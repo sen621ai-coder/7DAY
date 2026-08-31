@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="RecipeSearchOptimizer"/>
+  <DisplayName value="Recipe Search Optimizer"/>
+  <Description value="Recipe search optimization for 7 Days to Die 3.1.0. The guide note is issued once on first spawn; normal search stays local and @ enables global search."/>
+  <Author value="Exodusoul"/>
+  <Version value="1.2.3"/>
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <SkipWithAntiCheat value="true"/>
+  <ServerSideOnly value="false"/>
+</xml>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: loot groups, bundles and drop-table integration.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: группы добычи, наборы и интеграция таблиц выпадения.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/lootcontainers">
+    <lootcontainer name="aecForkliftVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicLongSchoolBusRepairedVehicleStorage" count="0" size="15,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicShortSchoolBusRepairedVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicShuttleSchoolBusRepairedVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicCitySchoolBusRepairedVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecStormhunterVehicleStorage" count="0" size="11,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSedanHuntRepairedVehicleStorage" count="0" size="9,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecDriftjackVehicleStorage" count="0" size="5,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheRockVehicleStorage" count="0" size="4,4" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSedanSpeedDamagedVehicleStorage" count="0" size="8,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecNitrojackVehicleStorage" count="0" size="8,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecHarpoonerVehicleStorage" count="0" size="9,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecDoomjackVehicleStorage" count="0" size="11,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSedanSpeedRepairedVehicleStorage" count="0" size="9,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTrailhunterVehicleStorage" count="0" size="8,8" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSedanHuntDamagedVehicleStorage" count="0" size="8,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecBonehunterVehicleStorage" count="0" size="9,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicPoliceCarRepairedVehicleStorage" count="0" size="9,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheJumperVehicleStorage" count="0" size="9,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecLeviathanVehicleStorage" count="0" size="12,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSUVVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheZombieHunterVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecScrapBastionVehicleStorage" count="0" size="8,8" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecIronBastionVehicleStorage" count="0" size="9,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSUVDamagedVehicleStorage" count="0" size="9,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheWoodenMistakeVehicleStorage" count="0" size="6,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicMinivanRepairedVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicTractorRepairedVehicleStorage" count="0" size="12,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecHandTruckVehicleStorage" count="0" size="4,3" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecWolfVehicleStorage" count="0" size="6,4" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecBearVehicleStorage" count="0" size="8,6" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecStagVehicleStorage" count="0" size="5,4" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecMountainLionVehicleStorage" count="0" size="7,5" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecDireWolfVehicleStorage" count="0" size="9,7" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheWheelchairVehicleStorage" count="0" size="4,4" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecExtremeWheelchairVehicleStorage" count="0" size="8,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecShoppingCartVehicleStorage" count="0" size="4,4" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecUnicycleVehicleStorage" count="0" size="4,4" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecRacingShoppingCartVehicleStorage" count="0" size="4,4" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecBrokenBicycleVehicleStorage" count="0" size="4,1" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecThePipeBicycleVehicleStorage" count="0" size="12,1" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheAdvancedPipeBicycleVehicleStorage" count="0" size="16,1" sound_open="UseActions/open_shopping_basket" open_time="0" sound_close="UseActions/close_shopping_basket" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <lootcontainer name="aecThundraRunnerVehicleStorage" count="0" size="7,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecMinimotoVehicleStorage" count="0" size="7,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheExplorerVehicleStorage" count="0" size="14,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheBikerVehicleStorage" count="0" size="10,4" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheExorcistVehicleStorage" count="0" size="14,4" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheSoldierVehicleStorage" count="0" size="15,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecWastelandRunnerVehicleStorage" count="0" size="8,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheHammerVehicleStorage" count="0" size="9,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheWarRamVehicleStorage" count="0" size="12,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheExecutionerVehicleStorage" count="0" size="10,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecThePunisherVehicleStorage" count="0" size="13,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheOldWagonVehicleStorage" count="0" size="5,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheTowerBusVehicleStorage" count="0" size="16,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheTowerCarVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheFamilyWagonVehicleStorage" count="0" size="5,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheWeaponWheelVehicleStorage" count="0" size="9,8" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheSalvagerVehicleStorage" count="0" size="11,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecCargoRatVehicleStorage" count="0" size="9,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicPickupCargoDamagedVehicleStorage" count="0" size="9,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecCargoHoundVehicleStorage" count="0" size="11,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicFireTruckRepairedVehicleStorage" count="0" size="14,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecCargoBehemothVehicleStorage" count="0" size="13,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicPickupCargoRepairedVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicAmbulanceRepairedVehicleStorage" count="0" size="11,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicArmyTruckEmptyVehicleStorage" count="0" size="13,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheKillerVehicleStorage" count="0" size="11,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicArmyTruckVehicleStorage" count="0" size="14,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicRaftVehicleStorage" count="0" size="8,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicFarmtruckRepairedVehicleStorage" count="0" size="11,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecFarmTruckOreBoulderVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecWarMammothVehicleStorage" count="0" size="15,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheGiantVehicleStorage" count="0" size="19,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTruckDrillerVehicleStorage" count="0" size="12,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicServiceTruckGenericNoLadderVehicleStorage" count="0" size="11,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicServiceTruckGenericVehicleStorage" count="0" size="12,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicServiceTruckMoPowerVehicleStorage" count="0" size="12,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicServiceTruckWorkingStiffVehicleStorage" count="0" size="12,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicSemiFrontRepairedVehicleStorage" count="0" size="12,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheMovingHQVehicleStorage" count="0" size="16,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicExcavatorRepairedVehicleStorage" count="0" size="10,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicExcavatorClawRepairedVehicleStorage" count="0" size="11,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecClassicBackhoeRepairedVehicleStorage" count="0" size="10,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecAirplaneVehicleStorage" count="0" size="14,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecMiniAirplaneVehicleStorage" count="0" size="12,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecFlyingSedanVehicleStorage" count="0" size="13,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecFlyingWasteVehicleStorage" count="0" size="11,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecFlyingCityBusVehicleStorage" count="0" size="10,10" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecSunDrifterVehicleStorage" count="0" size="10,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecArmoredGyroVehicleStorage" count="0" size="9,9" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheHoverboardVehicleStorage" count="0" size="4,4" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecHellglideVehicleStorage" count="0" size="13,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecAirMotorcycleVehicleStorage" count="0" size="13,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheFloatcampVehicleStorage" count="0" size="11,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecTheHangingWorldVehicleStorage" count="0" size="12,7" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecBasicJetpackVehicleStorage" count="0" size="10,5" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecAdvancedJetpackVehicleStorage" count="0" size="12,6" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecMiniRocketVehicleStorage" count="0" size="16,8" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+    <lootcontainer name="aecRocketVehicleStorage" count="0" size="19,11" sound_open="UseActions/vehicle_storage_open" open_time="0" sound_close="UseActions/vehicle_storage_close" loot_quality_template="qualBaseTemplate">
+		</lootcontainer>
+  </append>
+</configs>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xml>
+  <Name value="ProjectZ"/>
+  <DisplayName value="Project Z full modpack"/>
+  <Description value="Unique mechanics and new events in the game; transformed for the Project Z + AEC v9.22.8 progression, localization and Universal Parts salvage baseline."/>
+  <Author value="BlackRabbit"/>
+  <Version value="3.1.2"/>
+  <Website value="https://7dtdprojectz.com/"/>
+  <ServerSideOnly value="true"/>
+</xml>

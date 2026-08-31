@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: Project Z, AEC Endgame Overhaul and Zombie Market integration. File purpose: block definitions and targeted block-property patches.
+RU: Назначение модуля: интеграция Project Z, AEC Endgame Overhaul и Зомбо-маркета. Назначение файла: определения блоков и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/blocks">
+    <block name="flagThick44BlockVariantHelper">
+      <property name="Extends" value="flagWallHungThick44Black"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="CustomIcon" value="flagWallHungThick44Black"/>
+      <property name="ItemTypeIcon" value="all_blocks"/>
+      <property name="SelectAlternates" value="true"/>
+      <property name="PlaceAltBlockValue" value="flagWallHungThick44Black,flagWallHungThick44Purple,flagTopWallHungThick44Black,flagTopWallHungThick44Purple"/>
+      <property name="SortOrder1" value="U200"/>
+      <property name="SortOrder2" value="0000"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_playerHelpers"/>
+      <property name="SoundPickup" value="cloth_grab"/>
+      <property name="SoundPlace" value="cloth_place"/>
+    </block>
+  </append>
+</configs>

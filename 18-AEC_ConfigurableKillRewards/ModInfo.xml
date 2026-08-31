@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="AEC_ConfigurableKillRewards"/>
+  <DisplayName value="Project Z + AEC EO | Configurable Kill Rewards"/>
+  <Description value="Configurable kill rewards. v2.4.5 retains the 1048 standard Project Z/AEC rules and the current T1-T5 reward scheme." />
+  <Author value="Exodusoul"/>
+  <Version value="2.4.5" />
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <SkipWithAntiCheat value="true"/>
+  <ServerSideOnly value="true"/>
+</xml>

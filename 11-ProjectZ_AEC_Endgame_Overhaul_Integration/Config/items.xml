@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: Project Z, AEC Endgame Overhaul and Zombie Market integration. File purpose: item definitions and targeted item-property patches.
+RU: Назначение модуля: интеграция Project Z, AEC Endgame Overhaul и Зомбо-маркета. Назначение файла: определения предметов и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/items">
+    <item name="infectedTeeth">
+      <property name="Tags" value="internationalMarket"/>
+      <property name="DescriptionKey" value="infectedTeethDesc"/>
+      <property name="CustomIcon" value="goreHumanSkull"/>
+      <property name="ItemTypeIcon" value="skull_crusher"/>
+      <property name="HoldType" value="3"/>
+      <property name="Meshfile" value="@:Other/Items/Food/parcelGenericPrefab.prefab"/>
+      <property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+      <property name="Material" value="Morganic"/>
+      <property name="Stacknumber" value="50000"/>
+      <property name="EconomicValue" value="0"/>
+      <property name="Group" value="CryptoQuest,Science,Medical,TCMedical"/>
+      <property name="SoundPickup" value="bloodbag_grab"/>
+      <property name="SoundPlace" value="bloodbag_place"/>
+      <property name="SellableToTrader" value="false"/>
+    </item>
+  </append>
+  <append xpath="/items">
+    <item name="aecPZRad_meleeHandZombie01">
+      <property name="Extends" value="meleeHandZombie01"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombie02">
+      <property name="Extends" value="meleeHandZombie02"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieBurning">
+      <property name="Extends" value="meleeHandZombieBurning"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieChuck">
+      <property name="Extends" value="meleeHandZombieChuck"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieCop">
+      <property name="Extends" value="meleeHandZombieCop"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieDemolition">
+      <property name="Extends" value="meleeHandZombieDemolition"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieFeral">
+      <property name="Extends" value="meleeHandZombieFeral"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieHazMat">
+      <property name="Extends" value="meleeHandZombieHazMat"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieRancher">
+      <property name="Extends" value="meleeHandZombieRancher"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieShort">
+      <property name="Extends" value="meleeHandZombieShort"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieStrong">
+      <property name="Extends" value="meleeHandZombieStrong"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandZombieWorker">
+      <property name="Extends" value="meleeHandZombieWorker"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+    <item name="aecPZRad_meleeHandzombieMutated">
+      <property name="Extends" value="meleeHandzombieMutated"/>
+      <property name="CreativeMode" value="None"/>
+      <effect_group name="aecPZHitRadiation" tiered="false">
+        <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" target="other" cvar="$IRradiationStatus" operation="add" value="1.5">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+          <requirement name="CVarCompare" cvar="$buffstimIrradiatedShellStatus" target="other" operation="LT" value="1"/>
+        </triggered_effect>
+      </effect_group>
+    </item>
+  </append>
+  <set xpath="/items/item[@name='resourceBatteryNiv1']/property[@name='MeltTimePerUnit']/@value">0.002</set>
+  <set xpath="/items/item[@name='resourceBatteryNiv2']/property[@name='MeltTimePerUnit']/@value">0.0004</set>
+  <set xpath="/items/item[@name='resourceBatteryNiv3']/property[@name='MeltTimePerUnit']/@value">0.00008</set>
+  <set xpath="/items/item[@name='resourceBatteryNiv4']/property[@name='MeltTimePerUnit']/@value">0.0000266667</set>
+  <set xpath="/items/item[@name='resourceBatteryNiv5']/property[@name='MeltTimePerUnit']/@value">0.0000133333</set>
+</configs>

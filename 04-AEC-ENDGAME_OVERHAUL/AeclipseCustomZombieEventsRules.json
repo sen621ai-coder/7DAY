@@ -1,0 +1,108 @@
+{
+    "_comment_delay":  "minDelayMinutes / maxDelayMinutes: random interval between two master events (in real-time minutes).",
+    "minDelayMinutes":  300,
+    "maxDelayMinutes":  600,
+    "_comment_server_messages":  "serverMessagesEnabled: enables or disables AI Event announcements in server chat. Console logs remain enabled.",
+    "serverMessagesEnabled":  true,
+    "_comment_migration":  "biomeMigrationChance: probability (0.0-1.0) that when a timed event ends, it migrates to another biome instead of stopping. 0.0 = disabled.",
+    "biomeMigrationChance":  0.1,
+    "_comment_ai05weights":  "ai05BossTierWeights: relative spawn weights per boss tier for the AI05 boss incursion event. Higher = more likely to be chosen.",
+    "ai05BossTierWeights":  {
+                                  "tier03":  10,
+                                  "tier06":  30,
+                                  "tier09":  25,
+                                  "tier12":  20,
+                                  "tier15":  15
+                              },
+    "events":  [
+                   {
+                       "_comment":  "Boss invasion: Doomlord + minions pour the wilderness. windowMinutes = duration of the event.",
+                       "name":  "AeclipseCustomZombieAIDoomlord.DoomlordWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  15
+                   },
+                   {
+                       "_comment":  "Boss invasion: Singerie + minions rampage the wilderness.",
+                       "name":  "AeclipseCustomZombieAISingerie.SingerieWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  15
+                   },
+                   {
+                       "_comment":  "Boss invasion: Druid + animal minions overrun the wilderness.",
+                       "name":  "AeclipseCustomZombieAIDruid.DruidWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  15
+                   },
+                   {
+                       "_comment":  "Boss invasion: Ghost + minions haunt the wilderness. Spawns only 22:00-04:00.",
+                       "name":  "AeclipseCustomZombieAIGhost.GhostWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  60
+                   },
+                   {
+                       "_comment":  "Boss invasion: Mushroom + minions infest the wilderness.",
+                       "name":  "AeclipseCustomZombieAIMushroom.MushroomWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  30
+                   },
+                   {
+                       "_comment":  "Boss invasion: Headless + minions patrol the wilderness.",
+                       "name":  "AeclipseCustomZombieAIHeadless.HeadlessWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  25
+                   },
+                   {
+                       "_comment":  "Boss invasion: Archer + minions hunt in the wilderness.",
+                       "name":  "AeclipseCustomZombieAIArcher.ArcherWildernessRuntime",
+                       "probability":  1.0,
+                       "windowMinutes":  20
+                   },
+                   {
+                       "_comment":  "Mega horde: massive zombie wave across the map.",
+                       "name":  "AeclipseCustomZombieAI01.MegaHordeRuntime",
+                       "probability":  0.1
+                   },
+                   {
+                       "_comment":  "Heatmap: raises the hazard level, increasing zombie spawn tiers.",
+                       "name":  "AeclipseCustomZombieAI02.HeatmapHazardIncreaseEvent",
+                       "probability":  0.5
+                   },
+                   {
+                       "_comment":  "Heatmap: lowers the hazard level, decreasing zombie spawn tiers.",
+                       "name":  "AeclipseCustomZombieAI02.HeatmapHazardDecreaseEvent",
+                       "probability":  0.5
+                   },
+                   {
+                       "_comment":  "Kill replacement: every zombie killed spawns more. windowMinutes = duration.",
+                       "name":  "AeclipseCustomZombieAI03.SpawnReplaceOnKillEvent",
+                       "probability":  0,
+                       "windowMinutes":  5
+                   },
+                   {
+                       "_comment":  "Ghost on-kill: each kill spawns a ghost minion nearby. windowMinutes = duration.",
+                       "name":  "AeclipseCustomZombieAI06.GhostMinionOnKillEvent",
+                       "probability":  1.0,
+                       "windowMinutes":  30
+                   },
+                   {
+                       "_comment":  "Airdrop x2: doubles the number of airdrops.",
+                       "name":  "AeclipseCustomZombieAI04.AirdropEventX2",
+                       "probability":  0
+                   },
+                   {
+                       "_comment":  "Airdrop x4: quadruples the number of airdrops.",
+                       "name":  "AeclipseCustomZombieAI04.AirdropEventX4",
+                       "probability":  0
+                   },
+                   {
+                       "_comment":  "Airdrop x6: sextuples the number of airdrops.",
+                       "name":  "AeclipseCustomZombieAI04.AirdropEventX6",
+                       "probability":  0
+                   },
+                   {
+                       "_comment":  "Boss incursion: arms a boss spawn at fixed coordinates in the target biome. The boss spawns once the chunk is loaded (up to 30 min timeout).",
+                       "name":  "AeclipseCustomZombieAI05.BossTierDropRuntime",
+                       "probability":  0.5
+                   }
+               ]
+}

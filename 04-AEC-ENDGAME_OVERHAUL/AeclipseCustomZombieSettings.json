@@ -1,0 +1,115 @@
+{
+  "_comment": "AeclipseCustomZombieSpawner – configuration file. Fields prefixed with '_comment' are ignored by the mod and serve as documentation only.",
+
+  "spawner": {
+    "_comment_claimBlockExclusionRadius": "Radius (metres) around every Land Claim Block where custom zombie spawns are suppressed. Prevents bosses from spawning inside player bases. Set to 0 to disable.",
+    "claimBlockExclusionRadius": 100.0,
+
+    "_comment_leaderZoneExclusionRadius": "Radius (metres) around the leader zombie within which followers will NOT spawn if a player is already close. Avoids instant aggro on spawn. Set to 0 to disable.",
+    "leaderZoneExclusionRadius": 50.0,
+
+    "_comment_followerTierChances": "Probability that each follower is picked from one tier BELOW the leader (minus1) or TWO tiers below (minus2). The remaining probability uses the same tier as the leader. Example: 0.20 + 0.30 = 50% chance of a weaker follower.",
+    "followerTierMinus1Chance": 0.20,
+    "followerTierMinus2Chance": 0.30,
+
+    "_comment_followerCountMultiplier": "Global multiplier applied to the follower count defined in spawn_rules. 1.0 = default counts, 0.5 = half as many followers, 2.0 = twice as many.",
+    "followerCountMultiplier": 0.5
+  },
+
+  "compat": {
+    "_comment": "Dedicated/server compatibility settings. Leave the path fields empty for automatic detection.",
+
+    "_comment_forcedModRoot": "Optional absolute path to force the mod root directory. Use only if auto-detection fails on your host.",
+    "forcedModRoot": "",
+
+    "_comment_forcedAssemblyDirectory": "Optional absolute path to force the DLL directory used for companion assembly loading. Usually leave empty.",
+    "forcedAssemblyDirectory": "",
+
+    "_comment_enableAssemblyResolver": "When true, the dedicated bootstrap registers an AssemblyResolve handler for Aeclipse DLLs.",
+    "enableAssemblyResolver": true,
+
+    "_comment_enableDeferredCompanionRetry": "When true, the spawner performs a second companion-DLL detection pass shortly after startup on the main thread.",
+    "enableDeferredCompanionRetry": true,
+
+    "_comment_deferredRetryDelaySeconds": "Delay before the spawner runs its second detection pass. Increase this if your host loads mods slowly.",
+    "deferredRetryDelaySeconds": 15.0,
+
+    "_comment_enableCompatibilityReport": "When true, startup logs include a detailed path and DLL compatibility report.",
+    "enableCompatibilityReport": true
+  },
+
+  "followerAI": {
+    "_comment": "Controls the optional FollowerAI companion mod (AeclipseCustomZombieAI.dll). If that DLL is absent, this section is ignored.",
+
+    "_comment_followRadiusMeters": "Maximum distance (metres) from the leader within which followers are nudged toward it while idle. Beyond this distance the follower is left alone.",
+    "followRadiusMeters": 50.0,
+
+    "_comment_detachPlayerRadiusMeters": "If a player comes within this distance of a follower, the follow-bond is broken and the follower acts independently. Set to 0 to disable (followers always stay grouped until they find a target).",
+    "detachPlayerRadiusMeters": 0.0,
+
+    "_comment_tickIntervalSeconds": "How often (real seconds) the follower AI evaluates each group. Lower = more responsive movement, higher CPU cost.",
+    "tickIntervalSeconds": 3.0,
+
+    "_comment_groupExpirySeconds": "Seconds after which a leader-group is forcibly dissolved even if the leader is still alive. Acts as a safety net against orphaned groups. 600 = 10 minutes.",
+    "groupExpirySeconds": 600.0
+  },
+
+  "heatmapEvents": {
+    "_comment": "Controls the heatmap boss-event system (AeclipseCustomZombieEvents.dll). Each 64m cell accumulates heat % as zombies are killed. Reaching 100% triggers a boss spawn and escalation.",
+
+    "_comment_cellSizeMeters": "Local grid size (metres) used by the spawner for wilderness density checks and follower overcrowding checks. It does not control the biome-wide escalation scope, and it is not pushed into the Events DLL anymore. Recommended: 64.",
+    "cellSizeMeters": 64.0,
+
+    "_comment_killHeatGainPercent": "Heat % gained per zombie kill in a cell [0-100]. Default 2.0 = 50 kills to reach 100% and trigger a boss.",
+    "killHeatGainPercent": 1.0,
+
+    "_comment_heatDecayPerMinute": "Heat % lost per real minute when no kills occur. Default software value: 2.0 = 50 real minutes to fully cool from 100%.",
+    "heatDecayPerMinute": 5.0,
+
+    "_comment_warnHeatPercent": "Heat % at which the warning message is sent to nearby players. Default 70 = warning fires at 70%, boss at 100%.",
+    "warnHeatPercent": 70.0,
+
+    "_comment_cooldownMinutes": "Real minutes before a completed escalation chain can restart in the same cell. Set to 60 to avoid endless back-to-back chains.",
+    "cooldownMinutes": 60.0,
+
+    "_comment_notifyRadiusMeters": "XZ radius (metres) used to find nearby players for chat notifications and game-stage calculation. Players outside this radius receive no messages and are not counted.",
+    "notifyRadiusMeters": 150.0,
+
+    "_comment_tickIntervalSeconds": "How often (real seconds) the heatmap is evaluated. 10 is a good balance; lower values react faster but cost more CPU.",
+    "tickIntervalSeconds": 10.0,
+
+    "_comment_neighborhoodRadius": "Radius (in cells) used by the spawner when checking nearby-cell overcrowding before injecting followers. 1 = 3x3 grid (~192m at 64m cells), 2 = 5x5 (~320m). 0 = current cell only.",
+    "neighborhoodRadius": 1,
+
+    "_comment_followerMaxZombiesPerCell": "Maximum number of alive zombies in a spawn-cell before follower injection from the queue is suppressed. Prevents over-population in contested areas. 0 = disabled (always allow followers).",
+    "followerMaxZombiesPerCell": 15,
+
+    "_comment_decayDelaySeconds": "Real seconds after the last kill before heat decay begins. Default software value: 60 = decay starts after 1 minute without kills.",
+    "decayDelaySeconds": 60.0,
+
+    "_comment_escortZombieCount": "Number of non-boss escort zombies spawned at the effective boss tier alongside each heatmap boss. 0 = disabled.",
+    "escortZombieCount": 4
+  },
+
+  "stormEvents": {
+    "_comment": "Storm-triggered features. Requires AeclipseCustomZombieSpawner + AeclipseCustomZombieEvents DLLs. Storm detection uses WeatherManager reflection — set 'enabled' to false if your game version lacks weather data.",
+
+    "_comment_enabled": "Master switch for ALL storm features. false = nothing storm-related runs.",
+    "enabled": true,
+
+    "_comment_heatmapEnabled": "When true, a detected storm forces heatmap cells around affected players to the configured escalation level, immediately priming a boss spawn.",
+    "heatmapEnabled": true,
+
+    "_comment_heatmapEscalationLevel": "Escalation level to inject into storm-biome cells. 0 = first boss (KillThreshold), 1 = second boss (EscalationBaseKills), etc. Must be >= 0.",
+    "heatmapEscalationLevel": 1,
+
+    "_comment_spawnTierBoostEnabled": "When true, individual zombie spawns during a storm are promoted by 'spawnTierBoost' tier steps above the current player game-stage tier.",
+    "spawnTierBoostEnabled": true,
+
+    "_comment_spawnTierBoost": "Number of tier steps to boost zombie spawns by during a storm. 1 = next tier above normal GS tier. Capped by the highest available tier in spawn_rules.",
+    "spawnTierBoost": 1,
+
+    "_comment_minStormIntensity": "Minimum intensity value [0.0 – 1.0] reported by WeatherManager for a storm to be considered active. Tune down if storms rarely trigger; tune up to avoid false positives from light rain.",
+    "minStormIntensity": 0.3
+  }
+}

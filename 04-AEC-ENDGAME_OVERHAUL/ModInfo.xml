@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xml>
+  <Name value="AEC_ENDGAME_OVERHAUL"/>
+  <DisplayName value="AEC ENDGAME OVERHAUL"/>
+  <Description value="AEC Endgame Overhaul with native AEC Nemesis restored and a safer vanilla-like forest low-GS wilderness progression."/>
+  <Author value="Aeclipse"/>
+  <Version value="3.2.8"/>
+  <Website value=""/>
+  <ServerSideOnly value="true"/>
+</xml>

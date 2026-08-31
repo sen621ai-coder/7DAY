@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+	<setattribute xpath="/windows/window[@name='windowQuestObjectives']" name="height">600</setattribute>
+	<setattribute xpath="/windows/window[@name='windowQuestObjectives']/rect[@name='content']" name="height">554</setattribute>
+	<setattribute xpath="/windows/window[@name='windowQuestObjectives']/rect[@name='content']//grid[@name='objectiveList']" name="rows">20</setattribute>
+        <!-- AEC BossHunter attribute adds 1 tab to the skill category grid -->
+        <!-- 3.0: content et les rects internes sont des <rect>, non des <panel> -->
+        <set xpath="/windows/window[@name='windowSkillList']/rect[@name='content']/rect[@name='categoryHeader']/rect[@width='410']/grid/@cols">18</set>
+
+        <!-- Remove search bar and magnifying glass icon from skill panel -->
+        <remove xpath="/windows/window[@name='windowSkillList']/rect[@name='content']/rect[@name='categoryHeader']/rect[@width='200']/sprite[@name='searchIcon']"/>
+        <remove xpath="/windows/window[@name='windowSkillList']/rect[@name='content']/rect[@name='categoryHeader']/rect[@width='200']/textfield[@name='searchInput']"/>
+</configs>

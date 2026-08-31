@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: trader inventory and market compatibility.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: ассортимент торговцев и совместимость рынка.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <set xpath="/traders/trader_info[@id='91']/@override_buy_markup">1.0</set>
+  <!-- EN: Remove only obsolete AEC story-book sales; Huntsman Drone contracts remain available.
+RU: Удаляется только продажа устаревших сюжетных книг AEC; контракты Huntsman Drone остаются доступны.-->
+  <remove xpath="/traders//item[starts-with(@name,'aecEOProgressionBook') or starts-with(@name,'aecEOTutorial') or starts-with(@name,'aecEOFieldGuideBook')]"/>
+  <!-- EN: Source-mod Discord notes are not sold by traders in the unified pack.
+RU: В объединённом паке торговцы не продают Discord-записки исходных модов.-->
+  <remove xpath="/traders//item[@name='aecAIOBossDiscordNote' or @name='aecEndgameDiscordNote' or @name='aecProjectDiscordNote']"/>
+</configs>

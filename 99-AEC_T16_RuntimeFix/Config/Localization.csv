@@ -1,0 +1,258 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,KeepLoaded,english,Context / Alternate Text,german,spanish,french,italian,japanese,koreana,polish,brazilian,russian,turkish,schinese,tchinese
+AECZombieArleneTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Arlene,,,,,,,,,,,,[FF55FF]T16 超越级[-] 阿琳,[FF55FF]T16 Transcendent[-] Arlene
+AECZombieBikerTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Biker,,,,,,,,,,,,[FF55FF]T16 超越级[-] 摩托车手,[FF55FF]T16 Transcendent[-] Biker
+AECZombieBoeTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Boe,,,,,,,,,,,,[FF55FF]T16 超越级[-] 波,[FF55FF]T16 Transcendent[-] Boe
+AECZombieBowlerTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Bowler,,,,,,,,,,,,[FF55FF]T16 超越级[-] 保龄球手,[FF55FF]T16 Transcendent[-] Bowler
+AECZombieBurntTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Burnt Zombie,,,,,,,,,,,,[FF55FF]T16 超越级[-] 焦尸,[FF55FF]T16 Transcendent[-] Burnt Zombie
+AECZombieBusinessManTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Business Man,,,,,,,,,,,,[FF55FF]T16 超越级[-] 商务人士,[FF55FF]T16 Transcendent[-] Business Man
+AECZombieChuckTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Chuck,,,,,,,,,,,,[FF55FF]T16 超越级[-] 查克,[FF55FF]T16 Transcendent[-] Chuck
+AECZombieDarleneTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Darlene,,,,,,,,,,,,[FF55FF]T16 超越级[-] 达琳,[FF55FF]T16 Transcendent[-] Darlene
+AECZombieDemolitionTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Demolisher,,,,,,,,,,,,[FF55FF]T16 超越级[-] 爆破者,[FF55FF]T16 Transcendent[-] Demolisher
+AECZombieFatCopTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Fat Cop,,,,,,,,,,,,[FF55FF]T16 超越级[-] 肥胖警察,[FF55FF]T16 Transcendent[-] Fat Cop
+AECZombieFatHawaiianTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Fat Hawaiian,,,,,,,,,,,,[FF55FF]T16 超越级[-] 肥胖夏威夷人,[FF55FF]T16 Transcendent[-] Fat Hawaiian
+AECZombieFemaleFatTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Fat Female,,,,,,,,,,,,[FF55FF]T16 超越级[-] 肥胖女尸,[FF55FF]T16 Transcendent[-] Fat Female
+AECZombieInmateTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Inmate,,,,,,,,,,,,[FF55FF]T16 超越级[-] 囚犯,[FF55FF]T16 Transcendent[-] Inmate
+AECZombieJanitorTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Janitor,,,,,,,,,,,,[FF55FF]T16 超越级[-] 清洁工,[FF55FF]T16 Transcendent[-] Janitor
+AECZombieJoeTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Joe,,,,,,,,,,,,[FF55FF]T16 超越级[-] 乔,[FF55FF]T16 Transcendent[-] Joe
+AECZombieLabTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Lab Zombie,,,,,,,,,,,,[FF55FF]T16 超越级[-] 实验室僵尸,[FF55FF]T16 Transcendent[-] Lab Zombie
+AECZombieLumberjackTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Lumberjack,,,,,,,,,,,,[FF55FF]T16 超越级[-] 伐木工,[FF55FF]T16 Transcendent[-] Lumberjack
+AECZombieMaleHazmatTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Hazmat Zombie,,,,,,,,,,,,[FF55FF]T16 超越级[-] 防化服僵尸,[FF55FF]T16 Transcendent[-] Hazmat Zombie
+AECZombieMarleneTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Marlene,,,,,,,,,,,,[FF55FF]T16 超越级[-] 玛琳,[FF55FF]T16 Transcendent[-] Marlene
+AECZombieMoeTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Moe,,,,,,,,,,,,[FF55FF]T16 超越级[-] 莫,[FF55FF]T16 Transcendent[-] Moe
+AECZombieMutatedTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Mutated Zombie,,,,,,,,,,,,[FF55FF]T16 超越级[-] 变异僵尸,[FF55FF]T16 Transcendent[-] Mutated Zombie
+AECZombieNurseTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Nurse,,,,,,,,,,,,[FF55FF]T16 超越级[-] 护士,[FF55FF]T16 Transcendent[-] Nurse
+AECZombiePartyGirlTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Party Girl,,,,,,,,,,,,[FF55FF]T16 超越级[-] 派对女孩,[FF55FF]T16 Transcendent[-] Party Girl
+AECZombiePlagueSpitterTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Plague Spitter,,,,,,,,,,,,[FF55FF]T16 超越级[-] 瘟疫喷吐者,[FF55FF]T16 Transcendent[-] Plague Spitter
+AECZombieRancherTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Rancher,,,,,,,,,,,,[FF55FF]T16 超越级[-] 牧场主,[FF55FF]T16 Transcendent[-] Rancher
+AECZombieScreamerTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Screamer,,,,,,,,,,,,[FF55FF]T16 超越级[-] 尖叫者,[FF55FF]T16 Transcendent[-] Screamer
+AECZombieSkateboarderTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Skateboarder,,,,,,,,,,,,[FF55FF]T16 超越级[-] 滑板手,[FF55FF]T16 Transcendent[-] Skateboarder
+AECZombieSoldierTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Soldier,,,,,,,,,,,,[FF55FF]T16 超越级[-] 士兵,[FF55FF]T16 Transcendent[-] Soldier
+AECZombieSpiderTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Spider Zombie,,,,,,,,,,,,[FF55FF]T16 超越级[-] 蜘蛛僵尸,[FF55FF]T16 Transcendent[-] Spider Zombie
+AECZombieSteveCrawlerTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Steve Crawler,,,,,,,,,,,,[FF55FF]T16 超越级[-] 爬行者史蒂夫,[FF55FF]T16 Transcendent[-] Steve Crawler
+AECZombieSteveTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Steve,,,,,,,,,,,,[FF55FF]T16 超越级[-] 史蒂夫,[FF55FF]T16 Transcendent[-] Steve
+AECZombieTomClarkTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Tom Clark,,,,,,,,,,,,[FF55FF]T16 超越级[-] 汤姆·克拉克,[FF55FF]T16 Transcendent[-] Tom Clark
+AECZombieUtilityWorkerTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Utility Worker,,,,,,,,,,,,[FF55FF]T16 超越级[-] 公用事业工人,[FF55FF]T16 Transcendent[-] Utility Worker
+AECZombieWightFeralTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Feral Wight,,,,,,,,,,,,[FF55FF]T16 超越级[-] 狂暴尸王,[FF55FF]T16 Transcendent[-] Feral Wight
+AECZombieYoTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Yo,,,,,,,,,,,,[FF55FF]T16 超越级[-] 尤,[FF55FF]T16 Transcendent[-] Yo
+bossAECDumdumT16,entityclasses,Entity,,,,[00D8FF]BOSS[-] Dumdum T16,,,,,,,,,,,,[00D8FF]首领[-] 呆呆 T16,[00D8FF]BOSS[-] Dumdum T16
+RunningKamikazeT16,entityclasses,Entity,,,,[FFAA00]BOSS[-] RunningKamikaze T16,,,,,,,,,,,,[FFAA00]首领[-] 狂奔神风者 T16,[FFAA00]BOSS[-] RunningKamikaze T16
+AECDoomlordDemolishmanBossT16,entityclasses,Entity,,,,Doomlord Demolishman Boss T16,,,,,,,,,,,,末日领主爆破者首领 T16,Doomlord Demolishman Boss T16
+AECTheWitchAngelBossT16,entityclasses,Entity,,,,The Witch T16,,,,,,,,,,,,女巫 T16,The Witch T16
+AECElectricDemonRunnerBossT16,entityclasses,Entity,,,,[00C8FF]BOSS[-] Electric Demon T16,,,,,,,,,,,,[00C8FF]首领[-] 电能恶魔 T16,[00C8FF]BOSS[-] Electric Demon T16
+AECExplosiveEagleBossT16,entityclasses,Entity,,,,[FF6A00]BOSS[-] Explosive Eagle T16,,,,,,,,,,,,[FF6A00]首领[-] 爆破之鹰 T16,[FF6A00]BOSS[-] Explosive Eagle T16
+AECHammerGuardianT16,entityclasses,Entity,,,,The Hammer Guardian T16,,,,,,,,,,,,巨锤守卫 T16,The Hammer Guardian T16
+AECTheMechanicianBossT16,entityclasses,Entity,,,,[FF4500]BOSS[-] The Mechanician T16,,,,,,,,,,,,[FF4500]首领[-] 机械师 T16,[FF4500]BOSS[-] The Mechanician T16
+AECTheDruidBossT16,entityclasses,Entity,,,,[FF4500]BOSS[-] The Druid T16,,,,,,,,,,,,[FF4500]首领[-] 德鲁伊 T16,[FF4500]BOSS[-] The Druid T16
+AECTheExecutionerBossT16,entityclasses,Entity,,,,[FF4500]BOSS[-] The Executioner T16,,,,,,,,,,,,[FF4500]首领[-] 刽子手 T16,[FF4500]BOSS[-] The Executioner T16
+AECPartyBeachBossT16,entityclasses,Entity,,,,[FF69B4]BOSS[-] Party Beach T16,,,,,,,,,,,,[FF69B4]首领[-] 海滩派对 T16,[FF69B4]BOSS[-] Party Beach T16
+AECMykirBossT16,entityclasses,Entity,,,,[4CFF4C]BOSS[-] Mykir the Spider Demon T16,,,,,,,,,,,,[4CFF4C]首领[-] 迈基尔蜘蛛恶魔 T16,[4CFF4C]BOSS[-] Mykir the Spider Demon T16
+AECHellskyliBossT16,entityclasses,Entity,,,,[FF6A00]BOSS[-] Hellskyli the Burning Demon T16,,,,,,,,,,,,[FF6A00]首领[-] 赫尔斯凯利燃烧恶魔 T16,[FF6A00]BOSS[-] Hellskyli the Burning Demon T16
+AECRockbreakerBossT16,entityclasses,Entity,,,,[A0A0A0]BOSS[-] Rockbreaker T16,,,,,,,,,,,,[A0A0A0]首领[-] 碎岩者 T16,[A0A0A0]BOSS[-] Rockbreaker T16
+AECSingerieBossT16,entityclasses,Entity,,,,[3CB371]BOSS[-] Singerie T16,,,,,,,,,,,,[3CB371]首领[-] 歌姬 T16,[3CB371]BOSS[-] Singerie T16
+AECGhostBossT16,entityclasses,Entity,,,,[CDD7E3]The Ghost T16[-],,,,,,,,,,,,[CDD7E3]幽灵 T16[-],[CDD7E3]The Ghost T16[-]
+AECSirenHeadBossT16,entityclasses,Entity,,,,[B85C38]BOSS[-] Siren Head T16,,,,,,,,,,,,[B85C38]首领[-] 警笛头 T16,[B85C38]BOSS[-] Siren Head T16
+AECMushroomBossT16,entityclasses,Entity,,,,Mushroom Boss T16,,,,,,,,,,,,蘑菇怪首领 T16,Mushroom Boss T16
+AECTheArcherBossT16,entityclasses,Entity,,,,The Archer Boss T16,,,,,,,,,,,,弓手首领 T16,The Archer Boss T16
+AECSheriffBossT16,entityclasses,Entity,,,,The Sheriff T16,,,,,,,,,,,,警长 T16,The Sheriff T16
+AECHeadlessBossT16,entityclasses,Entity,,,,[FF2A2A]The Headless T16[-],,,,,,,,,,,,[FF2A2A]无头者 T16[-],[FF2A2A]The Headless T16[-]
+itemPZAECBossLootBundleT16,entityclasses,Entity,,,,[FFD700]AEC[-] [F87C63]PZ[-] [99FF99]Boss Loot — T16[-],,,,,,,,,,,,[FFD700]AEC[-] [F87C63]PZ[-] [99FF99]首领战利品 — T16[-],[FFD700]AEC[-] [F87C63]PZ[-] [99FF99]Boss Loot — T16[-]
+AECDruidMinionBearT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid Bear,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊熊,[FF55FF]T16 Transcendent[-] Druid Bear
+AECDruidMinionBoarAggroT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid Boar,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊野猪,[FF55FF]T16 Transcendent[-] Druid Boar
+AECDruidMinionBossBoarT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid Boss Boar,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊首领野猪,[FF55FF]T16 Transcendent[-] Druid Boss Boar
+AECDruidMinionC4WolfT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid C4 Wolf,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊爆破狼,[FF55FF]T16 Transcendent[-] Druid C4 Wolf
+AECDruidMinionDireWolfT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid Dire Wolf,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊恐狼,[FF55FF]T16 Transcendent[-] Druid Dire Wolf
+AECDruidMinionWolfAggroT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid Wolf,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊狼,[FF55FF]T16 Transcendent[-] Druid Wolf
+AECDruidMinionZombieBearT16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Druid Zombie Bear,,,,,,,,,,,,[FF55FF]T16 超越级[-] 德鲁伊尸熊,[FF55FF]T16 Transcendent[-] Druid Zombie Bear
+AECSheriffWolfMinion01T16,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Sheriff Wolf,,,,,,,,,,,,[FF55FF]T16 超越级[-] 警长战狼,[FF55FF]T16 Transcendent[-] Sheriff Wolf
+AECZombieArleneTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Arlene,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 阿琳,[FFAA33]T17 Ascendant[-] Arlene
+AECZombieBikerTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Biker,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 摩托车手,[FFAA33]T17 Ascendant[-] Biker
+AECZombieBoeTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Boe,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 波,[FFAA33]T17 Ascendant[-] Boe
+AECZombieBowlerTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Bowler,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 保龄球手,[FFAA33]T17 Ascendant[-] Bowler
+AECZombieBurntTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Burnt Zombie,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 焦尸,[FFAA33]T17 Ascendant[-] Burnt Zombie
+AECZombieBusinessManTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Business Man,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 商务人士,[FFAA33]T17 Ascendant[-] Business Man
+AECZombieChuckTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Chuck,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 查克,[FFAA33]T17 Ascendant[-] Chuck
+AECZombieDarleneTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Darlene,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 达琳,[FFAA33]T17 Ascendant[-] Darlene
+AECZombieDemolitionTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Demolisher,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 爆破者,[FFAA33]T17 Ascendant[-] Demolisher
+AECZombieFatCopTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Fat Cop,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 肥胖警察,[FFAA33]T17 Ascendant[-] Fat Cop
+AECZombieFatHawaiianTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Fat Hawaiian,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 肥胖夏威夷人,[FFAA33]T17 Ascendant[-] Fat Hawaiian
+AECZombieFemaleFatTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Fat Female,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 肥胖女尸,[FFAA33]T17 Ascendant[-] Fat Female
+AECZombieInmateTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Inmate,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 囚犯,[FFAA33]T17 Ascendant[-] Inmate
+AECZombieJanitorTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Janitor,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 清洁工,[FFAA33]T17 Ascendant[-] Janitor
+AECZombieJoeTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Joe,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 乔,[FFAA33]T17 Ascendant[-] Joe
+AECZombieLabTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Lab Zombie,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 实验室僵尸,[FFAA33]T17 Ascendant[-] Lab Zombie
+AECZombieLumberjackTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Lumberjack,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 伐木工,[FFAA33]T17 Ascendant[-] Lumberjack
+AECZombieMaleHazmatTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Hazmat Zombie,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 防化服僵尸,[FFAA33]T17 Ascendant[-] Hazmat Zombie
+AECZombieMarleneTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Marlene,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 玛琳,[FFAA33]T17 Ascendant[-] Marlene
+AECZombieMoeTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Moe,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 莫,[FFAA33]T17 Ascendant[-] Moe
+AECZombieMutatedTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Mutated Zombie,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 变异僵尸,[FFAA33]T17 Ascendant[-] Mutated Zombie
+AECZombieNurseTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Nurse,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 护士,[FFAA33]T17 Ascendant[-] Nurse
+AECZombiePartyGirlTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Party Girl,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 派对女孩,[FFAA33]T17 Ascendant[-] Party Girl
+AECZombiePlagueSpitterTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Plague Spitter,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 瘟疫喷吐者,[FFAA33]T17 Ascendant[-] Plague Spitter
+AECZombieRancherTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Rancher,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 牧场主,[FFAA33]T17 Ascendant[-] Rancher
+AECZombieScreamerTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Screamer,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 尖叫者,[FFAA33]T17 Ascendant[-] Screamer
+AECZombieSkateboarderTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Skateboarder,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 滑板手,[FFAA33]T17 Ascendant[-] Skateboarder
+AECZombieSoldierTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Soldier,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 士兵,[FFAA33]T17 Ascendant[-] Soldier
+AECZombieSpiderTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Spider Zombie,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 蜘蛛僵尸,[FFAA33]T17 Ascendant[-] Spider Zombie
+AECZombieSteveCrawlerTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Steve Crawler,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 爬行者史蒂夫,[FFAA33]T17 Ascendant[-] Steve Crawler
+AECZombieSteveTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Steve,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 史蒂夫,[FFAA33]T17 Ascendant[-] Steve
+AECZombieTomClarkTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Tom Clark,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 汤姆·克拉克,[FFAA33]T17 Ascendant[-] Tom Clark
+AECZombieUtilityWorkerTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Utility Worker,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 公用事业工人,[FFAA33]T17 Ascendant[-] Utility Worker
+AECZombieWightFeralTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Feral Wight,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 狂暴尸王,[FFAA33]T17 Ascendant[-] Feral Wight
+AECZombieYoTier17Ascendant,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Yo,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 尤,[FFAA33]T17 Ascendant[-] Yo
+bossAECDumdumT17,entityclasses,Entity,,,,[00D8FF]BOSS[-] Dumdum T17,,,,,,,,,,,,[00D8FF]首领[-] 呆呆 T17,[00D8FF]BOSS[-] Dumdum T17
+RunningKamikazeT17,entityclasses,Entity,,,,[FFAA00]BOSS[-] RunningKamikaze T17,,,,,,,,,,,,[FFAA00]首领[-] 狂奔神风者 T17,[FFAA00]BOSS[-] RunningKamikaze T17
+AECDoomlordDemolishmanBossT17,entityclasses,Entity,,,,Doomlord Demolishman Boss T17,,,,,,,,,,,,末日领主爆破者首领 T17,Doomlord Demolishman Boss T17
+AECTheWitchAngelBossT17,entityclasses,Entity,,,,The Witch T17,,,,,,,,,,,,女巫 T17,The Witch T17
+AECElectricDemonRunnerBossT17,entityclasses,Entity,,,,[00C8FF]BOSS[-] Electric Demon T17,,,,,,,,,,,,[00C8FF]首领[-] 电能恶魔 T17,[00C8FF]BOSS[-] Electric Demon T17
+AECExplosiveEagleBossT17,entityclasses,Entity,,,,[FF6A00]BOSS[-] Explosive Eagle T17,,,,,,,,,,,,[FF6A00]首领[-] 爆破之鹰 T17,[FF6A00]BOSS[-] Explosive Eagle T17
+AECHammerGuardianT17,entityclasses,Entity,,,,The Hammer Guardian T17,,,,,,,,,,,,巨锤守卫 T17,The Hammer Guardian T17
+AECTheMechanicianBossT17,entityclasses,Entity,,,,[FF4500]BOSS[-] The Mechanician T17,,,,,,,,,,,,[FF4500]首领[-] 机械师 T17,[FF4500]BOSS[-] The Mechanician T17
+AECTheDruidBossT17,entityclasses,Entity,,,,[FF4500]BOSS[-] The Druid T17,,,,,,,,,,,,[FF4500]首领[-] 德鲁伊 T17,[FF4500]BOSS[-] The Druid T17
+AECTheExecutionerBossT17,entityclasses,Entity,,,,[FF4500]BOSS[-] The Executioner T17,,,,,,,,,,,,[FF4500]首领[-] 刽子手 T17,[FF4500]BOSS[-] The Executioner T17
+AECPartyBeachBossT17,entityclasses,Entity,,,,[FF69B4]BOSS[-] Party Beach T17,,,,,,,,,,,,[FF69B4]首领[-] 海滩派对 T17,[FF69B4]BOSS[-] Party Beach T17
+AECMykirBossT17,entityclasses,Entity,,,,[4CFF4C]BOSS[-] Mykir the Spider Demon T17,,,,,,,,,,,,[4CFF4C]首领[-] 迈基尔蜘蛛恶魔 T17,[4CFF4C]BOSS[-] Mykir the Spider Demon T17
+AECHellskyliBossT17,entityclasses,Entity,,,,[FF6A00]BOSS[-] Hellskyli the Burning Demon T17,,,,,,,,,,,,[FF6A00]首领[-] 赫尔斯凯利燃烧恶魔 T17,[FF6A00]BOSS[-] Hellskyli the Burning Demon T17
+AECRockbreakerBossT17,entityclasses,Entity,,,,[A0A0A0]BOSS[-] Rockbreaker T17,,,,,,,,,,,,[A0A0A0]首领[-] 碎岩者 T17,[A0A0A0]BOSS[-] Rockbreaker T17
+AECSingerieBossT17,entityclasses,Entity,,,,[3CB371]BOSS[-] Singerie T17,,,,,,,,,,,,[3CB371]首领[-] 歌姬 T17,[3CB371]BOSS[-] Singerie T17
+AECGhostBossT17,entityclasses,Entity,,,,[CDD7E3]The Ghost T17[-],,,,,,,,,,,,[CDD7E3]幽灵 T17[-],[CDD7E3]The Ghost T17[-]
+AECSirenHeadBossT17,entityclasses,Entity,,,,[B85C38]BOSS[-] Siren Head T17,,,,,,,,,,,,[B85C38]首领[-] 警笛头 T17,[B85C38]BOSS[-] Siren Head T17
+AECMushroomBossT17,entityclasses,Entity,,,,Mushroom Boss T17,,,,,,,,,,,,蘑菇怪首领 T17,Mushroom Boss T17
+AECTheArcherBossT17,entityclasses,Entity,,,,The Archer Boss T17,,,,,,,,,,,,弓手首领 T17,The Archer Boss T17
+AECSheriffBossT17,entityclasses,Entity,,,,The Sheriff T17,,,,,,,,,,,,警长 T17,The Sheriff T17
+AECHeadlessBossT17,entityclasses,Entity,,,,[FF2A2A]The Headless T17[-],,,,,,,,,,,,[FF2A2A]无头者 T17[-],[FF2A2A]The Headless T17[-]
+AECDruidMinionBearT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid Bear,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊熊,[FFAA33]T17 Ascendant[-] Druid Bear
+AECDruidMinionBoarAggroT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid Boar,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊野猪,[FFAA33]T17 Ascendant[-] Druid Boar
+AECDruidMinionBossBoarT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid Boss Boar,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊首领野猪,[FFAA33]T17 Ascendant[-] Druid Boss Boar
+AECDruidMinionC4WolfT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid C4 Wolf,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊爆破狼,[FFAA33]T17 Ascendant[-] Druid C4 Wolf
+AECDruidMinionDireWolfT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid Dire Wolf,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊恐狼,[FFAA33]T17 Ascendant[-] Druid Dire Wolf
+AECDruidMinionWolfAggroT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid Wolf,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊狼,[FFAA33]T17 Ascendant[-] Druid Wolf
+AECDruidMinionZombieBearT17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Druid Zombie Bear,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 德鲁伊尸熊,[FFAA33]T17 Ascendant[-] Druid Zombie Bear
+AECSheriffWolfMinion01T17,entityclasses,Entity,,,,[FFAA33]T17 Ascendant[-] Sheriff Wolf,,,,,,,,,,,,[FFAA33]T17 飞升级[-] 警长战狼,[FFAA33]T17 Ascendant[-] Sheriff Wolf
+AECZombieArleneTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Arlene,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 阿琳,[55FFFF]T18 Eternal[-] Arlene
+AECZombieBikerTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Biker,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 摩托车手,[55FFFF]T18 Eternal[-] Biker
+AECZombieBoeTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Boe,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 波,[55FFFF]T18 Eternal[-] Boe
+AECZombieBowlerTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Bowler,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 保龄球手,[55FFFF]T18 Eternal[-] Bowler
+AECZombieBurntTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Burnt Zombie,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 焦尸,[55FFFF]T18 Eternal[-] Burnt Zombie
+AECZombieBusinessManTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Business Man,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 商务人士,[55FFFF]T18 Eternal[-] Business Man
+AECZombieChuckTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Chuck,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 查克,[55FFFF]T18 Eternal[-] Chuck
+AECZombieDarleneTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Darlene,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 达琳,[55FFFF]T18 Eternal[-] Darlene
+AECZombieDemolitionTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Demolisher,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 爆破者,[55FFFF]T18 Eternal[-] Demolisher
+AECZombieFatCopTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Fat Cop,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 肥胖警察,[55FFFF]T18 Eternal[-] Fat Cop
+AECZombieFatHawaiianTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Fat Hawaiian,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 肥胖夏威夷人,[55FFFF]T18 Eternal[-] Fat Hawaiian
+AECZombieFemaleFatTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Fat Female,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 肥胖女尸,[55FFFF]T18 Eternal[-] Fat Female
+AECZombieInmateTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Inmate,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 囚犯,[55FFFF]T18 Eternal[-] Inmate
+AECZombieJanitorTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Janitor,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 清洁工,[55FFFF]T18 Eternal[-] Janitor
+AECZombieJoeTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Joe,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 乔,[55FFFF]T18 Eternal[-] Joe
+AECZombieLabTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Lab Zombie,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 实验室僵尸,[55FFFF]T18 Eternal[-] Lab Zombie
+AECZombieLumberjackTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Lumberjack,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 伐木工,[55FFFF]T18 Eternal[-] Lumberjack
+AECZombieMaleHazmatTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Hazmat Zombie,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 防化服僵尸,[55FFFF]T18 Eternal[-] Hazmat Zombie
+AECZombieMarleneTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Marlene,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 玛琳,[55FFFF]T18 Eternal[-] Marlene
+AECZombieMoeTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Moe,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 莫,[55FFFF]T18 Eternal[-] Moe
+AECZombieMutatedTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Mutated Zombie,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 变异僵尸,[55FFFF]T18 Eternal[-] Mutated Zombie
+AECZombieNurseTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Nurse,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 护士,[55FFFF]T18 Eternal[-] Nurse
+AECZombiePartyGirlTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Party Girl,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 派对女孩,[55FFFF]T18 Eternal[-] Party Girl
+AECZombiePlagueSpitterTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Plague Spitter,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 瘟疫喷吐者,[55FFFF]T18 Eternal[-] Plague Spitter
+AECZombieRancherTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Rancher,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 牧场主,[55FFFF]T18 Eternal[-] Rancher
+AECZombieScreamerTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Screamer,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 尖叫者,[55FFFF]T18 Eternal[-] Screamer
+AECZombieSkateboarderTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Skateboarder,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 滑板手,[55FFFF]T18 Eternal[-] Skateboarder
+AECZombieSoldierTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Soldier,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 士兵,[55FFFF]T18 Eternal[-] Soldier
+AECZombieSpiderTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Spider Zombie,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 蜘蛛僵尸,[55FFFF]T18 Eternal[-] Spider Zombie
+AECZombieSteveCrawlerTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Steve Crawler,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 爬行者史蒂夫,[55FFFF]T18 Eternal[-] Steve Crawler
+AECZombieSteveTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Steve,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 史蒂夫,[55FFFF]T18 Eternal[-] Steve
+AECZombieTomClarkTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Tom Clark,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 汤姆·克拉克,[55FFFF]T18 Eternal[-] Tom Clark
+AECZombieUtilityWorkerTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Utility Worker,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 公用事业工人,[55FFFF]T18 Eternal[-] Utility Worker
+AECZombieWightFeralTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Feral Wight,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 狂暴尸王,[55FFFF]T18 Eternal[-] Feral Wight
+AECZombieYoTier18Eternal,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Yo,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 尤,[55FFFF]T18 Eternal[-] Yo
+bossAECDumdumT18,entityclasses,Entity,,,,[00D8FF]BOSS[-] Dumdum T18,,,,,,,,,,,,[00D8FF]首领[-] 呆呆 T18,[00D8FF]BOSS[-] Dumdum T18
+RunningKamikazeT18,entityclasses,Entity,,,,[FFAA00]BOSS[-] RunningKamikaze T18,,,,,,,,,,,,[FFAA00]首领[-] 狂奔神风者 T18,[FFAA00]BOSS[-] RunningKamikaze T18
+AECDoomlordDemolishmanBossT18,entityclasses,Entity,,,,Doomlord Demolishman Boss T18,,,,,,,,,,,,末日领主爆破者首领 T18,Doomlord Demolishman Boss T18
+AECTheWitchAngelBossT18,entityclasses,Entity,,,,The Witch T18,,,,,,,,,,,,女巫 T18,The Witch T18
+AECElectricDemonRunnerBossT18,entityclasses,Entity,,,,[00C8FF]BOSS[-] Electric Demon T18,,,,,,,,,,,,[00C8FF]首领[-] 电能恶魔 T18,[00C8FF]BOSS[-] Electric Demon T18
+AECExplosiveEagleBossT18,entityclasses,Entity,,,,[FF6A00]BOSS[-] Explosive Eagle T18,,,,,,,,,,,,[FF6A00]首领[-] 爆破之鹰 T18,[FF6A00]BOSS[-] Explosive Eagle T18
+AECHammerGuardianT18,entityclasses,Entity,,,,The Hammer Guardian T18,,,,,,,,,,,,巨锤守卫 T18,The Hammer Guardian T18
+AECTheMechanicianBossT18,entityclasses,Entity,,,,[FF4500]BOSS[-] The Mechanician T18,,,,,,,,,,,,[FF4500]首领[-] 机械师 T18,[FF4500]BOSS[-] The Mechanician T18
+AECTheDruidBossT18,entityclasses,Entity,,,,[FF4500]BOSS[-] The Druid T18,,,,,,,,,,,,[FF4500]首领[-] 德鲁伊 T18,[FF4500]BOSS[-] The Druid T18
+AECTheExecutionerBossT18,entityclasses,Entity,,,,[FF4500]BOSS[-] The Executioner T18,,,,,,,,,,,,[FF4500]首领[-] 刽子手 T18,[FF4500]BOSS[-] The Executioner T18
+AECPartyBeachBossT18,entityclasses,Entity,,,,[FF69B4]BOSS[-] Party Beach T18,,,,,,,,,,,,[FF69B4]首领[-] 海滩派对 T18,[FF69B4]BOSS[-] Party Beach T18
+AECMykirBossT18,entityclasses,Entity,,,,[4CFF4C]BOSS[-] Mykir the Spider Demon T18,,,,,,,,,,,,[4CFF4C]首领[-] 迈基尔蜘蛛恶魔 T18,[4CFF4C]BOSS[-] Mykir the Spider Demon T18
+AECHellskyliBossT18,entityclasses,Entity,,,,[FF6A00]BOSS[-] Hellskyli the Burning Demon T18,,,,,,,,,,,,[FF6A00]首领[-] 赫尔斯凯利燃烧恶魔 T18,[FF6A00]BOSS[-] Hellskyli the Burning Demon T18
+AECRockbreakerBossT18,entityclasses,Entity,,,,[A0A0A0]BOSS[-] Rockbreaker T18,,,,,,,,,,,,[A0A0A0]首领[-] 碎岩者 T18,[A0A0A0]BOSS[-] Rockbreaker T18
+AECSingerieBossT18,entityclasses,Entity,,,,[3CB371]BOSS[-] Singerie T18,,,,,,,,,,,,[3CB371]首领[-] 歌姬 T18,[3CB371]BOSS[-] Singerie T18
+AECGhostBossT18,entityclasses,Entity,,,,[CDD7E3]The Ghost T18[-],,,,,,,,,,,,[CDD7E3]幽灵 T18[-],[CDD7E3]The Ghost T18[-]
+AECSirenHeadBossT18,entityclasses,Entity,,,,[B85C38]BOSS[-] Siren Head T18,,,,,,,,,,,,[B85C38]首领[-] 警笛头 T18,[B85C38]BOSS[-] Siren Head T18
+AECMushroomBossT18,entityclasses,Entity,,,,Mushroom Boss T18,,,,,,,,,,,,蘑菇怪首领 T18,Mushroom Boss T18
+AECTheArcherBossT18,entityclasses,Entity,,,,The Archer Boss T18,,,,,,,,,,,,弓手首领 T18,The Archer Boss T18
+AECSheriffBossT18,entityclasses,Entity,,,,The Sheriff T18,,,,,,,,,,,,警长 T18,The Sheriff T18
+AECHeadlessBossT18,entityclasses,Entity,,,,[FF2A2A]The Headless T18[-],,,,,,,,,,,,[FF2A2A]无头者 T18[-],[FF2A2A]The Headless T18[-]
+AECDruidMinionBearT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid Bear,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊熊,[55FFFF]T18 Eternal[-] Druid Bear
+AECDruidMinionBoarAggroT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid Boar,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊野猪,[55FFFF]T18 Eternal[-] Druid Boar
+AECDruidMinionBossBoarT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid Boss Boar,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊首领野猪,[55FFFF]T18 Eternal[-] Druid Boss Boar
+AECDruidMinionC4WolfT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid C4 Wolf,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊爆破狼,[55FFFF]T18 Eternal[-] Druid C4 Wolf
+AECDruidMinionDireWolfT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid Dire Wolf,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊恐狼,[55FFFF]T18 Eternal[-] Druid Dire Wolf
+AECDruidMinionWolfAggroT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid Wolf,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊狼,[55FFFF]T18 Eternal[-] Druid Wolf
+AECDruidMinionZombieBearT18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Druid Zombie Bear,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 德鲁伊尸熊,[55FFFF]T18 Eternal[-] Druid Zombie Bear
+AECSheriffWolfMinion01T18,entityclasses,Entity,,,,[55FFFF]T18 Eternal[-] Sheriff Wolf,,,,,,,,,,,,[55FFFF]T18 永恒级[-] 警长战狼,[55FFFF]T18 Eternal[-] Sheriff Wolf
+AECZombieArleneTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Arlene,,,,,,,,,,,,[FF3333]T19 末日级[-] 阿琳,[FF3333]T19 Apocalyptic[-] Arlene
+AECZombieBikerTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Biker,,,,,,,,,,,,[FF3333]T19 末日级[-] 摩托车手,[FF3333]T19 Apocalyptic[-] Biker
+AECZombieBoeTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Boe,,,,,,,,,,,,[FF3333]T19 末日级[-] 波,[FF3333]T19 Apocalyptic[-] Boe
+AECZombieBowlerTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Bowler,,,,,,,,,,,,[FF3333]T19 末日级[-] 保龄球手,[FF3333]T19 Apocalyptic[-] Bowler
+AECZombieBurntTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Burnt Zombie,,,,,,,,,,,,[FF3333]T19 末日级[-] 焦尸,[FF3333]T19 Apocalyptic[-] Burnt Zombie
+AECZombieBusinessManTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Business Man,,,,,,,,,,,,[FF3333]T19 末日级[-] 商务人士,[FF3333]T19 Apocalyptic[-] Business Man
+AECZombieChuckTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Chuck,,,,,,,,,,,,[FF3333]T19 末日级[-] 查克,[FF3333]T19 Apocalyptic[-] Chuck
+AECZombieDarleneTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Darlene,,,,,,,,,,,,[FF3333]T19 末日级[-] 达琳,[FF3333]T19 Apocalyptic[-] Darlene
+AECZombieDemolitionTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Demolisher,,,,,,,,,,,,[FF3333]T19 末日级[-] 爆破者,[FF3333]T19 Apocalyptic[-] Demolisher
+AECZombieFatCopTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Fat Cop,,,,,,,,,,,,[FF3333]T19 末日级[-] 肥胖警察,[FF3333]T19 Apocalyptic[-] Fat Cop
+AECZombieFatHawaiianTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Fat Hawaiian,,,,,,,,,,,,[FF3333]T19 末日级[-] 肥胖夏威夷人,[FF3333]T19 Apocalyptic[-] Fat Hawaiian
+AECZombieFemaleFatTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Fat Female,,,,,,,,,,,,[FF3333]T19 末日级[-] 肥胖女尸,[FF3333]T19 Apocalyptic[-] Fat Female
+AECZombieInmateTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Inmate,,,,,,,,,,,,[FF3333]T19 末日级[-] 囚犯,[FF3333]T19 Apocalyptic[-] Inmate
+AECZombieJanitorTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Janitor,,,,,,,,,,,,[FF3333]T19 末日级[-] 清洁工,[FF3333]T19 Apocalyptic[-] Janitor
+AECZombieJoeTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Joe,,,,,,,,,,,,[FF3333]T19 末日级[-] 乔,[FF3333]T19 Apocalyptic[-] Joe
+AECZombieLabTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Lab Zombie,,,,,,,,,,,,[FF3333]T19 末日级[-] 实验室僵尸,[FF3333]T19 Apocalyptic[-] Lab Zombie
+AECZombieLumberjackTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Lumberjack,,,,,,,,,,,,[FF3333]T19 末日级[-] 伐木工,[FF3333]T19 Apocalyptic[-] Lumberjack
+AECZombieMaleHazmatTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Hazmat Zombie,,,,,,,,,,,,[FF3333]T19 末日级[-] 防化服僵尸,[FF3333]T19 Apocalyptic[-] Hazmat Zombie
+AECZombieMarleneTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Marlene,,,,,,,,,,,,[FF3333]T19 末日级[-] 玛琳,[FF3333]T19 Apocalyptic[-] Marlene
+AECZombieMoeTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Moe,,,,,,,,,,,,[FF3333]T19 末日级[-] 莫,[FF3333]T19 Apocalyptic[-] Moe
+AECZombieMutatedTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Mutated Zombie,,,,,,,,,,,,[FF3333]T19 末日级[-] 变异僵尸,[FF3333]T19 Apocalyptic[-] Mutated Zombie
+AECZombieNurseTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Nurse,,,,,,,,,,,,[FF3333]T19 末日级[-] 护士,[FF3333]T19 Apocalyptic[-] Nurse
+AECZombiePartyGirlTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Party Girl,,,,,,,,,,,,[FF3333]T19 末日级[-] 派对女孩,[FF3333]T19 Apocalyptic[-] Party Girl
+AECZombiePlagueSpitterTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Plague Spitter,,,,,,,,,,,,[FF3333]T19 末日级[-] 瘟疫喷吐者,[FF3333]T19 Apocalyptic[-] Plague Spitter
+AECZombieRancherTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Rancher,,,,,,,,,,,,[FF3333]T19 末日级[-] 牧场主,[FF3333]T19 Apocalyptic[-] Rancher
+AECZombieScreamerTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Screamer,,,,,,,,,,,,[FF3333]T19 末日级[-] 尖叫者,[FF3333]T19 Apocalyptic[-] Screamer
+AECZombieSkateboarderTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Skateboarder,,,,,,,,,,,,[FF3333]T19 末日级[-] 滑板手,[FF3333]T19 Apocalyptic[-] Skateboarder
+AECZombieSoldierTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Soldier,,,,,,,,,,,,[FF3333]T19 末日级[-] 士兵,[FF3333]T19 Apocalyptic[-] Soldier
+AECZombieSpiderTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Spider Zombie,,,,,,,,,,,,[FF3333]T19 末日级[-] 蜘蛛僵尸,[FF3333]T19 Apocalyptic[-] Spider Zombie
+AECZombieSteveCrawlerTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Steve Crawler,,,,,,,,,,,,[FF3333]T19 末日级[-] 爬行者史蒂夫,[FF3333]T19 Apocalyptic[-] Steve Crawler
+AECZombieSteveTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Steve,,,,,,,,,,,,[FF3333]T19 末日级[-] 史蒂夫,[FF3333]T19 Apocalyptic[-] Steve
+AECZombieTomClarkTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Tom Clark,,,,,,,,,,,,[FF3333]T19 末日级[-] 汤姆·克拉克,[FF3333]T19 Apocalyptic[-] Tom Clark
+AECZombieUtilityWorkerTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Utility Worker,,,,,,,,,,,,[FF3333]T19 末日级[-] 公用事业工人,[FF3333]T19 Apocalyptic[-] Utility Worker
+AECZombieWightFeralTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Feral Wight,,,,,,,,,,,,[FF3333]T19 末日级[-] 狂暴尸王,[FF3333]T19 Apocalyptic[-] Feral Wight
+AECZombieYoTier19Apocalyptic,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Yo,,,,,,,,,,,,[FF3333]T19 末日级[-] 尤,[FF3333]T19 Apocalyptic[-] Yo
+bossAECDumdumT19,entityclasses,Entity,,,,[00D8FF]BOSS[-] Dumdum T19,,,,,,,,,,,,[00D8FF]首领[-] 呆呆 T19,[00D8FF]BOSS[-] Dumdum T19
+RunningKamikazeT19,entityclasses,Entity,,,,[FFAA00]BOSS[-] RunningKamikaze T19,,,,,,,,,,,,[FFAA00]首领[-] 狂奔神风者 T19,[FFAA00]BOSS[-] RunningKamikaze T19
+AECDoomlordDemolishmanBossT19,entityclasses,Entity,,,,Doomlord Demolishman Boss T19,,,,,,,,,,,,末日领主爆破者首领 T19,Doomlord Demolishman Boss T19
+AECTheWitchAngelBossT19,entityclasses,Entity,,,,The Witch T19,,,,,,,,,,,,女巫 T19,The Witch T19
+AECElectricDemonRunnerBossT19,entityclasses,Entity,,,,[00C8FF]BOSS[-] Electric Demon T19,,,,,,,,,,,,[00C8FF]首领[-] 电能恶魔 T19,[00C8FF]BOSS[-] Electric Demon T19
+AECExplosiveEagleBossT19,entityclasses,Entity,,,,[FF6A00]BOSS[-] Explosive Eagle T19,,,,,,,,,,,,[FF6A00]首领[-] 爆破之鹰 T19,[FF6A00]BOSS[-] Explosive Eagle T19
+AECHammerGuardianT19,entityclasses,Entity,,,,The Hammer Guardian T19,,,,,,,,,,,,巨锤守卫 T19,The Hammer Guardian T19
+AECTheMechanicianBossT19,entityclasses,Entity,,,,[FF4500]BOSS[-] The Mechanician T19,,,,,,,,,,,,[FF4500]首领[-] 机械师 T19,[FF4500]BOSS[-] The Mechanician T19
+AECTheDruidBossT19,entityclasses,Entity,,,,[FF4500]BOSS[-] The Druid T19,,,,,,,,,,,,[FF4500]首领[-] 德鲁伊 T19,[FF4500]BOSS[-] The Druid T19
+AECTheExecutionerBossT19,entityclasses,Entity,,,,[FF4500]BOSS[-] The Executioner T19,,,,,,,,,,,,[FF4500]首领[-] 刽子手 T19,[FF4500]BOSS[-] The Executioner T19
+AECPartyBeachBossT19,entityclasses,Entity,,,,[FF69B4]BOSS[-] Party Beach T19,,,,,,,,,,,,[FF69B4]首领[-] 海滩派对 T19,[FF69B4]BOSS[-] Party Beach T19
+AECMykirBossT19,entityclasses,Entity,,,,[4CFF4C]BOSS[-] Mykir the Spider Demon T19,,,,,,,,,,,,[4CFF4C]首领[-] 迈基尔蜘蛛恶魔 T19,[4CFF4C]BOSS[-] Mykir the Spider Demon T19
+AECHellskyliBossT19,entityclasses,Entity,,,,[FF6A00]BOSS[-] Hellskyli the Burning Demon T19,,,,,,,,,,,,[FF6A00]首领[-] 赫尔斯凯利燃烧恶魔 T19,[FF6A00]BOSS[-] Hellskyli the Burning Demon T19
+AECRockbreakerBossT19,entityclasses,Entity,,,,[A0A0A0]BOSS[-] Rockbreaker T19,,,,,,,,,,,,[A0A0A0]首领[-] 碎岩者 T19,[A0A0A0]BOSS[-] Rockbreaker T19
+AECSingerieBossT19,entityclasses,Entity,,,,[3CB371]BOSS[-] Singerie T19,,,,,,,,,,,,[3CB371]首领[-] 歌姬 T19,[3CB371]BOSS[-] Singerie T19
+AECGhostBossT19,entityclasses,Entity,,,,[CDD7E3]The Ghost T19[-],,,,,,,,,,,,[CDD7E3]幽灵 T19[-],[CDD7E3]The Ghost T19[-]
+AECSirenHeadBossT19,entityclasses,Entity,,,,[B85C38]BOSS[-] Siren Head T19,,,,,,,,,,,,[B85C38]首领[-] 警笛头 T19,[B85C38]BOSS[-] Siren Head T19
+AECMushroomBossT19,entityclasses,Entity,,,,Mushroom Boss T19,,,,,,,,,,,,蘑菇怪首领 T19,Mushroom Boss T19
+AECTheArcherBossT19,entityclasses,Entity,,,,The Archer Boss T19,,,,,,,,,,,,弓手首领 T19,The Archer Boss T19
+AECSheriffBossT19,entityclasses,Entity,,,,The Sheriff T19,,,,,,,,,,,,警长 T19,The Sheriff T19
+AECHeadlessBossT19,entityclasses,Entity,,,,[FF2A2A]The Headless T19[-],,,,,,,,,,,,[FF2A2A]无头者 T19[-],[FF2A2A]The Headless T19[-]
+AECDruidMinionBearT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid Bear,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊熊,[FF3333]T19 Apocalyptic[-] Druid Bear
+AECDruidMinionBoarAggroT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid Boar,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊野猪,[FF3333]T19 Apocalyptic[-] Druid Boar
+AECDruidMinionBossBoarT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid Boss Boar,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊首领野猪,[FF3333]T19 Apocalyptic[-] Druid Boss Boar
+AECDruidMinionC4WolfT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid C4 Wolf,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊爆破狼,[FF3333]T19 Apocalyptic[-] Druid C4 Wolf
+AECDruidMinionDireWolfT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid Dire Wolf,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊恐狼,[FF3333]T19 Apocalyptic[-] Druid Dire Wolf
+AECDruidMinionWolfAggroT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid Wolf,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊狼,[FF3333]T19 Apocalyptic[-] Druid Wolf
+AECDruidMinionZombieBearT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Druid Zombie Bear,,,,,,,,,,,,[FF3333]T19 末日级[-] 德鲁伊尸熊,[FF3333]T19 Apocalyptic[-] Druid Zombie Bear
+AECSheriffWolfMinion01T19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Sheriff Wolf,,,,,,,,,,,,[FF3333]T19 末日级[-] 警长战狼,[FF3333]T19 Apocalyptic[-] Sheriff Wolf

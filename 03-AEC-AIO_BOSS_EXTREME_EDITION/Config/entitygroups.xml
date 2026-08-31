@@ -1,0 +1,916 @@
+﻿<configs>
+	<!-- === AEC-AIO BOSS === -->
+
+<!-- Forest - Day (downtown forest group) -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECRockbreakerGolemIron" p=".2"/>
+		<e n="AECRockbreakerGolemLead" p=".2"/>
+		<e n="AECRockbreakerGolemCoal" p=".2"/>
+		<e n="AECRockbreakerGolemRock" p=".2"/>
+		<e n="AECRockbreakerGolemNitrate" p=".2"/>
+		<e n="AECRockbreakerGolemOilShale" p=".2"/>
+	</append>
+
+	<!-- Forest - Night (downtown forest night group) -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECRockbreakerGolemIron" p=".2"/>
+		<e n="AECRockbreakerGolemLead" p=".2"/>
+		<e n="AECRockbreakerGolemCoal" p=".2"/>
+		<e n="AECRockbreakerGolemRock" p=".2"/>
+		<e n="AECRockbreakerGolemNitrate" p=".2"/>
+		<e n="AECRockbreakerGolemOilShale" p=".2"/>
+	</append>
+
+	<!-- Snow - Day -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECRockbreakerGolemIron" p=".2"/>
+		<e n="AECRockbreakerGolemLead" p=".2"/>
+		<e n="AECRockbreakerGolemCoal" p=".2"/>
+		<e n="AECRockbreakerGolemRock" p=".2"/>
+		<e n="AECRockbreakerGolemNitrate" p=".2"/>
+		<e n="AECRockbreakerGolemOilShale" p=".2"/>
+	</append>
+
+	<!-- Snow - Night -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECRockbreakerGolemIron" p=".2"/>
+		<e n="AECRockbreakerGolemLead" p=".2"/>
+		<e n="AECRockbreakerGolemCoal" p=".2"/>
+		<e n="AECRockbreakerGolemRock" p=".2"/>
+		<e n="AECRockbreakerGolemNitrate" p=".2"/>
+		<e n="AECRockbreakerGolemOilShale" p=".2"/>
+	</append>
+
+		<!-- Desert - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECRockbreakerGolemIron" p=".2"/>
+		<e n="AECRockbreakerGolemLead" p=".2"/>
+		<e n="AECRockbreakerGolemCoal" p=".2"/>
+		<e n="AECRockbreakerGolemRock" p=".2"/>
+		<e n="AECRockbreakerGolemNitrate" p=".2"/>
+		<e n="AECRockbreakerGolemOilShale" p=".2"/>
+	</append>
+
+	<!-- Desert - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECRockbreakerGolemIron" p=".2"/>
+		<e n="AECRockbreakerGolemLead" p=".2"/>
+		<e n="AECRockbreakerGolemCoal" p=".2"/>
+		<e n="AECRockbreakerGolemRock" p=".2"/>
+		<e n="AECRockbreakerGolemNitrate" p=".2"/>
+		<e n="AECRockbreakerGolemOilShale" p=".2"/>
+	</append>
+
+<!-- Forest - Day (downtown forest group) -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECDoomlordDemolishmanMinion" p=".2"/>
+		<e n="AECDemolishmanMinion01" p=".2"/>
+		<e n="AECDemolishmanMinion02" p=".2"/>
+		<e n="AECDemolishmanMinion03" p=".2"/>
+		<e n="AECDemolishmanMinion04" p=".2"/>
+		<e n="AECDemolishmanMinion05" p=".2"/>
+		<e n="AECDemolishmanMinion06" p=".2"/>
+		<e n="AECDemolishmanMinion07" p=".2"/>
+		<e n="AECDoomlordDemolishmanBoss" p=".02"/>
+	</append>
+
+	<!-- Forest - Night (downtown forest night group) -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECDoomlordDemolishmanMinion" p=".2"/>
+		<e n="AECDemolishmanMinion01" p=".2"/>
+		<e n="AECDemolishmanMinion02" p=".2"/>
+		<e n="AECDemolishmanMinion03" p=".2"/>
+		<e n="AECDemolishmanMinion04" p=".2"/>
+		<e n="AECDemolishmanMinion05" p=".2"/>
+		<e n="AECDemolishmanMinion06" p=".2"/>
+		<e n="AECDemolishmanMinion07" p=".2"/>
+		<e n="AECDoomlordDemolishmanBoss" p=".02"/>
+	</append>
+
+	<!-- Snow - Day -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECDoomlordDemolishmanMinion" p=".2"/>
+		<e n="AECDemolishmanMinion01" p=".2"/>
+		<e n="AECDemolishmanMinion02" p=".2"/>
+		<e n="AECDemolishmanMinion03" p=".2"/>
+		<e n="AECDemolishmanMinion04" p=".2"/>
+		<e n="AECDemolishmanMinion05" p=".2"/>
+		<e n="AECDemolishmanMinion06" p=".2"/>
+		<e n="AECDemolishmanMinion07" p=".2"/>
+		<e n="AECDoomlordDemolishmanBoss" p=".04"/>
+	</append>
+
+	<!-- Snow - Night -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECDoomlordDemolishmanMinion" p=".2"/>
+		<e n="AECDemolishmanMinion01" p=".2"/>
+		<e n="AECDemolishmanMinion02" p=".2"/>
+		<e n="AECDemolishmanMinion03" p=".2"/>
+		<e n="AECDemolishmanMinion04" p=".2"/>
+		<e n="AECDemolishmanMinion05" p=".2"/>
+		<e n="AECDemolishmanMinion06" p=".2"/>
+		<e n="AECDemolishmanMinion07" p=".2"/>
+		<e n="AECDoomlordDemolishmanBoss" p=".04"/>
+	</append>
+
+	<!-- === AEC-Dumdum_Boss === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+	<e n="bossAECDumdum" p=".01"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="bossAECDumdum" p=".02"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECDumdumMinion" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECDumdumMinion" p=".4"/>
+	</append>
+
+	<!-- === AEC-Electric_demon === -->
+
+<!-- Wasteland - Day -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']">
+		<e n="AECElectricDemonRunnerBoss" p=".01"/>
+	</append>
+
+	<!-- Wasteland - Night -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECElectricDemonRunnerBoss" p=".02"/>
+	</append>
+
+	<!-- === AEC-Executioner_Boss === -->
+
+<!-- === AEC-Executioner_Boss === -->
+
+	<!-- Night only: global night roaming -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesNight']">
+		<e n="AECExecutionerMinion" p=".04"/>
+		<e n="AECTheExecutionerBoss" p=".02"/>
+	</append>
+
+	<!-- Night only: forest/downtown -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECExecutionerMinion" p=".04"/>
+		<e n="AECTheExecutionerBoss" p=".02"/>
+	</append>
+
+	<!-- Night only: burnt forest -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECExecutionerMinion" p=".04"/>
+		<e n="AECTheExecutionerBoss" p=".02"/>
+	</append>
+
+	<!-- Night only: desert -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECExecutionerMinion" p=".04"/>
+		<e n="AECTheExecutionerBoss" p=".02"/>
+	</append>
+
+	<!-- Night only: snow -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECExecutionerMinion" p=".04"/>
+		<e n="AECTheExecutionerBoss" p=".02"/>
+	</append>
+
+	<!-- Night only: wasteland -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECExecutionerMinion" p=".04"/>
+		<e n="AECTheExecutionerBoss" p=".02"/>
+	</append>
+
+	<!-- === AEC-Explosive_Eagle_Boss_2 === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+	<e n="AECExplosiveEagleBoss" p=".01"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECExplosiveEagleBoss" p=".02"/>
+	</append>
+
+	<!-- === AEC-Ghost_Boss === -->
+
+<!-- === AEC GHOST BOSS - Entity Groups === -->
+
+<!-- Groupes standalone pour spawn manuel -->
+<append xpath="/entitygroups">
+<entitygroup name="AECGhostBossGroup">
+<entity name="AECGhostBoss"          prob="1"/>
+</entitygroup>
+<entitygroup name="AECGhostMinionsGroup">
+<entity name="AECGhostWight"         prob="1"/>
+<entity name="AECGhostScreamer"      prob="1"/>
+<entity name="AECGhostArlene"        prob="1"/>
+<entity name="AECGhostBowler"        prob="1"/>
+<entity name="AECGhostRancher"       prob="1"/>
+<entity name="AECGhostPartyGirl"     prob="1"/>
+<entity name="AECGhostNurse"         prob="1"/>
+<entity name="AECGhostSkateboarder"  prob="1"/>
+<entity name="AECGhostSoldier"       prob="1"/>
+</entitygroup>
+</append>
+
+<!-- ============================================================ -->
+<!--  WILDERNESS - NUIT SEULEMENT                                 -->
+<!-- ============================================================ -->
+
+<!-- ZombiesNight (groupe global nuit toutes zones) -->
+<append xpath="/entitygroups/entitygroup[@name='ZombiesNight']">
+	<e n="AECGhostBoss" p=".01"/>
+	<e n="AECGhostWight" p=".2"/>
+	<e n="AECGhostScreamer" p=".2"/>
+	<e n="AECGhostArlene" p=".2"/>
+	<e n="AECGhostBowler" p=".15"/>
+	<e n="AECGhostRancher" p=".2"/>
+	<e n="AECGhostPartyGirl" p=".2"/>
+	<e n="AECGhostNurse" p=".2"/>
+	<e n="AECGhostSkateboarder" p=".2"/>
+	<e n="AECGhostSoldier" p=".2"/>
+</append>
+
+<!-- Forest Downtown - Nuit -->
+<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+	<e n="AECGhostBoss" p=".01"/>
+	<e n="AECGhostWight" p=".2"/>
+	<e n="AECGhostScreamer" p=".2"/>
+	<e n="AECGhostArlene" p=".2"/>
+	<e n="AECGhostBowler" p=".15"/>
+	<e n="AECGhostRancher" p=".2"/>
+	<e n="AECGhostPartyGirl" p=".2"/>
+	<e n="AECGhostNurse" p=".2"/>
+	<e n="AECGhostSkateboarder" p=".2"/>
+	<e n="AECGhostSoldier" p=".2"/>
+</append>
+
+<!-- Burnt Forest - Nuit -->
+<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+	<e n="AECGhostBoss" p=".01"/>
+	<e n="AECGhostWight" p=".2"/>
+	<e n="AECGhostScreamer" p=".2"/>
+	<e n="AECGhostArlene" p=".2"/>
+	<e n="AECGhostBowler" p=".15"/>
+	<e n="AECGhostRancher" p=".2"/>
+	<e n="AECGhostPartyGirl" p=".2"/>
+	<e n="AECGhostNurse" p=".2"/>
+	<e n="AECGhostSkateboarder" p=".2"/>
+	<e n="AECGhostSoldier" p=".2"/>
+</append>
+
+<!-- Desert - Nuit -->
+<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+	<e n="AECGhostBoss" p=".01"/>
+	<e n="AECGhostWight" p=".2"/>
+	<e n="AECGhostScreamer" p=".2"/>
+	<e n="AECGhostArlene" p=".2"/>
+	<e n="AECGhostBowler" p=".15"/>
+	<e n="AECGhostRancher" p=".2"/>
+	<e n="AECGhostPartyGirl" p=".2"/>
+	<e n="AECGhostNurse" p=".2"/>
+	<e n="AECGhostSkateboarder" p=".2"/>
+	<e n="AECGhostSoldier" p=".2"/>
+</append>
+
+<!-- Snow - Nuit -->
+<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+	<e n="AECGhostBoss" p=".01"/>
+	<e n="AECGhostWight" p=".2"/>
+	<e n="AECGhostScreamer" p=".2"/>
+	<e n="AECGhostArlene" p=".2"/>
+	<e n="AECGhostBowler" p=".15"/>
+	<e n="AECGhostRancher" p=".2"/>
+	<e n="AECGhostPartyGirl" p=".2"/>
+	<e n="AECGhostNurse" p=".2"/>
+	<e n="AECGhostSkateboarder" p=".2"/>
+	<e n="AECGhostSoldier" p=".2"/>
+</append>
+
+<!-- Wasteland - Nuit -->
+<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+	<e n="AECGhostBoss" p=".01"/>
+	<e n="AECGhostWight" p=".2"/>
+	<e n="AECGhostScreamer" p=".2"/>
+	<e n="AECGhostArlene" p=".2"/>
+	<e n="AECGhostBowler" p=".15"/>
+	<e n="AECGhostRancher" p=".2"/>
+	<e n="AECGhostPartyGirl" p=".2"/>
+	<e n="AECGhostNurse" p=".2"/>
+	<e n="AECGhostSkateboarder" p=".2"/>
+	<e n="AECGhostSoldier" p=".2"/>
+</append>
+
+	<!-- === AEC-Hammer_Guardian === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+	<e n="AECHammerGuardian" p=".005"/>
+	<e n="AECHammerGuardianMinion01" p=".1"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECHammerGuardian" p=".01"/>
+		<e n="AECHammerGuardianMinion01" p=".2"/>
+	</append>
+
+	<!-- === AEC-Hellskyli_Boss === -->
+
+<!-- Wasteland - Day -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']">
+		<e n="AECHellskyliBoss" p=".02"/>
+	</append>
+
+	<!-- Wasteland - Night -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECHellskyliBoss" p=".04"/>
+	</append>
+
+	<!-- === AEC-Mykir === -->
+
+<!-- Wasteland - Day -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']">
+		<e n="AECMykirBoss" p=".02"/>
+	</append>
+
+	<!-- Wasteland - Night -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECMykirBoss" p=".04"/>
+	</append>
+
+	<!-- === AEC-PartyBeachBoss === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+	<e n="AECPartyBeachBoss" p=".02"/>
+</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECPartyBeachBoss" p=".04"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECPartyBeachBoss" p=".04"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECPartyBeachBoss" p=".08"/>
+	</append>
+
+	<!-- === AEC-Rockbreaker_Boss === -->
+
+<!-- === AEC ROCKBREAKER BOSS — Entity Groups === -->
+	<!-- Structure CSV identique à AEC-AIO_Boss entitygroups.xml       -->
+	<!-- Spawn dans toute la wilderness, toutes biomes, jour + nuit    -->
+	<!-- Rare de jour (0.02), légèrement plus fréquent la nuit (0.04) -->
+
+	<!-- Groupe standalone (spawn manuel via menu) -->
+	<append xpath="/entitygroups">
+		<entitygroup name="AECRockbreakerBossGroup">
+			<entity name="AECRockbreakerBoss" prob="1"/>
+		</entitygroup>
+	</append>
+
+	<!-- Forest - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECRockbreakerBoss" p=".02"/>
+	</append>
+
+	<!-- Forest - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECRockbreakerBoss" p=".02"/>
+	</append>
+
+	<!-- Burnt Forest - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECRockbreakerBoss" p=".04"/>
+	</append>
+
+	<!-- Burnt Forest - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECRockbreakerBoss" p=".02"/>
+	</append>
+
+	<!-- Desert - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECRockbreakerBoss" p=".04"/>
+	</append>
+
+	<!-- Desert - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECRockbreakerBoss" p=".02"/>
+	</append>
+
+	<!-- Snow - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECRockbreakerBoss" p=".04"/>
+	</append>
+
+	<!-- Snow - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECRockbreakerBoss" p=".02"/>
+	</append>
+
+	<!-- Wasteland - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']">
+		<e n="AECRockbreakerBoss" p=".04"/>
+	</append>
+
+	<!-- Wasteland - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECRockbreakerBoss" p=".02"/>
+	</append>
+
+	<!-- === AEC-RunningKamikaze_Boss === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+	<e n="RunningKamikaze" p=".02"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="RunningKamikaze" p=".06"/>
+	</append>
+
+	<!-- === AEC-Singerie_Boss === -->
+
+<!-- === AEC SINGERIE BOSS — Entity Groups === -->
+	<!-- Structure identique à AEC-Rockbreaker entitygroups.xml           -->
+	<!-- Minions spawnent 2× plus que le boss (4 variants × prob/2 each)  -->
+
+	<!-- Groupes standalone (spawn manuel / debug) -->
+	<append xpath="/entitygroups">
+		<entitygroup name="AECSingerieBossGroup">
+			<entity name="AECSingerieBoss" prob="1"/>
+		</entitygroup>
+
+		<entitygroup name="AECSingerieMinionGroup">
+			<entity name="AECSingerieMinion01" prob="1"/>
+			<entity name="AECSingerieMinion02" prob="1"/>
+			<entity name="AECSingerieMinion03" prob="1"/>
+			<entity name="AECSingerieMinion04" prob="1"/>
+		</entitygroup>
+	</append>
+
+	<!-- ============================================================ -->
+	<!--                        FOREST                                -->
+	<!-- ============================================================ -->
+
+	<!-- Forest - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECSingerieBoss" p=".02"/>
+		<e n="AECSingerieMinion01" p=".2"/>
+		<e n="AECSingerieMinion02" p=".2"/>
+		<e n="AECSingerieMinion03" p=".2"/>
+		<e n="AECSingerieMinion04" p=".2"/>
+	</append>
+
+	<!-- Forest - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECSingerieBoss" p=".02"/>
+		<e n="AECSingerieMinion01" p=".2"/>
+		<e n="AECSingerieMinion02" p=".2"/>
+		<e n="AECSingerieMinion03" p=".2"/>
+		<e n="AECSingerieMinion04" p=".2"/>
+	</append>
+
+	<!-- ============================================================ -->
+	<!--                        DESERT                                -->
+	<!-- ============================================================ -->
+
+	<!-- Desert - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECSingerieBoss" p=".04"/>
+		<e n="AECSingerieMinion01" p=".2"/>
+		<e n="AECSingerieMinion02" p=".2"/>
+		<e n="AECSingerieMinion03" p=".2"/>
+		<e n="AECSingerieMinion04" p=".2"/>
+	</append>
+
+	<!-- Desert - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECSingerieBoss" p=".02"/>
+		<e n="AECSingerieMinion01" p=".2"/>
+		<e n="AECSingerieMinion02" p=".2"/>
+		<e n="AECSingerieMinion03" p=".2"/>
+		<e n="AECSingerieMinion04" p=".2"/>
+	</append>
+
+	<!-- ============================================================ -->
+	<!--                         SNOW                                 -->
+	<!-- ============================================================ -->
+
+	<!-- Snow - Jour -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECSingerieBoss" p=".04"/>
+		<e n="AECSingerieMinion01" p=".2"/>
+		<e n="AECSingerieMinion02" p=".2"/>
+		<e n="AECSingerieMinion03" p=".2"/>
+		<e n="AECSingerieMinion04" p=".2"/>
+	</append>
+
+	<!-- Snow - Nuit -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECSingerieBoss" p=".02"/>
+		<e n="AECSingerieMinion01" p=".2"/>
+		<e n="AECSingerieMinion02" p=".2"/>
+		<e n="AECSingerieMinion03" p=".2"/>
+		<e n="AECSingerieMinion04" p=".2"/>
+	</append>
+
+	<!-- === AEC-SirenHead_Boss === -->
+
+<!-- AECSirenHeadBoss : burnt forest only (day + night) -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECSirenHeadBoss" p=".03"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECSirenHeadBoss" p=".07"/>
+	</append>
+
+	<!-- === AEC-The_Druid === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+	<e n="AECTheDruidBoss" p=".04"/>
+	<e n="AECDruidMinionC4Wolf" p=".008"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECTheDruidBoss" p=".08"/>
+		<e n="AECDruidMinionC4Wolf" p=".015"/>
+	</append>
+
+	<!-- === AEC-The_Mechanician_Boss === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+	<e n="AECTheMechanicianBoss" p=".005"/>
+	<e n="AECMechanicianMinion02" p=".01"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECTheMechanicianBoss" p=".01"/>
+		<e n="AECMechanicianMinion02" p=".02"/>
+	</append>
+
+	<!-- === AEC-TheWitch_Boss === -->
+
+<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+	<e n="AECTheWitchAngelBoss" p=".01"/>
+</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECTheWitchAngelBoss" p=".02"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECTheWitchMinionSpider" p=".03"/>
+		<e n="AECTheWitchMinionCrouch" p=".01"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECTheWitchMinionSpider" p=".06"/>
+		<e n="AECTheWitchMinionCrouch" p=".02"/>
+	</append>
+
+	<!-- === mushrroom zombie - Copie === -->
+
+<!-- === AEC Mushroom Boss — World Spawning === -->
+
+	<!-- Forest / Downtown -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECMushroomMinion01" p=".2"/>
+		<e n="AECMushroomMinion02" p=".2"/>
+		<e n="AECMushroomMinion03" p=".2"/>
+		<e n="AECMushroomMinion04" p=".2"/>
+		<e n="AECMushroomBoss" p=".04"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECMushroomMinion01" p=".25"/>
+		<e n="AECMushroomMinion02" p=".25"/>
+		<e n="AECMushroomMinion03" p=".25"/>
+		<e n="AECMushroomMinion04" p=".25"/>
+		<e n="AECMushroomBoss" p=".05"/>
+	</append>
+
+	<!-- Desert -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECMushroomMinion01" p=".18"/>
+		<e n="AECMushroomMinion02" p=".18"/>
+		<e n="AECMushroomMinion03" p=".18"/>
+		<e n="AECMushroomMinion04" p=".18"/>
+		<e n="AECMushroomBoss" p=".03"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECMushroomMinion01" p=".22"/>
+		<e n="AECMushroomMinion02" p=".22"/>
+		<e n="AECMushroomMinion03" p=".22"/>
+		<e n="AECMushroomMinion04" p=".22"/>
+		<e n="AECMushroomBoss" p=".04"/>
+	</append>
+
+	<!-- Snow -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECMushroomMinion01" p=".18"/>
+		<e n="AECMushroomMinion02" p=".18"/>
+		<e n="AECMushroomMinion03" p=".18"/>
+		<e n="AECMushroomMinion04" p=".18"/>
+		<e n="AECMushroomBoss" p=".03"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECMushroomMinion01" p=".22"/>
+		<e n="AECMushroomMinion02" p=".22"/>
+		<e n="AECMushroomMinion03" p=".22"/>
+		<e n="AECMushroomMinion04" p=".22"/>
+		<e n="AECMushroomBoss" p=".04"/>
+	</append>
+
+	<!-- Burnt Forest -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECMushroomMinion01" p=".2"/>
+		<e n="AECMushroomMinion02" p=".2"/>
+		<e n="AECMushroomMinion03" p=".2"/>
+		<e n="AECMushroomMinion04" p=".2"/>
+		<e n="AECMushroomBoss" p=".04"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECMushroomMinion01" p=".25"/>
+		<e n="AECMushroomMinion02" p=".25"/>
+		<e n="AECMushroomMinion03" p=".25"/>
+		<e n="AECMushroomMinion04" p=".25"/>
+		<e n="AECMushroomBoss" p=".05"/>
+	</append>
+
+	<!-- Night universal -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesNight']">
+		<e n="AECMushroomMinion01" p=".2"/>
+		<e n="AECMushroomMinion02" p=".2"/>
+		<e n="AECMushroomMinion03" p=".2"/>
+		<e n="AECMushroomMinion04" p=".2"/>
+		<e n="AECMushroomBoss" p=".04"/>
+	</append>
+
+	<!-- === AEC-Headless_Boss === -->
+
+	<!-- Groupes standalone pour spawn manuel -->
+	<append xpath="/entitygroups">
+		<entitygroup name="AECHeadlessBossGroup">
+			<entity name="AECHeadlessBoss" prob="1"/>
+		</entitygroup>
+		<entitygroup name="AECHeadlessMinionsGroup">
+			<entity name="AECHeadlessMinion01" prob="1"/>
+			<entity name="AECHeadlessMinion02" prob="1"/>
+			<entity name="AECHeadlessMinion03" prob="1"/>
+			<entity name="AECHeadlessMinion04" prob="1"/>
+			<entity name="AECHeadlessMinion05" prob="1"/>
+			<entity name="AECHeadlessMinion06" prob="1"/>
+			<entity name="AECHeadlessMinion07" prob="1"/>
+			<entity name="AECHeadlessMinion08" prob="1"/>
+			<entity name="AECHeadlessMinion09" prob="1"/>
+			<entity name="AECHeadlessMinion10" prob="1"/>
+		</entitygroup>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECHeadlessBoss" p=".02"/>
+		<e n="AECHeadlessMinion01" p=".2"/>
+		<e n="AECHeadlessMinion02" p=".2"/>
+		<e n="AECHeadlessMinion03" p=".2"/>
+		<e n="AECHeadlessMinion04" p=".2"/>
+		<e n="AECHeadlessMinion05" p=".2"/>
+		<e n="AECHeadlessMinion06" p=".2"/>
+		<e n="AECHeadlessMinion07" p=".2"/>
+		<e n="AECHeadlessMinion08" p=".2"/>
+		<e n="AECHeadlessMinion09" p=".2"/>
+		<e n="AECHeadlessMinion10" p=".2"/>
+	</append>
+	<!-- === AEC-Archer_Boss === -->
+
+	<!-- Groupes standalone pour spawn manuel -->
+	<append xpath="/entitygroups">
+		<entitygroup name="AECArcherMinionsGroup">
+			<entity name="AECArcherMinionBow" prob="1"/>
+			<entity name="AECArcherMinionExplosiveCrossbow" prob="1"/>
+			<entity name="AECArcherMinionFlamingCrossbow" prob="1"/>
+			<entity name="AECArcherMinionCrossbow" prob="1"/>
+		</entitygroup>
+	</append>
+
+	<!-- Pool général -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesAll']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesNight']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<!-- Forest Downtown -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntown']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesForestDowntownNight']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<!-- Burnt Forest -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<!-- Snow -->
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnow']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesSnowNight']">
+		<e n="AECTheArcherBoss" p=".02"/>
+		<e n="AECArcherMinionBow" p=".2"/>
+		<e n="AECArcherMinionExplosiveCrossbow" p=".2"/>
+		<e n="AECArcherMinionFlamingCrossbow" p=".2"/>
+		<e n="AECArcherMinionCrossbow" p=".2"/>
+	</append>
+
+
+	<!-- === AEC-Sheriff_Boss === -->
+	<append xpath="/entitygroups">
+		<entitygroup name="AECSheriffMinionsGroup">
+			<entity name="AECSheriffWolfMinion01" prob="1"/>
+			<entity name="AECSheriffMinion02" prob="1"/>
+		</entitygroup>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForest']">
+		<e n="AECSheriffBoss" p=".04"/>
+		<e n="AECSheriffWolfMinion01" p=".1"/>
+		<e n="AECSheriffMinion02" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesBurntForestNight']">
+		<e n="AECSheriffBoss" p=".04"/>
+		<e n="AECSheriffWolfMinion01" p=".1"/>
+		<e n="AECSheriffMinion02" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesert']">
+		<e n="AECSheriffBoss" p=".04"/>
+		<e n="AECSheriffWolfMinion01" p=".1"/>
+		<e n="AECSheriffMinion02" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesDesertNight']">
+		<e n="AECSheriffBoss" p=".04"/>
+		<e n="AECSheriffWolfMinion01" p=".1"/>
+		<e n="AECSheriffMinion02" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWasteland']">
+		<e n="AECSheriffBoss" p=".04"/>
+		<e n="AECSheriffWolfMinion01" p=".1"/>
+		<e n="AECSheriffMinion02" p=".2"/>
+	</append>
+
+	<append xpath="/entitygroups/entitygroup[@name='ZombiesWastelandNight']">
+		<e n="AECSheriffBoss" p=".04"/>
+		<e n="AECSheriffWolfMinion01" p=".1"/>
+		<e n="AECSheriffMinion02" p=".2"/>
+	</append>
+</configs>

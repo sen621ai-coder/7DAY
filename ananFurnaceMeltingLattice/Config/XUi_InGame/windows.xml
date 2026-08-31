@@ -1,0 +1,11 @@
+<anan>
+   
+   <set xpath="/windows/window[@name='windowForgeInput']/@height">279</set>
+   <set xpath="/windows/window[@name='windowForgeInput']/sprite[@name='backgroundMain']/@height">228</set>
+   <set xpath="/windows/window[@name='windowForgeInput']/rect[@name='content']/@height">223</set>
+   <set xpath="/windows/window[@name='windowForgeInput']/rect[@name='content']/grid[@depth='7']/@rows">3</set>
+   <set xpath="/windows/window[@name='windowForgeInput']/rect[@name='content2']/@height">223</set>
+   <set xpath="/windows/window[@name='windowForgeInput']/rect[@name='content2']/grid[@rows='6']/@pos">6,-12</set>
+   <set xpath="/windows/window[@name='windowForgeInput']/rect[@name='content2']/grid[@rows='6']/@cell_height">34</set>
+   
+</anan>

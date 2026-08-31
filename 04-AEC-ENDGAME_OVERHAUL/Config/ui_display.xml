@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecExtremeModCraftingTable">
+      <crafting_category name="AECworkbenchMain" icon="ui_game_symbol_block_upgrade" display_name="AEC Main"/>
+      <crafting_category name="AECworkbenchPower" icon="ui_game_symbol_block_upgrade" display_name="AEC Power"/>
+      <crafting_category name="AECworkbenchKnockback" icon="ui_game_symbol_block_upgrade" display_name="AEC Knockback"/>
+      <crafting_category name="AECworkbenchStun" icon="ui_game_symbol_block_upgrade" display_name="AEC Stun"/>
+      <crafting_category name="AECworkbenchTargetArmor" icon="ui_game_symbol_block_upgrade" display_name="AEC Target Armor"/>
+      <crafting_category name="AECworkbenchAiming" icon="ui_game_symbol_block_upgrade" display_name="AEC Aiming"/>
+      <crafting_category name="AECworkbenchRPM" icon="ui_game_symbol_block_upgrade" display_name="AEC RPM"/>
+      <crafting_category name="AECworkbenchReloadSpeed" icon="ui_game_symbol_block_upgrade" display_name="AEC Reload Speed"/>
+      <crafting_category name="AECworkbenchDrum" icon="ui_game_symbol_block_upgrade" display_name="AEC Drum"/>
+      <crafting_category name="AECworkbenchRange" icon="ui_game_symbol_block_upgrade" display_name="AEC Range"/>
+      <crafting_category name="AECworkbenchDegradation" icon="ui_game_symbol_block_upgrade" display_name="AEC Degradation"/>
+      <crafting_category name="AECworkbenchFlaming" icon="ui_game_symbol_block_upgrade" display_name="AEC Flaming"/>
+      <crafting_category name="AECworkbenchShocking" icon="ui_game_symbol_block_upgrade" display_name="AEC Shocking"/>
+      <crafting_category name="AECworkbenchSneakAttack" icon="ui_game_symbol_block_upgrade" display_name="AEC Sneak Attack"/>
+      <crafting_category name="AECworkbenchDismemberChance" icon="ui_game_symbol_block_upgrade" display_name="AEC Dismember Chance"/>
+      <crafting_category name="AECworkbenchAPM" icon="ui_game_symbol_block_upgrade" display_name="AEC APM"/>
+      <crafting_category name="AECworkbenchStaminaLoss" icon="ui_game_symbol_block_upgrade" display_name="AEC Stamina Loss"/>
+      <crafting_category name="AECworkbenchBlockDamage" icon="ui_game_symbol_block_upgrade" display_name="AEC Block Damage"/>
+      <crafting_category name="AECworkbenchBlockHarvest" icon="ui_game_symbol_block_upgrade" display_name="AEC Block Harvest"/>
+      <crafting_category name="AECworkbenchStaminaMax" icon="ui_game_symbol_block_upgrade" display_name="AEC Stamina Max"/>
+      <crafting_category name="AECworkbenchStaminaRegenRun" icon="ui_game_symbol_block_upgrade" display_name="AEC Stamina Regen Run"/>
+      <crafting_category name="AECworkbenchStaminaRegen" icon="ui_game_symbol_block_upgrade" display_name="AEC Stamina Regen"/>
+      <crafting_category name="AECworkbenchCrouchBoost" icon="ui_game_symbol_block_upgrade" display_name="AEC Crouch Boost"/>
+      <crafting_category name="AECworkbenchHealthRegen" icon="ui_game_symbol_block_upgrade" display_name="AEC Health Regen"/>
+      <crafting_category name="AECworkbenchJumpBoost" icon="ui_game_symbol_block_upgrade" display_name="AEC Jump Boost"/>
+      <crafting_category name="AECworkbenchRunBoost" icon="ui_game_symbol_block_upgrade" display_name="AEC Run Boost"/>
+      <crafting_category name="AECworkbenchWalkBoost" icon="ui_game_symbol_block_upgrade" display_name="AEC Walk Boost"/>
+      <crafting_category name="AECworkbenchXPKill" icon="ui_game_symbol_block_upgrade" display_name="AEC XP Kill"/>
+      <crafting_category name="AECworkbenchUnique" icon="ui_game_symbol_block_upgrade" display_name="AEC Unique"/>
+      <crafting_category name="AECworkbenchRare" icon="ui_game_symbol_block_upgrade" display_name="AEC Rare"/>
+      <crafting_category name="AECworkbenchAtypical" icon="ui_game_symbol_block_upgrade" display_name="AEC Atypical"/>
+      <crafting_category name="AECworkbenchLegendary" icon="ui_game_symbol_block_upgrade" display_name="AEC Legendary"/>
+    </crafting_category_list>
+
+  </append>
+
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecHeadConverter">
+      <crafting_category name="aecMutationExchangeUpgrade" icon="ui_game_symbol_block_upgrade" display_name="aecMutationExchangeUpgradeCategory"/><crafting_category name="aecMutationExchangeDowngrade" icon="ui_game_symbol_block_repair" display_name="aecMutationExchangeDowngradeCategory"/></crafting_category_list>
+  </append>
+
+  <append xpath="/ui_display_info/crafting_category_display">
+	 
+		<crafting_category_list display_type="internationalMarket">
+			<crafting_category name="CryptoMining" icon="ui_game_symbol_computer" display_name="lblCategoryCryptoMining"/>
+			<crafting_category name="CryptoBattery" icon="ui_game_symbol_twitch_energize" display_name="lblCategoryCryptoBattery"/>
+			<crafting_category name="CryptoConnexionCard" icon="ui_game_symbol_vending" display_name="lblCategoryCryptoConnexionCard"/>
+			<crafting_category name="CryptoPassiveMiner" icon="ui_game_symbol_electric_generator" display_name="lblCategoryCryptoPassiveMiner"/>
+			<crafting_category name="CryptoResearchPapers" icon="ui_game_symbol_twitch_history" display_name="lblCategoryCryptoResearchPapers"/>
+			<crafting_category name="CryptoBuilding" icon="ui_game_symbol_cement" display_name="lblCategoryCryptoBuilding"/>
+			<crafting_category name="CryptoAmmo" icon="ui_game_symbol_gunslinger" display_name="lblCategoryCryptoAmmo"/>
+			<crafting_category name="CryptoTools" icon="ui_game_symbol_tool" display_name="lblCategoryCryptoTools"/>
+			<crafting_category name="CryptoArmor" icon="ui_game_symbol_light_armor" display_name="lblCategoryCryptoArmor"/>
+			<crafting_category name="CryptoScience" icon="ui_game_symbol_science" display_name="lblCategoryCryptoScience"/>
+			<crafting_category name="CryptoMods" icon="ui_game_symbol_assemble" display_name="lblCategoryCryptoMods"/>
+			<crafting_category name="CryptoBooks" icon="ui_game_symbol_book_read" display_name="lblCategoryCryptoBooks"/>
+			<crafting_category name="CryptoRessources" icon="ui_game_symbol_challenge_harvesting_pipes" display_name="lblCategoryCryptoRessources"/>
+			<crafting_category name="CryptoFood" icon="ui_game_symbol_challenge_harvesting_rotting_meat" display_name="lblCategoryCryptoFood"/>
+			<crafting_category name="CryptoSeeds" icon="ui_game_symbol_crops" display_name="lblCategoryCryptoSeeds"/>
+			<crafting_category name="CryptoDecoration" icon="ui_game_symbol_chair" display_name="lblCategoryCryptoDecoration"/>
+			<crafting_category name="CryptoQuest" icon="ui_game_symbol_quest" display_name="lblCategoryCryptoQuest"/>
+			<crafting_category name="CryptoModding" icon="ui_game_symbol_schematic" display_name="lblCategoryCryptoModding"/>
+		</crafting_category_list>
+
+		<crafting_category_list display_type="GenerationCoin">
+			<crafting_category name="GenerationCoin" icon="ui_game_symbol_science" display_name="lblCategoryCoin"/>
+		</crafting_category_list>
+  </append>
+  
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecNecroforgeWorkbench">
+      <crafting_category name="aecNecroforgeAmmo9mm" icon="ui_game_symbol_knife" display_name="9mm"/>
+      <crafting_category name="aecNecroforgeAmmo44" icon="ui_game_symbol_knife" display_name=".44 Magnum"/>
+      <crafting_category name="aecNecroforgeAmmo762" icon="ui_game_symbol_knife" display_name="7.62mm"/>
+      <crafting_category name="aecNecroforgeAmmo12g" icon="ui_game_symbol_knife" display_name="12 Gauge"/>
+    </crafting_category_list>
+  </append>
+
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecQuestArchiveRadio">
+      <crafting_category name="aecQuestArchiveGuide" icon="ui_game_symbol_book_read" display_name="GUIDE"/>
+      <crafting_category name="aecQuestArchiveTutorial" icon="ui_game_symbol_book_read" display_name="TUTORIAL"/>
+      <crafting_category name="aecQuestArchiveProgression" icon="ui_game_symbol_quest" display_name="PROGRESSION"/>
+    </crafting_category_list>
+  </append>
+</configs>

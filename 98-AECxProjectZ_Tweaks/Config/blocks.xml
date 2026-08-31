@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: block definitions and targeted block-property patches.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения блоков и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/blocks">
+    <block name="aecMutationIncubator">
+      <property name="Extends" value="cntBarrelAcidQuadA"/>
+      <property name="Class" value="Forge"/>
+      <property name="UnlockedBy" value="craftingWorkstations"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="DescriptionKey" value="aecMutationIncubatorDesc"/>
+      <property name="LootLabelKey" value="aecMutationIncubator"/>
+      <property name="WorkstationIcon" value="ui_game_symbol_science"/>
+      <property name="CustomIcon" value="cntBarrelAcidQuadA"/>
+      <property name="CustomIconTint" value="190,220,150"/>
+      <property name="Stacknumber" value="1"/>
+      <property name="OnlySimpleRotations" value="true"/>
+      <property name="IsTerrainDecoration" value="true"/>
+      <property name="StabilitySupport" value="true"/>
+      <property name="Weight" value="0"/>
+      <property name="Group" value="Science,Building,TCScience"/>
+      <property name="Tags" value="workstationSkill,twitch_workstation,aecMutationIncubator"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor"/>
+      <property name="EconomicValue" value="3500"/>
+      <property name="MaxDamage" value="1200"/>
+      <property name="OpenSound" value="forge_open"/>
+      <property name="CloseSound" value="forge_close"/>
+      <property name="CraftSound" value="forge_smelt_click"/>
+      <property name="CraftCompleteSound" value="forge_item_complete"/>
+      <property name="TakeDelay" value="5"/>
+      <property class="Workstation">
+        <property name="CraftingAreaRecipes" value="aecMutationIncubator"/>
+        <property name="Modules" value="output,material_input"/>
+        <property name="InputMaterials" value="aecMutationSampleT1,aecMutationSampleT2,aecMutationSampleT3,aecMutationSampleT4,aecMutationSampleT5"/>
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="20"/>
+        <property name="resourceMechanicalParts" value="5"/>
+      </property>
+    </block>
+  </append>
+  <set xpath="/blocks/block[@name='AutoMinerIron']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='HydroponicStation']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='PortableReactorChargingStation']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurretImp_44']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurretImp_762mm']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurretImp_9mm']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurretLeg_44']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurretLeg_762mm']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurretLeg_9mm']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurret_44']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='autoTurret_762']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='bladeTrapExp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='bladeTrapImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='cementMixerImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='chemistryStationImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='electricfencepostExp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='electricfencepostImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='electrictimerrelayImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='electricwirerelayImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='farmerStation']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='forgeImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='kitchenStove']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='mineAirFilterImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='motionsensorImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='radioStation']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerBedMadeVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerCarsVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerGYMVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerLargeMechanicsVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerMEGeneralVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerMedicalBedVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerMediumMechanicsVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerServerVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerSmallElectronicsVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='recyclerSmallMechanicsVariantHelper']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='shotgunTurretImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='shotgunTurretLeg']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='switchImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[@name='workbenchImp']/property[@name='Stacknumber']/@value">50000</set>
+  <set xpath="/blocks/block[         starts-with(@name, 'cnt')         or starts-with(@name, 'planted')         or starts-with(@name, 'farmPlot')         or starts-with(@name, 'cube')         or starts-with(@name, 'frame')         or starts-with(@name, 'wood')         or starts-with(@name, 'stone')         or starts-with(@name, 'concrete')         or starts-with(@name, 'cobblestone')         or starts-with(@name, 'steel')         or starts-with(@name, 'iron')         or starts-with(@name, 'metal')         or starts-with(@name, 'brick')         or starts-with(@name, 'glass')         or starts-with(@name, 'door')         or starts-with(@name, 'hatch')         or starts-with(@name, 'ladder')         or starts-with(@name, 'fence')         or starts-with(@name, 'railing')         or starts-with(@name, 'bars')         or starts-with(@name, 'trap')         or starts-with(@name, 'mine')         or starts-with(@name, 'bladeTrap')         or starts-with(@name, 'dartTrap')         or starts-with(@name, 'electricfence')         or starts-with(@name, 'autoTurret')         or starts-with(@name, 'shotgunTurret')         or contains(@name, 'Shape')         or contains(@name, 'Shapes')         or contains(@name, 'Block')         or contains(@name, 'Frame')         or contains(@name, 'Ramp')         or contains(@name, 'Stair')         or contains(@name, 'Pillar')         or contains(@name, 'Plate')         or contains(@name, 'Wedge')         or contains(@name, 'Wall')         or contains(@name, 'Roof')         or contains(@name, 'Trim')         or contains(@name, 'Awning')         or contains(@name, 'Sign')         or contains(@name, 'Flag')     ]/property[@name='Stacknumber']/@value">50000</set>
+  <append xpath="/blocks/block[         starts-with(@name, 'cnt')         or starts-with(@name, 'planted')         or starts-with(@name, 'farmPlot')         or starts-with(@name, 'cube')         or starts-with(@name, 'frame')         or starts-with(@name, 'wood')         or starts-with(@name, 'stone')         or starts-with(@name, 'concrete')         or starts-with(@name, 'cobblestone')         or starts-with(@name, 'steel')         or starts-with(@name, 'iron')         or starts-with(@name, 'metal')         or starts-with(@name, 'brick')         or starts-with(@name, 'glass')         or starts-with(@name, 'door')         or starts-with(@name, 'hatch')         or starts-with(@name, 'ladder')         or starts-with(@name, 'fence')         or starts-with(@name, 'railing')         or starts-with(@name, 'bars')         or starts-with(@name, 'trap')         or starts-with(@name, 'mine')         or starts-with(@name, 'bladeTrap')         or starts-with(@name, 'dartTrap')         or starts-with(@name, 'electricfence')         or starts-with(@name, 'autoTurret')         or starts-with(@name, 'shotgunTurret')         or contains(@name, 'Shape')         or contains(@name, 'Shapes')         or contains(@name, 'Block')         or contains(@name, 'Frame')         or contains(@name, 'Ramp')         or contains(@name, 'Stair')         or contains(@name, 'Pillar')         or contains(@name, 'Plate')         or contains(@name, 'Wedge')         or contains(@name, 'Wall')         or contains(@name, 'Roof')         or contains(@name, 'Trim')         or contains(@name, 'Awning')         or contains(@name, 'Sign')         or contains(@name, 'Flag')     ][not(property[@name='Stacknumber'])]">
+    <property name="Stacknumber" value="50000"/>
+  </append>
+  <!-- EN: Archive Radio stays an ordinary workstation with one always-unlocked Field Guides category. The native AEC Nemesis guide remains in the AEC EO section.
+RU: Архивное радио остаётся обычной станцией с одной всегда доступной категорией «Полевые руководства». Справочник оригинального AEC Nemesis остаётся в разделе AEC EO.-->
+  <!-- EN: Keep aecHeadConverter only as a hidden migration shell so old placed blocks and saves remain valid.
+RU: aecHeadConverter сохраняется только как скрытая миграционная оболочка, чтобы старые установленные блоки и сохранения оставались валидными.-->
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='CreativeMode']/@value">None</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='Class']/@value">Forge</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='DescriptionKey']/@value">aecMutationIncubatorDesc</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='CustomIcon']/@value">cntBarrelAcidQuadA</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='CustomIconTint']/@value">190,220,150</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='Tags']/@value">aecHeadConverterLegacyShell</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@name='FilterTags']/@value">SC_hidden</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@class='Workstation']/property[@name='Modules']/@value">output,material_input</set>
+  <set xpath="/blocks/block[@name='aecHeadConverter']/property[@class='Workstation']/property[@name='CraftingAreaRecipes']/@value">aecMutationIncubator</set>
+  <append xpath="/blocks/block[@name='aecHeadConverter']/property[@class='Workstation']">
+    <property name="InputMaterials" value="aecMutationSampleT1,aecMutationSampleT2,aecMutationSampleT3,aecMutationSampleT4,aecMutationSampleT5"/>
+  </append>
+  <append xpath="/blocks/block[@name='aecHeadConverter']">
+    <property name="WorkstationWindow" value="workstation_aecMutationIncubator"/>
+  </append>
+</configs>

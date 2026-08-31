@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: vehicle progression and SkillLock integration. File purpose: recipe definitions, crafting areas and final normalization.
+RU: Назначение модуля: прогрессия транспорта и интеграция SkillLock. Назначение файла: определения рецептов, рабочие станции и финальная нормализация.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <setattribute xpath="/recipes/recipe[@name='AECAdvancedJetpackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECAdvancedJetpackVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECAdvancedJetpackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECAdvancedJetpackVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecAdvancedJetpackChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecAdvancedJetpackChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECAirMotorcycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECAirMotorcycleVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECAirMotorcycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECAirMotorcycleVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecAirMotorcycleChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecAirMotorcycleChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECAirplaneVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECAirplaneVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECAirplaneVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECAirplaneVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecAirplaneChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecAirplaneChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECArmoredGyroVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECArmoredGyroVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECArmoredGyroVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECArmoredGyroVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecArmoredGyroChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecArmoredGyroChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBasicJetpackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBasicJetpackVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBasicJetpackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBasicJetpackVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBasicJetpackChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBasicJetpackChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBearVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBearVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBearVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBearVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBearChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBearChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBonehunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBonehunterVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBonehunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBonehunterVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBonehunterChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBonehunterChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBrokenBicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBrokenBicycleVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECBrokenBicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECBrokenBicycleVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBrokenBicycleChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBrokenBicycleChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECCargoBehemothVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECCargoBehemothVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECCargoBehemothVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECCargoBehemothVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecCargoBehemothChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecCargoBehemothChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECCargoHoundVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECCargoHoundVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECCargoHoundVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECCargoHoundVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecCargoHoundChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecCargoHoundChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECCargoRatVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECCargoRatVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECCargoRatVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECCargoRatVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecCargoRatChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecCargoRatChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicAmbulanceRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicAmbulanceRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicAmbulanceRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicAmbulanceRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicAmbulanceChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicAmbulanceChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicArmyTruckEmptyVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicArmyTruckEmptyVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicArmyTruckEmptyVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicArmyTruckEmptyVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicArmyTruckEmptyChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicArmyTruckEmptyChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicArmyTruckVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicArmyTruckVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicArmyTruckVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicArmyTruckVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicArmyTruckChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicArmyTruckChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicBackhoeRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicBackhoeRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicBackhoeRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicBackhoeRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicBackhoeChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicBackhoeChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicCitySchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicCitySchoolBusRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicCitySchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicCitySchoolBusRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusCityChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusCityChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicExcavatorClawRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicExcavatorClawRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicExcavatorClawRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicExcavatorClawRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicExcavatorClawChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicExcavatorClawChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicExcavatorRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicExcavatorRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicExcavatorRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicExcavatorRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicExcavatorChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicExcavatorChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicFarmtruckRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicFarmtruckRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicFarmtruckRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicFarmtruckRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicFarmtruckChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicFarmtruckChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicFireTruckRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicFireTruckRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicFireTruckRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicFireTruckRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicFireTruckChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicFireTruckChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicLongSchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicLongSchoolBusRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicLongSchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicLongSchoolBusRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusLongSchoolChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusLongSchoolChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicMinivanRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicMinivanRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicMinivanRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicMinivanRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicMinivanChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicMinivanChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicPickupCargoDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicPickupCargoDamagedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicPickupCargoDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicPickupCargoDamagedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicPickupCargoDamagedChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicPickupCargoDamagedChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicPickupCargoRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicPickupCargoRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicPickupCargoRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicPickupCargoRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicPickupCargoChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicPickupCargoChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicPoliceCarRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicPoliceCarRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicPoliceCarRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicPoliceCarRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicPoliceCarChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicPoliceCarChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicRaftVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicRaftVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicRaftVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicRaftVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicRaftChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicRaftChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSUVDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSUVDamagedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSUVDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSUVDamagedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSUVDamagedChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSUVDamagedChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSUVVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSUVVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSUVVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSUVVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSUVChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSUVChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanHuntDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanHuntDamagedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanHuntDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanHuntDamagedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanHuntDamagedChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanHuntDamagedChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanHuntRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanHuntRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanHuntRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanHuntRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanHuntChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanHuntChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanSpeedDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanSpeedDamagedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanSpeedDamagedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanSpeedDamagedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanSpeedDamagedChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanSpeedDamagedChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanSpeedRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanSpeedRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSedanSpeedRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSedanSpeedRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanSpeedChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSedanSpeedChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSemiFrontRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSemiFrontRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicSemiFrontRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicSemiFrontRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSemiFrontChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicSemiFrontChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckGenericNoLadderVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckGenericNoLadderVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckGenericNoLadderVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckGenericNoLadderVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckGenericNoLadderChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckGenericNoLadderChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckGenericVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckGenericVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckGenericVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckGenericVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckGenericChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckGenericChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckMoPowerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckMoPowerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckMoPowerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckMoPowerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckMoPowerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckMoPowerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckWorkingStiffVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckWorkingStiffVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicServiceTruckWorkingStiffVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicServiceTruckWorkingStiffVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckWorkingStiffChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicServiceTruckWorkingStiffChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicShortSchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicShortSchoolBusRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicShortSchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicShortSchoolBusRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusShortSchoolChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusShortSchoolChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicShuttleSchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicShuttleSchoolBusRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicShuttleSchoolBusRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicShuttleSchoolBusRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusShuttleSchoolChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBusShuttleSchoolChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicTractorRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicTractorRepairedVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECClassicTractorRepairedVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECClassicTractorRepairedVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicTractorChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecClassicTractorChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECDireWolfVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECDireWolfVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECDireWolfVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECDireWolfVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecDireWolfChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecDireWolfChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECDoomjackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECDoomjackVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECDoomjackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECDoomjackVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecDoomjackChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecDoomjackChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECDriftjackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECDriftjackVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECDriftjackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECDriftjackVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecDriftjackChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecDriftjackChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECExtremeWheelchairVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECExtremeWheelchairVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECExtremeWheelchairVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECExtremeWheelchairVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecExtremeWheelchairChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecExtremeWheelchairChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFarmTruckOreBoulderVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFarmTruckOreBoulderVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFarmTruckOreBoulderVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFarmTruckOreBoulderVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBoulderTruckChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecBoulderTruckChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFlyingCityBusVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFlyingCityBusVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFlyingCityBusVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFlyingCityBusVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFlyingCityBusChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFlyingCityBusChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFlyingSedanVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFlyingSedanVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFlyingSedanVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFlyingSedanVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFlyingSedanChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFlyingSedanChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFlyingWasteVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFlyingWasteVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECFlyingWasteVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECFlyingWasteVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFlyingWasteChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFlyingWasteChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECForkliftVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECForkliftVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECForkliftVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECForkliftVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecForkliftChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecForkliftChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECHandTruckVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECHandTruckVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECHandTruckVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECHandTruckVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHandTruckChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHandTruckChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECHarpoonerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECHarpoonerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECHarpoonerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECHarpoonerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHarpoonerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHarpoonerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECHellglideVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECHellglideVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECHellglideVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECHellglideVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHellglideChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHellglideChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECIronBastionVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECIronBastionVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECIronBastionVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECIronBastionVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecIronBastionChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecIronBastionChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECLeviathanVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECLeviathanVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECLeviathanVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECLeviathanVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecLeviathanChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecLeviathanChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMiniAirplaneVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMiniAirplaneVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMiniAirplaneVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMiniAirplaneVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMiniAirplaneChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMiniAirplaneChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMiniRocketVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMiniRocketVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMiniRocketVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMiniRocketVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMiniRocketChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMiniRocketChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMinimotoVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMinimotoVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMinimotoVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMinimotoVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMinimotoChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMinimotoChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMountainLionVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMountainLionVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECMountainLionVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECMountainLionVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMountainLionChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMountainLionChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECNitrojackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECNitrojackVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECNitrojackVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECNitrojackVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecNitrojackChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecNitrojackChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECRacingShoppingCartVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECRacingShoppingCartVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECRacingShoppingCartVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECRacingShoppingCartVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecRacingShoppingCartChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecRacingShoppingCartChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECRocketVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECRocketVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECRocketVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECRocketVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecRocketChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecRocketChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECScrapBastionVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECScrapBastionVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECScrapBastionVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECScrapBastionVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecScrapBastionChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecScrapBastionChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECShoppingCartVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECShoppingCartVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECShoppingCartVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECShoppingCartVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecShoppingCartChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecShoppingCartChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECStagVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECStagVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECStagVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECStagVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecStagChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecStagChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECStormhunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECStormhunterVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECStormhunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECStormhunterVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecStormhunterChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecStormhunterChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECSunDrifterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECSunDrifterVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECSunDrifterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECSunDrifterVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecSunDrifterChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecSunDrifterChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheAdvancedPipeBicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheAdvancedPipeBicycleVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheAdvancedPipeBicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheAdvancedPipeBicycleVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheAdvancedPipeBicycleChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheAdvancedPipeBicycleChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheBikerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheBikerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheBikerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheBikerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheBikerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheBikerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheExecutionerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheExecutionerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheExecutionerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheExecutionerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheExecutionerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheExecutionerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheExorcistVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheExorcistVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheExorcistVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheExorcistVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheExorcistChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheExorcistChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheExplorerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheExplorerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheExplorerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheExplorerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheExplorerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheExplorerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheFamilyWagonVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheFamilyWagonVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheFamilyWagonVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheFamilyWagonVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFamilyWagonChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFamilyWagonChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheFloatcampVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheFloatcampVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheFloatcampVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheFloatcampVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFloatcampChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecFloatcampChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheGiantVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheGiantVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheGiantVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheGiantVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheGiantChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheGiantChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheHammerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheHammerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheHammerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheHammerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHammerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHammerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheHangingWorldVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheHangingWorldVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheHangingWorldVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheHangingWorldVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHangingWorldChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHangingWorldChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheHoverboardVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheHoverboardVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheHoverboardVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheHoverboardVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHoverboardChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecHoverboardChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheJumperVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheJumperVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheJumperVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheJumperVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheJumperChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheJumperChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheKillerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheKillerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheKillerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheKillerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecKillerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecKillerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheMovingHQVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheMovingHQVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheMovingHQVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheMovingHQVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMovingHQChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecMovingHQChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheOldWagonVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheOldWagonVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheOldWagonVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheOldWagonVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecOldWagonChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecOldWagonChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECThePipeBicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECThePipeBicycleVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECThePipeBicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECThePipeBicycleVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecThePipeBicycleChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecThePipeBicycleChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECThePunisherVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECThePunisherVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECThePunisherVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECThePunisherVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecPunisherChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecPunisherChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheRockVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheRockVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheRockVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheRockVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecRockChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecRockChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheSalvagerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheSalvagerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheSalvagerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheSalvagerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecSalvagerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecSalvagerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheSoldierVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheSoldierVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheSoldierVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheSoldierVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheSoldierChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheSoldierChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheTowerBusVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheTowerBusVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheTowerBusVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheTowerBusVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheTowerBusChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheTowerBusChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheTowerCarVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheTowerCarVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheTowerCarVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheTowerCarVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheTowerCarChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheTowerCarChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWarRamVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWarRamVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWarRamVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWarRamVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheWarRamChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheWarRamChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWeaponWheelVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWeaponWheelVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWeaponWheelVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWeaponWheelVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWeaponWheelChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWeaponWheelChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWheelchairVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWheelchairVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWheelchairVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWheelchairVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWheelchairChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWheelchairChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWoodenMistakeVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWoodenMistakeVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheWoodenMistakeVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheWoodenMistakeVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWoodenMistakeChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWoodenMistakeChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheZombieHunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheZombieHunterVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTheZombieHunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTheZombieHunterVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheZombieHunterChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTheZombieHunterChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECThundraRunnerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECThundraRunnerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECThundraRunnerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECThundraRunnerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecThundraRunnerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecThundraRunnerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTrailhunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTrailhunterVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTrailhunterVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTrailhunterVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTrailhunterChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTrailhunterChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTruckDrillerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTruckDrillerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECTruckDrillerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECTruckDrillerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTruckDrillerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecTruckDrillerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECUnicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECUnicycleVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECUnicycleVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECUnicycleVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecUnicycleChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecUnicycleChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECWarMammothVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECWarMammothVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECWarMammothVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECWarMammothVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWarMammothChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWarMammothChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECWastelandRunnerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECWastelandRunnerVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECWastelandRunnerVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECWastelandRunnerVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWastelandRunnerChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWastelandRunnerChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECWolfVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECWolfVehiclePlaceable')]]" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='AECWolfVehiclePlaceable' and not(@crafting_category='AECvehicleFinalRepairs')][ingredient[1][not(@name='AECWolfVehiclePlaceable')]]" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWolfChassis']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='aecWolfChassis']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageApocalypsePulverizer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageApocalypsePulverizer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageBastionBuster']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageBastionBuster']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageConcreteGnawer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageConcreteGnawer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageIronWrecker']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageIronWrecker']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageMasonSplitter']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageMasonSplitter']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageRoadRipper']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageRoadRipper']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageRustChipper']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageRustChipper']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageScrapBiter']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageScrapBiter']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageWarplowDemolisher']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageWarplowDemolisher']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageWastelandDozer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECBlockDamageWastelandDozer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageApocalypsePiledriver']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageApocalypsePiledriver']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageAxleHammer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageAxleHammer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageBastionBreaker']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageBastionBreaker']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageBoneCracker']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageBoneCracker']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageIronGore']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageIronGore']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageRoadMauler']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageRoadMauler']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageRustJab']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageRustJab']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageScrapNudge']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageScrapNudge']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageWarplowCrusher']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageWarplowCrusher']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageWastelandRam']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECEntityDamageWastelandRam']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxApocalypseFuelArk']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxApocalypseFuelArk']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxBlackDieselVault']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxBlackDieselVault']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxDustDrum']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxDustDrum']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxIronReservoir']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxIronReservoir']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxLeviathanFuelBelly']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxLeviathanFuelBelly']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxLonghaulCistern']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxLonghaulCistern']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxOverlandStockpile']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxOverlandStockpile']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxRoadBarrel']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxRoadBarrel']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxScrapCanteen']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxScrapCanteen']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxWastelandTanker']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelMaxWastelandTanker']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverBlackSmokeTamer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverBlackSmokeTamer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverDryTankReaper']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverDryTankReaper']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverDustSipper']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverDustSipper']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverFuelScavenger']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverFuelScavenger']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverLastDropKeeper']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverLastDropKeeper']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverRoadScrounger']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverRoadScrounger']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverRustSting']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverRustSting']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverScrapMiser']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverScrapMiser']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverWastelandMiserPrime']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverWastelandMiserPrime']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverWastelandSaver']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECFuelSaverWastelandSaver']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityApocalypseFloodlight']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityApocalypseFloodlight']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityAshenSpotlight']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityAshenSpotlight']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityBlacktopSun']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityBlacktopSun']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityCinderFlicker']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityCinderFlicker']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityDustGlow']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityDustGlow']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityNightCutter']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityNightCutter']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityRoadEmber']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityRoadEmber']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityRustLantern']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityRustLantern']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityScrapBeam']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityScrapBeam']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityWastelandFlare']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECLightIntensityWastelandFlare']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageApocalypseSafeguard']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageApocalypseSafeguard']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageCrashCocoon']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageCrashCocoon']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageDustBuffer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageDustBuffer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageFrameBulwark']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageFrameBulwark']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageIronBulwark']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageIronBulwark']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageIronShell']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageIronShell']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageLeviathanHide']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageLeviathanHide']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageRoadBracer']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageRoadBracer']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageScrapPadding']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageScrapPadding']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageWastelandBrace']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECSelfDamageWastelandBrace']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueAxleTyrant']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueAxleTyrant']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueBlackSmokeMule']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueBlackSmokeMule']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueDustGrunter']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueDustGrunter']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueGearGrinder']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueGearGrinder']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueIronClaw']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueIronClaw']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueLeviathanTorque']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueLeviathanTorque']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueOverdriveBrute']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueOverdriveBrute']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueRoadTwister']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueRoadTwister']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueScrapPuller']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueScrapPuller']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueWastelandHauler']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECTorqueWastelandHauler']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityApocalypseOverdrive']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityApocalypseOverdrive']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityBlacktopFury']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityBlacktopFury']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityDustRunner']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityDustRunner']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityHorizonSplitter']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityHorizonSplitter']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityLongshotDrive']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityLongshotDrive']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityRedlineReaper']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityRedlineReaper']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityRoadHowler']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityRoadHowler']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityRustStreak']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityRustStreak']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityScrapStride']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityScrapStride']" name="tags">learnable</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityWastelandSprint']" name="always_unlocked">false</setattribute>
+  <setattribute xpath="/recipes/recipe[@name='modAECVelocityWastelandSprint']" name="tags">learnable</setattribute>
+</configs>

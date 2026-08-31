@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: map-marker and navigation definitions.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения маркеров карты и навигации.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <remove xpath="/nav_object_classes/nav_object_class[@name='EnemyDot']"/>
+  <append xpath="/nav_object_classes">
+    <nav_object_class name="EnemyDot" extends="zombie">
+      <map_settings>
+        <property name="sprite_name" value="ui_game_symbol_enemy_dot"/>
+        <property name="color" value="255,0,0,255"/>
+        <property name="has_pulse" value="true"/>
+      </map_settings>
+      <compass_settings>
+        <property name="sprite_name" value="ui_game_symbol_enemy_dot"/>
+        <property name="color" value="255,0,0,255"/>
+        <property name="has_pulse" value="true"/>
+        <property name="icon_clamped" value="true"/>
+      </compass_settings>
+    </nav_object_class>
+  </append>
+</configs>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: buff definitions, effects and triggers.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения эффектов, их действия и триггеры.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <set xpath="/buffs//passive_effect[translate(@tags,' ','')='butcherHarvest,butcherHarvestMutation']/@tags">butcherHarvest</set>
+  <remove xpath="/buffs//passive_effect[contains(concat(',',translate(@tags,' ',''),','),',butcherHarvestMutation,')]"/>
+  <remove xpath="/buffs/buff/effect_group/triggered_effect[@action='ModifyScreenEffect' and @effect_name='Radiation']"/>
+  <remove xpath="/buffs/buff[@name='buffNerdBoots']"/>
+  <remove xpath="/buffs/buff[@name='EnemyDot_Buff']"/>
+  <set xpath="/buffs/buff[@name='buffPerkCharismaticNature']/effect_group/passive_effect[@name='AttributeLevel']/@value">0</set>
+  <append xpath="/buffs">
+    <buff name="buffNerdBoots" hidden="true" icon_color="0,255,255">
+      <stack_type value="ignore"/>
+      <duration value="0"/>
+    </buff>
+    <buff name="EnemyDot_Buff">
+      <stack_type value="ignore"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffStart" action="SetNavObject" nav_object="EnemyDot" add="true"/>
+      </effect_group>
+    </buff>
+  </append>
+  <!-- Publish the five T16 area unlock CVars used by the trader dialog. -->
+  <append xpath="/buffs/buff[@name='buffAecTierWatcher']/effect_group">
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A1" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="56"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A1" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="56"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A2" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="57"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A2" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="57"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A3" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="58"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A3" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="58"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A4" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="59"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A4" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="59"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A5" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T16A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="60"/></triggered_effect>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A5" operation="set" value="0"/>
+    <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T16A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="60"/></triggered_effect>
+  </append>
+</configs>

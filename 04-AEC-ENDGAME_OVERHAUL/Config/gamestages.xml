@@ -1,0 +1,388 @@
+<configs>
+	<append xpath="/gamestages/spawner[@name='BloodMoonHorde']">
+		<!-- AEC Extreme Zombies: progressive custom tiers from GS 600 to GS 30000 -->
+		<gamestage stage="600">
+			<spawn group="AECZombieExtremeGS0600Group" num="90" maxAlive="4" duration="1" interval="18"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="45" maxAlive="2" duration="1" interval="20"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="27" maxAlive="2" duration="1" interval="22"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="18" maxAlive="1" duration="1" interval="24"/>
+		</gamestage>
+		<gamestage stage="900">
+			<spawn group="AECZombieExtremeGS0600Group" num="110" maxAlive="5" duration="1" interval="17"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="55" maxAlive="3" duration="1" interval="19"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="33" maxAlive="2" duration="1" interval="21"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="22" maxAlive="1" duration="1" interval="23"/>
+		</gamestage>
+		<gamestage stage="1200">
+			<spawn group="AECZombieExtremeGS1200Group" num="125" maxAlive="6" duration="1" interval="16"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="62" maxAlive="3" duration="1" interval="18"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="38" maxAlive="2" duration="1" interval="20"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="25" maxAlive="1" duration="1" interval="22"/>
+		</gamestage>
+		<gamestage stage="1600">
+			<spawn group="AECZombieExtremeGS1200Group" num="142" maxAlive="6" duration="1" interval="15"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="71" maxAlive="3" duration="1" interval="17"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="43" maxAlive="2" duration="1" interval="19"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="29" maxAlive="2" duration="1" interval="21"/>
+		</gamestage>
+		<gamestage stage="2000">
+			<spawn group="AECZombieExtremeGS2000Group" num="175" maxAlive="8" duration="1" interval="14"/>
+			<spawn group="AECZombieExtremeGS1200Group" num="88" maxAlive="4" duration="1" interval="16"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="52" maxAlive="3" duration="1" interval="18"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="35" maxAlive="2" duration="1" interval="20"/>
+		</gamestage>
+		<gamestage stage="2600">
+			<spawn group="AECZombieExtremeGS2000Group" num="200" maxAlive="9" duration="1" interval="14"/>
+			<spawn group="AECZombieExtremeGS1200Group" num="100" maxAlive="5" duration="1" interval="16"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="60" maxAlive="3" duration="1" interval="18"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="40" maxAlive="2" duration="1" interval="20"/>
+		</gamestage>
+		<gamestage stage="3200">
+			<spawn group="AECZombieExtremeGS3200Group" num="225" maxAlive="11" duration="1" interval="13"/>
+			<spawn group="AECZombieExtremeGS2000Group" num="112" maxAlive="5" duration="1" interval="15"/>
+			<spawn group="AECZombieExtremeGS1200Group" num="68" maxAlive="4" duration="1" interval="17"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="45" maxAlive="2" duration="1" interval="19"/>
+		</gamestage>
+		<gamestage stage="4100">
+			<spawn group="AECZombieExtremeGS3200Group" num="250" maxAlive="12" duration="1" interval="13"/>
+			<spawn group="AECZombieExtremeGS2000Group" num="125" maxAlive="6" duration="1" interval="15"/>
+			<spawn group="AECZombieExtremeGS1200Group" num="75" maxAlive="4" duration="1" interval="17"/>
+			<spawn group="AECZombieExtremeGS0600Group" num="50" maxAlive="2" duration="1" interval="19"/>
+		</gamestage>
+		<gamestage stage="5000">
+			<spawn group="AECZombieExtremeGS5000Group" num="280" maxAlive="13" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS3200Group" num="140" maxAlive="6" duration="1" interval="14"/>
+			<spawn group="AECZombieExtremeGS2000Group" num="84" maxAlive="4" duration="1" interval="16"/>
+			<spawn group="AECZombieExtremeGS1200Group" num="56" maxAlive="3" duration="1" interval="18"/>
+		</gamestage>
+		<gamestage stage="6200">
+			<spawn group="AECZombieExtremeGS5000Group" num="310" maxAlive="14" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS3200Group" num="155" maxAlive="7" duration="1" interval="14"/>
+			<spawn group="AECZombieExtremeGS2000Group" num="93" maxAlive="5" duration="1" interval="16"/>
+			<spawn group="AECZombieExtremeGS1200Group" num="62" maxAlive="3" duration="1" interval="18"/>
+		</gamestage>
+		<gamestage stage="7500">
+			<spawn group="AECZombieExtremeGS7500Group" num="340" maxAlive="15" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS5000Group" num="170" maxAlive="7" duration="1" interval="13"/>
+			<spawn group="AECZombieExtremeGS3200Group" num="102" maxAlive="5" duration="1" interval="15"/>
+			<spawn group="AECZombieExtremeGS2000Group" num="68" maxAlive="3" duration="1" interval="17"/>
+		</gamestage>
+		<gamestage stage="9000">
+			<spawn group="AECZombieExtremeGS7500Group" num="370" maxAlive="16" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS5000Group" num="185" maxAlive="8" duration="1" interval="13"/>
+			<spawn group="AECZombieExtremeGS3200Group" num="111" maxAlive="5" duration="1" interval="15"/>
+			<spawn group="AECZombieExtremeGS2000Group" num="74" maxAlive="3" duration="1" interval="17"/>
+		</gamestage>
+		<gamestage stage="10500">
+			<spawn group="AECZombieExtremeGS10500Group" num="400" maxAlive="17" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS7500Group" num="200" maxAlive="8" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS5000Group" num="120" maxAlive="5" duration="1" interval="14"/>
+			<spawn group="AECZombieExtremeGS3200Group" num="80" maxAlive="4" duration="1" interval="16"/>
+		</gamestage>
+		<gamestage stage="12250">
+			<spawn group="AECZombieExtremeGS10500Group" num="420" maxAlive="17" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS7500Group" num="210" maxAlive="9" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS5000Group" num="126" maxAlive="5" duration="1" interval="14"/>
+			<spawn group="AECZombieExtremeGS3200Group" num="84" maxAlive="4" duration="1" interval="16"/>
+		</gamestage>
+		<gamestage stage="14000">
+			<spawn group="AECZombieExtremeGS14000Group" num="440" maxAlive="18" duration="1" interval="9"/>
+			<spawn group="AECZombieExtremeGS10500Group" num="220" maxAlive="9" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS7500Group" num="132" maxAlive="5" duration="1" interval="13"/>
+			<spawn group="AECZombieExtremeGS5000Group" num="88" maxAlive="4" duration="1" interval="15"/>
+		</gamestage>
+		<gamestage stage="16000">
+			<spawn group="AECZombieExtremeGS14000Group" num="460" maxAlive="18" duration="1" interval="9"/>
+			<spawn group="AECZombieExtremeGS10500Group" num="230" maxAlive="9" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS7500Group" num="138" maxAlive="6" duration="1" interval="13"/>
+			<spawn group="AECZombieExtremeGS5000Group" num="92" maxAlive="4" duration="1" interval="15"/>
+		</gamestage>
+		<gamestage stage="18000">
+			<spawn group="AECZombieExtremeGS18000Group" num="480" maxAlive="19" duration="1" interval="8"/>
+			<spawn group="AECZombieExtremeGS14000Group" num="240" maxAlive="9" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS10500Group" num="144" maxAlive="6" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS7500Group" num="96" maxAlive="4" duration="1" interval="14"/>
+		</gamestage>
+		<gamestage stage="20000">
+			<spawn group="AECZombieExtremeGS18000Group" num="500" maxAlive="19" duration="1" interval="8"/>
+			<spawn group="AECZombieExtremeGS14000Group" num="250" maxAlive="10" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS10500Group" num="150" maxAlive="6" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS7500Group" num="100" maxAlive="4" duration="1" interval="14"/>
+		</gamestage>
+		<gamestage stage="22000">
+			<spawn group="AECZombieExtremeGS22000Group" num="520" maxAlive="20" duration="1" interval="8"/>
+			<spawn group="AECZombieExtremeGS18000Group" num="260" maxAlive="10" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS14000Group" num="156" maxAlive="6" duration="1" interval="12"/>
+			<spawn group="AECZombieExtremeGS10500Group" num="104" maxAlive="4" duration="1" interval="14"/>
+		</gamestage>
+		<gamestage stage="23500">
+			<spawn group="AECZombieExtremeGS22000Group" num="540" maxAlive="20" duration="1" interval="7"/>
+			<spawn group="AECZombieExtremeGS18000Group" num="270" maxAlive="10" duration="1" interval="9"/>
+			<spawn group="AECZombieExtremeGS14000Group" num="162" maxAlive="7" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS10500Group" num="108" maxAlive="4" duration="1" interval="13"/>
+		</gamestage>
+		<gamestage stage="25000">
+			<spawn group="AECZombieExtremeGS25000Group" num="560" maxAlive="21" duration="1" interval="7"/>
+			<spawn group="AECZombieExtremeGS22000Group" num="280" maxAlive="10" duration="1" interval="9"/>
+			<spawn group="AECZombieExtremeGS18000Group" num="168" maxAlive="7" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS14000Group" num="112" maxAlive="4" duration="1" interval="13"/>
+		</gamestage>
+		<gamestage stage="27000">
+			<spawn group="AECZombieExtremeGS27000Group" num="590" maxAlive="22" duration="1" interval="7"/>
+			<spawn group="AECZombieExtremeGS25000Group" num="295" maxAlive="11" duration="1" interval="9"/>
+			<spawn group="AECZombieExtremeGS22000Group" num="177" maxAlive="7" duration="1" interval="11"/>
+			<spawn group="AECZombieExtremeGS18000Group" num="118" maxAlive="4" duration="1" interval="13"/>
+		</gamestage>
+		<gamestage stage="28500">
+			<spawn group="AECZombieExtremeGS27000Group" num="610" maxAlive="22" duration="1" interval="6"/>
+			<spawn group="AECZombieExtremeGS25000Group" num="305" maxAlive="11" duration="1" interval="8"/>
+			<spawn group="AECZombieExtremeGS22000Group" num="183" maxAlive="7" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS18000Group" num="122" maxAlive="5" duration="1" interval="12"/>
+		</gamestage>
+		<gamestage stage="30000">
+			<spawn group="AECZombieExtremeGS30000Group" num="630" maxAlive="23" duration="1" interval="6"/>
+			<spawn group="AECZombieExtremeGS27000Group" num="315" maxAlive="11" duration="1" interval="8"/>
+			<spawn group="AECZombieExtremeGS25000Group" num="189" maxAlive="7" duration="1" interval="10"/>
+			<spawn group="AECZombieExtremeGS22000Group" num="126" maxAlive="5" duration="1" interval="12"/>
+		</gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='SleeperGSList']">
+		<!-- AEC Extreme Zombies: sleeper progression with intermediate rates -->
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="20" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="900"><spawn group="AECZombieExtremeGS0600Group" num="24" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="1200"><spawn group="AECZombieExtremeGS1200Group" num="28" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="1600"><spawn group="AECZombieExtremeGS1200Group" num="32" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="36" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="2600"><spawn group="AECZombieExtremeGS2000Group" num="40" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="3200"><spawn group="AECZombieExtremeGS3200Group" num="44" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="4100"><spawn group="AECZombieExtremeGS3200Group" num="48" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="54" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="6200"><spawn group="AECZombieExtremeGS5000Group" num="60" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="7500"><spawn group="AECZombieExtremeGS7500Group" num="66" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="9000"><spawn group="AECZombieExtremeGS7500Group" num="72" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="80" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="12250"><spawn group="AECZombieExtremeGS10500Group" num="88" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="14000"><spawn group="AECZombieExtremeGS14000Group" num="96" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="16000"><spawn group="AECZombieExtremeGS14000Group" num="104" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="112" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="20000"><spawn group="AECZombieExtremeGS18000Group" num="120" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="22000"><spawn group="AECZombieExtremeGS22000Group" num="130" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="23500"><spawn group="AECZombieExtremeGS22000Group" num="140" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="150" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="27000"><spawn group="AECZombieExtremeGS27000Group" num="160" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="28500"><spawn group="AECZombieExtremeGS27000Group" num="170" maxAlive="256" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="180" maxAlive="256" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='WanderingHorde']">
+		<!-- AEC Extreme Zombies: wandering horde progression -->
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="30" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="36" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="42" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="50" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="58" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="66" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="75" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='AbandonedHouseHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieBikerBarHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieGhostTownHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='HospitalHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='LabWorkerHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieNightClubHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='PrisonHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieSpecialInfectedHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieSoldierHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieBadassGSHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieBadassOnlyHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombiePoliceCarHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieLumberjackHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieHazMatOnlyHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieSpiderOnlyHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieUtilityWorkerHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieJanitorOnlyHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieBusinessManHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieFatCopHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+
+	<append xpath="/gamestages/spawner[@name='ZombieBurntHorde']">
+		<gamestage stage="600"><spawn group="AECZombieExtremeGS0600Group" num="8" maxAlive="8" duration="1"/></gamestage>
+		<gamestage stage="2000"><spawn group="AECZombieExtremeGS2000Group" num="10" maxAlive="10" duration="1"/></gamestage>
+		<gamestage stage="5000"><spawn group="AECZombieExtremeGS5000Group" num="12" maxAlive="12" duration="1"/></gamestage>
+		<gamestage stage="10500"><spawn group="AECZombieExtremeGS10500Group" num="14" maxAlive="14" duration="1"/></gamestage>
+		<gamestage stage="18000"><spawn group="AECZombieExtremeGS18000Group" num="16" maxAlive="16" duration="1"/></gamestage>
+		<gamestage stage="25000"><spawn group="AECZombieExtremeGS25000Group" num="18" maxAlive="18" duration="1"/></gamestage>
+		<gamestage stage="30000"><spawn group="AECZombieExtremeGS30000Group" num="20" maxAlive="20" duration="1"/></gamestage>
+	</append>
+</configs>

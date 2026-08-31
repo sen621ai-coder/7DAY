@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: Project Z, AEC Endgame Overhaul and Zombie Market integration. File purpose: entity definitions and targeted entity-property patches.
+RU: Назначение модуля: интеграция Project Z, AEC Endgame Overhaul и Зомбо-маркета. Назначение файла: определения сущностей и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombie') and contains(@name,'Tier')]/effect_group[1]">
+    <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="BuffAcRadEliteZombieAOEself"/>
+    <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" target="self" buff="BuffAcRadEliteZombieAOEself"/>
+    <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="BuffEliteHandsDECO"/>
+    <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" target="self" buff="BuffEliteHandsDECO"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombie') and (contains(@name,'Tier11') or contains(@name,'Tier12') or contains(@name,'Tier13') or contains(@name,'Tier14') or contains(@name,'Tier15'))]/effect_group[1]">
+    <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="BuffAcRadEliteZombieAOEself_HighTier"/>
+    <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" target="self" buff="BuffAcRadEliteZombieAOEself_HighTier"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieArleneTier') or starts-with(@name,'AECZombieBusinessManTier') or starts-with(@name,'AECZombieJoeTier') or starts-with(@name,'AECZombieMarleneTier') or starts-with(@name,'AECZombieNurseTier') or starts-with(@name,'AECZombiePartyGirlTier') or starts-with(@name,'AECZombieScreamerTier') or starts-with(@name,'AECZombieSteveTier') or starts-with(@name,'AECZombieTomClarkTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieShort"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieBoeTier') or starts-with(@name,'AECZombieDarleneTier') or starts-with(@name,'AECZombieInmateTier') or starts-with(@name,'AECZombieJanitorTier') or starts-with(@name,'AECZombieLabTier') or starts-with(@name,'AECZombieMoeTier') or starts-with(@name,'AECZombieSkateboarderTier') or starts-with(@name,'AECZombieSpiderTier') or starts-with(@name,'AECZombieYoTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombie01"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieBowlerTier') or starts-with(@name,'AECZombieFatCopTier') or starts-with(@name,'AECZombieFatHawaiianTier') or starts-with(@name,'AECZombieFemaleFatTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieCop"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieBikerTier') or starts-with(@name,'AECZombieLumberjackTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieStrong"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombiePlagueSpitterTier') or starts-with(@name,'AECZombieRancherTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieRancher"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieSoldierTier') or starts-with(@name,'AECZombieUtilityWorkerTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieWorker"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieBurntTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieBurning"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieChuckTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieChuck"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieDemolitionTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieDemolition"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieMaleHazmatTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieHazMat"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieMutatedTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandzombieMutated"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieSteveCrawlerTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombie02"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[starts-with(@name,'AECZombieWightFeralTier')]">
+    <property name="HandItem" value="aecPZRad_meleeHandZombieFeral"/>
+  </append>
+</configs>

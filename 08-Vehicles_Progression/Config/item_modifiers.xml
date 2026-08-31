@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: vehicle progression and SkillLock integration. File purpose: item-modifier definitions and compatibility patches.
+RU: Назначение модуля: прогрессия транспорта и интеграция SkillLock. Назначение файла: определения модификаторов предметов и правки совместимости.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageApocalypsePulverizer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageBastionBuster'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageConcreteGnawer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageIronWrecker'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageMasonSplitter'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageRoadRipper'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageRustChipper'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageScrapBiter'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageWarplowDemolisher'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECBlockDamageWastelandDozer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageApocalypsePiledriver'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageAxleHammer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageBastionBreaker'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageBoneCracker'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageIronGore'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageRoadMauler'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageRustJab'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageScrapNudge'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageWarplowCrusher'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECEntityDamageWastelandRam'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxApocalypseFuelArk'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxBlackDieselVault'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxDustDrum'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxIronReservoir'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxLeviathanFuelBelly'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxLonghaulCistern'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxOverlandStockpile'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxRoadBarrel'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxScrapCanteen'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelMaxWastelandTanker'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverBlackSmokeTamer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverDryTankReaper'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverDustSipper'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverFuelScavenger'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverLastDropKeeper'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverRoadScrounger'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverRustSting'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverScrapMiser'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverWastelandMiserPrime'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECFuelSaverWastelandSaver'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityApocalypseFloodlight'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityAshenSpotlight'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityBlacktopSun'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityCinderFlicker'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityDustGlow'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityNightCutter'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityRoadEmber'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityRustLantern'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityScrapBeam'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECLightIntensityWastelandFlare'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageApocalypseSafeguard'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageCrashCocoon'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageDustBuffer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageFrameBulwark'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageIronBulwark'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageIronShell'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageLeviathanHide'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageRoadBracer'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageScrapPadding'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECSelfDamageWastelandBrace'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueAxleTyrant'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueBlackSmokeMule'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueDustGrunter'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueGearGrinder'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueIronClaw'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueLeviathanTorque'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueOverdriveBrute'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueRoadTwister'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueScrapPuller'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECTorqueWastelandHauler'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityApocalypseOverdrive'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityBlacktopFury'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityDustRunner'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityHorizonSplitter'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityLongshotDrive'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityRedlineReaper'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityRoadHowler'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityRustStreak'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityScrapStride'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/item_modifiers/item_modifier[@name='modAECVelocityWastelandSprint'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+</configs>

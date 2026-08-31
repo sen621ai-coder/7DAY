@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/blocks">
+    <block name="logicGateAND">
+      <property name="Extends" value="electricwirerelay"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="Powered"/>
+      <property name="RequiredPower" value="0"/>
+      <property name="Group" value="Science,TCScience"/>
+      <property name="Tags" value="electricianSkill,scrap100"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical"/>
+      <property name="CustomIcon" value="electricwirerelay"/>
+      <property name="CustomIconTint" value="80,220,120"/>
+      <property name="DescriptionKey" value="logicGateANDDesc"/>
+      <property name="EconomicValue" value="140"/>
+      <property name="SortOrder2" value="0018"/>
+    </block>
+    <block name="logicGateOR">
+      <property name="Extends" value="electricwirerelay"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="Powered"/>
+      <property name="RequiredPower" value="0"/>
+      <property name="Group" value="Science,TCScience"/>
+      <property name="Tags" value="electricianSkill,scrap100"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical"/>
+      <property name="CustomIcon" value="electricwirerelay"/>
+      <property name="CustomIconTint" value="80,170,255"/>
+      <property name="DescriptionKey" value="logicGateORDesc"/>
+      <property name="EconomicValue" value="140"/>
+      <property name="SortOrder2" value="0019"/>
+    </block>
+    <block name="logicGateNOT">
+      <property name="Extends" value="electricwirerelay"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="Powered"/>
+      <property name="RequiredPower" value="0"/>
+      <property name="Group" value="Science,TCScience"/>
+      <property name="Tags" value="electricianSkill,scrap100"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical"/>
+      <property name="CustomIcon" value="electricwirerelay"/>
+      <property name="CustomIconTint" value="255,100,100"/>
+      <property name="DescriptionKey" value="logicGateNOTDesc"/>
+      <property name="EconomicValue" value="140"/>
+      <property name="SortOrder2" value="0020"/>
+    </block>
+    <block name="logicGateXOR">
+      <property name="Extends" value="electricwirerelay"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="Class" value="Powered"/>
+      <property name="RequiredPower" value="0"/>
+      <property name="Group" value="Science,TCScience"/>
+      <property name="Tags" value="electricianSkill,scrap100"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical"/>
+      <property name="CustomIcon" value="electricwirerelay"/>
+      <property name="CustomIconTint" value="220,120,255"/>
+      <property name="DescriptionKey" value="logicGateXORDesc"/>
+      <property name="EconomicValue" value="160"/>
+      <property name="SortOrder2" value="0021"/>
+    </block>
+  </append>
+</configs>

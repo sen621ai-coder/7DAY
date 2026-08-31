@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: client-side recipe-search guide support. File purpose: buff definitions, effects and triggers.
+RU: Назначение модуля: поддержка клиентской справки поиска рецептов. Назначение файла: определения эффектов, их действия и триггеры.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!-- EN: Keeps a small reminder active until the first-spawn note is read.-->
+  <!-- RU: Показывает напоминание, пока выданная при первом входе памятка не прочитана.-->
+  <append xpath="/buffs">
+    <buff name="buffRsoRecipeSearchGuideReminder" hidden="true" remove_on_death="false">
+      <stack_type value="ignore"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffStart" action="PinToolbeltMessage" message_key="rsoRecipeSearchGuideReminder"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffRsoRecipeSearchGuideReminder">
+          <requirement name="CVarCompare" cvar="rsoRecipeSearchGuideRead" operation="GTE" value="1"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffRemove" action="RemoveToolbeltMessage" message_key="rsoRecipeSearchGuideReminder"/>
+      </effect_group>
+    </buff>
+  </append>
+</configs>

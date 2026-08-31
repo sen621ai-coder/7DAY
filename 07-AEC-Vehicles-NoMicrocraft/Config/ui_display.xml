@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: crafting categories and display metadata.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: категории крафта и данные отображения.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!--EN: Original AEC assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecVehicleModifierBench">
+      <crafting_category name="AECvehicleModifierFuelUse" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierFuelUse"/>
+      <crafting_category name="AECvehicleModifierLightIntensity" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierLightIntensity"/>
+      <crafting_category name="AECvehicleModifierEntityDamage" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierEntityDamage"/>
+      <crafting_category name="AECvehicleModifierBlockDamage" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierBlockDamage"/>
+      <crafting_category name="AECvehicleModifierMotorTorque" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierMotorTorque"/>
+      <crafting_category name="AECvehicleModifierVelocity" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierVelocity"/>
+      <crafting_category name="AECvehicleModifierFuelMax" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierFuelMax"/>
+      <crafting_category name="AECvehicleModifierSelfDamage" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleModifierSelfDamage"/>
+    </crafting_category_list>
+  </append>
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecVehicleFinalAssemblyBench">
+      <crafting_category name="AECvehicleFinalAssembly" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalAssembly"/>
+      <crafting_category name="AECvehicleFinalCar" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalCar"/>
+      <crafting_category name="AECvehicleFinalBus" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalBus"/>
+      <crafting_category name="AECvehicleFinalTruck" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalTruck"/>
+      <crafting_category name="AECvehicleFinalAirplane" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalAirplane"/>
+      <crafting_category name="AECvehicleFinalRocket" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalRocket"/>
+      <crafting_category name="AECvehicleFinalOther" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalOther"/>
+      <crafting_category name="AECvehicleFinalRepairs" icon="ui_game_symbol_block_upgrade" display_name="aecLblVehicleFinalRepairs"/>
+    </crafting_category_list>
+  </append>
+  <!--EN: Original AEC assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+</configs>

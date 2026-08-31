@@ -1,0 +1,479 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: skills, progression and recipe unlocks.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: навыки, прогрессия и открытие рецептов.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <remove xpath="/progression//passive_effect[contains(concat(',',translate(@tags,' ',''),','),',butcherHarvestMutation,')]"/>
+  <!-- QuestRewardChoiceCount raises the number of rewards the player must select. AEC quests with fewer choices then become impossible to turn in. -->
+  <remove xpath="/progression/perks/perk[@name='perkAecMasterNegotiator']//passive_effect[@name='QuestRewardChoiceCount']"/>
+  <!-- Keep time reductions below 100% after stacking with vanilla perks; zero/negative interaction timers cannot complete. -->
+  <set xpath="/progression/perks/perk[@name='perkAecSwiftScavenger']//passive_effect[@name='ScavengingTime']/@value">.0015,.15</set>
+  <set xpath="/progression/perks/perk[@name='perkAecLockBreaker']//passive_effect[@name='LockPickTime']/@value">.002,.2</set>
+  <append xpath="/progression/skills">
+    <skill name="skillCorpseGatherer" parent="attperfection" name_key="skillCorpseGathererName" desc_key="skillCorpseGathererDesc" icon="ui_game_symbol_loot_sack">
+      <effect_group/>
+    </skill>
+  </append>
+  <append xpath="/progression/perks">
+    <perk name="perkCorpseSurgeon" parent="skillCorpseGatherer" max_level="10" base_skill_point_cost="1" override_cost="1,2,3,4,5,6,7,8,9,10" name_key="perkCorpseSurgeonName" desc_key="perkCorpseSurgeonDesc" icon="ui_game_symbol_medical">
+      <level_requirements level="1">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="1" desc_key="reqPerfectLevel01"/>
+      </level_requirements>
+      <level_requirements level="2">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="2" desc_key="reqPerfectLevel02"/>
+      </level_requirements>
+      <level_requirements level="3">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="3" desc_key="reqPerfectLevel03"/>
+      </level_requirements>
+      <level_requirements level="4">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="4" desc_key="reqPerfectLevel04"/>
+      </level_requirements>
+      <level_requirements level="5">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="5" desc_key="reqPerfectLevel05"/>
+      </level_requirements>
+      <level_requirements level="6">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="6" desc_key="reqPerfectLevel06"/>
+      </level_requirements>
+      <level_requirements level="7">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="7" desc_key="reqPerfectLevel07"/>
+      </level_requirements>
+      <level_requirements level="8">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="8" desc_key="reqPerfectLevel08"/>
+      </level_requirements>
+      <level_requirements level="9">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="9" desc_key="reqPerfectLevel09"/>
+      </level_requirements>
+      <level_requirements level="10">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="10" desc_key="reqPerfectLevel10"/>
+      </level_requirements>
+      <effect_group>
+        <effect_description level="1" desc_key="perkCorpseSurgeonRank1Desc" long_desc_key="perkCorpseSurgeonRank1LongDesc"/>
+        <effect_description level="2" desc_key="perkCorpseSurgeonRank2Desc" long_desc_key="perkCorpseSurgeonRank2LongDesc"/>
+        <effect_description level="3" desc_key="perkCorpseSurgeonRank3Desc" long_desc_key="perkCorpseSurgeonRank3LongDesc"/>
+        <effect_description level="4" desc_key="perkCorpseSurgeonRank4Desc" long_desc_key="perkCorpseSurgeonRank4LongDesc"/>
+        <effect_description level="5" desc_key="perkCorpseSurgeonRank5Desc" long_desc_key="perkCorpseSurgeonRank5LongDesc"/>
+        <effect_description level="6" desc_key="perkCorpseSurgeonRank6Desc" long_desc_key="perkCorpseSurgeonRank6LongDesc"/>
+        <effect_description level="7" desc_key="perkCorpseSurgeonRank7Desc" long_desc_key="perkCorpseSurgeonRank7LongDesc"/>
+        <effect_description level="8" desc_key="perkCorpseSurgeonRank8Desc" long_desc_key="perkCorpseSurgeonRank8LongDesc"/>
+        <effect_description level="9" desc_key="perkCorpseSurgeonRank9Desc" long_desc_key="perkCorpseSurgeonRank9LongDesc"/>
+        <effect_description level="10" desc_key="perkCorpseSurgeonRank10Desc" long_desc_key="perkCorpseSurgeonRank10LongDesc"/>
+      </effect_group>
+    </perk>
+    <perk name="perkCorpseDentist" parent="skillCorpseGatherer" max_level="10" base_skill_point_cost="1" override_cost="1,2,3,4,5,6,7,8,9,10" name_key="perkCorpseDentistName" desc_key="perkCorpseDentistDesc" icon="ui_game_symbol_destruction2">
+      <level_requirements level="1">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="1" desc_key="reqPerfectLevel01"/>
+      </level_requirements>
+      <level_requirements level="2">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="2" desc_key="reqPerfectLevel02"/>
+      </level_requirements>
+      <level_requirements level="3">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="3" desc_key="reqPerfectLevel03"/>
+      </level_requirements>
+      <level_requirements level="4">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="4" desc_key="reqPerfectLevel04"/>
+      </level_requirements>
+      <level_requirements level="5">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="5" desc_key="reqPerfectLevel05"/>
+      </level_requirements>
+      <level_requirements level="6">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="6" desc_key="reqPerfectLevel06"/>
+      </level_requirements>
+      <level_requirements level="7">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="7" desc_key="reqPerfectLevel07"/>
+      </level_requirements>
+      <level_requirements level="8">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="8" desc_key="reqPerfectLevel08"/>
+      </level_requirements>
+      <level_requirements level="9">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="9" desc_key="reqPerfectLevel09"/>
+      </level_requirements>
+      <level_requirements level="10">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="10" desc_key="reqPerfectLevel10"/>
+      </level_requirements>
+      <effect_group>
+        <effect_description level="1" desc_key="perkCorpseDentistRank1Desc" long_desc_key="perkCorpseDentistRank1LongDesc"/>
+        <effect_description level="2" desc_key="perkCorpseDentistRank2Desc" long_desc_key="perkCorpseDentistRank2LongDesc"/>
+        <effect_description level="3" desc_key="perkCorpseDentistRank3Desc" long_desc_key="perkCorpseDentistRank3LongDesc"/>
+        <effect_description level="4" desc_key="perkCorpseDentistRank4Desc" long_desc_key="perkCorpseDentistRank4LongDesc"/>
+        <effect_description level="5" desc_key="perkCorpseDentistRank5Desc" long_desc_key="perkCorpseDentistRank5LongDesc"/>
+        <effect_description level="6" desc_key="perkCorpseDentistRank6Desc" long_desc_key="perkCorpseDentistRank6LongDesc"/>
+        <effect_description level="7" desc_key="perkCorpseDentistRank7Desc" long_desc_key="perkCorpseDentistRank7LongDesc"/>
+        <effect_description level="8" desc_key="perkCorpseDentistRank8Desc" long_desc_key="perkCorpseDentistRank8LongDesc"/>
+        <effect_description level="9" desc_key="perkCorpseDentistRank9Desc" long_desc_key="perkCorpseDentistRank9LongDesc"/>
+        <effect_description level="10" desc_key="perkCorpseDentistRank10Desc" long_desc_key="perkCorpseDentistRank10LongDesc"/>
+      </effect_group>
+    </perk>
+    <perk name="perkCorpseAdventurer" parent="skillCorpseGatherer" max_level="10" base_skill_point_cost="1" override_cost="1,2,3,4,5,6,7,8,9,10" name_key="perkCorpseAdventurerName" desc_key="perkCorpseAdventurerDesc" icon="ui_game_symbol_ninja">
+      <level_requirements level="1">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="1" desc_key="reqPerfectLevel01"/>
+      </level_requirements>
+      <level_requirements level="2">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="2" desc_key="reqPerfectLevel02"/>
+      </level_requirements>
+      <level_requirements level="3">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="3" desc_key="reqPerfectLevel03"/>
+      </level_requirements>
+      <level_requirements level="4">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="4" desc_key="reqPerfectLevel04"/>
+      </level_requirements>
+      <level_requirements level="5">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="5" desc_key="reqPerfectLevel05"/>
+      </level_requirements>
+      <level_requirements level="6">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="6" desc_key="reqPerfectLevel06"/>
+      </level_requirements>
+      <level_requirements level="7">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="7" desc_key="reqPerfectLevel07"/>
+      </level_requirements>
+      <level_requirements level="8">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="8" desc_key="reqPerfectLevel08"/>
+      </level_requirements>
+      <level_requirements level="9">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="9" desc_key="reqPerfectLevel09"/>
+      </level_requirements>
+      <level_requirements level="10">
+        <requirement name="ProgressionLevel" progression_name="attperfection" operation="GTE" value="10" desc_key="reqPerfectLevel10"/>
+      </level_requirements>
+      <effect_group>
+        <effect_description level="1" desc_key="perkCorpseAdventurerRank1Desc" long_desc_key="perkCorpseAdventurerRank1LongDesc"/>
+        <effect_description level="2" desc_key="perkCorpseAdventurerRank2Desc" long_desc_key="perkCorpseAdventurerRank2LongDesc"/>
+        <effect_description level="3" desc_key="perkCorpseAdventurerRank3Desc" long_desc_key="perkCorpseAdventurerRank3LongDesc"/>
+        <effect_description level="4" desc_key="perkCorpseAdventurerRank4Desc" long_desc_key="perkCorpseAdventurerRank4LongDesc"/>
+        <effect_description level="5" desc_key="perkCorpseAdventurerRank5Desc" long_desc_key="perkCorpseAdventurerRank5LongDesc"/>
+        <effect_description level="6" desc_key="perkCorpseAdventurerRank6Desc" long_desc_key="perkCorpseAdventurerRank6LongDesc"/>
+        <effect_description level="7" desc_key="perkCorpseAdventurerRank7Desc" long_desc_key="perkCorpseAdventurerRank7LongDesc"/>
+        <effect_description level="8" desc_key="perkCorpseAdventurerRank8Desc" long_desc_key="perkCorpseAdventurerRank8LongDesc"/>
+        <effect_description level="9" desc_key="perkCorpseAdventurerRank9Desc" long_desc_key="perkCorpseAdventurerRank9LongDesc"/>
+        <effect_description level="10" desc_key="perkCorpseAdventurerRank10Desc" long_desc_key="perkCorpseAdventurerRank10LongDesc"/>
+      </effect_group>
+    </perk>
+  </append>
+  <insertAfter xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='internationalMarket']">
+    <unlock_entry item="aecMutationIncubator" unlock_tier="7"/>
+  </insertAfter>
+  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/effect_group[1]">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="40,100" value="1" tags="aecMutationIncubator"/>
+  </append>
+  <remove xpath="/progression/attributes/attribute[@name='attAgility']"/>
+  <insertBefore xpath="/progression/attributes/attribute[@name='attFortitude']">
+    <attribute name="attAgility" name_key="attAgilityName" desc_key="attAgilityDesc" icon="ui_game_symbol_agility">
+      <level_requirements level="1">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints01"/>
+      </level_requirements>
+      <level_requirements level="2">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints01"/>
+      </level_requirements>
+      <level_requirements level="3">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints01"/>
+      </level_requirements>
+      <level_requirements level="4">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints01"/>
+      </level_requirements>
+      <level_requirements level="5">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints01"/>
+      </level_requirements>
+      <level_requirements level="6">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints02"/>
+      </level_requirements>
+      <level_requirements level="7">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints02"/>
+      </level_requirements>
+      <level_requirements level="8">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints02"/>
+      </level_requirements>
+      <level_requirements level="9">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints03"/>
+      </level_requirements>
+      <level_requirements level="10">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqGenericPoints03"/>
+      </level_requirements>
+      <effect_group>
+        <requirement name="ItemHasTags" tags="attAgility"/>
+        <passive_effect name="HeadshotDamageModifier" operation="perc_add" level="2,8" value="0.1,.7" tags="head"/>
+        <passive_effect name="HeadshotDamageModifier" operation="perc_add" level="9,10" value=".85,1" tags="head"/>
+        <passive_effect name="DismemberChance" operation="base_add" level="2,10" value=".05,.45"/>
+      </effect_group>
+      <effect_group>
+        <effect_description level="1" desc_key="attAgilityRank01Desc" long_desc_key="attAgilityRank01LongDesc"/>
+        <effect_description level="2" desc_key="attAgilityRank02Desc" long_desc_key="attAgilityRank02LongDesc"/>
+        <effect_description level="3" desc_key="attAgilityRank03Desc" long_desc_key="attAgilityRank03LongDesc"/>
+        <effect_description level="4" desc_key="attAgilityRank04Desc" long_desc_key="attAgilityRank04LongDesc"/>
+        <effect_description level="5" desc_key="attAgilityRank05Desc" long_desc_key="attAgilityRank05LongDesc"/>
+        <effect_description level="6" desc_key="attAgilityRank06Desc" long_desc_key="attAgilityRank06LongDesc"/>
+        <effect_description level="7" desc_key="attAgilityRank07Desc" long_desc_key="attAgilityRank07LongDesc"/>
+        <effect_description level="8" desc_key="attAgilityRank08Desc" long_desc_key="attAgilityRank08LongDesc"/>
+        <effect_description level="9" desc_key="attAgilityRank09Desc" long_desc_key="attAgilityRank09LongDesc"/>
+        <effect_description level="10" desc_key="attAgilityRank10Desc" long_desc_key="attAgilityRank10LongDesc"/>
+      </effect_group>
+    </attribute>
+  </insertBefore>
+  <remove xpath="/progression/attributes/attribute[@name='attperfection']"/>
+  <insertAfter xpath="/progression/attributes/attribute[@name='attGeneralPerks']">
+    <attribute name="attperfection" name_key="attperfectionName" desc_key="attperfectionDesc" icon="ui_game_symbol_diamond" min_level="0" max_level="10" base_skill_point_cost="2">
+      <level_requirements level="1">
+        <requirement name="PlayerLevel" operation="GTE" value="1" desc_key="reqPerfectPoints01"/>
+      </level_requirements>
+      <level_requirements level="2">
+        <requirement name="PlayerLevel" operation="GTE" value="50" desc_key="reqPerfectPoints02"/>
+      </level_requirements>
+      <level_requirements level="3">
+        <requirement name="PlayerLevel" operation="GTE" value="100" desc_key="reqPerfectPoints03"/>
+      </level_requirements>
+      <level_requirements level="4">
+        <requirement name="PlayerLevel" operation="GTE" value="150" desc_key="reqPerfectPoints04"/>
+      </level_requirements>
+      <level_requirements level="5">
+        <requirement name="PlayerLevel" operation="GTE" value="200" desc_key="reqPerfectPoints05"/>
+      </level_requirements>
+      <level_requirements level="6">
+        <requirement name="PlayerLevel" operation="GTE" value="250" desc_key="reqPerfectPoints06"/>
+      </level_requirements>
+      <level_requirements level="7">
+        <requirement name="PlayerLevel" operation="GTE" value="300" desc_key="reqPerfectPoints07"/>
+      </level_requirements>
+      <level_requirements level="8">
+        <requirement name="PlayerLevel" operation="GTE" value="350" desc_key="reqPerfectPoints08"/>
+      </level_requirements>
+      <level_requirements level="9">
+        <requirement name="PlayerLevel" operation="GTE" value="400" desc_key="reqPerfectPoints09"/>
+      </level_requirements>
+      <level_requirements level="10">
+        <requirement name="PlayerLevel" operation="GTE" value="450" desc_key="reqPerfectPoints10"/>
+      </level_requirements>
+      <effect_group>
+        <passive_effect name="BarteringBuying" operation="base_add" tier="1,10" value=".005,.05"/>
+        <passive_effect name="BarteringSelling" operation="base_add" tier="1,10" value=".02,.2"/>
+      </effect_group>
+      <effect_group>
+        <effect_description level="1" desc_key="attperfectionRank01Desc" long_desc_key="attperfectionRank01LongDesc"/>
+        <effect_description level="2" desc_key="attperfectionRank02Desc" long_desc_key="attperfectionRank02LongDesc"/>
+        <effect_description level="3" desc_key="attperfectionRank03Desc" long_desc_key="attperfectionRank03LongDesc"/>
+        <effect_description level="4" desc_key="attperfectionRank04Desc" long_desc_key="attperfectionRank04LongDesc"/>
+        <effect_description level="5" desc_key="attperfectionRank05Desc" long_desc_key="attperfectionRank05LongDesc"/>
+        <effect_description level="6" desc_key="attperfectionRank06Desc" long_desc_key="attperfectionRank06LongDesc"/>
+        <effect_description level="7" desc_key="attperfectionRank07Desc" long_desc_key="attperfectionRank07LongDesc"/>
+        <effect_description level="8" desc_key="attperfectionRank08Desc" long_desc_key="attperfectionRank08LongDesc"/>
+        <effect_description level="9" desc_key="attperfectionRank09Desc" long_desc_key="attperfectionRank09LongDesc"/>
+        <effect_description level="10" desc_key="attperfectionRank10Desc" long_desc_key="attperfectionRank10LongDesc"/>
+      </effect_group>
+    </attribute>
+  </insertAfter>
+  <!-- EN: AEC EO adds a point-purchased perk tab after Project Z fills the original top row; only the new AEC tab is moved.
+RU: AEC EO добавляет вкладку навыков за очки после заполнения исходного верхнего ряда Project Z; переносится только новая вкладка AEC.-->
+  <remove xpath="/progression/attributes/attribute[@name='attAecEndgamePerks']"/>
+  <insertAfter xpath="/progression/attributes/attribute[@name='attperfection']">
+    <attribute name="attAecEndgamePerks" name_key="attAecEndgamePerksName" desc_key="attAecEndgamePerksDesc" icon="ui_game_symbol_perk" min_level="0" max_level="0" base_skill_point_cost="0">
+      <effect_group/>
+    </attribute>
+  </insertAfter>
+  <remove xpath="/progression/attributes/attribute[@name='atttselftraits']"/>
+  <insertBefore xpath="/progression/attributes/attribute[@name='attpasssiveskills']">
+    <attribute name="atttselftraits" name_key="atttselftraits" desc_key="atttselftraitsDesc" icon="ui_game_symbol_influence" min_level="0" max_level="0" base_skill_point_cost="0">
+      <effect_group>
+        <effect_description level="0" desc_key="attperfectionRank01Desc" long_desc_key="attperfectionRank01LongDesc"/>
+      </effect_group>
+    </attribute>
+  </insertBefore>
+  <!-- EN: The workstation display entry has seven visible slots, so unlock_tier must stay contiguous 1..7. Values above 7 make RecipeUnlockData.GetLevel index past the unlock_level array and crash craftingInfoPanel.
+RU: У записи верстаков семь отображаемых слотов, поэтому unlock_tier должен оставаться непрерывным 1..7. Значения выше 7 заставляют RecipeUnlockData.GetLevel выйти за границы массива unlock_level и ломают craftingInfoPanel.-->
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/@icon">toolApiaryExtractor,toolApiaryBroodBox,resourceWaterFilter,chemistryStation,cntWasherIndustrialClosed,decoComputerMonitorKeyboardMousePC,aecMutationIncubator</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/@unlock_level">40,44,48,50,60,40,40</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/@name_key">workstationsT4-1,workstationsT4-2,workstationsT4-3,workstationsT4-4,workstationsT4-5,imPZ_workstationsIM,aecMutationIncubator</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='toolApiaryExtractor']/@unlock_tier">1</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='toolApiaryBroodBox']/@unlock_tier">2</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='toolDewFilter']/@unlock_tier">3</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='chemistryStation']/@unlock_tier">4</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='recycler']/@unlock_tier">5</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='internationalMarket']/@unlock_tier">6</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='aecMutationIncubator']/@unlock_tier">7</set>
+  <!-- EN: Project Z originally grants a 10% rank-5 stun-baton instant-kill chance; the modpack balance value is 1%.
+RU: В Project Z исходный шанс мгновенного убийства электродубинкой на 5-м ранге равен 10%; баланс модпака использует 1%.-->
+  <set xpath="/progression/perks/perk[@name='perkIntellectMastery']/effect_group[requirement[@name='ProgressionLevel' and @progression_name='perkIntellectMastery' and @operation='Equals' and @value='5'] and requirement[@name='HoldingItemHasTags' and contains(concat(',',@tags,','),',stunBaton,')]]/requirement[@name='RandomRoll']/@value">1</set>
+  <!-- EN: Spring Heel must scale JumpStrength by percentage across all 100 ranks. The source uses base_add and reaches extreme physics values; merely lowering that base value still breaks when combined with Parkour or equipment.
+RU: Spring Heel должен масштабировать JumpStrength в процентах на всех 100 рангах. Исходный base_add даёт экстремальные физические значения; простого уменьшения базового значения недостаточно при сложении с Parkour или экипировкой.-->
+  <set xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/passive_effect[@name='JumpStrength']/@operation">perc_add</set>
+  <set xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/passive_effect[@name='JumpStrength']/@level">1,20,100</set>
+  <set xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/passive_effect[@name='JumpStrength']/@value">.005,.1,2</set>
+  <!-- EN: Replace descriptions tied to obsolete Spring Heel values with neutral localized text.
+RU: Описания, рассчитанные на устаревшие значения Spring Heel, заменяются нейтральным локализованным текстом.-->
+  <remove xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/effect_description"/>
+  <append xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group">
+    <effect_description level="1" desc_key="perkAecSpringHeelEffectStartDesc" long_desc_key="perkAecSpringHeelEffectStartDesc"/>
+    <effect_description level="2" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="3" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="4" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="5" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="6" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="7" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="8" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="9" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>
+    <effect_description level="10" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="11" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="12" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="13" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="14" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="15" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="16" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="17" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="18" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="19" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="20" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="21" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="22" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="23" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="24" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="25" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="26" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="27" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="28" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="29" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="30" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="31" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="32" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="33" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="34" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="35" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="36" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="37" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="38" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="39" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="40" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="41" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="42" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="43" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="44" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="45" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="46" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="47" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="48" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="49" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="50" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="51" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="52" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="53" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="54" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="55" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="56" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="57" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="58" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="59" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="60" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="61" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="62" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="63" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="64" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="65" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="66" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="67" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="68" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="69" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="70" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="71" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="72" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="73" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="74" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="75" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="76" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="77" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="78" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="79" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="80" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="81" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="82" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="83" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="84" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="85" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="86" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="87" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="88" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="89" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="90" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="91" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="92" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="93" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="94" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="95" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="96" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="97" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="98" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="99" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+    <effect_description level="100" desc_key="perkAecSpringHeelEffectMaxDesc" long_desc_key="perkAecSpringHeelEffectMaxDesc"/>
+  </append>
+  <set xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/effect_description[@level!='100' and @desc_key='perkAecSpringHeelEffectMaxDesc']/@desc_key">perkAecSpringHeelEffectProgressDesc</set>
+  <set xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/effect_description[@level!='100' and @long_desc_key='perkAecSpringHeelEffectMaxDesc']/@long_desc_key">perkAecSpringHeelEffectProgressDesc</set>
+  <!-- EN: Retire AEC EO story-only tracking perks together with their removed acquisition paths.
+RU: Сюжетные служебные перки AEC EO отключаются вместе с удалёнными путями их получения.-->
+  <remove xpath="/progression/perks/perk[@name='aecEOQuestTutorialProgress' or @name='aecEOQuestCampaignProgress']"/>
+  <!-- Universal Parts component recipes unlock exactly when their first consuming craft unlocks. -->
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingBows']/display_entry[@item='gunBowT1WoodenBowParts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingBows']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunBowT1WoodenBowParts']/@level">11,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingHandguns']/display_entry[@item='gunHandgunT1PistolParts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingHandguns']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunHandgunT1PistolParts']/@level">11,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingShotguns']/display_entry[@item='gunShotgunT1DoubleBarrelParts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingShotguns']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunShotgunT1DoubleBarrelParts']/@level">11,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingRifles']/display_entry[@item='gunRifleT1HuntingRifleParts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingRifles']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunRifleT1HuntingRifleParts']/@level">11,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingMachineGuns']/display_entry[@item='gunMGT1AK47Parts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingMachineGuns']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunMGT1AK47Parts']/@level">11,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingExplosives']/display_entry[@item='gunExplosivesT3RocketLauncherParts']/@unlock_level">50</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingExplosives']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunExplosivesT3RocketLauncherParts']/@level">50,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingRobotics']/display_entry[@item='gunBotRoboticsParts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingRobotics']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='gunBotRoboticsParts']/@level">11,100</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingRobotics']/display_entry[@item='meleeWpnBatonT2StunBatonParts']/@unlock_level">26</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingRobotics']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeWpnBatonT2StunBatonParts']/@level">26,100</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingKnuckles']/display_entry[@item='meleeWpnKnucklesT3SteelKnucklesParts']/@unlock_level">36</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingKnuckles']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeWpnKnucklesT3SteelKnucklesParts']/@level">36,75</set>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingHarvestingTools']/display_entry[unlock_entry[@item='meleeToolAllSteelParts'] and unlock_entry[@item='meleeToolAxeT3ChainsawParts']]/@unlock_level">26,61</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingHarvestingTools']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeToolAllSteelParts']/@level">26,100</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingHarvestingTools']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeToolAxeT3ChainsawParts']/@level">61,100</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingSalvageTools']/display_entry[@item='meleeToolAxeT3ChainsawParts']/@unlock_level">51</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingSalvageTools']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeToolAxeT3ChainsawParts']/@level">51,75</set>
+  <insertAfter xpath="/progression/crafting_skills/crafting_skill[@name='craftingRepairTools']/display_entry[@item='meleeToolRepairT3Nailgun']">
+    <display_entry item="meleeToolAxeT3ChainsawParts" unlock_level="26"/>
+  </insertAfter>
+  <insertAfter xpath="/progression/crafting_skills/crafting_skill[@name='craftingRepairTools']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeToolRepairT3Nailgun']">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="26,50" value="1" tags="meleeToolAxeT3ChainsawParts"/>
+  </insertAfter>
+  <insertAfter xpath="/progression/crafting_skills/crafting_skill[@name='craftingSalvageTools']/display_entry[@item='meleeToolSalvageT2Ratchet']">
+    <display_entry item="meleeToolAllSteelParts" unlock_level="26"/>
+  </insertAfter>
+  <insertAfter xpath="/progression/crafting_skills/crafting_skill[@name='craftingSalvageTools']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeToolSalvageT2Ratchet']">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="26,75" value="1" tags="meleeToolAllSteelParts"/>
+  </insertAfter>
+
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingBlades']/display_entry[@item='meleeWpnBladeT3MacheteParts']/@unlock_level">36</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingBlades']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeWpnBladeT3MacheteParts']/@level">36,75</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingSpears']/display_entry[@item='meleeWpnSpearT3SteelSpearParts']/@unlock_level">36</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingSpears']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeWpnSpearT3SteelSpearParts']/@level">36,75</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingClubs']/display_entry[@item='meleeWpnClubT3SteelClubParts']/@unlock_level">36</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingClubs']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeWpnClubT3SteelClubParts']/@level">36,75</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingSledgehammers']/display_entry[@item='meleeWpnSledgeT3SteelSledgehammerParts']/@unlock_level">36</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingSledgehammers']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='meleeWpnSledgeT3SteelSledgehammerParts']/@level">36,75</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingArmor']/display_entry[@item='armorParts']/@unlock_level">11</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingArmor']/effect_group/passive_effect[@name='RecipeTagUnlocked' and @tags='armorParts']/@level">11,100</set>
+  <!-- Extend the hidden AEC game-stage tracker from T15 A5 to all five T16 areas. -->
+  <setattribute xpath="/progression/perks/perk[@name='aecTierUnlock']" name="max_level">60</setattribute>
+  <insertBefore xpath="/progression/perks/perk[@name='aecTierUnlock']/effect_group">
+    <level_requirements level="56"><requirement name="ProgressionLevel" progression_name="attAecProgression" operation="Equals" value="0" desc_key="aecTierUnlockDesc"/></level_requirements>
+    <level_requirements level="57"><requirement name="ProgressionLevel" progression_name="attAecProgression" operation="Equals" value="0" desc_key="aecTierUnlockDesc"/></level_requirements>
+    <level_requirements level="58"><requirement name="ProgressionLevel" progression_name="attAecProgression" operation="Equals" value="0" desc_key="aecTierUnlockDesc"/></level_requirements>
+    <level_requirements level="59"><requirement name="ProgressionLevel" progression_name="attAecProgression" operation="Equals" value="0" desc_key="aecTierUnlockDesc"/></level_requirements>
+    <level_requirements level="60"><requirement name="ProgressionLevel" progression_name="attAecProgression" operation="Equals" value="0" desc_key="aecTierUnlockDesc"/></level_requirements>
+  </insertBefore>
+  <append xpath="/progression/perks/perk[@name='aecTierUnlock']/effect_group">
+    <effect_description level="56" desc_key="aecTierUnlockLv56Desc" long_desc_key="aecTierUnlockLv56Desc"/>
+    <effect_description level="57" desc_key="aecTierUnlockLv57Desc" long_desc_key="aecTierUnlockLv57Desc"/>
+    <effect_description level="58" desc_key="aecTierUnlockLv58Desc" long_desc_key="aecTierUnlockLv58Desc"/>
+    <effect_description level="59" desc_key="aecTierUnlockLv59Desc" long_desc_key="aecTierUnlockLv59Desc"/>
+    <effect_description level="60" desc_key="aecTierUnlockLv60Desc" long_desc_key="aecTierUnlockLv60Desc"/>
+  </append>
+</configs>

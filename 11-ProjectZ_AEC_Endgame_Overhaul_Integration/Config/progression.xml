@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: Project Z, AEC Endgame Overhaul and Zombie Market integration. File purpose: skills, progression and recipe unlocks.
+RU: Назначение модуля: интеграция Project Z, AEC Endgame Overhaul и Зомбо-маркета. Назначение файла: навыки, прогрессия и открытие рецептов.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/effect_group[1]">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="40,100" value="1" tags="imPZInternationalMarket"/>
+  </append>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/@icon">toolApiaryExtractor,toolApiaryBroodBox,resourceWaterFilter,chemistryStation,cntWasherIndustrialClosed,decoComputerMonitorKeyboardMousePC</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/@unlock_level">40,44,48,50,60,40</set>
+  <set xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/@name_key">workstationsT4-1,workstationsT4-2,workstationsT4-3,workstationsT4-4,workstationsT4-5,imPZ_workstationsIM</set>
+  <insertAfter xpath="/progression/crafting_skills/crafting_skill[@name='craftingWorkstations']/display_entry[unlock_entry[@item='chemistryStation']]/unlock_entry[@item='recycler']">
+    <unlock_entry item="internationalMarket" unlock_tier="6"/>
+  </insertAfter>
+</configs>

@@ -1,0 +1,91 @@
+<Config>
+	<append xpath="/npc">
+		<npc_info
+			id="aecquestgiver"
+			name="AEC Huntmaster"
+			name_key="npcAecQuestGiver"
+			faction="whiteriver"
+			portrait="npc_hugh"
+			greeting_type="nearby"
+			stance="Neutral"
+			trader_id="91"
+			dialog_id="aecQuestGiverDialog"
+			localization_id="npcAecQuestGiver"
+			dms_section_type="TraderHugh"
+			quest_list="trader_aec_quests"
+		/>
+	</append>
+		<!-- AEC T03-T15 MODULE-->
+	<append xpath="/npc">
+		<npc_info
+			id="aecquestgiver1star"
+			name="AEC Huntmaster"
+			name_key="npcAecQuestGiver"
+			faction="whiteriver"
+			portrait="npc_hugh"
+			greeting_type="nearby"
+			stance="Neutral"
+			trader_id="92"
+			dialog_id="aecQuestGiverDialog"
+			localization_id="npcAecQuestGiver"
+			dms_section_type="TraderHugh"
+			quest_list="trader_aec_quests"
+		/>
+		<npc_info
+			id="aecquestgiver2star"
+			name="AEC Huntmaster"
+			name_key="npcAecQuestGiver"
+			faction="whiteriver"
+			portrait="npc_hugh"
+			greeting_type="nearby"
+			stance="Neutral"
+			trader_id="93"
+			dialog_id="aecQuestGiverDialog"
+			localization_id="npcAecQuestGiver"
+			dms_section_type="TraderHugh"
+			quest_list="trader_aec_quests"
+		/>
+		<npc_info
+			id="aecquestgiver3star"
+			name="AEC Huntmaster"
+			name_key="npcAecQuestGiver"
+			faction="whiteriver"
+			portrait="npc_hugh"
+			greeting_type="nearby"
+			stance="Neutral"
+			trader_id="94"
+			dialog_id="aecQuestGiverDialog"
+			localization_id="npcAecQuestGiver"
+			dms_section_type="TraderHugh"
+			quest_list="trader_aec_quests"
+		/>
+		<npc_info
+			id="aecquestgiver4star"
+			name="AEC Huntmaster"
+			name_key="npcAecQuestGiver"
+			faction="whiteriver"
+			portrait="npc_hugh"
+			greeting_type="nearby"
+			stance="Neutral"
+			trader_id="95"
+			dialog_id="aecQuestGiverDialog"
+			localization_id="npcAecQuestGiver"
+			dms_section_type="TraderHugh"
+			quest_list="trader_aec_quests"
+		/>
+		<npc_info
+			id="aecquestgiver5star"
+			name="AEC Huntmaster"
+			name_key="npcAecQuestGiver"
+			faction="whiteriver"
+			portrait="npc_hugh"
+			greeting_type="nearby"
+			stance="Neutral"
+			trader_id="96"
+			dialog_id="aecQuestGiverDialog"
+			localization_id="npcAecQuestGiver"
+			dms_section_type="TraderHugh"
+			quest_list="trader_aec_quests"
+		/>
+	</append>
+</Config>

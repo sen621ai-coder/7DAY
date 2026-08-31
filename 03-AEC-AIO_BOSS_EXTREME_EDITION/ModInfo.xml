@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xml>
+  <Name value="AEC_AIO_BOSS_EXTREME_EDITION"/>
+  <DisplayName value="AEC AIO BOSS EXTREME EDITION"/>
+  <Description value="AEC AIO BOSS EXTREME EDITION. Pack integration delays forest wilderness AIO minions/bosses until GS600 for a vanilla-like start."/>
+  <Author value="Aeclipse"/>
+  <Version value="3.1.4"/>
+  <Website value=""/>
+  <ServerSideOnly value="true"/>
+</xml>

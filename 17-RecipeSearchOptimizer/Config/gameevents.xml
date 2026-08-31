@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: client-side recipe-search guide support. File purpose: game-event definitions and first-spawn actions.
+RU: Назначение модуля: поддержка клиентской справки поиска рецептов. Назначение файла: определения игровых событий и действий при первом появлении.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!-- EN: Gives the search guide only during the character's first spawn.-->
+  <!-- RU: Выдаёт памятку только при первом появлении персонажа в мире.-->
+  <append xpath="/gameevents/action_sequence[@name='game_first_spawn']">
+    <action class="AddItems">
+      <property name="phase" value="3"/>
+      <property name="added_items" value="rsoRecipeSearchGuideNote"/>
+      <property name="added_item_counts" value="1"/>
+      <requirement class="CVar">
+        <property name="cvar" value="rsoRecipeSearchGuideIssued"/>
+        <property name="operation" value="NEQ"/>
+        <property name="value" value="1"/>
+      </requirement>
+    </action>
+    <action class="AddBuff">
+      <property name="phase" value="3"/>
+      <property name="buff_name" value="buffRsoRecipeSearchGuideReminder"/>
+      <property name="check_already_exists" value="true"/>
+      <requirement class="CVar">
+        <property name="cvar" value="rsoRecipeSearchGuideRead"/>
+        <property name="operation" value="NEQ"/>
+        <property name="value" value="1"/>
+      </requirement>
+    </action>
+    <action class="ModifyCVar">
+      <property name="phase" value="4"/>
+      <property name="cvar" value="rsoRecipeSearchGuideIssued"/>
+      <property name="operation" value="set"/>
+      <property name="value" value="1"/>
+    </action>
+  </append>
+</configs>

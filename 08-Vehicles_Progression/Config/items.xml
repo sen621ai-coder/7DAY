@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: vehicle progression and SkillLock integration. File purpose: item definitions and targeted item-property patches.
+RU: Назначение модуля: прогрессия транспорта и интеграция SkillLock. Назначение файла: определения предметов и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <setattribute xpath="/items/item[@name='vehicleBicyclePlaceable']/effect_group/passive_effect[@name='DegradationMax']" name="value">1000000</setattribute>
+  <setattribute xpath="/items/item[@name='vehicleMinibikePlaceable']/effect_group/passive_effect[@name='DegradationMax']" name="value">1000000</setattribute>
+  <setattribute xpath="/items/item[@name='vehicleMotorcyclePlaceable']/effect_group/passive_effect[@name='DegradationMax']" name="value">1000000</setattribute>
+  <setattribute xpath="/items/item[@name='vehicleTruck4x4Placeable']/effect_group/passive_effect[@name='DegradationMax']" name="value">1000000</setattribute>
+  <setattribute xpath="/items/item[@name='vehicleGyrocopterPlaceable']/effect_group/passive_effect[@name='DegradationMax']" name="value">1000000</setattribute>
+  <append xpath="/items/item[@name='AECAdvancedJetpackVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECAirMotorcycleVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECAirplaneVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECArmoredGyroVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECBasicJetpackVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECBearVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECBonehunterVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECBrokenBicycleVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECCargoBehemothVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECCargoHoundVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECCargoRatVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicAmbulanceRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicArmyTruckEmptyVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicArmyTruckVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicBackhoeRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicCitySchoolBusRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicExcavatorClawRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicExcavatorRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicFarmtruckRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicFireTruckRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicLongSchoolBusRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicMinivanRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicPickupCargoDamagedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicPickupCargoRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicPoliceCarRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicRaftVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSUVDamagedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSUVVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSedanHuntDamagedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSedanHuntRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSedanSpeedDamagedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSedanSpeedRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicSemiFrontRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicServiceTruckGenericNoLadderVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicServiceTruckGenericVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicServiceTruckMoPowerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicServiceTruckWorkingStiffVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicShortSchoolBusRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicShuttleSchoolBusRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECClassicTractorRepairedVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECDireWolfVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECDoomjackVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECDriftjackVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECExtremeWheelchairVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECFarmTruckOreBoulderVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECFlyingCityBusVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECFlyingSedanVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECFlyingWasteVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECForkliftVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECHandTruckVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECHarpoonerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECHellglideVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECIronBastionVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECLeviathanVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECMiniAirplaneVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECMiniRocketVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECMinimotoVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECMountainLionVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECNitrojackVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECRacingShoppingCartVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECRocketVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECScrapBastionVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECShoppingCartVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECStagVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECStormhunterVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECSunDrifterVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheAdvancedPipeBicycleVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheBikerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheExecutionerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheExorcistVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheExplorerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheFamilyWagonVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheFloatcampVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheGiantVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheHammerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheHangingWorldVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheHoverboardVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheJumperVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheKillerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheMovingHQVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheOldWagonVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECThePipeBicycleVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECThePunisherVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheRockVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheSalvagerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheSoldierVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheTowerBusVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheTowerCarVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheWarRamVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheWeaponWheelVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheWheelchairVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheWoodenMistakeVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTheZombieHunterVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECThundraRunnerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTrailhunterVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECTruckDrillerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECUnicycleVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECWarMammothVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECWastelandRunnerVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='AECWolfVehiclePlaceable'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecAdvancedJetpackChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecAirMotorcycleChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecAirplaneChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecArmoredGyroChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBasicJetpackChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBearChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBonehunterChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBoulderTruckChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBrokenBicycleChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBusCityChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBusLongSchoolChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBusShortSchoolChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecBusShuttleSchoolChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecCargoBehemothChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecCargoHoundChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecCargoRatChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicAmbulanceChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicArmyTruckChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicArmyTruckEmptyChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicBackhoeChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicExcavatorChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicExcavatorClawChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicFarmtruckChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicFireTruckChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicMinivanChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicPickupCargoChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicPickupCargoDamagedChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicPoliceCarChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicRaftChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSUVChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSUVDamagedChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSedanHuntChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSedanHuntDamagedChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSedanSpeedChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSedanSpeedDamagedChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicSemiFrontChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicServiceTruckGenericChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicServiceTruckGenericNoLadderChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicServiceTruckMoPowerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicServiceTruckWorkingStiffChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecClassicTractorChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecDireWolfChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecDoomjackChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecDriftjackChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecExtremeWheelchairChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecFamilyWagonChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecFloatcampChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecFlyingCityBusChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecFlyingSedanChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecFlyingWasteChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecForkliftChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecHammerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecHandTruckChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecHangingWorldChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecHarpoonerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecHellglideChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecHoverboardChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecIronBastionChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecKillerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecLeviathanChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecMiniAirplaneChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecMiniRocketChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecMinimotoChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecMountainLionChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecMovingHQChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecNitrojackChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecOldWagonChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecPunisherChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecRacingShoppingCartChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecRockChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecRocketChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecSalvagerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecScrapBastionChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecShoppingCartChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecStagChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecStormhunterChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecSunDrifterChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheAdvancedPipeBicycleChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheBikerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheExecutionerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheExorcistChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheExplorerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheGiantChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheJumperChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecThePipeBicycleChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheSoldierChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheTowerBusChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheTowerCarChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheWarRamChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTheZombieHunterChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecThundraRunnerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTrailhunterChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecTruckDrillerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecUnicycleChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecWarMammothChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecWastelandRunnerChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecWeaponWheelChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecWheelchairChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecWolfChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items/item[@name='aecWoodenMistakeChassis'][not(property[@name='UnlockedBy'])]">
+    <property name="UnlockedBy" value="craftingVehicles"/>
+  </append>
+  <append xpath="/items">
+    <item name="aecVehProgChapter1">
+      <property name="Extends" value="note1_startQuest"/>
+      <property name="CustomIconTint" value="55C05A"/>
+      <property name="DescriptionKey" value="aecVehProgChapter1Desc"/>
+      <property class="Action0">
+        <property name="Class" value="Quest"/>
+        <property name="QuestGiven" value="aecVehProgQuest1"/>
+        <property name="Delay" value="0.5"/>
+        <property name="UseAnimation" value="false"/>
+      </property>
+    </item>
+    <item name="aecVehProgChapter2">
+      <property name="Extends" value="note1_startQuest"/>
+      <property name="CustomIconTint" value="55C05A"/>
+      <property name="DescriptionKey" value="aecVehProgChapter2Desc"/>
+      <property class="Action0">
+        <property name="Class" value="Quest"/>
+        <property name="QuestGiven" value="aecVehProgQuest2"/>
+        <property name="Delay" value="0.5"/>
+        <property name="UseAnimation" value="false"/>
+      </property>
+    </item>
+  </append>
+</configs>

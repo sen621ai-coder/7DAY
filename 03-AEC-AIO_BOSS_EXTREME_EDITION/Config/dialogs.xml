@@ -1,0 +1,163 @@
+<Config>
+<append xpath="/dialogs">
+<dialog id="aecQuestGiverDialog" startstatementid="start">
+	<statement id="start" text="dialogAECQuestGiverStart">
+		<response_entry id="shop"/>
+		<response_entry id="restock"/>
+		<response_entry id="aecBossInfo"/>
+		<response_entry id="aecBossParts"/>
+		<response_entry id="aecQuestGuide"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="shop" text="dialog_trader_response_shop">
+		<action type="Trader" id="trade"/>
+	</response>
+	<response id="restock" text="dialog_trader_response_restock">
+		<action type="Trader" id="restock"/>
+	</response>
+	<response id="aecBossInfo" text="aecBossInfoBtnText" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecBossParts" text="aecBossPartsBtnText" nextstatementid="aecBossPartsStmt"/>
+	<response id="aecQuestGuide" text="aecQuestGuideBtnText" nextstatementid="aecQuestGuideStmt"/>
+	<response id="done" text="dialog_trader_response_nevermind"/>
+
+	<statement id="aecBossInfoStmt" text="aecBossInfoHeader" nextstatementid="start">
+		<response_entry id="aecInfoTitle"/>
+		<response_entry id="aecInfoLine1"/>
+		<response_entry id="aecInfoLine2"/>
+		<response_entry id="aecInfoLine3"/>
+		<response_entry id="aecInfoLine4"/>
+		<response_entry id="aecInfoLine5"/>
+		<response_entry id="aecInfoLine6"/>
+		<response_entry id="aecInfoLine7"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecInfoTitle" text="aecInfoTitleText" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine1" text="aecInfoLine1Text" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine2" text="aecInfoLine2Text" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine3" text="aecInfoLine3Text" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine4" text="aecInfoLine4Text" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine5" text="aecInfoLine5Text" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine6" text="aecInfoLine6Text" nextstatementid="aecBossInfoStmt"/>
+	<response id="aecInfoLine7" text="aecInfoLine7Text" nextstatementid="aecBossInfoStmt"/>
+
+	<!-- === BOSS PARTS === -->
+	<statement id="aecBossPartsStmt" text="aecBossPartsHeader" nextstatementid="start">
+		<response_entry id="aecBossPartsTitle"/>
+		<response_entry id="aecBossPartsLine1"/>
+		<response_entry id="aecBossPartsLine2"/>
+		<response_entry id="aecBossPartsLine3"/>
+		<response_entry id="aecBossPartsLine4"/>
+		<response_entry id="aecBossPartsLine5"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecBossPartsTitle" text="aecBossPartsTitleText" nextstatementid="aecBossPartsStmt"/>
+	<response id="aecBossPartsLine1" text="aecBossPartsLine1Text" nextstatementid="aecBossPartsStmt"/>
+	<response id="aecBossPartsLine2" text="aecBossPartsLine2Text" nextstatementid="aecBossPartsStmt"/>
+	<response id="aecBossPartsLine3" text="aecBossPartsLine3Text" nextstatementid="aecBossPartsStmt"/>
+	<response id="aecBossPartsLine4" text="aecBossPartsLine4Text" nextstatementid="aecBossPartsStmt"/>
+	<response id="aecBossPartsLine5" text="aecBossPartsLine5Text" nextstatementid="aecBossPartsStmt"/>
+
+	<!-- === QUEST GUIDE MENU === -->
+	<statement id="aecQuestGuideStmt" text="aecQuestGuideHeader" nextstatementid="start">
+		<response_entry id="aecQuestGuideTitle"/>
+		<response_entry id="aecQuestBossHunt"/>
+		<response_entry id="aecQuestBossDefense"/>
+		<response_entry id="aecQuestMinionPatrol"/>
+		<response_entry id="aecQuestMinionAssault"/>
+		<response_entry id="aecQuestSpecial"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecQuestGuideTitle" text="aecQuestGuideTitleText" nextstatementid="aecQuestGuideStmt"/>
+	<response id="aecQuestBossHunt" text="aecQuestBossHuntBtnText" nextstatementid="aecQuestBossHuntStmt"/>
+	<response id="aecQuestBossDefense" text="aecQuestBossDefenseBtnText" nextstatementid="aecQuestBossDefenseStmt"/>
+	<response id="aecQuestMinionPatrol" text="aecQuestMinionPatrolBtnText" nextstatementid="aecQuestMinionPatrolStmt"/>
+	<response id="aecQuestMinionAssault" text="aecQuestMinionAssaultBtnText" nextstatementid="aecQuestMinionAssaultStmt"/>
+	<response id="aecQuestSpecial" text="aecQuestSpecialBtnText" nextstatementid="aecQuestSpecialStmt"/>
+	<response id="aecQuestBackGuide" text="aecQuestBackGuideText" nextstatementid="aecQuestGuideStmt"/>
+
+	<!-- === QUEST TYPE: BOSS HUNT === -->
+	<statement id="aecQuestBossHuntStmt" text="aecQuestBossHuntHeader" nextstatementid="aecQuestGuideStmt">
+		<response_entry id="aecQuestBossHuntTitle"/>
+		<response_entry id="aecQuestBossHuntLine1"/>
+		<response_entry id="aecQuestBossHuntLine2"/>
+		<response_entry id="aecQuestBossHuntLine3"/>
+		<response_entry id="aecQuestBossHuntLine4"/>
+		<response_entry id="aecQuestBackGuide"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecQuestBossHuntTitle" text="aecQuestBossHuntTitleText" nextstatementid="aecQuestBossHuntStmt"/>
+	<response id="aecQuestBossHuntLine1" text="aecQuestBossHuntLine1Text" nextstatementid="aecQuestBossHuntStmt"/>
+	<response id="aecQuestBossHuntLine2" text="aecQuestBossHuntLine2Text" nextstatementid="aecQuestBossHuntStmt"/>
+	<response id="aecQuestBossHuntLine3" text="aecQuestBossHuntLine3Text" nextstatementid="aecQuestBossHuntStmt"/>
+	<response id="aecQuestBossHuntLine4" text="aecQuestBossHuntLine4Text" nextstatementid="aecQuestBossHuntStmt"/>
+
+	<!-- === QUEST TYPE: BOSS DEFENSE === -->
+	<statement id="aecQuestBossDefenseStmt" text="aecQuestBossDefenseHeader" nextstatementid="aecQuestGuideStmt">
+		<response_entry id="aecQuestBossDefenseTitle"/>
+		<response_entry id="aecQuestBossDefenseLine1"/>
+		<response_entry id="aecQuestBossDefenseLine2"/>
+		<response_entry id="aecQuestBossDefenseLine3"/>
+		<response_entry id="aecQuestBossDefenseLine4"/>
+		<response_entry id="aecQuestBossDefenseLine5"/>
+		<response_entry id="aecQuestBackGuide"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecQuestBossDefenseTitle" text="aecQuestBossDefenseTitleText" nextstatementid="aecQuestBossDefenseStmt"/>
+	<response id="aecQuestBossDefenseLine1" text="aecQuestBossDefenseLine1Text" nextstatementid="aecQuestBossDefenseStmt"/>
+	<response id="aecQuestBossDefenseLine2" text="aecQuestBossDefenseLine2Text" nextstatementid="aecQuestBossDefenseStmt"/>
+	<response id="aecQuestBossDefenseLine3" text="aecQuestBossDefenseLine3Text" nextstatementid="aecQuestBossDefenseStmt"/>
+	<response id="aecQuestBossDefenseLine4" text="aecQuestBossDefenseLine4Text" nextstatementid="aecQuestBossDefenseStmt"/>
+	<response id="aecQuestBossDefenseLine5" text="aecQuestBossDefenseLine5Text" nextstatementid="aecQuestBossDefenseStmt"/>
+
+	<!-- === QUEST TYPE: MINION PATROL === -->
+	<statement id="aecQuestMinionPatrolStmt" text="aecQuestMinionPatrolHeader" nextstatementid="aecQuestGuideStmt">
+		<response_entry id="aecQuestMinionPatrolTitle"/>
+		<response_entry id="aecQuestMinionPatrolLine1"/>
+		<response_entry id="aecQuestMinionPatrolLine2"/>
+		<response_entry id="aecQuestMinionPatrolLine3"/>
+		<response_entry id="aecQuestMinionPatrolLine4"/>
+		<response_entry id="aecQuestBackGuide"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecQuestMinionPatrolTitle" text="aecQuestMinionPatrolTitleText" nextstatementid="aecQuestMinionPatrolStmt"/>
+	<response id="aecQuestMinionPatrolLine1" text="aecQuestMinionPatrolLine1Text" nextstatementid="aecQuestMinionPatrolStmt"/>
+	<response id="aecQuestMinionPatrolLine2" text="aecQuestMinionPatrolLine2Text" nextstatementid="aecQuestMinionPatrolStmt"/>
+	<response id="aecQuestMinionPatrolLine3" text="aecQuestMinionPatrolLine3Text" nextstatementid="aecQuestMinionPatrolStmt"/>
+	<response id="aecQuestMinionPatrolLine4" text="aecQuestMinionPatrolLine4Text" nextstatementid="aecQuestMinionPatrolStmt"/>
+
+	<!-- === QUEST TYPE: MINION ASSAULT === -->
+	<statement id="aecQuestMinionAssaultStmt" text="aecQuestMinionAssaultHeader" nextstatementid="aecQuestGuideStmt">
+		<response_entry id="aecQuestMinionAssaultTitle"/>
+		<response_entry id="aecQuestMinionAssaultLine1"/>
+		<response_entry id="aecQuestMinionAssaultLine2"/>
+		<response_entry id="aecQuestMinionAssaultLine3"/>
+		<response_entry id="aecQuestMinionAssaultLine4"/>
+		<response_entry id="aecQuestMinionAssaultLine5"/>
+		<response_entry id="aecQuestBackGuide"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecQuestMinionAssaultTitle" text="aecQuestMinionAssaultTitleText" nextstatementid="aecQuestMinionAssaultStmt"/>
+	<response id="aecQuestMinionAssaultLine1" text="aecQuestMinionAssaultLine1Text" nextstatementid="aecQuestMinionAssaultStmt"/>
+	<response id="aecQuestMinionAssaultLine2" text="aecQuestMinionAssaultLine2Text" nextstatementid="aecQuestMinionAssaultStmt"/>
+	<response id="aecQuestMinionAssaultLine3" text="aecQuestMinionAssaultLine3Text" nextstatementid="aecQuestMinionAssaultStmt"/>
+	<response id="aecQuestMinionAssaultLine4" text="aecQuestMinionAssaultLine4Text" nextstatementid="aecQuestMinionAssaultStmt"/>
+	<response id="aecQuestMinionAssaultLine5" text="aecQuestMinionAssaultLine5Text" nextstatementid="aecQuestMinionAssaultStmt"/>
+
+	<!-- === QUEST TYPE: SPECIAL === -->
+	<statement id="aecQuestSpecialStmt" text="aecQuestSpecialHeader" nextstatementid="aecQuestGuideStmt">
+		<response_entry id="aecQuestSpecialTitle"/>
+		<response_entry id="aecQuestSpecialLine1"/>
+		<response_entry id="aecQuestSpecialLine2"/>
+		<response_entry id="aecQuestSpecialLine3"/>
+		<response_entry id="aecQuestSpecialLine4"/>
+		<response_entry id="aecQuestBackGuide"/>
+		<response_entry id="done"/>
+	</statement>
+	<response id="aecQuestSpecialTitle" text="aecQuestSpecialTitleText" nextstatementid="aecQuestSpecialStmt"/>
+	<response id="aecQuestSpecialLine1" text="aecQuestSpecialLine1Text" nextstatementid="aecQuestSpecialStmt"/>
+	<response id="aecQuestSpecialLine2" text="aecQuestSpecialLine2Text" nextstatementid="aecQuestSpecialStmt"/>
+	<response id="aecQuestSpecialLine3" text="aecQuestSpecialLine3Text" nextstatementid="aecQuestSpecialStmt"/>
+	<response id="aecQuestSpecialLine4" text="aecQuestSpecialLine4Text" nextstatementid="aecQuestSpecialStmt"/>
+</dialog>
+</append>
+</Config>

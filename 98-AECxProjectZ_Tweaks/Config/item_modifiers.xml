@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: item-modifier definitions and compatibility patches.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения модификаторов предметов и правки совместимости.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <remove xpath="/item_modifiers/item_modifier[@name='modArmorARResistHelmet']"/>
+  <append xpath="/item_modifiers">
+    <item_modifier name="modArmorARResistHelmet" installable_tags="armorHead" modifier_tags="resistance" type="attachment">
+      <property name="Extends" value="modGeneralMaster" param1="CustomIcon"/>
+      <property name="UnlockedBy" value="craftingArmor"/>
+      <property name="Material" value="MoreMetal"/>
+      <property name="ItemTypeIcon" value="radiation"/>
+      <property name="EconomicValue" value="1500"/>
+      <property name="CustomIcon" value="modArmorPlatingReinforced"/>
+      <property name="CustomIconTint" value="FF6666"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfEquipStart" action="ModifyCVar" cvar="$armorHeadProtect" operation="set" value="1"/>
+        <triggered_effect trigger="onSelfEquipStop" action="ModifyCVar" cvar="$armorHeadProtect" operation="set" value="0"/>
+      </effect_group>
+    </item_modifier>
+  </append>
+  <!-- EN: Fix the Project Z RadProtect boots CVar case mismatch between equip and unequip.
+RU: Исправляется различие регистра CVar у ботинок RadProtect Project Z при надевании и снятии.-->
+  <set xpath="/item_modifiers/item_modifier[@name='modRareArmorARResistBoots']/effect_group/triggered_effect[@trigger='onSelfEquipStop' and @action='ModifyCVar' and @cvar='$armorFeetimpProtect']/@cvar">$armorFeetImpProtect</set>
+</configs>

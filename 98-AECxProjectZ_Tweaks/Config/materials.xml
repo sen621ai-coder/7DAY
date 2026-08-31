@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: material definitions and smelting properties.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения материалов и параметры переплавки.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!-- EN: MUniversalParts keeps Project Z's original forge category. Input and output sharing the material is sufficient for direct Project Z salvage.
+  RU: MUniversalParts сохраняет исходную forge_category Project Z. Для прямого разбора контента Project Z достаточно общего материала у входа и результата. -->
+  <!--EN: 7DTD 3.1 points MMotorToolParts at the legacy nonexistent meleeToolChainsawParts category; route it to the actual shared Motor Tool Parts category.
+RU: В 7DTD 3.1 MMotorToolParts указывает на устаревшую несуществующую категорию meleeToolChainsawParts; здесь она перенаправляется на реальную общую категорию деталей моторных инструментов.-->
+  <set xpath="/materials/material[@id='MMotorToolParts']/property[@name='forge_category']/@value">meleeToolAxeT3ChainsawParts</set>
+  <append xpath="/materials">
+    <material id="MresourceResearchMaterial">
+      <property name="damage_category" value="organic"/>
+      <property name="surface_category" value="organic"/>
+      <property name="forge_category" value="researchMaterial"/>
+      <property name="Hardness" value="1" type="float"/>
+      <property name="stepsound" value="squish"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="stability_glue" value="0"/>
+      <property name="Mass" value="1" type="int"/>
+      <property name="MaxDamage" value="10"/>
+      <property name="Experience" value="0"/>
+    </material>
+  </append>
+  <append xpath="/materials">
+    <material id="MresourceAECMutationSampleT1">
+      <property name="damage_category" value="organic"/>
+      <property name="surface_category" value="organic"/>
+      <property name="forge_category" value="aecMutationSampleT1"/>
+      <property name="Hardness" value="1" type="float"/>
+      <property name="stepsound" value="squish"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="stability_glue" value="0"/>
+      <property name="Mass" value="1" type="int"/>
+      <property name="MaxDamage" value="10"/>
+      <property name="Experience" value="0"/>
+    </material>
+    <material id="MresourceAECMutationSampleT2">
+      <property name="damage_category" value="organic"/>
+      <property name="surface_category" value="organic"/>
+      <property name="forge_category" value="aecMutationSampleT2"/>
+      <property name="Hardness" value="1" type="float"/>
+      <property name="stepsound" value="squish"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="stability_glue" value="0"/>
+      <property name="Mass" value="1" type="int"/>
+      <property name="MaxDamage" value="10"/>
+      <property name="Experience" value="0"/>
+    </material>
+    <material id="MresourceAECMutationSampleT3">
+      <property name="damage_category" value="organic"/>
+      <property name="surface_category" value="organic"/>
+      <property name="forge_category" value="aecMutationSampleT3"/>
+      <property name="Hardness" value="1" type="float"/>
+      <property name="stepsound" value="squish"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="stability_glue" value="0"/>
+      <property name="Mass" value="1" type="int"/>
+      <property name="MaxDamage" value="10"/>
+      <property name="Experience" value="0"/>
+    </material>
+    <material id="MresourceAECMutationSampleT4">
+      <property name="damage_category" value="organic"/>
+      <property name="surface_category" value="organic"/>
+      <property name="forge_category" value="aecMutationSampleT4"/>
+      <property name="Hardness" value="1" type="float"/>
+      <property name="stepsound" value="squish"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="stability_glue" value="0"/>
+      <property name="Mass" value="1" type="int"/>
+      <property name="MaxDamage" value="10"/>
+      <property name="Experience" value="0"/>
+    </material>
+    <material id="MresourceAECMutationSampleT5">
+      <property name="damage_category" value="organic"/>
+      <property name="surface_category" value="organic"/>
+      <property name="forge_category" value="aecMutationSampleT5"/>
+      <property name="Hardness" value="1" type="float"/>
+      <property name="stepsound" value="squish"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="stability_glue" value="0"/>
+      <property name="Mass" value="1" type="int"/>
+      <property name="MaxDamage" value="10"/>
+      <property name="Experience" value="0"/>
+    </material>
+  </append>
+</configs>

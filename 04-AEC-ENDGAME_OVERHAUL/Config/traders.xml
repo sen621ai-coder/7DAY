@@ -1,0 +1,26 @@
+﻿<configs>
+    <append xpath="/traders/trader_info[@id='1']/trader_items">
+        <item name="aecEOTutorialIntroBook01" count="1,1" />
+        <item name="aecEOProgressionBook001" count="1,1" />
+    </append>
+
+    <append xpath="/traders/trader_info[@id='2']/trader_items">
+        <item name="aecEOTutorialIntroBook01" count="1,1" />
+        <item name="aecEOProgressionBook001" count="1,1" />
+    </append>
+
+    <append xpath="/traders/trader_info[@id='6']/trader_items">
+        <item name="aecEOTutorialIntroBook01" count="1,1" />
+        <item name="aecEOProgressionBook001" count="1,1" />
+    </append>
+
+    <append xpath="/traders/trader_info[@id='7']/trader_items">
+        <item name="aecEOTutorialIntroBook01" count="1,1" />
+        <item name="aecEOProgressionBook001" count="1,1" />
+    </append>
+
+    <append xpath="/traders/trader_info[@id='8']/trader_items">
+        <item name="aecEOTutorialIntroBook01" count="1,1" />
+        <item name="aecEOProgressionBook001" count="1,1" />
+    </append>
+</configs>

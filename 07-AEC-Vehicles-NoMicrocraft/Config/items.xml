@@ -1,0 +1,2642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: item definitions and targeted item-property patches.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: определения предметов и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/items">
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <item name="AECForkliftVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="forkliftWhite"/>
+      <property name="TintColor" value="204, 122, 0"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="23600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECForkliftVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicLongSchoolBusRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusSchool"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="38500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicLongSchoolBusRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalBus"/>
+    </item>
+    <item name="AECClassicShortSchoolBusRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusSchoolShort"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="23600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicShortSchoolBusRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalBus"/>
+    </item>
+    <item name="AECClassicShuttleSchoolBusRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusShuttle"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicShuttleSchoolBusRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalBus"/>
+    </item>
+    <item name="AECClassicCitySchoolBusRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusCity"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="19900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicCitySchoolBusRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalBus"/>
+    </item>
+    <item name="AECStormhunterVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage0Master"/>
+      <property name="TintColor" value="65, 120, 25"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECStormhunterVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicSedanHuntRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage0Master"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSedanHuntRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECDriftjackVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="TintColor" value="191, 37, 13"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECDriftjackVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheRockVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="resourceRockSmall"/>
+      <property name="TintColor" value="114, 114, 114"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="6200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheRockVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECClassicSedanSpeedDamagedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSedanSpeedDamagedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECNitrojackVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntFrontCrumpledSedan01White"/>
+      <property name="TintColor" value="66, 110, 106"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECNitrojackVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECHarpoonerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntFrontCrumpledSedan01White"/>
+      <property name="TintColor" value="217, 131, 64"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="8700"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECHarpoonerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECDoomjackVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSedan01White"/>
+      <property name="TintColor" value="177, 85, 44"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="25500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECDoomjackVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicSedanSpeedRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSedan01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSedanSpeedRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTrailhunterVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage2Master"/>
+      <property name="TintColor" value="194, 217, 93"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTrailhunterVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="70000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicSedanHuntDamagedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage2Master"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSedanHuntDamagedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="70000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECBonehunterVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage1Master"/>
+      <property name="TintColor" value="199, 101, 4"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="6900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECBonehunterVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="70000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicPoliceCarRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntPoliceCar01"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicPoliceCarRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheJumperVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="bundleVehicle4x4"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheJumperVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECLeviathanVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSUV01White"/>
+      <property name="TintColor" value="83, 150, 191"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="31100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECLeviathanVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicSUVVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSUV01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="19900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSUVVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <item name="AECTheZombieHunterVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSUV01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="20900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheZombieHunterVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECScrapBastionVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedSUV01White"/>
+      <property name="TintColor" value="79, 126, 85"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECScrapBastionVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECIronBastionVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedSUV01DoorsWhite"/>
+      <property name="TintColor" value="221, 124, 15"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="8700"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECIronBastionVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicSUVDamagedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedSUV01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSUVDamagedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheWoodenMistakeVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="banditPlatformSheet3x3A"/>
+      <property name="TintColor" value="153, 77, 0"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheWoodenMistakeVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="80000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECClassicMinivanRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntMinivan01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="14300"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicMinivanRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicTractorRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="tractorWhite"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="31100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicTractorRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECHandTruckVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="decoHandTruck"/>
+      <property name="TintColor" value="204, 153, 102"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECHandTruckVehicle"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECWolfVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperWolfAnimal"/>
+      <property name="TintColor" value="184, 125, 125"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECWolfVehicle"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECBearVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperBearAnimal"/>
+      <property name="TintColor" value="144, 79, 36"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="38500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECBearVehicle"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECStagVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperBoarAnimal"/>
+      <property name="TintColor" value="191, 153, 109"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECStagVehicle"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECMountainLionVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperBoarAnimal"/>
+      <property name="TintColor" value="191, 172, 95"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECMountainLionVehicle"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECDireWolfVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperWolfAnimal"/>
+      <property name="TintColor" value="128, 82, 117"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="32900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECDireWolfVehicle"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECTheWheelchairVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="wheelchairWhite"/>
+      <property name="TintColor" value="98, 148, 204"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheWheelchairVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECShoppingCartVehiclePlaceable">
+      <property name="Extends" value="vehicleBicyclePlaceable"/>
+      <property name="Tags" value="vehicle,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntShoppingCartWhite"/>
+      <property name="TintColor" value="128, 128, 128"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="4300"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="bike_grab"/>
+      <property name="SoundPlace" value="bike_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECShoppingCartVehicle"/>
+        <property name="VehicleSize" value="1.8, 2, 2.6"/>
+      </property>
+      <effect_group name="vehicleBicyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="2"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECUnicycleVehiclePlaceable">
+      <property name="Extends" value="vehicleBicyclePlaceable"/>
+      <property name="Tags" value="vehicle,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleBicyclePlaceable"/>
+      <property name="TintColor" value="128, 128, 128"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="3900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="bike_grab"/>
+      <property name="SoundPlace" value="bike_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECUnicycleVehicle"/>
+        <property name="VehicleSize" value="1.8, 2, 2.6"/>
+      </property>
+      <effect_group name="vehicleBicyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="2"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECRacingShoppingCartVehiclePlaceable">
+      <property name="Extends" value="vehicleBicyclePlaceable"/>
+      <property name="Tags" value="vehicle,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntShoppingCartWhite"/>
+      <property name="TintColor" value="166, 42, 42"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="9800"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="bike_grab"/>
+      <property name="SoundPlace" value="bike_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECRacingShoppingCartVehicle"/>
+        <property name="VehicleSize" value="1.8, 2, 2.6"/>
+      </property>
+      <effect_group name="vehicleBicyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="3"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECThePipeBicycleVehiclePlaceable">
+      <property name="Extends" value="vehicleBicyclePlaceable"/>
+      <property name="Tags" value="vehicle,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleBicyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="2500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="bike_grab"/>
+      <property name="SoundPlace" value="bike_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECThePipeBicycleVehicle"/>
+        <property name="VehicleSize" value="1.8, 2, 2.6"/>
+      </property>
+      <effect_group name="vehicleBicyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="2"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1500"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECTheAdvancedPipeBicycleVehiclePlaceable">
+      <property name="Extends" value="vehicleBicyclePlaceable"/>
+      <property name="Tags" value="vehicle,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleBicyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="2500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="bike_grab"/>
+      <property name="SoundPlace" value="bike_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheAdvancedPipeBicycleVehicle"/>
+        <property name="VehicleSize" value="1.8, 2, 2.6"/>
+      </property>
+      <effect_group name="vehicleBicyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="2"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1500"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECBrokenBicycleVehiclePlaceable">
+      <property name="Extends" value="vehicleBicyclePlaceable"/>
+      <property name="Tags" value="vehicle,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleBicyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="2500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="bike_grab"/>
+      <property name="SoundPlace" value="bike_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECBrokenBicycleVehicle"/>
+        <property name="VehicleSize" value="1.8, 2, 2.6"/>
+      </property>
+      <effect_group name="vehicleBicyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="2"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1500"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECExtremeWheelchairVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="wheelchairWhite"/>
+      <property name="TintColor" value="156, 86, 30"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="29300"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECExtremeWheelchairVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="aecShoppingCartChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntShoppingCartEmptyWhite"/>
+      <property name="TintColor" value="128, 128, 128"/>
+      <property name="EconomicValue" value="640"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecUnicycleChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleBicycleChassis"/>
+      <property name="TintColor" value="128, 128, 128"/>
+      <property name="EconomicValue" value="620"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecRacingShoppingCartChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntShoppingCartEmptyWhite"/>
+      <property name="TintColor" value="166, 42, 42"/>
+      <property name="EconomicValue" value="1680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecThePipeBicycleChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleBicycleChassis"/>
+      <property name="EconomicValue" value="620"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheAdvancedPipeBicycleChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleBicycleChassis"/>
+      <property name="EconomicValue" value="620"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBrokenBicycleChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleBicycleChassis"/>
+      <property name="EconomicValue" value="620"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecProjectDiscordNote">
+      <property name="Extends" value="blankNoteMaster"/>
+      <property name="CustomIcon" value="resourcePaper"/>
+      <property name="DescriptionKey" value="aecProjectDiscordNoteDesc"/>
+      <property name="Stacknumber" value="1"/>
+      <property name="EconomicValue" value="1"/>
+      <property name="Weight" value="1"/>
+      <property name="SellableToTrader" value="false"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="AECThundraRunnerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperWolfAnimal"/>
+      <property name="TintColor" value="79, 120, 173"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECThundraRunnerVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECMinimotoVehiclePlaceable">
+      <property name="Extends" value="vehicleMotorcyclePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleMotorcyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="11200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="motorcycle_grab"/>
+      <property name="SoundPlace" value="motorcycle_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECMinimotoVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicleMotorcyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="4"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECTheExplorerVehiclePlaceable">
+      <property name="Extends" value="vehicleMotorcyclePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleMotorcyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="motorcycle_grab"/>
+      <property name="SoundPlace" value="motorcycle_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheExplorerVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicleMotorcyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="4"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECTheBikerVehiclePlaceable">
+      <property name="Extends" value="vehicleMotorcyclePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleMotorcyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="motorcycle_grab"/>
+      <property name="SoundPlace" value="motorcycle_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheBikerVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicleMotorcyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="4"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECTheExorcistVehiclePlaceable">
+      <property name="Extends" value="vehicleMotorcyclePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleMotorcyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="motorcycle_grab"/>
+      <property name="SoundPlace" value="motorcycle_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheExorcistVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicleMotorcyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="4"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECTheSoldierVehiclePlaceable">
+      <property name="Extends" value="vehicleMotorcyclePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleMotorcyclePlaceable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="12400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value="motorcycle_grab"/>
+      <property name="SoundPlace" value="motorcycle_place"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheSoldierVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicleMotorcyclePlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="4"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECWastelandRunnerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="sleeperBoarAnimal"/>
+      <property name="TintColor" value="160, 115, 63"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="29300"/>
+      <property name="SellableToTrader" value="true"/>
+      <property name="SoundPickup" value=""/>
+      <property name="SoundPlace" value=""/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECWastelandRunnerVehicle"/>
+        <property name="VehicleSize" value="1.3, 1.9, 3"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECThePunisherVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage2Master"/>
+      <property name="TintColor" value="163, 43, 32"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="44100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECThePunisherVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheHammerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage1Master"/>
+      <property name="TintColor" value="209, 146, 38"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="6900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheHammerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheWarRamVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleTruck4x4Placeable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="30000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheWarRamVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheExecutionerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleTruck4x4Placeable"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="30000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheExecutionerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheSalvagerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="TintColor" value="121, 91, 72"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheSalvagerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheOldWagonVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="decoWildWestWagon"/>
+      <property name="TintColor" value="166, 112, 55"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheOldWagonVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheTowerBusVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusShuttle"/>
+      <property name="TintColor" value="122, 54, 143"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="57200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheTowerBusVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalBus"/>
+    </item>
+    <item name="AECTheTowerCarVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntMinivan01White"/>
+      <property name="TintColor" value="196, 86, 86"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheTowerCarVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheFamilyWagonVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="laundryCartEmpty"/>
+      <property name="TintColor" value="93, 133, 89"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheFamilyWagonVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTheWeaponWheelVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01White"/>
+      <property name="TintColor" value="91, 103, 148"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="10600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheWeaponWheelVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTiltTruckEmptyVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntTiltTruckEmpty"/>
+      <property name="TintColor" value="217, 120, 77"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="30000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTiltTruckEmptyVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+    </item>
+    <item name="AECCargoRatVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01White"/>
+      <property name="TintColor" value="171, 97, 51"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECCargoRatVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicPickupCargoDamagedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicPickupCargoDamagedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECCargoHoundVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01DoorWhite"/>
+      <property name="TintColor" value="140, 65, 41"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="14300"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECCargoHoundVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicFireTruckRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntFireTruck01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="38600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicFireTruckRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECCargoBehemothVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntPickupTruck01White"/>
+      <property name="TintColor" value="56, 122, 95"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="36700"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECCargoBehemothVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicPickupCargoRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntPickupTruck01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicPickupCargoRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECClassicAmbulanceRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntAmbulanceTruck01"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicAmbulanceRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicArmyTruckEmptyVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntArmyTruckOpen"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="36700"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicArmyTruckEmptyVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECTheKillerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntArmyTruckOpen"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="48900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheKillerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicArmyTruckVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntArmyTruckClosed"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="42200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicArmyTruckVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicRaftVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="banditPlatform3x3A"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="5000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicRaftVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECClassicFarmtruckRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntFarmTruckClosed"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicFarmtruckRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECFarmTruckOreBoulderVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntFarmTruckClosed"/>
+      <property name="TintColor" value="171, 114, 63"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECFarmTruckOreBoulderVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECWarMammothVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusSchool"/>
+      <property name="TintColor" value="97, 126, 60"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="51500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECWarMammothVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalBus"/>
+    </item>
+    <item name="AECTheGiantVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="bundleVehicle4x4"/>
+      <property name="TintColor" value="89, 111, 78"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="74200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheGiantVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalCar"/>
+    </item>
+    <item name="AECTruckDrillerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSemiTruck01White"/>
+      <property name="TintColor" value="73, 110, 156"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="73900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTruckDrillerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicServiceTruckGenericNoLadderVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBoxTruckWhite"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicServiceTruckGenericNoLadderVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicServiceTruckGenericVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntServiceTruckWhite"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="31100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicServiceTruckGenericVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicServiceTruckMoPowerVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntServiceTruckMoPower"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="32900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicServiceTruckMoPowerVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicServiceTruckWorkingStiffVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntServiceTruckWorkingStiffTools"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="32900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicServiceTruckWorkingStiffVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicSemiFrontRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSemiTruck01White"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="31100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicSemiFrontRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECTheMovingHQVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntSemiTruck01White"/>
+      <property name="TintColor" value="121, 71, 145"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="66500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheMovingHQVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalTruck"/>
+    </item>
+    <item name="AECClassicExcavatorRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="excavatorWhite"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicExcavatorRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECClassicExcavatorClawRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="excavatorClawWhite"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="21700"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicExcavatorClawRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECClassicBackhoeRepairedVehiclePlaceable">
+      <property name="Extends" value="vehicleMinibikePlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,vlight,vplow,vseat,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="backhoeWhite"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="16100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECClassicBackhoeRepairedVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicle4x4TruckPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECAirplaneVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="177, 92, 48"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="64600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECAirplaneVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECMiniAirplaneVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="82, 140, 105"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="38500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECMiniAirplaneVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECFlyingSedanVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="176, 76, 112"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="47900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECFlyingSedanVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECFlyingWasteVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="TintColor" value="122, 86, 67"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="27400"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECFlyingWasteVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECFlyingCityBusVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntBusCity"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="28600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECFlyingCityBusVehicle"/>
+        <property name="VehicleSize" value="4.5, 3.1, 7"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECSunDrifterVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntbasketLaundryEmptyWhite"/>
+      <property name="TintColor" value="218, 150, 67"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="18000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECSunDrifterVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECArmoredGyroVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="134, 138, 145"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="28600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECArmoredGyroVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECTheFloatcampVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="cntTiltTruckEmpty"/>
+      <property name="TintColor" value="92, 140, 121"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="31100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheFloatcampVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECTheHoverboardVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="plywoodStack"/>
+      <property name="TintColor" value="158, 128, 91"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="11200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheHoverboardVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalOther"/>
+    </item>
+    <item name="AECHellglideVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="176, 76, 112"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="47900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECHellglideVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECAirMotorcycleVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="134, 108, 168"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="48600"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECAirMotorcycleVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECTheHangingWorldVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="resourceSnowBall"/>
+      <property name="TintColor" value="112, 168, 201"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="44100"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECTheHangingWorldVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+    </item>
+    <item name="AECBasicJetpackVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="utilityGasMeter02"/>
+      <property name="TintColor" value="189, 92, 58"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="38500"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECBasicJetpackVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalRocket"/>
+    </item>
+    <item name="AECAdvancedJetpackVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="utilityGasMeter02"/>
+      <property name="TintColor" value="116, 86, 153"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="60900"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECAdvancedJetpackVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalRocket"/>
+    </item>
+    <item name="AECRocketVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="ammoRocketHE"/>
+      <property name="TintColor" value="204, 76, 52"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="100000"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECRocketVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="600" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalRocket"/>
+    </item>
+    <item name="AECMiniRocketVehiclePlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
+      <property name="CustomIcon" value="ammoRocketHE"/>
+      <property name="TintColor" value="219, 143, 48"/>
+      <property name="Meshfile" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="EconomicValue" value="57200"/>
+      <property name="SellableToTrader" value="true"/>
+      <property class="Action1">
+        <property name="Vehicle" value="AECMiniRocketVehicle"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="vehicleGyrocopterPlaceable" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="5"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="600" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleFinalRocket"/>
+    </item>
+    <item name="aecScrapRepairKit">
+      <property name="Extends" value="resourceRepairKit"/>
+      <property name="EconomicValue" value="420"/>
+      <property name="CustomIconTint" value="55AA33"/>
+      <property name="Group" value="AECvehicleFinalRepairs"/>
+      <property name="CustomIcon" value="resourceRepairKit"/>
+    </item>
+    <item name="aecBasicRepairKit">
+      <property name="Extends" value="resourceRepairKit"/>
+      <property name="EconomicValue" value="760"/>
+      <property name="CustomIconTint" value="3377CC"/>
+      <property name="Group" value="AECvehicleFinalRepairs"/>
+      <property name="CustomIcon" value="resourceRepairKit"/>
+    </item>
+    <item name="aecAdvancedRepairKit">
+      <property name="Extends" value="resourceRepairKit"/>
+      <property name="EconomicValue" value="1240"/>
+      <property name="CustomIconTint" value="8833CC"/>
+      <property name="Group" value="AECvehicleFinalRepairs"/>
+      <property name="CustomIcon" value="resourceRepairKit"/>
+    </item>
+    <item name="aecBicyclePieces">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleBicycleChassis"/>
+      <property name="EconomicValue" value="180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMinibikePieces">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMinibikeChassis"/>
+      <property name="EconomicValue" value="260"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMotorcyclePieces">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMotorcycleChassis"/>
+      <property name="EconomicValue" value="420"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTruck4x4Pieces">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleTruck4x4Accessories"/>
+      <property name="EconomicValue" value="650"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecGyroPieces">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyroCopterAccessories"/>
+      <property name="EconomicValue" value="900"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBusCityChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusCity"/>
+      <property name="EconomicValue" value="1250"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBusLongSchoolChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusSchool"/>
+      <property name="EconomicValue" value="2240"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBusShuttleSchoolChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusShuttle"/>
+      <property name="EconomicValue" value="1960"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBusShortSchoolChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusSchoolShort"/>
+      <property name="EconomicValue" value="1820"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecDriftjackChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="TintColor" value="191, 37, 13"/>
+      <property name="EconomicValue" value="760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecRockChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="resourceRockSmall"/>
+      <property name="TintColor" value="114, 114, 114"/>
+      <property name="EconomicValue" value="760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecNitrojackChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntFrontCrumpledSedan01White"/>
+      <property name="TintColor" value="66, 110, 106"/>
+      <property name="EconomicValue" value="1120"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecDoomjackChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSedan01White"/>
+      <property name="TintColor" value="177, 85, 44"/>
+      <property name="EconomicValue" value="1680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecScrapBastionChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedSUV01White"/>
+      <property name="TintColor" value="79, 126, 85"/>
+      <property name="EconomicValue" value="820"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecIronBastionChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedSUV01DoorsWhite"/>
+      <property name="TintColor" value="221, 124, 15"/>
+      <property name="EconomicValue" value="1210"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecLeviathanChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSUV01White"/>
+      <property name="TintColor" value="83, 150, 191"/>
+      <property name="EconomicValue" value="1820"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTrailhunterChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage2Master"/>
+      <property name="TintColor" value="194, 217, 93"/>
+      <property name="EconomicValue" value="780"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBonehunterChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage1Master"/>
+      <property name="TintColor" value="199, 101, 4"/>
+      <property name="EconomicValue" value="1160"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecStormhunterChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage0Master"/>
+      <property name="TintColor" value="65, 120, 25"/>
+      <property name="EconomicValue" value="1700"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecCargoRatChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01White"/>
+      <property name="TintColor" value="171, 97, 51"/>
+      <property name="EconomicValue" value="880"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecCargoHoundChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01DoorWhite"/>
+      <property name="TintColor" value="140, 65, 41"/>
+      <property name="EconomicValue" value="1320"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecCargoBehemothChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntPickupTruck01White"/>
+      <property name="TintColor" value="56, 122, 95"/>
+      <property name="EconomicValue" value="1950"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecForkliftChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="forkliftWhite"/>
+      <property name="TintColor" value="204, 122, 0"/>
+      <property name="EconomicValue" value="1580"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecFloatcampChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntTiltTruckEmpty"/>
+      <property name="TintColor" value="92, 140, 121"/>
+      <property name="EconomicValue" value="1760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecHoverboardChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="plywoodStack"/>
+      <property name="TintColor" value="158, 128, 91"/>
+      <property name="EconomicValue" value="980"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecHellglideChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="176, 76, 112"/>
+      <property name="EconomicValue" value="2060"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecAirMotorcycleChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="134, 108, 168"/>
+      <property name="EconomicValue" value="2120"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecHangingWorldChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="resourceSnowBall"/>
+      <property name="TintColor" value="112, 168, 201"/>
+      <property name="EconomicValue" value="2140"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecThundraRunnerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperWolfAnimal"/>
+      <property name="TintColor" value="79, 120, 173"/>
+      <property name="EconomicValue" value="1180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMinimotoChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMotorcycleChassis"/>
+      <property name="EconomicValue" value="1180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheExplorerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMotorcycleChassis"/>
+      <property name="EconomicValue" value="1180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheBikerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMotorcycleChassis"/>
+      <property name="EconomicValue" value="1180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheExorcistChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMotorcycleChassis"/>
+      <property name="EconomicValue" value="1180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheSoldierChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleMotorcycleChassis"/>
+      <property name="EconomicValue" value="1180"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecWastelandRunnerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperBoarAnimal"/>
+      <property name="TintColor" value="160, 115, 63"/>
+      <property name="EconomicValue" value="1680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheWarRamChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleTruck4x4Placeable"/>
+      <property name="EconomicValue" value="1680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheExecutionerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleTruck4x4Placeable"/>
+      <property name="EconomicValue" value="1680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecHarpoonerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntFrontCrumpledSedan01White"/>
+      <property name="TintColor" value="217, 131, 64"/>
+      <property name="EconomicValue" value="1360"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecSunDrifterChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntbasketLaundryEmptyWhite"/>
+      <property name="TintColor" value="218, 150, 67"/>
+      <property name="EconomicValue" value="980"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecArmoredGyroChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="134, 138, 145"/>
+      <property name="EconomicValue" value="1760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBoulderTruckChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntFarmTruckClosed"/>
+      <property name="TintColor" value="171, 114, 63"/>
+      <property name="EconomicValue" value="1460"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecWarMammothChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusSchool"/>
+      <property name="TintColor" value="97, 126, 60"/>
+      <property name="EconomicValue" value="2240"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheGiantChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="bundleVehicle4x4"/>
+      <property name="TintColor" value="89, 111, 78"/>
+      <property name="EconomicValue" value="2580"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheTowerCarChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntMinivan01White"/>
+      <property name="TintColor" value="196, 86, 86"/>
+      <property name="EconomicValue" value="1480"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheTowerBusChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusShuttle"/>
+      <property name="TintColor" value="122, 54, 143"/>
+      <property name="EconomicValue" value="2380"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecOldWagonChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="decoWildWestWagon"/>
+      <property name="TintColor" value="166, 112, 55"/>
+      <property name="EconomicValue" value="860"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecFamilyWagonChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="laundryCartEmpty"/>
+      <property name="TintColor" value="93, 133, 89"/>
+      <property name="EconomicValue" value="920"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecWeaponWheelChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01White"/>
+      <property name="TintColor" value="91, 103, 148"/>
+      <property name="EconomicValue" value="1280"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecFlyingWasteChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="TintColor" value="122, 86, 67"/>
+      <property name="EconomicValue" value="1540"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecFlyingCityBusChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBusCity"/>
+      <property name="EconomicValue" value="2280"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecFlyingSedanChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="176, 76, 112"/>
+      <property name="EconomicValue" value="2060"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecSalvagerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="TintColor" value="121, 91, 72"/>
+      <property name="EconomicValue" value="1820"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMiniAirplaneChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="82, 140, 105"/>
+      <property name="EconomicValue" value="1940"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecAirplaneChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable"/>
+      <property name="TintColor" value="177, 92, 48"/>
+      <property name="EconomicValue" value="2480"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecHammerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage1Master"/>
+      <property name="TintColor" value="209, 146, 38"/>
+      <property name="EconomicValue" value="1320"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecPunisherChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage2Master"/>
+      <property name="TintColor" value="163, 43, 32"/>
+      <property name="EconomicValue" value="2280"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBasicJetpackChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="utilityGasMeter02"/>
+      <property name="TintColor" value="189, 92, 58"/>
+      <property name="EconomicValue" value="2140"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecAdvancedJetpackChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="utilityGasMeter02"/>
+      <property name="TintColor" value="116, 86, 153"/>
+      <property name="EconomicValue" value="2760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecWoodenMistakeChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="banditPlatformSheet3x3A"/>
+      <property name="TintColor" value="153, 77, 0"/>
+      <property name="EconomicValue" value="780"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecWheelchairChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="wheelchairWhite"/>
+      <property name="TintColor" value="98, 148, 204"/>
+      <property name="EconomicValue" value="760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecExtremeWheelchairChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="wheelchairWhite"/>
+      <property name="TintColor" value="156, 86, 30"/>
+      <property name="EconomicValue" value="1840"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecHandTruckChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="decoHandTruck"/>
+      <property name="TintColor" value="204, 153, 102"/>
+      <property name="EconomicValue" value="720"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicMinivanChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntMinivan01White"/>
+      <property name="EconomicValue" value="1380"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicPickupCargoChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntPickupTruck01White"/>
+      <property name="EconomicValue" value="1440"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSedanSpeedChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSedan01White"/>
+      <property name="EconomicValue" value="1320"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSedanHuntChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage0Master"/>
+      <property name="EconomicValue" value="1340"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSUVChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSUV01White"/>
+      <property name="EconomicValue" value="1460"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheZombieHunterChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSUV01White"/>
+      <property name="EconomicValue" value="1540"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicPickupCargoDamagedChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedPickupTruck01White"/>
+      <property name="EconomicValue" value="980"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSUVDamagedChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="abandonedSUV01White"/>
+      <property name="EconomicValue" value="1040"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSedanHuntDamagedChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntCar03SedanDamage2Master"/>
+      <property name="EconomicValue" value="920"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSedanSpeedDamagedChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="burntSedan01"/>
+      <property name="EconomicValue" value="940"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicPoliceCarChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntPoliceCar01"/>
+      <property name="EconomicValue" value="1420"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTheJumperChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="bundleVehicle4x4"/>
+      <property name="EconomicValue" value="1420"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicFarmtruckChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntFarmTruckClosed"/>
+      <property name="EconomicValue" value="1620"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicTractorChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="tractorWhite"/>
+      <property name="EconomicValue" value="1680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicFireTruckChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntFireTruck01White"/>
+      <property name="EconomicValue" value="1760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicExcavatorChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="excavatorWhite"/>
+      <property name="EconomicValue" value="1540"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicExcavatorClawChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="excavatorClawWhite"/>
+      <property name="EconomicValue" value="1580"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicBackhoeChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="backhoeWhite"/>
+      <property name="EconomicValue" value="1500"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicAmbulanceChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntAmbulanceTruck01"/>
+      <property name="EconomicValue" value="1700"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicSemiFrontChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSemiTruck01White"/>
+      <property name="EconomicValue" value="1780"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicServiceTruckGenericNoLadderChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntBoxTruckWhite"/>
+      <property name="EconomicValue" value="1720"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicServiceTruckGenericChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntServiceTruckWhite"/>
+      <property name="EconomicValue" value="1800"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicServiceTruckMoPowerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntServiceTruckMoPower"/>
+      <property name="EconomicValue" value="1840"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicServiceTruckWorkingStiffChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntServiceTruckWorkingStiffTools"/>
+      <property name="EconomicValue" value="1820"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicArmyTruckEmptyChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntArmyTruckOpen"/>
+      <property name="EconomicValue" value="1880"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecKillerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntArmyTruckOpen"/>
+      <property name="EconomicValue" value="2680"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicArmyTruckChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntArmyTruckClosed"/>
+      <property name="EconomicValue" value="1960"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMovingHQChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSemiTruck01White"/>
+      <property name="TintColor" value="121, 71, 145"/>
+      <property name="EconomicValue" value="2480"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecClassicRaftChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="banditPlatform3x3A"/>
+      <property name="EconomicValue" value="880"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecTruckDrillerChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="cntSemiTruck01White"/>
+      <property name="TintColor" value="73, 110, 156"/>
+      <property name="EconomicValue" value="2360"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMiniRocketChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="ammoRocketHE"/>
+      <property name="TintColor" value="219, 143, 48"/>
+      <property name="EconomicValue" value="2140"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecRocketChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="ammoRocketHE"/>
+      <property name="TintColor" value="204, 76, 52"/>
+      <property name="EconomicValue" value="3420"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecStagChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperBoarAnimal"/>
+      <property name="TintColor" value="191, 153, 109"/>
+      <property name="EconomicValue" value="760"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecWolfChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperWolfAnimal"/>
+      <property name="TintColor" value="184, 125, 125"/>
+      <property name="EconomicValue" value="980"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecMountainLionChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperBoarAnimal"/>
+      <property name="TintColor" value="191, 172, 95"/>
+      <property name="EconomicValue" value="1380"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecDireWolfChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperWolfAnimal"/>
+      <property name="TintColor" value="128, 82, 117"/>
+      <property name="EconomicValue" value="1860"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <item name="aecBearChassis">
+      <property name="Extends" value="resourceMechanicalParts"/>
+      <property name="CustomIcon" value="sleeperBearAnimal"/>
+      <property name="TintColor" value="144, 79, 36"/>
+      <property name="EconomicValue" value="1980"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+    </item>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+  </append>
+</configs>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: XUi controller and window-group integration.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: интеграция контроллеров и групп окон XUi.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/xui">
+    <window_group name="workstation_aecVehicleStructureBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+    <window_group name="workstation_aecVehicleNavalBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+    <window_group name="workstation_aecVehicleMechanicalBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+    <window_group name="workstation_aecVehicleModifierBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+    <window_group name="workstation_aecVehicleEnergyBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+    <window_group name="workstation_aecVehicleAeronauticsBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+    <window_group name="workstation_aecVehicleFinalAssemblyBench" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultSelected="bp.content">
+      <window name="windowCraftingList"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowOutput"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+  </append>
+</config>

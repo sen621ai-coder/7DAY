@@ -1,0 +1,309 @@
+UPDATE 28/07/2026 - 3.1.0 :
+
+- Added the Passive Booze Barrel: a wine-barrel-styled passive generator that produces a random alcoholic drink every 30 minutes, weighted by each drink's trader value (rarer, more valuable drinks are proportionally less likely to be generated).
+- Added the Passive Hydro Cultivator: a large hydroponic-styled passive plant generator covering all 14 vanilla farmable crops, each crafted from Druid Research Papers at a star tier (0-2) matching the crop's own trader value.
+- Increased the default AIMaster Master Event delay range from 15-30 minutes to 300-600 real minutes between two events per biome.
+- Added a safeguard that verifies the minimum delay has actually elapsed since a biome's last Master Event before firing (or migrating) a new one; if the delay is not respected, the event and its announcement text are cancelled instead of appearing early.
+- Muted Nemesis migration chat announcements (they still occur silently; only the server chat broadcast was disabled).
+- Fixed several Nemesis chat messages (rising, grudge found a player, slain by player, wounded retreat, kin vengeance, permanent death, successor claiming the throne, killed a player, rank up, family revenge) that were previously hardcoded in English and never respected the configured server language; they now use the same localization system as the other Nemesis and migration messages, with translations added across all 13 supported languages.
+- Added complete T00-T04 Head Converter recipes for all Minion Parts, complementing the existing Boss Part conversion recipes.
+- Rebalanced all 40 T15 Mythic Head Converter recipes for 5-star Boss Parts, reducing their cost from 25 to 10 Mythic Heads so that Mythic Heads are correctly more valuable than Cataclysm Heads.
+- Rebalanced Head Converter station to T00 materials, so the Head converter station can be crafted when you kill your first zombies.
+- Integrated a massively expanded and fully reworked AEC Zombie Market Terminal directly into AEC ENDGAME OVERHAUL. This optimized international alternative to the original market mod features several thousand items, a large quest selection, dedicated boss and minion currencies, boss and minion research papers, multiple passive miner types, and much more.
+- Added the complete 419-stage AEC EO PROGRESSION campaign. This ordered 0-star to 5-star journey covers every Minion and Boss family through kill, crafting and collection objectives, including Research Papers, Passive Part Miners, tiered Heads and all quest Tokens up to T15 A5. Every stage has its own quest book, progression counter and apocalypse-themed narrative.
+- Reworked the AEC EO TUTORIAL into a new guided objective chain. Its chapters now teach the player through practical survival, gathering and crafting objectives: killing initial infected, building the Head Converter and Zombie Market Terminal, configuring the Crypto Miner with batteries and Connection Cards, producing Coins and Research Papers, automating parts with Passive Part Miners, and crafting the Contract Relay before entering the advanced EO chapters.
+- Added 10 AEC FIELD GUIDE information quests supplied directly during character generation. These readable books explain Game Stage progression, Newbie Protection, Heatmap pressure, Hazard 0-5 escalation, dynamic spawning, AI World Events, the persistent Nemesis roster, Nemesis grudges and territory wars, AEC contracts and Tokens, and the Heads/Market/Gear economy.
+- Added the AEC Quest Archive station, distributing all 452 PROGRESSION, TUTORIAL and FIELD GUIDE quest books through a dedicated interface. Previously read books can be crafted again up to the latest quest unlocked, preventing lost books from interrupting or erasing quest progression.
+- Restyled all 80 AEC contract quest windows (T00-T15, A1-A5) with a purple gradient title and a red/blue/green "AEC" text border around the description, so they are instantly distinguishable from vanilla quests.
+- Increased stack sizes for every item : 20 000 items/stack.
+- Increased minion part quantity to craft boss parts.
+- Increased max player level to 10 000.
+- Added T00-T04 Head converter crafts.
+- Added several hundred new perks.
+- Increased progression speed.
+- Nerfed AEC POWER MODIFIER.
+- Merged the AEC AIO BOSS mod with its optional AEC AIO BOSS EXTENDED QUESTS add-on; the extended quest chains are now included by default and no longer require a separate optional mod. (AEC AIO BOSS 3.1.0)
+- Increased the Headless Boss hitbox by 150%, making it noticeably easier to hit. (AEC AIO BOSS 3.1.0)
+- Fixed a large number of unset/missing quest localization keys. (AEC AIO BOSS 3.1.0)
+- Fixed several quests that could not be started due to a faulty RallyPoint objective. (AEC AIO BOSS 3.1.0)
+- Removed the workbench from the recipe list for the AEC Contract craft, so players will be able to craft it earlier. (AEC AIO BOSS 3.1.0)
+- Increased quest quantity sold in the AEC CONTARCT RELAYS. (AEC AIO BOSS 3.1.0)
+- Decreased AEC CONTRACT RELAY prices (for all star lvl) (AEC AIO BOSS 3.1.0)
+- Added various balance adjustments, bug fixes, optimizations, and quality-of-life improvements.
+- buffAecTierWatcher was updating every 1sec, and now updating every 60sec, removing lags.
+- Removed the duplication glitch with AEC CONTRACT RELAY. (AEC AIO BOSS 3.1.0)
+- Added 6 new Rockbreaker minions (AEC AIO BOSS 3.1.0)
+
+UPDATE 23/07/2026 3.0.9 :
+
+- Reduced the trader value of zombie and boss parts to 10% of their previous value. (AEC AIO BOSS 3.0.9)
+- Added a Blood Moon point-ranking system that awards each participating player a personalized airdrop based on their individual score. (AEC ENDGAME OVERHAUL 3.0.9)
+- Added minion-part rewards alongside zombie heads when AEC AIO BOSS minions are killed. (AEC ENDGAME OVERHAUL 3.0.9)
+- Increased Mutator crafting costs to account for zombie heads and minion parts being easier to obtain. (AEC ENDGAME OVERHAUL 3.0.9)
+- Fixed various localization keys. (AEC ENDGAME OVERHAUL 3.0.9)
+- Made zombie heads sellable to traders. (AEC ENDGAME OVERHAUL 3.0.9)
+- Reduced the base vanilla Chuck's maximum health by 50%. (AEC ENDGAME OVERHAUL 3.0.9)
+
+UPDATE 22/07/2026 :
+
+- Nerfed the base Headless Demolition Zombie. (AEC AIO BOSS 3.0.7)
+- Drastically reduced the crafting requirements for AEC Contract Relay recipes. (AEC AIO BOSS EXTENDED QUESTS 3.0.7)
+- Added server-side head rewards directly to the credited player's inventory when killing eligible vanilla zombies, AEC ENDGAME T05-T15 zombies, and AEC AIO 0-5 star minions; 889 entity classes are mapped to their corresponding T00-T15 head while AEC AIO bosses remain excluded.
+- Removed corpse harvesting as the method for obtaining zombie heads, replaced by the automatic software-side kill reward system. (AEC ENDGAME OVERHAUL 3.0.7)
+- Drastically reduced the crafting requirements for the AEC Head Converter, AEC Necroforge, and Empty Mutators. (AEC ENDGAME OVERHAUL 3.0.7)
+
+UPDATE 20/07/2026 :
+
+- Added the aec master speed <factor> command to accelerate AIMaster event scheduling from x1 to x1000 at runtime; x1 restores normal speed.
+- Added the AIMaster simulation speed, pause state, and server-message state to the aec master timers diagnostic report.
+- Added JSON settings to enable or disable server chat announcements independently for Events and Nemesis; both are currently disabled by default while console diagnostics remain active.
+- Localized all 18 Nemesis migration messages across the 13 supported languages, preserving the three migration variants for each Nemesis rank from 0 to 5.
+- Fixed AIMaster event spawn weights set to 0 being incorrectly treated as weight 1; zero-weight events are now fully excluded from selection, preventing disabled high-volume events from spawning excess monsters.
+- AIMaster Event scheduling and Nemesis simulation now pause automatically when no player is connected to the server.
+- Event and Nemesis deadlines are shifted by the full empty-server duration when players return, preventing overdue events, territory wars, power struggles, grudges, or migrations from triggering immediately after reconnection.
+- Increased the shipped Heatmap decay rate from 4% to 5% heat per real-time minute after 60 seconds without a kill.
+- Reduced the shipped Heatmap gain rate from 2% to 1% heat per zombie kill, requiring 100 kills instead of 50 to reach 100% heat without decay.
+- Fixed Pine Forest Heatmap hazard tier promotion by resolving the pine_forest/forest biome alias consistently; GS 0-99 newbie protection remains unchanged and ignores hazard and storm tier boosts.
+- Fixed Mega-Horde and AI05 Boss Incursion bosses respawning indefinitely after being killed; each event now spawns its boss quota only once.
+
+UPDATE 16/07/2026 :
+
+- Added tiered zombie <-> minion zombie <-> boss zombie recipes to simplify modifier crafting.
+- Changed first recipes for the Power Mutator and easier Empty Mutators.
+- Added server-side declaration localization for Events and Nemesis announcements.
+- Fixed server-side spawn pool selection to use the detected spawn-position biome (instead of group-name biome), ensuring correct biome/Game Stage weighting in multiplayer.
+- Updated the AEC HEAD CONVERTER UI.
+- Implemented a safeguard to prevent the Charismatic Nature perk from affecting game stage and blocking AEC progression.
+- Fixed missing localization entries. (AEC AIO BOSS 3.0.5)
+- Added AEC EO Tutorial Chapter 12: craft the Necroforge Workbench.
+- Reduced required levels for quest kill objectives.
+- Temporarily disabled Kill Replacement and Airdrop events.
+- Increased mushroom and headless hitbox (AEC AIO BOSS 3.0.5)
+- Added crafting groups to items (AEC AIO BOSS 3.0.5)
+
+UPDATE 07/07/2026 :
+
+- Significantly increased boss item drop rates. (AEC AIO BOSS 3.0.2)
+- Significantly increased minion item drop rates. (AEC AIO BOSS 3.0.2)
+- Reduced the Mega-Horde event selection chance from 0.5 to 0.1.
+- Temporarily disabled the event that spawned an extra zombie after every zombie kill.
+- Significantly increased Chuck, Ranger, and Mutated Zombie spawns in their respective biomes below Game Stage 600.
+- Added head rewards when completing AEC quests.
+	A1 = 10 heads
+	A2 = 20 heads
+	A3 = 30 heads
+	A4 = 40 heads
+	A5 = 50 heads
+
+UPDATE 30/06/2026 :
+
+- Event radio messages have been rewritten to feel more human and vanilla-friendly, with trader-flavored warnings based on the biome.
+- Master events now wait longer before the next event, with a random delay between 60 and 120 real-time minutes.
+- Newbie protection now prevents events from affecting the nearby spawn behavior of players below Game Stage 100.
+- Fixed a bug preventing the Necroforge from appearing in the Extreme Workstation recipe list.
+
+UPDATE 27/06/2026 :
+
+- Added stronger newbie protection for dangerous event spawns.
+- Players below Game Stage 100 are no longer subject to dangerous event targeting.
+- Players below Game Stage 600 no longer trigger Nemesis appearances when entering a Nemesis territory or a Nemesis Territory War area.
+- Territory Wars still happen and resolve normally, but low-tier players can no longer disturb them or pull Nemesis bosses onto themselves.
+- The heatmap system still works normally: kills still increase biome heat and can still raise the biome hazard level.
+- Heatmap decay has been increased from 2% per minute by default to 4% per minute, meaning biome danger cools down faster over time.
+- Events are now rarer overall, because heatmap pressure drops faster and low-tier players are protected from becoming valid event targets.
+- If the last heatmap-triggering kill was made by a protected low-tier player, that player is no longer used as the boss spawn target.
+- When a heatmap boss is ready to spawn, the system now looks for an eligible higher-stage player in the biome.
+- If no eligible player is present, the hazard level can still increase, but no boss will spawn on a protected low-tier player.
+
+UPDATE 21/06/2026 :
+
+- Decreased Zombie spawning in forest biome
+- Increased xp quantity to level up ~x3
+
+UPDATE 20/06/2026 :
+
+- Adds World/Biome invasion events : Mushrooms army, Soldiers army, Apes army, Headless army, Ghost army, Animals army, Archers army
+- Adds World/Biome hazard events : Mega-Horde, Heatmap Increase/Decrease, Zombies high concentration army, Ghost possession, Boss spawning
+- Scaled boss and minions T03-T15
+- Adds a head converter
+- Removes all aec weapons/tools/armors
+- Adds ~3000 endgame modifiers
+- Heatmap Reworked
+- Dynamic quests T05-T15 dialogs depending on player GS
+- T08-RT15 designs reworked
+- Removes flooding logs
+- AEC AIO BOSS mandatory
+- AIO BOSS materials used in AEC ENDGAME OVERHAUL recipes
+- Various dialog text improvements.
+- Nemesis software
+
+Nemesis System (detailed):
+
+- Persistent world roster with controlled population:
+	+ Nemesis pool runs with dynamic bounds.
+	+ Rank distribution target is configurable per tier, with hard cap priority.
+
+- Persistent identity and progression per nemesis:
+	+ Each nemesis stores unique identity data (name, title, rank, entity class/tier, home coordinates, last known entity id).
+	+ Combat and simulation state is persisted (virtual HP/Attack/Defense/Speed, win/loss streaks, kill/death counters).
+	+ Title source is tracked (for example rank- or glory-driven title assignment).
+
+- Death lifecycle and slot recycling:
+	+ Permanent death threshold is rolled per nemesis between configurable limits.
+	+ After death/despawn, respawn is blocked by cooldown.
+	+ Empty slots are not instantly replaced.
+	+ Home-zone proximity spawns are rate-limited.
+
+- Grudge and revenge logic:
+	+ Nemesis can lock a grudge target and evaluate attacks on timed checks.
+	+ Repeated revenge pressure is throttled by per pair cooldown.
+	+ Freshly respawned players get anti-chain protection.
+
+- Family vengeance layer:
+	+ Nemesis kills can trigger untracked same-family retaliation near the killer.
+	+ Killing related non-nemesis AEC bosses can also trigger linked nemesis grudges.
+
+- Dynamic hierarchy conflicts:
+	+ Internal power struggles trigger on interval windows.
+	+ Territory war encounter windows are timeboxed.
+	+ Related ally intervention can occur during active war.
+	+ Ally support applies simulation boosts.
+
+- Territory migration behavior:
+	+ Nemesis can relocate home territory on long-form intervals.
+
+- State continuity:
+	+ Nemesis runtime state persists through JSON state files to keep world-level continuity between sessions.
+
+Additional Systems Breakdown:
+
+- World Events framework:
+	+ Every biome runs its own random event timer.
+	+ Events can chain temporary surge windows with targeted enemy families.
+	+ Supported event themes include Mushroom, Archer, Headless, Ghost (night), Singerie, Druid and Doomlord invasions.
+	+ Some events can trigger large horde-style pressure spikes and biome-wide reinforcement behavior.
+
+- Wilderness ecosystem:
+	+ AEC scaled boss/minion ecosystem is focused on wilderness pressure loops.
+	+ Dynamic wilderness spawn pressure is tied to biome systems and can escalate during active event windows.
+
+- Quest layer (T05-T15):
+	+ Quest availability is tied to player game stage and progression state.
+	+ Dialog flow adapts to progression, with selected lines hidden until the proper progression threshold is reached.
+	+ Quest wilderness overrides are designed to preserve tier pressure while keeping wilderness pacing aligned with AEC scaling.
+
+- Pool and runtime modules:
+	+ AI-driven pool/no-quest behavior is integrated as a dedicated runtime module.
+	+ Runtime modules are designed to report startup state clearly (loaded/settings applied) to ease server diagnostics.
+
+- Passive progression support:
+	+ Additional passive-skill and utility tabs are integrated for AEC progression support.
+	+ The system includes progression hooks for boss/minion kill loops and higher-tier reward paths.
+
+- Nemesis gameplay loop (player-facing behavior):
+	+ Nemesis attacks can occur near players after runtime scheduling windows.
+	+ Nemesis can challenge other nemesis during territory conflicts.
+	+ Nemesis can gain/lose rank over time depending on victories and defeats.
+	+ Defeated nemesis are handled through cooldown/permanent-death rules, with roster refill when required.
+	+ Grudge behavior can bias aggression toward players who previously defeated that nemesis.
+
+- Heatmap gameplay loop:
+	+ Heatmap reacts to biome kill activity and increases hazard pressure dynamically.
+	+ Hazard level can influence local wilderness difficulty and boss pressure.
+	+ Heatmap decay and escalation timing are governed by runtime rules to avoid constant oscillation.
+	+ Low/High game stage handling is aligned to dedicated merged spawn rule paths for consistent tier selection.
+
+- Event rules and challenge support:
+	+ Event-rule runtime settings are loaded from the AEC ENDGAME module configuration path.
+	+ Challenge tabs were expanded to better expose high-tier objective progression.
+
+- Benches and crafting progression:
+	+ Head Converter bench supports conversion of AEC AIO BOSS heads into AEC ENDGAME heads.
+	+ The AEC Extreme Workstation progression includes large modifier/mod crafting depth (high-volume endgame itemization).
+
+UPDATE 05/04/2026 :
+
+- Weapon & tool progression restructure (legacy format fix): several ranged families (Shotgun, MG, Rifle, Handgun, Bow, Crossbow) had their T05 Veteran anchor values left in the old flat/incorrect format from the previous update, resulting in AEC T05 weapons dealing less damage than a fully-skilled vanilla T3 equivalent.
+- All 6 affected ranged families now have their T05Nrm base_add recalibrated so that AEC T05 (no perk investment required) deals approximately 1.5× the maximum effective damage of a vanilla T3 weapon at Q6 with maxed relevant skill perks.
+- New T05Nrm effective damage per shot (unperked): Shotgun 342 (9 pellets), MG 132, Rifle 207, Handgun 105, Bow 144, Crossbow 185.
+- The full 44-step geometric progression (T05Nrm → T15Mythic) was recomputed for all 252 affected items to maintain strict monotonic increase across all tiers and rarities.
+- All 17 weapon/tool families verified: no regression anomalies across the T05Nrm → T05Adv → T05Epic → T05Leg → T06Nrm → ... → T15Mythic chain.
+
+Known issue (next update):
+- Some mods/perks have no effects on the AEC weapons/tools/armors, will be fixed next update
+
+UPDATE 04/04/2026 :
+
+- Added a unified AEC trader dialog panel replacing individual tier buttons.
+- AEC contracts now require Trader Tier 6 to access; a always-visible Tutorial button is shown regardless of tier.
+- Added a pre-page with key information lines shown before the contract list.
+- Added a multi-page Tutorial dialog (7 pages) covering: token progression, POI sizes, zombie grades, hazard system, rewards, and the AEC workstation.
+- Tutorial is accessible from both the locked state and the unlocked contract intro page.
+- Vanilla trader quest buttons are always visible (removed tier/intro gating).
+- Fixed localization: quest names corrected from French to English.
+- Various dialog text color improvements.
+- Added 660 tiered AEC armor items (T05 Veteran → T15 Mythic): 15 non-DLC vanilla armor sets × 11 tiers × 4 slots (Helmet, Outfit, Gloves, Boots).
+- Armor resistance targets ~15 hits-to-kill per matching AEC zombie tier (44% total at T05, 80% at T15 full set).
+- Each armor tier has scaled DegradationMax (T05=1000 → T15=8000) and 6 mod slots.
+- Added 660 craft recipes for AEC armors (craft_area: aecExtremeArmor): A1×6 + A4×4 + A5×2 tokens + 20 zombie heads of matching tier + previous tier piece (T06+).
+- Weapon DPS rebalance: all 17 ranged families (Handgun, Rifle, Shotgun, SMG, Sniper, MG, Launcher, Bow, etc.) normalized to a unified DPS reference (~24,654 DPS at T15 Leg). Previous versions had up to 3.4× imbalance between families.
+- Shotgun DPS corrected: damage was calculated per-pellet instead of per-shot, resulting in a 18× undervalue — now fixed.
+- Tool BlockDamage now scales geometrically across tiers: Auger T05=50 → T15=400, Chainsaw T05=60 → T15=500, Driver T05=150 → T15=1200 (was flat across all tiers).
+- All 748 AEC items: ModSlots set to 6 at all quality levels.
+- All 748 AEC items: DegradationMax now scales geometrically per tier (T05=vanilla max, T15=vanilla max ×4).
+- Melee weapons: StaminaLoss now decreases with tier (T15 Leg costs 50% of T05 stamina), rewarding higher-tier gear with lighter swings.
+- Improved newbie protection against T05-T15 zombies spawns
+- Improved trader stability
+
+Known issue (next update):
+- Some mods/perks have no effects on the AEC weapons/tools/armors, will be fixed next update
+
+UPDATE 03/04/2026 :
+
+- Forest biome is now the newbie safe zone.
+- Removed T05-T15 AEC quest access in Forest.
+- Removed heatmap hazard levels in Forest.
+- Removed T05-T15 AEC wilderness spawns in Forest.
+- Other biomes are unchanged.
+- New Forest feedback buff: `Safe Zone` is displayed every 30 seconds so players know the mod is active.
+- Heatmap rate changes:
+	+ +2% heat per kill (was +2.5%)
+	+ -2% heat per minute decay (was -1%)
+	+ Result: hazard escalation takes longer overall.
+- Gear upgrade recipes adjusted: 60 heads required instead of 100.
+
+Known issue (next update):
+- Trader quest index/list desync for non-host clients is not fully fixed yet.
+- A more reliable trader refresh/sync path will be delivered in a following update.
+
+UPDATE 02/04/2026 :
+
+- Reworked the quest system with cleaner progression flow and improved trader integration.
+- Improved multiplayer synchronization for quest state and phase handling (host/client consistency significantly increased).
+- Greatly improved overall quest stability, including safer and more reliable quest override behavior.
+- Quest override now applies only during quest phases 2 and 3, and only inside the active quest POI zone (strict POI-only enforcement, no wilderness carry-over).
+- Players under GS600 can now take and complete AEC quests from T05 to T15.
+- Removed legacy recipe-based quest access paths from previous versions.
+- Removed the Extreme Radio Workstation recipe that previously granted quest access.
+- Quest access is now handled by the updated quest framework instead of old crafting-based unlock methods.
+
+UPDATE 30/03/2026 :
+
+- QuestArea: improved POI selection for invited/shared quests to reduce far-away quest spawns.
+- Shared quests: improved quest-override handling for invited players (better shared quest detection).
+- Quest override: iterated and stabilized logic to improve multiplayer reliability while avoiding over-broad overrides.
+- Blood Moon bosses: switched to per-spawn roll logic, then tuned to +1% boss chance every 5000 GS (lower overall rate).
+- Balance/config: kept prior session balance updates already applied (XP/heat/storm-related adjustments).
+
+The previous version had a synchronization issue where quest activation by non-host players could desync quest state/POI data and cause incorrect override behavior.
+
+UPDATE 29/03/2026 :
+
+- Added a new vanilla-side loot safeguard DLL for AEC ENDGAME OVERHAUL to fix the high-gamestage container bug where loot could stop spawning at extreme GS values. The patch now clamps the game’s effective loot-stage calculations to a safe cap before container generation, without changing zombie progression, gamestage scaling, custom weapons, or loot XML tables.
+
+UPDATE 28/03/2026 :
+
+- Added `AeclipseCustomZombieQuestsArea.dll` as an optional companion for custom quest POI selection. It expands the search area in steps, starting close to the quest source and increasing the range only when no compatible POI is found, which helps custom quest orders find a valid location more reliably.
+- Added `AeclipseDedicatedCompat.dll` as a dedicated server compatibility companion. It improves companion DLL loading and path resolution so the mod initializes more reliably in dedicated and mixed environments without requiring manual file juggling.
+- Added a fallback recipe for `aecQuestOrderT05A1` in the AEC Extreme Workstation. Players can now craft the entry Tier 05 A1 quest order for `2000` Dukes if the trader does not offer one.
+- Reduced CPU load from buff-related processing by lowering how aggressively buff checks and updates are performed. The goal is the same gameplay result with less repeated work during runtime, especially in heavier sessions.

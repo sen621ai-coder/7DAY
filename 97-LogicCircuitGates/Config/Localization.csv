@@ -1,0 +1,9 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,KeepLoaded,english,Context / Alternate Text,german,spanish,french,italian,japanese,koreana,polish,brazilian,russian,turkish,schinese,tchinese
+logicGateAND,blocks,Block,,,,AND Logic Gate,,,,,,,,,,,,与门,AND 邏輯閘
+logicGateANDDesc,blocks,Block,,,,Zero-consumption gate. First input is power-through; outputs its remaining power when at least two signal inputs are active.,,,,,,,,,,,,零耗电逻辑门。第一条线为主电源；至少两路信号全部开启时透传剩余功率。,零耗電邏輯閘。第一條線為主電源；至少兩路訊號全部開啟時透傳剩餘功率。
+logicGateOR,blocks,Block,,,,OR Logic Gate,,,,,,,,,,,,或门,OR 邏輯閘
+logicGateORDesc,blocks,Block,,,,Zero-consumption gate. First input is power-through; outputs its remaining power when any signal input is active.,,,,,,,,,,,,零耗电逻辑门。第一条线为主电源；任意一路信号开启时透传剩余功率。,零耗電邏輯閘。第一條線為主電源；任意一路訊號開啟時透傳剩餘功率。
+logicGateNOT,blocks,Block,,,,NOT Logic Gate,,,,,,,,,,,,非门,NOT 邏輯閘
+logicGateNOTDesc,blocks,Block,,,,Zero-consumption gate. First input is power-through; outputs its remaining power when no signal input is active.,,,,,,,,,,,,零耗电逻辑门。第一条线为主电源；所有信号关闭时透传剩余功率。,零耗電邏輯閘。第一條線為主電源；所有訊號關閉時透傳剩餘功率。
+logicGateXOR,blocks,Block,,,,XOR Logic Gate,,,,,,,,,,,,异或门,XOR 邏輯閘
+logicGateXORDesc,blocks,Block,,,,Zero-consumption gate. First input is power-through; outputs its remaining power when an odd number of signal inputs is active.,,,,,,,,,,,,零耗电逻辑门。第一条线为主电源；开启信号为奇数时透传剩余功率。,零耗電邏輯閘。第一條線為主電源；開啟訊號為奇數時透傳剩餘功率。

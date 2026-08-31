@@ -1,0 +1,2141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: recipe definitions, crafting areas and final normalization.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: определения рецептов, рабочие станции и финальная нормализация.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/recipes">
+    <recipe name="aecScrapRepairKit" count="1" craft_time="20" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="resourceRepairKit" count="1"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+    </recipe>
+    <recipe name="aecBasicRepairKit" count="1" craft_time="30" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="resourceRepairKit" count="2"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+    </recipe>
+    <recipe name="aecAdvancedRepairKit" count="1" craft_time="40" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="resourceRepairKit" count="3"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="10"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+    </recipe>
+    <recipe name="AECAdvancedJetpackVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECAdvancedJetpackVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECAirplaneVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECAirplaneVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECBasicJetpackVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECBasicJetpackVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECBearVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECBearVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECBonehunterVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECBonehunterVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECCargoBehemothVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECCargoBehemothVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECCargoHoundVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECCargoHoundVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECCargoRatVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECCargoRatVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicAmbulanceRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicAmbulanceRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicArmyTruckEmptyVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicArmyTruckEmptyVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheKillerVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheKillerVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicArmyTruckVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicArmyTruckVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicBackhoeRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicBackhoeRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicCitySchoolBusRepairedVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicCitySchoolBusRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicExcavatorClawRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicExcavatorClawRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicExcavatorRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicExcavatorRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicFarmtruckRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicFarmtruckRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicFireTruckRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicFireTruckRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicLongSchoolBusRepairedVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicLongSchoolBusRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicMinivanRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicMinivanRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicPickupCargoDamagedVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicPickupCargoDamagedVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicPickupCargoRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicPickupCargoRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicPoliceCarRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicPoliceCarRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheJumperVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheJumperVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicRaftVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicRaftVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSedanHuntDamagedVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSedanHuntDamagedVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSedanHuntRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSedanHuntRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSedanSpeedDamagedVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSedanSpeedDamagedVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSedanSpeedRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSedanSpeedRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSemiFrontRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSemiFrontRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckGenericNoLadderVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicServiceTruckGenericNoLadderVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckGenericVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicServiceTruckGenericVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckMoPowerVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicServiceTruckMoPowerVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckWorkingStiffVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicServiceTruckWorkingStiffVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicShortSchoolBusRepairedVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicShortSchoolBusRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicShuttleSchoolBusRepairedVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicShuttleSchoolBusRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSUVDamagedVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSUVDamagedVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicSUVVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicSUVVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheZombieHunterVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheZombieHunterVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicTractorRepairedVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECClassicTractorRepairedVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECDireWolfVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECDireWolfVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECDoomjackVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECDoomjackVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECDriftjackVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECDriftjackVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheRockVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheRockVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECExtremeWheelchairVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECExtremeWheelchairVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECFarmTruckOreBoulderVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECFarmTruckOreBoulderVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECFlyingSedanVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECFlyingSedanVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECFlyingWasteVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECFlyingWasteVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECFlyingCityBusVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECFlyingCityBusVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECForkliftVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECForkliftVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECHandTruckVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECHandTruckVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECHarpoonerVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECHarpoonerVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECIronBastionVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECIronBastionVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECLeviathanVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECLeviathanVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECMiniAirplaneVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECMiniAirplaneVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECMiniRocketVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECMiniRocketVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECMountainLionVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECMountainLionVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECNitrojackVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECNitrojackVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECRocketVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECRocketVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECScrapBastionVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECScrapBastionVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECStagVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECStagVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECStormhunterVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECStormhunterVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECSunDrifterVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECSunDrifterVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECArmoredGyroVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECArmoredGyroVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheFamilyWagonVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheFamilyWagonVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheFloatcampVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheFloatcampVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheHoverboardVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheHoverboardVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECHellglideVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECHellglideVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECAirMotorcycleVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECAirMotorcycleVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheHammerVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheHammerVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheWarRamVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheWarRamVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheExecutionerVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheExecutionerVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheExplorerVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheExplorerVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheBikerVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheBikerVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheExorcistVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheExorcistVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheSoldierVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheSoldierVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheHangingWorldVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheHangingWorldVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheMovingHQVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheMovingHQVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheOldWagonVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheOldWagonVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECThePunisherVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECThePunisherVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheSalvagerVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheSalvagerVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheTowerBusVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheTowerBusVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheTowerCarVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheTowerCarVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheWeaponWheelVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheWeaponWheelVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheWheelchairVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheWheelchairVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECShoppingCartVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECShoppingCartVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECUnicycleVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECUnicycleVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECRacingShoppingCartVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECRacingShoppingCartVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECBrokenBicycleVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECBrokenBicycleVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECThePipeBicycleVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECThePipeBicycleVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheAdvancedPipeBicycleVehiclePlaceable" count="1" craft_time="40" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheAdvancedPipeBicycleVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheWoodenMistakeVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheWoodenMistakeVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECThundraRunnerVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECThundraRunnerVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECMinimotoVehiclePlaceable" count="1" craft_time="26" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECMinimotoVehiclePlaceable" count="1"/>
+      <ingredient name="aecBasicRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTrailhunterVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTrailhunterVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTruckDrillerVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTruckDrillerVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECWarMammothVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECWarMammothVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECTheGiantVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECTheGiantVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECWastelandRunnerVehiclePlaceable" count="1" craft_time="36" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECWastelandRunnerVehiclePlaceable" count="1"/>
+      <ingredient name="aecAdvancedRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECWolfVehiclePlaceable" count="1" craft_time="18" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRepairs" always_unlocked="true">
+      <ingredient name="AECWolfVehiclePlaceable" count="1"/>
+      <ingredient name="aecScrapRepairKit" count="1"/>
+    </recipe>
+    <recipe name="AECClassicCitySchoolBusRepairedVehiclePlaceable" count="1" craft_time="780" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalBus" always_unlocked="true">
+      <ingredient name="aecBusCityChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="32"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+      <ingredient name="resourceForgedSteel" count="14"/>
+    </recipe>
+    <recipe name="AECClassicLongSchoolBusRepairedVehiclePlaceable" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalBus" always_unlocked="true">
+      <ingredient name="aecBusLongSchoolChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="40"/>
+      <ingredient name="resourceElectricParts" count="20"/>
+      <ingredient name="resourceForgedSteel" count="18"/>
+    </recipe>
+    <recipe name="AECClassicShuttleSchoolBusRepairedVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalBus" always_unlocked="true">
+      <ingredient name="aecBusShuttleSchoolChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="17"/>
+      <ingredient name="resourceForgedSteel" count="15"/>
+    </recipe>
+    <recipe name="AECClassicShortSchoolBusRepairedVehiclePlaceable" count="1" craft_time="820" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalBus" always_unlocked="true">
+      <ingredient name="aecBusShortSchoolChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceElectricParts" count="15"/>
+      <ingredient name="resourceForgedSteel" count="13"/>
+    </recipe>
+    <recipe name="AECWarMammothVehiclePlaceable" count="1" craft_time="1120" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalBus" always_unlocked="true">
+      <ingredient name="aecWarMammothChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+    </recipe>
+    <recipe name="AECTheGiantVehiclePlaceable" count="1" craft_time="1480" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecTheGiantChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="48"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceForgedSteel" count="28"/>
+      <ingredient name="resourceConcreteMix" count="250"/>
+    </recipe>
+    <recipe name="AECTheTowerBusVehiclePlaceable" count="1" craft_time="1180" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalBus" always_unlocked="true">
+      <ingredient name="aecTheTowerBusChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="36"/>
+      <ingredient name="resourceElectricParts" count="18"/>
+      <ingredient name="resourceForgedSteel" count="14"/>
+    </recipe>
+    <recipe name="AECDriftjackVehiclePlaceable" count="1" craft_time="440" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecDriftjackChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="10"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+    </recipe>
+    <recipe name="AECTheRockVehiclePlaceable" count="1" craft_time="440" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecRockChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="10"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+    </recipe>
+    <recipe name="AECNitrojackVehiclePlaceable" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecNitrojackChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+    </recipe>
+    <recipe name="AECDoomjackVehiclePlaceable" count="1" craft_time="840" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecDoomjackChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+    </recipe>
+    <recipe name="AECScrapBastionVehiclePlaceable" count="1" craft_time="480" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecScrapBastionChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+    </recipe>
+    <recipe name="AECIronBastionVehiclePlaceable" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecIronBastionChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="10"/>
+    </recipe>
+    <recipe name="AECLeviathanVehiclePlaceable" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecLeviathanChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceForgedSteel" count="12"/>
+    </recipe>
+    <recipe name="AECTrailhunterVehiclePlaceable" count="1" craft_time="460" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecTrailhunterChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="11"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+    </recipe>
+    <recipe name="AECBonehunterVehiclePlaceable" count="1" craft_time="640" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecBonehunterChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="19"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceForgedIron" count="9"/>
+    </recipe>
+    <recipe name="AECStormhunterVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecStormhunterChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="29"/>
+      <ingredient name="resourceForgedSteel" count="11"/>
+    </recipe>
+    <recipe name="AECHarpoonerVehiclePlaceable" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecHarpoonerChassis" count="1"/>
+      <ingredient name="gunBowT3CompoundCrossbow" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="AECTheTowerCarVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecTheTowerCarChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECTheSalvagerVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecSalvagerChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="26"/>
+      <ingredient name="resourceElectricParts" count="11"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+    </recipe>
+    <recipe name="AECTheHammerVehiclePlaceable" count="1" craft_time="640" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecHammerChassis" count="1"/>
+      <ingredient name="meleeToolRepairT1ClawHammer" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="AECThePunisherVehiclePlaceable" count="1" craft_time="1040" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecPunisherChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+      <ingredient name="resourceForgedSteel" count="12"/>
+    </recipe>
+    <recipe name="AECClassicMinivanRepairedVehiclePlaceable" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicMinivanChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="10"/>
+    </recipe>
+    <recipe name="AECClassicPickupCargoRepairedVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicPickupCargoChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECClassicSedanSpeedRepairedVehiclePlaceable" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicSedanSpeedChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceForgedIron" count="9"/>
+    </recipe>
+    <recipe name="AECClassicSedanHuntRepairedVehiclePlaceable" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicSedanHuntChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceForgedIron" count="9"/>
+    </recipe>
+    <recipe name="AECClassicSUVVehiclePlaceable" count="1" craft_time="780" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicSUVChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECTheZombieHunterVehiclePlaceable" count="1" craft_time="780" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecTheZombieHunterChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECClassicPickupCargoDamagedVehiclePlaceable" count="1" craft_time="560" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicPickupCargoDamagedChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="16"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+    </recipe>
+    <recipe name="AECClassicSUVDamagedVehiclePlaceable" count="1" craft_time="600" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicSUVDamagedChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="7"/>
+      <ingredient name="resourceForgedIron" count="9"/>
+    </recipe>
+    <recipe name="AECClassicSedanHuntDamagedVehiclePlaceable" count="1" craft_time="540" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicSedanHuntDamagedChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="15"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceForgedIron" count="7"/>
+    </recipe>
+    <recipe name="AECClassicSedanSpeedDamagedVehiclePlaceable" count="1" craft_time="540" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicSedanSpeedDamagedChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="15"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceForgedIron" count="7"/>
+    </recipe>
+    <recipe name="AECClassicPoliceCarRepairedVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecClassicPoliceCarChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="11"/>
+    </recipe>
+    <recipe name="AECTheJumperVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecTheJumperChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="11"/>
+    </recipe>
+    <recipe name="AECTheOldWagonVehiclePlaceable" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecOldWagonChassis" count="1"/>
+      <ingredient name="resourceWood" count="1200"/>
+      <ingredient name="resourceMechanicalParts" count="10"/>
+      <ingredient name="resourceDuctTape" count="4"/>
+    </recipe>
+    <recipe name="AECTheFamilyWagonVehiclePlaceable" count="1" craft_time="560" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecFamilyWagonChassis" count="1"/>
+      <ingredient name="resourceWood" count="100"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+      <ingredient name="resourceDuctTape" count="5"/>
+    </recipe>
+    <recipe name="AECTheWeaponWheelVehiclePlaceable" count="1" craft_time="680" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecWeaponWheelChassis" count="1"/>
+      <ingredient name="gunRifleT1HuntingRifle" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="AECCargoRatVehiclePlaceable" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecCargoRatChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="14"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+    </recipe>
+    <recipe name="AECCargoHoundVehiclePlaceable" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecCargoHoundChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECCargoBehemothVehiclePlaceable" count="1" craft_time="960" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecCargoBehemothChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+    </recipe>
+    <recipe name="AECFarmTruckOreBoulderVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecBoulderTruckChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="10"/>
+    </recipe>
+    <recipe name="AECClassicFarmtruckRepairedVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicFarmtruckChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedIron" count="15"/>
+    </recipe>
+    <recipe name="AECClassicTractorRepairedVehiclePlaceable" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicTractorChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="32"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedIron" count="16"/>
+    </recipe>
+    <recipe name="AECClassicFireTruckRepairedVehiclePlaceable" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicFireTruckChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="36"/>
+      <ingredient name="resourceElectricParts" count="14"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+    </recipe>
+    <recipe name="AECClassicAmbulanceRepairedVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicAmbulanceChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedIron" count="14"/>
+    </recipe>
+    <recipe name="AECClassicSemiFrontRepairedVehiclePlaceable" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicSemiFrontChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedIron" count="15"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckGenericNoLadderVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicServiceTruckGenericNoLadderChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="11"/>
+      <ingredient name="resourceForgedIron" count="14"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckGenericVehiclePlaceable" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicServiceTruckGenericChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedIron" count="15"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckMoPowerVehiclePlaceable" count="1" craft_time="920" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicServiceTruckMoPowerChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="31"/>
+      <ingredient name="resourceElectricParts" count="13"/>
+      <ingredient name="resourceForgedIron" count="16"/>
+    </recipe>
+    <recipe name="AECClassicServiceTruckWorkingStiffVehiclePlaceable" count="1" craft_time="920" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicServiceTruckWorkingStiffChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="31"/>
+      <ingredient name="resourceElectricParts" count="13"/>
+      <ingredient name="resourceForgedIron" count="16"/>
+    </recipe>
+    <recipe name="AECClassicArmyTruckEmptyVehiclePlaceable" count="1" craft_time="960" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicArmyTruckEmptyChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="14"/>
+      <ingredient name="resourceForgedIron" count="17"/>
+    </recipe>
+    <recipe name="AECTheKillerVehiclePlaceable" count="1" craft_time="1080" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecKillerChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="38"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+      <ingredient name="resourceForgedSteel" count="18"/>
+    </recipe>
+    <recipe name="AECClassicArmyTruckVehiclePlaceable" count="1" craft_time="1020" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecClassicArmyTruckChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="36"/>
+      <ingredient name="resourceElectricParts" count="15"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+    </recipe>
+    <recipe name="AECTheMovingHQVehiclePlaceable" count="1" craft_time="1280" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecMovingHQChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+    </recipe>
+    <recipe name="AECTruckDrillerVehiclePlaceable" count="1" craft_time="1360" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalTruck" always_unlocked="true">
+      <ingredient name="aecTruckDrillerChassis" count="1"/>
+      <ingredient name="meleeToolPickT3Auger" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="38"/>
+      <ingredient name="resourceElectricParts" count="18"/>
+    </recipe>
+    <recipe name="AECForkliftVehiclePlaceable" count="1" craft_time="820" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalCar" always_unlocked="true">
+      <ingredient name="aecForkliftChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+    </recipe>
+    <recipe name="AECTheFloatcampVehiclePlaceable" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecFloatcampChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="26"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+    </recipe>
+    <recipe name="AECTheHoverboardVehiclePlaceable" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecHoverboardChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="16"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+    </recipe>
+    <recipe name="AECSunDrifterVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecSunDrifterChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+    </recipe>
+    <recipe name="AECArmoredGyroVehiclePlaceable" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecArmoredGyroChassis" count="1"/>
+      <ingredient name="bladeTrap" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="32"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+    </recipe>
+    <recipe name="AECFlyingWasteVehiclePlaceable" count="1" craft_time="860" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecFlyingWasteChassis" count="1"/>
+      <ingredient name="bladeTrap" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+    </recipe>
+    <recipe name="AECFlyingCityBusVehiclePlaceable" count="1" craft_time="1280" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecFlyingCityBusChassis" count="1"/>
+      <ingredient name="bladeTrap" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="40"/>
+      <ingredient name="resourceElectricParts" count="20"/>
+    </recipe>
+    <recipe name="AECFlyingSedanVehiclePlaceable" count="1" craft_time="1080" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecFlyingSedanChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="36"/>
+      <ingredient name="resourceElectricParts" count="18"/>
+      <ingredient name="resourceForgedSteel" count="14"/>
+    </recipe>
+    <recipe name="AECHellglideVehiclePlaceable" count="1" craft_time="1080" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecHellglideChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="36"/>
+      <ingredient name="resourceElectricParts" count="18"/>
+      <ingredient name="resourceForgedSteel" count="14"/>
+    </recipe>
+    <recipe name="AECAirMotorcycleVehiclePlaceable" count="1" craft_time="1080" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecAirMotorcycleChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="36"/>
+      <ingredient name="resourceElectricParts" count="18"/>
+      <ingredient name="resourceForgedSteel" count="14"/>
+    </recipe>
+    <recipe name="AECMiniAirplaneVehiclePlaceable" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecMiniAirplaneChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceElectricParts" count="14"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+    </recipe>
+    <recipe name="AECAirplaneVehiclePlaceable" count="1" craft_time="1260" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecAirplaneChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="44"/>
+      <ingredient name="resourceElectricParts" count="22"/>
+      <ingredient name="resourceForgedSteel" count="18"/>
+    </recipe>
+    <recipe name="AECTheHangingWorldVehiclePlaceable" count="1" craft_time="1040" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" always_unlocked="true">
+      <ingredient name="aecHangingWorldChassis" count="1"/>
+      <ingredient name="resourceLegendaryParts" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="32"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+    </recipe>
+    <recipe name="AECBasicJetpackVehiclePlaceable" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRocket" always_unlocked="true">
+      <ingredient name="aecBasicJetpackChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="16"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+    </recipe>
+    <recipe name="AECAdvancedJetpackVehiclePlaceable" count="1" craft_time="1220" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRocket" always_unlocked="true">
+      <ingredient name="aecAdvancedJetpackChassis" count="1"/>
+      <ingredient name="AECMiniAirplaneVehiclePlaceable" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="38"/>
+      <ingredient name="resourceElectricParts" count="20"/>
+    </recipe>
+    <recipe name="AECMiniRocketVehiclePlaceable" count="1" craft_time="1180" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRocket" always_unlocked="true">
+      <ingredient name="aecMiniRocketChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="34"/>
+      <ingredient name="resourceElectricParts" count="18"/>
+      <ingredient name="resourceForgedSteel" count="12"/>
+    </recipe>
+    <recipe name="AECRocketVehiclePlaceable" count="1" craft_time="1640" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalRocket" always_unlocked="true">
+      <ingredient name="aecRocketChassis" count="1"/>
+      <ingredient name="AECMiniRocketVehiclePlaceable" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="48"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+    </recipe>
+    <recipe name="AECTheWoodenMistakeVehiclePlaceable" count="1" craft_time="460" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecWoodenMistakeChassis" count="1"/>
+      <ingredient name="resourceWood" count="80"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+      <ingredient name="resourceDuctTape" count="3"/>
+    </recipe>
+    <recipe name="AECTheWheelchairVehiclePlaceable" count="1" craft_time="420" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecWheelchairChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="AECShoppingCartVehiclePlaceable" count="1" craft_time="420" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecShoppingCartChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="AECUnicycleVehiclePlaceable" count="1" craft_time="420" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecUnicycleChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceScrapIron" count="24"/>
+      <ingredient name="resourceScrapPolymers" count="8"/>
+    </recipe>
+    <recipe name="AECRacingShoppingCartVehiclePlaceable" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecRacingShoppingCartChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+    </recipe>
+    <recipe name="AECBrokenBicycleVehiclePlaceable" count="1" craft_time="360" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecBrokenBicycleChassis" count="1"/>
+      <ingredient name="resourceScrapIron" count="30"/>
+      <ingredient name="resourceScrapPolymers" count="12"/>
+      <ingredient name="resourceDuctTape" count="2"/>
+      <ingredient name="resourceWood" count="20"/>
+    </recipe>
+    <recipe name="AECThePipeBicycleVehiclePlaceable" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecThePipeBicycleChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="10"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+    </recipe>
+    <recipe name="AECTheAdvancedPipeBicycleVehiclePlaceable" count="1" craft_time="680" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheAdvancedPipeBicycleChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceForgedSteel" count="6"/>
+    </recipe>
+    <recipe name="AECExtremeWheelchairVehiclePlaceable" count="1" craft_time="880" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecExtremeWheelchairChassis" count="1"/>
+      <ingredient name="ammoRocketHE" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+    </recipe>
+    <recipe name="AECHandTruckVehiclePlaceable" count="1" craft_time="400" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecHandTruckChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="7"/>
+      <ingredient name="resourceWood" count="30"/>
+      <ingredient name="resourceDuctTape" count="2"/>
+    </recipe>
+    <recipe name="AECClassicExcavatorRepairedVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecClassicExcavatorChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECClassicExcavatorClawRepairedVehiclePlaceable" count="1" craft_time="800" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecClassicExcavatorClawChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="26"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="13"/>
+    </recipe>
+    <recipe name="AECClassicBackhoeRepairedVehiclePlaceable" count="1" craft_time="740" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecClassicBackhoeChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="23"/>
+      <ingredient name="resourceElectricParts" count="9"/>
+      <ingredient name="resourceForgedIron" count="11"/>
+    </recipe>
+    <recipe name="AECClassicRaftVehiclePlaceable" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecClassicRaftChassis" count="1"/>
+      <ingredient name="resourceWood" count="120"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+      <ingredient name="resourceDuctTape" count="5"/>
+    </recipe>
+    <recipe name="AECStagVehiclePlaceable" count="1" craft_time="480" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecStagChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="9"/>
+      <ingredient name="resourceDuctTape" count="3"/>
+    </recipe>
+    <recipe name="AECWolfVehiclePlaceable" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecWolfChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="16"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="AECMountainLionVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecMountainLionChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="30"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+    </recipe>
+    <recipe name="AECDireWolfVehiclePlaceable" count="1" craft_time="920" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecDireWolfChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="45"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+    </recipe>
+    <recipe name="AECBearVehiclePlaceable" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecBearChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="60"/>
+      <ingredient name="resourceMechanicalParts" count="30"/>
+      <ingredient name="resourceElectricParts" count="14"/>
+    </recipe>
+    <recipe name="AECThundraRunnerVehiclePlaceable" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecThundraRunnerChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="AECMinimotoVehiclePlaceable" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecMinimotoChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+    </recipe>
+    <recipe name="AECTheExplorerVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheExplorerChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECTheBikerVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheBikerChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECTheExorcistVehiclePlaceable" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheExorcistChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECTheSoldierVehiclePlaceable" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheSoldierChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="24"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+    </recipe>
+    <recipe name="AECWastelandRunnerVehiclePlaceable" count="1" craft_time="880" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecWastelandRunnerChassis" count="1"/>
+      <ingredient name="foodRawMeat" count="50"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+    </recipe>
+    <recipe name="AECTheWarRamVehiclePlaceable" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheWarRamChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+    </recipe>
+    <recipe name="AECTheExecutionerVehiclePlaceable" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalOther" always_unlocked="true">
+      <ingredient name="aecTheExecutionerChassis" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="aecVehicleFinalAssemblyBench" count="1" craft_time="120" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="30"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="20"/>
+      <ingredient name="resourceDuctTape" count="10"/>
+      <ingredient name="resourceScrapPolymers" count="20"/>
+      <ingredient name="resourceWood" count="50"/>
+    </recipe>
+    <recipe name="aecBicyclePieces" count="1" craft_time="30" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="vehicleBicyclePlaceable" count="1"/>
+    </recipe>
+    <recipe name="aecMinibikePieces" count="1" craft_time="40" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="vehicleMinibikePlaceable" count="1"/>
+    </recipe>
+    <recipe name="aecMotorcyclePieces" count="1" craft_time="50" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="vehicleMotorcyclePlaceable" count="1"/>
+    </recipe>
+    <recipe name="aecTruck4x4Pieces" count="1" craft_time="60" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="vehicleTruck4x4Placeable" count="1"/>
+    </recipe>
+    <recipe name="aecGyroPieces" count="1" craft_time="70" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="vehicleGyrocopterPlaceable" count="1"/>
+    </recipe>
+    <recipe name="aecProjectDiscordNote" count="1" craft_time="1" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="resourceWood" count="1"/>
+    </recipe>
+    <recipe name="aecBusCityChassis" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecBusLongSchoolChassis" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecBusShuttleSchoolChassis" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecBusShortSchoolChassis" count="1" craft_time="600" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecDriftjackChassis" count="1" craft_time="300" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecRockChassis" count="1" craft_time="300" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecNitrojackChassis" count="1" craft_time="420" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecDoomjackChassis" count="1" craft_time="580" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecScrapBastionChassis" count="1" craft_time="320" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+    </recipe>
+    <recipe name="aecIronBastionChassis" count="1" craft_time="450" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecLeviathanChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecTrailhunterChassis" count="1" craft_time="310" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecBonehunterChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecStormhunterChassis" count="1" craft_time="600" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecCargoRatChassis" count="1" craft_time="340" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+    </recipe>
+    <recipe name="aecCargoHoundChassis" count="1" craft_time="480" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecCargoBehemothChassis" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecForkliftChassis" count="1" craft_time="560" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecFloatcampChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="25"/>
+      <ingredient name="resourceElectricParts" count="15"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecHangingWorldChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="3"/>
+      <ingredient name="resourceForgedSteel" count="24"/>
+      <ingredient name="resourceMechanicalParts" count="75"/>
+      <ingredient name="resourceElectricParts" count="45"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="aecThundraRunnerChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecMinimotoChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecTheExplorerChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecTheBikerChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecTheExorcistChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <recipe name="aecTheSoldierChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+    </recipe>
+    <recipe name="aecWastelandRunnerChassis" count="1" craft_time="590" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecTheWarRamChassis" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecTheExecutionerChassis" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecHarpoonerChassis" count="1" craft_time="440" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecSunDrifterChassis" count="1" craft_time="360" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecArmoredGyroChassis" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="25"/>
+      <ingredient name="resourceElectricParts" count="15"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecBoulderTruckChassis" count="1" craft_time="500" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecWarMammothChassis" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecTheGiantChassis" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecTheTowerCarChassis" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecTheTowerBusChassis" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="3"/>
+      <ingredient name="resourceForgedSteel" count="30"/>
+      <ingredient name="resourceMechanicalParts" count="84"/>
+      <ingredient name="resourceElectricParts" count="36"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="aecOldWagonChassis" count="1" craft_time="340" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecFamilyWagonChassis" count="1" craft_time="360" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecWeaponWheelChassis" count="1" craft_time="460" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecFlyingWasteChassis" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="15"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+    </recipe>
+    <recipe name="aecHoverboardChassis" count="1" craft_time="480" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="15"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+    </recipe>
+    <recipe name="aecFlyingCityBusChassis" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecFlyingSedanChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecHellglideChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecAirMotorcycleChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecSalvagerChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecMiniAirplaneChassis" count="1" craft_time="640" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="25"/>
+      <ingredient name="resourceElectricParts" count="15"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecAirplaneChassis" count="1" craft_time="1800" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="3"/>
+      <ingredient name="resourceForgedSteel" count="24"/>
+      <ingredient name="resourceMechanicalParts" count="75"/>
+      <ingredient name="resourceElectricParts" count="45"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="aecHammerChassis" count="1" craft_time="460" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecPunisherChassis" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecBasicJetpackChassis" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecAdvancedJetpackChassis" count="1" craft_time="920" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecWoodenMistakeChassis" count="1" craft_time="320" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecWheelchairChassis" count="1" craft_time="300" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecShoppingCartChassis" count="1" craft_time="300" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecUnicycleChassis" count="1" craft_time="300" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecRacingShoppingCartChassis" count="1" craft_time="540" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+    </recipe>
+    <recipe name="aecBrokenBicycleChassis" count="1" craft_time="220" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecBicyclePieces" count="1"/>
+      <ingredient name="resourceMetalPipe" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+      <ingredient name="resourceDuctTape" count="4"/>
+    </recipe>
+    <recipe name="aecThePipeBicycleChassis" count="1" craft_time="430" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecTheAdvancedPipeBicycleChassis" count="1" craft_time="560" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+    </recipe>
+    <recipe name="aecExtremeWheelchairChassis" count="1" craft_time="680" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecHandTruckChassis" count="1" craft_time="280" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecClassicMinivanChassis" count="1" craft_time="500" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicPickupCargoChassis" count="1" craft_time="520" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicSedanSpeedChassis" count="1" craft_time="460" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecClassicSedanHuntChassis" count="1" craft_time="470" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecClassicSUVChassis" count="1" craft_time="540" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecTheZombieHunterChassis" count="1" craft_time="740" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecClassicPickupCargoDamagedChassis" count="1" craft_time="340" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+    </recipe>
+    <recipe name="aecClassicSUVDamagedChassis" count="1" craft_time="360" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+    </recipe>
+    <recipe name="aecClassicSedanHuntDamagedChassis" count="1" craft_time="320" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecClassicSedanSpeedDamagedChassis" count="1" craft_time="330" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecClassicPoliceCarChassis" count="1" craft_time="500" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecTheJumperChassis" count="1" craft_time="500" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecClassicFarmtruckChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicTractorChassis" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicFireTruckChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicExcavatorChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicExcavatorClawChassis" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicBackhoeChassis" count="1" craft_time="600" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicAmbulanceChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicSemiFrontChassis" count="1" craft_time="680" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicServiceTruckGenericNoLadderChassis" count="1" craft_time="620" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicServiceTruckGenericChassis" count="1" craft_time="660" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicServiceTruckMoPowerChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicServiceTruckWorkingStiffChassis" count="1" craft_time="700" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecClassicArmyTruckEmptyChassis" count="1" craft_time="760" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecKillerChassis" count="1" craft_time="920" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecClassicArmyTruckChassis" count="1" craft_time="800" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="18"/>
+      <ingredient name="resourceMechanicalParts" count="22"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+    </recipe>
+    <recipe name="aecMovingHQChassis" count="1" craft_time="980" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecClassicRaftChassis" count="1" craft_time="320" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="15"/>
+      <ingredient name="resourceScrapPolymers" count="8"/>
+      <ingredient name="resourceCloth" count="6"/>
+    </recipe>
+    <recipe name="aecTruckDrillerChassis" count="1" craft_time="1040" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="56"/>
+      <ingredient name="resourceElectricParts" count="24"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecMiniRocketChassis" count="1" craft_time="920" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="2"/>
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="50"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="aecRocketChassis" count="1" craft_time="1480" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecGyroPieces" count="3"/>
+      <ingredient name="resourceForgedSteel" count="24"/>
+      <ingredient name="resourceMechanicalParts" count="75"/>
+      <ingredient name="resourceElectricParts" count="45"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="aecStagChassis" count="1" craft_time="280" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecWolfChassis" count="1" craft_time="340" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMinibikePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="12"/>
+    </recipe>
+    <recipe name="aecMountainLionChassis" count="1" craft_time="460" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecMotorcyclePieces" count="1"/>
+      <ingredient name="resourceForgedIron" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="18"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+    </recipe>
+    <recipe name="aecDireWolfChassis" count="1" craft_time="680" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="aecBearChassis" count="1" craft_time="720" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" always_unlocked="true">
+      <ingredient name="aecTruck4x4Pieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="28"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="aecVehicleModifierBench" count="1" craft_time="120" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceOil" count="8"/>
+      <ingredient name="resourceDuctTape" count="6"/>
+    </recipe>
+    <recipe name="modAECFuelSaverDustSipper" count="1" craft_time="30" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECFuelSaverScrapMiser" count="1" craft_time="40" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverDustSipper" count="1"/>
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelSaverWastelandSaver" count="1" craft_time="55" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverScrapMiser" count="1"/>
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelSaverRustSting" count="1" craft_time="70" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverWastelandSaver" count="1"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelSaverRoadScrounger" count="1" craft_time="85" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverRustSting" count="1"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="1"/>
+    </recipe>
+    <recipe name="modAECFuelSaverFuelScavenger" count="1" craft_time="100" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverRoadScrounger" count="1"/>
+      <ingredient name="resourceOil" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelSaverBlackSmokeTamer" count="1" craft_time="120" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverFuelScavenger" count="1"/>
+      <ingredient name="resourceOil" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelSaverLastDropKeeper" count="1" craft_time="145" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverBlackSmokeTamer" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECFuelSaverDryTankReaper" count="1" craft_time="170" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverLastDropKeeper" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelSaverWastelandMiserPrime" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelSaver" always_unlocked="true">
+      <ingredient name="modAECFuelSaverDryTankReaper" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECLightIntensityCinderFlicker" count="1" craft_time="30" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="resourceHeadlight" count="2"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECLightIntensityDustGlow" count="1" craft_time="42" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityCinderFlicker" count="1"/>
+      <ingredient name="resourceHeadlight" count="2"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+    </recipe>
+    <recipe name="modAECLightIntensityRoadEmber" count="1" craft_time="56" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityDustGlow" count="1"/>
+      <ingredient name="resourceHeadlight" count="2"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="modAECLightIntensityScrapBeam" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityRoadEmber" count="1"/>
+      <ingredient name="resourceHeadlight" count="3"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECLightIntensityRustLantern" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityScrapBeam" count="1"/>
+      <ingredient name="resourceHeadlight" count="3"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+    </recipe>
+    <recipe name="modAECLightIntensityWastelandFlare" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityRustLantern" count="1"/>
+      <ingredient name="resourceHeadlight" count="4"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+    </recipe>
+    <recipe name="modAECLightIntensityNightCutter" count="1" craft_time="126" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityWastelandFlare" count="1"/>
+      <ingredient name="resourceHeadlight" count="4"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+    </recipe>
+    <recipe name="modAECLightIntensityAshenSpotlight" count="1" craft_time="148" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityNightCutter" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECLightIntensityBlacktopSun" count="1" craft_time="172" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityAshenSpotlight" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECLightIntensityApocalypseFloodlight" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierLightIntensity" always_unlocked="true">
+      <ingredient name="modAECLightIntensityBlacktopSun" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECEntityDamageScrapNudge" count="1" craft_time="34" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECEntityDamageRustJab" count="1" craft_time="46" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageScrapNudge" count="1"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+    </recipe>
+    <recipe name="modAECEntityDamageRoadMauler" count="1" craft_time="58" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageRustJab" count="1"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+    </recipe>
+    <recipe name="modAECEntityDamageBoneCracker" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageRoadMauler" count="1"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="1"/>
+    </recipe>
+    <recipe name="modAECEntityDamageAxleHammer" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageBoneCracker" count="1"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+    </recipe>
+    <recipe name="modAECEntityDamageWastelandRam" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageAxleHammer" count="1"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECEntityDamageIronGore" count="1" craft_time="128" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageWastelandRam" count="1"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+    </recipe>
+    <recipe name="modAECEntityDamageBastionBreaker" count="1" craft_time="152" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageIronGore" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECEntityDamageWarplowCrusher" count="1" craft_time="176" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageBastionBreaker" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECEntityDamageApocalypsePiledriver" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierEntityDamage" always_unlocked="true">
+      <ingredient name="modAECEntityDamageWarplowCrusher" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECBlockDamageScrapBiter" count="1" craft_time="34" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECBlockDamageRustChipper" count="1" craft_time="46" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageScrapBiter" count="1"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+    </recipe>
+    <recipe name="modAECBlockDamageRoadRipper" count="1" craft_time="58" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageRustChipper" count="1"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+    </recipe>
+    <recipe name="modAECBlockDamageConcreteGnawer" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageRoadRipper" count="1"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="1"/>
+    </recipe>
+    <recipe name="modAECBlockDamageMasonSplitter" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageConcreteGnawer" count="1"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+    </recipe>
+    <recipe name="modAECBlockDamageWastelandDozer" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageMasonSplitter" count="1"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECBlockDamageIronWrecker" count="1" craft_time="128" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageWastelandDozer" count="1"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+    </recipe>
+    <recipe name="modAECBlockDamageBastionBuster" count="1" craft_time="152" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageIronWrecker" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECBlockDamageWarplowDemolisher" count="1" craft_time="176" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageBastionBuster" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECBlockDamageApocalypsePulverizer" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierBlockDamage" always_unlocked="true">
+      <ingredient name="modAECBlockDamageWarplowDemolisher" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECTorqueScrapPuller" count="1" craft_time="30" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECTorqueDustGrunter" count="1" craft_time="42" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueScrapPuller" count="1"/>
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+    </recipe>
+    <recipe name="modAECTorqueRoadTwister" count="1" craft_time="56" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueDustGrunter" count="1"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECTorqueIronClaw" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueRoadTwister" count="1"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECTorqueGearGrinder" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueIronClaw" count="1"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="modAECTorqueWastelandHauler" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueGearGrinder" count="1"/>
+      <ingredient name="resourceOil" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECTorqueAxleTyrant" count="1" craft_time="128" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueWastelandHauler" count="1"/>
+      <ingredient name="resourceOil" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+    </recipe>
+    <recipe name="modAECTorqueBlackSmokeMule" count="1" craft_time="152" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueAxleTyrant" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECTorqueOverdriveBrute" count="1" craft_time="176" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueBlackSmokeMule" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECTorqueLeviathanTorque" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierTorque" always_unlocked="true">
+      <ingredient name="modAECTorqueOverdriveBrute" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECVelocityScrapStride" count="1" craft_time="30" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="resourceMechanicalParts" count="3"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECVelocityDustRunner" count="1" craft_time="42" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityScrapStride" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECVelocityRoadHowler" count="1" craft_time="56" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityDustRunner" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceElectricParts" count="1"/>
+    </recipe>
+    <recipe name="modAECVelocityRustStreak" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityRoadHowler" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="modAECVelocityLongshotDrive" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityRustStreak" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+    </recipe>
+    <recipe name="modAECVelocityBlacktopFury" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityLongshotDrive" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="modAECVelocityWastelandSprint" count="1" craft_time="128" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityBlacktopFury" count="1"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECVelocityRedlineReaper" count="1" craft_time="152" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityWastelandSprint" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECVelocityHorizonSplitter" count="1" craft_time="176" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityRedlineReaper" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceElectricParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECVelocityApocalypseOverdrive" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierVelocity" always_unlocked="true">
+      <ingredient name="modAECVelocityHorizonSplitter" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelMaxScrapCanteen" count="1" craft_time="30" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="resourceMetalPipe" count="2"/>
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECFuelMaxDustDrum" count="1" craft_time="42" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxScrapCanteen" count="1"/>
+      <ingredient name="resourceMetalPipe" count="2"/>
+      <ingredient name="resourceOil" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelMaxRoadBarrel" count="1" craft_time="56" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxDustDrum" count="1"/>
+      <ingredient name="resourceMetalPipe" count="3"/>
+      <ingredient name="resourceOil" count="2"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelMaxIronReservoir" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxRoadBarrel" count="1"/>
+      <ingredient name="resourceMetalPipe" count="3"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelMaxLonghaulCistern" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxIronReservoir" count="1"/>
+      <ingredient name="resourceMetalPipe" count="4"/>
+      <ingredient name="resourceOil" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelMaxWastelandTanker" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxLonghaulCistern" count="1"/>
+      <ingredient name="resourceMetalPipe" count="4"/>
+      <ingredient name="resourceOil" count="4"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelMaxBlackDieselVault" count="1" craft_time="128" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxWastelandTanker" count="1"/>
+      <ingredient name="resourceMetalPipe" count="5"/>
+      <ingredient name="resourceOil" count="4"/>
+      <ingredient name="resourceElectricParts" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECFuelMaxOverlandStockpile" count="1" craft_time="152" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxBlackDieselVault" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceOil" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECFuelMaxLeviathanFuelBelly" count="1" craft_time="176" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxOverlandStockpile" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceOil" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECFuelMaxApocalypseFuelArk" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierFuelMax" always_unlocked="true">
+      <ingredient name="modAECFuelMaxLeviathanFuelBelly" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+    <recipe name="modAECSelfDamageScrapPadding" count="1" craft_time="30" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="resourceLeather" count="3"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceDuctTape" count="1"/>
+    </recipe>
+    <recipe name="modAECSelfDamageDustBuffer" count="1" craft_time="42" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageScrapPadding" count="1"/>
+      <ingredient name="resourceLeather" count="3"/>
+      <ingredient name="resourceForgedIron" count="3"/>
+    </recipe>
+    <recipe name="modAECSelfDamageRoadBracer" count="1" craft_time="56" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageDustBuffer" count="1"/>
+      <ingredient name="resourceLeather" count="3"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+    </recipe>
+    <recipe name="modAECSelfDamageIronShell" count="1" craft_time="72" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageRoadBracer" count="1"/>
+      <ingredient name="resourceForgedIron" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="3"/>
+      <ingredient name="resourceLeather" count="2"/>
+    </recipe>
+    <recipe name="modAECSelfDamageFrameBulwark" count="1" craft_time="88" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageIronShell" count="1"/>
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+    </recipe>
+    <recipe name="modAECSelfDamageWastelandBrace" count="1" craft_time="106" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageFrameBulwark" count="1"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+      <ingredient name="resourceElectricParts" count="1"/>
+    </recipe>
+    <recipe name="modAECSelfDamageIronBulwark" count="1" craft_time="128" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageWastelandBrace" count="1"/>
+      <ingredient name="resourceForgedIron" count="6"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceElectricParts" count="2"/>
+    </recipe>
+    <recipe name="modAECSelfDamageCrashCocoon" count="1" craft_time="152" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageIronBulwark" count="1"/>
+      <ingredient name="resourceForgedSteel" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="1"/>
+    </recipe>
+    <recipe name="modAECSelfDamageLeviathanHide" count="1" craft_time="176" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageCrashCocoon" count="1"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="6"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="modAECSelfDamageApocalypseSafeguard" count="1" craft_time="200" craft_area="aecVehicleModifierBench" crafting_category="AECvehicleModifierSelfDamage" always_unlocked="true">
+      <ingredient name="modAECSelfDamageLeviathanHide" count="1"/>
+      <ingredient name="resourceForgedSteel" count="8"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceLegendaryParts" count="3"/>
+    </recipe>
+  </append>
+</configs>

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: crafting categories and display metadata.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: категории крафта и данные отображения.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecMutationIncubator">
+      <crafting_category name="researchMaterialOutput" icon="ui_game_symbol_science" display_name="researchMaterialOutputCategory"/>
+      <crafting_category name="researchSampleOutput" icon="ui_game_symbol_block_upgrade" display_name="researchSampleOutputCategory"/>
+    </crafting_category_list>
+  </append>
+  <!-- EN: Unified late presentation layer for all functional AEC crafting tabs; internal category IDs and recipe behavior are preserved.
+RU: Единый поздний слой отображения для всех функциональных вкладок крафта AEC; внутренние идентификаторы категорий и поведение рецептов сохранены.-->
+  <setattribute xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierFuelUse']" name="name">AECvehicleModifierFuelSaver</setattribute>
+  <setattribute xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierMotorTorque']" name="name">AECvehicleModifierTorque</setattribute>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoMining']/@display_name">modpackTabMarket_CryptoMining</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoBattery']/@display_name">modpackTabMarket_CryptoBattery</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoConnexionCard']/@display_name">modpackTabMarket_CryptoConnexionCard</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoPassiveMiner']/@display_name">modpackTabMarket_CryptoPassiveMiner</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoResearchPapers']/@display_name">modpackTabMarket_CryptoResearchPapers</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoBuilding']/@display_name">modpackTabMarket_CryptoBuilding</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoAmmo']/@display_name">modpackTabMarket_CryptoAmmo</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoTools']/@display_name">modpackTabMarket_CryptoTools</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoArmor']/@display_name">modpackTabMarket_CryptoArmor</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoScience']/@display_name">modpackTabMarket_CryptoScience</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoMods']/@display_name">modpackTabMarket_CryptoMods</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoBooks']/@display_name">modpackTabMarket_CryptoBooks</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoRessources']/@display_name">modpackTabMarket_CryptoRessources</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoFood']/@display_name">modpackTabMarket_CryptoFood</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoSeeds']/@display_name">modpackTabMarket_CryptoSeeds</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoDecoration']/@display_name">modpackTabMarket_CryptoDecoration</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoQuest']/@display_name">modpackTabMarket_CryptoQuest</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='internationalMarket']/crafting_category[@name='CryptoModding']/@display_name">modpackTabMarket_CryptoModding</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='GenerationCoin']/crafting_category[@name='GenerationCoin']/@display_name">modpackTabMarket_GenerationCoin</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchMain']/@display_name">modpackTabMutator_AECworkbenchMain</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchPower']/@display_name">modpackTabMutator_AECworkbenchPower</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchKnockback']/@display_name">modpackTabMutator_AECworkbenchKnockback</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchStun']/@display_name">modpackTabMutator_AECworkbenchStun</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchTargetArmor']/@display_name">modpackTabMutator_AECworkbenchTargetArmor</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchAiming']/@display_name">modpackTabMutator_AECworkbenchAiming</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchRPM']/@display_name">modpackTabMutator_AECworkbenchRPM</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchReloadSpeed']/@display_name">modpackTabMutator_AECworkbenchReloadSpeed</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchDrum']/@display_name">modpackTabMutator_AECworkbenchDrum</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchRange']/@display_name">modpackTabMutator_AECworkbenchRange</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchDegradation']/@display_name">modpackTabMutator_AECworkbenchDegradation</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchFlaming']/@display_name">modpackTabMutator_AECworkbenchFlaming</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchShocking']/@display_name">modpackTabMutator_AECworkbenchShocking</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchSneakAttack']/@display_name">modpackTabMutator_AECworkbenchSneakAttack</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchDismemberChance']/@display_name">modpackTabMutator_AECworkbenchDismemberChance</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchAPM']/@display_name">modpackTabMutator_AECworkbenchAPM</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchStaminaLoss']/@display_name">modpackTabMutator_AECworkbenchStaminaLoss</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchBlockDamage']/@display_name">modpackTabMutator_AECworkbenchBlockDamage</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchBlockHarvest']/@display_name">modpackTabMutator_AECworkbenchBlockHarvest</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchStaminaMax']/@display_name">modpackTabMutator_AECworkbenchStaminaMax</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchStaminaRegenRun']/@display_name">modpackTabMutator_AECworkbenchStaminaRegenRun</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchStaminaRegen']/@display_name">modpackTabMutator_AECworkbenchStaminaRegen</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchCrouchBoost']/@display_name">modpackTabMutator_AECworkbenchCrouchBoost</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchHealthRegen']/@display_name">modpackTabMutator_AECworkbenchHealthRegen</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchJumpBoost']/@display_name">modpackTabMutator_AECworkbenchJumpBoost</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchRunBoost']/@display_name">modpackTabMutator_AECworkbenchRunBoost</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchWalkBoost']/@display_name">modpackTabMutator_AECworkbenchWalkBoost</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchXPKill']/@display_name">modpackTabMutator_AECworkbenchXPKill</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchUnique']/@display_name">modpackTabMutator_AECworkbenchUnique</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchRare']/@display_name">modpackTabMutator_AECworkbenchRare</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchAtypical']/@display_name">modpackTabMutator_AECworkbenchAtypical</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecExtremeModCraftingTable']/crafting_category[@name='AECworkbenchLegendary']/@display_name">modpackTabMutator_AECworkbenchLegendary</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecNecroforgeWorkbench']/crafting_category[@name='aecNecroforgeAmmo9mm']/@display_name">modpackTabNecro_aecNecroforgeAmmo9mm</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecNecroforgeWorkbench']/crafting_category[@name='aecNecroforgeAmmo44']/@display_name">modpackTabNecro_aecNecroforgeAmmo44</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecNecroforgeWorkbench']/crafting_category[@name='aecNecroforgeAmmo762']/@display_name">modpackTabNecro_aecNecroforgeAmmo762</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecNecroforgeWorkbench']/crafting_category[@name='aecNecroforgeAmmo12g']/@display_name">modpackTabNecro_aecNecroforgeAmmo12g</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierFuelSaver']/@display_name">modpackTabVehicleModifier_AECvehicleModifierFuelSaver</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierLightIntensity']/@display_name">modpackTabVehicleModifier_AECvehicleModifierLightIntensity</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierEntityDamage']/@display_name">modpackTabVehicleModifier_AECvehicleModifierEntityDamage</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierBlockDamage']/@display_name">modpackTabVehicleModifier_AECvehicleModifierBlockDamage</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierTorque']/@display_name">modpackTabVehicleModifier_AECvehicleModifierTorque</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierVelocity']/@display_name">modpackTabVehicleModifier_AECvehicleModifierVelocity</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierFuelMax']/@display_name">modpackTabVehicleModifier_AECvehicleModifierFuelMax</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleModifierBench']/crafting_category[@name='AECvehicleModifierSelfDamage']/@display_name">modpackTabVehicleModifier_AECvehicleModifierSelfDamage</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalAssembly']/@display_name">modpackTabVehicleFinal_AECvehicleFinalAssembly</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalCar']/@display_name">modpackTabVehicleFinal_AECvehicleFinalCar</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalBus']/@display_name">modpackTabVehicleFinal_AECvehicleFinalBus</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalTruck']/@display_name">modpackTabVehicleFinal_AECvehicleFinalTruck</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalAirplane']/@display_name">modpackTabVehicleFinal_AECvehicleFinalAirplane</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalRocket']/@display_name">modpackTabVehicleFinal_AECvehicleFinalRocket</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalOther']/@display_name">modpackTabVehicleFinal_AECvehicleFinalOther</set>
+  <set xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecVehicleFinalAssemblyBench']/crafting_category[@name='AECvehicleFinalRepairs']/@display_name">modpackTabVehicleFinal_AECvehicleFinalRepairs</set>
+  <!-- EN: Archive Radio is a plain field-guide workstation with one stable category.
+RU: Архивное радио — обычная справочная станция с одной стабильной категорией.-->
+  <remove xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecQuestArchiveRadio']"/>
+  <append xpath="/ui_display_info/crafting_category_display">
+    <crafting_category_list display_type="aecQuestArchiveRadio">
+      <crafting_category name="aecQuestArchiveGuide" icon="ui_game_symbol_book_read" display_name="PZAEC_GuideTab_All"/>
+    </crafting_category_list>
+  </append>
+  <!-- EN: Remove the obsolete Head Converter / Mutation Exchange category surface.
+RU: Удаляется устаревшая категория интерфейса Конвертера голов / Обменника мутаций.-->
+  <remove xpath="/ui_display_info/crafting_category_display/crafting_category_list[@display_type='aecHeadConverter']"/>
+</configs>

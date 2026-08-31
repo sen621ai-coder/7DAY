@@ -1,0 +1,702 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: quest definitions, objectives, rewards and chain links.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения заданий, цели, награды и связи цепочек.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <set xpath="/quests/quest[@id='startQuest1']/reward[@id='note2_startQuest' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='startQuest2']/reward[@id='note3_startQuest' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='startQuest3']/reward[@id='note4_startQuest' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='startQuest4']/reward[@id='BetterWeapon_MeleeT1' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponMeleeT1']/reward[@id='BetterWeapon_RangeT1' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponRangeT1']/reward[@id='BetterWeapon_MeleeT2' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponMeleeT2']/reward[@id='BetterWeapon_RangeT2' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponRangeT2']/reward[@id='BetterWeapon_RangeT3' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponRangeT3']/reward[@id='BetterWeapon_ImpMods' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponImpMods']/reward[@id='BetterWeapon_UniqueMods' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponUniqueMods']/reward[@id='BetterWeapon_LastHunt1' and @type='LootItem']/@type">Item</set>
+  <set xpath="/quests/quest[@id='BetterWeaponLastHunt1']/reward[@id='BetterWeapon_LastHunt2' and @type='LootItem']/@type">Item</set>
+  <remove xpath="/quests/quest[@id='treasure_leg_samples1']"/>
+  <remove xpath="/quests/quest[@id='treasure_leg_samples2']"/>
+  <remove xpath="/quests/quest[@id='treasure_leg_samples3']"/>
+  <remove xpath="/quests/quest[@id='RareSamples1']"/>
+  <remove xpath="/quests/quest[@id='RareSamples2']"/>
+  <remove xpath="/quests/quest[@id='RareSamples3']"/>
+  <remove xpath="/quests/quest[@id='RareSamples4']"/>
+  <remove xpath="/quests/quest[@id='RareSamples5']"/>
+  <remove xpath="/quests/quest[@id='RareSamples6']"/>
+  <remove xpath="/quests/quest[@id='RareSamples7']"/>
+  <remove xpath="/quests/quest[@id='RareSamples8']"/>
+  <remove xpath="/quests/quest[@id='RareSamples9']"/>
+  <remove xpath="/quests/quest[@id='RareSamples10']"/>
+  <!-- EN: Project Z Rare Contracts keep their original XP rewards.
+RU: Редкие контракты Project Z сохраняют исходные награды опытом.-->
+  <set xpath="/quests/quest[starts-with(@id, 'treasure_') and not(starts-with(@id, 'treasure_rare_'))]/reward[@type='Exp']/@value">1</set>
+  <append xpath="/quests[not(quest_list[@id='trader_aec_quests'])]">
+    <quest_list id="trader_aec_quests"/>
+  </append>
+  <set xpath="/quests/quest[@id='treasure_ammoJunkShell']/action[@type='GameEvent' and @id='ActionGive_ammoJunkShell']/@id">ActionGive_ammoJunkTurretShell</set>
+  <set xpath="/quests/quest[@id='treasure_ammoArrowSteelAP']/action[@type='GameEvent' and @id='ActionGive_ammoArrowStellAP']/@id">ActionGive_ammoArrowSteelAP</set>
+  <remove xpath="/quests/quest[@id='quest_whiteRiverCitizen1']/reward[@id='Chapter1_newHome' or @id='Chapter1_resCollector' or @id='bookRareSamples1']"/>
+  <!-- EN: Resources Collector starts from the trader-issued Modpack Progression Guide bundle; NewHome1 must not grant a duplicate starter.
+RU: «Сборщик ресурсов» начинается из выданного торговцем «Путеводителя по прогрессии»; NewHome1 не должен выдавать второй стартовый предмет.-->
+  <!-- EN: The progression guide keeps the research order strict: first sample → Mutation Incubator → Path to Great Power; Relay and Research Material branches unlock from the completed Incubator step.
+RU: Путеводитель сохраняет строгий порядок исследований: первый образец → Инкубатор мутаций → Путь к великой силе; ветки ретранслятора и исследовательского материала открываются после Инкубатора.-->
+  <append xpath="/quests/quest[@id='startQuest4']">
+    <reward type="Item" id="pzaecModpackProgressionBundle" value="1"/>
+  </append>
+  <!-- EN: Hide the original AEC EO storyline from normal progression while keeping upstream quest definitions available for compatibility.
+RU: Исходная сюжетная линия AEC EO скрывается из обычной прогрессии, но её определения сохраняются для совместимости.-->
+  <remove xpath="/quests/quest/reward[starts-with(@id,'aecEOTutorial') or starts-with(@id,'aecEOFieldGuideBook') or starts-with(@id,'aecEOProgressionBook')]"/>
+  <append xpath="/quests">
+    <quest id="PZAEC_Guide_Market_01">
+      <property name="name_key" value="PZAEC_Guide_Market_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_loot_sack"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="infectedTeeth" value="95" phase="1"/>
+      <reward type="Exp" value="750"/>
+      <reward type="Item" id="pzaecGuideMarket02" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_02">
+      <property name="name_key" value="PZAEC_Guide_Market_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_trader"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="internationalMarket" value="1" phase="1"/>
+      <reward type="Exp" value="1000"/>
+      <reward type="Item" id="pzaecGuideMarket03" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_03">
+      <property name="name_key" value="PZAEC_Guide_Market_03_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_03_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_03_Desc"/>
+      <property name="icon" value="ui_game_symbol_electric_power"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="questItem_CryptoMiner" value="1" phase="1"/>
+      <objective type="FetchKeep" id="cryptoMiner" value="1" phase="1"/>
+      <objective type="BlockPlace" id="cryptoMiner" value="1" phase="1"/>
+      <reward type="Exp" value="1250"/>
+      <reward type="Item" id="pzaecGuideMarket04" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_04">
+      <property name="name_key" value="PZAEC_Guide_Market_04_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_04_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_04_Desc"/>
+      <property name="icon" value="ui_game_symbol_electric_power"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="questItem_resourceBatteryNiv4" value="1" phase="1"/>
+      <objective type="FetchKeep" id="resourceBatteryNiv4" value="1" phase="1"/>
+      <reward type="Exp" value="1250"/>
+      <reward type="Item" id="pzaecGuideMarket05" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_05">
+      <property name="name_key" value="PZAEC_Guide_Market_05_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_05_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_05_Desc"/>
+      <property name="icon" value="ui_game_symbol_schematic"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="dumdum0starConnexionCard" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideMarket06" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_06">
+      <property name="name_key" value="PZAEC_Guide_Market_06_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_06_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_06_Desc"/>
+      <property name="icon" value="ui_game_symbol_coin"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="AEC_GENERIC_0_Coin" value="100" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideMarket07" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_07">
+      <property name="name_key" value="PZAEC_Guide_Market_07_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_07_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_07_Desc"/>
+      <property name="icon" value="ui_game_symbol_book_read"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="AEC_GENERIC_0_ResearchPapers" value="1" phase="1"/>
+      <reward type="Exp" value="1750"/>
+      <reward type="Item" id="pzaecGuideMarket08" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Market_08">
+      <property name="name_key" value="PZAEC_Guide_Market_08_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Market_08_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Market_08_Desc"/>
+      <property name="icon" value="ui_game_symbol_electric_power"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="questItem_PassiveBoozeBarrel001" value="1" phase="1"/>
+      <objective type="FetchKeep" id="PassiveBoozeBarrel001" value="1" phase="1"/>
+      <reward type="Exp" value="2000"/>
+    </quest>
+    <quest id="PZAEC_Guide_Research_Root">
+      <property name="name_key" value="PZAEC_Guide_Research_Root_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Research_Root_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Research_Root_Desc"/>
+      <property name="icon" value="ui_game_symbol_science"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="resourceAECMutationSampleT1" value="1" phase="1"/>
+      <reward type="Exp" value="1000"/>
+      <reward type="Item" id="pzaecGuideIncubator" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Mutator_01">
+      <property name="name_key" value="PZAEC_Guide_Mutator_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Mutator_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Mutator_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_science"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecExtremeModCraftingTable" value="1" phase="1"/>
+      <reward type="Exp" value="1250"/>
+      <reward type="Item" id="pzaecGuideMutator02" value="1"/>
+      <reward type="Item" id="pzaecGuideNecro01" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Mutator_02">
+      <property name="name_key" value="PZAEC_Guide_Mutator_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Mutator_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Mutator_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_mod"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="modAECMutatorEmpty" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideMutator03" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Mutator_03">
+      <property name="name_key" value="PZAEC_Guide_Mutator_03_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Mutator_03_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Mutator_03_Desc"/>
+      <property name="icon" value="ui_game_symbol_mod"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="modAECMutatorPower01" value="1" phase="1"/>
+      <reward type="Exp" value="2000"/>
+      <reward type="Item" id="pzaecGuideMutator04" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Mutator_04">
+      <property name="name_key" value="PZAEC_Guide_Mutator_04_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Mutator_04_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Mutator_04_Desc"/>
+      <property name="icon" value="ui_game_symbol_mod"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecUniversalToken" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modAECMutatorPower02" value="1" phase="1"/>
+      <reward type="Exp" value="2500"/>
+    </quest>
+    <quest id="PZAEC_Guide_Necro_01">
+      <property name="name_key" value="PZAEC_Guide_Necro_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Necro_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Necro_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_science"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecNecroforgeWorkbench" value="1" phase="1"/>
+      <reward type="Exp" value="2000"/>
+      <reward type="Item" id="pzaecGuideNecro02" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Necro_02">
+      <property name="name_key" value="PZAEC_Guide_Necro_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Necro_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Necro_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_ammo"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecNecroBundleAmmo9mmT00" value="1" phase="1"/>
+      <reward type="Exp" value="2500"/>
+    </quest>
+    <quest id="PZAEC_Guide_Incubator">
+      <property name="name_key" value="PZAEC_Guide_Incubator_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Incubator_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Incubator_Desc"/>
+      <property name="icon" value="ui_game_symbol_science"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecMutationIncubator" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecMutationIncubator" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideMutator01" value="1"/>
+      <reward type="Item" id="pzaecGuideRelay01" value="1"/>
+      <reward type="Item" id="pzaecGuideResearchMaterial" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Relay_01">
+      <property name="name_key" value="PZAEC_Guide_Relay_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Relay_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Relay_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestRelay" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecQuestRelay" value="1" phase="1"/>
+      <reward type="Exp" value="1000"/>
+      <reward type="Item" id="pzaecGuideRelay02" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Relay_02">
+      <property name="name_key" value="PZAEC_Guide_Relay_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Relay_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Relay_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestRelay1star" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecQuestRelay1star" value="1" phase="1"/>
+      <reward type="Exp" value="1250"/>
+      <reward type="Item" id="pzaecGuideRelay03" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Relay_03">
+      <property name="name_key" value="PZAEC_Guide_Relay_03_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Relay_03_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Relay_03_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestRelay2star" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecQuestRelay2star" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideRelay04" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Relay_04">
+      <property name="name_key" value="PZAEC_Guide_Relay_04_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Relay_04_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Relay_04_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestRelay3star" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecQuestRelay3star" value="1" phase="1"/>
+      <reward type="Exp" value="1750"/>
+      <reward type="Item" id="pzaecGuideRelay05" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Relay_05">
+      <property name="name_key" value="PZAEC_Guide_Relay_05_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Relay_05_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Relay_05_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestRelay4star" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecQuestRelay4star" value="1" phase="1"/>
+      <reward type="Exp" value="2000"/>
+      <reward type="Item" id="pzaecGuideRelay06" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Relay_06">
+      <property name="name_key" value="PZAEC_Guide_Relay_06_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Relay_06_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Relay_06_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestRelay5star" value="1" phase="1"/>
+      <objective type="BlockPlace" id="aecQuestRelay5star" value="1" phase="1"/>
+      <reward type="Exp" value="2500"/>
+    </quest>
+    <quest id="PZAEC_Guide_ResearchMaterial">
+      <property name="name_key" value="PZAEC_Guide_ResearchMaterial_Name"/>
+      <property name="description_key" value="PZAEC_Guide_ResearchMaterial_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_ResearchMaterial_Desc"/>
+      <property name="icon" value="ui_game_symbol_science"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="resourceMutationSamples" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideRadio01" value="1"/>
+      <reward type="Item" id="pzaecGuideMedicine01" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Radio_01">
+      <property name="name_key" value="PZAEC_Guide_Radio_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Radio_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Radio_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_radio"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="radioStation" value="1" phase="1"/>
+      <reward type="Exp" value="1000"/>
+      <reward type="Item" id="pzaecGuideRadio02" value="1"/>
+      <reward type="Item" id="pzaecGuideAmmo" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Radio_02">
+      <property name="name_key" value="PZAEC_Guide_Radio_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Radio_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Radio_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_book_read"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="QuestNotes" value="1" phase="1"/>
+      <reward type="Exp" value="1250"/>
+      <reward type="Item" id="pzaecGuideRadio03" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Radio_03">
+      <property name="name_key" value="PZAEC_Guide_Radio_03_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Radio_03_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Radio_03_Desc"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="RareCont_Bundle" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideRadio04" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Radio_04">
+      <property name="name_key" value="PZAEC_Guide_Radio_04_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Radio_04_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Radio_04_Desc"/>
+      <property name="icon" value="ui_game_symbol_medical"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="Ingredients_HealthT1" value="1" phase="1"/>
+      <objective type="FetchKeep" id="Elixir_HealthT1" value="1" phase="1"/>
+      <reward type="Exp" value="2000"/>
+    </quest>
+    <quest id="PZAEC_Guide_Medicine_01">
+      <property name="name_key" value="PZAEC_Guide_Medicine_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Medicine_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Medicine_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_medical"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="resourceMutagenConcentrate" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+      <reward type="Item" id="pzaecGuideMedicine02" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Medicine_02">
+      <property name="name_key" value="PZAEC_Guide_Medicine_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Medicine_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Medicine_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_medical"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="stimEquilibrium" value="1" phase="1"/>
+      <reward type="Exp" value="2000"/>
+    </quest>
+    <quest id="PZAEC_Guide_Ammo">
+      <property name="name_key" value="PZAEC_Guide_Ammo_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Ammo_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Ammo_Desc"/>
+      <property name="icon" value="ui_game_symbol_ammo"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="ammo762SmallCase100_Quest" value="1" phase="1"/>
+      <reward type="Exp" value="1500"/>
+    </quest>
+    <quest id="PZAEC_Guide_Archive">
+      <property name="name_key" value="PZAEC_Guide_Archive_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Archive_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Archive_Desc"/>
+      <property name="icon" value="ui_game_symbol_book_read"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="aecQuestArchiveRadio" value="1" phase="1"/>
+      <reward type="Exp" value="750"/>
+    </quest>
+  </append>
+  <!-- EN: User-authored Project Z radiation progression.
+RU: Пользовательская ветка радиационной прогрессии Project Z.-->
+  <append xpath="/quests">
+    <quest id="PZAEC_Guide_Radiation_01">
+      <property name="name_key" value="PZAEC_Guide_Radiation_01_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Radiation_01_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Radiation_01_Desc"/>
+      <property name="icon" value="ui_game_symbol_radiation"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="modArmorAROutfit" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modArmorARGloves" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modArmorARBoots" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modArmorARResistHelmet" value="1" phase="1"/>
+      <objective type="FetchKeep" id="drugAntiRadPills" value="1" phase="1"/>
+      <reward type="Exp" value="2500"/>
+      <reward type="Item" id="pzaecGuideRadiation02" value="1"/>
+    </quest>
+    <quest id="PZAEC_Guide_Radiation_02">
+      <property name="name_key" value="PZAEC_Guide_Radiation_02_Name"/>
+      <property name="description_key" value="PZAEC_Guide_Radiation_02_Desc"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="offer_key" value="PZAEC_Guide_Radiation_02_Desc"/>
+      <property name="icon" value="ui_game_symbol_radiation"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="FetchKeep" id="modRareArmorARResistOutfit" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modRareArmorARResistGloves" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modRareArmorARResistBoots" value="1" phase="1"/>
+      <objective type="FetchKeep" id="modRareArmorARResistHelmet" value="1" phase="1"/>
+      <objective type="FetchKeep" id="stimIrradiatedShell" value="1" phase="1"/>
+      <reward type="Exp" value="5000"/>
+    </quest>
+  </append>
+  <!-- EN: Keep the hidden AEC tutorial shell detached from the removed player-facing station.
+RU: Скрытая оболочка обучения AEC остаётся отвязанной от удалённой пользовательской станции.-->
+  <set xpath="/quests/quest[@id='aec_eo_tutorial_intro_03']/objective[@type='Craft' and @id='aecHeadConverter']/@id">aecMutationIncubator</set>
+  <!-- Complete T16 AEC clear-contract tier. The custom quest generator creates six POI variants from each area template. -->
+  <append xpath="/quests">
+    <quest id="aec_quest_T16_A1_clear" template="aec_base_A1">
+      <property name="difficulty_tier" value="6"/>
+      <variable name="name" value="aec_quest_T16_A1_name"/>
+      <variable name="offer" value="aec_quest_T16_A1_offer"/>
+      <reward type="Exp" value="200000"/>
+      <reward type="Item" id="casinoCoin" value="10000"/>
+      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6"/>
+      <reward type="Item" id="aecUniversalToken" value="250"/>
+      <reward type="Item" id="resourceAECMutationSampleT5" value="750"/>
+    </quest>
+    <quest id="aec_quest_T16_A2_clear" template="aec_base_A2">
+      <property name="difficulty_tier" value="6"/>
+      <variable name="name" value="aec_quest_T16_A2_name"/>
+      <variable name="offer" value="aec_quest_T16_A2_offer"/>
+      <reward type="Exp" value="400000"/>
+      <reward type="Item" id="casinoCoin" value="10000"/>
+      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6"/>
+      <reward type="Item" id="aecUniversalToken" value="260"/>
+      <reward type="Item" id="resourceAECMutationSampleT5" value="1500"/>
+    </quest>
+    <quest id="aec_quest_T16_A3_clear" template="aec_base_A3">
+      <property name="difficulty_tier" value="6"/>
+      <variable name="name" value="aec_quest_T16_A3_name"/>
+      <variable name="offer" value="aec_quest_T16_A3_offer"/>
+      <reward type="Exp" value="600000"/>
+      <reward type="Item" id="casinoCoin" value="10000"/>
+      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6"/>
+      <reward type="Item" id="aecUniversalToken" value="270"/>
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2250"/>
+    </quest>
+    <quest id="aec_quest_T16_A4_clear" template="aec_base_A4">
+      <property name="difficulty_tier" value="6"/>
+      <variable name="name" value="aec_quest_T16_A4_name"/>
+      <variable name="offer" value="aec_quest_T16_A4_offer"/>
+      <reward type="Exp" value="800000"/>
+      <reward type="Item" id="casinoCoin" value="10000"/>
+      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6"/>
+      <reward type="Item" id="aecUniversalToken" value="280"/>
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3000"/>
+    </quest>
+    <quest id="aec_quest_T16_A5_clear" template="aec_base_A5">
+      <property name="difficulty_tier" value="6"/>
+      <variable name="name" value="aec_quest_T16_A5_name"/>
+      <variable name="offer" value="aec_quest_T16_A5_offer"/>
+      <reward type="Exp" value="1000000"/>
+      <reward type="Item" id="casinoCoin" value="10000"/>
+      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7"/>
+      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6"/>
+      <reward type="Item" id="aecUniversalToken" value="300"/>
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3750"/>
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1"/>
+    </quest>
+  </append>
+</configs>

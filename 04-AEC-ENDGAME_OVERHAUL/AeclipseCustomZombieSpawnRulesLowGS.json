@@ -1,0 +1,5514 @@
+{
+  "_comment": "Vanilla zombie spawn rules. Tiers: 00=Normal 01=Feral 02=Radiated 03=Charged 04=Infernal.",
+  "fallbackGroup": "ZombiesAll",
+  "activationGameStage": 0,
+  "tiers": [
+    {
+      "label": "Tier 00 — Normal",
+      "minGameStage": 0,
+      "maxGameStage": 99,
+      "entries": [
+        {
+          "entityClass": "zombieArlene",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBiker",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 3,
+              "night": 3
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBoe",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBowler",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 3,
+              "night": 3
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBurnt",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBusinessMan",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieChuck",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieDarlene",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatCop",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatHawaiian",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 3,
+              "night": 3
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFemaleFat",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFrostclaw",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieInmate",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJanitor",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 2,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJoe",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLab",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLumberjack",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 2,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMaleHazmat",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMarlene",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMoe",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMutated",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieNurse",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 3,
+              "night": 3
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePartyGirl",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 3,
+              "night": 3
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePlagueSpitter",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieRancher",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieScreamer",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSkateboarder",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSoldier",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSpider",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteve",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteveCrawler",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieTomClark",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieUtilityWorker",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 3,
+              "night": 3
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieYo",
+          "tier": 0,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tier 01 — Feral",
+      "minGameStage": 100,
+      "maxGameStage": 199,
+      "entries": [
+        {
+          "entityClass": "zombieArleneFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBikerFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBoeFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBowlerFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBurntFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBusinessManFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieChuckFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieDarleneFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatCopFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatHawaiianFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFemaleFatFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFrostclawFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieInmateFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJanitorFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJoeFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLabFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLumberjackFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMaleHazmatFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMarleneFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMoeFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMutatedFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieNurseFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePartyGirlFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePlagueSpitterFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieRancherFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieScreamerFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSkateboarderFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSoldierFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSpiderFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteveFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieTomClarkFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieUtilityWorkerFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieYoFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieWightFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteveCrawlerFeral",
+          "tier": 1,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 2
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tier 02 — Radiated",
+      "minGameStage": 200,
+      "maxGameStage": 299,
+      "entries": [
+        {
+          "entityClass": "zombieArleneRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBikerRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBoeRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBowlerRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBurntRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBusinessManRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieChuckRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieDarleneRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatCopRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatHawaiianRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFemaleFatRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFrostclawRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieInmateRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJanitorRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJoeRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLabRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLumberjackRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMaleHazmatRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMarleneRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMoeRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMutatedRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieNurseRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePartyGirlRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePlagueSpitterRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieRancherRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieScreamerRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSkateboarderRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSoldierRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSpiderRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteveRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieTomClarkRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieUtilityWorkerRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieYoRadiated",
+          "tier": 2,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tier 03 — Charged",
+      "minGameStage": 300,
+      "maxGameStage": 399,
+      "entries": [
+        {
+          "entityClass": "zombieArleneCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBikerCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBoeCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBowlerCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBurntCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBusinessManCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieChuckCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieDarleneCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatCopCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatHawaiianCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFemaleFatCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFrostclawCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieInmateCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJanitorCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJoeCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLabCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLumberjackCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMaleHazmatCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMarleneCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMoeCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMutatedCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieNurseCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePartyGirlCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePlagueSpitterCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieRancherCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieScreamerCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSkateboarderCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSoldierCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSpiderCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteveCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieTomClarkCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieUtilityWorkerCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieYoCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieWightCharged",
+          "tier": 3,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tier 04 — Infernal",
+      "minGameStage": 400,
+      "maxGameStage": 9999,
+      "entries": [
+        {
+          "entityClass": "zombieArleneInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBikerInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBoeInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBowlerInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBurntInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieBusinessManInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieChuckInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieDarleneInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatCopInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFatHawaiianInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFemaleFatInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieFrostclawInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieInmateInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJanitorInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieJoeInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLabInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieLumberjackInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMaleHazmatInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMarleneInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMoeInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieMutatedInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 100,
+              "night": 100
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieNurseInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePartyGirlInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombiePlagueSpitterInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 0,
+              "night": 0
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieRancherInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 100,
+              "night": 100
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "snow",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieScreamerInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSkateboarderInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSoldierInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSpiderInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieSteveInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieTomClarkInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieUtilityWorkerInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieYoInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "desert",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "snow",
+              "day": 1,
+              "night": 1
+            },
+            {
+              "biome": "wasteland",
+              "day": 1,
+              "night": 1
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieWightInfernal",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        },
+        {
+          "entityClass": "zombieDemolition",
+          "tier": 4,
+          "isBoss": false,
+          "weights": [
+            {
+              "biome": "forest",
+              "day": 0,
+              "night": 0
+            },
+            {
+              "biome": "desert",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "burnt_forest",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "snow",
+              "day": 10,
+              "night": 10
+            },
+            {
+              "biome": "wasteland",
+              "day": 10,
+              "night": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

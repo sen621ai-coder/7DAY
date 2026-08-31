@@ -1,0 +1,2227 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+	<append xpath="/buffs">
+	
+		<buff name="buffAECExtremeDecoClub" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/ClubIron/clubIronPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/ClubIron/clubIronPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/ClubIron/clubIronPrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="clubIronPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="clubIronPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="clubIronPrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoBat" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Bat/bat_Prefab.prefab" local_offset="0.1,0.03,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Bat/bat_Prefab.prefab" local_offset="0.1,0.03,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/Bat/bat_Prefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="bat_Prefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="bat_Prefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="bat_Prefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoTorch" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Tools/torch02_unlitPrefab.prefab" local_offset="0.05,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Tools/torch02_unlitPrefab.prefab" local_offset="0.05,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Tools/torch02_unlitPrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="torch02_unlitPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="torch02_unlitPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="torch02_unlitPrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoKnife" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Knives/hunting_knifePrefab.prefab" local_offset="0.1,0.04,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Knives/hunting_knifePrefab.prefab" local_offset="0.1,0.04,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/Knives/hunting_knifePrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="hunting_knifePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="hunting_knifePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="hunting_knifePrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoMachete" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Knives/machetePrefab.prefab" local_offset="0.1,0.04,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Knives/machetePrefab.prefab" local_offset="0.1,0.04,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/Knives/machetePrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="machetePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="machetePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="machetePrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoSledge" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/SledgeHammer/steelSledgehammerPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/SledgeHammer/steelSledgehammerPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/SledgeHammer/steelSledgehammerPrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="steelSledgehammerPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="steelSledgehammerPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="steelSledgehammerPrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoSpear" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Spear/spear_steel_Prefab.prefab" local_offset="0.14,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Spear/spear_steel_Prefab.prefab" local_offset="0.14,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/Spear/spear_steel_Prefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="spear_steel_Prefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="spear_steel_Prefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="spear_steel_Prefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoAxe" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Axe/steelAxePrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Axe/steelAxePrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/Axe/steelAxePrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="steelAxePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="steelAxePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="steelAxePrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoWrench" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Tools/wrenchPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Tools/wrenchPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Tools/wrenchPrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="wrenchPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="wrenchPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="wrenchPrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoBaton" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/TaserBaton/TaserBatonPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/TaserBaton/TaserBatonPrefab.prefab" local_offset="0.08,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/TaserBaton/TaserBatonPrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="TaserBatonPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="TaserBatonPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="TaserBatonPrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoMykirShieldLeftHand" hidden="true" duration="0">
+			<stack_type value="ignore"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Entities/LootContainers/doorSteelStainlessFullPrefab.prefab" local_offset="-0.233,-0.077,-0.3466" local_rotation="0.1632,174.6825,158.9352" local_scale="0.6418,0.6279,1" parent_transform="LeftHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Entities/LootContainers/doorSteelStainlessFullPrefab.prefab" local_offset="-0.233,-0.077,-0.3466" local_rotation="0.1632,174.6825,158.9352" local_scale="0.6418,0.6279,1" parent_transform="LeftHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Entities/LootContainers/doorSteelStainlessFullPrefab.prefab" parent_transform="LeftHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="doorSteelStainlessFullPrefab" parent_transform="LeftHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="doorSteelStainlessFullPrefab" parent_transform="LeftHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="doorSteelStainlessFullPrefab" parent_transform="LeftHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoKnuckles" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Knuckles/knucklesSpikedRight_Prefab.prefab" local_offset="0.03,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Melee/Knuckles/knucklesSpikedRight_Prefab.prefab" local_offset="0.03,0.02,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Melee/Knuckles/knucklesSpikedRight_Prefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="knucklesSpikedRight_Prefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="knucklesSpikedRight_Prefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="knucklesSpikedRight_Prefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoM60" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Ranged/MachineGun/m60MachinegunPrefab.prefab" local_offset="0.18,0.03,-0.07" local_rotation="187,-80,90" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Ranged/MachineGun/m60MachinegunPrefab.prefab" local_offset="0.18,0.03,-0.07" local_rotation="187,-80,90" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Ranged/MachineGun/m60MachinegunPrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="m60MachinegunPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="m60MachinegunPrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="m60MachinegunPrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeDecoLeverAction" hidden="true" duration="10">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Ranged/LeverActionRifle/leverActionRiflePrefab.prefab" local_offset="0.12,0.03,0" local_rotation="270,180,-180" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Other/Items/Weapons/Ranged/LeverActionRifle/leverActionRiflePrefab.prefab" local_offset="0.12,0.03,0" local_rotation="270,180,-180" parent_transform="RightHand">
+					<requirement name="!HasAttachedPrefab" prefab="@:Other/Items/Weapons/Ranged/LeverActionRifle/leverActionRiflePrefab.prefab" parent_transform="RightHand"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="leverActionRiflePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="leverActionRiflePrefab" parent_transform="RightHand"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="leverActionRiflePrefab" parent_transform="RightHand"/>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeT15DecoVultureWings" hidden="true" duration="0">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Entities/Animals/Vulture/animalBirdVulture.prefab" local_offset="-0.1,0.3,0.2" local_rotation="-45,0,0" local_scale="1.5,1.5,1.5" parent_transform="Spine"/>
+				<triggered_effect trigger="onSelfBuffStart" action="SetTransformActive" active="false" parent_transform="Spine" transform_path="bodyMesh"/>
+				<triggered_effect trigger="onSelfBuffStart" action="SetTransformActive" active="false" parent_transform="Spine" transform_path="tailFeathersMesh"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Entities/Animals/Vulture/animalBirdVulture.prefab" local_offset="-0.1,0.3,0.2" local_rotation="-45,0,0" local_scale="1.5,1.5,1.5" parent_transform="Spine">
+					<requirement name="!HasAttachedPrefab" prefab="@:Entities/Animals/Vulture/animalBirdVulture.prefab" parent_transform="Spine"/>
+				</triggered_effect>
+			</effect_group>
+		</buff>
+
+		<buff name="buffAECExtremeT15DecoCowSkullHorns" hidden="true" duration="0">
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="AttachPrefabToEntity" prefab="@:Entities/OutdoorDecor/cowSkullPrefab.prefab" local_offset="0,0.186527,0.178302" local_rotation="51.8456,0,0" local_scale="0.167649,0.606179,0.0823882" parent_transform="Head"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AttachPrefabToEntity" prefab="@:Entities/OutdoorDecor/cowSkullPrefab.prefab" local_offset="0,0.186527,0.178302" local_rotation="51.8456,0,0" local_scale="0.167649,0.606179,0.0823882" parent_transform="Head">
+					<requirement name="!HasAttachedPrefab" prefab="@:Entities/OutdoorDecor/cowSkullPrefab.prefab" parent_transform="Head"/>
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffRemove" action="RemovePrefabFromEntity" prefab="cowSkullPrefab" parent_transform="Head"/>
+				<triggered_effect trigger="onSelfDied" action="RemovePrefabFromEntity" prefab="cowSkullPrefab" parent_transform="Head"/>
+				<triggered_effect trigger="onSelfLeaveGame" action="RemovePrefabFromEntity" prefab="cowSkullPrefab" parent_transform="Head"/>
+			</effect_group>
+		</buff>
+
+		<!-- ══════════════════════════════════════════════════════════════════
+		     Heatmap threat level display buffs
+		     Applied server-side by AeclipseCustomZombieSpawner when the player
+		     is inside a hot cell (heatmap escalation zone).
+		     Pure display — no gameplay effects.
+		     ══════════════════════════════════════════════════════════════════ -->
+		<!-- Safe Zone (green — no active heat/escalation) -->
+    <buff name="buffAECNewbieProtection" name_key="buffAECNewbieProtection" icon="ui_game_symbol_tree" icon_color="80,220,80" remove_on_death="true" showonhud="true" description_key="buffAECNewbieProtectionDesc">
+      <display_value_key value="buffAECNewbieProtection"/>
+      <display_value value="0"/>
+      <duration value="30"/>
+    </buff>
+		<buff name="buffAECSafeZone" name_key="buffAECSafeZone" icon="ui_game_symbol_map" icon_color="80,220,80" remove_on_death="true" showonhud="true" description_key="buffAECSafeZoneDesc">
+			<display_value_key value="buffAECSafeZone"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff>
+		<!-- Hazard L0 (blue — heat building, no escalation yet) -->
+		<buff name="buffAECHeatL0" name_key="buffAECHeatL0" icon="ui_game_symbol_map" icon_color="100,180,255" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL0">
+			<display_value_key value="buffAECHeatL0"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff>
+		<!-- Hazard L1 (grey) -->
+		<buff name="buffAECHeatL1T5" name_key="buffAECHeatL1T5" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T5"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T6" name_key="buffAECHeatL1T6" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T6"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T7" name_key="buffAECHeatL1T7" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T7"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T8" name_key="buffAECHeatL1T8" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T8"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T9" name_key="buffAECHeatL1T9" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T9"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T10" name_key="buffAECHeatL1T10" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T10"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T11" name_key="buffAECHeatL1T11" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T11"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T12" name_key="buffAECHeatL1T12" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T12"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T13" name_key="buffAECHeatL1T13" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T13"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T14" name_key="buffAECHeatL1T14" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T14"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL1T15" name_key="buffAECHeatL1T15" icon="ui_game_symbol_map" icon_color="180,180,180" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL1">
+			<display_value_key value="buffAECHeatL1T15"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><!-- Hazard L2 (yellow) -->
+		<buff name="buffAECHeatL2T5" name_key="buffAECHeatL2T5" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T5"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T6" name_key="buffAECHeatL2T6" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T6"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T7" name_key="buffAECHeatL2T7" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T7"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T8" name_key="buffAECHeatL2T8" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T8"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T9" name_key="buffAECHeatL2T9" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T9"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T10" name_key="buffAECHeatL2T10" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T10"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T11" name_key="buffAECHeatL2T11" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T11"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T12" name_key="buffAECHeatL2T12" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T12"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T13" name_key="buffAECHeatL2T13" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T13"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T14" name_key="buffAECHeatL2T14" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T14"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL2T15" name_key="buffAECHeatL2T15" icon="ui_game_symbol_map" icon_color="255,220,50" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL2">
+			<display_value_key value="buffAECHeatL2T15"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><!-- Hazard L3 (orange) -->
+		<buff name="buffAECHeatL3T5" name_key="buffAECHeatL3T5" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T5"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T6" name_key="buffAECHeatL3T6" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T6"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T7" name_key="buffAECHeatL3T7" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T7"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T8" name_key="buffAECHeatL3T8" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T8"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T9" name_key="buffAECHeatL3T9" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T9"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T10" name_key="buffAECHeatL3T10" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T10"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T11" name_key="buffAECHeatL3T11" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T11"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T12" name_key="buffAECHeatL3T12" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T12"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T13" name_key="buffAECHeatL3T13" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T13"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T14" name_key="buffAECHeatL3T14" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T14"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL3T15" name_key="buffAECHeatL3T15" icon="ui_game_symbol_map" icon_color="255,155,0" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL3">
+			<display_value_key value="buffAECHeatL3T15"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><!-- Hazard L4 (red-orange) -->
+		<buff name="buffAECHeatL4T5" name_key="buffAECHeatL4T5" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T5"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T6" name_key="buffAECHeatL4T6" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T6"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T7" name_key="buffAECHeatL4T7" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T7"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T8" name_key="buffAECHeatL4T8" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T8"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T9" name_key="buffAECHeatL4T9" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T9"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T10" name_key="buffAECHeatL4T10" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T10"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T11" name_key="buffAECHeatL4T11" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T11"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T12" name_key="buffAECHeatL4T12" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T12"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T13" name_key="buffAECHeatL4T13" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T13"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T14" name_key="buffAECHeatL4T14" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T14"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL4T15" name_key="buffAECHeatL4T15" icon="ui_game_symbol_map" icon_color="255,80,20" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL4">
+			<display_value_key value="buffAECHeatL4T15"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><!-- Hazard L5 (red, blink) -->
+		<buff name="buffAECHeatL5T5" name_key="buffAECHeatL5T5" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T5"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T6" name_key="buffAECHeatL5T6" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T6"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T7" name_key="buffAECHeatL5T7" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T7"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T8" name_key="buffAECHeatL5T8" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T8"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T9" name_key="buffAECHeatL5T9" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T9"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T10" name_key="buffAECHeatL5T10" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T10"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T11" name_key="buffAECHeatL5T11" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T11"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T12" name_key="buffAECHeatL5T12" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T12"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T13" name_key="buffAECHeatL5T13" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T13"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T14" name_key="buffAECHeatL5T14" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T14"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+		</buff><buff name="buffAECHeatL5T15" name_key="buffAECHeatL5T15" icon="ui_game_symbol_map" icon_color="200,0,0" icon_blink="true" remove_on_death="true" showonhud="true" description_key="buffAECHeatDescL5">
+			<display_value_key value="buffAECHeatL5T15"/>
+			<display_value value="0"/>
+			<duration value="20"/>
+                </buff>
+
+        <!-- CallGameEvent sync le niveau progression, puis on écrit les CVars depuis ProgressionLevel -->
+        <buff name="buffAecTierWatcher" hidden="true" remove_on_death="false">
+            <stack_type value="ignore"/>
+            <duration value="999999"/>
+            <update_rate value="60"/>
+            <effect_group>
+                <triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="AecTierStageSync"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="CallGameEvent" target="self" event="AecTierStageSync"/>
+                <triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="AecTierStageSyncLowGS"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="CallGameEvent" target="self" event="AecTierStageSyncLowGS"/>
+                <!-- T00 A1 : GS >= 0 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="1"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="1"/></triggered_effect>
+                <!-- T00 A2 : GS >= 20 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="2"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="2"/></triggered_effect>
+                <!-- T00 A3 : GS >= 40 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="3"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="3"/></triggered_effect>
+                <!-- T00 A4 : GS >= 60 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="4"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="4"/></triggered_effect>
+                <!-- T00 A5 : GS >= 80 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T00A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="5"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T00A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="5"/></triggered_effect>
+                <!-- T01 A1 : GS >= 100 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="6"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="6"/></triggered_effect>
+                <!-- T01 A2 : GS >= 120 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="7"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="7"/></triggered_effect>
+                <!-- T01 A3 : GS >= 140 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="8"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="8"/></triggered_effect>
+                <!-- T01 A4 : GS >= 160 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="9"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="9"/></triggered_effect>
+                <!-- T01 A5 : GS >= 180 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T01A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="10"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T01A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="10"/></triggered_effect>
+                <!-- T02 A1 : GS >= 200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="11"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="11"/></triggered_effect>
+                <!-- T02 A2 : GS >= 220 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="12"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="12"/></triggered_effect>
+                <!-- T02 A3 : GS >= 240 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="13"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="13"/></triggered_effect>
+                <!-- T02 A4 : GS >= 260 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="14"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="14"/></triggered_effect>
+                <!-- T02 A5 : GS >= 280 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T02A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="15"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T02A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="15"/></triggered_effect>
+                <!-- T03 A1 : GS >= 300 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="16"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="16"/></triggered_effect>
+                <!-- T03 A2 : GS >= 320 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="17"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="17"/></triggered_effect>
+                <!-- T03 A3 : GS >= 340 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="18"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="18"/></triggered_effect>
+                <!-- T03 A4 : GS >= 360 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="19"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="19"/></triggered_effect>
+                <!-- T03 A5 : GS >= 380 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T03A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="20"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T03A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="20"/></triggered_effect>
+                <!-- T04 A1 : GS >= 400 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="21"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="21"/></triggered_effect>
+                <!-- T04 A2 : GS >= 420 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="22"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="22"/></triggered_effect>
+                <!-- T04 A3 : GS >= 440 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="23"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="23"/></triggered_effect>
+                <!-- T04 A4 : GS >= 460 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="24"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="24"/></triggered_effect>
+                <!-- T04 A5 : GS >= 480 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T04A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="25"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T04A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlockLowGS" operation="GTE" value="25"/></triggered_effect>
+                <!-- T05 A1 : GS >= 600 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="1"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="1"/></triggered_effect>
+                <!-- T05 A2 : GS >= 720 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="2"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="2"/></triggered_effect>
+                <!-- T05 A3 : GS >= 840 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="3"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="3"/></triggered_effect>
+                <!-- T05 A4 : GS >= 960 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="4"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="4"/></triggered_effect>
+                <!-- T05 A5 : GS >= 1080 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T05A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="5"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T05A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="5"/></triggered_effect>
+                <!-- T06 A1 : GS >= 1200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="6"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="6"/></triggered_effect>
+                <!-- T06 A2 : GS >= 1360 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="7"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="7"/></triggered_effect>
+                <!-- T06 A3 : GS >= 1520 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="8"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="8"/></triggered_effect>
+                <!-- T06 A4 : GS >= 1680 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="9"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="9"/></triggered_effect>
+                <!-- T06 A5 : GS >= 1840 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T06A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="10"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T06A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="10"/></triggered_effect>
+                <!-- T07 A1 : GS >= 2000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="11"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="11"/></triggered_effect>
+                <!-- T07 A2 : GS >= 2240 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="12"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="12"/></triggered_effect>
+                <!-- T07 A3 : GS >= 2480 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="13"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="13"/></triggered_effect>
+                <!-- T07 A4 : GS >= 2720 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="14"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="14"/></triggered_effect>
+                <!-- T07 A5 : GS >= 2960 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T07A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="15"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T07A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="15"/></triggered_effect>
+                <!-- T08 A1 : GS >= 3200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="16"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="16"/></triggered_effect>
+                <!-- T08 A2 : GS >= 3560 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="17"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="17"/></triggered_effect>
+                <!-- T08 A3 : GS >= 3920 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="18"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="18"/></triggered_effect>
+                <!-- T08 A4 : GS >= 4280 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="19"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="19"/></triggered_effect>
+                <!-- T08 A5 : GS >= 4640 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T08A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="20"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T08A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="20"/></triggered_effect>
+                <!-- T09 A1 : GS >= 5000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="21"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="21"/></triggered_effect>
+                <!-- T09 A2 : GS >= 5500 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="22"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="22"/></triggered_effect>
+                <!-- T09 A3 : GS >= 6000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="23"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="23"/></triggered_effect>
+                <!-- T09 A4 : GS >= 6500 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="24"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="24"/></triggered_effect>
+                <!-- T09 A5 : GS >= 7000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T09A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="25"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T09A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="25"/></triggered_effect>
+                <!-- T10 A1 : GS >= 7500 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="26"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="26"/></triggered_effect>
+                <!-- T10 A2 : GS >= 8100 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="27"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="27"/></triggered_effect>
+                <!-- T10 A3 : GS >= 8700 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="28"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="28"/></triggered_effect>
+                <!-- T10 A4 : GS >= 9300 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="29"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="29"/></triggered_effect>
+                <!-- T10 A5 : GS >= 9900 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T10A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="30"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T10A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="30"/></triggered_effect>
+                <!-- T11 A1 : GS >= 10500 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="31"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="31"/></triggered_effect>
+                <!-- T11 A2 : GS >= 11200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="32"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="32"/></triggered_effect>
+                <!-- T11 A3 : GS >= 11900 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="33"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="33"/></triggered_effect>
+                <!-- T11 A4 : GS >= 12600 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="34"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="34"/></triggered_effect>
+                <!-- T11 A5 : GS >= 13300 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T11A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="35"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T11A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="35"/></triggered_effect>
+                <!-- T12 A1 : GS >= 14000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="36"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="36"/></triggered_effect>
+                <!-- T12 A2 : GS >= 14800 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="37"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="37"/></triggered_effect>
+                <!-- T12 A3 : GS >= 15600 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="38"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="38"/></triggered_effect>
+                <!-- T12 A4 : GS >= 16400 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="39"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="39"/></triggered_effect>
+                <!-- T12 A5 : GS >= 17200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T12A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="40"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T12A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="40"/></triggered_effect>
+                <!-- T13 A1 : GS >= 18000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="41"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="41"/></triggered_effect>
+                <!-- T13 A2 : GS >= 18800 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="42"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="42"/></triggered_effect>
+                <!-- T13 A3 : GS >= 19600 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="43"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="43"/></triggered_effect>
+                <!-- T13 A4 : GS >= 20400 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="44"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="44"/></triggered_effect>
+                <!-- T13 A5 : GS >= 21200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T13A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="45"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T13A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="45"/></triggered_effect>
+                <!-- T14 A1 : GS >= 22000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="46"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="46"/></triggered_effect>
+                <!-- T14 A2 : GS >= 22600 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="47"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="47"/></triggered_effect>
+                <!-- T14 A3 : GS >= 23200 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="48"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="48"/></triggered_effect>
+                <!-- T14 A4 : GS >= 23800 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="49"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="49"/></triggered_effect>
+                <!-- T14 A5 : GS >= 24400 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T14A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="50"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T14A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="50"/></triggered_effect>
+                <!-- T15 A1 : GS >= 25000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="51"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A1" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A1" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="51"/></triggered_effect>
+                <!-- T15 A2 : GS >= 26000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="52"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A2" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A2" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="52"/></triggered_effect>
+                <!-- T15 A3 : GS >= 27000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="53"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A3" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A3" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="53"/></triggered_effect>
+                <!-- T15 A4 : GS >= 28000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="54"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A4" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A4" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="54"/></triggered_effect>
+                <!-- T15 A5 : GS >= 29000 -->
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="AecGS_T15A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="55"/></triggered_effect>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A5" operation="set" value="0"/>
+                <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="AecGS_T15A5" operation="set" value="1"><requirement name="ProgressionLevel" progression_name="aecTierUnlock" operation="GTE" value="55"/></triggered_effect>
+            </effect_group>
+        </buff>
+    <buff name="buffAECNemesisTitleRank0_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_01_PlayerAura" name_key="buffAECNemesisTitleRank0_01_PlayerAura" description_key="buffAECNemesisTitleRank0_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Lost"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_02_PlayerAura" name_key="buffAECNemesisTitleRank0_02_PlayerAura" description_key="buffAECNemesisTitleRank0_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Weak"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_03_PlayerAura" name_key="buffAECNemesisTitleRank0_03_PlayerAura" description_key="buffAECNemesisTitleRank0_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Wanderer"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_04_PlayerAura" name_key="buffAECNemesisTitleRank0_04_PlayerAura" description_key="buffAECNemesisTitleRank0_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Forgotten"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_05_PlayerAura" name_key="buffAECNemesisTitleRank0_05_PlayerAura" description_key="buffAECNemesisTitleRank0_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Scarred"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_06_PlayerAura" name_key="buffAECNemesisTitleRank0_06_PlayerAura" description_key="buffAECNemesisTitleRank0_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Feral"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_07_PlayerAura" name_key="buffAECNemesisTitleRank0_07_PlayerAura" description_key="buffAECNemesisTitleRank0_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Drifter"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_08_PlayerAura" name_key="buffAECNemesisTitleRank0_08_PlayerAura" description_key="buffAECNemesisTitleRank0_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Shambling"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_09_PlayerAura" name_key="buffAECNemesisTitleRank0_09_PlayerAura" description_key="buffAECNemesisTitleRank0_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Crawling"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank0_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank0_10_PlayerAura" name_key="buffAECNemesisTitleRank0_10_PlayerAura" description_key="buffAECNemesisTitleRank0_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Hollow"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_01_PlayerAura" name_key="buffAECNemesisTitleRank1_01_PlayerAura" description_key="buffAECNemesisTitleRank1_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Stalker"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_02_PlayerAura" name_key="buffAECNemesisTitleRank1_02_PlayerAura" description_key="buffAECNemesisTitleRank1_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Hunter"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_03_PlayerAura" name_key="buffAECNemesisTitleRank1_03_PlayerAura" description_key="buffAECNemesisTitleRank1_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Ruthless"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_04_PlayerAura" name_key="buffAECNemesisTitleRank1_04_PlayerAura" description_key="buffAECNemesisTitleRank1_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Bloodied"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_05_PlayerAura" name_key="buffAECNemesisTitleRank1_05_PlayerAura" description_key="buffAECNemesisTitleRank1_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Savage"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_06_PlayerAura" name_key="buffAECNemesisTitleRank1_06_PlayerAura" description_key="buffAECNemesisTitleRank1_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Relentless"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_07_PlayerAura" name_key="buffAECNemesisTitleRank1_07_PlayerAura" description_key="buffAECNemesisTitleRank1_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Fearsome"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_08_PlayerAura" name_key="buffAECNemesisTitleRank1_08_PlayerAura" description_key="buffAECNemesisTitleRank1_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Vicious"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_09_PlayerAura" name_key="buffAECNemesisTitleRank1_09_PlayerAura" description_key="buffAECNemesisTitleRank1_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Merciless"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank1_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank1_10_PlayerAura" name_key="buffAECNemesisTitleRank1_10_PlayerAura" description_key="buffAECNemesisTitleRank1_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Hated"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_01_PlayerAura" name_key="buffAECNemesisTitleRank2_01_PlayerAura" description_key="buffAECNemesisTitleRank2_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Executioner"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_02_PlayerAura" name_key="buffAECNemesisTitleRank2_02_PlayerAura" description_key="buffAECNemesisTitleRank2_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Butcher"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_03_PlayerAura" name_key="buffAECNemesisTitleRank2_03_PlayerAura" description_key="buffAECNemesisTitleRank2_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Ravager"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_04_PlayerAura" name_key="buffAECNemesisTitleRank2_04_PlayerAura" description_key="buffAECNemesisTitleRank2_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Destroyer"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_05_PlayerAura" name_key="buffAECNemesisTitleRank2_05_PlayerAura" description_key="buffAECNemesisTitleRank2_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Defiler"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_06_PlayerAura" name_key="buffAECNemesisTitleRank2_06_PlayerAura" description_key="buffAECNemesisTitleRank2_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Reaper"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_07_PlayerAura" name_key="buffAECNemesisTitleRank2_07_PlayerAura" description_key="buffAECNemesisTitleRank2_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Tormentor"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_08_PlayerAura" name_key="buffAECNemesisTitleRank2_08_PlayerAura" description_key="buffAECNemesisTitleRank2_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Bonebreaker"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_09_PlayerAura" name_key="buffAECNemesisTitleRank2_09_PlayerAura" description_key="buffAECNemesisTitleRank2_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Fleshrender"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank2_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank2_10_PlayerAura" name_key="buffAECNemesisTitleRank2_10_PlayerAura" description_key="buffAECNemesisTitleRank2_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Skullcrusher"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_01_PlayerAura" name_key="buffAECNemesisTitleRank3_01_PlayerAura" description_key="buffAECNemesisTitleRank3_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Unbroken"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_02_PlayerAura" name_key="buffAECNemesisTitleRank3_02_PlayerAura" description_key="buffAECNemesisTitleRank3_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Undying"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_03_PlayerAura" name_key="buffAECNemesisTitleRank3_03_PlayerAura" description_key="buffAECNemesisTitleRank3_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Invincible"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_04_PlayerAura" name_key="buffAECNemesisTitleRank3_04_PlayerAura" description_key="buffAECNemesisTitleRank3_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Conqueror"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_05_PlayerAura" name_key="buffAECNemesisTitleRank3_05_PlayerAura" description_key="buffAECNemesisTitleRank3_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Warmaster"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_06_PlayerAura" name_key="buffAECNemesisTitleRank3_06_PlayerAura" description_key="buffAECNemesisTitleRank3_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Dominator"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_07_PlayerAura" name_key="buffAECNemesisTitleRank3_07_PlayerAura" description_key="buffAECNemesisTitleRank3_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Warlord"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_08_PlayerAura" name_key="buffAECNemesisTitleRank3_08_PlayerAura" description_key="buffAECNemesisTitleRank3_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Harvester"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_09_PlayerAura" name_key="buffAECNemesisTitleRank3_09_PlayerAura" description_key="buffAECNemesisTitleRank3_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Devastator"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank3_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank3_10_PlayerAura" name_key="buffAECNemesisTitleRank3_10_PlayerAura" description_key="buffAECNemesisTitleRank3_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Overwhelming"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_01_PlayerAura" name_key="buffAECNemesisTitleRank4_01_PlayerAura" description_key="buffAECNemesisTitleRank4_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Cursed"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_02_PlayerAura" name_key="buffAECNemesisTitleRank4_02_PlayerAura" description_key="buffAECNemesisTitleRank4_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Forsaken"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_03_PlayerAura" name_key="buffAECNemesisTitleRank4_03_PlayerAura" description_key="buffAECNemesisTitleRank4_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Eternal"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_04_PlayerAura" name_key="buffAECNemesisTitleRank4_04_PlayerAura" description_key="buffAECNemesisTitleRank4_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Corrupted"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_05_PlayerAura" name_key="buffAECNemesisTitleRank4_05_PlayerAura" description_key="buffAECNemesisTitleRank4_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Harbinger"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_06_PlayerAura" name_key="buffAECNemesisTitleRank4_06_PlayerAura" description_key="buffAECNemesisTitleRank4_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Cataclysm"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_07_PlayerAura" name_key="buffAECNemesisTitleRank4_07_PlayerAura" description_key="buffAECNemesisTitleRank4_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Doombringer"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_08_PlayerAura" name_key="buffAECNemesisTitleRank4_08_PlayerAura" description_key="buffAECNemesisTitleRank4_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Worldeater"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_09_PlayerAura" name_key="buffAECNemesisTitleRank4_09_PlayerAura" description_key="buffAECNemesisTitleRank4_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Plagueborn"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank4_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank4_10_PlayerAura" name_key="buffAECNemesisTitleRank4_10_PlayerAura" description_key="buffAECNemesisTitleRank4_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Deathless"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_01_PlayerAura" name_key="buffAECNemesisTitleRank5_01_PlayerAura" description_key="buffAECNemesisTitleRank5_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Apocalypse"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_02_PlayerAura" name_key="buffAECNemesisTitleRank5_02_PlayerAura" description_key="buffAECNemesisTitleRank5_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Endbringer"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_03_PlayerAura" name_key="buffAECNemesisTitleRank5_03_PlayerAura" description_key="buffAECNemesisTitleRank5_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Last Hunger"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_04_PlayerAura" name_key="buffAECNemesisTitleRank5_04_PlayerAura" description_key="buffAECNemesisTitleRank5_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Extinction"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_05_PlayerAura" name_key="buffAECNemesisTitleRank5_05_PlayerAura" description_key="buffAECNemesisTitleRank5_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Nightmare King"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_06_PlayerAura" name_key="buffAECNemesisTitleRank5_06_PlayerAura" description_key="buffAECNemesisTitleRank5_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Voidborn"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_07_PlayerAura" name_key="buffAECNemesisTitleRank5_07_PlayerAura" description_key="buffAECNemesisTitleRank5_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Dark Ascendant"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_08_PlayerAura" name_key="buffAECNemesisTitleRank5_08_PlayerAura" description_key="buffAECNemesisTitleRank5_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Immortal Tyrant"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_09_PlayerAura" name_key="buffAECNemesisTitleRank5_09_PlayerAura" description_key="buffAECNemesisTitleRank5_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Herald of Ruin"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleRank5_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleRank5_10_PlayerAura" name_key="buffAECNemesisTitleRank5_10_PlayerAura" description_key="buffAECNemesisTitleRank5_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,190,30" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Lord of Decay"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_01_PlayerAura" name_key="buffAECNemesisTitleGlory_01_PlayerAura" description_key="buffAECNemesisTitleGlory_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Victorious"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_02_PlayerAura" name_key="buffAECNemesisTitleGlory_02_PlayerAura" description_key="buffAECNemesisTitleGlory_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Triumphant"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_03_PlayerAura" name_key="buffAECNemesisTitleGlory_03_PlayerAura" description_key="buffAECNemesisTitleGlory_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Unstoppable"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_04_PlayerAura" name_key="buffAECNemesisTitleGlory_04_PlayerAura" description_key="buffAECNemesisTitleGlory_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Blooded"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_05_PlayerAura" name_key="buffAECNemesisTitleGlory_05_PlayerAura" description_key="buffAECNemesisTitleGlory_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Ascendant"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_06_PlayerAura" name_key="buffAECNemesisTitleGlory_06_PlayerAura" description_key="buffAECNemesisTitleGlory_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Slayer"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_07_PlayerAura" name_key="buffAECNemesisTitleGlory_07_PlayerAura" description_key="buffAECNemesisTitleGlory_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Dreaded"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_08_PlayerAura" name_key="buffAECNemesisTitleGlory_08_PlayerAura" description_key="buffAECNemesisTitleGlory_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Unbeaten"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_09_PlayerAura" name_key="buffAECNemesisTitleGlory_09_PlayerAura" description_key="buffAECNemesisTitleGlory_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Dominant"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_10_PlayerAura" name_key="buffAECNemesisTitleGlory_10_PlayerAura" description_key="buffAECNemesisTitleGlory_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Relentless"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_11" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_11_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_11_PlayerAura" name_key="buffAECNemesisTitleGlory_11_PlayerAura" description_key="buffAECNemesisTitleGlory_11_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Terror"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_12" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_12_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_12_PlayerAura" name_key="buffAECNemesisTitleGlory_12_PlayerAura" description_key="buffAECNemesisTitleGlory_12_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Unkillable"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_13" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_13_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_13_PlayerAura" name_key="buffAECNemesisTitleGlory_13_PlayerAura" description_key="buffAECNemesisTitleGlory_13_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Dread-Crowned"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_14" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_14_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_14_PlayerAura" name_key="buffAECNemesisTitleGlory_14_PlayerAura" description_key="buffAECNemesisTitleGlory_14_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Rampant"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_15" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_15_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_15_PlayerAura" name_key="buffAECNemesisTitleGlory_15_PlayerAura" description_key="buffAECNemesisTitleGlory_15_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Exalted"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_16" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleGlory_16_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleGlory_16_PlayerAura" name_key="buffAECNemesisTitleGlory_16_PlayerAura" description_key="buffAECNemesisTitleGlory_16_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="255,120,20" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Apex"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_01" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_01_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_01_PlayerAura" name_key="buffAECNemesisTitleShame_01_PlayerAura" description_key="buffAECNemesisTitleShame_01_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Broken"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_02" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_02_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_02_PlayerAura" name_key="buffAECNemesisTitleShame_02_PlayerAura" description_key="buffAECNemesisTitleShame_02_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Humiliated"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_03" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_03_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_03_PlayerAura" name_key="buffAECNemesisTitleShame_03_PlayerAura" description_key="buffAECNemesisTitleShame_03_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Wounded"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_04" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_04_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_04_PlayerAura" name_key="buffAECNemesisTitleShame_04_PlayerAura" description_key="buffAECNemesisTitleShame_04_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Fleeing"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_05" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_05_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_05_PlayerAura" name_key="buffAECNemesisTitleShame_05_PlayerAura" description_key="buffAECNemesisTitleShame_05_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Defeated"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_06" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_06_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_06_PlayerAura" name_key="buffAECNemesisTitleShame_06_PlayerAura" description_key="buffAECNemesisTitleShame_06_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Disgraced"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_07" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_07_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_07_PlayerAura" name_key="buffAECNemesisTitleShame_07_PlayerAura" description_key="buffAECNemesisTitleShame_07_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Diminished"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_08" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_08_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_08_PlayerAura" name_key="buffAECNemesisTitleShame_08_PlayerAura" description_key="buffAECNemesisTitleShame_08_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Craven"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_09" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_09_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_09_PlayerAura" name_key="buffAECNemesisTitleShame_09_PlayerAura" description_key="buffAECNemesisTitleShame_09_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Shamed"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_10" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_10_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_10_PlayerAura" name_key="buffAECNemesisTitleShame_10_PlayerAura" description_key="buffAECNemesisTitleShame_10_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Pitiful"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_11" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_11_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_11_PlayerAura" name_key="buffAECNemesisTitleShame_11_PlayerAura" description_key="buffAECNemesisTitleShame_11_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Hollow"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_12" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_12_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_12_PlayerAura" name_key="buffAECNemesisTitleShame_12_PlayerAura" description_key="buffAECNemesisTitleShame_12_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Stumbling"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_13" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_13_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_13_PlayerAura" name_key="buffAECNemesisTitleShame_13_PlayerAura" description_key="buffAECNemesisTitleShame_13_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Scarred"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_14" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_14_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_14_PlayerAura" name_key="buffAECNemesisTitleShame_14_PlayerAura" description_key="buffAECNemesisTitleShame_14_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Crawling"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_15" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_15_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_15_PlayerAura" name_key="buffAECNemesisTitleShame_15_PlayerAura" description_key="buffAECNemesisTitleShame_15_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Forsaken"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_16" hidden="true">
+      <duration value="999999"/>
+      <stack_type value="replace"/>
+      <update_rate value="1"/>
+      <effect_group name="Aura">
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="otherAOE" range="28" buff="buffAECNemesisTitleShame_16_PlayerAura" target_tags="player"/>
+      </effect_group>
+    </buff>
+    <buff name="buffAECNemesisTitleShame_16_PlayerAura" name_key="buffAECNemesisTitleShame_16_PlayerAura" description_key="buffAECNemesisTitleShame_16_PlayerAuraDesc" icon="ui_game_symbol_near_death_trauma" icon_color="120,160,255" hidden="false" showonhud="true" remove_on_death="true">
+      <display_value_key value="NEMESIS the Wretched"/>
+      <display_value value="0"/>
+      <duration value="2"/>
+      <stack_type value="replace"/>
+    </buff>
+
+    <!--ZOMBIE MARKET-->
+  		<buff name="EnemyDot_Buff">
+			<stack_type value="ignore"/>
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="SetNavObject" nav_object="EnemyDot" add="true"/>	
+			</effect_group>
+		</buff>
+		
+		<buff name="buff_AirdropSignal01_Start" hidden="true">
+			<stack_type value="replace"/>
+			<duration value="1"/>
+			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="Spawner_AirdropSignal01"/>	  
+			</effect_group>
+		</buff>
+
+		<buff name="buff_AirdropSignal02_Start" hidden="true">
+			<stack_type value="replace"/>
+			<duration value="1"/>
+			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="Spawner_AirdropSignal02"/>	  
+			</effect_group>
+		</buff>
+
+		<buff name="buff_AirdropSignal03_Start" hidden="true">
+			<stack_type value="replace"/>
+			<duration value="1"/>
+			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="Spawner_AirdropSignal03"/>	  
+			</effect_group>
+		</buff>
+
+		<buff name="buff_AirdropSignal04_Start" hidden="true">
+			<stack_type value="replace"/>
+			<duration value="1"/>
+			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="Spawner_AirdropSignal04"/>	  
+			</effect_group>
+		</buff>
+
+		<buff name="buff_AirdropSignal05_Start" hidden="true">
+			<stack_type value="replace"/>
+			<duration value="1"/>
+			
+			<effect_group>
+				<triggered_effect trigger="onSelfBuffStart" action="CallGameEvent" target="self" event="Spawner_AirdropSignal05"/>	  
+			</effect_group>
+		</buff>
+
+
+
+</append>
+
+  <!-- Disable vanilla biome storm debuff chains when AEC-ENDGAME_OVERHAUL is installed -->
+  <remove xpath="/buffs/buff[@name='buffBurnt_Storm']"/>
+  <remove xpath="/buffs/buff[@name='buffBurnt_Storm_Stage01']"/>
+  <remove xpath="/buffs/buff[@name='buffBurnt_Storm_Stage02']"/>
+  <remove xpath="/buffs/buff[@name='buffBurnt_Storm_Recover01']"/>
+
+  <remove xpath="/buffs/buff[@name='buffDesert_Storm']"/>
+  <remove xpath="/buffs/buff[@name='buffDesert_Storm_Stage01']"/>
+  <remove xpath="/buffs/buff[@name='buffDesert_Storm_Stage02']"/>
+  <remove xpath="/buffs/buff[@name='buffDesert_Storm_Recover01']"/>
+
+  <remove xpath="/buffs/buff[@name='buffSnow_Storm']"/>
+  <remove xpath="/buffs/buff[@name='buffSnow_Storm_Stage01']"/>
+  <remove xpath="/buffs/buff[@name='buffSnow_Storm_Stage02']"/>
+  <remove xpath="/buffs/buff[@name='buffSnow_Storm_Recover01']"/>
+
+  <remove xpath="/buffs/buff[@name='buffWasteland_Storm']"/>
+  <remove xpath="/buffs/buff[@name='buffWasteland_Storm_Stage01']"/>
+  <remove xpath="/buffs/buff[@name='buffWasteland_Storm_Stage02']"/>
+  <remove xpath="/buffs/buff[@name='buffWasteland_Storm_Recover01']"/>
+
+  <!-- Neutralize Charismatic Nature rank 5 attribute boost to avoid GS side effects in AEC quest checks. -->
+  </configs>

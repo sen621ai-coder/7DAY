@@ -1,0 +1,912 @@
+﻿<configs>
+    <append xpath="/challenges">
+        <challenge_category name="AEC Bosses T00" title_key="aecChallengeCategoryBossesT00" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Bosses T00" name="AEC Boss Hunts T00 Row 1" title_key="aecChallengeGroupBossHuntsT00"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_archerBoss_T00" title_key="aecChallengeKill_archerBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_archerBoss_T00Short" description_key="aecChallengeKill_archerBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="archerBoss" target_name_key="aecTarget_archerBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_bossAECDumdum_T00" title_key="aecChallengeKill_bossAECDumdum_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_bossAECDumdum_T00Short" description_key="aecChallengeKill_bossAECDumdum_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="bossAECDumdum" target_name_key="aecTarget_bossAECDumdum_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_doomlordBoss_T00" title_key="aecChallengeKill_doomlordBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_doomlordBoss_T00Short" description_key="aecChallengeKill_doomlordBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="doomlordBoss" target_name_key="aecTarget_doomlordBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_druidBoss_T00" title_key="aecChallengeKill_druidBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_druidBoss_T00Short" description_key="aecChallengeKill_druidBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="druidBoss" target_name_key="aecTarget_druidBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_electricdemonBoss_T00" title_key="aecChallengeKill_electricdemonBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_electricdemonBoss_T00Short" description_key="aecChallengeKill_electricdemonBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="electricdemonBoss" target_name_key="aecTarget_electricdemonBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_executionerBoss_T00" title_key="aecChallengeKill_executionerBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_executionerBoss_T00Short" description_key="aecChallengeKill_executionerBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="executionerBoss" target_name_key="aecTarget_executionerBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_explosiveeagleBoss_T00" title_key="aecChallengeKill_explosiveeagleBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_explosiveeagleBoss_T00Short" description_key="aecChallengeKill_explosiveeagleBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="explosiveeagleBoss" target_name_key="aecTarget_explosiveeagleBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_ghostBoss_T00" title_key="aecChallengeKill_ghostBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_ghostBoss_T00Short" description_key="aecChallengeKill_ghostBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="ghostBoss" target_name_key="aecTarget_ghostBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_hammerguardianBoss_T00" title_key="aecChallengeKill_hammerguardianBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_hammerguardianBoss_T00Short" description_key="aecChallengeKill_hammerguardianBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="hammerguardianBoss" target_name_key="aecTarget_hammerguardianBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_headlessBoss_T00" title_key="aecChallengeKill_headlessBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 1"
+            short_description_key="aecChallengeKill_headlessBoss_T00Short" description_key="aecChallengeKill_headlessBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="headlessBoss" target_name_key="aecTarget_headlessBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T00" name="AEC Boss Hunts T00 Row 2" title_key="aecChallengeGroupBossHuntsT00"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_hellskyliBoss_T00" title_key="aecChallengeKill_hellskyliBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_hellskyliBoss_T00Short" description_key="aecChallengeKill_hellskyliBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="hellskyliBoss" target_name_key="aecTarget_hellskyliBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_mechanicianBoss_T00" title_key="aecChallengeKill_mechanicianBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_mechanicianBoss_T00Short" description_key="aecChallengeKill_mechanicianBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="mechanicianBoss" target_name_key="aecTarget_mechanicianBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_mushroomBoss_T00" title_key="aecChallengeKill_mushroomBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_mushroomBoss_T00Short" description_key="aecChallengeKill_mushroomBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="mushroomBoss" target_name_key="aecTarget_mushroomBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_mykirBoss_T00" title_key="aecChallengeKill_mykirBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_mykirBoss_T00Short" description_key="aecChallengeKill_mykirBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="mykirBoss" target_name_key="aecTarget_mykirBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_partybeachBoss_T00" title_key="aecChallengeKill_partybeachBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_partybeachBoss_T00Short" description_key="aecChallengeKill_partybeachBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="partybeachBoss" target_name_key="aecTarget_partybeachBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_rockbreakerBoss_T00" title_key="aecChallengeKill_rockbreakerBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_rockbreakerBoss_T00Short" description_key="aecChallengeKill_rockbreakerBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="rockbreakerBoss" target_name_key="aecTarget_rockbreakerBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_RunningKamikaze_T00" title_key="aecChallengeKill_RunningKamikaze_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_RunningKamikaze_T00Short" description_key="aecChallengeKill_RunningKamikaze_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="RunningKamikaze" target_name_key="aecTarget_RunningKamikaze_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_sheriffBoss_T00" title_key="aecChallengeKill_sheriffBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_sheriffBoss_T00Short" description_key="aecChallengeKill_sheriffBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="sheriffBoss" target_name_key="aecTarget_sheriffBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_singerieBoss_T00" title_key="aecChallengeKill_singerieBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_singerieBoss_T00Short" description_key="aecChallengeKill_singerieBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="singerieBoss" target_name_key="aecTarget_singerieBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_sirenheadBoss_T00" title_key="aecChallengeKill_sirenheadBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 2"
+            short_description_key="aecChallengeKill_sirenheadBoss_T00Short" description_key="aecChallengeKill_sirenheadBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="sirenheadBoss" target_name_key="aecTarget_sirenheadBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T00" name="AEC Boss Hunts T00 Row 3" title_key="aecChallengeGroupBossHuntsT00"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_witchBoss_T00" title_key="aecChallengeKill_witchBoss_T00" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T00 Row 3"
+            short_description_key="aecChallengeKill_witchBoss_T00Short" description_key="aecChallengeKill_witchBoss_T00Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="witchBoss" target_name_key="aecTarget_witchBoss_T00" count="1"/>
+        </challenge>
+
+        <challenge_category name="AEC Bosses T03" title_key="aecChallengeCategoryBossesT03" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Bosses T03" name="AEC Boss Hunts T03 Row 1" title_key="aecChallengeGroupBossHuntsT03"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECDoomlordDemolishmanBossT03_T03" title_key="aecChallengeKill_AECDoomlordDemolishmanBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECDoomlordDemolishmanBossT03_T03Short" description_key="aecChallengeKill_AECDoomlordDemolishmanBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECDoomlordDemolishmanBossT03" target_name_key="aecTarget_AECDoomlordDemolishmanBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECElectricDemonRunnerBossT03_T03" title_key="aecChallengeKill_AECElectricDemonRunnerBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECElectricDemonRunnerBossT03_T03Short" description_key="aecChallengeKill_AECElectricDemonRunnerBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECElectricDemonRunnerBossT03" target_name_key="aecTarget_AECElectricDemonRunnerBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECExplosiveEagleBossT03_T03" title_key="aecChallengeKill_AECExplosiveEagleBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECExplosiveEagleBossT03_T03Short" description_key="aecChallengeKill_AECExplosiveEagleBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECExplosiveEagleBossT03" target_name_key="aecTarget_AECExplosiveEagleBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECGhostBossT03_T03" title_key="aecChallengeKill_AECGhostBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECGhostBossT03_T03Short" description_key="aecChallengeKill_AECGhostBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECGhostBossT03" target_name_key="aecTarget_AECGhostBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHammerGuardianT03_T03" title_key="aecChallengeKill_AECHammerGuardianT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECHammerGuardianT03_T03Short" description_key="aecChallengeKill_AECHammerGuardianT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHammerGuardianT03" target_name_key="aecTarget_AECHammerGuardianT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHeadlessBossT03_T03" title_key="aecChallengeKill_AECHeadlessBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECHeadlessBossT03_T03Short" description_key="aecChallengeKill_AECHeadlessBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHeadlessBossT03" target_name_key="aecTarget_AECHeadlessBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHellskyliBossT03_T03" title_key="aecChallengeKill_AECHellskyliBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECHellskyliBossT03_T03Short" description_key="aecChallengeKill_AECHellskyliBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHellskyliBossT03" target_name_key="aecTarget_AECHellskyliBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMushroomBossT03_T03" title_key="aecChallengeKill_AECMushroomBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECMushroomBossT03_T03Short" description_key="aecChallengeKill_AECMushroomBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMushroomBossT03" target_name_key="aecTarget_AECMushroomBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMykirBossT03_T03" title_key="aecChallengeKill_AECMykirBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECMykirBossT03_T03Short" description_key="aecChallengeKill_AECMykirBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMykirBossT03" target_name_key="aecTarget_AECMykirBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECPartyBeachBossT03_T03" title_key="aecChallengeKill_AECPartyBeachBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 1"
+            short_description_key="aecChallengeKill_AECPartyBeachBossT03_T03Short" description_key="aecChallengeKill_AECPartyBeachBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECPartyBeachBossT03" target_name_key="aecTarget_AECPartyBeachBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T03" name="AEC Boss Hunts T03 Row 2" title_key="aecChallengeGroupBossHuntsT03"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECRockbreakerBossT03_T03" title_key="aecChallengeKill_AECRockbreakerBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECRockbreakerBossT03_T03Short" description_key="aecChallengeKill_AECRockbreakerBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECRockbreakerBossT03" target_name_key="aecTarget_AECRockbreakerBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSheriffBossT03_T03" title_key="aecChallengeKill_AECSheriffBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECSheriffBossT03_T03Short" description_key="aecChallengeKill_AECSheriffBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSheriffBossT03" target_name_key="aecTarget_AECSheriffBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSingerieBossT03_T03" title_key="aecChallengeKill_AECSingerieBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECSingerieBossT03_T03Short" description_key="aecChallengeKill_AECSingerieBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSingerieBossT03" target_name_key="aecTarget_AECSingerieBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSirenHeadBossT03_T03" title_key="aecChallengeKill_AECSirenHeadBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECSirenHeadBossT03_T03Short" description_key="aecChallengeKill_AECSirenHeadBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSirenHeadBossT03" target_name_key="aecTarget_AECSirenHeadBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheArcherBossT03_T03" title_key="aecChallengeKill_AECTheArcherBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECTheArcherBossT03_T03Short" description_key="aecChallengeKill_AECTheArcherBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheArcherBossT03" target_name_key="aecTarget_AECTheArcherBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheDruidBossT03_T03" title_key="aecChallengeKill_AECTheDruidBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECTheDruidBossT03_T03Short" description_key="aecChallengeKill_AECTheDruidBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheDruidBossT03" target_name_key="aecTarget_AECTheDruidBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheExecutionerBossT03_T03" title_key="aecChallengeKill_AECTheExecutionerBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECTheExecutionerBossT03_T03Short" description_key="aecChallengeKill_AECTheExecutionerBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheExecutionerBossT03" target_name_key="aecTarget_AECTheExecutionerBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheMechanicianBossT03_T03" title_key="aecChallengeKill_AECTheMechanicianBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECTheMechanicianBossT03_T03Short" description_key="aecChallengeKill_AECTheMechanicianBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheMechanicianBossT03" target_name_key="aecTarget_AECTheMechanicianBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheWitchAngelBossT03_T03" title_key="aecChallengeKill_AECTheWitchAngelBossT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_AECTheWitchAngelBossT03_T03Short" description_key="aecChallengeKill_AECTheWitchAngelBossT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheWitchAngelBossT03" target_name_key="aecTarget_AECTheWitchAngelBossT03_T03" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_bossAECDumdumT03_T03" title_key="aecChallengeKill_bossAECDumdumT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 2"
+            short_description_key="aecChallengeKill_bossAECDumdumT03_T03Short" description_key="aecChallengeKill_bossAECDumdumT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="bossAECDumdumT03" target_name_key="aecTarget_bossAECDumdumT03_T03" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T03" name="AEC Boss Hunts T03 Row 3" title_key="aecChallengeGroupBossHuntsT03"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_RunningKamikazeT03_T03" title_key="aecChallengeKill_RunningKamikazeT03_T03" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T03 Row 3"
+            short_description_key="aecChallengeKill_RunningKamikazeT03_T03Short" description_key="aecChallengeKill_RunningKamikazeT03_T03Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="RunningKamikazeT03" target_name_key="aecTarget_RunningKamikazeT03_T03" count="1"/>
+        </challenge>
+
+        <challenge_category name="AEC Bosses T06" title_key="aecChallengeCategoryBossesT06" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Bosses T06" name="AEC Boss Hunts T06 Row 1" title_key="aecChallengeGroupBossHuntsT06"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECDoomlordDemolishmanBossT06_T06" title_key="aecChallengeKill_AECDoomlordDemolishmanBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECDoomlordDemolishmanBossT06_T06Short" description_key="aecChallengeKill_AECDoomlordDemolishmanBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECDoomlordDemolishmanBossT06" target_name_key="aecTarget_AECDoomlordDemolishmanBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECElectricDemonRunnerBossT06_T06" title_key="aecChallengeKill_AECElectricDemonRunnerBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECElectricDemonRunnerBossT06_T06Short" description_key="aecChallengeKill_AECElectricDemonRunnerBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECElectricDemonRunnerBossT06" target_name_key="aecTarget_AECElectricDemonRunnerBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECExplosiveEagleBossT06_T06" title_key="aecChallengeKill_AECExplosiveEagleBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECExplosiveEagleBossT06_T06Short" description_key="aecChallengeKill_AECExplosiveEagleBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECExplosiveEagleBossT06" target_name_key="aecTarget_AECExplosiveEagleBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECGhostBossT06_T06" title_key="aecChallengeKill_AECGhostBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECGhostBossT06_T06Short" description_key="aecChallengeKill_AECGhostBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECGhostBossT06" target_name_key="aecTarget_AECGhostBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHammerGuardianT06_T06" title_key="aecChallengeKill_AECHammerGuardianT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECHammerGuardianT06_T06Short" description_key="aecChallengeKill_AECHammerGuardianT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHammerGuardianT06" target_name_key="aecTarget_AECHammerGuardianT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHeadlessBossT06_T06" title_key="aecChallengeKill_AECHeadlessBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECHeadlessBossT06_T06Short" description_key="aecChallengeKill_AECHeadlessBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHeadlessBossT06" target_name_key="aecTarget_AECHeadlessBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHellskyliBossT06_T06" title_key="aecChallengeKill_AECHellskyliBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECHellskyliBossT06_T06Short" description_key="aecChallengeKill_AECHellskyliBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHellskyliBossT06" target_name_key="aecTarget_AECHellskyliBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMushroomBossT06_T06" title_key="aecChallengeKill_AECMushroomBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECMushroomBossT06_T06Short" description_key="aecChallengeKill_AECMushroomBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMushroomBossT06" target_name_key="aecTarget_AECMushroomBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMykirBossT06_T06" title_key="aecChallengeKill_AECMykirBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECMykirBossT06_T06Short" description_key="aecChallengeKill_AECMykirBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMykirBossT06" target_name_key="aecTarget_AECMykirBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECPartyBeachBossT06_T06" title_key="aecChallengeKill_AECPartyBeachBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 1"
+            short_description_key="aecChallengeKill_AECPartyBeachBossT06_T06Short" description_key="aecChallengeKill_AECPartyBeachBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECPartyBeachBossT06" target_name_key="aecTarget_AECPartyBeachBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T06" name="AEC Boss Hunts T06 Row 2" title_key="aecChallengeGroupBossHuntsT06"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECRockbreakerBossT06_T06" title_key="aecChallengeKill_AECRockbreakerBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECRockbreakerBossT06_T06Short" description_key="aecChallengeKill_AECRockbreakerBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECRockbreakerBossT06" target_name_key="aecTarget_AECRockbreakerBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSheriffBossT06_T06" title_key="aecChallengeKill_AECSheriffBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECSheriffBossT06_T06Short" description_key="aecChallengeKill_AECSheriffBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSheriffBossT06" target_name_key="aecTarget_AECSheriffBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSingerieBossT06_T06" title_key="aecChallengeKill_AECSingerieBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECSingerieBossT06_T06Short" description_key="aecChallengeKill_AECSingerieBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSingerieBossT06" target_name_key="aecTarget_AECSingerieBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSirenHeadBossT06_T06" title_key="aecChallengeKill_AECSirenHeadBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECSirenHeadBossT06_T06Short" description_key="aecChallengeKill_AECSirenHeadBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSirenHeadBossT06" target_name_key="aecTarget_AECSirenHeadBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheArcherBossT06_T06" title_key="aecChallengeKill_AECTheArcherBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECTheArcherBossT06_T06Short" description_key="aecChallengeKill_AECTheArcherBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheArcherBossT06" target_name_key="aecTarget_AECTheArcherBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheDruidBossT06_T06" title_key="aecChallengeKill_AECTheDruidBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECTheDruidBossT06_T06Short" description_key="aecChallengeKill_AECTheDruidBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheDruidBossT06" target_name_key="aecTarget_AECTheDruidBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheExecutionerBossT06_T06" title_key="aecChallengeKill_AECTheExecutionerBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECTheExecutionerBossT06_T06Short" description_key="aecChallengeKill_AECTheExecutionerBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheExecutionerBossT06" target_name_key="aecTarget_AECTheExecutionerBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheMechanicianBossT06_T06" title_key="aecChallengeKill_AECTheMechanicianBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECTheMechanicianBossT06_T06Short" description_key="aecChallengeKill_AECTheMechanicianBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheMechanicianBossT06" target_name_key="aecTarget_AECTheMechanicianBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheWitchAngelBossT06_T06" title_key="aecChallengeKill_AECTheWitchAngelBossT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_AECTheWitchAngelBossT06_T06Short" description_key="aecChallengeKill_AECTheWitchAngelBossT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheWitchAngelBossT06" target_name_key="aecTarget_AECTheWitchAngelBossT06_T06" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_bossAECDumdumT06_T06" title_key="aecChallengeKill_bossAECDumdumT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 2"
+            short_description_key="aecChallengeKill_bossAECDumdumT06_T06Short" description_key="aecChallengeKill_bossAECDumdumT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="bossAECDumdumT06" target_name_key="aecTarget_bossAECDumdumT06_T06" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T06" name="AEC Boss Hunts T06 Row 3" title_key="aecChallengeGroupBossHuntsT06"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_RunningKamikazeT06_T06" title_key="aecChallengeKill_RunningKamikazeT06_T06" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T06 Row 3"
+            short_description_key="aecChallengeKill_RunningKamikazeT06_T06Short" description_key="aecChallengeKill_RunningKamikazeT06_T06Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="RunningKamikazeT06" target_name_key="aecTarget_RunningKamikazeT06_T06" count="1"/>
+        </challenge>
+
+        <challenge_category name="AEC Bosses T09" title_key="aecChallengeCategoryBossesT09" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Bosses T09" name="AEC Boss Hunts T09 Row 1" title_key="aecChallengeGroupBossHuntsT09"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECDoomlordDemolishmanBossT09_T09" title_key="aecChallengeKill_AECDoomlordDemolishmanBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECDoomlordDemolishmanBossT09_T09Short" description_key="aecChallengeKill_AECDoomlordDemolishmanBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECDoomlordDemolishmanBossT09" target_name_key="aecTarget_AECDoomlordDemolishmanBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECElectricDemonRunnerBossT09_T09" title_key="aecChallengeKill_AECElectricDemonRunnerBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECElectricDemonRunnerBossT09_T09Short" description_key="aecChallengeKill_AECElectricDemonRunnerBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECElectricDemonRunnerBossT09" target_name_key="aecTarget_AECElectricDemonRunnerBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECExplosiveEagleBossT09_T09" title_key="aecChallengeKill_AECExplosiveEagleBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECExplosiveEagleBossT09_T09Short" description_key="aecChallengeKill_AECExplosiveEagleBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECExplosiveEagleBossT09" target_name_key="aecTarget_AECExplosiveEagleBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECGhostBossT09_T09" title_key="aecChallengeKill_AECGhostBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECGhostBossT09_T09Short" description_key="aecChallengeKill_AECGhostBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECGhostBossT09" target_name_key="aecTarget_AECGhostBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHammerGuardianT09_T09" title_key="aecChallengeKill_AECHammerGuardianT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECHammerGuardianT09_T09Short" description_key="aecChallengeKill_AECHammerGuardianT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHammerGuardianT09" target_name_key="aecTarget_AECHammerGuardianT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHeadlessBossT09_T09" title_key="aecChallengeKill_AECHeadlessBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECHeadlessBossT09_T09Short" description_key="aecChallengeKill_AECHeadlessBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHeadlessBossT09" target_name_key="aecTarget_AECHeadlessBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHellskyliBossT09_T09" title_key="aecChallengeKill_AECHellskyliBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECHellskyliBossT09_T09Short" description_key="aecChallengeKill_AECHellskyliBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHellskyliBossT09" target_name_key="aecTarget_AECHellskyliBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMushroomBossT09_T09" title_key="aecChallengeKill_AECMushroomBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECMushroomBossT09_T09Short" description_key="aecChallengeKill_AECMushroomBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMushroomBossT09" target_name_key="aecTarget_AECMushroomBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMykirBossT09_T09" title_key="aecChallengeKill_AECMykirBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECMykirBossT09_T09Short" description_key="aecChallengeKill_AECMykirBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMykirBossT09" target_name_key="aecTarget_AECMykirBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECPartyBeachBossT09_T09" title_key="aecChallengeKill_AECPartyBeachBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 1"
+            short_description_key="aecChallengeKill_AECPartyBeachBossT09_T09Short" description_key="aecChallengeKill_AECPartyBeachBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECPartyBeachBossT09" target_name_key="aecTarget_AECPartyBeachBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T09" name="AEC Boss Hunts T09 Row 2" title_key="aecChallengeGroupBossHuntsT09"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECRockbreakerBossT09_T09" title_key="aecChallengeKill_AECRockbreakerBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECRockbreakerBossT09_T09Short" description_key="aecChallengeKill_AECRockbreakerBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECRockbreakerBossT09" target_name_key="aecTarget_AECRockbreakerBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSheriffBossT09_T09" title_key="aecChallengeKill_AECSheriffBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECSheriffBossT09_T09Short" description_key="aecChallengeKill_AECSheriffBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSheriffBossT09" target_name_key="aecTarget_AECSheriffBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSingerieBossT09_T09" title_key="aecChallengeKill_AECSingerieBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECSingerieBossT09_T09Short" description_key="aecChallengeKill_AECSingerieBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSingerieBossT09" target_name_key="aecTarget_AECSingerieBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSirenHeadBossT09_T09" title_key="aecChallengeKill_AECSirenHeadBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECSirenHeadBossT09_T09Short" description_key="aecChallengeKill_AECSirenHeadBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSirenHeadBossT09" target_name_key="aecTarget_AECSirenHeadBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheArcherBossT09_T09" title_key="aecChallengeKill_AECTheArcherBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECTheArcherBossT09_T09Short" description_key="aecChallengeKill_AECTheArcherBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheArcherBossT09" target_name_key="aecTarget_AECTheArcherBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheDruidBossT09_T09" title_key="aecChallengeKill_AECTheDruidBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECTheDruidBossT09_T09Short" description_key="aecChallengeKill_AECTheDruidBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheDruidBossT09" target_name_key="aecTarget_AECTheDruidBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheExecutionerBossT09_T09" title_key="aecChallengeKill_AECTheExecutionerBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECTheExecutionerBossT09_T09Short" description_key="aecChallengeKill_AECTheExecutionerBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheExecutionerBossT09" target_name_key="aecTarget_AECTheExecutionerBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheMechanicianBossT09_T09" title_key="aecChallengeKill_AECTheMechanicianBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECTheMechanicianBossT09_T09Short" description_key="aecChallengeKill_AECTheMechanicianBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheMechanicianBossT09" target_name_key="aecTarget_AECTheMechanicianBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheWitchAngelBossT09_T09" title_key="aecChallengeKill_AECTheWitchAngelBossT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_AECTheWitchAngelBossT09_T09Short" description_key="aecChallengeKill_AECTheWitchAngelBossT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheWitchAngelBossT09" target_name_key="aecTarget_AECTheWitchAngelBossT09_T09" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_bossAECDumdumT09_T09" title_key="aecChallengeKill_bossAECDumdumT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 2"
+            short_description_key="aecChallengeKill_bossAECDumdumT09_T09Short" description_key="aecChallengeKill_bossAECDumdumT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="bossAECDumdumT09" target_name_key="aecTarget_bossAECDumdumT09_T09" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T09" name="AEC Boss Hunts T09 Row 3" title_key="aecChallengeGroupBossHuntsT09"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_RunningKamikazeT09_T09" title_key="aecChallengeKill_RunningKamikazeT09_T09" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T09 Row 3"
+            short_description_key="aecChallengeKill_RunningKamikazeT09_T09Short" description_key="aecChallengeKill_RunningKamikazeT09_T09Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="RunningKamikazeT09" target_name_key="aecTarget_RunningKamikazeT09_T09" count="1"/>
+        </challenge>
+
+        <challenge_category name="AEC Bosses T12" title_key="aecChallengeCategoryBossesT12" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Bosses T12" name="AEC Boss Hunts T12 Row 1" title_key="aecChallengeGroupBossHuntsT12"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECDoomlordDemolishmanBossT12_T12" title_key="aecChallengeKill_AECDoomlordDemolishmanBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECDoomlordDemolishmanBossT12_T12Short" description_key="aecChallengeKill_AECDoomlordDemolishmanBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECDoomlordDemolishmanBossT12" target_name_key="aecTarget_AECDoomlordDemolishmanBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECElectricDemonRunnerBossT12_T12" title_key="aecChallengeKill_AECElectricDemonRunnerBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECElectricDemonRunnerBossT12_T12Short" description_key="aecChallengeKill_AECElectricDemonRunnerBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECElectricDemonRunnerBossT12" target_name_key="aecTarget_AECElectricDemonRunnerBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECExplosiveEagleBossT12_T12" title_key="aecChallengeKill_AECExplosiveEagleBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECExplosiveEagleBossT12_T12Short" description_key="aecChallengeKill_AECExplosiveEagleBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECExplosiveEagleBossT12" target_name_key="aecTarget_AECExplosiveEagleBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECGhostBossT12_T12" title_key="aecChallengeKill_AECGhostBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECGhostBossT12_T12Short" description_key="aecChallengeKill_AECGhostBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECGhostBossT12" target_name_key="aecTarget_AECGhostBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHammerGuardianT12_T12" title_key="aecChallengeKill_AECHammerGuardianT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECHammerGuardianT12_T12Short" description_key="aecChallengeKill_AECHammerGuardianT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHammerGuardianT12" target_name_key="aecTarget_AECHammerGuardianT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHeadlessBossT12_T12" title_key="aecChallengeKill_AECHeadlessBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECHeadlessBossT12_T12Short" description_key="aecChallengeKill_AECHeadlessBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHeadlessBossT12" target_name_key="aecTarget_AECHeadlessBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHellskyliBossT12_T12" title_key="aecChallengeKill_AECHellskyliBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECHellskyliBossT12_T12Short" description_key="aecChallengeKill_AECHellskyliBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHellskyliBossT12" target_name_key="aecTarget_AECHellskyliBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMushroomBossT12_T12" title_key="aecChallengeKill_AECMushroomBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECMushroomBossT12_T12Short" description_key="aecChallengeKill_AECMushroomBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMushroomBossT12" target_name_key="aecTarget_AECMushroomBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMykirBossT12_T12" title_key="aecChallengeKill_AECMykirBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECMykirBossT12_T12Short" description_key="aecChallengeKill_AECMykirBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMykirBossT12" target_name_key="aecTarget_AECMykirBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECPartyBeachBossT12_T12" title_key="aecChallengeKill_AECPartyBeachBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 1"
+            short_description_key="aecChallengeKill_AECPartyBeachBossT12_T12Short" description_key="aecChallengeKill_AECPartyBeachBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECPartyBeachBossT12" target_name_key="aecTarget_AECPartyBeachBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T12" name="AEC Boss Hunts T12 Row 2" title_key="aecChallengeGroupBossHuntsT12"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECRockbreakerBossT12_T12" title_key="aecChallengeKill_AECRockbreakerBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECRockbreakerBossT12_T12Short" description_key="aecChallengeKill_AECRockbreakerBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECRockbreakerBossT12" target_name_key="aecTarget_AECRockbreakerBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSheriffBossT12_T12" title_key="aecChallengeKill_AECSheriffBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECSheriffBossT12_T12Short" description_key="aecChallengeKill_AECSheriffBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSheriffBossT12" target_name_key="aecTarget_AECSheriffBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSingerieBossT12_T12" title_key="aecChallengeKill_AECSingerieBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECSingerieBossT12_T12Short" description_key="aecChallengeKill_AECSingerieBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSingerieBossT12" target_name_key="aecTarget_AECSingerieBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSirenHeadBossT12_T12" title_key="aecChallengeKill_AECSirenHeadBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECSirenHeadBossT12_T12Short" description_key="aecChallengeKill_AECSirenHeadBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSirenHeadBossT12" target_name_key="aecTarget_AECSirenHeadBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheArcherBossT12_T12" title_key="aecChallengeKill_AECTheArcherBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECTheArcherBossT12_T12Short" description_key="aecChallengeKill_AECTheArcherBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheArcherBossT12" target_name_key="aecTarget_AECTheArcherBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheDruidBossT12_T12" title_key="aecChallengeKill_AECTheDruidBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECTheDruidBossT12_T12Short" description_key="aecChallengeKill_AECTheDruidBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheDruidBossT12" target_name_key="aecTarget_AECTheDruidBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheExecutionerBossT12_T12" title_key="aecChallengeKill_AECTheExecutionerBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECTheExecutionerBossT12_T12Short" description_key="aecChallengeKill_AECTheExecutionerBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheExecutionerBossT12" target_name_key="aecTarget_AECTheExecutionerBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheMechanicianBossT12_T12" title_key="aecChallengeKill_AECTheMechanicianBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECTheMechanicianBossT12_T12Short" description_key="aecChallengeKill_AECTheMechanicianBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheMechanicianBossT12" target_name_key="aecTarget_AECTheMechanicianBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheWitchAngelBossT12_T12" title_key="aecChallengeKill_AECTheWitchAngelBossT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_AECTheWitchAngelBossT12_T12Short" description_key="aecChallengeKill_AECTheWitchAngelBossT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheWitchAngelBossT12" target_name_key="aecTarget_AECTheWitchAngelBossT12_T12" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_bossAECDumdumT12_T12" title_key="aecChallengeKill_bossAECDumdumT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 2"
+            short_description_key="aecChallengeKill_bossAECDumdumT12_T12Short" description_key="aecChallengeKill_bossAECDumdumT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="bossAECDumdumT12" target_name_key="aecTarget_bossAECDumdumT12_T12" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T12" name="AEC Boss Hunts T12 Row 3" title_key="aecChallengeGroupBossHuntsT12"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_RunningKamikazeT12_T12" title_key="aecChallengeKill_RunningKamikazeT12_T12" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T12 Row 3"
+            short_description_key="aecChallengeKill_RunningKamikazeT12_T12Short" description_key="aecChallengeKill_RunningKamikazeT12_T12Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="RunningKamikazeT12" target_name_key="aecTarget_RunningKamikazeT12_T12" count="1"/>
+        </challenge>
+
+        <challenge_category name="AEC Bosses T15" title_key="aecChallengeCategoryBossesT15" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Bosses T15" name="AEC Boss Hunts T15 Row 1" title_key="aecChallengeGroupBossHuntsT15"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECDoomlordDemolishmanBossT15_T15" title_key="aecChallengeKill_AECDoomlordDemolishmanBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECDoomlordDemolishmanBossT15_T15Short" description_key="aecChallengeKill_AECDoomlordDemolishmanBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECDoomlordDemolishmanBossT15" target_name_key="aecTarget_AECDoomlordDemolishmanBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECElectricDemonRunnerBossT15_T15" title_key="aecChallengeKill_AECElectricDemonRunnerBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECElectricDemonRunnerBossT15_T15Short" description_key="aecChallengeKill_AECElectricDemonRunnerBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECElectricDemonRunnerBossT15" target_name_key="aecTarget_AECElectricDemonRunnerBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECExplosiveEagleBossT15_T15" title_key="aecChallengeKill_AECExplosiveEagleBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECExplosiveEagleBossT15_T15Short" description_key="aecChallengeKill_AECExplosiveEagleBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECExplosiveEagleBossT15" target_name_key="aecTarget_AECExplosiveEagleBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECGhostBossT15_T15" title_key="aecChallengeKill_AECGhostBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECGhostBossT15_T15Short" description_key="aecChallengeKill_AECGhostBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECGhostBossT15" target_name_key="aecTarget_AECGhostBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHammerGuardianT15_T15" title_key="aecChallengeKill_AECHammerGuardianT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECHammerGuardianT15_T15Short" description_key="aecChallengeKill_AECHammerGuardianT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHammerGuardianT15" target_name_key="aecTarget_AECHammerGuardianT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHeadlessBossT15_T15" title_key="aecChallengeKill_AECHeadlessBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECHeadlessBossT15_T15Short" description_key="aecChallengeKill_AECHeadlessBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHeadlessBossT15" target_name_key="aecTarget_AECHeadlessBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECHellskyliBossT15_T15" title_key="aecChallengeKill_AECHellskyliBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECHellskyliBossT15_T15Short" description_key="aecChallengeKill_AECHellskyliBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECHellskyliBossT15" target_name_key="aecTarget_AECHellskyliBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMushroomBossT15_T15" title_key="aecChallengeKill_AECMushroomBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECMushroomBossT15_T15Short" description_key="aecChallengeKill_AECMushroomBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMushroomBossT15" target_name_key="aecTarget_AECMushroomBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECMykirBossT15_T15" title_key="aecChallengeKill_AECMykirBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECMykirBossT15_T15Short" description_key="aecChallengeKill_AECMykirBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECMykirBossT15" target_name_key="aecTarget_AECMykirBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECPartyBeachBossT15_T15" title_key="aecChallengeKill_AECPartyBeachBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 1"
+            short_description_key="aecChallengeKill_AECPartyBeachBossT15_T15Short" description_key="aecChallengeKill_AECPartyBeachBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECPartyBeachBossT15" target_name_key="aecTarget_AECPartyBeachBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T15" name="AEC Boss Hunts T15 Row 2" title_key="aecChallengeGroupBossHuntsT15"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_AECRockbreakerBossT15_T15" title_key="aecChallengeKill_AECRockbreakerBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECRockbreakerBossT15_T15Short" description_key="aecChallengeKill_AECRockbreakerBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECRockbreakerBossT15" target_name_key="aecTarget_AECRockbreakerBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSheriffBossT15_T15" title_key="aecChallengeKill_AECSheriffBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECSheriffBossT15_T15Short" description_key="aecChallengeKill_AECSheriffBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSheriffBossT15" target_name_key="aecTarget_AECSheriffBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSingerieBossT15_T15" title_key="aecChallengeKill_AECSingerieBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECSingerieBossT15_T15Short" description_key="aecChallengeKill_AECSingerieBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSingerieBossT15" target_name_key="aecTarget_AECSingerieBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECSirenHeadBossT15_T15" title_key="aecChallengeKill_AECSirenHeadBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECSirenHeadBossT15_T15Short" description_key="aecChallengeKill_AECSirenHeadBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECSirenHeadBossT15" target_name_key="aecTarget_AECSirenHeadBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheArcherBossT15_T15" title_key="aecChallengeKill_AECTheArcherBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECTheArcherBossT15_T15Short" description_key="aecChallengeKill_AECTheArcherBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheArcherBossT15" target_name_key="aecTarget_AECTheArcherBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheDruidBossT15_T15" title_key="aecChallengeKill_AECTheDruidBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECTheDruidBossT15_T15Short" description_key="aecChallengeKill_AECTheDruidBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheDruidBossT15" target_name_key="aecTarget_AECTheDruidBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheExecutionerBossT15_T15" title_key="aecChallengeKill_AECTheExecutionerBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECTheExecutionerBossT15_T15Short" description_key="aecChallengeKill_AECTheExecutionerBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheExecutionerBossT15" target_name_key="aecTarget_AECTheExecutionerBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheMechanicianBossT15_T15" title_key="aecChallengeKill_AECTheMechanicianBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECTheMechanicianBossT15_T15Short" description_key="aecChallengeKill_AECTheMechanicianBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheMechanicianBossT15" target_name_key="aecTarget_AECTheMechanicianBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_AECTheWitchAngelBossT15_T15" title_key="aecChallengeKill_AECTheWitchAngelBossT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_AECTheWitchAngelBossT15_T15Short" description_key="aecChallengeKill_AECTheWitchAngelBossT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECTheWitchAngelBossT15" target_name_key="aecTarget_AECTheWitchAngelBossT15_T15" count="1"/>
+        </challenge>
+
+        <challenge name="aecKill_bossAECDumdumT15_T15" title_key="aecChallengeKill_bossAECDumdumT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 2"
+            short_description_key="aecChallengeKill_bossAECDumdumT15_T15Short" description_key="aecChallengeKill_bossAECDumdumT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="bossAECDumdumT15" target_name_key="aecTarget_bossAECDumdumT15_T15" count="1"/>
+        </challenge>
+
+        <challenge_group category="AEC Bosses T15" name="AEC Boss Hunts T15 Row 3" title_key="aecChallengeGroupBossHuntsT15"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKill_RunningKamikazeT15_T15" title_key="aecChallengeKill_RunningKamikazeT15_T15" icon="ui_game_symbol_zombie" group="AEC Boss Hunts T15 Row 3"
+            short_description_key="aecChallengeKill_RunningKamikazeT15_T15Short" description_key="aecChallengeKill_RunningKamikazeT15_T15Desc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="RunningKamikazeT15" target_name_key="aecTarget_RunningKamikazeT15_T15" count="1"/>
+        </challenge>
+
+        <challenge_category name="AEC Minions All Tiers" title_key="aecChallengeCategoryMinionsAll" icon="ui_game_symbol_skull"/>
+
+        <challenge_group category="AEC Minions All Tiers" name="AEC Minion Hunts Row 1" title_key="aecChallengeGroupMinionHuntsAll"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKillMinion_dumdum_All" title_key="aecChallengeKillMinion_dumdum_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_dumdum_AllShort" description_key="aecChallengeKillMinion_dumdum_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="AECDumdumMinion" target_name_key="aecTargetMinion_dumdum_All" count="200"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_doomlord_All" title_key="aecChallengeKillMinion_doomlord_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_doomlord_AllShort" description_key="aecChallengeKillMinion_doomlord_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="doomlord" target_name_key="aecTargetMinion_doomlord_All" count="500"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_witch_All" title_key="aecChallengeKillMinion_witch_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_witch_AllShort" description_key="aecChallengeKillMinion_witch_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="witch" target_name_key="aecTargetMinion_witch_All" count="200"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_hammerguardian_All" title_key="aecChallengeKillMinion_hammerguardian_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_hammerguardian_AllShort" description_key="aecChallengeKillMinion_hammerguardian_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="hammerguardianMinion" target_name_key="aecTargetMinion_hammerguardian_All" count="200"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_mechanician_All" title_key="aecChallengeKillMinion_mechanician_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_mechanician_AllShort" description_key="aecChallengeKillMinion_mechanician_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="mechanicianMinion" target_name_key="aecTargetMinion_mechanician_All" count="100"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_druid_All" title_key="aecChallengeKillMinion_druid_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_druid_AllShort" description_key="aecChallengeKillMinion_druid_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="druidMinion" target_name_key="aecTargetMinion_druid_All" count="200"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_executioner_All" title_key="aecChallengeKillMinion_executioner_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 1"
+            short_description_key="aecChallengeKillMinion_executioner_AllShort" description_key="aecChallengeKillMinion_executioner_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="executionerMinion" target_name_key="aecTargetMinion_executioner_All" count="50"/>
+        </challenge>
+
+        <challenge_group category="AEC Minions All Tiers" name="AEC Minion Hunts Row 2" title_key="aecChallengeGroupMinionHuntsAll"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000"/>
+
+        <challenge name="aecKillMinion_singerie_All" title_key="aecChallengeKillMinion_singerie_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 2"
+            short_description_key="aecChallengeKillMinion_singerie_AllShort" description_key="aecChallengeKillMinion_singerie_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="singerieMinion" target_name_key="aecTargetMinion_singerie_All" count="500"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_ghost_All" title_key="aecChallengeKillMinion_ghost_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 2"
+            short_description_key="aecChallengeKillMinion_ghost_AllShort" description_key="aecChallengeKillMinion_ghost_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="ghostMinion" target_name_key="aecTargetMinion_ghost_All" count="500"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_mushroom_All" title_key="aecChallengeKillMinion_mushroom_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 2"
+            short_description_key="aecChallengeKillMinion_mushroom_AllShort" description_key="aecChallengeKillMinion_mushroom_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="mushroomMinion" target_name_key="aecTargetMinion_mushroom_All" count="400"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_headless_All" title_key="aecChallengeKillMinion_headless_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 2"
+            short_description_key="aecChallengeKillMinion_headless_AllShort" description_key="aecChallengeKillMinion_headless_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="headless" target_name_key="aecTargetMinion_headless_All" count="500"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_archer_All" title_key="aecChallengeKillMinion_archer_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 2"
+            short_description_key="aecChallengeKillMinion_archer_AllShort" description_key="aecChallengeKillMinion_archer_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="archerMinion" target_name_key="aecTargetMinion_archer_All" count="250"/>
+        </challenge>
+
+        <challenge name="aecKillMinion_sheriff_All" title_key="aecChallengeKillMinion_sheriff_All" icon="ui_game_symbol_zombie" group="AEC Minion Hunts Row 2"
+            short_description_key="aecChallengeKillMinion_sheriff_AllShort" description_key="aecChallengeKillMinion_sheriff_AllDesc"
+            reward_text_key="challenge_reward_1000xp" reward_event="challenge_reward_1000">
+            <objective type="KillByTag" entity_tags="sheriffMinion" target_name_key="aecTargetMinion_sheriff_All" count="100"/>
+        </challenge>
+
+    </append>
+</configs>

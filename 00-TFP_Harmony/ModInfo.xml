@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xml>
+    <Name value="TFP_Harmony"/>
+    <DisplayName value="Harmony Wrapper"/>
+    <Description value="Sets up basic HarmonyX configuration to be used with 7 Days to Die"/>
+    <Author value="Exodusoul"/>
+    <Version value="1.1.0.4"/>
+    <Website value="https://discord.gg/Ef4bBuhEEw"/>
+    <ServerSideOnly value="true"/>
+    <SkipWithAntiCheat value="true"/>
+</xml>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xml>
+  <Name value="ProjectZ_AEC_Endgame_Overhaul_Integration"/>
+  <DisplayName value="Project Z + AEC Endgame Overhaul | Integration"/>
+  <Description value="Project Z / AEC Endgame Overhaul integration: enemy compatibility, infected-teeth economy, battery compatibility, market integration and shared crafting progression."/>
+  <Author value="Exodusoul"/>
+  <Version value="4.0.4"/>
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <ServerSideOnly value="true"/>
+</xml>

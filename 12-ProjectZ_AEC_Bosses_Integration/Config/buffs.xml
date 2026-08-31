@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: Project Z and AEC Bosses integration. File purpose: buff definitions, effects and triggers.
+RU: Назначение модуля: интеграция Project Z и боссов AEC. Назначение файла: определения эффектов, их действия и триггеры.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/buffs">
+    <buff name="buffPZAECBossZRadiationSelf" hidden="true">
+      <stack_type value="replace"/>
+      <duration value="0"/>
+      <update_rate value="1"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="50" buff="buffPZAECBossZRadiationAOE">
+          <requirement name="!EntityTagCompare" target="other" tags="vehicle,zombie,turret,drone"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="10" buff="BuffActiveRadiation">
+          <requirement name="!EntityTagCompare" target="other" tags="vehicle,zombie,turret,drone"/>
+        </triggered_effect>
+      </effect_group>
+    </buff>
+    <buff name="buffPZAECBossZRadiationAOE" hidden="true">
+      <stack_type value="replace"/>
+      <duration value="5"/>
+      <update_rate value="1"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$AcRadZBoss" operation="set" value="1"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$AcRadZBoss" operation="set" value="0"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyScreenEffect" effect_name="Radiation" intensity=".03" fade="2"/>
+        <triggered_effect trigger="onSelfDied" action="ModifyScreenEffect" effect_name="Radiation" intensity="0" fade="0"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyScreenEffect" effect_name="Radiation" intensity="0" fade="2"/>
+      </effect_group>
+    </buff>
+    <buff name="buffPZAECBossHandsMiniDECO" hidden="true">
+      <stack_type value="replace"/>
+      <duration value="0"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="MiniBossHitRad">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+        </triggered_effect>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffStart" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_left" parent_transform="LeftHand"/>
+        <triggered_effect trigger="onSelfEnteredGame" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_left" parent_transform="LeftHand"/>
+        <triggered_effect trigger="onSelfBuffStart" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_right" parent_transform="RightHand"/>
+        <triggered_effect trigger="onSelfEnteredGame" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_right" parent_transform="RightHand"/>
+        <triggered_effect trigger="onSelfDied" action="RemoveParticleEffectFromEntity" particle="p_twitch_zombie_radiation_left"/>
+        <triggered_effect trigger="onSelfDied" action="RemoveParticleEffectFromEntity" particle="p_twitch_zombie_radiation_right"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_left" parent_transform="LeftHand">
+          <requirement name="!HasParticle" particle="p_twitch_zombie_radiation_left"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffUpdate" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_right" parent_transform="RightHand">
+          <requirement name="!HasParticle" particle="p_twitch_zombie_radiation_right"/>
+        </triggered_effect>
+      </effect_group>
+    </buff>
+    <buff name="buffPZAECBossHandsBossDECO" hidden="true">
+      <stack_type value="replace"/>
+      <duration value="0"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="BossHitRad">
+          <requirement name="EntityTagCompare" target="other" tags="player"/>
+        </triggered_effect>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffStart" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_left" parent_transform="LeftHand"/>
+        <triggered_effect trigger="onSelfEnteredGame" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_left" parent_transform="LeftHand"/>
+        <triggered_effect trigger="onSelfBuffStart" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_right" parent_transform="RightHand"/>
+        <triggered_effect trigger="onSelfEnteredGame" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_right" parent_transform="RightHand"/>
+        <triggered_effect trigger="onSelfDied" action="RemoveParticleEffectFromEntity" particle="p_twitch_zombie_radiation_left"/>
+        <triggered_effect trigger="onSelfDied" action="RemoveParticleEffectFromEntity" particle="p_twitch_zombie_radiation_right"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_left" parent_transform="LeftHand">
+          <requirement name="!HasParticle" particle="p_twitch_zombie_radiation_left"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffUpdate" action="AttachParticleEffectToEntity" particle="p_twitch_zombie_radiation_right" parent_transform="RightHand">
+          <requirement name="!HasParticle" particle="p_twitch_zombie_radiation_right"/>
+        </triggered_effect>
+      </effect_group>
+    </buff>
+  </append>
+</configs>

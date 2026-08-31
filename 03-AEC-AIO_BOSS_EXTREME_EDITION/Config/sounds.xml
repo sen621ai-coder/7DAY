@@ -1,0 +1,41 @@
+<configs>
+	<!-- === AEC-AIO BOSS === -->
+
+<!-- === AEC-SirenHead_Boss === -->
+
+<append xpath="/Sounds">
+		<SoundDataNode name="AECSirenHeadAlarmLoop">
+			<AudioSource name="@:Sounds/Prefabs/AudioSource_VO_Announce.prefab"/>
+			<AudioClip ClipName="@:Sounds/Electricity/Alarms/alarm1_lp.wav"/>
+			<LowestPitch name="0.125"/>
+			<HighestPitch name="0.125"/>
+			<LocalCrouchVolumeScale value="1.0"/>
+			<CrouchNoiseScale value="0.5"/>
+			<NoiseScale value="1.0"/>
+			<MaxVoices value="10"/>
+			<MaxRepeatRate value="0.001"/>
+		</SoundDataNode>
+		<SoundDataNode name="AECSirenHeadDrone">
+			<AudioSource name="@:Sounds/Prefabs/AudioSource_VO_Announce.prefab"/>
+			<AudioClip ClipName="@:Sounds/VO/Drone/drone_enemy_sense_05.wav"/>
+			<LowestPitch name="0.0005"/>
+			<HighestPitch name="3"/>
+			<LocalCrouchVolumeScale value="1.0"/>
+			<CrouchNoiseScale value="0.5"/>
+			<NoiseScale value="0.2"/>
+			<MaxVoices value="10"/>
+			<MaxRepeatRate value="0.001"/>
+		</SoundDataNode>
+		<SoundDataNode name="AECSirenHeadDrone2">
+			<AudioSource name="@:Sounds/Prefabs/AudioSource_VO_Announce.prefab"/>
+			<AudioClip ClipName="@:Sounds/VO/Drone/drone_enemy_sense_04.wav"/>
+			<LowestPitch name="0.25"/>
+			<HighestPitch name="0.25"/>
+			<LocalCrouchVolumeScale value="1.0"/>
+			<CrouchNoiseScale value="0.5"/>
+			<NoiseScale value="1.0"/>
+			<MaxVoices value="10"/>
+			<MaxRepeatRate value="0.001"/>
+		</SoundDataNode>
+	</append>
+</configs>

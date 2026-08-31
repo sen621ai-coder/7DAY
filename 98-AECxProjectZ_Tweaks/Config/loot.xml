@@ -1,0 +1,1078 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: loot groups, bundles and drop-table integration.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: группы добычи, наборы и интеграция таблиц выпадения.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!-- Double only the mutation-sample quantities obtained by opening AEC corpses. Drop probability, recipes, quest rewards and Project Z butchering yields remain unchanged. -->
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='2,10']/@count">4,20</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='3,15']/@count">6,30</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='10,50']/@count">20,100</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='11,55']/@count">22,110</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='18,90']/@count">36,180</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='19,95']/@count">38,190</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='26,130']/@count">52,260</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='27,135']/@count">54,270</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='34,170']/@count">68,340</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='35,175']/@count">70,350</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='42,210']/@count">84,420</set>
+  <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='43,215']/@count">86,430</set>
+  <append xpath="/lootcontainers">
+    <lootgroup name="PZAECBossLoot_UniqueMods_ByFamily">
+      <item group="groupUniqModsBull"/>
+      <item group="groupUniqModsShoker"/>
+      <item group="groupUniqModsVeteran"/>
+      <item group="groupUniqModsHarry"/>
+      <item group="groupUniqModsAll"/>
+    </lootgroup>
+    <lootgroup name="PZAECBossLootBundleT03_Content" count="all">
+      <item group="groupAmmoLarge" count="2" prob=".65" force_prob="true"/>
+      <item group="groupMiniBoss01" count="2"/>
+      <item group="groupZpackBoss01"/>
+      <item group="groupZpackBoss02" count="2"/>
+      <item group="groupZpackBoss03" count="1" prob=".35" force_prob="true"/>
+      <item group="groupZpackBoss04" count="1" prob=".18" force_prob="true"/>
+      <item group="groupMiniBossAlloys" count="1" prob=".18" force_prob="true"/>
+      <item group="groupRareLootMiniboss" count="1" prob=".10" force_prob="true"/>
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT03" count="1" size="6,4" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualBaseTemplate" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true">
+      <item group="PZAECBossLootBundleT03_Content"/>
+    </lootcontainer>
+    <lootgroup name="PZAECBossLootBundleT06_Content" count="all">
+      <item group="groupAmmoImpLarge" count="2" prob=".75" force_prob="true"/>
+      <item group="groupMiniBoss01" count="3"/>
+      <item group="groupZpackBoss02" count="2"/>
+      <item group="groupZpackBoss03"/>
+      <item group="groupMiniBossAlloys" count="1" prob=".45" force_prob="true"/>
+      <item group="groupZpackBoss04" count="1" prob=".35" force_prob="true"/>
+      <item group="groupRareLootMiniboss" count="1" prob=".18" force_prob="true"/>
+      <item group="groupRareMods" count="1" prob=".12" force_prob="true"/>
+      <item group="groupImp_Weapon" count="1" prob=".12" force_prob="true"/>
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT06" count="1" size="6,5" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true">
+      <item group="PZAECBossLootBundleT06_Content"/>
+    </lootcontainer>
+    <lootgroup name="PZAECBossLootBundleT09_Content" count="all">
+      <item group="groupAmmoImpLarge" count="3" prob=".85" force_prob="true"/>
+      <item group="groupAmmoDU" count="1" prob=".28" force_prob="true"/>
+      <item group="groupMiniBoss01" count="3"/>
+      <item group="groupZpackBoss02" count="3"/>
+      <item group="groupZpackBoss03" count="2"/>
+      <item group="groupBossAlloys" count="1" prob=".55" force_prob="true"/>
+      <item group="groupZpackBoss04" count="1" prob=".55" force_prob="true"/>
+      <item group="groupRareMods" count="1" prob=".22" force_prob="true"/>
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".12" force_prob="true"/>
+      <item group="groupSkillBook" count="1" prob=".08" force_prob="true"/>
+      <item group="groupUnique_Weapon" count="1" prob=".06" force_prob="true"/>
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT09" count="1" size="6,6" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true">
+      <item group="PZAECBossLootBundleT09_Content"/>
+    </lootcontainer>
+    <lootgroup name="PZAECBossLootBundleT12_Content" count="all">
+      <item group="groupAmmoImpLarge" count="4" prob=".90" force_prob="true"/>
+      <item group="groupAmmoDU" count="2" prob=".45" force_prob="true"/>
+      <item group="groupMiniBoss01" count="4"/>
+      <item group="groupZpackBoss02" count="4"/>
+      <item group="groupZpackBoss03" count="2"/>
+      <item group="groupBossAlloys" count="2" prob=".75" force_prob="true"/>
+      <item group="groupZpackBoss04" count="1" prob=".70" force_prob="true"/>
+      <item group="groupRareMods" count="1" prob=".35" force_prob="true"/>
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".25" force_prob="true"/>
+      <item group="groupSkillBook" count="1" prob=".16" force_prob="true"/>
+      <item group="groupUnique_Weapon" count="1" prob=".12" force_prob="true"/>
+      <item group="groupLegend_Weapon" count="1" prob=".06" force_prob="true"/>
+      <item group="groupLegend_MeleeWeapon" count="1" prob=".08" force_prob="true"/>
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT12" count="1" size="6,7" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true">
+      <item group="PZAECBossLootBundleT12_Content"/>
+    </lootcontainer>
+    <lootgroup name="PZAECBossLootBundleT15_Content" count="all">
+      <item group="groupAmmoImpLarge" count="5" prob=".95" force_prob="true"/>
+      <item group="groupAmmoDU" count="3" prob=".65" force_prob="true"/>
+      <item group="groupMiniBoss01" count="5"/>
+      <item group="groupZpackBoss02" count="5"/>
+      <item group="groupZpackBoss03" count="3"/>
+      <item group="groupBossAlloys" count="3" prob=".90" force_prob="true"/>
+      <item group="groupZpackBoss04" count="1" prob=".85" force_prob="true"/>
+      <item group="groupRareMods" count="1" prob=".50" force_prob="true"/>
+      <item group="groupUniqModsAll" count="1" prob=".45" force_prob="true"/>
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".35" force_prob="true"/>
+      <item group="groupSkillBook" count="1" prob=".25" force_prob="true"/>
+      <item group="groupUnique_Weapon" count="1" prob=".24" force_prob="true"/>
+      <item group="groupLegend_Weapon" count="1" prob=".12" force_prob="true"/>
+      <item group="groupLegend_MeleeWeapon" count="1" prob=".16" force_prob="true"/>
+      <item group="groupUniqueParts" count="1" prob=".08" force_prob="true"/>
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT15" count="1" size="6,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true">
+      <item group="PZAECBossLootBundleT15_Content"/>
+    </lootcontainer>
+  </append>
+  <!-- EN: Reward items are portable bundles. Use the engine's unmodified loot stage so biome/POI multipliers cannot push their final stage outside scaled loot tables. Contents, probabilities and quality templates remain unchanged.
+  RU: Наградные предметы являются переносимыми наборами. Используется штатная немодифицированная стадия добычи, чтобы множители биома/POI не выводили итоговое значение за диапазоны масштабируемых таблиц. Состав, вероятности и шаблоны качества не меняются.-->
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT03']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT06']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT09']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT12']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT15']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECAllInOneHuntBundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECMushroomT2Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECArcherT2Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECArcherT3Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='questRewardSkillMagazines']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='questContainerMagazinesT3']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='questContainerMagazinesT4']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='questContainerMagazinesT5']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='questContainerMagazinesT6']" name="unmodified_lootstage">true</setattribute>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLoot']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT03']/item[1]">
+    <item name="itemPZAECBossLootBundleT03" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT06']/item[1]">
+    <item name="itemPZAECBossLootBundleT06" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT09']/item[1]">
+    <item name="itemPZAECBossLootBundleT09" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT12']/item[1]">
+    <item name="itemPZAECBossLootBundleT12" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT15']/item[1]">
+    <item name="itemPZAECBossLootBundleT15" count="1" prob="1" force_prob="true"/>
+  </insertBefore>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLoot']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT03']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT06']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT09']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT12']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT15']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLoot']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT03']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT06']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT09']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT12']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT15']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLoot']/@count">17</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT03']/@count">17</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT06']/@count">17</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT09']/@count">17</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT12']/@count">17</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT15']/@count">17</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLoot']/@count">21</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT03']/@count">21</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT06']/@count">21</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT09']/@count">21</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT12']/@count">21</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT15']/@count">21</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT15']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLoot']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT03']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT06']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT09']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT12']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT15']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLoot']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT03']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT06']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT09']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT12']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT15']/@count">15</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLoot']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT03']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT06']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT09']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT12']/@count">13</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT15']/@count">13</set>
+  <remove xpath="/lootcontainers//item[@name='LegCont_SamplesT1']"/>
+  <remove xpath="/lootcontainers//item[@name='LegCont_SamplesT2']"/>
+  <remove xpath="/lootcontainers//item[@name='LegCont_SamplesT3']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples2']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples2']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples3']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples3']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples4']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples4']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples5']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples5']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples6']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples6']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples7']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples7']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples8']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples8']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples9']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples9']"/>
+  <remove xpath="/lootcontainers//item[@name='bookRareSamples10']"/>
+  <remove xpath="/lootcontainers//lootgroup[@name='bookRareSamples10']"/>
+  <!-- 168 slots: enough for the 150-slot backpack plus the ten-slot toolbelt. -->
+  <set xpath="/lootcontainers/lootcontainer[@name='playerBackpack']/@size">14,13</set>
+  <remove xpath="/lootcontainers/lootgroup/item[@group='aecZombieLootContractsScaled']"/>
+  <remove xpath="/lootcontainers/lootgroup/item[starts-with(@group,'aecZombieLootContracts')]"/>
+  <remove xpath="/lootcontainers/lootgroup/item[starts-with(@name,'itemAEC') and contains(@name,'Contract')]"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar1']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar2']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar3']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar4']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar5']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar6']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsStar7']"/>
+  <remove xpath="/lootcontainers/lootgroup[@name='aecZombieLootContractsScaled']"/>
+  <!-- EN: Close real high-LootStage world-loot gaps without globally clamping LootStage.
+RU: Закрываются реальные провалы мирового лута на высоком LootStage без глобального ограничения LootStage.-->
+  <!-- EN: 7DTD parses loot groups sequentially, so helper groups must be defined before groupMilitaryFootlocker02 references them.
+RU: 7DTD разбирает loot-группы последовательно, поэтому вспомогательные группы должны быть объявлены раньше ссылки из groupMilitaryFootlocker02.-->
+  <insertBefore xpath="/lootcontainers/lootgroup[@name='groupMilitaryFootlocker02']">
+    <lootgroup name="PZAECMilitaryFootlockerWeaponsT2" loot_quality_template="QLTemplateT2">
+      <item name="gunHandgunT2Magnum44"/>
+      <item name="gunShotgunT2PumpShotgun"/>
+      <item name="gunRifleT2LeverActionRifle"/>
+    </lootgroup>
+    <lootgroup name="PZAECMilitaryFootlockerWeaponsT3" loot_quality_template="QLTemplateT3">
+      <item name="gunHandgunT3DesertVulture"/>
+      <item name="gunHandgunT3SMG5"/>
+      <item name="gunShotgunT3AutoShotgun"/>
+      <item name="gunRifleT3SniperRifle"/>
+      <item name="meleeWpnBladeT3Machete"/>
+      <item name="meleeWpnKnucklesT3SteelKnuckles"/>
+    </lootgroup>
+  </insertBefore>
+  <append xpath="/lootcontainers/lootgroup[@name='groupMilitaryFootlocker02']">
+    <item group="PZAECMilitaryFootlockerWeaponsT2" loot_prob_template="ProbT2"/>
+    <item group="PZAECMilitaryFootlockerWeaponsT3" loot_prob_template="ProbT3"/>
+  </append>
+  <append xpath="/lootcontainers/lootgroup[@name='groupHuntingRanged']">
+    <item name="gunRifleT2LeverActionRifle" loot_prob_template="ProbT2"/>
+  </append>
+  <!-- EN: Portable OpenLootBundle containers must not inherit biome / POI LootStage from the place where they are opened.
+RU: Переносимые OpenLootBundle не должны наследовать LootStage биома / POI места, где их открывают.-->
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECMushroomT1Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECArcherT1Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECArcherT4Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECArcherT5Bundle']" name="unmodified_lootstage">true</setattribute>
+  <setattribute xpath="/lootcontainers/lootcontainer[@name='AECArcherT6Bundle']" name="unmodified_lootstage">true</setattribute>
+  <!-- T16 boss loot preserves each family's native T15 table, adds two guaranteed T16 reward bundles and doubles mutation-sample stacks found inside these boss containers. -->
+  <append xpath="/lootcontainers">
+    <lootgroup name="PZAECBossLootBundleT16_Content" count="all">
+      <item group="groupAmmoImpLarge" count="8" prob="1" force_prob="true"/>
+      <item group="groupAmmoDU" count="5" prob=".85" force_prob="true"/>
+      <item group="groupMiniBoss01" count="8"/>
+      <item group="groupZpackBoss02" count="8"/>
+      <item group="groupZpackBoss03" count="5"/>
+      <item group="groupBossAlloys" count="4" prob="1" force_prob="true"/>
+      <item group="groupZpackBoss04" count="2" prob=".95" force_prob="true"/>
+      <item group="groupRareMods" count="2" prob=".75" force_prob="true"/>
+      <item group="groupUniqModsAll" count="1" prob=".65" force_prob="true"/>
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".55" force_prob="true"/>
+      <item group="groupSkillBook" count="2" prob=".45" force_prob="true"/>
+      <item group="groupUnique_Weapon" count="1" prob=".40" force_prob="true"/>
+      <item group="groupLegend_Weapon" count="1" prob=".25" force_prob="true"/>
+      <item group="groupLegend_MeleeWeapon" count="1" prob=".30" force_prob="true"/>
+      <item group="groupUniqueParts" count="1" prob=".18" force_prob="true"/>
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT16" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <item group="PZAECBossLootBundleT16_Content"/>
+    </lootcontainer>
+<lootcontainer name="AECArcherBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item group="groupAECArcherBossLoot" />
+        <item name="resourceAECMutationSampleT4" count="532,874" />
+        <item name="resourceAECMutationSampleT5" count="628,1034" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECDruidBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="foodRawMeat" count="80,150" />
+        <item name="resourceAnimalFat" count="60,100" />
+        <item name="resourceBone" count="40,80" />
+        <item name="foodHoney" count="10,20" />
+        <item name="resourceFeather" count="50,100" />
+        <item name="resourceLeather" count="30,60" />
+        <item name="resourcePotassiumNitratePowder" count="60,120" />
+        <item name="resourceAECMutationSampleT4" count="624" />
+        <item name="resourceAECMutationSampleT5" count="736" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECDumdumBossLootT16" count="16" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="resourceCoal" count="6000" />
+        <item name="resourceRawDiamond" count="2" />
+        <item name="resourceGoldNugget" count="2" />
+        <item name="resourceSilverNugget" count="2" />
+        <item name="resourceAECMutationSampleT4" count="636" />
+        <item name="resourceAECMutationSampleT5" count="748" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECElectricDemonBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="resourceElectricParts" count="240,440" />
+        <item name="resourceAcid" count="20,40" />
+        <item name="carBattery" count="2,4" />
+        <item name="smallEngine" count="2,4" />
+        <item name="solarCell" count="1" />
+        <item name="meleeToolWireTool" count="1" />
+        <item name="ammoGasCan" count="2500,5000" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECExecutionerBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item group="groupAECExecutionerBossLoot" />
+        <item name="resourceAECMutationSampleT4" count="624" />
+        <item name="resourceAECMutationSampleT5" count="736" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECExplosiveEagleBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="ammoGasCan" count="3000,5000" />
+        <item name="ammoRocketHE" count="6,12" />
+        <item name="resourceGunPowder" count="1200,2200" />
+        <item name="resourcePotassiumNitratePowder" count="900,1600" />
+        <item name="resourceCoal" count="900,1600" />
+        <item name="resourceOil" count="300,600" />
+        <item name="resourceDuctTape" count="25,50" />
+        <item name="resourceMechanicalParts" count="40,80" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECGhostBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="foodRottingFlesh" count="5,15" />
+        <item name="foodCropPumpkin" count="1,3" />
+        <item name="casinoCoin" count="500,1500" />
+        <item group="groupAECGhostBossModifiers" />
+        <item group="groupAECGhostBossModifiers" />
+        <item group="groupAECGhostBossModifiers" />
+        <item name="resourceGoldNugget" count="20,50" />
+        <item name="resourceSilverNugget" count="40,80" />
+        <item name="resourceRawDiamond" count="2,6" />
+        <item name="resourceCoal" count="100,300" />
+        <item name="resourceScrapIron" count="100,250" />
+        <item name="resourceScrapBrass" count="40,100" />
+        <item name="resourceForgedSteel" count="20,50" />
+        <item name="resourceMechanicalParts" count="15,40" />
+        <item name="resourceElectricParts" count="15,40" />
+        <item name="resourceGunPowder" count="20,60" />
+        <item name="resourceAECMutationSampleT4" count="576" />
+        <item name="resourceAECMutationSampleT5" count="688" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECHammerGuardianBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="meleeWpnSledgeT3SteelSledgehammer" count="1" />
+        <item name="meleeToolPickT2SteelPickaxe" count="1" />
+        <item name="resourceForgedSteel" count="150,260" />
+        <item name="resourceMechanicalParts" count="70,120" />
+        <item name="resourceDuctTape" count="30,60" />
+        <item name="resourceRepairKit" count="10,20" />
+        <item name="resourceGunPowder" count="900,1600" />
+        <item name="ammoRocketHE" count="4,10" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECHeadlessBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="foodRottingFlesh" count="10,25" />
+        <item name="foodRawMeat" count="8,18" />
+        <item name="resourceBone" count="40,90" />
+        <item name="resourceAnimalFat" count="15,35" />
+        <item name="casinoCoin" count="1200,3200" />
+        <item group="groupAECHeadlessBossModifiers" />
+        <item group="groupAECHeadlessBossModifiers" />
+        <item name="resourceForgedSteel" count="20,45" />
+        <item name="resourceForgedIron" count="35,75" />
+        <item name="resourceMechanicalParts" count="10,30" />
+        <item name="resourceScrapIron" count="120,260" />
+        <item name="resourceAECMutationSampleT4" count="606" />
+        <item name="resourceAECMutationSampleT5" count="718" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECHellskyliLootT16" count="16" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="casinoCoin" count="10000,18000" />
+        <item name="resourceRawDiamond" count="8,14" />
+        <item name="resourceGoldNugget" count="45,80" />
+        <item name="resourceSilverNugget" count="70,120" />
+        <item name="medicalFirstAidKit" count="5,10" />
+        <item name="ammoRocketHE" count="6,12" />
+        <item name="ammo762mmBulletAP" count="200,380" />
+        <item name="thrownAmmoMolotovCocktail" count="8,16" />
+        <item name="resourceScrapPolymers" count="100,200" />
+        <item name="resourceScrapIron" count="250,450" />
+        <item name="resourcePotassiumNitratePowder" count="50,100" />
+        <item name="resourceMechanicalParts" count="20,40" />
+        <item name="resourceAECMutationSampleT4" count="590" />
+        <item name="resourceAECMutationSampleT5" count="702" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECMechanicianBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="vehicleMotorcyclePlaceable" count="1" prob="1" />
+        <item name="resourceMechanicalParts" count="120,220" />
+        <item name="resourceForgedSteel" count="120,220" />
+        <item name="smallEngine" count="2,5" />
+        <item name="resourceElectricParts" count="80,160" />
+        <item name="resourceHeadlight" count="8,16" />
+        <item name="carBattery" count="2,5" />
+        <item name="resourceDuctTape" count="25,50" />
+        <item name="resourceAECMutationSampleT4" count="624" />
+        <item name="resourceAECMutationSampleT5" count="736" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECMushroomBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="casinoCoin" count="5000,6000" />
+        <item name="resourceRawDiamond" count="2,3" />
+        <item name="resourceGoldNugget" count="10,15" />
+        <item name="foodCropMushrooms" count="50,100" />
+        <item name="drugAntibiotics" count="3,6" />
+        <item name="ammo762mmBulletAP" count="150,160" />
+        <item name="ammo9mmBulletBall" count="100,150" />
+        <item name="resourceAECMutationSampleT4" count="510,746" />
+        <item name="resourceAECMutationSampleT5" count="606,890" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECMykirBossLootT16" count="18" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="casinoCoin" count="25000,45000" />
+        <item name="resourceRawDiamond" count="20,35" />
+        <item name="resourceGoldNugget" count="100,180" />
+        <item name="resourceSilverNugget" count="140,240" />
+        <item name="medicalFirstAidKit" count="10,16" />
+        <item name="ammoRocketHE" count="12,22" />
+        <item name="ammo762mmBulletAP" count="450,750" />
+        <item name="thrownAmmoMolotovCocktail" count="18,30" />
+        <item name="resourceScrapPolymers" count="250,450" />
+        <item name="resourceScrapIron" count="650,1000" />
+        <item name="resourcePotassiumNitratePowder" count="140,220" />
+        <item name="resourceMechanicalParts" count="60,100" />
+        <item name="resourceForgedSteel" count="80,140" />
+        <item name="drugRecog" count="4,8" />
+        <item name="resourceAECMutationSampleT4" count="648" />
+        <item name="resourceAECMutationSampleT5" count="760" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECPartyBeachBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="casinoCoin" count="6000,10000" />
+        <item name="resourceRawDiamond" count="6,12" />
+        <item name="resourceGoldNugget" count="30,60" />
+        <item name="resourceSilverNugget" count="60,120" />
+        <item name="foodCanPears" count="8,16" />
+        <item name="foodCanChili" count="8,16" />
+        <item name="drinkJarBoiledWater" count="10,20" />
+        <item name="medicalFirstAidKit" count="3,6" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECRockbreakerLootT16" count="22" size="7,5" sound_open="UseActions/open_bag" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="casinoCoin" count="1000,5000" />
+        <item name="resourceForgedSteel" count="60,120" />
+        <item name="oreCoalBoulder" count="3,8" />
+        <item name="oreIronBoulder" count="3,8" />
+        <item name="oreLeadBoulder" count="3,8" />
+        <item name="orePotassiumNitrateBoulder" count="3,8" />
+        <item name="oreShaleBoulder" count="3,8" />
+        <item name="resourceCoal" count="100,250" />
+        <item name="resourceScrapIron" count="100,250" />
+        <item name="resourceScrapLead" count="80,180" />
+        <item name="resourcePotassiumNitratePowder" count="80,160" />
+        <item name="resourceGoldNugget" count="10,25" />
+        <item name="resourceSilverNugget" count="10,25" />
+        <item name="resourceRawDiamond" count="2,2" />
+        <item name="meleeToolPickT1IronPickaxe" count="1" />
+        <item name="meleeToolPickT2SteelPickaxe" count="1" />
+        <item name="meleeToolPickT3Auger" count="1" />
+        <item name="meleeWpnSledgeT1IronSledgehammer" count="1" />
+        <item name="meleeWpnSledgeT3SteelSledgehammer" count="1" />
+        <item name="resourceAECMutationSampleT4" count="590" />
+        <item name="resourceAECMutationSampleT5" count="702" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECSheriffBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="foodRottingFlesh" count="10,24" />
+        <item name="foodRawMeat" count="8,18" />
+        <item name="resourceBone" count="24,60" />
+        <item name="resourceAnimalFat" count="10,24" />
+        <item name="casinoCoin" count="1500,3500" />
+        <item name="resourceForgedSteel" count="16,34" />
+        <item name="resourceForgedIron" count="28,60" />
+        <item name="resourceMechanicalParts" count="8,20" />
+        <item name="resourceScrapIron" count="80,180" />
+        <item name="resourceGunPowder" count="20,50" />
+        <item name="ammoGasCan" count="2,5" prob="0.65" />
+        <item name="ammo9mmBulletBall" count="45,120" />
+        <item name="ammo9mmBulletAP" count="20,55" />
+        <item name="resourceAECMutationSampleT4" count="354" />
+        <item name="resourceAECMutationSampleT5" count="418" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECSingerieBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="plantedCorn1" count="3,16" />
+        <item name="plantedYucca1" count="3,16" />
+        <item name="plantedAloe1" count="2,12" />
+        <item name="plantedMushroom1" count="2,12" />
+        <item name="plantedBlueberry1" count="2,12" />
+        <item name="resourceCropAloeLeaf" count="6,20" />
+        <item name="resourceYuccaFibers" count="20,60" />
+        <item name="resourceWood" count="800,1800" />
+        <item name="foodHoney" count="1,6" />
+        <item name="foodCornBread" count="1,4" />
+        <item name="drugHerbalAntibiotics" count="1,4" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECSirenHeadBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="medicalFirstAidKit" count="2,4" />
+        <item name="resourceForgedSteel" count="100,200" />
+        <item name="resourceMechanicalParts" count="50,100" />
+        <item name="resourceDuctTape" count="20,50" />
+        <item name="resourceRepairKit" count="5,15" />
+        <item name="resourceGunPowder" count="500,1200" />
+        <item name="ammoRocketHE" count="2,6" />
+        <item name="drinkJarGoldenRodTea" count="2,5" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+<lootcontainer name="AECWitchBossLootT16" count="16" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="thrownAmmoMolotovCocktail" count="50" />
+        <item name="ammoArrowFlaming" count="120" />
+        <item name="resourceRawDiamond" count="3,6" />
+        <item name="resourceGoldNugget" count="10,15" />
+        <item name="ammoCrossbowBoltFlaming" count="120" />
+        <item name="resourceCoal" count="6000" />
+        <item name="resourceGunPowder" count="3000" />
+        <item name="resourceOil" count="1500" />
+        <item name="resourceAECMutationSampleT4" count="780" />
+        <item name="resourceAECMutationSampleT5" count="924" />
+    </lootcontainer>
+
+
+<lootcontainer name="DoomlordBossLootT16" count="16" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="casinoCoin" count="8000,12000" />
+        <item name="resourceRawDiamond" count="4,8" />
+        <item name="resourceGoldNugget" count="15,30" />
+        <item name="resourceSilverNugget" count="20,40" />
+        <item name="ammoRocketHE" count="4,8" />
+        <item name="ammo762mmBulletAP" count="250,450" />
+        <item name="ammo44MagnumBulletAP" count="120,220" />
+        <item name="ammoShotgunSlug" count="120,220" />
+        <item name="resourceAECMutationSampleT4" count="456" />
+        <item name="resourceAECMutationSampleT5" count="536" />
+    </lootcontainer>
+
+
+<lootcontainer name="RunningKamikazeBossLootT16" count="14" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="itemPZAECBossLootBundleT16" count="1" prob="1" force_prob="true" />
+        <item name="thrownAmmoPipeBomb" count="14" />
+        <item name="thrownGrenade" count="10" />
+        <item name="thrownGrenadeContact" count="10" />
+        <item name="thrownTimedCharge" count="2" />
+        <item name="ammoRocketHE" count="2" />
+        <item name="ammoRocketFrag" count="2" />
+        <item name="resourceGunPowder" count="2500" />
+        <item name="resourcePotassiumNitratePowder" count="2500" />
+        <item name="resourceDuctTape" count="120" />
+        <item name="resourceMechanicalParts" count="120" />
+        <item name="resourceAECMutationSampleT4" count="598" />
+        <item name="resourceAECMutationSampleT5" count="710" />
+    </lootcontainer>
+
+
+
+  </append>
+</configs>

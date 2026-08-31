@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: block definitions and targeted block-property patches.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: определения блоков и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/blocks">
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <block name="aecVehicleFinalAssemblyBench">
+      <property name="Class" value="Workstation"/>
+      <property class="Workstation">
+        <property name="Modules" value="output"/>
+        <property name="CraftingAreaRecipes" value="aecVehicleFinalAssemblyBench"/>
+      </property>
+      <property name="CreativeMode" value="Player"/>
+      <property name="DescriptionKey" value="aecVehicleFinalAssemblyBenchDesc"/>
+      <property name="WorkstationIcon" value="ui_game_symbol_forge"/>
+      <property name="CustomIcon" value="liftHydraulicWhite"/>
+      <property name="Stacknumber" value="1"/>
+      <property name="Material" value="Mmetal_medium"/>
+      <property name="Shape" value="ModelEntity"/>
+      <property name="Model" value="@:Entities/Industrial/liftHydraulicPrefab.prefab"/>
+      <property name="MultiBlockDim" value="2,2,1"/>
+      <property name="ImposterDontBlock" value="true"/>
+      <property name="WaterFlow" value="permitted"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="OnlySimpleRotations" value="true"/>
+      <property name="IsTerrainDecoration" value="true"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="MaxDamage" value="600"/>
+      <property name="TakeDelay" value="15"/>
+      <property name="OpenSound" value="open_workbench"/>
+      <property name="CloseSound" value="close_workbench"/>
+      <drop event="Destroy" count="0"/>
+      <property name="Tags" value="workstationSkill"/>
+      <property name="Group" value="Building,advBuilding"/>
+      <property name="SoundPickup" value="workbench_grab"/>
+      <property name="SoundPlace" value="workbench_place"/>
+    </block>
+    <block name="aecVehicleModifierBench">
+      <property name="Class" value="Workstation"/>
+      <property class="Workstation">
+        <property name="Modules" value="output"/>
+        <property name="CraftingAreaRecipes" value="aecVehicleModifierBench"/>
+      </property>
+      <property name="CreativeMode" value="Player"/>
+      <property name="DescriptionKey" value="aecVehicleModifierBenchDesc"/>
+      <property name="WorkstationIcon" value="ui_game_symbol_forge"/>
+      <property name="CustomIcon" value="cntShelvesMetalFullA"/>
+      <property name="Stacknumber" value="1"/>
+      <property name="Material" value="Mmetal_medium"/>
+      <property name="Shape" value="ModelEntity"/>
+      <property name="Model" value="@:Entities/Commercial/traderRektShelvesMetalFullAPrefab.prefab"/>
+      <property name="MultiBlockDim" value="2,2,1"/>
+      <property name="ImposterDontBlock" value="true"/>
+      <property name="WaterFlow" value="permitted"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="OnlySimpleRotations" value="true"/>
+      <property name="IsTerrainDecoration" value="true"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="MaxDamage" value="600"/>
+      <property name="TakeDelay" value="15"/>
+      <property name="OpenSound" value="open_workbench"/>
+      <property name="CloseSound" value="close_workbench"/>
+      <drop event="Destroy" count="0"/>
+      <property name="Tags" value="workstationSkill"/>
+      <property name="Group" value="Building,advBuilding"/>
+      <property name="SoundPickup" value="workbench_grab"/>
+      <property name="SoundPlace" value="workbench_place"/>
+    </block>
+  </append>
+</configs>

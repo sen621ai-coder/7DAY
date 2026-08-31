@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ProjectZ_AEC_Bosses_Integration"/>
+  <DisplayName value="Project Z + AEC Bosses | Integration"/>
+  <Description value="Integrates AEC AIO Bosses 3.1 enemies with Project Z radiation, mutation samples and combat effects."/>
+  <Author value="Exodusoul"/>
+  <Version value="3.1.1"/>
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <ServerSideOnly value="true"/>
+</xml>

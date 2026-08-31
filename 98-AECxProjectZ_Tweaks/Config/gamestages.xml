@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!--EN: Blood Moon integration owns only BloodMoonHorde gamestages; replacing upstream stages prevents the dense vanilla grid and Project Z append weights from bypassing the integrated progression.
+RU: Интеграция владеет только стадиями BloodMoonHorde; замена исходных стадий не позволяет плотной ванильной сетке и добавочным весам Project Z обходить объединённую прогрессию.-->
+  <remove xpath="/gamestages/spawner[@name='BloodMoonHorde']/gamestage"/>
+  <append xpath="/gamestages/spawner[@name='BloodMoonHorde']">
+    <gamestage stage="1">
+      <spawn group="PZAECBloodMoonGS000001" num="999" maxAlive="4"/>
+    </gamestage>
+    <gamestage stage="25">
+      <spawn group="PZAECBloodMoonGS000025" num="999" maxAlive="8"/>
+    </gamestage>
+    <gamestage stage="50">
+      <spawn group="PZAECBloodMoonGS000050" num="999" maxAlive="12"/>
+    </gamestage>
+    <gamestage stage="100">
+      <spawn group="PZAECBloodMoonGS000100" num="999" maxAlive="18"/>
+    </gamestage>
+    <gamestage stage="200">
+      <spawn group="PZAECBloodMoonGS000200" num="999" maxAlive="24"/>
+    </gamestage>
+    <gamestage stage="400">
+      <spawn group="PZAECBloodMoonGS000400" num="999" maxAlive="28"/>
+    </gamestage>
+    <gamestage stage="600">
+      <spawn group="PZAECBloodMoonGS000600" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="900">
+      <spawn group="PZAECBloodMoonGS000900" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="1200">
+      <spawn group="PZAECBloodMoonGS001200" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="1600">
+      <spawn group="PZAECBloodMoonGS001600" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="2000">
+      <spawn group="PZAECBloodMoonGS002000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="2600">
+      <spawn group="PZAECBloodMoonGS002600" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="3200">
+      <spawn group="PZAECBloodMoonGS003200" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="4100">
+      <spawn group="PZAECBloodMoonGS004100" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="5000">
+      <spawn group="PZAECBloodMoonGS005000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="6200">
+      <spawn group="PZAECBloodMoonGS006200" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="7500">
+      <spawn group="PZAECBloodMoonGS007500" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="9000">
+      <spawn group="PZAECBloodMoonGS009000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="10500">
+      <spawn group="PZAECBloodMoonGS010500" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="12250">
+      <spawn group="PZAECBloodMoonGS012250" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="14000">
+      <spawn group="PZAECBloodMoonGS014000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="16000">
+      <spawn group="PZAECBloodMoonGS016000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="18000">
+      <spawn group="PZAECBloodMoonGS018000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="20000">
+      <spawn group="PZAECBloodMoonGS020000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="22000">
+      <spawn group="PZAECBloodMoonGS022000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="23500">
+      <spawn group="PZAECBloodMoonGS023500" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="25000">
+      <spawn group="PZAECBloodMoonGS025000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="27000">
+      <spawn group="PZAECBloodMoonGS027000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="28500">
+      <spawn group="PZAECBloodMoonGS028500" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="30000">
+      <spawn group="PZAECBloodMoonGS030000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="40000">
+      <spawn group="PZAECBloodMoonGS040000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="60000">
+      <spawn group="PZAECBloodMoonGS060000" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="99999">
+      <spawn group="PZAECBloodMoonGS099999" num="999" maxAlive="256"/>
+    </gamestage>
+    <gamestage stage="999999">
+      <spawn group="PZAECBloodMoonGS999999" num="999" maxAlive="256"/>
+    </gamestage>
+  </append>
+</configs>

@@ -1,0 +1,553 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: recipe definitions, crafting areas and final normalization.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения рецептов, рабочие станции и финальная нормализация.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <remove xpath="/recipes/recipe[@name='aecExtremeModCraftingTable']"/>
+  <remove xpath="/recipes/recipe[@name='aecNecroforgeWorkbench']"/>
+  <remove xpath="/recipes/recipe[@craft_area='aecExtremeModCraftingTable' and not(starts-with(@name,'modAECMutator'))]"/>
+  <remove xpath="/recipes/recipe[@craft_area='aecNecroforgeWorkbench']"/>
+  <append xpath="/recipes">
+    <recipe name="aecExtremeModCraftingTable" count="1" craft_time="60" always_unlocked="true">
+      <ingredient name="workbench" count="1"/>
+      <ingredient name="resourceAECMutationSampleT1" count="273"/>
+      <ingredient name="resourceAECMutationSampleT2" count="30"/>
+    </recipe>
+    <recipe name="aecNecroforgeWorkbench" count="1" craft_time="60" craft_area="aecExtremeModCraftingTable" crafting_category="AECworkbenchMain" always_unlocked="true">
+      <ingredient name="workbench" count="1"/>
+      <ingredient name="resourceAECMutationSampleT1" count="20"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="10"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT00" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT01" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT02" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT03" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT04" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="20"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT05" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="30"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT06" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="40"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT07" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="60"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT08" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="80"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT09" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="100"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT10" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="140"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT11" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="190"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT12" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="250"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT13" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="320"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT14" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="400"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo9mmT15" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo9mm" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo9mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="500"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T00" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T01" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T02" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T03" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T04" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="20"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T05" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="30"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T06" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="40"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T07" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="60"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T08" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="80"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T09" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="100"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T10" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="140"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T11" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="190"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T12" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="250"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T13" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="320"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T14" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="400"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo44T15" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo44" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo44MagnumBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="500"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T00" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T01" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T02" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T03" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T04" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="20"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T05" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="30"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T06" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="40"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T07" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="60"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T08" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="80"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T09" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="100"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T10" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="140"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T11" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="190"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T12" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="250"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T13" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="320"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T14" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="400"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo762T15" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo762" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammo762mmBulletBall" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="500"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT00" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT01" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT02" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT03" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="10"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT04" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT1" count="20"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT05" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="30"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT06" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="40"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT07" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="60"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT08" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT2" count="80"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT09" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="100"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT10" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT3" count="140"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT11" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="190"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT12" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT4" count="250"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT13" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="320"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT14" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="400"/>
+    </recipe>
+    <recipe name="aecNecroBundleAmmo12gT15" count="1" craft_time="5" craft_area="aecNecroforgeWorkbench" crafting_category="aecNecroforgeAmmo12g" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="ammoShotgunShell" count="50"/>
+      <ingredient name="resourceAECMutationSampleT5" count="500"/>
+    </recipe>
+  </append>
+  <remove xpath="/recipes/recipe[@name='resourceMutationSamplesBundle']"/>
+  <append xpath="/recipes">
+    <recipe name="aecMutationIncubator" count="1" craft_area="workbench" craft_time="45" tags="learnable,workbenchCrafting,aecMutationIncubator">
+      <ingredient name="resourceForgedIron" count="25"/>
+      <ingredient name="resourceMetalPipe" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="25"/>
+      <ingredient name="resourceAcid" count="5"/>
+    </recipe>
+    <!-- EN: Incubator tab I converts tier reserves into Research Material: T1 15→1, T2 1→1, T3 1→2, T4 1→3, T5 1→4.
+RU: Вкладка I Инкубатора превращает тировые запасы в Материал для исследований: T1 15→1, T2 1→1, T3 1→2, T4 1→3, T5 1→4.-->
+    <recipe name="itemPZAECResearchMaterialT1Bundle" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchMaterialOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchMaterialOutput">
+      <ingredient name="unit_aecMutationSampleT1" count="15"/>
+    </recipe>
+    <recipe name="itemPZAECResearchMaterialT2Bundle" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchMaterialOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchMaterialOutput">
+      <ingredient name="unit_aecMutationSampleT2" count="1"/>
+    </recipe>
+    <recipe name="itemPZAECResearchMaterialT3Bundle" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchMaterialOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchMaterialOutput">
+      <ingredient name="unit_aecMutationSampleT3" count="1"/>
+    </recipe>
+    <recipe name="itemPZAECResearchMaterialT4Bundle" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchMaterialOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchMaterialOutput">
+      <ingredient name="unit_aecMutationSampleT4" count="1"/>
+    </recipe>
+    <recipe name="itemPZAECResearchMaterialT5Bundle" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchMaterialOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchMaterialOutput">
+      <ingredient name="unit_aecMutationSampleT5" count="1"/>
+    </recipe>
+    <!-- EN: Incubator tab II restores physical samples strictly 1:1 within each tier.
+RU: Вкладка II Инкубатора восстанавливает физические образцы строго 1:1 внутри каждого тира.-->
+    <recipe name="resourceAECMutationSampleT1" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchSampleOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchSampleOutput">
+      <ingredient name="unit_aecMutationSampleT1" count="1"/>
+    </recipe>
+    <recipe name="resourceAECMutationSampleT2" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchSampleOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchSampleOutput">
+      <ingredient name="unit_aecMutationSampleT2" count="1"/>
+    </recipe>
+    <recipe name="resourceAECMutationSampleT3" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchSampleOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchSampleOutput">
+      <ingredient name="unit_aecMutationSampleT3" count="1"/>
+    </recipe>
+    <recipe name="resourceAECMutationSampleT4" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchSampleOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchSampleOutput">
+      <ingredient name="unit_aecMutationSampleT4" count="1"/>
+    </recipe>
+    <recipe name="resourceAECMutationSampleT5" count="1" craft_time="2" material_based="true" craft_area="aecMutationIncubator" crafting_category="researchSampleOutput" is_trackable="false" always_unlocked="true" tags="aecMutationIncubator,researchSampleOutput">
+      <ingredient name="unit_aecMutationSampleT5" count="1"/>
+    </recipe>
+  </append>
+  <!-- EN: Remove duplicate Project Z forge-salvage recipes created when a broad insertAfter selector matches more than one vanilla anchor.-->
+  <!-- RU: Удаление дублей переплавки деталей Project Z, возникающих при нескольких совпадениях исходного insertAfter.-->
+  <remove xpath="/recipes/recipe[@name='UniversalParts'][@tags='salvageScrap']"/>
+  <remove xpath="/recipes/recipe[@name='UniqueParts'][@tags='salvageScrap']"/>
+  <!-- 3.7.14: select only the salvage anchor, not the forge recipe with the same name. -->
+  <insertAfter xpath="/recipes/recipe[@name='resourceScrapLead' and @tags='salvageScrap']">
+    <recipe name="UniversalParts" count="1" tooltip="ttScrapMetalBrass" always_unlocked="true" tags="salvageScrap">
+      <wildcard_forge_category/>
+    </recipe>
+  </insertAfter>
+  <append xpath="/recipes">
+    <recipe name="UniqueParts" count="1" tooltip="ttScrapMetalBrass" always_unlocked="true" tags="salvageScrap">
+      <wildcard_forge_category/>
+    </recipe>
+  </append>
+  <!-- EN: AEC EO Market | Unified teeth economy for generic market orders.-->
+  <!-- RU: AEC EO Market | Единая экономика зубов для универсальных заказов рынка.-->
+  <!-- EN: Every server-battery tier has exactly one recipe; prices retain the established 3.0.1 market anchors.
+RU: Каждый тир серверной батареи имеет ровно один рецепт; цены сохраняют установленные ориентиры рынка 3.0.1.-->
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv0']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv1']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv2']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv3']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv4']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv5']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv6']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv7']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv8']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv9']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv10']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv11']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv12']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv13']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv14']"/>
+  <remove xpath="/recipes/recipe[@name='questItem_resourceBatteryNiv15']"/>
+  <append xpath="/recipes">
+    <recipe name="questItem_resourceBatteryNiv0" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="20"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv1" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="40"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv2" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="60"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv3" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="75"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv4" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="95"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv5" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="305"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv6" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="510"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv7" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="845"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv8" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="1345"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv9" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="1940"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv10" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="2670"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv11" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="3585"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv12" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="4800"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv13" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="6000"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv14" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="7440"/>
+    </recipe>
+    <recipe name="questItem_resourceBatteryNiv15" craft_time="5" count="1" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="9840"/>
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="AEC_IM_DecorationCrate" count="1" craft_time="5" craft_area="internationalMarket">
+      <ingredient name="infectedTeeth" count="1500"/>
+    </recipe>
+  </append>
+  <!-- EN: Progression-lock safety. Every recipe shown as a crafting-skill unlock must carry the learnable tag; otherwise the game exposes it from level 1 even though the progression UI shows it locked.
+RU: Защита прогрессионных блокировок. Каждый рецепт, отображаемый как разблокировка навыка изготовления, обязан иметь тег learnable; иначе игра делает его доступным с 1-го уровня, хотя интерфейс прогрессии показывает замок.-->
+  <set xpath="/recipes/recipe[@name='elevatorDoor_Powered']/@tags">learnable,workbenchCrafting</set>
+  <set xpath="/recipes/recipe[@name='elevatorDoorDouble_Powered']/@tags">learnable,workbenchCrafting</set>
+  <set xpath="/recipes/recipe[@name='modAttributeBoostExp']/@tags">learnable,workbenchCrafting</set>
+  <!--EN: Project Z 3.1.2 contains two radioStation recipes; the untagged duplicate bypasses the level-40 unlock, so only that duplicate is replaced with an equivalent learnable recipe.
+RU: В Project Z 3.1.2 есть два рецепта radioStation; дубль без тегов обходит открытие на 40-м уровне, поэтому только он заменяется эквивалентным обучаемым рецептом.-->
+  <remove xpath="/recipes/recipe[@name='radioStation' and not(@tags)]"/>
+  <append xpath="/recipes">
+    <recipe name="radioStation" craft_time="300" count="1" craft_area="workbench" tags="learnable">
+      <ingredient name="carBattery" count="3"/>
+      <ingredient name="resourceElectricParts" count="100"/>
+      <ingredient name="resourceForgedSteel" count="50"/>
+      <ingredient name="radioHam" count="1"/>
+    </recipe>
+  </append>
+  <!-- EN: Retire AEC tutorial / field-guide / story-book recipes from normal acquisition; contract recipes remain untouched.
+RU: Рецепты обучения / справочников / сюжетных книг AEC выводятся из обычной добычи; рецепты контрактов не затрагиваются.-->
+  <remove xpath="/recipes/recipe[starts-with(@name,'aecEOProgressionBook') or starts-with(@name,'aecEOTutorial') or starts-with(@name,'aecEOFieldGuideBook')]"/>
+  <!-- EN: Archive Radio exposes one always-available Field Guide list ordered by player progression.
+RU: Архивное радио показывает один всегда доступный список полевых руководств, упорядоченный по прогрессии игрока.-->
+  <remove xpath="/recipes/recipe[@craft_area='aecQuestArchiveRadio']"/>
+  <append xpath="/recipes">
+    <recipe name="pzaecFG_AECEO10" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO10">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ01" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ01">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ02" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ02">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ03" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ03">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ14" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ14">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ04" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ04">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ05" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ05">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ06" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ06">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ13" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ13">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ08" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ08">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO01" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO01">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO02" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO02">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO05" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO05">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ09" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ09">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO03" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO03">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO04" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO04">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO06" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO06">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO09" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO09">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO11" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO11">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO12" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO12">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO13" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO13">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss01" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss01">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss03" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss03">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss02" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss02">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss07" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss07">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss06" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss06">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss05" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss05">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECBoss04" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECBoss04">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO14" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO14">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ07" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ07">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ17" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ17">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ11" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ11">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ15" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ15">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ12" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ12">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_PZ16" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_PZ16">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO08" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO08">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+    <recipe name="pzaecFG_AECEO07" count="1" craft_time="1" craft_area="aecQuestArchiveRadio" crafting_category="aecQuestArchiveGuide" always_unlocked="true" is_trackable="false" tags="ca_aecQuestArchiveRadio,cc_aecQuestArchiveGuide,pzaecFG_AECEO07">
+      <ingredient name="resourcePaper" count="1"/>
+    </recipe>
+  </append>
+  <!-- EN: Obsolete player-facing recipes are removed only by the unified tweaks layer.
+RU: Устаревшие пользовательские рецепты удаляются только единым слоем твиков.-->
+  <remove xpath="/recipes/recipe[@name='aecHeadConverter']"/>
+  <remove xpath="/recipes/recipe[@name='aecEndgameDiscordNote' or @name='aecProjectDiscordNote' or @name='aecAIOBossDiscordNote']"/>
+</configs>

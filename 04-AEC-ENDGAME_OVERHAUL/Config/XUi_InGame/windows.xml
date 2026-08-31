@@ -1,0 +1,168 @@
+<configs>
+    <!-- AEC Extreme Zombies – Custom crafting list windows with per-family category tabs -->
+
+    <append xpath="/windows">
+
+        <window name="windowCraftingListExtreme" width="397" height="688" controller="CraftingListInfo" panel="Left" pos="413,304" cursor_area="true" >
+
+            <rect name="header" height="43" depth="1">
+                <headerbg />
+                <sprite pos="4,-5" depth="2" name="windowIcon" style="icon32px" sprite="Craft_Icon_Basics"/>
+                <label style="header.name" text="basics" text_key="xuiBasics" />
+            </rect>
+
+            <rect name="content" width="397" height="650" depth="1" pos="0,-43" on_scroll="true">
+
+                <rect depth="2" name="categorySelector" width="390" height="174" pos="3,-6">
+                    <sprite name="backgroundMain" sprite="menu_empty3px" pos="-3,3" width="396" height="179" color="[black]" type="sliced" fillcenter="false" />
+                    <sprite color="[mediumGrey]" type="sliced" />
+                    <grid name="categories" pos="23,-21" rows="4" cols="9" width="390" height="172" cell_width="43" cell_height="43" repeat_content="true" controller="CategoryList">
+                        <category_icon />
+                    </grid>
+                </rect>
+
+                <rect depth="3" name="searchControls" width="390" height="44" pos="3,-182">
+                    <sprite name="backgroundMain" sprite="menu_empty3px" pos="-3,3" width="396" height="49" color="[black]" type="sliced" fillcenter="false" />
+                    <sprite color="[darkGrey]" type="sliced" />
+                    <button depth="4" name="favorites" style="icon30px, press" pos="18,-22" sprite="server_favorite" pivot="center" sound="[paging_click]" tooltip="Favorites" tooltip_key="lblFavorites" collider_scale="1.5" />
+
+                    <rect pos="104,0" width="200">
+                        <sprite depth="4" name="searchIcon" style="icon30px" pos="0,-22" sprite="ui_game_symbol_search" pivot="center"/>
+                        <textfield depth="5" name="searchInput" pos="22,-7" width="140" height="30" virtual_keyboard_prompt="vkPromptSearchTerm" search_field="true" close_group_on_tab="true" clear_button="true" />
+                    </rect>
+
+                    <rect pos="286,0" width="104" height="43">
+                        <pager name="pager" pos="4,-6" contents_parent="content"/>
+                    </rect>
+                </rect>
+
+                <grid name="recipes" depth="2" rows="9" cols="1" pos="3,-228" width="390" height="414" cell_width="390" cell_height="46" controller="RecipeList" repeat_content="true" arrangement="vertical" >
+                    <recipe_entry name="0"/>
+                </grid>
+            </rect>
+        </window>
+        <window name="windowCraftingListHead" width="397" height="688" controller="CraftingListInfo" panel="Left" pos="413,304" cursor_area="true" >
+
+            <rect name="header" height="43" depth="1">
+                <headerbg />
+                <sprite pos="4,-5" depth="2" name="windowIcon" style="icon32px" sprite="Craft_Icon_Basics"/>
+                <label style="header.name" text="basics" text_key="xuiBasics" />
+            </rect>
+
+            <rect name="content" width="397" height="650" depth="1" pos="0,-43" on_scroll="true">
+
+                <rect depth="2" name="categorySelector" width="390" height="88" pos="3,-6">
+                    <sprite name="backgroundMain" sprite="menu_empty3px" pos="-3,3" width="396" height="93" color="[black]" type="sliced" fillcenter="false" />
+                    <sprite color="[mediumGrey]" type="sliced" />
+                    <grid name="categories" pos="23,-21" rows="2" cols="9" width="390" height="86" cell_width="43" cell_height="43" repeat_content="true" controller="CategoryList">
+                        <category_icon />
+                    </grid>
+                </rect>
+
+                <rect depth="3" name="searchControls" width="390" height="44" pos="3,-96">
+                    <sprite name="backgroundMain" sprite="menu_empty3px" pos="-3,3" width="396" height="49" color="[black]" type="sliced" fillcenter="false" />
+                    <sprite color="[darkGrey]" type="sliced" />
+                    <button depth="4" name="favorites" style="icon30px, press" pos="18,-22" sprite="server_favorite" pivot="center" sound="[paging_click]" tooltip="Favorites" tooltip_key="lblFavorites" collider_scale="1.5" />
+
+                    <rect pos="104,0" width="200">
+                        <sprite depth="4" name="searchIcon" style="icon30px" pos="0,-22" sprite="ui_game_symbol_search" pivot="center"/>
+                        <textfield depth="5" name="searchInput" pos="22,-7" width="140" height="30" virtual_keyboard_prompt="vkPromptSearchTerm" search_field="true" close_group_on_tab="true" clear_button="true" />
+                    </rect>
+
+                    <rect pos="286,0" width="104" height="43">
+                        <pager name="pager" pos="4,-6" contents_parent="content"/>
+                    </rect>
+                </rect>
+
+                <grid name="recipes" depth="2" rows="11" cols="1" pos="3,-142" width="390" height="506" cell_width="390" cell_height="46" controller="RecipeList" repeat_content="true" arrangement="vertical" >
+                    <recipe_entry name="0"/>
+                </grid>
+            </rect>
+        </window>
+    </append>
+
+<append xpath="/windows">
+    <window name="windowToolsCryptoMiner" width="548" height="410" panel="Right" pos="0,100" cursor_area="true" >
+		<panel style="header.panel">
+			<sprite style="header.icon" sprite="ui_game_symbol_wrench"/>
+			<label style="header.name" text="TOOLS" text_key="xuiTools" />
+		</panel>
+
+        <rect name="content" depth="0" pos="0,-46" height="322" disablefallthrough="true">
+            <sprite depth="1" name="backgroundMain" sprite="menu_empty" pos="0,0" width="548" height="322" color="0,0,0,0" type="sliced" fillcenter="true" />
+			
+            <grid name="inventory" rows="7" cols="12" pos="3,-3" width="540" height="315" cell_width="45" cell_height="45" controller="WorkstationToolGrid" repeat_content="true"
+            required_tools="dumdum4starConnexionCard,doomlord4starConnexionCard,witch4starConnexionCard,hammer4starConnexionCard,dumdum1starConnexionCard,dumdum3starConnexionCard,dumdum0starConnexionCard,mecha4starConnexionCard,doomlord0starConnexionCard,witch0starConnexionCard,doomlord3starConnexionCard,dumdum2starConnexionCard,doomlord1starConnexionCard,doomlord2starConnexionCard,witch3starConnexionCard,witch1starConnexionCard,druid4starConnexionCard,witch2starConnexionCard,hammer3starConnexionCard,mecha0starConnexionCard,hammer1starConnexionCard,hammer2starConnexionCard,hammer0starConnexionCard,mecha3starConnexionCard,druid3starConnexionCard,mecha2starConnexionCard,druid0starConnexionCard,executioner0starConnexionCard,mecha1starConnexionCard,druid1starConnexionCard,druid2starConnexionCard,executioner2starConnexionCard,rockbreaker2starConnexionCard,singerie2starConnexionCard,executioner1starConnexionCard,ghost2starConnexionCard,rockbreaker1starConnexionCard,singerie1starConnexionCard,ghost1starConnexionCard,executioner3starConnexionCard,rockbreaker3starConnexionCard,singerie3starConnexionCard,mushroom1starConnexionCard,mushroom2starConnexionCard,ghost3starConnexionCard,rockbreaker4starConnexionCard,rockbreaker5starConnexionCard,rockbreaker0starConnexionCard,singerie0starConnexionCard,ghost0starConnexionCard,mushroom0starConnexionCard,headless0starConnexionCard,archer0starConnexionCard,headless1starConnexionCard,archer1starConnexionCard,sheriff1starConnexionCard,headless2starConnexionCard,archer2starConnexionCard,sheriff2starConnexionCard,singerie4starConnexionCard,ghost4starConnexionCard,mushroom4starConnexionCard,headless4starConnexionCard,archer4starConnexionCard,sheriff4starConnexionCard,dumdum5starConnexionCard,mushroom3starConnexionCard,doomlord5starConnexionCard,witch5starConnexionCard,sheriff3starConnexionCard,archer3starConnexionCard,sheriff0starConnexionCard,hammer5starConnexionCard,mecha5starConnexionCard,druid5starConnexionCard,executioner5starConnexionCard,headless3starConnexionCard,executioner4starConnexionCard,singerie5starConnexionCard,ghost5starConnexionCard,mushroom5starConnexionCard,headless5starConnexionCard,archer5starConnexionCard,sheriff5starConnexionCard" required_tools_only="true">
+				<item_stack controller="RequiredItemStack" name="0"/>
+			</grid>
+		</rect>
+	</window>
+
+<window name="windowInputCryptoMiner" width="228" height="204" panel="Right" pos="413,50"
+		controller="WorkstationMaterialInputWindow" materials_accepted="battery" valid_materials_color="[green]" invalid_materials_color="[red]" cursor_area="true" >
+		<panel style="header.panel">
+			<sprite style="header.icon" sprite="ui_game_symbol_battery"/>
+			<label style="header.name.shrink" text="BATTERY" text_key="xuiCryptoBattery" />
+		</panel>
+
+		<sprite depth="2" name="backgroundMain" sprite="menu_empty3px" pos="0,-46" height="153" color="[black]" type="sliced" fillcenter="false" />
+		<rect name="content" depth="1" pos="0,-46" height="153">
+
+			<grid depth="7" rows="1" cols="1" pos="3,-3" cell_width="75" cell_height="150" controller="WorkstationMaterialInputGrid" repeat_content="true">
+				<item_stack name="0"/>
+			</grid>
+
+		</rect>
+
+		<rect name="content2" depth="0" pos="78, -49" width="147" height="148">
+			<sprite depth="1" color="[mediumGrey]" type="sliced"/>
+			<grid rows="6" cols="1" pos="3,-3" cell_width="147" cell_height="24"  repeat_content="true">
+				<forge_material name="0"/>
+			</grid>
+		</rect>
+	</window>
+
+	<window name="windowCraftingListInternationalMarket"  width="397" height="688" controller="CraftingListInfo" panel="Left" pos="413,304" cursor_area="true" >
+
+		<rect name="header" height="43" depth="1">
+			<headerbg />
+			<sprite pos="4,-5" depth="2" name="windowIcon" style="icon32px" sprite="Craft_Icon_Basics"/>
+			<label style="header.name" text="basics" text_key="xuiBasics" />
+
+			<!-- <label pos="387, -6" depth="2" name="unlockedCount" width="64" height="32" text="0/65" font_size="32" color="[lightGrey]" justify="right" pivot="topright"/> -->
+			<!-- <sprite pos="328, -5" depth="2" name="unlockedIcon" style="icon32px" sprite="ui_game_symbol_book" color="[lightGrey]" pivot="topright"/> -->
+		</rect>
+
+		<rect name="content" width="397" height="650" depth="1" pos="0,-43" on_scroll="true">
+
+			<rect depth="2" name="categorySelector" width="390" height="88" pos="3,-6">
+				<sprite name="backgroundMain" sprite="menu_empty3px" pos="-3,3" width="396" height="93" color="[black]" type="sliced" fillcenter="false" />
+				<sprite color="[mediumGrey]" type="sliced" />
+				<grid name="categories" pos="23,-21" rows="2" cols="9" width="390" height="86" cell_width="43" cell_height="43" repeat_content="true" controller="CategoryList">
+					<category_icon />
+				</grid>
+			</rect>
+
+			<rect depth="3" name="searchControls" width="390" height="44" pos="3,-96">
+				<sprite name="backgroundMain" sprite="menu_empty3px" pos="-3,3" width="396" height="49" color="[black]" type="sliced" fillcenter="false" />
+				<sprite color="[darkGrey]" type="sliced" />
+				<button depth="4" name="favorites" style="icon30px, press" pos="18,-22" sprite="server_favorite" pivot="center" sound="[paging_click]" tooltip="Favorites" tooltip_key="lblFavorites" collider_scale="1.5" />
+
+				<rect pos="104,0" width="200">
+					<sprite depth="4" name="searchIcon" style="icon30px" pos="0,-22" sprite="ui_game_symbol_search" pivot="center"/>
+					<textfield depth="5" name="searchInput" pos="22,-7" width="140" height="30" virtual_keyboard_prompt="vkPromptSearchTerm" search_field="true" close_group_on_tab="true" clear_button="true" />
+				</rect>
+
+				<rect pos="286,0" width="104" height="43">
+					<pager name="pager" pos="4,-6" contents_parent="content"/>
+				</rect>
+			</rect>
+
+			<grid name="recipes" depth="2" rows="11" cols="1" pos="3,-142" width="390" height="506" cell_width="390" cell_height="46" controller="RecipeList" repeat_content="true" arrangement="vertical" >
+				<recipe_entry name="0"/>
+			</grid>
+		</rect>
+	</window>
+</append>
+
+</configs>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="AEC_Vehicles_NoMicrocraft"/>
+  <DisplayName value="AEC Vehicles (No Microcraft)"/>
+  <Description value="Required CORE module: AEC Vehicles with simplified two-stage crafting, updated for 7 Days to Die 3.1.0."/>
+  <Author value="Aeclipse"/>
+  <Version value="3.1.2"/>
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <ServerSideOnly value="true"/>
+</xml>

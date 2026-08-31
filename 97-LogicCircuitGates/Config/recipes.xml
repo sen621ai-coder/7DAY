@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="logicGateAND" count="1" craft_area="workbench" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="1"/>
+    </recipe>
+    <recipe name="logicGateOR" count="1" craft_area="workbench" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="1"/>
+    </recipe>
+    <recipe name="logicGateNOT" count="1" craft_area="workbench" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceElectricParts" count="4"/>
+      <ingredient name="resourceMechanicalParts" count="1"/>
+    </recipe>
+    <recipe name="logicGateXOR" count="1" craft_area="workbench" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceElectricParts" count="5"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+    </recipe>
+  </append>
+</configs>

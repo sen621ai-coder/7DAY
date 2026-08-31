@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="Vehicles_Progression"/>
+  <DisplayName value="AEC Vehicles | Progression &amp; Guide"/>
+  <Description value="Required CORE module: AEC vehicle progression, recipe locks, durability balance and guide integration for 7 Days to Die 3.1.0."/>
+  <Author value="Exodusoul"/>
+  <Version value="1.2.3"/>
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <ServerSideOnly value="true"/>
+</xml>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xml>
+  <Name value="ProjectZ_AEC_HP_BAR"/>
+  <DisplayName value="Project Z + AEC | HP Bar"/>
+  <Description value="Project Z target-bar compatibility with the AEC 3.1 boss health-bar presentation. POI entry name and difficulty are placed on separate centered lines below the health bar."/>
+  <Author value="Exodusoul"/>
+  <Version value="1.3.2"/>
+  <Website value="https://discord.gg/Ef4bBuhEEw"/>
+  <ServerSideOnly value="false"/>
+</xml>

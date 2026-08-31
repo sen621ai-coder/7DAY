@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+
+	<!-- Z_Balance_Game | worldglobal.xml -->
+
+	<!-- darkness -->
+
+	<set xpath="/worldglobal/environment/property[@name='ambientEquatorScale']/@value">.7,.15</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientGroundScale']/@value">.2,0</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientSkyScale']/@value">.8, .4</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientInsideSpeed']/@value">0.3</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientInsideThreshold']/@value">0.12</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientInsideEquatorScale']/@value">.25,.75</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientInsideGroundScale']/@value">.24,.12</set>
+
+	<set xpath="/worldglobal/environment/property[@name='ambientInsideSkyScale']/@value">.36,.18</set>
+
+
+</configs>

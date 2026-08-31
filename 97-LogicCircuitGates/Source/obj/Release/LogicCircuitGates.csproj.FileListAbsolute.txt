@@ -1,0 +1,5 @@
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\97-LogicCircuitGates\Source\obj\Release\LogicCircuitGates.csproj.AssemblyReference.cache
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\97-LogicCircuitGates\Source\obj\Release\LogicCircuitGates.GeneratedMSBuildEditorConfig.editorconfig
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\97-LogicCircuitGates\Source\obj\Release\LogicCircuitGates.csproj.CoreCompileInputs.cache
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\97-LogicCircuitGates\Source\obj\Release\LogicCircuitGates.dll
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\97-LogicCircuitGates\LogicCircuitGates.dll

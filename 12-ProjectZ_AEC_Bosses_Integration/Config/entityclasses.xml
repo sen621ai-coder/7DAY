@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: Project Z and AEC Bosses integration. File purpose: entity definitions and targeted entity-property patches.
+RU: Назначение модуля: интеграция Project Z и боссов AEC. Назначение файла: определения сущностей и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/entity_classes/entity_class[not(contains(@name,'LootBag')) and (starts-with(@name,'AEC') or starts-with(@name,'bossAEC') or starts-with(@name,'RunningKamikaze')) and (contains(property[@name='Tags']/@value,'boss') or contains(property[@name='Tags']/@value,'miniboss') or contains(@name,'Boss')) and not(contains(property[@name='Tags']/@value,'minion'))]/effect_group[1]">
+    <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECBossZRadiationSelf"/>
+    <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" target="self" buff="buffPZAECBossZRadiationSelf"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[not(contains(@name,'LootBag')) and (starts-with(@name,'AEC') or starts-with(@name,'bossAEC') or starts-with(@name,'RunningKamikaze')) and (contains(property[@name='Tags']/@value,'boss') or contains(property[@name='Tags']/@value,'miniboss') or contains(@name,'Boss')) and not(contains(property[@name='Tags']/@value,'minion'))][((contains(property[@name='Tags']/@value,'miniboss') and not(contains(property[@name='Tags']/@value,'AECTier09')) and not(contains(property[@name='Tags']/@value,'AECTier12')) and not(contains(property[@name='Tags']/@value,'AECTier15'))) or contains(property[@name='Tags']/@value,'AECTier03') or contains(property[@name='Tags']/@value,'AECTier06'))]/effect_group[1]">
+    <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECBossHandsMiniDECO"/>
+    <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" target="self" buff="buffPZAECBossHandsMiniDECO"/>
+  </append>
+  <append xpath="/entity_classes/entity_class[not(contains(@name,'LootBag')) and (starts-with(@name,'AEC') or starts-with(@name,'bossAEC') or starts-with(@name,'RunningKamikaze')) and (contains(property[@name='Tags']/@value,'boss') or contains(property[@name='Tags']/@value,'miniboss') or contains(@name,'Boss')) and not(contains(property[@name='Tags']/@value,'minion'))][((not(contains(property[@name='Tags']/@value,'miniboss')) and not(contains(property[@name='Tags']/@value,'AECTier03')) and not(contains(property[@name='Tags']/@value,'AECTier06'))) or contains(property[@name='Tags']/@value,'AECTier09') or contains(property[@name='Tags']/@value,'AECTier12') or contains(property[@name='Tags']/@value,'AECTier15'))]/effect_group[1]">
+    <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECBossHandsBossDECO"/>
+    <triggered_effect trigger="onSelfEnteredGame" action="AddBuff" target="self" buff="buffPZAECBossHandsBossDECO"/>
+  </append>
+</configs>

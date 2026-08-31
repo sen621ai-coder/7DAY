@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: entity definitions and targeted entity-property patches.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: определения сущностей и точечные правки их свойств.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/entity_classes">
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <entity_class name="AECForkliftVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecforkliftvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecForkliftVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicLongSchoolBusRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassiclongschoolbusrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicLongSchoolBusRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicShortSchoolBusRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicshortschoolbusrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicShortSchoolBusRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicShuttleSchoolBusRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicshuttleschoolbusrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicShuttleSchoolBusRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicCitySchoolBusRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassiccityschoolbusrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicCitySchoolBusRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECStormhunterVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecstormhuntervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecStormhunterVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicSedanHuntRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsedanhuntrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSedanHuntRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECDriftjackVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecdriftjackvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecDriftjackVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheRockVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectherockvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheRockVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicSedanSpeedDamagedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsedanspeeddamagedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSedanSpeedDamagedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECNitrojackVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecnitrojackvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecNitrojackVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECHarpoonerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecharpoonervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecHarpoonerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECDoomjackVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecdoomjackvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecDoomjackVehicleStorage"/>
+    </entity_class>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <entity_class name="AECClassicSedanSpeedRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsedanspeedrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSedanSpeedRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTrailhunterVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectrailhuntervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTrailhunterVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicSedanHuntDamagedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsedanhuntdamagedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSedanHuntDamagedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECBonehunterVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecbonehuntervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecBonehunterVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicPoliceCarRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicpolicecarrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicPoliceCarRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheJumperVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthejumpervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheJumperVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECLeviathanVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecleviathanvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecLeviathanVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicSUVVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsuvvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSUVVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheZombieHunterVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthezombiehuntervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheZombieHunterVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECScrapBastionVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecscrapbastionvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecScrapBastionVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECIronBastionVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecironbastionvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecIronBastionVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicSUVDamagedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsuvdamagedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSUVDamagedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheWoodenMistakeVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthewoodenmistakevehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheWoodenMistakeVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicMinivanRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicminivanrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicMinivanRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicTractorRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassictractorrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicTractorRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECHandTruckVehicle">
+      <property name="Tags" value="vehicle,usesGas,aechandtruckvehicle"/>
+      <property name="Class" value="EntityMinibike"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMini/VBikeMiniP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_minibike"/>
+      <property name="NavObject" value="minibike"/>
+      <property name="LootList" value="aecHandTruckVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECWolfVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecwolfvehicle"/>
+      <property name="Class" value="EntityMinibike"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMini/VBikeMiniP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_minibike"/>
+      <property name="NavObject" value="minibike"/>
+      <property name="LootList" value="aecWolfVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECBearVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecbearvehicle"/>
+      <property name="Class" value="EntityMinibike"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMini/VBikeMiniP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_minibike"/>
+      <property name="NavObject" value="minibike"/>
+      <property name="LootList" value="aecBearVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECStagVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecstagvehicle"/>
+      <property name="Class" value="EntityMinibike"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMini/VBikeMiniP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_minibike"/>
+      <property name="NavObject" value="minibike"/>
+      <property name="LootList" value="aecStagVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECMountainLionVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecmountainlionvehicle"/>
+      <property name="Class" value="EntityMinibike"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMini/VBikeMiniP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_minibike"/>
+      <property name="NavObject" value="minibike"/>
+      <property name="LootList" value="aecMountainLionVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECDireWolfVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecdirewolfvehicle"/>
+      <property name="Class" value="EntityMinibike"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMini/VBikeMiniP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_minibike"/>
+      <property name="NavObject" value="minibike"/>
+      <property name="LootList" value="aecDireWolfVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheWheelchairVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthewheelchairvehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecTheWheelchairVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECExtremeWheelchairVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecextremewheelchairvehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecExtremeWheelchairVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECShoppingCartVehicle">
+      <property name="Tags" value="vehicle,aecshoppingcartvehicle"/>
+      <property name="Class" value="EntityBicycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_bicycle"/>
+      <property name="NavObject" value="bicycle"/>
+      <property name="LootList" value="aecShoppingCartVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECUnicycleVehicle">
+      <property name="Tags" value="vehicle,aecunicyclevehicle"/>
+      <property name="Class" value="EntityBicycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_bicycle"/>
+      <property name="NavObject" value="bicycle"/>
+      <property name="LootList" value="aecUnicycleVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECRacingShoppingCartVehicle">
+      <property name="Tags" value="vehicle,aecracingshoppingcartvehicle"/>
+      <property name="Class" value="EntityBicycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_bicycle"/>
+      <property name="NavObject" value="bicycle"/>
+      <property name="LootList" value="aecRacingShoppingCartVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECBrokenBicycleVehicle">
+      <property name="Tags" value="vehicle,aecbrokenbicyclevehicle"/>
+      <property name="Class" value="EntityBicycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_bicycle"/>
+      <property name="NavObject" value="bicycle"/>
+      <property name="LootList" value="aecBrokenBicycleVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECThePipeBicycleVehicle">
+      <property name="Tags" value="vehicle,aecthepipebicyclevehicle"/>
+      <property name="Class" value="EntityBicycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_bicycle"/>
+      <property name="NavObject" value="bicycle"/>
+      <property name="LootList" value="aecThePipeBicycleVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheAdvancedPipeBicycleVehicle">
+      <property name="Tags" value="vehicle,aectheadvancedpipebicyclevehicle"/>
+      <property name="Class" value="EntityBicycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VBikeMountain/VBikeMountainP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_bicycle"/>
+      <property name="NavObject" value="bicycle"/>
+      <property name="LootList" value="aecTheAdvancedPipeBicycleVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECThundraRunnerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthundrarunnervehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecThundraRunnerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECMinimotoVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecminimotovehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecMinimotoVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheExplorerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectheexplorervehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecTheExplorerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheBikerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthebikervehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecTheBikerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheExorcistVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectheexorcistvehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecTheExorcistVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheSoldierVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthesoldiervehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecTheSoldierVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECWastelandRunnerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecwastelandrunnervehicle"/>
+      <property name="Class" value="EntityMotorcycle"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VMotorcycle/VMotorcycleP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_motorcycle"/>
+      <property name="NavObject" value="motorcycle"/>
+      <property name="LootList" value="aecWastelandRunnerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheHammerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthehammervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheHammerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheWarRamVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthewarramvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheWarRamVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheExecutionerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectheexecutionervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheExecutionerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECThePunisherVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthepunishervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecThePunisherVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheOldWagonVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectheoldwagonvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheOldWagonVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheTowerBusVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthetowerbusvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheTowerBusVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheTowerCarVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthetowercarvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheTowerCarVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheFamilyWagonVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthefamilywagonvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheFamilyWagonVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheWeaponWheelVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectheweaponwheelvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheWeaponWheelVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheSalvagerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthesalvagervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheSalvagerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTiltTruckEmptyVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectilttruckemptyvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="vehicle4x4Truck"/>
+    </entity_class>
+    <entity_class name="AECCargoRatVehicle">
+      <property name="Tags" value="vehicle,usesGas,aeccargoratvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecCargoRatVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicPickupCargoDamagedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicpickupcargodamagedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicPickupCargoDamagedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECCargoHoundVehicle">
+      <property name="Tags" value="vehicle,usesGas,aeccargohoundvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecCargoHoundVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicFireTruckRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicfiretruckrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicFireTruckRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECCargoBehemothVehicle">
+      <property name="Tags" value="vehicle,usesGas,aeccargobehemothvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecCargoBehemothVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicPickupCargoRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicpickupcargorepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicPickupCargoRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicAmbulanceRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicambulancerepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicAmbulanceRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicArmyTruckEmptyVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicarmytruckemptyvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicArmyTruckEmptyVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheKillerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthekillervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheKillerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicArmyTruckVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicarmytruckvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicArmyTruckVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicRaftVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicraftvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="false"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicRaftVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicFarmtruckRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicfarmtruckrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicFarmtruckRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECFarmTruckOreBoulderVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecfarmtruckorebouldervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecFarmTruckOreBoulderVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECWarMammothVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecwarmammothvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecWarMammothVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheGiantVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthegiantvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheGiantVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTruckDrillerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aectruckdrillervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTruckDrillerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicServiceTruckGenericNoLadderVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicservicetruckgenericnoladdervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicServiceTruckGenericNoLadderVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicServiceTruckGenericVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicservicetruckgenericvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicServiceTruckGenericVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicServiceTruckMoPowerVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicservicetruckmopowervehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicServiceTruckMoPowerVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicServiceTruckWorkingStiffVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicservicetruckworkingstiffvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicServiceTruckWorkingStiffVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicSemiFrontRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicsemifrontrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicSemiFrontRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECTheMovingHQVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthemovinghqvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecTheMovingHQVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicExcavatorRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicexcavatorrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicExcavatorRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicExcavatorClawRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicexcavatorclawrepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicExcavatorClawRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECClassicBackhoeRepairedVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecclassicbackhoerepairedvehicle"/>
+      <property name="Class" value="EntityVJeep"/>
+      <property name="Parent" value="Cars"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_4x4"/>
+      <property name="NavObject" value="4x4"/>
+      <property name="LootList" value="aecClassicBackhoeRepairedVehicleStorage"/>
+    </entity_class>
+    <entity_class name="AECAirplaneVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecairplanevehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecAirplaneVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECMiniAirplaneVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecminiairplanevehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecMiniAirplaneVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECFlyingSedanVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecflyingsedanvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecFlyingSedanVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECFlyingWasteVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecflyingwastevehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecFlyingWasteVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECFlyingCityBusVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecflyingcitybusvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecFlyingCityBusVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECSunDrifterVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecsundriftervehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecSunDrifterVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECArmoredGyroVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecarmoredgyrovehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecArmoredGyroVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECTheHoverboardVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthehoverboardvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecTheHoverboardVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECHellglideVehicle">
+      <property name="Tags" value="vehicle,usesGas,aechellglidevehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecHellglideVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECAirMotorcycleVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecairmotorcyclevehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecAirMotorcycleVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECTheFloatcampVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthefloatcampvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecTheFloatcampVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECTheHangingWorldVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecthehangingworldvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecTheHangingWorldVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECBasicJetpackVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecbasicjetpackvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecBasicJetpackVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECAdvancedJetpackVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecadvancedjetpackvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecAdvancedJetpackVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECRocketVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecrocketvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecRocketVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="5"/>
+        <property name="RadiusEntities" value="5"/>
+        <property name="BlockDamage" value="60"/>
+        <property name="EntityDamage" value="60"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <entity_class name="AECMiniRocketVehicle">
+      <property name="Tags" value="vehicle,usesGas,aecminirocketvehicle"/>
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Prefab" value="@:Entities/Vehicles/VGyrocopter/VGyrocopterP.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="aecMiniRocketVehicleStorage"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="5"/>
+        <property name="RadiusEntities" value="5"/>
+        <property name="BlockDamage" value="60"/>
+        <property name="EntityDamage" value="60"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter"/>
+      <property name="NavObject" value="gyrocopter"/>
+    </entity_class>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+  </append>
+</configs>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: vehicle progression and SkillLock integration. File purpose: quest definitions, objectives, rewards and chain links.
+RU: Назначение модуля: прогрессия транспорта и интеграция SkillLock. Назначение файла: определения заданий, цели, награды и связи цепочек.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/quests">
+    <quest id="aecVehProgQuest1">
+      <property name="name_key" value="aecVehProgQuest1Name"/>
+      <property name="description_key" value="aecVehProgQuest1Journal"/>
+      <property name="offer_key" value="aecVehProgQuest1Offer"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="Craft" id="aecVehicleFinalAssemblyBench" value="1" phase="1">
+        <property name="objective_name_key" value="aecVehProgObjectiveAssemblyBench"/>
+      </objective>
+      <reward type="Exp" value="750"/>
+      <reward type="Item" id="aecVehProgChapter2" value="1"/>
+    </quest>
+    <quest id="aecVehProgQuest2">
+      <property name="name_key" value="aecVehProgQuest2Name"/>
+      <property name="description_key" value="aecVehProgQuest2Journal"/>
+      <property name="offer_key" value="aecVehProgQuest2Offer"/>
+      <property name="subtitle_key" value="quest_conditions"/>
+      <property name="statement_key" value="quest_conditions"/>
+      <property name="response_key" value="quest_conditions"/>
+      <property name="icon" value="ui_game_symbol_quest"/>
+      <property name="repeatable" value="false"/>
+      <property name="shareable" value="false"/>
+      <property name="add_to_tier_complete" value="false"/>
+      <property name="category_key" value="quest"/>
+      <property name="completiontype" value="AutoComplete"/>
+      <objective type="Craft" id="aecVehicleModifierBench" value="1" phase="1">
+        <property name="objective_name_key" value="aecVehProgObjectiveModifierBench"/>
+      </objective>
+      <reward type="Exp" value="750"/>
+    </quest>
+  </append>
+</configs>

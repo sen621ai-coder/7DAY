@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: game-event definitions and first-spawn actions.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения игровых событий и действий при первом появлении.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <remove xpath="/gameevents/action_sequence[@name='GiveNewQuestRare']"/>
+  <remove xpath="/gameevents/action_sequence[@name='action_addBonus_MiniBossSample']"/>
+  <remove xpath="/gameevents/action_sequence[@name='action_addBonus_BossSample']"/>
+  <remove xpath="/gameevents/action_sequence[@name='action_addBonus_AllSample']"/>
+  <append xpath="/gameevents">
+    <action_sequence name="corpseRewardResearchOne">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="resourceMutationSamples"/>
+        <property name="added_item_counts" value="1"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardResearchOneTwo">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="resourceMutationSamples"/>
+        <property name="added_item_counts" value="1-2"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardResearchOneThree">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="resourceMutationSamples"/>
+        <property name="added_item_counts" value="1-3"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardResearchOneThreeMax">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="resourceMutationSamples"/>
+        <property name="added_item_counts" value="1-3"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardTeethOne">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="infectedTeeth"/>
+        <property name="added_item_counts" value="1"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardTeethOneTwo">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="infectedTeeth"/>
+        <property name="added_item_counts" value="1-2"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardTeethOneThree">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="infectedTeeth"/>
+        <property name="added_item_counts" value="1-3"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardTeethOneThreeMax">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="infectedTeeth"/>
+        <property name="added_item_counts" value="1-3"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="corpseRewardTokenOne">
+      <property name="action_type" value="Game"/>
+      <action class="AddItems">
+        <property name="added_items" value="aecUniversalToken"/>
+        <property name="added_item_counts" value="1"/>
+      </action>
+    </action_sequence>
+  </append>
+  <!-- EN: Suppress upstream AEC EO tutorial / field-guide first-spawn grants; source story definitions stay intact.
+RU: Отключается стартовая выдача обучения / справочников AEC EO; исходные сюжетные определения остаются нетронутыми.-->
+  <remove xpath="/gameevents/action_sequence[@name='game_first_spawn']/action[@class='AddItems'][property[@name='added_items' and @value='aecEOTutorialIntroBook01']]"/>
+  <remove xpath="/gameevents/action_sequence[@name='game_first_spawn']/action[@class='ModifyCVar'][property[@name='cvar' and @value='aecEOTutorialIntroBook01Granted']]"/>
+  <remove xpath="/gameevents/action_sequence[@name='game_first_spawn']/action[@class='AddItems'][property[@name='added_items' and contains(@value,'aecEOFieldGuideBook01')]]"/>
+  <remove xpath="/gameevents/action_sequence[@name='game_first_spawn']/action[@class='ModifyCVar'][property[@name='cvar' and @value='aecEOFieldGuidesGranted']]"/>
+  <!-- EN: The unified campaign starter is supplied by ItemsOnEnterGame in entityclasses.xml.
+RU: Старт единой кампании выдаётся через ItemsOnEnterGame в entityclasses.xml.-->
+  <!-- EN: Supply the final Doomlord waves referenced by Hunt / Siege quests.
+RU: Добавляются финальные волны Doomlord, на которые ссылаются задания Hunt / Siege.-->
+  <append xpath="/gameevents">
+    <action_sequence name="eventAECDoomlordWave_Hunt6">
+      <property name="refund_inactivity" value="false"/>
+      <action class="AddChatMessage">
+        <property name="text" value="| [FF0000]WAVE 6:[-] The last Doomlord elite wave is here. Boss incoming next!"/>
+        <property name="text_key" value="eventAECDoomlordWave6_msg"/>
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="AECDoomlordDemolishmanMinion,AECDemolishmanMinion01,AECDemolishmanMinion02,AECDemolishmanMinion03,AECDemolishmanMinion04,AECDemolishmanMinion05,AECDemolishmanMinion06,AECDemolishmanMinion07"/>
+        <property name="spawn_count" value="8"/>
+        <property name="min_distance" value="8"/>
+        <property name="max_distance" value="20"/>
+        <property name="air_spawn" value="false"/>
+        <property name="spawn_type" value="WanderingHorde"/>
+        <property name="is_aggressive" value="true"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="eventAECDoomlordWave_Hunt6_T03">
+      <property name="refund_inactivity" value="false"/>
+      <action class="AddChatMessage">
+        <property name="text" value="| [FF0000]WAVE 6:[-] The last Doomlord elite wave is here. Boss incoming next!"/>
+        <property name="text_key" value="eventAECDoomlordWave6_msg"/>
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="AECDoomlordDemolishmanMinionT03,AECDemolishmanMinion01T03,AECDemolishmanMinion02T03,AECDemolishmanMinion03T03,AECDemolishmanMinion04T03,AECDemolishmanMinion05T03,AECDemolishmanMinion06T03,AECDemolishmanMinion07T03"/>
+        <property name="spawn_count" value="8"/>
+        <property name="min_distance" value="8"/>
+        <property name="max_distance" value="20"/>
+        <property name="air_spawn" value="false"/>
+        <property name="spawn_type" value="WanderingHorde"/>
+        <property name="is_aggressive" value="true"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="eventAECDoomlordWave_Hunt6_T06">
+      <property name="refund_inactivity" value="false"/>
+      <action class="AddChatMessage">
+        <property name="text" value="| [FF0000]WAVE 6:[-] The last Doomlord elite wave is here. Boss incoming next!"/>
+        <property name="text_key" value="eventAECDoomlordWave6_msg"/>
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="AECDoomlordDemolishmanMinionT06,AECDemolishmanMinion01T06,AECDemolishmanMinion02T06,AECDemolishmanMinion03T06,AECDemolishmanMinion04T06,AECDemolishmanMinion05T06,AECDemolishmanMinion06T06,AECDemolishmanMinion07T06"/>
+        <property name="spawn_count" value="8"/>
+        <property name="min_distance" value="8"/>
+        <property name="max_distance" value="20"/>
+        <property name="air_spawn" value="false"/>
+        <property name="spawn_type" value="WanderingHorde"/>
+        <property name="is_aggressive" value="true"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="eventAECDoomlordWave_Hunt6_T09">
+      <property name="refund_inactivity" value="false"/>
+      <action class="AddChatMessage">
+        <property name="text" value="| [FF0000]WAVE 6:[-] The last Doomlord elite wave is here. Boss incoming next!"/>
+        <property name="text_key" value="eventAECDoomlordWave6_msg"/>
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="AECDoomlordDemolishmanMinionT09,AECDemolishmanMinion01T09,AECDemolishmanMinion02T09,AECDemolishmanMinion03T09,AECDemolishmanMinion04T09,AECDemolishmanMinion05T09,AECDemolishmanMinion06T09,AECDemolishmanMinion07T09"/>
+        <property name="spawn_count" value="8"/>
+        <property name="min_distance" value="8"/>
+        <property name="max_distance" value="20"/>
+        <property name="air_spawn" value="false"/>
+        <property name="spawn_type" value="WanderingHorde"/>
+        <property name="is_aggressive" value="true"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="eventAECDoomlordWave_Hunt6_T12">
+      <property name="refund_inactivity" value="false"/>
+      <action class="AddChatMessage">
+        <property name="text" value="| [FF0000]WAVE 6:[-] The last Doomlord elite wave is here. Boss incoming next!"/>
+        <property name="text_key" value="eventAECDoomlordWave6_msg"/>
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="AECDoomlordDemolishmanMinionT12,AECDemolishmanMinion01T12,AECDemolishmanMinion02T12,AECDemolishmanMinion03T12,AECDemolishmanMinion04T12,AECDemolishmanMinion05T12,AECDemolishmanMinion06T12,AECDemolishmanMinion07T12"/>
+        <property name="spawn_count" value="8"/>
+        <property name="min_distance" value="8"/>
+        <property name="max_distance" value="20"/>
+        <property name="air_spawn" value="false"/>
+        <property name="spawn_type" value="WanderingHorde"/>
+        <property name="is_aggressive" value="true"/>
+      </action>
+    </action_sequence>
+    <action_sequence name="eventAECDoomlordWave_Hunt6_T15">
+      <property name="refund_inactivity" value="false"/>
+      <action class="AddChatMessage">
+        <property name="text" value="| [FF0000]WAVE 6:[-] The last Doomlord elite wave is here. Boss incoming next!"/>
+        <property name="text_key" value="eventAECDoomlordWave6_msg"/>
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="AECDoomlordDemolishmanMinionT15,AECDemolishmanMinion01T15,AECDemolishmanMinion02T15,AECDemolishmanMinion03T15,AECDemolishmanMinion04T15,AECDemolishmanMinion05T15,AECDemolishmanMinion06T15,AECDemolishmanMinion07T15"/>
+        <property name="spawn_count" value="8"/>
+        <property name="min_distance" value="8"/>
+        <property name="max_distance" value="20"/>
+        <property name="air_spawn" value="false"/>
+        <property name="spawn_type" value="WanderingHorde"/>
+        <property name="is_aggressive" value="true"/>
+      </action>
+    </action_sequence>
+  </append>
+  <!-- EN: Repair stale AEC Boss event references without editing the source AEC modules.
+RU: Исправляются устаревшие ссылки событий AEC Boss без изменения исходных модулей AEC.-->
+  <!-- EN: Blood Brood used six entity IDs that are not defined anywhere. Reuse existing compatible AEC minions so kill tags and reward rules still work.
+RU: Blood Brood использовал шесть нигде не определённых ID. Используются существующие совместимые миньоны AEC, чтобы сохранились теги убийств и награды.-->
+  <setattribute xpath="/gameevents/action_sequence[@name='eventAECBloodBroodWave1']/action[@class='SpawnEntity']/property[@name='entity_names']" name="value">AECHeadlessMinion03,AECHeadlessMinion04,AECHeadlessMinion06,AECExecutionerMinion,AECExecutionerMinion,AECExecutionerMinion,AECTheWitchMinionSpider,AECTheWitchMinionSpider</setattribute>
+  <setattribute xpath="/gameevents/action_sequence[@name='eventAECBloodBroodWave2']/action[@class='SpawnEntity']/property[@name='entity_names']" name="value">AECHeadlessMinion03,AECHeadlessMinion04,AECHeadlessMinion06,AECHeadlessMinion08,AECExecutionerMinion,AECExecutionerMinion,AECExecutionerMinion,AECExecutionerMinion,AECTheWitchMinionSpider,AECTheWitchMinionSpider</setattribute>
+  <setattribute xpath="/gameevents/action_sequence[@name='eventAECBloodBroodWave3']/action[@class='SpawnEntity']/property[@name='entity_names']" name="value">AECHeadlessMinion03,AECHeadlessMinion04,AECHeadlessMinion06,AECHeadlessMinion08,AECHeadlessMinion09,AECExecutionerMinion,AECExecutionerMinion,AECExecutionerMinion,AECExecutionerMinion,AECTheWitchMinionSpider,AECTheWitchMinionSpider</setattribute>
+  <!-- EN: Last Stand referenced a non-existent shorthand boss ID; point it at the real Doomlord class.
+RU: Last Stand ссылался на несуществующее сокращённое имя босса; используется реальный класс Doomlord.-->
+  <setattribute xpath="/gameevents/action_sequence[@name='eventAECDoomlordArcherBossSpawn_LastStand']/action[@class='SpawnEntity']/property[@name='entity_names']" name="value">AECDoomlordDemolishmanBoss,AECTheArcherBoss</setattribute>
+  <!-- EN: Cleanup actions used the localization key as a buff ID. Redirect all of them to the actual Next Wave buff.
+RU: Очистка использовала ключ локализации вместо ID бафа. Все такие ссылки перенаправляются на реальный баф Next Wave.-->
+  <setattribute xpath="/gameevents/action_sequence/action/property[@name='buff_name' and @value='buffAECWaveChallengeNextWave']" name="value">buffAECDoomlordEndlessGrenadierNextWave</setattribute>
+  <!-- Continue the AEC stage synchronizer through T16 A1-A5. -->
+  <append xpath="/gameevents/action_sequence[@name='AecTierStageSync']">
+    <decision class="If"><requirement class="Gamestage"><property name="operation" value="GTE"/><property name="game_stage" value="30000"/></requirement><action class="ModifyProgression"><property name="phase" value="0"/><property name="modify_type" value="Set"/><property name="progression_names" value="aecTierUnlock"/><property name="values" value="56"/></action></decision>
+    <decision class="If"><requirement class="Gamestage"><property name="operation" value="GTE"/><property name="game_stage" value="31000"/></requirement><action class="ModifyProgression"><property name="phase" value="0"/><property name="modify_type" value="Set"/><property name="progression_names" value="aecTierUnlock"/><property name="values" value="57"/></action></decision>
+    <decision class="If"><requirement class="Gamestage"><property name="operation" value="GTE"/><property name="game_stage" value="32000"/></requirement><action class="ModifyProgression"><property name="phase" value="0"/><property name="modify_type" value="Set"/><property name="progression_names" value="aecTierUnlock"/><property name="values" value="58"/></action></decision>
+    <decision class="If"><requirement class="Gamestage"><property name="operation" value="GTE"/><property name="game_stage" value="33000"/></requirement><action class="ModifyProgression"><property name="phase" value="0"/><property name="modify_type" value="Set"/><property name="progression_names" value="aecTierUnlock"/><property name="values" value="59"/></action></decision>
+    <decision class="If"><requirement class="Gamestage"><property name="operation" value="GTE"/><property name="game_stage" value="34000"/></requirement><action class="ModifyProgression"><property name="phase" value="0"/><property name="modify_type" value="Set"/><property name="progression_names" value="aecTierUnlock"/><property name="values" value="60"/></action></decision>
+  </append>
+</configs>

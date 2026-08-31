@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- EN: Module purpose: Project Z, AEC Endgame Overhaul and Zombie Market integration. File purpose: recipe definitions, crafting areas and final normalization.
+RU: Назначение модуля: интеграция Project Z, AEC Endgame Overhaul и Зомбо-маркета. Назначение файла: определения рецептов, рабочие станции и финальная нормализация.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/recipes">
+    <recipe name="flagThick44BlockVariantHelper" count="1" tags="packMuleCrafting">
+      <ingredient name="resourceCloth" count="44"/>
+    </recipe>
+  </append>
+  <set xpath="/recipes/recipe[@name='internationalMarket']/@tags">craftingHarvestingTools,packMuleCrafting,learnable,imPZInternationalMarket</set>
+</configs>

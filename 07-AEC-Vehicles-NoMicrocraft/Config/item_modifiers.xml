@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!--EN: Module purpose: AEC vehicle pack without micro-crafting. File purpose: item-modifier definitions and compatibility patches.
+RU: Назначение модуля: транспорт AEC без микрокрафта. Назначение файла: определения модификаторов предметов и правки совместимости.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/item_modifiers">
+    <item_modifier name="modAECFuelSaverDustSipper" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverDustSipperDesc"/>
+      <property name="EconomicValue" value="450"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.05"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverScrapMiser" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverScrapMiserDesc"/>
+      <property name="EconomicValue" value="650"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.10"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverWastelandSaver" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverWastelandSaverDesc"/>
+      <property name="EconomicValue" value="900"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.15"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverRustSting" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverRustStingDesc"/>
+      <property name="EconomicValue" value="1200"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.20"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverRoadScrounger" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverRoadScroungerDesc"/>
+      <property name="EconomicValue" value="1500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.25"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverFuelScavenger" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverFuelScavengerDesc"/>
+      <property name="EconomicValue" value="1900"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.30"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverBlackSmokeTamer" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverBlackSmokeTamerDesc"/>
+      <property name="EconomicValue" value="2400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.35"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverLastDropKeeper" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverLastDropKeeperDesc"/>
+      <property name="EconomicValue" value="3000"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.40"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverDryTankReaper" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverDryTankReaperDesc"/>
+      <property name="EconomicValue" value="3700"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.45"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelSaverWastelandMiserPrime" installable_tags="vengine" modifier_tags="fuelsaver" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleFuelSaver"/>
+      <property name="DescriptionKey" value="modAECFuelSaverWastelandMiserPrimeDesc"/>
+      <property name="EconomicValue" value="4500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelUsePer" operation="perc_add" value="-.50"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelUse"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityCinderFlicker" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityCinderFlickerDesc"/>
+      <property name="EconomicValue" value="500"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="1.25"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityDustGlow" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityDustGlowDesc"/>
+      <property name="EconomicValue" value="700"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="1.50"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityRoadEmber" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityRoadEmberDesc"/>
+      <property name="EconomicValue" value="950"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="1.75"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityScrapBeam" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityScrapBeamDesc"/>
+      <property name="EconomicValue" value="1250"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="2"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityRustLantern" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityRustLanternDesc"/>
+      <property name="EconomicValue" value="1550"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="2.2"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityWastelandFlare" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityWastelandFlareDesc"/>
+      <property name="EconomicValue" value="1950"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="2.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityNightCutter" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityNightCutterDesc"/>
+      <property name="EconomicValue" value="2400"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="2.55"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityAshenSpotlight" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityAshenSpotlightDesc"/>
+      <property name="EconomicValue" value="2950"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="2.7"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityBlacktopSun" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityBlacktopSunDesc"/>
+      <property name="EconomicValue" value="3600"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="2.85"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECLightIntensityApocalypseFloodlight" installable_tags="vlight" modifier_tags="light" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleOffRoadHeadlights"/>
+      <property name="DescriptionKey" value="modAECLightIntensityApocalypseFloodlightDesc"/>
+      <property name="EconomicValue" value="4300"/>
+      <effect_group tiered="false">
+        <passive_effect name="LightIntensity" operation="perc_set" value="3"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierLightIntensity"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageScrapNudge" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageScrapNudgeDesc"/>
+      <property name="EconomicValue" value="650"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="1"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageRustJab" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageRustJabDesc"/>
+      <property name="EconomicValue" value="900"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="1.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageRoadMauler" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageRoadMaulerDesc"/>
+      <property name="EconomicValue" value="1200"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="1.8"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageBoneCracker" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageBoneCrackerDesc"/>
+      <property name="EconomicValue" value="1550"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="2.2"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageAxleHammer" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageAxleHammerDesc"/>
+      <property name="EconomicValue" value="1950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="2.6"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageWastelandRam" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageWastelandRamDesc"/>
+      <property name="EconomicValue" value="2400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="3"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageIronGore" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageIronGoreDesc"/>
+      <property name="EconomicValue" value="2900"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="3.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageBastionBreaker" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageBastionBreakerDesc"/>
+      <property name="EconomicValue" value="3500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="3.8"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageWarplowCrusher" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageWarplowCrusherDesc"/>
+      <property name="EconomicValue" value="4200"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="4.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECEntityDamageApocalypsePiledriver" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECEntityDamageApocalypsePiledriverDesc"/>
+      <property name="EconomicValue" value="5000"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleEntityDamage" operation="perc_add" value="5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierEntityDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageScrapBiter" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageScrapBiterDesc"/>
+      <property name="EconomicValue" value="650"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="1"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageRustChipper" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageRustChipperDesc"/>
+      <property name="EconomicValue" value="900"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="1.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageRoadRipper" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageRoadRipperDesc"/>
+      <property name="EconomicValue" value="1200"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="1.8"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageConcreteGnawer" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageConcreteGnawerDesc"/>
+      <property name="EconomicValue" value="1550"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="2.2"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageMasonSplitter" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageMasonSplitterDesc"/>
+      <property name="EconomicValue" value="1950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="2.6"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageWastelandDozer" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageWastelandDozerDesc"/>
+      <property name="EconomicValue" value="2400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="3"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageIronWrecker" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageIronWreckerDesc"/>
+      <property name="EconomicValue" value="2900"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="3.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageBastionBuster" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageBastionBusterDesc"/>
+      <property name="EconomicValue" value="3500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="3.8"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageWarplowDemolisher" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageWarplowDemolisherDesc"/>
+      <property name="EconomicValue" value="4200"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="4.4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECBlockDamageApocalypsePulverizer" installable_tags="vplow" modifier_tags="plow" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehiclePlow"/>
+      <property name="DescriptionKey" value="modAECBlockDamageApocalypsePulverizerDesc"/>
+      <property name="EconomicValue" value="5000"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleBlockDamage" operation="perc_add" value="5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierBlockDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueScrapPuller" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueScrapPullerDesc"/>
+      <property name="EconomicValue" value="500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".02"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueDustGrunter" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueDustGrunterDesc"/>
+      <property name="EconomicValue" value="700"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".05"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueRoadTwister" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueRoadTwisterDesc"/>
+      <property name="EconomicValue" value="950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".08"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueIronClaw" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueIronClawDesc"/>
+      <property name="EconomicValue" value="1250"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".12"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueGearGrinder" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueGearGrinderDesc"/>
+      <property name="EconomicValue" value="1550"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".17"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueWastelandHauler" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueWastelandHaulerDesc"/>
+      <property name="EconomicValue" value="1950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".23"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueAxleTyrant" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueAxleTyrantDesc"/>
+      <property name="EconomicValue" value="2400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".30"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueBlackSmokeMule" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueBlackSmokeMuleDesc"/>
+      <property name="EconomicValue" value="2950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".38"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueOverdriveBrute" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueOverdriveBruteDesc"/>
+      <property name="EconomicValue" value="3600"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".44"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECTorqueLeviathanTorque" installable_tags="vengine" modifier_tags="torque" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECTorqueLeviathanTorqueDesc"/>
+      <property name="EconomicValue" value="4300"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleMotorTorquePer" operation="perc_add" value=".50"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierMotorTorque"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityScrapStride" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityScrapStrideDesc"/>
+      <property name="EconomicValue" value="500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".02"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityDustRunner" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityDustRunnerDesc"/>
+      <property name="EconomicValue" value="700"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".05"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityRoadHowler" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityRoadHowlerDesc"/>
+      <property name="EconomicValue" value="950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".08"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityRustStreak" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityRustStreakDesc"/>
+      <property name="EconomicValue" value="1250"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".12"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityLongshotDrive" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityLongshotDriveDesc"/>
+      <property name="EconomicValue" value="1550"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".17"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityBlacktopFury" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityBlacktopFuryDesc"/>
+      <property name="EconomicValue" value="1950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".23"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityWastelandSprint" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityWastelandSprintDesc"/>
+      <property name="EconomicValue" value="2400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".30"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityRedlineReaper" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityRedlineReaperDesc"/>
+      <property name="EconomicValue" value="2950"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".38"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityHorizonSplitter" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityHorizonSplitterDesc"/>
+      <property name="EconomicValue" value="3600"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".44"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECVelocityApocalypseOverdrive" installable_tags="vengine" modifier_tags="velocity" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleSuperCharger"/>
+      <property name="DescriptionKey" value="modAECVelocityApocalypseOverdriveDesc"/>
+      <property name="EconomicValue" value="4300"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleVelocityMaxPer" operation="perc_add" value=".50"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierVelocity"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxScrapCanteen" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxScrapCanteenDesc"/>
+      <property name="EconomicValue" value="600"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="1.5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxDustDrum" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxDustDrumDesc"/>
+      <property name="EconomicValue" value="850"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="2"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxRoadBarrel" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxRoadBarrelDesc"/>
+      <property name="EconomicValue" value="1100"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="2.5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxIronReservoir" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxIronReservoirDesc"/>
+      <property name="EconomicValue" value="1400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="3"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxLonghaulCistern" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxLonghaulCisternDesc"/>
+      <property name="EconomicValue" value="1750"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="3.5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxWastelandTanker" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxWastelandTankerDesc"/>
+      <property name="EconomicValue" value="2150"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="4"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxBlackDieselVault" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxBlackDieselVaultDesc"/>
+      <property name="EconomicValue" value="2600"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="4.5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxOverlandStockpile" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxOverlandStockpileDesc"/>
+      <property name="EconomicValue" value="3150"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxLeviathanFuelBelly" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxLeviathanFuelBellyDesc"/>
+      <property name="EconomicValue" value="3800"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="5.5"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECFuelMaxApocalypseFuelArk" installable_tags="vfuel" modifier_tags="fueltank" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleReserveFuelTank"/>
+      <property name="DescriptionKey" value="modAECFuelMaxApocalypseFuelArkDesc"/>
+      <property name="EconomicValue" value="4500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleFuelMaxPer" operation="perc_set" value="6"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierFuelMax"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageScrapPadding" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageScrapPaddingDesc"/>
+      <property name="EconomicValue" value="550"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".90"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageDustBuffer" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageDustBufferDesc"/>
+      <property name="EconomicValue" value="750"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".80"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageRoadBracer" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageRoadBracerDesc"/>
+      <property name="EconomicValue" value="1000"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".70"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageIronShell" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageIronShellDesc"/>
+      <property name="EconomicValue" value="1300"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".60"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <!--EN: Original AEC vehicle assets and hand-placed decorations are by Aeclipse; reuse in another mod requires permission.
+RU: Оригинальные транспортные ресурсы AEC и вручную размещённые элементы созданы Aeclipse; для использования в другом моде требуется разрешение.-->
+    <item_modifier name="modAECSelfDamageFrameBulwark" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageFrameBulwarkDesc"/>
+      <property name="EconomicValue" value="1650"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".50"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageWastelandBrace" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageWastelandBraceDesc"/>
+      <property name="EconomicValue" value="2050"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".40"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageIronBulwark" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageIronBulwarkDesc"/>
+      <property name="EconomicValue" value="2500"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".30"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageCrashCocoon" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageCrashCocoonDesc"/>
+      <property name="EconomicValue" value="3050"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".25"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageLeviathanHide" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageLeviathanHideDesc"/>
+      <property name="EconomicValue" value="3700"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".15"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+    <item_modifier name="modAECSelfDamageApocalypseSafeguard" installable_tags="varmor" modifier_tags="armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster"/>
+      <property name="CustomIcon" value="modVehicleArmor"/>
+      <property name="DescriptionKey" value="modAECSelfDamageApocalypseSafeguardDesc"/>
+      <property name="EconomicValue" value="4400"/>
+      <effect_group tiered="false">
+        <passive_effect name="VehicleStrongSelfDamage" operation="perc_set" value=".05"/>
+      </effect_group>
+      <property name="Group" value="AECvehicleModifierSelfDamage"/>
+    </item_modifier>
+  </append>
+</configs>

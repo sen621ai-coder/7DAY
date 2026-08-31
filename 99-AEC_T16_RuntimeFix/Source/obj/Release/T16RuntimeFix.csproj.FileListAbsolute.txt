@@ -1,0 +1,5 @@
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\99-AEC_T16_RuntimeFix\Source\obj\Release\T16RuntimeFix.csproj.AssemblyReference.cache
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\99-AEC_T16_RuntimeFix\Source\obj\Release\T16RuntimeFix.GeneratedMSBuildEditorConfig.editorconfig
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\99-AEC_T16_RuntimeFix\Source\obj\Release\T16RuntimeFix.csproj.CoreCompileInputs.cache
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\99-AEC_T16_RuntimeFix\Source\obj\Release\AEC.T16.RuntimeFix.dll
+E:\Warcraft III\steam\steamapps\common\7 Days To Die\Mods\99-AEC_T16_RuntimeFix\AEC.T16.RuntimeFix.dll

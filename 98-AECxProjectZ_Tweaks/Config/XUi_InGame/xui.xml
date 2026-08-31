@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: XUi controller and window-group integration.
+RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: интеграция контроллеров и групп окон XUi.
+EN: Operations are applied in file order; keep selectors specific and preserve load order.
+RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <append xpath="/xui">
+    <window_group name="workstation_aecMutationIncubator" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultselected="bp.content">
+      <window name="windowCraftingListAECMutationIncubator"/>
+      <window name="craftingInfoPanel"/>
+      <window name="windowCraftingQueue"/>
+      <window name="windowInputAECMutationIncubator"/>
+      <window name="windowOutputAECMutationIncubator"/>
+      <window name="windowNonPagingHeader"/>
+    </window_group>
+  </append>
+  <!-- EN: Old placed aecHeadConverter shells reuse the Mutation Incubator workstation window.
+RU: Старые установленные оболочки aecHeadConverter используют окно станции «Инкубатор мутаций».-->
+  <remove xpath="/xui/window_group[@name='workstation_aecHeadConverter']"/>
+</configs>

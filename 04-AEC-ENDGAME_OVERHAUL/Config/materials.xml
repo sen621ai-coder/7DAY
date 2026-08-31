@@ -1,0 +1,16 @@
+<config>
+	<append xpath="/materials">
+		<material id="MresourceBattery">
+			<property name="damage_category" value="metal"/>
+			<property name="surface_category" value="metal"/>
+			<property name="forge_category" value="battery"/>
+			<property name="Hardness" type="float" value="1"/>
+			<property name="stepsound" value="metal"/>
+			<property name="StabilitySupport" value="false"/>
+			<property name="stability_glue" value="20"/>
+			<property name="Mass" type="int" value="20"/>
+			<property name="MaxDamage" value="100"/>
+			<property name="Experience" value="2"/>
+		</material>
+	</append>
+</config>

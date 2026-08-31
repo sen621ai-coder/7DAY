@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+	<!-- === AEC-AIO BOSS === -->
+
+<append xpath="/recipes">
+
+    <recipe name="aecQuestRelay" count="1" craft_time="20">
+      <ingredient name="resourceWood" count="40"/>
+      <ingredient name="resourceForgedIron" count="20"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+      <ingredient name="resourceDuctTape" count="4"/>
+    </recipe>
+    </append>
+  		<!-- AEC T03-T15 MODULE-->
+<append xpath="/recipes">
+
+    <!-- Relay 1★ : aecQuestRelay + 4 pieces T00 de 4 boss differents -->
+    <recipe name="aecQuestRelay1star" count="1" craft_time="60">
+      <ingredient name="aecQuestRelay" count="1"/>
+      <ingredient name="resourceAECMutationSampleT1" count="16"/></recipe>
+
+    <!-- Relay 2★ : aecQuestRelay1star + 4 pieces 1star de 4 boss differents -->
+    <recipe name="aecQuestRelay2star" count="1" craft_time="90">
+      <ingredient name="aecQuestRelay1star" count="1"/>
+      <ingredient name="resourceAECMutationSampleT1" count="20"/></recipe>
+
+    <!-- Relay 3★ : aecQuestRelay2star + 4 pieces 2star de 4 boss differents -->
+    <recipe name="aecQuestRelay3star" count="1" craft_time="120">
+      <ingredient name="aecQuestRelay2star" count="1"/>
+      <ingredient name="resourceAECMutationSampleT2" count="28"/></recipe>
+
+    <!-- Relay 4★ : aecQuestRelay3star + 4 pieces 3star de 4 boss differents -->
+    <recipe name="aecQuestRelay4star" count="1" craft_time="180">
+      <ingredient name="aecQuestRelay3star" count="1"/>
+      <ingredient name="resourceAECMutationSampleT3" count="36"/></recipe>
+
+    <!-- Relay 5★ : aecQuestRelay4star + 4 pieces 4star de 4 boss differents -->
+    <recipe name="aecQuestRelay5star" count="1" craft_time="240">
+      <ingredient name="aecQuestRelay4star" count="1"/>
+      <ingredient name="resourceAECMutationSampleT4" count="48"/></recipe>
+
+  </append>
+
+</configs>
