@@ -38,6 +38,19 @@ T17-T19 progression
 - Each tier carries forward all 35 ordinary enemies, 21 bosses and eight beasts.
 - The existing ranged weighting and 18% Blood Moon boss roll continue at each tier.
 
+Trader quest repair
+-------------------
+- Replaces the upstream all-tier trader merge that generated 510 AEC offers at once.
+- Offers only the player's current GS tier, with up to 30 valid POI variants.
+- Adds complete T17, T18 and T19 clear-contract definitions and localization.
+
+T16-T19 boss escalation
+-----------------------
+- Final boss health: 40M / 80M / 150M / 260M.
+- Final skill damage: x6 / x8 / x11 / x15.
+- Final block damage: x10 / x14 / x20 / x28.
+- Adds 35% / 45% / 55% / 65% physical resistance and progressive control resistance.
+
 Blood Moon beast balance
 ------------------------
 - Restores ordinary beasts to every Blood Moon game-stage band.

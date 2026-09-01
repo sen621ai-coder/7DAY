@@ -30108,7 +30108,7 @@
     {
       "label": "Tier 15 — Mythic",
       "minGameStage": 25000,
-      "maxGameStage": 99999,
+      "maxGameStage": 30000,
       "entries": [
         {
           "entityClass": "AECArcherMinionBowT15",

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
   <Name value="AEC_T16_RuntimeFix"/>
-  <DisplayName value="AEC T16 | Runtime Fix"/>
-  <Description value="Completes the AEC T16 runtime layer and optimizes high-tier navigation, Blood Moon weighting, and boss pressure."/>
+  <DisplayName value="AEC T16-T19 | Runtime Fix"/>
+  <Description value="Completes AEC T16-T19 runtime, trader quests, high-tier navigation, Blood Moon weighting, and boss escalation."/>
   <Author value="Exodusoul"/>
-  <Version value="1.6.0"/>
+  <Version value="1.7.0"/>
   <Website value="https://discord.gg/Ef4bBuhEEw"/>
   <ServerSideOnly value="true"/>
   <SkipWithAntiCheat value="true"/>

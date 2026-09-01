@@ -38796,9 +38796,9 @@
       ]
     },
     {
-      "label": "PZ Integration | GS 25000-99999",
+      "label": "PZ Integration | GS 25000-30000",
       "minGameStage": 25000,
-      "maxGameStage": 99999,
+      "maxGameStage": 30000,
       "entries": [
         {
           "entityClass": "zombieBikerChargedElite",

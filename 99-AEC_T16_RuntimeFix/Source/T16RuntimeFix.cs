@@ -20,6 +20,7 @@ namespace AECT16RuntimeFix
             {
                 var harmony = new Harmony(HarmonyId);
                 PatchHighTierNavigation(harmony);
+                PatchTraderQuestOffers(harmony);
                 var spawnerType = AccessTools.TypeByName("AeclipseCustomZombieSpawner.SpawnDebugPatcher");
                 if (spawnerType == null)
                 {
@@ -53,6 +54,154 @@ namespace AECT16RuntimeFix
             harmony.Patch(
                 target,
                 postfix: new HarmonyMethod(typeof(T16RuntimeFixMod), nameof(HighTierNavigationPostfix)));
+        }
+
+        private static void PatchTraderQuestOffers(Harmony harmony)
+        {
+            var traderType = AccessTools.TypeByName("EntityTrader");
+            if (traderType == null)
+            {
+                SafeLog("[AEC-T16-Fix] EntityTrader type not found; quest offer fix skipped.");
+                return;
+            }
+
+            MethodInfo target = null;
+            foreach (var method in traderType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                if (method.Name == "PopulateActiveQuests")
+                {
+                    target = method;
+                    break;
+                }
+            }
+            if (target == null)
+            {
+                SafeLog("[AEC-T16-Fix] PopulateActiveQuests not found; quest offer fix skipped.");
+                return;
+            }
+
+            // The upstream postfix creates every T00-T16/area/POI variant at once
+            // (510 AEC offers in the observed save), which overwhelms the trader job
+            // list. Keep the vanilla method and replace only that postfix.
+            harmony.Unpatch(target, HarmonyPatchType.Postfix, "aec.extremezombies.questtier");
+            harmony.Patch(
+                target,
+                postfix: new HarmonyMethod(typeof(T16RuntimeFixMod), nameof(TraderQuestOffersPostfix)));
+        }
+
+        private static int GetQuestTierForGameStage(int gameStage)
+        {
+            if (gameStage >= 90000) return 19;
+            if (gameStage >= 70000) return 18;
+            if (gameStage >= 50000) return 17;
+            if (gameStage >= 30001) return 16;
+            if (gameStage >= 25000) return 15;
+            if (gameStage >= 22000) return 14;
+            if (gameStage >= 18000) return 13;
+            if (gameStage >= 14000) return 12;
+            if (gameStage >= 10500) return 11;
+            if (gameStage >= 7500) return 10;
+            if (gameStage >= 5000) return 9;
+            if (gameStage >= 3200) return 8;
+            if (gameStage >= 2000) return 7;
+            if (gameStage >= 1200) return 6;
+            if (gameStage >= 600) return 5;
+            return 0;
+        }
+
+        private static int GetPlayerGameStage(EntityPlayer player)
+        {
+            if (player == null)
+            {
+                return 0;
+            }
+            try
+            {
+                var type = player.GetType();
+                foreach (string methodName in new[] { "GetGameStage", "CalcGameStage", "CalculateGameStage" })
+                {
+                    var method = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                        null, Type.EmptyTypes, null);
+                    if (method != null)
+                    {
+                        return Convert.ToInt32(method.Invoke(player, null));
+                    }
+                }
+                foreach (string memberName in new[] { "GameStage", "gameStage" })
+                {
+                    var property = type.GetProperty(memberName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (property != null) return Convert.ToInt32(property.GetValue(player, null));
+                    var field = type.GetField(memberName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (field != null) return Convert.ToInt32(field.GetValue(player));
+                }
+            }
+            catch
+            {
+            }
+            return 0;
+        }
+
+        public static void TraderQuestOffersPostfix(EntityTrader __instance, EntityPlayer player, ref List<Quest> __result)
+        {
+            try
+            {
+                if (__instance == null || player == null)
+                {
+                    return;
+                }
+
+                int gameStage = GetPlayerGameStage(player);
+                int tier = GetQuestTierForGameStage(gameStage);
+                if (tier == 0)
+                {
+                    return;
+                }
+
+                var additions = new List<Quest>();
+                for (int area = 1; area <= 5; area++)
+                {
+                    string questId = "aec_quest_T" + tier.ToString("D2") + "_A" + area + "_clear";
+                    QuestClass questClass = QuestClass.GetQuest(questId);
+                    if (questClass == null)
+                    {
+                        continue;
+                    }
+
+                    int created = 0;
+                    int attempts = 0;
+                    while (created < 6 && attempts < 30)
+                    {
+                        attempts++;
+                        Quest quest = questClass.CreateQuest();
+                        quest.QuestGiverID = __instance.entityId;
+                        quest.QuestFaction = (byte)(__instance.NPCInfo == null ? 1 : __instance.NPCInfo.QuestFaction);
+                        quest.SetPositionData((Quest.PositionDataTypes)0, __instance.position);
+                        quest.SetPositionData((Quest.PositionDataTypes)9,
+                            __instance.traderArea != null ? __instance.traderArea.Position.ToVector3() : __instance.position);
+                        quest.SetupTags();
+                        var usedPositions = new List<Vector2>();
+                        if (quest.SetupPosition(__instance, player, usedPositions, player.entityId))
+                        {
+                            additions.Add(quest);
+                            created++;
+                        }
+                    }
+                }
+
+                if (additions.Count > 0)
+                {
+                    var merged = __result == null ? new List<Quest>() : new List<Quest>(__result);
+                    merged.AddRange(additions);
+                    __result = merged;
+                }
+                SafeLog("[AEC-Quest-Fix] player=" + player.entityId + " gs=" + gameStage +
+                    " tier=T" + tier.ToString("D2") + " offers=" + additions.Count +
+                    " total=" + (__result == null ? 0 : __result.Count));
+            }
+            catch (Exception ex)
+            {
+                SafeLog("[AEC-Quest-Fix] Trader offer generation failed: " + ex.GetBaseException().Message);
+            }
         }
 
         private sealed class NavigationState
