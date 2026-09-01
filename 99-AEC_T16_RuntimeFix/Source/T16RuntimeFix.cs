@@ -594,11 +594,16 @@ namespace AECT16RuntimeFix
                 int installed = 0;
                 foreach (var pair in aliases)
                 {
-                    if (!rewards.Contains(pair.Key) && rewards.Contains(pair.Value))
+                    if (!rewards.Contains(pair.Value))
                     {
-                        rewards[pair.Key] = rewards[pair.Value];
-                        installed++;
+                        continue;
                     }
+
+                    double multiplier = GetRewardMultiplier(pair.Key);
+                    rewards[pair.Key] = multiplier <= 1d
+                        ? rewards[pair.Value]
+                        : CreateScaledRewards(rewards[pair.Value], multiplier);
+                    installed++;
                 }
 
                 return installed;
@@ -642,6 +647,63 @@ namespace AECT16RuntimeFix
             }
 
             return aliases;
+        }
+
+        private static double GetRewardMultiplier(string entityClass)
+        {
+            if (entityClass.EndsWith("Tier17Ascendant", StringComparison.OrdinalIgnoreCase) ||
+                entityClass.EndsWith("T17", StringComparison.OrdinalIgnoreCase))
+            {
+                return 1.5d;
+            }
+            if (entityClass.EndsWith("Tier18Eternal", StringComparison.OrdinalIgnoreCase) ||
+                entityClass.EndsWith("T18", StringComparison.OrdinalIgnoreCase))
+            {
+                return 2d;
+            }
+            if (entityClass.EndsWith("Tier19Apocalyptic", StringComparison.OrdinalIgnoreCase) ||
+                entityClass.EndsWith("T19", StringComparison.OrdinalIgnoreCase))
+            {
+                return 3d;
+            }
+            return 1d;
+        }
+
+        private static object CreateScaledRewards(object sourceValue, double multiplier)
+        {
+            var source = sourceValue as Array;
+            if (source == null)
+            {
+                return sourceValue;
+            }
+
+            Type elementType = source.GetType().GetElementType();
+            var itemNameField = AccessTools.Field(elementType, "ItemName");
+            var minCountField = AccessTools.Field(elementType, "MinCount");
+            var maxCountField = AccessTools.Field(elementType, "MaxCount");
+            var chanceField = AccessTools.Field(elementType, "Chance");
+            if (itemNameField == null || minCountField == null || maxCountField == null || chanceField == null)
+            {
+                return sourceValue;
+            }
+
+            Array scaled = Array.CreateInstance(elementType, source.Length);
+            for (int index = 0; index < source.Length; index++)
+            {
+                object original = source.GetValue(index);
+                object copy = System.Runtime.Serialization.FormatterServices.GetUninitializedObject(elementType);
+                itemNameField.SetValue(copy, itemNameField.GetValue(original));
+                minCountField.SetValue(copy, ScaleRewardCount((int)minCountField.GetValue(original), multiplier));
+                maxCountField.SetValue(copy, ScaleRewardCount((int)maxCountField.GetValue(original), multiplier));
+                chanceField.SetValue(copy, chanceField.GetValue(original));
+                scaled.SetValue(copy, index);
+            }
+            return scaled;
+        }
+
+        private static int ScaleRewardCount(int count, double multiplier)
+        {
+            return Math.Max(1, (int)Math.Ceiling(count * multiplier));
         }
 
         // Explosive Eagle intentionally remains harvest-only, matching the existing T15 rules.

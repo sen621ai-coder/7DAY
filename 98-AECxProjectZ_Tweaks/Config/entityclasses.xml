@@ -2930,4 +2930,68 @@ RU: Варианты AEC EO T05-T15 наследуют квестовые сем
       <passive_effect name="BuffResistance" operation="base_set" value="0.9" tags="buffInjuryKnockdown01,buffInjuryKnockdown02,buffInjuryConcussion,buffInjuryStunned01CHTrigger,buffShocked" />
     </effect_group>
   </append>
+  <!-- T17-T19 living bosses keep their direct T15 parent for runtime stability, but their physical drops must never regress below the enhanced T16 boss bags. Their additional tier progression is supplied by the scaled kill rewards in 99-AEC_T16_RuntimeFix. -->
+  <append xpath="/entity_classes/entity_class[@name='bossAECDumdumT17' or @name='bossAECDumdumT18' or @name='bossAECDumdumT19']">
+    <property name="LootDropEntityClass" value="AECDumdumBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='RunningKamikazeT17' or @name='RunningKamikazeT18' or @name='RunningKamikazeT19']">
+    <property name="LootDropEntityClass" value="RunningKamikazeBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECDoomlordDemolishmanBossT17' or @name='AECDoomlordDemolishmanBossT18' or @name='AECDoomlordDemolishmanBossT19']">
+    <property name="LootDropEntityClass" value="DoomlordBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheWitchAngelBossT17' or @name='AECTheWitchAngelBossT18' or @name='AECTheWitchAngelBossT19']">
+    <property name="LootDropEntityClass" value="AECWitchBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECElectricDemonRunnerBossT17' or @name='AECElectricDemonRunnerBossT18' or @name='AECElectricDemonRunnerBossT19']">
+    <property name="LootDropEntityClass" value="AECElectricDemonBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECExplosiveEagleBossT17' or @name='AECExplosiveEagleBossT18' or @name='AECExplosiveEagleBossT19']">
+    <property name="LootDropEntityClass" value="AECExplosiveEagleBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECHammerGuardianT17' or @name='AECHammerGuardianT18' or @name='AECHammerGuardianT19']">
+    <property name="LootDropEntityClass" value="AECHammerGuardianBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheMechanicianBossT17' or @name='AECTheMechanicianBossT18' or @name='AECTheMechanicianBossT19']">
+    <property name="LootDropEntityClass" value="AECMechanicianBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheDruidBossT17' or @name='AECTheDruidBossT18' or @name='AECTheDruidBossT19']">
+    <property name="LootDropEntityClass" value="AECDruidBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheExecutionerBossT17' or @name='AECTheExecutionerBossT18' or @name='AECTheExecutionerBossT19']">
+    <property name="LootDropEntityClass" value="AECExecutionerBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECPartyBeachBossT17' or @name='AECPartyBeachBossT18' or @name='AECPartyBeachBossT19']">
+    <property name="LootDropEntityClass" value="AECPartyBeachBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECMykirBossT17' or @name='AECMykirBossT18' or @name='AECMykirBossT19']">
+    <property name="LootDropEntityClass" value="AECMykirBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECHellskyliBossT17' or @name='AECHellskyliBossT18' or @name='AECHellskyliBossT19']">
+    <property name="LootDropEntityClass" value="AECHellskyliLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECRockbreakerBossT17' or @name='AECRockbreakerBossT18' or @name='AECRockbreakerBossT19']">
+    <property name="LootDropEntityClass" value="AECRockbreakerLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECSingerieBossT17' or @name='AECSingerieBossT18' or @name='AECSingerieBossT19']">
+    <property name="LootDropEntityClass" value="AECSingerieBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECGhostBossT17' or @name='AECGhostBossT18' or @name='AECGhostBossT19']">
+    <property name="LootDropEntityClass" value="AECGhostBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECSirenHeadBossT17' or @name='AECSirenHeadBossT18' or @name='AECSirenHeadBossT19']">
+    <property name="LootDropEntityClass" value="AECSirenHeadBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECMushroomBossT17' or @name='AECMushroomBossT18' or @name='AECMushroomBossT19']">
+    <property name="LootDropEntityClass" value="AECMushroomBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheArcherBossT17' or @name='AECTheArcherBossT18' or @name='AECTheArcherBossT19']">
+    <property name="LootDropEntityClass" value="AECArcherBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECSheriffBossT17' or @name='AECSheriffBossT18' or @name='AECSheriffBossT19']">
+    <property name="LootDropEntityClass" value="AECSheriffBossLootBagT16" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT17' or @name='AECHeadlessBossT18' or @name='AECHeadlessBossT19']">
+    <property name="LootDropEntityClass" value="AECHeadlessBossLootBagT16" />
+  </append>
 </configs>
