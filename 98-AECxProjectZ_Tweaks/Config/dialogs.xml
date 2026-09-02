@@ -5,12 +5,12 @@ RU: Браузер контрактов AEC открывается через л
   <set xpath="/dialogs/dialog[@id='trader']/response[@id='aec_tip_go']/@nextstatementid">pzaec_aec_tier_central_hub</set>
 
   <append xpath="/dialogs/dialog[@id='trader']">
-    <!-- EN: Categories map directly to AEC internal tiers: T00–T05, T06–T10, T11–T16.
-RU: Категории напрямую соответствуют внутренним тирам AEC: T00–T05, T06–T10, T11–T16.-->
+    <!-- AEC categories: Standard T00-T05; Elite T06-T10; Master T11-T15; Legendary T16-T19. -->
     <statement id="pzaec_aec_tier_central_hub" text="pzaec_aec_hub_title">
       <response_entry id="pzaec_open_standard_menu"/>
       <response_entry id="pzaec_open_elite_menu"/>
       <response_entry id="pzaec_open_master_menu"/>
+      <response_entry id="pzaec_open_legendary_menu"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_aec_standard_hub" text="pzaec_aec_standard_hub_title">
@@ -36,7 +36,13 @@ RU: Категории напрямую соответствуют внутре�
       <response_entry id="pzaec_go_to_t13"/>
       <response_entry id="pzaec_go_to_t14"/>
       <response_entry id="pzaec_go_to_t15"/>
+      <response_entry id="pzaec_return_to_hub"/>
+    </statement>
+    <statement id="pzaec_aec_legendary_hub" text="pzaec_aec_legendary_hub_title">
       <response_entry id="pzaec_go_to_t16"/>
+      <response_entry id="pzaec_go_to_t17"/>
+      <response_entry id="pzaec_go_to_t18"/>
+      <response_entry id="pzaec_go_to_t19"/>
       <response_entry id="pzaec_return_to_hub"/>
     </statement>
 
@@ -1050,35 +1056,258 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="pzaec_return_to_master"/>
       <response_entry id="nevermind"/>
     </statement>
+    <!-- Legendary offers use quest IDs rather than obsolete active-list offsets. -->
     <statement id="pzaec_t16_small" text="aec_dialog_a1_t16_header" nextstatementid="start">
-      <quest_entry listindex="337" tier="6"/><quest_entry listindex="338" tier="6"/><quest_entry listindex="339" tier="6"/>
-      <quest_entry listindex="340" tier="6"/><quest_entry listindex="341" tier="6"/><quest_entry listindex="342" tier="6"/>
-      <response_entry id="pzaec_sep_t16_small"/><response_entry id="pzaec_fwd_t16_small" uniqueid="next"/>
-      <response_entry id="pzaec_return_to_master"/><response_entry id="nevermind"/>
+      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t16_small"/>
+      <response_entry id="pzaec_fwd_t16_small" uniqueid="next"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_medium" text="aec_dialog_a2_t16_header" nextstatementid="start">
-      <quest_entry listindex="343" tier="6"/><quest_entry listindex="344" tier="6"/><quest_entry listindex="345" tier="6"/>
-      <quest_entry listindex="346" tier="6"/><quest_entry listindex="347" tier="6"/><quest_entry listindex="348" tier="6"/>
-      <response_entry id="pzaec_sep_t16_medium"/><response_entry id="pzaec_fwd_t16_medium" uniqueid="next"/><response_entry id="pzaec_back_t16_medium" uniqueid="prev"/>
-      <response_entry id="pzaec_return_to_master"/><response_entry id="nevermind"/>
+      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t16_medium"/>
+      <response_entry id="pzaec_fwd_t16_medium" uniqueid="next"/>
+      <response_entry id="pzaec_back_t16_medium" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_large" text="aec_dialog_a3_t16_header" nextstatementid="start">
-      <quest_entry listindex="349" tier="6"/><quest_entry listindex="350" tier="6"/><quest_entry listindex="351" tier="6"/>
-      <quest_entry listindex="352" tier="6"/><quest_entry listindex="353" tier="6"/><quest_entry listindex="354" tier="6"/>
-      <response_entry id="pzaec_sep_t16_large"/><response_entry id="pzaec_fwd_t16_large" uniqueid="next"/><response_entry id="pzaec_back_t16_large" uniqueid="prev"/>
-      <response_entry id="pzaec_return_to_master"/><response_entry id="nevermind"/>
+      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t16_large"/>
+      <response_entry id="pzaec_fwd_t16_large" uniqueid="next"/>
+      <response_entry id="pzaec_back_t16_large" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_huge" text="aec_dialog_a4_t16_header" nextstatementid="start">
-      <quest_entry listindex="355" tier="6"/><quest_entry listindex="356" tier="6"/><quest_entry listindex="357" tier="6"/>
-      <quest_entry listindex="358" tier="6"/><quest_entry listindex="359" tier="6"/><quest_entry listindex="360" tier="6"/>
-      <response_entry id="pzaec_sep_t16_huge"/><response_entry id="pzaec_fwd_t16_huge" uniqueid="next"/><response_entry id="pzaec_back_t16_huge" uniqueid="prev"/>
-      <response_entry id="pzaec_return_to_master"/><response_entry id="nevermind"/>
+      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t16_huge"/>
+      <response_entry id="pzaec_fwd_t16_huge" uniqueid="next"/>
+      <response_entry id="pzaec_back_t16_huge" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_massive" text="aec_dialog_a5_t16_header" nextstatementid="start">
-      <quest_entry listindex="361" tier="6"/><quest_entry listindex="362" tier="6"/><quest_entry listindex="363" tier="6"/>
-      <quest_entry listindex="364" tier="6"/><quest_entry listindex="365" tier="6"/><quest_entry listindex="366" tier="6"/>
-      <response_entry id="pzaec_sep_t16_massive"/><response_entry id="pzaec_back_t16_massive" uniqueid="prev"/>
-      <response_entry id="pzaec_return_to_master"/><response_entry id="nevermind"/>
+      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t16_massive"/>
+      <response_entry id="pzaec_back_t16_massive" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t17_small" text="aec_dialog_a1_t17_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t17_small"/>
+      <response_entry id="pzaec_fwd_t17_small" uniqueid="next"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t17_medium" text="aec_dialog_a2_t17_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t17_medium"/>
+      <response_entry id="pzaec_fwd_t17_medium" uniqueid="next"/>
+      <response_entry id="pzaec_back_t17_medium" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t17_large" text="aec_dialog_a3_t17_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t17_large"/>
+      <response_entry id="pzaec_fwd_t17_large" uniqueid="next"/>
+      <response_entry id="pzaec_back_t17_large" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t17_huge" text="aec_dialog_a4_t17_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t17_huge"/>
+      <response_entry id="pzaec_fwd_t17_huge" uniqueid="next"/>
+      <response_entry id="pzaec_back_t17_huge" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t17_massive" text="aec_dialog_a5_t17_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t17_massive"/>
+      <response_entry id="pzaec_back_t17_massive" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t18_small" text="aec_dialog_a1_t18_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t18_small"/>
+      <response_entry id="pzaec_fwd_t18_small" uniqueid="next"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t18_medium" text="aec_dialog_a2_t18_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t18_medium"/>
+      <response_entry id="pzaec_fwd_t18_medium" uniqueid="next"/>
+      <response_entry id="pzaec_back_t18_medium" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t18_large" text="aec_dialog_a3_t18_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t18_large"/>
+      <response_entry id="pzaec_fwd_t18_large" uniqueid="next"/>
+      <response_entry id="pzaec_back_t18_large" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t18_huge" text="aec_dialog_a4_t18_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t18_huge"/>
+      <response_entry id="pzaec_fwd_t18_huge" uniqueid="next"/>
+      <response_entry id="pzaec_back_t18_huge" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t18_massive" text="aec_dialog_a5_t18_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t18_massive"/>
+      <response_entry id="pzaec_back_t18_massive" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t19_small" text="aec_dialog_a1_t19_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t19_small"/>
+      <response_entry id="pzaec_fwd_t19_small" uniqueid="next"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t19_medium" text="aec_dialog_a2_t19_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t19_medium"/>
+      <response_entry id="pzaec_fwd_t19_medium" uniqueid="next"/>
+      <response_entry id="pzaec_back_t19_medium" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t19_large" text="aec_dialog_a3_t19_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t19_large"/>
+      <response_entry id="pzaec_fwd_t19_large" uniqueid="next"/>
+      <response_entry id="pzaec_back_t19_large" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t19_huge" text="aec_dialog_a4_t19_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t19_huge"/>
+      <response_entry id="pzaec_fwd_t19_huge" uniqueid="next"/>
+      <response_entry id="pzaec_back_t19_huge" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
+    </statement>
+    <statement id="pzaec_t19_massive" text="aec_dialog_a5_t19_header" nextstatementid="start">
+      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <response_entry id="pzaec_sep_t19_massive"/>
+      <response_entry id="pzaec_back_t19_massive" uniqueid="prev"/>
+      <response_entry id="pzaec_return_to_legendary"/>
+      <response_entry id="nevermind"/>
     </statement>
 
     <!-- EN: Category and tier routing. No special-case tier submenus are used.
@@ -1094,6 +1323,8 @@ RU: Переходы между категориями и тирами. Спец
     <response id="pzaec_return_to_standard" text="pzaec_aec_return_to_standard_menu" nextstatementid="pzaec_aec_standard_hub"/>
     <response id="pzaec_return_to_elite" text="pzaec_aec_return_to_elite" nextstatementid="pzaec_aec_elite_hub"/>
     <response id="pzaec_return_to_master" text="pzaec_aec_return_to_master_menu" nextstatementid="pzaec_aec_master_hub"/>
+    <response id="pzaec_open_legendary_menu" text="pzaec_aec_open_legendary" nextstatementid="pzaec_aec_legendary_hub"/>
+    <response id="pzaec_return_to_legendary" text="pzaec_aec_return_to_legendary_menu" nextstatementid="pzaec_aec_legendary_hub"/>
     <response id="pzaec_go_to_t00" text="pzaec_aec_browse_t00" nextstatementid="pzaec_t00_small">
       <requirement type="QuestTier" value="1" requirementtype="Hide"/>
     </response>
@@ -1497,5 +1728,53 @@ RU: Навигация по размерам остаётся внутри вы�
     <response id="pzaec_back_t16_huge" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t16_large"/>
     <response id="pzaec_sep_t16_massive" text="aec_dialog_a5_t16_header" nextstatementid="pzaec_t16_massive"/>
     <response id="pzaec_back_t16_massive" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t16_huge"/>
+    <response id="pzaec_go_to_t17" text="pzaec_aec_browse_t17" nextstatementid="pzaec_t17_small">
+      <requirement type="AECLegendaryGameStage, AEC.T16.RuntimeFix" value="50000" requirementtype="Hide"/>
+    </response>
+    <response id="pzaec_sep_t17_small" text="aec_dialog_a1_t17_header" nextstatementid="pzaec_t17_small"/>
+    <response id="pzaec_fwd_t17_small" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t17_medium"/>
+    <response id="pzaec_sep_t17_medium" text="aec_dialog_a2_t17_header" nextstatementid="pzaec_t17_medium"/>
+    <response id="pzaec_fwd_t17_medium" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t17_large"/>
+    <response id="pzaec_back_t17_medium" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t17_small"/>
+    <response id="pzaec_sep_t17_large" text="aec_dialog_a3_t17_header" nextstatementid="pzaec_t17_large"/>
+    <response id="pzaec_fwd_t17_large" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t17_huge"/>
+    <response id="pzaec_back_t17_large" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t17_medium"/>
+    <response id="pzaec_sep_t17_huge" text="aec_dialog_a4_t17_header" nextstatementid="pzaec_t17_huge"/>
+    <response id="pzaec_fwd_t17_huge" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t17_massive"/>
+    <response id="pzaec_back_t17_huge" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t17_large"/>
+    <response id="pzaec_sep_t17_massive" text="aec_dialog_a5_t17_header" nextstatementid="pzaec_t17_massive"/>
+    <response id="pzaec_back_t17_massive" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t17_huge"/>
+    <response id="pzaec_go_to_t18" text="pzaec_aec_browse_t18" nextstatementid="pzaec_t18_small">
+      <requirement type="AECLegendaryGameStage, AEC.T16.RuntimeFix" value="70000" requirementtype="Hide"/>
+    </response>
+    <response id="pzaec_sep_t18_small" text="aec_dialog_a1_t18_header" nextstatementid="pzaec_t18_small"/>
+    <response id="pzaec_fwd_t18_small" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t18_medium"/>
+    <response id="pzaec_sep_t18_medium" text="aec_dialog_a2_t18_header" nextstatementid="pzaec_t18_medium"/>
+    <response id="pzaec_fwd_t18_medium" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t18_large"/>
+    <response id="pzaec_back_t18_medium" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t18_small"/>
+    <response id="pzaec_sep_t18_large" text="aec_dialog_a3_t18_header" nextstatementid="pzaec_t18_large"/>
+    <response id="pzaec_fwd_t18_large" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t18_huge"/>
+    <response id="pzaec_back_t18_large" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t18_medium"/>
+    <response id="pzaec_sep_t18_huge" text="aec_dialog_a4_t18_header" nextstatementid="pzaec_t18_huge"/>
+    <response id="pzaec_fwd_t18_huge" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t18_massive"/>
+    <response id="pzaec_back_t18_huge" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t18_large"/>
+    <response id="pzaec_sep_t18_massive" text="aec_dialog_a5_t18_header" nextstatementid="pzaec_t18_massive"/>
+    <response id="pzaec_back_t18_massive" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t18_huge"/>
+    <response id="pzaec_go_to_t19" text="pzaec_aec_browse_t19" nextstatementid="pzaec_t19_small">
+      <requirement type="AECLegendaryGameStage, AEC.T16.RuntimeFix" value="90000" requirementtype="Hide"/>
+    </response>
+    <response id="pzaec_sep_t19_small" text="aec_dialog_a1_t19_header" nextstatementid="pzaec_t19_small"/>
+    <response id="pzaec_fwd_t19_small" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t19_medium"/>
+    <response id="pzaec_sep_t19_medium" text="aec_dialog_a2_t19_header" nextstatementid="pzaec_t19_medium"/>
+    <response id="pzaec_fwd_t19_medium" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t19_large"/>
+    <response id="pzaec_back_t19_medium" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t19_small"/>
+    <response id="pzaec_sep_t19_large" text="aec_dialog_a3_t19_header" nextstatementid="pzaec_t19_large"/>
+    <response id="pzaec_fwd_t19_large" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t19_huge"/>
+    <response id="pzaec_back_t19_large" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t19_medium"/>
+    <response id="pzaec_sep_t19_huge" text="aec_dialog_a4_t19_header" nextstatementid="pzaec_t19_huge"/>
+    <response id="pzaec_fwd_t19_huge" text="pzaec_aec_next_poi_size" nextstatementid="pzaec_t19_massive"/>
+    <response id="pzaec_back_t19_huge" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t19_large"/>
+    <response id="pzaec_sep_t19_massive" text="aec_dialog_a5_t19_header" nextstatementid="pzaec_t19_massive"/>
+    <response id="pzaec_back_t19_massive" text="pzaec_aec_prev_poi_size" nextstatementid="pzaec_t19_huge"/>
   </append>
 </configs>

@@ -41,8 +41,14 @@ T17-T19 progression
 Trader quest repair
 -------------------
 - Replaces the upstream all-tier trader merge that generated 510 AEC offers at once.
-- Offers only the player's current GS tier, with up to 30 valid POI variants.
+- The ordinary trader job list offers the player's current GS tier with up to 30 valid POI variants.
 - Adds complete T17, T18 and T19 clear-contract definitions and localization.
+- Adds Legendary Operations for T16-T19; Master Operations now contains T11-T15.
+- Legendary category pages resolve quest IDs directly instead of obsolete list offsets.
+- Each of five POI-size pages attempts six offers; availability depends on nearby matching POIs.
+- T17/T18/T19 menu entries unlock at current GS 50000/70000/90000; T16 keeps its existing area unlocks.
+- The assembly-qualified dialog requirement reads current player GS without waiting for watcher CVars.
+- Quest rewards, enemy strength and the ordinary trader offer generator are unchanged by this menu fix.
 
 T16-T19 boss escalation
 -----------------------
