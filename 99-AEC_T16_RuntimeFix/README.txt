@@ -16,6 +16,14 @@ Fixes
 - Uses an 18% Blood Moon boss roll at GS 30001+ and supplies all 21 T16 bosses to that pool.
 - Forces integrated Blood Moon groups to use their nighttime biome weights.
 
+Model tint initialization safety
+--------------------------------
+- Skips only the cosmetic MatColor work when the model has no valid tint material.
+- Preserves native renderer materials and completes the remaining entity initialization.
+- Prevents the observed Instantiate<Material>(null) failure and its cascading LateUpdate errors.
+- Logs the affected entity class once instead of suppressing exceptions every frame.
+- T16 Demolition also retains its native materials, matching T15/T17-T19.
+
 High-tier AI optimization (T14-T19)
 -----------------------------------
 - Preserves all original AITask and custom boss-skill logic.

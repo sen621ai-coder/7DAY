@@ -390,7 +390,7 @@
     </entity_class>
     <entity_class name="AECZombieDemolitionTier16Transcendent" extends="AECZombieDemolitionTier15Mythic">
       <property name="UserSpawnType" value="Menu" />
-      <property name="MatColor" value="AECTier16TranscendentColor" />
+      <!-- Keep the Demolition model's native materials, as T15/T17-T19 do. It cannot safely use generic MatColor tinting. -->
       <property name="Tags" value="entity,zombie,walker,allbiome,feral,infernal,AECtier16,AECtier15,AECbase_zombieDemolition,Demolition,PZFamily_zombieDemolition" />
       <property name="ExperienceGain" value="30000" />
       <effect_group name="AEC Tier 16 Effects">

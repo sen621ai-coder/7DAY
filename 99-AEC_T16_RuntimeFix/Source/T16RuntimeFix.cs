@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Emit;
 using HarmonyLib;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace AECT16RuntimeFix
             try
             {
                 var harmony = new Harmony(HarmonyId);
+                PatchModelTintSafety(harmony);
                 PatchHighTierNavigation(harmony);
                 PatchTraderQuestOffers(harmony);
                 var spawnerType = AccessTools.TypeByName("AeclipseCustomZombieSpawner.SpawnDebugPatcher");
@@ -41,6 +43,115 @@ namespace AECT16RuntimeFix
             {
                 SafeLog("[AEC-T16-Fix] Initialization failed: " + ex.GetBaseException().Message);
             }
+        }
+
+        private static void PatchModelTintSafety(Harmony harmony)
+        {
+            // A failed cosmetic tint used to abort EntityAlive.Init, leaving its
+            // stats uninitialized and causing a LateUpdate exception every frame.
+            // Keep this independent of the spawner and the other runtime fixes.
+            try
+            {
+                var modelType = AccessTools.TypeByName("EModelBase");
+                var target = modelType == null ? null : AccessTools.Method(modelType,
+                    "createModel", new[] { typeof(World), typeof(EntityClass) });
+                if (target == null)
+                {
+                    throw new MissingMethodException("EModelBase", "createModel");
+                }
+                harmony.Patch(target, transpiler: new HarmonyMethod(typeof(T16RuntimeFixMod),
+                    nameof(ModelTintSafetyTranspiler)));
+                SafeLog("[AEC-ModelTint-Fix] Null-material guard active.");
+            }
+            catch (Exception ex)
+            {
+                SafeLog("[AEC-ModelTint-Fix] Guard installation failed: " + ex.GetBaseException().Message);
+            }
+        }
+
+        private static readonly HashSet<string> ModelsWithoutTintMaterial =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        private static bool CanApplyModelTint(Material material, EntityClass entityClass)
+        {
+            // Unity's comparison also detects an already-destroyed material.
+            if (material != null)
+            {
+                return true;
+            }
+
+            string name = entityClass == null ? "<unknown>" : entityClass.entityClassName ?? "<unknown>";
+            lock (ModelsWithoutTintMaterial)
+            {
+                if (ModelsWithoutTintMaterial.Add(name))
+                {
+                    SafeLog("[AEC-ModelTint-Fix] Preserving native materials for " + name +
+                        ": no valid material for MatColor. Cosmetic tint skipped; entity initialization continues.");
+                }
+            }
+            return false;
+        }
+
+        public static IEnumerable<CodeInstruction> ModelTintSafetyTranspiler(
+            IEnumerable<CodeInstruction> instructions, ILGenerator generator)
+        {
+            var code = new List<CodeInstruction>(instructions);
+            int cloneIndex = -1;
+            int clearIndex = -1;
+            for (int i = 0; i < code.Count; i++)
+            {
+                var method = code[i].operand as MethodInfo;
+                if (code[i].opcode == OpCodes.Call && method != null &&
+                    method.DeclaringType == typeof(UnityEngine.Object) && method.Name == "Instantiate" &&
+                    method.IsGenericMethod && method.GetGenericArguments().Length == 1 &&
+                    method.GetGenericArguments()[0] == typeof(Material) && method.GetParameters().Length == 1)
+                {
+                    if (cloneIndex >= 0)
+                        throw new InvalidOperationException("Ambiguous material clone site in EModelBase.createModel.");
+                    cloneIndex = i;
+                }
+            }
+
+            bool hasTintCall = false;
+            for (int i = cloneIndex + 1; cloneIndex >= 0 && i < code.Count; i++)
+            {
+                var method = code[i].operand as MethodInfo;
+                if (method != null && method.DeclaringType == typeof(Material) && method.Name == "SetColor")
+                    hasTintCall = true;
+
+                var field = code[i].operand as FieldInfo;
+                var nextMethod = i + 1 < code.Count ? code[i + 1].operand as MethodInfo : null;
+                if (code[i].opcode == OpCodes.Ldsfld && field != null &&
+                    field.DeclaringType.Name == "EModelBase" && field.Name == "skinnedRendererList" &&
+                    nextMethod != null && nextMethod.Name == "Clear" && nextMethod.DeclaringType == field.FieldType)
+                {
+                    clearIndex = i;
+                    break;
+                }
+            }
+
+            if (cloneIndex < 1 || clearIndex < 0 || !hasTintCall || !code[cloneIndex - 1].IsLdloc())
+                throw new InvalidOperationException("Unsupported model tint IL; no guard was applied.");
+
+            // Jump to the original renderer-list cleanup, bypassing the clone,
+            // SetColor AND material assignment. Do not suppress other model errors
+            // or skip the remaining model/entity initialization.
+            Label cleanup = generator.DefineLabel();
+            code[clearIndex].labels.Add(cleanup);
+            var sourceLoad = code[cloneIndex - 1];
+            var guardLoad = new CodeInstruction(sourceLoad.opcode, sourceLoad.operand);
+            guardLoad.labels.AddRange(sourceLoad.labels);
+            guardLoad.blocks.AddRange(sourceLoad.blocks);
+            sourceLoad.labels.Clear();
+            sourceLoad.blocks.Clear();
+            code.InsertRange(cloneIndex - 1, new[]
+            {
+                guardLoad,
+                new CodeInstruction(OpCodes.Ldarg_2),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(T16RuntimeFixMod), nameof(CanApplyModelTint))),
+                new CodeInstruction(OpCodes.Brfalse, cleanup)
+            });
+            return code;
         }
 
         private static void PatchHighTierNavigation(Harmony harmony)
