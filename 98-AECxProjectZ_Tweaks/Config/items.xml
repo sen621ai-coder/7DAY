@@ -2112,4 +2112,6 @@
   <!-- Expose shared tool-part recipes through every crafting branch that consumes them. -->
   <set xpath="/items/item[@name='meleeToolAxeT3ChainsawParts']/property[@name='UnlockedBy']/@value">craftingRepairTools,craftingHarvestingTools,craftingSalvageTools</set>
   <set xpath="/items/item[@name='meleeToolAllSteelParts']/property[@name='UnlockedBy']/@value">craftingHarvestingTools,craftingSalvageTools</set>
+  <!-- Improve only the named improved/Gaus sniper rifles: flat headshot bonus, not a percentage or body-shot damage change. -->
+  <set xpath="/items/item[@name='gunRifleT4SniperRifleImp' or @name='gunRifleT5SniperRifleGaus']/effect_group/passive_effect[@name='DamageModifier' and @operation='base_add' and @tags='head']/@value">2000</set>
 </configs>
