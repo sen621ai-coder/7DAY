@@ -21,6 +21,8 @@ namespace AECT16RuntimeFix
             {
                 var harmony = new Harmony(HarmonyId);
                 PatchModelTintSafety(harmony);
+                PlayerHeadshotDamagePatch.Install(harmony);
+                BloodMoonSpawnFix.Install(harmony);
                 PatchHighTierNavigation(harmony);
                 PatchTraderQuestOffers(harmony);
                 var spawnerType = AccessTools.TypeByName("AeclipseCustomZombieSpawner.SpawnDebugPatcher");
@@ -726,7 +728,7 @@ namespace AECT16RuntimeFix
             }
         }
 
-        private static void SafeLog(string message)
+        internal static void SafeLog(string message)
         {
             Debug.Log(message);
         }

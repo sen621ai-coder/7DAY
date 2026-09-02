@@ -46,7 +46,7 @@ public static class ModelTintRegression
         return T16RuntimeFixMod.ModelTintSafetyTranspiler(code, il).ToList();
     }
 
-    static List<CodeInstruction> ReadGameIL(MethodInfo target, ILGenerator il)
+    public static List<CodeInstruction> ReadGameIL(MethodInfo target, ILGenerator il)
     {
         // Read metadata directly: Harmony's native patch installer only supports
         // the game's Mono runtime, not every newer CoreCLR used by PowerShell.

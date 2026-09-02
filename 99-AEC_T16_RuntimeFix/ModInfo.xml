@@ -4,7 +4,7 @@
   <DisplayName value="AEC T16-T19 | Runtime Fix"/>
   <Description value="Completes AEC T16-T19 runtime, trader quests, high-tier navigation, Blood Moon weighting, and boss escalation."/>
   <Author value="Exodusoul"/>
-  <Version value="1.7.1"/>
+  <Version value="1.8.0"/>
   <Website value="https://discord.gg/Ef4bBuhEEw"/>
   <ServerSideOnly value="true"/>
   <SkipWithAntiCheat value="true"/>

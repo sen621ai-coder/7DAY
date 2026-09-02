@@ -24,6 +24,27 @@ Model tint initialization safety
 - Logs the affected entity class once instead of suppressing exceptions every frame.
 - T16 Demolition also retains its native materials, matching T15/T17-T19.
 
+Blood Moon current-game compatibility (1.8.0)
+--------------------------------------------
+- Hooks the actual selector call inside AIDirectorBloodMoonParty.SpawnZombie.
+- Current builds call GetRandomEntityFromGroupMaxTier, bypassing the old GetRandomFromGroup hook.
+- Selects by the chased player's current GS, never by party average or stale spawn context.
+- T16/T17/T18/T19 start at GS 30001/50000/70000/90000 and select only that exact tier.
+- Uses the existing nighttime biome weights, beast/ranged mix and 18% high-tier boss roll.
+- Blood Moon selection does not enter the wilderness land-claim exclusion path.
+- Four exact-tier XML backup pools replace old high-GS stage references; each has 64 classes and 18% boss weight.
+- Preserves engine enemy/max-tier filters, native vehicle-vulture behavior, wave counts and player limits.
+- Logs [AEC-BloodMoon-Fix] at installation, sampled selections, each dynamic boss roll success and fallback warnings.
+- Existing material-tint, navigation, quest and reward fixes are preserved. Restart the game/server to load the DLL.
+
+Player weapon headshot damage
+-----------------------------
+- Multiplies existing player weapon headshot damage by 5 after the original headshot calculation.
+- Covers the shared gun, bow/crossbow and melee hit path without a weapon-name whitelist.
+- Preserves all flat bonuses, including +2000 for improved/Gaus sniper rifles, perks and sandbox settings.
+- Does not amplify body hits, block damage, damage-over-time or non-player attacks.
+- Target armor, resistances and difficulty still apply afterward; extreme damage saturates instead of overflowing.
+
 High-tier AI optimization (T14-T19)
 -----------------------------------
 - Preserves all original AITask and custom boss-skill logic.

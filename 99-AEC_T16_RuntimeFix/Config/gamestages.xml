@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <!-- Replace only high-GS Blood Moon stages. The direct runtime selector uses
+       each target's GS; these tiers also protect the unpatched/static path. -->
+  <remove xpath="/gamestages/spawner[@name='BloodMoonHorde']/gamestage[@stage &gt;= 30001]"/>
+  <append xpath="/gamestages/spawner[@name='BloodMoonHorde']">
+    <gamestage stage="30001"><spawn group="PZAECBloodMoonT16Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="50000"><spawn group="PZAECBloodMoonT17Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="70000"><spawn group="PZAECBloodMoonT18Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="90000"><spawn group="PZAECBloodMoonT19Fallback" num="999" maxAlive="256"/></gamestage>
+  </append>
+</configs>
