@@ -9,7 +9,7 @@
       <property name="single_instance" value="false" />
       <action class="SpawnEntity">
         <property name="entity_names" value="bossAECDumdumT17,RunningKamikazeT17,AECDoomlordDemolishmanBossT17,AECTheWitchAngelBossT17,AECElectricDemonRunnerBossT17,AECExplosiveEagleBossT17,AECHammerGuardianT17,AECTheMechanicianBossT17,AECTheDruidBossT17,AECTheExecutionerBossT17,AECPartyBeachBossT17,AECMykirBossT17,AECHellskyliBossT17,AECRockbreakerBossT17,AECSingerieBossT17,AECGhostBossT17,AECSirenHeadBossT17,AECMushroomBossT17,AECTheArcherBossT17,AECSheriffBossT17,AECHeadlessBossT17" />
-        <property name="spawn_count" value="1" />
+        <property name="spawn_count" value="2" />
         <property name="single_choice" value="true" />
         <property name="party_addition" value="0" />
         <property name="ignore_multiplier" value="true" />
@@ -27,7 +27,7 @@
       <property name="single_instance" value="false" />
       <action class="SpawnEntity">
         <property name="entity_names" value="bossAECDumdumT18,RunningKamikazeT18,AECDoomlordDemolishmanBossT18,AECTheWitchAngelBossT18,AECElectricDemonRunnerBossT18,AECExplosiveEagleBossT18,AECHammerGuardianT18,AECTheMechanicianBossT18,AECTheDruidBossT18,AECTheExecutionerBossT18,AECPartyBeachBossT18,AECMykirBossT18,AECHellskyliBossT18,AECRockbreakerBossT18,AECSingerieBossT18,AECGhostBossT18,AECSirenHeadBossT18,AECMushroomBossT18,AECTheArcherBossT18,AECSheriffBossT18,AECHeadlessBossT18" />
-        <property name="spawn_count" value="1" />
+        <property name="spawn_count" value="2" />
         <property name="single_choice" value="true" />
         <property name="party_addition" value="0" />
         <property name="ignore_multiplier" value="true" />
@@ -45,7 +45,7 @@
       <property name="single_instance" value="false" />
       <action class="SpawnEntity">
         <property name="entity_names" value="bossAECDumdumT19,RunningKamikazeT19,AECDoomlordDemolishmanBossT19,AECTheWitchAngelBossT19,AECElectricDemonRunnerBossT19,AECExplosiveEagleBossT19,AECHammerGuardianT19,AECTheMechanicianBossT19,AECTheDruidBossT19,AECTheExecutionerBossT19,AECPartyBeachBossT19,AECMykirBossT19,AECHellskyliBossT19,AECRockbreakerBossT19,AECSingerieBossT19,AECGhostBossT19,AECSirenHeadBossT19,AECMushroomBossT19,AECTheArcherBossT19,AECSheriffBossT19,AECHeadlessBossT19" />
-        <property name="spawn_count" value="1" />
+        <property name="spawn_count" value="2" />
         <property name="single_choice" value="true" />
         <property name="party_addition" value="0" />
         <property name="ignore_multiplier" value="true" />

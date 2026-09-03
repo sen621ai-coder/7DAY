@@ -26,7 +26,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(target,
                     prefix: new HarmonyMethod(typeof(QuestBossSpawn), nameof(BeforeAdvance)),
                     postfix: new HarmonyMethod(typeof(QuestBossSpawn), nameof(AfterAdvance)));
-                Debug.Log("[AEC-QuestBoss] T17-T19 clear contracts: one exact-tier boss on rally activation; owner-only, persistent deduplication.");
+                Debug.Log("[AEC-QuestBoss] T17-T19 clear contracts: two exact-tier bosses on rally activation; owner-only, persistent deduplication.");
             }
             catch (Exception ex)
             {
@@ -132,7 +132,7 @@ namespace AECT16RuntimeFix
                         false, false, "", null));
                 if (accepted)
                     Debug.Log("[AEC-QuestBoss] Queued " + quest.DataVariables[Marker] + " for quest=" + quest.ID +
-                        " code=" + quest.QuestCode + " player=" + player.entityId + " count=1.");
+                        " code=" + quest.QuestCode + " player=" + player.entityId + " count=2.");
                 return accepted;
             }
             catch (Exception ex)

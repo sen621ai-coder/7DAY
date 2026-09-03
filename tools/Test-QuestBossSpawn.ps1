@@ -92,7 +92,7 @@ foreach ($tier in 17..19) {
     $action = $sequence.SelectSingleNode("action[@class='SpawnEntity']")
     $props = @{}
     foreach ($prop in $action.property) { $props[$prop.GetAttribute('name')] = $prop.GetAttribute('value') }
-    foreach ($entry in @{'spawn_count'='1'; 'party_addition'='0'; 'ignore_multiplier'='true'; 'single_choice'='true'; 'safe_spawn'='true'; 'spawn_type'='WanderingHorde'}.GetEnumerator()) {
+    foreach ($entry in @{'spawn_count'='2'; 'party_addition'='0'; 'ignore_multiplier'='true'; 'single_choice'='true'; 'safe_spawn'='true'; 'spawn_type'='WanderingHorde'}.GetEnumerator()) {
         if ($props[$entry.Key] -ne $entry.Value) { throw "T$tier incorrect $($entry.Key)" }
     }
     if ($props.ContainsKey('target_group')) { throw 'Party-wide target would multiply bosses' }
@@ -105,4 +105,4 @@ foreach ($tier in 17..19) {
         if (-not $quests.SelectSingleNode("//quest[@id='aec_quest_T${tier}_A${area}_clear']")) { throw 'Missing quest definition' }
     }
 }
-'PASS: three single-boss native events, 63 exact-tier boss references, all 15 existing quest definitions.'
+'PASS: three two-boss native events, 63 exact-tier boss references, all 15 existing quest definitions.'
