@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/entity_classes">
+    <entity_class name="PZAECAffix_hunter_T16" extends="AECTheExecutionerBossT16">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECTrial_hunter_T16" extends="AECTheExecutionerBossT16">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECAffix_bulwark_T16" extends="AECTheMechanicianBossT16">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECTrial_bulwark_T16" extends="AECTheMechanicianBossT16">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECAffix_storm_T16" extends="AECTheArcherBossT16">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECTrial_storm_T16" extends="AECTheArcherBossT16">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECAffix_hunter_T17" extends="AECTheExecutionerBossT17">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECTrial_hunter_T17" extends="AECTheExecutionerBossT17">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECAffix_bulwark_T17" extends="AECTheMechanicianBossT17">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECTrial_bulwark_T17" extends="AECTheMechanicianBossT17">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECAffix_storm_T17" extends="AECTheArcherBossT17">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECTrial_storm_T17" extends="AECTheArcherBossT17">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECAffix_hunter_T18" extends="AECTheExecutionerBossT18">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECTrial_hunter_T18" extends="AECTheExecutionerBossT18">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECAffix_bulwark_T18" extends="AECTheMechanicianBossT18">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECTrial_bulwark_T18" extends="AECTheMechanicianBossT18">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECAffix_storm_T18" extends="AECTheArcherBossT18">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECTrial_storm_T18" extends="AECTheArcherBossT18">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECAffix_hunter_T19" extends="AECTheExecutionerBossT19">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECTrial_hunter_T19" extends="AECTheExecutionerBossT19">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="hunter" />
+    </entity_class>
+    <entity_class name="PZAECAffix_bulwark_T19" extends="AECTheMechanicianBossT19">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECTrial_bulwark_T19" extends="AECTheMechanicianBossT19">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="bulwark" />
+      <effect_group name="Legendary overheat cycle">
+        <triggered_effect trigger="onSelfFirstSpawn" action="AddBuff" target="self" buff="buffPZAECCharge" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="PZAECAffix_storm_T19" extends="AECTheArcherBossT19">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+    <entity_class name="PZAECTrial_storm_T19" extends="AECTheArcherBossT19">
+      <property name="UserSpawnType" value="None" />
+      <property name="PZAECEncounterKind" value="storm" />
+    </entity_class>
+  </append>
+  <!-- Voluntary, leased three-wave base-defense encounters. -->
+  <append xpath="/entity_classes">
+    <entity_class name="PZAECDefense_runner_T16_W1" extends="AECZombieArleneTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spider_T16_W1" extends="AECZombieSpiderTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T16_W1" extends="AECZombieFatCopTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_biker_T16_W2" extends="AECZombieBikerTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_demo_T16_W2" extends="AECZombieDemolitionTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spitter_T16_W2" extends="AECZombiePlagueSpitterTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wolf_T16_W2" extends="AECDruidMinionWolfAggroT16">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wight_T16_W3" extends="AECZombieWightFeralTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T16_W3" extends="AECZombieFatCopTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_bulwark_T16_W3" extends="PZAECAffix_bulwark_T16">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_storm_T16_W3" extends="PZAECAffix_storm_T16">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_runner_T17_W1" extends="AECZombieArleneTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spider_T17_W1" extends="AECZombieSpiderTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T17_W1" extends="AECZombieFatCopTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_biker_T17_W2" extends="AECZombieBikerTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_demo_T17_W2" extends="AECZombieDemolitionTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spitter_T17_W2" extends="AECZombiePlagueSpitterTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wolf_T17_W2" extends="AECDruidMinionWolfAggroT17">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wight_T17_W3" extends="AECZombieWightFeralTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T17_W3" extends="AECZombieFatCopTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_bulwark_T17_W3" extends="PZAECAffix_bulwark_T17">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_storm_T17_W3" extends="PZAECAffix_storm_T17">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_runner_T18_W1" extends="AECZombieArleneTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spider_T18_W1" extends="AECZombieSpiderTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T18_W1" extends="AECZombieFatCopTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_biker_T18_W2" extends="AECZombieBikerTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_demo_T18_W2" extends="AECZombieDemolitionTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spitter_T18_W2" extends="AECZombiePlagueSpitterTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wolf_T18_W2" extends="AECDruidMinionWolfAggroT18">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wight_T18_W3" extends="AECZombieWightFeralTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T18_W3" extends="AECZombieFatCopTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_bulwark_T18_W3" extends="PZAECAffix_bulwark_T18">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_storm_T18_W3" extends="PZAECAffix_storm_T18">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_runner_T19_W1" extends="AECZombieArleneTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spider_T19_W1" extends="AECZombieSpiderTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T19_W1" extends="AECZombieFatCopTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_biker_T19_W2" extends="AECZombieBikerTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_demo_T19_W2" extends="AECZombieDemolitionTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_spitter_T19_W2" extends="AECZombiePlagueSpitterTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wolf_T19_W2" extends="AECDruidMinionWolfAggroT19">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_wight_T19_W3" extends="AECZombieWightFeralTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_cop_T19_W3" extends="AECZombieFatCopTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_bulwark_T19_W3" extends="PZAECAffix_bulwark_T19">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+    <entity_class name="PZAECDefense_storm_T19_W3" extends="PZAECAffix_storm_T19">
+      <property name="UserSpawnType" value="None" />
+    </entity_class>
+  </append>
+</configs>

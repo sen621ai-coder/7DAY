@@ -84,7 +84,7 @@ public static class QuestBossRegression
 [xml]$events = Get-Content -LiteralPath (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/gameevents.xml') -Raw
 [xml]$entities = Get-Content -LiteralPath (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/entityclasses.xml') -Raw
 [xml]$quests = Get-Content -LiteralPath (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/quests.xml') -Raw
-$sequences = $events.SelectNodes('/configs/append/action_sequence')
+$sequences = $events.SelectNodes('/configs/append/action_sequence[starts-with(@name,"PZAECQuestBossT")]')
 if ($sequences.Count -ne 3) { throw 'Expected three tier-specific events' }
 foreach ($tier in 17..19) {
     $sequence = $events.SelectSingleNode("//action_sequence[@name='PZAECQuestBossT$tier']")

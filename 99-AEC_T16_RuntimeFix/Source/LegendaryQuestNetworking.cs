@@ -73,7 +73,7 @@ namespace AECT16RuntimeFix
             int seen = 0;
             for (int i = 0; i < ids.Count; i++)
             {
-                if (!ready[i] || !string.Equals(ids[i], wantedId, StringComparison.OrdinalIgnoreCase)) continue;
+                if (!ready[i] || !LegendaryAdventure.MatchesPage(ids[i], wantedId)) continue;
                 if (seen++ != slot) continue;
                 int relative = 0;
                 for (int j = 0; j < i; j++) if (difficulties[j] == difficulties[i]) relative++;

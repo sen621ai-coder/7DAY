@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/buffs">
+    <buff name="buffPZAECCharge" hidden="true">
+      <stack_type value="ignore" />
+      <duration value="18" />
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffFinish" action="AddBuff" buff="buffPZAECOverheat" />
+      </effect_group>
+    </buff>
+    <buff name="buffPZAECOverheat" hidden="true">
+      <stack_type value="ignore" />
+      <duration value="6" />
+      <effect_group>
+        <passive_effect name="RunSpeed" operation="perc_subtract" value="0.5" />
+        <passive_effect name="WalkSpeed" operation="perc_subtract" value="0.5" />
+        <triggered_effect trigger="onSelfBuffStart" action="AttachParticleEffectToEntity" particle="p_electric_shock" parent_transform="Spine1" local_offset="0,-.2,0" />
+        <triggered_effect trigger="onSelfEnteredGame" action="AttachParticleEffectToEntity" particle="p_electric_shock" parent_transform="Spine1" local_offset="0,-.2,0" />
+        <triggered_effect trigger="onSelfBuffRemove" action="RemoveParticleEffectFromEntity" particle="p_electric_shock" />
+        <triggered_effect trigger="onSelfDied" action="RemoveParticleEffectFromEntity" particle="p_electric_shock" />
+        <triggered_effect trigger="onSelfLeaveGame" action="RemoveParticleEffectFromEntity" particle="p_electric_shock" />
+        <triggered_effect trigger="onSelfBuffFinish" action="AddBuff" buff="buffPZAECCharge" />
+      </effect_group>
+    </buff>
+  </append>
+  <append xpath="/buffs">
+    <!-- Short native-networked lease; refreshed only by a live owner session. -->
+    <buff name="buffPZAECDefenseLease" hidden="true">
+      <stack_type value="replace" />
+      <duration value="8" />
+    </buff>
+  </append>
+</configs>

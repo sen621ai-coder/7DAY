@@ -120,7 +120,7 @@ public static class LegendaryNetworkingRegression
         for (int area=1; area<=5; area++)
         for (int slot=0; slot<6; slot++)
             entries.Add(new NetPackageNPCQuestList.QuestPacketEntry {
-                QuestID = "aec_quest_T"+tier+"_A"+area+"_clear",
+                QuestID = LegendaryAdventure.OfferId("aec_quest_T"+tier+"_A"+area+"_clear", slot, area),
                 QuestLocation = new Vector3(tier*100+slot,60,area*100),
                 QuestSize = new Vector3(area*10,20,area*10),
                 TraderPos = new Vector3(500,61,600), POIName = "server-poi-"+tier+"-"+area+"-"+slot });

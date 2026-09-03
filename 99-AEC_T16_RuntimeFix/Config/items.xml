@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/items">
+    <item name="PZAECChallengeVoucherT16">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECChallengeVoucherDesc" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="10" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECChallengeT16" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="PZAECChallengeVoucherT17">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECChallengeVoucherDesc" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="10" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECChallengeT17" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="PZAECChallengeVoucherT18">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECChallengeVoucherDesc" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="10" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECChallengeT18" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="PZAECChallengeVoucherT19">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECChallengeVoucherDesc" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="10" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECChallengeT19" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+  </append>
+  <!-- Voluntary, leased three-wave base-defense encounters. -->
+  <append xpath="/items">
+    <item name="PZAECDefenseBeaconT16">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECDefenseBeaconDesc" />
+      <property name="CustomIconTint" value="FF6633" />
+      <property name="Stacknumber" value="5" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECDefenseT16" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="PZAECDefenseBeaconT17">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECDefenseBeaconDesc" />
+      <property name="CustomIconTint" value="FF6633" />
+      <property name="Stacknumber" value="5" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECDefenseT17" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="PZAECDefenseBeaconT18">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECDefenseBeaconDesc" />
+      <property name="CustomIconTint" value="FF6633" />
+      <property name="Stacknumber" value="5" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECDefenseT18" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="PZAECDefenseBeaconT19">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECDefenseBeaconDesc" />
+      <property name="CustomIconTint" value="FF6633" />
+      <property name="Stacknumber" value="5" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="Quest" />
+        <property name="QuestGiven" value="PZAECDefenseT19" />
+        <property name="Delay" value="0.5" />
+        <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+  </append>
+  <!-- Completion-only components. No quest-use action or quality stat. -->
+  <append xpath="/items">
+    <item name="PZAECBuildPartsR2">
+      <property name="Extends" value="resourceLegendaryParts" />
+      <property name="DescriptionKey" value="PZAECBuildPartsR2Desc" />
+      <property name="Tags" value="PZAECBuildMaterial" />
+      <property name="CustomIcon" value="resourceLegendaryParts" />
+      <property name="CustomIconTint" value="66BBFF" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <property name="CraftingIngredientTime" value="0" />
+    </item>
+    <item name="PZAECBuildPartsR3">
+      <property name="Extends" value="resourceLegendaryParts" />
+      <property name="DescriptionKey" value="PZAECBuildPartsR3Desc" />
+      <property name="Tags" value="PZAECBuildMaterial" />
+      <property name="CustomIcon" value="resourceLegendaryParts" />
+      <property name="CustomIconTint" value="AA88FF" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <property name="CraftingIngredientTime" value="0" />
+    </item>
+    <item name="PZAECBuildPartsR4">
+      <property name="Extends" value="resourceLegendaryParts" />
+      <property name="DescriptionKey" value="PZAECBuildPartsR4Desc" />
+      <property name="Tags" value="PZAECBuildMaterial" />
+      <property name="CustomIcon" value="resourceLegendaryParts" />
+      <property name="CustomIconTint" value="FFBB44" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <property name="CraftingIngredientTime" value="0" />
+    </item>
+    <item name="PZAECBuildPartsR5">
+      <property name="Extends" value="resourceLegendaryParts" />
+      <property name="DescriptionKey" value="PZAECBuildPartsR5Desc" />
+      <property name="Tags" value="PZAECBuildMaterial" />
+      <property name="CustomIcon" value="resourceLegendaryParts" />
+      <property name="CustomIconTint" value="FF6655" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <property name="CraftingIngredientTime" value="0" />
+    </item>
+  </append>
+</configs>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <!-- Fixed ranks: never depend on the installed weapon's quality. -->
+  <append xpath="/item_modifiers">
+    <item_modifier name="modPZAECPrecisionR2" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECPrecisionR2Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunScopeLarge" />
+      <property name="CustomIconTint" value="66BBFF" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.3" tags="head" />
+        <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.1" />
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.15" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBreakerR2" installable_tags="perkPummelPete,perkSkullCrusher,perkJavelinMaster,perkDeepCuts,perkBrawler,perkElectrocutioner" modifier_tags="PZAECBuildCore" blocked_tags="noMods,gun,ranged,tool,motorTool,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBreakerR2Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modMeleeWeightedHead" />
+      <property name="CustomIconTint" value="FF8844" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.35" tags="secondary" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="-0.1" tags="primary" />
+        <passive_effect name="StaminaLoss" operation="perc_add" value="0.15" tags="secondary" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBarrageR2" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBarrageR2Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+      <property name="CustomIconTint" value="FFCC44" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.15" />
+        <passive_effect name="MagazineSize" operation="perc_add" value="0.1" />
+        <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.1" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.15" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECSkirmisherR2" installable_tags="armorChest" modifier_tags="PZAECBuildCore" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECSkirmisherR2Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modArmorCustomizedFittings" />
+      <property name="CustomIconTint" value="66DD88" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="StaminaMax" operation="base_add" value="30" />
+        <passive_effect name="RunSpeed" operation="perc_add" value="0.04" />
+        <passive_effect name="PhysicalDamageResist" operation="base_add" value="-2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECPrecisionR3" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECPrecisionR3Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunScopeLarge" />
+      <property name="CustomIconTint" value="66BBFF" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.45" tags="head" />
+        <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.15" />
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.15" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBreakerR3" installable_tags="perkPummelPete,perkSkullCrusher,perkJavelinMaster,perkDeepCuts,perkBrawler,perkElectrocutioner" modifier_tags="PZAECBuildCore" blocked_tags="noMods,gun,ranged,tool,motorTool,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBreakerR3Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modMeleeWeightedHead" />
+      <property name="CustomIconTint" value="FF8844" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.5" tags="secondary" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="-0.1" tags="primary" />
+        <passive_effect name="StaminaLoss" operation="perc_add" value="0.15" tags="secondary" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBarrageR3" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBarrageR3Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+      <property name="CustomIconTint" value="FFCC44" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.2" />
+        <passive_effect name="MagazineSize" operation="perc_add" value="0.2" />
+        <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.1" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.15" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECSkirmisherR3" installable_tags="armorChest" modifier_tags="PZAECBuildCore" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECSkirmisherR3Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modArmorCustomizedFittings" />
+      <property name="CustomIconTint" value="66DD88" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="StaminaMax" operation="base_add" value="45" />
+        <passive_effect name="RunSpeed" operation="perc_add" value="0.06" />
+        <passive_effect name="PhysicalDamageResist" operation="base_add" value="-2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECPrecisionR4" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECPrecisionR4Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunScopeLarge" />
+      <property name="CustomIconTint" value="66BBFF" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.6" tags="head" />
+        <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.2" />
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.15" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBreakerR4" installable_tags="perkPummelPete,perkSkullCrusher,perkJavelinMaster,perkDeepCuts,perkBrawler,perkElectrocutioner" modifier_tags="PZAECBuildCore" blocked_tags="noMods,gun,ranged,tool,motorTool,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBreakerR4Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modMeleeWeightedHead" />
+      <property name="CustomIconTint" value="FF8844" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.7" tags="secondary" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="-0.1" tags="primary" />
+        <passive_effect name="StaminaLoss" operation="perc_add" value="0.15" tags="secondary" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBarrageR4" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBarrageR4Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+      <property name="CustomIconTint" value="FFCC44" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.25" />
+        <passive_effect name="MagazineSize" operation="perc_add" value="0.3" />
+        <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.1" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.15" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECSkirmisherR4" installable_tags="armorChest" modifier_tags="PZAECBuildCore" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECSkirmisherR4Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modArmorCustomizedFittings" />
+      <property name="CustomIconTint" value="66DD88" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="StaminaMax" operation="base_add" value="60" />
+        <passive_effect name="RunSpeed" operation="perc_add" value="0.08" />
+        <passive_effect name="PhysicalDamageResist" operation="base_add" value="-2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECPrecisionR5" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECPrecisionR5Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunScopeLarge" />
+      <property name="CustomIconTint" value="66BBFF" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.8" tags="head" />
+        <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.25" />
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.15" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBreakerR5" installable_tags="perkPummelPete,perkSkullCrusher,perkJavelinMaster,perkDeepCuts,perkBrawler,perkElectrocutioner" modifier_tags="PZAECBuildCore" blocked_tags="noMods,gun,ranged,tool,motorTool,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBreakerR5Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modMeleeWeightedHead" />
+      <property name="CustomIconTint" value="FF8844" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.9" tags="secondary" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="-0.1" tags="primary" />
+        <passive_effect name="StaminaLoss" operation="perc_add" value="0.15" tags="secondary" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECBarrageR5" installable_tags="gun" modifier_tags="PZAECBuildCore" blocked_tags="noMods,launcher,perkDemolitionsExpert,turretRanged,turretMelee" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECBarrageR5Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+      <property name="CustomIconTint" value="FFCC44" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.3" />
+        <passive_effect name="MagazineSize" operation="perc_add" value="0.4" />
+        <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.1" />
+        <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.15" />
+      </effect_group>
+    </item_modifier>
+    <item_modifier name="modPZAECSkirmisherR5" installable_tags="armorChest" modifier_tags="PZAECBuildCore" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="DescriptionKey" value="modPZAECSkirmisherR5Desc" />
+      <property name="MaxModsAllowed" value="1" />
+      <property name="CustomIcon" value="modArmorCustomizedFittings" />
+      <property name="CustomIconTint" value="66DD88" />
+      <property name="CreativeMode" value="Player" />
+      <property name="Tags" value="PZAECBuildCore" />
+      <property name="Material" value="MUniversalParts" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+      <property name="Weight" value="0" />
+      <effect_group tiered="false">
+        <passive_effect name="StaminaMax" operation="base_add" value="80" />
+        <passive_effect name="RunSpeed" operation="perc_add" value="0.1" />
+        <passive_effect name="PhysicalDamageResist" operation="base_add" value="-2" />
+      </effect_group>
+    </item_modifier>
+  </append>
+</configs>

@@ -2,9 +2,9 @@
 <xml>
   <Name value="AEC_T16_RuntimeFix"/>
   <DisplayName value="AEC T16-T19 | Runtime Fix"/>
-  <Description value="Completes AEC T16-T19 runtime, trader quests, high-tier navigation, Blood Moon weighting, and boss escalation."/>
+  <Description value="AEC T16-T19 runtime fixes, legendary affix quests and trials, voluntary base defense, and four craftable equipment builds in ranks 2-5."/>
   <Author value="Exodusoul"/>
-  <Version value="1.10.0"/>
+  <Version value="1.13.0"/>
   <Website value="https://discord.gg/Ef4bBuhEEw"/>
   <ServerSideOnly value="false"/>
   <SkipWithAntiCheat value="true"/>

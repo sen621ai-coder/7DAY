@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="PZAECDefenseBeaconT16" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECChallengeVoucherT16" count="1" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="PZAECDefenseBeaconT17" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECChallengeVoucherT17" count="1" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="PZAECDefenseBeaconT18" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECChallengeVoucherT18" count="1" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="PZAECDefenseBeaconT19" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECChallengeVoucherT19" count="1" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="modPZAECPrecisionR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR2" count="6" />
+      <ingredient name="resourceLegendaryParts" count="5" />
+      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBreakerR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR2" count="6" />
+      <ingredient name="resourceLegendaryParts" count="5" />
+      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBarrageR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR2" count="6" />
+      <ingredient name="resourceLegendaryParts" count="5" />
+      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECSkirmisherR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR2" count="6" />
+      <ingredient name="resourceLegendaryParts" count="5" />
+      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECPrecisionR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR3" count="6" />
+      <ingredient name="resourceLegendaryParts" count="10" />
+      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBreakerR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR3" count="6" />
+      <ingredient name="resourceLegendaryParts" count="10" />
+      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBarrageR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR3" count="6" />
+      <ingredient name="resourceLegendaryParts" count="10" />
+      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECSkirmisherR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR3" count="6" />
+      <ingredient name="resourceLegendaryParts" count="10" />
+      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECPrecisionR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR4" count="6" />
+      <ingredient name="resourceLegendaryParts" count="20" />
+      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBreakerR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR4" count="6" />
+      <ingredient name="resourceLegendaryParts" count="20" />
+      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBarrageR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR4" count="6" />
+      <ingredient name="resourceLegendaryParts" count="20" />
+      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECSkirmisherR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR4" count="6" />
+      <ingredient name="resourceLegendaryParts" count="20" />
+      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECPrecisionR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR5" count="6" />
+      <ingredient name="resourceLegendaryParts" count="35" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBreakerR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR5" count="6" />
+      <ingredient name="resourceLegendaryParts" count="35" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECBarrageR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR5" count="6" />
+      <ingredient name="resourceLegendaryParts" count="35" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="modPZAECSkirmisherR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="PZAECBuildPartsR5" count="6" />
+      <ingredient name="resourceLegendaryParts" count="35" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+  </append>
+</configs>

@@ -1,4 +1,44 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,KeepLoaded,english,Context / Alternate Text,german,spanish,french,italian,japanese,koreana,polish,brazilian,russian,turkish,schinese,tchinese
+PZAECBuildPartsR2,items,BuildCores,,,,Rank 2 Tactical Components,,,,,,,,,,,,2 阶战术组件,2 阶战术组件
+PZAECBuildPartsR2Desc,items,BuildCores,,,,Earn 3 from a T16 trial or 5 from T16 base defense. Use 6 with legendary parts and metals to craft any rank 2 build core at a workbench. No lower-rank core required. Not sold by traders.,,,,,,,,,,,,完成 T16 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 2 阶流派核心；不需低阶核心。商人不出售。,完成 T16 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 2 阶流派核心；不需低阶核心。商人不出售。
+modPZAECPrecisionR2,items,BuildCores,,,,Eagle Eye Core - Rank 2,,,,,,,,,,,,鹰眼核心·2 阶,鹰眼核心·2 阶
+modPZAECPrecisionR2Desc,items,BuildCores,,,,"Firearms only. Headshot modifier +30%; aimed spread -10%. Trade-off: fire rate -15%; hip spread +20%. One build core per weapon. Fixed rank 2, independent of weapon quality. Craft with rank 2 tactical components from T16 encounters.",,,,,,,,,,,,枪械专用；爆头伤害系数 +30%，瞄准散布 -10%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；爆头伤害系数 +30%，瞄准散布 -10%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBreakerR2,items,BuildCores,,,,Breaker Core - Rank 2,,,,,,,,,,,,破军核心·2 阶,破军核心·2 阶
+modPZAECBreakerR2Desc,items,BuildCores,,,,"Melee weapons only. Power-attack damage modifier +35%. Trade-off: normal-attack damage modifier -10%; power-attack stamina cost modifier +15%. One build core per weapon. Fixed rank 2, independent of weapon quality. Craft with rank 2 tactical components from T16 encounters.",,,,,,,,,,,,近战武器专用；重击伤害系数 +35%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,近战武器专用；重击伤害系数 +35%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBarrageR2,items,BuildCores,,,,Barrage Core - Rank 2,,,,,,,,,,,,弹幕核心·2 阶,弹幕核心·2 阶
+modPZAECBarrageR2Desc,items,BuildCores,,,,"Firearms only. Fire-rate modifier +15%; magazine-capacity modifier +10%. Trade-off: reload-speed modifier -10%; hip spread +15%. One build core per weapon. Fixed rank 2, independent of weapon quality. Craft with rank 2 tactical components from T16 encounters.",,,,,,,,,,,,枪械专用；射速系数 +15%、弹匣容量系数 +10%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；射速系数 +15%、弹匣容量系数 +10%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECSkirmisherR2,items,BuildCores,,,,Skirmisher Core - Rank 2,,,,,,,,,,,,游击核心·2 阶,游击核心·2 阶
+modPZAECSkirmisherR2Desc,items,BuildCores,,,,"Chest armor only. Maximum stamina +30; run-speed modifier +4%. Trade-off: armor rating -2. One chest core; can pair with a weapon core. Unequipping removes its effects. Fixed rank 2, independent of weapon quality. Craft with rank 2 tactical components from T16 encounters.",,,,,,,,,,,,胸甲专用；最大耐力 +30、奔跑速度系数 +4%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,胸甲专用；最大耐力 +30、奔跑速度系数 +4%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 2 阶，不随武器品质变化；使用 T16 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+PZAECBuildPartsR3,items,BuildCores,,,,Rank 3 Tactical Components,,,,,,,,,,,,3 阶战术组件,3 阶战术组件
+PZAECBuildPartsR3Desc,items,BuildCores,,,,Earn 3 from a T17 trial or 5 from T17 base defense. Use 6 with legendary parts and metals to craft any rank 3 build core at a workbench. No lower-rank core required. Not sold by traders.,,,,,,,,,,,,完成 T17 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 3 阶流派核心；不需低阶核心。商人不出售。,完成 T17 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 3 阶流派核心；不需低阶核心。商人不出售。
+modPZAECPrecisionR3,items,BuildCores,,,,Eagle Eye Core - Rank 3,,,,,,,,,,,,鹰眼核心·3 阶,鹰眼核心·3 阶
+modPZAECPrecisionR3Desc,items,BuildCores,,,,"Firearms only. Headshot modifier +45%; aimed spread -15%. Trade-off: fire rate -15%; hip spread +20%. One build core per weapon. Fixed rank 3, independent of weapon quality. Craft with rank 3 tactical components from T17 encounters.",,,,,,,,,,,,枪械专用；爆头伤害系数 +45%，瞄准散布 -15%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；爆头伤害系数 +45%，瞄准散布 -15%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBreakerR3,items,BuildCores,,,,Breaker Core - Rank 3,,,,,,,,,,,,破军核心·3 阶,破军核心·3 阶
+modPZAECBreakerR3Desc,items,BuildCores,,,,"Melee weapons only. Power-attack damage modifier +50%. Trade-off: normal-attack damage modifier -10%; power-attack stamina cost modifier +15%. One build core per weapon. Fixed rank 3, independent of weapon quality. Craft with rank 3 tactical components from T17 encounters.",,,,,,,,,,,,近战武器专用；重击伤害系数 +50%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,近战武器专用；重击伤害系数 +50%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBarrageR3,items,BuildCores,,,,Barrage Core - Rank 3,,,,,,,,,,,,弹幕核心·3 阶,弹幕核心·3 阶
+modPZAECBarrageR3Desc,items,BuildCores,,,,"Firearms only. Fire-rate modifier +20%; magazine-capacity modifier +20%. Trade-off: reload-speed modifier -10%; hip spread +15%. One build core per weapon. Fixed rank 3, independent of weapon quality. Craft with rank 3 tactical components from T17 encounters.",,,,,,,,,,,,枪械专用；射速系数 +20%、弹匣容量系数 +20%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；射速系数 +20%、弹匣容量系数 +20%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECSkirmisherR3,items,BuildCores,,,,Skirmisher Core - Rank 3,,,,,,,,,,,,游击核心·3 阶,游击核心·3 阶
+modPZAECSkirmisherR3Desc,items,BuildCores,,,,"Chest armor only. Maximum stamina +45; run-speed modifier +6%. Trade-off: armor rating -2. One chest core; can pair with a weapon core. Unequipping removes its effects. Fixed rank 3, independent of weapon quality. Craft with rank 3 tactical components from T17 encounters.",,,,,,,,,,,,胸甲专用；最大耐力 +45、奔跑速度系数 +6%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,胸甲专用；最大耐力 +45、奔跑速度系数 +6%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 3 阶，不随武器品质变化；使用 T17 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+PZAECBuildPartsR4,items,BuildCores,,,,Rank 4 Tactical Components,,,,,,,,,,,,4 阶战术组件,4 阶战术组件
+PZAECBuildPartsR4Desc,items,BuildCores,,,,Earn 3 from a T18 trial or 5 from T18 base defense. Use 6 with legendary parts and metals to craft any rank 4 build core at a workbench. No lower-rank core required. Not sold by traders.,,,,,,,,,,,,完成 T18 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 4 阶流派核心；不需低阶核心。商人不出售。,完成 T18 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 4 阶流派核心；不需低阶核心。商人不出售。
+modPZAECPrecisionR4,items,BuildCores,,,,Eagle Eye Core - Rank 4,,,,,,,,,,,,鹰眼核心·4 阶,鹰眼核心·4 阶
+modPZAECPrecisionR4Desc,items,BuildCores,,,,"Firearms only. Headshot modifier +60%; aimed spread -20%. Trade-off: fire rate -15%; hip spread +20%. One build core per weapon. Fixed rank 4, independent of weapon quality. Craft with rank 4 tactical components from T18 encounters.",,,,,,,,,,,,枪械专用；爆头伤害系数 +60%，瞄准散布 -20%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；爆头伤害系数 +60%，瞄准散布 -20%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBreakerR4,items,BuildCores,,,,Breaker Core - Rank 4,,,,,,,,,,,,破军核心·4 阶,破军核心·4 阶
+modPZAECBreakerR4Desc,items,BuildCores,,,,"Melee weapons only. Power-attack damage modifier +70%. Trade-off: normal-attack damage modifier -10%; power-attack stamina cost modifier +15%. One build core per weapon. Fixed rank 4, independent of weapon quality. Craft with rank 4 tactical components from T18 encounters.",,,,,,,,,,,,近战武器专用；重击伤害系数 +70%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,近战武器专用；重击伤害系数 +70%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBarrageR4,items,BuildCores,,,,Barrage Core - Rank 4,,,,,,,,,,,,弹幕核心·4 阶,弹幕核心·4 阶
+modPZAECBarrageR4Desc,items,BuildCores,,,,"Firearms only. Fire-rate modifier +25%; magazine-capacity modifier +30%. Trade-off: reload-speed modifier -10%; hip spread +15%. One build core per weapon. Fixed rank 4, independent of weapon quality. Craft with rank 4 tactical components from T18 encounters.",,,,,,,,,,,,枪械专用；射速系数 +25%、弹匣容量系数 +30%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；射速系数 +25%、弹匣容量系数 +30%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECSkirmisherR4,items,BuildCores,,,,Skirmisher Core - Rank 4,,,,,,,,,,,,游击核心·4 阶,游击核心·4 阶
+modPZAECSkirmisherR4Desc,items,BuildCores,,,,"Chest armor only. Maximum stamina +60; run-speed modifier +8%. Trade-off: armor rating -2. One chest core; can pair with a weapon core. Unequipping removes its effects. Fixed rank 4, independent of weapon quality. Craft with rank 4 tactical components from T18 encounters.",,,,,,,,,,,,胸甲专用；最大耐力 +60、奔跑速度系数 +8%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,胸甲专用；最大耐力 +60、奔跑速度系数 +8%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 4 阶，不随武器品质变化；使用 T18 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+PZAECBuildPartsR5,items,BuildCores,,,,Rank 5 Tactical Components,,,,,,,,,,,,5 阶战术组件,5 阶战术组件
+PZAECBuildPartsR5Desc,items,BuildCores,,,,Earn 3 from a T19 trial or 5 from T19 base defense. Use 6 with legendary parts and metals to craft any rank 5 build core at a workbench. No lower-rank core required. Not sold by traders.,,,,,,,,,,,,完成 T19 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 5 阶流派核心；不需低阶核心。商人不出售。,完成 T19 传奇试炼获得 3 个，基地防守获得 5 个。在工作台用 6 个组件、传奇零件和金属制作任意 5 阶流派核心；不需低阶核心。商人不出售。
+modPZAECPrecisionR5,items,BuildCores,,,,Eagle Eye Core - Rank 5,,,,,,,,,,,,鹰眼核心·5 阶,鹰眼核心·5 阶
+modPZAECPrecisionR5Desc,items,BuildCores,,,,"Firearms only. Headshot modifier +80%; aimed spread -25%. Trade-off: fire rate -15%; hip spread +20%. One build core per weapon. Fixed rank 5, independent of weapon quality. Craft with rank 5 tactical components from T19 encounters.",,,,,,,,,,,,枪械专用；爆头伤害系数 +80%，瞄准散布 -25%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；爆头伤害系数 +80%，瞄准散布 -25%；代价：射速 -15%、腰射散布 +20%。同一武器只能安装一个流派核心。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBreakerR5,items,BuildCores,,,,Breaker Core - Rank 5,,,,,,,,,,,,破军核心·5 阶,破军核心·5 阶
+modPZAECBreakerR5Desc,items,BuildCores,,,,"Melee weapons only. Power-attack damage modifier +90%. Trade-off: normal-attack damage modifier -10%; power-attack stamina cost modifier +15%. One build core per weapon. Fixed rank 5, independent of weapon quality. Craft with rank 5 tactical components from T19 encounters.",,,,,,,,,,,,近战武器专用；重击伤害系数 +90%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,近战武器专用；重击伤害系数 +90%；代价：普通攻击伤害系数 -10%、重击耐力消耗系数 +15%。同一武器只能安装一个流派核心。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECBarrageR5,items,BuildCores,,,,Barrage Core - Rank 5,,,,,,,,,,,,弹幕核心·5 阶,弹幕核心·5 阶
+modPZAECBarrageR5Desc,items,BuildCores,,,,"Firearms only. Fire-rate modifier +30%; magazine-capacity modifier +40%. Trade-off: reload-speed modifier -10%; hip spread +15%. One build core per weapon. Fixed rank 5, independent of weapon quality. Craft with rank 5 tactical components from T19 encounters.",,,,,,,,,,,,枪械专用；射速系数 +30%、弹匣容量系数 +40%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,枪械专用；射速系数 +30%、弹匣容量系数 +40%；代价：换弹速度系数 -10%、腰射散布 +15%。同一武器只能安装一个流派核心。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
+modPZAECSkirmisherR5,items,BuildCores,,,,Skirmisher Core - Rank 5,,,,,,,,,,,,游击核心·5 阶,游击核心·5 阶
+modPZAECSkirmisherR5Desc,items,BuildCores,,,,"Chest armor only. Maximum stamina +80; run-speed modifier +10%. Trade-off: armor rating -2. One chest core; can pair with a weapon core. Unequipping removes its effects. Fixed rank 5, independent of weapon quality. Craft with rank 5 tactical components from T19 encounters.",,,,,,,,,,,,胸甲专用；最大耐力 +80、奔跑速度系数 +10%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。,胸甲专用；最大耐力 +80、奔跑速度系数 +10%；代价：护甲值 -2。只能装一个，可与武器流派核心搭配；卸下胸甲即失效。固定 5 阶，不随武器品质变化；使用 T19 挑战产出的同阶战术组件制作。百分比与原有同项加成相加，非最终独立倍数。
 AECZombieArleneTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Arlene,,,,,,,,,,,,[FF55FF]T16 超越级[-] 阿琳,[FF55FF]T16 Transcendent[-] Arlene
 AECZombieBikerTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Biker,,,,,,,,,,,,[FF55FF]T16 超越级[-] 摩托车手,[FF55FF]T16 Transcendent[-] Biker
 AECZombieBoeTier16Transcendent,entityclasses,Entity,,,,[FF55FF]T16 Transcendent[-] Boe,,,,,,,,,,,,[FF55FF]T16 超越级[-] 波,[FF55FF]T16 Transcendent[-] Boe
@@ -278,3 +318,177 @@ aec_dialog_a2_t19_header,dialogs,Dialog,false,,,Legendary Operations | Medium PO
 aec_dialog_a3_t19_header,dialogs,Dialog,false,,,Legendary Operations | Large POI | [FF3333]T19[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜大型地标｜[FF3333]T19[-]｜最多 6 个任务,传奇行动｜大型地标｜[FF3333]T19[-]｜最多 6 个任务
 aec_dialog_a4_t19_header,dialogs,Dialog,false,,,Legendary Operations | Huge POI | [FF3333]T19[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜巨型地标｜[FF3333]T19[-]｜最多 6 个任务,传奇行动｜巨型地标｜[FF3333]T19[-]｜最多 6 个任务
 aec_dialog_a5_t19_header,dialogs,Dialog,false,,,Legendary Operations | Massive POI | [FF3333]T19[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜超大型地标｜[FF3333]T19[-]｜最多 6 个任务,传奇行动｜超大型地标｜[FF3333]T19[-]｜最多 6 个任务
+aec_quest_T16_A1_clear_hunter_name,quests,Adventure,,,,[FFAA33]T16 Hunters[-] | Area 1,,,,,,,,,,,,[FFAA33]T16 猎杀者[-]｜区域 1,[FFAA33]T16 猎杀者[-]｜区域 1
+aec_quest_T16_A1_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T16 Overheating Bulwarks[-] | Area 1,,,,,,,,,,,,[FFAA33]T16 裂甲守卫[-]｜区域 1,[FFAA33]T16 裂甲守卫[-]｜区域 1
+aec_quest_T16_A1_clear_storm_name,quests,Adventure,,,,[FFAA33]T16 Ranged Suppression[-] | Area 1,,,,,,,,,,,,[FFAA33]T16 远程压制[-]｜区域 1,[FFAA33]T16 远程压制[-]｜区域 1
+aec_quest_T16_A2_clear_hunter_name,quests,Adventure,,,,[FFAA33]T16 Hunters[-] | Area 2,,,,,,,,,,,,[FFAA33]T16 猎杀者[-]｜区域 2,[FFAA33]T16 猎杀者[-]｜区域 2
+aec_quest_T16_A2_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T16 Overheating Bulwarks[-] | Area 2,,,,,,,,,,,,[FFAA33]T16 裂甲守卫[-]｜区域 2,[FFAA33]T16 裂甲守卫[-]｜区域 2
+aec_quest_T16_A2_clear_storm_name,quests,Adventure,,,,[FFAA33]T16 Ranged Suppression[-] | Area 2,,,,,,,,,,,,[FFAA33]T16 远程压制[-]｜区域 2,[FFAA33]T16 远程压制[-]｜区域 2
+aec_quest_T16_A3_clear_hunter_name,quests,Adventure,,,,[FFAA33]T16 Hunters[-] | Area 3,,,,,,,,,,,,[FFAA33]T16 猎杀者[-]｜区域 3,[FFAA33]T16 猎杀者[-]｜区域 3
+aec_quest_T16_A3_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T16 Overheating Bulwarks[-] | Area 3,,,,,,,,,,,,[FFAA33]T16 裂甲守卫[-]｜区域 3,[FFAA33]T16 裂甲守卫[-]｜区域 3
+aec_quest_T16_A3_clear_storm_name,quests,Adventure,,,,[FFAA33]T16 Ranged Suppression[-] | Area 3,,,,,,,,,,,,[FFAA33]T16 远程压制[-]｜区域 3,[FFAA33]T16 远程压制[-]｜区域 3
+aec_quest_T16_A4_clear_hunter_name,quests,Adventure,,,,[FFAA33]T16 Hunters[-] | Area 4,,,,,,,,,,,,[FFAA33]T16 猎杀者[-]｜区域 4,[FFAA33]T16 猎杀者[-]｜区域 4
+aec_quest_T16_A4_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T16 Overheating Bulwarks[-] | Area 4,,,,,,,,,,,,[FFAA33]T16 裂甲守卫[-]｜区域 4,[FFAA33]T16 裂甲守卫[-]｜区域 4
+aec_quest_T16_A4_clear_storm_name,quests,Adventure,,,,[FFAA33]T16 Ranged Suppression[-] | Area 4,,,,,,,,,,,,[FFAA33]T16 远程压制[-]｜区域 4,[FFAA33]T16 远程压制[-]｜区域 4
+aec_quest_T16_A5_clear_hunter_name,quests,Adventure,,,,[FFAA33]T16 Hunters[-] | Area 5,,,,,,,,,,,,[FFAA33]T16 猎杀者[-]｜区域 5,[FFAA33]T16 猎杀者[-]｜区域 5
+aec_quest_T16_A5_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T16 Overheating Bulwarks[-] | Area 5,,,,,,,,,,,,[FFAA33]T16 裂甲守卫[-]｜区域 5,[FFAA33]T16 裂甲守卫[-]｜区域 5
+aec_quest_T16_A5_clear_storm_name,quests,Adventure,,,,[FFAA33]T16 Ranged Suppression[-] | Area 5,,,,,,,,,,,,[FFAA33]T16 远程压制[-]｜区域 5,[FFAA33]T16 远程压制[-]｜区域 5
+aec_quest_T17_A1_clear_hunter_name,quests,Adventure,,,,[FFAA33]T17 Hunters[-] | Area 1,,,,,,,,,,,,[FFAA33]T17 猎杀者[-]｜区域 1,[FFAA33]T17 猎杀者[-]｜区域 1
+aec_quest_T17_A1_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T17 Overheating Bulwarks[-] | Area 1,,,,,,,,,,,,[FFAA33]T17 裂甲守卫[-]｜区域 1,[FFAA33]T17 裂甲守卫[-]｜区域 1
+aec_quest_T17_A1_clear_storm_name,quests,Adventure,,,,[FFAA33]T17 Ranged Suppression[-] | Area 1,,,,,,,,,,,,[FFAA33]T17 远程压制[-]｜区域 1,[FFAA33]T17 远程压制[-]｜区域 1
+aec_quest_T17_A2_clear_hunter_name,quests,Adventure,,,,[FFAA33]T17 Hunters[-] | Area 2,,,,,,,,,,,,[FFAA33]T17 猎杀者[-]｜区域 2,[FFAA33]T17 猎杀者[-]｜区域 2
+aec_quest_T17_A2_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T17 Overheating Bulwarks[-] | Area 2,,,,,,,,,,,,[FFAA33]T17 裂甲守卫[-]｜区域 2,[FFAA33]T17 裂甲守卫[-]｜区域 2
+aec_quest_T17_A2_clear_storm_name,quests,Adventure,,,,[FFAA33]T17 Ranged Suppression[-] | Area 2,,,,,,,,,,,,[FFAA33]T17 远程压制[-]｜区域 2,[FFAA33]T17 远程压制[-]｜区域 2
+aec_quest_T17_A3_clear_hunter_name,quests,Adventure,,,,[FFAA33]T17 Hunters[-] | Area 3,,,,,,,,,,,,[FFAA33]T17 猎杀者[-]｜区域 3,[FFAA33]T17 猎杀者[-]｜区域 3
+aec_quest_T17_A3_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T17 Overheating Bulwarks[-] | Area 3,,,,,,,,,,,,[FFAA33]T17 裂甲守卫[-]｜区域 3,[FFAA33]T17 裂甲守卫[-]｜区域 3
+aec_quest_T17_A3_clear_storm_name,quests,Adventure,,,,[FFAA33]T17 Ranged Suppression[-] | Area 3,,,,,,,,,,,,[FFAA33]T17 远程压制[-]｜区域 3,[FFAA33]T17 远程压制[-]｜区域 3
+aec_quest_T17_A4_clear_hunter_name,quests,Adventure,,,,[FFAA33]T17 Hunters[-] | Area 4,,,,,,,,,,,,[FFAA33]T17 猎杀者[-]｜区域 4,[FFAA33]T17 猎杀者[-]｜区域 4
+aec_quest_T17_A4_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T17 Overheating Bulwarks[-] | Area 4,,,,,,,,,,,,[FFAA33]T17 裂甲守卫[-]｜区域 4,[FFAA33]T17 裂甲守卫[-]｜区域 4
+aec_quest_T17_A4_clear_storm_name,quests,Adventure,,,,[FFAA33]T17 Ranged Suppression[-] | Area 4,,,,,,,,,,,,[FFAA33]T17 远程压制[-]｜区域 4,[FFAA33]T17 远程压制[-]｜区域 4
+aec_quest_T17_A5_clear_hunter_name,quests,Adventure,,,,[FFAA33]T17 Hunters[-] | Area 5,,,,,,,,,,,,[FFAA33]T17 猎杀者[-]｜区域 5,[FFAA33]T17 猎杀者[-]｜区域 5
+aec_quest_T17_A5_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T17 Overheating Bulwarks[-] | Area 5,,,,,,,,,,,,[FFAA33]T17 裂甲守卫[-]｜区域 5,[FFAA33]T17 裂甲守卫[-]｜区域 5
+aec_quest_T17_A5_clear_storm_name,quests,Adventure,,,,[FFAA33]T17 Ranged Suppression[-] | Area 5,,,,,,,,,,,,[FFAA33]T17 远程压制[-]｜区域 5,[FFAA33]T17 远程压制[-]｜区域 5
+aec_quest_T18_A1_clear_hunter_name,quests,Adventure,,,,[FFAA33]T18 Hunters[-] | Area 1,,,,,,,,,,,,[FFAA33]T18 猎杀者[-]｜区域 1,[FFAA33]T18 猎杀者[-]｜区域 1
+aec_quest_T18_A1_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T18 Overheating Bulwarks[-] | Area 1,,,,,,,,,,,,[FFAA33]T18 裂甲守卫[-]｜区域 1,[FFAA33]T18 裂甲守卫[-]｜区域 1
+aec_quest_T18_A1_clear_storm_name,quests,Adventure,,,,[FFAA33]T18 Ranged Suppression[-] | Area 1,,,,,,,,,,,,[FFAA33]T18 远程压制[-]｜区域 1,[FFAA33]T18 远程压制[-]｜区域 1
+aec_quest_T18_A2_clear_hunter_name,quests,Adventure,,,,[FFAA33]T18 Hunters[-] | Area 2,,,,,,,,,,,,[FFAA33]T18 猎杀者[-]｜区域 2,[FFAA33]T18 猎杀者[-]｜区域 2
+aec_quest_T18_A2_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T18 Overheating Bulwarks[-] | Area 2,,,,,,,,,,,,[FFAA33]T18 裂甲守卫[-]｜区域 2,[FFAA33]T18 裂甲守卫[-]｜区域 2
+aec_quest_T18_A2_clear_storm_name,quests,Adventure,,,,[FFAA33]T18 Ranged Suppression[-] | Area 2,,,,,,,,,,,,[FFAA33]T18 远程压制[-]｜区域 2,[FFAA33]T18 远程压制[-]｜区域 2
+aec_quest_T18_A3_clear_hunter_name,quests,Adventure,,,,[FFAA33]T18 Hunters[-] | Area 3,,,,,,,,,,,,[FFAA33]T18 猎杀者[-]｜区域 3,[FFAA33]T18 猎杀者[-]｜区域 3
+aec_quest_T18_A3_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T18 Overheating Bulwarks[-] | Area 3,,,,,,,,,,,,[FFAA33]T18 裂甲守卫[-]｜区域 3,[FFAA33]T18 裂甲守卫[-]｜区域 3
+aec_quest_T18_A3_clear_storm_name,quests,Adventure,,,,[FFAA33]T18 Ranged Suppression[-] | Area 3,,,,,,,,,,,,[FFAA33]T18 远程压制[-]｜区域 3,[FFAA33]T18 远程压制[-]｜区域 3
+aec_quest_T18_A4_clear_hunter_name,quests,Adventure,,,,[FFAA33]T18 Hunters[-] | Area 4,,,,,,,,,,,,[FFAA33]T18 猎杀者[-]｜区域 4,[FFAA33]T18 猎杀者[-]｜区域 4
+aec_quest_T18_A4_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T18 Overheating Bulwarks[-] | Area 4,,,,,,,,,,,,[FFAA33]T18 裂甲守卫[-]｜区域 4,[FFAA33]T18 裂甲守卫[-]｜区域 4
+aec_quest_T18_A4_clear_storm_name,quests,Adventure,,,,[FFAA33]T18 Ranged Suppression[-] | Area 4,,,,,,,,,,,,[FFAA33]T18 远程压制[-]｜区域 4,[FFAA33]T18 远程压制[-]｜区域 4
+aec_quest_T18_A5_clear_hunter_name,quests,Adventure,,,,[FFAA33]T18 Hunters[-] | Area 5,,,,,,,,,,,,[FFAA33]T18 猎杀者[-]｜区域 5,[FFAA33]T18 猎杀者[-]｜区域 5
+aec_quest_T18_A5_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T18 Overheating Bulwarks[-] | Area 5,,,,,,,,,,,,[FFAA33]T18 裂甲守卫[-]｜区域 5,[FFAA33]T18 裂甲守卫[-]｜区域 5
+aec_quest_T18_A5_clear_storm_name,quests,Adventure,,,,[FFAA33]T18 Ranged Suppression[-] | Area 5,,,,,,,,,,,,[FFAA33]T18 远程压制[-]｜区域 5,[FFAA33]T18 远程压制[-]｜区域 5
+aec_quest_T19_A1_clear_hunter_name,quests,Adventure,,,,[FFAA33]T19 Hunters[-] | Area 1,,,,,,,,,,,,[FFAA33]T19 猎杀者[-]｜区域 1,[FFAA33]T19 猎杀者[-]｜区域 1
+aec_quest_T19_A1_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T19 Overheating Bulwarks[-] | Area 1,,,,,,,,,,,,[FFAA33]T19 裂甲守卫[-]｜区域 1,[FFAA33]T19 裂甲守卫[-]｜区域 1
+aec_quest_T19_A1_clear_storm_name,quests,Adventure,,,,[FFAA33]T19 Ranged Suppression[-] | Area 1,,,,,,,,,,,,[FFAA33]T19 远程压制[-]｜区域 1,[FFAA33]T19 远程压制[-]｜区域 1
+aec_quest_T19_A2_clear_hunter_name,quests,Adventure,,,,[FFAA33]T19 Hunters[-] | Area 2,,,,,,,,,,,,[FFAA33]T19 猎杀者[-]｜区域 2,[FFAA33]T19 猎杀者[-]｜区域 2
+aec_quest_T19_A2_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T19 Overheating Bulwarks[-] | Area 2,,,,,,,,,,,,[FFAA33]T19 裂甲守卫[-]｜区域 2,[FFAA33]T19 裂甲守卫[-]｜区域 2
+aec_quest_T19_A2_clear_storm_name,quests,Adventure,,,,[FFAA33]T19 Ranged Suppression[-] | Area 2,,,,,,,,,,,,[FFAA33]T19 远程压制[-]｜区域 2,[FFAA33]T19 远程压制[-]｜区域 2
+aec_quest_T19_A3_clear_hunter_name,quests,Adventure,,,,[FFAA33]T19 Hunters[-] | Area 3,,,,,,,,,,,,[FFAA33]T19 猎杀者[-]｜区域 3,[FFAA33]T19 猎杀者[-]｜区域 3
+aec_quest_T19_A3_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T19 Overheating Bulwarks[-] | Area 3,,,,,,,,,,,,[FFAA33]T19 裂甲守卫[-]｜区域 3,[FFAA33]T19 裂甲守卫[-]｜区域 3
+aec_quest_T19_A3_clear_storm_name,quests,Adventure,,,,[FFAA33]T19 Ranged Suppression[-] | Area 3,,,,,,,,,,,,[FFAA33]T19 远程压制[-]｜区域 3,[FFAA33]T19 远程压制[-]｜区域 3
+aec_quest_T19_A4_clear_hunter_name,quests,Adventure,,,,[FFAA33]T19 Hunters[-] | Area 4,,,,,,,,,,,,[FFAA33]T19 猎杀者[-]｜区域 4,[FFAA33]T19 猎杀者[-]｜区域 4
+aec_quest_T19_A4_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T19 Overheating Bulwarks[-] | Area 4,,,,,,,,,,,,[FFAA33]T19 裂甲守卫[-]｜区域 4,[FFAA33]T19 裂甲守卫[-]｜区域 4
+aec_quest_T19_A4_clear_storm_name,quests,Adventure,,,,[FFAA33]T19 Ranged Suppression[-] | Area 4,,,,,,,,,,,,[FFAA33]T19 远程压制[-]｜区域 4,[FFAA33]T19 远程压制[-]｜区域 4
+aec_quest_T19_A5_clear_hunter_name,quests,Adventure,,,,[FFAA33]T19 Hunters[-] | Area 5,,,,,,,,,,,,[FFAA33]T19 猎杀者[-]｜区域 5,[FFAA33]T19 猎杀者[-]｜区域 5
+aec_quest_T19_A5_clear_bulwark_name,quests,Adventure,,,,[FFAA33]T19 Overheating Bulwarks[-] | Area 5,,,,,,,,,,,,[FFAA33]T19 裂甲守卫[-]｜区域 5,[FFAA33]T19 裂甲守卫[-]｜区域 5
+aec_quest_T19_A5_clear_storm_name,quests,Adventure,,,,[FFAA33]T19 Ranged Suppression[-] | Area 5,,,,,,,,,,,,[FFAA33]T19 远程压制[-]｜区域 5,[FFAA33]T19 远程压制[-]｜区域 5
+PZAECAffix_hunter_T16,entityclasses,Entity,,,,[FFAA33]T16 Affix Hunters[-],,,,,,,,,,,,[FFAA33]T16 词缀·猎杀者[-],[FFAA33]T16 词缀·猎杀者[-]
+PZAECTrial_hunter_T16,entityclasses,Entity,,,,[FFAA33]T16 Trial Hunters[-],,,,,,,,,,,,[FFAA33]T16 试炼·猎杀者[-],[FFAA33]T16 试炼·猎杀者[-]
+PZAECAffix_bulwark_T16,entityclasses,Entity,,,,[FFAA33]T16 Affix Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T16 词缀·裂甲守卫[-],[FFAA33]T16 词缀·裂甲守卫[-]
+PZAECTrial_bulwark_T16,entityclasses,Entity,,,,[FFAA33]T16 Trial Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T16 试炼·裂甲守卫[-],[FFAA33]T16 试炼·裂甲守卫[-]
+PZAECAffix_storm_T16,entityclasses,Entity,,,,[FFAA33]T16 Affix Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T16 词缀·远程压制[-],[FFAA33]T16 词缀·远程压制[-]
+PZAECTrial_storm_T16,entityclasses,Entity,,,,[FFAA33]T16 Trial Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T16 试炼·远程压制[-],[FFAA33]T16 试炼·远程压制[-]
+PZAECChallengeT16_name,quests,Adventure,,,,T16 Legendary Trial: Three Champions,,,,,,,,,,,,T16 传奇试炼：三强决战,T16 传奇试炼：三强决战
+PZAECChallengeVoucherT16,items,Adventure,,,,T16 Optional Legendary Trial Voucher,,,,,,,,,,,,T16 可选传奇试炼凭证,T16 可选传奇试炼凭证
+PZAECAffix_hunter_T17,entityclasses,Entity,,,,[FFAA33]T17 Affix Hunters[-],,,,,,,,,,,,[FFAA33]T17 词缀·猎杀者[-],[FFAA33]T17 词缀·猎杀者[-]
+PZAECTrial_hunter_T17,entityclasses,Entity,,,,[FFAA33]T17 Trial Hunters[-],,,,,,,,,,,,[FFAA33]T17 试炼·猎杀者[-],[FFAA33]T17 试炼·猎杀者[-]
+PZAECAffix_bulwark_T17,entityclasses,Entity,,,,[FFAA33]T17 Affix Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T17 词缀·裂甲守卫[-],[FFAA33]T17 词缀·裂甲守卫[-]
+PZAECTrial_bulwark_T17,entityclasses,Entity,,,,[FFAA33]T17 Trial Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T17 试炼·裂甲守卫[-],[FFAA33]T17 试炼·裂甲守卫[-]
+PZAECAffix_storm_T17,entityclasses,Entity,,,,[FFAA33]T17 Affix Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T17 词缀·远程压制[-],[FFAA33]T17 词缀·远程压制[-]
+PZAECTrial_storm_T17,entityclasses,Entity,,,,[FFAA33]T17 Trial Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T17 试炼·远程压制[-],[FFAA33]T17 试炼·远程压制[-]
+PZAECChallengeT17_name,quests,Adventure,,,,T17 Legendary Trial: Three Champions,,,,,,,,,,,,T17 传奇试炼：三强决战,T17 传奇试炼：三强决战
+PZAECChallengeVoucherT17,items,Adventure,,,,T17 Optional Legendary Trial Voucher,,,,,,,,,,,,T17 可选传奇试炼凭证,T17 可选传奇试炼凭证
+PZAECAffix_hunter_T18,entityclasses,Entity,,,,[FFAA33]T18 Affix Hunters[-],,,,,,,,,,,,[FFAA33]T18 词缀·猎杀者[-],[FFAA33]T18 词缀·猎杀者[-]
+PZAECTrial_hunter_T18,entityclasses,Entity,,,,[FFAA33]T18 Trial Hunters[-],,,,,,,,,,,,[FFAA33]T18 试炼·猎杀者[-],[FFAA33]T18 试炼·猎杀者[-]
+PZAECAffix_bulwark_T18,entityclasses,Entity,,,,[FFAA33]T18 Affix Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T18 词缀·裂甲守卫[-],[FFAA33]T18 词缀·裂甲守卫[-]
+PZAECTrial_bulwark_T18,entityclasses,Entity,,,,[FFAA33]T18 Trial Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T18 试炼·裂甲守卫[-],[FFAA33]T18 试炼·裂甲守卫[-]
+PZAECAffix_storm_T18,entityclasses,Entity,,,,[FFAA33]T18 Affix Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T18 词缀·远程压制[-],[FFAA33]T18 词缀·远程压制[-]
+PZAECTrial_storm_T18,entityclasses,Entity,,,,[FFAA33]T18 Trial Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T18 试炼·远程压制[-],[FFAA33]T18 试炼·远程压制[-]
+PZAECChallengeT18_name,quests,Adventure,,,,T18 Legendary Trial: Three Champions,,,,,,,,,,,,T18 传奇试炼：三强决战,T18 传奇试炼：三强决战
+PZAECChallengeVoucherT18,items,Adventure,,,,T18 Optional Legendary Trial Voucher,,,,,,,,,,,,T18 可选传奇试炼凭证,T18 可选传奇试炼凭证
+PZAECAffix_hunter_T19,entityclasses,Entity,,,,[FFAA33]T19 Affix Hunters[-],,,,,,,,,,,,[FFAA33]T19 词缀·猎杀者[-],[FFAA33]T19 词缀·猎杀者[-]
+PZAECTrial_hunter_T19,entityclasses,Entity,,,,[FFAA33]T19 Trial Hunters[-],,,,,,,,,,,,[FFAA33]T19 试炼·猎杀者[-],[FFAA33]T19 试炼·猎杀者[-]
+PZAECAffix_bulwark_T19,entityclasses,Entity,,,,[FFAA33]T19 Affix Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T19 词缀·裂甲守卫[-],[FFAA33]T19 词缀·裂甲守卫[-]
+PZAECTrial_bulwark_T19,entityclasses,Entity,,,,[FFAA33]T19 Trial Overheating Bulwarks[-],,,,,,,,,,,,[FFAA33]T19 试炼·裂甲守卫[-],[FFAA33]T19 试炼·裂甲守卫[-]
+PZAECAffix_storm_T19,entityclasses,Entity,,,,[FFAA33]T19 Affix Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T19 词缀·远程压制[-],[FFAA33]T19 词缀·远程压制[-]
+PZAECTrial_storm_T19,entityclasses,Entity,,,,[FFAA33]T19 Trial Ranged Suppression[-],,,,,,,,,,,,[FFAA33]T19 试炼·远程压制[-],[FFAA33]T19 试炼·远程压制[-]
+PZAECChallengeT19_name,quests,Adventure,,,,T19 Legendary Trial: Three Champions,,,,,,,,,,,,T19 传奇试炼：三强决战,T19 传奇试炼：三强决战
+PZAECChallengeVoucherT19,items,Adventure,,,,T19 Optional Legendary Trial Voucher,,,,,,,,,,,,T19 可选传奇试炼凭证,T19 可选传奇试炼凭证
+PZAECOffer_hunter,quests,Adventure,,,,Hunters: activating the rally calls two exact-tier special bosses. Head hits deal an extra 2x direct damage. Clear the POI normally; these extra bosses are not mandatory objectives. XP / Dukes / samples +25%. After clearing receive one optional trial voucher.,,,,,,,,,,,,猎杀者：启动集合点后呼叫 2 只同阶特殊 Boss。命中头部额外造成 2 倍直接伤害。仍以清剿地标为主目标，增援 Boss 不计入必杀目标。经验／金币／样本增加 25%。清场后获得 1 张可选试炼凭证。,猎杀者：启动集合点后呼叫 2 只同阶特殊 Boss。命中头部额外造成 2 倍直接伤害。仍以清剿地标为主目标，增援 Boss 不计入必杀目标。经验／金币／样本增加 25%。清场后获得 1 张可选试炼凭证。
+PZAECObjective_hunter,quests,Adventure,,,,Defeat the trial champion: Hunters,,,,,,,,,,,,击败试炼 Boss：猎杀者,击败试炼 Boss：猎杀者
+PZAECOffer_bulwark,quests,Adventure,,,,Overheating Bulwarks: activating the rally calls two exact-tier special bosses. 18 seconds normal then 6 seconds overheating; sparks and slower movement mark 3x player direct damage. Clear the POI normally; these extra bosses are not mandatory objectives. XP / Dukes / samples +25%. After clearing receive one optional trial voucher.,,,,,,,,,,,,裂甲守卫：启动集合点后呼叫 2 只同阶特殊 Boss。常态 18 秒后过热 6 秒；过热时减速并冒电光，受到玩家直接伤害变为 3 倍。仍以清剿地标为主目标，增援 Boss 不计入必杀目标。经验／金币／样本增加 25%。清场后获得 1 张可选试炼凭证。,裂甲守卫：启动集合点后呼叫 2 只同阶特殊 Boss。常态 18 秒后过热 6 秒；过热时减速并冒电光，受到玩家直接伤害变为 3 倍。仍以清剿地标为主目标，增援 Boss 不计入必杀目标。经验／金币／样本增加 25%。清场后获得 1 张可选试炼凭证。
+PZAECObjective_bulwark,quests,Adventure,,,,Defeat the trial champion: Overheating Bulwarks,,,,,,,,,,,,击败试炼 Boss：裂甲守卫,击败试炼 Boss：裂甲守卫
+PZAECOffer_storm,quests,Adventure,,,,Ranged Suppression: activating the rally calls two exact-tier special bosses. Melee weapon hits deal an extra 3x direct damage. Clear the POI normally; these extra bosses are not mandatory objectives. XP / Dukes / samples +25%. After clearing receive one optional trial voucher.,,,,,,,,,,,,远程压制：启动集合点后呼叫 2 只同阶特殊 Boss。使用近战武器命中额外造成 3 倍直接伤害。仍以清剿地标为主目标，增援 Boss 不计入必杀目标。经验／金币／样本增加 25%。清场后获得 1 张可选试炼凭证。,远程压制：启动集合点后呼叫 2 只同阶特殊 Boss。使用近战武器命中额外造成 3 倍直接伤害。仍以清剿地标为主目标，增援 Boss 不计入必杀目标。经验／金币／样本增加 25%。清场后获得 1 张可选试炼凭证。
+PZAECObjective_storm,quests,Adventure,,,,Defeat the trial champion: Ranged Suppression,,,,,,,,,,,,击败试炼 Boss：远程压制,击败试炼 Boss：远程压制
+PZAECChallengeVoucherDesc,items,Adventure,,,,Optional encounter. Use OUTSIDE trader protection in open terrain; read and accept the offer to consume ONE voucher and call three exact-tier bosses. Declining does not consume it. Clear one of each champion to earn weapon + combat mod + legendary parts + tokens. This does not affect the original clear contract. One active trial per tier; finish before leaving the game. No refund after accepting.,,,,,,,,,,,,可选加赛。到商人保护区外的开阔地使用，阅读并接受任务后消耗 1 张凭证，呼叫 3 只同阶 Boss；拒绝不消耗。击败三种试炼 Boss 各 1 只，获得武器＋战斗模组＋传奇零件＋代币。不影响原清剿任务的交付。同一等级只能进行 1 场，建议退出游戏前打完；接受后不退票。,可选加赛。到商人保护区外的开阔地使用，阅读并接受任务后消耗 1 张凭证，呼叫 3 只同阶 Boss；拒绝不消耗。击败三种试炼 Boss 各 1 只，获得武器＋战斗模组＋传奇零件＋代币。不影响原清剿任务的交付。同一等级只能进行 1 场，建议退出游戏前打完；接受后不退票。
+PZAECChallengeDesc,quests,Adventure,,,,"Accept to consume one voucher and call THREE exact-tier bosses nearby. Fight outside trader protection in open terrain. Hunter: head x2. Bulwark: 18s normal / 6s sparking overheat with slower movement and player direct damage x3. Storm: melee x3. Kill one of each trial champion. Rewards automatically delivered: one weapon + combat mods + parts + tokens + XP. No rewards for merely summoning. This trial is independent of the clear contract; do not leave before finishing. If blocked by spawning limits or invalid terrain, no automatic extra summons or refunds.",,,,,,,,,,,,接受后消耗 1 张凭证，在附近呼叫 3 只同阶 Boss，请在商人保护区外开阔地战斗。猎杀者：爆头额外 2 倍；裂甲守卫：常态 18 秒／冒电光过热 6 秒，过热减速且受到玩家直接伤害 3 倍；远程压制：近战额外 3 倍。三种试炼 Boss 各击败 1 只才会自动结算武器＋战斗模组＋传奇零件＋代币＋经验，召唤本身不给奖励。试炼独立于清剿任务，建议打完再退出。刷怪上限或地形可能影响出怪，已受理的召唤不会自动补刷或退票。,接受后消耗 1 张凭证，在附近呼叫 3 只同阶 Boss，请在商人保护区外开阔地战斗。猎杀者：爆头额外 2 倍；裂甲守卫：常态 18 秒／冒电光过热 6 秒，过热减速且受到玩家直接伤害 3 倍；远程压制：近战额外 3 倍。三种试炼 Boss 各击败 1 只才会自动结算武器＋战斗模组＋传奇零件＋代币＋经验，召唤本身不给奖励。试炼独立于清剿任务，建议打完再退出。刷怪上限或地形可能影响出怪，已受理的召唤不会自动补刷或退票。
+PZAECChallengeSubtitle,quests,Adventure,,,,Optional boss encounter — confirm only when prepared,,,,,,,,,,,,可选 Boss 加赛——准备好再接受,可选 Boss 加赛——准备好再接受
+PZAECLegendaryTrialCategory,quests,Adventure,,,,Legendary Trials,,,,,,,,,,,,传奇试炼,传奇试炼
+PZAECVoucherReceived,gameevents,Adventure,,,,POI cleared: optional trial voucher delivered. Use it outside trader protection when ready; normal turn-in remains available.,,,,,,,,,,,,清场完成：已发放可选试炼凭证。准备好后在商人保护区外使用，也可以直接交付原任务。,清场完成：已发放可选试炼凭证。准备好后在商人保护区外使用，也可以直接交付原任务。
+PZAECAdventureUseOutside,items,Adventure,,,,"Use the voucher alive, outside trader protection, with enemy spawning enabled.",,,,,,,,,,,,请存活时到商人保护区外使用，并开启敌人生成。,请存活时到商人保护区外使用，并开启敌人生成。
+PZAECAdventureUnavailable,quests,Adventure,,,,Adventure event unavailable. Move into open terrain and check enemy spawning. An unaccepted request can retry on reload; accepted summons are not duplicated.,,,,,,,,,,,,玩法事件暂不可用，请检查开阔地形和敌人生成设置。尚未受理的请求可重登重试，已受理的召唤不会重复生成。,玩法事件暂不可用，请检查开阔地形和敌人生成设置。尚未受理的请求可重登重试，已受理的召唤不会重复生成。
+PZAECDefense_runner_T16_W1,entityclasses,Defense,,,,T16 Defense W1: Raider,,,,,,,,,,,,T16 防守第1波·突袭者,T16 防守第1波·突袭者
+PZAECDefense_spider_T16_W1,entityclasses,Defense,,,,T16 Defense W1: Crawler,,,,,,,,,,,,T16 防守第1波·攀袭者,T16 防守第1波·攀袭者
+PZAECDefense_cop_T16_W1,entityclasses,Defense,,,,T16 Defense W1: Spitting Cop,,,,,,,,,,,,T16 防守第1波·远程警察,T16 防守第1波·远程警察
+PZAECDefense_biker_T16_W2,entityclasses,Defense,,,,T16 Defense W2: Breacher,,,,,,,,,,,,T16 防守第2波·破阵者,T16 防守第2波·破阵者
+PZAECDefense_demo_T16_W2,entityclasses,Defense,,,,T16 Defense W2: Demolition,,,,,,,,,,,,T16 防守第2波·爆破者,T16 防守第2波·爆破者
+PZAECDefense_spitter_T16_W2,entityclasses,Defense,,,,T16 Defense W2: Plague Spitter,,,,,,,,,,,,T16 防守第2波·疫病喷吐者,T16 防守第2波·疫病喷吐者
+PZAECDefense_wolf_T16_W2,entityclasses,Defense,,,,T16 Defense W2: Siege Wolf,,,,,,,,,,,,T16 防守第2波·攻城狼,T16 防守第2波·攻城狼
+PZAECDefense_wight_T16_W3,entityclasses,Defense,,,,T16 Defense W3: Final-wave Wight,,,,,,,,,,,,T16 防守第3波·终波白煞,T16 防守第3波·终波白煞
+PZAECDefense_cop_T16_W3,entityclasses,Defense,,,,T16 Defense W3: Spitting Cop,,,,,,,,,,,,T16 防守第3波·远程警察,T16 防守第3波·远程警察
+PZAECDefense_bulwark_T16_W3,entityclasses,Defense,,,,T16 Defense W3: Bulwark Commander,,,,,,,,,,,,T16 防守第3波·裂甲统领,T16 防守第3波·裂甲统领
+PZAECDefense_storm_T16_W3,entityclasses,Defense,,,,T16 Defense W3: Storm Commander,,,,,,,,,,,,T16 防守第3波·远程统领,T16 防守第3波·远程统领
+PZAECDefenseT16_name,quests,Defense,,,,T16 Base Defense: Hold the Line,,,,,,,,,,,,T16 基地防守：坚守阵线,T16 基地防守：坚守阵线
+PZAECDefenseBeaconT16,items,Defense,,,,T16 Base Defense Beacon,,,,,,,,,,,,T16 基地防守信标,T16 基地防守信标
+PZAECDefense_runner_T17_W1,entityclasses,Defense,,,,T17 Defense W1: Raider,,,,,,,,,,,,T17 防守第1波·突袭者,T17 防守第1波·突袭者
+PZAECDefense_spider_T17_W1,entityclasses,Defense,,,,T17 Defense W1: Crawler,,,,,,,,,,,,T17 防守第1波·攀袭者,T17 防守第1波·攀袭者
+PZAECDefense_cop_T17_W1,entityclasses,Defense,,,,T17 Defense W1: Spitting Cop,,,,,,,,,,,,T17 防守第1波·远程警察,T17 防守第1波·远程警察
+PZAECDefense_biker_T17_W2,entityclasses,Defense,,,,T17 Defense W2: Breacher,,,,,,,,,,,,T17 防守第2波·破阵者,T17 防守第2波·破阵者
+PZAECDefense_demo_T17_W2,entityclasses,Defense,,,,T17 Defense W2: Demolition,,,,,,,,,,,,T17 防守第2波·爆破者,T17 防守第2波·爆破者
+PZAECDefense_spitter_T17_W2,entityclasses,Defense,,,,T17 Defense W2: Plague Spitter,,,,,,,,,,,,T17 防守第2波·疫病喷吐者,T17 防守第2波·疫病喷吐者
+PZAECDefense_wolf_T17_W2,entityclasses,Defense,,,,T17 Defense W2: Siege Wolf,,,,,,,,,,,,T17 防守第2波·攻城狼,T17 防守第2波·攻城狼
+PZAECDefense_wight_T17_W3,entityclasses,Defense,,,,T17 Defense W3: Final-wave Wight,,,,,,,,,,,,T17 防守第3波·终波白煞,T17 防守第3波·终波白煞
+PZAECDefense_cop_T17_W3,entityclasses,Defense,,,,T17 Defense W3: Spitting Cop,,,,,,,,,,,,T17 防守第3波·远程警察,T17 防守第3波·远程警察
+PZAECDefense_bulwark_T17_W3,entityclasses,Defense,,,,T17 Defense W3: Bulwark Commander,,,,,,,,,,,,T17 防守第3波·裂甲统领,T17 防守第3波·裂甲统领
+PZAECDefense_storm_T17_W3,entityclasses,Defense,,,,T17 Defense W3: Storm Commander,,,,,,,,,,,,T17 防守第3波·远程统领,T17 防守第3波·远程统领
+PZAECDefenseT17_name,quests,Defense,,,,T17 Base Defense: Hold the Line,,,,,,,,,,,,T17 基地防守：坚守阵线,T17 基地防守：坚守阵线
+PZAECDefenseBeaconT17,items,Defense,,,,T17 Base Defense Beacon,,,,,,,,,,,,T17 基地防守信标,T17 基地防守信标
+PZAECDefense_runner_T18_W1,entityclasses,Defense,,,,T18 Defense W1: Raider,,,,,,,,,,,,T18 防守第1波·突袭者,T18 防守第1波·突袭者
+PZAECDefense_spider_T18_W1,entityclasses,Defense,,,,T18 Defense W1: Crawler,,,,,,,,,,,,T18 防守第1波·攀袭者,T18 防守第1波·攀袭者
+PZAECDefense_cop_T18_W1,entityclasses,Defense,,,,T18 Defense W1: Spitting Cop,,,,,,,,,,,,T18 防守第1波·远程警察,T18 防守第1波·远程警察
+PZAECDefense_biker_T18_W2,entityclasses,Defense,,,,T18 Defense W2: Breacher,,,,,,,,,,,,T18 防守第2波·破阵者,T18 防守第2波·破阵者
+PZAECDefense_demo_T18_W2,entityclasses,Defense,,,,T18 Defense W2: Demolition,,,,,,,,,,,,T18 防守第2波·爆破者,T18 防守第2波·爆破者
+PZAECDefense_spitter_T18_W2,entityclasses,Defense,,,,T18 Defense W2: Plague Spitter,,,,,,,,,,,,T18 防守第2波·疫病喷吐者,T18 防守第2波·疫病喷吐者
+PZAECDefense_wolf_T18_W2,entityclasses,Defense,,,,T18 Defense W2: Siege Wolf,,,,,,,,,,,,T18 防守第2波·攻城狼,T18 防守第2波·攻城狼
+PZAECDefense_wight_T18_W3,entityclasses,Defense,,,,T18 Defense W3: Final-wave Wight,,,,,,,,,,,,T18 防守第3波·终波白煞,T18 防守第3波·终波白煞
+PZAECDefense_cop_T18_W3,entityclasses,Defense,,,,T18 Defense W3: Spitting Cop,,,,,,,,,,,,T18 防守第3波·远程警察,T18 防守第3波·远程警察
+PZAECDefense_bulwark_T18_W3,entityclasses,Defense,,,,T18 Defense W3: Bulwark Commander,,,,,,,,,,,,T18 防守第3波·裂甲统领,T18 防守第3波·裂甲统领
+PZAECDefense_storm_T18_W3,entityclasses,Defense,,,,T18 Defense W3: Storm Commander,,,,,,,,,,,,T18 防守第3波·远程统领,T18 防守第3波·远程统领
+PZAECDefenseT18_name,quests,Defense,,,,T18 Base Defense: Hold the Line,,,,,,,,,,,,T18 基地防守：坚守阵线,T18 基地防守：坚守阵线
+PZAECDefenseBeaconT18,items,Defense,,,,T18 Base Defense Beacon,,,,,,,,,,,,T18 基地防守信标,T18 基地防守信标
+PZAECDefense_runner_T19_W1,entityclasses,Defense,,,,T19 Defense W1: Raider,,,,,,,,,,,,T19 防守第1波·突袭者,T19 防守第1波·突袭者
+PZAECDefense_spider_T19_W1,entityclasses,Defense,,,,T19 Defense W1: Crawler,,,,,,,,,,,,T19 防守第1波·攀袭者,T19 防守第1波·攀袭者
+PZAECDefense_cop_T19_W1,entityclasses,Defense,,,,T19 Defense W1: Spitting Cop,,,,,,,,,,,,T19 防守第1波·远程警察,T19 防守第1波·远程警察
+PZAECDefense_biker_T19_W2,entityclasses,Defense,,,,T19 Defense W2: Breacher,,,,,,,,,,,,T19 防守第2波·破阵者,T19 防守第2波·破阵者
+PZAECDefense_demo_T19_W2,entityclasses,Defense,,,,T19 Defense W2: Demolition,,,,,,,,,,,,T19 防守第2波·爆破者,T19 防守第2波·爆破者
+PZAECDefense_spitter_T19_W2,entityclasses,Defense,,,,T19 Defense W2: Plague Spitter,,,,,,,,,,,,T19 防守第2波·疫病喷吐者,T19 防守第2波·疫病喷吐者
+PZAECDefense_wolf_T19_W2,entityclasses,Defense,,,,T19 Defense W2: Siege Wolf,,,,,,,,,,,,T19 防守第2波·攻城狼,T19 防守第2波·攻城狼
+PZAECDefense_wight_T19_W3,entityclasses,Defense,,,,T19 Defense W3: Final-wave Wight,,,,,,,,,,,,T19 防守第3波·终波白煞,T19 防守第3波·终波白煞
+PZAECDefense_cop_T19_W3,entityclasses,Defense,,,,T19 Defense W3: Spitting Cop,,,,,,,,,,,,T19 防守第3波·远程警察,T19 防守第3波·远程警察
+PZAECDefense_bulwark_T19_W3,entityclasses,Defense,,,,T19 Defense W3: Bulwark Commander,,,,,,,,,,,,T19 防守第3波·裂甲统领,T19 防守第3波·裂甲统领
+PZAECDefense_storm_T19_W3,entityclasses,Defense,,,,T19 Defense W3: Storm Commander,,,,,,,,,,,,T19 防守第3波·远程统领,T19 防守第3波·远程统领
+PZAECDefenseT19_name,quests,Defense,,,,T19 Base Defense: Hold the Line,,,,,,,,,,,,T19 基地防守：坚守阵线,T19 基地防守：坚守阵线
+PZAECDefenseBeaconT19,items,Defense,,,,T19 Base Defense Beacon,,,,,,,,,,,,T19 基地防守信标,T19 基地防守信标
+PZAECDefenseBeaconDesc,items,Defense,,,,"Craft at a workbench with one same-tier trial voucher + 50 forged steel + 20 electrical parts. USE at your chosen defense center (not a placeable block). Accepting consumes one beacon. Three waves: 9 / 12 / 9 enemies, including two final bosses. Stay within 45m horizontally and 60m vertically; return within 15s if outside. Death, timeout or reloading ends the run without refund. Enemies can damage your base. No automatic enemy cleanup.",,,,,,,,,,,,工作台制作：同阶试炼凭证 1 张＋锻钢 50＋电气零件 20。到选定防守中心使用（不是可放置方块），接受后消耗 1 个信标。三波分别 9／12／9 只，末波包含 2 只 Boss。水平半径 45 米、上下高度差 60 米，越界须在 15 秒内返回。死亡、超时、重登视为失败且不退票。敌人可能拆毁基地；结束不会自动清除已生成的敌人。,工作台制作：同阶试炼凭证 1 张＋锻钢 50＋电气零件 20。到选定防守中心使用（不是可放置方块），接受后消耗 1 个信标。三波分别 9／12／9 只，末波包含 2 只 Boss。水平半径 45 米、上下高度差 60 米，越界须在 15 秒内返回。死亡、超时、重登视为失败且不退票。敌人可能拆毁基地；结束不会自动清除已生成的敌人。
+PZAECDefenseDesc,quests,Defense,,,,"WARNING: enemies can destroy structures. Accept ONLY at your chosen defense center; consumes one beacon. 20s preparation; clear 9 enemies, then 12 including wolves, then 9 including two commanders. 15s between waves. Remain within 45m horizontally / 60m vertically. Outside: 15s to return. Each wave has 15 minutes after preparation. Death, timeout or reloading fails without refund. Clear all targets in this run to receive weapon + mods + materials + parts + tokens + steel + XP. Unrelated enemies do not count; no rewards for starting. Existing enemies remain after ending.",,,,,,,,,,,,警告：敌人可能拆毁建筑！请站在选定防守中心再接受，消耗 1 个信标。准备 20 秒，依次清完 9 只突袭怪、12 只混合攻城怪（含狼）、9 只末波敌人（含裂甲与远程统领各 1 只）。波间休整 15 秒。守住水平半径 45 米、上下高度差 60 米范围；越界 15 秒未返回失败。每波准备结束后限时 15 分钟，死亡、超时或重登均失败、不退票。清完本场全部目标才保底领取武器＋模组＋材料＋传奇零件＋代币＋锻钢＋经验。其他场次的敌人不计数，接受任务不给奖。结束后已生成的敌人不会自动消失。,警告：敌人可能拆毁建筑！请站在选定防守中心再接受，消耗 1 个信标。准备 20 秒，依次清完 9 只突袭怪、12 只混合攻城怪（含狼）、9 只末波敌人（含裂甲与远程统领各 1 只）。波间休整 15 秒。守住水平半径 45 米、上下高度差 60 米范围；越界 15 秒未返回失败。每波准备结束后限时 15 分钟，死亡、超时或重登均失败、不退票。清完本场全部目标才保底领取武器＋模组＋材料＋传奇零件＋代币＋锻钢＋经验。其他场次的敌人不计数，接受任务不给奖。结束后已生成的敌人不会自动消失。
+PZAECDefenseSubtitle,quests,Defense,,,,Three waves — buildings are at risk,,,,,,,,,,,,三波防守——建筑有损毁风险,三波防守——建筑有损毁风险
+PZAECDefenseCategory,quests,Defense,,,,Base Defense,,,,,,,,,,,,基地防守,基地防守
+PZAECDefenseUseOutside,items,Defense,,,,"Use alive, with enemy spawning enabled, outside trader protection and where you can build.",,,,,,,,,,,,请存活时在商人保护区外、允许自己建造的位置使用，并开启敌人生成。,请存活时在商人保护区外、允许自己建造的位置使用，并开启敌人生成。
+PZAECDefenseAlreadyActive,items,Defense,,,,Finish or abandon your current defense before opening another tier.,,,,,,,,,,,,你已有一场防守战，请完成或放弃后再开启其他等级。,你已有一场防守战，请完成或放弃后再开启其他等级。
+PZAECDefensePreparation,quests,Defense,,,,Defense center locked. 20 seconds to prepare. Stay within 45m horizontally and 60m vertically.,,,,,,,,,,,,防守中心已锁定，20 秒后开始第一波。保持在水平半径 45 米、上下高度差 60 米内。,防守中心已锁定，20 秒后开始第一波。保持在水平半径 45 米、上下高度差 60 米内。
+PZAECDefenseIntermission,quests,Defense,,,,Wave cleared. Next wave in 15 seconds; repair and reload.,,,,,,,,,,,,本波已清完，15 秒后开启下一波，抓紧维修和补弹。,本波已清完，15 秒后开启下一波，抓紧维修和补弹。
+PZAECDefenseWave1,quests,Defense,,,,Wave 1 requested: 4 raiders + 2 crawlers + 3 ranged cops.,,,,,,,,,,,,第一波已请求：4 只突袭者＋2 只攀袭者＋3 只远程警察。,第一波已请求：4 只突袭者＋2 只攀袭者＋3 只远程警察。
+PZAECDefenseWave2,quests,Defense,,,,Wave 2 requested: 4 breachers + 2 demolitions + 4 spitters + 2 wolves.,,,,,,,,,,,,第二波已请求：4 只破阵者＋2 只爆破者＋4 只喷吐者＋2 只攻城狼。,第二波已请求：4 只破阵者＋2 只爆破者＋4 只喷吐者＋2 只攻城狼。
+PZAECDefenseWave3,quests,Defense,,,,Final wave requested: 5 wights + 2 ranged cops + bulwark and storm commanders.,,,,,,,,,,,,末波已请求：5 只白煞＋2 只远程警察＋裂甲统领和远程统领各 1 只。,末波已请求：5 只白煞＋2 只远程警察＋裂甲统领和远程统领各 1 只。
+PZAECDefenseReturn,quests,Defense,,,,Outside defense area! Return within 15 seconds. New spawns and kill credit pause outside.,,,,,,,,,,,,已离开防守区！请在 15 秒内返回，越界期间暂停刷怪和击杀计数。,已离开防守区！请在 15 秒内返回，越界期间暂停刷怪和击杀计数。
+PZAECDefenseRetreated,quests,Defense,,,,Defense failed: outside the area too long. No refund; existing enemies remain.,,,,,,,,,,,,防守失败：离开防守区超过 15 秒。不退还信标，已生成敌人仍然存在。,防守失败：离开防守区超过 15 秒。不退还信标，已生成敌人仍然存在。
+PZAECDefenseDeath,quests,Defense,,,,Defense failed: the owner died. No refund; existing enemies remain.,,,,,,,,,,,,防守失败：发起者死亡。不退还信标，已生成敌人仍然存在。,防守失败：发起者死亡。不退还信标，已生成敌人仍然存在。
+PZAECDefenseTimeout,quests,Defense,,,,Defense failed: wave time limit reached. Spawn limits or blocked terrain may leave targets unavailable.,,,,,,,,,,,,防守失败：本波超过 15 分钟。刷怪上限或地形阻挡可能造成目标未能出现。,防守失败：本波超过 15 分钟。刷怪上限或地形阻挡可能造成目标未能出现。
+PZAECDefenseUnavailable,quests,Defense,,,,"Defense stopped: spawning disabled, protected area entered, or encounter state unavailable. No refund.",,,,,,,,,,,,防守终止：敌人生成关闭、进入保护区或玩法状态异常。不退还信标。,防守终止：敌人生成关闭、进入保护区或玩法状态异常。不退还信标。
+PZAECDefenseResumeFailed,quests,Defense,,,,Defense is a single-session encounter. Reloading ends the old run without replaying waves or refunding the beacon.,,,,,,,,,,,,防守战为单次在线挑战，重登结束旧场次，不重复刷波、不退还信标。,防守战为单次在线挑战，重登结束旧场次，不重复刷波、不退还信标。

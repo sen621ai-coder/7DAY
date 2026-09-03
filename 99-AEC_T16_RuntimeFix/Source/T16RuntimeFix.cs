@@ -28,6 +28,8 @@ namespace AECT16RuntimeFix
                 LegendaryQuestNetworking.Install(harmony);
                 QuestBossSpawn.Install(harmony);
                 HighTierMobLoot.Install(harmony);
+                LegendaryAdventure.Install(harmony);
+                LegendaryDefense.Install(harmony);
                 var spawnerType = AccessTools.TypeByName("AeclipseCustomZombieSpawner.SpawnDebugPatcher");
                 if (spawnerType == null)
                 {
@@ -289,11 +291,14 @@ namespace AECT16RuntimeFix
 
                         int created = 0;
                         int attempts = 0;
+                        int variantRoll = player.world.GetGameRandom().RandomRange(3);
                         var usedPositions = new List<Vector2>();
                         while (created < 6 && attempts < 30 && (__result == null ? 0 : __result.Count) + additions.Count < 240)
                         {
                             attempts++;
-                            Quest quest = questClass.CreateQuest();
+                            string offerId = LegendaryAdventure.OfferId(questId, created, variantRoll);
+                            var offerClass = QuestClass.GetQuest(offerId) ?? questClass;
+                            Quest quest = offerClass.CreateQuest();
                             quest.QuestGiverID = __instance.entityId;
                             quest.QuestFaction = (byte)(__instance.NPCInfo == null ? 1 : __instance.NPCInfo.QuestFaction);
                             quest.SetPositionData((Quest.PositionDataTypes)0, __instance.position);
@@ -483,6 +488,9 @@ namespace AECT16RuntimeFix
             {
                 return 0;
             }
+
+            int defenseTier = LegendaryDefense.EnemyTier(name);
+            if (defenseTier != 0) return defenseTier;
 
             if (name.IndexOf("Tier19", StringComparison.OrdinalIgnoreCase) >= 0 ||
                 name.EndsWith("T19", StringComparison.OrdinalIgnoreCase))

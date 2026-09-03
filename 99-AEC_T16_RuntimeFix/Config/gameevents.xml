@@ -58,4 +58,1082 @@
       </action>
     </action_sequence>
   </append>
+  <!-- Owner-scoped legendary affixes, trial encounters and clear vouchers. -->
+  <append xpath="/gameevents">
+    <action_sequence name="PZAECAffix_hunter_T16">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_hunter_T16" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_bulwark_T16">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_bulwark_T16" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_storm_T16">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_storm_T16" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECTrialT16">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_hunter_T16" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_bulwark_T16" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_storm_T16" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECGiveVoucherT16">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="AddItems">
+        <property name="added_items" value="PZAECChallengeVoucherT16" />
+        <property name="added_item_counts" value="1" />
+      </action>
+      <action class="BeltTooltip">
+        <property name="text_key" value="PZAECVoucherReceived" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_hunter_T17">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_hunter_T17" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_bulwark_T17">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_bulwark_T17" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_storm_T17">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_storm_T17" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECTrialT17">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_hunter_T17" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_bulwark_T17" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_storm_T17" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECGiveVoucherT17">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="AddItems">
+        <property name="added_items" value="PZAECChallengeVoucherT17" />
+        <property name="added_item_counts" value="1" />
+      </action>
+      <action class="BeltTooltip">
+        <property name="text_key" value="PZAECVoucherReceived" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_hunter_T18">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_hunter_T18" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_bulwark_T18">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_bulwark_T18" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_storm_T18">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_storm_T18" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECTrialT18">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_hunter_T18" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_bulwark_T18" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_storm_T18" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECGiveVoucherT18">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="AddItems">
+        <property name="added_items" value="PZAECChallengeVoucherT18" />
+        <property name="added_item_counts" value="1" />
+      </action>
+      <action class="BeltTooltip">
+        <property name="text_key" value="PZAECVoucherReceived" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_hunter_T19">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_hunter_T19" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_bulwark_T19">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_bulwark_T19" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECAffix_storm_T19">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECAffix_storm_T19" />
+        <property name="spawn_count" value="2" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECTrialT19">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_hunter_T19" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_bulwark_T19" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECTrial_storm_T19" />
+        <property name="spawn_count" value="1" />
+        <property name="single_choice" value="true" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="min_distance" value="12" />
+        <property name="max_distance" value="22" />
+        <property name="spawn_type" value="WanderingHorde" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECGiveVoucherT19">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="AddItems">
+        <property name="added_items" value="PZAECChallengeVoucherT19" />
+        <property name="added_item_counts" value="1" />
+      </action>
+      <action class="BeltTooltip">
+        <property name="text_key" value="PZAECVoucherReceived" />
+      </action>
+    </action_sequence>
+  </append>
+  <!-- Voluntary, leased three-wave base-defense encounters. -->
+  <append xpath="/gameevents">
+    <action_sequence name="PZAECDefenseT16W1">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_runner_T16_W1" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spider_T16_W1" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T16_W1" />
+        <property name="spawn_count" value="3" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT16W2">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_biker_T16_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_demo_T16_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spitter_T16_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wolf_T16_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT16W3">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wight_T16_W3" />
+        <property name="spawn_count" value="5" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T16_W3" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_bulwark_T16_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_storm_T16_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT17W1">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_runner_T17_W1" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spider_T17_W1" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T17_W1" />
+        <property name="spawn_count" value="3" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT17W2">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_biker_T17_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_demo_T17_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spitter_T17_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wolf_T17_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT17W3">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wight_T17_W3" />
+        <property name="spawn_count" value="5" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T17_W3" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_bulwark_T17_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_storm_T17_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT18W1">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_runner_T18_W1" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spider_T18_W1" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T18_W1" />
+        <property name="spawn_count" value="3" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT18W2">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_biker_T18_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_demo_T18_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spitter_T18_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wolf_T18_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT18W3">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wight_T18_W3" />
+        <property name="spawn_count" value="5" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T18_W3" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_bulwark_T18_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_storm_T18_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT19W1">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_runner_T19_W1" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spider_T19_W1" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T19_W1" />
+        <property name="spawn_count" value="3" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT19W2">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_biker_T19_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_demo_T19_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_spitter_T19_W2" />
+        <property name="spawn_count" value="4" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wolf_T19_W2" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+    <action_sequence name="PZAECDefenseT19W3">
+      <property name="action_type" value="Game" />
+      <property name="refund_inactivity" value="false" />
+      <property name="single_instance" value="false" />
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_wight_T19_W3" />
+        <property name="spawn_count" value="5" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_cop_T19_W3" />
+        <property name="spawn_count" value="2" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_bulwark_T19_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+      <action class="SpawnEntity">
+        <property name="entity_names" value="PZAECDefense_storm_T19_W3" />
+        <property name="spawn_count" value="1" />
+        <property name="party_addition" value="0" />
+        <property name="ignore_multiplier" value="true" />
+        <property name="single_choice" value="true" />
+        <property name="safe_spawn" value="false" />
+        <property name="spawn_type" value="NearPosition" />
+        <property name="min_distance" value="32" />
+        <property name="max_distance" value="48" />
+        <property name="is_aggressive" value="true" />
+        <property name="attack_target" value="true" />
+      </action>
+    </action_sequence>
+  </append>
 </configs>

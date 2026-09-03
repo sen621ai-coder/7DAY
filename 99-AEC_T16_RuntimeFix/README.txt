@@ -3,6 +3,83 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Equipment Builds (Runtime 1.13.0)
+---------------------------------
+- Chinese guide, exact numbers and smoke checks: EQUIPMENT_BUILDS.md.
+- Sixteen independent cores: Eagle Eye, Breaker, Barrage and Skirmisher,
+  each with fixed ranks 2-5 corresponding to T16-T19 encounter components.
+- Trial completion adds 3 matching components; base defense adds 5. All old
+  rewards remain. Craft any chosen core from 6 components plus parts/metals.
+- Direct workbench crafting takes 60 seconds, with no material discounts or
+  lower-rank prerequisites. No global loot pool or original item-stat changes.
+- Every build has a trade-off. Native modifier tags allow only one core per
+  item; mobility is chest-only, and can pair with the active weapon's core.
+- Native stat effects only: no new runtime combat hooks or persistent buffs.
+  Rank is encoded by the core item ID, not the host weapon's quality.
+- Update the whole folder on every peer, restart, and accept fresh encounters
+  for component rewards. Offline tests are not live multiplayer validation.
+
+Voluntary Base Defense (Runtime 1.12.0)
+--------------------------------------
+- Chinese instructions, exact rewards and smoke-test checklist: BASE_DEFENSE.md.
+- Craft one tiered beacon at a workbench from one same-tier trial voucher,
+  50 forged steel and 20 electrical parts. Costs cannot receive crafting discounts.
+- Use at the chosen center and accept the native confirmation to consume one.
+  Building damage is explicitly warned before activation. Nothing starts automatically.
+- T16-T19 each have three waves: 9 / 12 / 9 enemies, including two wolves in
+  wave 2 and two commanders in wave 3. Initial ranged count is exactly one third;
+  bosses retain their existing summons. No global Blood Moon or spawn-pool edits.
+- Prepare for 20s; clear a wave before the next starts, with 15s intermissions.
+  Defend within a 45m horizontal radius and 60m vertical difference. Outside has
+  15s return grace; death, disabled spawning, trader protection or 15min wave
+  timeout fails the run. Reloading ends it without replaying or refunding waves.
+- Server actions enforce the native-networked lease and full signed quest ID.
+  NearPosition spawns stay anchored to the original center, not the owner's new
+  position or the previous spawned enemy. Retreat pauses pending spawns.
+- Encounter identity travels in native game-event ExtraData / initial entity
+  spawnByName metadata (spawnById remains -1), so nearby runs cannot borrow kills.
+- Explicit server enqueue denials release only the matching unapproved wave;
+  an accepted request is not blindly replayed. Native limits and terrain still apply.
+- Completion requires all eleven kill objectives across all three waves. Seven
+  original guarantees remain; 1.13.0 adds one tactical-component reward entry.
+- Existing spawned enemies are NOT deleted when an encounter ends. Structures
+  are NOT repaired automatically. There is no beacon refund for a failed run.
+- 44 isolated enemy classes inherit existing tier stats/loot; high-tier navigation
+  recognizes their wave IDs. Eight defense commanders inherit the existing weaknesses.
+- Both host/server and clients must update the whole 99-AEC_T16_RuntimeFix folder
+  and restart without EAC, retaining matching Tweaks 3.9.7.
+- Offline regressions passed; no live gameplay or multiplayer testing performed.
+
+Legendary Adventures (Runtime 1.11.0)
+------------------------------------
+- Chinese gameplay and installation guide: LEGENDARY_ADVENTURES.md in this folder.
+- First-batch features: affix contracts, optional post-clear trials, scoped boss weaknesses.
+- Each T16-T19 / A1-A5 page attempts three plain offers followed by three affixed
+  offers (hunter, bulwark, storm), with server-randomized affix order and native POIs.
+- 60 new variant definitions preserve the original POI objectives and advanced
+  reward pools. Only their XP / Dukes / samples increase by 25%.
+- Rallying an affixed contract requests two corresponding exact-tier champions;
+  the original T17-T19 two-boss dispatcher still handles plain contracts only.
+- Clearing a legendary POI awards its owner one tiered optional trial voucher.
+  Use outside trader protection and accept the native quest offer to call three
+  champions. Declining leaves the item intact; the original turn-in is independent.
+- Trials require one kill of each trial champion, then automatically give weapon,
+  combat mod(s), legendary parts, tokens and XP. Affix bosses do not count as trial kills.
+- The 24 first-batch encounter classes get weaknesses: hunter head x2; bulwark
+  18s normal / 6s overheating with player direct damage x3; storm melee x3.
+- Native buff synchronization and native damage-response networking are preserved.
+  Damage scaling runs on the calculating peer, including joining players, not again
+  on packet receipt. No permanent invulnerability or global damage changes added.
+- Quest data persists dispatch/clear/voucher markers. Shared copies do not summon
+  or award vouchers. Native spawn limits and protected-area checks are not bypassed.
+- An accepted game event is not proof that all entities actually spawned. Do not
+  start trials in cramped terrain, and finish before disconnecting if possible.
+  Accepted requests are never blindly replayed; abandoning does not refund vouchers.
+- Update the whole 99-AEC_T16_RuntimeFix folder on host, server and all clients;
+  retain matching 98-AECxProjectZ_Tweaks 3.9.7. Fully restart without EAC.
+- Offline build and regression tests passed; in-game/two-player smoke testing is
+  still required. No live game or save was launched or edited for this update.
+
 Fixes
 -----
 - Accepts signed custom entity-class IDs when spawning leader followers.
@@ -96,7 +173,7 @@ T16-T17 quest reward uplift (Tweaks 3.9.5)
 
 T16-T19 advanced quest items (Tweaks 3.9.6)
 ------------------------------------------
-- All five POI sizes at each tier now offer three advanced choices: weapon, combat mod, or crafting materials. The game's existing reward-selection limit still applies; these three are not all guaranteed.
+- All five POI sizes at each tier offer three advanced reward entries: weapon, combat mod and crafting materials. These use native chosen rewards; the inherited AEC templates currently set reward_choices_count to 3.
 - T16 weapon choice: one Q5 unique weapon (14-item pool). Mod choice: one rare improved combat mod.
 - T17 weapon choice: one Q5 legendary ranged/melee weapon (47-item pool). Mod choice: one unique combat mod.
 - T18 weapon choice: one Q6 legendary weapon. Mod choice: two copies of the rolled unique combat mod.
@@ -146,8 +223,9 @@ template was replaced with the defined zombieJanitorChargedElite class.
 
 Scope
 -----
-T16-T19 remain enemy/challenge tiers. No new equipment or recipes are introduced
-by this fix, so the existing T15 equipment balance is unchanged.
+T16-T19 remain enemy/challenge tiers. Adventures and defense add eight quest-note
+items and four beacon recipes. Builds add four components and sixteen cores /
+recipes; core effects apply only when installed, without global equipment edits.
 
 Verification
 ------------
