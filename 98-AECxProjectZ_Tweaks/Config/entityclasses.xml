@@ -2994,4 +2994,223 @@ RU: Варианты AEC EO T05-T15 наследуют квестовые сем
   <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT17' or @name='AECHeadlessBossT18' or @name='AECHeadlessBossT19']">
     <property name="LootDropEntityClass" value="AECHeadlessBossLootBagT16" />
   </append>
+  <!-- Scoped bags for ordinary T16-T19 zombies only. Preserve native bag families and mixed-bag weights. -->
+  <append xpath="/entity_classes">
+    <entity_class name="PZAECMobT16_EntityLootContainerRegular" extends="EntityLootContainerRegular">
+      <property name="LootList" value="PZAECMobT16_zPackReg" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerStrong" extends="EntityLootContainerStrong">
+      <property name="LootList" value="PZAECMobT16_zPackStrong" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerBoss" extends="EntityLootContainerBoss">
+      <property name="LootList" value="PZAECMobT16_zPackBoss" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerLab" extends="EntityLootContainerLab">
+      <property name="LootList" value="PZAECMobT16_zPackLab" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerNurse" extends="EntityLootContainerNurse">
+      <property name="LootList" value="PZAECMobT16_zPackNurse" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerSoldier" extends="EntityLootContainerSoldier">
+      <property name="LootList" value="PZAECMobT16_zPackSoldier" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerThug" extends="EntityLootContainerThug">
+      <property name="LootList" value="PZAECMobT16_zPackThug" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerUtility" extends="EntityLootContainerUtility">
+      <property name="LootList" value="PZAECMobT16_zPackUtility" />
+    </entity_class>
+    <entity_class name="PZAECMobT16_EntityLootContainerPlague" extends="EntityLootContainerPlague">
+      <property name="LootList" value="PZAECMobT16_zPackPlague" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerRegular" extends="EntityLootContainerRegular">
+      <property name="LootList" value="PZAECMobT17_zPackReg" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerStrong" extends="EntityLootContainerStrong">
+      <property name="LootList" value="PZAECMobT17_zPackStrong" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerBoss" extends="EntityLootContainerBoss">
+      <property name="LootList" value="PZAECMobT17_zPackBoss" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerLab" extends="EntityLootContainerLab">
+      <property name="LootList" value="PZAECMobT17_zPackLab" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerNurse" extends="EntityLootContainerNurse">
+      <property name="LootList" value="PZAECMobT17_zPackNurse" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerSoldier" extends="EntityLootContainerSoldier">
+      <property name="LootList" value="PZAECMobT17_zPackSoldier" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerThug" extends="EntityLootContainerThug">
+      <property name="LootList" value="PZAECMobT17_zPackThug" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerUtility" extends="EntityLootContainerUtility">
+      <property name="LootList" value="PZAECMobT17_zPackUtility" />
+    </entity_class>
+    <entity_class name="PZAECMobT17_EntityLootContainerPlague" extends="EntityLootContainerPlague">
+      <property name="LootList" value="PZAECMobT17_zPackPlague" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerRegular" extends="EntityLootContainerRegular">
+      <property name="LootList" value="PZAECMobT18_zPackReg" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerStrong" extends="EntityLootContainerStrong">
+      <property name="LootList" value="PZAECMobT18_zPackStrong" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerBoss" extends="EntityLootContainerBoss">
+      <property name="LootList" value="PZAECMobT18_zPackBoss" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerLab" extends="EntityLootContainerLab">
+      <property name="LootList" value="PZAECMobT18_zPackLab" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerNurse" extends="EntityLootContainerNurse">
+      <property name="LootList" value="PZAECMobT18_zPackNurse" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerSoldier" extends="EntityLootContainerSoldier">
+      <property name="LootList" value="PZAECMobT18_zPackSoldier" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerThug" extends="EntityLootContainerThug">
+      <property name="LootList" value="PZAECMobT18_zPackThug" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerUtility" extends="EntityLootContainerUtility">
+      <property name="LootList" value="PZAECMobT18_zPackUtility" />
+    </entity_class>
+    <entity_class name="PZAECMobT18_EntityLootContainerPlague" extends="EntityLootContainerPlague">
+      <property name="LootList" value="PZAECMobT18_zPackPlague" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerRegular" extends="EntityLootContainerRegular">
+      <property name="LootList" value="PZAECMobT19_zPackReg" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerStrong" extends="EntityLootContainerStrong">
+      <property name="LootList" value="PZAECMobT19_zPackStrong" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerBoss" extends="EntityLootContainerBoss">
+      <property name="LootList" value="PZAECMobT19_zPackBoss" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerLab" extends="EntityLootContainerLab">
+      <property name="LootList" value="PZAECMobT19_zPackLab" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerNurse" extends="EntityLootContainerNurse">
+      <property name="LootList" value="PZAECMobT19_zPackNurse" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerSoldier" extends="EntityLootContainerSoldier">
+      <property name="LootList" value="PZAECMobT19_zPackSoldier" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerThug" extends="EntityLootContainerThug">
+      <property name="LootList" value="PZAECMobT19_zPackThug" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerUtility" extends="EntityLootContainerUtility">
+      <property name="LootList" value="PZAECMobT19_zPackUtility" />
+    </entity_class>
+    <entity_class name="PZAECMobT19_EntityLootContainerPlague" extends="EntityLootContainerPlague">
+      <property name="LootList" value="PZAECMobT19_zPackPlague" />
+    </entity_class>
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieArleneTier16Transcendent' or @name='AECZombieBoeTier16Transcendent' or @name='AECZombieBurntTier16Transcendent' or @name='AECZombieBusinessManTier16Transcendent' or @name='AECZombieChuckTier16Transcendent' or @name='AECZombieDarleneTier16Transcendent' or @name='AECZombieInmateTier16Transcendent' or @name='AECZombieJanitorTier16Transcendent' or @name='AECZombieJoeTier16Transcendent' or @name='AECZombieMaleHazmatTier16Transcendent' or @name='AECZombieMarleneTier16Transcendent' or @name='AECZombieMoeTier16Transcendent' or @name='AECZombiePartyGirlTier16Transcendent' or @name='AECZombieScreamerTier16Transcendent' or @name='AECZombieSpiderTier16Transcendent' or @name='AECZombieSteveCrawlerTier16Transcendent' or @name='AECZombieSteveTier16Transcendent' or @name='AECZombieTomClarkTier16Transcendent' or @name='AECZombieWightFeralTier16Transcendent' or @name='AECZombieYoTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerRegular" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBowlerTier16Transcendent' or @name='AECZombieFatCopTier16Transcendent' or @name='AECZombieFatHawaiianTier16Transcendent' or @name='AECZombieFemaleFatTier16Transcendent' or @name='AECZombieLumberjackTier16Transcendent' or @name='AECZombieMutatedTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerStrong" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieDemolitionTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerBoss" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieLabTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerLab" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieNurseTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerNurse" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieSoldierTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerSoldier" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBikerTier16Transcendent' or @name='AECZombieSkateboarderTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerThug" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieUtilityWorkerTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerUtility" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombiePlagueSpitterTier16Transcendent' or @name='AECZombieRancherTier16Transcendent']">
+    <property name="LootDropEntityClass" value="PZAECMobT16_EntityLootContainerRegular,1,PZAECMobT16_EntityLootContainerPlague,1" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieArleneTier17Ascendant' or @name='AECZombieBoeTier17Ascendant' or @name='AECZombieBurntTier17Ascendant' or @name='AECZombieBusinessManTier17Ascendant' or @name='AECZombieChuckTier17Ascendant' or @name='AECZombieDarleneTier17Ascendant' or @name='AECZombieInmateTier17Ascendant' or @name='AECZombieJanitorTier17Ascendant' or @name='AECZombieJoeTier17Ascendant' or @name='AECZombieMaleHazmatTier17Ascendant' or @name='AECZombieMarleneTier17Ascendant' or @name='AECZombieMoeTier17Ascendant' or @name='AECZombiePartyGirlTier17Ascendant' or @name='AECZombieScreamerTier17Ascendant' or @name='AECZombieSpiderTier17Ascendant' or @name='AECZombieSteveCrawlerTier17Ascendant' or @name='AECZombieSteveTier17Ascendant' or @name='AECZombieTomClarkTier17Ascendant' or @name='AECZombieWightFeralTier17Ascendant' or @name='AECZombieYoTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerRegular" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBowlerTier17Ascendant' or @name='AECZombieFatCopTier17Ascendant' or @name='AECZombieFatHawaiianTier17Ascendant' or @name='AECZombieFemaleFatTier17Ascendant' or @name='AECZombieLumberjackTier17Ascendant' or @name='AECZombieMutatedTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerStrong" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieDemolitionTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerBoss" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieLabTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerLab" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieNurseTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerNurse" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieSoldierTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerSoldier" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBikerTier17Ascendant' or @name='AECZombieSkateboarderTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerThug" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieUtilityWorkerTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerUtility" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombiePlagueSpitterTier17Ascendant' or @name='AECZombieRancherTier17Ascendant']">
+    <property name="LootDropEntityClass" value="PZAECMobT17_EntityLootContainerRegular,1,PZAECMobT17_EntityLootContainerPlague,1" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieArleneTier18Eternal' or @name='AECZombieBoeTier18Eternal' or @name='AECZombieBurntTier18Eternal' or @name='AECZombieBusinessManTier18Eternal' or @name='AECZombieChuckTier18Eternal' or @name='AECZombieDarleneTier18Eternal' or @name='AECZombieInmateTier18Eternal' or @name='AECZombieJanitorTier18Eternal' or @name='AECZombieJoeTier18Eternal' or @name='AECZombieMaleHazmatTier18Eternal' or @name='AECZombieMarleneTier18Eternal' or @name='AECZombieMoeTier18Eternal' or @name='AECZombiePartyGirlTier18Eternal' or @name='AECZombieScreamerTier18Eternal' or @name='AECZombieSpiderTier18Eternal' or @name='AECZombieSteveCrawlerTier18Eternal' or @name='AECZombieSteveTier18Eternal' or @name='AECZombieTomClarkTier18Eternal' or @name='AECZombieWightFeralTier18Eternal' or @name='AECZombieYoTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerRegular" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBowlerTier18Eternal' or @name='AECZombieFatCopTier18Eternal' or @name='AECZombieFatHawaiianTier18Eternal' or @name='AECZombieFemaleFatTier18Eternal' or @name='AECZombieLumberjackTier18Eternal' or @name='AECZombieMutatedTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerStrong" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieDemolitionTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerBoss" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieLabTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerLab" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieNurseTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerNurse" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieSoldierTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerSoldier" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBikerTier18Eternal' or @name='AECZombieSkateboarderTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerThug" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieUtilityWorkerTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerUtility" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombiePlagueSpitterTier18Eternal' or @name='AECZombieRancherTier18Eternal']">
+    <property name="LootDropEntityClass" value="PZAECMobT18_EntityLootContainerRegular,1,PZAECMobT18_EntityLootContainerPlague,1" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieArleneTier19Apocalyptic' or @name='AECZombieBoeTier19Apocalyptic' or @name='AECZombieBurntTier19Apocalyptic' or @name='AECZombieBusinessManTier19Apocalyptic' or @name='AECZombieChuckTier19Apocalyptic' or @name='AECZombieDarleneTier19Apocalyptic' or @name='AECZombieInmateTier19Apocalyptic' or @name='AECZombieJanitorTier19Apocalyptic' or @name='AECZombieJoeTier19Apocalyptic' or @name='AECZombieMaleHazmatTier19Apocalyptic' or @name='AECZombieMarleneTier19Apocalyptic' or @name='AECZombieMoeTier19Apocalyptic' or @name='AECZombiePartyGirlTier19Apocalyptic' or @name='AECZombieScreamerTier19Apocalyptic' or @name='AECZombieSpiderTier19Apocalyptic' or @name='AECZombieSteveCrawlerTier19Apocalyptic' or @name='AECZombieSteveTier19Apocalyptic' or @name='AECZombieTomClarkTier19Apocalyptic' or @name='AECZombieWightFeralTier19Apocalyptic' or @name='AECZombieYoTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerRegular" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBowlerTier19Apocalyptic' or @name='AECZombieFatCopTier19Apocalyptic' or @name='AECZombieFatHawaiianTier19Apocalyptic' or @name='AECZombieFemaleFatTier19Apocalyptic' or @name='AECZombieLumberjackTier19Apocalyptic' or @name='AECZombieMutatedTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerStrong" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieDemolitionTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerBoss" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieLabTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerLab" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieNurseTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerNurse" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieSoldierTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerSoldier" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieBikerTier19Apocalyptic' or @name='AECZombieSkateboarderTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerThug" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombieUtilityWorkerTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerUtility" />
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='AECZombiePlagueSpitterTier19Apocalyptic' or @name='AECZombieRancherTier19Apocalyptic']">
+    <property name="LootDropEntityClass" value="PZAECMobT19_EntityLootContainerRegular,1,PZAECMobT19_EntityLootContainerPlague,1" />
+  </append>
 </configs>

@@ -25,6 +25,9 @@ namespace AECT16RuntimeFix
                 BloodMoonSpawnFix.Install(harmony);
                 PatchHighTierNavigation(harmony);
                 PatchTraderQuestOffers(harmony);
+                LegendaryQuestNetworking.Install(harmony);
+                QuestBossSpawn.Install(harmony);
+                HighTierMobLoot.Install(harmony);
                 var spawnerType = AccessTools.TypeByName("AeclipseCustomZombieSpawner.SpawnDebugPatcher");
                 if (spawnerType == null)
                 {
@@ -258,7 +261,7 @@ namespace AECT16RuntimeFix
         {
             try
             {
-                if (__instance == null || player == null)
+                if (__instance == null || player == null || !SingletonMonoBehaviour<ConnectionManager>.Instance.IsServer)
                 {
                     return;
                 }
@@ -271,32 +274,37 @@ namespace AECT16RuntimeFix
                 }
 
                 var additions = new List<Quest>();
-                for (int area = 1; area <= 5; area++)
+                // At high GS expose every unlocked legendary tier, not only the
+                // current one. At most 120 AEC offers, all server-positioned.
+                foreach (int offeredTier in LegendaryQuestNetworking.OfferTiers(tier))
                 {
-                    string questId = "aec_quest_T" + tier.ToString("D2") + "_A" + area + "_clear";
-                    QuestClass questClass = QuestClass.GetQuest(questId);
-                    if (questClass == null)
+                    for (int area = 1; area <= 5; area++)
                     {
-                        continue;
-                    }
-
-                    int created = 0;
-                    int attempts = 0;
-                    while (created < 6 && attempts < 30)
-                    {
-                        attempts++;
-                        Quest quest = questClass.CreateQuest();
-                        quest.QuestGiverID = __instance.entityId;
-                        quest.QuestFaction = (byte)(__instance.NPCInfo == null ? 1 : __instance.NPCInfo.QuestFaction);
-                        quest.SetPositionData((Quest.PositionDataTypes)0, __instance.position);
-                        quest.SetPositionData((Quest.PositionDataTypes)9,
-                            __instance.traderArea != null ? __instance.traderArea.Position.ToVector3() : __instance.position);
-                        quest.SetupTags();
-                        var usedPositions = new List<Vector2>();
-                        if (quest.SetupPosition(__instance, player, usedPositions, player.entityId))
+                        string questId = "aec_quest_T" + offeredTier.ToString("D2") + "_A" + area + "_clear";
+                        QuestClass questClass = QuestClass.GetQuest(questId);
+                        if (questClass == null)
                         {
-                            additions.Add(quest);
-                            created++;
+                            continue;
+                        }
+
+                        int created = 0;
+                        int attempts = 0;
+                        var usedPositions = new List<Vector2>();
+                        while (created < 6 && attempts < 30 && (__result == null ? 0 : __result.Count) + additions.Count < 240)
+                        {
+                            attempts++;
+                            Quest quest = questClass.CreateQuest();
+                            quest.QuestGiverID = __instance.entityId;
+                            quest.QuestFaction = (byte)(__instance.NPCInfo == null ? 1 : __instance.NPCInfo.QuestFaction);
+                            quest.SetPositionData((Quest.PositionDataTypes)0, __instance.position);
+                            quest.SetPositionData((Quest.PositionDataTypes)9,
+                                __instance.traderArea != null ? __instance.traderArea.Position.ToVector3() : __instance.position);
+                            quest.SetupTags();
+                            if (quest.SetupPosition(__instance, player, usedPositions, player.entityId))
+                            {
+                                additions.Add(quest);
+                                created++;
+                            }
                         }
                     }
                 }

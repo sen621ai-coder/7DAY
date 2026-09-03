@@ -14991,3 +14991,39 @@ aec_quest_T19_A4_name,quests,Quest,false,,,[FFD700][AEC][-] [FF3333]T19 Apocalyp
 aec_quest_T19_A4_offer,quests,Quest,false,,,APOCALYPTIC PURGE. Tier 19 AEC hostiles have overrun a Huge POI. Eliminate every target and return to any trader.,,,,,,,,,,,,末日级清剿：一个巨型地标已被 T19 AEC 敌人占领。清除全部目标后，返回任意商人处领取奖励。,
 aec_quest_T19_A5_name,quests,Quest,false,,,[FFD700][AEC][-] [FF3333]T19 Apocalyptic Clear[-] | Massive,,,,,,,,,,,,[FFD700][AEC][-] [FF3333]T19 末日级清剿[-]｜超大型,
 aec_quest_T19_A5_offer,quests,Quest,false,,,APOCALYPTIC PURGE. Tier 19 AEC hostiles have overrun a Massive POI. Eliminate every target and return to any trader.,,,,,,,,,,,,末日级清剿：一个超大型地标已被 T19 AEC 敌人占领。清除全部目标后，返回任意商人处领取奖励。,
+PZAECMobT16_EntityLootContainerRegular,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerStrong,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerBoss,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerLab,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerNurse,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerSoldier,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerThug,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerUtility,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT16_EntityLootContainerPlague,entityclasses,Entity,false,,,T16 Zombie Loot,,,,,,,,,,,,T16 小怪战利品,T16 小怪戰利品
+PZAECMobT17_EntityLootContainerRegular,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerStrong,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerBoss,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerLab,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerNurse,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerSoldier,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerThug,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerUtility,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT17_EntityLootContainerPlague,entityclasses,Entity,false,,,T17 Zombie Loot,,,,,,,,,,,,T17 小怪战利品,T17 小怪戰利品
+PZAECMobT18_EntityLootContainerRegular,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerStrong,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerBoss,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerLab,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerNurse,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerSoldier,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerThug,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerUtility,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT18_EntityLootContainerPlague,entityclasses,Entity,false,,,T18 Zombie Loot,,,,,,,,,,,,T18 小怪战利品,T18 小怪戰利品
+PZAECMobT19_EntityLootContainerRegular,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerStrong,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerBoss,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerLab,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerNurse,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerSoldier,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerThug,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerUtility,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+PZAECMobT19_EntityLootContainerPlague,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品

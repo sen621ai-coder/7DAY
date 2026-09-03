@@ -1056,26 +1056,26 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="pzaec_return_to_master"/>
       <response_entry id="nevermind"/>
     </statement>
-    <!-- Legendary offers use quest IDs rather than obsolete active-list offsets. -->
+    <!-- Slots 0-5 map to server-positioned offers; sentinel -19 fails closed on stale clients. -->
     <statement id="pzaec_t16_small" text="aec_dialog_a1_t16_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A1_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t16_small"/>
       <response_entry id="pzaec_fwd_t16_small" uniqueid="next"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_medium" text="aec_dialog_a2_t16_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A2_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t16_medium"/>
       <response_entry id="pzaec_fwd_t16_medium" uniqueid="next"/>
       <response_entry id="pzaec_back_t16_medium" uniqueid="prev"/>
@@ -1083,12 +1083,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_large" text="aec_dialog_a3_t16_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A3_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t16_large"/>
       <response_entry id="pzaec_fwd_t16_large" uniqueid="next"/>
       <response_entry id="pzaec_back_t16_large" uniqueid="prev"/>
@@ -1096,12 +1096,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_huge" text="aec_dialog_a4_t16_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A4_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t16_huge"/>
       <response_entry id="pzaec_fwd_t16_huge" uniqueid="next"/>
       <response_entry id="pzaec_back_t16_huge" uniqueid="prev"/>
@@ -1109,36 +1109,36 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t16_massive" text="aec_dialog_a5_t16_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T16_A5_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t16_massive"/>
       <response_entry id="pzaec_back_t16_massive" uniqueid="prev"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t17_small" text="aec_dialog_a1_t17_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A1_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t17_small"/>
       <response_entry id="pzaec_fwd_t17_small" uniqueid="next"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t17_medium" text="aec_dialog_a2_t17_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A2_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t17_medium"/>
       <response_entry id="pzaec_fwd_t17_medium" uniqueid="next"/>
       <response_entry id="pzaec_back_t17_medium" uniqueid="prev"/>
@@ -1146,12 +1146,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t17_large" text="aec_dialog_a3_t17_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A3_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t17_large"/>
       <response_entry id="pzaec_fwd_t17_large" uniqueid="next"/>
       <response_entry id="pzaec_back_t17_large" uniqueid="prev"/>
@@ -1159,12 +1159,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t17_huge" text="aec_dialog_a4_t17_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A4_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t17_huge"/>
       <response_entry id="pzaec_fwd_t17_huge" uniqueid="next"/>
       <response_entry id="pzaec_back_t17_huge" uniqueid="prev"/>
@@ -1172,36 +1172,36 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t17_massive" text="aec_dialog_a5_t17_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T17_A5_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t17_massive"/>
       <response_entry id="pzaec_back_t17_massive" uniqueid="prev"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t18_small" text="aec_dialog_a1_t18_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A1_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t18_small"/>
       <response_entry id="pzaec_fwd_t18_small" uniqueid="next"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t18_medium" text="aec_dialog_a2_t18_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A2_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t18_medium"/>
       <response_entry id="pzaec_fwd_t18_medium" uniqueid="next"/>
       <response_entry id="pzaec_back_t18_medium" uniqueid="prev"/>
@@ -1209,12 +1209,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t18_large" text="aec_dialog_a3_t18_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A3_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t18_large"/>
       <response_entry id="pzaec_fwd_t18_large" uniqueid="next"/>
       <response_entry id="pzaec_back_t18_large" uniqueid="prev"/>
@@ -1222,12 +1222,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t18_huge" text="aec_dialog_a4_t18_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A4_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t18_huge"/>
       <response_entry id="pzaec_fwd_t18_huge" uniqueid="next"/>
       <response_entry id="pzaec_back_t18_huge" uniqueid="prev"/>
@@ -1235,36 +1235,36 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t18_massive" text="aec_dialog_a5_t18_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T18_A5_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t18_massive"/>
       <response_entry id="pzaec_back_t18_massive" uniqueid="prev"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t19_small" text="aec_dialog_a1_t19_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A1_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t19_small"/>
       <response_entry id="pzaec_fwd_t19_small" uniqueid="next"/>
       <response_entry id="pzaec_return_to_legendary"/>
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t19_medium" text="aec_dialog_a2_t19_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A2_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t19_medium"/>
       <response_entry id="pzaec_fwd_t19_medium" uniqueid="next"/>
       <response_entry id="pzaec_back_t19_medium" uniqueid="prev"/>
@@ -1272,12 +1272,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t19_large" text="aec_dialog_a3_t19_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A3_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t19_large"/>
       <response_entry id="pzaec_fwd_t19_large" uniqueid="next"/>
       <response_entry id="pzaec_back_t19_large" uniqueid="prev"/>
@@ -1285,12 +1285,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t19_huge" text="aec_dialog_a4_t19_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A4_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t19_huge"/>
       <response_entry id="pzaec_fwd_t19_huge" uniqueid="next"/>
       <response_entry id="pzaec_back_t19_huge" uniqueid="prev"/>
@@ -1298,12 +1298,12 @@ RU: Каждый тир AEC использует одинаковую навиг
       <response_entry id="nevermind"/>
     </statement>
     <statement id="pzaec_t19_massive" text="aec_dialog_a5_t19_header" nextstatementid="start">
-      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
-      <quest_entry id="aec_quest_T19_A5_clear" nextstatementid="start"/>
+      <quest_entry listindex="0" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="1" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="2" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="3" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="4" tier="-19" nextstatementid="start"/>
+      <quest_entry listindex="5" tier="-19" nextstatementid="start"/>
       <response_entry id="pzaec_sep_t19_massive"/>
       <response_entry id="pzaec_back_t19_massive" uniqueid="prev"/>
       <response_entry id="pzaec_return_to_legendary"/>

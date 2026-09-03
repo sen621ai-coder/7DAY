@@ -36,12 +36,15 @@ foreach ($tier in 16..19) {
         Assert-True ($null -ne $page) "Missing T$tier $size page"
         Assert-True (@($page.quest_entry).Count -eq 6) "Expected 6 offer slots in T$tier $size"
         Assert-True ($page.response_entry.id -contains 'pzaec_return_to_legendary') 'Wrong category return'
+        $slot = 0
         foreach ($entry in $page.quest_entry) {
-            Assert-True ($entry.id -eq "aec_quest_T${tier}_A${area}_clear") 'Wrong quest ID'
-            Assert-True (-not $entry.HasAttribute('listindex')) 'Legacy fixed index remains'
-            $quest = $quests.SelectSingleNode("//quest[@id='$($entry.id)']")
-            Assert-True ($null -ne $quest) "Missing quest definition $($entry.id)"
+            Assert-True (-not $entry.HasAttribute('id')) 'Client-local quest creation remains'
+            Assert-True ([int]$entry.listindex -eq $slot -and [int]$entry.tier -eq -19) 'Wrong synchronized offer slot'
+            $questId = "aec_quest_T${tier}_A${area}_clear"
+            $quest = $quests.SelectSingleNode("//quest[@id='$questId']")
+            Assert-True ($null -ne $quest) "Missing quest definition $questId"
             Assert-True ($quest.template -eq "aec_base_A$area") 'Wrong area template'
+            $slot++
             $slots++
         }
         foreach ($entry in $page.response_entry) {
@@ -100,4 +103,4 @@ foreach ($tier in 17..19) {
 }
 $gate.Value = 'invalid'
 Assert-True (-not $gate.CheckRequirement($player, $null)) 'Malformed threshold was accepted'
-Write-Output "PASS: $pages pages; $slots direct quest slots; category routing, quest IDs, localization and $tests GS boundary checks."
+Write-Output "PASS: $pages pages; $slots synchronized quest slots; category routing, quest IDs, localization and $tests GS boundary checks."

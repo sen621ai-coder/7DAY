@@ -1075,4 +1075,230 @@ RU: Переносимые OpenLootBundle не должны наследоват
 
 
   </append>
+  <!-- Legendary quest-only pools: explicit item IDs, no low-tier supplies or stage-scaled counts. -->
+  <append xpath="/lootcontainers">
+    <lootqualitytemplates>
+      <lootqualitytemplate name="PZAECQuestLegendQuality">
+        <qualitytemplate level="0,17" default_quality="5"><loot quality="5" prob="1" /></qualitytemplate>
+        <qualitytemplate level="18,999999" default_quality="6"><loot quality="6" prob="1" /></qualitytemplate>
+      </lootqualitytemplate>
+    </lootqualitytemplates>
+  </append>
+  <append xpath="/lootcontainers">
+    <lootgroup name="PZAECQuestWeaponsT16">
+      <item name="gunMGT5M60Bulldog" count="1" quality="5" />
+      <item name="gunShotgunT5AutoShotgunEraser" count="1" quality="5" />
+      <item name="gunRifleT5SniperRifleGaus" count="1" quality="5" />
+      <item name="gunHandgunT5SMG5Zinger" count="1" quality="5" />
+      <item name="gunHandgunT5Hellgun" count="1" quality="5" />
+      <item name="gunBowT5CompoundCrossbowMantis" count="1" quality="5" />
+      <item name="gunBotJunkSledgeImp" count="1" quality="5" />
+      <item name="gunBotJunkTurretImp" count="1" quality="5" />
+      <item name="meleeWpnSpearT5SteelSpearCombistick" count="1" quality="5" />
+      <item name="meleeWpnClubT5SteelAxeBarbarian" count="1" quality="5" />
+      <item name="meleeWpnSledgeT5SteelSledgehammerDestructor" count="1" quality="5" />
+      <item name="meleeWpnMausClaws" count="1" quality="5" />
+      <item name="meleeWpnBladeT5MacheteIndiana" count="1" quality="5" />
+      <item name="meleeWpnBatonT5PlasmaBatonFlugen" count="1" quality="5" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestLegendWeapons" loot_quality_template="PZAECQuestLegendQuality">
+      <item name="BulldogLegArsonist" count="1" />
+      <item name="BulldogLegURANUS" count="1" />
+      <item name="BulldogLegBreeze" count="1" />
+      <item name="BulldogLegUnkillable" count="1" />
+      <item name="BulldogLegAvenger" count="1" />
+      <item name="BulldogLegBerserk" count="1" />
+      <item name="EraserLegArsonist" count="1" />
+      <item name="EraserLegURANUS" count="1" />
+      <item name="EraserLegUnkillable" count="1" />
+      <item name="EraserLegAvenger" count="1" />
+      <item name="EraserLegBerserk" count="1" />
+      <item name="GausLegArsonist" count="1" />
+      <item name="GausLegTesla" count="1" />
+      <item name="GausLegURANUS" count="1" />
+      <item name="GausLegUnkillable" count="1" />
+      <item name="ZingerLegArsonist" count="1" />
+      <item name="ZingerLegURANUS" count="1" />
+      <item name="ZingerLegBreeze" count="1" />
+      <item name="ZingerLegUnkillable" count="1" />
+      <item name="ZingerLegAvenger" count="1" />
+      <item name="ZingerLegBerserk" count="1" />
+      <item name="CombistickLegCrisis" count="1" />
+      <item name="CombistickLegCrusher" count="1" />
+      <item name="CombistickLegMasterpiece" count="1" />
+      <item name="CombistickLegGuardian" count="1" />
+      <item name="CombistickLegSurgeon" count="1" />
+      <item name="BarbarianLegCrisis" count="1" />
+      <item name="BarbarianLegCrusher" count="1" />
+      <item name="BarbarianLegMasterpiece" count="1" />
+      <item name="BarbarianLegGuardian" count="1" />
+      <item name="DestructorLegCrisis" count="1" />
+      <item name="DestructorLegCrusher" count="1" />
+      <item name="DestructorLegMasterpiece" count="1" />
+      <item name="DestructorLegGuardian" count="1" />
+      <item name="MausClawsLegCrisis" count="1" />
+      <item name="MausClawsLegCrusher" count="1" />
+      <item name="MausClawsLegMasterpiece" count="1" />
+      <item name="MausClawsLegGuardian" count="1" />
+      <item name="MausClawsLegSurgeon" count="1" />
+      <item name="IndianaLegCrisis" count="1" />
+      <item name="IndianaLegCrusher" count="1" />
+      <item name="IndianaLegMasterpiece" count="1" />
+      <item name="IndianaLegGuardian" count="1" />
+      <item name="IndianaLegSurgeon" count="1" />
+      <item name="FlugenLegCrisis" count="1" />
+      <item name="FlugenLegCrusher" count="1" />
+      <item name="FlugenLegMasterpiece" count="1" />
+      <item name="FlugenLegGuardian" count="1" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestModsT16">
+      <item name="modBandolierImp" count="1" />
+      <item name="modSmartGlass" count="1" />
+      <item name="modArmorPerceptionImp" count="1" />
+      <item name="modArmorStrengthImp" count="1" />
+      <item name="modArmorFortitudeImp" count="1" />
+      <item name="modArmorAgilityImp" count="1" />
+      <item name="modArmorIntellectImp" count="1" />
+      <item name="modGunDrumMagazineExtenderImp" count="1" />
+      <item name="modGunMagazineExtenderImp" count="1" />
+      <item name="modGunMeleeRadRemoverImp" count="1" />
+      <item name="modGunCrippleEmImp" count="1" />
+      <item name="modGunRiflePartsImp" count="1" />
+      <item name="modGunPistolPartsImp" count="1" />
+      <item name="modGunM60PartsImp" count="1" />
+      <item name="modGunShotgunPartsImp" count="1" />
+      <item name="modGunForegripImp" count="1" />
+      <item name="modGunBipodImp" count="1" />
+      <item name="modGunBoosterExp" count="1" />
+      <item name="modGunDamageAccumulatorExp" count="1" />
+      <item name="modMeleeDimondPartsHeavy" count="1" />
+      <item name="modMeleeDimondPartsLight" count="1" />
+      <item name="modMeleeErgonomicGripImp" count="1" />
+      <item name="modMeleeTheHunterImp" count="1" />
+      <item name="modMeleeTerribleSpikesImp" count="1" />
+      <item name="modMeleeParalizeImp" count="1" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestMaterialsT16">
+      <item name="resourceExperimentalAlloys" count="20" />
+      <item name="UniqueParts" count="2" />
+      <item name="resourceLegendaryParts" count="5" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestModsT17">
+      <item name="modGunDrumMagazineExtenderUnique" count="1" />
+      <item name="modGunMagazineExtenderUnique" count="1" />
+      <item name="modGunMeleeRadRemoverUnique" count="1" />
+      <item name="modGunCrippleEmUnique" count="1" />
+      <item name="modGunPistolPartsUnique" count="1" />
+      <item name="modGunRiflePartsUnique" count="1" />
+      <item name="modGunShotgunPartsUnique" count="1" />
+      <item name="modGunM60PartsUnique" count="1" />
+      <item name="modGunBipodUnique" count="1" />
+      <item name="modGunSoundSuppressorSilencerUnique" count="1" />
+      <item name="modGunBoosterUnique" count="1" />
+      <item name="modGunDamageAccumulatorUnique" count="1" />
+      <item name="modMeleeDimondPartsHeavyUnique" count="1" />
+      <item name="modMeleeErgonomicGripUnique" count="1" />
+      <item name="modMeleeTheHunterUnique" count="1" />
+      <item name="modMeleeTerribleSpikesUnique" count="1" />
+      <item name="modMeleeClubBurningUnique" count="1" />
+      <item name="modMeleeParalizeUnique" count="1" />
+      <item name="modMeleeElectroUnique" count="1" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestMaterialsT17">
+      <item name="resourceExperimentalAlloys" count="40" />
+      <item name="UniqueParts" count="4" />
+      <item name="resourceLegendaryParts" count="10" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestModsT18">
+      <item name="modGunDrumMagazineExtenderUnique" count="2" />
+      <item name="modGunMagazineExtenderUnique" count="2" />
+      <item name="modGunMeleeRadRemoverUnique" count="2" />
+      <item name="modGunCrippleEmUnique" count="2" />
+      <item name="modGunPistolPartsUnique" count="2" />
+      <item name="modGunRiflePartsUnique" count="2" />
+      <item name="modGunShotgunPartsUnique" count="2" />
+      <item name="modGunM60PartsUnique" count="2" />
+      <item name="modGunBipodUnique" count="2" />
+      <item name="modGunSoundSuppressorSilencerUnique" count="2" />
+      <item name="modGunBoosterUnique" count="2" />
+      <item name="modGunDamageAccumulatorUnique" count="2" />
+      <item name="modMeleeDimondPartsHeavyUnique" count="2" />
+      <item name="modMeleeErgonomicGripUnique" count="2" />
+      <item name="modMeleeTheHunterUnique" count="2" />
+      <item name="modMeleeTerribleSpikesUnique" count="2" />
+      <item name="modMeleeClubBurningUnique" count="2" />
+      <item name="modMeleeParalizeUnique" count="2" />
+      <item name="modMeleeElectroUnique" count="2" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestMaterialsT18">
+      <item name="resourceExperimentalAlloys" count="60" />
+      <item name="UniqueParts" count="6" />
+      <item name="resourceLegendaryParts" count="15" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestModsT19">
+      <item name="modGunDrumMagazineExtenderUnique" count="3" />
+      <item name="modGunMagazineExtenderUnique" count="3" />
+      <item name="modGunMeleeRadRemoverUnique" count="3" />
+      <item name="modGunCrippleEmUnique" count="3" />
+      <item name="modGunPistolPartsUnique" count="3" />
+      <item name="modGunRiflePartsUnique" count="3" />
+      <item name="modGunShotgunPartsUnique" count="3" />
+      <item name="modGunM60PartsUnique" count="3" />
+      <item name="modGunBipodUnique" count="3" />
+      <item name="modGunSoundSuppressorSilencerUnique" count="3" />
+      <item name="modGunBoosterUnique" count="3" />
+      <item name="modGunDamageAccumulatorUnique" count="3" />
+      <item name="modMeleeDimondPartsHeavyUnique" count="3" />
+      <item name="modMeleeErgonomicGripUnique" count="3" />
+      <item name="modMeleeTheHunterUnique" count="3" />
+      <item name="modMeleeTerribleSpikesUnique" count="3" />
+      <item name="modMeleeClubBurningUnique" count="3" />
+      <item name="modMeleeParalizeUnique" count="3" />
+      <item name="modMeleeElectroUnique" count="3" />
+    </lootgroup>
+    <lootgroup name="PZAECQuestMaterialsT19">
+      <item name="resourceExperimentalAlloys" count="100" />
+      <item name="UniqueParts" count="10" />
+      <item name="resourceLegendaryParts" count="25" />
+    </lootgroup>
+  </append>
+  <!-- Original loot contents retained; bag identity supplies the quality scope in HighTierMobLoot. -->
+  <append xpath="/lootcontainers">
+    <lootcontainer name="PZAECMobT16_zPackReg" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackReg" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackStrong" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackStrong" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackBoss" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackBoss" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackLab" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackLab" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackNurse" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackNurse" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackSoldier" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackSoldier" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackThug" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackThug" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackUtility" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackUtility" /></lootcontainer>
+    <lootcontainer name="PZAECMobT16_zPackPlague" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackPlague" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackReg" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackReg" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackStrong" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackStrong" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackBoss" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackBoss" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackLab" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackLab" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackNurse" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackNurse" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackSoldier" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackSoldier" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackThug" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackThug" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackUtility" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackUtility" /></lootcontainer>
+    <lootcontainer name="PZAECMobT17_zPackPlague" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackPlague" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackReg" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackReg" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackStrong" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackStrong" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackBoss" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackBoss" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackLab" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackLab" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackNurse" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackNurse" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackSoldier" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackSoldier" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackThug" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackThug" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackUtility" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackUtility" /></lootcontainer>
+    <lootcontainer name="PZAECMobT18_zPackPlague" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackPlague" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackReg" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackReg" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackStrong" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackStrong" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackBoss" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackBoss" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackLab" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackLab" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackNurse" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackNurse" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackSoldier" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackSoldier" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackThug" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackThug" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackUtility" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualBaseTemplate"><item group="groupZpackUtility" /></lootcontainer>
+    <lootcontainer name="PZAECMobT19_zPackPlague" count="1" size="6,3" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" loot_quality_template="qualPlus1Template"><item group="groupZpackPlague" /></lootcontainer>
+  </append>
 </configs>

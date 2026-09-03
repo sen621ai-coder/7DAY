@@ -70,14 +70,53 @@ T17-T19 progression
 Trader quest repair
 -------------------
 - Replaces the upstream all-tier trader merge that generated 510 AEC offers at once.
-- The ordinary trader job list offers the player's current GS tier with up to 30 valid POI variants.
+- Before T16 the generator offers the player's current GS tier. At T16+ it supplies all unlocked legendary tiers (up to 120 offers) for the category browser.
 - Adds complete T17, T18 and T19 clear-contract definitions and localization.
 - Adds Legendary Operations for T16-T19; Master Operations now contains T11-T15.
-- Legendary category pages resolve quest IDs directly instead of obsolete list offsets.
+- Legendary pages use six logical slots resolved against server-generated, per-player synchronized quest lists. They never create quests or request POIs locally.
 - Each of five POI-size pages attempts six offers; availability depends on nearby matching POIs.
 - T17/T18/T19 menu entries unlock at current GS 50000/70000/90000; T16 keeps its existing area unlocks.
 - The assembly-qualified dialog requirement reads current player GS without waiting for watcher CVars.
-- Quest rewards, enemy strength and the ordinary trader offer generator are unchanged by this menu fix.
+- The networking fix does not alter rewards or enemy strength. Host and joining players must both use the updated runtime DLL and dialog config.
+- Selection indices are absolute; the RemoveQuest packet uses the correctly computed difficulty-relative byte index, including preceding non-AEC/special quests.
+- Invalid player requests are rejected without guessing an identity. The packet handler's unused POI-center calculation no longer dereferences a null prefab before its native null check.
+- Close the game and update Mods/98-AECxProjectZ_Tweaks and Mods/99-AEC_T16_RuntimeFix on all peers, then restart/reconnect to rebuild offer caches.
+- Launch without EAC on all peers; the runtime DLL is skipped when anti-cheat is enabled and is not automatically downloaded from the host.
+
+T16-T17 quest reward uplift (Tweaks 3.9.5)
+----------------------------------------
+- Guaranteed turn-in rewards increase by POI size A1-A5; no items are awarded merely for accepting a quest.
+- T16: XP 300000 / 600000 / 900000 / 1200000 / 1500000; Dukes 15000 / 17000 / 19000 / 21000 / 23000.
+- T16: Universal Tokens 350 / 375 / 400 / 425 / 450; T5 samples 1200 / 2400 / 3600 / 4800 / 6000.
+- T17: XP 600000 / 1200000 / 1800000 / 2400000 / 3000000; Dukes 25000 / 27000 / 29000 / 31000 / 33000.
+- T17: Universal Tokens 450 / 490 / 530 / 570 / 610; T5 samples 2400 / 4800 / 7200 / 9600 / 12000.
+- XP rises 50%, samples rise 60%; the same-size guaranteed rewards remain strictly ordered T16 < T17 < T18 < T19.
+- This currency uplift preserves the existing one-bundle A5 reward, T18-T19 currency values, unlock thresholds, objectives and multiplayer acceptance logic. Advanced item choices are described below.
+- Restart the host/game to load the XML changes; verify the new amounts on a freshly accepted quest. Existing saved quests may retain their previously generated rewards.
+
+T16-T19 advanced quest items (Tweaks 3.9.6)
+------------------------------------------
+- All five POI sizes at each tier now offer three advanced choices: weapon, combat mod, or crafting materials. The game's existing reward-selection limit still applies; these three are not all guaranteed.
+- T16 weapon choice: one Q5 unique weapon (14-item pool). Mod choice: one rare improved combat mod.
+- T17 weapon choice: one Q5 legendary ranged/melee weapon (47-item pool). Mod choice: one unique combat mod.
+- T18 weapon choice: one Q6 legendary weapon. Mod choice: two copies of the rolled unique combat mod.
+- T19 weapon choice: one Q6 legendary weapon. Mod choice: three copies of the rolled unique combat mod; additionally one random unique combat mod is guaranteed regardless of choice.
+- Material choice rolls one stack: experimental alloys / UniqueParts / legendary parts, respectively 20/2/5 at T16, 40/4/10 at T17, 60/6/15 at T18, 100/10/25 at T19.
+- Guaranteed legendary parts scale by POI size A1-A5: T16 2/4/6/8/10; T17 4/8/12/16/20; T18 6/12/18/24/30; T19 10/20/30/40/50.
+- Quest-only pools use existing item IDs and fixed quality/count rules. Vanilla quest pools, boss drops, XP/currency/sample rewards and existing A5 boss bundles are not changed by this item upgrade.
+- New rewards appear on freshly generated quests after restarting the host/game with updated Tweaks. Already-saved reward items may retain old rolls.
+
+T16-T19 ordinary-mob loot quality (Runtime 1.10.0 / Tweaks 3.9.7)
+---------------------------------------------------------------
+- Applies to the 35 ordinary AEC zombie families at each tier (140 classes), not bosses, beasts, quest completion rewards or world containers.
+- Ordinary equipment rolls quality 5-6 at all four tiers. Advanced equipment rolls exactly quality 2 / 3 / 4 / 5 for T16 / T17 / T18 / T19.
+- Advanced means Rare/Unique item variants, LegendWeapon-tagged items and the existing improved/unique/legendary weapon pools. Classification adds only a marker property; it does not change the item globally.
+- Items without an actual quality stat, including ammunition, materials and ordinary modifier items, retain native behavior.
+- 36 scoped bags preserve all nine native loot families, including plague/regular weighted selection, existing drop probabilities, contents, stack counts and item-selection chances. Legendary item drop chances are not increased.
+- The bag identity carries its source tier across looting by another player, network synchronization and saves; the looter's GS does not determine the tier.
+- Quality is selected before the native ItemValue constructor initializes mod slots and before loot stats/durability are populated. Nested unrelated containers and quest reward generation are explicitly isolated; exception finalizers restore scope.
+- Both host and joining players must update Mods/98-AECxProjectZ_Tweaks and Mods/99-AEC_T16_RuntimeFix, then fully restart without EAC. Check newly dropped bags: existing generated loot and old unmarked bags are not rewritten.
+- Offline regression covers real SpawnItem IL, the actual factory with the Unity constructor stubbed, 896 quality cases, scope isolation, all 140 merged entity mappings and unchanged native bag contents/rates.
 
 T16-T19 boss escalation
 -----------------------

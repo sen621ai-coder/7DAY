@@ -641,123 +641,133 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T16_A1_name" />
       <variable name="offer" value="aec_quest_T16_A1_offer" />
-      <reward type="Exp" value="200000" />
-      <reward type="Item" id="casinoCoin" value="10000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="250" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="750" />
+      <reward type="Exp" value="300000" />
+      <reward type="Item" id="casinoCoin" value="15000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="350" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="1200" />
+      <reward type="Item" id="resourceLegendaryParts" value="2" />
     </quest>
     <quest id="aec_quest_T16_A2_clear" template="aec_base_A2">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T16_A2_name" />
       <variable name="offer" value="aec_quest_T16_A2_offer" />
-      <reward type="Exp" value="400000" />
-      <reward type="Item" id="casinoCoin" value="10000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="260" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="1500" />
+      <reward type="Exp" value="600000" />
+      <reward type="Item" id="casinoCoin" value="17000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="375" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2400" />
+      <reward type="Item" id="resourceLegendaryParts" value="4" />
     </quest>
     <quest id="aec_quest_T16_A3_clear" template="aec_base_A3">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T16_A3_name" />
       <variable name="offer" value="aec_quest_T16_A3_offer" />
-      <reward type="Exp" value="600000" />
-      <reward type="Item" id="casinoCoin" value="10000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="270" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="2250" />
+      <reward type="Exp" value="900000" />
+      <reward type="Item" id="casinoCoin" value="19000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="400" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3600" />
+      <reward type="Item" id="resourceLegendaryParts" value="6" />
     </quest>
     <quest id="aec_quest_T16_A4_clear" template="aec_base_A4">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T16_A4_name" />
       <variable name="offer" value="aec_quest_T16_A4_offer" />
-      <reward type="Exp" value="800000" />
-      <reward type="Item" id="casinoCoin" value="10000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="280" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="3000" />
+      <reward type="Exp" value="1200000" />
+      <reward type="Item" id="casinoCoin" value="21000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="425" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="4800" />
+      <reward type="Item" id="resourceLegendaryParts" value="8" />
     </quest>
     <quest id="aec_quest_T16_A5_clear" template="aec_base_A5">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T16_A5_name" />
       <variable name="offer" value="aec_quest_T16_A5_offer" />
-      <reward type="Exp" value="1000000" />
-      <reward type="Item" id="casinoCoin" value="10000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="300" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="3750" />
+      <reward type="Exp" value="1500000" />
+      <reward type="Item" id="casinoCoin" value="23000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="450" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
       <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="10" />
     </quest>
     <quest id="aec_quest_T17_A1_clear" template="aec_base_A1">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T17_A1_name" />
       <variable name="offer" value="aec_quest_T17_A1_offer" />
-      <reward type="Exp" value="400000" />
-      <reward type="Item" id="casinoCoin" value="20000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="350" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="1500" />
+      <reward type="Exp" value="600000" />
+      <reward type="Item" id="casinoCoin" value="25000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="450" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2400" />
+      <reward type="Item" id="resourceLegendaryParts" value="4" />
     </quest>
     <quest id="aec_quest_T17_A2_clear" template="aec_base_A2">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T17_A2_name" />
       <variable name="offer" value="aec_quest_T17_A2_offer" />
-      <reward type="Exp" value="800000" />
-      <reward type="Item" id="casinoCoin" value="20000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="375" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="3000" />
+      <reward type="Exp" value="1200000" />
+      <reward type="Item" id="casinoCoin" value="27000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="490" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="4800" />
+      <reward type="Item" id="resourceLegendaryParts" value="8" />
     </quest>
     <quest id="aec_quest_T17_A3_clear" template="aec_base_A3">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T17_A3_name" />
       <variable name="offer" value="aec_quest_T17_A3_offer" />
-      <reward type="Exp" value="1200000" />
-      <reward type="Item" id="casinoCoin" value="20000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="400" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="4500" />
+      <reward type="Exp" value="1800000" />
+      <reward type="Item" id="casinoCoin" value="29000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="530" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="7200" />
+      <reward type="Item" id="resourceLegendaryParts" value="12" />
     </quest>
     <quest id="aec_quest_T17_A4_clear" template="aec_base_A4">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T17_A4_name" />
       <variable name="offer" value="aec_quest_T17_A4_offer" />
-      <reward type="Exp" value="1600000" />
-      <reward type="Item" id="casinoCoin" value="20000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="425" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Exp" value="2400000" />
+      <reward type="Item" id="casinoCoin" value="31000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="570" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="9600" />
+      <reward type="Item" id="resourceLegendaryParts" value="16" />
     </quest>
     <quest id="aec_quest_T17_A5_clear" template="aec_base_A5">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T17_A5_name" />
       <variable name="offer" value="aec_quest_T17_A5_offer" />
-      <reward type="Exp" value="2000000" />
-      <reward type="Item" id="casinoCoin" value="20000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
-      <reward type="Item" id="aecUniversalToken" value="450" />
-      <reward type="Item" id="resourceAECMutationSampleT5" value="7500" />
+      <reward type="Exp" value="3000000" />
+      <reward type="Item" id="casinoCoin" value="33000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="610" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
       <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="20" />
     </quest>
     <quest id="aec_quest_T18_A1_clear" template="aec_base_A1">
       <property name="difficulty_tier" value="6" />
@@ -765,11 +775,12 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T18_A1_offer" />
       <reward type="Exp" value="800000" />
       <reward type="Item" id="casinoCoin" value="35000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
       <reward type="Item" id="aecUniversalToken" value="500" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="3000" />
+      <reward type="Item" id="resourceLegendaryParts" value="6" />
     </quest>
     <quest id="aec_quest_T18_A2_clear" template="aec_base_A2">
       <property name="difficulty_tier" value="6" />
@@ -777,11 +788,12 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T18_A2_offer" />
       <reward type="Exp" value="1600000" />
       <reward type="Item" id="casinoCoin" value="35000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
       <reward type="Item" id="aecUniversalToken" value="540" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="resourceLegendaryParts" value="12" />
     </quest>
     <quest id="aec_quest_T18_A3_clear" template="aec_base_A3">
       <property name="difficulty_tier" value="6" />
@@ -789,11 +801,12 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T18_A3_offer" />
       <reward type="Exp" value="2400000" />
       <reward type="Item" id="casinoCoin" value="35000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
       <reward type="Item" id="aecUniversalToken" value="580" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="9000" />
+      <reward type="Item" id="resourceLegendaryParts" value="18" />
     </quest>
     <quest id="aec_quest_T18_A4_clear" template="aec_base_A4">
       <property name="difficulty_tier" value="6" />
@@ -801,11 +814,12 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T18_A4_offer" />
       <reward type="Exp" value="3200000" />
       <reward type="Item" id="casinoCoin" value="35000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
       <reward type="Item" id="aecUniversalToken" value="620" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="resourceLegendaryParts" value="24" />
     </quest>
     <quest id="aec_quest_T18_A5_clear" template="aec_base_A5">
       <property name="difficulty_tier" value="6" />
@@ -813,12 +827,13 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T18_A5_offer" />
       <reward type="Exp" value="4000000" />
       <reward type="Item" id="casinoCoin" value="35000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
       <reward type="Item" id="aecUniversalToken" value="660" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="15000" />
       <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="30" />
     </quest>
     <quest id="aec_quest_T19_A1_clear" template="aec_base_A1">
       <property name="difficulty_tier" value="6" />
@@ -826,11 +841,13 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T19_A1_offer" />
       <reward type="Exp" value="1600000" />
       <reward type="Item" id="casinoCoin" value="50000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
       <reward type="Item" id="aecUniversalToken" value="750" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="resourceLegendaryParts" value="10" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
     </quest>
     <quest id="aec_quest_T19_A2_clear" template="aec_base_A2">
       <property name="difficulty_tier" value="6" />
@@ -838,11 +855,13 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T19_A2_offer" />
       <reward type="Exp" value="3200000" />
       <reward type="Item" id="casinoCoin" value="50000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
       <reward type="Item" id="aecUniversalToken" value="825" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="resourceLegendaryParts" value="20" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
     </quest>
     <quest id="aec_quest_T19_A3_clear" template="aec_base_A3">
       <property name="difficulty_tier" value="6" />
@@ -850,11 +869,13 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T19_A3_offer" />
       <reward type="Exp" value="4800000" />
       <reward type="Item" id="casinoCoin" value="50000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
       <reward type="Item" id="aecUniversalToken" value="900" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="18000" />
+      <reward type="Item" id="resourceLegendaryParts" value="30" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
     </quest>
     <quest id="aec_quest_T19_A4_clear" template="aec_base_A4">
       <property name="difficulty_tier" value="6" />
@@ -862,11 +883,13 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T19_A4_offer" />
       <reward type="Exp" value="6400000" />
       <reward type="Item" id="casinoCoin" value="50000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
       <reward type="Item" id="aecUniversalToken" value="975" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="24000" />
+      <reward type="Item" id="resourceLegendaryParts" value="40" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
     </quest>
     <quest id="aec_quest_T19_A5_clear" template="aec_base_A5">
       <property name="difficulty_tier" value="6" />
@@ -874,12 +897,14 @@ RU: Скрытая оболочка обучения AEC остаётся отв
       <variable name="offer" value="aec_quest_T19_A5_offer" />
       <reward type="Exp" value="8000000" />
       <reward type="Item" id="casinoCoin" value="50000" />
-      <reward type="LootItem" id="groupQuestAmmo,groupQuestSchematics,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestMedical,groupQuestAmmo,groupQuestMods" ischosen="true" value="7" />
-      <reward type="LootItem" id="groupQuestGas,groupQuestSteel02,groupQuestResourcesT1" ischosen="true" value="6" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
       <reward type="Item" id="aecUniversalToken" value="1050" />
       <reward type="Item" id="resourceAECMutationSampleT5" value="30000" />
       <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="50" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
     </quest>
   </append>
 </configs>
