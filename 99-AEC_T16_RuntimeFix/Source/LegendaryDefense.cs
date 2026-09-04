@@ -14,14 +14,37 @@ namespace AECT16RuntimeFix
     public static class LegendaryDefense
     {
         public const float Radius = 45f, Height = 60f;
+        public const int CoreSearchRadius = 10, CoreSearchHeight = 6, FacilityRadius = 24, ScanRadius = 20, ScanHeight = 10;
         public const double Preparation = 20, Intermission = 15, RetreatGrace = 15, WaveLimit = 900;
         public const string Lease = "buffPZAECDefenseLease";
         public const string Scope = "PZAECDefense";
+        public const string CoreBlock = "PZAECStrongholdCore";
+        public const string PowerBlock = "PZAECStrongholdPower";
+        public const string SupplyBlock = "PZAECStrongholdSupply";
         private static readonly Regex QuestPattern = new Regex(@"\APZAECDefenseT(16|17|18|19)\z", RegexOptions.CultureInvariant);
         private static readonly Regex EventPattern = new Regex(@"\APZAECDefenseT(16|17|18|19)W([1-3])\z", RegexOptions.CultureInvariant);
         private static readonly Regex BossPattern = new Regex(@"\APZAECDefense_(bulwark|storm)_T(16|17|18|19)_W3\z", RegexOptions.CultureInvariant);
         private static readonly Regex EnemyPattern = new Regex(@"\APZAECDefense_(runner|spider|cop|biker|demo|spitter|wolf|wight|bulwark|storm)_T(16|17|18|19)_W([1-3])\z", RegexOptions.CultureInvariant);
         private static readonly Dictionary<Quest, Session> Sessions = new Dictionary<Quest, Session>();
+
+        internal sealed class StructuralSample
+        {
+            public int Type;
+            public int HitPoints;
+        }
+
+        public sealed class FortificationReport
+        {
+            public Vector3i Core;
+            public Vector3i Power;
+            public Vector3i Supply;
+            public int StructuralBlocks;
+            public int Systems;
+            public long InitialHitPoints;
+            public int Score;
+            public int Grade;
+            internal readonly Dictionary<Vector3i, StructuralSample> Samples = new Dictionary<Vector3i, StructuralSample>();
+        }
 
         public sealed class WaveClock
         {
@@ -54,9 +77,10 @@ namespace AECT16RuntimeFix
             public Quest Quest;
             public EntityPlayerLocal Player;
             public Vector3 Anchor;
+            public FortificationReport Fortification;
             public WaveClock Clock;
             public double NextAttempt, NextLease;
-            public bool WarnedOutside;
+            public bool WarnedOutside, PowerAlive = true, SupplyAlive = true;
         }
 
         public static void Install(Harmony harmony)
@@ -104,6 +128,114 @@ namespace AECT16RuntimeFix
         }
         private static bool Finite(float value) { return !float.IsNaN(value) && !float.IsInfinity(value); }
         private static bool Inside(Vector3 position, Vector3 anchor) { return Within(position.x, position.y, position.z, anchor.x, anchor.y, anchor.z); }
+        private static int Bounded(int value, int maximum) { return value < 0 ? 0 : value > maximum ? maximum : value; }
+        public static int ConstructionScore(long hitPoints, int structuralBlocks, int systems)
+        {
+            long safeHitPoints = Math.Max(0L, hitPoints);
+            long hp = Math.Min(60L, safeHitPoints / 25000L);
+            return (int)hp + Bounded(structuralBlocks / 10, 20) + Bounded(systems * 2, 20);
+        }
+        public static int ConstructionGrade(int score) { return score >= 65 ? 3 : score >= 30 ? 2 : 1; }
+        public static int IntegrityGrade(long initialHitPoints, long remainingHitPoints)
+        {
+            if (initialHitPoints <= 0) return 1;
+            double ratio = Math.Max(0d, Math.Min(1d, (double)remainingHitPoints / initialHitPoints));
+            return ratio >= .9d ? 3 : ratio >= .7d ? 2 : 1;
+        }
+        public static int RewardRank(int constructionGrade, long initialHitPoints, long remainingHitPoints, bool powerAlive, bool supplyAlive)
+        {
+            int facilities = powerAlive && supplyAlive ? 3 : powerAlive || supplyAlive ? 2 : 1;
+            return Math.Max(1, Math.Min(Math.Min(Bounded(constructionGrade, 3), IntegrityGrade(initialHitPoints, remainingHitPoints)), facilities));
+        }
+        public static string BonusEventId(int tier, int rank)
+        {
+            return tier >= 16 && tier <= 19 && rank >= 1 && rank <= 3 ? "PZAECStrongholdBonusT" + tier + "R" + rank : null;
+        }
+        private static string NameAt(World world, Vector3i position)
+        {
+            if (world == null) return "";
+            BlockValue value = world.GetBlock(position);
+            return value.isair || value.Block == null ? "" : value.Block.blockName ?? "";
+        }
+        private static bool IsAt(World world, Vector3i position, string name)
+        {
+            return string.Equals(NameAt(world, position), name, StringComparison.OrdinalIgnoreCase);
+        }
+        private static bool FindBlock(World world, Vector3i center, string name, int radius, int height, out Vector3i found)
+        {
+            found = Vector3i.zero;
+            int best = int.MaxValue;
+            for (int y = center.y - height; y <= center.y + height; y++)
+                for (int z = center.z - radius; z <= center.z + radius; z++)
+                    for (int x = center.x - radius; x <= center.x + radius; x++)
+                    {
+                        int dx = x - center.x, dz = z - center.z;
+                        int distance = dx * dx + dz * dz + (y - center.y) * (y - center.y);
+                        if (dx * dx + dz * dz > radius * radius || distance >= best) continue;
+                        var position = new Vector3i(x, y, z);
+                        if (!IsAt(world, position, name)) continue;
+                        found = position;
+                        best = distance;
+                    }
+            return best != int.MaxValue;
+        }
+        private static bool IsSystem(string name)
+        {
+            string n = (name ?? "").ToLowerInvariant();
+            return n.Contains("trap") || n.Contains("turret") || n.Contains("electricfence") ||
+                n.Contains("tripwire") || n.Contains("motion") || n.Contains("generator") ||
+                n.Contains("batterybank") || n.Contains("solarbank") || n.Contains("speaker") ||
+                n.Contains("relay") || n == PowerBlock.ToLowerInvariant();
+        }
+        private static bool Inspect(World world, Vector3 playerPosition, out FortificationReport report, out string reason)
+        {
+            report = null;
+            reason = null;
+            if (world == null) { reason = "PZAECDefenseUnavailable"; return false; }
+            var playerBlock = new Vector3i(playerPosition);
+            if (!FindBlock(world, playerBlock, CoreBlock, CoreSearchRadius, CoreSearchHeight, out var core))
+            { reason = "PZAECStrongholdNeedCore"; return false; }
+            if (!FindBlock(world, core, PowerBlock, FacilityRadius, ScanHeight, out var power))
+            { reason = "PZAECStrongholdNeedPower"; return false; }
+            if (!FindBlock(world, core, SupplyBlock, FacilityRadius, ScanHeight, out var supply))
+            { reason = "PZAECStrongholdNeedSupply"; return false; }
+            report = new FortificationReport { Core = core, Power = power, Supply = supply };
+            for (int y = core.y - ScanHeight; y <= core.y + ScanHeight; y++)
+                for (int z = core.z - ScanRadius; z <= core.z + ScanRadius; z++)
+                    for (int x = core.x - ScanRadius; x <= core.x + ScanRadius; x++)
+                    {
+                        int dx = x - core.x, dz = z - core.z;
+                        if (dx * dx + dz * dz > ScanRadius * ScanRadius) continue;
+                        var position = new Vector3i(x, y, z);
+                        BlockValue value = world.GetBlock(position);
+                        Block block = value.Block;
+                        if (value.isair || value.isTerrain || value.isWater || value.ischild || block == null) continue;
+                        string name = block.blockName ?? "";
+                        if (IsSystem(name)) report.Systems++;
+                        if (block.BlocksMovement == 0 || block.MaxDamage < 500) continue;
+                        int remaining = Math.Max(0, block.MaxDamage - value.damage);
+                        if (remaining == 0) continue;
+                        report.StructuralBlocks++;
+                        report.InitialHitPoints += remaining;
+                        report.Samples[position] = new StructuralSample { Type = value.type, HitPoints = remaining };
+                    }
+            report.Score = ConstructionScore(report.InitialHitPoints, report.StructuralBlocks, report.Systems);
+            report.Grade = ConstructionGrade(report.Score);
+            return true;
+        }
+        private static long RemainingHitPoints(World world, FortificationReport report)
+        {
+            long total = 0;
+            if (world == null || report == null) return 0;
+            foreach (var pair in report.Samples)
+            {
+                BlockValue value = world.GetBlock(pair.Key);
+                Block block = value.Block;
+                if (value.isair || block == null || value.type != pair.Value.Type) continue;
+                total += Math.Min(pair.Value.HitPoints, Math.Max(0, block.MaxDamage - value.damage));
+            }
+            return total;
+        }
         public static bool HasActive(IEnumerable<string> activeIds)
         {
             if (activeIds != null) foreach (string id in activeIds) if (Tier(id) != 0) return true;
@@ -152,6 +284,7 @@ namespace AECT16RuntimeFix
                 !player.world.CanPlaceBlockAt(new Vector3i(player.position), null)) return "PZAECDefenseUseOutside";
             foreach (var quest in player.QuestJournal.quests)
                 if (quest != null && quest.Active && Tier(quest.ID) != 0) return "PZAECDefenseAlreadyActive";
+            if (!Inspect(player.world, player.position, out _, out string reason)) return reason;
             return null;
         }
         public static bool BeforeUse(ItemActionQuest __instance, EntityAlive ent, ref bool __result)
@@ -186,12 +319,26 @@ namespace AECT16RuntimeFix
                     return;
                 }
                 if (Sessions.ContainsKey(__instance)) return;
-                var session = new Session { Quest = __instance, Player = player, Anchor = player.position, Clock = new WaveClock(1, Time.time) };
+                if (!Inspect(player.world, player.position, out var report, out string reason))
+                {
+                    Tell(player, reason);
+                    GameManager.Instance.StartCoroutine(FailLoaded(__instance, player));
+                    return;
+                }
+                var anchor = new Vector3(report.Core.x + .5f, report.Core.y + .5f, report.Core.z + .5f);
+                var session = new Session { Quest = __instance, Player = player, Anchor = anchor,
+                    Fortification = report, Clock = new WaveClock(1, Time.time) };
                 __instance.SetPositionData(Quest.PositionDataTypes.Location, session.Anchor);
                 __instance.DataVariables[Scope + "Started_v1"] = "1";
+                __instance.DataVariables[Scope + "Score_v1"] = report.Score.ToString(CultureInfo.InvariantCulture);
                 Sessions.Add(__instance, session);
                 Publish(session);
                 Tell(player, "PZAECDefensePreparation");
+                TellFormatted(player, "PZAECStrongholdRegistered", report.Score,
+                    Localization.Get("PZAECStrongholdGrade" + report.Grade), report.StructuralBlocks, report.Systems);
+                Log("Registered score=" + report.Score + " grade=" + report.Grade + " blocks=" +
+                    report.StructuralBlocks + " systems=" + report.Systems + " hp=" + report.InitialHitPoints +
+                    " core=" + report.Core + " code=" + __instance.QuestCode);
                 GameManager.Instance.StartCoroutine(Run(session));
             }
             catch (Exception ex)
@@ -274,6 +421,11 @@ namespace AECT16RuntimeFix
         {
             var player = s.Player;
             if (player == null || player.world == null) return "PZAECDefenseUnavailable";
+            if (!IsAt(player.world, s.Fortification.Core, CoreBlock)) return "PZAECStrongholdCoreLost";
+            bool power = IsAt(player.world, s.Fortification.Power, PowerBlock);
+            bool supply = IsAt(player.world, s.Fortification.Supply, SupplyBlock);
+            if (power != s.PowerAlive) { s.PowerAlive = power; Tell(player, power ? "PZAECStrongholdPowerRestored" : "PZAECStrongholdPowerLost"); }
+            if (supply != s.SupplyAlive) { s.SupplyAlive = supply; Tell(player, supply ? "PZAECStrongholdSupplyRestored" : "PZAECStrongholdSupplyLost"); }
             return s.Clock.Check(now, !player.IsDead(), GameStats.GetBool(EnumGameStats.EnemySpawnMode),
                 player.world.IsWithinTraderArea(new Vector3i(player.position)), Inside(player.position, s.Anchor));
         }
@@ -359,6 +511,23 @@ namespace AECT16RuntimeFix
                 for (int wave = 1; wave <= 3 && valid; wave++) valid &= __instance.DataVariables.ContainsKey(WaveMarker(wave));
                 foreach (var objective in __instance.Objectives) valid &= objective.Complete;
                 if (!valid) finalState = Quest.QuestState.Failed;
+                else
+                {
+                    long remaining = RemainingHitPoints(s.Player.world, s.Fortification);
+                    bool power = IsAt(s.Player.world, s.Fortification.Power, PowerBlock);
+                    bool supply = IsAt(s.Player.world, s.Fortification.Supply, SupplyBlock);
+                    int rank = RewardRank(s.Fortification.Grade, s.Fortification.InitialHitPoints, remaining, power, supply);
+                    string eventId = BonusEventId(Tier(__instance.ID), rank);
+                    bool awarded = LegendaryAdventure.DispatchOnce(__instance.DataVariables, Scope + "Bonus_v1", eventId, id =>
+                        GameEventManager.Current != null && GameEventManager.Current.HandleAction(id, s.Player, s.Player, false,
+                            Scope + ":" + __instance.QuestCode + ":" + rank, Scope + ":" + __instance.QuestCode + ":" + rank,
+                            false, false, "", null));
+                    TellFormatted(s.Player, "PZAECStrongholdComplete", rank,
+                        s.Fortification.InitialHitPoints <= 0 ? 0 : (int)Math.Round(100d * remaining / s.Fortification.InitialHitPoints),
+                        power ? 1 : 0, supply ? 1 : 0);
+                    Log("Completed rank=" + rank + " integrity=" + remaining + "/" + s.Fortification.InitialHitPoints +
+                        " power=" + power + " supply=" + supply + " bonusQueued=" + awarded + " code=" + __instance.QuestCode);
+                }
             }
             Revoke(__instance.OwnerJournal?.OwnerPlayer, __instance.QuestCode);
         }
@@ -369,6 +538,10 @@ namespace AECT16RuntimeFix
             if (player != null) Tell(player, reason);
         }
         private static void Tell(EntityPlayerLocal player, string key) { GameManager.ShowTooltip(player, Localization.Get(key)); }
+        private static void TellFormatted(EntityPlayerLocal player, string key, params object[] values)
+        {
+            GameManager.ShowTooltip(player, string.Format(CultureInfo.InvariantCulture, Localization.Get(key), values));
+        }
         private static void Log(string message) { T16RuntimeFixMod.SafeLog("[AEC-Defense] " + message); }
     }
 }

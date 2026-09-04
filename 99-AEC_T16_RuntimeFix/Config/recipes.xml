@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
   <append xpath="/recipes">
+    <recipe name="PZAECStrongholdCore" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedSteel" count="100" />
+      <ingredient name="resourceMechanicalParts" count="30" />
+      <ingredient name="resourceElectricParts" count="30" />
+      <ingredient name="resourceLegendaryParts" count="2" />
+    </recipe>
+    <recipe name="PZAECStrongholdPower" count="1" craft_area="workbench" craft_time="45" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="generatorbank" count="1" />
+      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceMechanicalParts" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+    </recipe>
+    <recipe name="PZAECStrongholdSupply" count="1" craft_area="workbench" craft_time="45" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedSteel" count="75" />
+      <ingredient name="resourceMechanicalParts" count="20" />
+      <ingredient name="resourceSpring" count="20" />
+    </recipe>
+  </append>
+  <append xpath="/recipes">
     <recipe name="PZAECDefenseBeaconT16" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECChallengeVoucherT16" count="1" />
       <ingredient name="resourceForgedSteel" count="50" />

@@ -201,7 +201,7 @@ foreach ($row in Import-Csv (Join-Path $configRoot 'Localization.csv')) {
 Assert-Adventure ($quests.SelectNodes('//quest[not(starts-with(@id,"PZAECDefense"))]').Count -eq 104) 'Expected 40 mixed-type contracts, 60 affix contracts and four trials'
 Assert-Adventure ($entities.SelectNodes('//entity_class[starts-with(@name,"PZAECAffix_") or starts-with(@name,"PZAECTrial_")]').Count -eq 24) 'Expected 24 isolated champions'
 Assert-Adventure ($items.SelectNodes('//item[starts-with(@name,"PZAECChallengeVoucher")]').Count -eq 4) 'Expected four vouchers'
-Assert-Adventure ($events.SelectNodes('//action_sequence[not(starts-with(@name,"PZAECDefense"))]').Count -eq 23) 'Original three + twenty adventure events required'
+Assert-Adventure ($events.SelectNodes('//action_sequence[not(starts-with(@name,"PZAECDefense")) and not(starts-with(@name,"PZAECStronghold"))]').Count -eq 23) 'Original three + twenty adventure events required'
 foreach ($tier in 16..19) {
     foreach ($area in 1..5) {
         $baseId = "aec_quest_T${tier}_A${area}_clear"

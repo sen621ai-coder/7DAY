@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/blocks">
+    <block name="PZAECStrongholdCore">
+      <property name="Extends" value="cntSteelWallCabinetSecure" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="keystoneBlock" />
+      <property name="CustomIconTint" value="FF6633" />
+      <property name="DescriptionKey" value="PZAECStrongholdCoreDesc" />
+      <property name="MaxDamage" value="20000" />
+      <property name="LPHardnessScale" value="4" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="5000" />
+      <property name="SellableToTrader" value="false" />
+      <property name="TakeDelay" value="30" />
+      <property name="Group" value="Science,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property class="RepairItems">
+        <property name="resourceForgedSteel" value="40" />
+        <property name="resourceElectricParts" value="10" />
+      </property>
+    </block>
+    <block name="PZAECStrongholdPower">
+      <property name="Extends" value="generatorbank" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIconTint" value="55CCFF" />
+      <property name="DescriptionKey" value="PZAECStrongholdPowerDesc" />
+      <property name="MaxDamage" value="12000" />
+      <property name="LPHardnessScale" value="4" />
+      <property name="MaxPower" value="15000" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="4000" />
+      <property name="SellableToTrader" value="false" />
+      <property name="TakeDelay" value="30" />
+      <property class="RepairItems">
+        <property name="resourceForgedSteel" value="25" />
+        <property name="resourceMechanicalParts" value="10" />
+        <property name="resourceElectricParts" value="20" />
+      </property>
+    </block>
+    <block name="PZAECStrongholdSupply">
+      <property name="Extends" value="cntSteelWallCabinetSecure" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="cntSteelWallCabinetSecure" />
+      <property name="CustomIconTint" value="FFD34D" />
+      <property name="DescriptionKey" value="PZAECStrongholdSupplyDesc" />
+      <property name="MaxDamage" value="12000" />
+      <property name="LPHardnessScale" value="4" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="3500" />
+      <property name="SellableToTrader" value="false" />
+      <property name="TakeDelay" value="30" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_building,SC_loot" />
+      <property class="RepairItems">
+        <property name="resourceForgedSteel" value="25" />
+        <property name="resourceMechanicalParts" value="10" />
+      </property>
+    </block>
+  </append>
+</configs>

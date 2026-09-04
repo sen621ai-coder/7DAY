@@ -3,6 +3,17 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.0 stronghold construction challenge
+-------------------------
+- Base defense now requires a craftable Stronghold Core, functional Power
+  Station and lockable Supply Depot. The beacon is used within 10m of the core.
+- Starting construction is scored inside 20m from structural HP, block count,
+  electrical systems and defenses. The core anchors the existing three waves.
+- Core loss fails the run. Power/supply survival and retained structural HP
+  combine with the starting grade to select a rank 1-3 conditional bonus.
+- Rank 3 adds an exact-tier boss cache. See BASE_DEFENSE.md for formulas, costs
+  and the T16-T19 bonus table.
+
 Runtime 1.15.4 trader-label and loot-loader hotfix
 -------------------------
 - Loot groups are now defined before any container is rewired to them. This
