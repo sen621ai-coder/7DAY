@@ -337,9 +337,15 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
                 add_effect(eg, "BlockDamage", "perc_set", "0", "secondary")
             else:
                 add_effect(eg, "RunSpeed", "perc_add", "-.15")
+                # target_tags is an OR filter in 7DTD. Keep the owner explicit,
+                # then filter the AOE to allied/party player entities so hostile
+                # players cannot receive the defensive aura in PvP.
                 ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfBuffUpdate", "action": "AddBuff",
+                    "buff": f"buffPZAECWardenT{tier}Aura"})
+                aura = ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfBuffUpdate", "action": "AddBuff",
                     "target": "selfAOE", "range": ["8", "9", "10", "12"][idx],
-                    "target_tags": "player,ally", "buff": f"buffPZAECWardenT{tier}Aura"})
+                    "target_tags": "ally,party", "buff": f"buffPZAECWardenT{tier}Aura"})
+                ET.SubElement(aura, "requirement", {"name": "EntityTagCompare", "target": "other", "tags": "player"})
                 ally = ET.SubElement(definitions, "buff", {"name": f"buffPZAECWardenT{tier}Aura", "hidden": "true"})
                 ET.SubElement(ally, "stack_type", {"value": "replace"})
                 ET.SubElement(ally, "duration", {"value": "1.5"})

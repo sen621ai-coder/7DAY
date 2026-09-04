@@ -85,6 +85,22 @@ def main() -> None:
                 expected_buffs.add(f"buffPZAECWardenT{tier}Aura")
     assert expected_buffs <= buffs.keys(), expected_buffs - buffs.keys()
 
+    for tier in TIERS:
+        active = buffs[f"buffPZAECWardenT{tier}Active"]
+        aura_name = f"buffPZAECWardenT{tier}Aura"
+        aura_effects = [
+            effect for effect in active.findall(".//triggered_effect")
+            if effect.get("action") == "AddBuff" and effect.get("buff") == aura_name
+        ]
+        assert len(aura_effects) == 2, (active.get("name"), len(aura_effects))
+        owner = [effect for effect in aura_effects if effect.get("target") is None]
+        allied = [effect for effect in aura_effects if effect.get("target") == "selfAOE"]
+        assert len(owner) == 1 and len(allied) == 1, active.get("name")
+        assert allied[0].get("target_tags") == "ally,party", allied[0].attrib
+        player_requirement = allied[0].find("requirement[@name='EntityTagCompare']")
+        assert player_requirement is not None and player_requirement.get("target") == "other" \
+            and player_requirement.get("tags") == "player", active.get("name")
+
     recipes = [r.get("name") for a in recipes_root.findall(".//append[@xpath='/recipes']") for r in a.findall("recipe")]
     for name in expected_armor | expected_devices:
         tier = int(name[-2:])

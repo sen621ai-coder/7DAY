@@ -1183,7 +1183,10 @@
         <duration value="8" />
         <effect_group>
           <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
-          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="8" target_tags="player,ally" buff="buffPZAECWardenT16Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT16Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="8" target_tags="ally,party" buff="buffPZAECWardenT16Aura">
+            <requirement name="EntityTagCompare" target="other" tags="player" />
+          </triggered_effect>
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT16Aura" hidden="true">
@@ -1239,7 +1242,10 @@
         <duration value="9" />
         <effect_group>
           <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
-          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="9" target_tags="player,ally" buff="buffPZAECWardenT17Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT17Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="9" target_tags="ally,party" buff="buffPZAECWardenT17Aura">
+            <requirement name="EntityTagCompare" target="other" tags="player" />
+          </triggered_effect>
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT17Aura" hidden="true">
@@ -1295,7 +1301,10 @@
         <duration value="10" />
         <effect_group>
           <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
-          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="10" target_tags="player,ally" buff="buffPZAECWardenT18Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT18Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="10" target_tags="ally,party" buff="buffPZAECWardenT18Aura">
+            <requirement name="EntityTagCompare" target="other" tags="player" />
+          </triggered_effect>
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT18Aura" hidden="true">
@@ -1351,7 +1360,10 @@
         <duration value="12" />
         <effect_group>
           <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
-          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="12" target_tags="player,ally" buff="buffPZAECWardenT19Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT19Aura" />
+          <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="12" target_tags="ally,party" buff="buffPZAECWardenT19Aura">
+            <requirement name="EntityTagCompare" target="other" tags="player" />
+          </triggered_effect>
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT19Aura" hidden="true">

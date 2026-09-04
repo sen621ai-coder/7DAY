@@ -1,6 +1,12 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.17.1 Warden aura targeting fix
+- Warden Field now always buffs its owner and only allied/party players in its
+  area. Hostile players can no longer receive the defensive aura in PvP.
+- Adds validation for the owner and allied-player target paths so regeneration
+  cannot silently reintroduce the broad player target filter.
+
 Runtime 1.17.0 endgame resonance armor
 - Adds four true armor sets at T16, T17, T18 and T19. Every set has a helmet,
   outfit, gloves and boots, for 64 new wearable pieces in total.
@@ -10,7 +16,7 @@ Runtime 1.17.0 endgame resonance armor
   through melee power attacks, and Warden by taking hostile hits.
 - Harrier designation creates a precision damage window; Storm vent grants rapid
   penetrating fire; Tremor release empowers power attacks without block damage;
-  Warden field refreshes a defensive stamina aura on nearby players.
+  Warden field refreshes a defensive stamina aura on its owner and nearby allies.
 - Adds 16 reusable active devices, three craftable chassis, tiered siege capacitors
   and mutant hearts, direct recipes, and T17-T19 upgrade recipes.
 - Blood Moon siege engineers now drop their tier's capacitors. Same-tier boss
