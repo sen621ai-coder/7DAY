@@ -33,6 +33,11 @@ try {
         Assert-True ($installStrings -contains $target) "Missing Harmony target: $target"
     }
 
+    $prefix = $fix.Methods | Where-Object Name -eq 'BeforeLocalRespawn'
+    $nativeRespawn = ($game.Types | Where-Object Name -eq 'EntityPlayerLocal').Methods |
+        Where-Object { $_.Name -eq 'Respawn' -and $_.Parameters.Count -eq 1 }
+    Assert-True ($prefix.Parameters[1].Name -eq $nativeRespawn.Parameters[0].Name) 'Harmony respawn parameter name does not match the native method.'
+
     $update = $fix.Methods | Where-Object Name -eq 'AfterLocalUpdate'
     $calls = @($update.Body.Instructions | ForEach-Object { $_.Operand } |
         Where-Object { $_ -is [Mono.Cecil.MethodReference] })

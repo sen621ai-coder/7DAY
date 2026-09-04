@@ -1188,4 +1188,12 @@
       <action class="AddItems"><property name="added_items" value="aecUniversalToken,resourceLegendaryParts,resourceForgedSteel,PZAECBuildPartsR5,itemPZAECBossLootBundleT19" /><property name="added_item_counts" value="540,36,450,3,1" /></action>
     </action_sequence>
   </append>
+  <!-- Direct relay activation supplies a block ActionTarget. Spawn and nearby
+       live-count actions then use that block position instead of a null entity. -->
+  <set xpath="/gameevents/action_sequence[@name='eventAECQuestRelaySpawn']/property[@name='target_type']/@value">Block</set>
+  <set xpath="/gameevents/action_sequence[@name='eventAECQuestRelaySpawn1star']/property[@name='target_type']/@value">Block</set>
+  <set xpath="/gameevents/action_sequence[@name='eventAECQuestRelaySpawn2star']/property[@name='target_type']/@value">Block</set>
+  <set xpath="/gameevents/action_sequence[@name='eventAECQuestRelaySpawn3star']/property[@name='target_type']/@value">Block</set>
+  <set xpath="/gameevents/action_sequence[@name='eventAECQuestRelaySpawn4star']/property[@name='target_type']/@value">Block</set>
+  <set xpath="/gameevents/action_sequence[@name='eventAECQuestRelaySpawn5star']/property[@name='target_type']/@value">Block</set>
 </configs>

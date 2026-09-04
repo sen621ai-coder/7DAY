@@ -3,6 +3,14 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.1 contract-relay and respawn compatibility fixes
+-------------------------
+- Contract Relay blocks now call their quest-giver spawn events directly with
+  the block position. V2.5 drops that position through the old nested event,
+  which made all six relay tiers appear to do nothing when activated.
+- The local-death recovery prefix now uses the current Respawn parameter name,
+  allowing Harmony to install the recovery patch instead of rejecting it.
+
 Runtime 1.16.0 stronghold construction challenge
 -------------------------
 - Base defense now requires a craftable Stronghold Core, functional Power

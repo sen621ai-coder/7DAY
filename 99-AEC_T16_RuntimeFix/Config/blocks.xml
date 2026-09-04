@@ -58,4 +58,13 @@
       </property>
     </block>
   </append>
+
+  <!-- V2.5 no longer carries a block ActionTarget through CallGameEvent.
+       Invoke each spawn sequence directly so it receives the relay position. -->
+  <set xpath="/blocks/block[@name='aecQuestRelay']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn</set>
+  <set xpath="/blocks/block[@name='aecQuestRelay1star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn1star</set>
+  <set xpath="/blocks/block[@name='aecQuestRelay2star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn2star</set>
+  <set xpath="/blocks/block[@name='aecQuestRelay3star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn3star</set>
+  <set xpath="/blocks/block[@name='aecQuestRelay4star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn4star</set>
+  <set xpath="/blocks/block[@name='aecQuestRelay5star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn5star</set>
 </configs>

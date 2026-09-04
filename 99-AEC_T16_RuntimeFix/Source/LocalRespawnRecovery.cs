@@ -61,9 +61,9 @@ namespace AECT16RuntimeFix
             }
         }
 
-        public static void BeforeLocalRespawn(EntityPlayerLocal __instance, RespawnType _respawnReason)
+        public static void BeforeLocalRespawn(EntityPlayerLocal __instance, RespawnType _reason)
         {
-            if (__instance != null && _respawnReason == RespawnType.Died &&
+            if (__instance != null && _reason == RespawnType.Died &&
                 trackedEntityId == __instance.entityId)
             {
                 deathRespawnStarted = true;
