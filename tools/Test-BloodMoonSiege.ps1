@@ -111,6 +111,8 @@ public static class SiegeRegression
             var selector=mod.Types.Single(t=>t.Name=="BloodMoonSpawnFix").Methods.Single(m=>m.Name=="SelectForTarget");
             Check(selector.Body.Instructions.Count(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="SelectReplacement")==2,"Dynamic/fallback blood moon path missing squad");
             Check(selector.Body.Instructions.Count(i=>i.Operand is Mono.Cecil.MethodReference m && m.DeclaringType.Name=="BloodMoonSiege" && m.Name=="TierForGameStage")==2,"Siege-specific GS ladder missing from dynamic/fallback paths");
+            var replacement=mod.Types.Single(t=>t.Name=="BloodMoonSiege").Methods.Single(m=>m.Name=="SelectReplacement");
+            Check(replacement.Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="GetGameRandom"),"Null native random source is not resolved through the world");
             var ai=mod.Types.Single(t=>t.Name=="EAIPZAECSiege");
             Check(ai.Methods.Single(m=>m.Name=="Continue").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name=="recovering"),"Gunner walks into ditch on reload");
             var enabled=ai.Methods.Single(m=>m.Name=="Enabled");

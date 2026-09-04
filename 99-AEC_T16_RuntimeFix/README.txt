@@ -3,6 +3,13 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.3 Blood Moon siege random-source hotfix
+-------------------------
+- Blood Moon engineering-squad replacement now mirrors the native selector's
+  world-random fallback when its optional random argument is null.
+- Missing world entity collections safely preserve the ordinary spawn instead
+  of interrupting the Blood Moon director.
+
 Runtime 1.16.2 contract-relay pickup fix
 -------------------------
 - All six Contract Relay tiers once again expose the standard take command.

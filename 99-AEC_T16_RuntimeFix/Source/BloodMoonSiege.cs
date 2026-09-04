@@ -37,7 +37,12 @@ namespace AECT16RuntimeFix
                 !target.world.isEventBloodMoon || !isEnemy || isAnimal || tier < 16 || tier > 19) return original;
             string oldName = EntityClass.GetEntityClassName(original);
             if (oldName == null || !oldName.StartsWith("AECZombie", StringComparison.Ordinal)) return original;
-            string name = Variant(tier, random.RandomRange(100));
+            // The native selector accepts a null GameRandom and resolves it from
+            // the world internally. Dynamic selections reach us before that
+            // native fallback, so mirror it here before rolling the squad slot.
+            GameRandom selectionRandom = random ?? target.world.GetGameRandom();
+            if (selectionRandom == null) return original;
+            string name = Variant(tier, selectionRandom.RandomRange(100));
             if (name == null) return original;
             int replacement = EntityClass.GetId(name);
             if (replacement == -1) return original;
@@ -47,7 +52,9 @@ namespace AECT16RuntimeFix
             // suppress this deliberate escalation.
             if (replacementClass == null || !replacementClass.bIsEnemyEntity || replacementClass.bIsAnimalEntity) return original;
             int nearby = 0, targeted = 0;
-            foreach (var entity in target.world.Entities.list)
+            var entities = target.world.Entities;
+            if (entities == null || entities.list == null) return original;
+            foreach (var entity in entities.list)
             {
                 var alive = entity as EntityAlive;
                 if (alive == null || alive.IsDead() || Tier(EntityClass.GetEntityClassName(alive.entityClass)) == 0) continue;
