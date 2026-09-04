@@ -449,7 +449,7 @@ def build_loot() -> str:
         ET.SubElement(bag_group, "item", {"name": "resourceForgedSteel", "count": str(10 + (tier - 16) * 5)})
     containers = ET.Element("append", {"xpath": "/lootcontainers"})
     for tier in TIERS:
-        con = ET.SubElement(containers, "lootcontainer", {"name": f"PZAECSiegeLootT{tier}", "count": "all", "size": "4,2", "sound_open": "UseActions/open_backpack", "sound_close": "UseActions/close_backpack", "open_time": "1", "ignore_loot_abundance": "true", "unmodified_lootstage": "true"})
+        con = ET.SubElement(containers, "lootcontainer", {"name": f"PZAECSiegeLootT{tier}", "count": "1", "size": "4,2", "sound_open": "UseActions/open_backpack", "sound_close": "UseActions/close_backpack", "open_time": "1", "ignore_loot_abundance": "true", "unmodified_lootstage": "true"})
         ET.SubElement(con, "item", {"group": f"PZAECSiegeMaterialsT{tier}"})
     patches = []
     chances = {16: ".10", 17: ".15", 18: ".22", 19: ".30"}

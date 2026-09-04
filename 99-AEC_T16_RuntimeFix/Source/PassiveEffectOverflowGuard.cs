@@ -11,7 +11,7 @@ namespace AECT16RuntimeFix
     /// </summary>
     public static class PassiveEffectOverflowGuard
     {
-        private const float DamageCeiling = 100000000f;
+        private const float RecoveryCeiling = 100000000f;
         private const float VitalCeiling = 1000000000f;
         private const float QuantityCeiling = 1000000f;
         private const float RewardCeiling = 100000000f;
@@ -109,17 +109,8 @@ namespace AECT16RuntimeFix
                 return value;
             }
 
-            // Multipliers may legitimately be negative debuffs. Limit only
-            // their positive side so those mechanics keep their meaning.
-            if (rule == 5)
-            {
-                if (float.IsPositiveInfinity(value) || value > MultiplierCeiling)
-                    return MultiplierCeiling;
-                return value;
-            }
-
             float minimum = 0f;
-            float maximum = rule == 1 ? DamageCeiling :
+            float maximum = rule == 1 ? RecoveryCeiling :
                 rule == 2 ? VitalCeiling :
                 rule == 3 ? QuantityCeiling : RewardCeiling;
 
@@ -147,14 +138,24 @@ namespace AECT16RuntimeFix
             switch (effect)
             {
                 case PassiveEffects.EntityDamage:
-                case PassiveEffects.EntityHeal:
                 case PassiveEffects.BlockDamage:
-                case PassiveEffects.BlockRepairAmount:
                 case PassiveEffects.ExplosionBlockDamage:
                 case PassiveEffects.ExplosionEntityDamage:
                 case PassiveEffects.VehicleEntityDamage:
                 case PassiveEffects.VehicleBlockDamage:
                 case PassiveEffects.FallingBlockDamage:
+                case PassiveEffects.DamageModifier:
+                case PassiveEffects.HeadshotDamageModifier:
+                case PassiveEffects.InternalDamageModifier:
+                case PassiveEffects.DamageBonus:
+                case PassiveEffects.GrazeDamageMultiplier:
+                case PassiveEffects.ExplosionIncomingDamage:
+                    // Preserve ProjectZ's full high-tier damage calculation;
+                    // this guard must not impose a mod-level damage ceiling.
+                    return 0;
+
+                case PassiveEffects.EntityHeal:
+                case PassiveEffects.BlockRepairAmount:
                     return 1;
 
                 case PassiveEffects.DegradationMax:
@@ -199,14 +200,6 @@ namespace AECT16RuntimeFix
                 case PassiveEffects.QuestRewardOptionCount:
                 case PassiveEffects.QuestRewardChoiceCount:
                     return 4;
-
-                case PassiveEffects.DamageModifier:
-                case PassiveEffects.HeadshotDamageModifier:
-                case PassiveEffects.InternalDamageModifier:
-                case PassiveEffects.DamageBonus:
-                case PassiveEffects.GrazeDamageMultiplier:
-                case PassiveEffects.ExplosionIncomingDamage:
-                    return 5;
 
                 case PassiveEffects.IncrementalSpreadMultiplier:
                 case PassiveEffects.SpreadMultiplierHip:

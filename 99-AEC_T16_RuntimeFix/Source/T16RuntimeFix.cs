@@ -21,6 +21,7 @@ namespace AECT16RuntimeFix
             {
                 var harmony = new Harmony(HarmonyId);
                 PatchModelTintSafety(harmony);
+                LootContainerNullGuard.Install(harmony);
                 LocalRespawnRecovery.Install(harmony);
                 PassiveEffectOverflowGuard.Install(harmony);
                 ContractRelayPickup.Install(harmony);

@@ -1360,16 +1360,16 @@
       </lootgroup>
     </insertBefore>
     <append xpath="/lootcontainers">
-      <lootcontainer name="PZAECSiegeLootT16" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <lootcontainer name="PZAECSiegeLootT16" count="1" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
         <item group="PZAECSiegeMaterialsT16" />
       </lootcontainer>
-      <lootcontainer name="PZAECSiegeLootT17" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <lootcontainer name="PZAECSiegeLootT17" count="1" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
         <item group="PZAECSiegeMaterialsT17" />
       </lootcontainer>
-      <lootcontainer name="PZAECSiegeLootT18" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <lootcontainer name="PZAECSiegeLootT18" count="1" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
         <item group="PZAECSiegeMaterialsT18" />
       </lootcontainer>
-      <lootcontainer name="PZAECSiegeLootT19" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <lootcontainer name="PZAECSiegeLootT19" count="1" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
         <item group="PZAECSiegeMaterialsT19" />
       </lootcontainer>
     </append>

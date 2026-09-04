@@ -125,12 +125,21 @@ def main() -> None:
                 assert ingredient.get("name") in all_known_items, (recipe.get("name"), ingredient.get("name"))
 
     loot_groups = {g.get("name") for g in loot_root.findall(".//lootgroup")}
-    loot_containers = {c.get("name") for c in loot_root.findall(".//lootcontainer")}
+    loot_containers = {c.get("name"): c for c in loot_root.findall(".//lootcontainer")}
+    for container in loot_containers.values():
+        raw_count = container.get("count")
+        if raw_count is None:
+            continue
+        count_parts = raw_count.split(",")
+        assert 1 <= len(count_parts) <= 2 and all(part.isdigit() for part in count_parts), \
+            (container.get("name"), raw_count)
     entity_classes = {e.get("name") for e in entities_root.findall(".//entity_class")}
     for tier in TIERS:
         assert f"PZAECArmorDropT{tier}" in loot_groups
         assert f"PZAECSiegeMaterialsT{tier}" in loot_groups
-        assert f"PZAECSiegeLootT{tier}" in loot_containers
+        container_name = f"PZAECSiegeLootT{tier}"
+        assert container_name in loot_containers
+        assert loot_containers[container_name].get("count") == "1", loot_containers[container_name].attrib
         assert f"PZAECSiegeLootBagT{tier}" in entity_classes
 
     for element in list(items_root.iter()) + list(buffs_root.iter()):
