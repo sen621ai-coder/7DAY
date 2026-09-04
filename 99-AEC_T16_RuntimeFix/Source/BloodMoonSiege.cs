@@ -16,10 +16,10 @@ namespace AECT16RuntimeFix
         public static int Tier(string id) { var m = Names.Match(id ?? ""); return m.Success ? int.Parse(m.Groups[2].Value) : 0; }
         public static int TierForGameStage(int gs)
         {
-            if (gs >= 18000) return 19;
-            if (gs >= 16000) return 18;
-            if (gs >= 14000) return 17;
-            return gs >= 12000 ? 16 : 0;
+            if (gs >= 200000) return 19;
+            if (gs >= 170000) return 18;
+            if (gs >= 140000) return 17;
+            return gs >= 80000 ? 16 : 0;
         }
         public static string Variant(int tier, int roll)
         {
@@ -47,9 +47,8 @@ namespace AECT16RuntimeFix
             int replacement = EntityClass.GetId(name);
             if (replacement == -1) return original;
             var replacementClass = EntityClass.GetEntityClass(replacement);
-            // Siege ranks have their own GS 12000/14000/16000/18000 difficulty
-            // ladder, so the ordinary Blood Moon selector's maxTier does not
-            // suppress this deliberate escalation.
+            // Siege ranks follow the same GS 80000/140000/170000/200000
+            // ladder as the ordinary Blood Moon selector.
             if (replacementClass == null || !replacementClass.bIsEnemyEntity || replacementClass.bIsAnimalEntity) return original;
             int nearby = 0, targeted = 0;
             var entities = target.world.Entities;

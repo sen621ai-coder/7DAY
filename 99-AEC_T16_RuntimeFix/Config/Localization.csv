@@ -298,21 +298,21 @@ AECDruidMinionZombieBearT19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] D
 AECSheriffWolfMinion01T19,entityclasses,Entity,,,,[FF3333]T19 Apocalyptic[-] Sheriff Wolf,,,,,,,,,,,,[FF3333]T19 末日级[-] 警长战狼,[FF3333]T19 Apocalyptic[-] Sheriff Wolf
 pzaec_aec_master_hub_title,dialogs,Dialog,false,,,[FF66CC]Master Operations[-] [AAAAAA]— AEC T11–T15[-],,,,,,,,,,[FF66CC]Операции мастера[-] [AAAAAA]— AEC T11–T15[-],,[FF66CC]大师行动[-] [AAAAAA]— AEC T11–T15[-],[FF66CC]大师行动[-] [AAAAAA]— AEC T11–T15[-]
 pzaec_aec_open_legendary,dialogs,Dialog,false,,,[FFD700]Legendary Operations[-] [AAAAAA](AEC T16–T19)[-],,,,,,,,,,,,[FFD700]传奇行动[-] [AAAAAA]（AEC T16–T19）[-],[FFD700]传奇行动[-] [AAAAAA]（AEC T16–T19）[-]
-pzaec_aec_legendary_hub_title,dialogs,Dialog,false,,,[FFD700]Legendary Operations[-] | T16–T19 | T17 GS 50000 / T18 GS 70000 / T19 GS 90000,,,,,,,,,,,,[FFD700]传奇行动[-]｜T16–T19｜T17：GS 50000 / T18：GS 70000 / T19：GS 90000,[FFD700]传奇行动[-]｜T16–T19｜T17：GS 50000 / T18：GS 70000 / T19：GS 90000
+pzaec_aec_legendary_hub_title,dialogs,Dialog,false,,,[FFD700]Legendary Operations[-] | T16–T19 | T17 GS 140000 / T18 GS 170000 / T19 GS 200000,,,,,,,,,,,,[FFD700]传奇行动[-]｜T16–T19｜T17：GS 140000 / T18：GS 170000 / T19：GS 200000,[FFD700]传奇行动[-]｜T16–T19｜T17：GS 140000 / T18：GS 170000 / T19：GS 200000
 pzaec_aec_return_to_legendary_menu,dialogs,Dialog,false,,,[AAAAAA]← Return to Legendary Operations[-],,,,,,,,,,,,[AAAAAA]← 返回传奇行动[-],[AAAAAA]← 返回传奇行动[-]
-pzaec_aec_browse_t17,dialogs,Dialog,false,,,[FFAA33]AEC T17 contracts[-] (GS 50000+),,,,,,,,,,,,[FFAA33]AEC T17 契约[-]（GS 50000 起）,[FFAA33]AEC T17 契约[-]（GS 50000 起）
+pzaec_aec_browse_t17,dialogs,Dialog,false,,,[FFAA33]AEC T17 contracts[-] (GS 140000+),,,,,,,,,,,,[FFAA33]AEC T17 契约[-]（GS 140000 起）,[FFAA33]AEC T17 契约[-]（GS 140000 起）
 aec_dialog_a1_t17_header,dialogs,Dialog,false,,,Legendary Operations | Small POI | [FFAA33]T17[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜小型地标｜[FFAA33]T17[-]｜最多 6 个任务,传奇行动｜小型地标｜[FFAA33]T17[-]｜最多 6 个任务
 aec_dialog_a2_t17_header,dialogs,Dialog,false,,,Legendary Operations | Medium POI | [FFAA33]T17[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜中型地标｜[FFAA33]T17[-]｜最多 6 个任务,传奇行动｜中型地标｜[FFAA33]T17[-]｜最多 6 个任务
 aec_dialog_a3_t17_header,dialogs,Dialog,false,,,Legendary Operations | Large POI | [FFAA33]T17[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜大型地标｜[FFAA33]T17[-]｜最多 6 个任务,传奇行动｜大型地标｜[FFAA33]T17[-]｜最多 6 个任务
 aec_dialog_a4_t17_header,dialogs,Dialog,false,,,Legendary Operations | Huge POI | [FFAA33]T17[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜巨型地标｜[FFAA33]T17[-]｜最多 6 个任务,传奇行动｜巨型地标｜[FFAA33]T17[-]｜最多 6 个任务
 aec_dialog_a5_t17_header,dialogs,Dialog,false,,,Legendary Operations | Massive POI | [FFAA33]T17[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜超大型地标｜[FFAA33]T17[-]｜最多 6 个任务,传奇行动｜超大型地标｜[FFAA33]T17[-]｜最多 6 个任务
-pzaec_aec_browse_t18,dialogs,Dialog,false,,,[55FFFF]AEC T18 contracts[-] (GS 70000+),,,,,,,,,,,,[55FFFF]AEC T18 契约[-]（GS 70000 起）,[55FFFF]AEC T18 契约[-]（GS 70000 起）
+pzaec_aec_browse_t18,dialogs,Dialog,false,,,[55FFFF]AEC T18 contracts[-] (GS 170000+),,,,,,,,,,,,[55FFFF]AEC T18 契约[-]（GS 170000 起）,[55FFFF]AEC T18 契约[-]（GS 170000 起）
 aec_dialog_a1_t18_header,dialogs,Dialog,false,,,Legendary Operations | Small POI | [55FFFF]T18[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜小型地标｜[55FFFF]T18[-]｜最多 6 个任务,传奇行动｜小型地标｜[55FFFF]T18[-]｜最多 6 个任务
 aec_dialog_a2_t18_header,dialogs,Dialog,false,,,Legendary Operations | Medium POI | [55FFFF]T18[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜中型地标｜[55FFFF]T18[-]｜最多 6 个任务,传奇行动｜中型地标｜[55FFFF]T18[-]｜最多 6 个任务
 aec_dialog_a3_t18_header,dialogs,Dialog,false,,,Legendary Operations | Large POI | [55FFFF]T18[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜大型地标｜[55FFFF]T18[-]｜最多 6 个任务,传奇行动｜大型地标｜[55FFFF]T18[-]｜最多 6 个任务
 aec_dialog_a4_t18_header,dialogs,Dialog,false,,,Legendary Operations | Huge POI | [55FFFF]T18[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜巨型地标｜[55FFFF]T18[-]｜最多 6 个任务,传奇行动｜巨型地标｜[55FFFF]T18[-]｜最多 6 个任务
 aec_dialog_a5_t18_header,dialogs,Dialog,false,,,Legendary Operations | Massive POI | [55FFFF]T18[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜超大型地标｜[55FFFF]T18[-]｜最多 6 个任务,传奇行动｜超大型地标｜[55FFFF]T18[-]｜最多 6 个任务
-pzaec_aec_browse_t19,dialogs,Dialog,false,,,[FF3333]AEC T19 contracts[-] (GS 90000+),,,,,,,,,,,,[FF3333]AEC T19 契约[-]（GS 90000 起）,[FF3333]AEC T19 契约[-]（GS 90000 起）
+pzaec_aec_browse_t19,dialogs,Dialog,false,,,[FF3333]AEC T19 contracts[-] (GS 200000+),,,,,,,,,,,,[FF3333]AEC T19 契约[-]（GS 200000 起）,[FF3333]AEC T19 契约[-]（GS 200000 起）
 aec_dialog_a1_t19_header,dialogs,Dialog,false,,,Legendary Operations | Small POI | [FF3333]T19[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜小型地标｜[FF3333]T19[-]｜最多 6 个任务,传奇行动｜小型地标｜[FF3333]T19[-]｜最多 6 个任务
 aec_dialog_a2_t19_header,dialogs,Dialog,false,,,Legendary Operations | Medium POI | [FF3333]T19[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜中型地标｜[FF3333]T19[-]｜最多 6 个任务,传奇行动｜中型地标｜[FF3333]T19[-]｜最多 6 个任务
 aec_dialog_a3_t19_header,dialogs,Dialog,false,,,Legendary Operations | Large POI | [FF3333]T19[-] | Up to 6 missions,,,,,,,,,,,,传奇行动｜大型地标｜[FF3333]T19[-]｜最多 6 个任务,传奇行动｜大型地标｜[FF3333]T19[-]｜最多 6 个任务

@@ -4,7 +4,7 @@
   <DisplayName value="AEC T16-T19 | Runtime Fix"/>
   <Description value="AEC T16-T19 runtime fixes, legendary adventures, tiered quest and loot rewards, voluntary base defense, equipment builds, and Blood Moon siege squads."/>
   <Author value="Exodusoul"/>
-  <Version value="1.16.4"/>
+  <Version value="1.16.5"/>
   <Website value="https://discord.gg/Ef4bBuhEEw"/>
   <ServerSideOnly value="false"/>
   <SkipWithAntiCheat value="true"/>

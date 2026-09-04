@@ -19,8 +19,8 @@ public static class SiegeRegression
     static void Check(bool ok,string why) { if(!ok) throw new Exception(why); }
     public static string Rules()
     {
-        foreach(var pair in new[]{new[]{11999,0},new[]{12000,16},new[]{13999,16},new[]{14000,17},
-            new[]{15999,17},new[]{16000,18},new[]{17999,18},new[]{18000,19},new[]{999999,19}})
+        foreach(var pair in new[]{new[]{79999,0},new[]{80000,16},new[]{139999,16},new[]{140000,17},
+            new[]{169999,17},new[]{170000,18},new[]{199999,18},new[]{200000,19},new[]{999999,19}})
             Check(BloodMoonSiege.TierForGameStage(pair[0])==pair[1],"Wrong siege GS tier");
         int heavy=0,acid=0;
         for(int tier=15;tier<=20;tier++) for(int roll=0;roll<100;roll++) {
@@ -50,7 +50,7 @@ public static class SiegeRegression
             wall.blockName="tree"; wall.bIsPlant=true; Check(!BloodMoonSiege.IsStructure(new BlockValue(2000)),"Plant selected");
             Check(!BloodMoonSiege.IsStructure(BlockValue.Air),"Air selected");
         } finally { Block.list=old; }
-        return "PASS: siege GS 12000/14000/16000/18000, 600 replacement cases, raised caps, range/structure filters, assembly-qualified factories and native AI parameter parsing.";
+        return "PASS: siege GS 80000/140000/170000/200000, 600 replacement cases, raised caps, range/structure filters, assembly-qualified factories and native AI parameter parsing.";
     }
     public static string Projectiles(string xml)
     {

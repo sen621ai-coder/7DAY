@@ -75,10 +75,10 @@ namespace AECT16RuntimeFix
 
         public static int TierForGameStage(int gs)
         {
-            if (gs >= 90000) return 19;
-            if (gs >= 70000) return 18;
-            if (gs >= 50000) return 17;
-            if (gs >= 30001) return 16;
+            if (gs >= 200000) return 19;
+            if (gs >= 170000) return 18;
+            if (gs >= 140000) return 17;
+            if (gs >= 80000) return 16;
             if (gs >= 25000) return 15;
             if (gs >= 22000) return 14;
             if (gs >= 18000) return 13;

@@ -212,10 +212,10 @@ namespace AECT16RuntimeFix
 
         private static int GetQuestTierForGameStage(int gameStage)
         {
-            if (gameStage >= 90000) return 19;
-            if (gameStage >= 70000) return 18;
-            if (gameStage >= 50000) return 17;
-            if (gameStage >= 30001) return 16;
+            if (gameStage >= 200000) return 19;
+            if (gameStage >= 170000) return 18;
+            if (gameStage >= 140000) return 17;
+            if (gameStage >= 80000) return 16;
             if (gameStage >= 25000) return 15;
             if (gameStage >= 22000) return 14;
             if (gameStage >= 18000) return 13;
@@ -676,7 +676,7 @@ namespace AECT16RuntimeFix
                 return;
             }
 
-            if (gameStage >= 30001)
+            if (gameStage >= 80000)
             {
                 __result = 18d;
                 return;
