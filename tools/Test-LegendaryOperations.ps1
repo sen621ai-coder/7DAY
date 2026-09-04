@@ -16,7 +16,7 @@ $master = $dialogs.SelectSingleNode("//statement[@id='pzaec_aec_master_hub']")
 Assert-True ($master.response_entry.id -notcontains 'pzaec_go_to_t16') 'T16 still in master category'
 $hub = $dialogs.SelectSingleNode("//statement[@id='pzaec_aec_legendary_hub']")
 $sizes = @('small', 'medium', 'large', 'huge', 'massive')
-$thresholds = @{ 17 = 140000; 18 = 170000; 19 = 200000 }
+$thresholds = @{ 17 = 240000; 18 = 270000; 19 = 300000 }
 $textKeys = [System.Collections.Generic.HashSet[string]]::new()
 foreach ($node in $dialogs.SelectNodes('//*[@text]')) { [void]$textKeys.Add($node.text) }
 $localization = @{}
@@ -93,7 +93,7 @@ $tests = 0
 foreach ($tier in 17..19) {
     $gate = [DialogRequirementAECLegendaryGameStage]::new()
     $gate.Value = [string]$thresholds[$tier]
-    foreach ($gs in @(($thresholds[$tier] - 1), $thresholds[$tier], ($thresholds[$tier] + 1), 250000)) {
+    foreach ($gs in @(($thresholds[$tier] - 1), $thresholds[$tier], ($thresholds[$tier] + 1), 350000)) {
         $player = [EntityPlayer]::new()
         $player.gameStage = $gs
         Assert-True ($gate.CheckRequirement($player, $null) -eq ($gs -ge $thresholds[$tier])) "Boundary failed: T$tier at GS $gs"

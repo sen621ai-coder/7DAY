@@ -5,9 +5,9 @@
   <remove xpath="/gamestages/spawner[@name='BloodMoonHorde']/gamestage[@stage &gt;= 30001]"/>
   <append xpath="/gamestages/spawner[@name='BloodMoonHorde']">
     <gamestage stage="30001"><spawn group="PZAECBloodMoonGS030000" num="999" maxAlive="256"/></gamestage>
-    <gamestage stage="80000"><spawn group="PZAECBloodMoonT16Fallback" num="999" maxAlive="256"/></gamestage>
-    <gamestage stage="140000"><spawn group="PZAECBloodMoonT17Fallback" num="999" maxAlive="256"/></gamestage>
-    <gamestage stage="170000"><spawn group="PZAECBloodMoonT18Fallback" num="999" maxAlive="256"/></gamestage>
-    <gamestage stage="200000"><spawn group="PZAECBloodMoonT19Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="180000"><spawn group="PZAECBloodMoonT16Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="240000"><spawn group="PZAECBloodMoonT17Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="270000"><spawn group="PZAECBloodMoonT18Fallback" num="999" maxAlive="256"/></gamestage>
+    <gamestage stage="300000"><spawn group="PZAECBloodMoonT19Fallback" num="999" maxAlive="256"/></gamestage>
   </append>
 </configs>

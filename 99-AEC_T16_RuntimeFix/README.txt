@@ -3,6 +3,13 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.6 current-save tier pacing
+-------------------------
+- T15 now extends through GS 179999. T16/T17/T18/T19 begin at GS
+  180000/240000/270000/300000 across Blood Moon pools and quest selection.
+- A player around GS 190000 now receives T16 ordinary enemies and T16 siege
+  squads; later tiers rise in 30000-GS steps after T16.
+
 Runtime 1.16.5 endgame tier pacing
 -------------------------
 - T15 now extends through GS 79999. T16/T17/T18/T19 begin at GS
@@ -79,11 +86,11 @@ Endgame Reward Balance (Runtime 1.15.4)
 - Restart every peer without EAC and accept fresh quests. Offline regressions
   passed; actual opening frequency and two-player behavior still need live tests.
 
-Blood Moon Ranged Siege Squad (Runtime 1.14.0; retuned in 1.16.5)
+Blood Moon Ranged Siege Squad (Runtime 1.14.0; retuned in 1.16.6)
 ----------------------------------------------
 - Chinese behavior, damage values and live test checklist: BLOOD_MOON_SIEGE.md.
 - Siege ranks T16-T19 use the ordinary Blood Moon GS
-  80000/140000/170000/200000 ladder.
+  180000/240000/270000/300000 ladder.
 - Blood Moons can replace 25% of eligible ordinary zombie selections with heavy
   bombardiers / wall corroders in an approximate 2:1 ratio. Native spawn counts,
   boss rolls and animal branches remain in force.
@@ -208,7 +215,7 @@ Fixes
 - Keeps AECExplosiveEagleBossT16 harvest-only, matching its T15 design.
 - Adds display names for all 56 T16 combat entities and repairs the T16 boss bundle label.
 - Raises the Blood Moon boss roll from 2% at GS 600 to 12% before T16.
-- Uses an 18% Blood Moon boss roll at GS 80000+ and supplies all 21 T16 bosses to that pool.
+- Uses an 18% Blood Moon boss roll at GS 180000+ and supplies all 21 T16 bosses to that pool.
 - Forces integrated Blood Moon groups to use their nighttime biome weights.
 
 Model tint initialization safety
@@ -224,7 +231,7 @@ Blood Moon current-game compatibility (1.8.0)
 - Hooks the actual selector call inside AIDirectorBloodMoonParty.SpawnZombie.
 - Current builds call GetRandomEntityFromGroupMaxTier, bypassing the old GetRandomFromGroup hook.
 - Selects by the chased player's current GS, never by party average or stale spawn context.
-- T16/T17/T18/T19 start at GS 80000/140000/170000/200000 and select only that exact tier.
+- T16/T17/T18/T19 start at GS 180000/240000/270000/300000 and select only that exact tier.
 - Uses the existing nighttime biome weights, beast/ranged mix and 18% high-tier boss roll.
 - Blood Moon selection does not enter the wilderness land-claim exclusion path.
 - Four exact-tier XML backup pools replace old high-GS stage references; each has 64 classes and 18% boss weight.
@@ -256,10 +263,10 @@ T16 ranged pressure
 
 T17-T19 progression
 --------------------
-- T16 begins at GS 80000 and runs through GS 139999.
-- T17 Ascendant begins at GS 140000 and runs through GS 169999.
-- T18 Eternal begins at GS 170000 and runs through GS 199999.
-- T19 Apocalyptic begins at GS 200000.
+- T16 begins at GS 180000 and runs through GS 239999.
+- T17 Ascendant begins at GS 240000 and runs through GS 269999.
+- T18 Eternal begins at GS 270000 and runs through GS 299999.
+- T19 Apocalyptic begins at GS 300000.
 - Each tier carries forward all 35 ordinary enemies, 21 bosses and eight beasts.
 - The existing ranged weighting and 18% Blood Moon boss roll continue at each tier.
 
@@ -271,7 +278,7 @@ Trader quest repair
 - Adds Legendary Operations for T16-T19; Master Operations now contains T11-T15.
 - Legendary pages use six logical slots resolved against server-generated, per-player synchronized quest lists. They never create quests or request POIs locally.
 - Each of five POI-size pages attempts six offers; availability depends on nearby matching POIs.
-- T17/T18/T19 menu entries unlock at current GS 140000/170000/200000; T16 keeps its existing area unlocks.
+- T17/T18/T19 menu entries unlock at current GS 240000/270000/300000; T16 keeps its existing area unlocks.
 - The assembly-qualified dialog requirement reads current player GS without waiting for watcher CVars.
 - The networking fix does not alter rewards or enemy strength. Host and joining players must both use the updated runtime DLL and dialog config.
 - Selection indices are absolute; the RemoveQuest packet uses the correctly computed difficulty-relative byte index, including preceding non-AEC/special quests.
