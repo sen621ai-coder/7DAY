@@ -3190,4 +3190,1105 @@
       </item>
     </append>
   <!-- END GENERATED ENDGAME ARSENAL -->
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <append xpath="/items">
+      <item name="gunPZAECHorizonNeedleT16">
+        <property name="Extends" value="gunRifleT3SniperRifle" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECHorizonNeedleT16Desc" />
+        <property name="CustomIcon" value="gunRifleT3SniperRifle" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,mediumTopAttachments,largeTopAttachments,stock,magazine,firingMode,bottomAttachments,attPerception,perkDeadEye,attachmentsIncluded,canHaveCosmetic,rifleSkill,PZAECAdvancedWeapon,PZAECHorizonNeedle,PZAECTier16" />
+        <effect_group name="gunPZAECHorizonNeedleT16" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="190" tags="perkDeadEye" />
+          <passive_effect name="MagazineSize" operation="base_set" value="6" tags="perkDeadEye" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="48" tags="perkDeadEye" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".25" />
+          <passive_effect name="SpreadMultiplierAiming" operation="base_set" value="0.08" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECHorizonNeedleT17">
+        <property name="Extends" value="gunRifleT3SniperRifle" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECHorizonNeedleT17Desc" />
+        <property name="CustomIcon" value="gunRifleT3SniperRifle" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="EconomicValue" value="17000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,mediumTopAttachments,largeTopAttachments,stock,magazine,firingMode,bottomAttachments,attPerception,perkDeadEye,attachmentsIncluded,canHaveCosmetic,rifleSkill,PZAECAdvancedWeapon,PZAECHorizonNeedle,PZAECTier17" />
+        <effect_group name="gunPZAECHorizonNeedleT17" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="210" tags="perkDeadEye" />
+          <passive_effect name="MagazineSize" operation="base_set" value="7" tags="perkDeadEye" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="50" tags="perkDeadEye" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="2" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".25" />
+          <passive_effect name="SpreadMultiplierAiming" operation="base_set" value="0.07" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECHorizonNeedleT18">
+        <property name="Extends" value="gunRifleT3SniperRifle" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECHorizonNeedleT18Desc" />
+        <property name="CustomIcon" value="gunRifleT3SniperRifle" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="EconomicValue" value="22000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,mediumTopAttachments,largeTopAttachments,stock,magazine,firingMode,bottomAttachments,attPerception,perkDeadEye,attachmentsIncluded,canHaveCosmetic,rifleSkill,PZAECAdvancedWeapon,PZAECHorizonNeedle,PZAECTier18" />
+        <effect_group name="gunPZAECHorizonNeedleT18" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="232" tags="perkDeadEye" />
+          <passive_effect name="MagazineSize" operation="base_set" value="8" tags="perkDeadEye" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="52" tags="perkDeadEye" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="3" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".25" />
+          <passive_effect name="SpreadMultiplierAiming" operation="base_set" value="0.06" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECHorizonNeedleT19">
+        <property name="Extends" value="gunRifleT3SniperRifle" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECHorizonNeedleT19Desc" />
+        <property name="CustomIcon" value="gunRifleT3SniperRifle" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="EconomicValue" value="27000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,mediumTopAttachments,largeTopAttachments,stock,magazine,firingMode,bottomAttachments,attPerception,perkDeadEye,attachmentsIncluded,canHaveCosmetic,rifleSkill,PZAECAdvancedWeapon,PZAECHorizonNeedle,PZAECTier19" />
+        <effect_group name="gunPZAECHorizonNeedleT19" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="4300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="255" tags="perkDeadEye" />
+          <passive_effect name="MagazineSize" operation="base_set" value="9" tags="perkDeadEye" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="54" tags="perkDeadEye" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="4" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".25" />
+          <passive_effect name="SpreadMultiplierAiming" operation="base_set" value="0.05" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECStormReservoirT16">
+        <property name="Extends" value="gunMGT3M60" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECStormReservoirT16Desc" />
+        <property name="CustomIcon" value="gunMGT3M60" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,magazine,drumMagazine,bottomAttachments,mediumTopAttachments,attFortitude,perkMachineGunner,perkBookAutoWeapons,attachmentsIncluded,canHaveCosmetic,machinegunSkill,PZAECAdvancedWeapon,PZAECStormReservoir,PZAECTier16" />
+        <effect_group name="gunPZAECStormReservoirT16" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="76" tags="perkMachineGunner" />
+          <passive_effect name="MagazineSize" operation="base_set" value="90" tags="perkMachineGunner" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="390" tags="perkMachineGunner" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormHeatT16" operation="add" value="1">
+            <requirement name="!HasBuff" buff="buffPZAECStormOverheatedT16" />
+          </triggered_effect>
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECStormReservoirT17">
+        <property name="Extends" value="gunMGT3M60" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECStormReservoirT17Desc" />
+        <property name="CustomIcon" value="gunMGT3M60" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="EconomicValue" value="17000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,magazine,drumMagazine,bottomAttachments,mediumTopAttachments,attFortitude,perkMachineGunner,perkBookAutoWeapons,attachmentsIncluded,canHaveCosmetic,machinegunSkill,PZAECAdvancedWeapon,PZAECStormReservoir,PZAECTier17" />
+        <effect_group name="gunPZAECStormReservoirT17" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="84" tags="perkMachineGunner" />
+          <passive_effect name="MagazineSize" operation="base_set" value="100" tags="perkMachineGunner" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="410" tags="perkMachineGunner" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormHeatT17" operation="add" value="1">
+            <requirement name="!HasBuff" buff="buffPZAECStormOverheatedT17" />
+          </triggered_effect>
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECStormReservoirT18">
+        <property name="Extends" value="gunMGT3M60" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECStormReservoirT18Desc" />
+        <property name="CustomIcon" value="gunMGT3M60" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="EconomicValue" value="22000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,magazine,drumMagazine,bottomAttachments,mediumTopAttachments,attFortitude,perkMachineGunner,perkBookAutoWeapons,attachmentsIncluded,canHaveCosmetic,machinegunSkill,PZAECAdvancedWeapon,PZAECStormReservoir,PZAECTier18" />
+        <effect_group name="gunPZAECStormReservoirT18" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="92" tags="perkMachineGunner" />
+          <passive_effect name="MagazineSize" operation="base_set" value="110" tags="perkMachineGunner" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="430" tags="perkMachineGunner" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormHeatT18" operation="add" value="1">
+            <requirement name="!HasBuff" buff="buffPZAECStormOverheatedT18" />
+          </triggered_effect>
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECStormReservoirT19">
+        <property name="Extends" value="gunMGT3M60" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECStormReservoirT19Desc" />
+        <property name="CustomIcon" value="gunMGT3M60" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="EconomicValue" value="27000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,barrelAttachments,sideAttachments,smallTopAttachments,magazine,drumMagazine,bottomAttachments,mediumTopAttachments,attFortitude,perkMachineGunner,perkBookAutoWeapons,attachmentsIncluded,canHaveCosmetic,machinegunSkill,PZAECAdvancedWeapon,PZAECStormReservoir,PZAECTier19" />
+        <effect_group name="gunPZAECStormReservoirT19" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="4300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="101" tags="perkMachineGunner" />
+          <passive_effect name="MagazineSize" operation="base_set" value="120" tags="perkMachineGunner" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="450" tags="perkMachineGunner" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormHeatT19" operation="add" value="1">
+            <requirement name="!HasBuff" buff="buffPZAECStormOverheatedT19" />
+          </triggered_effect>
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
+        </effect_group>
+      </item>
+      <item name="meleePZAECFaultlineHammerT16">
+        <property name="Extends" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="meleePZAECFaultlineHammerT16Desc" />
+        <property name="CustomIcon" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,blunt,melee,grunting,heavy,sledge,weapon,meleeWeapon,longShaft,attStrength,perkSkullCrusher,perkFlurryOfStrength,canHaveCosmetic,sledgeSkill,PZAECAdvancedWeapon,PZAECFaultlineHammer,PZAECTier16" />
+        <effect_group name="meleePZAECFaultlineHammerT16" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="275" tags="perkSkullCrusher" />
+          <passive_effect name="EntityDamage" operation="base_set" value="125" tags="primary" />
+          <passive_effect name="EntityDamage" operation="base_set" value="275" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="base_set" value="42" tags="secondary" />
+          <triggered_effect trigger="onSelfSecondaryActionRayHit" action="AddBuff" target="other" buff="buffPZAECFaultlineImpactT16">
+            <requirement name="EntityTagCompare" target="other" tags="zombie,animal" />
+          </triggered_effect>
+        </effect_group>
+      </item>
+      <item name="meleePZAECFaultlineHammerT17">
+        <property name="Extends" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="meleePZAECFaultlineHammerT17Desc" />
+        <property name="CustomIcon" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="EconomicValue" value="17000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,blunt,melee,grunting,heavy,sledge,weapon,meleeWeapon,longShaft,attStrength,perkSkullCrusher,perkFlurryOfStrength,canHaveCosmetic,sledgeSkill,PZAECAdvancedWeapon,PZAECFaultlineHammer,PZAECTier17" />
+        <effect_group name="meleePZAECFaultlineHammerT17" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="303" tags="perkSkullCrusher" />
+          <passive_effect name="EntityDamage" operation="base_set" value="138" tags="primary" />
+          <passive_effect name="EntityDamage" operation="base_set" value="303" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="base_set" value="41" tags="secondary" />
+          <triggered_effect trigger="onSelfSecondaryActionRayHit" action="AddBuff" target="other" buff="buffPZAECFaultlineImpactT17">
+            <requirement name="EntityTagCompare" target="other" tags="zombie,animal" />
+          </triggered_effect>
+        </effect_group>
+      </item>
+      <item name="meleePZAECFaultlineHammerT18">
+        <property name="Extends" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="meleePZAECFaultlineHammerT18Desc" />
+        <property name="CustomIcon" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="EconomicValue" value="22000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,blunt,melee,grunting,heavy,sledge,weapon,meleeWeapon,longShaft,attStrength,perkSkullCrusher,perkFlurryOfStrength,canHaveCosmetic,sledgeSkill,PZAECAdvancedWeapon,PZAECFaultlineHammer,PZAECTier18" />
+        <effect_group name="meleePZAECFaultlineHammerT18" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="333" tags="perkSkullCrusher" />
+          <passive_effect name="EntityDamage" operation="base_set" value="152" tags="primary" />
+          <passive_effect name="EntityDamage" operation="base_set" value="333" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="base_set" value="40" tags="secondary" />
+          <triggered_effect trigger="onSelfSecondaryActionRayHit" action="AddBuff" target="other" buff="buffPZAECFaultlineImpactT18">
+            <requirement name="EntityTagCompare" target="other" tags="zombie,animal" />
+          </triggered_effect>
+        </effect_group>
+      </item>
+      <item name="meleePZAECFaultlineHammerT19">
+        <property name="Extends" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="meleePZAECFaultlineHammerT19Desc" />
+        <property name="CustomIcon" value="meleeWpnSledgeT3SteelSledgehammer" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="EconomicValue" value="27000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,blunt,melee,grunting,heavy,sledge,weapon,meleeWeapon,longShaft,attStrength,perkSkullCrusher,perkFlurryOfStrength,canHaveCosmetic,sledgeSkill,PZAECAdvancedWeapon,PZAECFaultlineHammer,PZAECTier19" />
+        <effect_group name="meleePZAECFaultlineHammerT19" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="4300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="366" tags="perkSkullCrusher" />
+          <passive_effect name="EntityDamage" operation="base_set" value="167" tags="primary" />
+          <passive_effect name="EntityDamage" operation="base_set" value="366" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="base_set" value="39" tags="secondary" />
+          <triggered_effect trigger="onSelfSecondaryActionRayHit" action="AddBuff" target="other" buff="buffPZAECFaultlineImpactT19">
+            <requirement name="EntityTagCompare" target="other" tags="zombie,animal" />
+          </triggered_effect>
+        </effect_group>
+      </item>
+      <item name="gunPZAECBastionShotgunT16">
+        <property name="Extends" value="gunShotgunT3AutoShotgun" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECBastionShotgunT16Desc" />
+        <property name="CustomIcon" value="gunShotgunT3AutoShotgun" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,shotgun,shortRange,barrelAttachments,sideAttachments,smallTopAttachments,noScopes,stock,magazine,drumMagazine,firingMode,bottomAttachments,attStrength,perkBoomstick,attachmentsIncluded,canHaveCosmetic,shotgunSkill,PZAECAdvancedWeapon,PZAECBastionShotgun,PZAECTier16" />
+        <effect_group name="gunPZAECBastionShotgunT16" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="21" tags="perkBoomstick" />
+          <passive_effect name="MagazineSize" operation="base_set" value="16" tags="perkBoomstick" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="155" tags="perkBoomstick" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".15" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECBastionStaggerT16" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECBastionShotgunT17">
+        <property name="Extends" value="gunShotgunT3AutoShotgun" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECBastionShotgunT17Desc" />
+        <property name="CustomIcon" value="gunShotgunT3AutoShotgun" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="EconomicValue" value="17000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,shotgun,shortRange,barrelAttachments,sideAttachments,smallTopAttachments,noScopes,stock,magazine,drumMagazine,firingMode,bottomAttachments,attStrength,perkBoomstick,attachmentsIncluded,canHaveCosmetic,shotgunSkill,PZAECAdvancedWeapon,PZAECBastionShotgun,PZAECTier17" />
+        <effect_group name="gunPZAECBastionShotgunT17" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="23" tags="perkBoomstick" />
+          <passive_effect name="MagazineSize" operation="base_set" value="18" tags="perkBoomstick" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="160" tags="perkBoomstick" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".15" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECBastionStaggerT17" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECBastionShotgunT18">
+        <property name="Extends" value="gunShotgunT3AutoShotgun" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECBastionShotgunT18Desc" />
+        <property name="CustomIcon" value="gunShotgunT3AutoShotgun" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="EconomicValue" value="22000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,shotgun,shortRange,barrelAttachments,sideAttachments,smallTopAttachments,noScopes,stock,magazine,drumMagazine,firingMode,bottomAttachments,attStrength,perkBoomstick,attachmentsIncluded,canHaveCosmetic,shotgunSkill,PZAECAdvancedWeapon,PZAECBastionShotgun,PZAECTier18" />
+        <effect_group name="gunPZAECBastionShotgunT18" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="25" tags="perkBoomstick" />
+          <passive_effect name="MagazineSize" operation="base_set" value="20" tags="perkBoomstick" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="165" tags="perkBoomstick" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".15" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECBastionStaggerT18" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECBastionShotgunT19">
+        <property name="Extends" value="gunShotgunT3AutoShotgun" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECBastionShotgunT19Desc" />
+        <property name="CustomIcon" value="gunShotgunT3AutoShotgun" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="EconomicValue" value="27000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,gun,shotgun,shortRange,barrelAttachments,sideAttachments,smallTopAttachments,noScopes,stock,magazine,drumMagazine,firingMode,bottomAttachments,attStrength,perkBoomstick,attachmentsIncluded,canHaveCosmetic,shotgunSkill,PZAECAdvancedWeapon,PZAECBastionShotgun,PZAECTier19" />
+        <effect_group name="gunPZAECBastionShotgunT19" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="4300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="28" tags="perkBoomstick" />
+          <passive_effect name="MagazineSize" operation="base_set" value="22" tags="perkBoomstick" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="170" tags="perkBoomstick" />
+          <passive_effect name="BlockDamage" operation="perc_set" value=".15" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECBastionStaggerT19" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECEchoRepeaterT16">
+        <property name="Extends" value="gunBowT3CompoundCrossbow" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECEchoRepeaterT16Desc" />
+        <property name="CustomIcon" value="gunBowT3CompoundCrossbow" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,sideAttachments,smallTopAttachments,mediumTopAttachments,bottomAttachments,attAgility,perkArchery,crossbow,attachmentsIncluded,canHaveCosmetic,bowSkill,PZAECAdvancedWeapon,PZAECEchoRepeater,PZAECTier16" />
+        <effect_group name="gunPZAECEchoRepeaterT16" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="225" tags="perkArchery" />
+          <passive_effect name="MagazineSize" operation="base_set" value="3" tags="perkArchery" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="36" tags="perkArchery" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECEchoMarkedT16" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.08" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECEchoRepeaterT17">
+        <property name="Extends" value="gunBowT3CompoundCrossbow" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECEchoRepeaterT17Desc" />
+        <property name="CustomIcon" value="gunBowT3CompoundCrossbow" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="EconomicValue" value="17000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,sideAttachments,smallTopAttachments,mediumTopAttachments,bottomAttachments,attAgility,perkArchery,crossbow,attachmentsIncluded,canHaveCosmetic,bowSkill,PZAECAdvancedWeapon,PZAECEchoRepeater,PZAECTier17" />
+        <effect_group name="gunPZAECEchoRepeaterT17" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="248" tags="perkArchery" />
+          <passive_effect name="MagazineSize" operation="base_set" value="3" tags="perkArchery" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="38" tags="perkArchery" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECEchoMarkedT17" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.1" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECEchoRepeaterT18">
+        <property name="Extends" value="gunBowT3CompoundCrossbow" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECEchoRepeaterT18Desc" />
+        <property name="CustomIcon" value="gunBowT3CompoundCrossbow" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="EconomicValue" value="22000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,sideAttachments,smallTopAttachments,mediumTopAttachments,bottomAttachments,attAgility,perkArchery,crossbow,attachmentsIncluded,canHaveCosmetic,bowSkill,PZAECAdvancedWeapon,PZAECEchoRepeater,PZAECTier18" />
+        <effect_group name="gunPZAECEchoRepeaterT18" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="273" tags="perkArchery" />
+          <passive_effect name="MagazineSize" operation="base_set" value="4" tags="perkArchery" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="40" tags="perkArchery" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECEchoMarkedT18" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.12" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECEchoRepeaterT19">
+        <property name="Extends" value="gunBowT3CompoundCrossbow" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECEchoRepeaterT19Desc" />
+        <property name="CustomIcon" value="gunBowT3CompoundCrossbow" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="EconomicValue" value="27000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,sideAttachments,smallTopAttachments,mediumTopAttachments,bottomAttachments,attAgility,perkArchery,crossbow,attachmentsIncluded,canHaveCosmetic,bowSkill,PZAECAdvancedWeapon,PZAECEchoRepeater,PZAECTier19" />
+        <effect_group name="gunPZAECEchoRepeaterT19" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="4300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="300" tags="perkArchery" />
+          <passive_effect name="MagazineSize" operation="base_set" value="4" tags="perkArchery" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="42" tags="perkArchery" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECEchoMarkedT19" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.15" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECCounterSiegeT16">
+        <property name="Extends" value="gunExplosivesT3RocketLauncher" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECCounterSiegeT16Desc" />
+        <property name="CustomIcon" value="gunExplosivesT3RocketLauncher" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,launcher,attPerception,perkDemolitionsExpert,canHaveCosmetic,barrelAttachments,noSilencer,sideAttachments,explosivesSkill,PZAECAdvancedWeapon,PZAECCounterSiege,PZAECTier16" />
+        <property class="Action0">
+          <property name="Magazine_items" value="ammoPZAECCounterPulseT16" />
+          <property name="Reload_time" value="4.0" />
+        </property>
+        <effect_group name="gunPZAECCounterSiegeT16" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="80" tags="perkDemolitionsExpert" />
+          <passive_effect name="MagazineSize" operation="base_set" value="1" tags="perkDemolitionsExpert" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="15" tags="perkDemolitionsExpert" />
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECCounterSiegeT16" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECCounterSiegeT17">
+        <property name="Extends" value="gunExplosivesT3RocketLauncher" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECCounterSiegeT17Desc" />
+        <property name="CustomIcon" value="gunExplosivesT3RocketLauncher" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="EconomicValue" value="17000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,launcher,attPerception,perkDemolitionsExpert,canHaveCosmetic,barrelAttachments,noSilencer,sideAttachments,explosivesSkill,PZAECAdvancedWeapon,PZAECCounterSiege,PZAECTier17" />
+        <property class="Action0">
+          <property name="Magazine_items" value="ammoPZAECCounterPulseT17" />
+          <property name="Reload_time" value="3.8" />
+        </property>
+        <effect_group name="gunPZAECCounterSiegeT17" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="90" tags="perkDemolitionsExpert" />
+          <passive_effect name="MagazineSize" operation="base_set" value="1" tags="perkDemolitionsExpert" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="16" tags="perkDemolitionsExpert" />
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECCounterSiegeT17" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECCounterSiegeT18">
+        <property name="Extends" value="gunExplosivesT3RocketLauncher" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECCounterSiegeT18Desc" />
+        <property name="CustomIcon" value="gunExplosivesT3RocketLauncher" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="EconomicValue" value="22000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,launcher,attPerception,perkDemolitionsExpert,canHaveCosmetic,barrelAttachments,noSilencer,sideAttachments,explosivesSkill,PZAECAdvancedWeapon,PZAECCounterSiege,PZAECTier18" />
+        <property class="Action0">
+          <property name="Magazine_items" value="ammoPZAECCounterPulseT18" />
+          <property name="Reload_time" value="3.6" />
+        </property>
+        <effect_group name="gunPZAECCounterSiegeT18" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3800" />
+          <passive_effect name="EntityDamage" operation="base_set" value="100" tags="perkDemolitionsExpert" />
+          <passive_effect name="MagazineSize" operation="base_set" value="1" tags="perkDemolitionsExpert" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="17" tags="perkDemolitionsExpert" />
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECCounterSiegeT18" />
+        </effect_group>
+      </item>
+      <item name="gunPZAECCounterSiegeT19">
+        <property name="Extends" value="gunExplosivesT3RocketLauncher" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="gunPZAECCounterSiegeT19Desc" />
+        <property name="CustomIcon" value="gunExplosivesT3RocketLauncher" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="EconomicValue" value="27000" />
+        <property name="SellableToTrader" value="false" />
+        <property name="ShowQuality" value="false" />
+        <property name="Tags" value="T3,weapon,ranged,holdBreathAiming,reloadPenalty,launcher,attPerception,perkDemolitionsExpert,canHaveCosmetic,barrelAttachments,noSilencer,sideAttachments,explosivesSkill,PZAECAdvancedWeapon,PZAECCounterSiege,PZAECTier19" />
+        <property class="Action0">
+          <property name="Magazine_items" value="ammoPZAECCounterPulseT19" />
+          <property name="Reload_time" value="3.4" />
+        </property>
+        <effect_group name="gunPZAECCounterSiegeT19" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="4" />
+          <passive_effect name="DegradationMax" operation="base_set" value="4300" />
+          <passive_effect name="EntityDamage" operation="base_set" value="110" tags="perkDemolitionsExpert" />
+          <passive_effect name="MagazineSize" operation="base_set" value="1" tags="perkDemolitionsExpert" />
+          <passive_effect name="RoundsPerMinute" operation="base_set" value="18" tags="perkDemolitionsExpert" />
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECCounterSiegeT19" />
+        </effect_group>
+      </item>
+      <item name="ammoPZAECSkyguardInterceptorT16">
+        <property name="Extends" value="ammo762mmBulletAP" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECSkyguardInterceptorT16Desc" />
+        <property name="CustomIcon" value="ammo762mmBulletAP" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false" />
+      </item>
+      <item name="ammoPZAECSkyguardInterceptorT17">
+        <property name="Extends" value="ammo762mmBulletAP" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECSkyguardInterceptorT17Desc" />
+        <property name="CustomIcon" value="ammo762mmBulletAP" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false" />
+      </item>
+      <item name="ammoPZAECSkyguardInterceptorT18">
+        <property name="Extends" value="ammo762mmBulletAP" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECSkyguardInterceptorT18Desc" />
+        <property name="CustomIcon" value="ammo762mmBulletAP" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false" />
+      </item>
+      <item name="ammoPZAECSkyguardInterceptorT19">
+        <property name="Extends" value="ammo762mmBulletAP" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECSkyguardInterceptorT19Desc" />
+        <property name="CustomIcon" value="ammo762mmBulletAP" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false" />
+      </item>
+      <item name="ammoPZAECCounterPulseT16">
+        <property name="Extends" value="ammoRocketHE" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECCounterPulseT16Desc" />
+        <property name="CustomIcon" value="ammoRocketHE" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <passive_effect name="EntityDamage" operation="base_set" value="35" />
+        </effect_group>
+      </item>
+      <item name="ammoPZAECCounterPulseT17">
+        <property name="Extends" value="ammoRocketHE" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECCounterPulseT17Desc" />
+        <property name="CustomIcon" value="ammoRocketHE" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <passive_effect name="EntityDamage" operation="base_set" value="40" />
+        </effect_group>
+      </item>
+      <item name="ammoPZAECCounterPulseT18">
+        <property name="Extends" value="ammoRocketHE" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECCounterPulseT18Desc" />
+        <property name="CustomIcon" value="ammoRocketHE" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <passive_effect name="EntityDamage" operation="base_set" value="45" />
+        </effect_group>
+      </item>
+      <item name="ammoPZAECCounterPulseT19">
+        <property name="Extends" value="ammoRocketHE" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="ammoPZAECCounterPulseT19Desc" />
+        <property name="CustomIcon" value="ammoRocketHE" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockDamage" operation="perc_set" value="0" />
+          <passive_effect name="EntityDamage" operation="base_set" value="50" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECQuickArmorGel">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECQuickArmorGelDesc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="55CCFF" />
+        <property name="Stacknumber" value="10" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="1.0" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECQuickArmorGel" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECResonanceInjector">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECResonanceInjectorDesc" />
+        <property name="CustomIcon" value="medicalFirstAidKit" />
+        <property name="CustomIconTint" value="55CCFF" />
+        <property name="Stacknumber" value="5" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="1.0" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECResonanceInjector" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECDecoyBeacon">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECDecoyBeaconDesc" />
+        <property name="CustomIcon" value="thrownGrenade" />
+        <property name="CustomIconTint" value="55CCFF" />
+        <property name="Stacknumber" value="5" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="1.0" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECDecoyBeacon" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECEvacAnchor">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECEvacAnchorDesc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="55CCFF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value="0.4" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECEvacAnchor" />
+        </effect_group>
+      </item>
+      <item name="thrownPZAECCounterJammerT16">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="thrownPZAECCounterJammerT16Desc" />
+        <property name="CustomIcon" value="thrownGrenade" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="10" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="0.8" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECCounterJammerT16" target="selfAOE" range="8" target_tags="enemy" />
+        </effect_group>
+      </item>
+      <item name="thrownPZAECCounterJammerT17">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="thrownPZAECCounterJammerT17Desc" />
+        <property name="CustomIcon" value="thrownGrenade" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="10" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="0.8" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECCounterJammerT17" target="selfAOE" range="8" target_tags="enemy" />
+        </effect_group>
+      </item>
+      <item name="thrownPZAECCounterJammerT18">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="thrownPZAECCounterJammerT18Desc" />
+        <property name="CustomIcon" value="thrownGrenade" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="10" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="0.8" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECCounterJammerT18" target="selfAOE" range="8" target_tags="enemy" />
+        </effect_group>
+      </item>
+      <item name="thrownPZAECCounterJammerT19">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="thrownPZAECCounterJammerT19Desc" />
+        <property name="CustomIcon" value="thrownGrenade" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="10" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="0.8" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECCounterJammerT19" target="selfAOE" range="8" target_tags="enemy" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECFieldRepairKitT16">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECFieldRepairKitT16Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="5" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="4" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECFieldRepairT16" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECFieldRepairKitT17">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECFieldRepairKitT17Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="5" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="4" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECFieldRepairT17" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECFieldRepairKitT18">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECFieldRepairKitT18Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="5" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="4" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECFieldRepairT18" />
+        </effect_group>
+      </item>
+      <item name="itemPZAECFieldRepairKitT19">
+        <property name="Extends" value="medicalFirstAidKit" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECFieldRepairKitT19Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="5" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="true" />
+          <property name="Delay" value="4" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECFieldRepairT19" />
+        </effect_group>
+      </item>
+      <item name="resourcePZAECDefenseChassis">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECDefenseChassisDesc" />
+        <property name="CustomIcon" value="resourceMechanicalParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCoreFragmentT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCoreFragmentT16Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCapacitorFragmentT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCapacitorFragmentT16Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECArmoryBlueprintCrateT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECArmoryBlueprintCrateT16Desc" />
+        <property name="CustomIcon" value="questRewardT3RifleLegendaryBundle" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECComponentChoiceCrateT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECComponentChoiceCrateT16Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECRepairChargeT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECRepairChargeT16Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECDecoyChargeT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECDecoyChargeT16Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECDefenseBlueprintCrateT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECDefenseBlueprintCrateT16Desc" />
+        <property name="CustomIcon" value="questRewardBatteryBankBundle" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCoreFragmentT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCoreFragmentT17Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCapacitorFragmentT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCapacitorFragmentT17Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECArmoryBlueprintCrateT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECArmoryBlueprintCrateT17Desc" />
+        <property name="CustomIcon" value="questRewardT3RifleLegendaryBundle" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECComponentChoiceCrateT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECComponentChoiceCrateT17Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECRepairChargeT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECRepairChargeT17Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECDecoyChargeT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECDecoyChargeT17Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECDefenseBlueprintCrateT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECDefenseBlueprintCrateT17Desc" />
+        <property name="CustomIcon" value="questRewardBatteryBankBundle" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCoreFragmentT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCoreFragmentT18Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCapacitorFragmentT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCapacitorFragmentT18Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECArmoryBlueprintCrateT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECArmoryBlueprintCrateT18Desc" />
+        <property name="CustomIcon" value="questRewardT3RifleLegendaryBundle" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECComponentChoiceCrateT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECComponentChoiceCrateT18Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECRepairChargeT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECRepairChargeT18Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECDecoyChargeT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECDecoyChargeT18Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECDefenseBlueprintCrateT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECDefenseBlueprintCrateT18Desc" />
+        <property name="CustomIcon" value="questRewardBatteryBankBundle" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCoreFragmentT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCoreFragmentT19Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECCapacitorFragmentT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECCapacitorFragmentT19Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECArmoryBlueprintCrateT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECArmoryBlueprintCrateT19Desc" />
+        <property name="CustomIcon" value="questRewardT3RifleLegendaryBundle" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECComponentChoiceCrateT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECComponentChoiceCrateT19Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECRepairChargeT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECRepairChargeT19Desc" />
+        <property name="CustomIcon" value="resourceRepairKit" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECDecoyChargeT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECDecoyChargeT19Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="itemPZAECDefenseBlueprintCrateT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECDefenseBlueprintCrateT19Desc" />
+        <property name="CustomIcon" value="questRewardBatteryBankBundle" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+    </append>
+    <append xpath="/items/item[@name='itemPZAECHarrierDeviceT19']">
+      <property name="Tags" value="PZAECResonanceDevice,PZAECHarrierDevice" />
+      <effect_group name="PZAEC Harrier calibration slot" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="1" />
+      </effect_group>
+    </append>
+    <append xpath="/items/item[@name='itemPZAECStormDeviceT19']">
+      <property name="Tags" value="PZAECResonanceDevice,PZAECStormDevice" />
+      <effect_group name="PZAEC Storm calibration slot" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="1" />
+      </effect_group>
+    </append>
+    <append xpath="/items/item[@name='itemPZAECTremorDeviceT19']">
+      <property name="Tags" value="PZAECResonanceDevice,PZAECTremorDevice" />
+      <effect_group name="PZAEC Tremor calibration slot" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="1" />
+      </effect_group>
+    </append>
+    <append xpath="/items/item[@name='itemPZAECWardenDeviceT19']">
+      <property name="Tags" value="PZAECResonanceDevice,PZAECWardenDevice" />
+      <effect_group name="PZAEC Warden calibration slot" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="1" />
+      </effect_group>
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
 </configs>

@@ -1394,4 +1394,147 @@
       <item group="PZAECArmorDropT19" count="1" prob=".30" force_prob="true" />
     </append>
   <!-- END GENERATED ENDGAME ARSENAL -->
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <insertBefore xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+      <lootgroup name="PZAECExpansionWeaponT16" count="1">
+        <item name="gunPZAECHorizonNeedleT16" count="1" />
+        <item name="gunPZAECStormReservoirT16" count="1" />
+        <item name="meleePZAECFaultlineHammerT16" count="1" />
+        <item name="gunPZAECBastionShotgunT16" count="1" />
+        <item name="gunPZAECEchoRepeaterT16" count="1" />
+        <item name="gunPZAECCounterSiegeT16" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionComponentT16" count="1">
+        <item name="modPZAECThreatLensT16" count="1" />
+        <item name="modPZAECCoolingSinkT16" count="1" />
+        <item name="modPZAECKineticRecyclerT16" count="1" />
+        <item name="modPZAECRepairServoT16" count="1" />
+        <item name="modPZAECPhaseRangefinderT16" count="1" />
+        <item name="modPZAECNearfieldReflexT16" count="1" />
+        <item name="modPZAECClosedLoopFeedT16" count="1" />
+        <item name="modPZAECPulseCapacitorT16" count="1" />
+        <item name="modPZAECStanceBreakerT16" count="1" />
+        <item name="modPZAECGatekeeperHookT16" count="1" />
+        <item name="modPZAECEmergencyLinerT16" count="1" />
+        <item name="modPZAECInsulatedTreadsT16" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionWeaponT17" count="1">
+        <item name="gunPZAECHorizonNeedleT17" count="1" />
+        <item name="gunPZAECStormReservoirT17" count="1" />
+        <item name="meleePZAECFaultlineHammerT17" count="1" />
+        <item name="gunPZAECBastionShotgunT17" count="1" />
+        <item name="gunPZAECEchoRepeaterT17" count="1" />
+        <item name="gunPZAECCounterSiegeT17" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionComponentT17" count="1">
+        <item name="modPZAECThreatLensT17" count="1" />
+        <item name="modPZAECCoolingSinkT17" count="1" />
+        <item name="modPZAECKineticRecyclerT17" count="1" />
+        <item name="modPZAECRepairServoT17" count="1" />
+        <item name="modPZAECPhaseRangefinderT17" count="1" />
+        <item name="modPZAECNearfieldReflexT17" count="1" />
+        <item name="modPZAECClosedLoopFeedT17" count="1" />
+        <item name="modPZAECPulseCapacitorT17" count="1" />
+        <item name="modPZAECStanceBreakerT17" count="1" />
+        <item name="modPZAECGatekeeperHookT17" count="1" />
+        <item name="modPZAECEmergencyLinerT17" count="1" />
+        <item name="modPZAECInsulatedTreadsT17" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionWeaponT18" count="1">
+        <item name="gunPZAECHorizonNeedleT18" count="1" />
+        <item name="gunPZAECStormReservoirT18" count="1" />
+        <item name="meleePZAECFaultlineHammerT18" count="1" />
+        <item name="gunPZAECBastionShotgunT18" count="1" />
+        <item name="gunPZAECEchoRepeaterT18" count="1" />
+        <item name="gunPZAECCounterSiegeT18" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionComponentT18" count="1">
+        <item name="modPZAECThreatLensT18" count="1" />
+        <item name="modPZAECCoolingSinkT18" count="1" />
+        <item name="modPZAECKineticRecyclerT18" count="1" />
+        <item name="modPZAECRepairServoT18" count="1" />
+        <item name="modPZAECPhaseRangefinderT18" count="1" />
+        <item name="modPZAECNearfieldReflexT18" count="1" />
+        <item name="modPZAECClosedLoopFeedT18" count="1" />
+        <item name="modPZAECPulseCapacitorT18" count="1" />
+        <item name="modPZAECStanceBreakerT18" count="1" />
+        <item name="modPZAECGatekeeperHookT18" count="1" />
+        <item name="modPZAECEmergencyLinerT18" count="1" />
+        <item name="modPZAECInsulatedTreadsT18" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionWeaponT19" count="1">
+        <item name="gunPZAECHorizonNeedleT19" count="1" />
+        <item name="gunPZAECStormReservoirT19" count="1" />
+        <item name="meleePZAECFaultlineHammerT19" count="1" />
+        <item name="gunPZAECBastionShotgunT19" count="1" />
+        <item name="gunPZAECEchoRepeaterT19" count="1" />
+        <item name="gunPZAECCounterSiegeT19" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECExpansionComponentT19" count="1">
+        <item name="modPZAECThreatLensT19" count="1" />
+        <item name="modPZAECCoolingSinkT19" count="1" />
+        <item name="modPZAECKineticRecyclerT19" count="1" />
+        <item name="modPZAECRepairServoT19" count="1" />
+        <item name="modPZAECPhaseRangefinderT19" count="1" />
+        <item name="modPZAECNearfieldReflexT19" count="1" />
+        <item name="modPZAECClosedLoopFeedT19" count="1" />
+        <item name="modPZAECPulseCapacitorT19" count="1" />
+        <item name="modPZAECStanceBreakerT19" count="1" />
+        <item name="modPZAECGatekeeperHookT19" count="1" />
+        <item name="modPZAECEmergencyLinerT19" count="1" />
+        <item name="modPZAECInsulatedTreadsT19" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECCalibrationT19" count="1">
+        <item name="modPZAECHarrierStableT19" count="1" />
+        <item name="modPZAECHarrierOverloadT19" count="1" />
+        <item name="modPZAECStormStableT19" count="1" />
+        <item name="modPZAECStormOverloadT19" count="1" />
+        <item name="modPZAECTremorStableT19" count="1" />
+        <item name="modPZAECTremorOverloadT19" count="1" />
+        <item name="modPZAECWardenStableT19" count="1" />
+        <item name="modPZAECWardenOverloadT19" count="1" />
+      </lootgroup>
+    </insertBefore>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+      <item name="itemPZAECArmoryBlueprintCrateT16" count="1" prob="0.08" force_prob="true" />
+      <item name="itemPZAECComponentChoiceCrateT16" count="1" prob="0.18" force_prob="true" />
+      <item group="PZAECExpansionWeaponT16" count="1" prob="0.02" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT16']">
+      <item name="resourcePZAECCapacitorFragmentT16" count="1,3" prob=".75" />
+      <item name="thrownPZAECCounterJammerT16" count="1" prob="0.08" />
+      <item name="itemPZAECDefenseBlueprintCrateT16" count="1" prob="0.04" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']">
+      <item name="itemPZAECArmoryBlueprintCrateT17" count="1" prob="0.12" force_prob="true" />
+      <item name="itemPZAECComponentChoiceCrateT17" count="1" prob="0.25" force_prob="true" />
+      <item group="PZAECExpansionWeaponT17" count="1" prob="0.03" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT17']">
+      <item name="resourcePZAECCapacitorFragmentT17" count="1,3" prob=".75" />
+      <item name="thrownPZAECCounterJammerT17" count="1" prob="0.12" />
+      <item name="itemPZAECDefenseBlueprintCrateT17" count="1" prob="0.06" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']">
+      <item name="itemPZAECArmoryBlueprintCrateT18" count="1" prob="0.18" force_prob="true" />
+      <item name="itemPZAECComponentChoiceCrateT18" count="1" prob="0.35" force_prob="true" />
+      <item group="PZAECExpansionWeaponT18" count="1" prob="0.04" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT18']">
+      <item name="resourcePZAECCapacitorFragmentT18" count="1,3" prob=".75" />
+      <item name="thrownPZAECCounterJammerT18" count="1" prob="0.18" />
+      <item name="itemPZAECDefenseBlueprintCrateT18" count="1" prob="0.09" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
+      <item name="itemPZAECArmoryBlueprintCrateT19" count="1" prob="0.25" force_prob="true" />
+      <item name="itemPZAECComponentChoiceCrateT19" count="1" prob="0.5" force_prob="true" />
+      <item group="PZAECExpansionWeaponT19" count="1" prob="0.06" force_prob="true" />
+      <item group="PZAECCalibrationT19" count="1" prob=".15" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT19']">
+      <item name="resourcePZAECCapacitorFragmentT19" count="1,3" prob=".75" />
+      <item name="thrownPZAECCounterJammerT19" count="1" prob="0.25" />
+      <item name="itemPZAECDefenseBlueprintCrateT19" count="1" prob="0.12" />
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
 </configs>

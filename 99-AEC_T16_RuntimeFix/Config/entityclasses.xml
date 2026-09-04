@@ -476,4 +476,76 @@
       <property name="LootDropEntityClass" value="PZAECSiegeLootBagT19" />
     </append>
   <!-- END GENERATED ENDGAME ARSENAL -->
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <append xpath="/entity_classes">
+      <entity_class name="PZAECSiegeDisruptorT16" extends="PZAECSiege_acid_T16">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Disruptor" />
+        <property name="HandItem" value="meleeHandPZAECSiege_acid_T16" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=8;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeSpotterT16" extends="PZAECSiege_heavy_T16">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Spotter" />
+        <property name="HandItem" value="meleeHandPZAECSiege_heavy_T16" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=12;duration=7;minRange=10;maxRange=60;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLinesmanT16" extends="AECZombieUtilityWorkerTier16Transcendent">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Linesman" />
+        <property name="AITask" value="BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeDisruptorT17" extends="PZAECSiege_acid_T17">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Disruptor" />
+        <property name="HandItem" value="meleeHandPZAECSiege_acid_T17" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=8;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeSpotterT17" extends="PZAECSiege_heavy_T17">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Spotter" />
+        <property name="HandItem" value="meleeHandPZAECSiege_heavy_T17" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=12;duration=7;minRange=10;maxRange=60;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLinesmanT17" extends="AECZombieUtilityWorkerTier17Ascendant">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Linesman" />
+        <property name="AITask" value="BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeDisruptorT18" extends="PZAECSiege_acid_T18">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Disruptor" />
+        <property name="HandItem" value="meleeHandPZAECSiege_acid_T18" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=8;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeSpotterT18" extends="PZAECSiege_heavy_T18">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Spotter" />
+        <property name="HandItem" value="meleeHandPZAECSiege_heavy_T18" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=12;duration=7;minRange=10;maxRange=60;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLinesmanT18" extends="AECZombieUtilityWorkerTier18Eternal">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Linesman" />
+        <property name="AITask" value="BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeDisruptorT19" extends="PZAECSiege_acid_T19">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Disruptor" />
+        <property name="HandItem" value="meleeHandPZAECSiege_acid_T19" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=8;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeSpotterT19" extends="PZAECSiege_heavy_T19">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Spotter" />
+        <property name="HandItem" value="meleeHandPZAECSiege_heavy_T19" />
+        <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=12;duration=7;minRange=10;maxRange=60;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLinesmanT19" extends="AECZombieUtilityWorkerTier19Apocalyptic">
+        <property name="UserSpawnType" value="None" />
+        <property name="PZAECSiegeRole" value="Linesman" />
+        <property name="AITask" value="BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+      </entity_class>
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
 </configs>

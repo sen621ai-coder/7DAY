@@ -7,13 +7,16 @@ namespace AECT16RuntimeFix
 {
     public static class BloodMoonSiege
     {
-        public const int ReplacementChance = 25, HeavyChance = 17;
+        public const int ReplacementChance = 25, HeavyChance = 10, AcidChance = 5,
+            DisruptorChance = 4, SpotterChance = 3, LinesmanChance = 3;
         public const int NearbyCap = 8, TargetCap = 4;
         public const float MinRange = 8, MaxRange = 52, SupportRadius = 24;
-        private static readonly Regex Names = new Regex(@"\APZAECSiege_(heavy|acid)_T(16|17|18|19)\z", RegexOptions.CultureInvariant);
+        private static readonly Regex Names = new Regex(
+            @"\APZAECSiege(?:(?:_(?:heavy|acid)_T)|(?:Disruptor|Spotter|Linesman)T)(16|17|18|19)\z",
+            RegexOptions.CultureInvariant);
         private static readonly ConditionalWeakTable<EntityAlive, EAIPZAECSiege> Aiming = new ConditionalWeakTable<EntityAlive, EAIPZAECSiege>();
 
-        public static int Tier(string id) { var m = Names.Match(id ?? ""); return m.Success ? int.Parse(m.Groups[2].Value) : 0; }
+        public static int Tier(string id) { var m = Names.Match(id ?? ""); return m.Success ? int.Parse(m.Groups[1].Value) : 0; }
         public static int TierForGameStage(int gs)
         {
             if (gs >= 300000) return 19;
@@ -23,8 +26,15 @@ namespace AECT16RuntimeFix
         }
         public static string Variant(int tier, int roll)
         {
-            return tier < 16 || tier > 19 || roll < 0 || roll >= ReplacementChance ? null :
-                "PZAECSiege_" + (roll < HeavyChance ? "heavy" : "acid") + "_T" + tier;
+            if (tier < 16 || tier > 19 || roll < 0 || roll >= ReplacementChance) return null;
+            if (roll < HeavyChance) return "PZAECSiege_heavy_T" + tier;
+            roll -= HeavyChance;
+            if (roll < AcidChance) return "PZAECSiege_acid_T" + tier;
+            roll -= AcidChance;
+            if (roll < DisruptorChance) return "PZAECSiegeDisruptorT" + tier;
+            roll -= DisruptorChance;
+            if (roll < SpotterChance) return "PZAECSiegeSpotterT" + tier;
+            return "PZAECSiegeLinesmanT" + tier;
         }
         public static bool HasRoom(int nearby, int targeted) { return nearby < NearbyCap && targeted < TargetCap; }
 

@@ -29,7 +29,7 @@ function Get-InheritedProperty([hashtable]$map,[string]$id,[string]$property) {
     }
     return ''
 }
-Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.16\.7"') 'Runtime version was not bumped'
+Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.18\.0"') 'Runtime version was not bumped'
 Assert-Balance (Test-Path (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ENDGAME_REWARD_BALANCE.md')) 'Missing reward guide'
 
 # Apply the real configuration operations in load order, including this patch.
@@ -90,7 +90,11 @@ foreach($tier in 16..19) {
         Assert-Balance ($bonus.SelectNodes("item[@name='$id']").Count -eq 1) "Missing utility drop $id/T$tier"
     }
     $bundle=$loot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']")
-    Assert-Balance ($bundle.item.Count -eq 15) "Wrong boss bundle breadth T$tier"
+    $expectedBreadth=if($tier -eq 19){22}else{21}
+    Assert-Balance ($bundle.item.Count -eq $expectedBreadth) "Wrong boss bundle breadth T${tier}: expected $expectedBreadth, got $($bundle.item.Count)"
+    foreach($groupName in @("PZAECExpansionWeaponT$tier")){Assert-Balance ($bundle.SelectNodes("item[@group='$groupName']").Count -eq 1) "Missing expansion weapon reward T$tier"}
+    foreach($itemName in @("itemPZAECArmoryBlueprintCrateT$tier","itemPZAECComponentChoiceCrateT$tier")){Assert-Balance ($bundle.SelectNodes("item[@name='$itemName']").Count -eq 1) "Missing expansion choice reward $itemName"}
+    if($tier -eq 19){Assert-Balance ($bundle.SelectNodes("item[@group='PZAECCalibrationT19']").Count -eq 1) 'Missing T19 calibration reward'}
     $box=$loot.SelectSingleNode("/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT$tier']")
     Assert-Balance ($box.unmodified_lootstage -eq 'true' -and $box.ignore_loot_abundance -eq 'true') "Bundle affected by world loot multipliers T$tier"
 }

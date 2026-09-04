@@ -687,3 +687,461 @@ buffPZAECWardenActiveName,buffs,EndgameArsenal,,,,Warden Field,,,,,,,,,,,,守望
 buffPZAECWardenActiveDesc,buffs,EndgameArsenal,,,,The Warden resonance ability is active.,,,,,,,,,,,,守望共鸣能力正在生效。,守望共鸣能力正在生效。
 buffPZAECResonanceCooldownName,buffs,EndgameArsenal,,,,Resonance Overload,,,,,,,,,,,,共鸣过载,共鸣过载
 buffPZAECResonanceCooldownDesc,buffs,EndgameArsenal,,,,The resonance device is cooling down.,,,,,,,,,,,,共鸣装置正在冷却。,共鸣装置正在冷却。
+gunPZAECHorizonNeedleT16,items,EndgameExpansion,,,,T16 Horizon Needle Rifle,,,,,,,,,,,,T16 地平线针刺步枪,T16 地平线针刺步枪
+gunPZAECHorizonNeedleT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT17,items,EndgameExpansion,,,,T17 Horizon Needle Rifle,,,,,,,,,,,,T17 地平线针刺步枪,T17 地平线针刺步枪
+gunPZAECHorizonNeedleT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT18,items,EndgameExpansion,,,,T18 Horizon Needle Rifle,,,,,,,,,,,,T18 地平线针刺步枪,T18 地平线针刺步枪
+gunPZAECHorizonNeedleT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT19,items,EndgameExpansion,,,,T19 Horizon Needle Rifle,,,,,,,,,,,,T19 地平线针刺步枪,T19 地平线针刺步枪
+gunPZAECHorizonNeedleT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT16,items,EndgameExpansion,,,,T16 Storm Reservoir LMG,,,,,,,,,,,,T16 雷池轻机枪,T16 雷池轻机枪
+gunPZAECStormReservoirT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT17,items,EndgameExpansion,,,,T17 Storm Reservoir LMG,,,,,,,,,,,,T17 雷池轻机枪,T17 雷池轻机枪
+gunPZAECStormReservoirT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT18,items,EndgameExpansion,,,,T18 Storm Reservoir LMG,,,,,,,,,,,,T18 雷池轻机枪,T18 雷池轻机枪
+gunPZAECStormReservoirT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT19,items,EndgameExpansion,,,,T19 Storm Reservoir LMG,,,,,,,,,,,,T19 雷池轻机枪,T19 雷池轻机枪
+gunPZAECStormReservoirT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT16,items,EndgameExpansion,,,,T16 Faultline Shock Hammer,,,,,,,,,,,,T16 断层震击锤,T16 断层震击锤
+meleePZAECFaultlineHammerT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT17,items,EndgameExpansion,,,,T17 Faultline Shock Hammer,,,,,,,,,,,,T17 断层震击锤,T17 断层震击锤
+meleePZAECFaultlineHammerT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT18,items,EndgameExpansion,,,,T18 Faultline Shock Hammer,,,,,,,,,,,,T18 断层震击锤,T18 断层震击锤
+meleePZAECFaultlineHammerT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT19,items,EndgameExpansion,,,,T19 Faultline Shock Hammer,,,,,,,,,,,,T19 断层震击锤,T19 断层震击锤
+meleePZAECFaultlineHammerT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT16,items,EndgameExpansion,,,,T16 Bastion Auto Shotgun,,,,,,,,,,,,T16 壁垒自动霰弹枪,T16 壁垒自动霰弹枪
+gunPZAECBastionShotgunT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT17,items,EndgameExpansion,,,,T17 Bastion Auto Shotgun,,,,,,,,,,,,T17 壁垒自动霰弹枪,T17 壁垒自动霰弹枪
+gunPZAECBastionShotgunT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT18,items,EndgameExpansion,,,,T18 Bastion Auto Shotgun,,,,,,,,,,,,T18 壁垒自动霰弹枪,T18 壁垒自动霰弹枪
+gunPZAECBastionShotgunT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT19,items,EndgameExpansion,,,,T19 Bastion Auto Shotgun,,,,,,,,,,,,T19 壁垒自动霰弹枪,T19 壁垒自动霰弹枪
+gunPZAECBastionShotgunT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT16,items,EndgameExpansion,,,,T16 Echo Repeating Crossbow,,,,,,,,,,,,T16 回声连弩,T16 回声连弩
+gunPZAECEchoRepeaterT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT17,items,EndgameExpansion,,,,T17 Echo Repeating Crossbow,,,,,,,,,,,,T17 回声连弩,T17 回声连弩
+gunPZAECEchoRepeaterT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT18,items,EndgameExpansion,,,,T18 Echo Repeating Crossbow,,,,,,,,,,,,T18 回声连弩,T18 回声连弩
+gunPZAECEchoRepeaterT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT19,items,EndgameExpansion,,,,T19 Echo Repeating Crossbow,,,,,,,,,,,,T19 回声连弩,T19 回声连弩
+gunPZAECEchoRepeaterT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT16,items,EndgameExpansion,,,,T16 Counter-Siege Pulser,,,,,,,,,,,,T16 反攻城脉冲器,T16 反攻城脉冲器
+gunPZAECCounterSiegeT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT17,items,EndgameExpansion,,,,T17 Counter-Siege Pulser,,,,,,,,,,,,T17 反攻城脉冲器,T17 反攻城脉冲器
+gunPZAECCounterSiegeT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT18,items,EndgameExpansion,,,,T18 Counter-Siege Pulser,,,,,,,,,,,,T18 反攻城脉冲器,T18 反攻城脉冲器
+gunPZAECCounterSiegeT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT19,items,EndgameExpansion,,,,T19 Counter-Siege Pulser,,,,,,,,,,,,T19 反攻城脉冲器,T19 反攻城脉冲器
+gunPZAECCounterSiegeT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+ammoPZAECSkyguardInterceptorT16,items,EndgameExpansion,,,,T16 Skyguard Interceptor Round,,,,,,,,,,,,T16 天穹截击弹,T16 天穹截击弹
+ammoPZAECSkyguardInterceptorT16Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECSkyguardInterceptorT17,items,EndgameExpansion,,,,T17 Skyguard Interceptor Round,,,,,,,,,,,,T17 天穹截击弹,T17 天穹截击弹
+ammoPZAECSkyguardInterceptorT17Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECSkyguardInterceptorT18,items,EndgameExpansion,,,,T18 Skyguard Interceptor Round,,,,,,,,,,,,T18 天穹截击弹,T18 天穹截击弹
+ammoPZAECSkyguardInterceptorT18Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECSkyguardInterceptorT19,items,EndgameExpansion,,,,T19 Skyguard Interceptor Round,,,,,,,,,,,,T19 天穹截击弹,T19 天穹截击弹
+ammoPZAECSkyguardInterceptorT19Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECCounterPulseT16,items,EndgameExpansion,,,,T16 Counter-Siege Pulse Round,,,,,,,,,,,,T16 反攻城脉冲弹,T16 反攻城脉冲弹
+ammoPZAECCounterPulseT16Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECCounterPulseT17,items,EndgameExpansion,,,,T17 Counter-Siege Pulse Round,,,,,,,,,,,,T17 反攻城脉冲弹,T17 反攻城脉冲弹
+ammoPZAECCounterPulseT17Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECCounterPulseT18,items,EndgameExpansion,,,,T18 Counter-Siege Pulse Round,,,,,,,,,,,,T18 反攻城脉冲弹,T18 反攻城脉冲弹
+ammoPZAECCounterPulseT18Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+ammoPZAECCounterPulseT19,items,EndgameExpansion,,,,T19 Counter-Siege Pulse Round,,,,,,,,,,,,T19 反攻城脉冲弹,T19 反攻城脉冲弹
+ammoPZAECCounterPulseT19Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
+itemPZAECQuickArmorGel,items,EndgameExpansion,,,,Quick Armor Gel,,,,,,,,,,,,快凝装甲胶,快凝装甲胶
+itemPZAECQuickArmorGelDesc,items,EndgameExpansion,,,,Reusable endgame field technology with server-checked limits where required.,,,,,,,,,,,,终局战场科技；需要时由服务器验证目标、位置和冷却。,终局战场科技；需要时由服务器验证目标、位置和冷却。
+itemPZAECResonanceInjector,items,EndgameExpansion,,,,Resonance Injector,,,,,,,,,,,,共鸣注射剂,共鸣注射剂
+itemPZAECResonanceInjectorDesc,items,EndgameExpansion,,,,Reusable endgame field technology with server-checked limits where required.,,,,,,,,,,,,终局战场科技；需要时由服务器验证目标、位置和冷却。,终局战场科技；需要时由服务器验证目标、位置和冷却。
+itemPZAECDecoyBeacon,items,EndgameExpansion,,,,Decoy Beacon,,,,,,,,,,,,诱饵信标,诱饵信标
+itemPZAECDecoyBeaconDesc,items,EndgameExpansion,,,,Reusable endgame field technology with server-checked limits where required.,,,,,,,,,,,,终局战场科技；需要时由服务器验证目标、位置和冷却。,终局战场科技；需要时由服务器验证目标、位置和冷却。
+itemPZAECEvacAnchor,items,EndgameExpansion,,,,Evacuation Anchor,,,,,,,,,,,,撤离锚,撤离锚
+itemPZAECEvacAnchorDesc,items,EndgameExpansion,,,,Reusable endgame field technology with server-checked limits where required.,,,,,,,,,,,,终局战场科技；需要时由服务器验证目标、位置和冷却。,终局战场科技；需要时由服务器验证目标、位置和冷却。
+thrownPZAECCounterJammerT16,items,EndgameExpansion,,,,T16 Countermeasure Jammer,,,,,,,,,,,,T16 反制干扰弹,T16 反制干扰弹
+thrownPZAECCounterJammerT16Desc,items,EndgameExpansion,,,,Tier-scaled countermeasure jammer for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶反制干扰弹。,用于主动血夜防御的同阶反制干扰弹。
+thrownPZAECCounterJammerT17,items,EndgameExpansion,,,,T17 Countermeasure Jammer,,,,,,,,,,,,T17 反制干扰弹,T17 反制干扰弹
+thrownPZAECCounterJammerT17Desc,items,EndgameExpansion,,,,Tier-scaled countermeasure jammer for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶反制干扰弹。,用于主动血夜防御的同阶反制干扰弹。
+thrownPZAECCounterJammerT18,items,EndgameExpansion,,,,T18 Countermeasure Jammer,,,,,,,,,,,,T18 反制干扰弹,T18 反制干扰弹
+thrownPZAECCounterJammerT18Desc,items,EndgameExpansion,,,,Tier-scaled countermeasure jammer for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶反制干扰弹。,用于主动血夜防御的同阶反制干扰弹。
+thrownPZAECCounterJammerT19,items,EndgameExpansion,,,,T19 Countermeasure Jammer,,,,,,,,,,,,T19 反制干扰弹,T19 反制干扰弹
+thrownPZAECCounterJammerT19Desc,items,EndgameExpansion,,,,Tier-scaled countermeasure jammer for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶反制干扰弹。,用于主动血夜防御的同阶反制干扰弹。
+itemPZAECFieldRepairKitT16,items,EndgameExpansion,,,,T16 Field Repair Kit,,,,,,,,,,,,T16 战地维修包,T16 战地维修包
+itemPZAECFieldRepairKitT16Desc,items,EndgameExpansion,,,,Tier-scaled field repair kit for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶战地维修包。,用于主动血夜防御的同阶战地维修包。
+itemPZAECFieldRepairKitT17,items,EndgameExpansion,,,,T17 Field Repair Kit,,,,,,,,,,,,T17 战地维修包,T17 战地维修包
+itemPZAECFieldRepairKitT17Desc,items,EndgameExpansion,,,,Tier-scaled field repair kit for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶战地维修包。,用于主动血夜防御的同阶战地维修包。
+itemPZAECFieldRepairKitT18,items,EndgameExpansion,,,,T18 Field Repair Kit,,,,,,,,,,,,T18 战地维修包,T18 战地维修包
+itemPZAECFieldRepairKitT18Desc,items,EndgameExpansion,,,,Tier-scaled field repair kit for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶战地维修包。,用于主动血夜防御的同阶战地维修包。
+itemPZAECFieldRepairKitT19,items,EndgameExpansion,,,,T19 Field Repair Kit,,,,,,,,,,,,T19 战地维修包,T19 战地维修包
+itemPZAECFieldRepairKitT19Desc,items,EndgameExpansion,,,,Tier-scaled field repair kit for active Blood Moon defense.,,,,,,,,,,,,用于主动血夜防御的同阶战地维修包。,用于主动血夜防御的同阶战地维修包。
+resourcePZAECDefenseChassis,items,EndgameExpansion,,,,Defense Equipment Chassis,,,,,,,,,,,,防御设备底盘,防御设备底盘
+resourcePZAECDefenseChassisDesc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCoreFragmentT16,items,EndgameExpansion,,,,T16 Core Fragment,,,,,,,,,,,,T16 心核碎片,T16 心核碎片
+resourcePZAECCoreFragmentT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCapacitorFragmentT16,items,EndgameExpansion,,,,T16 Capacitor Fragment,,,,,,,,,,,,T16 电容碎片,T16 电容碎片
+resourcePZAECCapacitorFragmentT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECArmoryBlueprintCrateT16,items,EndgameExpansion,,,,T16 Armory Blueprint Choice,,,,,,,,,,,,T16 军械蓝图选择箱,T16 军械蓝图选择箱
+itemPZAECArmoryBlueprintCrateT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECComponentChoiceCrateT16,items,EndgameExpansion,,,,T16 Component Choice,,,,,,,,,,,,T16 组件选择箱,T16 组件选择箱
+itemPZAECComponentChoiceCrateT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECRepairChargeT16,items,EndgameExpansion,,,,T16 Repair Charge,,,,,,,,,,,,T16 维修料盒,T16 维修料盒
+resourcePZAECRepairChargeT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECDecoyChargeT16,items,EndgameExpansion,,,,T16 Decoy Charge,,,,,,,,,,,,T16 诱导电荷,T16 诱导电荷
+resourcePZAECDecoyChargeT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECDefenseBlueprintCrateT16,items,EndgameExpansion,,,,T16 Defense Blueprint Choice,,,,,,,,,,,,T16 设备蓝图选择箱,T16 设备蓝图选择箱
+itemPZAECDefenseBlueprintCrateT16Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCoreFragmentT17,items,EndgameExpansion,,,,T17 Core Fragment,,,,,,,,,,,,T17 心核碎片,T17 心核碎片
+resourcePZAECCoreFragmentT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCapacitorFragmentT17,items,EndgameExpansion,,,,T17 Capacitor Fragment,,,,,,,,,,,,T17 电容碎片,T17 电容碎片
+resourcePZAECCapacitorFragmentT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECArmoryBlueprintCrateT17,items,EndgameExpansion,,,,T17 Armory Blueprint Choice,,,,,,,,,,,,T17 军械蓝图选择箱,T17 军械蓝图选择箱
+itemPZAECArmoryBlueprintCrateT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECComponentChoiceCrateT17,items,EndgameExpansion,,,,T17 Component Choice,,,,,,,,,,,,T17 组件选择箱,T17 组件选择箱
+itemPZAECComponentChoiceCrateT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECRepairChargeT17,items,EndgameExpansion,,,,T17 Repair Charge,,,,,,,,,,,,T17 维修料盒,T17 维修料盒
+resourcePZAECRepairChargeT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECDecoyChargeT17,items,EndgameExpansion,,,,T17 Decoy Charge,,,,,,,,,,,,T17 诱导电荷,T17 诱导电荷
+resourcePZAECDecoyChargeT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECDefenseBlueprintCrateT17,items,EndgameExpansion,,,,T17 Defense Blueprint Choice,,,,,,,,,,,,T17 设备蓝图选择箱,T17 设备蓝图选择箱
+itemPZAECDefenseBlueprintCrateT17Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCoreFragmentT18,items,EndgameExpansion,,,,T18 Core Fragment,,,,,,,,,,,,T18 心核碎片,T18 心核碎片
+resourcePZAECCoreFragmentT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCapacitorFragmentT18,items,EndgameExpansion,,,,T18 Capacitor Fragment,,,,,,,,,,,,T18 电容碎片,T18 电容碎片
+resourcePZAECCapacitorFragmentT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECArmoryBlueprintCrateT18,items,EndgameExpansion,,,,T18 Armory Blueprint Choice,,,,,,,,,,,,T18 军械蓝图选择箱,T18 军械蓝图选择箱
+itemPZAECArmoryBlueprintCrateT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECComponentChoiceCrateT18,items,EndgameExpansion,,,,T18 Component Choice,,,,,,,,,,,,T18 组件选择箱,T18 组件选择箱
+itemPZAECComponentChoiceCrateT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECRepairChargeT18,items,EndgameExpansion,,,,T18 Repair Charge,,,,,,,,,,,,T18 维修料盒,T18 维修料盒
+resourcePZAECRepairChargeT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECDecoyChargeT18,items,EndgameExpansion,,,,T18 Decoy Charge,,,,,,,,,,,,T18 诱导电荷,T18 诱导电荷
+resourcePZAECDecoyChargeT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECDefenseBlueprintCrateT18,items,EndgameExpansion,,,,T18 Defense Blueprint Choice,,,,,,,,,,,,T18 设备蓝图选择箱,T18 设备蓝图选择箱
+itemPZAECDefenseBlueprintCrateT18Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCoreFragmentT19,items,EndgameExpansion,,,,T19 Core Fragment,,,,,,,,,,,,T19 心核碎片,T19 心核碎片
+resourcePZAECCoreFragmentT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECCapacitorFragmentT19,items,EndgameExpansion,,,,T19 Capacitor Fragment,,,,,,,,,,,,T19 电容碎片,T19 电容碎片
+resourcePZAECCapacitorFragmentT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECArmoryBlueprintCrateT19,items,EndgameExpansion,,,,T19 Armory Blueprint Choice,,,,,,,,,,,,T19 军械蓝图选择箱,T19 军械蓝图选择箱
+itemPZAECArmoryBlueprintCrateT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECComponentChoiceCrateT19,items,EndgameExpansion,,,,T19 Component Choice,,,,,,,,,,,,T19 组件选择箱,T19 组件选择箱
+itemPZAECComponentChoiceCrateT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECRepairChargeT19,items,EndgameExpansion,,,,T19 Repair Charge,,,,,,,,,,,,T19 维修料盒,T19 维修料盒
+resourcePZAECRepairChargeT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+resourcePZAECDecoyChargeT19,items,EndgameExpansion,,,,T19 Decoy Charge,,,,,,,,,,,,T19 诱导电荷,T19 诱导电荷
+resourcePZAECDecoyChargeT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+itemPZAECDefenseBlueprintCrateT19,items,EndgameExpansion,,,,T19 Defense Blueprint Choice,,,,,,,,,,,,T19 设备蓝图选择箱,T19 设备蓝图选择箱
+itemPZAECDefenseBlueprintCrateT19Desc,items,EndgameExpansion,,,,Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.,,,,,,,,,,,,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。,终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。
+modPZAECHarrierStableT19,items,EndgameExpansion,,,,Harrier Stable Calibration,,,,,,,,,,,,猎隼稳定校准,猎隼稳定校准
+modPZAECHarrierStableT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECHarrierOverloadT19,items,EndgameExpansion,,,,Harrier Overload Calibration,,,,,,,,,,,,猎隼过载校准,猎隼过载校准
+modPZAECHarrierOverloadT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECStormStableT19,items,EndgameExpansion,,,,Storm Stable Calibration,,,,,,,,,,,,雷暴稳定校准,雷暴稳定校准
+modPZAECStormStableT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECStormOverloadT19,items,EndgameExpansion,,,,Storm Overload Calibration,,,,,,,,,,,,雷暴过载校准,雷暴过载校准
+modPZAECStormOverloadT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECTremorStableT19,items,EndgameExpansion,,,,Tremor Stable Calibration,,,,,,,,,,,,震岳稳定校准,震岳稳定校准
+modPZAECTremorStableT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECTremorOverloadT19,items,EndgameExpansion,,,,Tremor Overload Calibration,,,,,,,,,,,,震岳过载校准,震岳过载校准
+modPZAECTremorOverloadT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECWardenStableT19,items,EndgameExpansion,,,,Warden Stable Calibration,,,,,,,,,,,,守望稳定校准,守望稳定校准
+modPZAECWardenStableT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECWardenOverloadT19,items,EndgameExpansion,,,,Warden Overload Calibration,,,,,,,,,,,,守望过载校准,守望过载校准
+modPZAECWardenOverloadT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
+modPZAECThreatLensT16,items,EndgameExpansion,,,,T16 Threat Lens,,,,,,,,,,,,T16 威胁鉴别镜,T16 威胁鉴别镜
+modPZAECThreatLensT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT17,items,EndgameExpansion,,,,T17 Threat Lens,,,,,,,,,,,,T17 威胁鉴别镜,T17 威胁鉴别镜
+modPZAECThreatLensT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT18,items,EndgameExpansion,,,,T18 Threat Lens,,,,,,,,,,,,T18 威胁鉴别镜,T18 威胁鉴别镜
+modPZAECThreatLensT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT19,items,EndgameExpansion,,,,T19 Threat Lens,,,,,,,,,,,,T19 威胁鉴别镜,T19 威胁鉴别镜
+modPZAECThreatLensT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECCoolingSinkT16,items,EndgameExpansion,,,,T16 Cooling Sink,,,,,,,,,,,,T16 热沉套件,T16 热沉套件
+modPZAECCoolingSinkT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT17,items,EndgameExpansion,,,,T17 Cooling Sink,,,,,,,,,,,,T17 热沉套件,T17 热沉套件
+modPZAECCoolingSinkT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT18,items,EndgameExpansion,,,,T18 Cooling Sink,,,,,,,,,,,,T18 热沉套件,T18 热沉套件
+modPZAECCoolingSinkT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT19,items,EndgameExpansion,,,,T19 Cooling Sink,,,,,,,,,,,,T19 热沉套件,T19 热沉套件
+modPZAECCoolingSinkT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECKineticRecyclerT16,items,EndgameExpansion,,,,T16 Kinetic Recycler,,,,,,,,,,,,T16 动能回收器,T16 动能回收器
+modPZAECKineticRecyclerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT17,items,EndgameExpansion,,,,T17 Kinetic Recycler,,,,,,,,,,,,T17 动能回收器,T17 动能回收器
+modPZAECKineticRecyclerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT18,items,EndgameExpansion,,,,T18 Kinetic Recycler,,,,,,,,,,,,T18 动能回收器,T18 动能回收器
+modPZAECKineticRecyclerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT19,items,EndgameExpansion,,,,T19 Kinetic Recycler,,,,,,,,,,,,T19 动能回收器,T19 动能回收器
+modPZAECKineticRecyclerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECRepairServoT16,items,EndgameExpansion,,,,T16 Repair Servo,,,,,,,,,,,,T16 维修伺服,T16 维修伺服
+modPZAECRepairServoT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Repair Servo: 提高方块修理速度和修理量。,,,,,,,,,,,,同阶行为组件。提高方块修理速度和修理量。,同阶行为组件。提高方块修理速度和修理量。
+modPZAECRepairServoT17,items,EndgameExpansion,,,,T17 Repair Servo,,,,,,,,,,,,T17 维修伺服,T17 维修伺服
+modPZAECRepairServoT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Repair Servo: 提高方块修理速度和修理量。,,,,,,,,,,,,同阶行为组件。提高方块修理速度和修理量。,同阶行为组件。提高方块修理速度和修理量。
+modPZAECRepairServoT18,items,EndgameExpansion,,,,T18 Repair Servo,,,,,,,,,,,,T18 维修伺服,T18 维修伺服
+modPZAECRepairServoT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Repair Servo: 提高方块修理速度和修理量。,,,,,,,,,,,,同阶行为组件。提高方块修理速度和修理量。,同阶行为组件。提高方块修理速度和修理量。
+modPZAECRepairServoT19,items,EndgameExpansion,,,,T19 Repair Servo,,,,,,,,,,,,T19 维修伺服,T19 维修伺服
+modPZAECRepairServoT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Repair Servo: 提高方块修理速度和修理量。,,,,,,,,,,,,同阶行为组件。提高方块修理速度和修理量。,同阶行为组件。提高方块修理速度和修理量。
+modPZAECPhaseRangefinderT16,items,EndgameExpansion,,,,T16 Phase Rangefinder,,,,,,,,,,,,T16 相位测距镜,T16 相位测距镜
+modPZAECPhaseRangefinderT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Phase Rangefinder: 稳定瞄准提高弱点伤害。,,,,,,,,,,,,同阶行为组件。稳定瞄准提高弱点伤害。,同阶行为组件。稳定瞄准提高弱点伤害。
+modPZAECPhaseRangefinderT17,items,EndgameExpansion,,,,T17 Phase Rangefinder,,,,,,,,,,,,T17 相位测距镜,T17 相位测距镜
+modPZAECPhaseRangefinderT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Phase Rangefinder: 稳定瞄准提高弱点伤害。,,,,,,,,,,,,同阶行为组件。稳定瞄准提高弱点伤害。,同阶行为组件。稳定瞄准提高弱点伤害。
+modPZAECPhaseRangefinderT18,items,EndgameExpansion,,,,T18 Phase Rangefinder,,,,,,,,,,,,T18 相位测距镜,T18 相位测距镜
+modPZAECPhaseRangefinderT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Phase Rangefinder: 稳定瞄准提高弱点伤害。,,,,,,,,,,,,同阶行为组件。稳定瞄准提高弱点伤害。,同阶行为组件。稳定瞄准提高弱点伤害。
+modPZAECPhaseRangefinderT19,items,EndgameExpansion,,,,T19 Phase Rangefinder,,,,,,,,,,,,T19 相位测距镜,T19 相位测距镜
+modPZAECPhaseRangefinderT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Phase Rangefinder: 稳定瞄准提高弱点伤害。,,,,,,,,,,,,同阶行为组件。稳定瞄准提高弱点伤害。,同阶行为组件。稳定瞄准提高弱点伤害。
+modPZAECNearfieldReflexT16,items,EndgameExpansion,,,,T16 Nearfield Reflex,,,,,,,,,,,,T16 近场反射镜,T16 近场反射镜
+modPZAECNearfieldReflexT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT17,items,EndgameExpansion,,,,T17 Nearfield Reflex,,,,,,,,,,,,T17 近场反射镜,T17 近场反射镜
+modPZAECNearfieldReflexT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT18,items,EndgameExpansion,,,,T18 Nearfield Reflex,,,,,,,,,,,,T18 近场反射镜,T18 近场反射镜
+modPZAECNearfieldReflexT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT19,items,EndgameExpansion,,,,T19 Nearfield Reflex,,,,,,,,,,,,T19 近场反射镜,T19 近场反射镜
+modPZAECNearfieldReflexT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECClosedLoopFeedT16,items,EndgameExpansion,,,,T16 Closed-Loop Feed,,,,,,,,,,,,T16 闭环供弹器,T16 闭环供弹器
+modPZAECClosedLoopFeedT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Closed-Loop Feed: 扩大弹匣并提高持续供弹能力。,,,,,,,,,,,,同阶行为组件。扩大弹匣并提高持续供弹能力。,同阶行为组件。扩大弹匣并提高持续供弹能力。
+modPZAECClosedLoopFeedT17,items,EndgameExpansion,,,,T17 Closed-Loop Feed,,,,,,,,,,,,T17 闭环供弹器,T17 闭环供弹器
+modPZAECClosedLoopFeedT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Closed-Loop Feed: 扩大弹匣并提高持续供弹能力。,,,,,,,,,,,,同阶行为组件。扩大弹匣并提高持续供弹能力。,同阶行为组件。扩大弹匣并提高持续供弹能力。
+modPZAECClosedLoopFeedT18,items,EndgameExpansion,,,,T18 Closed-Loop Feed,,,,,,,,,,,,T18 闭环供弹器,T18 闭环供弹器
+modPZAECClosedLoopFeedT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Closed-Loop Feed: 扩大弹匣并提高持续供弹能力。,,,,,,,,,,,,同阶行为组件。扩大弹匣并提高持续供弹能力。,同阶行为组件。扩大弹匣并提高持续供弹能力。
+modPZAECClosedLoopFeedT19,items,EndgameExpansion,,,,T19 Closed-Loop Feed,,,,,,,,,,,,T19 闭环供弹器,T19 闭环供弹器
+modPZAECClosedLoopFeedT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Closed-Loop Feed: 扩大弹匣并提高持续供弹能力。,,,,,,,,,,,,同阶行为组件。扩大弹匣并提高持续供弹能力。,同阶行为组件。扩大弹匣并提高持续供弹能力。
+modPZAECPulseCapacitorT16,items,EndgameExpansion,,,,T16 Pulse Capacitor,,,,,,,,,,,,T16 脉冲电容,T16 脉冲电容
+modPZAECPulseCapacitorT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Pulse Capacitor: 命中可附加短时电击。,,,,,,,,,,,,同阶行为组件。命中可附加短时电击。,同阶行为组件。命中可附加短时电击。
+modPZAECPulseCapacitorT17,items,EndgameExpansion,,,,T17 Pulse Capacitor,,,,,,,,,,,,T17 脉冲电容,T17 脉冲电容
+modPZAECPulseCapacitorT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Pulse Capacitor: 命中可附加短时电击。,,,,,,,,,,,,同阶行为组件。命中可附加短时电击。,同阶行为组件。命中可附加短时电击。
+modPZAECPulseCapacitorT18,items,EndgameExpansion,,,,T18 Pulse Capacitor,,,,,,,,,,,,T18 脉冲电容,T18 脉冲电容
+modPZAECPulseCapacitorT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Pulse Capacitor: 命中可附加短时电击。,,,,,,,,,,,,同阶行为组件。命中可附加短时电击。,同阶行为组件。命中可附加短时电击。
+modPZAECPulseCapacitorT19,items,EndgameExpansion,,,,T19 Pulse Capacitor,,,,,,,,,,,,T19 脉冲电容,T19 脉冲电容
+modPZAECPulseCapacitorT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Pulse Capacitor: 命中可附加短时电击。,,,,,,,,,,,,同阶行为组件。命中可附加短时电击。,同阶行为组件。命中可附加短时电击。
+modPZAECStanceBreakerT16,items,EndgameExpansion,,,,T16 Stance Breaker,,,,,,,,,,,,T16 破势配重,T16 破势配重
+modPZAECStanceBreakerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT17,items,EndgameExpansion,,,,T17 Stance Breaker,,,,,,,,,,,,T17 破势配重,T17 破势配重
+modPZAECStanceBreakerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT18,items,EndgameExpansion,,,,T18 Stance Breaker,,,,,,,,,,,,T18 破势配重,T18 破势配重
+modPZAECStanceBreakerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT19,items,EndgameExpansion,,,,T19 Stance Breaker,,,,,,,,,,,,T19 破势配重,T19 破势配重
+modPZAECStanceBreakerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECGatekeeperHookT16,items,EndgameExpansion,,,,T16 Gatekeeper Hook,,,,,,,,,,,,T16 守门钩爪,T16 守门钩爪
+modPZAECGatekeeperHookT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT17,items,EndgameExpansion,,,,T17 Gatekeeper Hook,,,,,,,,,,,,T17 守门钩爪,T17 守门钩爪
+modPZAECGatekeeperHookT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT18,items,EndgameExpansion,,,,T18 Gatekeeper Hook,,,,,,,,,,,,T18 守门钩爪,T18 守门钩爪
+modPZAECGatekeeperHookT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT19,items,EndgameExpansion,,,,T19 Gatekeeper Hook,,,,,,,,,,,,T19 守门钩爪,T19 守门钩爪
+modPZAECGatekeeperHookT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECEmergencyLinerT16,items,EndgameExpansion,,,,T16 Emergency Liner,,,,,,,,,,,,T16 应急止血层,T16 应急止血层
+modPZAECEmergencyLinerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT17,items,EndgameExpansion,,,,T17 Emergency Liner,,,,,,,,,,,,T17 应急止血层,T17 应急止血层
+modPZAECEmergencyLinerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT18,items,EndgameExpansion,,,,T18 Emergency Liner,,,,,,,,,,,,T18 应急止血层,T18 应急止血层
+modPZAECEmergencyLinerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT19,items,EndgameExpansion,,,,T19 Emergency Liner,,,,,,,,,,,,T19 应急止血层,T19 应急止血层
+modPZAECEmergencyLinerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECInsulatedTreadsT16,items,EndgameExpansion,,,,T16 Insulated Treads,,,,,,,,,,,,T16 绝缘步进器,T16 绝缘步进器
+modPZAECInsulatedTreadsT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT17,items,EndgameExpansion,,,,T17 Insulated Treads,,,,,,,,,,,,T17 绝缘步进器,T17 绝缘步进器
+modPZAECInsulatedTreadsT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT18,items,EndgameExpansion,,,,T18 Insulated Treads,,,,,,,,,,,,T18 绝缘步进器,T18 绝缘步进器
+modPZAECInsulatedTreadsT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT19,items,EndgameExpansion,,,,T19 Insulated Treads,,,,,,,,,,,,T19 绝缘步进器,T19 绝缘步进器
+modPZAECInsulatedTreadsT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+buffPZAECQuickArmorGelName,buffs,EndgameExpansion,,,,Armor Gel Application,,,,,,,,,,,,装甲胶施工,装甲胶施工
+buffPZAECQuickArmorGelDesc,buffs,EndgameExpansion,,,,Temporary endgame field effect.,,,,,,,,,,,,终局战场物品产生的临时效果。,终局战场物品产生的临时效果。
+buffPZAECResonanceInjectorName,buffs,EndgameExpansion,,,,Resonance Injection,,,,,,,,,,,,共鸣注入,共鸣注入
+buffPZAECResonanceInjectorDesc,buffs,EndgameExpansion,,,,Temporary endgame field effect.,,,,,,,,,,,,终局战场物品产生的临时效果。,终局战场物品产生的临时效果。
+buffPZAECDecoyBeaconName,buffs,EndgameExpansion,,,,Decoy Pulse,,,,,,,,,,,,诱饵脉冲,诱饵脉冲
+buffPZAECDecoyBeaconDesc,buffs,EndgameExpansion,,,,Temporary endgame field effect.,,,,,,,,,,,,终局战场物品产生的临时效果。,终局战场物品产生的临时效果。
+buffPZAECEvacAnchorName,buffs,EndgameExpansion,,,,Evacuation Anchor Armed,,,,,,,,,,,,撤离锚已记录,撤离锚已记录
+buffPZAECEvacAnchorDesc,buffs,EndgameExpansion,,,,Temporary endgame field effect.,,,,,,,,,,,,终局战场物品产生的临时效果。,终局战场物品产生的临时效果。
+buffPZAECFaultlineImpactT16Name,buffs,EndgameExpansion,,,,T16 断层冲击,,,,,,,,,,,,T16 断层冲击,T16 断层冲击
+buffPZAECFaultlineImpactT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECBastionStaggerT16Name,buffs,EndgameExpansion,,,,T16 壁垒震慑,,,,,,,,,,,,T16 壁垒震慑,T16 壁垒震慑
+buffPZAECBastionStaggerT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECEchoMarkedT16Name,buffs,EndgameExpansion,,,,T16 回声标记,,,,,,,,,,,,T16 回声标记,T16 回声标记
+buffPZAECEchoMarkedT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterSiegeT16Name,buffs,EndgameExpansion,,,,T16 反攻城压制,,,,,,,,,,,,T16 反攻城压制,T16 反攻城压制
+buffPZAECCounterSiegeT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECStormOverheatedT16Name,buffs,EndgameExpansion,,,,T16 雷池过热,,,,,,,,,,,,T16 雷池过热,T16 雷池过热
+buffPZAECStormOverheatedT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECPulseCapacitorT16Name,buffs,EndgameExpansion,,,,T16 脉冲电击,,,,,,,,,,,,T16 脉冲电击,T16 脉冲电击
+buffPZAECPulseCapacitorT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECShockNetT16Name,buffs,EndgameExpansion,,,,T16 震荡网束缚,,,,,,,,,,,,T16 震荡网束缚,T16 震荡网束缚
+buffPZAECShockNetT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECArmorBreakT16Name,buffs,EndgameExpansion,,,,T16 裂甲,,,,,,,,,,,,T16 裂甲,T16 裂甲
+buffPZAECArmorBreakT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterJammerT16Name,buffs,EndgameExpansion,,,,T16 反制干扰,,,,,,,,,,,,T16 反制干扰,T16 反制干扰
+buffPZAECCounterJammerT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFieldRepairT16Name,buffs,EndgameExpansion,,,,T16 战地维护,,,,,,,,,,,,T16 战地维护,T16 战地维护
+buffPZAECFieldRepairT16Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFaultlineImpactT17Name,buffs,EndgameExpansion,,,,T17 断层冲击,,,,,,,,,,,,T17 断层冲击,T17 断层冲击
+buffPZAECFaultlineImpactT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECBastionStaggerT17Name,buffs,EndgameExpansion,,,,T17 壁垒震慑,,,,,,,,,,,,T17 壁垒震慑,T17 壁垒震慑
+buffPZAECBastionStaggerT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECEchoMarkedT17Name,buffs,EndgameExpansion,,,,T17 回声标记,,,,,,,,,,,,T17 回声标记,T17 回声标记
+buffPZAECEchoMarkedT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterSiegeT17Name,buffs,EndgameExpansion,,,,T17 反攻城压制,,,,,,,,,,,,T17 反攻城压制,T17 反攻城压制
+buffPZAECCounterSiegeT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECStormOverheatedT17Name,buffs,EndgameExpansion,,,,T17 雷池过热,,,,,,,,,,,,T17 雷池过热,T17 雷池过热
+buffPZAECStormOverheatedT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECPulseCapacitorT17Name,buffs,EndgameExpansion,,,,T17 脉冲电击,,,,,,,,,,,,T17 脉冲电击,T17 脉冲电击
+buffPZAECPulseCapacitorT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECShockNetT17Name,buffs,EndgameExpansion,,,,T17 震荡网束缚,,,,,,,,,,,,T17 震荡网束缚,T17 震荡网束缚
+buffPZAECShockNetT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECArmorBreakT17Name,buffs,EndgameExpansion,,,,T17 裂甲,,,,,,,,,,,,T17 裂甲,T17 裂甲
+buffPZAECArmorBreakT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterJammerT17Name,buffs,EndgameExpansion,,,,T17 反制干扰,,,,,,,,,,,,T17 反制干扰,T17 反制干扰
+buffPZAECCounterJammerT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFieldRepairT17Name,buffs,EndgameExpansion,,,,T17 战地维护,,,,,,,,,,,,T17 战地维护,T17 战地维护
+buffPZAECFieldRepairT17Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFaultlineImpactT18Name,buffs,EndgameExpansion,,,,T18 断层冲击,,,,,,,,,,,,T18 断层冲击,T18 断层冲击
+buffPZAECFaultlineImpactT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECBastionStaggerT18Name,buffs,EndgameExpansion,,,,T18 壁垒震慑,,,,,,,,,,,,T18 壁垒震慑,T18 壁垒震慑
+buffPZAECBastionStaggerT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECEchoMarkedT18Name,buffs,EndgameExpansion,,,,T18 回声标记,,,,,,,,,,,,T18 回声标记,T18 回声标记
+buffPZAECEchoMarkedT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterSiegeT18Name,buffs,EndgameExpansion,,,,T18 反攻城压制,,,,,,,,,,,,T18 反攻城压制,T18 反攻城压制
+buffPZAECCounterSiegeT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECStormOverheatedT18Name,buffs,EndgameExpansion,,,,T18 雷池过热,,,,,,,,,,,,T18 雷池过热,T18 雷池过热
+buffPZAECStormOverheatedT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECPulseCapacitorT18Name,buffs,EndgameExpansion,,,,T18 脉冲电击,,,,,,,,,,,,T18 脉冲电击,T18 脉冲电击
+buffPZAECPulseCapacitorT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECShockNetT18Name,buffs,EndgameExpansion,,,,T18 震荡网束缚,,,,,,,,,,,,T18 震荡网束缚,T18 震荡网束缚
+buffPZAECShockNetT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECArmorBreakT18Name,buffs,EndgameExpansion,,,,T18 裂甲,,,,,,,,,,,,T18 裂甲,T18 裂甲
+buffPZAECArmorBreakT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterJammerT18Name,buffs,EndgameExpansion,,,,T18 反制干扰,,,,,,,,,,,,T18 反制干扰,T18 反制干扰
+buffPZAECCounterJammerT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFieldRepairT18Name,buffs,EndgameExpansion,,,,T18 战地维护,,,,,,,,,,,,T18 战地维护,T18 战地维护
+buffPZAECFieldRepairT18Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFaultlineImpactT19Name,buffs,EndgameExpansion,,,,T19 断层冲击,,,,,,,,,,,,T19 断层冲击,T19 断层冲击
+buffPZAECFaultlineImpactT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECBastionStaggerT19Name,buffs,EndgameExpansion,,,,T19 壁垒震慑,,,,,,,,,,,,T19 壁垒震慑,T19 壁垒震慑
+buffPZAECBastionStaggerT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECEchoMarkedT19Name,buffs,EndgameExpansion,,,,T19 回声标记,,,,,,,,,,,,T19 回声标记,T19 回声标记
+buffPZAECEchoMarkedT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterSiegeT19Name,buffs,EndgameExpansion,,,,T19 反攻城压制,,,,,,,,,,,,T19 反攻城压制,T19 反攻城压制
+buffPZAECCounterSiegeT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECStormOverheatedT19Name,buffs,EndgameExpansion,,,,T19 雷池过热,,,,,,,,,,,,T19 雷池过热,T19 雷池过热
+buffPZAECStormOverheatedT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECPulseCapacitorT19Name,buffs,EndgameExpansion,,,,T19 脉冲电击,,,,,,,,,,,,T19 脉冲电击,T19 脉冲电击
+buffPZAECPulseCapacitorT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECShockNetT19Name,buffs,EndgameExpansion,,,,T19 震荡网束缚,,,,,,,,,,,,T19 震荡网束缚,T19 震荡网束缚
+buffPZAECShockNetT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECArmorBreakT19Name,buffs,EndgameExpansion,,,,T19 裂甲,,,,,,,,,,,,T19 裂甲,T19 裂甲
+buffPZAECArmorBreakT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECCounterJammerT19Name,buffs,EndgameExpansion,,,,T19 反制干扰,,,,,,,,,,,,T19 反制干扰,T19 反制干扰
+buffPZAECCounterJammerT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECFieldRepairT19Name,buffs,EndgameExpansion,,,,T19 战地维护,,,,,,,,,,,,T19 战地维护,T19 战地维护
+buffPZAECFieldRepairT19Desc,buffs,EndgameExpansion,,,,Tier-scaled endgame combat state.,,,,,,,,,,,,随终局等级成长的战斗状态。,随终局等级成长的战斗状态。
+buffPZAECHarrierStableCalibrationT19Name,buffs,EndgameExpansion,,,,Harrier Stable Calibration,,,,,,,,,,,,Harrier·稳定校准,Harrier·稳定校准
+buffPZAECHarrierStableCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECHarrierOverloadCalibrationT19Name,buffs,EndgameExpansion,,,,Harrier Overload Calibration,,,,,,,,,,,,Harrier·过载校准,Harrier·过载校准
+buffPZAECHarrierOverloadCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECStormStableCalibrationT19Name,buffs,EndgameExpansion,,,,Storm Stable Calibration,,,,,,,,,,,,Storm·稳定校准,Storm·稳定校准
+buffPZAECStormStableCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECStormOverloadCalibrationT19Name,buffs,EndgameExpansion,,,,Storm Overload Calibration,,,,,,,,,,,,Storm·过载校准,Storm·过载校准
+buffPZAECStormOverloadCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECTremorStableCalibrationT19Name,buffs,EndgameExpansion,,,,Tremor Stable Calibration,,,,,,,,,,,,Tremor·稳定校准,Tremor·稳定校准
+buffPZAECTremorStableCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECTremorOverloadCalibrationT19Name,buffs,EndgameExpansion,,,,Tremor Overload Calibration,,,,,,,,,,,,Tremor·过载校准,Tremor·过载校准
+buffPZAECTremorOverloadCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECWardenStableCalibrationT19Name,buffs,EndgameExpansion,,,,Warden Stable Calibration,,,,,,,,,,,,Warden·稳定校准,Warden·稳定校准
+buffPZAECWardenStableCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+buffPZAECWardenOverloadCalibrationT19Name,buffs,EndgameExpansion,,,,Warden Overload Calibration,,,,,,,,,,,,Warden·过载校准,Warden·过载校准
+buffPZAECWardenOverloadCalibrationT19Desc,buffs,EndgameExpansion,,,,T19 device calibration is active for this resonance window.,,,,,,,,,,,,T19 装置校准在本次共鸣窗口内生效。,T19 装置校准在本次共鸣窗口内生效。
+PZAECSkyguardArrayT16,blocks,EndgameExpansion,,,,T16 Skyguard Interceptor Array,,,,,,,,,,,,T16 天穹截击阵列,T16 天穹截击阵列
+PZAECSkyguardArrayT16Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECSkyguardArrayT17,blocks,EndgameExpansion,,,,T17 Skyguard Interceptor Array,,,,,,,,,,,,T17 天穹截击阵列,T17 天穹截击阵列
+PZAECSkyguardArrayT17Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECSkyguardArrayT18,blocks,EndgameExpansion,,,,T18 Skyguard Interceptor Array,,,,,,,,,,,,T18 天穹截击阵列,T18 天穹截击阵列
+PZAECSkyguardArrayT18Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECSkyguardArrayT19,blocks,EndgameExpansion,,,,T19 Skyguard Interceptor Array,,,,,,,,,,,,T19 天穹截击阵列,T19 天穹截击阵列
+PZAECSkyguardArrayT19Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHiveRepairStationT16,blocks,EndgameExpansion,,,,T16 Hive Repair Station,,,,,,,,,,,,T16 蜂巢维修站,T16 蜂巢维修站
+PZAECHiveRepairStationT16Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHiveRepairStationT17,blocks,EndgameExpansion,,,,T17 Hive Repair Station,,,,,,,,,,,,T17 蜂巢维修站,T17 蜂巢维修站
+PZAECHiveRepairStationT17Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHiveRepairStationT18,blocks,EndgameExpansion,,,,T18 Hive Repair Station,,,,,,,,,,,,T18 蜂巢维修站,T18 蜂巢维修站
+PZAECHiveRepairStationT18Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHiveRepairStationT19,blocks,EndgameExpansion,,,,T19 Hive Repair Station,,,,,,,,,,,,T19 蜂巢维修站,T19 蜂巢维修站
+PZAECHiveRepairStationT19Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHoundDecoyTowerT16,blocks,EndgameExpansion,,,,T16 Hound Decoy Tower,,,,,,,,,,,,T16 猎犬诱导塔,T16 猎犬诱导塔
+PZAECHoundDecoyTowerT16Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHoundDecoyTowerT17,blocks,EndgameExpansion,,,,T17 Hound Decoy Tower,,,,,,,,,,,,T17 猎犬诱导塔,T17 猎犬诱导塔
+PZAECHoundDecoyTowerT17Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHoundDecoyTowerT18,blocks,EndgameExpansion,,,,T18 Hound Decoy Tower,,,,,,,,,,,,T18 猎犬诱导塔,T18 猎犬诱导塔
+PZAECHoundDecoyTowerT18Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECHoundDecoyTowerT19,blocks,EndgameExpansion,,,,T19 Hound Decoy Tower,,,,,,,,,,,,T19 猎犬诱导塔,T19 猎犬诱导塔
+PZAECHoundDecoyTowerT19Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECShockNetNodeT16,blocks,EndgameExpansion,,,,T16 Shock Net Node,,,,,,,,,,,,T16 震荡网节点,T16 震荡网节点
+PZAECShockNetNodeT16Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECShockNetNodeT17,blocks,EndgameExpansion,,,,T17 Shock Net Node,,,,,,,,,,,,T17 震荡网节点,T17 震荡网节点
+PZAECShockNetNodeT17Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECShockNetNodeT18,blocks,EndgameExpansion,,,,T18 Shock Net Node,,,,,,,,,,,,T18 震荡网节点,T18 震荡网节点
+PZAECShockNetNodeT18Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECShockNetNodeT19,blocks,EndgameExpansion,,,,T19 Shock Net Node,,,,,,,,,,,,T19 震荡网节点,T19 震荡网节点
+PZAECShockNetNodeT19Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECArmorBreakTurretT16,blocks,EndgameExpansion,,,,T16 Armor-Break Sentry,,,,,,,,,,,,T16 裂甲哨戒炮,T16 裂甲哨戒炮
+PZAECArmorBreakTurretT16Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECArmorBreakTurretT17,blocks,EndgameExpansion,,,,T17 Armor-Break Sentry,,,,,,,,,,,,T17 裂甲哨戒炮,T17 裂甲哨戒炮
+PZAECArmorBreakTurretT17Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECArmorBreakTurretT18,blocks,EndgameExpansion,,,,T18 Armor-Break Sentry,,,,,,,,,,,,T18 裂甲哨戒炮,T18 裂甲哨戒炮
+PZAECArmorBreakTurretT18Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECArmorBreakTurretT19,blocks,EndgameExpansion,,,,T19 Armor-Break Sentry,,,,,,,,,,,,T19 裂甲哨戒炮,T19 裂甲哨戒炮
+PZAECArmorBreakTurretT19Desc,blocks,EndgameExpansion,,,,"Powered endgame defense device with bounded range, upkeep and downtime.",,,,,,,,,,,,有范围、消耗和停机限制的供电终局防御设备。,有范围、消耗和停机限制的供电终局防御设备。
+PZAECResonanceForge,blocks,EndgameExpansion,,,,Resonance Forge,,,,,,,,,,,,共鸣锻造台,共鸣锻造台
+PZAECResonanceForgeDesc,blocks,EndgameExpansion,,,,Endgame workbench for the T16-T19 arsenal and fortress network.,,,,,,,,,,,,用于 T16–T19 军械、组件与要塞设备的终局工作台。,用于 T16–T19 军械、组件与要塞设备的终局工作台。
+PZAECTacticalRelay,blocks,EndgameExpansion,,,,Tactical Command Relay,,,,,,,,,,,,战术指挥中继,战术指挥中继
+PZAECTacticalRelayDesc,blocks,EndgameExpansion,,,,Armored power relay and visible priority target for siege squads.,,,,,,,,,,,,装甲供电中继，也是工程小队能够识别并攻击的高价值目标。,装甲供电中继，也是工程小队能够识别并攻击的高价值目标。
+PZAECReactiveWallT16,blocks,EndgameExpansion,,,,T16 Reactive Armor Wall,,,,,,,,,,,,T16 反应装甲墙,T16 反应装甲墙
+PZAECReactiveWallT16Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECReactiveWallT17,blocks,EndgameExpansion,,,,T17 Reactive Armor Wall,,,,,,,,,,,,T17 反应装甲墙,T17 反应装甲墙
+PZAECReactiveWallT17Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECReactiveWallT18,blocks,EndgameExpansion,,,,T18 Reactive Armor Wall,,,,,,,,,,,,T18 反应装甲墙,T18 反应装甲墙
+PZAECReactiveWallT18Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECReactiveWallT19,blocks,EndgameExpansion,,,,T19 Reactive Armor Wall,,,,,,,,,,,,T19 反应装甲墙,T19 反应装甲墙
+PZAECReactiveWallT19Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECAblativeWallT16,blocks,EndgameExpansion,,,,T16 Replaceable Ablative Wall,,,,,,,,,,,,T16 可替换缓冲墙,T16 可替换缓冲墙
+PZAECAblativeWallT16Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECAblativeWallT17,blocks,EndgameExpansion,,,,T17 Replaceable Ablative Wall,,,,,,,,,,,,T17 可替换缓冲墙,T17 可替换缓冲墙
+PZAECAblativeWallT17Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECAblativeWallT18,blocks,EndgameExpansion,,,,T18 Replaceable Ablative Wall,,,,,,,,,,,,T18 可替换缓冲墙,T18 可替换缓冲墙
+PZAECAblativeWallT18Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECAblativeWallT19,blocks,EndgameExpansion,,,,T19 Replaceable Ablative Wall,,,,,,,,,,,,T19 可替换缓冲墙,T19 可替换缓冲墙
+PZAECAblativeWallT19Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECEmbrasureT16,blocks,EndgameExpansion,,,,T16 Armored Embrasure,,,,,,,,,,,,T16 装甲射击孔,T16 装甲射击孔
+PZAECEmbrasureT16Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECEmbrasureT17,blocks,EndgameExpansion,,,,T17 Armored Embrasure,,,,,,,,,,,,T17 装甲射击孔,T17 装甲射击孔
+PZAECEmbrasureT17Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECEmbrasureT18,blocks,EndgameExpansion,,,,T18 Armored Embrasure,,,,,,,,,,,,T18 装甲射击孔,T18 装甲射击孔
+PZAECEmbrasureT18Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECEmbrasureT19,blocks,EndgameExpansion,,,,T19 Armored Embrasure,,,,,,,,,,,,T19 装甲射击孔,T19 装甲射击孔
+PZAECEmbrasureT19Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECBlastGateT16,blocks,EndgameExpansion,,,,T16 Sectional Blast Gate,,,,,,,,,,,,T16 分区防爆门,T16 分区防爆门
+PZAECBlastGateT16Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECBlastGateT17,blocks,EndgameExpansion,,,,T17 Sectional Blast Gate,,,,,,,,,,,,T17 分区防爆门,T17 分区防爆门
+PZAECBlastGateT17Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECBlastGateT18,blocks,EndgameExpansion,,,,T18 Sectional Blast Gate,,,,,,,,,,,,T18 分区防爆门,T18 分区防爆门
+PZAECBlastGateT18Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECBlastGateT19,blocks,EndgameExpansion,,,,T19 Sectional Blast Gate,,,,,,,,,,,,T19 分区防爆门,T19 分区防爆门
+PZAECBlastGateT19Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECArmoredConduitT16,blocks,EndgameExpansion,,,,T16 Armored Conduit,,,,,,,,,,,,T16 装甲电缆槽,T16 装甲电缆槽
+PZAECArmoredConduitT16Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECArmoredConduitT17,blocks,EndgameExpansion,,,,T17 Armored Conduit,,,,,,,,,,,,T17 装甲电缆槽,T17 装甲电缆槽
+PZAECArmoredConduitT17Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECArmoredConduitT18,blocks,EndgameExpansion,,,,T18 Armored Conduit,,,,,,,,,,,,T18 装甲电缆槽,T18 装甲电缆槽
+PZAECArmoredConduitT18Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECArmoredConduitT19,blocks,EndgameExpansion,,,,T19 Armored Conduit,,,,,,,,,,,,T19 装甲电缆槽,T19 装甲电缆槽
+PZAECArmoredConduitT19Desc,blocks,EndgameExpansion,,,,Repairable fortress block designed for active Blood Moon defense.,,,,,,,,,,,,为主动血夜防守设计的可维修要塞建筑。,为主动血夜防守设计的可维修要塞建筑。
+PZAECSiegeDisruptorT16,entityclasses,EndgameExpansion,,,,T16 Siege Disruptor,,,,,,,,,,,,T16 攻城干扰者,T16 攻城干扰者
+PZAECSiegeSpotterT16,entityclasses,EndgameExpansion,,,,T16 Siege Spotter,,,,,,,,,,,,T16 攻城校射官,T16 攻城校射官
+PZAECSiegeLinesmanT16,entityclasses,EndgameExpansion,,,,T16 Siege Linesman,,,,,,,,,,,,T16 攻城切线者,T16 攻城切线者
+PZAECSiegeDisruptorT17,entityclasses,EndgameExpansion,,,,T17 Siege Disruptor,,,,,,,,,,,,T17 攻城干扰者,T17 攻城干扰者
+PZAECSiegeSpotterT17,entityclasses,EndgameExpansion,,,,T17 Siege Spotter,,,,,,,,,,,,T17 攻城校射官,T17 攻城校射官
+PZAECSiegeLinesmanT17,entityclasses,EndgameExpansion,,,,T17 Siege Linesman,,,,,,,,,,,,T17 攻城切线者,T17 攻城切线者
+PZAECSiegeDisruptorT18,entityclasses,EndgameExpansion,,,,T18 Siege Disruptor,,,,,,,,,,,,T18 攻城干扰者,T18 攻城干扰者
+PZAECSiegeSpotterT18,entityclasses,EndgameExpansion,,,,T18 Siege Spotter,,,,,,,,,,,,T18 攻城校射官,T18 攻城校射官
+PZAECSiegeLinesmanT18,entityclasses,EndgameExpansion,,,,T18 Siege Linesman,,,,,,,,,,,,T18 攻城切线者,T18 攻城切线者
+PZAECSiegeDisruptorT19,entityclasses,EndgameExpansion,,,,T19 Siege Disruptor,,,,,,,,,,,,T19 攻城干扰者,T19 攻城干扰者
+PZAECSiegeSpotterT19,entityclasses,EndgameExpansion,,,,T19 Siege Spotter,,,,,,,,,,,,T19 攻城校射官,T19 攻城校射官
+PZAECSiegeLinesmanT19,entityclasses,EndgameExpansion,,,,T19 Siege Linesman,,,,,,,,,,,,T19 攻城切线者,T19 攻城切线者

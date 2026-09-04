@@ -1380,4 +1380,378 @@
       </buff>
     </append>
   <!-- END GENERATED ENDGAME ARSENAL -->
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <append xpath="/buffs">
+      <buff name="buffPZAECQuickArmorGel" name_key="buffPZAECQuickArmorGelName" description_key="buffPZAECQuickArmorGelDesc" icon="ui_game_symbol_electricity" icon_color="80,200,255">
+        <stack_type value="replace" />
+        <duration value="20" />
+        <effect_group>
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value=".65" />
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECResonanceInjector" name_key="buffPZAECResonanceInjectorName" description_key="buffPZAECResonanceInjectorDesc" icon="ui_game_symbol_electricity" icon_color="80,200,255">
+        <stack_type value="replace" />
+        <duration value="60" />
+        <effect_group>
+          <passive_effect name="HealthMax" operation="perc_add" value="-.10" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".15" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECDecoyBeacon" name_key="buffPZAECDecoyBeaconName" description_key="buffPZAECDecoyBeaconDesc" icon="ui_game_symbol_electricity" icon_color="80,200,255">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value=".10" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECEvacAnchor" name_key="buffPZAECEvacAnchorName" description_key="buffPZAECEvacAnchorDesc" icon="ui_game_symbol_electricity" icon_color="80,200,255">
+        <stack_type value="replace" />
+        <duration value="20" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value=".05" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFaultlineImpactT16" name_key="buffPZAECFaultlineImpactT16Name" description_key="buffPZAECFaultlineImpactT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.45" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.35" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECBastionStaggerT16" name_key="buffPZAECBastionStaggerT16Name" description_key="buffPZAECBastionStaggerT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.1" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECEchoMarkedT16" name_key="buffPZAECEchoMarkedT16Name" description_key="buffPZAECEchoMarkedT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-2" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterSiegeT16" name_key="buffPZAECCounterSiegeT16Name" description_key="buffPZAECCounterSiegeT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="5" />
+        <effect_group>
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.25" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECStormOverheatedT16" name_key="buffPZAECStormOverheatedT16Name" description_key="buffPZAECStormOverheatedT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="3" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECPulseCapacitorT16" name_key="buffPZAECPulseCapacitorT16Name" description_key="buffPZAECPulseCapacitorT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.35" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECShockNetT16" name_key="buffPZAECShockNetT16Name" description_key="buffPZAECShockNetT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="2" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.35" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECArmorBreakT16" name_key="buffPZAECArmorBreakT16Name" description_key="buffPZAECArmorBreakT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="5" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-8" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterJammerT16" name_key="buffPZAECCounterJammerT16Name" description_key="buffPZAECCounterJammerT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="3" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.75" />
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.50" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFieldRepairT16" name_key="buffPZAECFieldRepairT16Name" description_key="buffPZAECFieldRepairT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="90" />
+        <effect_group>
+          <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.35" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFaultlineImpactT17" name_key="buffPZAECFaultlineImpactT17Name" description_key="buffPZAECFaultlineImpactT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.45" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.35" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECBastionStaggerT17" name_key="buffPZAECBastionStaggerT17Name" description_key="buffPZAECBastionStaggerT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.12" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECEchoMarkedT17" name_key="buffPZAECEchoMarkedT17Name" description_key="buffPZAECEchoMarkedT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-3" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterSiegeT17" name_key="buffPZAECCounterSiegeT17Name" description_key="buffPZAECCounterSiegeT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="6" />
+        <effect_group>
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.25" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECStormOverheatedT17" name_key="buffPZAECStormOverheatedT17Name" description_key="buffPZAECStormOverheatedT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="3" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECPulseCapacitorT17" name_key="buffPZAECPulseCapacitorT17Name" description_key="buffPZAECPulseCapacitorT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.35" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECShockNetT17" name_key="buffPZAECShockNetT17Name" description_key="buffPZAECShockNetT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="2" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.38" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECArmorBreakT17" name_key="buffPZAECArmorBreakT17Name" description_key="buffPZAECArmorBreakT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="5" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-10" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterJammerT17" name_key="buffPZAECCounterJammerT17Name" description_key="buffPZAECCounterJammerT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.75" />
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.50" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFieldRepairT17" name_key="buffPZAECFieldRepairT17Name" description_key="buffPZAECFieldRepairT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="90" />
+        <effect_group>
+          <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.45" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFaultlineImpactT18" name_key="buffPZAECFaultlineImpactT18Name" description_key="buffPZAECFaultlineImpactT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.45" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.35" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECBastionStaggerT18" name_key="buffPZAECBastionStaggerT18Name" description_key="buffPZAECBastionStaggerT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.14" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECEchoMarkedT18" name_key="buffPZAECEchoMarkedT18Name" description_key="buffPZAECEchoMarkedT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-4" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterSiegeT18" name_key="buffPZAECCounterSiegeT18Name" description_key="buffPZAECCounterSiegeT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="7" />
+        <effect_group>
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.25" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECStormOverheatedT18" name_key="buffPZAECStormOverheatedT18Name" description_key="buffPZAECStormOverheatedT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="3" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECPulseCapacitorT18" name_key="buffPZAECPulseCapacitorT18Name" description_key="buffPZAECPulseCapacitorT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.35" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECShockNetT18" name_key="buffPZAECShockNetT18Name" description_key="buffPZAECShockNetT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="2" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.42" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECArmorBreakT18" name_key="buffPZAECArmorBreakT18Name" description_key="buffPZAECArmorBreakT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="5" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-12" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterJammerT18" name_key="buffPZAECCounterJammerT18Name" description_key="buffPZAECCounterJammerT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="5" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.75" />
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.50" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFieldRepairT18" name_key="buffPZAECFieldRepairT18Name" description_key="buffPZAECFieldRepairT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="90" />
+        <effect_group>
+          <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.55" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFaultlineImpactT19" name_key="buffPZAECFaultlineImpactT19Name" description_key="buffPZAECFaultlineImpactT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.45" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.35" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECBastionStaggerT19" name_key="buffPZAECBastionStaggerT19Name" description_key="buffPZAECBastionStaggerT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.16" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECEchoMarkedT19" name_key="buffPZAECEchoMarkedT19Name" description_key="buffPZAECEchoMarkedT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="4" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-5" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterSiegeT19" name_key="buffPZAECCounterSiegeT19Name" description_key="buffPZAECCounterSiegeT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="8" />
+        <effect_group>
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.25" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECStormOverheatedT19" name_key="buffPZAECStormOverheatedT19Name" description_key="buffPZAECStormOverheatedT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="3" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECPulseCapacitorT19" name_key="buffPZAECPulseCapacitorT19Name" description_key="buffPZAECPulseCapacitorT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="0.35" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECShockNetT19" name_key="buffPZAECShockNetT19Name" description_key="buffPZAECShockNetT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="2" />
+        <effect_group>
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.45" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECArmorBreakT19" name_key="buffPZAECArmorBreakT19Name" description_key="buffPZAECArmorBreakT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="5" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="-15" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECCounterJammerT19" name_key="buffPZAECCounterJammerT19Name" description_key="buffPZAECCounterJammerT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="6" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.75" />
+          <passive_effect name="BlockDamage" operation="perc_add" value="-.50" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECFieldRepairT19" name_key="buffPZAECFieldRepairT19Name" description_key="buffPZAECFieldRepairT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
+        <stack_type value="replace" />
+        <duration value="90" />
+        <effect_group>
+          <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.65" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECHarrierStableCalibrationT19" name_key="buffPZAECHarrierStableCalibrationT19Name" description_key="buffPZAECHarrierStableCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="100,220,255">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".08" tags="head" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECHarrierOverloadCalibrationT19" name_key="buffPZAECHarrierOverloadCalibrationT19Name" description_key="buffPZAECHarrierOverloadCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="255,90,50">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".12" tags="head" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECStormStableCalibrationT19" name_key="buffPZAECStormStableCalibrationT19Name" description_key="buffPZAECStormStableCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="100,220,255">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECStormOverloadCalibrationT19" name_key="buffPZAECStormOverloadCalibrationT19Name" description_key="buffPZAECStormOverloadCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="255,90,50">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".15" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECTremorStableCalibrationT19" name_key="buffPZAECTremorStableCalibrationT19Name" description_key="buffPZAECTremorStableCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="100,220,255">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-.15" tags="secondary" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECTremorOverloadCalibrationT19" name_key="buffPZAECTremorOverloadCalibrationT19Name" description_key="buffPZAECTremorOverloadCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="255,90,50">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="EntityDamage" operation="perc_add" value=".20" tags="secondary" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECWardenStableCalibrationT19" name_key="buffPZAECWardenStableCalibrationT19Name" description_key="buffPZAECWardenStableCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="100,220,255">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".20" />
+        </effect_group>
+      </buff>
+      <buff name="buffPZAECWardenOverloadCalibrationT19" name_key="buffPZAECWardenOverloadCalibrationT19Name" description_key="buffPZAECWardenOverloadCalibrationT19Desc" icon="ui_game_symbol_armor_iron" icon_color="255,90,50">
+        <stack_type value="replace" />
+        <duration value="15" />
+        <effect_group>
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="6" />
+        </effect_group>
+      </buff>
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
 </configs>

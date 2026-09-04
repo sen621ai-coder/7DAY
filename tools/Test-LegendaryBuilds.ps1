@@ -28,7 +28,10 @@ public static class BuildRegression
 
     public static string Effects(string xml)
     {
-        var mods=XDocument.Parse(xml).Descendants("item_modifier").ToArray(); int cases=0;
+        var mods=XDocument.Parse(xml).Descendants("item_modifier")
+            .Where(n => System.Text.RegularExpressions.Regex.IsMatch((string)n.Attribute("name") ?? "",
+                @"^modPZAEC(Precision|Breaker|Barrage|Skirmisher)R[2-5]$"))
+            .ToArray(); int cases=0;
         Check(mods.Length==16,"Expected 16 cores");
         foreach(var node in mods)
         {
@@ -138,9 +141,10 @@ function Get-BuildProperty([string]$id,[string]$property) {
     }
     return ''
 }
-$coreNodes=@($buildMods.SelectNodes('//item_modifier'))
-$coreRecipes=@($recipes.SelectNodes('//recipe[starts-with(@name,"modPZAEC")]'))
-Assert-Build ($coreRecipes.Count -eq 16) 'Missing/duplicate core recipes'
+$corePattern='^modPZAEC(Precision|Breaker|Barrage|Skirmisher)R[2-5]$'
+$coreNodes=@($buildMods.SelectNodes('//item_modifier') | Where-Object name -match $corePattern)
+$coreRecipes=@($recipes.SelectNodes('//recipe') | Where-Object name -match $corePattern)
+Assert-Build ($coreRecipes.Count -eq 28) 'Missing direct or upgrade core recipes'
 Assert-Build ($items.SelectNodes('//item[starts-with(@name,"PZAECBuildParts")]').Count -eq 4) 'Wrong component count'
 foreach($core in $coreNodes) {
     $rank=[int]$core.name.Substring($core.name.Length-1); $tier=$rank+14; $id=$core.name

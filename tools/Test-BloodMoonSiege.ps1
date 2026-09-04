@@ -22,13 +22,21 @@ public static class SiegeRegression
         foreach(var pair in new[]{new[]{179999,0},new[]{180000,16},new[]{239999,16},new[]{240000,17},
             new[]{269999,17},new[]{270000,18},new[]{299999,18},new[]{300000,19},new[]{999999,19}})
             Check(BloodMoonSiege.TierForGameStage(pair[0])==pair[1],"Wrong siege GS tier");
-        int heavy=0,acid=0;
+        int heavy=0,acid=0,disruptor=0,spotter=0,linesman=0;
         for(int tier=15;tier<=20;tier++) for(int roll=0;roll<100;roll++) {
             string id=BloodMoonSiege.Variant(tier,roll);
             if(tier<16 || tier>19 || roll>=BloodMoonSiege.ReplacementChance) Check(id==null,"Out-of-scope selection");
-            else { Check(BloodMoonSiege.Tier(id)==tier,"Wrong siege tier"); if(id.Contains("heavy")) heavy++; else acid++; }
+            else {
+                Check(BloodMoonSiege.Tier(id)==tier,"Wrong siege tier");
+                if(id.Contains("heavy")) heavy++;
+                else if(id.Contains("acid")) acid++;
+                else if(id.Contains("Disruptor")) disruptor++;
+                else if(id.Contains("Spotter")) spotter++;
+                else if(id.Contains("Linesman")) linesman++;
+            }
         }
-        Check(heavy==68 && acid==32,"25% ordinary replacement / approximate 2:1 composition changed");
+        Check(heavy==40 && acid==20 && disruptor==16 && spotter==12 && linesman==12,
+            "25% five-role siege composition changed");
         Check(BloodMoonSiege.HasRoom(7,3) && !BloodMoonSiege.HasRoom(8,3) && !BloodMoonSiege.HasRoom(3,4),"Squad cap broken");
         Check(BloodMoonSiege.InRange(Vector3.zero,new Vector3(8,0,0)) && BloodMoonSiege.InRange(Vector3.zero,new Vector3(0,0,52)),"Valid standoff range");
         Check(!BloodMoonSiege.InRange(Vector3.zero,new Vector3(7.99f,0,0)) && !BloodMoonSiege.InRange(Vector3.zero,new Vector3(52.01f,0,0)),"Standoff range ignored");

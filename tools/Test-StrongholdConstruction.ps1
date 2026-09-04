@@ -71,7 +71,7 @@ foreach ($row in Import-Csv (Join-Path $config 'Localization.csv')) {
 }
 
 $facilityNames = @('PZAECStrongholdCore','PZAECStrongholdPower','PZAECStrongholdSupply')
-$facilityBlocks = @($blocks.SelectNodes('/configs/append/block'))
+$facilityBlocks = @($blocks.SelectNodes('/configs/append/block') | Where-Object name -in $facilityNames)
 Assert-Stronghold ($facilityBlocks.Count -eq 3) 'Expected three stronghold facility blocks'
 foreach ($name in $facilityNames) {
     $block = $blocks.SelectSingleNode("//block[@name='$name']")
@@ -99,5 +99,5 @@ foreach ($key in @('PZAECStrongholdNeedCore','PZAECStrongholdNeedPower','PZAECSt
     'PZAECStrongholdCoreLost','PZAECStrongholdPowerLost','PZAECStrongholdSupplyLost','PZAECStrongholdComplete')) {
     Assert-Stronghold ($localization.ContainsKey($key) -and -not [string]::IsNullOrWhiteSpace($localization[$key].schinese)) "Missing stronghold text $key"
 }
-Assert-Stronghold ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.16\.7"') 'Runtime version was not bumped'
+Assert-Stronghold ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.18\.0"') 'Runtime version was not bumped'
 'PASS: three craftable 12k+ HP facilities, native parents, Chinese text and 12 exact-tier construction bonus events.'

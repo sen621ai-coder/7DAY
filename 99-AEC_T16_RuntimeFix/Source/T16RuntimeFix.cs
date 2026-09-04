@@ -24,6 +24,7 @@ namespace AECT16RuntimeFix
                 LootContainerNullGuard.Install(harmony);
                 LocalRespawnRecovery.Install(harmony);
                 PassiveEffectOverflowGuard.Install(harmony);
+                EndgameExpansionRuntime.Install(harmony);
                 ContractRelayPickup.Install(harmony);
                 PlayerHeadshotDamagePatch.Install(harmony);
                 BloodMoonSpawnFix.Install(harmony);

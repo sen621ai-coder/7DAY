@@ -268,4 +268,26 @@
       <e n="AECSheriffWolfMinion01T19" p="0.019003476246"/>
     </entitygroup>
   </append>
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <append xpath="/entitygroups/entitygroup[@name='PZAECBloodMoonT16Fallback']">
+      <e n="PZAECSiegeDisruptorT16" p=".018" />
+      <e n="PZAECSiegeSpotterT16" p=".014" />
+      <e n="PZAECSiegeLinesmanT16" p=".022" />
+    </append>
+    <append xpath="/entitygroups/entitygroup[@name='PZAECBloodMoonT17Fallback']">
+      <e n="PZAECSiegeDisruptorT17" p=".018" />
+      <e n="PZAECSiegeSpotterT17" p=".014" />
+      <e n="PZAECSiegeLinesmanT17" p=".022" />
+    </append>
+    <append xpath="/entitygroups/entitygroup[@name='PZAECBloodMoonT18Fallback']">
+      <e n="PZAECSiegeDisruptorT18" p=".018" />
+      <e n="PZAECSiegeSpotterT18" p=".014" />
+      <e n="PZAECSiegeLinesmanT18" p=".022" />
+    </append>
+    <append xpath="/entitygroups/entitygroup[@name='PZAECBloodMoonT19Fallback']">
+      <e n="PZAECSiegeDisruptorT19" p=".018" />
+      <e n="PZAECSiegeSpotterT19" p=".014" />
+      <e n="PZAECSiegeLinesmanT19" p=".022" />
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
 </configs>

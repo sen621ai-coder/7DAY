@@ -299,4 +299,756 @@
       </effect_group>
     </item_modifier>
   </append>
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <append xpath="/item_modifiers">
+      <item_modifier name="modPZAECHarrierStableT19" installable_tags="PZAECHarrierDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECHarrierStableT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66DDFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".10" tags="head" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECHarrierOverloadT19" installable_tags="PZAECHarrierDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECHarrierOverloadT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FF6633" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".12" tags="head" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECStormStableT19" installable_tags="PZAECStormDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECStormStableT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66DDFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".08" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECStormOverloadT19" installable_tags="PZAECStormDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECStormOverloadT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FF6633" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".15" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECTremorStableT19" installable_tags="PZAECTremorDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECTremorStableT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66DDFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value=".12" tags="secondary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECTremorOverloadT19" installable_tags="PZAECTremorDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECTremorOverloadT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FF6633" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value=".20" tags="secondary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECWardenStableT19" installable_tags="PZAECWardenDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECWardenStableT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66DDFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="3" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECWardenOverloadT19" installable_tags="PZAECWardenDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECWardenOverloadT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FF6633" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="6" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECThreatLensT16" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECThreatLensT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.04" tags="ranged" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECThreatLensT17" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECThreatLensT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.05" tags="ranged" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECThreatLensT18" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECThreatLensT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.06" tags="ranged" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECThreatLensT19" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECThreatLensT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.08" tags="ranged" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECCoolingSinkT16" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECCoolingSinkT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunBarrelExtender" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.1" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECCoolingSinkT17" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECCoolingSinkT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunBarrelExtender" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.14" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECCoolingSinkT18" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECCoolingSinkT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunBarrelExtender" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.18" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECCoolingSinkT19" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECCoolingSinkT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunBarrelExtender" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.22" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECKineticRecyclerT16" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECKineticRecyclerT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.1" tags="secondary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECKineticRecyclerT17" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECKineticRecyclerT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.14" tags="secondary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECKineticRecyclerT18" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECKineticRecyclerT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.18" tags="secondary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECKineticRecyclerT19" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECKineticRecyclerT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.22" tags="secondary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECRepairServoT16" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECRepairServoT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.08" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECRepairServoT17" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECRepairServoT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.1" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECRepairServoT18" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECRepairServoT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.12" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECRepairServoT19" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECRepairServoT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.15" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPhaseRangefinderT16" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPhaseRangefinderT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.08" tags="head" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPhaseRangefinderT17" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPhaseRangefinderT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.1" tags="head" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPhaseRangefinderT18" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPhaseRangefinderT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.12" tags="head" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPhaseRangefinderT19" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPhaseRangefinderT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.15" tags="head" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECNearfieldReflexT16" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECNearfieldReflexT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunReflexSight" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.1" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECNearfieldReflexT17" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECNearfieldReflexT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunReflexSight" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.12" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECNearfieldReflexT18" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECNearfieldReflexT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunReflexSight" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.15" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECNearfieldReflexT19" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECNearfieldReflexT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunReflexSight" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.18" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECClosedLoopFeedT16" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECClosedLoopFeedT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value="0.1" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECClosedLoopFeedT17" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECClosedLoopFeedT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value="0.13" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECClosedLoopFeedT18" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECClosedLoopFeedT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value="0.16" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECClosedLoopFeedT19" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECClosedLoopFeedT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value="0.2" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPulseCapacitorT16" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPulseCapacitorT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeBunkerBuster" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT16" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPulseCapacitorT17" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPulseCapacitorT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeBunkerBuster" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT17" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPulseCapacitorT18" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPulseCapacitorT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeBunkerBuster" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT18" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECPulseCapacitorT19" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECPulseCapacitorT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeBunkerBuster" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT19" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECStanceBreakerT16" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECStanceBreakerT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.12" tags="secondary" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECStanceBreakerT17" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECStanceBreakerT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.15" tags="secondary" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECStanceBreakerT18" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECStanceBreakerT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.18" tags="secondary" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECStanceBreakerT19" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECStanceBreakerT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.22" tags="secondary" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECGatekeeperHookT16" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECGatekeeperHookT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeErgonomicGrip" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value="0.1" tags="buffInjuryStunned01CHTrigger" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECGatekeeperHookT17" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECGatekeeperHookT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeErgonomicGrip" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value="0.12" tags="buffInjuryStunned01CHTrigger" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECGatekeeperHookT18" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECGatekeeperHookT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeErgonomicGrip" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value="0.15" tags="buffInjuryStunned01CHTrigger" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECGatekeeperHookT19" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECGatekeeperHookT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modMeleeErgonomicGrip" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value="0.18" tags="buffInjuryStunned01CHTrigger" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECEmergencyLinerT16" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECEmergencyLinerT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorPlatingReinforced" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="2" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECEmergencyLinerT17" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECEmergencyLinerT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorPlatingReinforced" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="3" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECEmergencyLinerT18" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECEmergencyLinerT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorPlatingReinforced" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="4" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECEmergencyLinerT19" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECEmergencyLinerT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorPlatingReinforced" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="5" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECInsulatedTreadsT16" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECInsulatedTreadsT16Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorInsulatedLinerT3" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="6" tags="electrical" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECInsulatedTreadsT17" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECInsulatedTreadsT17Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorInsulatedLinerT3" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="8" tags="electrical" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECInsulatedTreadsT18" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECInsulatedTreadsT18Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorInsulatedLinerT3" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="10" tags="electrical" />
+        </effect_group>
+      </item_modifier>
+      <item_modifier name="modPZAECInsulatedTreadsT19" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
+        <property name="Extends" value="modGeneralMaster" />
+        <property name="DescriptionKey" value="modPZAECInsulatedTreadsT19Desc" />
+        <property name="MaxModsAllowed" value="1" />
+        <property name="CustomIcon" value="modArmorInsulatedLinerT3" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="CreativeMode" value="Player" />
+        <property name="EconomicValue" value="0" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group tiered="false">
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="12" tags="electrical" />
+        </effect_group>
+      </item_modifier>
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
 </configs>
