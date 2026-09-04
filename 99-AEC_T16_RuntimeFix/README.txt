@@ -1,6 +1,13 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Endgame expansion design
+- ENDGAME_EXPANSION_BLUEPRINT.md specifies the next T16-T19 development wave:
+  advanced weapon families, behavior-changing components, field supplies,
+  powered defense devices, fortress blocks, siege counters, recipes and loot.
+- This blueprint is design documentation. Runtime 1.17.1 does not yet add those
+  planned weapons, devices or blocks.
+
 Runtime 1.17.1 Warden aura targeting fix
 - Warden Field now always buffs its owner and only allied/party players in its
   area. Hostile players can no longer receive the defensive aura in PvP.
