@@ -1,6 +1,545 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
   <append xpath="/quests">
+    <!-- Each page mixes ordinary clear, infestation and fetch work; all IDs stay unique. -->
+    <quest id="aec_quest_T16_A1_clear_infested" template="tier2_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="300000" />
+      <reward type="Item" id="casinoCoin" value="15000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="350" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="1200" />
+      <reward type="Item" id="resourceLegendaryParts" value="2" />
+    </quest>
+    <quest id="aec_quest_T16_A1_clear_fetch" template="tier1_fetch">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="300000" />
+      <reward type="Item" id="casinoCoin" value="15000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="350" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="1200" />
+      <reward type="Item" id="resourceLegendaryParts" value="2" />
+    </quest>
+    <quest id="aec_quest_T16_A2_clear_infested" template="tier3_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="600000" />
+      <reward type="Item" id="casinoCoin" value="17000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="375" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2400" />
+      <reward type="Item" id="resourceLegendaryParts" value="4" />
+    </quest>
+    <quest id="aec_quest_T16_A2_clear_fetch" template="tier2_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="600000" />
+      <reward type="Item" id="casinoCoin" value="17000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="375" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2400" />
+      <reward type="Item" id="resourceLegendaryParts" value="4" />
+    </quest>
+    <quest id="aec_quest_T16_A3_clear_infested" template="tier4_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="900000" />
+      <reward type="Item" id="casinoCoin" value="19000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="400" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3600" />
+      <reward type="Item" id="resourceLegendaryParts" value="6" />
+    </quest>
+    <quest id="aec_quest_T16_A3_clear_fetch" template="tier3_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="900000" />
+      <reward type="Item" id="casinoCoin" value="19000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="400" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3600" />
+      <reward type="Item" id="resourceLegendaryParts" value="6" />
+    </quest>
+    <quest id="aec_quest_T16_A4_clear_infested" template="tier5_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="1200000" />
+      <reward type="Item" id="casinoCoin" value="21000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="425" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="4800" />
+      <reward type="Item" id="resourceLegendaryParts" value="8" />
+    </quest>
+    <quest id="aec_quest_T16_A4_clear_fetch" template="tier4_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="1200000" />
+      <reward type="Item" id="casinoCoin" value="21000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="425" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="4800" />
+      <reward type="Item" id="resourceLegendaryParts" value="8" />
+    </quest>
+    <quest id="aec_quest_T16_A5_clear_infested" template="tier6_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="1500000" />
+      <reward type="Item" id="casinoCoin" value="23000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="450" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="10" />
+    </quest>
+    <quest id="aec_quest_T16_A5_clear_fetch" template="tier5_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT16fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="1500000" />
+      <reward type="Item" id="casinoCoin" value="23000" />
+      <reward type="LootItem" id="PZAECQuestWeaponsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestModsT16" ischosen="true" value="16" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT16" ischosen="true" value="16" />
+      <reward type="Item" id="aecUniversalToken" value="450" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="10" />
+    </quest>
+    <quest id="aec_quest_T17_A1_clear_infested" template="tier2_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="600000" />
+      <reward type="Item" id="casinoCoin" value="25000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="450" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2400" />
+      <reward type="Item" id="resourceLegendaryParts" value="4" />
+    </quest>
+    <quest id="aec_quest_T17_A1_clear_fetch" template="tier1_fetch">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="600000" />
+      <reward type="Item" id="casinoCoin" value="25000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="450" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="2400" />
+      <reward type="Item" id="resourceLegendaryParts" value="4" />
+    </quest>
+    <quest id="aec_quest_T17_A2_clear_infested" template="tier3_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="1200000" />
+      <reward type="Item" id="casinoCoin" value="27000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="490" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="4800" />
+      <reward type="Item" id="resourceLegendaryParts" value="8" />
+    </quest>
+    <quest id="aec_quest_T17_A2_clear_fetch" template="tier2_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="1200000" />
+      <reward type="Item" id="casinoCoin" value="27000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="490" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="4800" />
+      <reward type="Item" id="resourceLegendaryParts" value="8" />
+    </quest>
+    <quest id="aec_quest_T17_A3_clear_infested" template="tier4_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="1800000" />
+      <reward type="Item" id="casinoCoin" value="29000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="530" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="7200" />
+      <reward type="Item" id="resourceLegendaryParts" value="12" />
+    </quest>
+    <quest id="aec_quest_T17_A3_clear_fetch" template="tier3_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="1800000" />
+      <reward type="Item" id="casinoCoin" value="29000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="530" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="7200" />
+      <reward type="Item" id="resourceLegendaryParts" value="12" />
+    </quest>
+    <quest id="aec_quest_T17_A4_clear_infested" template="tier5_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="2400000" />
+      <reward type="Item" id="casinoCoin" value="31000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="570" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="9600" />
+      <reward type="Item" id="resourceLegendaryParts" value="16" />
+    </quest>
+    <quest id="aec_quest_T17_A4_clear_fetch" template="tier4_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="2400000" />
+      <reward type="Item" id="casinoCoin" value="31000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="570" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="9600" />
+      <reward type="Item" id="resourceLegendaryParts" value="16" />
+    </quest>
+    <quest id="aec_quest_T17_A5_clear_infested" template="tier6_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="3000000" />
+      <reward type="Item" id="casinoCoin" value="33000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="610" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="20" />
+    </quest>
+    <quest id="aec_quest_T17_A5_clear_fetch" template="tier5_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT17fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="3000000" />
+      <reward type="Item" id="casinoCoin" value="33000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestModsT17" ischosen="true" value="17" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT17" ischosen="true" value="17" />
+      <reward type="Item" id="aecUniversalToken" value="610" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="20" />
+    </quest>
+    <quest id="aec_quest_T18_A1_clear_infested" template="tier2_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="800000" />
+      <reward type="Item" id="casinoCoin" value="36000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="500" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3000" />
+      <reward type="Item" id="resourceLegendaryParts" value="6" />
+    </quest>
+    <quest id="aec_quest_T18_A1_clear_fetch" template="tier1_fetch">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="800000" />
+      <reward type="Item" id="casinoCoin" value="36000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="500" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="3000" />
+      <reward type="Item" id="resourceLegendaryParts" value="6" />
+    </quest>
+    <quest id="aec_quest_T18_A2_clear_infested" template="tier3_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="1600000" />
+      <reward type="Item" id="casinoCoin" value="40000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="540" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="resourceLegendaryParts" value="12" />
+    </quest>
+    <quest id="aec_quest_T18_A2_clear_fetch" template="tier2_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="1600000" />
+      <reward type="Item" id="casinoCoin" value="40000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="540" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="resourceLegendaryParts" value="12" />
+    </quest>
+    <quest id="aec_quest_T18_A3_clear_infested" template="tier4_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="2400000" />
+      <reward type="Item" id="casinoCoin" value="44000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="580" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="9000" />
+      <reward type="Item" id="resourceLegendaryParts" value="18" />
+    </quest>
+    <quest id="aec_quest_T18_A3_clear_fetch" template="tier3_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="2400000" />
+      <reward type="Item" id="casinoCoin" value="44000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="580" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="9000" />
+      <reward type="Item" id="resourceLegendaryParts" value="18" />
+    </quest>
+    <quest id="aec_quest_T18_A4_clear_infested" template="tier5_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="3200000" />
+      <reward type="Item" id="casinoCoin" value="48000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="620" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="resourceLegendaryParts" value="24" />
+    </quest>
+    <quest id="aec_quest_T18_A4_clear_fetch" template="tier4_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="3200000" />
+      <reward type="Item" id="casinoCoin" value="48000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="620" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="resourceLegendaryParts" value="24" />
+    </quest>
+    <quest id="aec_quest_T18_A5_clear_infested" template="tier6_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="4000000" />
+      <reward type="Item" id="casinoCoin" value="52000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="660" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="15000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="30" />
+    </quest>
+    <quest id="aec_quest_T18_A5_clear_fetch" template="tier5_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT18fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="4000000" />
+      <reward type="Item" id="casinoCoin" value="52000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestModsT18" ischosen="true" value="18" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT18" ischosen="true" value="18" />
+      <reward type="Item" id="aecUniversalToken" value="660" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="15000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="30" />
+    </quest>
+    <quest id="aec_quest_T19_A1_clear_infested" template="tier2_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="1600000" />
+      <reward type="Item" id="casinoCoin" value="60000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="750" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="resourceLegendaryParts" value="10" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A1_clear_fetch" template="tier1_fetch">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="1600000" />
+      <reward type="Item" id="casinoCoin" value="60000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="750" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="6000" />
+      <reward type="Item" id="resourceLegendaryParts" value="10" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A2_clear_infested" template="tier3_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="3200000" />
+      <reward type="Item" id="casinoCoin" value="66000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="825" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="resourceLegendaryParts" value="20" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A2_clear_fetch" template="tier2_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="3200000" />
+      <reward type="Item" id="casinoCoin" value="66000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="825" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="12000" />
+      <reward type="Item" id="resourceLegendaryParts" value="20" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A3_clear_infested" template="tier4_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="4800000" />
+      <reward type="Item" id="casinoCoin" value="72000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="900" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="18000" />
+      <reward type="Item" id="resourceLegendaryParts" value="30" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A3_clear_fetch" template="tier3_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="4800000" />
+      <reward type="Item" id="casinoCoin" value="72000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="900" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="18000" />
+      <reward type="Item" id="resourceLegendaryParts" value="30" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A4_clear_infested" template="tier5_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="6400000" />
+      <reward type="Item" id="casinoCoin" value="78000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="975" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="24000" />
+      <reward type="Item" id="resourceLegendaryParts" value="40" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A4_clear_fetch" template="tier4_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="6400000" />
+      <reward type="Item" id="casinoCoin" value="78000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="975" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="24000" />
+      <reward type="Item" id="resourceLegendaryParts" value="40" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A5_clear_infested" template="tier6_clear_infested">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19infestedName" />
+      <variable name="offer" value="PZAECOffer_infested" />
+      <reward type="Exp" value="8000000" />
+      <reward type="Item" id="casinoCoin" value="84000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="1050" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="30000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="50" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
+    <quest id="aec_quest_T19_A5_clear_fetch" template="tier5_fetch_clear">
+      <property name="reward_choices_count" value="3" />
+      <variable name="name" value="PZAECQuestT19fetchName" />
+      <variable name="offer" value="PZAECOffer_fetch" />
+      <reward type="Exp" value="8000000" />
+      <reward type="Item" id="casinoCoin" value="84000" />
+      <reward type="LootItem" id="PZAECQuestLegendWeapons" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestModsT19" ischosen="true" value="19" />
+      <reward type="LootItem" id="PZAECQuestMaterialsT19" ischosen="true" value="19" />
+      <reward type="Item" id="aecUniversalToken" value="1050" />
+      <reward type="Item" id="resourceAECMutationSampleT5" value="30000" />
+      <reward type="Item" id="itemPZAECBossLootBundleT16" value="1" />
+      <reward type="Item" id="resourceLegendaryParts" value="50" />
+      <reward type="LootItem" id="PZAECQuestModsT17" value="19" />
+    </quest>
     <quest id="aec_quest_T16_A1_clear_hunter" template="aec_base_A1">
       <property name="difficulty_tier" value="6" />
       <variable name="name" value="aec_quest_T16_A1_clear_hunter_name" />
@@ -1129,25 +1668,25 @@
     </quest>
   </append>
   <set xpath="/quests/quest[@id='aec_quest_T18_A1_clear']/reward[@id='casinoCoin']/@value">36000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A1_clear_')]/reward[@id='casinoCoin']/@value">45000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A1_clear_hunter' or @id='aec_quest_T18_A1_clear_bulwark' or @id='aec_quest_T18_A1_clear_storm']/reward[@id='casinoCoin']/@value">45000</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A2_clear']/reward[@id='casinoCoin']/@value">40000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A2_clear_')]/reward[@id='casinoCoin']/@value">50000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A2_clear_hunter' or @id='aec_quest_T18_A2_clear_bulwark' or @id='aec_quest_T18_A2_clear_storm']/reward[@id='casinoCoin']/@value">50000</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A3_clear']/reward[@id='casinoCoin']/@value">44000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A3_clear_')]/reward[@id='casinoCoin']/@value">55000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A3_clear_hunter' or @id='aec_quest_T18_A3_clear_bulwark' or @id='aec_quest_T18_A3_clear_storm']/reward[@id='casinoCoin']/@value">55000</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A4_clear']/reward[@id='casinoCoin']/@value">48000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A4_clear_')]/reward[@id='casinoCoin']/@value">60000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A4_clear_hunter' or @id='aec_quest_T18_A4_clear_bulwark' or @id='aec_quest_T18_A4_clear_storm']/reward[@id='casinoCoin']/@value">60000</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear']/reward[@id='casinoCoin']/@value">52000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A5_clear_')]/reward[@id='casinoCoin']/@value">65000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear_hunter' or @id='aec_quest_T18_A5_clear_bulwark' or @id='aec_quest_T18_A5_clear_storm']/reward[@id='casinoCoin']/@value">65000</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A1_clear']/reward[@id='casinoCoin']/@value">60000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A1_clear_')]/reward[@id='casinoCoin']/@value">75000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A1_clear_hunter' or @id='aec_quest_T19_A1_clear_bulwark' or @id='aec_quest_T19_A1_clear_storm']/reward[@id='casinoCoin']/@value">75000</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A2_clear']/reward[@id='casinoCoin']/@value">66000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A2_clear_')]/reward[@id='casinoCoin']/@value">82500</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A2_clear_hunter' or @id='aec_quest_T19_A2_clear_bulwark' or @id='aec_quest_T19_A2_clear_storm']/reward[@id='casinoCoin']/@value">82500</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A3_clear']/reward[@id='casinoCoin']/@value">72000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A3_clear_')]/reward[@id='casinoCoin']/@value">90000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A3_clear_hunter' or @id='aec_quest_T19_A3_clear_bulwark' or @id='aec_quest_T19_A3_clear_storm']/reward[@id='casinoCoin']/@value">90000</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A4_clear']/reward[@id='casinoCoin']/@value">78000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A4_clear_')]/reward[@id='casinoCoin']/@value">97500</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A4_clear_hunter' or @id='aec_quest_T19_A4_clear_bulwark' or @id='aec_quest_T19_A4_clear_storm']/reward[@id='casinoCoin']/@value">97500</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear']/reward[@id='casinoCoin']/@value">84000</set>
-  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A5_clear_')]/reward[@id='casinoCoin']/@value">105000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear_hunter' or @id='aec_quest_T19_A5_clear_bulwark' or @id='aec_quest_T19_A5_clear_storm']/reward[@id='casinoCoin']/@value">105000</set>
   <set xpath="/quests/quest[@id='aec_quest_T17_A5_clear' or starts-with(@id,'aec_quest_T17_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT17</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear' or starts-with(@id,'aec_quest_T18_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT18</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear' or starts-with(@id,'aec_quest_T19_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT19</set>

@@ -3,7 +3,18 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
-Endgame Reward Balance (Runtime 1.15.0)
+Runtime 1.15.2 trader and log hotfix
+-------------------------
+- Loot groups are now defined before any container is rewired to them. This
+  prevents the loot.xml loader failure and the follow-on EntityLootContainer
+  NullReferenceException spam seen when a T16-T19 enemy drops a bag.
+- Every Legendary Operations page now mixes one clear, one infestation and one
+  fetch/fetch-and-clear contract, followed by three affixed clears. All six use
+  unique IDs and can coexist in one player's quest journal.
+- Fully restart the host and every peer so XML, DLL and trader offer caches are
+  rebuilt. Previously spawned broken loot bags should be allowed to despawn.
+
+Endgame Reward Balance (Runtime 1.15.2)
 ---------------------------------------
 - Chinese tables and exact rules: ENDGAME_REWARD_BALANCE.md.
 - T18/T19 clear-contract Dukes now rise with A1-A5 size. Affix contracts keep
@@ -110,12 +121,13 @@ Legendary Adventures (Runtime 1.11.0)
 ------------------------------------
 - Chinese gameplay and installation guide: LEGENDARY_ADVENTURES.md in this folder.
 - First-batch features: affix contracts, optional post-clear trials, scoped boss weaknesses.
-- Each T16-T19 / A1-A5 page attempts three plain offers followed by three affixed
-  offers (hunter, bulwark, storm), with server-randomized affix order and native POIs.
+- Each T16-T19 / A1-A5 page attempts a clear, an infestation and a fetch contract
+  followed by three affixed clears (hunter, bulwark, storm). A1 uses fetch-only;
+  A2-A5 use fetch-and-clear. Affix order is server-randomized; all use native POIs.
 - 60 new variant definitions preserve the original POI objectives and advanced
   reward pools. Only their XP / Dukes / samples increase by 25%.
 - Rallying an affixed contract requests two corresponding exact-tier champions;
-  the original T17-T19 two-boss dispatcher still handles plain contracts only.
+  the original T17-T19 two-boss dispatcher handles all three ordinary task types.
 - Clearing a legendary POI awards its owner one tiered optional trial voucher.
   Use outside trader protection and accept the native quest offer to call three
   champions. Declining leaves the item intact; the original turn-in is independent.
@@ -245,7 +257,7 @@ T16-T19 ordinary-mob loot quality (Runtime 1.10.0 / Tweaks 3.9.7)
 - Ordinary equipment rolls quality 5-6 at all four tiers. Advanced equipment rolls exactly quality 2 / 3 / 4 / 5 for T16 / T17 / T18 / T19.
 - Advanced means Rare/Unique item variants, LegendWeapon-tagged items and the existing improved/unique/legendary weapon pools. Classification adds only a marker property; it does not change the item globally.
 - Items without an actual quality stat, including ammunition, materials and ordinary modifier items, retain native behavior.
-- 36 scoped bags preserve all nine native loot families and their equipment odds. Runtime 1.15.0 adds only the separately rolled tiered utility supply described above; it does not add equipment to ordinary-mob bonus rolls.
+- 36 scoped bags preserve all nine native loot families and their equipment odds. Runtime 1.15.2 adds only the separately rolled tiered utility supply described above; it does not add equipment to ordinary-mob bonus rolls.
 - The bag identity carries its source tier across looting by another player, network synchronization and saves; the looter's GS does not determine the tier.
 - Quality is selected before the native ItemValue constructor initializes mod slots and before loot stats/durability are populated. Nested unrelated containers and quest reward generation are explicitly isolated; exception finalizers restore scope.
 - Both host and joining players must update Mods/98-AECxProjectZ_Tweaks and Mods/99-AEC_T16_RuntimeFix, then fully restart without EAC. Check newly dropped bags: existing generated loot and old unmarked bags are not rewritten.

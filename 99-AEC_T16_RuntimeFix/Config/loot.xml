@@ -1,85 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackReg']/item/@group">PZAECMobT16_groupZpackRegBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackStrong']/item/@group">PZAECMobT16_groupZpackStrongBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackBoss']/item/@group">PZAECMobT16_groupZpackBossBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackLab']/item/@group">PZAECMobT16_groupZpackLabBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackNurse']/item/@group">PZAECMobT16_groupZpackNurseBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackSoldier']/item/@group">PZAECMobT16_groupZpackSoldierBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackThug']/item/@group">PZAECMobT16_groupZpackThugBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackUtility']/item/@group">PZAECMobT16_groupZpackUtilityBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackPlague']/item/@group">PZAECMobT16_groupZpackPlagueBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackReg']/item/@group">PZAECMobT17_groupZpackRegBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackStrong']/item/@group">PZAECMobT17_groupZpackStrongBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackBoss']/item/@group">PZAECMobT17_groupZpackBossBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackLab']/item/@group">PZAECMobT17_groupZpackLabBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackNurse']/item/@group">PZAECMobT17_groupZpackNurseBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackSoldier']/item/@group">PZAECMobT17_groupZpackSoldierBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackThug']/item/@group">PZAECMobT17_groupZpackThugBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackUtility']/item/@group">PZAECMobT17_groupZpackUtilityBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackPlague']/item/@group">PZAECMobT17_groupZpackPlagueBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackReg']/item/@group">PZAECMobT18_groupZpackRegBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackStrong']/item/@group">PZAECMobT18_groupZpackStrongBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackBoss']/item/@group">PZAECMobT18_groupZpackBossBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackLab']/item/@group">PZAECMobT18_groupZpackLabBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackNurse']/item/@group">PZAECMobT18_groupZpackNurseBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackSoldier']/item/@group">PZAECMobT18_groupZpackSoldierBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackThug']/item/@group">PZAECMobT18_groupZpackThugBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackUtility']/item/@group">PZAECMobT18_groupZpackUtilityBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackPlague']/item/@group">PZAECMobT18_groupZpackPlagueBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackReg']/item/@group">PZAECMobT19_groupZpackRegBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackStrong']/item/@group">PZAECMobT19_groupZpackStrongBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackBoss']/item/@group">PZAECMobT19_groupZpackBossBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackLab']/item/@group">PZAECMobT19_groupZpackLabBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackNurse']/item/@group">PZAECMobT19_groupZpackNurseBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackSoldier']/item/@group">PZAECMobT19_groupZpackSoldierBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackThug']/item/@group">PZAECMobT19_groupZpackThugBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackUtility']/item/@group">PZAECMobT19_groupZpackUtilityBalanced</set>
-  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackPlague']/item/@group">PZAECMobT19_groupZpackPlagueBalanced</set>
-  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']" />
-  <remove xpath="/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT16']" />
   <append xpath="/lootcontainers">
-    <lootgroup name="PZAECBossLootBundleT16_Content" count="all">
-      <item group="groupAmmoImpLarge" count="6" prob="1" force_prob="true" />
-      <item group="groupAmmoDU" count="3" prob=".70" force_prob="true" />
-      <item group="groupMiniBoss01" count="5" prob="1" force_prob="true" />
-      <item group="groupZpackBoss02" count="5" prob="1" force_prob="true" />
-      <item group="groupZpackBoss03" count="3" prob="1" force_prob="true" />
-      <item group="groupBossAlloys" count="2" prob=".80" force_prob="true" />
-      <item group="groupZpackBoss04" count="1" prob=".70" force_prob="true" />
-      <item group="groupRareMods" count="1" prob=".50" force_prob="true" />
-      <item group="groupUniqModsAll" count="1" prob=".35" force_prob="true" />
-      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".30" force_prob="true" />
-      <item group="groupSkillBook" count="1" prob=".20" force_prob="true" />
-      <item group="groupUnique_Weapon" count="1" prob=".20" force_prob="true" />
-      <item group="groupLegend_Weapon" count="1" prob=".10" force_prob="true" />
-      <item group="groupLegend_MeleeWeapon" count="1" prob=".12" force_prob="true" />
-      <item group="groupUniqueParts" count="1" prob=".08" force_prob="true" />
-    </lootgroup>
-    <lootcontainer name="PZAECBossLootBundleT16" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
-      <item group="PZAECBossLootBundleT16_Content" />
-    </lootcontainer>
     <lootgroup name="PZAECMobBonusT16">
       <item name="ammo762mmBulletAP" count="60,100" />
       <item name="resourceRepairKit" count="3,5" />
@@ -1258,4 +1179,89 @@
       <item name="resourceAECMutationSampleT5" count="1436" />
     </lootcontainer>
   </append>
+  <!-- Retune the existing T16 cache in place; never leave a live reference undefined. -->
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupAmmoImpLarge']/@count">6</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupAmmoDU']/@count">3</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupAmmoDU']/@prob">.70</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupMiniBoss01']/@count">5</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss02']/@count">5</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss03']/@count">3</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupBossAlloys']/@count">2</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupBossAlloys']/@prob">.80</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss04']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss04']/@prob">.70</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupRareMods']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupRareMods']/@prob">.50</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUniqModsAll']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUniqModsAll']/@prob">.35</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='PZAECBossLoot_UniqueMods_ByFamily']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='PZAECBossLoot_UniqueMods_ByFamily']/@prob">.30</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupSkillBook']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupSkillBook']/@prob">.20</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUnique_Weapon']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUnique_Weapon']/@prob">.20</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupLegend_Weapon']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupLegend_Weapon']/@prob">.10</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupLegend_MeleeWeapon']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupLegend_MeleeWeapon']/@prob">.12</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUniqueParts']/@count">1</set>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUniqueParts']/@prob">.08</set>
+  <!-- The game validates references after each patch operation: definitions above, rewires below. -->
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECDumdumBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='RunningKamikazeBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='DoomlordBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECWitchBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECElectricDemonBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECExplosiveEagleBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECHammerGuardianBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECMechanicianBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECDruidBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECExecutionerBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECPartyBeachBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECMykirBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECHellskyliLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECRockbreakerLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECSingerieBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECGhostBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECSirenHeadBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECMushroomBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECArcherBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECSheriffBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <remove xpath="/lootcontainers/lootcontainer[@name='AECHeadlessBossLootT16']/item[@name='itemPZAECBossLootBundleT16'][2]" />
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackReg']/item/@group">PZAECMobT16_groupZpackRegBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackStrong']/item/@group">PZAECMobT16_groupZpackStrongBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackBoss']/item/@group">PZAECMobT16_groupZpackBossBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackLab']/item/@group">PZAECMobT16_groupZpackLabBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackNurse']/item/@group">PZAECMobT16_groupZpackNurseBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackSoldier']/item/@group">PZAECMobT16_groupZpackSoldierBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackThug']/item/@group">PZAECMobT16_groupZpackThugBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackUtility']/item/@group">PZAECMobT16_groupZpackUtilityBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackPlague']/item/@group">PZAECMobT16_groupZpackPlagueBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackReg']/item/@group">PZAECMobT17_groupZpackRegBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackStrong']/item/@group">PZAECMobT17_groupZpackStrongBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackBoss']/item/@group">PZAECMobT17_groupZpackBossBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackLab']/item/@group">PZAECMobT17_groupZpackLabBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackNurse']/item/@group">PZAECMobT17_groupZpackNurseBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackSoldier']/item/@group">PZAECMobT17_groupZpackSoldierBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackThug']/item/@group">PZAECMobT17_groupZpackThugBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackUtility']/item/@group">PZAECMobT17_groupZpackUtilityBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT17_zPackPlague']/item/@group">PZAECMobT17_groupZpackPlagueBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackReg']/item/@group">PZAECMobT18_groupZpackRegBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackStrong']/item/@group">PZAECMobT18_groupZpackStrongBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackBoss']/item/@group">PZAECMobT18_groupZpackBossBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackLab']/item/@group">PZAECMobT18_groupZpackLabBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackNurse']/item/@group">PZAECMobT18_groupZpackNurseBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackSoldier']/item/@group">PZAECMobT18_groupZpackSoldierBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackThug']/item/@group">PZAECMobT18_groupZpackThugBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackUtility']/item/@group">PZAECMobT18_groupZpackUtilityBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT18_zPackPlague']/item/@group">PZAECMobT18_groupZpackPlagueBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackReg']/item/@group">PZAECMobT19_groupZpackRegBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackStrong']/item/@group">PZAECMobT19_groupZpackStrongBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackBoss']/item/@group">PZAECMobT19_groupZpackBossBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackLab']/item/@group">PZAECMobT19_groupZpackLabBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackNurse']/item/@group">PZAECMobT19_groupZpackNurseBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackSoldier']/item/@group">PZAECMobT19_groupZpackSoldierBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackThug']/item/@group">PZAECMobT19_groupZpackThugBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackUtility']/item/@group">PZAECMobT19_groupZpackUtilityBalanced</set>
+  <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackPlague']/item/@group">PZAECMobT19_groupZpackPlagueBalanced</set>
 </configs>

@@ -18,7 +18,7 @@ namespace AECT16RuntimeFix
         public const string OverheatBuff = "buffPZAECOverheat";
         private static readonly string[] Affixes = { "hunter", "bulwark", "storm" };
         private static readonly Regex Contract = new Regex(
-            @"\A(aec_quest_T(16|17|18|19)_A[1-5]_clear)(?:_(hunter|bulwark|storm))?\z",
+            @"\A(aec_quest_T(16|17|18|19)_A[1-5]_clear)(?:_(infested|fetch|hunter|bulwark|storm))?\z",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         private static readonly Regex Challenge = new Regex(@"\APZAECChallengeT(16|17|18|19)\z",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
@@ -53,7 +53,12 @@ namespace AECT16RuntimeFix
 
         public static int ContractTier(string id) { var m = Contract.Match(id ?? ""); return m.Success ? int.Parse(m.Groups[2].Value) : 0; }
         public static int ChallengeTier(string id) { var m = Challenge.Match(id ?? ""); return m.Success ? int.Parse(m.Groups[1].Value) : 0; }
-        public static string Affix(string id) { var m = Contract.Match(id ?? ""); return m.Success ? m.Groups[3].Value.ToLowerInvariant() : ""; }
+        private static string Suffix(string id) { var m = Contract.Match(id ?? ""); return m.Success ? m.Groups[3].Value.ToLowerInvariant() : ""; }
+        public static string Affix(string id)
+        {
+            string suffix = Suffix(id);
+            return Array.IndexOf(Affixes, suffix) >= 0 ? suffix : "";
+        }
         public static string EncounterKind(string id) { var m = Encounter.Match(id ?? ""); return m.Success ? m.Groups[2].Value.ToLowerInvariant() : LegendaryDefense.BossKind(id); }
 
         public static bool MatchesPage(string id, string wanted)
@@ -64,11 +69,15 @@ namespace AECT16RuntimeFix
             return m.Success && string.Equals(m.Groups[1].Value, wanted, StringComparison.OrdinalIgnoreCase);
         }
 
-        // First three successful positions retain plain quests. The remaining
-        // three rotate all three affixes, randomized once per server-made page.
+        // Every slot needs a distinct class ID: the native quest journal rejects
+        // duplicate IDs even when trader-assigned POIs differ. Ordinary pages mix
+        // clear, infestation and fetch work; the remaining slots rotate affixes.
         public static string OfferId(string id, int slot, int roll)
         {
-            if (ContractTier(id) == 0 || Affix(id) != "" || slot < 3 || slot > 5) return id;
+            if (ContractTier(id) == 0 || Suffix(id) != "" || slot < 0 || slot > 5) return id;
+            if (slot == 1) return id + "_infested";
+            if (slot == 2) return id + "_fetch";
+            if (slot < 3) return id;
             return id + "_" + Affixes[((roll % 3 + 3) % 3 + slot - 3) % 3];
         }
 

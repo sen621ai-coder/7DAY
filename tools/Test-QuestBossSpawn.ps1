@@ -29,15 +29,17 @@ public static class QuestBossRegression
             for (int area = 1; area <= 5; area++)
             {
                 string id = "aec_quest_T" + tier + "_A" + area + "_clear";
-                Check(QuestBossSpawn.TierForQuestId(id) == tier, "Wrong tier: " + id);
-                Check(QuestBossSpawn.ShouldStart(id,2,3,true,-1,42,false), "Missing owner trigger");
-                Check(QuestBossSpawn.ShouldStart(id,2,3,true,42,42,false), "Explicit owner rejected");
-                Check(!QuestBossSpawn.ShouldStart(id,2,3,true,42,43,false), "Shared copy triggered");
-                Check(!QuestBossSpawn.ShouldStart(id,1,2,true,-1,42,false), "Spawned on accepting quest");
-                Check(!QuestBossSpawn.ShouldStart(id,3,4,true,-1,42,false), "Spawned at trader phase");
-                Check(!QuestBossSpawn.ShouldStart(id,3,3,true,-1,42,false), "Reload triggered");
-                Check(!QuestBossSpawn.ShouldStart(id,2,3,false,-1,42,false), "Inactive quest triggered");
-                Check(!QuestBossSpawn.ShouldStart(id,2,3,true,-1,42,true), "Persisted marker ignored");
+                foreach (string candidate in new[]{id,id+"_infested",id+"_fetch"}) {
+                    Check(QuestBossSpawn.TierForQuestId(candidate) == tier, "Wrong tier: " + candidate);
+                    Check(QuestBossSpawn.ShouldStart(candidate,2,3,true,-1,42,false), "Missing owner trigger");
+                    Check(QuestBossSpawn.ShouldStart(candidate,2,3,true,42,42,false), "Explicit owner rejected");
+                    Check(!QuestBossSpawn.ShouldStart(candidate,2,3,true,42,43,false), "Shared copy triggered");
+                    Check(!QuestBossSpawn.ShouldStart(candidate,1,2,true,-1,42,false), "Spawned on accepting quest");
+                    Check(!QuestBossSpawn.ShouldStart(candidate,3,4,true,-1,42,false), "Spawned at trader phase");
+                    Check(!QuestBossSpawn.ShouldStart(candidate,3,3,true,-1,42,false), "Reload triggered");
+                    Check(!QuestBossSpawn.ShouldStart(candidate,2,3,false,-1,42,false), "Inactive quest triggered");
+                    Check(!QuestBossSpawn.ShouldStart(candidate,2,3,true,-1,42,true), "Persisted marker ignored");
+                }
             }
         foreach (string id in new[]{null,"","aec_quest_T16_A1_clear","aec_quest_T20_A1_clear",
             "aec_quest_T17_A0_clear","aec_quest_T17_A6_clear","aec_quest_T17_A1_clear_extra",
@@ -75,7 +77,7 @@ public static class QuestBossRegression
             Check(init.Body.Instructions.Any(i => (i.Operand as string) == "ignore_multiplier"), "Wrong native multiplier property");
             Check(init.Body.Instructions.Any(i => (i.Operand as string) == "party_addition"), "Wrong native party property");
         }
-        return "PASS: 15 quest mappings, phase/owner/party guards, reload and reentrancy dedup, failed dispatch retries, native serialization/API checks.";
+        return "PASS: 45 clear/infested/fetch quest mappings, phase/owner/party guards, reload and reentrancy dedup, failed dispatch retries, native serialization/API checks.";
     }
 }
 '@
@@ -84,6 +86,7 @@ public static class QuestBossRegression
 [xml]$events = Get-Content -LiteralPath (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/gameevents.xml') -Raw
 [xml]$entities = Get-Content -LiteralPath (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/entityclasses.xml') -Raw
 [xml]$quests = Get-Content -LiteralPath (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/quests.xml') -Raw
+[xml]$runtimeQuests = Get-Content -LiteralPath (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/quests.xml') -Raw
 $sequences = $events.SelectNodes('/configs/append/action_sequence[starts-with(@name,"PZAECQuestBossT")]')
 if ($sequences.Count -ne 3) { throw 'Expected three tier-specific events' }
 foreach ($tier in 17..19) {
@@ -102,7 +105,11 @@ foreach ($tier in 17..19) {
         if (-not $name.EndsWith("T$tier") -or -not $entities.SelectSingleNode("//entity_class[@name='$name']")) { throw "Invalid boss: $name" }
     }
     foreach ($area in 1..5) {
-        if (-not $quests.SelectSingleNode("//quest[@id='aec_quest_T${tier}_A${area}_clear']")) { throw 'Missing quest definition' }
+        foreach ($suffix in @('','_infested','_fetch')) {
+            $id="aec_quest_T${tier}_A${area}_clear$suffix"
+            $source=if($suffix){$runtimeQuests}else{$quests}
+            if (-not $source.SelectSingleNode("//quest[@id='$id']")) { throw "Missing quest definition: $id" }
+        }
     }
 }
-'PASS: three two-boss native events, 63 exact-tier boss references, all 15 existing quest definitions.'
+'PASS: three two-boss native events, 63 exact-tier boss references, all 45 clear/infested/fetch quest definitions.'

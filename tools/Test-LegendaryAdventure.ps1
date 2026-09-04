@@ -1,6 +1,7 @@
 #Requires -Version 7.0
 $ErrorActionPreference = 'Stop'
-# Also exercises the real native offer packet with 60 plain + 60 affixed IDs.
+# Also exercises the real native offer packet with 20 clear, 20 infested,
+# 20 fetch/fetch-clear and 60 affixed IDs.
 . (Join-Path $PSScriptRoot 'Test-LegendaryNetworking.ps1')
 Add-Type -ReferencedAssemblies ($references + $frameworkReferences) -TypeDefinition @'
 using System;
@@ -82,7 +83,8 @@ public static class AdventureRegression
         {
             string id="aec_quest_T"+tier+"_A"+area+"_clear";
             var ids=Enumerable.Range(0,6).Select(slot=>LegendaryAdventure.OfferId(id,slot,roll)).ToList();
-            Check(ids.Take(3).All(q=>q==id),"Plain offers lost");
+            Check(ids.Take(3).SequenceEqual(new[]{id,id+"_infested",id+"_fetch"}),"Mixed ordinary offer identities changed");
+            Check(ids.Distinct(StringComparer.OrdinalIgnoreCase).Count()==6,"A page contains duplicate quest IDs");
             Check(ids.Skip(3).Select(LegendaryAdventure.Affix).OrderBy(s=>s).SequenceEqual(affixes.OrderBy(s=>s)),"Affix rotation wrong");
             ids.Insert(0,"other_difficulty"); ids.Insert(1,"special6");
             var tiers = new[]{2,6,6,6,6,6,6,6}; var ready = Enumerable.Repeat(true,8).ToArray();
@@ -173,6 +175,14 @@ public static class AdventureRegression
 [AdventureRegression]::Boundaries()
 
 function Assert-Adventure([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
+function Get-ObjectiveTemplate([xml]$document, $quest) {
+    $seen=@{}
+    while ($null -ne $quest -and $quest.SelectNodes('objective').Count -eq 0 -and $quest.template -and -not $seen.ContainsKey([string]$quest.id)) {
+        $seen[[string]$quest.id]=$true
+        $quest=$document.SelectSingleNode("/quests/quest[@id='$($quest.template)']")
+    }
+    return $quest
+}
 $configRoot = Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config'
 [xml]$quests = Get-Content (Join-Path $configRoot 'quests.xml') -Raw
 [xml]$events = Get-Content (Join-Path $configRoot 'gameevents.xml') -Raw
@@ -180,6 +190,7 @@ $configRoot = Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config'
 [xml]$items = Get-Content (Join-Path $configRoot 'items.xml') -Raw
 [xml]$buffs = Get-Content (Join-Path $configRoot 'buffs.xml') -Raw
 [xml]$baseQuests = Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/quests.xml') -Raw
+[xml]$nativeQuests = Get-Content (Join-Path $modRoot '../Data/Config/quests.xml') -Raw
 [xml]$baseEntities = Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/entityclasses.xml') -Raw
 [xml]$baseLoot = Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/loot.xml') -Raw
 $localization = @{}
@@ -187,7 +198,7 @@ foreach ($row in Import-Csv (Join-Path $configRoot 'Localization.csv')) {
     Assert-Adventure (-not $localization.ContainsKey($row.Key)) "Duplicate localization $($row.Key)"
     $localization[$row.Key] = $row
 }
-Assert-Adventure ($quests.SelectNodes('//quest[not(starts-with(@id,"PZAECDefense"))]').Count -eq 64) 'Expected 60 affix contracts and four trials'
+Assert-Adventure ($quests.SelectNodes('//quest[not(starts-with(@id,"PZAECDefense"))]').Count -eq 104) 'Expected 40 mixed-type contracts, 60 affix contracts and four trials'
 Assert-Adventure ($entities.SelectNodes('//entity_class[starts-with(@name,"PZAECAffix_") or starts-with(@name,"PZAECTrial_")]').Count -eq 24) 'Expected 24 isolated champions'
 Assert-Adventure ($items.SelectNodes('//item[starts-with(@name,"PZAECChallengeVoucher")]').Count -eq 4) 'Expected four vouchers'
 Assert-Adventure ($events.SelectNodes('//action_sequence[not(starts-with(@name,"PZAECDefense"))]').Count -eq 23) 'Original three + twenty adventure events required'
@@ -195,6 +206,25 @@ foreach ($tier in 16..19) {
     foreach ($area in 1..5) {
         $baseId = "aec_quest_T${tier}_A${area}_clear"
         $base = $baseQuests.SelectSingleNode("//quest[@id='$baseId']")
+        foreach ($suffix in @('infested','fetch')) {
+            $typed = $quests.SelectSingleNode("//quest[@id='${baseId}_$suffix']")
+            $expectedTemplate = if ($suffix -eq 'infested') { "tier$($area+1)_clear_infested" } elseif ($area -eq 1) { 'tier1_fetch' } else { "tier${area}_fetch_clear" }
+            Assert-Adventure ($null -ne $typed -and $typed.template -eq $expectedTemplate) "Broken mission template ${baseId}_$suffix"
+            $nativeTemplate = $nativeQuests.SelectSingleNode("/quests/quest[@id='$expectedTemplate']")
+            Assert-Adventure ($null -ne $nativeTemplate) "Missing native mission template $expectedTemplate"
+            $objectiveTemplate = Get-ObjectiveTemplate $nativeQuests $nativeTemplate
+            if ($suffix -eq 'infested') {
+                Assert-Adventure ($objectiveTemplate.SelectNodes("objective[@type='ClearSleepers']").Count -eq 1) "Infestation lost clear objective $expectedTemplate"
+            } else {
+                Assert-Adventure ($objectiveTemplate.SelectNodes("objective[@type='FetchFromContainer']").Count -eq 1) "Fetch mission lost satchel objective $expectedTemplate"
+                Assert-Adventure (($objectiveTemplate.SelectNodes("objective[@type='ClearSleepers']").Count -eq 1) -eq ($area -gt 1)) "Fetch/clear size mapping changed $expectedTemplate"
+            }
+            Assert-Adventure ($typed.SelectNodes('objective | action').Count -eq 0) "Typed child duplicated inherited objectives ${baseId}_$suffix"
+            Assert-Adventure ($typed.SelectSingleNode("property[@name='reward_choices_count']").value -eq '3') "Wrong reward choice count ${baseId}_$suffix"
+            Assert-Adventure ($typed.reward.Count -eq $base.reward.Count) "Reward count changed ${baseId}_$suffix"
+            Assert-Adventure ($localization.ContainsKey($typed.SelectSingleNode("variable[@name='name']").value)) "Missing typed mission label ${baseId}_$suffix"
+            Assert-Adventure ($localization.ContainsKey($typed.SelectSingleNode("variable[@name='offer']").value)) "Missing typed mission offer ${baseId}_$suffix"
+        }
         foreach ($affix in @('hunter','bulwark','storm')) {
             $id = "${baseId}_$affix"
             $quest = $quests.SelectSingleNode("//quest[@id='$id']")
@@ -264,4 +294,4 @@ foreach ($buff in $buffs.SelectNodes('//buff[@name="buffPZAECCharge" or @name="b
 foreach ($prop in $quests.SelectNodes('//property[contains(@name,"_key")]') + $items.SelectNodes('//property[@name="DescriptionKey"]') + $events.SelectNodes('//property[@name="text_key"]')) {
     Assert-Adventure ($localization.ContainsKey($prop.value) -and -not [string]::IsNullOrWhiteSpace($localization[$prop.value].schinese)) "Missing description $($prop.value)"
 }
-'PASS: 60 variant contracts preserve original POIs and advanced loot; +25% XP/coins/samples; 4 optional trial notes; 24 tier-correct champions; spawn counts, 18/6 weakness cycle and Chinese text verified.'
+'PASS: 20 infestation and 20 fetch/fetch-clear contracts plus 60 affix contracts; six unique IDs per page, tier rewards, 4 optional trials, 24 champions and Chinese text verified.'

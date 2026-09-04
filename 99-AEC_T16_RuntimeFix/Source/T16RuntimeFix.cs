@@ -289,26 +289,29 @@ namespace AECT16RuntimeFix
                             continue;
                         }
 
-                        int created = 0;
-                        int attempts = 0;
                         int variantRoll = player.world.GetGameRandom().RandomRange(3);
                         var usedPositions = new List<Vector2>();
-                        while (created < 6 && attempts < 30 && (__result == null ? 0 : __result.Count) + additions.Count < 240)
+                        // Try every mission kind independently. A world without a
+                        // matching infestation POI must not prevent the later fetch
+                        // and affix slots from being offered.
+                        for (int offerSlot = 0; offerSlot < 6 &&
+                            (__result == null ? 0 : __result.Count) + additions.Count < 240; offerSlot++)
                         {
-                            attempts++;
-                            string offerId = LegendaryAdventure.OfferId(questId, created, variantRoll);
-                            var offerClass = QuestClass.GetQuest(offerId) ?? questClass;
-                            Quest quest = offerClass.CreateQuest();
-                            quest.QuestGiverID = __instance.entityId;
-                            quest.QuestFaction = (byte)(__instance.NPCInfo == null ? 1 : __instance.NPCInfo.QuestFaction);
-                            quest.SetPositionData((Quest.PositionDataTypes)0, __instance.position);
-                            quest.SetPositionData((Quest.PositionDataTypes)9,
-                                __instance.traderArea != null ? __instance.traderArea.Position.ToVector3() : __instance.position);
-                            quest.SetupTags();
-                            if (quest.SetupPosition(__instance, player, usedPositions, player.entityId))
+                            string offerId = LegendaryAdventure.OfferId(questId, offerSlot, variantRoll);
+                            var offerClass = QuestClass.GetQuest(offerId);
+                            if (offerClass == null) continue;
+                            for (int attempt = 0; attempt < 5; attempt++)
                             {
+                                Quest quest = offerClass.CreateQuest();
+                                quest.QuestGiverID = __instance.entityId;
+                                quest.QuestFaction = (byte)(__instance.NPCInfo == null ? 1 : __instance.NPCInfo.QuestFaction);
+                                quest.SetPositionData((Quest.PositionDataTypes)0, __instance.position);
+                                quest.SetPositionData((Quest.PositionDataTypes)9,
+                                    __instance.traderArea != null ? __instance.traderArea.Position.ToVector3() : __instance.position);
+                                quest.SetupTags();
+                                if (!quest.SetupPosition(__instance, player, usedPositions, player.entityId)) continue;
                                 additions.Add(quest);
-                                created++;
+                                break;
                             }
                         }
                     }

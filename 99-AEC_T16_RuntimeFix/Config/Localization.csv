@@ -506,3 +506,13 @@ itemPZAECBossLootBundleT18,items,Item,,,,T18 Boss Reward Cache,,,,,,,,,,,,T18 Bo
 itemPZAECBossLootBundleT18Desc,items,Item,,,,"Exact-tier boss cache. Equipment is Q5-6; advanced gear is fixed at rank 4. Chances for advanced mods, weapons and parts scale by tier.",,,,,,,,,,,,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 4 级；高级模组、武器和零件概率随等级提高。,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 4 级；高级模组、武器和零件概率随等级提高。
 itemPZAECBossLootBundleT19,items,Item,,,,T19 Boss Reward Cache,,,,,,,,,,,,T19 Boss 奖励箱,T19 Boss 奖励箱
 itemPZAECBossLootBundleT19Desc,items,Item,,,,"Exact-tier boss cache. Equipment is Q5-6; advanced gear is fixed at rank 5. Chances for advanced mods, weapons and parts scale by tier.",,,,,,,,,,,,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 5 级；高级模组、武器和零件概率随等级提高。,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 5 级；高级模组、武器和零件概率随等级提高。
+PZAECQuestT16infestedName,quests,Quest,,,,[AEC] T16 Transcendent Infestation,,,,,,,,,,,,[AEC] T16 超越级感染清剿,[AEC] T16 超越级感染清剿
+PZAECQuestT16fetchName,quests,Quest,,,,[AEC] T16 Transcendent Fetch Operation,,,,,,,,,,,,[AEC] T16 超越级取回行动,[AEC] T16 超越级取回行动
+PZAECQuestT17infestedName,quests,Quest,,,,[AEC] T17 Ascendant Infestation,,,,,,,,,,,,[AEC] T17 飞升级感染清剿,[AEC] T17 飞升级感染清剿
+PZAECQuestT17fetchName,quests,Quest,,,,[AEC] T17 Ascendant Fetch Operation,,,,,,,,,,,,[AEC] T17 飞升级取回行动,[AEC] T17 飞升级取回行动
+PZAECQuestT18infestedName,quests,Quest,,,,[AEC] T18 Eternal Infestation,,,,,,,,,,,,[AEC] T18 永恒级感染清剿,[AEC] T18 永恒级感染清剿
+PZAECQuestT18fetchName,quests,Quest,,,,[AEC] T18 Eternal Fetch Operation,,,,,,,,,,,,[AEC] T18 永恒级取回行动,[AEC] T18 永恒级取回行动
+PZAECQuestT19infestedName,quests,Quest,,,,[AEC] T19 Apocalyptic Infestation,,,,,,,,,,,,[AEC] T19 末日级感染清剿,[AEC] T19 末日级感染清剿
+PZAECQuestT19fetchName,quests,Quest,,,,[AEC] T19 Apocalyptic Fetch Operation,,,,,,,,,,,,[AEC] T19 末日级取回行动,[AEC] T19 末日级取回行动
+PZAECOffer_infested,quests,Quest,,,,Infestation operation: purge the reinforced sleeper population and return to a trader. Legendary-tier rewards are preserved.,,,,,,,,,,,,感染行动：清除加强后的全部沉睡者并返回商人处。保留对应传奇等级奖励。,感染行动：清除加强后的全部沉睡者并返回商人处。保留对应传奇等级奖励。
+PZAECOffer_fetch,quests,Quest,,,,Fetch operation: recover the marked satchel; medium and larger sites also require a full clear. Legendary-tier rewards are preserved.,,,,,,,,,,,,取回行动：找回标记的任务包；中型及更大地标还需完成全清。保留对应传奇等级奖励。,取回行动：找回标记的任务包；中型及更大地标还需完成全清。保留对应传奇等级奖励。

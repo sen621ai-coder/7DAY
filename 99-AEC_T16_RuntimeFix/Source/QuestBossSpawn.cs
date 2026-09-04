@@ -13,7 +13,7 @@ namespace AECT16RuntimeFix
     {
         public const string Marker = "PZAECQuestBossDispatched_v1";
         private static readonly Regex QuestIdPattern = new Regex(
-            @"\Aaec_quest_T(17|18|19)_A[1-5]_clear\z",
+            @"\Aaec_quest_T(17|18|19)_A[1-5]_clear(?:_(?:infested|fetch))?\z",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         private static readonly HashSet<Quest> Pending = new HashSet<Quest>();
 
