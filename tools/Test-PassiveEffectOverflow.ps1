@@ -15,9 +15,11 @@ function Assert-Overflow([bool]$ok, [string]$message) {
 }
 
 $guard = [AECT16RuntimeFix.PassiveEffectOverflowGuard]
-Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, [single]::PositiveInfinity) -eq 100000000) 'Damage infinity was not saturated.'
-Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, -1) -eq 0) 'Negative damage was not clamped.'
-Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, [single]125, [single]-1) -eq [single]125) 'Invalid damage did not fall back to its native value.'
+Assert-Overflow ([single]::IsPositiveInfinity($guard::ClampValue([PassiveEffects]::EntityDamage, [single]::PositiveInfinity))) 'Uncapped damage infinity was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, -1) -eq -1) 'Uncapped negative damage semantics were changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, [single]125, [single]-1) -eq [single]-1) 'Final uncapped damage was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, [single]2000000000) -eq [single]2000000000) 'High-tier entity damage was capped.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::BlockDamage, [single]2000000000) -eq [single]2000000000) 'High-tier block damage was capped.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::HealthMax, 2000000000) -eq 1000000000) 'Health maximum can still overflow.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::MagazineSize, -20) -eq 0) 'Magazine minimum is invalid.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::ModSlots, [single]0, [single]0) -eq 0) 'A valid zero mod-slot value was changed.'
@@ -26,8 +28,8 @@ Assert-Overflow ($guard::ClampValue([PassiveEffects]::RoundsPerMinute, 2000000) 
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::PlayerExpGain, 200000000) -eq 100000000) 'XP maximum can still overflow.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::HealthMax, 54000000) -eq 54000000) 'Existing T19 health was changed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::DamageModifier, -2.5) -eq -2.5) 'A valid negative percent modifier was changed.'
-Assert-Overflow ($guard::ClampValue([PassiveEffects]::DamageModifier, [single]::PositiveInfinity) -eq 10000) 'Damage multiplier infinity was not saturated.'
-Assert-Overflow ($guard::ClampValue([PassiveEffects]::HeadshotDamageModifier, 25000) -eq 10000) 'Headshot multiplier can still overflow.'
+Assert-Overflow ([single]::IsPositiveInfinity($guard::ClampValue([PassiveEffects]::DamageModifier, [single]::PositiveInfinity))) 'Uncapped damage multiplier infinity was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::HeadshotDamageModifier, 25000) -eq 25000) 'Headshot multiplier was capped.'
 Assert-Overflow ([single]::IsNaN($guard::ClampValue([PassiveEffects]::PhysicalDamageResist, [single]::NaN))) 'Unmanaged resistance semantics were changed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::WeaponHandling, -0.25) -eq -0.25) 'Weapon handling semantics were changed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::SpreadMultiplierAiming, -0.5) -eq 0) 'Aiming spread multiplier can still become negative.'
@@ -60,4 +62,4 @@ finally {
     $module.Dispose()
 }
 
-Write-Host 'PASS: passive-effect saturation, recoil direction, spread bounds, maxima, minima and negative modifier exclusions verified.'
+Write-Host 'PASS: uncapped damage, passive-effect saturation exclusions, recoil direction, spread bounds, maxima and minima verified.'
