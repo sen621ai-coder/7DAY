@@ -12,6 +12,7 @@ function Assert-Relay([bool]$condition, [string]$message) {
 [xml]$sourceEvents = Get-Content -LiteralPath (Join-Path $sourceRoot 'gameevents.xml') -Raw
 [xml]$fixBlocks = Get-Content -LiteralPath (Join-Path $fixRoot 'blocks.xml') -Raw
 [xml]$fixEvents = Get-Content -LiteralPath (Join-Path $fixRoot 'gameevents.xml') -Raw
+$runtimePath = Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'
 
 $relayNames = @('aecQuestRelay','aecQuestRelay1star','aecQuestRelay2star','aecQuestRelay3star','aecQuestRelay4star','aecQuestRelay5star')
 $spawnNames = @('eventAECQuestRelaySpawn','eventAECQuestRelaySpawn1star','eventAECQuestRelaySpawn2star','eventAECQuestRelaySpawn3star','eventAECQuestRelaySpawn4star','eventAECQuestRelaySpawn5star')
@@ -31,4 +32,25 @@ for ($i = 0; $i -lt $relayNames.Count; $i++) {
     Assert-Relay ($null -ne $eventSet -and $eventSet.InnerText -eq 'Block') "Relay spawn event does not accept a block target: $spawn"
 }
 
-Write-Host 'PASS: all six contract relays directly invoke block-targeted quest-giver spawn events.'
+$pickup = $fixBlocks.SelectSingleNode('/configs/append[@xpath="/blocks/block[@name=''aecQuestRelay'']"]/property[@name="CanPickup"]')
+Assert-Relay ($null -ne $pickup -and $pickup.value -eq 'true') 'Contract relay pickup was not enabled.'
+
+Add-Type -Path (Join-Path $modRoot '00-TFP_Harmony/Mono.Cecil.dll')
+$runtime = [Mono.Cecil.ModuleDefinition]::ReadModule($runtimePath)
+try {
+    $pickupFix = $runtime.Types | Where-Object FullName -eq 'AECT16RuntimeFix.ContractRelayPickup'
+    Assert-Relay ($null -ne $pickupFix) 'Compiled contract-relay pickup patch is missing.'
+    $install = $pickupFix.Methods | Where-Object Name -eq 'Install'
+    $installStrings = @($install.Body.Instructions | Where-Object { $_.OpCode.Code -eq 'Ldstr' } | ForEach-Object { [string]$_.Operand })
+    Assert-Relay ($installStrings -contains 'GetBlockActivationCommands') 'Pickup command-list hook is missing.'
+    Assert-Relay ($installStrings -contains 'OnBlockActivated') 'Pickup activation hook is missing.'
+
+    $activation = $pickupFix.Methods | Where-Object Name -eq 'BeforeActivation'
+    $calls = @($activation.Body.Instructions | ForEach-Object { $_.Operand } | Where-Object { $_ -is [Mono.Cecil.MethodReference] })
+    Assert-Relay (@($calls | Where-Object { $_.DeclaringType.Name -eq 'Block' -and $_.Name -eq 'OnBlockActivated' }).Count -eq 1) 'Pickup does not delegate to the native Block permission/inventory path.'
+}
+finally {
+    $runtime.Dispose()
+}
+
+Write-Host 'PASS: all six contract relays summon from their block target and expose native guarded pickup.'

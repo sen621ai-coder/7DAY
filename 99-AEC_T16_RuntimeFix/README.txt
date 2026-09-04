@@ -3,6 +3,11 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.2 contract-relay pickup fix
+-------------------------
+- All six Contract Relay tiers once again expose the standard take command.
+  Pickup uses the game's normal land-claim, repair, inventory and server checks.
+
 Runtime 1.16.1 contract-relay and respawn compatibility fixes
 -------------------------
 - Contract Relay blocks now call their quest-giver spawn events directly with

@@ -23,6 +23,7 @@ namespace AECT16RuntimeFix
                 PatchModelTintSafety(harmony);
                 LocalRespawnRecovery.Install(harmony);
                 PassiveEffectOverflowGuard.Install(harmony);
+                ContractRelayPickup.Install(harmony);
                 PlayerHeadshotDamagePatch.Install(harmony);
                 BloodMoonSpawnFix.Install(harmony);
                 PatchHighTierNavigation(harmony);

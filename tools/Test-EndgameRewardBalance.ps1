@@ -29,7 +29,7 @@ function Get-InheritedProperty([hashtable]$map,[string]$id,[string]$property) {
     }
     return ''
 }
-Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.16\.1"') 'Runtime version was not bumped'
+Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.16\.2"') 'Runtime version was not bumped'
 Assert-Balance (Test-Path (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ENDGAME_REWARD_BALANCE.md')) 'Missing reward guide'
 
 # Apply the real configuration operations in load order, including this patch.

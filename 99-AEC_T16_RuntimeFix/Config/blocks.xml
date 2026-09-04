@@ -67,4 +67,7 @@
   <set xpath="/blocks/block[@name='aecQuestRelay3star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn3star</set>
   <set xpath="/blocks/block[@name='aecQuestRelay4star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn4star</set>
   <set xpath="/blocks/block[@name='aecQuestRelay5star']/property[@name='ActivateEvent']/@value">eventAECQuestRelaySpawn5star</set>
+  <append xpath="/blocks/block[@name='aecQuestRelay']">
+    <property name="CanPickup" value="true" />
+  </append>
 </configs>
