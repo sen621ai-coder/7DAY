@@ -12,8 +12,11 @@ namespace AECT16RuntimeFix
     public static class HighTierMobLoot
     {
         [ThreadStatic] private static int activeTier;
-        private static readonly Regex bagPattern = new Regex(
+        private static readonly Regex mobBagPattern = new Regex(
             @"^PZAECMobT(16|17|18|19)_zPack(Reg|Strong|Boss|Lab|Nurse|Soldier|Thug|Utility|Plague)$",
+            RegexOptions.CultureInvariant);
+        private static readonly Regex bossLootPattern = new Regex(
+            @"^(?:PZAECBossLootBundle|AEC.*(?:BossLoot|Loot)|DoomlordBossLoot|RunningKamikazeBossLoot)T(16|17|18|19)$",
             RegexOptions.CultureInvariant);
 
         public static void Install(Harmony harmony)
@@ -30,7 +33,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(AccessTools.Method(typeof(LootContainer), "GetRewardItem"),
                     prefix: new HarmonyMethod(typeof(HighTierMobLoot), nameof(RewardPrefix)),
                     finalizer: new HarmonyMethod(typeof(HighTierMobLoot), nameof(SpawnFinalizer)));
-                T16RuntimeFixMod.SafeLog("[AEC-Mob-Loot] T16-T19 mob bags: ordinary quality 5-6; advanced quality 2/3/4/5. Other loot unchanged.");
+                T16RuntimeFixMod.SafeLog("[AEC-Mob-Loot] T16-T19 mob and boss bags: ordinary quality 5-6; advanced quality 2/3/4/5; tiered supplies enabled.");
             }
             catch (Exception ex)
             {
@@ -41,7 +44,8 @@ namespace AECT16RuntimeFix
         public static int TierForContainer(string name)
         {
             if (string.IsNullOrEmpty(name)) return 0;
-            var match = bagPattern.Match(name);
+            var match = mobBagPattern.Match(name);
+            if (!match.Success) match = bossLootPattern.Match(name);
             return match.Success ? int.Parse(match.Groups[1].Value) : 0;
         }
 

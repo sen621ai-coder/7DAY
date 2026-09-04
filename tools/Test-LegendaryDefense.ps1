@@ -117,6 +117,10 @@ public static class DefenseRegression
             }
             Check(forced==6,"Missing scope coordinates/identity/wave fields");
             Check(helper.Methods.Single(m=>m.Name=="BeforeKill").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name=="spawnByName"),"Kill credit not encounter-specific");
+            var killOps=helper.Methods.Single(m=>m.Name=="BeforeKill").Body.Instructions.ToList();
+            int phaseGuard=killOps.FindIndex(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="get_CurrentPhase");
+            int deadlineCheck=killOps.FindIndex(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="Check");
+            Check(phaseGuard>=0 && phaseGuard<deadlineCheck,"Next-wave kill callback can fail against previous-wave deadline");
             var gate=helper.Methods.Single(m=>m.Name=="BeforeNativeSpawn");
             foreach(string field in new[]{"Tag","Requester","TargetPosition","position"})
                 Check(gate.Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name==field),"Missing server scope/anchor guard "+field);

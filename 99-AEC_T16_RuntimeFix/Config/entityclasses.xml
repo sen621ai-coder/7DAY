@@ -257,4 +257,175 @@
       <property name="UserSpawnType" value="None" />
     </entity_class>
   </append>
+  <!-- Blood Moon ranged siege squad. -->
+  <append xpath="/entity_classes">
+    <entity_class name="PZAECSiege_heavy_T16" extends="AECZombieFatCopTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_heavy_T16" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=10;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_acid_T16" extends="AECZombiePlagueSpitterTier16Transcendent">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_acid_T16" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=6;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_heavy_T17" extends="AECZombieFatCopTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_heavy_T17" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=10;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_acid_T17" extends="AECZombiePlagueSpitterTier17Ascendant">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_acid_T17" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=6;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_heavy_T18" extends="AECZombieFatCopTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_heavy_T18" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=10;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_acid_T18" extends="AECZombiePlagueSpitterTier18Eternal">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_acid_T18" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=6;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_heavy_T19" extends="AECZombieFatCopTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_heavy_T19" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=10;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+    <entity_class name="PZAECSiege_acid_T19" extends="AECZombiePlagueSpitterTier19Apocalyptic">
+      <property name="UserSpawnType" value="None" />
+      <property name="HandItem" value="meleeHandPZAECSiege_acid_T19" />
+      <property name="AITask" value="PZAECSiege,AEC.T16.RuntimeFix itemType=1;cooldown=6;duration=7;minRange=8;maxRange=52;sndStart=hulkvomitwarning|BreakBlock|ApproachAndAttackTarget class=EntityPlayer,0|ApproachSpot|Look|Wander" />
+    </entity_class>
+  </append>
+  <append xpath="/entity_classes">
+    <entity_class name="AECDumdumBossLootBagT17" extends="AECDumdumBossLootBagT16"><property name="LootList" value="AECDumdumBossLootT17" /></entity_class>
+    <entity_class name="RunningKamikazeBossLootBagT17" extends="RunningKamikazeBossLootBagT16"><property name="LootList" value="RunningKamikazeBossLootT17" /></entity_class>
+    <entity_class name="DoomlordBossLootBagT17" extends="DoomlordBossLootBagT16"><property name="LootList" value="DoomlordBossLootT17" /></entity_class>
+    <entity_class name="AECWitchBossLootBagT17" extends="AECWitchBossLootBagT16"><property name="LootList" value="AECWitchBossLootT17" /></entity_class>
+    <entity_class name="AECElectricDemonBossLootBagT17" extends="AECElectricDemonBossLootBagT16"><property name="LootList" value="AECElectricDemonBossLootT17" /></entity_class>
+    <entity_class name="AECExplosiveEagleBossLootBagT17" extends="AECExplosiveEagleBossLootBagT16"><property name="LootList" value="AECExplosiveEagleBossLootT17" /></entity_class>
+    <entity_class name="AECHammerGuardianBossLootBagT17" extends="AECHammerGuardianBossLootBagT16"><property name="LootList" value="AECHammerGuardianBossLootT17" /></entity_class>
+    <entity_class name="AECMechanicianBossLootBagT17" extends="AECMechanicianBossLootBagT16"><property name="LootList" value="AECMechanicianBossLootT17" /></entity_class>
+    <entity_class name="AECDruidBossLootBagT17" extends="AECDruidBossLootBagT16"><property name="LootList" value="AECDruidBossLootT17" /></entity_class>
+    <entity_class name="AECExecutionerBossLootBagT17" extends="AECExecutionerBossLootBagT16"><property name="LootList" value="AECExecutionerBossLootT17" /></entity_class>
+    <entity_class name="AECPartyBeachBossLootBagT17" extends="AECPartyBeachBossLootBagT16"><property name="LootList" value="AECPartyBeachBossLootT17" /></entity_class>
+    <entity_class name="AECMykirBossLootBagT17" extends="AECMykirBossLootBagT16"><property name="LootList" value="AECMykirBossLootT17" /></entity_class>
+    <entity_class name="AECHellskyliLootBagT17" extends="AECHellskyliLootBagT16"><property name="LootList" value="AECHellskyliLootT17" /></entity_class>
+    <entity_class name="AECRockbreakerLootBagT17" extends="AECRockbreakerLootBagT16"><property name="LootList" value="AECRockbreakerLootT17" /></entity_class>
+    <entity_class name="AECSingerieBossLootBagT17" extends="AECSingerieBossLootBagT16"><property name="LootList" value="AECSingerieBossLootT17" /></entity_class>
+    <entity_class name="AECGhostBossLootBagT17" extends="AECGhostBossLootBagT16"><property name="LootList" value="AECGhostBossLootT17" /></entity_class>
+    <entity_class name="AECSirenHeadBossLootBagT17" extends="AECSirenHeadBossLootBagT16"><property name="LootList" value="AECSirenHeadBossLootT17" /></entity_class>
+    <entity_class name="AECMushroomBossLootBagT17" extends="AECMushroomBossLootBagT16"><property name="LootList" value="AECMushroomBossLootT17" /></entity_class>
+    <entity_class name="AECArcherBossLootBagT17" extends="AECArcherBossLootBagT16"><property name="LootList" value="AECArcherBossLootT17" /></entity_class>
+    <entity_class name="AECSheriffBossLootBagT17" extends="AECSheriffBossLootBagT16"><property name="LootList" value="AECSheriffBossLootT17" /></entity_class>
+    <entity_class name="AECHeadlessBossLootBagT17" extends="AECHeadlessBossLootBagT16"><property name="LootList" value="AECHeadlessBossLootT17" /></entity_class>
+    <entity_class name="AECDumdumBossLootBagT18" extends="AECDumdumBossLootBagT16"><property name="LootList" value="AECDumdumBossLootT18" /></entity_class>
+    <entity_class name="RunningKamikazeBossLootBagT18" extends="RunningKamikazeBossLootBagT16"><property name="LootList" value="RunningKamikazeBossLootT18" /></entity_class>
+    <entity_class name="DoomlordBossLootBagT18" extends="DoomlordBossLootBagT16"><property name="LootList" value="DoomlordBossLootT18" /></entity_class>
+    <entity_class name="AECWitchBossLootBagT18" extends="AECWitchBossLootBagT16"><property name="LootList" value="AECWitchBossLootT18" /></entity_class>
+    <entity_class name="AECElectricDemonBossLootBagT18" extends="AECElectricDemonBossLootBagT16"><property name="LootList" value="AECElectricDemonBossLootT18" /></entity_class>
+    <entity_class name="AECExplosiveEagleBossLootBagT18" extends="AECExplosiveEagleBossLootBagT16"><property name="LootList" value="AECExplosiveEagleBossLootT18" /></entity_class>
+    <entity_class name="AECHammerGuardianBossLootBagT18" extends="AECHammerGuardianBossLootBagT16"><property name="LootList" value="AECHammerGuardianBossLootT18" /></entity_class>
+    <entity_class name="AECMechanicianBossLootBagT18" extends="AECMechanicianBossLootBagT16"><property name="LootList" value="AECMechanicianBossLootT18" /></entity_class>
+    <entity_class name="AECDruidBossLootBagT18" extends="AECDruidBossLootBagT16"><property name="LootList" value="AECDruidBossLootT18" /></entity_class>
+    <entity_class name="AECExecutionerBossLootBagT18" extends="AECExecutionerBossLootBagT16"><property name="LootList" value="AECExecutionerBossLootT18" /></entity_class>
+    <entity_class name="AECPartyBeachBossLootBagT18" extends="AECPartyBeachBossLootBagT16"><property name="LootList" value="AECPartyBeachBossLootT18" /></entity_class>
+    <entity_class name="AECMykirBossLootBagT18" extends="AECMykirBossLootBagT16"><property name="LootList" value="AECMykirBossLootT18" /></entity_class>
+    <entity_class name="AECHellskyliLootBagT18" extends="AECHellskyliLootBagT16"><property name="LootList" value="AECHellskyliLootT18" /></entity_class>
+    <entity_class name="AECRockbreakerLootBagT18" extends="AECRockbreakerLootBagT16"><property name="LootList" value="AECRockbreakerLootT18" /></entity_class>
+    <entity_class name="AECSingerieBossLootBagT18" extends="AECSingerieBossLootBagT16"><property name="LootList" value="AECSingerieBossLootT18" /></entity_class>
+    <entity_class name="AECGhostBossLootBagT18" extends="AECGhostBossLootBagT16"><property name="LootList" value="AECGhostBossLootT18" /></entity_class>
+    <entity_class name="AECSirenHeadBossLootBagT18" extends="AECSirenHeadBossLootBagT16"><property name="LootList" value="AECSirenHeadBossLootT18" /></entity_class>
+    <entity_class name="AECMushroomBossLootBagT18" extends="AECMushroomBossLootBagT16"><property name="LootList" value="AECMushroomBossLootT18" /></entity_class>
+    <entity_class name="AECArcherBossLootBagT18" extends="AECArcherBossLootBagT16"><property name="LootList" value="AECArcherBossLootT18" /></entity_class>
+    <entity_class name="AECSheriffBossLootBagT18" extends="AECSheriffBossLootBagT16"><property name="LootList" value="AECSheriffBossLootT18" /></entity_class>
+    <entity_class name="AECHeadlessBossLootBagT18" extends="AECHeadlessBossLootBagT16"><property name="LootList" value="AECHeadlessBossLootT18" /></entity_class>
+    <entity_class name="AECDumdumBossLootBagT19" extends="AECDumdumBossLootBagT16"><property name="LootList" value="AECDumdumBossLootT19" /></entity_class>
+    <entity_class name="RunningKamikazeBossLootBagT19" extends="RunningKamikazeBossLootBagT16"><property name="LootList" value="RunningKamikazeBossLootT19" /></entity_class>
+    <entity_class name="DoomlordBossLootBagT19" extends="DoomlordBossLootBagT16"><property name="LootList" value="DoomlordBossLootT19" /></entity_class>
+    <entity_class name="AECWitchBossLootBagT19" extends="AECWitchBossLootBagT16"><property name="LootList" value="AECWitchBossLootT19" /></entity_class>
+    <entity_class name="AECElectricDemonBossLootBagT19" extends="AECElectricDemonBossLootBagT16"><property name="LootList" value="AECElectricDemonBossLootT19" /></entity_class>
+    <entity_class name="AECExplosiveEagleBossLootBagT19" extends="AECExplosiveEagleBossLootBagT16"><property name="LootList" value="AECExplosiveEagleBossLootT19" /></entity_class>
+    <entity_class name="AECHammerGuardianBossLootBagT19" extends="AECHammerGuardianBossLootBagT16"><property name="LootList" value="AECHammerGuardianBossLootT19" /></entity_class>
+    <entity_class name="AECMechanicianBossLootBagT19" extends="AECMechanicianBossLootBagT16"><property name="LootList" value="AECMechanicianBossLootT19" /></entity_class>
+    <entity_class name="AECDruidBossLootBagT19" extends="AECDruidBossLootBagT16"><property name="LootList" value="AECDruidBossLootT19" /></entity_class>
+    <entity_class name="AECExecutionerBossLootBagT19" extends="AECExecutionerBossLootBagT16"><property name="LootList" value="AECExecutionerBossLootT19" /></entity_class>
+    <entity_class name="AECPartyBeachBossLootBagT19" extends="AECPartyBeachBossLootBagT16"><property name="LootList" value="AECPartyBeachBossLootT19" /></entity_class>
+    <entity_class name="AECMykirBossLootBagT19" extends="AECMykirBossLootBagT16"><property name="LootList" value="AECMykirBossLootT19" /></entity_class>
+    <entity_class name="AECHellskyliLootBagT19" extends="AECHellskyliLootBagT16"><property name="LootList" value="AECHellskyliLootT19" /></entity_class>
+    <entity_class name="AECRockbreakerLootBagT19" extends="AECRockbreakerLootBagT16"><property name="LootList" value="AECRockbreakerLootT19" /></entity_class>
+    <entity_class name="AECSingerieBossLootBagT19" extends="AECSingerieBossLootBagT16"><property name="LootList" value="AECSingerieBossLootT19" /></entity_class>
+    <entity_class name="AECGhostBossLootBagT19" extends="AECGhostBossLootBagT16"><property name="LootList" value="AECGhostBossLootT19" /></entity_class>
+    <entity_class name="AECSirenHeadBossLootBagT19" extends="AECSirenHeadBossLootBagT16"><property name="LootList" value="AECSirenHeadBossLootT19" /></entity_class>
+    <entity_class name="AECMushroomBossLootBagT19" extends="AECMushroomBossLootBagT16"><property name="LootList" value="AECMushroomBossLootT19" /></entity_class>
+    <entity_class name="AECArcherBossLootBagT19" extends="AECArcherBossLootBagT16"><property name="LootList" value="AECArcherBossLootT19" /></entity_class>
+    <entity_class name="AECSheriffBossLootBagT19" extends="AECSheriffBossLootBagT16"><property name="LootList" value="AECSheriffBossLootT19" /></entity_class>
+    <entity_class name="AECHeadlessBossLootBagT19" extends="AECHeadlessBossLootBagT16"><property name="LootList" value="AECHeadlessBossLootT19" /></entity_class>
+  </append>
+  <append xpath="/entity_classes/entity_class[@name='bossAECDumdumT17']"><property name="LootDropEntityClass" value="AECDumdumBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='RunningKamikazeT17']"><property name="LootDropEntityClass" value="RunningKamikazeBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECDoomlordDemolishmanBossT17']"><property name="LootDropEntityClass" value="DoomlordBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheWitchAngelBossT17']"><property name="LootDropEntityClass" value="AECWitchBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECElectricDemonRunnerBossT17']"><property name="LootDropEntityClass" value="AECElectricDemonBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECExplosiveEagleBossT17']"><property name="LootDropEntityClass" value="AECExplosiveEagleBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHammerGuardianT17']"><property name="LootDropEntityClass" value="AECHammerGuardianBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheMechanicianBossT17']"><property name="LootDropEntityClass" value="AECMechanicianBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheDruidBossT17']"><property name="LootDropEntityClass" value="AECDruidBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheExecutionerBossT17']"><property name="LootDropEntityClass" value="AECExecutionerBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECPartyBeachBossT17']"><property name="LootDropEntityClass" value="AECPartyBeachBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECMykirBossT17']"><property name="LootDropEntityClass" value="AECMykirBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHellskyliBossT17']"><property name="LootDropEntityClass" value="AECHellskyliLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECRockbreakerBossT17']"><property name="LootDropEntityClass" value="AECRockbreakerLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSingerieBossT17']"><property name="LootDropEntityClass" value="AECSingerieBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECGhostBossT17']"><property name="LootDropEntityClass" value="AECGhostBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSirenHeadBossT17']"><property name="LootDropEntityClass" value="AECSirenHeadBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECMushroomBossT17']"><property name="LootDropEntityClass" value="AECMushroomBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheArcherBossT17']"><property name="LootDropEntityClass" value="AECArcherBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSheriffBossT17']"><property name="LootDropEntityClass" value="AECSheriffBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT17']"><property name="LootDropEntityClass" value="AECHeadlessBossLootBagT17" /></append>
+  <append xpath="/entity_classes/entity_class[@name='bossAECDumdumT18']"><property name="LootDropEntityClass" value="AECDumdumBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='RunningKamikazeT18']"><property name="LootDropEntityClass" value="RunningKamikazeBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECDoomlordDemolishmanBossT18']"><property name="LootDropEntityClass" value="DoomlordBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheWitchAngelBossT18']"><property name="LootDropEntityClass" value="AECWitchBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECElectricDemonRunnerBossT18']"><property name="LootDropEntityClass" value="AECElectricDemonBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECExplosiveEagleBossT18']"><property name="LootDropEntityClass" value="AECExplosiveEagleBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHammerGuardianT18']"><property name="LootDropEntityClass" value="AECHammerGuardianBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheMechanicianBossT18']"><property name="LootDropEntityClass" value="AECMechanicianBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheDruidBossT18']"><property name="LootDropEntityClass" value="AECDruidBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheExecutionerBossT18']"><property name="LootDropEntityClass" value="AECExecutionerBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECPartyBeachBossT18']"><property name="LootDropEntityClass" value="AECPartyBeachBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECMykirBossT18']"><property name="LootDropEntityClass" value="AECMykirBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHellskyliBossT18']"><property name="LootDropEntityClass" value="AECHellskyliLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECRockbreakerBossT18']"><property name="LootDropEntityClass" value="AECRockbreakerLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSingerieBossT18']"><property name="LootDropEntityClass" value="AECSingerieBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECGhostBossT18']"><property name="LootDropEntityClass" value="AECGhostBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSirenHeadBossT18']"><property name="LootDropEntityClass" value="AECSirenHeadBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECMushroomBossT18']"><property name="LootDropEntityClass" value="AECMushroomBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheArcherBossT18']"><property name="LootDropEntityClass" value="AECArcherBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSheriffBossT18']"><property name="LootDropEntityClass" value="AECSheriffBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT18']"><property name="LootDropEntityClass" value="AECHeadlessBossLootBagT18" /></append>
+  <append xpath="/entity_classes/entity_class[@name='bossAECDumdumT19']"><property name="LootDropEntityClass" value="AECDumdumBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='RunningKamikazeT19']"><property name="LootDropEntityClass" value="RunningKamikazeBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECDoomlordDemolishmanBossT19']"><property name="LootDropEntityClass" value="DoomlordBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheWitchAngelBossT19']"><property name="LootDropEntityClass" value="AECWitchBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECElectricDemonRunnerBossT19']"><property name="LootDropEntityClass" value="AECElectricDemonBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECExplosiveEagleBossT19']"><property name="LootDropEntityClass" value="AECExplosiveEagleBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHammerGuardianT19']"><property name="LootDropEntityClass" value="AECHammerGuardianBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheMechanicianBossT19']"><property name="LootDropEntityClass" value="AECMechanicianBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheDruidBossT19']"><property name="LootDropEntityClass" value="AECDruidBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheExecutionerBossT19']"><property name="LootDropEntityClass" value="AECExecutionerBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECPartyBeachBossT19']"><property name="LootDropEntityClass" value="AECPartyBeachBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECMykirBossT19']"><property name="LootDropEntityClass" value="AECMykirBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHellskyliBossT19']"><property name="LootDropEntityClass" value="AECHellskyliLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECRockbreakerBossT19']"><property name="LootDropEntityClass" value="AECRockbreakerLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSingerieBossT19']"><property name="LootDropEntityClass" value="AECSingerieBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECGhostBossT19']"><property name="LootDropEntityClass" value="AECGhostBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSirenHeadBossT19']"><property name="LootDropEntityClass" value="AECSirenHeadBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECMushroomBossT19']"><property name="LootDropEntityClass" value="AECMushroomBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECTheArcherBossT19']"><property name="LootDropEntityClass" value="AECArcherBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECSheriffBossT19']"><property name="LootDropEntityClass" value="AECSheriffBossLootBagT19" /></append>
+  <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT19']"><property name="LootDropEntityClass" value="AECHeadlessBossLootBagT19" /></append>
 </configs>

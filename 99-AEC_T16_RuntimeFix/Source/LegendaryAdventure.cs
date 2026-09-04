@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 using UnityEngine;
@@ -36,6 +37,12 @@ namespace AECT16RuntimeFix
                     postfix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(AfterStart)));
                 harmony.Patch(AccessTools.Method(typeof(ItemActionQuest), nameof(ItemActionQuest.ExecuteInstantAction)),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeUseVoucher)));
+                harmony.Patch(AccessTools.Method(typeof(XUiC_QuestOfferWindow), "btnAccept_OnPress"),
+                    prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeAccept)));
+                harmony.Patch(AccessTools.Method(typeof(ObjectiveEntityKill), "Current_EntityKill"),
+                    prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeTrialKill)));
+                harmony.Patch(AccessTools.Method(typeof(NetPackageGameEventResponse), nameof(NetPackageGameEventResponse.ProcessPackage)),
+                    postfix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(AfterReply)));
                 harmony.Patch(AccessTools.Method(typeof(EntityAlive), nameof(EntityAlive.damageEntityLocal),
                     new[] { typeof(DamageSource), typeof(int), typeof(bool), typeof(float) }),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeDamage)));
@@ -73,6 +80,65 @@ namespace AECT16RuntimeFix
         public static bool IsClearTransition(string id, int previous, int current)
         {
             return ContractTier(id) != 0 && previous == 3 && current == 4;
+        }
+
+        public static string Request(int code, string marker)
+        {
+            return "PZAECAdventure:" + code.ToString(CultureInfo.InvariantCulture) + ":" + marker;
+        }
+
+        public static string EventFor(string questId, string marker)
+        {
+            int tier = ContractTier(questId);
+            if (marker == VoucherMarker && tier != 0) return "PZAECGiveVoucherT" + tier;
+            if (marker != SpawnMarker) return null;
+            if (tier != 0 && Affix(questId) != "") return "PZAECAffix_" + Affix(questId) + "_T" + tier;
+            tier = ChallengeTier(questId);
+            return tier != 0 ? "PZAECTrialT" + tier : null;
+        }
+
+        public static bool ApplyReply(IDictionary<string, string> data, string questId, int code,
+            string eventId, string tag, bool approved)
+        {
+            if (data == null) return false;
+            foreach (string marker in new[] { SpawnMarker, VoucherMarker })
+            {
+                if (eventId == null || eventId != EventFor(questId, marker) || tag != Request(code, marker) ||
+                    !data.TryGetValue(marker, out var queued) || queued != eventId) continue;
+                if (approved) { data[marker + "Approved"] = "1"; return true; }
+                if (data.ContainsKey(marker + "Approved")) return false;
+                return data.Remove(marker);
+            }
+            return false;
+        }
+
+        public static void AfterReply(NetPackageGameEventResponse __instance, World __0)
+        {
+            if (__0 == null || (__instance.responseType != NetPackageGameEventResponse.ResponseTypes.Denied &&
+                __instance.responseType != NetPackageGameEventResponse.ResponseTypes.Approved)) return;
+            var player = __0.GetEntity(__instance.targetEntityID) as EntityPlayerLocal;
+            if (player?.QuestJournal == null) return;
+            bool approved = __instance.responseType == NetPackageGameEventResponse.ResponseTypes.Approved;
+            foreach (var quest in player.QuestJournal.quests)
+            {
+                if (!Owned(quest, out var owner) || owner != player) continue;
+                if (ApplyReply(quest.DataVariables, quest.ID, quest.QuestCode, __instance.eventName, __instance.tag, approved) && !approved)
+                    T16RuntimeFixMod.SafeLog("[AEC-Adventure] Server denied enqueue; released for retry: " + __instance.eventName);
+            }
+        }
+
+        public static bool MatchesTrialKill(string questId, int code, string spawnByName)
+        {
+            return ChallengeTier(questId) != 0 && string.Equals(spawnByName, Request(code, SpawnMarker), StringComparison.Ordinal);
+        }
+
+        public static bool BeforeTrialKill(ObjectiveEntityKill __instance, EntityAlive killedEntity)
+        {
+            var quest = __instance.OwnerQuest;
+            if (ChallengeTier(quest?.ID) == 0) return true;
+            return Owned(quest, out _) && quest.CurrentPhase == 1 &&
+                quest.DataVariables.TryGetValue(SpawnMarker, out var queued) && queued == EventFor(quest.ID, SpawnMarker) &&
+                killedEntity != null && MatchesTrialKill(quest.ID, quest.QuestCode, killedEntity.spawnByName);
         }
 
         public static bool DispatchOnce(IDictionary<string, string> data, string marker, string eventId, Func<string, bool> dispatch)
@@ -141,7 +207,14 @@ namespace AECT16RuntimeFix
                     var quest = key.Item1;
                     if (player == null || !quest.Active || quest.CurrentPhase != phase || quest.DataVariables.ContainsKey(key.Item2)) yield break;
                     bool ready = !player.IsDead() && (!combat || CanFight(player));
-                    if (ready && TryDispatch(quest, player, key.Item2, eventId)) yield break;
+                    if (ready && TryDispatch(quest, player, key.Item2, eventId))
+                    {
+                        // A client's true return means sent, not server-approved.
+                        // An explicit denial releases the marker; silence never does.
+                        yield return new WaitForSeconds(5f);
+                        if (quest.DataVariables.ContainsKey(key.Item2)) yield break;
+                        continue;
+                    }
                     yield return new WaitForSeconds(5f);
                 }
                 GameManager.ShowTooltip(player, Localization.Get("PZAECAdventureUnavailable"));
@@ -156,7 +229,7 @@ namespace AECT16RuntimeFix
             {
                 if (GameEventManager.Current == null) return false;
                 bool accepted = DispatchOnce(quest.DataVariables, marker, eventId, name =>
-                    GameEventManager.Current.HandleAction(name, player, player, false, "", "PZAECAdventure:" + quest.QuestCode + ":" + marker,
+                    GameEventManager.Current.HandleAction(name, player, player, false, Request(quest.QuestCode, marker), Request(quest.QuestCode, marker),
                         false, false, "", null));
                 if (accepted) T16RuntimeFixMod.SafeLog("[AEC-Adventure] Queued " + eventId + " quest=" + quest.QuestCode + " player=" + player.entityId);
                 return accepted;
@@ -178,6 +251,26 @@ namespace AECT16RuntimeFix
             if (player != null) GameManager.ShowTooltip(player, Localization.Get("PZAECAdventureUseOutside"));
             __result = false;
             return false; // Leave native stack and confirmation untouched on failure.
+        }
+
+        public static bool BeforeAccept(XUiC_QuestOfferWindow __instance)
+        {
+            string id = __instance.Quest?.ID;
+            if (ChallengeTier(id) == 0) return true;
+            var player = __instance.xui?.playerUI?.entityPlayer;
+            if (player == null) return false;
+            if (player.IsDead() || !CanFight(player))
+            {
+                GameManager.ShowTooltip(player, Localization.Get("PZAECAdventureUseOutside"));
+                return false;
+            }
+            foreach (var quest in player.QuestJournal.quests)
+                if (quest != null && quest.Active && string.Equals(quest.ID, id, StringComparison.OrdinalIgnoreCase))
+                {
+                    GameManager.ShowTooltip(player, Localization.Get("questunavailable"));
+                    return false;
+                }
+            return true; // Revalidate before the native confirmation consumes the voucher.
         }
 
         public static int WeaknessDamage(string kind, int strength, bool playerAttack, bool head, bool melee, bool overheated)

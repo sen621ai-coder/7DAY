@@ -335,6 +335,10 @@ namespace AECT16RuntimeFix
             var q = __instance.OwnerQuest;
             if (Tier(q?.ID) == 0) return true;
             if (!Owned(q, out var player) || !Sessions.TryGetValue(q, out var s)) return false;
+            // Native phase advancement can precede the next one-second Tick.
+            // Ignore callbacks for that unscheduled wave before checking the
+            // old deadline; otherwise an unrelated kill can fail a cleared wave.
+            if (q.CurrentPhase != s.Clock.Wave || __instance.Phase != s.Clock.Wave) return false;
             string reason = Check(s, Time.time);
             if (reason != null) { Fail(q, player, reason); return false; }
             // Game-event ExtraData becomes native spawnByName before the first

@@ -12,6 +12,66 @@ using HarmonyLib;
 public static class AdventureRegression
 {
     static void Check(bool ok, string message) { if (!ok) throw new Exception(message); }
+    public static string Boundaries()
+    {
+        int replies=0, wire=0;
+        foreach(int tier in new[]{16,17,18,19})
+        foreach(string id in new[]{"PZAECChallengeT"+tier,"aec_quest_T"+tier+"_A1_clear_hunter","aec_quest_T"+tier+"_A1_clear"})
+        foreach(string marker in new[]{LegendaryAdventure.SpawnMarker,LegendaryAdventure.VoucherMarker})
+        {
+            string eid=LegendaryAdventure.EventFor(id,marker);
+            if(eid==null) continue;
+            string tag=LegendaryAdventure.Request(-42,marker);
+            var data=new Dictionary<string,string>();
+            Check(LegendaryAdventure.DispatchOnce(data,marker,eid,e=>true),"Initial event not queued");
+            Check(!LegendaryAdventure.ApplyReply(data,id,-43,eid,tag,false) && data.ContainsKey(marker),"Foreign quest denial changed state");
+            Check(!LegendaryAdventure.ApplyReply(data,id,-42,eid+"bad",tag,false),"Foreign event denial changed state");
+            Check(LegendaryAdventure.ApplyReply(data,id,-42,eid,tag,false) && !data.ContainsKey(marker),"Server denial permanently consumed dispatch");
+            Check(LegendaryAdventure.DispatchOnce(data,marker,eid,e=>true),"Denied event not retryable");
+            Check(LegendaryAdventure.ApplyReply(data,id,-42,eid,tag,true),"Approval not saved");
+            Check(!LegendaryAdventure.ApplyReply(data,id,-42,eid,tag,false) && data.ContainsKey(marker),"Late denial duplicated approved encounter/reward");
+            var loaded=new Dictionary<string,string>(data);
+            Check(!LegendaryAdventure.DispatchOnce(loaded,marker,eid,e=>true),"Approved event duplicated after reload");
+            replies++;
+        }
+        foreach(int code in new[]{int.MinValue,-42,1,int.MaxValue}) foreach(int tier in new[]{16,17,18,19})
+        {
+            string id="PZAECChallengeT"+tier, tag=LegendaryAdventure.Request(code,LegendaryAdventure.SpawnMarker);
+            var original=new EntityCreationData {id=51,entityClass=123456789,spawnById=-1,spawnByName=tag};
+            using(var stream=new System.IO.MemoryStream()) {
+                var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream); original.write(writer,true); writer.Flush(); stream.Position=0;
+                var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); var received=new EntityCreationData(); received.read(reader,true);
+                Check(LegendaryAdventure.MatchesTrialKill(id,code,received.spawnByName),"Own trial kill lost in initial packet");
+                Check(!LegendaryAdventure.MatchesTrialKill(id,unchecked(code+1),received.spawnByName),"Nearby/old trial borrowed kill");
+                Check(!LegendaryAdventure.MatchesTrialKill(id,code,null) && !LegendaryAdventure.MatchesTrialKill(id,code,""),"Unattributed old enemy counted");
+                Check(!LegendaryAdventure.MatchesTrialKill(id,code,LegendaryDefense.Request(code,tier,1)),"Defense enemy counted as trial");
+                Check(received.spawnById==-1 && stream.Position==stream.Length,"Trial wire metadata changed Twitch ownership");
+            }
+            wire++;
+        }
+        // Exercise the actual prefix for missing-player and unrelated offers.
+        var offer=(XUiC_QuestOfferWindow)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(XUiC_QuestOfferWindow));
+        var quest=(Quest)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(Quest));
+        offer.Quest=quest; quest.ID="PZAECChallengeT19";
+        Check(!LegendaryAdventure.BeforeAccept(offer),"Missing confirmation owner still consumes voucher");
+        quest.ID="PZAECDefenseT19";
+        Check(LegendaryAdventure.BeforeAccept(offer),"Defense confirmation intercepted by trial guard");
+        // PowerShell's CoreCLR cannot install this Unity/Mono Harmony detour.
+        // Verify target signatures and compiled wiring without claiming a live patch.
+        Check(AccessTools.Method(typeof(ObjectiveEntityKill),"Current_EntityKill").GetParameters()
+            .Any(p=>p.Name=="killedEntity" && p.ParameterType==typeof(EntityAlive)),"Trial kill hook signature changed");
+        Check(AccessTools.Method(typeof(NetPackageGameEventResponse),"ProcessPackage").GetParameters()[0].ParameterType==typeof(World),"Reply hook first argument changed");
+        using(var module=Mono.Cecil.ModuleDefinition.ReadModule(typeof(LegendaryAdventure).Assembly.Location)) {
+            var helper=module.Types.Single(t=>t.FullName=="AECT16RuntimeFix.LegendaryAdventure");
+            var install=helper.Methods.Single(m=>m.Name=="Install");
+            foreach(string hook in new[]{"BeforeAccept","BeforeTrialKill","AfterReply"})
+                Check(install.Body.Instructions.Any(i=>i.Operand is string s && s==hook),"Boundary hook not registered: "+hook);
+            Check(helper.Methods.Single(m=>m.Name=="BeforeTrialKill").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name=="spawnByName"),"Trial attribution not checked in kill hook");
+            var dispatch=helper.NestedTypes.SelectMany(t=>t.Methods).Single(m=>m.Name.Contains("b__") && m.Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference r && r.Name=="HandleAction"));
+            Check(dispatch.Body.Instructions.Count(i=>i.Operand is Mono.Cecil.MethodReference r && r.Name=="Request")==2,"Trial identity not sent in both extraData and tag");
+        }
+        return "PASS: "+replies+" scoped server approval/denial cases; "+wire+" native trial identity round-trips; confirmation guard and compiled hook signatures/wiring (no live detours).";
+    }
     public static string Run()
     {
         var affixes = new[]{"hunter","bulwark","storm"};
@@ -110,6 +170,7 @@ public static class AdventureRegression
 }
 '@
 [AdventureRegression]::Run()
+[AdventureRegression]::Boundaries()
 
 function Assert-Adventure([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
 $configRoot = Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config'
@@ -127,7 +188,7 @@ foreach ($row in Import-Csv (Join-Path $configRoot 'Localization.csv')) {
     $localization[$row.Key] = $row
 }
 Assert-Adventure ($quests.SelectNodes('//quest[not(starts-with(@id,"PZAECDefense"))]').Count -eq 64) 'Expected 60 affix contracts and four trials'
-Assert-Adventure ($entities.SelectNodes('//entity_class[not(starts-with(@name,"PZAECDefense"))]').Count -eq 24) 'Expected 24 isolated champions'
+Assert-Adventure ($entities.SelectNodes('//entity_class[starts-with(@name,"PZAECAffix_") or starts-with(@name,"PZAECTrial_")]').Count -eq 24) 'Expected 24 isolated champions'
 Assert-Adventure ($items.SelectNodes('//item[starts-with(@name,"PZAECChallengeVoucher")]').Count -eq 4) 'Expected four vouchers'
 Assert-Adventure ($events.SelectNodes('//action_sequence[not(starts-with(@name,"PZAECDefense"))]').Count -eq 23) 'Original three + twenty adventure events required'
 foreach ($tier in 16..19) {

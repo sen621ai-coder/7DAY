@@ -160,4 +160,387 @@
       <property name="CraftingIngredientTime" value="0" />
     </item>
   </append>
+  <!-- Blood Moon ranged siege squad. -->
+  <append xpath="/items">
+    <item name="meleeHandPZAECSiege_heavy_T16">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_heavy_T16" />
+        <property name="WarningDelay" value="3" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_heavy_T16">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Boulder/BoulderThrownPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="1200" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="36" />
+          <property name="RadiusBlocks" value="1.2" />
+          <property name="RadiusEntities" value="2" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="350" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_acid_T16">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_acid_T16" />
+        <property name="WarningDelay" value="2" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_acid_T16">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Vomit/vomitBulbPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="500" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="7" />
+          <property name="RadiusBlocks" value="0" />
+          <property name="RadiusEntities" value="0" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="0" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_heavy_T17">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_heavy_T17" />
+        <property name="WarningDelay" value="3" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_heavy_T17">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Boulder/BoulderThrownPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="1800" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="36" />
+          <property name="RadiusBlocks" value="1.2" />
+          <property name="RadiusEntities" value="2" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="500" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_acid_T17">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_acid_T17" />
+        <property name="WarningDelay" value="2" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_acid_T17">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Vomit/vomitBulbPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="800" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="7" />
+          <property name="RadiusBlocks" value="0" />
+          <property name="RadiusEntities" value="0" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="0" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_heavy_T18">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_heavy_T18" />
+        <property name="WarningDelay" value="3" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_heavy_T18">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Boulder/BoulderThrownPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="2600" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="36" />
+          <property name="RadiusBlocks" value="1.2" />
+          <property name="RadiusEntities" value="2" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="700" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_acid_T18">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_acid_T18" />
+        <property name="WarningDelay" value="2" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_acid_T18">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Vomit/vomitBulbPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="1100" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="7" />
+          <property name="RadiusBlocks" value="0" />
+          <property name="RadiusEntities" value="0" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="0" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_heavy_T19">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_heavy_T19" />
+        <property name="WarningDelay" value="3" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_heavy_T19">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Boulder/BoulderThrownPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="3600" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="36" />
+          <property name="RadiusBlocks" value="1.2" />
+          <property name="RadiusEntities" value="2" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="900" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
+    <item name="meleeHandPZAECSiege_acid_T19">
+      <property name="Extends" value="meleeHandZombieCop" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action1">
+        <property name="Class" value="PZAECSiegeVomit,AEC.T16.RuntimeFix" />
+        <property name="Magazine_items" value="ammoPZAECSiege_acid_T19" />
+        <property name="WarningDelay" value="2" />
+        <property name="WarningMax" value="1" />
+      </property>
+      <effect_group name="Siege single shot" tiered="false">
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="1" />
+      </effect_group>
+    </item>
+    <item name="ammoPZAECSiege_acid_T19">
+      <property name="Meshfile" value="@:Other/Items/Weapons/Ranged/Vomit/vomitBulbPrefab.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="missingIcon" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="35" />
+        <property name="DamageBlock" value="1500" />
+        <property name="FlyTime" value="-1.2" />
+        <property name="Velocity" value="40" />
+        <property name="Gravity" value="-2" />
+        <property name="LifeTime" value="5" />
+        <property name="CollisionRadius" value=".18" />
+        <property class="Explosion">
+          <property name="ParticleIndex" value="7" />
+          <property name="RadiusBlocks" value="0" />
+          <property name="RadiusEntities" value="0" />
+          <property name="EntityDamage" value="20" />
+          <property name="BlockDamage" value="0" />
+          <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+        </property>
+        <property class="DamageBonus"><property name="earth" value="0" /><property name="water" value="0" /></property>
+      </property>
+      <effect_group name="Siege terrain exclusion" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
+      </effect_group>
+    </item>
++    <item name="itemPZAECBossLootBundleT17">
+      <property name="Extends" value="itemPZAECBossLootBundleT16" />
+      <property name="CustomIconTint" value="D98CFF" />
+      <property name="DescriptionKey" value="itemPZAECBossLootBundleT17Desc" />
+      <property name="EconomicValue" value="9500" />
+      <property class="Action0">
+        <property name="Class" value="OpenLootBundle" />
+        <property name="Delay" value="0" />
+        <property name="Sound_start" value="close_garbage" />
+        <property name="LootList" value="PZAECBossLootBundleT17" />
+      </property>
+    </item>
+    <item name="itemPZAECBossLootBundleT18">
+      <property name="Extends" value="itemPZAECBossLootBundleT16" />
+      <property name="CustomIconTint" value="FF6AE8" />
+      <property name="DescriptionKey" value="itemPZAECBossLootBundleT18Desc" />
+      <property name="EconomicValue" value="13000" />
+      <property class="Action0">
+        <property name="Class" value="OpenLootBundle" />
+        <property name="Delay" value="0" />
+        <property name="Sound_start" value="close_garbage" />
+        <property name="LootList" value="PZAECBossLootBundleT18" />
+      </property>
+    </item>
+    <item name="itemPZAECBossLootBundleT19">
+      <property name="Extends" value="itemPZAECBossLootBundleT16" />
+      <property name="CustomIconTint" value="FF3B3B" />
+      <property name="DescriptionKey" value="itemPZAECBossLootBundleT19Desc" />
+      <property name="EconomicValue" value="18000" />
+      <property class="Action0">
+        <property name="Class" value="OpenLootBundle" />
+        <property name="Delay" value="0" />
+        <property name="Sound_start" value="close_garbage" />
+        <property name="LootList" value="PZAECBossLootBundleT19" />
+      </property>
+    </item>
+  </append>
 </configs>

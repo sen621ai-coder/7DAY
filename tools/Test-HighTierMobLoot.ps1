@@ -107,7 +107,10 @@ public static class MobLootRegression
         foreach (int tier in new[] { 16, 17, 18, 19 })
         foreach (string kind in kinds)
             Check(HighTierMobLoot.TierForContainer("PZAECMobT" + tier + "_zPack" + kind) == tier, "Unrecognized bag");
-        foreach (string name in new[] { null, "", "zPackReg", "AECDumdumBossLootT16", "PZAECBossLootBundleT16", "PZAECMobT15_zPackReg", "PZAECMobT20_zPackReg", "PZAECMobT19_zPackRegExtra", "PZAECMobT19_unknown" })
+        foreach (int tier in new[] { 16, 17, 18, 19 })
+        foreach (string prefix in new[] { "PZAECBossLootBundleT", "AECDumdumBossLootT", "DoomlordBossLootT", "RunningKamikazeBossLootT", "AECHellskyliLootT" })
+            Check(HighTierMobLoot.TierForContainer(prefix + tier) == tier, "Unrecognized boss bag");
+        foreach (string name in new[] { null, "", "zPackReg", "AECDumdumBossLootT15", "PZAECBossLootBundleT20", "PZAECMobT15_zPackReg", "PZAECMobT20_zPackReg", "PZAECMobT19_zPackRegExtra", "PZAECMobT19_unknown" })
             Check(HighTierMobLoot.TierForContainer(name) == 0, "Unrelated loot entered scope");
         var scope = typeof(HighTierMobLoot).GetField("activeTier", BindingFlags.NonPublic | BindingFlags.Static);
         int previous = HighTierMobLoot.EnterScope("PZAECMobT19_zPackReg");
@@ -128,7 +131,7 @@ public static class MobLootRegression
         catch (InvalidOperationException) { }
         finally { HighTierMobLoot.SpawnFinalizer(previous); }
         Check((int)scope.GetValue(null) == 0, "Finalizer did not restore after failure");
-        return "PASS: " + cases + " quality cases; 36 bag identities; unrelated loot, nested quest rewards, exception restoration and thread isolation.";
+        return "PASS: " + cases + " quality cases; 36 mob and 20 representative boss bag identities; unrelated loot, nested quest rewards, exception restoration and thread isolation.";
     }
     public static string CheckIL(List<CodeInstruction> original)
     {

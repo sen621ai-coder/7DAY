@@ -492,3 +492,17 @@ PZAECDefenseDeath,quests,Defense,,,,Defense failed: the owner died. No refund; e
 PZAECDefenseTimeout,quests,Defense,,,,Defense failed: wave time limit reached. Spawn limits or blocked terrain may leave targets unavailable.,,,,,,,,,,,,防守失败：本波超过 15 分钟。刷怪上限或地形阻挡可能造成目标未能出现。,防守失败：本波超过 15 分钟。刷怪上限或地形阻挡可能造成目标未能出现。
 PZAECDefenseUnavailable,quests,Defense,,,,"Defense stopped: spawning disabled, protected area entered, or encounter state unavailable. No refund.",,,,,,,,,,,,防守终止：敌人生成关闭、进入保护区或玩法状态异常。不退还信标。,防守终止：敌人生成关闭、进入保护区或玩法状态异常。不退还信标。
 PZAECDefenseResumeFailed,quests,Defense,,,,Defense is a single-session encounter. Reloading ends the old run without replaying waves or refunding the beacon.,,,,,,,,,,,,防守战为单次在线挑战，重登结束旧场次，不重复刷波、不退还信标。,防守战为单次在线挑战，重登结束旧场次，不重复刷波、不退还信标。
+PZAECSiege_heavy_T16,entityclasses,Siege,,,,T16 Siege Bombardier,,,,,,,,,,,,T16 重型轰墙手,T16 重型轰墙手
+PZAECSiege_acid_T16,entityclasses,Siege,,,,T16 Wall Corroder,,,,,,,,,,,,T16 蚀墙喷射手,T16 蚀墙喷射手
+PZAECSiege_heavy_T17,entityclasses,Siege,,,,T17 Siege Bombardier,,,,,,,,,,,,T17 重型轰墙手,T17 重型轰墙手
+PZAECSiege_acid_T17,entityclasses,Siege,,,,T17 Wall Corroder,,,,,,,,,,,,T17 蚀墙喷射手,T17 蚀墙喷射手
+PZAECSiege_heavy_T18,entityclasses,Siege,,,,T18 Siege Bombardier,,,,,,,,,,,,T18 重型轰墙手,T18 重型轰墙手
+PZAECSiege_acid_T18,entityclasses,Siege,,,,T18 Wall Corroder,,,,,,,,,,,,T18 蚀墙喷射手,T18 蚀墙喷射手
+PZAECSiege_heavy_T19,entityclasses,Siege,,,,T19 Siege Bombardier,,,,,,,,,,,,T19 重型轰墙手,T19 重型轰墙手
+PZAECSiege_acid_T19,entityclasses,Siege,,,,T19 Wall Corroder,,,,,,,,,,,,T19 蚀墙喷射手,T19 蚀墙喷射手
+itemPZAECBossLootBundleT17,items,Item,,,,T17 Boss Reward Cache,,,,,,,,,,,,T17 Boss 奖励箱,T17 Boss 奖励箱
+itemPZAECBossLootBundleT17Desc,items,Item,,,,"Exact-tier boss cache. Equipment is Q5-6; advanced gear is fixed at rank 3. Chances for advanced mods, weapons and parts scale by tier.",,,,,,,,,,,,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 3 级；高级模组、武器和零件概率随等级提高。,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 3 级；高级模组、武器和零件概率随等级提高。
+itemPZAECBossLootBundleT18,items,Item,,,,T18 Boss Reward Cache,,,,,,,,,,,,T18 Boss 奖励箱,T18 Boss 奖励箱
+itemPZAECBossLootBundleT18Desc,items,Item,,,,"Exact-tier boss cache. Equipment is Q5-6; advanced gear is fixed at rank 4. Chances for advanced mods, weapons and parts scale by tier.",,,,,,,,,,,,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 4 级；高级模组、武器和零件概率随等级提高。,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 4 级；高级模组、武器和零件概率随等级提高。
+itemPZAECBossLootBundleT19,items,Item,,,,T19 Boss Reward Cache,,,,,,,,,,,,T19 Boss 奖励箱,T19 Boss 奖励箱
+itemPZAECBossLootBundleT19Desc,items,Item,,,,"Exact-tier boss cache. Equipment is Q5-6; advanced gear is fixed at rank 5. Chances for advanced mods, weapons and parts scale by tier.",,,,,,,,,,,,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 5 级；高级模组、武器和零件概率随等级提高。,同阶 Boss 奖励箱。普通装备品质 5–6，高级装备固定为 5 级；高级模组、武器和零件概率随等级提高。

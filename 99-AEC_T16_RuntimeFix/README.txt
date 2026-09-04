@@ -3,6 +3,62 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Endgame Reward Balance (Runtime 1.15.0)
+---------------------------------------
+- Chinese tables and exact rules: ENDGAME_REWARD_BALANCE.md.
+- T18/T19 clear-contract Dukes now rise with A1-A5 size. Affix contracts keep
+  their exact +25% premium; other existing quest guarantees stay unchanged.
+- Every A5 contract awards its own T16/T17/T18/T19 boss cache.
+- Ordinary high-tier bags preserve native equipment odds, then independently
+  roll one utility supply at 12% / 16% / 20% / 25%.
+- All 21 boss families use exact-tier bags. Mutation samples scale x1 / x1.25 /
+  x1.6 / x2, with a second-cache roll of 25% / 40% / 60% / 80%.
+- Equipment stays Q5-Q6. Advanced gear is rank 2 / 3 / 4 / 5 by tier.
+- Portable boss caches ignore loot abundance and biome/POI LootStage inflation.
+- Restart every peer without EAC and accept fresh quests. Offline regressions
+  passed; actual opening frequency and two-player behavior still need live tests.
+
+Blood Moon Ranged Siege Squad (Runtime 1.14.0; tuned in 1.14.1)
+----------------------------------------------
+- Chinese behavior, damage values and live test checklist: BLOOD_MOON_SIEGE.md.
+- Siege ranks T16-T19 unlock on their own GS 12000/14000/16000/18000 ladder;
+  the ordinary Blood Moon tier ladder remains unchanged.
+- Blood Moons can replace 25% of eligible ordinary zombie selections with heavy
+  bombardiers / wall corroders in an approximate 2:1 ratio. Native spawn counts,
+  boss rolls and animal branches remain in force.
+- At selection time allow at most eight living siege units within 96m of the
+  target, and at most four currently targeting that player. Caps lower frequency.
+- Native AI selects a visible structural face within 24m of the player and
+  8-52m of the gunner. It retains that breach until invalidated; it does not
+  need to see the player behind the wall. Terrain is not a siege target.
+- Both roles use native physical projectiles and native block damage/explosions,
+  with fixed target coordinates in native action packets. No direct block deletion.
+- Broadcast warning and native windup precede a single shot (heavy 3s, acid 2s).
+  Reload stays on station. Stun, electrocution, pain interruption, lost line of
+  sight or target death cancels the attack. Already-fired rounds remain physical.
+- Siege fire requires a server-side, living Blood Moon entity during an active
+  Blood Moon. Afterward the surviving unit retains ordinary melee pursuit.
+- All peers need the whole folder and an EAC-disabled restart. Offline tests
+  verify native parsers/packet payloads; actual siege layouts and live multiplayer
+  still need in-game testing.
+
+Adventure and Defense Corrections (Runtime 1.13.1)
+-------------------------------------------------
+- Trial confirmation rechecks death, trader protection, enemy spawning and an
+  already-active same-tier trial before consuming the voucher.
+- Trial enemies carry their quest identity in the initial native spawn packet;
+  nearby and abandoned encounters cannot supply another trial's kill credit.
+- Explicit server enqueue denials release only the matching unapproved adventure
+  or voucher request. Timely denials retry within the existing bounded dispatch
+  loop; later denials leave it retryable on reload. Silence never triggers replay.
+- Defense kill callbacks ignore an unscheduled next phase before checking the
+  previous wave's deadline, avoiding a false failure just after clearing a wave.
+- Update all peers and accept fresh trials: old spawned trial enemies do not
+  carry the new identity. Abandon an unfinished pre-update trial and use a new
+  voucher; existing enemies are not removed and vouchers are not refunded.
+- Offline regressions passed. Live Unity hooks, gameplay and two-player smoke
+  tests still require in-game validation.
+
 Equipment Builds (Runtime 1.13.0)
 ---------------------------------
 - Chinese guide, exact numbers and smoke checks: EQUIPMENT_BUILDS.md.
@@ -189,7 +245,7 @@ T16-T19 ordinary-mob loot quality (Runtime 1.10.0 / Tweaks 3.9.7)
 - Ordinary equipment rolls quality 5-6 at all four tiers. Advanced equipment rolls exactly quality 2 / 3 / 4 / 5 for T16 / T17 / T18 / T19.
 - Advanced means Rare/Unique item variants, LegendWeapon-tagged items and the existing improved/unique/legendary weapon pools. Classification adds only a marker property; it does not change the item globally.
 - Items without an actual quality stat, including ammunition, materials and ordinary modifier items, retain native behavior.
-- 36 scoped bags preserve all nine native loot families, including plague/regular weighted selection, existing drop probabilities, contents, stack counts and item-selection chances. Legendary item drop chances are not increased.
+- 36 scoped bags preserve all nine native loot families and their equipment odds. Runtime 1.15.0 adds only the separately rolled tiered utility supply described above; it does not add equipment to ordinary-mob bonus rolls.
 - The bag identity carries its source tier across looting by another player, network synchronization and saves; the looter's GS does not determine the tier.
 - Quality is selected before the native ItemValue constructor initializes mod slots and before loot stats/durability are populated. Nested unrelated containers and quest reward generation are explicitly isolated; exception finalizers restore scope.
 - Both host and joining players must update Mods/98-AECxProjectZ_Tweaks and Mods/99-AEC_T16_RuntimeFix, then fully restart without EAC. Check newly dropped bags: existing generated loot and old unmarked bags are not rewritten.

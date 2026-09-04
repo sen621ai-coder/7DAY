@@ -1128,4 +1128,27 @@
       <reward type="Item" id="PZAECBuildPartsR5" value="5" />
     </quest>
   </append>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A1_clear']/reward[@id='casinoCoin']/@value">36000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A1_clear_')]/reward[@id='casinoCoin']/@value">45000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A2_clear']/reward[@id='casinoCoin']/@value">40000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A2_clear_')]/reward[@id='casinoCoin']/@value">50000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A3_clear']/reward[@id='casinoCoin']/@value">44000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A3_clear_')]/reward[@id='casinoCoin']/@value">55000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A4_clear']/reward[@id='casinoCoin']/@value">48000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A4_clear_')]/reward[@id='casinoCoin']/@value">60000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear']/reward[@id='casinoCoin']/@value">52000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T18_A5_clear_')]/reward[@id='casinoCoin']/@value">65000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A1_clear']/reward[@id='casinoCoin']/@value">60000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A1_clear_')]/reward[@id='casinoCoin']/@value">75000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A2_clear']/reward[@id='casinoCoin']/@value">66000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A2_clear_')]/reward[@id='casinoCoin']/@value">82500</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A3_clear']/reward[@id='casinoCoin']/@value">72000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A3_clear_')]/reward[@id='casinoCoin']/@value">90000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A4_clear']/reward[@id='casinoCoin']/@value">78000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A4_clear_')]/reward[@id='casinoCoin']/@value">97500</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear']/reward[@id='casinoCoin']/@value">84000</set>
+  <set xpath="/quests/quest[starts-with(@id,'aec_quest_T19_A5_clear_')]/reward[@id='casinoCoin']/@value">105000</set>
+  <set xpath="/quests/quest[@id='aec_quest_T17_A5_clear' or starts-with(@id,'aec_quest_T17_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT17</set>
+  <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear' or starts-with(@id,'aec_quest_T18_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT18</set>
+  <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear' or starts-with(@id,'aec_quest_T19_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT19</set>
 </configs>

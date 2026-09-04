@@ -123,6 +123,9 @@ namespace AECT16RuntimeFix
                             Mathf.FloorToInt(target.position.x), Mathf.FloorToInt(target.position.z) }) as string ?? "";
                     if (tier > 0 && TrySelect(gs, tier, biome, maxTier, isEnemy, isAnimal, out int id, out bool boss))
                     {
+                        int siegeTier = BloodMoonSiege.TierForGameStage(gs);
+                        if (!boss && siegeTier > 0)
+                            id = BloodMoonSiege.SelectReplacement(id, siegeTier, target, isEnemy, isAnimal, gameRandom);
                         lastClassId = id; // Custom IDs are signed; only -1 means missing.
                         LogSelection(target.entityId, gs, tier, biome, boss, id, "rules");
                         return id;
@@ -144,7 +147,13 @@ namespace AECT16RuntimeFix
             }
             int result = EntityGroups.GetRandomEntityFromGroupMaxTier(fallback, maxTier,
                 ref lastClassId, isEnemy, isAnimal, gameRandom);
-            if (gs >= 30001 && result != -1 && target != null)
+            int fallbackTier = BloodMoonSiege.TierForGameStage(gs);
+            if (fallbackTier > 0 && result != -1 && target != null)
+            {
+                result = BloodMoonSiege.SelectReplacement(result, fallbackTier, target, isEnemy, isAnimal, gameRandom);
+                lastClassId = result;
+            }
+            if (fallbackTier > 0 && result != -1 && target != null)
                 LogSelection(target.entityId, gs, TierForGameStage(gs), "all", false, result, "xml-fallback");
             return result;
         }
