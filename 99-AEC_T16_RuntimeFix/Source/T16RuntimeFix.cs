@@ -22,6 +22,7 @@ namespace AECT16RuntimeFix
                 var harmony = new Harmony(HarmonyId);
                 PatchModelTintSafety(harmony);
                 LocalRespawnRecovery.Install(harmony);
+                PassiveEffectOverflowGuard.Install(harmony);
                 PlayerHeadshotDamagePatch.Install(harmony);
                 BloodMoonSpawnFix.Install(harmony);
                 PatchHighTierNavigation(harmony);
