@@ -1268,4 +1268,130 @@
   <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackThug']/item/@group">PZAECMobT19_groupZpackThugBalanced</set>
   <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackUtility']/item/@group">PZAECMobT19_groupZpackUtilityBalanced</set>
   <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackPlague']/item/@group">PZAECMobT19_groupZpackPlagueBalanced</set>
+  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+    <insertBefore xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+      <lootgroup name="PZAECArmorDropT16" count="1">
+        <item name="armorPZAECHarrierHelmetT16" count="1" />
+        <item name="armorPZAECHarrierOutfitT16" count="1" />
+        <item name="armorPZAECHarrierGlovesT16" count="1" />
+        <item name="armorPZAECHarrierBootsT16" count="1" />
+        <item name="armorPZAECStormHelmetT16" count="1" />
+        <item name="armorPZAECStormOutfitT16" count="1" />
+        <item name="armorPZAECStormGlovesT16" count="1" />
+        <item name="armorPZAECStormBootsT16" count="1" />
+        <item name="armorPZAECTremorHelmetT16" count="1" />
+        <item name="armorPZAECTremorOutfitT16" count="1" />
+        <item name="armorPZAECTremorGlovesT16" count="1" />
+        <item name="armorPZAECTremorBootsT16" count="1" />
+        <item name="armorPZAECWardenHelmetT16" count="1" />
+        <item name="armorPZAECWardenOutfitT16" count="1" />
+        <item name="armorPZAECWardenGlovesT16" count="1" />
+        <item name="armorPZAECWardenBootsT16" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECSiegeMaterialsT16" count="all">
+        <item name="resourcePZAECSiegeCapacitorT16" count="1" />
+        <item name="resourceForgedSteel" count="10" />
+      </lootgroup>
+      <lootgroup name="PZAECArmorDropT17" count="1">
+        <item name="armorPZAECHarrierHelmetT17" count="1" />
+        <item name="armorPZAECHarrierOutfitT17" count="1" />
+        <item name="armorPZAECHarrierGlovesT17" count="1" />
+        <item name="armorPZAECHarrierBootsT17" count="1" />
+        <item name="armorPZAECStormHelmetT17" count="1" />
+        <item name="armorPZAECStormOutfitT17" count="1" />
+        <item name="armorPZAECStormGlovesT17" count="1" />
+        <item name="armorPZAECStormBootsT17" count="1" />
+        <item name="armorPZAECTremorHelmetT17" count="1" />
+        <item name="armorPZAECTremorOutfitT17" count="1" />
+        <item name="armorPZAECTremorGlovesT17" count="1" />
+        <item name="armorPZAECTremorBootsT17" count="1" />
+        <item name="armorPZAECWardenHelmetT17" count="1" />
+        <item name="armorPZAECWardenOutfitT17" count="1" />
+        <item name="armorPZAECWardenGlovesT17" count="1" />
+        <item name="armorPZAECWardenBootsT17" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECSiegeMaterialsT17" count="all">
+        <item name="resourcePZAECSiegeCapacitorT17" count="1" />
+        <item name="resourceForgedSteel" count="15" />
+      </lootgroup>
+      <lootgroup name="PZAECArmorDropT18" count="1">
+        <item name="armorPZAECHarrierHelmetT18" count="1" />
+        <item name="armorPZAECHarrierOutfitT18" count="1" />
+        <item name="armorPZAECHarrierGlovesT18" count="1" />
+        <item name="armorPZAECHarrierBootsT18" count="1" />
+        <item name="armorPZAECStormHelmetT18" count="1" />
+        <item name="armorPZAECStormOutfitT18" count="1" />
+        <item name="armorPZAECStormGlovesT18" count="1" />
+        <item name="armorPZAECStormBootsT18" count="1" />
+        <item name="armorPZAECTremorHelmetT18" count="1" />
+        <item name="armorPZAECTremorOutfitT18" count="1" />
+        <item name="armorPZAECTremorGlovesT18" count="1" />
+        <item name="armorPZAECTremorBootsT18" count="1" />
+        <item name="armorPZAECWardenHelmetT18" count="1" />
+        <item name="armorPZAECWardenOutfitT18" count="1" />
+        <item name="armorPZAECWardenGlovesT18" count="1" />
+        <item name="armorPZAECWardenBootsT18" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECSiegeMaterialsT18" count="all">
+        <item name="resourcePZAECSiegeCapacitorT18" count="1,2" />
+        <item name="resourceForgedSteel" count="20" />
+      </lootgroup>
+      <lootgroup name="PZAECArmorDropT19" count="1">
+        <item name="armorPZAECHarrierHelmetT19" count="1" />
+        <item name="armorPZAECHarrierOutfitT19" count="1" />
+        <item name="armorPZAECHarrierGlovesT19" count="1" />
+        <item name="armorPZAECHarrierBootsT19" count="1" />
+        <item name="armorPZAECStormHelmetT19" count="1" />
+        <item name="armorPZAECStormOutfitT19" count="1" />
+        <item name="armorPZAECStormGlovesT19" count="1" />
+        <item name="armorPZAECStormBootsT19" count="1" />
+        <item name="armorPZAECTremorHelmetT19" count="1" />
+        <item name="armorPZAECTremorOutfitT19" count="1" />
+        <item name="armorPZAECTremorGlovesT19" count="1" />
+        <item name="armorPZAECTremorBootsT19" count="1" />
+        <item name="armorPZAECWardenHelmetT19" count="1" />
+        <item name="armorPZAECWardenOutfitT19" count="1" />
+        <item name="armorPZAECWardenGlovesT19" count="1" />
+        <item name="armorPZAECWardenBootsT19" count="1" />
+      </lootgroup>
+      <lootgroup name="PZAECSiegeMaterialsT19" count="all">
+        <item name="resourcePZAECSiegeCapacitorT19" count="1,2" />
+        <item name="resourceForgedSteel" count="25" />
+      </lootgroup>
+    </insertBefore>
+    <append xpath="/lootcontainers">
+      <lootcontainer name="PZAECSiegeLootT16" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+        <item group="PZAECSiegeMaterialsT16" />
+      </lootcontainer>
+      <lootcontainer name="PZAECSiegeLootT17" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+        <item group="PZAECSiegeMaterialsT17" />
+      </lootcontainer>
+      <lootcontainer name="PZAECSiegeLootT18" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+        <item group="PZAECSiegeMaterialsT18" />
+      </lootcontainer>
+      <lootcontainer name="PZAECSiegeLootT19" count="all" size="4,2" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="1" ignore_loot_abundance="true" unmodified_lootstage="true">
+        <item group="PZAECSiegeMaterialsT19" />
+      </lootcontainer>
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+      <item name="resourcePZAECMutantHeartT16" count="1" prob="1" force_prob="true" />
+      <item name="resourcePZAECMutantHeartT16" count="1" prob=".25" force_prob="true" />
+      <item group="PZAECArmorDropT16" count="1" prob=".10" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']">
+      <item name="resourcePZAECMutantHeartT17" count="1" prob="1" force_prob="true" />
+      <item name="resourcePZAECMutantHeartT17" count="1" prob=".40" force_prob="true" />
+      <item group="PZAECArmorDropT17" count="1" prob=".15" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']">
+      <item name="resourcePZAECMutantHeartT18" count="1" prob="1" force_prob="true" />
+      <item name="resourcePZAECMutantHeartT18" count="1" prob=".60" force_prob="true" />
+      <item group="PZAECArmorDropT18" count="1" prob=".22" force_prob="true" />
+    </append>
+    <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
+      <item name="resourcePZAECMutantHeartT19" count="1" prob="1" force_prob="true" />
+      <item name="resourcePZAECMutantHeartT19" count="1" prob=".80" force_prob="true" />
+      <item group="PZAECArmorDropT19" count="1" prob=".30" force_prob="true" />
+    </append>
+  <!-- END GENERATED ENDGAME ARSENAL -->
 </configs>

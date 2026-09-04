@@ -1,6 +1,23 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.17.0 endgame resonance armor
+- Adds four true armor sets at T16, T17, T18 and T19. Every set has a helmet,
+  outfit, gloves and boots, for 64 new wearable pieces in total.
+- Exact-tier 2-piece bonuses add a role passive. Three pieces unlock a visible
+  0-100 resonance meter. Four pieces allow the matching reusable toolbelt device.
+- Harrier charges through ranged headshots, Storm through ranged hits, Tremor
+  through melee power attacks, and Warden by taking hostile hits.
+- Harrier designation creates a precision damage window; Storm vent grants rapid
+  penetrating fire; Tremor release empowers power attacks without block damage;
+  Warden field refreshes a defensive stamina aura on nearby players.
+- Adds 16 reusable active devices, three craftable chassis, tiered siege capacitors
+  and mutant hearts, direct recipes, and T17-T19 upgrade recipes.
+- Blood Moon siege engineers now drop their tier's capacitors. Same-tier boss
+  reward caches always contain a mutant heart and can drop one armor piece.
+- Removes a stray patch marker from items.xml which could invalidate that config.
+- Generated arsenal data can be rebuilt with Tools/generate_endgame_arsenal.py.
+
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
 Runtime 1.16.7 movement-effect safety

@@ -535,3 +535,155 @@ PZAECStrongholdPowerRestored,quests,Stronghold,,,,Power station restored.,,,,,,,
 PZAECStrongholdSupplyLost,quests,Stronghold,,,,Supply depot lost. Rebuild it at the registered position before victory to recover the facility rank.,,,,,,,,,,,,物资仓已损失；胜利前在原位置重建可恢复设施评级。,物资仓已损失；胜利前在原位置重建可恢复设施评级。
 PZAECStrongholdSupplyRestored,quests,Stronghold,,,,Supply depot restored.,,,,,,,,,,,,物资仓已恢复。,物资仓已恢复。
 PZAECStrongholdComplete,quests,Stronghold,,,,Stronghold complete: bonus rank {0}; structural integrity {1}%; power {2}/1; supplies {3}/1.,,,,,,,,,,,,据点防守完成：追加奖励等级 {0}；结构完整度 {1}%；能源站 {2}/1；物资仓 {3}/1。,据点防守完成：追加奖励等级 {0}；结构完整度 {1}%；能源站 {2}/1；物资仓 {3}/1。
+resourcePZAECWeaponChassis,items,EndgameArsenal,,,,Weapon Arsenal Chassis,,,,,,,,,,,,武器军械底盘,武器军械底盘
+resourcePZAECWeaponChassisDesc,items,EndgameArsenal,,,,A reusable endgame crafting frame made at a workbench.,,,,,,,,,,,,在工作台制作的终局装备通用底盘。,在工作台制作的终局装备通用底盘。
+resourcePZAECArmorChassis,items,EndgameArsenal,,,,Armor Arsenal Chassis,,,,,,,,,,,,护甲军械底盘,护甲军械底盘
+resourcePZAECArmorChassisDesc,items,EndgameArsenal,,,,A reusable endgame crafting frame made at a workbench.,,,,,,,,,,,,在工作台制作的终局装备通用底盘。,在工作台制作的终局装备通用底盘。
+resourcePZAECDeviceChassis,items,EndgameArsenal,,,,Resonance Device Chassis,,,,,,,,,,,,共鸣装置底盘,共鸣装置底盘
+resourcePZAECDeviceChassisDesc,items,EndgameArsenal,,,,A reusable endgame crafting frame made at a workbench.,,,,,,,,,,,,在工作台制作的终局装备通用底盘。,在工作台制作的终局装备通用底盘。
+resourcePZAECSiegeCapacitorT16,items,EndgameArsenal,,,,T16 Siege Capacitor,,,,,,,,,,,,T16 攻城电容,T16 攻城电容
+resourcePZAECSiegeCapacitorT16Desc,items,EndgameArsenal,,,,Recovered from Blood Moon siege engineers.,,,,,,,,,,,,由血月工程小队掉落。,由血月工程小队掉落。
+resourcePZAECMutantHeartT16,items,EndgameArsenal,,,,T16 Mutant Heart,,,,,,,,,,,,T16 异变心核,T16 异变心核
+resourcePZAECMutantHeartT16Desc,items,EndgameArsenal,,,,Recovered from same-tier endgame boss caches.,,,,,,,,,,,,由同阶终局 Boss 奖励箱产出。,由同阶终局 Boss 奖励箱产出。
+resourcePZAECSiegeCapacitorT17,items,EndgameArsenal,,,,T17 Siege Capacitor,,,,,,,,,,,,T17 攻城电容,T17 攻城电容
+resourcePZAECSiegeCapacitorT17Desc,items,EndgameArsenal,,,,Recovered from Blood Moon siege engineers.,,,,,,,,,,,,由血月工程小队掉落。,由血月工程小队掉落。
+resourcePZAECMutantHeartT17,items,EndgameArsenal,,,,T17 Mutant Heart,,,,,,,,,,,,T17 异变心核,T17 异变心核
+resourcePZAECMutantHeartT17Desc,items,EndgameArsenal,,,,Recovered from same-tier endgame boss caches.,,,,,,,,,,,,由同阶终局 Boss 奖励箱产出。,由同阶终局 Boss 奖励箱产出。
+resourcePZAECSiegeCapacitorT18,items,EndgameArsenal,,,,T18 Siege Capacitor,,,,,,,,,,,,T18 攻城电容,T18 攻城电容
+resourcePZAECSiegeCapacitorT18Desc,items,EndgameArsenal,,,,Recovered from Blood Moon siege engineers.,,,,,,,,,,,,由血月工程小队掉落。,由血月工程小队掉落。
+resourcePZAECMutantHeartT18,items,EndgameArsenal,,,,T18 Mutant Heart,,,,,,,,,,,,T18 异变心核,T18 异变心核
+resourcePZAECMutantHeartT18Desc,items,EndgameArsenal,,,,Recovered from same-tier endgame boss caches.,,,,,,,,,,,,由同阶终局 Boss 奖励箱产出。,由同阶终局 Boss 奖励箱产出。
+resourcePZAECSiegeCapacitorT19,items,EndgameArsenal,,,,T19 Siege Capacitor,,,,,,,,,,,,T19 攻城电容,T19 攻城电容
+resourcePZAECSiegeCapacitorT19Desc,items,EndgameArsenal,,,,Recovered from Blood Moon siege engineers.,,,,,,,,,,,,由血月工程小队掉落。,由血月工程小队掉落。
+resourcePZAECMutantHeartT19,items,EndgameArsenal,,,,T19 Mutant Heart,,,,,,,,,,,,T19 异变心核,T19 异变心核
+resourcePZAECMutantHeartT19Desc,items,EndgameArsenal,,,,Recovered from same-tier endgame boss caches.,,,,,,,,,,,,由同阶终局 Boss 奖励箱产出。,由同阶终局 Boss 奖励箱产出。
+armorPZAECHarrierHelmetT16,items,EndgameArsenal,,,,T16 Harrier Helmet,,,,,,,,,,,,T16 猎隼头盔,T16 猎隼头盔
+armorPZAECHarrierHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Harrier 精准射击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECHarrierOutfitT16,items,EndgameArsenal,,,,T16 Harrier Outfit,,,,,,,,,,,,T16 猎隼衣装,T16 猎隼衣装
+armorPZAECHarrierOutfitDesc,items,EndgameArsenal,,,,A true armor piece for the Harrier 精准射击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECHarrierGlovesT16,items,EndgameArsenal,,,,T16 Harrier Gloves,,,,,,,,,,,,T16 猎隼手套,T16 猎隼手套
+armorPZAECHarrierGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Harrier 精准射击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECHarrierBootsT16,items,EndgameArsenal,,,,T16 Harrier Boots,,,,,,,,,,,,T16 猎隼战靴,T16 猎隼战靴
+armorPZAECHarrierBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Harrier 精准射击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+itemPZAECHarrierDeviceT16,items,EndgameArsenal,,,,T16 Refractive Designation Device,,,,,,,,,,,,T16 折光标定装置,T16 折光标定装置
+itemPZAECHarrierDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+armorPZAECHarrierHelmetT17,items,EndgameArsenal,,,,T17 Harrier Helmet,,,,,,,,,,,,T17 猎隼头盔,T17 猎隼头盔
+armorPZAECHarrierOutfitT17,items,EndgameArsenal,,,,T17 Harrier Outfit,,,,,,,,,,,,T17 猎隼衣装,T17 猎隼衣装
+armorPZAECHarrierGlovesT17,items,EndgameArsenal,,,,T17 Harrier Gloves,,,,,,,,,,,,T17 猎隼手套,T17 猎隼手套
+armorPZAECHarrierBootsT17,items,EndgameArsenal,,,,T17 Harrier Boots,,,,,,,,,,,,T17 猎隼战靴,T17 猎隼战靴
+itemPZAECHarrierDeviceT17,items,EndgameArsenal,,,,T17 Refractive Designation Device,,,,,,,,,,,,T17 折光标定装置,T17 折光标定装置
+itemPZAECHarrierDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+armorPZAECHarrierHelmetT18,items,EndgameArsenal,,,,T18 Harrier Helmet,,,,,,,,,,,,T18 猎隼头盔,T18 猎隼头盔
+armorPZAECHarrierOutfitT18,items,EndgameArsenal,,,,T18 Harrier Outfit,,,,,,,,,,,,T18 猎隼衣装,T18 猎隼衣装
+armorPZAECHarrierGlovesT18,items,EndgameArsenal,,,,T18 Harrier Gloves,,,,,,,,,,,,T18 猎隼手套,T18 猎隼手套
+armorPZAECHarrierBootsT18,items,EndgameArsenal,,,,T18 Harrier Boots,,,,,,,,,,,,T18 猎隼战靴,T18 猎隼战靴
+itemPZAECHarrierDeviceT18,items,EndgameArsenal,,,,T18 Refractive Designation Device,,,,,,,,,,,,T18 折光标定装置,T18 折光标定装置
+itemPZAECHarrierDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+armorPZAECHarrierHelmetT19,items,EndgameArsenal,,,,T19 Harrier Helmet,,,,,,,,,,,,T19 猎隼头盔,T19 猎隼头盔
+armorPZAECHarrierOutfitT19,items,EndgameArsenal,,,,T19 Harrier Outfit,,,,,,,,,,,,T19 猎隼衣装,T19 猎隼衣装
+armorPZAECHarrierGlovesT19,items,EndgameArsenal,,,,T19 Harrier Gloves,,,,,,,,,,,,T19 猎隼手套,T19 猎隼手套
+armorPZAECHarrierBootsT19,items,EndgameArsenal,,,,T19 Harrier Boots,,,,,,,,,,,,T19 猎隼战靴,T19 猎隼战靴
+itemPZAECHarrierDeviceT19,items,EndgameArsenal,,,,T19 Refractive Designation Device,,,,,,,,,,,,T19 折光标定装置,T19 折光标定装置
+itemPZAECHarrierDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+armorPZAECStormHelmetT16,items,EndgameArsenal,,,,T16 Storm Helmet,,,,,,,,,,,,T16 雷暴头盔,T16 雷暴头盔
+armorPZAECStormHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Storm 持续火力 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECStormOutfitT16,items,EndgameArsenal,,,,T16 Storm Outfit,,,,,,,,,,,,T16 雷暴衣装,T16 雷暴衣装
+armorPZAECStormOutfitDesc,items,EndgameArsenal,,,,A true armor piece for the Storm 持续火力 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECStormGlovesT16,items,EndgameArsenal,,,,T16 Storm Gloves,,,,,,,,,,,,T16 雷暴手套,T16 雷暴手套
+armorPZAECStormGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Storm 持续火力 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECStormBootsT16,items,EndgameArsenal,,,,T16 Storm Boots,,,,,,,,,,,,T16 雷暴战靴,T16 雷暴战靴
+armorPZAECStormBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Storm 持续火力 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+itemPZAECStormDeviceT16,items,EndgameArsenal,,,,T16 Arc Vent Device,,,,,,,,,,,,T16 弧光泄压装置,T16 弧光泄压装置
+itemPZAECStormDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+armorPZAECStormHelmetT17,items,EndgameArsenal,,,,T17 Storm Helmet,,,,,,,,,,,,T17 雷暴头盔,T17 雷暴头盔
+armorPZAECStormOutfitT17,items,EndgameArsenal,,,,T17 Storm Outfit,,,,,,,,,,,,T17 雷暴衣装,T17 雷暴衣装
+armorPZAECStormGlovesT17,items,EndgameArsenal,,,,T17 Storm Gloves,,,,,,,,,,,,T17 雷暴手套,T17 雷暴手套
+armorPZAECStormBootsT17,items,EndgameArsenal,,,,T17 Storm Boots,,,,,,,,,,,,T17 雷暴战靴,T17 雷暴战靴
+itemPZAECStormDeviceT17,items,EndgameArsenal,,,,T17 Arc Vent Device,,,,,,,,,,,,T17 弧光泄压装置,T17 弧光泄压装置
+itemPZAECStormDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+armorPZAECStormHelmetT18,items,EndgameArsenal,,,,T18 Storm Helmet,,,,,,,,,,,,T18 雷暴头盔,T18 雷暴头盔
+armorPZAECStormOutfitT18,items,EndgameArsenal,,,,T18 Storm Outfit,,,,,,,,,,,,T18 雷暴衣装,T18 雷暴衣装
+armorPZAECStormGlovesT18,items,EndgameArsenal,,,,T18 Storm Gloves,,,,,,,,,,,,T18 雷暴手套,T18 雷暴手套
+armorPZAECStormBootsT18,items,EndgameArsenal,,,,T18 Storm Boots,,,,,,,,,,,,T18 雷暴战靴,T18 雷暴战靴
+itemPZAECStormDeviceT18,items,EndgameArsenal,,,,T18 Arc Vent Device,,,,,,,,,,,,T18 弧光泄压装置,T18 弧光泄压装置
+itemPZAECStormDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+armorPZAECStormHelmetT19,items,EndgameArsenal,,,,T19 Storm Helmet,,,,,,,,,,,,T19 雷暴头盔,T19 雷暴头盔
+armorPZAECStormOutfitT19,items,EndgameArsenal,,,,T19 Storm Outfit,,,,,,,,,,,,T19 雷暴衣装,T19 雷暴衣装
+armorPZAECStormGlovesT19,items,EndgameArsenal,,,,T19 Storm Gloves,,,,,,,,,,,,T19 雷暴手套,T19 雷暴手套
+armorPZAECStormBootsT19,items,EndgameArsenal,,,,T19 Storm Boots,,,,,,,,,,,,T19 雷暴战靴,T19 雷暴战靴
+itemPZAECStormDeviceT19,items,EndgameArsenal,,,,T19 Arc Vent Device,,,,,,,,,,,,T19 弧光泄压装置,T19 弧光泄压装置
+itemPZAECStormDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+armorPZAECTremorHelmetT16,items,EndgameArsenal,,,,T16 Tremor Helmet,,,,,,,,,,,,T16 震岳头盔,T16 震岳头盔
+armorPZAECTremorHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Tremor 近战重击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECTremorOutfitT16,items,EndgameArsenal,,,,T16 Tremor Outfit,,,,,,,,,,,,T16 震岳衣装,T16 震岳衣装
+armorPZAECTremorOutfitDesc,items,EndgameArsenal,,,,A true armor piece for the Tremor 近战重击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECTremorGlovesT16,items,EndgameArsenal,,,,T16 Tremor Gloves,,,,,,,,,,,,T16 震岳手套,T16 震岳手套
+armorPZAECTremorGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Tremor 近战重击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECTremorBootsT16,items,EndgameArsenal,,,,T16 Tremor Boots,,,,,,,,,,,,T16 震岳战靴,T16 震岳战靴
+armorPZAECTremorBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Tremor 近战重击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+itemPZAECTremorDeviceT16,items,EndgameArsenal,,,,T16 Tremor Release Device,,,,,,,,,,,,T16 震岳释放装置,T16 震岳释放装置
+itemPZAECTremorDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+armorPZAECTremorHelmetT17,items,EndgameArsenal,,,,T17 Tremor Helmet,,,,,,,,,,,,T17 震岳头盔,T17 震岳头盔
+armorPZAECTremorOutfitT17,items,EndgameArsenal,,,,T17 Tremor Outfit,,,,,,,,,,,,T17 震岳衣装,T17 震岳衣装
+armorPZAECTremorGlovesT17,items,EndgameArsenal,,,,T17 Tremor Gloves,,,,,,,,,,,,T17 震岳手套,T17 震岳手套
+armorPZAECTremorBootsT17,items,EndgameArsenal,,,,T17 Tremor Boots,,,,,,,,,,,,T17 震岳战靴,T17 震岳战靴
+itemPZAECTremorDeviceT17,items,EndgameArsenal,,,,T17 Tremor Release Device,,,,,,,,,,,,T17 震岳释放装置,T17 震岳释放装置
+itemPZAECTremorDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+armorPZAECTremorHelmetT18,items,EndgameArsenal,,,,T18 Tremor Helmet,,,,,,,,,,,,T18 震岳头盔,T18 震岳头盔
+armorPZAECTremorOutfitT18,items,EndgameArsenal,,,,T18 Tremor Outfit,,,,,,,,,,,,T18 震岳衣装,T18 震岳衣装
+armorPZAECTremorGlovesT18,items,EndgameArsenal,,,,T18 Tremor Gloves,,,,,,,,,,,,T18 震岳手套,T18 震岳手套
+armorPZAECTremorBootsT18,items,EndgameArsenal,,,,T18 Tremor Boots,,,,,,,,,,,,T18 震岳战靴,T18 震岳战靴
+itemPZAECTremorDeviceT18,items,EndgameArsenal,,,,T18 Tremor Release Device,,,,,,,,,,,,T18 震岳释放装置,T18 震岳释放装置
+itemPZAECTremorDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+armorPZAECTremorHelmetT19,items,EndgameArsenal,,,,T19 Tremor Helmet,,,,,,,,,,,,T19 震岳头盔,T19 震岳头盔
+armorPZAECTremorOutfitT19,items,EndgameArsenal,,,,T19 Tremor Outfit,,,,,,,,,,,,T19 震岳衣装,T19 震岳衣装
+armorPZAECTremorGlovesT19,items,EndgameArsenal,,,,T19 Tremor Gloves,,,,,,,,,,,,T19 震岳手套,T19 震岳手套
+armorPZAECTremorBootsT19,items,EndgameArsenal,,,,T19 Tremor Boots,,,,,,,,,,,,T19 震岳战靴,T19 震岳战靴
+itemPZAECTremorDeviceT19,items,EndgameArsenal,,,,T19 Tremor Release Device,,,,,,,,,,,,T19 震岳释放装置,T19 震岳释放装置
+itemPZAECTremorDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+armorPZAECWardenHelmetT16,items,EndgameArsenal,,,,T16 Warden Helmet,,,,,,,,,,,,T16 守望头盔,T16 守望头盔
+armorPZAECWardenHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Warden 承伤防守 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECWardenOutfitT16,items,EndgameArsenal,,,,T16 Warden Outfit,,,,,,,,,,,,T16 守望衣装,T16 守望衣装
+armorPZAECWardenOutfitDesc,items,EndgameArsenal,,,,A true armor piece for the Warden 承伤防守 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECWardenGlovesT16,items,EndgameArsenal,,,,T16 Warden Gloves,,,,,,,,,,,,T16 守望手套,T16 守望手套
+armorPZAECWardenGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Warden 承伤防守 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+armorPZAECWardenBootsT16,items,EndgameArsenal,,,,T16 Warden Boots,,,,,,,,,,,,T16 守望战靴,T16 守望战靴
+armorPZAECWardenBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Warden 承伤防守 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
+itemPZAECWardenDeviceT16,items,EndgameArsenal,,,,T16 Warden Field Device,,,,,,,,,,,,T16 守望领域装置,T16 守望领域装置
+itemPZAECWardenDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+armorPZAECWardenHelmetT17,items,EndgameArsenal,,,,T17 Warden Helmet,,,,,,,,,,,,T17 守望头盔,T17 守望头盔
+armorPZAECWardenOutfitT17,items,EndgameArsenal,,,,T17 Warden Outfit,,,,,,,,,,,,T17 守望衣装,T17 守望衣装
+armorPZAECWardenGlovesT17,items,EndgameArsenal,,,,T17 Warden Gloves,,,,,,,,,,,,T17 守望手套,T17 守望手套
+armorPZAECWardenBootsT17,items,EndgameArsenal,,,,T17 Warden Boots,,,,,,,,,,,,T17 守望战靴,T17 守望战靴
+itemPZAECWardenDeviceT17,items,EndgameArsenal,,,,T17 Warden Field Device,,,,,,,,,,,,T17 守望领域装置,T17 守望领域装置
+itemPZAECWardenDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+armorPZAECWardenHelmetT18,items,EndgameArsenal,,,,T18 Warden Helmet,,,,,,,,,,,,T18 守望头盔,T18 守望头盔
+armorPZAECWardenOutfitT18,items,EndgameArsenal,,,,T18 Warden Outfit,,,,,,,,,,,,T18 守望衣装,T18 守望衣装
+armorPZAECWardenGlovesT18,items,EndgameArsenal,,,,T18 Warden Gloves,,,,,,,,,,,,T18 守望手套,T18 守望手套
+armorPZAECWardenBootsT18,items,EndgameArsenal,,,,T18 Warden Boots,,,,,,,,,,,,T18 守望战靴,T18 守望战靴
+itemPZAECWardenDeviceT18,items,EndgameArsenal,,,,T18 Warden Field Device,,,,,,,,,,,,T18 守望领域装置,T18 守望领域装置
+itemPZAECWardenDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+armorPZAECWardenHelmetT19,items,EndgameArsenal,,,,T19 Warden Helmet,,,,,,,,,,,,T19 守望头盔,T19 守望头盔
+armorPZAECWardenOutfitT19,items,EndgameArsenal,,,,T19 Warden Outfit,,,,,,,,,,,,T19 守望衣装,T19 守望衣装
+armorPZAECWardenGlovesT19,items,EndgameArsenal,,,,T19 Warden Gloves,,,,,,,,,,,,T19 守望手套,T19 守望手套
+armorPZAECWardenBootsT19,items,EndgameArsenal,,,,T19 Warden Boots,,,,,,,,,,,,T19 守望战靴,T19 守望战靴
+itemPZAECWardenDeviceT19,items,EndgameArsenal,,,,T19 Warden Field Device,,,,,,,,,,,,T19 守望领域装置,T19 守望领域装置
+itemPZAECWardenDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+buffPZAECHarrierResonanceName,buffs,EndgameArsenal,,,,Harrier Resonance,,,,,,,,,,,,猎隼共鸣,猎隼共鸣
+buffPZAECHarrierResonanceDesc,buffs,EndgameArsenal,,,,Three-piece charge for 精准射击; reaches 100 to arm the device.,,,,,,,,,,,,三件套通过精准射击充能；达到 100 后可启动装置。,三件套通过精准射击充能；达到 100 后可启动装置。
+buffPZAECHarrierActiveName,buffs,EndgameArsenal,,,,Refractive Designation,,,,,,,,,,,,折光标定,折光标定
+buffPZAECHarrierActiveDesc,buffs,EndgameArsenal,,,,The Harrier resonance ability is active.,,,,,,,,,,,,猎隼共鸣能力正在生效。,猎隼共鸣能力正在生效。
+buffPZAECStormResonanceName,buffs,EndgameArsenal,,,,Storm Resonance,,,,,,,,,,,,雷暴共鸣,雷暴共鸣
+buffPZAECStormResonanceDesc,buffs,EndgameArsenal,,,,Three-piece charge for 持续火力; reaches 100 to arm the device.,,,,,,,,,,,,三件套通过持续火力充能；达到 100 后可启动装置。,三件套通过持续火力充能；达到 100 后可启动装置。
+buffPZAECStormActiveName,buffs,EndgameArsenal,,,,Arc Vent,,,,,,,,,,,,弧光泄压,弧光泄压
+buffPZAECStormActiveDesc,buffs,EndgameArsenal,,,,The Storm resonance ability is active.,,,,,,,,,,,,雷暴共鸣能力正在生效。,雷暴共鸣能力正在生效。
+buffPZAECTremorResonanceName,buffs,EndgameArsenal,,,,Tremor Resonance,,,,,,,,,,,,震岳共鸣,震岳共鸣
+buffPZAECTremorResonanceDesc,buffs,EndgameArsenal,,,,Three-piece charge for 近战重击; reaches 100 to arm the device.,,,,,,,,,,,,三件套通过近战重击充能；达到 100 后可启动装置。,三件套通过近战重击充能；达到 100 后可启动装置。
+buffPZAECTremorActiveName,buffs,EndgameArsenal,,,,Tremor Release,,,,,,,,,,,,震岳释放,震岳释放
+buffPZAECTremorActiveDesc,buffs,EndgameArsenal,,,,The Tremor resonance ability is active.,,,,,,,,,,,,震岳共鸣能力正在生效。,震岳共鸣能力正在生效。
+buffPZAECWardenResonanceName,buffs,EndgameArsenal,,,,Warden Resonance,,,,,,,,,,,,守望共鸣,守望共鸣
+buffPZAECWardenResonanceDesc,buffs,EndgameArsenal,,,,Three-piece charge for 承伤防守; reaches 100 to arm the device.,,,,,,,,,,,,三件套通过承伤防守充能；达到 100 后可启动装置。,三件套通过承伤防守充能；达到 100 后可启动装置。
+buffPZAECWardenActiveName,buffs,EndgameArsenal,,,,Warden Field,,,,,,,,,,,,守望领域,守望领域
+buffPZAECWardenActiveDesc,buffs,EndgameArsenal,,,,The Warden resonance ability is active.,,,,,,,,,,,,守望共鸣能力正在生效。,守望共鸣能力正在生效。
+buffPZAECResonanceCooldownName,buffs,EndgameArsenal,,,,Resonance Overload,,,,,,,,,,,,共鸣过载,共鸣过载
+buffPZAECResonanceCooldownDesc,buffs,EndgameArsenal,,,,The resonance device is cooling down.,,,,,,,,,,,,共鸣装置正在冷却。,共鸣装置正在冷却。

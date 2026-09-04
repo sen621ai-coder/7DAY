@@ -428,4 +428,52 @@
   <append xpath="/entity_classes/entity_class[@name='AECTheArcherBossT19']"><property name="LootDropEntityClass" value="AECArcherBossLootBagT19" /></append>
   <append xpath="/entity_classes/entity_class[@name='AECSheriffBossT19']"><property name="LootDropEntityClass" value="AECSheriffBossLootBagT19" /></append>
   <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT19']"><property name="LootDropEntityClass" value="AECHeadlessBossLootBagT19" /></append>
+  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+    <append xpath="/entity_classes">
+      <entity_class name="PZAECSiegeLootBagT16" extends="EntityLootContainerStrong">
+        <property name="LootList" value="PZAECSiegeLootT16" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLootBagT17" extends="EntityLootContainerStrong">
+        <property name="LootList" value="PZAECSiegeLootT17" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLootBagT18" extends="EntityLootContainerStrong">
+        <property name="LootList" value="PZAECSiegeLootT18" />
+      </entity_class>
+      <entity_class name="PZAECSiegeLootBagT19" extends="EntityLootContainerStrong">
+        <property name="LootList" value="PZAECSiegeLootT19" />
+      </entity_class>
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_heavy_T16']">
+      <property name="LootDropProb" value=".35" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT16" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_acid_T16']">
+      <property name="LootDropProb" value=".35" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT16" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_heavy_T17']">
+      <property name="LootDropProb" value=".45" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT17" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_acid_T17']">
+      <property name="LootDropProb" value=".45" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT17" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_heavy_T18']">
+      <property name="LootDropProb" value=".55" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT18" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_acid_T18']">
+      <property name="LootDropProb" value=".55" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT18" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_heavy_T19']">
+      <property name="LootDropProb" value=".70" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT19" />
+    </append>
+    <append xpath="/entity_classes/entity_class[@name='PZAECSiege_acid_T19']">
+      <property name="LootDropProb" value=".70" />
+      <property name="LootDropEntityClass" value="PZAECSiegeLootBagT19" />
+    </append>
+  <!-- END GENERATED ENDGAME ARSENAL -->
 </configs>

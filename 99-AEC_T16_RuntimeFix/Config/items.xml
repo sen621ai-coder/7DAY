@@ -506,7 +506,7 @@
         <passive_effect name="DamageModifier" operation="perc_set" value="0" tags="earth,water" />
       </effect_group>
     </item>
-+    <item name="itemPZAECBossLootBundleT17">
+    <item name="itemPZAECBossLootBundleT17">
       <property name="Extends" value="itemPZAECBossLootBundleT16" />
       <property name="CustomIconTint" value="D98CFF" />
       <property name="DescriptionKey" value="itemPZAECBossLootBundleT17Desc" />
@@ -543,4 +543,2651 @@
       </property>
     </item>
   </append>
+  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+    <append xpath="/items">
+      <item name="resourcePZAECWeaponChassis">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECWeaponChassisDesc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FF8844" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECArmorChassis">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECArmorChassisDesc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECDeviceChassis">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECDeviceChassisDesc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECSiegeCapacitorT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECSiegeCapacitorT16Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECMutantHeartT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECMutantHeartT16Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECSiegeCapacitorT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECSiegeCapacitorT17Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECMutantHeartT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECMutantHeartT17Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECSiegeCapacitorT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECSiegeCapacitorT18Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECMutantHeartT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECMutantHeartT18Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECSiegeCapacitorT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECSiegeCapacitorT19Desc" />
+        <property name="CustomIcon" value="resourceElectricParts" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="100" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="resourcePZAECMutantHeartT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="resourcePZAECMutantHeartT19Desc" />
+        <property name="CustomIcon" value="resourceLegendaryParts" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="20" />
+        <property name="SellableToTrader" value="false" />
+      </item>
+      <item name="armorPZAECHarrierHelmetT16">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierHelmetDesc" />
+        <property name="CustomIcon" value="armorRangerHelmet" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRangerHelmet" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT16" />
+        <property name="Tags" value="head,armor,armorHead,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT16" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T16 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="15" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="15" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".06" tags="head" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/HeadgearMorphMatrix/{race}{variant}/gearRanger{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierOutfitT16">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierOutfitDesc" />
+        <property name="CustomIcon" value="armorRangerOutfit" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRangerOutfit" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT16" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT16" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_leather_grab" />
+        <property name="SoundPlace" value="outfit_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T16 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="15" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="15" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Outfit specialty" tiered="false">
+          <passive_effect name="StaminaMax" operation="base_add" value="10" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierGlovesT16">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierGlovesDesc" />
+        <property name="CustomIcon" value="armorRangerGloves" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRangerGloves" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT16" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT16" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T16 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="15" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="15" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-.04" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.04" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.04" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierBootsT16">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierBootsDesc" />
+        <property name="CustomIcon" value="armorRangerBoots" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRangerBoots" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT16" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT16" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T16 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="15" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="15" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".02" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECHarrierDeviceT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECHarrierDeviceT16Desc" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT16Set4" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT16Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECHarrierT16Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT16Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT16Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECHarrierT16Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECHarrierT16Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECHarrierHelmetT17">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierHelmetDesc" />
+        <property name="CustomIcon" value="armorRangerHelmet" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRangerHelmet" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT17" />
+        <property name="Tags" value="head,armor,armorHead,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT17" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T17 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="16" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="16" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".08" tags="head" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/HeadgearMorphMatrix/{race}{variant}/gearRanger{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierOutfitT17">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierOutfitDesc" />
+        <property name="CustomIcon" value="armorRangerOutfit" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRangerOutfit" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT17" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT17" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_leather_grab" />
+        <property name="SoundPlace" value="outfit_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T17 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="16" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="16" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Outfit specialty" tiered="false">
+          <passive_effect name="StaminaMax" operation="base_add" value="15" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierGlovesT17">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierGlovesDesc" />
+        <property name="CustomIcon" value="armorRangerGloves" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRangerGloves" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT17" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT17" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T17 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="16" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="16" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-.05" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.05" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.05" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierBootsT17">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierBootsDesc" />
+        <property name="CustomIcon" value="armorRangerBoots" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRangerBoots" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT17" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT17" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T17 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="16" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="16" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".03" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECHarrierDeviceT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECHarrierDeviceT17Desc" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT17Set4" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT17Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECHarrierT17Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT17Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT17Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECHarrierT17Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECHarrierT17Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECHarrierHelmetT18">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierHelmetDesc" />
+        <property name="CustomIcon" value="armorRangerHelmet" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRangerHelmet" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT18" />
+        <property name="Tags" value="head,armor,armorHead,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT18" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T18 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".10" tags="head" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/HeadgearMorphMatrix/{race}{variant}/gearRanger{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierOutfitT18">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierOutfitDesc" />
+        <property name="CustomIcon" value="armorRangerOutfit" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRangerOutfit" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT18" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT18" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_leather_grab" />
+        <property name="SoundPlace" value="outfit_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T18 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Outfit specialty" tiered="false">
+          <passive_effect name="StaminaMax" operation="base_add" value="20" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierGlovesT18">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierGlovesDesc" />
+        <property name="CustomIcon" value="armorRangerGloves" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRangerGloves" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT18" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT18" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T18 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-.06" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.06" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.06" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierBootsT18">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierBootsDesc" />
+        <property name="CustomIcon" value="armorRangerBoots" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRangerBoots" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT18" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT18" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T18 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".04" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECHarrierDeviceT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECHarrierDeviceT18Desc" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT18Set4" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT18Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECHarrierT18Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT18Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT18Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECHarrierT18Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECHarrierT18Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECHarrierHelmetT19">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierHelmetDesc" />
+        <property name="CustomIcon" value="armorRangerHelmet" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRangerHelmet" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT19" />
+        <property name="Tags" value="head,armor,armorHead,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT19" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T19 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".12" tags="head" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/HeadgearMorphMatrix/{race}{variant}/gearRanger{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierOutfitT19">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierOutfitDesc" />
+        <property name="CustomIcon" value="armorRangerOutfit" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRangerOutfit" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT19" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT19" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_leather_grab" />
+        <property name="SoundPlace" value="outfit_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T19 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Outfit specialty" tiered="false">
+          <passive_effect name="StaminaMax" operation="base_add" value="25" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierGlovesT19">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierGlovesDesc" />
+        <property name="CustomIcon" value="armorRangerGloves" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRangerGloves" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT19" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT19" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T19 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-.08" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.08" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.08" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECHarrierBootsT19">
+        <property name="Extends" value="armorLightMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECHarrierBootsDesc" />
+        <property name="CustomIcon" value="armorRangerBoots" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRangerBoots" />
+        <property name="ArmorGroup" value="groupPZAECHarrierT19" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,lightArmor,lightArmorDeg,armorLightSkill,PZAECArmorHarrier,PZAECArmorT19" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Harrier T19 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="lightArmorDeg" />
+        </effect_group>
+        <effect_group name="AEC Harrier Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".05" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Ranger/gear{sex}RangerPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECHarrierDeviceT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECHarrierDeviceT19Desc" />
+        <property name="CustomIcon" value="modGunScopeLarge" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT19Set4" />
+          <requirement name="HasBuff" buff="buffPZAECHarrierT19Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECHarrierT19Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT19Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECHarrierT19Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECHarrierT19Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECHarrierT19Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECStormHelmetT16">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormHelmetDesc" />
+        <property name="CustomIcon" value="armorCommandoHelmet" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorCommandoHelmet" />
+        <property name="ArmorGroup" value="groupPZAECStormT16" />
+        <property name="Tags" value="head,armor,armorHead,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT16" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T16 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".05" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/HeadgearMorphMatrix/{race}{variant}/gearCommando{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECStormOutfitT16">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormOutfitDesc" />
+        <property name="CustomIcon" value="armorCommandoOutfit" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorCommandoOutfit" />
+        <property name="ArmorGroup" value="groupPZAECStormT16" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT16" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T16 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Outfit specialty" tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value=".05" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECStormGlovesT16">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormGlovesDesc" />
+        <property name="CustomIcon" value="armorCommandoGloves" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorCommandoGloves" />
+        <property name="ArmorGroup" value="groupPZAECStormT16" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT16" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T16 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".05" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECStormBootsT16">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormBootsDesc" />
+        <property name="CustomIcon" value="armorCommandoBoots" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorCommandoBoots" />
+        <property name="ArmorGroup" value="groupPZAECStormT16" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT16" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T16 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="17" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="17" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Boots specialty" tiered="false">
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".08" tags="running" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECStormDeviceT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECStormDeviceT16Desc" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECStormT16Set4" />
+          <requirement name="HasBuff" buff="buffPZAECStormT16Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECStormT16Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT16Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT16Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECStormT16Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECStormT16Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECStormHelmetT17">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormHelmetDesc" />
+        <property name="CustomIcon" value="armorCommandoHelmet" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorCommandoHelmet" />
+        <property name="ArmorGroup" value="groupPZAECStormT17" />
+        <property name="Tags" value="head,armor,armorHead,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT17" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T17 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".07" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/HeadgearMorphMatrix/{race}{variant}/gearCommando{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECStormOutfitT17">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormOutfitDesc" />
+        <property name="CustomIcon" value="armorCommandoOutfit" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorCommandoOutfit" />
+        <property name="ArmorGroup" value="groupPZAECStormT17" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT17" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T17 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Outfit specialty" tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value=".08" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECStormGlovesT17">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormGlovesDesc" />
+        <property name="CustomIcon" value="armorCommandoGloves" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorCommandoGloves" />
+        <property name="ArmorGroup" value="groupPZAECStormT17" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT17" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T17 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".07" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECStormBootsT17">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormBootsDesc" />
+        <property name="CustomIcon" value="armorCommandoBoots" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorCommandoBoots" />
+        <property name="ArmorGroup" value="groupPZAECStormT17" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT17" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T17 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="18" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="18" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Boots specialty" tiered="false">
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".10" tags="running" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECStormDeviceT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECStormDeviceT17Desc" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECStormT17Set4" />
+          <requirement name="HasBuff" buff="buffPZAECStormT17Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECStormT17Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT17Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT17Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECStormT17Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECStormT17Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECStormHelmetT18">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormHelmetDesc" />
+        <property name="CustomIcon" value="armorCommandoHelmet" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorCommandoHelmet" />
+        <property name="ArmorGroup" value="groupPZAECStormT18" />
+        <property name="Tags" value="head,armor,armorHead,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT18" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T18 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="19" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="19" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".09" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/HeadgearMorphMatrix/{race}{variant}/gearCommando{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECStormOutfitT18">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormOutfitDesc" />
+        <property name="CustomIcon" value="armorCommandoOutfit" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorCommandoOutfit" />
+        <property name="ArmorGroup" value="groupPZAECStormT18" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT18" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T18 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="19" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="19" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Outfit specialty" tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value=".11" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECStormGlovesT18">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormGlovesDesc" />
+        <property name="CustomIcon" value="armorCommandoGloves" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorCommandoGloves" />
+        <property name="ArmorGroup" value="groupPZAECStormT18" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT18" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T18 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="19" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="19" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".09" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECStormBootsT18">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormBootsDesc" />
+        <property name="CustomIcon" value="armorCommandoBoots" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorCommandoBoots" />
+        <property name="ArmorGroup" value="groupPZAECStormT18" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT18" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T18 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="19" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="19" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Boots specialty" tiered="false">
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".12" tags="running" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECStormDeviceT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECStormDeviceT18Desc" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECStormT18Set4" />
+          <requirement name="HasBuff" buff="buffPZAECStormT18Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECStormT18Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT18Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT18Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECStormT18Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECStormT18Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECStormHelmetT19">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormHelmetDesc" />
+        <property name="CustomIcon" value="armorCommandoHelmet" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorCommandoHelmet" />
+        <property name="ArmorGroup" value="groupPZAECStormT19" />
+        <property name="Tags" value="head,armor,armorHead,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT19" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T19 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".12" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/HeadgearMorphMatrix/{race}{variant}/gearCommando{hair}Head.asset" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="" />
+          <property name="HairMaskType" value="Hat" />
+        </property>
+      </item>
+      <item name="armorPZAECStormOutfitT19">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormOutfitDesc" />
+        <property name="CustomIcon" value="armorCommandoOutfit" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorCommandoOutfit" />
+        <property name="ArmorGroup" value="groupPZAECStormT19" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT19" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T19 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Outfit specialty" tiered="false">
+          <passive_effect name="MagazineSize" operation="perc_add" value=".15" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECStormGlovesT19">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormGlovesDesc" />
+        <property name="CustomIcon" value="armorCommandoGloves" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorCommandoGloves" />
+        <property name="ArmorGroup" value="groupPZAECStormT19" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT19" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T19 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="ranged" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".12" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECStormBootsT19">
+        <property name="Extends" value="armorMediumMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECStormBootsDesc" />
+        <property name="CustomIcon" value="armorCommandoBoots" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorCommandoBoots" />
+        <property name="ArmorGroup" value="groupPZAECStormT19" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,mediumArmor,mediumArmorPenalty,mediumArmorDeg,armorMediumSkill,PZAECArmorStorm,PZAECArmorT19" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Storm T19 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="mediumArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.025" />
+        </effect_group>
+        <effect_group name="AEC Storm Boots specialty" tiered="false">
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".15" tags="running" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Commando/gear{sex}CommandoPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECStormDeviceT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECStormDeviceT19Desc" />
+        <property name="CustomIcon" value="modGunDrumMagazineExtender" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECStormT19Set4" />
+          <requirement name="HasBuff" buff="buffPZAECStormT19Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECStormT19Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT19Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECStormT19Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECStormT19Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECStormT19Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECTremorHelmetT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorHelmetDesc" />
+        <property name="CustomIcon" value="armorRaiderHelmet" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRaiderHelmet" />
+        <property name="ArmorGroup" value="groupPZAECTremorT16" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT16" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_metal_grab" />
+        <property name="SoundPlace" value="headwear_metal_place" />
+        <property name="SoundImpactHit" value="hitarmyhelmet" />
+        <property name="SoundImpactGraze" value="hitarmyhelmet" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T16 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".08" tags="buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorOutfitT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorOutfitDesc" />
+        <property name="CustomIcon" value="armorRaiderOutfit" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRaiderOutfit" />
+        <property name="ArmorGroup" value="groupPZAECTremorT16" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT16" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_metal_grab" />
+        <property name="SoundPlace" value="outfit_metal_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T16 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="15" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorGlovesT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorGlovesDesc" />
+        <property name="CustomIcon" value="armorRaiderGloves" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRaiderGloves" />
+        <property name="ArmorGroup" value="groupPZAECTremorT16" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT16" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T16 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="EntityDamage" operation="perc_add" value=".08" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorBootsT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorBootsDesc" />
+        <property name="CustomIcon" value="armorRaiderBoots" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorRaiderBoots" />
+        <property name="ArmorGroup" value="groupPZAECTremorT16" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT16" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T16 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Boots specialty" tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-.06" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECTremorDeviceT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECTremorDeviceT16Desc" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT16Set4" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT16Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECTremorT16Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT16Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT16Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECTremorT16Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECTremorT16Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECTremorHelmetT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorHelmetDesc" />
+        <property name="CustomIcon" value="armorRaiderHelmet" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRaiderHelmet" />
+        <property name="ArmorGroup" value="groupPZAECTremorT17" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT17" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_metal_grab" />
+        <property name="SoundPlace" value="headwear_metal_place" />
+        <property name="SoundImpactHit" value="hitarmyhelmet" />
+        <property name="SoundImpactGraze" value="hitarmyhelmet" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T17 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".10" tags="buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorOutfitT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorOutfitDesc" />
+        <property name="CustomIcon" value="armorRaiderOutfit" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRaiderOutfit" />
+        <property name="ArmorGroup" value="groupPZAECTremorT17" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT17" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_metal_grab" />
+        <property name="SoundPlace" value="outfit_metal_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T17 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="20" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorGlovesT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorGlovesDesc" />
+        <property name="CustomIcon" value="armorRaiderGloves" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRaiderGloves" />
+        <property name="ArmorGroup" value="groupPZAECTremorT17" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT17" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T17 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="EntityDamage" operation="perc_add" value=".10" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorBootsT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorBootsDesc" />
+        <property name="CustomIcon" value="armorRaiderBoots" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorRaiderBoots" />
+        <property name="ArmorGroup" value="groupPZAECTremorT17" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT17" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T17 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Boots specialty" tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-.08" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECTremorDeviceT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECTremorDeviceT17Desc" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT17Set4" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT17Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECTremorT17Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT17Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT17Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECTremorT17Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECTremorT17Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECTremorHelmetT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorHelmetDesc" />
+        <property name="CustomIcon" value="armorRaiderHelmet" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRaiderHelmet" />
+        <property name="ArmorGroup" value="groupPZAECTremorT18" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT18" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_metal_grab" />
+        <property name="SoundPlace" value="headwear_metal_place" />
+        <property name="SoundImpactHit" value="hitarmyhelmet" />
+        <property name="SoundImpactGraze" value="hitarmyhelmet" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T18 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".12" tags="buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorOutfitT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorOutfitDesc" />
+        <property name="CustomIcon" value="armorRaiderOutfit" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRaiderOutfit" />
+        <property name="ArmorGroup" value="groupPZAECTremorT18" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT18" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_metal_grab" />
+        <property name="SoundPlace" value="outfit_metal_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T18 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="25" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorGlovesT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorGlovesDesc" />
+        <property name="CustomIcon" value="armorRaiderGloves" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRaiderGloves" />
+        <property name="ArmorGroup" value="groupPZAECTremorT18" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT18" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T18 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="EntityDamage" operation="perc_add" value=".12" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorBootsT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorBootsDesc" />
+        <property name="CustomIcon" value="armorRaiderBoots" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorRaiderBoots" />
+        <property name="ArmorGroup" value="groupPZAECTremorT18" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT18" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T18 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Boots specialty" tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-.10" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECTremorDeviceT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECTremorDeviceT18Desc" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT18Set4" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT18Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECTremorT18Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT18Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT18Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECTremorT18Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECTremorT18Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECTremorHelmetT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorHelmetDesc" />
+        <property name="CustomIcon" value="armorRaiderHelmet" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRaiderHelmet" />
+        <property name="ArmorGroup" value="groupPZAECTremorT19" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT19" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_metal_grab" />
+        <property name="SoundPlace" value="headwear_metal_place" />
+        <property name="SoundImpactHit" value="hitarmyhelmet" />
+        <property name="SoundImpactGraze" value="hitarmyhelmet" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T19 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="24" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="24" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Helmet specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".15" tags="buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorOutfitT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorOutfitDesc" />
+        <property name="CustomIcon" value="armorRaiderOutfit" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRaiderOutfit" />
+        <property name="ArmorGroup" value="groupPZAECTremorT19" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT19" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_metal_grab" />
+        <property name="SoundPlace" value="outfit_metal_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T19 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="24" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="24" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="35" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorGlovesT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorGlovesDesc" />
+        <property name="CustomIcon" value="armorRaiderGloves" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRaiderGloves" />
+        <property name="ArmorGroup" value="groupPZAECTremorT19" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT19" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T19 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="24" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="24" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Gloves specialty" tiered="false">
+          <requirement name="HoldingItemHasTags" tags="melee" />
+          <passive_effect name="EntityDamage" operation="perc_add" value=".15" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECTremorBootsT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECTremorBootsDesc" />
+        <property name="CustomIcon" value="armorRaiderBoots" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorRaiderBoots" />
+        <property name="ArmorGroup" value="groupPZAECTremorT19" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorTremor,PZAECArmorT19" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Tremor T19 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="24" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="24" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.04" />
+        </effect_group>
+        <effect_group name="AEC Tremor Boots specialty" tiered="false">
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-.12" tags="secondary" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Raider/gear{sex}RaiderPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECTremorDeviceT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECTremorDeviceT19Desc" />
+        <property name="CustomIcon" value="modMeleeWeightedHead" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT19Set4" />
+          <requirement name="HasBuff" buff="buffPZAECTremorT19Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECTremorT19Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT19Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECTremorT19Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECTremorT19Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECTremorT19Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECWardenHelmetT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenHelmetDesc" />
+        <property name="CustomIcon" value="armorNomadHelmet" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorNomadHelmet" />
+        <property name="ArmorGroup" value="groupPZAECWardenT16" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT16" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T16 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Helmet specialty" tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value=".08" tags="buffFatiguedTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenOutfitT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenOutfitDesc" />
+        <property name="CustomIcon" value="armorNomadOutfit" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorNomadOutfit" />
+        <property name="ArmorGroup" value="groupPZAECWardenT16" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT16" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T16 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="20" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenGlovesT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenGlovesDesc" />
+        <property name="CustomIcon" value="armorNomadGloves" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorNomadGloves" />
+        <property name="ArmorGroup" value="groupPZAECWardenT16" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT16" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T16 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Gloves specialty" tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value=".10" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenBootsT16">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenBootsDesc" />
+        <property name="CustomIcon" value="armorNomadBoots" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="DisplayType" value="armorNomadBoots" />
+        <property name="ArmorGroup" value="groupPZAECWardenT16" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT16" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="4500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T16 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="20" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="1800" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".02" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECWardenDeviceT16">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECWardenDeviceT16Desc" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="66BBFF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT16Set4" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT16Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECWardenT16Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT16Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT16Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECWardenT16Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECWardenT16Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECWardenHelmetT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenHelmetDesc" />
+        <property name="CustomIcon" value="armorNomadHelmet" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorNomadHelmet" />
+        <property name="ArmorGroup" value="groupPZAECWardenT17" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT17" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T17 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Helmet specialty" tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value=".10" tags="buffFatiguedTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenOutfitT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenOutfitDesc" />
+        <property name="CustomIcon" value="armorNomadOutfit" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorNomadOutfit" />
+        <property name="ArmorGroup" value="groupPZAECWardenT17" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT17" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T17 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="30" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenGlovesT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenGlovesDesc" />
+        <property name="CustomIcon" value="armorNomadGloves" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorNomadGloves" />
+        <property name="ArmorGroup" value="groupPZAECWardenT17" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT17" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T17 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Gloves specialty" tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value=".15" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenBootsT17">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenBootsDesc" />
+        <property name="CustomIcon" value="armorNomadBoots" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="DisplayType" value="armorNomadBoots" />
+        <property name="ArmorGroup" value="groupPZAECWardenT17" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT17" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="7000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T17 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="21" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="21" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2200" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".03" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECWardenDeviceT17">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECWardenDeviceT17Desc" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="AA88FF" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT17Set4" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT17Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECWardenT17Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT17Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT17Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECWardenT17Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECWardenT17Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECWardenHelmetT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenHelmetDesc" />
+        <property name="CustomIcon" value="armorNomadHelmet" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorNomadHelmet" />
+        <property name="ArmorGroup" value="groupPZAECWardenT18" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT18" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T18 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Helmet specialty" tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value=".12" tags="buffFatiguedTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenOutfitT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenOutfitDesc" />
+        <property name="CustomIcon" value="armorNomadOutfit" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorNomadOutfit" />
+        <property name="ArmorGroup" value="groupPZAECWardenT18" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT18" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T18 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="40" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenGlovesT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenGlovesDesc" />
+        <property name="CustomIcon" value="armorNomadGloves" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorNomadGloves" />
+        <property name="ArmorGroup" value="groupPZAECWardenT18" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT18" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T18 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Gloves specialty" tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value=".20" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenBootsT18">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenBootsDesc" />
+        <property name="CustomIcon" value="armorNomadBoots" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="DisplayType" value="armorNomadBoots" />
+        <property name="ArmorGroup" value="groupPZAECWardenT18" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT18" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="9500" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T18 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="22" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="22" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="2600" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".04" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECWardenDeviceT18">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECWardenDeviceT18Desc" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="FFBB44" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT18Set4" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT18Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECWardenT18Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT18Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT18Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECWardenT18Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECWardenT18Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+      <item name="armorPZAECWardenHelmetT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenHelmetDesc" />
+        <property name="CustomIcon" value="armorNomadHelmet" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorNomadHelmet" />
+        <property name="ArmorGroup" value="groupPZAECWardenT19" />
+        <property name="Tags" value="head,armor,armorHead,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT19" />
+        <property name="EquipSlot" value="Head" />
+        <property name="SoundPickup" value="headwear_cloth_grab" />
+        <property name="SoundPlace" value="headwear_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T19 Helmet" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Helmet specialty" tiered="false">
+          <passive_effect name="BuffResistance" operation="base_add" value=".15" tags="buffFatiguedTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="head" />
+          <property name="Excludes" value="head" />
+          <property name="HairMaskType" value="None" />
+          <property name="FacialHairMaskType" value="None" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenOutfitT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenOutfitDesc" />
+        <property name="CustomIcon" value="armorNomadOutfit" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorNomadOutfit" />
+        <property name="ArmorGroup" value="groupPZAECWardenT19" />
+        <property name="Tags" value="upperbody,chest,armor,armorChest,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT19" />
+        <property name="EquipSlot" value="Chest" />
+        <property name="SoundPickup" value="outfit_cloth_grab" />
+        <property name="SoundPlace" value="outfit_cloth_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T19 Outfit" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Outfit specialty" tiered="false">
+          <passive_effect name="HealthMax" operation="base_add" value="50" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="body" />
+          <property name="Excludes" value="body" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenGlovesT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenGlovesDesc" />
+        <property name="CustomIcon" value="armorNomadGloves" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorNomadGloves" />
+        <property name="ArmorGroup" value="groupPZAECWardenT19" />
+        <property name="Tags" value="upperbody,hands,armor,armorHands,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT19" />
+        <property name="EquipSlot" value="Hands" />
+        <property name="SoundPickup" value="gloves_leather_grab" />
+        <property name="SoundPlace" value="gloves_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T19 Gloves" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Gloves specialty" tiered="false">
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value=".25" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="hands" />
+          <property name="Excludes" value="hands" />
+        </property>
+      </item>
+      <item name="armorPZAECWardenBootsT19">
+        <property name="Extends" value="armorHeavyMaster" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="armorPZAECWardenBootsDesc" />
+        <property name="CustomIcon" value="armorNomadBoots" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="DisplayType" value="armorNomadBoots" />
+        <property name="ArmorGroup" value="groupPZAECWardenT19" />
+        <property name="Tags" value="lowerbody,feet,armor,armorFeet,heavyArmor,heavyArmorPenalty,heavyArmorDeg,armorHeavySkill,PZAECArmorWarden,PZAECArmorT19" />
+        <property name="EquipSlot" value="Feet" />
+        <property name="SoundPickup" value="footwear_leather_grab" />
+        <property name="SoundPlace" value="footwear_leather_place" />
+        <property name="PZAECAdvancedLoot" value="true" />
+        <property name="EconomicValue" value="12000" />
+        <property name="SellableToTrader" value="false" />
+        <effect_group name="AEC Warden T19 Boots" tiered="false">
+          <passive_effect name="ModSlots" operation="base_set" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="23" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="23" tags="heat,electrical" />
+          <passive_effect name="BuffResistance" operation="base_add" value=".06" tags="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffAbrasionCatch,buffLaceration,buffInfectionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+          <passive_effect name="DegradationMax" operation="base_set" value="3000" />
+          <passive_effect name="DegradationPerUse" operation="base_set" value="1" tags="heavyArmorDeg" />
+          <passive_effect name="Mobility" operation="perc_add" value="-.03" />
+        </effect_group>
+        <effect_group name="AEC Warden Boots specialty" tiered="false">
+          <passive_effect name="RunSpeed" operation="perc_add" value=".05" />
+        </effect_group>
+        <property class="SDCS">
+          <property name="Prefab" value="@:Entities/Player/{sex}/Gear/Nomad/gear{sex}NomadPrefab.prefab" />
+          <property name="TransformName" value="feet" />
+          <property name="Excludes" value="feet" />
+        </property>
+      </item>
+      <item name="itemPZAECWardenDeviceT19">
+        <property name="Extends" value="resourceLegendaryParts" />
+        <property name="CreativeMode" value="Player" />
+        <property name="DescriptionKey" value="itemPZAECWardenDeviceT19Desc" />
+        <property name="CustomIcon" value="modArmorCustomizedFittings" />
+        <property name="CustomIconTint" value="FF6655" />
+        <property name="Stacknumber" value="1" />
+        <property name="SellableToTrader" value="false" />
+        <property class="Action0">
+          <property name="Class" value="Eat" />
+          <property name="Consume" value="false" />
+          <property name="Delay" value=".4" />
+          <property name="Sound_start" value="ui_mag_read" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT19Set4" />
+          <requirement name="HasBuff" buff="buffPZAECWardenT19Ready" />
+          <requirement name="!HasBuff" buff="buffPZAECWardenT19Cooldown" />
+        </property>
+        <effect_group tiered="false">
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT19Active" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffPZAECWardenT19Cooldown" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="RemoveBuff" buff="buffPZAECWardenT19Ready" />
+          <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$PZAECWardenT19Resonance" operation="set" value="0" />
+        </effect_group>
+      </item>
+    </append>
+  <!-- END GENERATED ENDGAME ARSENAL -->
 </configs>
