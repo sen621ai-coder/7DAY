@@ -26,6 +26,15 @@ Assert-Overflow ($guard::ClampValue([PassiveEffects]::DamageModifier, -2.5) -eq 
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::DamageModifier, [single]::PositiveInfinity) -eq 10000) 'Damage multiplier infinity was not saturated.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::HeadshotDamageModifier, 25000) -eq 10000) 'Headshot multiplier can still overflow.'
 Assert-Overflow ([single]::IsNaN($guard::ClampValue([PassiveEffects]::PhysicalDamageResist, [single]::NaN))) 'Unmanaged resistance semantics were changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::WeaponHandling, -0.25) -eq 0) 'Weapon handling can still become negative.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::SpreadMultiplierAiming, -0.5) -eq 0) 'Aiming spread multiplier can still become negative.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::SpreadDegreesHorizontal, -2) -eq 0) 'Spread magnitude can still become negative.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesHorizontalMin, [single]-0.3, [single]-0.05) -eq [single]-0.05) 'Valid leftward recoil was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesHorizontalMin, [single]-0.3, [single]0.2) -eq [single]0) 'Reduced leftward recoil crossed zero and reversed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesVerticalMin, [single]0.5, [single]-0.1) -eq [single]0) 'Reduced positive recoil crossed zero and reversed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesVerticalMin, [single]-0.6, [single]0.1) -eq [single]0) 'Valid negative vertical recoil crossed zero and reversed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesHorizontalMax, [single]0.8, [single]0.1) -eq [single]0.1) 'Valid positive recoil was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesHorizontalMax, [single]0.8, [single]::PositiveInfinity) -eq [single]360) 'Infinite recoil was not saturated.'
 
 $module = [Mono.Cecil.ModuleDefinition]::ReadModule((Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'))
 try {
@@ -41,4 +50,4 @@ finally {
     $module.Dispose()
 }
 
-Write-Host 'PASS: passive-effect overflow saturation, safe maxima, minima and negative modifier exclusions verified.'
+Write-Host 'PASS: passive-effect saturation, recoil direction, spread bounds, maxima, minima and negative modifier exclusions verified.'

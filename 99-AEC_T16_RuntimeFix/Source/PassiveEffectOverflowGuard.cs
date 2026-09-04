@@ -16,6 +16,7 @@ namespace AECT16RuntimeFix
         private const float QuantityCeiling = 1000000f;
         private const float RewardCeiling = 100000000f;
         private const float MultiplierCeiling = 10000f;
+        private const float RecoilDegreeCeiling = 360f;
 
         private static readonly HashSet<PassiveEffects> Reported = new HashSet<PassiveEffects>();
 
@@ -36,9 +37,9 @@ namespace AECT16RuntimeFix
             }
         }
 
-        public static void AfterGetValue(PassiveEffects _passiveEffect, ref float __result)
+        public static void AfterGetValue(PassiveEffects _passiveEffect, float _originalValue, ref float __result)
         {
-            float corrected = ClampValue(_passiveEffect, __result);
+            float corrected = ClampValue(_passiveEffect, _originalValue, __result);
             if (corrected == __result || (float.IsNaN(corrected) && float.IsNaN(__result))) return;
             Report(_passiveEffect, __result, corrected);
             __result = corrected;
@@ -46,8 +47,52 @@ namespace AECT16RuntimeFix
 
         public static float ClampValue(PassiveEffects effect, float value)
         {
+            return ClampValue(effect, value, value);
+        }
+
+        public static float ClampValue(PassiveEffects effect, float originalValue, float value)
+        {
             int rule = Rule(effect);
             if (rule == 0) return value;
+
+            // Recoil minima can intentionally be negative to aim the kick to
+            // the left or down. Keep that direction, but never let stacked
+            // reductions cross zero and reverse it.
+            if (rule == 7)
+            {
+                if (float.IsNaN(value)) return 0f;
+                if (originalValue > 0f)
+                {
+                    if (value < 0f || float.IsNegativeInfinity(value)) return 0f;
+                    if (value > RecoilDegreeCeiling || float.IsPositiveInfinity(value))
+                        return RecoilDegreeCeiling;
+                }
+                else if (originalValue < 0f)
+                {
+                    if (value > 0f || float.IsPositiveInfinity(value)) return 0f;
+                    if (value < -RecoilDegreeCeiling || float.IsNegativeInfinity(value))
+                        return -RecoilDegreeCeiling;
+                }
+                else
+                {
+                    if (float.IsPositiveInfinity(value) || value > RecoilDegreeCeiling)
+                        return RecoilDegreeCeiling;
+                    if (float.IsNegativeInfinity(value) || value < -RecoilDegreeCeiling)
+                        return -RecoilDegreeCeiling;
+                }
+                return value;
+            }
+
+            // Handling, spread and spread multipliers describe magnitudes.
+            // Negative totals invert weapon behavior and are never meaningful.
+            if (rule == 6)
+            {
+                if (float.IsNaN(value) || float.IsNegativeInfinity(value) || value < 0f)
+                    return 0f;
+                if (float.IsPositiveInfinity(value) || value > MultiplierCeiling)
+                    return MultiplierCeiling;
+                return value;
+            }
 
             // Multipliers may legitimately be negative debuffs. Limit only
             // their positive side so those mechanics keep their meaning.
@@ -137,6 +182,24 @@ namespace AECT16RuntimeFix
                 case PassiveEffects.GrazeDamageMultiplier:
                 case PassiveEffects.ExplosionIncomingDamage:
                     return 5;
+
+                case PassiveEffects.WeaponHandling:
+                case PassiveEffects.IncrementalSpreadMultiplier:
+                case PassiveEffects.SpreadMultiplierHip:
+                case PassiveEffects.SpreadMultiplierAiming:
+                case PassiveEffects.SpreadMultiplierRunning:
+                case PassiveEffects.SpreadMultiplierWalking:
+                case PassiveEffects.SpreadMultiplierCrouching:
+                case PassiveEffects.SpreadMultiplierIdle:
+                case PassiveEffects.SpreadDegreesVertical:
+                case PassiveEffects.SpreadDegreesHorizontal:
+                    return 6;
+
+                case PassiveEffects.KickDegreesVerticalMin:
+                case PassiveEffects.KickDegreesHorizontalMin:
+                case PassiveEffects.KickDegreesVerticalMax:
+                case PassiveEffects.KickDegreesHorizontalMax:
+                    return 7;
 
                 default:
                     return 0;
