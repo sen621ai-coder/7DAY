@@ -29,42 +29,30 @@ function Get-InheritedProperty([hashtable]$map,[string]$id,[string]$property) {
     }
     return ''
 }
-Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.15\.2"') 'Runtime version was not bumped'
+Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.15\.4"') 'Runtime version was not bumped'
 Assert-Balance (Test-Path (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ENDGAME_REWARD_BALANCE.md')) 'Missing reward guide'
 
 # Apply the real configuration operations in load order, including this patch.
 [xml]$loot = Get-Content (Join-Path $modRoot '../Data/Config/loot.xml') -Raw
 Apply-Config $loot ([xml](Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/loot.xml') -Raw))
-$knownGroups=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-foreach($group in $loot.SelectNodes('/lootcontainers/lootgroup[@name]')){[void]$knownGroups.Add([string]$group.name)}
-# References may target groups contributed by any earlier mod, not only the
-# vanilla file and Tweaks document used by the focused merge assertions below.
-foreach($directory in Get-ChildItem $modRoot -Directory | Sort-Object Name){
-    if($directory.Name -ge '99-AEC_T16_RuntimeFix'){continue}
-    $path=Join-Path $directory.FullName 'Config/loot.xml'
-    if(-not (Test-Path $path)){continue}
-    [xml]$earlier=Get-Content $path -Raw
-    foreach($group in $earlier.SelectNodes('//lootgroup[@name]')){[void]$knownGroups.Add([string]$group.name)}
-}
 [xml]$runtimeLootPatch=Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/loot.xml') -Raw
-# The game validates group references after each XML operation. A final merged
-# tree can therefore look valid even though an early set/append already failed.
-foreach($op in $runtimeLootPatch.DocumentElement.ChildNodes){
-    if($op.NodeType -ne 'Element'){continue}
-    if($op.LocalName -eq 'append' -and $op.xpath -eq '/lootcontainers'){
-        foreach($child in $op.ChildNodes){
-            if($child.NodeType -ne 'Element'){continue}
-            foreach($item in $child.SelectNodes('.//item[@group]')){
-                Assert-Balance ($knownGroups.Contains([string]$item.group)) "Forward lootgroup reference before definition: $($item.group) in $($child.name)"
-            }
-            if($child.LocalName -eq 'lootgroup'){[void]$knownGroups.Add([string]$child.name)}
-        }
-    }
-    if($op.LocalName -eq 'set' -and $op.xpath.EndsWith('/@group')){
-        Assert-Balance ($knownGroups.Contains($op.InnerText.Trim())) "Set references lootgroup before definition: $($op.InnerText.Trim())"
-    }
-}
 Apply-Config $loot $runtimeLootPatch -Strict
+
+# Rebuild the complete loot document in actual mod-folder order, then emulate
+# LootFromXml's single forward pass. This catches a group that exists in the
+# final XML but is physically located after a container that references it.
+[xml]$fullLoot=Get-Content (Join-Path $modRoot '../Data/Config/loot.xml') -Raw
+foreach($directory in Get-ChildItem $modRoot -Directory | Sort-Object Name){
+    $path=Join-Path $directory.FullName 'Config/loot.xml'
+    if(Test-Path $path){Apply-Config $fullLoot ([xml](Get-Content $path -Raw))}
+}
+$parsedGroups=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+foreach($node in $fullLoot.SelectNodes('/lootcontainers/*[self::lootgroup or self::lootcontainer]')){
+    foreach($item in $node.SelectNodes('item[@group]')){
+        Assert-Balance ($parsedGroups.Contains([string]$item.group)) "Final-order forward lootgroup reference: $($item.group) in $($node.name)"
+    }
+    if($node.LocalName -eq 'lootgroup'){[void]$parsedGroups.Add([string]$node.name)}
+}
 [xml]$quests = Get-Content (Join-Path $modRoot '../Data/Config/quests.xml') -Raw
 Apply-Config $quests ([xml](Get-Content (Join-Path $modRoot '04-AEC-ENDGAME_OVERHAUL/Config/quests.xml') -Raw))
 Apply-Config $quests ([xml](Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/quests.xml') -Raw))

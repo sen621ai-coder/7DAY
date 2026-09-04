@@ -84,6 +84,16 @@ namespace AECT16RuntimeFix
             return -1;
         }
 
+        // The native trader dialog labels a quest with ResponseText. All three
+        // affix contracts inherit the clear template, so without this bridge the
+        // six distinct offers appear to be only Clear / Infested / Fetch.
+        public static string LegendaryOfferText(string id, string currentText, string questName)
+        {
+            return LegendaryAdventure.ContractTier(id) != 0 && !string.IsNullOrEmpty(questName)
+                ? questName
+                : currentText;
+        }
+
         public static void ResponsePrefix(string _returnStatementID, ref string _questID,
             ref string _type, ref int _listIndex, ref int _tier, out int __state)
         {
@@ -138,6 +148,11 @@ namespace AECT16RuntimeFix
             if (__state < 0 || !__instance.IsValid) return;
             foreach (var action in __instance.Actions)
                 if (action is DialogActionAddQuest add) add.ListIndex = __state;
+            var quest = __instance.Quest;
+            var questClass = quest == null ? null : quest.QuestClass;
+            if (questClass != null)
+                __instance.Text = LegendaryOfferText(quest.ID, __instance.Text,
+                    quest.GetParsedText(questClass.Name));
         }
 
         public static bool PacketPrefix(NetPackageQuestGotoPoint __instance, World _world)

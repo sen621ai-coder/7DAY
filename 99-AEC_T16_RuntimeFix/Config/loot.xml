@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
-  <append xpath="/lootcontainers">
+  <!-- These groups must physically precede the 98 mod's existing mob containers:
+       LootFromXml resolves group references in final document order. -->
+  <insertBefore xpath="/lootcontainers/lootcontainer[@name='PZAECMobT16_zPackReg']">
     <lootgroup name="PZAECMobBonusT16">
       <item name="ammo762mmBulletAP" count="60,100" />
       <item name="resourceRepairKit" count="3,5" />
@@ -44,26 +46,6 @@
       <item group="groupZpackPlague" />
       <item group="PZAECMobBonusT16" prob=".12" force_prob="true" />
     </lootgroup>
-    <lootgroup name="PZAECBossLootBundleT17_Content" count="all">
-      <item group="groupAmmoImpLarge" count="8" prob="1" force_prob="true" />
-      <item group="groupAmmoDU" count="4" prob=".80" force_prob="true" />
-      <item group="groupMiniBoss01" count="6" prob="1" force_prob="true" />
-      <item group="groupZpackBoss02" count="6" prob="1" force_prob="true" />
-      <item group="groupZpackBoss03" count="4" prob="1" force_prob="true" />
-      <item group="groupBossAlloys" count="3" prob=".90" force_prob="true" />
-      <item group="groupZpackBoss04" count="1" prob=".80" force_prob="true" />
-      <item group="groupRareMods" count="1" prob=".60" force_prob="true" />
-      <item group="groupUniqModsAll" count="1" prob=".45" force_prob="true" />
-      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".40" force_prob="true" />
-      <item group="groupSkillBook" count="1" prob=".25" force_prob="true" />
-      <item group="groupUnique_Weapon" count="1" prob=".28" force_prob="true" />
-      <item group="groupLegend_Weapon" count="1" prob=".16" force_prob="true" />
-      <item group="groupLegend_MeleeWeapon" count="1" prob=".20" force_prob="true" />
-      <item group="groupUniqueParts" count="1" prob=".12" force_prob="true" />
-    </lootgroup>
-    <lootcontainer name="PZAECBossLootBundleT17" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
-      <item group="PZAECBossLootBundleT17_Content" />
-    </lootcontainer>
     <lootgroup name="PZAECMobBonusT17">
       <item name="ammo762mmBulletAP" count="100,160" />
       <item name="resourceRepairKit" count="4,6" />
@@ -107,26 +89,6 @@
       <item group="groupZpackPlague" />
       <item group="PZAECMobBonusT17" prob=".16" force_prob="true" />
     </lootgroup>
-    <lootgroup name="PZAECBossLootBundleT18_Content" count="all">
-      <item group="groupAmmoImpLarge" count="10" prob="1" force_prob="true" />
-      <item group="groupAmmoDU" count="5" prob=".90" force_prob="true" />
-      <item group="groupMiniBoss01" count="8" prob="1" force_prob="true" />
-      <item group="groupZpackBoss02" count="8" prob="1" force_prob="true" />
-      <item group="groupZpackBoss03" count="5" prob="1" force_prob="true" />
-      <item group="groupBossAlloys" count="4" prob="1" force_prob="true" />
-      <item group="groupZpackBoss04" count="2" prob=".90" force_prob="true" />
-      <item group="groupRareMods" count="2" prob=".70" force_prob="true" />
-      <item group="groupUniqModsAll" count="1" prob=".55" force_prob="true" />
-      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".50" force_prob="true" />
-      <item group="groupSkillBook" count="2" prob=".30" force_prob="true" />
-      <item group="groupUnique_Weapon" count="1" prob=".35" force_prob="true" />
-      <item group="groupLegend_Weapon" count="1" prob=".24" force_prob="true" />
-      <item group="groupLegend_MeleeWeapon" count="1" prob=".28" force_prob="true" />
-      <item group="groupUniqueParts" count="1" prob=".18" force_prob="true" />
-    </lootgroup>
-    <lootcontainer name="PZAECBossLootBundleT18" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
-      <item group="PZAECBossLootBundleT18_Content" />
-    </lootcontainer>
     <lootgroup name="PZAECMobBonusT18">
       <item name="ammo762mmBulletAP" count="150,240" />
       <item name="resourceRepairKit" count="5,8" />
@@ -170,26 +132,6 @@
       <item group="groupZpackPlague" />
       <item group="PZAECMobBonusT18" prob=".20" force_prob="true" />
     </lootgroup>
-    <lootgroup name="PZAECBossLootBundleT19_Content" count="all">
-      <item group="groupAmmoImpLarge" count="12" prob="1" force_prob="true" />
-      <item group="groupAmmoDU" count="6" prob="1" force_prob="true" />
-      <item group="groupMiniBoss01" count="10" prob="1" force_prob="true" />
-      <item group="groupZpackBoss02" count="10" prob="1" force_prob="true" />
-      <item group="groupZpackBoss03" count="6" prob="1" force_prob="true" />
-      <item group="groupBossAlloys" count="5" prob="1" force_prob="true" />
-      <item group="groupZpackBoss04" count="2" prob="1" force_prob="true" />
-      <item group="groupRareMods" count="2" prob=".80" force_prob="true" />
-      <item group="groupUniqModsAll" count="2" prob=".65" force_prob="true" />
-      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".60" force_prob="true" />
-      <item group="groupSkillBook" count="2" prob=".40" force_prob="true" />
-      <item group="groupUnique_Weapon" count="1" prob=".45" force_prob="true" />
-      <item group="groupLegend_Weapon" count="1" prob=".34" force_prob="true" />
-      <item group="groupLegend_MeleeWeapon" count="1" prob=".40" force_prob="true" />
-      <item group="groupUniqueParts" count="1" prob=".25" force_prob="true" />
-    </lootgroup>
-    <lootcontainer name="PZAECBossLootBundleT19" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
-      <item group="PZAECBossLootBundleT19_Content" />
-    </lootcontainer>
     <lootgroup name="PZAECMobBonusT19">
       <item name="ammo762mmBulletAP" count="220,350" />
       <item name="resourceRepairKit" count="6,10" />
@@ -233,6 +175,68 @@
       <item group="groupZpackPlague" />
       <item group="PZAECMobBonusT19" prob=".25" force_prob="true" />
     </lootgroup>
+  </insertBefore>
+  <append xpath="/lootcontainers">
+    <lootgroup name="PZAECBossLootBundleT17_Content" count="all">
+      <item group="groupAmmoImpLarge" count="8" prob="1" force_prob="true" />
+      <item group="groupAmmoDU" count="4" prob=".80" force_prob="true" />
+      <item group="groupMiniBoss01" count="6" prob="1" force_prob="true" />
+      <item group="groupZpackBoss02" count="6" prob="1" force_prob="true" />
+      <item group="groupZpackBoss03" count="4" prob="1" force_prob="true" />
+      <item group="groupBossAlloys" count="3" prob=".90" force_prob="true" />
+      <item group="groupZpackBoss04" count="1" prob=".80" force_prob="true" />
+      <item group="groupRareMods" count="1" prob=".60" force_prob="true" />
+      <item group="groupUniqModsAll" count="1" prob=".45" force_prob="true" />
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".40" force_prob="true" />
+      <item group="groupSkillBook" count="1" prob=".25" force_prob="true" />
+      <item group="groupUnique_Weapon" count="1" prob=".28" force_prob="true" />
+      <item group="groupLegend_Weapon" count="1" prob=".16" force_prob="true" />
+      <item group="groupLegend_MeleeWeapon" count="1" prob=".20" force_prob="true" />
+      <item group="groupUniqueParts" count="1" prob=".12" force_prob="true" />
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT17" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <item group="PZAECBossLootBundleT17_Content" />
+    </lootcontainer>
+    <lootgroup name="PZAECBossLootBundleT18_Content" count="all">
+      <item group="groupAmmoImpLarge" count="10" prob="1" force_prob="true" />
+      <item group="groupAmmoDU" count="5" prob=".90" force_prob="true" />
+      <item group="groupMiniBoss01" count="8" prob="1" force_prob="true" />
+      <item group="groupZpackBoss02" count="8" prob="1" force_prob="true" />
+      <item group="groupZpackBoss03" count="5" prob="1" force_prob="true" />
+      <item group="groupBossAlloys" count="4" prob="1" force_prob="true" />
+      <item group="groupZpackBoss04" count="2" prob=".90" force_prob="true" />
+      <item group="groupRareMods" count="2" prob=".70" force_prob="true" />
+      <item group="groupUniqModsAll" count="1" prob=".55" force_prob="true" />
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".50" force_prob="true" />
+      <item group="groupSkillBook" count="2" prob=".30" force_prob="true" />
+      <item group="groupUnique_Weapon" count="1" prob=".35" force_prob="true" />
+      <item group="groupLegend_Weapon" count="1" prob=".24" force_prob="true" />
+      <item group="groupLegend_MeleeWeapon" count="1" prob=".28" force_prob="true" />
+      <item group="groupUniqueParts" count="1" prob=".18" force_prob="true" />
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT18" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <item group="PZAECBossLootBundleT18_Content" />
+    </lootcontainer>
+    <lootgroup name="PZAECBossLootBundleT19_Content" count="all">
+      <item group="groupAmmoImpLarge" count="12" prob="1" force_prob="true" />
+      <item group="groupAmmoDU" count="6" prob="1" force_prob="true" />
+      <item group="groupMiniBoss01" count="10" prob="1" force_prob="true" />
+      <item group="groupZpackBoss02" count="10" prob="1" force_prob="true" />
+      <item group="groupZpackBoss03" count="6" prob="1" force_prob="true" />
+      <item group="groupBossAlloys" count="5" prob="1" force_prob="true" />
+      <item group="groupZpackBoss04" count="2" prob="1" force_prob="true" />
+      <item group="groupRareMods" count="2" prob=".80" force_prob="true" />
+      <item group="groupUniqModsAll" count="2" prob=".65" force_prob="true" />
+      <item group="PZAECBossLoot_UniqueMods_ByFamily" count="1" prob=".60" force_prob="true" />
+      <item group="groupSkillBook" count="2" prob=".40" force_prob="true" />
+      <item group="groupUnique_Weapon" count="1" prob=".45" force_prob="true" />
+      <item group="groupLegend_Weapon" count="1" prob=".34" force_prob="true" />
+      <item group="groupLegend_MeleeWeapon" count="1" prob=".40" force_prob="true" />
+      <item group="groupUniqueParts" count="1" prob=".25" force_prob="true" />
+    </lootgroup>
+    <lootcontainer name="PZAECBossLootBundleT19" count="1" size="7,8" sound_open="UseActions/open_garbage" sound_close="silencefiller" loot_quality_template="qualPlus1Template" destroy_on_close="empty" unique_item="true" ignore_loot_abundance="true" unmodified_lootstage="true">
+      <item group="PZAECBossLootBundleT19_Content" />
+    </lootcontainer>
     <lootcontainer name="AECDumdumBossLootT17" count="16" size="7,5" sound_open="UseActions/open_backpack" sound_close="UseActions/close_backpack" open_time="5" loot_quality_template="qualPlus1Template" ignore_loot_abundance="true">
       <item name="itemPZAECBossLootBundleT17" count="1" prob="1" force_prob="true" />
       <item name="itemPZAECBossLootBundleT17" count="1" prob=".40" force_prob="true" />

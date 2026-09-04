@@ -95,6 +95,12 @@ public static class LegendaryNetworkingRegression
         var many = Enumerable.Repeat("base6", 256).Concat(new[]{"wanted"}).ToList();
         Check(LegendaryQuestNetworking.ResolveIndex(many, Enumerable.Repeat(6,257).ToList(), Enumerable.Repeat(true,257).ToList(),
             "wanted", 0, out removal) == -1, "Byte removal overflow");
+        Check(LegendaryQuestNetworking.LegendaryOfferText("aec_quest_T19_A5_clear_hunter", "Clear", "T19 Hunters") == "T19 Hunters",
+            "Affix offer is still disguised as a generic clear quest");
+        Check(LegendaryQuestNetworking.LegendaryOfferText("tier6_clear", "Clear", "Vanilla") == "Clear",
+            "Unrelated trader offer label changed");
+        Check(LegendaryQuestNetworking.LegendaryOfferText("aec_quest_T16_A1_clear_storm", "Clear", "") == "Clear",
+            "Missing localization erased the offer label");
 
         string id = "keep", type = "keep";
         int index = 3, tier = 6, state;
@@ -110,7 +116,7 @@ public static class LegendaryNetworkingRegression
         LegendaryQuestNetworking.ResponsePostfix(response, 17);
         Check(action.ListIndex == 17, "Removal index not applied to real dialog action");
         Check(!LegendaryQuestNetworking.PacketPrefix(null, null), "Null world packet not rejected");
-        return "PASS: per-player cached-list mapping, sparse pages, no local quest creation, difficulty-relative removal and byte-limit guards.";
+        return "PASS: per-player cached-list mapping, distinct legendary labels, sparse pages, no local quest creation, difficulty-relative removal and byte-limit guards.";
     }
 
     public static string Wire()
