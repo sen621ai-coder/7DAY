@@ -17,6 +17,7 @@ namespace AECT16RuntimeFix
         private const float RewardCeiling = 100000000f;
         private const float MultiplierCeiling = 10000f;
         private const float RecoilDegreeCeiling = 360f;
+        private const float MovementCeiling = 100f;
 
         private static readonly HashSet<PassiveEffects> Reported = new HashSet<PassiveEffects>();
 
@@ -80,6 +81,19 @@ namespace AECT16RuntimeFix
                     if (float.IsNegativeInfinity(value) || value < -RecoilDegreeCeiling)
                         return -RecoilDegreeCeiling;
                 }
+                return value;
+            }
+
+            // Movement values are absolute speeds/impulses at gameplay call
+            // sites. Zero is valid for immobilizing effects; negative values,
+            // NaN and infinities are not. Falling back to the native value
+            // prevents excessive stacking from reversing movement or jumping.
+            if (rule == 8)
+            {
+                if (float.IsNaN(value) || float.IsNegativeInfinity(value) || value < 0f)
+                    return FallbackToOriginal(originalValue, 0f, MovementCeiling);
+                if (float.IsPositiveInfinity(value) || value > MovementCeiling)
+                    return MovementCeiling;
                 return value;
             }
 
@@ -210,6 +224,13 @@ namespace AECT16RuntimeFix
                 case PassiveEffects.KickDegreesVerticalMax:
                 case PassiveEffects.KickDegreesHorizontalMax:
                     return 7;
+
+                case PassiveEffects.JumpStrength:
+                case PassiveEffects.WalkSpeed:
+                case PassiveEffects.RunSpeed:
+                case PassiveEffects.CrouchSpeed:
+                case PassiveEffects.MovementFactorMultiplier:
+                    return 8;
 
                 default:
                     return 0;

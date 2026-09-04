@@ -39,6 +39,12 @@ Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesVerticalMin, [s
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesVerticalMin, [single]-0.6, [single]0.1) -eq [single]0) 'Valid negative vertical recoil crossed zero and reversed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesHorizontalMax, [single]0.8, [single]0.1) -eq [single]0.1) 'Valid positive recoil was changed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::KickDegreesHorizontalMax, [single]0.8, [single]::PositiveInfinity) -eq [single]360) 'Infinite recoil was not saturated.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::JumpStrength, [single]8, [single]-2) -eq [single]8) 'Invalid jump strength did not fall back to native strength.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::JumpStrength, [single]8, [single]0) -eq [single]0) 'Intentional jump immobilization was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::JumpStrength, [single]8, [single]::PositiveInfinity) -eq [single]100) 'Infinite jump strength was not saturated.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::RunSpeed, [single]4, [single]-1) -eq [single]4) 'Invalid run speed did not fall back to native speed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::WalkSpeed, [single]1.65, [single]0) -eq [single]0) 'Intentional movement immobilization was changed.'
+Assert-Overflow ($guard::ClampValue([PassiveEffects]::Mobility, [single]-0.25) -eq [single]-0.25) 'Signed armor mobility semantics were changed.'
 
 $module = [Mono.Cecil.ModuleDefinition]::ReadModule((Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'))
 try {

@@ -99,5 +99,5 @@ foreach ($key in @('PZAECStrongholdNeedCore','PZAECStrongholdNeedPower','PZAECSt
     'PZAECStrongholdCoreLost','PZAECStrongholdPowerLost','PZAECStrongholdSupplyLost','PZAECStrongholdComplete')) {
     Assert-Stronghold ($localization.ContainsKey($key) -and -not [string]::IsNullOrWhiteSpace($localization[$key].schinese)) "Missing stronghold text $key"
 }
-Assert-Stronghold ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.16\.6"') 'Runtime version was not bumped'
+Assert-Stronghold ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.16\.7"') 'Runtime version was not bumped'
 'PASS: three craftable 12k+ HP facilities, native parents, Chinese text and 12 exact-tier construction bonus events.'

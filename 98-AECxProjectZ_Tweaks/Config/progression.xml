@@ -297,7 +297,6 @@ RU: Spring Heel должен масштабировать JumpStrength в про
   <set xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/passive_effect[@name='JumpStrength']/@value">.005,.1,2</set>
   <!-- EN: Replace descriptions tied to obsolete Spring Heel values with neutral localized text.
 RU: Описания, рассчитанные на устаревшие значения Spring Heel, заменяются нейтральным локализованным текстом.-->
-  <remove xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group/effect_description"/>
   <append xpath="/progression/perks/perk[@name='perkAecSpringHeel']/effect_group">
     <effect_description level="1" desc_key="perkAecSpringHeelEffectStartDesc" long_desc_key="perkAecSpringHeelEffectStartDesc"/>
     <effect_description level="2" desc_key="perkAecSpringHeelEffectProgressDesc" long_desc_key="perkAecSpringHeelEffectProgressDesc"/>

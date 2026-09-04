@@ -3,6 +3,13 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.7 movement-effect safety
+-------------------------
+- Jump, walk, run, crouch and movement-factor results now reject negative,
+  NaN and infinite gameplay values while preserving intentional zero-speed effects.
+- Spring Heel's final loaded configuration is verified at +0.5% to +200%
+  across 100 ranks, and its obsolete XML-patch warning is removed in Tweaks 3.9.8.
+
 Runtime 1.16.6 current-save tier pacing
 -------------------------
 - T15 now extends through GS 179999. T16/T17/T18/T19 begin at GS
@@ -171,7 +178,7 @@ Voluntary Base Defense (Runtime 1.12.0)
 - 44 isolated enemy classes inherit existing tier stats/loot; high-tier navigation
   recognizes their wave IDs. Eight defense commanders inherit the existing weaknesses.
 - Both host/server and clients must update the whole 99-AEC_T16_RuntimeFix folder
-  and restart without EAC, retaining matching Tweaks 3.9.7.
+  and restart without EAC, retaining matching Tweaks 3.9.8.
 - Offline regressions passed; no live gameplay or multiplayer testing performed.
 
 Legendary Adventures (Runtime 1.11.0)
@@ -201,7 +208,7 @@ Legendary Adventures (Runtime 1.11.0)
   start trials in cramped terrain, and finish before disconnecting if possible.
   Accepted requests are never blindly replayed; abandoning does not refund vouchers.
 - Update the whole 99-AEC_T16_RuntimeFix folder on host, server and all clients;
-  retain matching 98-AECxProjectZ_Tweaks 3.9.7. Fully restart without EAC.
+  retain matching 98-AECxProjectZ_Tweaks 3.9.8. Fully restart without EAC.
 - Offline build and regression tests passed; in-game/two-player smoke testing is
   still required. No live game or save was launched or edited for this update.
 
