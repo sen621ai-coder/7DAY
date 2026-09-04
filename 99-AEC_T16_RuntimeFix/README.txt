@@ -3,6 +3,13 @@ AEC T16-T19 Runtime Fix
 
 This compatibility layer completes the runtime side of the T16-T19 enemy tiers.
 
+Runtime 1.16.4 automatic-fire overflow hotfix
+-------------------------
+- Invalid negative fire rates now fall back to each weapon's native rate
+  instead of being forced to one round per minute.
+- Valid zero-valued counts stay zero, and WeaponHandling keeps its native
+  signed semantics while recoil angles remain protected from reversal.
+
 Runtime 1.16.3 Blood Moon siege random-source hotfix
 -------------------------
 - Blood Moon engineering-squad replacement now mirrors the native selector's

@@ -83,12 +83,13 @@ namespace AECT16RuntimeFix
                 return value;
             }
 
-            // Handling, spread and spread multipliers describe magnitudes.
-            // Negative totals invert weapon behavior and are never meaningful.
+            // Spread and spread multipliers describe magnitudes. If stacked
+            // reductions cross zero, use the item's native value instead of
+            // zero: a zero timing/magnitude can break weapon state machines.
             if (rule == 6)
             {
                 if (float.IsNaN(value) || float.IsNegativeInfinity(value) || value < 0f)
-                    return 0f;
+                    return FallbackToOriginal(originalValue, 0f, MultiplierCeiling);
                 if (float.IsPositiveInfinity(value) || value > MultiplierCeiling)
                     return MultiplierCeiling;
                 return value;
@@ -103,16 +104,26 @@ namespace AECT16RuntimeFix
                 return value;
             }
 
-            float minimum = rule == 3 ? 1f : 0f;
+            float minimum = 0f;
             float maximum = rule == 1 ? DamageCeiling :
                 rule == 2 ? VitalCeiling :
                 rule == 3 ? QuantityCeiling : RewardCeiling;
 
             if (float.IsNaN(value) || float.IsNegativeInfinity(value) || value < minimum)
-                return minimum;
+                return FallbackToOriginal(originalValue, minimum, maximum);
             if (float.IsPositiveInfinity(value) || value > maximum)
                 return maximum;
             return value;
+        }
+
+        private static float FallbackToOriginal(float originalValue, float minimum, float maximum)
+        {
+            if (float.IsNaN(originalValue) || float.IsNegativeInfinity(originalValue) ||
+                originalValue < minimum)
+                return minimum;
+            if (float.IsPositiveInfinity(originalValue) || originalValue > maximum)
+                return maximum;
+            return originalValue;
         }
 
         // Only final values which have no valid negative meaning are guarded.
@@ -183,7 +194,6 @@ namespace AECT16RuntimeFix
                 case PassiveEffects.ExplosionIncomingDamage:
                     return 5;
 
-                case PassiveEffects.WeaponHandling:
                 case PassiveEffects.IncrementalSpreadMultiplier:
                 case PassiveEffects.SpreadMultiplierHip:
                 case PassiveEffects.SpreadMultiplierAiming:
