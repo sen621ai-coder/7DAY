@@ -30,7 +30,7 @@
       <duration value="8" />
     </buff>
   </append>
-  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+<!-- BEGIN GENERATED ENDGAME ARSENAL -->
     <append xpath="/buffs/buff[@name='buffStatusCheck02']">
       <effect_group>
         <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECHarrierT16Set2">
@@ -519,6 +519,7 @@
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
           <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".05" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.8" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT16Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -526,7 +527,7 @@
         <display_value value="$PZAECHarrierT16Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT16Resonance" operation="add" value="10">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT16Resonance" operation="add" value="16">
             <requirement name="CVarCompare" cvar="$PZAECHarrierT16Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT16Active" />
@@ -555,22 +556,23 @@
       </buff>
       <buff name="buffPZAECHarrierT16Active" name_key="buffPZAECHarrierActiveName" description_key="buffPZAECHarrierActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="8" />
+        <duration value="12" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".08" />
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".10" tags="head" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="1" tags="head" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT16Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="36" />
+        <duration value="30" />
       </buff>
       <buff name="buffPZAECHarrierT17Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
           <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".06" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.1" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT17Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -578,7 +580,7 @@
         <display_value value="$PZAECHarrierT17Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT17Resonance" operation="add" value="11">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT17Resonance" operation="add" value="20">
             <requirement name="CVarCompare" cvar="$PZAECHarrierT17Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT17Active" />
@@ -607,22 +609,23 @@
       </buff>
       <buff name="buffPZAECHarrierT17Active" name_key="buffPZAECHarrierActiveName" description_key="buffPZAECHarrierActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="9" />
+        <duration value="16" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".10" />
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".12" tags="head" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.4" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="1.4" tags="head" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT17Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="34" />
+        <duration value="26" />
       </buff>
       <buff name="buffPZAECHarrierT18Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
           <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".07" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT18Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -630,7 +633,7 @@
         <display_value value="$PZAECHarrierT18Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT18Resonance" operation="add" value="12">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT18Resonance" operation="add" value="25">
             <requirement name="CVarCompare" cvar="$PZAECHarrierT18Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT18Active" />
@@ -659,22 +662,23 @@
       </buff>
       <buff name="buffPZAECHarrierT18Active" name_key="buffPZAECHarrierActiveName" description_key="buffPZAECHarrierActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="10" />
+        <duration value="20" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".12" />
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".15" tags="head" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.9" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="1.9" tags="head" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT18Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="32" />
+        <duration value="22" />
       </buff>
       <buff name="buffPZAECHarrierT19Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
           <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".08" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT19Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -682,7 +686,7 @@
         <display_value value="$PZAECHarrierT19Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT19Resonance" operation="add" value="14">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT19Resonance" operation="add" value="34">
             <requirement name="CVarCompare" cvar="$PZAECHarrierT19Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT19Active" />
@@ -711,21 +715,22 @@
       </buff>
       <buff name="buffPZAECHarrierT19Active" name_key="buffPZAECHarrierActiveName" description_key="buffPZAECHarrierActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="12" />
+        <duration value="24" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".15" />
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".20" tags="head" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2.6" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="2.6" tags="head" />
         </effect_group>
       </buff>
       <buff name="buffPZAECHarrierT19Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="30" />
+        <duration value="18" />
       </buff>
       <buff name="buffPZAECStormT16Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="StaminaMax" operation="base_add" value="20" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.8" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT16Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -733,7 +738,7 @@
         <display_value value="$PZAECStormT16Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT16Resonance" operation="add" value="4">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT16Resonance" operation="add" value="8">
             <requirement name="CVarCompare" cvar="$PZAECStormT16Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT16Active" />
@@ -761,23 +766,24 @@
       </buff>
       <buff name="buffPZAECStormT16Active" name_key="buffPZAECStormActiveName" description_key="buffPZAECStormActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="8" />
+        <duration value="12" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".15" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".10" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.65" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.65" />
           <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value=".20" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.10" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT16Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="36" />
+        <duration value="30" />
       </buff>
       <buff name="buffPZAECStormT17Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="StaminaMax" operation="base_add" value="25" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.1" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT17Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -785,7 +791,7 @@
         <display_value value="$PZAECStormT17Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT17Resonance" operation="add" value="5">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT17Resonance" operation="add" value="10">
             <requirement name="CVarCompare" cvar="$PZAECStormT17Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT17Active" />
@@ -813,23 +819,24 @@
       </buff>
       <buff name="buffPZAECStormT17Active" name_key="buffPZAECStormActiveName" description_key="buffPZAECStormActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="9" />
+        <duration value="16" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".20" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".12" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.9" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.9" />
           <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value=".20" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.10" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT17Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="34" />
+        <duration value="26" />
       </buff>
       <buff name="buffPZAECStormT18Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="StaminaMax" operation="base_add" value="30" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT18Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -837,7 +844,7 @@
         <display_value value="$PZAECStormT18Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT18Resonance" operation="add" value="6">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT18Resonance" operation="add" value="13">
             <requirement name="CVarCompare" cvar="$PZAECStormT18Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT18Active" />
@@ -865,23 +872,24 @@
       </buff>
       <buff name="buffPZAECStormT18Active" name_key="buffPZAECStormActiveName" description_key="buffPZAECStormActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="10" />
+        <duration value="20" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".25" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".15" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.2" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="1.2" />
           <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value=".20" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.10" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT18Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="32" />
+        <duration value="22" />
       </buff>
       <buff name="buffPZAECStormT19Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="StaminaMax" operation="base_add" value="35" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT19Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -889,7 +897,7 @@
         <display_value value="$PZAECStormT19Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT19Resonance" operation="add" value="7">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT19Resonance" operation="add" value="17">
             <requirement name="CVarCompare" cvar="$PZAECStormT19Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT19Active" />
@@ -917,24 +925,25 @@
       </buff>
       <buff name="buffPZAECStormT19Active" name_key="buffPZAECStormActiveName" description_key="buffPZAECStormActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="12" />
+        <duration value="24" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="ranged" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value=".30" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value=".20" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.6" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="1.6" />
           <passive_effect name="EntityPenetrationCount" operation="base_add" value="1" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value=".20" />
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-.10" />
         </effect_group>
       </buff>
       <buff name="buffPZAECStormT19Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="30" />
+        <duration value="18" />
       </buff>
       <buff name="buffPZAECTremorT16Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.08" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.8" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT16Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -942,7 +951,7 @@
         <display_value value="$PZAECTremorT16Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT16Resonance" operation="add" value="16">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT16Resonance" operation="add" value="25">
             <requirement name="CVarCompare" cvar="$PZAECTremorT16Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT16Active" />
@@ -971,23 +980,24 @@
       </buff>
       <buff name="buffPZAECTremorT16Active" name_key="buffPZAECTremorActiveName" description_key="buffPZAECTremorActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="8" />
+        <duration value="12" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".25" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1" tags="secondary" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.15" tags="secondary" />
           <passive_effect name="BlockDamage" operation="perc_set" value="0" tags="secondary" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT16Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="36" />
+        <duration value="30" />
       </buff>
       <buff name="buffPZAECTremorT17Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.10" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.1" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT17Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -995,7 +1005,7 @@
         <display_value value="$PZAECTremorT17Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT17Resonance" operation="add" value="18">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT17Resonance" operation="add" value="34">
             <requirement name="CVarCompare" cvar="$PZAECTremorT17Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT17Active" />
@@ -1024,23 +1034,24 @@
       </buff>
       <buff name="buffPZAECTremorT17Active" name_key="buffPZAECTremorActiveName" description_key="buffPZAECTremorActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="9" />
+        <duration value="16" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".30" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.4" tags="secondary" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.20" tags="secondary" />
           <passive_effect name="BlockDamage" operation="perc_set" value="0" tags="secondary" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT17Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="34" />
+        <duration value="26" />
       </buff>
       <buff name="buffPZAECTremorT18Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.12" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT18Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -1048,7 +1059,7 @@
         <display_value value="$PZAECTremorT18Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT18Resonance" operation="add" value="20">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT18Resonance" operation="add" value="50">
             <requirement name="CVarCompare" cvar="$PZAECTremorT18Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT18Active" />
@@ -1077,23 +1088,24 @@
       </buff>
       <buff name="buffPZAECTremorT18Active" name_key="buffPZAECTremorActiveName" description_key="buffPZAECTremorActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="10" />
+        <duration value="20" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".35" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.9" tags="secondary" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.25" tags="secondary" />
           <passive_effect name="BlockDamage" operation="perc_set" value="0" tags="secondary" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT18Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="32" />
+        <duration value="22" />
       </buff>
       <buff name="buffPZAECTremorT19Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.14" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT19Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -1101,7 +1113,7 @@
         <display_value value="$PZAECTremorT19Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT19Resonance" operation="add" value="22">
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT19Resonance" operation="add" value="100">
             <requirement name="CVarCompare" cvar="$PZAECTremorT19Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT19Active" />
@@ -1130,22 +1142,23 @@
       </buff>
       <buff name="buffPZAECTremorT19Active" name_key="buffPZAECTremorActiveName" description_key="buffPZAECTremorActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="12" />
+        <duration value="24" />
         <effect_group>
           <requirement name="HoldingItemHasTags" tags="melee" />
-          <passive_effect name="EntityDamage" operation="perc_add" value=".40" tags="secondary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2.6" tags="secondary" />
           <passive_effect name="StaminaLoss" operation="perc_add" value="-.30" tags="secondary" />
           <passive_effect name="BlockDamage" operation="perc_set" value="0" tags="secondary" />
         </effect_group>
       </buff>
       <buff name="buffPZAECTremorT19Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="30" />
+        <duration value="18" />
       </buff>
       <buff name="buffPZAECWardenT16Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="3" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="0.8" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT16Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -1153,7 +1166,7 @@
         <display_value value="$PZAECWardenT16Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT16Resonance" operation="add" value="8">
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT16Resonance" operation="add" value="25">
             <requirement name="CVarCompare" cvar="$PZAECWardenT16Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT16Active" />
@@ -1180,9 +1193,9 @@
       </buff>
       <buff name="buffPZAECWardenT16Active" name_key="buffPZAECWardenActiveName" description_key="buffPZAECWardenActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="8" />
+        <duration value="12" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="0.05" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT16Aura" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="8" target_tags="ally,party" buff="buffPZAECWardenT16Aura">
             <requirement name="EntityTagCompare" target="other" tags="player" />
@@ -1194,17 +1207,19 @@
         <duration value="1.5" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="8" />
-          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".15" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.6" />
+          <passive_effect name="HealthMax" operation="base_add" value="80" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT16Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="36" />
+        <duration value="30" />
       </buff>
       <buff name="buffPZAECWardenT17Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="4" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.1" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT17Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -1212,7 +1227,7 @@
         <display_value value="$PZAECWardenT17Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT17Resonance" operation="add" value="9">
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT17Resonance" operation="add" value="34">
             <requirement name="CVarCompare" cvar="$PZAECWardenT17Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT17Active" />
@@ -1239,9 +1254,9 @@
       </buff>
       <buff name="buffPZAECWardenT17Active" name_key="buffPZAECWardenActiveName" description_key="buffPZAECWardenActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="9" />
+        <duration value="16" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="0.08" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT17Aura" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="9" target_tags="ally,party" buff="buffPZAECWardenT17Aura">
             <requirement name="EntityTagCompare" target="other" tags="player" />
@@ -1253,17 +1268,19 @@
         <duration value="1.5" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="10" />
-          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".20" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.9" />
+          <passive_effect name="HealthMax" operation="base_add" value="120" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT17Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="34" />
+        <duration value="26" />
       </buff>
       <buff name="buffPZAECWardenT18Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="5" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT18Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -1271,7 +1288,7 @@
         <display_value value="$PZAECWardenT18Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT18Resonance" operation="add" value="10">
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT18Resonance" operation="add" value="50">
             <requirement name="CVarCompare" cvar="$PZAECWardenT18Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT18Active" />
@@ -1298,9 +1315,9 @@
       </buff>
       <buff name="buffPZAECWardenT18Active" name_key="buffPZAECWardenActiveName" description_key="buffPZAECWardenActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="10" />
+        <duration value="20" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="0.12" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT18Aura" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="10" target_tags="ally,party" buff="buffPZAECWardenT18Aura">
             <requirement name="EntityTagCompare" target="other" tags="player" />
@@ -1312,17 +1329,19 @@
         <duration value="1.5" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="12" />
-          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".25" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="1.3" />
+          <passive_effect name="HealthMax" operation="base_add" value="180" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT18Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="32" />
+        <duration value="22" />
       </buff>
       <buff name="buffPZAECWardenT19Set2" hidden="true">
         <stack_type value="ignore" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="6" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT19Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
@@ -1330,7 +1349,7 @@
         <display_value value="$PZAECWardenT19Resonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT19Resonance" operation="add" value="12">
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT19Resonance" operation="add" value="100">
             <requirement name="CVarCompare" cvar="$PZAECWardenT19Resonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT19Active" />
@@ -1357,9 +1376,9 @@
       </buff>
       <buff name="buffPZAECWardenT19Active" name_key="buffPZAECWardenActiveName" description_key="buffPZAECWardenActiveDesc" icon="ui_game_symbol_armor_iron" icon_color="80,200,255">
         <stack_type value="replace" />
-        <duration value="12" />
+        <duration value="24" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.15" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="0.16" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECWardenT19Aura" />
           <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" range="12" target_tags="ally,party" buff="buffPZAECWardenT19Aura">
             <requirement name="EntityTagCompare" target="other" tags="player" />
@@ -1371,12 +1390,13 @@
         <duration value="1.5" />
         <effect_group>
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="15" />
-          <passive_effect name="StaminaChangeOT" operation="perc_add" value=".30" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="1.8" />
+          <passive_effect name="HealthMax" operation="base_add" value="260" />
         </effect_group>
       </buff>
       <buff name="buffPZAECWardenT19Cooldown" name_key="buffPZAECResonanceCooldownName" description_key="buffPZAECResonanceCooldownDesc" icon="ui_game_symbol_armor_iron" icon_color="180,180,180">
         <stack_type value="replace" />
-        <duration value="30" />
+        <duration value="18" />
       </buff>
     </append>
   <!-- END GENERATED ENDGAME ARSENAL -->
@@ -1444,14 +1464,14 @@
         <stack_type value="replace" />
         <duration value="3" />
         <effect_group>
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.1" />
         </effect_group>
       </buff>
       <buff name="buffPZAECPulseCapacitorT16" name_key="buffPZAECPulseCapacitorT16Name" description_key="buffPZAECPulseCapacitorT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
         <stack_type value="replace" />
-        <duration value="0.35" />
+        <duration value="1" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.35" />
         </effect_group>
       </buff>
       <buff name="buffPZAECShockNetT16" name_key="buffPZAECShockNetT16Name" description_key="buffPZAECShockNetT16Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
@@ -1515,14 +1535,14 @@
         <stack_type value="replace" />
         <duration value="3" />
         <effect_group>
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" />
         </effect_group>
       </buff>
       <buff name="buffPZAECPulseCapacitorT17" name_key="buffPZAECPulseCapacitorT17Name" description_key="buffPZAECPulseCapacitorT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
         <stack_type value="replace" />
-        <duration value="0.35" />
+        <duration value="1.4" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.45" />
         </effect_group>
       </buff>
       <buff name="buffPZAECShockNetT17" name_key="buffPZAECShockNetT17Name" description_key="buffPZAECShockNetT17Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
@@ -1586,14 +1606,14 @@
         <stack_type value="replace" />
         <duration value="3" />
         <effect_group>
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.06" />
         </effect_group>
       </buff>
       <buff name="buffPZAECPulseCapacitorT18" name_key="buffPZAECPulseCapacitorT18Name" description_key="buffPZAECPulseCapacitorT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
         <stack_type value="replace" />
-        <duration value="0.35" />
+        <duration value="1.8" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.55" />
         </effect_group>
       </buff>
       <buff name="buffPZAECShockNetT18" name_key="buffPZAECShockNetT18Name" description_key="buffPZAECShockNetT18Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
@@ -1657,14 +1677,14 @@
         <stack_type value="replace" />
         <duration value="3" />
         <effect_group>
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-.90" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.04" />
         </effect_group>
       </buff>
       <buff name="buffPZAECPulseCapacitorT19" name_key="buffPZAECPulseCapacitorT19Name" description_key="buffPZAECPulseCapacitorT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">
         <stack_type value="replace" />
-        <duration value="0.35" />
+        <duration value="2.4" />
         <effect_group>
-          <passive_effect name="RunSpeed" operation="perc_add" value="-.20" />
+          <passive_effect name="RunSpeed" operation="perc_add" value="-0.65" />
         </effect_group>
       </buff>
       <buff name="buffPZAECShockNetT19" name_key="buffPZAECShockNetT19Name" description_key="buffPZAECShockNetT19Desc" icon="ui_game_symbol_electricity" icon_color="255,160,64">

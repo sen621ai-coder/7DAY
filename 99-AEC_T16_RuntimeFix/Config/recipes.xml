@@ -2,19 +2,19 @@
 <configs>
   <append xpath="/recipes">
     <recipe name="PZAECStrongholdCore" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
-      <ingredient name="resourceForgedSteel" count="100" />
+      <ingredient name="resourceDurablAlloys" count="100" />
       <ingredient name="resourceMechanicalParts" count="30" />
       <ingredient name="resourceElectricParts" count="30" />
       <ingredient name="resourceLegendaryParts" count="2" />
     </recipe>
     <recipe name="PZAECStrongholdPower" count="1" craft_area="workbench" craft_time="45" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="generatorbank" count="1" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceMechanicalParts" count="20" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="PZAECStrongholdSupply" count="1" craft_area="workbench" craft_time="45" always_unlocked="true" use_ingredient_modifier="false">
-      <ingredient name="resourceForgedSteel" count="75" />
+      <ingredient name="resourceDurablAlloys" count="75" />
       <ingredient name="resourceMechanicalParts" count="20" />
       <ingredient name="resourceSpring" count="20" />
     </recipe>
@@ -22,22 +22,22 @@
   <append xpath="/recipes">
     <recipe name="PZAECDefenseBeaconT16" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECChallengeVoucherT16" count="1" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="PZAECDefenseBeaconT17" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECChallengeVoucherT17" count="1" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="PZAECDefenseBeaconT18" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECChallengeVoucherT18" count="1" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="PZAECDefenseBeaconT19" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECChallengeVoucherT19" count="1" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
   </append>
@@ -45,101 +45,101 @@
     <recipe name="modPZAECPrecisionR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR2" count="6" />
       <ingredient name="resourceLegendaryParts" count="5" />
-      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceDurablAlloys" count="20" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBreakerR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR2" count="6" />
       <ingredient name="resourceLegendaryParts" count="5" />
-      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceDurablAlloys" count="20" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBarrageR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR2" count="6" />
       <ingredient name="resourceLegendaryParts" count="5" />
-      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceDurablAlloys" count="20" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECSkirmisherR2" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR2" count="6" />
       <ingredient name="resourceLegendaryParts" count="5" />
-      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceDurablAlloys" count="20" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECPrecisionR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR3" count="6" />
       <ingredient name="resourceLegendaryParts" count="10" />
-      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceDurablAlloys" count="30" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBreakerR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR3" count="6" />
       <ingredient name="resourceLegendaryParts" count="10" />
-      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceDurablAlloys" count="30" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBarrageR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR3" count="6" />
       <ingredient name="resourceLegendaryParts" count="10" />
-      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceDurablAlloys" count="30" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECSkirmisherR3" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR3" count="6" />
       <ingredient name="resourceLegendaryParts" count="10" />
-      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceDurablAlloys" count="30" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECPrecisionR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR4" count="6" />
       <ingredient name="resourceLegendaryParts" count="20" />
-      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceDurablAlloys" count="40" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBreakerR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR4" count="6" />
       <ingredient name="resourceLegendaryParts" count="20" />
-      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceDurablAlloys" count="40" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBarrageR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR4" count="6" />
       <ingredient name="resourceLegendaryParts" count="20" />
-      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceDurablAlloys" count="40" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECSkirmisherR4" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR4" count="6" />
       <ingredient name="resourceLegendaryParts" count="20" />
-      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceDurablAlloys" count="40" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECPrecisionR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR5" count="6" />
       <ingredient name="resourceLegendaryParts" count="35" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBreakerR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR5" count="6" />
       <ingredient name="resourceLegendaryParts" count="35" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECBarrageR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR5" count="6" />
       <ingredient name="resourceLegendaryParts" count="35" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
     <recipe name="modPZAECSkirmisherR5" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="PZAECBuildPartsR5" count="6" />
       <ingredient name="resourceLegendaryParts" count="35" />
-      <ingredient name="resourceForgedSteel" count="50" />
+      <ingredient name="resourceDurablAlloys" count="50" />
       <ingredient name="resourceElectricParts" count="20" />
     </recipe>
   </append>
-  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+<!-- BEGIN GENERATED ENDGAME ARSENAL -->
     <append xpath="/recipes/recipe[@name='modPZAECPrecisionR2']">
       <ingredient name="resourcePZAECWeaponChassis" count="1" />
       <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
@@ -222,14 +222,14 @@
     </append>
     <append xpath="/recipes">
       <recipe name="resourcePZAECWeaponChassis" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceMechanicalParts" count="40" />
         <ingredient name="resourceElectricParts" count="30" />
         <ingredient name="resourceDuctTape" count="10" />
         <ingredient name="resourceLegendaryParts" count="5" />
       </recipe>
       <recipe name="resourcePZAECArmorChassis" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="resourceForgedSteel" count="60" />
+        <ingredient name="resourceDurablAlloys" count="60" />
         <ingredient name="resourceMechanicalParts" count="20" />
         <ingredient name="resourceElectricParts" count="20" />
         <ingredient name="resourceSewingKit" count="20" />
@@ -237,7 +237,7 @@
         <ingredient name="resourceLegendaryParts" count="5" />
       </recipe>
       <recipe name="resourcePZAECDeviceChassis" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="resourceForgedSteel" count="80" />
+        <ingredient name="resourceDurablAlloys" count="80" />
         <ingredient name="resourceMechanicalParts" count="30" />
         <ingredient name="resourceElectricParts" count="50" />
         <ingredient name="resourceScrapPolymers" count="40" />
@@ -245,6 +245,7 @@
         <ingredient name="resourceLegendaryParts" count="5" />
       </recipe>
       <recipe name="armorPZAECHarrierHelmetT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPredatorHelmet" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -253,6 +254,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECHarrierOutfitT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPredatorOutfit" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -261,6 +263,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECHarrierGlovesT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPredatorGloves" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -269,6 +272,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECHarrierBootsT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPredatorBoots" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -506,6 +510,7 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="armorPZAECStormHelmetT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPlundererHelmet" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -514,6 +519,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECStormOutfitT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPlundererOutfit" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -522,6 +528,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECStormGlovesT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPlundererGloves" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -530,6 +537,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECStormBootsT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorPlundererBoots" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -767,6 +775,7 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="armorPZAECTremorHelmetT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorMausHelmet" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -775,6 +784,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECTremorOutfitT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorMausOutfit" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -783,6 +793,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECTremorGlovesT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorMausGloves" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -791,6 +802,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECTremorBootsT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorMausBoots" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -1028,6 +1040,7 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="armorPZAECWardenHelmetT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorRescuerHelmet" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -1036,6 +1049,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECWardenOutfitT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorRescuerOutfit" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -1044,6 +1058,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECWardenGlovesT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorRescuerGloves" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -1052,6 +1067,7 @@
         <ingredient name="resourceElectricParts" count="20" />
       </recipe>
       <recipe name="armorPZAECWardenBootsT16" count="1" craft_area="workbench" craft_time="75" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="armorRescuerBoots" count="1" />
         <ingredient name="resourcePZAECArmorChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="4" />
         <ingredient name="resourceLegendaryParts" count="6" />
@@ -1376,8 +1392,101 @@
   <!-- END GENERATED ENDGAME ARSENAL -->
   <!-- BEGIN GENERATED ENDGAME EXPANSION -->
     <append xpath="/recipes">
+      <recipe name="gunPZAECEmberPistolT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="gunHandgunT5Hellgun" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECEmberPistolT17" count="1" craft_area="workbench" craft_time="480" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="gunHandgunT3DesertVulture" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR3" count="10" />
+        <ingredient name="resourceLegendaryParts" count="24" />
+        <ingredient name="resourcePZAECSiegeCapacitorT17" count="3" />
+        <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT17" count="1" />
+      </recipe>
+      <recipe name="gunPZAECEmberPistolT17" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade">
+        <ingredient name="gunPZAECEmberPistolT16" count="1" />
+        <ingredient name="PZAECBuildPartsR3" count="6" />
+        <ingredient name="resourceLegendaryParts" count="16" />
+        <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+      </recipe>
+      <recipe name="gunPZAECEmberPistolT18" count="1" craft_area="workbench" craft_time="600" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="gunHandgunT3DesertVulture" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR4" count="12" />
+        <ingredient name="resourceLegendaryParts" count="36" />
+        <ingredient name="resourcePZAECSiegeCapacitorT18" count="4" />
+        <ingredient name="resourcePZAECMutantHeartT18" count="2" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT18" count="1" />
+      </recipe>
+      <recipe name="gunPZAECEmberPistolT18" count="1" craft_area="workbench" craft_time="420" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade">
+        <ingredient name="gunPZAECEmberPistolT17" count="1" />
+        <ingredient name="PZAECBuildPartsR4" count="8" />
+        <ingredient name="resourceLegendaryParts" count="24" />
+        <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+        <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+      </recipe>
+      <recipe name="gunPZAECEmberPistolT19" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="gunHandgunT3DesertVulture" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR5" count="16" />
+        <ingredient name="resourceLegendaryParts" count="52" />
+        <ingredient name="resourcePZAECSiegeCapacitorT19" count="6" />
+        <ingredient name="resourcePZAECMutantHeartT19" count="3" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT19" count="1" />
+      </recipe>
+      <recipe name="gunPZAECEmberPistolT19" count="1" craft_area="workbench" craft_time="540" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade">
+        <ingredient name="gunPZAECEmberPistolT18" count="1" />
+        <ingredient name="PZAECBuildPartsR5" count="10" />
+        <ingredient name="resourceLegendaryParts" count="36" />
+        <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+        <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+      </recipe>
       <recipe name="gunPZAECHorizonNeedleT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="gunRifleT3SniperRifle" count="1" />
+        <ingredient name="gunRifleT5SniperRifleGaus" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECHorizonNeedleT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegArsonist" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECHorizonNeedleT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegTesla" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECHorizonNeedleT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegURANUS" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECHorizonNeedleT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegUnkillable" count="1" />
         <ingredient name="resourcePZAECWeaponChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
         <ingredient name="resourceLegendaryParts" count="15" />
@@ -1434,7 +1543,61 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="gunMGT3M60" count="1" />
+        <ingredient name="gunMGT5M60Bulldog" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="BulldogLegArsonist" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="BulldogLegURANUS" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="BulldogLegBreeze" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="BulldogLegUnkillable" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="BulldogLegAvenger" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECStormReservoirT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="BulldogLegBerserk" count="1" />
         <ingredient name="resourcePZAECWeaponChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
         <ingredient name="resourceLegendaryParts" count="15" />
@@ -1491,7 +1654,43 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="meleePZAECFaultlineHammerT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="meleeWpnSledgeT3SteelSledgehammer" count="1" />
+        <ingredient name="meleeWpnSledgeT5SteelSledgehammerDestructor" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="meleePZAECFaultlineHammerT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="DestructorLegCrisis" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="meleePZAECFaultlineHammerT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="DestructorLegCrusher" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="meleePZAECFaultlineHammerT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="DestructorLegMasterpiece" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="meleePZAECFaultlineHammerT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="DestructorLegGuardian" count="1" />
         <ingredient name="resourcePZAECWeaponChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
         <ingredient name="resourceLegendaryParts" count="15" />
@@ -1548,7 +1747,52 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="gunPZAECBastionShotgunT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="gunShotgunT3AutoShotgun" count="1" />
+        <ingredient name="gunShotgunT5AutoShotgunEraser" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECBastionShotgunT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="EraserLegArsonist" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECBastionShotgunT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="EraserLegURANUS" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECBastionShotgunT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="EraserLegUnkillable" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECBastionShotgunT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="EraserLegAvenger" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECBastionShotgunT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="EraserLegBerserk" count="1" />
         <ingredient name="resourcePZAECWeaponChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
         <ingredient name="resourceLegendaryParts" count="15" />
@@ -1605,7 +1849,7 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="gunPZAECEchoRepeaterT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="gunBowT3CompoundCrossbow" count="1" />
+        <ingredient name="gunBowT5CompoundCrossbowMantis" count="1" />
         <ingredient name="resourcePZAECWeaponChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
         <ingredient name="resourceLegendaryParts" count="15" />
@@ -1662,7 +1906,48 @@
         <ingredient name="resourcePZAECMutantHeartT19" count="2" />
       </recipe>
       <recipe name="gunPZAECCounterSiegeT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="gunExplosivesT3RocketLauncher" count="1" />
+        <ingredient name="gunRifleT5SniperRifleGaus" count="1" />
+        <ingredient name="gunExplosivesT4RocketLauncherImp" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECCounterSiegeT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegArsonist" count="1" />
+        <ingredient name="gunExplosivesT4RocketLauncherImp" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECCounterSiegeT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegTesla" count="1" />
+        <ingredient name="gunExplosivesT4RocketLauncherImp" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECCounterSiegeT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegURANUS" count="1" />
+        <ingredient name="gunExplosivesT4RocketLauncherImp" count="1" />
+        <ingredient name="resourcePZAECWeaponChassis" count="1" />
+        <ingredient name="PZAECBuildPartsR2" count="8" />
+        <ingredient name="resourceLegendaryParts" count="15" />
+        <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+        <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+        <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+      </recipe>
+      <recipe name="gunPZAECCounterSiegeT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+        <ingredient name="GausLegUnkillable" count="1" />
+        <ingredient name="gunExplosivesT4RocketLauncherImp" count="1" />
         <ingredient name="resourcePZAECWeaponChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
         <ingredient name="resourceLegendaryParts" count="15" />
@@ -2403,14 +2688,14 @@
         <ingredient name="resourceElectricParts" count="30" />
       </recipe>
       <recipe name="resourcePZAECDefenseChassis" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceMechanicalParts" count="50" />
         <ingredient name="resourceElectricParts" count="75" />
         <ingredient name="resourceDuctTape" count="15" />
         <ingredient name="resourceLegendaryParts" count="5" />
       </recipe>
       <recipe name="itemPZAECQuickArmorGel" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="resourceForgedSteel" count="8" />
+        <ingredient name="resourceDurablAlloys" count="8" />
         <ingredient name="resourceScrapPolymers" count="12" />
         <ingredient name="resourceDuctTape" count="4" />
         <ingredient name="resourceAcid" count="1" />
@@ -2442,7 +2727,7 @@
       </recipe>
       <recipe name="itemPZAECFieldRepairKitT16" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="3" />
-        <ingredient name="resourceForgedSteel" count="5" />
+        <ingredient name="resourceDurablAlloys" count="5" />
         <ingredient name="resourceOil" count="3" />
         <ingredient name="resourceLegendaryParts" count="1" />
       </recipe>
@@ -2455,7 +2740,7 @@
       <recipe name="resourcePZAECRepairChargeT16" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="1" />
         <ingredient name="resourcePZAECCapacitorFragmentT16" count="1" />
-        <ingredient name="resourceForgedSteel" count="3" />
+        <ingredient name="resourceDurablAlloys" count="3" />
       </recipe>
       <recipe name="resourcePZAECDecoyChargeT16" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceElectricParts" count="4" />
@@ -2470,7 +2755,7 @@
       </recipe>
       <recipe name="itemPZAECFieldRepairKitT17" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="3" />
-        <ingredient name="resourceForgedSteel" count="5" />
+        <ingredient name="resourceDurablAlloys" count="5" />
         <ingredient name="resourceOil" count="3" />
         <ingredient name="resourceLegendaryParts" count="2" />
       </recipe>
@@ -2483,7 +2768,7 @@
       <recipe name="resourcePZAECRepairChargeT17" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="1" />
         <ingredient name="resourcePZAECCapacitorFragmentT17" count="1" />
-        <ingredient name="resourceForgedSteel" count="4" />
+        <ingredient name="resourceDurablAlloys" count="4" />
       </recipe>
       <recipe name="resourcePZAECDecoyChargeT17" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceElectricParts" count="4" />
@@ -2498,7 +2783,7 @@
       </recipe>
       <recipe name="itemPZAECFieldRepairKitT18" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="3" />
-        <ingredient name="resourceForgedSteel" count="5" />
+        <ingredient name="resourceDurablAlloys" count="5" />
         <ingredient name="resourceOil" count="3" />
         <ingredient name="resourceLegendaryParts" count="3" />
       </recipe>
@@ -2511,7 +2796,7 @@
       <recipe name="resourcePZAECRepairChargeT18" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="1" />
         <ingredient name="resourcePZAECCapacitorFragmentT18" count="1" />
-        <ingredient name="resourceForgedSteel" count="5" />
+        <ingredient name="resourceDurablAlloys" count="5" />
       </recipe>
       <recipe name="resourcePZAECDecoyChargeT18" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceElectricParts" count="4" />
@@ -2526,7 +2811,7 @@
       </recipe>
       <recipe name="itemPZAECFieldRepairKitT19" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="3" />
-        <ingredient name="resourceForgedSteel" count="5" />
+        <ingredient name="resourceDurablAlloys" count="5" />
         <ingredient name="resourceOil" count="3" />
         <ingredient name="resourceLegendaryParts" count="4" />
       </recipe>
@@ -2539,7 +2824,7 @@
       <recipe name="resourcePZAECRepairChargeT19" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceRepairKit" count="1" />
         <ingredient name="resourcePZAECCapacitorFragmentT19" count="1" />
-        <ingredient name="resourceForgedSteel" count="6" />
+        <ingredient name="resourceDurablAlloys" count="6" />
       </recipe>
       <recipe name="resourcePZAECDecoyChargeT19" count="5" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourceElectricParts" count="4" />
@@ -2549,7 +2834,7 @@
       <recipe name="PZAECSkyguardArrayT16" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourcePZAECDefenseChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
-        <ingredient name="resourceForgedSteel" count="120" />
+        <ingredient name="resourceDurablAlloys" count="120" />
         <ingredient name="resourceMechanicalParts" count="60" />
         <ingredient name="resourceElectricParts" count="80" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="3" />
@@ -2580,7 +2865,7 @@
       <recipe name="PZAECHiveRepairStationT16" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourcePZAECDefenseChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
-        <ingredient name="resourceForgedSteel" count="120" />
+        <ingredient name="resourceDurablAlloys" count="120" />
         <ingredient name="resourceMechanicalParts" count="60" />
         <ingredient name="resourceElectricParts" count="80" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="3" />
@@ -2611,7 +2896,7 @@
       <recipe name="PZAECHoundDecoyTowerT16" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourcePZAECDefenseChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
-        <ingredient name="resourceForgedSteel" count="120" />
+        <ingredient name="resourceDurablAlloys" count="120" />
         <ingredient name="resourceMechanicalParts" count="60" />
         <ingredient name="resourceElectricParts" count="80" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="3" />
@@ -2642,7 +2927,7 @@
       <recipe name="PZAECShockNetNodeT16" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourcePZAECDefenseChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
-        <ingredient name="resourceForgedSteel" count="120" />
+        <ingredient name="resourceDurablAlloys" count="120" />
         <ingredient name="resourceMechanicalParts" count="60" />
         <ingredient name="resourceElectricParts" count="80" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="3" />
@@ -2673,7 +2958,7 @@
       <recipe name="PZAECArmorBreakTurretT16" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="resourcePZAECDefenseChassis" count="1" />
         <ingredient name="PZAECBuildPartsR2" count="8" />
-        <ingredient name="resourceForgedSteel" count="120" />
+        <ingredient name="resourceDurablAlloys" count="120" />
         <ingredient name="resourceMechanicalParts" count="60" />
         <ingredient name="resourceElectricParts" count="80" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="3" />
@@ -2704,7 +2989,7 @@
       <recipe name="PZAECResonanceForge" count="1" craft_area="workbench" craft_time="480" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="workbench" count="1" />
         <ingredient name="forge" count="1" />
-        <ingredient name="resourceForgedSteel" count="200" />
+        <ingredient name="resourceDurablAlloys" count="200" />
         <ingredient name="resourceMechanicalParts" count="100" />
         <ingredient name="resourceElectricParts" count="100" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="4" />
@@ -2713,130 +2998,893 @@
       </recipe>
       <recipe name="PZAECTacticalRelay" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="electricwirerelay" count="1" />
-        <ingredient name="resourceForgedSteel" count="80" />
+        <ingredient name="resourceDurablAlloys" count="80" />
         <ingredient name="resourceElectricParts" count="60" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
       </recipe>
       <recipe name="PZAECReactiveWallT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="40" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="40" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECReactiveWallT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="55" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="55" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECReactiveWallT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="75" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="75" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECReactiveWallT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
       <recipe name="PZAECAblativeWallT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="40" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="40" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECAblativeWallT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="55" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="55" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECAblativeWallT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="75" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="75" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECAblativeWallT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
       <recipe name="PZAECEmbrasureT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="40" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="40" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECEmbrasureT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="55" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="55" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECEmbrasureT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="75" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="75" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECEmbrasureT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
-        <ingredient name="steelShapes" count="1" />
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="steelShapes:VariantHelper" count="1" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
       <recipe name="PZAECBlastGateT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="vaultDoor01_Powered" count="1" />
-        <ingredient name="resourceForgedSteel" count="40" />
+        <ingredient name="resourceDurablAlloys" count="40" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECBlastGateT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="vaultDoor01_Powered" count="1" />
-        <ingredient name="resourceForgedSteel" count="55" />
+        <ingredient name="resourceDurablAlloys" count="55" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECBlastGateT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="vaultDoor01_Powered" count="1" />
-        <ingredient name="resourceForgedSteel" count="75" />
+        <ingredient name="resourceDurablAlloys" count="75" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECBlastGateT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="vaultDoor01_Powered" count="1" />
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
       <recipe name="PZAECArmoredConduitT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="electricwirerelay" count="1" />
-        <ingredient name="resourceForgedSteel" count="40" />
+        <ingredient name="resourceDurablAlloys" count="40" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECArmoredConduitT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="electricwirerelay" count="1" />
-        <ingredient name="resourceForgedSteel" count="55" />
+        <ingredient name="resourceDurablAlloys" count="55" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECArmoredConduitT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="electricwirerelay" count="1" />
-        <ingredient name="resourceForgedSteel" count="75" />
+        <ingredient name="resourceDurablAlloys" count="75" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECArmoredConduitT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="electricwirerelay" count="1" />
-        <ingredient name="resourceForgedSteel" count="100" />
+        <ingredient name="resourceDurablAlloys" count="100" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
     </append>
   <!-- END GENERATED ENDGAME EXPANSION -->
+<!-- BEGIN GENERATED FUSION UPGRADES -->
+<append xpath="/recipes">
+  <recipe name="armorPZAECHarrierBootsT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECHarrierBootsT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierBootsT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierBootsT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierGlovesT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECHarrierGlovesT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierGlovesT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierGlovesT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierHelmetT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECHarrierHelmetT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierHelmetT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierHelmetT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierOutfitT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECHarrierOutfitT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECHarrierOutfitT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECHarrierOutfitT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormBootsT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECStormBootsT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormBootsT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormBootsT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormGlovesT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECStormGlovesT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormGlovesT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormGlovesT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormHelmetT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECStormHelmetT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormHelmetT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormHelmetT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormOutfitT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECStormOutfitT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECStormOutfitT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECStormOutfitT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorBootsT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECTremorBootsT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorBootsT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorBootsT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorGlovesT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECTremorGlovesT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorGlovesT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorGlovesT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorHelmetT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECTremorHelmetT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorHelmetT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorHelmetT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorOutfitT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECTremorOutfitT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECTremorOutfitT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECTremorOutfitT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenBootsT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECWardenBootsT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenBootsT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenBootsT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenBootsT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenGlovesT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECWardenGlovesT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenGlovesT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenGlovesT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenGlovesT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenHelmetT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECWardenHelmetT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenHelmetT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenHelmetT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenHelmetT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenOutfitT18" count="1" craft_area="workbench" craft_time="135" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="16" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="armorPZAECWardenOutfitT19" count="1" craft_area="workbench" craft_time="225" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenOutfitT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="3" />
+    <ingredient name="resourceLegendaryParts" count="32" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="armorPZAECWardenOutfitT19" count="1" craft_area="workbench" craft_time="165" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="armorPZAECWardenOutfitT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="3" />
+    <ingredient name="resourceLegendaryParts" count="26" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="4" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECBastionShotgunT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECBastionShotgunT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="gunPZAECBastionShotgunT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECBastionShotgunT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECBastionShotgunT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECBastionShotgunT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECCounterSiegeT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECCounterSiegeT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="gunPZAECCounterSiegeT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECCounterSiegeT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECCounterSiegeT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECCounterSiegeT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECEchoRepeaterT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECEchoRepeaterT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="gunPZAECEchoRepeaterT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECEchoRepeaterT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECEchoRepeaterT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECEchoRepeaterT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECEmberPistolT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECEmberPistolT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="gunPZAECEmberPistolT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECEmberPistolT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECEmberPistolT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECEmberPistolT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECHorizonNeedleT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECHorizonNeedleT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="gunPZAECHorizonNeedleT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECHorizonNeedleT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECHorizonNeedleT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECHorizonNeedleT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECStormReservoirT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECStormReservoirT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="gunPZAECStormReservoirT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECStormReservoirT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="gunPZAECStormReservoirT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="gunPZAECStormReservoirT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="meleePZAECFaultlineHammerT18" count="1" craft_area="workbench" craft_time="720" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="meleePZAECFaultlineHammerT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="40" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+  </recipe>
+  <recipe name="meleePZAECFaultlineHammerT19" count="1" craft_area="workbench" craft_time="1260" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="meleePZAECFaultlineHammerT16" count="1" />
+    <ingredient name="PZAECBuildPartsR3" count="6" />
+    <ingredient name="resourceLegendaryParts" count="76" />
+    <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+    <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+  <recipe name="meleePZAECFaultlineHammerT19" count="1" craft_area="workbench" craft_time="960" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade,aecfusionjump">
+    <ingredient name="meleePZAECFaultlineHammerT17" count="1" />
+    <ingredient name="PZAECBuildPartsR4" count="8" />
+    <ingredient name="resourceLegendaryParts" count="60" />
+    <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+    <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    <ingredient name="PZAECBuildPartsR5" count="10" />
+    <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+    <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+  </recipe>
+</append>
+<!-- END GENERATED FUSION UPGRADES -->
 </configs>

@@ -1,2 +1,4 @@
 /0_TFP_Harmony/
 **/__pycache__/
+/.local-tests/
+**/Source/obj/

@@ -566,25 +566,25 @@ armorPZAECHarrierGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the H
 armorPZAECHarrierBootsT16,items,EndgameArsenal,,,,T16 Harrier Boots,,,,,,,,,,,,T16 猎隼战靴,T16 猎隼战靴
 armorPZAECHarrierBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Harrier 精准射击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,猎隼“精准射击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 itemPZAECHarrierDeviceT16,items,EndgameArsenal,,,,T16 Refractive Designation Device,,,,,,,,,,,,T16 折光标定装置,T16 折光标定装置
-itemPZAECHarrierDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+itemPZAECHarrierDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
 armorPZAECHarrierHelmetT17,items,EndgameArsenal,,,,T17 Harrier Helmet,,,,,,,,,,,,T17 猎隼头盔,T17 猎隼头盔
 armorPZAECHarrierOutfitT17,items,EndgameArsenal,,,,T17 Harrier Outfit,,,,,,,,,,,,T17 猎隼衣装,T17 猎隼衣装
 armorPZAECHarrierGlovesT17,items,EndgameArsenal,,,,T17 Harrier Gloves,,,,,,,,,,,,T17 猎隼手套,T17 猎隼手套
 armorPZAECHarrierBootsT17,items,EndgameArsenal,,,,T17 Harrier Boots,,,,,,,,,,,,T17 猎隼战靴,T17 猎隼战靴
 itemPZAECHarrierDeviceT17,items,EndgameArsenal,,,,T17 Refractive Designation Device,,,,,,,,,,,,T17 折光标定装置,T17 折光标定装置
-itemPZAECHarrierDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+itemPZAECHarrierDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 16s; cooldown 26s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。
 armorPZAECHarrierHelmetT18,items,EndgameArsenal,,,,T18 Harrier Helmet,,,,,,,,,,,,T18 猎隼头盔,T18 猎隼头盔
 armorPZAECHarrierOutfitT18,items,EndgameArsenal,,,,T18 Harrier Outfit,,,,,,,,,,,,T18 猎隼衣装,T18 猎隼衣装
 armorPZAECHarrierGlovesT18,items,EndgameArsenal,,,,T18 Harrier Gloves,,,,,,,,,,,,T18 猎隼手套,T18 猎隼手套
 armorPZAECHarrierBootsT18,items,EndgameArsenal,,,,T18 Harrier Boots,,,,,,,,,,,,T18 猎隼战靴,T18 猎隼战靴
 itemPZAECHarrierDeviceT18,items,EndgameArsenal,,,,T18 Refractive Designation Device,,,,,,,,,,,,T18 折光标定装置,T18 折光标定装置
-itemPZAECHarrierDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+itemPZAECHarrierDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 20s; cooldown 22s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。
 armorPZAECHarrierHelmetT19,items,EndgameArsenal,,,,T19 Harrier Helmet,,,,,,,,,,,,T19 猎隼头盔,T19 猎隼头盔
 armorPZAECHarrierOutfitT19,items,EndgameArsenal,,,,T19 Harrier Outfit,,,,,,,,,,,,T19 猎隼衣装,T19 猎隼衣装
 armorPZAECHarrierGlovesT19,items,EndgameArsenal,,,,T19 Harrier Gloves,,,,,,,,,,,,T19 猎隼手套,T19 猎隼手套
 armorPZAECHarrierBootsT19,items,EndgameArsenal,,,,T19 Harrier Boots,,,,,,,,,,,,T19 猎隼战靴,T19 猎隼战靴
 itemPZAECHarrierDeviceT19,items,EndgameArsenal,,,,T19 Refractive Designation Device,,,,,,,,,,,,T19 折光标定装置,T19 折光标定装置
-itemPZAECHarrierDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+itemPZAECHarrierDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Harrier set, fill resonance, then use from the toolbelt. Active 24s; cooldown 18s.",,,,,,,,,,,,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。,可重复使用。穿齐同阶四件猎隼套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。
 armorPZAECStormHelmetT16,items,EndgameArsenal,,,,T16 Storm Helmet,,,,,,,,,,,,T16 雷暴头盔,T16 雷暴头盔
 armorPZAECStormHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Storm 持续火力 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 armorPZAECStormOutfitT16,items,EndgameArsenal,,,,T16 Storm Outfit,,,,,,,,,,,,T16 雷暴衣装,T16 雷暴衣装
@@ -594,25 +594,25 @@ armorPZAECStormGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Sto
 armorPZAECStormBootsT16,items,EndgameArsenal,,,,T16 Storm Boots,,,,,,,,,,,,T16 雷暴战靴,T16 雷暴战靴
 armorPZAECStormBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Storm 持续火力 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,雷暴“持续火力”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 itemPZAECStormDeviceT16,items,EndgameArsenal,,,,T16 Arc Vent Device,,,,,,,,,,,,T16 弧光泄压装置,T16 弧光泄压装置
-itemPZAECStormDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+itemPZAECStormDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
 armorPZAECStormHelmetT17,items,EndgameArsenal,,,,T17 Storm Helmet,,,,,,,,,,,,T17 雷暴头盔,T17 雷暴头盔
 armorPZAECStormOutfitT17,items,EndgameArsenal,,,,T17 Storm Outfit,,,,,,,,,,,,T17 雷暴衣装,T17 雷暴衣装
 armorPZAECStormGlovesT17,items,EndgameArsenal,,,,T17 Storm Gloves,,,,,,,,,,,,T17 雷暴手套,T17 雷暴手套
 armorPZAECStormBootsT17,items,EndgameArsenal,,,,T17 Storm Boots,,,,,,,,,,,,T17 雷暴战靴,T17 雷暴战靴
 itemPZAECStormDeviceT17,items,EndgameArsenal,,,,T17 Arc Vent Device,,,,,,,,,,,,T17 弧光泄压装置,T17 弧光泄压装置
-itemPZAECStormDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+itemPZAECStormDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 16s; cooldown 26s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。
 armorPZAECStormHelmetT18,items,EndgameArsenal,,,,T18 Storm Helmet,,,,,,,,,,,,T18 雷暴头盔,T18 雷暴头盔
 armorPZAECStormOutfitT18,items,EndgameArsenal,,,,T18 Storm Outfit,,,,,,,,,,,,T18 雷暴衣装,T18 雷暴衣装
 armorPZAECStormGlovesT18,items,EndgameArsenal,,,,T18 Storm Gloves,,,,,,,,,,,,T18 雷暴手套,T18 雷暴手套
 armorPZAECStormBootsT18,items,EndgameArsenal,,,,T18 Storm Boots,,,,,,,,,,,,T18 雷暴战靴,T18 雷暴战靴
 itemPZAECStormDeviceT18,items,EndgameArsenal,,,,T18 Arc Vent Device,,,,,,,,,,,,T18 弧光泄压装置,T18 弧光泄压装置
-itemPZAECStormDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+itemPZAECStormDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 20s; cooldown 22s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。
 armorPZAECStormHelmetT19,items,EndgameArsenal,,,,T19 Storm Helmet,,,,,,,,,,,,T19 雷暴头盔,T19 雷暴头盔
 armorPZAECStormOutfitT19,items,EndgameArsenal,,,,T19 Storm Outfit,,,,,,,,,,,,T19 雷暴衣装,T19 雷暴衣装
 armorPZAECStormGlovesT19,items,EndgameArsenal,,,,T19 Storm Gloves,,,,,,,,,,,,T19 雷暴手套,T19 雷暴手套
 armorPZAECStormBootsT19,items,EndgameArsenal,,,,T19 Storm Boots,,,,,,,,,,,,T19 雷暴战靴,T19 雷暴战靴
 itemPZAECStormDeviceT19,items,EndgameArsenal,,,,T19 Arc Vent Device,,,,,,,,,,,,T19 弧光泄压装置,T19 弧光泄压装置
-itemPZAECStormDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+itemPZAECStormDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Storm set, fill resonance, then use from the toolbelt. Active 24s; cooldown 18s.",,,,,,,,,,,,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。,可重复使用。穿齐同阶四件雷暴套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。
 armorPZAECTremorHelmetT16,items,EndgameArsenal,,,,T16 Tremor Helmet,,,,,,,,,,,,T16 震岳头盔,T16 震岳头盔
 armorPZAECTremorHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Tremor 近战重击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 armorPZAECTremorOutfitT16,items,EndgameArsenal,,,,T16 Tremor Outfit,,,,,,,,,,,,T16 震岳衣装,T16 震岳衣装
@@ -622,25 +622,25 @@ armorPZAECTremorGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Tr
 armorPZAECTremorBootsT16,items,EndgameArsenal,,,,T16 Tremor Boots,,,,,,,,,,,,T16 震岳战靴,T16 震岳战靴
 armorPZAECTremorBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Tremor 近战重击 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,震岳“近战重击”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 itemPZAECTremorDeviceT16,items,EndgameArsenal,,,,T16 Tremor Release Device,,,,,,,,,,,,T16 震岳释放装置,T16 震岳释放装置
-itemPZAECTremorDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+itemPZAECTremorDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
 armorPZAECTremorHelmetT17,items,EndgameArsenal,,,,T17 Tremor Helmet,,,,,,,,,,,,T17 震岳头盔,T17 震岳头盔
 armorPZAECTremorOutfitT17,items,EndgameArsenal,,,,T17 Tremor Outfit,,,,,,,,,,,,T17 震岳衣装,T17 震岳衣装
 armorPZAECTremorGlovesT17,items,EndgameArsenal,,,,T17 Tremor Gloves,,,,,,,,,,,,T17 震岳手套,T17 震岳手套
 armorPZAECTremorBootsT17,items,EndgameArsenal,,,,T17 Tremor Boots,,,,,,,,,,,,T17 震岳战靴,T17 震岳战靴
 itemPZAECTremorDeviceT17,items,EndgameArsenal,,,,T17 Tremor Release Device,,,,,,,,,,,,T17 震岳释放装置,T17 震岳释放装置
-itemPZAECTremorDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+itemPZAECTremorDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 16s; cooldown 26s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。
 armorPZAECTremorHelmetT18,items,EndgameArsenal,,,,T18 Tremor Helmet,,,,,,,,,,,,T18 震岳头盔,T18 震岳头盔
 armorPZAECTremorOutfitT18,items,EndgameArsenal,,,,T18 Tremor Outfit,,,,,,,,,,,,T18 震岳衣装,T18 震岳衣装
 armorPZAECTremorGlovesT18,items,EndgameArsenal,,,,T18 Tremor Gloves,,,,,,,,,,,,T18 震岳手套,T18 震岳手套
 armorPZAECTremorBootsT18,items,EndgameArsenal,,,,T18 Tremor Boots,,,,,,,,,,,,T18 震岳战靴,T18 震岳战靴
 itemPZAECTremorDeviceT18,items,EndgameArsenal,,,,T18 Tremor Release Device,,,,,,,,,,,,T18 震岳释放装置,T18 震岳释放装置
-itemPZAECTremorDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+itemPZAECTremorDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 20s; cooldown 22s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。
 armorPZAECTremorHelmetT19,items,EndgameArsenal,,,,T19 Tremor Helmet,,,,,,,,,,,,T19 震岳头盔,T19 震岳头盔
 armorPZAECTremorOutfitT19,items,EndgameArsenal,,,,T19 Tremor Outfit,,,,,,,,,,,,T19 震岳衣装,T19 震岳衣装
 armorPZAECTremorGlovesT19,items,EndgameArsenal,,,,T19 Tremor Gloves,,,,,,,,,,,,T19 震岳手套,T19 震岳手套
 armorPZAECTremorBootsT19,items,EndgameArsenal,,,,T19 Tremor Boots,,,,,,,,,,,,T19 震岳战靴,T19 震岳战靴
 itemPZAECTremorDeviceT19,items,EndgameArsenal,,,,T19 Tremor Release Device,,,,,,,,,,,,T19 震岳释放装置,T19 震岳释放装置
-itemPZAECTremorDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+itemPZAECTremorDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Tremor set, fill resonance, then use from the toolbelt. Active 24s; cooldown 18s.",,,,,,,,,,,,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。,可重复使用。穿齐同阶四件震岳套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。
 armorPZAECWardenHelmetT16,items,EndgameArsenal,,,,T16 Warden Helmet,,,,,,,,,,,,T16 守望头盔,T16 守望头盔
 armorPZAECWardenHelmetDesc,items,EndgameArsenal,,,,A true armor piece for the Warden 承伤防守 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 armorPZAECWardenOutfitT16,items,EndgameArsenal,,,,T16 Warden Outfit,,,,,,,,,,,,T16 守望衣装,T16 守望衣装
@@ -650,25 +650,25 @@ armorPZAECWardenGlovesDesc,items,EndgameArsenal,,,,A true armor piece for the Wa
 armorPZAECWardenBootsT16,items,EndgameArsenal,,,,T16 Warden Boots,,,,,,,,,,,,T16 守望战靴,T16 守望战靴
 armorPZAECWardenBootsDesc,items,EndgameArsenal,,,,A true armor piece for the Warden 承伤防守 set. Exact-tier pieces unlock 2/3/4-piece bonuses.,,,,,,,,,,,,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。,守望“承伤防守”真护甲组件。同一等级穿戴 2／3／4 件依次解锁套装效果。
 itemPZAECWardenDeviceT16,items,EndgameArsenal,,,,T16 Warden Field Device,,,,,,,,,,,,T16 守望领域装置,T16 守望领域装置
-itemPZAECWardenDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 8s; cooldown 36s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 8 秒，冷却 36 秒。
+itemPZAECWardenDeviceT16Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
 armorPZAECWardenHelmetT17,items,EndgameArsenal,,,,T17 Warden Helmet,,,,,,,,,,,,T17 守望头盔,T17 守望头盔
 armorPZAECWardenOutfitT17,items,EndgameArsenal,,,,T17 Warden Outfit,,,,,,,,,,,,T17 守望衣装,T17 守望衣装
 armorPZAECWardenGlovesT17,items,EndgameArsenal,,,,T17 Warden Gloves,,,,,,,,,,,,T17 守望手套,T17 守望手套
 armorPZAECWardenBootsT17,items,EndgameArsenal,,,,T17 Warden Boots,,,,,,,,,,,,T17 守望战靴,T17 守望战靴
 itemPZAECWardenDeviceT17,items,EndgameArsenal,,,,T17 Warden Field Device,,,,,,,,,,,,T17 守望领域装置,T17 守望领域装置
-itemPZAECWardenDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 9s; cooldown 34s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 9 秒，冷却 34 秒。
+itemPZAECWardenDeviceT17Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 16s; cooldown 26s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 16 秒，冷却 26 秒。
 armorPZAECWardenHelmetT18,items,EndgameArsenal,,,,T18 Warden Helmet,,,,,,,,,,,,T18 守望头盔,T18 守望头盔
 armorPZAECWardenOutfitT18,items,EndgameArsenal,,,,T18 Warden Outfit,,,,,,,,,,,,T18 守望衣装,T18 守望衣装
 armorPZAECWardenGlovesT18,items,EndgameArsenal,,,,T18 Warden Gloves,,,,,,,,,,,,T18 守望手套,T18 守望手套
 armorPZAECWardenBootsT18,items,EndgameArsenal,,,,T18 Warden Boots,,,,,,,,,,,,T18 守望战靴,T18 守望战靴
 itemPZAECWardenDeviceT18,items,EndgameArsenal,,,,T18 Warden Field Device,,,,,,,,,,,,T18 守望领域装置,T18 守望领域装置
-itemPZAECWardenDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 10s; cooldown 32s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 10 秒，冷却 32 秒。
+itemPZAECWardenDeviceT18Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 20s; cooldown 22s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 20 秒，冷却 22 秒。
 armorPZAECWardenHelmetT19,items,EndgameArsenal,,,,T19 Warden Helmet,,,,,,,,,,,,T19 守望头盔,T19 守望头盔
 armorPZAECWardenOutfitT19,items,EndgameArsenal,,,,T19 Warden Outfit,,,,,,,,,,,,T19 守望衣装,T19 守望衣装
 armorPZAECWardenGlovesT19,items,EndgameArsenal,,,,T19 Warden Gloves,,,,,,,,,,,,T19 守望手套,T19 守望手套
 armorPZAECWardenBootsT19,items,EndgameArsenal,,,,T19 Warden Boots,,,,,,,,,,,,T19 守望战靴,T19 守望战靴
 itemPZAECWardenDeviceT19,items,EndgameArsenal,,,,T19 Warden Field Device,,,,,,,,,,,,T19 守望领域装置,T19 守望领域装置
-itemPZAECWardenDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 12s; cooldown 30s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 12 秒，冷却 30 秒。
+itemPZAECWardenDeviceT19Desc,items,EndgameArsenal,,,,"Reusable. Equip the exact-tier four-piece Warden set, fill resonance, then use from the toolbelt. Active 24s; cooldown 18s.",,,,,,,,,,,,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。,可重复使用。穿齐同阶四件守望套装并充满共鸣后，从快捷栏启动；持续 24 秒，冷却 18 秒。
 buffPZAECHarrierResonanceName,buffs,EndgameArsenal,,,,Harrier Resonance,,,,,,,,,,,,猎隼共鸣,猎隼共鸣
 buffPZAECHarrierResonanceDesc,buffs,EndgameArsenal,,,,Three-piece charge for 精准射击; reaches 100 to arm the device.,,,,,,,,,,,,三件套通过精准射击充能；达到 100 后可启动装置。,三件套通过精准射击充能；达到 100 后可启动装置。
 buffPZAECHarrierActiveName,buffs,EndgameArsenal,,,,Refractive Designation,,,,,,,,,,,,折光标定,折光标定
@@ -687,54 +687,62 @@ buffPZAECWardenActiveName,buffs,EndgameArsenal,,,,Warden Field,,,,,,,,,,,,守望
 buffPZAECWardenActiveDesc,buffs,EndgameArsenal,,,,The Warden resonance ability is active.,,,,,,,,,,,,守望共鸣能力正在生效。,守望共鸣能力正在生效。
 buffPZAECResonanceCooldownName,buffs,EndgameArsenal,,,,Resonance Overload,,,,,,,,,,,,共鸣过载,共鸣过载
 buffPZAECResonanceCooldownDesc,buffs,EndgameArsenal,,,,The resonance device is cooling down.,,,,,,,,,,,,共鸣装置正在冷却。,共鸣装置正在冷却。
+gunPZAECEmberPistolT16,items,EndgameExpansion,,,,T16 Ember Heavy Pistol,,,,,,,,,,,,T16 烬火重型手枪,T16 烬火重型手枪
+gunPZAECEmberPistolT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
+gunPZAECEmberPistolT17,items,EndgameExpansion,,,,T17 Ember Heavy Pistol,,,,,,,,,,,,T17 烬火重型手枪,T17 烬火重型手枪
+gunPZAECEmberPistolT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
+gunPZAECEmberPistolT18,items,EndgameExpansion,,,,T18 Ember Heavy Pistol,,,,,,,,,,,,T18 烬火重型手枪,T18 烬火重型手枪
+gunPZAECEmberPistolT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
+gunPZAECEmberPistolT19,items,EndgameExpansion,,,,T19 Ember Heavy Pistol,,,,,,,,,,,,T19 烬火重型手枪,T19 烬火重型手枪
+gunPZAECEmberPistolT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECHorizonNeedleT16,items,EndgameExpansion,,,,T16 Horizon Needle Rifle,,,,,,,,,,,,T16 地平线针刺步枪,T16 地平线针刺步枪
-gunPZAECHorizonNeedleT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECHorizonNeedleT17,items,EndgameExpansion,,,,T17 Horizon Needle Rifle,,,,,,,,,,,,T17 地平线针刺步枪,T17 地平线针刺步枪
-gunPZAECHorizonNeedleT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECHorizonNeedleT18,items,EndgameExpansion,,,,T18 Horizon Needle Rifle,,,,,,,,,,,,T18 地平线针刺步枪,T18 地平线针刺步枪
-gunPZAECHorizonNeedleT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECHorizonNeedleT19,items,EndgameExpansion,,,,T19 Horizon Needle Rifle,,,,,,,,,,,,T19 地平线针刺步枪,T19 地平线针刺步枪
-gunPZAECHorizonNeedleT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Horizon Needle Rifle has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。地平线针刺步枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECHorizonNeedleT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECStormReservoirT16,items,EndgameExpansion,,,,T16 Storm Reservoir LMG,,,,,,,,,,,,T16 雷池轻机枪,T16 雷池轻机枪
-gunPZAECStormReservoirT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECStormReservoirT17,items,EndgameExpansion,,,,T17 Storm Reservoir LMG,,,,,,,,,,,,T17 雷池轻机枪,T17 雷池轻机枪
-gunPZAECStormReservoirT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECStormReservoirT18,items,EndgameExpansion,,,,T18 Storm Reservoir LMG,,,,,,,,,,,,T18 雷池轻机枪,T18 雷池轻机枪
-gunPZAECStormReservoirT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECStormReservoirT19,items,EndgameExpansion,,,,T19 Storm Reservoir LMG,,,,,,,,,,,,T19 雷池轻机枪,T19 雷池轻机枪
-gunPZAECStormReservoirT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Storm Reservoir LMG has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。雷池轻机枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECStormReservoirT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 meleePZAECFaultlineHammerT16,items,EndgameExpansion,,,,T16 Faultline Shock Hammer,,,,,,,,,,,,T16 断层震击锤,T16 断层震击锤
-meleePZAECFaultlineHammerT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 meleePZAECFaultlineHammerT17,items,EndgameExpansion,,,,T17 Faultline Shock Hammer,,,,,,,,,,,,T17 断层震击锤,T17 断层震击锤
-meleePZAECFaultlineHammerT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 meleePZAECFaultlineHammerT18,items,EndgameExpansion,,,,T18 Faultline Shock Hammer,,,,,,,,,,,,T18 断层震击锤,T18 断层震击锤
-meleePZAECFaultlineHammerT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 meleePZAECFaultlineHammerT19,items,EndgameExpansion,,,,T19 Faultline Shock Hammer,,,,,,,,,,,,T19 断层震击锤,T19 断层震击锤
-meleePZAECFaultlineHammerT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Faultline Shock Hammer has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。断层震击锤拥有同阶专属机制和四个普通模组槽。
+meleePZAECFaultlineHammerT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECBastionShotgunT16,items,EndgameExpansion,,,,T16 Bastion Auto Shotgun,,,,,,,,,,,,T16 壁垒自动霰弹枪,T16 壁垒自动霰弹枪
-gunPZAECBastionShotgunT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECBastionShotgunT17,items,EndgameExpansion,,,,T17 Bastion Auto Shotgun,,,,,,,,,,,,T17 壁垒自动霰弹枪,T17 壁垒自动霰弹枪
-gunPZAECBastionShotgunT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECBastionShotgunT18,items,EndgameExpansion,,,,T18 Bastion Auto Shotgun,,,,,,,,,,,,T18 壁垒自动霰弹枪,T18 壁垒自动霰弹枪
-gunPZAECBastionShotgunT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECBastionShotgunT19,items,EndgameExpansion,,,,T19 Bastion Auto Shotgun,,,,,,,,,,,,T19 壁垒自动霰弹枪,T19 壁垒自动霰弹枪
-gunPZAECBastionShotgunT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Bastion Auto Shotgun has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。壁垒自动霰弹枪拥有同阶专属机制和四个普通模组槽。
+gunPZAECBastionShotgunT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECEchoRepeaterT16,items,EndgameExpansion,,,,T16 Echo Repeating Crossbow,,,,,,,,,,,,T16 回声连弩,T16 回声连弩
-gunPZAECEchoRepeaterT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECEchoRepeaterT17,items,EndgameExpansion,,,,T17 Echo Repeating Crossbow,,,,,,,,,,,,T17 回声连弩,T17 回声连弩
-gunPZAECEchoRepeaterT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECEchoRepeaterT18,items,EndgameExpansion,,,,T18 Echo Repeating Crossbow,,,,,,,,,,,,T18 回声连弩,T18 回声连弩
-gunPZAECEchoRepeaterT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECEchoRepeaterT19,items,EndgameExpansion,,,,T19 Echo Repeating Crossbow,,,,,,,,,,,,T19 回声连弩,T19 回声连弩
-gunPZAECEchoRepeaterT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Echo Repeating Crossbow has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。回声连弩拥有同阶专属机制和四个普通模组槽。
+gunPZAECEchoRepeaterT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECCounterSiegeT16,items,EndgameExpansion,,,,T16 Counter-Siege Pulser,,,,,,,,,,,,T16 反攻城脉冲器,T16 反攻城脉冲器
-gunPZAECCounterSiegeT16Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT16Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECCounterSiegeT17,items,EndgameExpansion,,,,T17 Counter-Siege Pulser,,,,,,,,,,,,T17 反攻城脉冲器,T17 反攻城脉冲器
-gunPZAECCounterSiegeT17Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT17Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECCounterSiegeT18,items,EndgameExpansion,,,,T18 Counter-Siege Pulser,,,,,,,,,,,,T18 反攻城脉冲器,T18 反攻城脉冲器
-gunPZAECCounterSiegeT18Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT18Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 gunPZAECCounterSiegeT19,items,EndgameExpansion,,,,T19 Counter-Siege Pulser,,,,,,,,,,,,T19 反攻城脉冲器,T19 反攻城脉冲器
-gunPZAECCounterSiegeT19Desc,items,EndgameExpansion,,,,Fixed-power endgame weapon. Counter-Siege Pulser has a tier-specific combat mechanic and four normal mod slots.,,,,,,,,,,,,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。,固定强度的终局武器。反攻城脉冲器拥有同阶专属机制和四个普通模组槽。
+gunPZAECCounterSiegeT19Desc,items,EndgameExpansion,,,,"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.",,,,,,,,,,,,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。,传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。
 ammoPZAECSkyguardInterceptorT16,items,EndgameExpansion,,,,T16 Skyguard Interceptor Round,,,,,,,,,,,,T16 天穹截击弹,T16 天穹截击弹
 ammoPZAECSkyguardInterceptorT16Desc,items,EndgameExpansion,,,,Specialized ammunition for AEC endgame equipment.,,,,,,,,,,,,AEC 终局设备使用的专属弹药。,AEC 终局设备使用的专属弹药。
 ammoPZAECSkyguardInterceptorT17,items,EndgameExpansion,,,,T17 Skyguard Interceptor Round,,,,,,,,,,,,T17 天穹截击弹,T17 天穹截击弹
@@ -850,29 +858,29 @@ modPZAECWardenStableT19Desc,items,EndgameExpansion,,,,T19 resonance-device calib
 modPZAECWardenOverloadT19,items,EndgameExpansion,,,,Warden Overload Calibration,,,,,,,,,,,,守望过载校准,守望过载校准
 modPZAECWardenOverloadT19Desc,items,EndgameExpansion,,,,T19 resonance-device calibration. Only one calibration can be installed.,,,,,,,,,,,,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。,T19 共鸣装置校准；同一装置只能安装一枚校准芯片。
 modPZAECThreatLensT16,items,EndgameExpansion,,,,T16 Threat Lens,,,,,,,,,,,,T16 威胁鉴别镜,T16 威胁鉴别镜
-modPZAECThreatLensT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 远程伤害随阶提升。,,,,,,,,,,,,同阶行为组件。远程伤害随阶提升。,同阶行为组件。远程伤害随阶提升。
 modPZAECThreatLensT17,items,EndgameExpansion,,,,T17 Threat Lens,,,,,,,,,,,,T17 威胁鉴别镜,T17 威胁鉴别镜
-modPZAECThreatLensT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 远程伤害随阶提升。,,,,,,,,,,,,同阶行为组件。远程伤害随阶提升。,同阶行为组件。远程伤害随阶提升。
 modPZAECThreatLensT18,items,EndgameExpansion,,,,T18 Threat Lens,,,,,,,,,,,,T18 威胁鉴别镜,T18 威胁鉴别镜
-modPZAECThreatLensT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 远程伤害随阶提升。,,,,,,,,,,,,同阶行为组件。远程伤害随阶提升。,同阶行为组件。远程伤害随阶提升。
 modPZAECThreatLensT19,items,EndgameExpansion,,,,T19 Threat Lens,,,,,,,,,,,,T19 威胁鉴别镜,T19 威胁鉴别镜
-modPZAECThreatLensT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 35／40／45／50 米内提示攻城单位蓄力。,,,,,,,,,,,,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。,同阶行为组件。35／40／45／50 米内提示攻城单位蓄力。
+modPZAECThreatLensT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Threat Lens: 远程伤害随阶提升。,,,,,,,,,,,,同阶行为组件。远程伤害随阶提升。,同阶行为组件。远程伤害随阶提升。
 modPZAECCoolingSinkT16,items,EndgameExpansion,,,,T16 Cooling Sink,,,,,,,,,,,,T16 热沉套件,T16 热沉套件
-modPZAECCoolingSinkT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低四向后坐力，提高操控和射速。,,,,,,,,,,,,同阶行为组件。降低四向后坐力，提高操控和射速。,同阶行为组件。降低四向后坐力，提高操控和射速。
 modPZAECCoolingSinkT17,items,EndgameExpansion,,,,T17 Cooling Sink,,,,,,,,,,,,T17 热沉套件,T17 热沉套件
-modPZAECCoolingSinkT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低四向后坐力，提高操控和射速。,,,,,,,,,,,,同阶行为组件。降低四向后坐力，提高操控和射速。,同阶行为组件。降低四向后坐力，提高操控和射速。
 modPZAECCoolingSinkT18,items,EndgameExpansion,,,,T18 Cooling Sink,,,,,,,,,,,,T18 热沉套件,T18 热沉套件
-modPZAECCoolingSinkT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低四向后坐力，提高操控和射速。,,,,,,,,,,,,同阶行为组件。降低四向后坐力，提高操控和射速。,同阶行为组件。降低四向后坐力，提高操控和射速。
 modPZAECCoolingSinkT19,items,EndgameExpansion,,,,T19 Cooling Sink,,,,,,,,,,,,T19 热沉套件,T19 热沉套件
-modPZAECCoolingSinkT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低自动武器热量和后坐力。,,,,,,,,,,,,同阶行为组件。降低自动武器热量和后坐力。,同阶行为组件。降低自动武器热量和后坐力。
+modPZAECCoolingSinkT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Cooling Sink: 降低四向后坐力，提高操控和射速。,,,,,,,,,,,,同阶行为组件。降低四向后坐力，提高操控和射速。,同阶行为组件。降低四向后坐力，提高操控和射速。
 modPZAECKineticRecyclerT16,items,EndgameExpansion,,,,T16 Kinetic Recycler,,,,,,,,,,,,T16 动能回收器,T16 动能回收器
-modPZAECKineticRecyclerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 降低普攻与重击耗耐，提高攻速和操控。,,,,,,,,,,,,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。
 modPZAECKineticRecyclerT17,items,EndgameExpansion,,,,T17 Kinetic Recycler,,,,,,,,,,,,T17 动能回收器,T17 动能回收器
-modPZAECKineticRecyclerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 降低普攻与重击耗耐，提高攻速和操控。,,,,,,,,,,,,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。
 modPZAECKineticRecyclerT18,items,EndgameExpansion,,,,T18 Kinetic Recycler,,,,,,,,,,,,T18 动能回收器,T18 动能回收器
-modPZAECKineticRecyclerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 降低普攻与重击耗耐，提高攻速和操控。,,,,,,,,,,,,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。
 modPZAECKineticRecyclerT19,items,EndgameExpansion,,,,T19 Kinetic Recycler,,,,,,,,,,,,T19 动能回收器,T19 动能回收器
-modPZAECKineticRecyclerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 重击命中返还耐力。,,,,,,,,,,,,同阶行为组件。重击命中返还耐力。,同阶行为组件。重击命中返还耐力。
+modPZAECKineticRecyclerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Kinetic Recycler: 降低普攻与重击耗耐，提高攻速和操控。,,,,,,,,,,,,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。,同阶行为组件。降低普攻与重击耗耐，提高攻速和操控。
 modPZAECRepairServoT16,items,EndgameExpansion,,,,T16 Repair Servo,,,,,,,,,,,,T16 维修伺服,T16 维修伺服
 modPZAECRepairServoT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Repair Servo: 提高方块修理速度和修理量。,,,,,,,,,,,,同阶行为组件。提高方块修理速度和修理量。,同阶行为组件。提高方块修理速度和修理量。
 modPZAECRepairServoT17,items,EndgameExpansion,,,,T17 Repair Servo,,,,,,,,,,,,T17 维修伺服,T17 维修伺服
@@ -890,13 +898,13 @@ modPZAECPhaseRangefinderT18Desc,items,EndgameExpansion,,,,Tiered behavior compon
 modPZAECPhaseRangefinderT19,items,EndgameExpansion,,,,T19 Phase Rangefinder,,,,,,,,,,,,T19 相位测距镜,T19 相位测距镜
 modPZAECPhaseRangefinderT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Phase Rangefinder: 稳定瞄准提高弱点伤害。,,,,,,,,,,,,同阶行为组件。稳定瞄准提高弱点伤害。,同阶行为组件。稳定瞄准提高弱点伤害。
 modPZAECNearfieldReflexT16,items,EndgameExpansion,,,,T16 Nearfield Reflex,,,,,,,,,,,,T16 近场反射镜,T16 近场反射镜
-modPZAECNearfieldReflexT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 提高换弹、射速和伤害衰减距离。,,,,,,,,,,,,同阶行为组件。提高换弹、射速和伤害衰减距离。,同阶行为组件。提高换弹、射速和伤害衰减距离。
 modPZAECNearfieldReflexT17,items,EndgameExpansion,,,,T17 Nearfield Reflex,,,,,,,,,,,,T17 近场反射镜,T17 近场反射镜
-modPZAECNearfieldReflexT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 提高换弹、射速和伤害衰减距离。,,,,,,,,,,,,同阶行为组件。提高换弹、射速和伤害衰减距离。,同阶行为组件。提高换弹、射速和伤害衰减距离。
 modPZAECNearfieldReflexT18,items,EndgameExpansion,,,,T18 Nearfield Reflex,,,,,,,,,,,,T18 近场反射镜,T18 近场反射镜
-modPZAECNearfieldReflexT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 提高换弹、射速和伤害衰减距离。,,,,,,,,,,,,同阶行为组件。提高换弹、射速和伤害衰减距离。,同阶行为组件。提高换弹、射速和伤害衰减距离。
 modPZAECNearfieldReflexT19,items,EndgameExpansion,,,,T19 Nearfield Reflex,,,,,,,,,,,,T19 近场反射镜,T19 近场反射镜
-modPZAECNearfieldReflexT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 近距离装填更快，远距离伤害略低。,,,,,,,,,,,,同阶行为组件。近距离装填更快，远距离伤害略低。,同阶行为组件。近距离装填更快，远距离伤害略低。
+modPZAECNearfieldReflexT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Nearfield Reflex: 提高换弹、射速和伤害衰减距离。,,,,,,,,,,,,同阶行为组件。提高换弹、射速和伤害衰减距离。,同阶行为组件。提高换弹、射速和伤害衰减距离。
 modPZAECClosedLoopFeedT16,items,EndgameExpansion,,,,T16 Closed-Loop Feed,,,,,,,,,,,,T16 闭环供弹器,T16 闭环供弹器
 modPZAECClosedLoopFeedT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Closed-Loop Feed: 扩大弹匣并提高持续供弹能力。,,,,,,,,,,,,同阶行为组件。扩大弹匣并提高持续供弹能力。,同阶行为组件。扩大弹匣并提高持续供弹能力。
 modPZAECClosedLoopFeedT17,items,EndgameExpansion,,,,T17 Closed-Loop Feed,,,,,,,,,,,,T17 闭环供弹器,T17 闭环供弹器
@@ -914,37 +922,37 @@ modPZAECPulseCapacitorT18Desc,items,EndgameExpansion,,,,Tiered behavior componen
 modPZAECPulseCapacitorT19,items,EndgameExpansion,,,,T19 Pulse Capacitor,,,,,,,,,,,,T19 脉冲电容,T19 脉冲电容
 modPZAECPulseCapacitorT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Pulse Capacitor: 命中可附加短时电击。,,,,,,,,,,,,同阶行为组件。命中可附加短时电击。,同阶行为组件。命中可附加短时电击。
 modPZAECStanceBreakerT16,items,EndgameExpansion,,,,T16 Stance Breaker,,,,,,,,,,,,T16 破势配重,T16 破势配重
-modPZAECStanceBreakerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高普攻、重击伤害与攻速。,,,,,,,,,,,,同阶行为组件。提高普攻、重击伤害与攻速。,同阶行为组件。提高普攻、重击伤害与攻速。
 modPZAECStanceBreakerT17,items,EndgameExpansion,,,,T17 Stance Breaker,,,,,,,,,,,,T17 破势配重,T17 破势配重
-modPZAECStanceBreakerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高普攻、重击伤害与攻速。,,,,,,,,,,,,同阶行为组件。提高普攻、重击伤害与攻速。,同阶行为组件。提高普攻、重击伤害与攻速。
 modPZAECStanceBreakerT18,items,EndgameExpansion,,,,T18 Stance Breaker,,,,,,,,,,,,T18 破势配重,T18 破势配重
-modPZAECStanceBreakerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高普攻、重击伤害与攻速。,,,,,,,,,,,,同阶行为组件。提高普攻、重击伤害与攻速。,同阶行为组件。提高普攻、重击伤害与攻速。
 modPZAECStanceBreakerT19,items,EndgameExpansion,,,,T19 Stance Breaker,,,,,,,,,,,,T19 破势配重,T19 破势配重
-modPZAECStanceBreakerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高重击伤害，降低普通攻击速度。,,,,,,,,,,,,同阶行为组件。提高重击伤害，降低普通攻击速度。,同阶行为组件。提高重击伤害，降低普通攻击速度。
+modPZAECStanceBreakerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Stance Breaker: 提高普攻、重击伤害与攻速。,,,,,,,,,,,,同阶行为组件。提高普攻、重击伤害与攻速。,同阶行为组件。提高普攻、重击伤害与攻速。
 modPZAECGatekeeperHookT16,items,EndgameExpansion,,,,T16 Gatekeeper Hook,,,,,,,,,,,,T16 守门钩爪,T16 守门钩爪
-modPZAECGatekeeperHookT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 常驻提高伤害与眩晕抗性。,,,,,,,,,,,,同阶行为组件。常驻提高伤害与眩晕抗性。,同阶行为组件。常驻提高伤害与眩晕抗性。
 modPZAECGatekeeperHookT17,items,EndgameExpansion,,,,T17 Gatekeeper Hook,,,,,,,,,,,,T17 守门钩爪,T17 守门钩爪
-modPZAECGatekeeperHookT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 常驻提高伤害与眩晕抗性。,,,,,,,,,,,,同阶行为组件。常驻提高伤害与眩晕抗性。,同阶行为组件。常驻提高伤害与眩晕抗性。
 modPZAECGatekeeperHookT18,items,EndgameExpansion,,,,T18 Gatekeeper Hook,,,,,,,,,,,,T18 守门钩爪,T18 守门钩爪
-modPZAECGatekeeperHookT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 常驻提高伤害与眩晕抗性。,,,,,,,,,,,,同阶行为组件。常驻提高伤害与眩晕抗性。,同阶行为组件。常驻提高伤害与眩晕抗性。
 modPZAECGatekeeperHookT19,items,EndgameExpansion,,,,T19 Gatekeeper Hook,,,,,,,,,,,,T19 守门钩爪,T19 守门钩爪
-modPZAECGatekeeperHookT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 近距离击杀后短时提高抗硬直能力。,,,,,,,,,,,,同阶行为组件。近距离击杀后短时提高抗硬直能力。,同阶行为组件。近距离击杀后短时提高抗硬直能力。
+modPZAECGatekeeperHookT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Gatekeeper Hook: 常驻提高伤害与眩晕抗性。,,,,,,,,,,,,同阶行为组件。常驻提高伤害与眩晕抗性。,同阶行为组件。常驻提高伤害与眩晕抗性。
 modPZAECEmergencyLinerT16,items,EndgameExpansion,,,,T16 Emergency Liner,,,,,,,,,,,,T16 应急止血层,T16 应急止血层
-modPZAECEmergencyLinerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 提高护甲、生命与流血抗性。,,,,,,,,,,,,同阶行为组件。提高护甲、生命与流血抗性。,同阶行为组件。提高护甲、生命与流血抗性。
 modPZAECEmergencyLinerT17,items,EndgameExpansion,,,,T17 Emergency Liner,,,,,,,,,,,,T17 应急止血层,T17 应急止血层
-modPZAECEmergencyLinerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 提高护甲、生命与流血抗性。,,,,,,,,,,,,同阶行为组件。提高护甲、生命与流血抗性。,同阶行为组件。提高护甲、生命与流血抗性。
 modPZAECEmergencyLinerT18,items,EndgameExpansion,,,,T18 Emergency Liner,,,,,,,,,,,,T18 应急止血层,T18 应急止血层
-modPZAECEmergencyLinerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 提高护甲、生命与流血抗性。,,,,,,,,,,,,同阶行为组件。提高护甲、生命与流血抗性。,同阶行为组件。提高护甲、生命与流血抗性。
 modPZAECEmergencyLinerT19,items,EndgameExpansion,,,,T19 Emergency Liner,,,,,,,,,,,,T19 应急止血层,T19 应急止血层
-modPZAECEmergencyLinerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 低生命时获得短时止血和减伤。,,,,,,,,,,,,同阶行为组件。低生命时获得短时止血和减伤。,同阶行为组件。低生命时获得短时止血和减伤。
+modPZAECEmergencyLinerT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Emergency Liner: 提高护甲、生命与流血抗性。,,,,,,,,,,,,同阶行为组件。提高护甲、生命与流血抗性。,同阶行为组件。提高护甲、生命与流血抗性。
 modPZAECInsulatedTreadsT16,items,EndgameExpansion,,,,T16 Insulated Treads,,,,,,,,,,,,T16 绝缘步进器,T16 绝缘步进器
-modPZAECInsulatedTreadsT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT16Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 提高电击抗性、耐力恢复和指定不良地形抗性。,,,,,,,,,,,,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。
 modPZAECInsulatedTreadsT17,items,EndgameExpansion,,,,T17 Insulated Treads,,,,,,,,,,,,T17 绝缘步进器,T17 绝缘步进器
-modPZAECInsulatedTreadsT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT17Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 提高电击抗性、耐力恢复和指定不良地形抗性。,,,,,,,,,,,,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。
 modPZAECInsulatedTreadsT18,items,EndgameExpansion,,,,T18 Insulated Treads,,,,,,,,,,,,T18 绝缘步进器,T18 绝缘步进器
-modPZAECInsulatedTreadsT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT18Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 提高电击抗性、耐力恢复和指定不良地形抗性。,,,,,,,,,,,,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。
 modPZAECInsulatedTreadsT19,items,EndgameExpansion,,,,T19 Insulated Treads,,,,,,,,,,,,T19 绝缘步进器,T19 绝缘步进器
-modPZAECInsulatedTreadsT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 降低电击与陷阱伤害。,,,,,,,,,,,,同阶行为组件。降低电击与陷阱伤害。,同阶行为组件。降低电击与陷阱伤害。
+modPZAECInsulatedTreadsT19Desc,items,EndgameExpansion,,,,Tiered behavior component. Insulated Treads: 提高电击抗性、耐力恢复和指定不良地形抗性。,,,,,,,,,,,,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。,同阶行为组件。提高电击抗性、耐力恢复和指定不良地形抗性。
 buffPZAECQuickArmorGelName,buffs,EndgameExpansion,,,,Armor Gel Application,,,,,,,,,,,,装甲胶施工,装甲胶施工
 buffPZAECQuickArmorGelDesc,buffs,EndgameExpansion,,,,Temporary endgame field effect.,,,,,,,,,,,,终局战场物品产生的临时效果。,终局战场物品产生的临时效果。
 buffPZAECResonanceInjectorName,buffs,EndgameExpansion,,,,Resonance Injection,,,,,,,,,,,,共鸣注入,共鸣注入

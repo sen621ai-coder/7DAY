@@ -12,6 +12,11 @@
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="obj\**\*.cs" />
+    <Reference Include="netstandard">
+      <HintPath>..\..\..\7DaysToDie_Data\Managed\netstandard.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
@@ -25,4 +30,11 @@
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+  <Target Name="UseInstalledGameReferences" BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <Reference Update="@(Reference)">
+        <Private>false</Private>
+      </Reference>
+    </ItemGroup>
+  </Target>
 </Project>

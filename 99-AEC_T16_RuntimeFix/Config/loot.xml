@@ -1268,7 +1268,7 @@
   <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackThug']/item/@group">PZAECMobT19_groupZpackThugBalanced</set>
   <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackUtility']/item/@group">PZAECMobT19_groupZpackUtilityBalanced</set>
   <set xpath="/lootcontainers/lootcontainer[@name='PZAECMobT19_zPackPlague']/item/@group">PZAECMobT19_groupZpackPlagueBalanced</set>
-  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+<!-- BEGIN GENERATED ENDGAME ARSENAL -->
     <insertBefore xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
       <lootgroup name="PZAECArmorDropT16" count="1">
         <item name="armorPZAECHarrierHelmetT16" count="1" />
@@ -1397,6 +1397,7 @@
   <!-- BEGIN GENERATED ENDGAME EXPANSION -->
     <insertBefore xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
       <lootgroup name="PZAECExpansionWeaponT16" count="1">
+        <item name="gunPZAECEmberPistolT16" count="1" />
         <item name="gunPZAECHorizonNeedleT16" count="1" />
         <item name="gunPZAECStormReservoirT16" count="1" />
         <item name="meleePZAECFaultlineHammerT16" count="1" />
@@ -1419,6 +1420,7 @@
         <item name="modPZAECInsulatedTreadsT16" count="1" />
       </lootgroup>
       <lootgroup name="PZAECExpansionWeaponT17" count="1">
+        <item name="gunPZAECEmberPistolT17" count="1" />
         <item name="gunPZAECHorizonNeedleT17" count="1" />
         <item name="gunPZAECStormReservoirT17" count="1" />
         <item name="meleePZAECFaultlineHammerT17" count="1" />
@@ -1441,6 +1443,7 @@
         <item name="modPZAECInsulatedTreadsT17" count="1" />
       </lootgroup>
       <lootgroup name="PZAECExpansionWeaponT18" count="1">
+        <item name="gunPZAECEmberPistolT18" count="1" />
         <item name="gunPZAECHorizonNeedleT18" count="1" />
         <item name="gunPZAECStormReservoirT18" count="1" />
         <item name="meleePZAECFaultlineHammerT18" count="1" />
@@ -1463,6 +1466,7 @@
         <item name="modPZAECInsulatedTreadsT18" count="1" />
       </lootgroup>
       <lootgroup name="PZAECExpansionWeaponT19" count="1">
+        <item name="gunPZAECEmberPistolT19" count="1" />
         <item name="gunPZAECHorizonNeedleT19" count="1" />
         <item name="gunPZAECStormReservoirT19" count="1" />
         <item name="meleePZAECFaultlineHammerT19" count="1" />

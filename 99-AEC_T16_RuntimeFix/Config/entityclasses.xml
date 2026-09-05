@@ -428,7 +428,7 @@
   <append xpath="/entity_classes/entity_class[@name='AECTheArcherBossT19']"><property name="LootDropEntityClass" value="AECArcherBossLootBagT19" /></append>
   <append xpath="/entity_classes/entity_class[@name='AECSheriffBossT19']"><property name="LootDropEntityClass" value="AECSheriffBossLootBagT19" /></append>
   <append xpath="/entity_classes/entity_class[@name='AECHeadlessBossT19']"><property name="LootDropEntityClass" value="AECHeadlessBossLootBagT19" /></append>
-  <!-- BEGIN GENERATED ENDGAME ARSENAL -->
+<!-- BEGIN GENERATED ENDGAME ARSENAL -->
     <append xpath="/entity_classes">
       <entity_class name="PZAECSiegeLootBagT16" extends="EntityLootContainerStrong">
         <property name="LootList" value="PZAECSiegeLootT16" />

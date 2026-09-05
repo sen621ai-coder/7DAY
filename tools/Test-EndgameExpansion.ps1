@@ -52,14 +52,14 @@ public static class EndgameExpansionRegression
 
     public static string Effects(string itemsXml, string modifiersXml)
     {
-        string[] itemStems = { "HorizonNeedle", "StormReservoir", "FaultlineHammer", "BastionShotgun",
+        string[] itemStems = { "EmberPistol", "HorizonNeedle", "StormReservoir", "FaultlineHammer", "BastionShotgun",
             "EchoRepeater", "CounterSiege", "SkyguardInterceptor", "CounterPulse", "QuickArmorGel",
             "ResonanceInjector", "DecoyBeacon", "EvacAnchor", "CounterJammer", "FieldRepairKit",
             "DefenseChassis", "CoreFragment", "CapacitorFragment", "ArmoryBlueprintCrate",
             "ComponentChoiceCrate", "RepairCharge", "DecoyCharge", "DefenseBlueprintCrate" };
         var items = XDocument.Parse(itemsXml).Descendants("item")
             .Where(n => itemStems.Any(s => (((string)n.Attribute("name")) ?? "").Contains(s))).ToArray();
-        Check(items.Length == 73, "Expected 73 expansion items in native effect test");
+        Check(items.Length == 77, "Expected 77 expansion items in native effect test");
         foreach (var node in items.Where(n => n.Elements("effect_group").Any()))
         {
             var effects = MinEffectController.ParseXml(node, null, MinEffectController.SourceParentType.ItemClass);
@@ -81,7 +81,7 @@ public static class EndgameExpansionRegression
             Check(effects.EffectGroups.Sum(g => g.PassiveEffects.Count) == node.Descendants("passive_effect").Count(),
                 "Modifier passive effect was ignored: " + (string)node.Attribute("name"));
         }
-        return "PASS: all 73 items and 56 modifiers parse through the game's native effect controller.";
+        return "PASS: all 77 items and 56 modifiers parse through the game's native effect controller.";
     }
 }
 '@
@@ -92,11 +92,22 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 $generator = Join-Path $modRoot '99-AEC_T16_RuntimeFix/Tools/generate_endgame_expansion.py'
 $tracked = @('items.xml','item_modifiers.xml','buffs.xml','blocks.xml','recipes.xml','loot.xml','entityclasses.xml','entitygroups.xml','Localization.csv') |
     ForEach-Object { Join-Path $modRoot "99-AEC_T16_RuntimeFix/Config/$_" }
-$before = $tracked | ForEach-Object { (Get-FileHash -Algorithm SHA256 -LiteralPath $_).Hash }
-python $generator
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-$after = $tracked | ForEach-Object { (Get-FileHash -Algorithm SHA256 -LiteralPath $_).Hash }
-if (Compare-Object $before $after) { throw 'Expansion generator is not idempotent' }
+$originalBytes = @{}
+foreach ($path in $tracked) { $originalBytes[$path] = [IO.File]::ReadAllBytes($path) }
+try {
+    # Git may check out CRLF while Python emits LF. Compare text per file,
+    # preserving all differences except line endings, and restore exact bytes.
+    python $generator
+    if ($LASTEXITCODE -ne 0) { throw "Expansion generator failed: $LASTEXITCODE" }
+    foreach ($path in $tracked) {
+        $before = [Text.Encoding]::UTF8.GetString($originalBytes[$path]).Replace("`r`n", "`n")
+        $after = [IO.File]::ReadAllText($path).Replace("`r`n", "`n")
+        if ($before -cne $after) { throw "Expansion generator changed content: $path" }
+    }
+}
+finally {
+    foreach ($path in $tracked) { [IO.File]::WriteAllBytes($path, $originalBytes[$path]) }
+}
 
 [EndgameExpansionRegression]::Runtime((Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'))
 [EndgameExpansionRegression]::Effects(

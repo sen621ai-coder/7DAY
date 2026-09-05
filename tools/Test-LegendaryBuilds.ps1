@@ -1,4 +1,4 @@
-#Requires -Version 7.0
+﻿#Requires -Version 7.0
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Test-LegendaryDefense.ps1')
 
@@ -152,7 +152,7 @@ foreach($core in $coreNodes) {
     Assert-Build ($core.SelectNodes('effect_group/triggered_effect | item_property_overrides').Count -eq 0) 'Unexpected stateful effect/weapon mutation'
     $recipe=$recipes.SelectSingleNode("//recipe[@name='$id']")
     Assert-Build ($recipe.count -eq '1' -and $recipe.craft_area -eq 'workbench' -and $recipe.always_unlocked -eq 'true' -and $recipe.use_ingredient_modifier -eq 'false' -and $recipe.craft_time -eq '60') 'Unsafe/missing deterministic crafting'
-    $costs=@{("PZAECBuildPartsR$rank")=6;resourceLegendaryParts=@(5,10,20,35)[$rank-2];resourceForgedSteel=@(20,30,40,50)[$rank-2];resourceElectricParts=20}
+    $costs=@{("PZAECBuildPartsR$rank")=6;resourceLegendaryParts=@(5,10,20,35)[$rank-2];resourceDurablAlloys=@(20,30,40,50)[$rank-2];resourceElectricParts=20}
     Assert-Build ($recipe.SelectNodes('ingredient').Count -eq 4) 'Unexpected ingredient count'
     foreach($entry in $costs.GetEnumerator()) {
         Assert-Build ($buildItemMap.ContainsKey($entry.Key) -and [int]$recipe.SelectSingleNode("ingredient[@name='$($entry.Key)']").count -eq $entry.Value) "Wrong/missing cost $id / $($entry.Key)"

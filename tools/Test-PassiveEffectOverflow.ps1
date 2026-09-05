@@ -15,6 +15,13 @@ function Assert-Overflow([bool]$ok, [string]$message) {
 }
 
 $guard = [AECT16RuntimeFix.PassiveEffectOverflowGuard]
+foreach ($effect in @('StaminaLoss','FoodLossPerStaminaPointGained','WaterLossPerStaminaPointGained','ScavengingTime')) {
+    $kind = [PassiveEffects]::$effect
+    Assert-Overflow ($guard::ClampValue($kind, [single]28, [single]-23.52) -eq 0) "$effect stacking grants resources or negative time."
+    Assert-Overflow ($guard::ClampValue($kind, [single]28, [single]8.4) -eq [single]8.4) "$effect changed a valid reduced cost."
+    Assert-Overflow ($guard::ClampValue($kind, [single]28, [single]0) -eq 0) "$effect changed valid zero cost."
+    Assert-Overflow ($guard::ClampValue($kind, [single]28, [single]::NaN) -eq 28) "$effect has no finite fallback."
+}
 Assert-Overflow ([single]::IsPositiveInfinity($guard::ClampValue([PassiveEffects]::EntityDamage, [single]::PositiveInfinity))) 'Uncapped damage infinity was changed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, -1) -eq -1) 'Uncapped negative damage semantics were changed.'
 Assert-Overflow ($guard::ClampValue([PassiveEffects]::EntityDamage, [single]125, [single]-1) -eq [single]-1) 'Final uncapped damage was changed.'

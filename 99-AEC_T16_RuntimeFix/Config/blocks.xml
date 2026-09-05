@@ -16,7 +16,7 @@
       <property name="Group" value="Science,advBuilding" />
       <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
       <property class="RepairItems">
-        <property name="resourceForgedSteel" value="40" />
+        <property name="resourceDurablAlloys" value="40" />
         <property name="resourceElectricParts" value="10" />
       </property>
     </block>
@@ -33,7 +33,7 @@
       <property name="SellableToTrader" value="false" />
       <property name="TakeDelay" value="30" />
       <property class="RepairItems">
-        <property name="resourceForgedSteel" value="25" />
+        <property name="resourceDurablAlloys" value="25" />
         <property name="resourceMechanicalParts" value="10" />
         <property name="resourceElectricParts" value="20" />
       </property>
@@ -53,7 +53,7 @@
       <property name="Group" value="Building,advBuilding" />
       <property name="FilterTags" value="MC_building,SC_loot" />
       <property class="RepairItems">
-        <property name="resourceForgedSteel" value="25" />
+        <property name="resourceDurablAlloys" value="25" />
         <property name="resourceMechanicalParts" value="10" />
       </property>
     </block>
@@ -78,7 +78,7 @@
         <property name="DescriptionKey" value="PZAECSkyguardArrayT16Desc" />
         <property name="CustomIcon" value="autoTurret" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="9000" />
+        <property name="MaxDamage" value="13500" />
         <property name="RequiredPower" value="45" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="15000" />
@@ -87,11 +87,11 @@
         <property name="PZAECTier" value="16" />
         <property name="AmmoItem" value="ammoPZAECSkyguardInterceptorT16" />
         <property name="MaxDistance" value="28" />
-        <property name="EntityDamage" value="45" />
-        <property name="BurstRoundCount" value="8" />
+        <property name="EntityDamage" value="180" />
+        <property name="BurstRoundCount" value="30" />
         <property name="CooldownTime" value="2.5" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="10" />
         </property>
       </block>
@@ -101,7 +101,7 @@
         <property name="DescriptionKey" value="PZAECSkyguardArrayT17Desc" />
         <property name="CustomIcon" value="autoTurret" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="10800" />
+        <property name="MaxDamage" value="19440" />
         <property name="RequiredPower" value="50" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="21000" />
@@ -110,11 +110,11 @@
         <property name="PZAECTier" value="17" />
         <property name="AmmoItem" value="ammoPZAECSkyguardInterceptorT17" />
         <property name="MaxDistance" value="32" />
-        <property name="EntityDamage" value="52" />
-        <property name="BurstRoundCount" value="8" />
+        <property name="EntityDamage" value="250" />
+        <property name="BurstRoundCount" value="40" />
         <property name="CooldownTime" value="2.5" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
           <property name="resourceElectricParts" value="15" />
         </property>
       </block>
@@ -124,7 +124,7 @@
         <property name="DescriptionKey" value="PZAECSkyguardArrayT18Desc" />
         <property name="CustomIcon" value="autoTurret" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="13000" />
+        <property name="MaxDamage" value="28600" />
         <property name="RequiredPower" value="55" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="27000" />
@@ -133,11 +133,11 @@
         <property name="PZAECTier" value="18" />
         <property name="AmmoItem" value="ammoPZAECSkyguardInterceptorT18" />
         <property name="MaxDistance" value="36" />
-        <property name="EntityDamage" value="60" />
-        <property name="BurstRoundCount" value="8" />
+        <property name="EntityDamage" value="350" />
+        <property name="BurstRoundCount" value="50" />
         <property name="CooldownTime" value="2.5" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="20" />
         </property>
       </block>
@@ -147,7 +147,7 @@
         <property name="DescriptionKey" value="PZAECSkyguardArrayT19Desc" />
         <property name="CustomIcon" value="autoTurret" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="15800" />
+        <property name="MaxDamage" value="42660" />
         <property name="RequiredPower" value="60" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="33000" />
@@ -156,11 +156,11 @@
         <property name="PZAECTier" value="19" />
         <property name="AmmoItem" value="ammoPZAECSkyguardInterceptorT19" />
         <property name="MaxDistance" value="40" />
-        <property name="EntityDamage" value="70" />
-        <property name="BurstRoundCount" value="8" />
+        <property name="EntityDamage" value="490" />
+        <property name="BurstRoundCount" value="60" />
         <property name="CooldownTime" value="2.5" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="60" />
+          <property name="resourceDurablAlloys" value="60" />
           <property name="resourceElectricParts" value="25" />
         </property>
       </block>
@@ -170,7 +170,7 @@
         <property name="DescriptionKey" value="PZAECHiveRepairStationT16Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="7500" />
+        <property name="MaxDamage" value="11250" />
         <property name="RequiredPower" value="35" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="15000" />
@@ -178,7 +178,7 @@
         <property name="PZAECDefenseDevice" value="HiveRepairStation" />
         <property name="PZAECTier" value="16" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="10" />
         </property>
       </block>
@@ -188,7 +188,7 @@
         <property name="DescriptionKey" value="PZAECHiveRepairStationT17Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="9000" />
+        <property name="MaxDamage" value="16200" />
         <property name="RequiredPower" value="40" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="21000" />
@@ -196,7 +196,7 @@
         <property name="PZAECDefenseDevice" value="HiveRepairStation" />
         <property name="PZAECTier" value="17" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
           <property name="resourceElectricParts" value="15" />
         </property>
       </block>
@@ -206,7 +206,7 @@
         <property name="DescriptionKey" value="PZAECHiveRepairStationT18Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="11000" />
+        <property name="MaxDamage" value="24200" />
         <property name="RequiredPower" value="45" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="27000" />
@@ -214,7 +214,7 @@
         <property name="PZAECDefenseDevice" value="HiveRepairStation" />
         <property name="PZAECTier" value="18" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="20" />
         </property>
       </block>
@@ -224,7 +224,7 @@
         <property name="DescriptionKey" value="PZAECHiveRepairStationT19Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="13500" />
+        <property name="MaxDamage" value="36450" />
         <property name="RequiredPower" value="50" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="33000" />
@@ -232,7 +232,7 @@
         <property name="PZAECDefenseDevice" value="HiveRepairStation" />
         <property name="PZAECTier" value="19" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="60" />
+          <property name="resourceDurablAlloys" value="60" />
           <property name="resourceElectricParts" value="25" />
         </property>
       </block>
@@ -242,7 +242,7 @@
         <property name="DescriptionKey" value="PZAECHoundDecoyTowerT16Desc" />
         <property name="CustomIcon" value="speaker" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="6000" />
+        <property name="MaxDamage" value="9000" />
         <property name="RequiredPower" value="20" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="15000" />
@@ -253,7 +253,7 @@
         <property name="HeatMapTime" value="1500" />
         <property name="HeatMapFrequency" value="300" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="10" />
         </property>
       </block>
@@ -263,7 +263,7 @@
         <property name="DescriptionKey" value="PZAECHoundDecoyTowerT17Desc" />
         <property name="CustomIcon" value="speaker" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="7500" />
+        <property name="MaxDamage" value="13500" />
         <property name="RequiredPower" value="20" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="21000" />
@@ -274,7 +274,7 @@
         <property name="HeatMapTime" value="1500" />
         <property name="HeatMapFrequency" value="300" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
           <property name="resourceElectricParts" value="15" />
         </property>
       </block>
@@ -284,7 +284,7 @@
         <property name="DescriptionKey" value="PZAECHoundDecoyTowerT18Desc" />
         <property name="CustomIcon" value="speaker" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="9200" />
+        <property name="MaxDamage" value="20240" />
         <property name="RequiredPower" value="20" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="27000" />
@@ -295,7 +295,7 @@
         <property name="HeatMapTime" value="1500" />
         <property name="HeatMapFrequency" value="300" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="20" />
         </property>
       </block>
@@ -305,7 +305,7 @@
         <property name="DescriptionKey" value="PZAECHoundDecoyTowerT19Desc" />
         <property name="CustomIcon" value="speaker" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="11500" />
+        <property name="MaxDamage" value="31050" />
         <property name="RequiredPower" value="20" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="33000" />
@@ -316,7 +316,7 @@
         <property name="HeatMapTime" value="1500" />
         <property name="HeatMapFrequency" value="300" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="60" />
+          <property name="resourceDurablAlloys" value="60" />
           <property name="resourceElectricParts" value="25" />
         </property>
       </block>
@@ -326,7 +326,7 @@
         <property name="DescriptionKey" value="PZAECShockNetNodeT16Desc" />
         <property name="CustomIcon" value="electricfencepost" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="6500" />
+        <property name="MaxDamage" value="9750" />
         <property name="RequiredPower" value="25" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="15000" />
@@ -336,7 +336,7 @@
         <property name="Buff" value="buffPZAECShockNetT16" />
         <property name="DamageReceived" value="0.7" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="10" />
         </property>
       </block>
@@ -346,7 +346,7 @@
         <property name="DescriptionKey" value="PZAECShockNetNodeT17Desc" />
         <property name="CustomIcon" value="electricfencepost" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="8000" />
+        <property name="MaxDamage" value="14400" />
         <property name="RequiredPower" value="28" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="21000" />
@@ -356,7 +356,7 @@
         <property name="Buff" value="buffPZAECShockNetT17" />
         <property name="DamageReceived" value="0.65" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
           <property name="resourceElectricParts" value="15" />
         </property>
       </block>
@@ -366,7 +366,7 @@
         <property name="DescriptionKey" value="PZAECShockNetNodeT18Desc" />
         <property name="CustomIcon" value="electricfencepost" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="9800" />
+        <property name="MaxDamage" value="21560" />
         <property name="RequiredPower" value="31" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="27000" />
@@ -376,7 +376,7 @@
         <property name="Buff" value="buffPZAECShockNetT18" />
         <property name="DamageReceived" value="0.6" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="20" />
         </property>
       </block>
@@ -386,7 +386,7 @@
         <property name="DescriptionKey" value="PZAECShockNetNodeT19Desc" />
         <property name="CustomIcon" value="electricfencepost" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="12000" />
+        <property name="MaxDamage" value="32400" />
         <property name="RequiredPower" value="35" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="33000" />
@@ -396,7 +396,7 @@
         <property name="Buff" value="buffPZAECShockNetT19" />
         <property name="DamageReceived" value="0.55" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="60" />
+          <property name="resourceDurablAlloys" value="60" />
           <property name="resourceElectricParts" value="25" />
         </property>
       </block>
@@ -406,7 +406,7 @@
         <property name="DescriptionKey" value="PZAECArmorBreakTurretT16Desc" />
         <property name="CustomIcon" value="m60Turret" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="7000" />
+        <property name="MaxDamage" value="10500" />
         <property name="RequiredPower" value="40" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="15000" />
@@ -414,11 +414,11 @@
         <property name="PZAECDefenseDevice" value="ArmorBreakTurret" />
         <property name="PZAECTier" value="16" />
         <property name="AmmoItem" value="ammo762mmBulletBall+tags(ammo762mm)" />
-        <property name="EntityDamage" value="26" />
-        <property name="BurstRoundCount" value="36" />
-        <property name="CooldownTime" value="5" />
+        <property name="EntityDamage" value="180" />
+        <property name="BurstRoundCount" value="60" />
+        <property name="CooldownTime" value="2" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="10" />
         </property>
       </block>
@@ -428,7 +428,7 @@
         <property name="DescriptionKey" value="PZAECArmorBreakTurretT17Desc" />
         <property name="CustomIcon" value="m60Turret" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="8500" />
+        <property name="MaxDamage" value="15300" />
         <property name="RequiredPower" value="45" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="21000" />
@@ -436,11 +436,11 @@
         <property name="PZAECDefenseDevice" value="ArmorBreakTurret" />
         <property name="PZAECTier" value="17" />
         <property name="AmmoItem" value="ammo762mmBulletBall+tags(ammo762mm)" />
-        <property name="EntityDamage" value="30" />
-        <property name="BurstRoundCount" value="36" />
-        <property name="CooldownTime" value="5" />
+        <property name="EntityDamage" value="250" />
+        <property name="BurstRoundCount" value="75" />
+        <property name="CooldownTime" value="1.8" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
           <property name="resourceElectricParts" value="15" />
         </property>
       </block>
@@ -450,7 +450,7 @@
         <property name="DescriptionKey" value="PZAECArmorBreakTurretT18Desc" />
         <property name="CustomIcon" value="m60Turret" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="10400" />
+        <property name="MaxDamage" value="22880" />
         <property name="RequiredPower" value="50" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="27000" />
@@ -458,11 +458,11 @@
         <property name="PZAECDefenseDevice" value="ArmorBreakTurret" />
         <property name="PZAECTier" value="18" />
         <property name="AmmoItem" value="ammo762mmBulletBall+tags(ammo762mm)" />
-        <property name="EntityDamage" value="34" />
-        <property name="BurstRoundCount" value="36" />
-        <property name="CooldownTime" value="5" />
+        <property name="EntityDamage" value="350" />
+        <property name="BurstRoundCount" value="90" />
+        <property name="CooldownTime" value="1.6" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="20" />
         </property>
       </block>
@@ -472,7 +472,7 @@
         <property name="DescriptionKey" value="PZAECArmorBreakTurretT19Desc" />
         <property name="CustomIcon" value="m60Turret" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="12800" />
+        <property name="MaxDamage" value="34560" />
         <property name="RequiredPower" value="55" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="33000" />
@@ -480,11 +480,11 @@
         <property name="PZAECDefenseDevice" value="ArmorBreakTurret" />
         <property name="PZAECTier" value="19" />
         <property name="AmmoItem" value="ammo762mmBulletBall+tags(ammo762mm)" />
-        <property name="EntityDamage" value="40" />
-        <property name="BurstRoundCount" value="36" />
-        <property name="CooldownTime" value="5" />
+        <property name="EntityDamage" value="490" />
+        <property name="BurstRoundCount" value="110" />
+        <property name="CooldownTime" value="1.4" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="60" />
+          <property name="resourceDurablAlloys" value="60" />
           <property name="resourceElectricParts" value="25" />
         </property>
       </block>
@@ -497,7 +497,7 @@
         <property name="MaxDamage" value="12000" />
         <property name="TakeDelay" value="45" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="25" />
         </property>
       </block>
@@ -505,22 +505,25 @@
         <property name="Extends" value="electricwirerelay" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECTacticalRelayDesc" />
+        <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="55CCFF" />
         <property name="MaxDamage" value="10000" />
         <property name="RequiredPower" value="15" />
         <property name="TakeDelay" value="30" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="20" />
         </property>
       </block>
       <block name="PZAECReactiveWallT16">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT16Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="18000" />
+        <property name="MaxDamage" value="27000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -528,16 +531,18 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="16" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="20" />
+          <property name="resourceDurablAlloys" value="20" />
         </property>
       </block>
       <block name="PZAECReactiveWallT17">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT17Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="22000" />
+        <property name="MaxDamage" value="39600" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -545,16 +550,18 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="17" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
         </property>
       </block>
       <block name="PZAECReactiveWallT18">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT18Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="27000" />
+        <property name="MaxDamage" value="59400" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -562,16 +569,18 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="18" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
         </property>
       </block>
       <block name="PZAECReactiveWallT19">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT19Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="33000" />
+        <property name="MaxDamage" value="89100" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -579,16 +588,18 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="19" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
         </property>
       </block>
       <block name="PZAECAblativeWallT16">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT16Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="12000" />
+        <property name="MaxDamage" value="18000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -597,29 +608,33 @@
         <property name="PZAECTier" value="16" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT16" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="20" />
+          <property name="resourceDurablAlloys" value="20" />
         </property>
       </block>
       <block name="PZAECAblativeWallRuinT16">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
         <property name="MaxDamage" value="2500" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT16" />
-          <property name="Item" value="resourceForgedSteel" />
+          <property name="Item" value="resourceDurablAlloys" />
           <property name="ItemCount" value="20" />
           <property name="UpgradeHitCount" value="4" />
         </property>
       </block>
       <block name="PZAECAblativeWallT17">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT17Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="15000" />
+        <property name="MaxDamage" value="27000" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -628,29 +643,33 @@
         <property name="PZAECTier" value="17" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT17" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
         </property>
       </block>
       <block name="PZAECAblativeWallRuinT17">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
         <property name="MaxDamage" value="2500" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT17" />
-          <property name="Item" value="resourceForgedSteel" />
+          <property name="Item" value="resourceDurablAlloys" />
           <property name="ItemCount" value="28" />
           <property name="UpgradeHitCount" value="4" />
         </property>
       </block>
       <block name="PZAECAblativeWallT18">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT18Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="19000" />
+        <property name="MaxDamage" value="41800" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -659,29 +678,33 @@
         <property name="PZAECTier" value="18" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT18" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
         </property>
       </block>
       <block name="PZAECAblativeWallRuinT18">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
         <property name="MaxDamage" value="2500" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT18" />
-          <property name="Item" value="resourceForgedSteel" />
+          <property name="Item" value="resourceDurablAlloys" />
           <property name="ItemCount" value="38" />
           <property name="UpgradeHitCount" value="4" />
         </property>
       </block>
       <block name="PZAECAblativeWallT19">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT19Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="24000" />
+        <property name="MaxDamage" value="64800" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -690,29 +713,33 @@
         <property name="PZAECTier" value="19" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT19" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
         </property>
       </block>
       <block name="PZAECAblativeWallRuinT19">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
         <property name="MaxDamage" value="2500" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT19" />
-          <property name="Item" value="resourceForgedSteel" />
+          <property name="Item" value="resourceDurablAlloys" />
           <property name="ItemCount" value="50" />
           <property name="UpgradeHitCount" value="4" />
         </property>
       </block>
       <block name="PZAECEmbrasureT16">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECEmbrasureT16Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="14000" />
+        <property name="MaxDamage" value="21000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -720,16 +747,18 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="16" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="20" />
+          <property name="resourceDurablAlloys" value="20" />
         </property>
       </block>
       <block name="PZAECEmbrasureT17">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECEmbrasureT17Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="17500" />
+        <property name="MaxDamage" value="31500" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -737,16 +766,18 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="17" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
         </property>
       </block>
       <block name="PZAECEmbrasureT18">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECEmbrasureT18Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="21500" />
+        <property name="MaxDamage" value="47300" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -754,16 +785,18 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="18" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
         </property>
       </block>
       <block name="PZAECEmbrasureT19">
-        <property name="Extends" value="steelShapes" />
+        <property name="Extends" value="steelMaster" />
+        <property name="Shape" value="New" />
+        <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECEmbrasureT19Desc" />
-        <property name="CustomIcon" value="steelShapes" />
+        <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="26500" />
+        <property name="MaxDamage" value="71550" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -771,16 +804,16 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="19" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
         </property>
       </block>
       <block name="PZAECBlastGateT16">
         <property name="Extends" value="vaultDoor01_Powered" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECBlastGateT16Desc" />
-        <property name="CustomIcon" value="vaultDoor01_Powered" />
+        <property name="CustomIcon" value="vaultDoor01" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="20000" />
+        <property name="MaxDamage" value="30000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -789,16 +822,16 @@
         <property name="PZAECTier" value="16" />
         <property name="RequiredPower" value="30" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="20" />
+          <property name="resourceDurablAlloys" value="20" />
         </property>
       </block>
       <block name="PZAECBlastGateT17">
         <property name="Extends" value="vaultDoor01_Powered" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECBlastGateT17Desc" />
-        <property name="CustomIcon" value="vaultDoor01_Powered" />
+        <property name="CustomIcon" value="vaultDoor01" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="25000" />
+        <property name="MaxDamage" value="45000" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -807,16 +840,16 @@
         <property name="PZAECTier" value="17" />
         <property name="RequiredPower" value="30" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
         </property>
       </block>
       <block name="PZAECBlastGateT18">
         <property name="Extends" value="vaultDoor01_Powered" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECBlastGateT18Desc" />
-        <property name="CustomIcon" value="vaultDoor01_Powered" />
+        <property name="CustomIcon" value="vaultDoor01" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="31000" />
+        <property name="MaxDamage" value="68200" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -825,16 +858,16 @@
         <property name="PZAECTier" value="18" />
         <property name="RequiredPower" value="30" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
         </property>
       </block>
       <block name="PZAECBlastGateT19">
         <property name="Extends" value="vaultDoor01_Powered" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECBlastGateT19Desc" />
-        <property name="CustomIcon" value="vaultDoor01_Powered" />
+        <property name="CustomIcon" value="vaultDoor01" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="38000" />
+        <property name="MaxDamage" value="102600" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -843,7 +876,7 @@
         <property name="PZAECTier" value="19" />
         <property name="RequiredPower" value="30" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
         </property>
       </block>
       <block name="PZAECArmoredConduitT16">
@@ -852,7 +885,7 @@
         <property name="DescriptionKey" value="PZAECArmoredConduitT16Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="66BBFF" />
-        <property name="MaxDamage" value="8000" />
+        <property name="MaxDamage" value="12000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -860,7 +893,7 @@
         <property name="PZAECFortressType" value="ArmoredConduit" />
         <property name="PZAECTier" value="16" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="20" />
+          <property name="resourceDurablAlloys" value="20" />
           <property name="resourceElectricParts" value="5" />
         </property>
       </block>
@@ -870,7 +903,7 @@
         <property name="DescriptionKey" value="PZAECArmoredConduitT17Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="AA88FF" />
-        <property name="MaxDamage" value="10000" />
+        <property name="MaxDamage" value="18000" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -878,7 +911,7 @@
         <property name="PZAECFortressType" value="ArmoredConduit" />
         <property name="PZAECTier" value="17" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="30" />
+          <property name="resourceDurablAlloys" value="30" />
           <property name="resourceElectricParts" value="5" />
         </property>
       </block>
@@ -888,7 +921,7 @@
         <property name="DescriptionKey" value="PZAECArmoredConduitT18Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="FFBB44" />
-        <property name="MaxDamage" value="12500" />
+        <property name="MaxDamage" value="27500" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -896,7 +929,7 @@
         <property name="PZAECFortressType" value="ArmoredConduit" />
         <property name="PZAECTier" value="18" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="40" />
+          <property name="resourceDurablAlloys" value="40" />
           <property name="resourceElectricParts" value="5" />
         </property>
       </block>
@@ -906,7 +939,7 @@
         <property name="DescriptionKey" value="PZAECArmoredConduitT19Desc" />
         <property name="CustomIcon" value="electricwirerelay" />
         <property name="CustomIconTint" value="FF6655" />
-        <property name="MaxDamage" value="15500" />
+        <property name="MaxDamage" value="41850" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -914,7 +947,7 @@
         <property name="PZAECFortressType" value="ArmoredConduit" />
         <property name="PZAECTier" value="19" />
         <property class="RepairItems">
-          <property name="resourceForgedSteel" value="50" />
+          <property name="resourceDurablAlloys" value="50" />
           <property name="resourceElectricParts" value="5" />
         </property>
       </block>

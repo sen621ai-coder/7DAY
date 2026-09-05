@@ -29,7 +29,8 @@ function Get-InheritedProperty([hashtable]$map,[string]$id,[string]$property) {
     }
     return ''
 }
-Assert-Balance ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.18\.0"') 'Runtime version was not bumped'
+[xml]$modInfo = Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw
+Assert-Balance ([version]$modInfo.xml.Version.value -ge [version]'1.18.0') 'Runtime version predates the reward expansion'
 Assert-Balance (Test-Path (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ENDGAME_REWARD_BALANCE.md')) 'Missing reward guide'
 
 # Apply the real configuration operations in load order, including this patch.

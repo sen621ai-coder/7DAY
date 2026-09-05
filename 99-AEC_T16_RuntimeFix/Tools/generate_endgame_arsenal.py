@@ -5,6 +5,8 @@ import csv
 import io
 import pathlib
 import xml.etree.ElementTree as ET
+import endgame_progression as progression
+import legendary_prerequisites as legendary
 
 
 MOD = pathlib.Path(__file__).resolve().parents[1]
@@ -24,6 +26,10 @@ TIERS = {
     19: dict(rank="R5", color="FF6655", armor=3, comp=8, legendary=24, cap=6, heart=3, electric=50,
              device_comp=10, device_legendary=36, device_cap=9, device_heart=3, active=12, cooldown=30),
 }
+
+for tier, data in TIERS.items():
+    data['active'] = progression.ACTIVE_DURATION[tier - 16]
+    data['cooldown'] = progression.COOLDOWN_DURATION[tier - 16]
 
 SETS = {
     "Harrier": dict(cn="猎隼", base="armorRanger", master="armorLightMaster", armor=[15, 16, 17, 18],
@@ -53,7 +59,9 @@ def replace_generated(path: pathlib.Path, body: str) -> None:
     if BEGIN in text:
         head, rest = text.split(BEGIN, 1)
         _, tail = rest.split(END, 1)
-        text = head.rstrip() + "\n" + tail.lstrip()
+        text = head + BEGIN + "\n" + body.rstrip() + "\n  " + END + tail
+        path.write_text(text, encoding="utf-8", newline="\n")
+        return
     pos = text.rfind("</configs>")
     if pos < 0:
         raise RuntimeError(f"Missing </configs> in {path}")
@@ -237,6 +245,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             loc += [(device, "items", f"T{tier} {spec['active_en']} Device", f"T{tier} {spec['active_cn']}装置"),
                     (device + "Desc", "items", f"Reusable. Equip the exact-tier four-piece {set_name} set, fill resonance, then use from the toolbelt. Active {data['active']}s; cooldown {data['cooldown']}s.",
                      f"可重复使用。穿齐同阶四件{spec['cn']}套装并充满共鸣后，从快捷栏启动；持续 {data['active']} 秒，冷却 {data['cooldown']} 秒。")]
+    progression.armor_items(append)
     return element_text(append), loc
 
 
@@ -369,6 +378,7 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
         ("buffPZAECResonanceCooldownName", "buffs", "Resonance Overload", "共鸣过载"),
         ("buffPZAECResonanceCooldownDesc", "buffs", "The resonance device is cooling down.", "共鸣装置正在冷却。"),
     ]
+    progression.arsenal_buffs(definitions)
     return element_text(check) + "\n" + element_text(definitions), loc
 
 
@@ -385,9 +395,9 @@ def build_recipes() -> str:
             ET.SubElement(patch, "ingredient", {"name": f"resourcePZAECMutantHeartT{tier}", "count": str([1, 1, 2, 3][tier - 16])})
             core_patches.append(element_text(patch))
     chassis = {
-        "resourcePZAECWeaponChassis": [("resourceForgedSteel", 100), ("resourceMechanicalParts", 40), ("resourceElectricParts", 30), ("resourceDuctTape", 10), ("resourceLegendaryParts", 5)],
-        "resourcePZAECArmorChassis": [("resourceForgedSteel", 60), ("resourceMechanicalParts", 20), ("resourceElectricParts", 20), ("resourceSewingKit", 20), ("resourceLeather", 40), ("resourceLegendaryParts", 5)],
-        "resourcePZAECDeviceChassis": [("resourceForgedSteel", 80), ("resourceMechanicalParts", 30), ("resourceElectricParts", 50), ("resourceScrapPolymers", 40), ("resourceAcid", 5), ("resourceLegendaryParts", 5)],
+        "resourcePZAECWeaponChassis": [("resourceDurablAlloys", 100), ("resourceMechanicalParts", 40), ("resourceElectricParts", 30), ("resourceDuctTape", 10), ("resourceLegendaryParts", 5)],
+        "resourcePZAECArmorChassis": [("resourceDurablAlloys", 60), ("resourceMechanicalParts", 20), ("resourceElectricParts", 20), ("resourceSewingKit", 20), ("resourceLeather", 40), ("resourceLegendaryParts", 5)],
+        "resourcePZAECDeviceChassis": [("resourceDurablAlloys", 80), ("resourceMechanicalParts", 30), ("resourceElectricParts", 50), ("resourceScrapPolymers", 40), ("resourceAcid", 5), ("resourceLegendaryParts", 5)],
     }
     for output, ingredients in chassis.items():
         rec = ET.SubElement(append, "recipe", {"name": output, "count": "1", "craft_area": "workbench", "craft_time": "60", "always_unlocked": "true", "use_ingredient_modifier": "false"})
@@ -400,6 +410,8 @@ def build_recipes() -> str:
                 ingredients = [("resourcePZAECArmorChassis", 1), (f"PZAECBuildParts{data['rank']}", data["comp"]),
                     ("resourceLegendaryParts", data["legendary"]), (f"resourcePZAECSiegeCapacitorT{tier}", data["cap"]),
                     (f"resourcePZAECMutantHeartT{tier}", data["heart"]), ("resourceElectricParts", data["electric"])]
+                if tier == 16:
+                    ingredients.insert(0, (legendary.ARMOR[set_name] + slot, 1))
                 for name, count in ingredients: ET.SubElement(rec, "ingredient", {"name": name, "count": str(count)})
                 if tier > 16:
                     up = ET.SubElement(append, "recipe", {"name": output, "count": "1", "craft_area": "workbench", "craft_time": str(60 + (tier - 17) * 15), "always_unlocked": "true", "use_ingredient_modifier": "false", "tags": "upgrade"})
@@ -506,6 +518,8 @@ def main() -> None:
     replace_generated(CONFIG / "loot.xml", build_loot())
     replace_generated(CONFIG / "entityclasses.xml", build_entities())
     write_localization(item_loc + buff_loc)
+    from generate_fusion_upgrades import refresh
+    refresh(CONFIG)
 
 
 if __name__ == "__main__":

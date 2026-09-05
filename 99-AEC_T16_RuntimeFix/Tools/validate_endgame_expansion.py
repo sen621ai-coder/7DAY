@@ -10,11 +10,12 @@ MODS = MOD.parent
 GAME_CONFIG = MODS.parent / "Data" / "Config"
 CONFIG = MOD / "Config"
 TIERS = range(16, 20)
-WEAPONS = ("HorizonNeedle", "StormReservoir", "FaultlineHammer", "BastionShotgun", "EchoRepeater", "CounterSiege")
+WEAPONS = ("EmberPistol", "HorizonNeedle", "StormReservoir", "FaultlineHammer", "BastionShotgun", "EchoRepeater", "CounterSiege")
 COMPONENTS = ("ThreatLens", "CoolingSink", "KineticRecycler", "RepairServo", "PhaseRangefinder", "NearfieldReflex", "ClosedLoopFeed", "PulseCapacitor", "StanceBreaker", "GatekeeperHook", "EmergencyLiner", "InsulatedTreads")
 DEVICES = ("SkyguardArray", "HiveRepairStation", "HoundDecoyTower", "ShockNetNode", "ArmorBreakTurret")
 FORTRESS = ("ReactiveWall", "AblativeWall", "Embrasure", "BlastGate", "ArmoredConduit")
 WEAPON_BASES = {
+    "EmberPistol": "gunHandgunT3DesertVulture",
     "HorizonNeedle": "gunRifleT3SniperRifle", "StormReservoir": "gunMGT3M60",
     "FaultlineHammer": "meleeWpnSledgeT3SteelSledgehammer", "BastionShotgun": "gunShotgunT3AutoShotgun",
     "EchoRepeater": "gunBowT3CompoundCrossbow", "CounterSiege": "gunExplosivesT3RocketLauncher",
@@ -49,6 +50,14 @@ def main() -> None:
     items_root = parse(CONFIG / "items.xml")
     modifiers_root = parse(CONFIG / "item_modifiers.xml")
     blocks_root = parse(CONFIG / "blocks.xml")
+    fortress_names = {f"PZAEC{stem}T{tier}" for stem in FORTRESS + ("AblativeWallRuin",) for tier in TIERS}
+    fortress_names.update(("PZAECResonanceForge", "PZAECTacticalRelay"))
+    for block in blocks_root.iter("block"):
+        if block.get("name") in fortress_names:
+            icon = block.find("property[@name='CustomIcon']")
+            require(icon is not None, f"Missing fortress icon: {block.get('name')}")
+            require((GAME_CONFIG.parent / "ItemIcons" / (icon.get("value") + ".png")).is_file(),
+                    f"Missing fortress icon asset: {block.get('name')} -> {icon.get('value')}")
     buffs_root = parse(CONFIG / "buffs.xml")
     recipes_root = parse(CONFIG / "recipes.xml")
     loot_root = parse(CONFIG / "loot.xml")
@@ -63,6 +72,10 @@ def main() -> None:
     known_items = collect(item_paths, "item")
     known_modifiers = collect(modifier_paths, "item_modifier")
     known_blocks = collect(block_paths, "block")
+    # Shape families expand into individual blocks at load time; their source
+    # names are not concrete Extends parents (e.g. steelShapes).
+    shape_families = {e.get("name") for path in block_paths for e in parse(path).iter("block") if e.get("shapes")}
+    known_blocks |= {name + ":VariantHelper" for name in shape_families}
     known_buffs = collect(buff_paths, "buff")
     known_entities = collect(entity_paths, "entity_class")
     craftables = known_items | known_modifiers | known_blocks
@@ -95,10 +108,10 @@ def main() -> None:
     require(expected_modifiers <= actual_modifiers, f"Missing expansion modifiers: {sorted(expected_modifiers - actual_modifiers)}")
     require(expected_blocks <= actual_blocks, f"Missing expansion blocks: {sorted(expected_blocks - actual_blocks)}")
     require(expected_entities <= actual_entities, f"Missing expansion entities: {sorted(expected_entities - actual_entities)}")
-    require(len(expected_items) == 73, f"Expected 73 item definitions, got {len(expected_items)}")
+    require(len(expected_items) == 77, f"Expected 77 item definitions, got {len(expected_items)}")
     require(len(expected_modifiers) == 56, f"Expected 56 modifier definitions, got {len(expected_modifiers)}")
     require(len(expected_blocks) == 42, f"Expected 42 player-facing block definitions, got {len(expected_blocks)}")
-    require(len(expected_items | expected_modifiers | expected_blocks) == 171, "Catalog total must remain 171")
+    require(len(expected_items | expected_modifiers | expected_blocks) == 175, "Catalog total must remain 175")
     require(len(expected_entities) == 12, "Expected 12 siege support entity definitions")
     require(expected_calibration_buffs <= known_buffs, f"Missing calibration buffs: {sorted(expected_calibration_buffs - known_buffs)}")
 
@@ -132,6 +145,9 @@ def main() -> None:
             continue
         extends = element.find("property[@name='Extends']")
         require(extends is None or extends.get("value") in known_blocks, f"{name} extends missing block {extends.get('value')}")
+        require(extends is None or extends.get("value") not in shape_families, f"{name} extends shape family instead of concrete block")
+        if name.startswith("PZAECEmbrasureT"):
+            require(element.find("property[@name='Model']").get("value") == "@:Shapes/arrow_slit.fbx", f"{name} must have an open firing slit")
     for element in entities_root.iter("entity_class"):
         if element.get("name") in expected_entities:
             require(element.get("extends") in known_entities, f"{element.get('name')} extends missing entity {element.get('extends')}")
@@ -145,6 +161,7 @@ def main() -> None:
         require(output in craftables, f"Recipe output does not exist: {output}")
         for ingredient in recipe.findall("ingredient"):
             require(ingredient.get("name") in craftables, f"{output} uses missing ingredient {ingredient.get('name')}")
+            require(ingredient.get("name") not in shape_families, f"{output} uses shape family instead of its craftable VariantHelper")
             require(int(ingredient.get("count", "0")) > 0, f"{output} has a non-positive ingredient count")
     for output in expected_items | expected_modifiers | expected_blocks:
         if "BlueprintCrate" in output or "ChoiceCrate" in output or output.startswith("itemPZAECArmoryBlueprint"):
@@ -179,7 +196,7 @@ def main() -> None:
     for name in expected_entities:
         require(sum(1 for row in localization_rows if row[0] == name) == 1, f"Missing or duplicate siege entity localization {name}")
 
-    print("Endgame expansion validation passed: 73 items, 56 modifiers, 42 blocks, 12 siege entities, 171 player-facing definitions.")
+    print("Endgame expansion validation passed: 77 items, 56 modifiers, 42 blocks, 12 siege entities, 175 player-facing definitions.")
 
 
 if __name__ == "__main__":

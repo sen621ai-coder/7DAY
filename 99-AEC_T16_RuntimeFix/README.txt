@@ -1,6 +1,74 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.21.1 weapon attachment compatibility
+- Reused T16-T19 weapon models now use their original model-specific attachment
+  offsets, scope settings and sounds when no dedicated property exists.
+- Dedicated new-weapon overrides retain priority; native wildcard fallback and
+  unrelated weapons keep their behavior. Native audit: aecattachmentcheck.
+
+Runtime 1.21.0 Ember heavy pistols
+- Four T16-T19 .44 pistols using native Desert Vulture model/actions and Gunslinger.
+- T16 consumes legendary Hellgun. Ten recipes cover direct crafting, adjacent
+  upgrades and skip-tier upgrades. Added to each same-tier boss weapon pool.
+- Fusion/socket allowlists now cover 92 equipment types; 28 weapons + 64 armor.
+  Native upgrade audit covers 138 adjacent/skip recipes. Guide: 手枪系列说明.md.
+
+Runtime 1.20.2 T16 legendary crafting prerequisites
+- T16 weapon recipes consume matching legendary predecessors, with alternate
+  recipes for each existing legendary variant; T16 armor consumes its mapped
+  legendary set's matching slot. No Q6 requirement; original other costs stay.
+- No legacy legendary launcher exists: Counter-Siege consumes an improved
+  launcher plus one legendary Gaus variant. Mapping: Tools/legendary_prerequisites.py.
+- Scope: 22 T16 weapon/armor types, 45 alternatives; T17-T19 direct recipes
+  and tier upgrade inheritance are unchanged. Guide: T16传奇制作前置.md.
+
+Runtime 1.20.1 fusion inheritance on tier upgrade
+- Upgrading same-family T16-T19 gear retains floor(source fusion rank / 5).
+- Adds 66 skip-tier recipes: T16->T18, T16->T19, T17->T19. Costs and craft time
+  sum the adjacent upgrades; inheritance is calculated once per actual craft.
+- Native consumed ingredient ItemValues carry rank in saved/networked recipes;
+  client and background workstation output constructors apply the same rule.
+- Native quality-bearing recipe limit remains one craft per queue entry.
+- Read-only native check: aecupgradecheck. Generator: generate_fusion_upgrades.py;
+  both existing equipment generators refresh the skip-tier recipes automatically.
+
+Runtime 1.20.0 equipment fusion
+- Only the 24 new T16-T19 weapons and 64 new armor pieces support fusion.
+- Use the native combine station: identical item ID and fusion rank, two to one.
+- Each rank compounds intrinsic numeric bonuses by 1.05; costs/penalties improve
+  in the beneficial direction. Tier, quality, sockets and triggered abilities
+  retain their original mechanics. Attached components are retained, not fused.
+- Primary quality, mods, cosmetics, metadata and wear proportion are preserved.
+  Remove donor attachments and unload both weapons before combining.
+- Preview does not consume materials; commit revalidates current inputs and
+  uses the native AddItem-before-input-clear path. No fusion XP is awarded.
+- Native item metadata persists fusion rank through save/network serialization.
+- Read-only integration check: aecfusioncheck. Chinese guide: 装备融合说明.md.
+
+Runtime 1.19.1 bug fixes
+- Stacked stamina, sustenance and scavenging cost reductions cannot turn negative.
+- Counter-siege pulse ammo explicitly disables inherited HE demolition and
+  scales explosion entity damage with its tier.
+- Device descriptions share the actual duration/cooldown values.
+- Regenerating either XML section preserves patch order and neighboring content.
+
+Runtime 1.19.0 legendary succession
+- Fixed T16-T19 weapon and armor progression, six sockets, stronger components,
+  resonance windows and tiered fortress defenses. Existing item IDs retained.
+- Balance source: Tools/endgame_progression.py.
+- Regenerate with generate_endgame_arsenal.py followed by
+  generate_endgame_expansion.py; then run both validators.
+- Read-only native console verification: aecgearcheck.
+- Current Chinese reference: 新物品目录.md / 新物品配方与属性明细.md.
+
+2026-09-05 verification fixes
+- Corrects fortress block inheritance and steel-block recipe ingredients for
+  the native shape-family expansion system. Dedicated startup now succeeds.
+- Build with tools/Build-RuntimeFix.ps1 from the Mods directory.
+- See EQUIPMENT_VERIFICATION_2026-09-05.md for actual checks and remaining
+  player-client acceptance coverage.
+
 Runtime 1.18.0 endgame expansion
 - Adds 171 player-facing T16-T19 definitions: six weapon families, two ammo
   families, 12 component families, six field-item families, five powered

@@ -1,4 +1,4 @@
-#Requires -Version 7.0
+﻿#Requires -Version 7.0
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Test-LegendaryAdventure.ps1')
 Add-Type -ReferencedAssemblies ($references + $frameworkReferences) -TypeDefinition @'
@@ -186,7 +186,7 @@ foreach($tier in 16..19) {
     Assert-Defense ($beacon.SelectSingleNode("property[@class='Action0']/property[@name='UseAnimation']").value -eq 'false') 'Use guard bypassed'
     $recipe=$recipes.SelectSingleNode("//recipe[@name='$itemId']")
     Assert-Defense ($recipe.craft_area -eq 'workbench' -and $recipe.count -eq '1' -and $recipe.use_ingredient_modifier -eq 'false') 'Wrong crafting station/count or discount exploit'
-    foreach($cost in @{("PZAECChallengeVoucherT$tier")=1;'resourceForgedSteel'=50;'resourceElectricParts'=20}.GetEnumerator()) {
+    foreach($cost in @{("PZAECChallengeVoucherT$tier")=1;'resourceDurablAlloys'=50;'resourceElectricParts'=20}.GetEnumerator()) {
         Assert-Defense ([int]$recipe.SelectSingleNode("ingredient[@name='$($cost.Key)']").count -eq $cost.Value) 'Wrong beacon cost'
     }
     Assert-Defense ($recipe.SelectNodes('ingredient').Count -eq 3) 'Unexpected extra cost'

@@ -415,7 +415,7 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.04" tags="ranged" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2.25" tags="ranged" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECThreatLensT17" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
@@ -428,7 +428,7 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.05" tags="ranged" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="3" tags="ranged" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECThreatLensT18" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
@@ -441,7 +441,7 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.06" tags="ranged" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="4" tags="ranged" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECThreatLensT19" installable_tags="armorHead" modifier_tags="PZAECExpansionThreatLens" blocked_tags="noMods" type="attachment">
@@ -454,7 +454,7 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.08" tags="ranged" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="5.5" tags="ranged" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECCoolingSinkT16" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
@@ -467,8 +467,12 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.1" />
-          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+          <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-1" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="1" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.1" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECCoolingSinkT17" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
@@ -481,8 +485,12 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.14" />
-          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+          <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-1" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="1.25" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.4" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECCoolingSinkT18" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
@@ -495,8 +503,12 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.18" />
-          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+          <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-1" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="1.6" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.8" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECCoolingSinkT19" installable_tags="gun" modifier_tags="PZAECExpansionCoolingSink" blocked_tags="noMods" type="attachment">
@@ -509,8 +521,12 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-0.22" />
-          <passive_effect name="WeaponHandling" operation="perc_add" value="-0.08" />
+          <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
+          <passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-1" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="2" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="2.3" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECKineticRecyclerT16" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
@@ -523,7 +539,10 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.1" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.4" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.65" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.65" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="0.35" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECKineticRecyclerT17" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
@@ -536,7 +555,10 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.14" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.5" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.85" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.85" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="0.5" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECKineticRecyclerT18" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
@@ -549,7 +571,10 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.18" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.6" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.1" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.1" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="0.7" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECKineticRecyclerT19" installable_tags="melee" modifier_tags="PZAECExpansionKineticRecycler" blocked_tags="noMods" type="attachment">
@@ -562,7 +587,10 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.22" tags="secondary" />
+          <passive_effect name="StaminaLoss" operation="perc_add" value="-0.7" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.4" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.4" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="0.9" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECRepairServoT16" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
@@ -575,8 +603,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.08" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="1" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="2.75" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECRepairServoT17" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
@@ -589,8 +617,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.1" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="1.5" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="3.5" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECRepairServoT18" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
@@ -603,8 +631,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.12" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="2.2" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="4.5" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECRepairServoT19" installable_tags="armorHands" modifier_tags="PZAECExpansionRepairServo" blocked_tags="noMods" type="attachment">
@@ -617,8 +645,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BlockRepairAmount" operation="perc_add" value="0.15" />
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="-0.05" />
+          <passive_effect name="BlockRepairAmount" operation="perc_add" value="3" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="6" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPhaseRangefinderT16" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
@@ -631,8 +659,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.08" tags="head" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="2.25" tags="head" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.65" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="1" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPhaseRangefinderT17" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
@@ -645,8 +674,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.1" tags="head" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="3" tags="head" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.72" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="1.25" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPhaseRangefinderT18" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
@@ -659,8 +689,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.12" tags="head" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="4" tags="head" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.8" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="1.6" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPhaseRangefinderT19" installable_tags="gun,perkArchery" modifier_tags="PZAECExpansionPhaseRangefinder" blocked_tags="noMods" type="attachment">
@@ -673,8 +704,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="0.15" tags="head" />
-          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="0.2" />
+          <passive_effect name="HeadshotDamageModifier" operation="perc_add" value="5.5" tags="head" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-0.88" />
+          <passive_effect name="WeaponHandling" operation="perc_add" value="2" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECNearfieldReflexT16" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
@@ -687,8 +719,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.1" />
-          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="2.75" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="0.15" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.65" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECNearfieldReflexT17" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
@@ -701,8 +734,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.12" />
-          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="3.5" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="0.25" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.85" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECNearfieldReflexT18" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
@@ -715,8 +749,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.15" />
-          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="4.5" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="0.4" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.1" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECNearfieldReflexT19" installable_tags="gun" modifier_tags="PZAECExpansionNearfieldReflex" blocked_tags="noMods" type="attachment">
@@ -729,8 +764,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="0.18" />
-          <passive_effect name="DamageFalloffRange" operation="perc_add" value="-0.05" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="6" />
+          <passive_effect name="DamageFalloffRange" operation="perc_add" value="0.6" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.4" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECClosedLoopFeedT16" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
@@ -743,7 +779,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="MagazineSize" operation="perc_add" value="0.1" />
+          <passive_effect name="MagazineSize" operation="perc_add" value="5.5" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="2.75" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.2" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECClosedLoopFeedT17" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
@@ -756,7 +794,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="MagazineSize" operation="perc_add" value="0.13" />
+          <passive_effect name="MagazineSize" operation="perc_add" value="7" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="3.5" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.3" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECClosedLoopFeedT18" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
@@ -769,7 +809,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="MagazineSize" operation="perc_add" value="0.16" />
+          <passive_effect name="MagazineSize" operation="perc_add" value="9" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="4.5" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.45" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECClosedLoopFeedT19" installable_tags="gun" modifier_tags="PZAECExpansionClosedLoopFeed" blocked_tags="noMods" type="attachment">
@@ -782,7 +824,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="MagazineSize" operation="perc_add" value="0.2" />
+          <passive_effect name="MagazineSize" operation="perc_add" value="12" />
+          <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="6" />
+          <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.65" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPulseCapacitorT16" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
@@ -796,6 +840,8 @@
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT16" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2.25" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="2" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPulseCapacitorT17" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
@@ -809,6 +855,8 @@
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT17" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="3" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="3" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPulseCapacitorT18" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
@@ -822,6 +870,8 @@
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT18" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="4" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="4" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECPulseCapacitorT19" installable_tags="gun,perkElectrocutioner" modifier_tags="PZAECExpansionPulseCapacitor" blocked_tags="noMods" type="attachment">
@@ -835,6 +885,8 @@
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" buff="buffPZAECPulseCapacitorT19" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="5.5" />
+          <passive_effect name="EntityPenetrationCount" operation="base_add" value="5" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECStanceBreakerT16" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
@@ -847,8 +899,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.12" tags="secondary" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2.25" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.65" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECStanceBreakerT17" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
@@ -861,8 +913,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.15" tags="secondary" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="3" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.85" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECStanceBreakerT18" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
@@ -875,8 +927,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.18" tags="secondary" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="4" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.1" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECStanceBreakerT19" installable_tags="melee" modifier_tags="PZAECExpansionStanceBreaker" blocked_tags="noMods" type="attachment">
@@ -889,8 +941,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="EntityDamage" operation="perc_add" value="0.22" tags="secondary" />
-          <passive_effect name="RoundsPerMinute" operation="perc_add" value="-0.08" tags="primary" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="5.5" tags="primary,secondary" />
+          <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.4" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECGatekeeperHookT16" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
@@ -903,7 +955,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BuffResistance" operation="base_add" value="0.1" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="2.25" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECGatekeeperHookT17" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
@@ -916,7 +969,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BuffResistance" operation="base_add" value="0.12" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="3" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECGatekeeperHookT18" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
@@ -929,7 +983,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BuffResistance" operation="base_add" value="0.15" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="4" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECGatekeeperHookT19" installable_tags="melee,shotgun" modifier_tags="PZAECExpansionGatekeeperHook" blocked_tags="noMods" type="attachment">
@@ -942,7 +997,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="BuffResistance" operation="base_add" value="0.18" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryStunned01CHTrigger" />
+          <passive_effect name="EntityDamage" operation="perc_add" value="5.5" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECEmergencyLinerT16" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
@@ -955,7 +1011,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="PhysicalDamageResist" operation="base_add" value="2" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="3" />
+          <passive_effect name="HealthMax" operation="base_add" value="80" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECEmergencyLinerT17" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
@@ -968,7 +1026,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="PhysicalDamageResist" operation="base_add" value="3" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="4" />
+          <passive_effect name="HealthMax" operation="base_add" value="120" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECEmergencyLinerT18" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
@@ -981,7 +1041,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="PhysicalDamageResist" operation="base_add" value="4" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="5" />
+          <passive_effect name="HealthMax" operation="base_add" value="180" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECEmergencyLinerT19" installable_tags="armorChest" modifier_tags="PZAECExpansionEmergencyLiner" blocked_tags="noMods" type="attachment">
@@ -994,7 +1056,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="PhysicalDamageResist" operation="base_add" value="5" />
+          <passive_effect name="PhysicalDamageResist" operation="base_add" value="6" />
+          <passive_effect name="HealthMax" operation="base_add" value="260" />
+          <passive_effect name="BuffResistance" operation="base_add" value="1" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECInsulatedTreadsT16" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
@@ -1007,7 +1071,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ElementalDamageResist" operation="base_add" value="6" tags="electrical" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="15" tags="electrical" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.5" />
+          <passive_effect name="BuffResistance" operation="base_set" value="1" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECInsulatedTreadsT17" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
@@ -1020,7 +1086,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ElementalDamageResist" operation="base_add" value="8" tags="electrical" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="20" tags="electrical" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.75" />
+          <passive_effect name="BuffResistance" operation="base_set" value="1" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECInsulatedTreadsT18" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
@@ -1033,7 +1101,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ElementalDamageResist" operation="base_add" value="10" tags="electrical" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="26" tags="electrical" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="1.1" />
+          <passive_effect name="BuffResistance" operation="base_set" value="1" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
         </effect_group>
       </item_modifier>
       <item_modifier name="modPZAECInsulatedTreadsT19" installable_tags="armorFeet" modifier_tags="PZAECExpansionInsulatedTreads" blocked_tags="noMods" type="attachment">
@@ -1046,7 +1116,9 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
-          <passive_effect name="ElementalDamageResist" operation="base_add" value="12" tags="electrical" />
+          <passive_effect name="ElementalDamageResist" operation="base_add" value="34" tags="electrical" />
+          <passive_effect name="StaminaChangeOT" operation="perc_add" value="1.6" />
+          <passive_effect name="BuffResistance" operation="base_set" value="1" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
         </effect_group>
       </item_modifier>
     </append>

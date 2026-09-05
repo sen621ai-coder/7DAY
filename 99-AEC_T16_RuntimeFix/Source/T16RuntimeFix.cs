@@ -25,6 +25,11 @@ namespace AECT16RuntimeFix
                 LocalRespawnRecovery.Install(harmony);
                 PassiveEffectOverflowGuard.Install(harmony);
                 EndgameExpansionRuntime.Install(harmony);
+                EndgameSocketMigration.Install(harmony);
+                FusionStatScaling.Install(harmony);
+                EquipmentFusionUI.Install(harmony);
+                WeaponAttachmentCompatibility.Install(harmony);
+                FusionTierUpgrade.Install(harmony);
                 ContractRelayPickup.Install(harmony);
                 PlayerHeadshotDamagePatch.Install(harmony);
                 BloodMoonSpawnFix.Install(harmony);

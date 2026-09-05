@@ -4,6 +4,8 @@ import csv
 import io
 import pathlib
 import xml.etree.ElementTree as ET
+import endgame_progression as progression
+import legendary_prerequisites as legendary
 
 
 MOD = pathlib.Path(__file__).resolve().parents[1]
@@ -17,6 +19,7 @@ COLOR = {16: "66BBFF", 17: "AA88FF", 18: "FFBB44", 19: "FF6655"}
 VANILLA_ITEMS = {item.get("name"): item for item in ET.parse(GAME_CONFIG / "items.xml").getroot().findall("item")}
 
 WEAPONS = {
+    "EmberPistol": ("烬火重型手枪", "Ember Heavy Pistol", "gunHandgunT3DesertVulture", "perkGunslinger", [700, 950, 1280, 1730], [32, 40, 50, 64], [420, 480, 540, 620]),
     "HorizonNeedle": ("地平线针刺步枪", "Horizon Needle Rifle", "gunRifleT3SniperRifle", "perkDeadEye", [190, 210, 232, 255], [6, 7, 8, 9], [48, 50, 52, 54]),
     "StormReservoir": ("雷池轻机枪", "Storm Reservoir LMG", "gunMGT3M60", "perkMachineGunner", [76, 84, 92, 101], [90, 100, 110, 120], [390, 410, 430, 450]),
     "FaultlineHammer": ("断层震击锤", "Faultline Shock Hammer", "meleeWpnSledgeT3SteelSledgehammer", "perkSkullCrusher", [275, 303, 333, 366], [0, 0, 0, 0], [0, 0, 0, 0]),
@@ -26,18 +29,18 @@ WEAPONS = {
 }
 
 COMPONENTS = {
-    "ThreatLens": ("威胁鉴别镜", "Threat Lens", "armorHead", "modGunScopeLarge", "35／40／45／50 米内提示攻城单位蓄力。"),
-    "CoolingSink": ("热沉套件", "Cooling Sink", "gun", "modGunBarrelExtender", "降低自动武器热量和后坐力。"),
-    "KineticRecycler": ("动能回收器", "Kinetic Recycler", "melee", "modMeleeWeightedHead", "重击命中返还耐力。"),
+    "ThreatLens": ("威胁鉴别镜", "Threat Lens", "armorHead", "modGunScopeLarge", "远程伤害随阶提升。"),
+    "CoolingSink": ("热沉套件", "Cooling Sink", "gun", "modGunBarrelExtender", "降低四向后坐力，提高操控和射速。"),
+    "KineticRecycler": ("动能回收器", "Kinetic Recycler", "melee", "modMeleeWeightedHead", "降低普攻与重击耗耐，提高攻速和操控。"),
     "RepairServo": ("维修伺服", "Repair Servo", "armorHands", "modArmorCustomizedFittings", "提高方块修理速度和修理量。"),
     "PhaseRangefinder": ("相位测距镜", "Phase Rangefinder", "gun,perkArchery", "modGunScopeLarge", "稳定瞄准提高弱点伤害。"),
-    "NearfieldReflex": ("近场反射镜", "Nearfield Reflex", "gun", "modGunReflexSight", "近距离装填更快，远距离伤害略低。"),
+    "NearfieldReflex": ("近场反射镜", "Nearfield Reflex", "gun", "modGunReflexSight", "提高换弹、射速和伤害衰减距离。"),
     "ClosedLoopFeed": ("闭环供弹器", "Closed-Loop Feed", "gun", "modGunDrumMagazineExtender", "扩大弹匣并提高持续供弹能力。"),
     "PulseCapacitor": ("脉冲电容", "Pulse Capacitor", "gun,perkElectrocutioner", "modMeleeBunkerBuster", "命中可附加短时电击。"),
-    "StanceBreaker": ("破势配重", "Stance Breaker", "melee", "modMeleeWeightedHead", "提高重击伤害，降低普通攻击速度。"),
-    "GatekeeperHook": ("守门钩爪", "Gatekeeper Hook", "melee,shotgun", "modMeleeErgonomicGrip", "近距离击杀后短时提高抗硬直能力。"),
-    "EmergencyLiner": ("应急止血层", "Emergency Liner", "armorChest", "modArmorPlatingReinforced", "低生命时获得短时止血和减伤。"),
-    "InsulatedTreads": ("绝缘步进器", "Insulated Treads", "armorFeet", "modArmorInsulatedLinerT3", "降低电击与陷阱伤害。"),
+    "StanceBreaker": ("破势配重", "Stance Breaker", "melee", "modMeleeWeightedHead", "提高普攻、重击伤害与攻速。"),
+    "GatekeeperHook": ("守门钩爪", "Gatekeeper Hook", "melee,shotgun", "modMeleeErgonomicGrip", "常驻提高伤害与眩晕抗性。"),
+    "EmergencyLiner": ("应急止血层", "Emergency Liner", "armorChest", "modArmorPlatingReinforced", "提高护甲、生命与流血抗性。"),
+    "InsulatedTreads": ("绝缘步进器", "Insulated Treads", "armorFeet", "modArmorInsulatedLinerT3", "提高电击抗性、耐力恢复和指定不良地形抗性。"),
 }
 
 DEVICE_BLOCKS = {
@@ -49,9 +52,9 @@ DEVICE_BLOCKS = {
 }
 
 FORTRESS_BLOCKS = {
-    "ReactiveWall": ("反应装甲墙", "Reactive Armor Wall", "steelShapes", [18000, 22000, 27000, 33000]),
-    "AblativeWall": ("可替换缓冲墙", "Replaceable Ablative Wall", "steelShapes", [12000, 15000, 19000, 24000]),
-    "Embrasure": ("装甲射击孔", "Armored Embrasure", "steelShapes", [14000, 17500, 21500, 26500]),
+    "ReactiveWall": ("反应装甲墙", "Reactive Armor Wall", "steelMaster", [18000, 22000, 27000, 33000]),
+    "AblativeWall": ("可替换缓冲墙", "Replaceable Ablative Wall", "steelMaster", [12000, 15000, 19000, 24000]),
+    "Embrasure": ("装甲射击孔", "Armored Embrasure", "steelMaster", [14000, 17500, 21500, 26500]),
     "BlastGate": ("分区防爆门", "Sectional Blast Gate", "vaultDoor01_Powered", [20000, 25000, 31000, 38000]),
     "ArmoredConduit": ("装甲电缆槽", "Armored Conduit", "electricwirerelay", [8000, 10000, 12500, 15500]),
 }
@@ -62,7 +65,9 @@ def replace_generated(path: pathlib.Path, body: str) -> None:
     if BEGIN in text:
         head, rest = text.split(BEGIN, 1)
         _, tail = rest.split(END, 1)
-        text = head.rstrip() + "\n" + tail.lstrip()
+        text = head + BEGIN + "\n" + body.rstrip() + "\n  " + END + tail
+        path.write_text(text, encoding="utf-8", newline="\n")
+        return
     pos = text.rfind("</configs>")
     if pos < 0:
         raise RuntimeError(f"Missing </configs> in {path}")
@@ -114,6 +119,9 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
                 action = ET.SubElement(item, "property", {"class": "Action0"})
                 prop(action, "Magazine_items", f"ammoPZAECCounterPulseT{tier}")
                 prop(action, "Reload_time", [4.0, 3.8, 3.6, 3.4][i])
+            elif stem == "EmberPistol":
+                action = ET.SubElement(item, "property", {"class": "Action0"})
+                prop(action, "Magazine_items", "ammo44MagnumBulletBall,ammo44MagnumBulletHP,ammo44MagnumBulletAP,ammo44MagnumBulletDU")
             eg = ET.SubElement(item, "effect_group", {"name": name, "tiered": "false"})
             passive(eg, "ModSlots", "base_set", 4)
             passive(eg, "DegradationMax", "base_set", 2800 + i * 500)
@@ -127,7 +135,12 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             else:
                 passive(eg, "MagazineSize", "base_set", mags[i], perk)
                 passive(eg, "RoundsPerMinute", "base_set", rpms[i], perk)
-            if stem == "HorizonNeedle":
+            if stem == "EmberPistol":
+                passive(eg, "EntityPenetrationCount", "base_set", [4, 5, 6, 7][i])
+                passive(eg, "SpreadMultiplierAiming", "base_set", [0.10, 0.085, 0.07, 0.055][i], perk)
+                passive(eg, "KickDegreesVerticalMin", "base_set", [1.2, 1.0, 0.8, 0.6][i], perk)
+                passive(eg, "KickDegreesVerticalMax", "base_set", [1.2, 1.0, 0.8, 0.6][i], perk)
+            elif stem == "HorizonNeedle":
                 passive(eg, "EntityPenetrationCount", "base_add", i + 1)
                 passive(eg, "BlockDamage", "perc_set", ".25")
                 passive(eg, "SpreadMultiplierAiming", "base_set", [0.08, 0.07, 0.06, 0.05][i])
@@ -145,7 +158,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
                 passive(eg, "BlockDamage", "perc_set", 0)
                 ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfAttackedOther", "action": "AddBuff", "target": "other", "buff": f"buffPZAECCounterSiegeT{tier}"})
             loc(rows, name, "items", f"T{tier} {en}", f"T{tier} {cn}")
-            loc(rows, name + "Desc", "items", f"Fixed-power endgame weapon. {en} has a tier-specific combat mechanic and four normal mod slots.", f"固定强度的终局武器。{cn}拥有同阶专属机制和四个普通模组槽。")
+            loc(rows, name + "Desc", "items", f"Legendary succession weapon: T16 < T17 < T18 < T19. Six mod slots and tier-scaled damage, reload and durability.", f"传奇进阶武器：T16 < T17 < T18 < T19。六个模组槽，伤害、装填、弹匣和耐久随阶级提升。")
 
     for stem, base, cn, en in [
         ("SkyguardInterceptor", "ammo762mmBulletAP", "天穹截击弹", "Skyguard Interceptor Round"),
@@ -163,6 +176,13 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             prop(item, "SellableToTrader", "false")
             eg = ET.SubElement(item, "effect_group", {"tiered": "false"})
             if stem == "CounterPulse":
+                # Impact damage and explosion damage are independent native
+                # paths. Override inherited HE block damage explicitly.
+                action = ET.SubElement(item, "property", {"class": "Action1"})
+                explosion = ET.SubElement(action, "property", {"class": "Explosion"})
+                prop(explosion, "BlockDamage", 0)
+                prop(explosion, "EntityDamage", [1200, 1700, 2400, 3400][i])
+                passive(eg, "ExplosionBlockDamage", "base_set", 0)
                 passive(eg, "BlockDamage", "perc_set", 0)
                 passive(eg, "EntityDamage", "base_set", [35, 40, 45, 50][i])
             loc(rows, name, "items", f"T{tier} {en}", f"T{tier} {cn}")
@@ -243,6 +263,13 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
         loc(rows, name, "items", en, cn)
         loc(rows, name + "Desc", "items", "Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.", "终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。")
 
+    progression.weapons(root)
+    for ammo in root.findall('item'):
+        if ammo.get('name', '').startswith('ammoPZAECCounterPulseT'):
+            index = int(ammo.get('name')[-2:]) - 16
+            for effect in ammo.findall('./effect_group/passive_effect'):
+                if effect.get('name') == 'EntityDamage':
+                    effect.set('value', str([1200, 1700, 2400, 3400][index]))
     chunks = [xml(root)]
     for set_name in ("Harrier", "Storm", "Tremor", "Warden"):
         patch = ET.Element("append", {"xpath": f"/items/item[@name='itemPZAEC{set_name}DeviceT19']"})
@@ -314,6 +341,7 @@ def build_modifiers() -> tuple[str, list[tuple[str, str, str, str]]]:
             elif stem == "InsulatedTreads": passive(eg, "ElementalDamageResist", "base_add", [6, 8, 10, 12][i], "electrical")
             loc(rows, name, "items", f"T{tier} {en}", f"T{tier} {cn}")
             loc(rows, name + "Desc", "items", f"Tiered behavior component. {en}: {desc}", f"同阶行为组件。{desc}")
+    progression.components(root)
     return xml(root), rows
 
 
@@ -376,12 +404,13 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
             passive(eg, effect_name, operation, value, tags)
         loc(rows, name + "Name", "buffs", f"{set_name} {mode} Calibration", f"{set_name}·{'稳定' if mode == 'Stable' else '过载'}校准")
         loc(rows, name + "Desc", "buffs", "T19 device calibration is active for this resonance window.", "T19 装置校准在本次共鸣窗口内生效。")
+    progression.expansion_buffs(root)
     return xml(root), rows
 
 
 def repair_items(block: ET.Element, steel: int, electric: int = 0) -> None:
     group = ET.SubElement(block, "property", {"class": "RepairItems"})
-    prop(group, "resourceForgedSteel", steel)
+    prop(group, "resourceDurablAlloys", steel)
     if electric: prop(group, "resourceElectricParts", electric)
 
 
@@ -442,6 +471,7 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
     prop(relay, "Extends", "electricwirerelay")
     prop(relay, "CreativeMode", "Player")
     prop(relay, "DescriptionKey", "PZAECTacticalRelayDesc")
+    prop(relay, "CustomIcon", "electricwirerelay")
     prop(relay, "CustomIconTint", "55CCFF")
     prop(relay, "MaxDamage", 10000)
     prop(relay, "RequiredPower", 15)
@@ -455,9 +485,12 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
             name = f"PZAEC{stem}T{tier}"
             block = ET.SubElement(root, "block", {"name": name})
             prop(block, "Extends", base)
+            if base == "steelMaster":
+                prop(block, "Shape", "New")
+                prop(block, "Model", "@:Shapes/arrow_slit.fbx" if stem == "Embrasure" else "@:Shapes/Cube.fbx")
             prop(block, "CreativeMode", "Player")
             prop(block, "DescriptionKey", name + "Desc")
-            prop(block, "CustomIcon", base)
+            prop(block, "CustomIcon", "vaultDoor01" if stem == "BlastGate" else base)
             prop(block, "CustomIconTint", COLOR[tier])
             prop(block, "MaxDamage", hp[i])
             prop(block, "LPHardnessScale", 4 + i)
@@ -476,16 +509,19 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
             if stem == "AblativeWall":
                 ruin_name = f"PZAECAblativeWallRuinT{tier}"
                 ruin = ET.SubElement(root, "block", {"name": ruin_name})
-                prop(ruin, "Extends", "steelShapes")
+                prop(ruin, "Extends", "steelMaster")
+                prop(ruin, "Shape", "New")
+                prop(ruin, "Model", "@:Shapes/Cube.fbx")
                 prop(ruin, "CreativeMode", "Dev")
-                prop(ruin, "CustomIcon", "steelShapes")
+                prop(ruin, "CustomIcon", "steelMaster")
                 prop(ruin, "CustomIconTint", "555555")
                 prop(ruin, "MaxDamage", 2500)
                 up = ET.SubElement(ruin, "property", {"class": "UpgradeBlock"})
                 prop(up, "ToBlock", name)
-                prop(up, "Item", "resourceForgedSteel")
+                prop(up, "Item", "resourceDurablAlloys")
                 prop(up, "ItemCount", [20, 28, 38, 50][i])
                 prop(up, "UpgradeHitCount", 4)
+    progression.defense_blocks(root)
     return xml(root), rows
 
 
@@ -498,13 +534,17 @@ def add_recipe(root: ET.Element, name: str, ingredients: list[tuple[str, int]], 
 
 def build_recipes() -> str:
     root = ET.Element("append", {"xpath": "/recipes"})
-    prototypes = {"HorizonNeedle": "gunRifleT3SniperRifle", "StormReservoir": "gunMGT3M60", "FaultlineHammer": "meleeWpnSledgeT3SteelSledgehammer", "BastionShotgun": "gunShotgunT3AutoShotgun", "EchoRepeater": "gunBowT3CompoundCrossbow", "CounterSiege": "gunExplosivesT3RocketLauncher"}
+    prototypes = {stem: data[2] for stem, data in WEAPONS.items()}
     for stem in WEAPONS:
         prefix = "melee" if stem == "FaultlineHammer" else "gun"
         for i, tier in enumerate(TIERS):
             output = f"{prefix}PZAEC{stem}T{tier}"
             direct = [(prototypes[stem], 1), ("resourcePZAECWeaponChassis", 1), (f"PZAECBuildParts{RANK[tier]}", [8, 10, 12, 16][i]), ("resourceLegendaryParts", [15, 24, 36, 52][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [2, 3, 4, 6][i]), (f"resourcePZAECMutantHeartT{tier}", [1, 1, 2, 3][i]), (f"itemPZAECArmoryBlueprintCrateT{tier}", 1)]
-            add_recipe(root, output, direct, [6, 8, 10, 12][i])
+            if tier == 16 and stem in legendary.WEAPONS:
+                for predecessor in legendary.WEAPONS[stem]:
+                    add_recipe(root, output, [(predecessor, 1)] + legendary.EXTRA.get(stem, []) + direct[1:], [6, 8, 10, 12][i])
+            else:
+                add_recipe(root, output, direct, [6, 8, 10, 12][i])
             if tier > 16:
                 prev = f"{prefix}PZAEC{stem}T{tier-1}"
                 up = [(prev, 1), (f"PZAECBuildParts{RANK[tier]}", [0, 6, 8, 10][i]), ("resourceLegendaryParts", [0, 16, 24, 36][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [0, 2, 3, 4][i]), (f"resourcePZAECMutantHeartT{tier}", [0, 1, 1, 2][i])]
@@ -529,19 +569,19 @@ def build_recipes() -> str:
         for mode in ("Stable", "Overload"):
             add_recipe(root, f"modPZAEC{set_name}{mode}T19", [("PZAECBuildPartsR5", 4), ("resourceLegendaryParts", 12), ("resourcePZAECSiegeCapacitorT19", 2), ("resourceElectricParts", 30)], 4)
 
-    add_recipe(root, "resourcePZAECDefenseChassis", [("resourceForgedSteel", 100), ("resourceMechanicalParts", 50), ("resourceElectricParts", 75), ("resourceDuctTape", 15), ("resourceLegendaryParts", 5)], 3)
-    add_recipe(root, "itemPZAECQuickArmorGel", [("resourceForgedSteel", 8), ("resourceScrapPolymers", 12), ("resourceDuctTape", 4), ("resourceAcid", 1), ("resourcePZAECCapacitorFragmentT16", 1)], 1)
+    add_recipe(root, "resourcePZAECDefenseChassis", [("resourceDurablAlloys", 100), ("resourceMechanicalParts", 50), ("resourceElectricParts", 75), ("resourceDuctTape", 15), ("resourceLegendaryParts", 5)], 3)
+    add_recipe(root, "itemPZAECQuickArmorGel", [("resourceDurablAlloys", 8), ("resourceScrapPolymers", 12), ("resourceDuctTape", 4), ("resourceAcid", 1), ("resourcePZAECCapacitorFragmentT16", 1)], 1)
     add_recipe(root, "itemPZAECResonanceInjector", [("medicalBloodBag", 2), ("resourceAcid", 1), ("resourcePZAECCoreFragmentT16", 1), ("drugVitamins", 1)], 1)
     add_recipe(root, "itemPZAECDecoyBeacon", [("resourceElectricParts", 20), ("resourceMechanicalParts", 10), ("carBattery", 1), ("resourceGunPowder", 20)], 2)
     add_recipe(root, "itemPZAECEvacAnchor", [("resourcePZAECDeviceChassis", 1), ("resourcePZAECSiegeCapacitorT18", 2), ("resourcePZAECMutantHeartT18", 1), ("resourceElectricParts", 40)], 5)
     for i, tier in enumerate(TIERS):
         add_recipe(root, f"thrownPZAECCounterJammerT{tier}", [(f"resourcePZAEC{('SiegeCapacitor')}T{tier}", 1), ("resourceScrapIron", 20), ("resourceGunPowder", 30), ("resourceElectricParts", 10)], 1)
-        add_recipe(root, f"itemPZAECFieldRepairKitT{tier}", [("resourceRepairKit", 3), ("resourceForgedSteel", 5), ("resourceOil", 3), ("resourceLegendaryParts", 1 + i)], 1)
+        add_recipe(root, f"itemPZAECFieldRepairKitT{tier}", [("resourceRepairKit", 3), ("resourceDurablAlloys", 5), ("resourceOil", 3), ("resourceLegendaryParts", 1 + i)], 1)
         add_recipe(root, f"resourcePZAECCoreFragmentT{tier}", [(f"resourcePZAECMutantHeartT{tier}", 1)], .5)
         root[-1].set("count", "4")
         add_recipe(root, f"resourcePZAECCapacitorFragmentT{tier}", [(f"resourcePZAECSiegeCapacitorT{tier}", 1)], .5)
         root[-1].set("count", "6")
-        add_recipe(root, f"resourcePZAECRepairChargeT{tier}", [("resourceRepairKit", 1), (f"resourcePZAECCapacitorFragmentT{tier}", 1), ("resourceForgedSteel", 3 + i)], 1)
+        add_recipe(root, f"resourcePZAECRepairChargeT{tier}", [("resourceRepairKit", 1), (f"resourcePZAECCapacitorFragmentT{tier}", 1), ("resourceDurablAlloys", 3 + i)], 1)
         root[-1].set("count", "5")
         add_recipe(root, f"resourcePZAECDecoyChargeT{tier}", [("resourceElectricParts", 4), (f"resourcePZAECCapacitorFragmentT{tier}", 1), ("resourceGunPowder", 5)], 1)
         root[-1].set("count", "5")
@@ -550,16 +590,16 @@ def build_recipes() -> str:
         for i, tier in enumerate(TIERS):
             output = f"PZAEC{stem}T{tier}"
             if tier == 16:
-                costs = [("resourcePZAECDefenseChassis", 1), ("PZAECBuildPartsR2", 8), ("resourceForgedSteel", 120), ("resourceMechanicalParts", 60), ("resourceElectricParts", 80), ("resourcePZAECSiegeCapacitorT16", 3), ("resourceLegendaryParts", 12), ("itemPZAECDefenseBlueprintCrateT16", 1)]
+                costs = [("resourcePZAECDefenseChassis", 1), ("PZAECBuildPartsR2", 8), ("resourceDurablAlloys", 120), ("resourceMechanicalParts", 60), ("resourceElectricParts", 80), ("resourcePZAECSiegeCapacitorT16", 3), ("resourceLegendaryParts", 12), ("itemPZAECDefenseBlueprintCrateT16", 1)]
             else:
                 costs = [(f"PZAEC{stem}T{tier-1}", 1), (f"PZAECBuildParts{RANK[tier]}", [0, 6, 8, 10][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [0, 2, 3, 4][i]), (f"resourcePZAECMutantHeartT{tier}", [0, 1, 1, 2][i]), ("resourceLegendaryParts", [0, 16, 24, 36][i])]
             add_recipe(root, output, costs, 4 + i, "upgrade" if tier > 16 else None)
 
-    add_recipe(root, "PZAECResonanceForge", [("workbench", 1), ("forge", 1), ("resourceForgedSteel", 200), ("resourceMechanicalParts", 100), ("resourceElectricParts", 100), ("resourcePZAECSiegeCapacitorT16", 4), ("resourcePZAECMutantHeartT16", 2), ("resourceLegendaryParts", 20)], 8)
-    add_recipe(root, "PZAECTacticalRelay", [("electricwirerelay", 1), ("resourceForgedSteel", 80), ("resourceElectricParts", 60), ("resourcePZAECSiegeCapacitorT16", 2)], 3)
+    add_recipe(root, "PZAECResonanceForge", [("workbench", 1), ("forge", 1), ("resourceDurablAlloys", 200), ("resourceMechanicalParts", 100), ("resourceElectricParts", 100), ("resourcePZAECSiegeCapacitorT16", 4), ("resourcePZAECMutantHeartT16", 2), ("resourceLegendaryParts", 20)], 8)
+    add_recipe(root, "PZAECTacticalRelay", [("electricwirerelay", 1), ("resourceDurablAlloys", 80), ("resourceElectricParts", 60), ("resourcePZAECSiegeCapacitorT16", 2)], 3)
     for stem in FORTRESS_BLOCKS:
         for i, tier in enumerate(TIERS):
-            costs = [("steelShapes", 1), ("resourceForgedSteel", [40, 55, 75, 100][i]), ("resourceScrapPolymers", [20, 25, 30, 40][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [1, 1, 1, 2][i])]
+            costs = [("steelShapes:VariantHelper", 1), ("resourceDurablAlloys", [40, 55, 75, 100][i]), ("resourceScrapPolymers", [20, 25, 30, 40][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [1, 1, 1, 2][i])]
             if stem == "BlastGate": costs[0] = ("vaultDoor01_Powered", 1)
             if stem == "ArmoredConduit": costs[0] = ("electricwirerelay", 1)
             add_recipe(root, f"PZAEC{stem}T{tier}", costs, 2 + i)
@@ -656,6 +696,8 @@ def main() -> None:
     replace_generated(CONFIG / "entityclasses.xml", entity_xml)
     replace_generated(CONFIG / "entitygroups.xml", build_entitygroups())
     write_localization(item_rows + mod_rows + buff_rows + block_rows + entity_rows)
+    from generate_fusion_upgrades import refresh
+    refresh(CONFIG)
 
 
 if __name__ == "__main__":

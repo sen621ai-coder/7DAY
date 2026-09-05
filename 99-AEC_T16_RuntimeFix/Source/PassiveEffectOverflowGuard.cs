@@ -56,6 +56,16 @@ namespace AECT16RuntimeFix
             int rule = Rule(effect);
             if (rule == 0) return value;
 
+            // Cost reductions stack additively. Crossing -100% must produce
+            // zero cost, never restore stamina/resources or a negative timer.
+            if (rule == 9)
+            {
+                if (value < 0f) return 0f;
+                if (float.IsNaN(value) || float.IsPositiveInfinity(value))
+                    return FallbackToOriginal(originalValue, 0f, VitalCeiling);
+                return value;
+            }
+
             // Recoil minima can intentionally be negative to aim the kick to
             // the left or down. Keep that direction, but never let stacked
             // reductions cross zero and reverse it.
@@ -137,6 +147,11 @@ namespace AECT16RuntimeFix
         {
             switch (effect)
             {
+                case PassiveEffects.StaminaLoss:
+                case PassiveEffects.FoodLossPerStaminaPointGained:
+                case PassiveEffects.WaterLossPerStaminaPointGained:
+                case PassiveEffects.ScavengingTime:
+                    return 9;
                 case PassiveEffects.EntityDamage:
                 case PassiveEffects.BlockDamage:
                 case PassiveEffects.ExplosionBlockDamage:

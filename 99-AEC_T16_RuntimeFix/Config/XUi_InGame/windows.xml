@@ -1,0 +1,6 @@
+<configs>
+  <append xpath="/windows/window[@name='windowCombine']/rect[@controller='CombineGrid']">
+    <label name="aecFusionHint" pos="4,-495" width="602" height="64" depth="4"
+           font_size="21" color="255,220,130" justify="left" text="{aecfusionhint}" />
+  </append>
+</configs>
