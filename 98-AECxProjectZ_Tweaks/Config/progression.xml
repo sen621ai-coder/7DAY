@@ -6,7 +6,7 @@ EN: Operations are applied in file order; keep selectors specific and preserve l
 RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
   <remove xpath="/progression//passive_effect[contains(concat(',',translate(@tags,' ',''),','),',butcherHarvestMutation,')]"/>
   <!-- QuestRewardChoiceCount raises the number of rewards the player must select. AEC quests with fewer choices then become impossible to turn in. -->
-  <remove xpath="/progression/perks/perk[@name='perkAecMasterNegotiator']//passive_effect[@name='QuestRewardChoiceCount']"/>
+  <!-- Current AEC definitions already omit this effect; no stale removal patch needed. -->
   <!-- Keep time reductions below 100% after stacking with vanilla perks; zero/negative interaction timers cannot complete. -->
   <set xpath="/progression/perks/perk[@name='perkAecSwiftScavenger']//passive_effect[@name='ScavengingTime']/@value">.0015,.15</set>
   <set xpath="/progression/perks/perk[@name='perkAecLockBreaker']//passive_effect[@name='LockPickTime']/@value">.002,.2</set>

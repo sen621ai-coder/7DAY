@@ -41,7 +41,7 @@ for filename, tag in [('items.xml', 'item'), ('item_modifiers.xml', 'item_modifi
         name = e.get('name')
         live[name] = e
         types[name] = tag
-assert len(selected) == 266
+assert len(selected) == 250
 support = {f'modPZAEC{stem}R{rank}' for stem in ('Precision', 'Breaker', 'Barrage', 'Skirmisher') for rank in range(2, 6)}
 support |= {f'PZAECBuildPartsR{rank}' for rank in range(2, 6)}
 selected |= support
@@ -101,7 +101,6 @@ def tier(name):
 def category(name):
     if name in support: return '11 关联战术核心与组件（既有内容）'
     if name.startswith('armor'): return '01 护甲四件套'
-    if re.search(r'DeviceT\d+$', name): return '02 共鸣主动装置'
     if name.startswith(('gun','melee')): return '03 高级武器'
     if name.startswith('mod'):
         return '05 T19 校准芯片' if ('Stable' in name or 'Overload' in name) else '04 高级组件'
@@ -120,7 +119,7 @@ def source(name):
     if name.startswith('armor'):
         result.append(f'同阶 Boss 战利品包：{[10,15,22,30][i]}% 抽取一件随机同阶护甲（16 件池）')
     elif name.startswith(('gun','melee')):
-        result.append(f'同阶 Boss 战利品包：{[2,3,4,6][i]}% 抽取一件随机高级武器（6 件池）')
+        result.append(f'同阶 Boss 战利品包：{[2,3,4,6][i]}% 抽取一件随机高级武器（7 件池）')
     elif 'StableT19' in name or 'OverloadT19' in name:
         result.append('T19 Boss 战利品包：15% 抽取一枚随机校准芯片（8 枚池）')
     elif 'ArmoryBlueprintCrate' in name:
@@ -165,9 +164,10 @@ notes = {
     'ResonanceInjector':'消耗品；有同阶三件套时共鸣 +25，上限100。60 秒最大生命 −10%、耐力恢复 +15%。',
     'DecoyBeacon':'消耗品；25 米内普通非 Boss、非攻城敌人转向使用者当前位置；自身奔跑 +10%，15 秒。当前不是放置实体信标。',
     'EvacAnchor':'不消耗；首次使用记录位置，20 秒内再次使用尝试返回。载具、商人区及目标空间限制由服务器检查。',
-    'CounterJammer':'消耗品；当前通过使用动作在自身周围 8 米施放，非实际投掷弹道。攻城目标短踉跄，状态持续3/4/5/6秒，射速−75%、方块伤害−50%。',
-    'FieldRepairKit':'消耗品；4 秒使用动作，修复当前装备栏中绝对磨损量最大的一件装备，恢复其最大耐久35/45/55/65%。当前未修理手持武器；另有90秒磨损减少状态。',
-    'SkyguardArray':'供电后拦截28/32/36/40米内攻城投射物，单次检查成功率70/76/82/88%。检查间隔0.15秒；累计100热停8秒，每秒散热4。自动拦截代码未扣专属弹药；原生炮塔射击仍有弹药配置。',
+    'CounterJammer':'消耗品；右键拉环、左键投掷，3秒引信；在实际爆点周围8米对敌人施加短踉跄与3/4/5/6秒干扰，射速−75%、方块伤害−50%。满血可用，爆炸伤害为0，不给玩家施加干扰。',
+    'FieldRepairKit':'消耗品；立即修复当前护甲栏中绝对磨损量最大的一件护甲，恢复其最大耐久35/45/55/65%。满血可用；没有受损护甲时不消耗。不修理手持武器；另有90秒磨损减少状态。',
+    'SkyguardArray':'支持7.62毫米弹药与同阶截击弹，按弹药槽顺序消耗。普通标准弹伤害450/650/900/1250，同阶截击弹900/1300/1800/2500，未计爆头和目标减伤。供电后拦截28/32/36/40米内攻城投射物，单次检查成功率70/76/82/88%。检查间隔0.15秒；累计100热停8秒，每秒散热4。自动拦截代码未扣专属弹药。',
+    'SkyguardInterceptor':'同阶天穹阵列专用弹，伤害+100%；T16/T17/T18/T19单发伤害900/1300/1800/2500，不造成方块伤害。普通7.62毫米弹可替代使用，本弹不适配步枪或其他T阶阵列。',
     'HiveRepairStation':'供电后响应10/12/14/16米内方块受损事件，修复250/330/430/560点；维修站4秒冷却、同目标12秒冷却。当前运行代码未扣维修料盒。',
     'HoundDecoyTower':'供电后影响25/28/31/35米内普通非动物敌人，排除Boss与攻城单位；每个敌人2秒检查一次。当前未扣诱导电荷。',
     'ShockNetNode':'继承原生电围栏节点机制；电网命中可施加2秒奔跑速度−35/38/42/45%状态。需要按原生方式接线供电。',
@@ -179,7 +179,7 @@ notes = {
     'ArmoredConduit':'继承电线中继，是高耐久中继方块；不是能包覆一整段电线的独立系统。',
     'ResonanceForge':'12000耐久的工作台变体；当前新配方 craft_area 都是 workbench，普通工作台即可制作，不要求先造此台。',
     'TacticalRelay':'10000耐久、耗电15的装甲电线中继；当前未发现向其他炮塔广播目标优先级的逻辑。',
-    'ArmoryBlueprintCrate':'是制作材料代币：直接制作同阶高级武器消耗1个；不会右键打开选武器，也不是读一次永久解锁。升阶配方不消耗此箱。',
+    'ArmoryBlueprintCrate':'是制作材料代币：T16武器制作消耗T16箱1个；不会右键打开选武器，也不是读一次永久解锁。1.22.0移除高阶直接制作后，T17–T19箱暂无消耗配方；逐级升阶不消耗此箱。',
     'ComponentChoiceCrate':'是制作材料代币：直接制作同阶组件消耗1个。升阶配方不消耗此箱。',
     'DefenseBlueprintCrate':'T16版本用于五类T16防御设备，每次消耗1个；T17–T19版本已存在并能掉落，但当前没有消耗它们的配方。',
     'RepairCharge':'可制作的维修料盒；当前自动维修代码未实际消耗它。',
@@ -203,21 +203,19 @@ notes.update({
 })
 
 def note(name):
-    if re.search(r'DeviceT\d+$', name):
-        return '可重复使用；需同流派同阶四件套、共鸣充满且冷却结束。T19装置有1个校准槽。套装与充能参数见总览。'
     if 'StableT19' in name or 'OverloadT19' in name:
-        return '仅装在对应流派T19主动装置，稳定/过载互斥。使用时服务器添加15秒对应校准增益；当前持续时间、冷却和范围不会按旧设计表的说法改变。'
+        return '装在对应流派T19头盔，占1个模组槽，稳定/过载互斥。提供所列常驻加成；共鸣自动触发时再添加15秒对应校准增益。'
     return next((text for stem, text in notes.items() if stem in name), '')
 
 groups = defaultdict(list)
 for name in selected:
     groups[category(name)].append(name)
 lines = ['# 新物品属性、配方与获取明细', '',
-         '数据日期：2026-09-05。266 个军械/扩展物品，另附16个既有战术核心和4种战术组件，共286项；不含敌人及4个自动生成的墙体残架。', '',
+         '数据日期：2026-09-05。250 个军械/扩展物品，另附16个既有战术核心和4种战术组件，共270项；不含敌人及4个自动生成的墙体残架。', '',
          '本明细使用本次真实启动导出的合并配置。所列属性为该物品显式配置；继承父物品的基础动作、弹药/技能/其他模组以及难度仍会影响实战结果。百分比通常与同项加成相加，并非最终独立倍率。', '',
          '下列均为未融合数值。Runtime 1.20.0 起，仅28件T16–T19新武器和64件新护甲支持两件同名同阶、同融合次数合一；详见[装备融合说明](装备融合说明.md)。融合使用合并工作站，不属于下方普通工作台配方。', '',
-         'Runtime 1.20.1：同款跨T阶升阶保留原融合次数20%，向下取整；新增66条跨阶直升配方，支付沿途升阶材料总和。T16融合+10直升T19为融合+2，每次实际升阶只折算一次。', '',
-         'Runtime 1.20.2：T16武器/护甲制作实际消耗对应传奇装备，原有其他材料仍需支付；同系列传奇词条款任选一条配方，不要求Q6。对应关系见[T16传奇制作前置](T16传奇制作前置.md)。T17–T19直接制作沿用原配方。', '',
+         'Runtime 1.22.0：武器/护甲仅允许T16→T17→T18→T19逐级升级，共69条升阶配方；已删除高阶直接制作和跨阶直升。每升一级保留原融合次数20%，向下取整。T16+10逐级升至T19为+2→+0→+0。', '',
+         'T16武器/护甲制作实际消耗对应传奇装备及其他材料；同系列传奇词条款任选一条配方，不要求Q6。对应关系见[T16传奇制作前置](T16传奇制作前置.md)。', '',
          '全部列出的新制作配方位于工作台并直接开放，依靠材料限制进度。时长和产量为基础值；“升阶”会消耗上一阶实物。没有配方质量条件时，不额外要求原型必须Q6。', '',
          'Boss百分比按每次打开对应阶Boss战利品包计算，不是每杀一只Boss的概率。攻城袋条目prob按配置原值列出，不乘算成每杀一只敌人的概率。', '']
 for group, names in sorted(groups.items()):

@@ -1,0 +1,978 @@
+<configs>
+<!-- BEGIN GENERATED EQUIPMENT DISPLAY -->
+<append xpath="/ui_display_info/item_display">
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierHelmetT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierOutfitT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierGlovesT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierBootsT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierHelmetT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierOutfitT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierGlovesT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierBootsT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierHelmetT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierOutfitT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierGlovesT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierBootsT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierHelmetT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierOutfitT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierGlovesT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECHarrierBootsT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormHelmetT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormOutfitT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormGlovesT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormBootsT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormHelmetT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormOutfitT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormGlovesT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormBootsT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormHelmetT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormOutfitT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormGlovesT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormBootsT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormHelmetT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormOutfitT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormGlovesT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECStormBootsT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorHelmetT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorOutfitT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorGlovesT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_secondary" display_type="Percent" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorBootsT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorHelmetT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorOutfitT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorGlovesT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_secondary" display_type="Percent" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorBootsT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorHelmetT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorOutfitT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorGlovesT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_secondary" display_type="Percent" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorBootsT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorHelmetT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorOutfitT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorGlovesT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_secondary" display_type="Percent" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECTremorBootsT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenHelmetT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenOutfitT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenGlovesT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenBootsT16" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenHelmetT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenOutfitT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenGlovesT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenBootsT17" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenHelmetT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenOutfitT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenGlovesT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenBootsT18" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenHelmetT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_PlayerExpGain" title_key="aecDisplay_PlayerExpGain_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_LootStage" title_key="aecDisplay_LootStage_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenOutfitT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_CarryCapacity" title_key="aecDisplay_CarryCapacity_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenGlovesT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_armorPZAECWardenBootsT19" display_group="groupAttire">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RunSpeed" title_key="aecDisplay_RunSpeed_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaMax" title_key="aecDisplay_StaminaMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEmberPistolT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEmberPistolT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEmberPistolT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEmberPistolT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkGunslinger" display_type="Decimal1" display_leading_plus="true" tags="perkGunslinger" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECHorizonNeedleT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECHorizonNeedleT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECHorizonNeedleT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECHorizonNeedleT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDeadEye" display_type="Decimal1" display_leading_plus="true" tags="perkDeadEye" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECStormReservoirT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECStormReservoirT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECStormReservoirT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECStormReservoirT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkMachineGunner" display_type="Decimal1" display_leading_plus="true" tags="perkMachineGunner" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_meleePZAECFaultlineHammerT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_primary" display_type="Decimal1" display_leading_plus="true" tags="primary" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecBase_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaLoss" title_key="aecDisplay_StaminaLoss_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_meleePZAECFaultlineHammerT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_primary" display_type="Decimal1" display_leading_plus="true" tags="primary" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecBase_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaLoss" title_key="aecDisplay_StaminaLoss_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_meleePZAECFaultlineHammerT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_primary" display_type="Decimal1" display_leading_plus="true" tags="primary" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecBase_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaLoss" title_key="aecDisplay_StaminaLoss_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_meleePZAECFaultlineHammerT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_primary" display_type="Decimal1" display_leading_plus="true" tags="primary" />
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+    <display_entry name="aecBase_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkSkullCrusher" display_type="Decimal1" display_leading_plus="true" tags="perkSkullCrusher" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_StaminaLoss" title_key="aecDisplay_StaminaLoss_Base_secondary" display_type="Decimal1" display_leading_plus="true" tags="secondary" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECBastionShotgunT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECBastionShotgunT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECBastionShotgunT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECBastionShotgunT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkBoomstick" display_type="Decimal1" display_leading_plus="true" tags="perkBoomstick" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEchoRepeaterT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEchoRepeaterT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEchoRepeaterT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECEchoRepeaterT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkArchery" display_type="Decimal1" display_leading_plus="true" tags="perkArchery" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECCounterSiegeT16" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECCounterSiegeT17" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECCounterSiegeT18" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_gunPZAECCounterSiegeT19" display_group="groupRanged">
+    <display_entry name="aecBase_EntityDamage" title_key="aecDisplay_EntityDamage_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MagazineSize" title_key="aecDisplay_MagazineSize_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_MaxRange" title_key="aecDisplay_MaxRange_Base_perkDemolitionsExpert" display_type="Decimal1" display_leading_plus="true" tags="perkDemolitionsExpert" />
+    <display_entry name="aecBase_DegradationMax" title_key="aecDisplay_DegradationMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECHarrierStableT19" display_group="groupRanged">
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECHarrierOverloadT19" display_group="groupRanged">
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECStormStableT19" display_group="groupRanged">
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECStormOverloadT19" display_group="groupRanged">
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECTremorStableT19" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_secondary" display_type="Percent" display_leading_plus="true" tags="secondary" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECTremorOverloadT19" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_secondary" display_type="Percent" display_leading_plus="true" tags="secondary" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECWardenStableT19" display_group="groupRanged">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECWardenOverloadT19" display_group="groupRanged">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECThreatLensT16" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECThreatLensT17" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECThreatLensT18" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECThreatLensT19" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT16" display_group="groupRanged">
+    <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMax" title_key="aecDisplay_KickDegreesHorizontalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT17" display_group="groupRanged">
+    <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMax" title_key="aecDisplay_KickDegreesHorizontalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT18" display_group="groupRanged">
+    <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMax" title_key="aecDisplay_KickDegreesHorizontalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT19" display_group="groupRanged">
+    <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_KickDegreesHorizontalMax" title_key="aecDisplay_KickDegreesHorizontalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECKineticRecyclerT16" display_group="groupRanged">
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECKineticRecyclerT17" display_group="groupRanged">
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECKineticRecyclerT18" display_group="groupRanged">
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECKineticRecyclerT19" display_group="groupRanged">
+    <display_entry name="aecPercent_StaminaLoss" title_key="aecDisplay_StaminaLoss_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECRepairServoT16" display_group="groupRanged">
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECRepairServoT17" display_group="groupRanged">
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECRepairServoT18" display_group="groupRanged">
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECRepairServoT19" display_group="groupRanged">
+    <display_entry name="aecPercent_BlockRepairAmount" title_key="aecDisplay_BlockRepairAmount_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPhaseRangefinderT16" display_group="groupRanged">
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPhaseRangefinderT17" display_group="groupRanged">
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPhaseRangefinderT18" display_group="groupRanged">
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPhaseRangefinderT19" display_group="groupRanged">
+    <display_entry name="aecPercent_HeadshotDamageModifier" title_key="aecDisplay_HeadshotDamageModifier_Percent_head" display_type="Percent" display_leading_plus="true" tags="head" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_WeaponHandling" title_key="aecDisplay_WeaponHandling_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECNearfieldReflexT16" display_group="groupRanged">
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_DamageFalloffRange" title_key="aecDisplay_DamageFalloffRange_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECNearfieldReflexT17" display_group="groupRanged">
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_DamageFalloffRange" title_key="aecDisplay_DamageFalloffRange_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECNearfieldReflexT18" display_group="groupRanged">
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_DamageFalloffRange" title_key="aecDisplay_DamageFalloffRange_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECNearfieldReflexT19" display_group="groupRanged">
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_DamageFalloffRange" title_key="aecDisplay_DamageFalloffRange_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECClosedLoopFeedT16" display_group="groupRanged">
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECClosedLoopFeedT17" display_group="groupRanged">
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECClosedLoopFeedT18" display_group="groupRanged">
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECClosedLoopFeedT19" display_group="groupRanged">
+    <display_entry name="aecPercent_MagazineSize" title_key="aecDisplay_MagazineSize_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_ReloadSpeedMultiplier" title_key="aecDisplay_ReloadSpeedMultiplier_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPulseCapacitorT16" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_EntityPenetrationCount" title_key="aecDisplay_EntityPenetrationCount_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPulseCapacitorT17" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_EntityPenetrationCount" title_key="aecDisplay_EntityPenetrationCount_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPulseCapacitorT18" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_EntityPenetrationCount" title_key="aecDisplay_EntityPenetrationCount_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECPulseCapacitorT19" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_EntityPenetrationCount" title_key="aecDisplay_EntityPenetrationCount_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECStanceBreakerT16" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECStanceBreakerT17" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECStanceBreakerT18" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECStanceBreakerT19" display_group="groupRanged">
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_primary_secondary" display_type="Percent" display_leading_plus="true" tags="primary,secondary" />
+    <display_entry name="aecPercent_AttacksPerMinute" title_key="aecDisplay_AttacksPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECGatekeeperHookT16" display_group="groupRanged">
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryStunned01CHTrigger" display_type="Percent" display_leading_plus="true" tags="buffInjuryStunned01CHTrigger" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECGatekeeperHookT17" display_group="groupRanged">
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryStunned01CHTrigger" display_type="Percent" display_leading_plus="true" tags="buffInjuryStunned01CHTrigger" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECGatekeeperHookT18" display_group="groupRanged">
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryStunned01CHTrigger" display_type="Percent" display_leading_plus="true" tags="buffInjuryStunned01CHTrigger" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECGatekeeperHookT19" display_group="groupRanged">
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryStunned01CHTrigger" display_type="Percent" display_leading_plus="true" tags="buffInjuryStunned01CHTrigger" />
+    <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECEmergencyLinerT16" display_group="groupRanged">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryBleedingTwo_buffInjuryBleedingBarbedWire" display_type="Percent" display_leading_plus="true" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECEmergencyLinerT17" display_group="groupRanged">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryBleedingTwo_buffInjuryBleedingBarbedWire" display_type="Percent" display_leading_plus="true" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECEmergencyLinerT18" display_group="groupRanged">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryBleedingTwo_buffInjuryBleedingBarbedWire" display_type="Percent" display_leading_plus="true" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECEmergencyLinerT19" display_group="groupRanged">
+    <display_entry name="aecBase_PhysicalDamageResist" title_key="aecDisplay_PhysicalDamageResist_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_HealthMax" title_key="aecDisplay_HealthMax_Base_" display_type="Decimal1" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffInjuryBleedingTwo_buffInjuryBleedingBarbedWire" display_type="Percent" display_leading_plus="true" tags="buffInjuryBleedingTwo,buffInjuryBleedingBarbedWire" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECInsulatedTreadsT16" display_group="groupRanged">
+    <display_entry name="aecBase_ElementalDamageResist" title_key="aecDisplay_ElementalDamageResist_Base_electrical" display_type="Decimal1" display_leading_plus="true" tags="electrical" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffDeepSnowStatus_buffSandStatus_buffDesertGroundStatus_buffRoughGroundStatus_buffDestroyedStoneStatus" display_type="Percent" display_leading_plus="true" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECInsulatedTreadsT17" display_group="groupRanged">
+    <display_entry name="aecBase_ElementalDamageResist" title_key="aecDisplay_ElementalDamageResist_Base_electrical" display_type="Decimal1" display_leading_plus="true" tags="electrical" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffDeepSnowStatus_buffSandStatus_buffDesertGroundStatus_buffRoughGroundStatus_buffDestroyedStoneStatus" display_type="Percent" display_leading_plus="true" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECInsulatedTreadsT18" display_group="groupRanged">
+    <display_entry name="aecBase_ElementalDamageResist" title_key="aecDisplay_ElementalDamageResist_Base_electrical" display_type="Decimal1" display_leading_plus="true" tags="electrical" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffDeepSnowStatus_buffSandStatus_buffDesertGroundStatus_buffRoughGroundStatus_buffDestroyedStoneStatus" display_type="Percent" display_leading_plus="true" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
+  </item_display_info>
+  <item_display_info display_type="AECDisplay_modPZAECInsulatedTreadsT19" display_group="groupRanged">
+    <display_entry name="aecBase_ElementalDamageResist" title_key="aecDisplay_ElementalDamageResist_Base_electrical" display_type="Decimal1" display_leading_plus="true" tags="electrical" />
+    <display_entry name="aecPercent_StaminaChangeOT" title_key="aecDisplay_StaminaChangeOT_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecBase_BuffResistance" title_key="aecDisplay_BuffResistance_Base_buffDeepSnowStatus_buffSandStatus_buffDesertGroundStatus_buffRoughGroundStatus_buffDestroyedStoneStatus" display_type="Percent" display_leading_plus="true" tags="buffDeepSnowStatus,buffSandStatus,buffDesertGroundStatus,buffRoughGroundStatus,buffDestroyedStoneStatus" />
+  </item_display_info>
+</append>
+<!-- END GENERATED EQUIPMENT DISPLAY -->
+  <!-- BEGIN GENERATED ENDGAME EXPANSION -->
+    <append xpath="/ui_display_info/item_display">
+      <item_display_info display_type="aecSkyguardAmmo" display_group="groupAmmo">
+        <display_entry name="dSkyguardDamage" title_key="aecSkyguardDamageTitle" display_type="Decimal1" />
+        <display_entry name="dSkyguardBonus" title_key="aecSkyguardBonusTitle" display_type="Percent" display_leading_plus="true" />
+      </item_display_info>
+    </append>
+  <!-- END GENERATED ENDGAME EXPANSION -->
+</configs>

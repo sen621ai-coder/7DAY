@@ -34,7 +34,7 @@ for family in arsenal.SETS:
     for tier in range(16, 20):
         duration = buff_map[f'buffPZAEC{family}T{tier}Active'].find('duration').get('value')
         cooldown = buff_map[f'buffPZAEC{family}T{tier}Cooldown'].find('duration').get('value')
-        description = texts[f'itemPZAEC{family}DeviceT{tier}Desc']
+        description = texts[f'armorPZAEC{family}HelmetT{tier}Desc']
         assert f'持续 {duration} 秒，冷却 {cooldown} 秒' in description, 'Device text disagrees with its active/cooldown buffs'
 
 items, _ = expansion.build_items()
@@ -45,4 +45,4 @@ for tier in range(16, 20):
     assert explosion.find("property[@name='BlockDamage']").get('value') == '0', 'Pulse inherits HE base demolition'
     assert int(explosion.find("property[@name='EntityDamage']").get('value')) == [1200,1700,2400,3400][tier-16], 'Pulse explosion does not scale'
     assert ammo.find("effect_group/passive_effect[@name='ExplosionBlockDamage']").get('value') == '0', 'Pulse explosion damage effect no longer blocks demolition'
-print('PASS: both generator orders preserve dependent operations; 16 device texts match buffs; four pulse explosion paths are explicitly non-demolishing and tier-scaled.')
+print('PASS: both generator orders preserve dependent operations; 16 automatic set texts match buffs; four pulse explosion paths are explicitly non-demolishing and tier-scaled.')

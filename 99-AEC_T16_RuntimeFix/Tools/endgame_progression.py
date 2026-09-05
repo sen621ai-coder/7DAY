@@ -228,5 +228,5 @@ def defense_blocks(root):
             set_prop(block,'BurstRoundCount',[60,75,90,110][i])
             set_prop(block,'CooldownTime',[2,1.8,1.6,1.4][i])
         elif 'SkyguardArray' in name:
-            set_prop(block,'EntityDamage',[180,250,350,490][i])
+            set_prop(block,'EntityDamage',[450,650,900,1250][i])
             set_prop(block,'BurstRoundCount',[30,40,50,60][i])

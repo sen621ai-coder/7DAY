@@ -30,12 +30,16 @@ namespace AECT16RuntimeFix
             try
             {
                 int recipes = 0;
+                var targets = new HashSet<int>();
                 foreach (var definition in CraftingManager.GetAllRecipes())
                 {
                     var target = new ItemValue(definition.itemValueType, false);
                     if (!EquipmentFusion.IsFusionItem(target)) continue;
+                    int tier = int.Parse(target.ItemClass.GetItemName().Substring(target.ItemClass.GetItemName().Length - 2));
+                    if (tier == 16) continue;
                     var original = definition.ingredients.FirstOrDefault(i => FusionTierUpgrade.IsHigherSameFamily(i.itemValue, target));
-                    if (original == null) continue;
+                    Check(targets.Add(target.type), "Duplicate high-tier recipe: " + target.ItemClass.GetItemName());
+                    Check(original != null && original.itemValue.ItemClass.GetItemName() == target.ItemClass.GetItemName().Substring(0, target.ItemClass.GetItemName().Length - 2) + (tier-1), "Direct or skip-tier recipe remains");
                     recipes++;
                     foreach (int rank in new[] { 0, 4, 5, 10, 14, 25 })
                     {
@@ -65,16 +69,23 @@ namespace AECT16RuntimeFix
                         Check(EquipmentFusion.Rank(ingredient.itemValue) == rank && EquipmentFusion.Rank(original.itemValue) == 0, "Input/shared definition mutated");
                     }
                 }
-                Check(recipes == 138, "Expected 69 adjacent + 69 skip recipes, got " + recipes);
-                var source = Item("gunPZAECHorizonNeedleT16"); source.SetMetadata(EquipmentFusion.RankKey, 10);
+                Check(recipes == 69, "Expected exactly 69 adjacent recipes, got " + recipes);
+                var source = Item("gunPZAECHorizonNeedleT18"); source.SetMetadata(EquipmentFusion.RankKey, 10);
                 var direct = new Recipe { itemValueType = Item("gunPZAECHorizonNeedleT19").type, count = 1, ingredients = new List<ItemStack> { new ItemStack(source, 1) } };
                 var inherited = FusionTierUpgrade.Apply(Item("gunPZAECHorizonNeedleT19"), direct);
                 float damage = EffectManager.GetValue(PassiveEffects.EntityDamage, inherited, 0, null, null, FastTags<TagGroup.Global>.Parse("perkDeadEye"), false, false, false, false, false, 1, false, false);
                 Check(Math.Abs(damage - 1800 * 1.1025f) < .01f, "Inherited rank did not affect target stats");
                 Check(!FusionTierUpgrade.IsHigherSameFamily(source, Item("gunPZAECStormReservoirT19")), "Different family accepted");
-                Check(!FusionTierUpgrade.IsHigherSameFamily(source, Item("gunPZAECHorizonNeedleT16")), "Same tier accepted");
+                Check(!FusionTierUpgrade.IsHigherSameFamily(source, Item("gunPZAECHorizonNeedleT18")), "Same tier accepted");
                 Check(!FusionTierUpgrade.IsHigherSameFamily(Item("gunPZAECHorizonNeedleT19"), source), "Downgrade accepted");
-                SdtdConsole.Instance.Output("[AEC-Upgrade-Audit] PASS checks=" + checks + "; failures=0. T16+10 -> T19+2, damage=" + damage);
+                var chain = Item("gunPZAECHorizonNeedleT16"); chain.SetMetadata(EquipmentFusion.RankKey, 10);
+                foreach (int tier in new[] { 17, 18, 19 })
+                {
+                    var target = Item("gunPZAECHorizonNeedleT" + tier);
+                    chain = FusionTierUpgrade.Apply(target, new Recipe { itemValueType = target.type, count = 1, ingredients = new List<ItemStack> { new ItemStack(chain, 1) } });
+                    Check(EquipmentFusion.Rank(chain) == (tier == 17 ? 2 : 0), "Sequential 20% inheritance failed");
+                }
+                SdtdConsole.Instance.Output("[AEC-Upgrade-Audit] PASS checks=" + checks + "; failures=0. 69 adjacent-only recipes; T18+10 -> T19+2, damage=" + damage + "; sequential T16+10 -> T17+2 -> T18+0 -> T19+0");
             }
             catch (Exception ex) { SdtdConsole.Instance.Output("[AEC-Upgrade-Audit] FAIL checks=" + checks + "; " + ex.GetBaseException()); }
         }

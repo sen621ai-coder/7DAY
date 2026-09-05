@@ -26,8 +26,11 @@ namespace AECT16RuntimeFix
                 PassiveEffectOverflowGuard.Install(harmony);
                 EndgameExpansionRuntime.Install(harmony);
                 EndgameSocketMigration.Install(harmony);
+                ItemMetadataReadFix.Install(harmony);
+                WorldLogRecovery.Install(harmony);
                 FusionStatScaling.Install(harmony);
                 EquipmentFusionUI.Install(harmony);
+                EquipmentStatDisplay.Install(harmony, modInstance.Path);
                 WeaponAttachmentCompatibility.Install(harmony);
                 FusionTierUpgrade.Install(harmony);
                 ContractRelayPickup.Install(harmony);

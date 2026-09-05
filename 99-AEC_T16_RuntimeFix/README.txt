@@ -1,6 +1,101 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.25.2 save-read and world-log fixes
+- ItemValue reads replace stale metadata and deserialize typed records directly;
+  duplicate None values no longer enter the native null-unsafe live-value setter.
+  Unknown tags and truncated payloads still fail visibly instead of being skipped.
+- Preserve 16 retired device IDs and four retired bundle IDs as hidden definitions.
+  Devices have no use action, recipes or drops; old attached components remain
+  removable. Old device test bundles return four device chassis when opened.
+- Server-side loot bags below the world wait for their terrain column to load,
+  then return above it with linear/angular velocity reset and contents retained.
+- Ignore destroyed sign renderers in each rendering call without changing the
+  owner's renderer list or sign data. This does not replace missing asset scripts.
+- Correct five stale ProjectZ/AECxProjectZ XML operations; restore the intended
+  boss exclusion on Intellect Mastery's 2000-damage stun-baton proc.
+- Verification command aecsavecheck is restricted to the isolated verification
+  world. It reads copied player files; it never loads/writes a live player's save.
+- Restart the game to load the new DLL and XML. See 日志修复_2026-09-06.md.
+
+Runtime 1.25.1 fortress color identification
+- Assign purpose-specific model/icon colors to all 42 new fortress/device blocks.
+  Model shades brighten from T16 to T19. Shape/New walls and firing slits use
+  existing colored atlas textures, with blue/purple/yellow/red tier end faces.
+- Damaged ablative frames retain gray steel. Nonvisual block settings unchanged.
+- Source configuration, native texture references, icon availability and generator
+  idempotence checks passed. Configuration-only change; restart to load.
+
+Runtime 1.25.0 automatic set resonance
+- Four matching family/tier armor pieces automatically activate at 100 resonance
+  when the ability is inactive and its cooldown has ended. Checks run every 0.5s.
+- Full charge waits during cooldown. Removing the fourth piece cancels active
+  effects; fewer than three pieces clears charge. Unequipping preserves cooldown.
+- Removed all 16 manual activation devices, their 28 recipes and bundle entries.
+  T19 calibration chips now fit matching-family T19 helmets, using one of the
+  existing six sockets. Stable/overload chips remain mutually exclusive.
+- Native isolated-save use audit: 868 checks passed, including all 16 automatic
+  sets and all eight helmet calibration triggers. Gear/fusion/upgrade/weapon and
+  display regressions also passed. Restart to load the installed runtime.
+
+Runtime 1.24.2 Skyguard ammunition and firepower
+- Skyguard arrays accept 7.62mm ammunition plus matching-tier interceptor rounds.
+- Final T16-T19 turret damage is 450/650/900/1250. Interceptor rounds add 100%,
+  producing 900/1300/1800/2500 before headshots and target resistance.
+- Dedicated rounds no longer carry rifle ammo tags; their own stat panel shows
+  matching-tier turret damage and the bonus. Native damage/selection checks pass.
+- Ammo is consumed in slot order. Automatic interception still consumes none.
+- Configuration-only update; restart the game to load it.
+
+Runtime 1.24.1 resonance forge interaction
+- Point the resonance forge at the existing workstation_workbench window.
+  Native activation otherwise searched for workstation_PZAECResonanceForge,
+  which was not registered. Client logs confirmed the missing-window warning.
+- Preserve workbench recipes and update the generator and description.
+  This is a configuration-only fix; restart the game to load it.
+
+Runtime 1.24.0 equipment use and effect delivery
+- Counter jammers now use native grenade priming/throwing and apply an 8m
+  enemy-only debuff at the actual detonation point, with zero explosion damage.
+- Field supplies no longer inherit first-aid-kit full-health restrictions or
+  the heal-other action. Reusable devices use a reliable instant-use action.
+- Toolbelt and inventory activation share the same completion event; native
+  Eat's missing animation-free toolbelt end event is supplied exactly once.
+- Resonance, calibration, jammer effects and machine-gun heat now apply state
+  locally before synchronizing. Network-only helpers did not apply local state.
+- T19 calibration devices create a real socket; empty armor/mod slots are safe.
+- Repair kits, armor gel and resonance injectors validate prerequisites before
+  consumption. Missing power tile entities no longer count as powered devices.
+- Armor-break turrets carry native hit buffs; all four embrasures use the native
+  arrow-slit collision mask so bullets and arrows pass through.
+- Functional audit: aecusecheck is restricted to the isolated verification save.
+
+Runtime 1.23.1 live equipment stat panels
+- Replaced legacy armor display metadata (which could show health as zero)
+  with dedicated panels for 28 weapons, 64 armor pieces and 56 components.
+- 668 primary stat rows read native item base/percentage effects, including
+  fusion and optional attached mods. Percent-only bonuses no longer multiply
+  a zero display baseline. Complete abilities remain in the description tab.
+- T19 Harrier outfit displays health +350 and stamina +360 before fusion.
+  Existing items receive the display fix after restarting; no recrafting needed.
+
+Runtime 1.23.0 firing foundations and equipment descriptions
+- Restored fixed native range, recoil/spread, handling, reload base and wear
+  effects for 28 reused weapons. Extends does not inherit these passive effects.
+  T19 Horizon Needle: 150m range, 80m falloff, 0.75 handling, 0.05 aiming spread.
+- BurstRoundCount is structural during fusion, preserving firing mode.
+- 164 weapons, armor, devices and components now have tier-specific Chinese
+  ability descriptions generated from final XML. Armor no longer shares one
+  generic description between tiers. Preview: 装备能力介绍预览.md.
+
+Runtime 1.22.0 adjacent equipment upgrades only
+- T16 weapons/armor require their legendary predecessors. T17-T19 each have one
+  recipe consuming the previous tier of the same family plus upgrade materials.
+- Removed 69 high-tier direct recipes and 69 skip-tier recipes. The remaining
+  69 adjacent upgrades retain their original costs and times.
+- Each step retains floor(fusion rank / 5): T16+10 -> T17+2 -> T18+0 -> T19+0.
+  Same-tier fusion and loot remain available. Catalog: 286 entries, 345 recipes.
+
 Runtime 1.21.1 weapon attachment compatibility
 - Reused T16-T19 weapon models now use their original model-specific attachment
   offsets, scope settings and sounds when no dedicated property exists.

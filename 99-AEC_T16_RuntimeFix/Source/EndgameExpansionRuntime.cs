@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace AECT16RuntimeFix
 
         public static void Install(Harmony harmony)
         {
-            var completed = AccessTools.Method(typeof(ItemActionEat), "Completed", new[] { typeof(ItemActionData) });
+            var explosion = AccessTools.Method(typeof(GameManager), "explode");
             var damage = AccessTools.Method(typeof(Block), "DamageBlock", new[]
             {
                 typeof(WorldBase), typeof(BlockValueRef), typeof(BlockValue), typeof(int), typeof(int),
@@ -50,13 +51,13 @@ namespace AECT16RuntimeFix
             var playerUpdate = AccessTools.Method(typeof(EntityPlayer), "OnUpdateLive", Type.EmptyTypes);
             var enemyUpdate = AccessTools.Method(typeof(EntityAlive), "updateTasks", Type.EmptyTypes);
             var damageEntity = AccessTools.Method(typeof(EntityAlive), "DamageEntity", new[] { typeof(DamageSource), typeof(int), typeof(bool), typeof(float) });
-            if (completed == null || damage == null || loaded == null || added == null || removed == null ||
+            if (explosion == null || damage == null || loaded == null || added == null || removed == null ||
                 projectileUpdate == null || playerUpdate == null || enemyUpdate == null || damageEntity == null)
             {
                 throw new MissingMethodException("Endgame expansion runtime targets changed.");
             }
 
-            harmony.Patch(completed, postfix: new HarmonyMethod(typeof(EndgameExpansionRuntime), nameof(EatCompletedPostfix)));
+            harmony.Patch(explosion, postfix: new HarmonyMethod(typeof(EndgameExpansionRuntime), nameof(JammerExplosionPostfix)));
             harmony.Patch(damage,
                 prefix: new HarmonyMethod(typeof(EndgameExpansionRuntime), nameof(DamageBlockPrefix)),
                 postfix: new HarmonyMethod(typeof(EndgameExpansionRuntime), nameof(DamageBlockPostfix)));
@@ -69,22 +70,60 @@ namespace AECT16RuntimeFix
             harmony.Patch(damageEntity, postfix: new HarmonyMethod(typeof(EndgameExpansionRuntime), nameof(DamageEntityPostfix)));
         }
 
-        public static void EatCompletedPostfix(ItemActionEat __instance, ItemActionData _actionData)
+        public static bool CanUseFieldItem(EntityPlayer player, ItemValue value, out string reason)
+        {
+            reason = "当前无法使用。";
+            if (player == null || player.world == null || player.IsDead()) return false;
+            string name = value?.ItemClass?.GetItemName() ?? "";
+            if (name.StartsWith("itemPZAECFieldRepairKitT", StringComparison.Ordinal))
+            {
+                reason = "没有需要维修的已穿护甲；维修包未消耗。";
+                if (player.equipment == null) return false;
+                foreach (var armor in player.equipment.GetItems())
+                    if (armor != null && !armor.IsEmpty() && armor.MaxUseTimes > 0 && armor.UseTimes > 0) return true;
+                return false;
+            }
+            if (name == "itemPZAECResonanceInjector")
+            {
+                reason = "需要同阶三件套且共鸣未满；注射剂未消耗。";
+                foreach (string family in new[] { "Harrier", "Storm", "Tremor", "Warden" })
+                for (int tier = 16; tier <= 19; tier++)
+                    if (player.Buffs.HasBuff("buffPZAEC" + family + "T" + tier + "Set3") &&
+                        player.Buffs.GetCustomVar("$PZAEC" + family + "T" + tier + "Resonance") < 100) return true;
+                return false;
+            }
+            if (name == "itemPZAECQuickArmorGel")
+            {
+                reason = "请对准6米内受损建筑，且不能在商人保护区使用；装甲胶未消耗。";
+                if (!Voxel.Raycast(player.world, player.GetLookRay(), 6f, true, false)) return false;
+                var hit = Voxel.voxelRayHitInfo;
+                if (!hit.bHitValid || hit.tag != "B_Mesh" || !BlockValueRef.Create(hit).TryGetBlockPos(out var pos) || player.world.IsWithinTraderArea(pos)) return false;
+                var block = player.world.GetBlock(pos);
+                return !block.isair && !block.isTerrain && block.damage > 0;
+            }
+            if (name == "itemPZAECEvacAnchor")
+            {
+                reason = "请下车并离开商人保护区后使用撤离锚。";
+                return player.AttachedMainEntity == null && !player.world.IsWithinTraderArea(new Vector3i(player.position));
+            }
+            return true;
+        }
+
+        public static void UseFieldItem(EntityPlayer player, ItemValue itemValue)
         {
             try
             {
-                if (__instance == null || __instance.item == null || _actionData == null || _actionData.invData == null)
+                if (itemValue == null || itemValue.IsEmpty() || itemValue.ItemClass == null)
                 {
                     return;
                 }
 
-                var player = _actionData.invData.holdingEntity as EntityPlayer;
-                if (player == null || player.world == null || player.world.IsRemote() || player.IsDead())
+                if (player == null || player.world == null || player.IsDead())
                 {
                     return;
                 }
 
-                string itemName = __instance.item.GetItemName();
+                string itemName = itemValue.ItemClass.GetItemName();
                 if (itemName == "itemPZAECQuickArmorGel")
                 {
                     ApplyArmorGel(player);
@@ -101,18 +140,9 @@ namespace AECT16RuntimeFix
                 {
                     UseEvacAnchor(player);
                 }
-                else if (itemName != null && itemName.StartsWith("itemPZAEC", StringComparison.Ordinal) &&
-                    itemName.EndsWith("DeviceT19", StringComparison.Ordinal))
-                {
-                    ApplyCalibration(player, _actionData.invData.itemValue);
-                }
                 else if (itemName != null && itemName.StartsWith("itemPZAECFieldRepairKitT", StringComparison.Ordinal))
                 {
                     ApplyFieldRepair(player, ParseTier(itemName));
-                }
-                else if (itemName != null && itemName.StartsWith("thrownPZAECCounterJammerT", StringComparison.Ordinal))
-                {
-                    ApplyJammer(player, ParseTier(itemName));
                 }
             }
             catch (Exception ex)
@@ -157,10 +187,10 @@ namespace AECT16RuntimeFix
                     }
                     string cvar = "$PZAEC" + setName + "T" + tier + "Resonance";
                     float next = Math.Min(100f, player.Buffs.GetCustomVar(cvar) + 25f);
-                    player.Buffs.SetCustomVarNetwork(cvar, next, CVarOperation.set);
+                    player.Buffs.SetCustomVar(cvar, next, true, CVarOperation.set);
                     if (next >= 100f)
                     {
-                        player.Buffs.AddBuffNetwork("buffPZAEC" + setName + "T" + tier + "Ready", -1f, Vector3i.zero, player.entityId);
+                        player.Buffs.AddBuff("buffPZAEC" + setName + "T" + tier + "Ready", player.entityId, true);
                     }
                     return;
                 }
@@ -188,22 +218,43 @@ namespace AECT16RuntimeFix
             }
         }
 
-        private static void ApplyJammer(EntityPlayer player, int tier)
+        public static void JammerExplosionPostfix(Vector3 _worldPos, int _entityId, ItemValue _itemValueExplosionSource)
+        {
+            try
+            {
+                var world = GameManager.Instance == null ? null : GameManager.Instance.World;
+                string name = _itemValueExplosionSource?.ItemClass?.GetItemName();
+                if (world == null || world.IsRemote() || name == null || !name.StartsWith("thrownPZAECCounterJammerT", StringComparison.Ordinal)) return;
+                ApplyJammer(world, _worldPos, _entityId, ParseTier(name));
+            }
+            catch (Exception ex)
+            {
+                T16RuntimeFixMod.SafeLog("[AEC-Endgame] Jammer failed: " + ex.GetBaseException().Message);
+            }
+        }
+
+        public static bool IsJammerTarget(EntityAlive enemy)
+        {
+            if (enemy == null || enemy is EntityPlayer || enemy.IsDead()) return false;
+            var definition = EntityClass.GetEntityClass(enemy.entityClass);
+            return definition != null && definition.bIsEnemyEntity;
+        }
+
+        public static void ApplyJammer(World world, Vector3 position, int sourceId, int tier)
         {
             if (tier < 16 || tier > 19)
             {
                 return;
             }
             string buff = "buffPZAECCounterJammerT" + tier;
-            foreach (var entity in player.world.Entities.list)
+            foreach (var entity in world.Entities.list)
             {
                 var enemy = entity as EntityAlive;
-                if (enemy == null || enemy.IsDead() || BloodMoonSiege.Tier(EntityClass.GetEntityClassName(enemy.entityClass)) == 0 ||
-                    (enemy.position - player.position).sqrMagnitude > 8f * 8f)
+                if (!IsJammerTarget(enemy) || (enemy.position - position).sqrMagnitude > 8f * 8f)
                 {
                     continue;
                 }
-                enemy.Buffs.AddBuffNetwork(buff, -1f, Vector3i.zero, player.entityId);
+                enemy.Buffs.AddBuff(buff, sourceId, true);
                 enemy.bodyDamage.CurrentStun = EnumEntityStunType.Stumble;
             }
         }
@@ -221,7 +272,7 @@ namespace AECT16RuntimeFix
             for (int i = 0; i < equipped.Length; i++)
             {
                 ItemValue value = equipped[i];
-                if (value.IsEmpty() || value.MaxUseTimes <= 0 || value.UseTimes <= bestDamage)
+                if (value == null || value.IsEmpty() || value.MaxUseTimes <= 0 || value.UseTimes <= bestDamage)
                 {
                     continue;
                 }
@@ -237,25 +288,64 @@ namespace AECT16RuntimeFix
             player.equipment.SetSlotItem(bestSlot, repaired, true);
         }
 
-        private static void ApplyCalibration(EntityPlayer player, ItemValue device)
+        private static void ApplyCalibration(EntityPlayer player, ItemValue helmet, string family)
         {
-            if (device.Modifications == null)
+            if (helmet == null || helmet.Modifications == null)
             {
                 return;
             }
-            foreach (ItemValue modification in device.Modifications)
+            foreach (ItemValue modification in helmet.Modifications)
             {
-                if (modification.IsEmpty() || modification.ItemClass == null)
+                if (modification == null || modification.IsEmpty() || modification.ItemClass == null)
                 {
                     continue;
                 }
                 string name = modification.ItemClass.GetItemName();
-                if (name.StartsWith("modPZAEC", StringComparison.Ordinal) && name.EndsWith("T19", StringComparison.Ordinal) &&
-                    (name.IndexOf("Stable", StringComparison.Ordinal) >= 0 || name.IndexOf("Overload", StringComparison.Ordinal) >= 0))
+                if (name == "modPZAEC" + family + "StableT19" || name == "modPZAEC" + family + "OverloadT19")
                 {
                     string stem = name.Substring("modPZAEC".Length, name.Length - "modPZAEC".Length - "T19".Length);
-                    player.Buffs.AddBuffNetwork("buffPZAEC" + stem + "CalibrationT19", -1f, Vector3i.zero, player.entityId);
+                    player.Buffs.AddBuff("buffPZAEC" + stem + "CalibrationT19", player.entityId, true);
                     return;
+                }
+            }
+        }
+
+        public static void UpdateAutomaticResonance(EntityPlayer player)
+        {
+            if (player == null || player.world == null || player.world.IsRemote() || player.IsDead() || player.equipment == null) return;
+            foreach (string family in new[] { "Harrier", "Storm", "Tremor", "Warden" })
+            foreach (int tier in new[] {16,17,18,19})
+            {
+                string prefix = "buffPZAEC" + family + "T" + tier;
+                string charge = "$PZAEC" + family + "T" + tier + "Resonance";
+                int pieces = player.equipment.GetArmorGroupCount("groupPZAEC" + family + "T" + tier);
+                if (pieces < 3)
+                {
+                    if (player.Buffs.GetCustomVar(charge) != 0) player.Buffs.SetCustomVar(charge, 0, true, CVarOperation.set);
+                    if (player.Buffs.HasBuff(prefix + "Ready")) player.Buffs.RemoveBuff(prefix + "Ready", -1, true);
+                }
+                if (pieces < 4)
+                {
+                    if (player.Buffs.HasBuff(prefix + "Active")) player.Buffs.RemoveBuff(prefix + "Active", -1, true);
+                    if (tier == 19)
+                    foreach (string mode in new[] {"Stable", "Overload"})
+                    {
+                        string calibration = "buffPZAEC" + family + mode + "CalibrationT19";
+                        if (player.Buffs.HasBuff(calibration)) player.Buffs.RemoveBuff(calibration, -1, true);
+                    }
+                    continue;
+                }
+                if (player.Buffs.GetCustomVar(charge) < 100 || player.Buffs.HasBuff(prefix + "Cooldown") || player.Buffs.HasBuff(prefix + "Active")) continue;
+                // Commit the charge/cooldown before applying effects so repeated
+                // updates cannot consume or activate the same charge twice.
+                player.Buffs.SetCustomVar(charge, 0, true, CVarOperation.set);
+                player.Buffs.RemoveBuff(prefix + "Ready", -1, true);
+                player.Buffs.AddBuff(prefix + "Cooldown", player.entityId, true);
+                player.Buffs.AddBuff(prefix + "Active", player.entityId, true);
+                if (tier == 19)
+                {
+                    var helmet = player.equipment.GetItems().FirstOrDefault(v => v != null && v.ItemClass != null && v.ItemClass.GetItemName() == "armorPZAEC" + family + "HelmetT19");
+                    ApplyCalibration(player, helmet, family);
                 }
             }
         }
@@ -345,7 +435,7 @@ namespace AECT16RuntimeFix
                         continue;
                     }
                     var powered = _world.GetTileEntity(stationPos) as TileEntityPowered;
-                    if (powered != null && !powered.IsPowered)
+                    if (powered == null || !powered.IsPowered)
                     {
                         continue;
                     }
@@ -477,6 +567,7 @@ namespace AECT16RuntimeFix
                     return;
                 }
                 NextPlayerHeatUpdate[__instance.entityId] = now + .5f;
+                UpdateAutomaticResonance(__instance);
                 ItemClass held = __instance.inventory.holdingItem;
                 string name = held == null ? string.Empty : held.GetItemName();
                 if (!name.StartsWith("gunPZAECStormReservoirT", StringComparison.Ordinal))
@@ -488,13 +579,13 @@ namespace AECT16RuntimeFix
                 float heat = __instance.Buffs.GetCustomVar(cvar);
                 if (heat >= 100f)
                 {
-                    __instance.Buffs.SetCustomVarNetwork(cvar, 0f, CVarOperation.set);
-                    __instance.Buffs.AddBuffNetwork("buffPZAECStormOverheatedT" + tier, -1f, Vector3i.zero, __instance.entityId);
+                    __instance.Buffs.SetCustomVar(cvar, 0f, true, CVarOperation.set);
+                    __instance.Buffs.AddBuff("buffPZAECStormOverheatedT" + tier, __instance.entityId, true);
                     return;
                 }
                 float cooling = tier == 19 ? 12.5f : tier == 18 ? 11f : tier == 17 ? 10f : 9f;
                 heat = Math.Max(0f, heat - cooling * .5f);
-                __instance.Buffs.SetCustomVarNetwork(cvar, heat, CVarOperation.set);
+                __instance.Buffs.SetCustomVar(cvar, heat, true, CVarOperation.set);
             }
             catch
             {
@@ -563,7 +654,7 @@ namespace AECT16RuntimeFix
                 if (name.StartsWith("PZAECArmorBreakTurretT", StringComparison.Ordinal))
                 {
                     int tier = ParseTier(name);
-                    __instance.Buffs.AddBuffNetwork("buffPZAECArmorBreakT" + tier, -1f, _damageSource.BlockPosition, _damageSource.ownerEntityId);
+                    __instance.Buffs.AddBuff("buffPZAECArmorBreakT" + tier, _damageSource.BlockPosition, _damageSource.ownerEntityId, true);
                 }
             }
             catch
@@ -575,7 +666,7 @@ namespace AECT16RuntimeFix
         private static bool IsPowered(WorldBase world, Vector3i position)
         {
             var powered = world.GetTileEntity(position) as TileEntityPowered;
-            return powered == null || powered.IsPowered;
+            return powered != null && powered.IsPowered;
         }
 
         private static int TierForPlayer(EntityPlayer player)

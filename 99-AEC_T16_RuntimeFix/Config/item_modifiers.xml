@@ -301,7 +301,7 @@
   </append>
   <!-- BEGIN GENERATED ENDGAME EXPANSION -->
     <append xpath="/item_modifiers">
-      <item_modifier name="modPZAECHarrierStableT19" installable_tags="PZAECHarrierDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECHarrierStableT19" installable_tags="PZAECHarrierCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECHarrierStableT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -314,7 +314,7 @@
           <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".10" tags="head" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECHarrierOverloadT19" installable_tags="PZAECHarrierDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECHarrierOverloadT19" installable_tags="PZAECHarrierCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECHarrierOverloadT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -327,7 +327,7 @@
           <passive_effect name="HeadshotDamageModifier" operation="perc_add" value=".12" tags="head" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECStormStableT19" installable_tags="PZAECStormDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECStormStableT19" installable_tags="PZAECStormCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECStormStableT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -340,7 +340,7 @@
           <passive_effect name="RoundsPerMinute" operation="perc_add" value=".08" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECStormOverloadT19" installable_tags="PZAECStormDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECStormOverloadT19" installable_tags="PZAECStormCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECStormOverloadT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -353,7 +353,7 @@
           <passive_effect name="RoundsPerMinute" operation="perc_add" value=".15" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECTremorStableT19" installable_tags="PZAECTremorDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECTremorStableT19" installable_tags="PZAECTremorCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECTremorStableT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -366,7 +366,7 @@
           <passive_effect name="EntityDamage" operation="perc_add" value=".12" tags="secondary" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECTremorOverloadT19" installable_tags="PZAECTremorDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECTremorOverloadT19" installable_tags="PZAECTremorCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECTremorOverloadT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -379,7 +379,7 @@
           <passive_effect name="EntityDamage" operation="perc_add" value=".20" tags="secondary" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECWardenStableT19" installable_tags="PZAECWardenDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECWardenStableT19" installable_tags="PZAECWardenCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECWardenStableT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -392,7 +392,7 @@
           <passive_effect name="PhysicalDamageResist" operation="base_add" value="3" />
         </effect_group>
       </item_modifier>
-      <item_modifier name="modPZAECWardenOverloadT19" installable_tags="PZAECWardenDevice" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
+      <item_modifier name="modPZAECWardenOverloadT19" installable_tags="PZAECWardenCalibrationT19" modifier_tags="PZAECCalibration" blocked_tags="noMods" type="attachment">
         <property name="Extends" value="modGeneralMaster" />
         <property name="DescriptionKey" value="modPZAECWardenOverloadT19Desc" />
         <property name="MaxModsAllowed" value="1" />
@@ -1123,4 +1123,62 @@
       </item_modifier>
     </append>
   <!-- END GENERATED ENDGAME EXPANSION -->
+<!-- BEGIN GENERATED EQUIPMENT DISPLAY -->
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECHarrierStableT19']"><property name="DisplayType" value="AECDisplay_modPZAECHarrierStableT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECHarrierOverloadT19']"><property name="DisplayType" value="AECDisplay_modPZAECHarrierOverloadT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECStormStableT19']"><property name="DisplayType" value="AECDisplay_modPZAECStormStableT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECStormOverloadT19']"><property name="DisplayType" value="AECDisplay_modPZAECStormOverloadT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECTremorStableT19']"><property name="DisplayType" value="AECDisplay_modPZAECTremorStableT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECTremorOverloadT19']"><property name="DisplayType" value="AECDisplay_modPZAECTremorOverloadT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECWardenStableT19']"><property name="DisplayType" value="AECDisplay_modPZAECWardenStableT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECWardenOverloadT19']"><property name="DisplayType" value="AECDisplay_modPZAECWardenOverloadT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECThreatLensT16']"><property name="DisplayType" value="AECDisplay_modPZAECThreatLensT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECThreatLensT17']"><property name="DisplayType" value="AECDisplay_modPZAECThreatLensT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECThreatLensT18']"><property name="DisplayType" value="AECDisplay_modPZAECThreatLensT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECThreatLensT19']"><property name="DisplayType" value="AECDisplay_modPZAECThreatLensT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECCoolingSinkT16']"><property name="DisplayType" value="AECDisplay_modPZAECCoolingSinkT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECCoolingSinkT17']"><property name="DisplayType" value="AECDisplay_modPZAECCoolingSinkT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECCoolingSinkT18']"><property name="DisplayType" value="AECDisplay_modPZAECCoolingSinkT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECCoolingSinkT19']"><property name="DisplayType" value="AECDisplay_modPZAECCoolingSinkT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECKineticRecyclerT16']"><property name="DisplayType" value="AECDisplay_modPZAECKineticRecyclerT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECKineticRecyclerT17']"><property name="DisplayType" value="AECDisplay_modPZAECKineticRecyclerT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECKineticRecyclerT18']"><property name="DisplayType" value="AECDisplay_modPZAECKineticRecyclerT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECKineticRecyclerT19']"><property name="DisplayType" value="AECDisplay_modPZAECKineticRecyclerT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECRepairServoT16']"><property name="DisplayType" value="AECDisplay_modPZAECRepairServoT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECRepairServoT17']"><property name="DisplayType" value="AECDisplay_modPZAECRepairServoT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECRepairServoT18']"><property name="DisplayType" value="AECDisplay_modPZAECRepairServoT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECRepairServoT19']"><property name="DisplayType" value="AECDisplay_modPZAECRepairServoT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPhaseRangefinderT16']"><property name="DisplayType" value="AECDisplay_modPZAECPhaseRangefinderT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPhaseRangefinderT17']"><property name="DisplayType" value="AECDisplay_modPZAECPhaseRangefinderT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPhaseRangefinderT18']"><property name="DisplayType" value="AECDisplay_modPZAECPhaseRangefinderT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPhaseRangefinderT19']"><property name="DisplayType" value="AECDisplay_modPZAECPhaseRangefinderT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECNearfieldReflexT16']"><property name="DisplayType" value="AECDisplay_modPZAECNearfieldReflexT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECNearfieldReflexT17']"><property name="DisplayType" value="AECDisplay_modPZAECNearfieldReflexT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECNearfieldReflexT18']"><property name="DisplayType" value="AECDisplay_modPZAECNearfieldReflexT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECNearfieldReflexT19']"><property name="DisplayType" value="AECDisplay_modPZAECNearfieldReflexT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECClosedLoopFeedT16']"><property name="DisplayType" value="AECDisplay_modPZAECClosedLoopFeedT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECClosedLoopFeedT17']"><property name="DisplayType" value="AECDisplay_modPZAECClosedLoopFeedT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECClosedLoopFeedT18']"><property name="DisplayType" value="AECDisplay_modPZAECClosedLoopFeedT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECClosedLoopFeedT19']"><property name="DisplayType" value="AECDisplay_modPZAECClosedLoopFeedT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPulseCapacitorT16']"><property name="DisplayType" value="AECDisplay_modPZAECPulseCapacitorT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPulseCapacitorT17']"><property name="DisplayType" value="AECDisplay_modPZAECPulseCapacitorT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPulseCapacitorT18']"><property name="DisplayType" value="AECDisplay_modPZAECPulseCapacitorT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECPulseCapacitorT19']"><property name="DisplayType" value="AECDisplay_modPZAECPulseCapacitorT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECStanceBreakerT16']"><property name="DisplayType" value="AECDisplay_modPZAECStanceBreakerT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECStanceBreakerT17']"><property name="DisplayType" value="AECDisplay_modPZAECStanceBreakerT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECStanceBreakerT18']"><property name="DisplayType" value="AECDisplay_modPZAECStanceBreakerT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECStanceBreakerT19']"><property name="DisplayType" value="AECDisplay_modPZAECStanceBreakerT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECGatekeeperHookT16']"><property name="DisplayType" value="AECDisplay_modPZAECGatekeeperHookT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECGatekeeperHookT17']"><property name="DisplayType" value="AECDisplay_modPZAECGatekeeperHookT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECGatekeeperHookT18']"><property name="DisplayType" value="AECDisplay_modPZAECGatekeeperHookT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECGatekeeperHookT19']"><property name="DisplayType" value="AECDisplay_modPZAECGatekeeperHookT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECEmergencyLinerT16']"><property name="DisplayType" value="AECDisplay_modPZAECEmergencyLinerT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECEmergencyLinerT17']"><property name="DisplayType" value="AECDisplay_modPZAECEmergencyLinerT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECEmergencyLinerT18']"><property name="DisplayType" value="AECDisplay_modPZAECEmergencyLinerT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECEmergencyLinerT19']"><property name="DisplayType" value="AECDisplay_modPZAECEmergencyLinerT19" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECInsulatedTreadsT16']"><property name="DisplayType" value="AECDisplay_modPZAECInsulatedTreadsT16" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECInsulatedTreadsT17']"><property name="DisplayType" value="AECDisplay_modPZAECInsulatedTreadsT17" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECInsulatedTreadsT18']"><property name="DisplayType" value="AECDisplay_modPZAECInsulatedTreadsT18" /></append>
+<append xpath="/item_modifiers/item_modifier[@name='modPZAECInsulatedTreadsT19']"><property name="DisplayType" value="AECDisplay_modPZAECInsulatedTreadsT19" /></append>
+<!-- END GENERATED EQUIPMENT DISPLAY -->
 </configs>

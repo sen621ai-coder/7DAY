@@ -51,7 +51,7 @@ namespace AECT16RuntimeFix
 
         public static bool IsStructural(PassiveEffects effect)
         {
-            return effect == PassiveEffects.None || effect == PassiveEffects.ModSlots || effect == PassiveEffects.Tier ||
+            return effect == PassiveEffects.None || effect == PassiveEffects.ModSlots || effect == PassiveEffects.BurstRoundCount || effect == PassiveEffects.Tier ||
                 effect == PassiveEffects.CraftingTier || effect == PassiveEffects.RecipeTagUnlocked || effect == PassiveEffects.EconomicValue;
         }
 

@@ -79,6 +79,8 @@ def main() -> None:
     known_buffs = collect(buff_paths, "buff")
     known_entities = collect(entity_paths, "entity_class")
     craftables = known_items | known_modifiers | known_blocks
+    # Some native icons (e.g. bundleRifle) have no matching item definition.
+    known_icons = craftables | {path.stem for path in (GAME_CONFIG.parent / "ItemIcons").glob("*.png")}
 
     expected_items = set()
     for tier in TIERS:
@@ -122,7 +124,7 @@ def main() -> None:
         extends = element.find("property[@name='Extends']")
         require(extends is None or extends.get("value") in known_items, f"{name} extends missing item {extends.get('value')}")
         icon = element.find("property[@name='CustomIcon']")
-        require(icon is None or icon.get("value") in craftables, f"{name} uses missing custom icon {icon.get('value')}")
+        require(icon is None or icon.get("value") in known_icons, f"{name} uses missing custom icon {icon.get('value')}")
         for stem, base in WEAPON_BASES.items():
             if stem not in name:
                 continue
@@ -138,7 +140,7 @@ def main() -> None:
         extends = element.find("property[@name='Extends']")
         require(extends is None or extends.get("value") in known_modifiers, f"{name} extends missing modifier {extends.get('value')}")
         icon = element.find("property[@name='CustomIcon']")
-        require(icon is None or icon.get("value") in craftables, f"{name} uses missing custom icon {icon.get('value')}")
+        require(icon is None or icon.get("value") in known_icons, f"{name} uses missing custom icon {icon.get('value')}")
     for element in blocks_root.iter("block"):
         name = element.get("name") or ""
         if name not in expected_blocks and not name.startswith("PZAECAblativeWallRuinT"):
@@ -148,6 +150,11 @@ def main() -> None:
         require(extends is None or extends.get("value") not in shape_families, f"{name} extends shape family instead of concrete block")
         if name.startswith("PZAECEmbrasureT"):
             require(element.find("property[@name='Model']").get("value") == "@:Shapes/arrow_slit.fbx", f"{name} must have an open firing slit")
+            native_slit = parse(GAME_CONFIG / "shapes.xml").find("shape[@name='arrowSlit']")
+            native_collision = native_slit.find("property[@name='Collide']").get("value")
+            collision = element.find("property[@name='Collide']")
+            require(collision is not None and set(collision.get("value").split(",")) == set(native_collision.split(",")),
+                    f"{name} must use native firing-slit collision, not just its mesh")
     for element in entities_root.iter("entity_class"):
         if element.get("name") in expected_entities:
             require(element.get("extends") in known_entities, f"{element.get('name')} extends missing entity {element.get('extends')}")

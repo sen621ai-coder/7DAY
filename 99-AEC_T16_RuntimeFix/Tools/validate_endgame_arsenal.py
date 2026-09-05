@@ -46,6 +46,8 @@ def main() -> None:
     buffs = defined_buffs(buffs_root)
     vanilla_items = {item.get("name") for item in ET.parse(GAME / "Data" / "Config" / "items.xml").getroot().findall("item")}
     all_known_items = vanilla_items | set(items)
+    for path in MOD.parent.glob('*/Config/items.xml'):
+        all_known_items.update(n.get('name') for n in ET.parse(path).iter('item') if n.get('name'))
     modifiers = {m.get("name") for a in modifiers_root.findall(".//append[@xpath='/item_modifiers']") for m in a.findall("item_modifier")}
 
     expected_armor = {
@@ -57,7 +59,13 @@ def main() -> None:
         for set_name in SETS for tier in TIERS
     }
     assert expected_armor <= items.keys(), expected_armor - items.keys()
-    assert expected_devices <= items.keys(), expected_devices - items.keys()
+    for name in expected_devices:
+        legacy = items[name]
+        assert legacy.find("property[@name='CreativeMode']").get('value') == 'None'
+        assert legacy.find("property[@class='Action0']") is None
+        assert legacy.find('.//triggered_effect') is None
+        assert not any(e.get('name') == name for e in recipes_root.iter('recipe'))
+        assert not any(e.get('name') == name for e in loot_root.iter('item'))
     assert len(expected_armor) == 64 and len(expected_devices) == 16
 
     slot_names = {"Helmet": "Head", "Outfit": "Chest", "Gloves": "Hands", "Boots": "Feet"}
@@ -102,9 +110,10 @@ def main() -> None:
             and player_requirement.get("tags") == "player", active.get("name")
 
     recipes = [r.get("name") for a in recipes_root.findall(".//append[@xpath='/recipes']") for r in a.findall("recipe")]
-    for name in expected_armor | expected_devices:
+    for name in expected_armor:
         tier = int(name[-2:])
-        assert recipes.count(name) == (1 if tier == 16 else 2), (name, recipes.count(name))
+        assert (recipes.count(name) >= 1 if tier == 16 else recipes.count(name) == 1), (name, recipes.count(name))
+    assert not (set(recipes) & expected_devices), 'Removed devices still have recipes'
     for name in ("resourcePZAECWeaponChassis", "resourcePZAECArmorChassis", "resourcePZAECDeviceChassis"):
         assert recipes.count(name) == 1
     ranks = {16: "R2", 17: "R3", 18: "R4", 19: "R5"}
@@ -152,10 +161,10 @@ def main() -> None:
     assert all(len(row) == 20 for row in rows), {len(row) for row in rows}
     keys = [row[0] for row in rows if row]
     assert len(keys) == len(set(keys)), "Duplicate localization key"
-    for name in expected_armor | expected_devices:
+    for name in expected_armor:
         assert name in keys, name
     key_set = set(keys)
-    for item in [items[name] for name in expected_armor | expected_devices]:
+    for item in [items[name] for name in expected_armor]:
         desc = item.find("property[@name='DescriptionKey']")
         assert desc is not None and desc.get("value") in key_set, item.get("name")
     for buff in buffs.values():
@@ -171,7 +180,7 @@ def main() -> None:
         assert text.count("END GENERATED ENDGAME ARSENAL") == 1, file_name
         assert not any(line.startswith("+") for line in text.splitlines()), file_name
 
-    print("Endgame arsenal validation passed: 64 armor pieces, 16 devices, 4 tiered loot loops.")
+    print("Endgame arsenal validation passed: 64 armor pieces, 16 automatic set abilities, 4 tiered loot loops.")
 
 
 if __name__ == "__main__":

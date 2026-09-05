@@ -26,11 +26,10 @@ for index, tier in enumerate(range(16, 20)):
     group = next(g for g in loot if g.get('name') == f'PZAECExpansionWeaponT{tier}')
     assert len(group.findall('item')) == 7 and len(group.findall(f"item[@name='{name}']")) == 1
     rows = [r for r in recipes if r.get('name') == name]
-    assert len(rows) == tier - 15, (name, len(rows))
+    assert len(rows) == 1, (name, len(rows))
     if tier == 16:
         assert rows[0].find("ingredient[@name='gunHandgunT5Hellgun']").get('count') == '1'
     else:
-        for source in range(16, tier):
-            match = [r for r in rows if r.find(f"ingredient[@name='gunPZAECEmberPistolT{source}']") is not None]
-            assert len(match) == 1 and match[0].get('count') == '1'
-print('PASS: four pistols, .44 ammo, exact tier stats and sockets, 10 recipes including legendary entry and six upgrades, all four boss weapon pools.')
+        assert rows[0].find(f"ingredient[@name='gunPZAECEmberPistolT{tier-1}']").get('count') == '1'
+        assert rows[0].get('count') == '1' and rows[0].get('tags') == 'upgrade'
+print('PASS: four pistols, .44 ammo, exact tier stats and sockets, four recipes with legendary entry and adjacent-only upgrades, all four boss weapon pools.')

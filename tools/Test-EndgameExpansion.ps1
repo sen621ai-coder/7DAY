@@ -35,12 +35,14 @@ public static class EndgameExpansionRegression
                 "ProjectileUpdatePrefix", "PlayerUpdatePostfix", "EnemyUpdatePostfix", "DamageEntityPostfix" })
                 Check(runtime.Methods.Any(m => m.Name == method), "Missing runtime path " + method);
 
-            string[] requiredCalls = { "SetBlockRPC", "SetCustomVarNetwork", "AddBuffNetwork", "Teleport",
+            string[] requiredCalls = { "SetBlockRPC", "SetCustomVar", "AddBuff", "Teleport",
                 "SetInvestigatePosition", "Destroy", "SetSlotItem" };
             var calls = runtime.Methods.Where(m => m.HasBody).SelectMany(m => m.Body.Instructions)
                 .Select(i => i.Operand as MethodReference).Where(m => m != null).Select(m => m.Name).ToArray();
             foreach (string call in requiredCalls)
                 Check(calls.Contains(call), "Runtime no longer calls " + call);
+            Check(!calls.Contains("AddBuffNetwork") && !calls.Contains("SetCustomVarNetwork"),
+                "Endgame effects must apply locally with AddBuff/SetCustomVar before syncing; network-only helpers do not apply state.");
 
             var entry = module.Types.Single(t => t.Name == "T16RuntimeFixMod").Methods.Single(m => m.Name == "InitMod");
             Check(entry.Body.Instructions.Any(i => i.Operand is MethodReference m &&

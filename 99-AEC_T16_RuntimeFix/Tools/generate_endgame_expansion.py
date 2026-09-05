@@ -6,6 +6,8 @@ import pathlib
 import xml.etree.ElementTree as ET
 import endgame_progression as progression
 import legendary_prerequisites as legendary
+import equipment_descriptions as descriptions
+import weapon_foundations
 
 
 MOD = pathlib.Path(__file__).resolve().parents[1]
@@ -175,6 +177,16 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             prop(item, "Stacknumber", 100 if stem == "SkyguardInterceptor" else 20)
             prop(item, "SellableToTrader", "false")
             eg = ET.SubElement(item, "effect_group", {"tiered": "false"})
+            if stem == "SkyguardInterceptor":
+                # Dedicated turret ammunition must not match rifle ammo tags.
+                # Native turret damage evaluates the loaded round's effects
+                # against the turret's EntityDamage base value.
+                prop(item, "Tags", f"ammo,aecSkyguardAmmoT{tier},scrap100")
+                prop(item, "DisplayType", "aecSkyguardAmmo")
+                passive(eg, "EntityDamage", "perc_add", 1)
+                passive(eg, "BlockDamage", "perc_set", 0)
+                ET.SubElement(eg, "display_value", {"name": "dSkyguardDamage", "value": str([900,1300,1800,2500][i])})
+                ET.SubElement(eg, "display_value", {"name": "dSkyguardBonus", "value": "1"})
             if stem == "CounterPulse":
                 # Impact damage and explosion damage are independent native
                 # paths. Override inherited HE block damage explicitly.
@@ -186,7 +198,10 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
                 passive(eg, "BlockDamage", "perc_set", 0)
                 passive(eg, "EntityDamage", "base_set", [35, 40, 45, 50][i])
             loc(rows, name, "items", f"T{tier} {en}", f"T{tier} {cn}")
-            loc(rows, name + "Desc", "items", "Specialized ammunition for AEC endgame equipment.", "AEC 终局设备使用的专属弹药。")
+            if stem == "SkyguardInterceptor":
+                loc(rows, name + "Desc", "items", f"Dedicated T{tier} Skyguard ammunition: +100% turret entity damage, {[900,1300,1800,2500][i]} base damage per hit. Load into the matching-tier array; not rifle ammunition. Automatic interception currently consumes no ammunition.", f"T{tier}天穹阵列专用弹。装入同阶阵列后射击伤害+100%，未计爆头和目标减伤的单发伤害为{[900,1300,1800,2500][i]}，不造成方块伤害。普通7.62毫米弹可作低成本替代；本弹不能装入步枪。自动拦截目前不扣弹药。")
+            else:
+                loc(rows, name + "Desc", "items", "Specialized ammunition for AEC endgame equipment.", "AEC 终局设备使用的专属弹药。")
 
     field = [
         ("itemPZAECQuickArmorGel", "快凝装甲胶", "Quick Armor Gel", "buffPZAECQuickArmorGel", 10, "resourceRepairKit"),
@@ -196,7 +211,9 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
     ]
     for name, cn, en, buff, stack, icon in field:
         item = ET.SubElement(root, "item", {"name": name})
-        prop(item, "Extends", "medicalFirstAidKit")
+        # A neutral base avoids inherited medical Health<100% requirements
+        # and the secondary heal-other action.
+        prop(item, "Extends", "resourceLegendaryParts")
         prop(item, "CreativeMode", "Player")
         prop(item, "DescriptionKey", name + "Desc")
         prop(item, "CustomIcon", icon)
@@ -204,13 +221,21 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
         prop(item, "Stacknumber", stack)
         prop(item, "SellableToTrader", "false")
         action = ET.SubElement(item, "property", {"class": "Action0"})
-        prop(action, "Class", "Eat")
+        prop(action, "Class", "PZAECUse,AEC.T16.RuntimeFix")
+        prop(action, "UseAnimation", "false")
         prop(action, "Consume", "true" if name != "itemPZAECEvacAnchor" else "false")
         prop(action, "Delay", 1.0 if name != "itemPZAECEvacAnchor" else 0.4)
         eg = ET.SubElement(item, "effect_group", {"tiered": "false"})
         ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfPrimaryActionEnd", "action": "AddBuff", "buff": buff})
+        ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfPrimaryActionEnd", "action": "PZAECFieldUse,AEC.T16.RuntimeFix"})
         loc(rows, name, "items", en, cn)
-        loc(rows, name + "Desc", "items", "Reusable endgame field technology with server-checked limits where required.", "终局战场科技；需要时由服务器验证目标、位置和冷却。")
+        instructions = {
+            "itemPZAECQuickArmorGel": "快捷栏左键使用。修复准星对准的6米内受损建筑，按玩家终局阶级恢复1500／2000／2600／3400耐久；不能用于商人保护区。无有效目标不消耗，满血可用。",
+            "itemPZAECResonanceInjector": "快捷栏左键使用，为已穿同阶三件套增加25共鸣，最多100；共鸣未满时消耗1个。没有套装或共鸣已满不消耗，满血可用。",
+            "itemPZAECDecoyBeacon": "快捷栏左键使用，消耗1个；吸引25米内普通敌人调查当前位置。对Boss和攻城单位无效；这是原地信标，不是投掷物。满血可用。",
+            "itemPZAECEvacAnchor": "快捷栏左键标记当前位置，20秒内再次左键返回标记点。可重复使用；需要下车，不能在商人保护区使用，返回点需有两格净空。",
+        }
+        loc(rows, name + "Desc", "items", "Use from the toolbelt. Field technology validates prerequisites before consumption.", instructions[name])
 
     for stem, cn, en, buff in [
         ("CounterJammer", "反制干扰弹", "Countermeasure Jammer", "buffPZAECCounterJammer"),
@@ -219,36 +244,46 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
         for i, tier in enumerate(TIERS):
             name = ("thrown" if stem == "CounterJammer" else "item") + f"PZAEC{stem}T{tier}"
             item = ET.SubElement(root, "item", {"name": name})
-            prop(item, "Extends", "medicalFirstAidKit")
+            prop(item, "Extends", "thrownGrenade" if stem == "CounterJammer" else "resourceLegendaryParts")
             prop(item, "CreativeMode", "Player")
             prop(item, "DescriptionKey", name + "Desc")
             prop(item, "CustomIcon", "thrownGrenade" if stem == "CounterJammer" else "resourceRepairKit")
             prop(item, "CustomIconTint", COLOR[tier])
             prop(item, "Stacknumber", 10 if stem == "CounterJammer" else 5)
             prop(item, "SellableToTrader", "false")
-            action = ET.SubElement(item, "property", {"class": "Action0"})
-            prop(action, "Class", "Eat")
-            prop(action, "Consume", "true")
-            prop(action, "Delay", 0.8 if stem == "CounterJammer" else 4)
             eg = ET.SubElement(item, "effect_group", {"tiered": "false"})
-            effect = ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfPrimaryActionEnd", "action": "AddBuff", "buff": f"{buff}T{tier}"})
             if stem == "CounterJammer":
-                effect.set("target", "selfAOE")
-                effect.set("range", "8")
-                effect.set("target_tags", "enemy")
+                prop(item, "FuseTime", 3)
+                prop(item, "ExplodeOnHit", "false")
+                explosion = ET.SubElement(item, "property", {"class": "Explosion"})
+                for key, value in {"BlockDamage": 0, "EntityDamage": 0, "RadiusBlocks": 0,
+                                   "RadiusEntities": 8, "BlastPower": 0, "Buff": ""}.items():
+                    prop(explosion, key, value)
+                passive(eg, "ExplosionBlockDamage", "base_set", 0)
+                passive(eg, "ExplosionEntityDamage", "base_set", 0)
+            else:
+                action = ET.SubElement(item, "property", {"class": "Action0"})
+                prop(action, "Class", "PZAECUse,AEC.T16.RuntimeFix")
+                prop(action, "UseAnimation", "false")
+                prop(action, "Consume", "true")
+                prop(action, "Delay", 4)
+                ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfPrimaryActionEnd", "action": "AddBuff", "buff": f"{buff}T{tier}"})
+                ET.SubElement(eg, "triggered_effect", {"trigger": "onSelfPrimaryActionEnd", "action": "PZAECFieldUse,AEC.T16.RuntimeFix"})
             loc(rows, name, "items", f"T{tier} {en}", f"T{tier} {cn}")
-            loc(rows, name + "Desc", "items", f"Tier-scaled {en.lower()} for active Blood Moon defense.", f"用于主动血夜防御的同阶{cn}。")
+            detail = (f"右键拉环，左键投掷，3秒后在落点周围8米干扰敌人{[3,4,5,6][i]}秒：射速−75%、方块伤害−50%。不炸伤玩家或建筑，满血可用。" if stem == "CounterJammer"
+                      else f"快捷栏左键使用，修复当前受损最重的一件已穿护甲，恢复其最大耐久的{[35,45,55,65][i]}%；消耗1个，满血可用。")
+            loc(rows, name + "Desc", "items", f"Tier-scaled {en.lower()} for active Blood Moon defense.", detail)
 
     resource_defs = [("resourcePZAECDefenseChassis", "防御设备底盘", "Defense Equipment Chassis", "resourceMechanicalParts")]
     for tier in TIERS:
         resource_defs += [
             (f"resourcePZAECCoreFragmentT{tier}", f"T{tier} 心核碎片", f"T{tier} Core Fragment", "resourceLegendaryParts"),
             (f"resourcePZAECCapacitorFragmentT{tier}", f"T{tier} 电容碎片", f"T{tier} Capacitor Fragment", "resourceElectricParts"),
-            (f"itemPZAECArmoryBlueprintCrateT{tier}", f"T{tier} 军械蓝图选择箱", f"T{tier} Armory Blueprint Choice", "questRewardT3RifleLegendaryBundle"),
+            (f"itemPZAECArmoryBlueprintCrateT{tier}", f"T{tier} 军械蓝图选择箱", f"T{tier} Armory Blueprint Choice", "bundleRifle"),
             (f"itemPZAECComponentChoiceCrateT{tier}", f"T{tier} 组件选择箱", f"T{tier} Component Choice", "resourceLegendaryParts"),
             (f"resourcePZAECRepairChargeT{tier}", f"T{tier} 维修料盒", f"T{tier} Repair Charge", "resourceRepairKit"),
             (f"resourcePZAECDecoyChargeT{tier}", f"T{tier} 诱导电荷", f"T{tier} Decoy Charge", "resourceElectricParts"),
-            (f"itemPZAECDefenseBlueprintCrateT{tier}", f"T{tier} 设备蓝图选择箱", f"T{tier} Defense Blueprint Choice", "questRewardBatteryBankBundle"),
+            (f"itemPZAECDefenseBlueprintCrateT{tier}", f"T{tier} 设备蓝图选择箱", f"T{tier} Defense Blueprint Choice", "bundleBatteryBank"),
         ]
     for name, cn, en, icon in resource_defs:
         item = ET.SubElement(root, "item", {"name": name})
@@ -264,19 +299,15 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
         loc(rows, name + "Desc", "items", "Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.", "终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。")
 
     progression.weapons(root)
+    weapon_foundations.apply(root, VANILLA_ITEMS)
     for ammo in root.findall('item'):
         if ammo.get('name', '').startswith('ammoPZAECCounterPulseT'):
             index = int(ammo.get('name')[-2:]) - 16
             for effect in ammo.findall('./effect_group/passive_effect'):
                 if effect.get('name') == 'EntityDamage':
                     effect.set('value', str([1200, 1700, 2400, 3400][index]))
+    rows = descriptions.weapons(root, rows, descriptions.buff_map(build_buffs()[0]))
     chunks = [xml(root)]
-    for set_name in ("Harrier", "Storm", "Tremor", "Warden"):
-        patch = ET.Element("append", {"xpath": f"/items/item[@name='itemPZAEC{set_name}DeviceT19']"})
-        prop(patch, "Tags", f"PZAECResonanceDevice,PZAEC{set_name}Device")
-        eg = ET.SubElement(patch, "effect_group", {"name": f"PZAEC {set_name} calibration slot", "tiered": "false"})
-        passive(eg, "ModSlots", "base_set", 1)
-        chunks.append(xml(patch))
     return "\n".join(chunks), rows
 
 
@@ -286,7 +317,7 @@ def build_modifiers() -> tuple[str, list[tuple[str, str, str, str]]]:
     for set_name, cn_set in [("Harrier", "猎隼"), ("Storm", "雷暴"), ("Tremor", "震岳"), ("Warden", "守望")]:
         for mode, cn_mode in [("Stable", "稳定校准"), ("Overload", "过载校准")]:
             name = f"modPZAEC{set_name}{mode}T19"
-            mod = ET.SubElement(root, "item_modifier", {"name": name, "installable_tags": f"PZAEC{set_name}Device", "modifier_tags": "PZAECCalibration", "blocked_tags": "noMods", "type": "attachment"})
+            mod = ET.SubElement(root, "item_modifier", {"name": name, "installable_tags": f"PZAEC{set_name}CalibrationT19", "modifier_tags": "PZAECCalibration", "blocked_tags": "noMods", "type": "attachment"})
             prop(mod, "Extends", "modGeneralMaster")
             prop(mod, "DescriptionKey", name + "Desc")
             prop(mod, "MaxModsAllowed", 1)
@@ -301,7 +332,7 @@ def build_modifiers() -> tuple[str, list[tuple[str, str, str, str]]]:
             elif set_name == "Tremor": passive(eg, "EntityDamage", "perc_add", ".12" if mode == "Stable" else ".20", "secondary")
             else: passive(eg, "PhysicalDamageResist", "base_add", "3" if mode == "Stable" else "6")
             loc(rows, name, "items", f"{set_name} {mode} Calibration", f"{cn_set}{cn_mode}")
-            loc(rows, name + "Desc", "items", "T19 resonance-device calibration. Only one calibration can be installed.", "T19 共鸣装置校准；同一装置只能安装一枚校准芯片。")
+            loc(rows, name + "Desc", "items", "T19 matching-set helmet calibration. Only one calibration can be installed.", "装入同流派T19头盔，占用1个模组槽；稳定与过载互斥，只能装一枚。")
 
     for stem, (cn, en, tags, icon, desc) in COMPONENTS.items():
         for i, tier in enumerate(TIERS):
@@ -342,6 +373,7 @@ def build_modifiers() -> tuple[str, list[tuple[str, str, str, str]]]:
             loc(rows, name, "items", f"T{tier} {en}", f"T{tier} {cn}")
             loc(rows, name + "Desc", "items", f"Tiered behavior component. {en}: {desc}", f"同阶行为组件。{desc}")
     progression.components(root)
+    rows = descriptions.modifiers(root, rows, descriptions.buff_map(build_buffs()[0]))
     return xml(root), rows
 
 
@@ -403,7 +435,7 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
         for effect_name, operation, value, tags in effects:
             passive(eg, effect_name, operation, value, tags)
         loc(rows, name + "Name", "buffs", f"{set_name} {mode} Calibration", f"{set_name}·{'稳定' if mode == 'Stable' else '过载'}校准")
-        loc(rows, name + "Desc", "buffs", "T19 device calibration is active for this resonance window.", "T19 装置校准在本次共鸣窗口内生效。")
+        loc(rows, name + "Desc", "buffs", "T19 helmet calibration is active for this resonance window.", "T19头盔校准在本次自动共鸣窗口内生效。")
     progression.expansion_buffs(root)
     return xml(root), rows
 
@@ -412,6 +444,52 @@ def repair_items(block: ET.Element, steel: int, electric: int = 0) -> None:
     group = ET.SubElement(block, "property", {"class": "RepairItems"})
     prop(group, "resourceDurablAlloys", steel)
     if electric: prop(group, "resourceElectricParts", electric)
+
+
+def apply_block_colors(root: ET.Element, rows: list) -> None:
+    palette = {
+        "SkyguardArray": ("40C8F5", "青蓝"),
+        "HiveRepairStation": ("50DA88", "翠绿"),
+        "HoundDecoyTower": ("F8A449", "橙黄"),
+        "ShockNetNode": ("EADB45", "亮黄"),
+        "ArmorBreakTurret": ("EF6576", "玫红"),
+        "ReactiveWall": ("CA4D48", "红"),
+        "AblativeWall": ("DEA244", "橙"),
+        "Embrasure": ("5097DF", "蓝"),
+        "BlastGate": ("AC74E3", "紫"),
+        "ArmoredConduit": ("8298AF", "蓝灰"),
+        "ResonanceForge": ("9D78E7", "紫罗兰"),
+        "TacticalRelay": ("4DE0C7", "青绿"),
+    }
+    # Shape/New meshes use atlas textures rather than ModelEntity's tint.
+    paints = {p.get("name"): p.find("property[@name='TextureId']").get("value")
+              for p in ET.parse(GAME_CONFIG / "painting.xml").getroot().findall("paint")}
+    surfaces = {"ReactiveWall": "red", "AblativeWall": "orange", "Embrasure": "blue"}
+    tier_markers = {16: "blue", 17: "purple", 18: "yellow", 19: "red"}
+    labels = {}
+    for block in root.findall("block"):
+        name = block.get("name", "")
+        tier = int(name[-2:]) if name.endswith(tuple(f"T{t}" for t in TIERS)) else None
+        stem = name.removeprefix("PZAEC")
+        if tier: stem = stem[:-3]
+        if stem == "AblativeWallRuin":
+            prop(block, "Texture", "355,355,356,356,356,356")
+            continue
+        if stem not in palette: continue
+        color, label = palette[stem]
+        brightness = [0.70, 0.80, 0.90, 1.0][tier-16] if tier else 1.0
+        color = ''.join(f'{round(int(color[i:i+2], 16)*brightness):02X}' for i in (0,2,4))
+        icon = block.find("property[@name='CustomIconTint']")
+        if icon is not None: icon.set("value", color)
+        prop(block, "TintColor", color)
+        if stem in surfaces:
+            side = paints["txName_Concrete_" + surfaces[stem]]
+            marker = paints["txName_Concrete_" + tier_markers[tier]]
+            prop(block, "Texture", ','.join([marker, marker, side, side, side, side]))
+        labels[name + "Desc"] = label
+    for i, (key, file_name, en, cn) in enumerate(rows):
+        if key in labels:
+            rows[i] = (key, file_name, en, cn + f" 识别色：{labels[key]}。")
 
 
 def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
@@ -434,9 +512,9 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
             prop(block, "PZAECDefenseDevice", stem)
             prop(block, "PZAECTier", tier)
             if stem == "SkyguardArray":
-                prop(block, "AmmoItem", f"ammoPZAECSkyguardInterceptorT{tier}")
+                prop(block, "AmmoItem", f"ammo762mmBulletBall+tags(ammo762mm)+ammoPZAECSkyguardInterceptorT{tier}")
                 prop(block, "MaxDistance", [28, 32, 36, 40][i])
-                prop(block, "EntityDamage", [45, 52, 60, 70][i])
+                prop(block, "EntityDamage", [450, 650, 900, 1250][i])
                 prop(block, "BurstRoundCount", 8)
                 prop(block, "CooldownTime", 2.5)
             elif stem == "HoundDecoyTower":
@@ -448,24 +526,30 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
                 prop(block, "DamageReceived", [.7, .65, .6, .55][i])
             elif stem == "ArmorBreakTurret":
                 prop(block, "AmmoItem", "ammo762mmBulletBall+tags(ammo762mm)")
+                prop(block, "Buff", f"buffPZAECArmorBreakT{tier}")
+                prop(block, "BuffChance", 1)
                 prop(block, "EntityDamage", [26, 30, 34, 40][i])
                 prop(block, "BurstRoundCount", 36)
                 prop(block, "CooldownTime", 5)
             repair_items(block, 30 + i * 10, 10 + i * 5)
             loc(rows, name, "blocks", f"T{tier} {en}", f"T{tier} {cn}")
-            loc(rows, name + "Desc", "blocks", "Powered endgame defense device with bounded range, upkeep and downtime.", "有范围、消耗和停机限制的供电终局防御设备。")
+            if stem == "SkyguardArray":
+                loc(rows, name + "Desc", "blocks", f"Powered T{tier} Skyguard array. Supports 7.62mm ammunition and matching-tier interceptor rounds. Base entity damage {[450,650,900,1250][i]}; dedicated rounds double it. Fires the first nonempty ammo slot. Automatic interception consumes no ammunition.", f"需供电{power[i]}W。支持7.62毫米弹药与同阶天穹截击弹：普通标准弹单发{[450,650,900,1250][i]}，同阶截击弹单发{[900,1300,1800,2500][i]}，未计爆头和目标减伤。每轮{[30,40,50,60][i]}发，射程{[28,32,36,40][i]}米；从前往后消耗弹药槽，换弹种可取出原弹或调整槽位。另可自动拦截攻城投射物，目前拦截不扣弹药。")
+            else:
+                loc(rows, name + "Desc", "blocks", "Powered endgame defense device with bounded range, upkeep and downtime.", "有范围、消耗和停机限制的供电终局防御设备。")
 
     forge = ET.SubElement(root, "block", {"name": "PZAECResonanceForge"})
     prop(forge, "Extends", "workbench")
     prop(forge, "CreativeMode", "Player")
     prop(forge, "DescriptionKey", "PZAECResonanceForgeDesc")
+    prop(forge, "WorkstationWindow", "workstation_workbench")
     prop(forge, "CustomIcon", "workbench")
     prop(forge, "CustomIconTint", "AA88FF")
     prop(forge, "MaxDamage", 12000)
     prop(forge, "TakeDelay", 45)
     repair_items(forge, 50, 25)
     loc(rows, "PZAECResonanceForge", "blocks", "Resonance Forge", "共鸣锻造台")
-    loc(rows, "PZAECResonanceForgeDesc", "blocks", "Endgame workbench for the T16-T19 arsenal and fortress network.", "用于 T16–T19 军械、组件与要塞设备的终局工作台。")
+    loc(rows, "PZAECResonanceForgeDesc", "blocks", "A 12000-durability workbench. Interact to craft using standard workbench recipes. No fuel or power required; ordinary workbenches can also craft this equipment.", "耐久12000的高级工作台。放置后按交互键打开制作界面，可制作普通工作台配方及T16–T19装备、组件和设备；不需燃料或供电，普通工作台也能制作这些物品。")
 
     relay = ET.SubElement(root, "block", {"name": "PZAECTacticalRelay"})
     prop(relay, "Extends", "electricwirerelay")
@@ -488,6 +572,11 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
             if base == "steelMaster":
                 prop(block, "Shape", "New")
                 prop(block, "Model", "@:Shapes/arrow_slit.fbx" if stem == "Embrasure" else "@:Shapes/Cube.fbx")
+            if stem == "Embrasure":
+                # Selecting the mesh does not inherit shapes.xml properties.
+                # Match native arrowSlit: bullets/bolts pass; movement, melee
+                # and rockets still collide. This applies in both directions.
+                prop(block, "Collide", "sight,movement,melee,rocket")
             prop(block, "CreativeMode", "Player")
             prop(block, "DescriptionKey", name + "Desc")
             prop(block, "CustomIcon", "vaultDoor01" if stem == "BlastGate" else base)
@@ -505,7 +594,15 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
                 prop(block, "RequiredPower", 30)
             repair_items(block, 20 + i * 10, 5 if stem == "ArmoredConduit" else 0)
             loc(rows, name, "blocks", f"T{tier} {en}", f"T{tier} {cn}")
-            loc(rows, name + "Desc", "blocks", "Repairable fortress block designed for active Blood Moon defense.", "为主动血夜防守设计的可维修要塞建筑。")
+            if stem == "ReactiveWall":
+                reduction = [18, 22, 26, 30][i]
+                loc(rows, name + "Desc", "blocks",
+                    f"Repairable reactive armor wall. Once every 12 seconds, reduces only the portion of a hit above 800 damage by {reduction}%. No constant damage reduction; hits during cooldown take full damage.",
+                    f"可维修反应装甲墙。单次伤害超过800时，只对超出800的部分减伤{reduction}%；每面墙冷却12秒。没有常驻减伤，冷却中的攻击正常扣血。")
+            elif stem == "Embrasure":
+                loc(rows, name + "Desc", "blocks", "Repairable armored firing slit. Bullets and arrows pass in both directions; blocks movement, melee and rockets.", "可维修装甲射击孔。允许子弹和箭矢双向穿过，阻挡角色移动、近战与火箭弹；不能作为防弹墙。")
+            else:
+                loc(rows, name + "Desc", "blocks", "Repairable fortress block designed for active Blood Moon defense.", "为主动血夜防守设计的可维修要塞建筑。")
             if stem == "AblativeWall":
                 ruin_name = f"PZAECAblativeWallRuinT{tier}"
                 ruin = ET.SubElement(root, "block", {"name": ruin_name})
@@ -522,6 +619,7 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
                 prop(up, "ItemCount", [20, 28, 38, 50][i])
                 prop(up, "UpgradeHitCount", 4)
     progression.defense_blocks(root)
+    apply_block_colors(root, rows)
     return xml(root), rows
 
 
@@ -534,17 +632,14 @@ def add_recipe(root: ET.Element, name: str, ingredients: list[tuple[str, int]], 
 
 def build_recipes() -> str:
     root = ET.Element("append", {"xpath": "/recipes"})
-    prototypes = {stem: data[2] for stem, data in WEAPONS.items()}
     for stem in WEAPONS:
         prefix = "melee" if stem == "FaultlineHammer" else "gun"
         for i, tier in enumerate(TIERS):
             output = f"{prefix}PZAEC{stem}T{tier}"
-            direct = [(prototypes[stem], 1), ("resourcePZAECWeaponChassis", 1), (f"PZAECBuildParts{RANK[tier]}", [8, 10, 12, 16][i]), ("resourceLegendaryParts", [15, 24, 36, 52][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [2, 3, 4, 6][i]), (f"resourcePZAECMutantHeartT{tier}", [1, 1, 2, 3][i]), (f"itemPZAECArmoryBlueprintCrateT{tier}", 1)]
-            if tier == 16 and stem in legendary.WEAPONS:
+            if tier == 16:
+                direct = [("resourcePZAECWeaponChassis", 1), ("PZAECBuildPartsR2", 8), ("resourceLegendaryParts", 15), ("resourcePZAECSiegeCapacitorT16", 2), ("resourcePZAECMutantHeartT16", 1), ("itemPZAECArmoryBlueprintCrateT16", 1)]
                 for predecessor in legendary.WEAPONS[stem]:
-                    add_recipe(root, output, [(predecessor, 1)] + legendary.EXTRA.get(stem, []) + direct[1:], [6, 8, 10, 12][i])
-            else:
-                add_recipe(root, output, direct, [6, 8, 10, 12][i])
+                    add_recipe(root, output, [(predecessor, 1)] + legendary.EXTRA.get(stem, []) + direct, 6)
             if tier > 16:
                 prev = f"{prefix}PZAEC{stem}T{tier-1}"
                 up = [(prev, 1), (f"PZAECBuildParts{RANK[tier]}", [0, 6, 8, 10][i]), ("resourceLegendaryParts", [0, 16, 24, 36][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [0, 2, 3, 4][i]), (f"resourcePZAECMutantHeartT{tier}", [0, 1, 1, 2][i])]
@@ -686,6 +781,13 @@ def main() -> None:
     mod_xml, mod_rows = build_modifiers()
     buff_xml, buff_rows = build_buffs()
     block_xml, block_rows = build_blocks()
+    ammo_ui = ET.Element("append", {"xpath": "/ui_display_info/item_display"})
+    panel = ET.SubElement(ammo_ui, "item_display_info", {"display_type": "aecSkyguardAmmo", "display_group": "groupAmmo"})
+    ET.SubElement(panel, "display_entry", {"name": "dSkyguardDamage", "title_key": "aecSkyguardDamageTitle", "display_type": "Decimal1"})
+    ET.SubElement(panel, "display_entry", {"name": "dSkyguardBonus", "title_key": "aecSkyguardBonusTitle", "display_type": "Percent", "display_leading_plus": "true"})
+    loc(item_rows, "aecSkyguardDamageTitle", "ui_display", "Matching-tier turret damage", "同阶阵列单发伤害")
+    loc(item_rows, "aecSkyguardBonusTitle", "ui_display", "Turret damage bonus", "阵列伤害加成")
+    replace_generated(CONFIG / "ui_display.xml", xml(ammo_ui))
     replace_generated(CONFIG / "items.xml", item_xml)
     replace_generated(CONFIG / "item_modifiers.xml", mod_xml)
     replace_generated(CONFIG / "buffs.xml", buff_xml)
@@ -698,6 +800,8 @@ def main() -> None:
     write_localization(item_rows + mod_rows + buff_rows + block_rows + entity_rows)
     from generate_fusion_upgrades import refresh
     refresh(CONFIG)
+    import equipment_display
+    equipment_display.refresh(CONFIG)
 
 
 if __name__ == "__main__":
