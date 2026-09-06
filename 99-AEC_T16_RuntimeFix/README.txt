@@ -1,6 +1,14 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.25.3 floating-origin interception fix
+- Convert projectile scene positions to world positions before comparing them
+  with Skyguard block coordinates. Matches native ProjectileMoveScript.Fire.
+  The previous comparison failed after an Origin Reposition, including the
+  shifts recorded near the player's base. Firing damage/ammo rules unchanged.
+- Description verification now checks 148 active gear/modifier descriptions and
+  the 16 hidden retired-device descriptions separately. Restart to load the DLL.
+
 Runtime 1.25.2 save-read and world-log fixes
 - ItemValue reads replace stale metadata and deserialize typed records directly;
   duplicate None values no longer enter the native null-unsafe live-value setter.

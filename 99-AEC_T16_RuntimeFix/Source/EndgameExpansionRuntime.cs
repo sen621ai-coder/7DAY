@@ -509,7 +509,9 @@ namespace AECT16RuntimeFix
                     return true;
                 }
                 float now = Time.time;
-                Vector3 projectilePosition = __instance.transform.position;
+                // Projectile transforms use the floating scene origin; block
+                // positions are absolute (same conversion as native Fire).
+                Vector3 projectilePosition = __instance.transform.position + Origin.position;
                 WorldBase world = __instance.firingEntity.world;
                 foreach (var pair in new List<KeyValuePair<Vector3i, DeviceState>>(SkyguardArrays))
                 {

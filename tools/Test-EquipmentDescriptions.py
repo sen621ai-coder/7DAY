@@ -10,7 +10,14 @@ rows = list(csv.DictReader((config / 'Localization.csv').open(encoding='utf-8-si
 keys = [r['Key'] for r in rows]
 loc = {r['Key']: r['schinese'] for r in rows}
 items = list(ET.parse(config / 'items.xml').iter('item')) + list(ET.parse(config / 'item_modifiers.xml').iter('item_modifier'))
-gear = [i for i in items if re.fullmatch(r'(?:armorPZAEC(?:Harrier|Storm|Tremor|Warden)(?:Helmet|Outfit|Gloves|Boots)|(?:gun|melee)PZAEC\w+|itemPZAEC(?:Harrier|Storm|Tremor|Warden)Device|modPZAEC\w+)T1[6-9]', i.get('name',''))]
+retired = [i for i in items if re.fullmatch(r'itemPZAEC(?:Harrier|Storm|Tremor|Warden)DeviceT1[6-9]', i.get('name',''))]
+assert len(retired) == 16
+for item in retired:
+    key = item.find("property[@name='DescriptionKey']").get('value')
+    assert keys.count(key) == 1 and '已停止制作' in loc[key] and '芯片' in loc[key], key
+    assert item.find("property[@name='CreativeMode']").get('value') == 'None'
+    assert item.find("property[@class='Action0']") is None
+gear = [i for i in items if re.fullmatch(r'(?:armorPZAEC(?:Harrier|Storm|Tremor|Warden)(?:Helmet|Outfit|Gloves|Boots)|(?:gun|melee)PZAEC\w+|modPZAEC\w+)T1[6-9]', i.get('name',''))]
 assert len(gear) == 148, len(gear)
 descriptions = []
 for item in gear:

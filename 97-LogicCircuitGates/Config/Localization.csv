@@ -7,3 +7,14 @@ logicGateNOT,blocks,Block,,,,NOT Logic Gate,,,,,,,,,,,,非门,NOT 邏輯閘
 logicGateNOTDesc,blocks,Block,,,,Zero-consumption gate. First input is power-through; outputs its remaining power when no signal input is active.,,,,,,,,,,,,零耗电逻辑门。第一条线为主电源；所有信号关闭时透传剩余功率。,零耗電邏輯閘。第一條線為主電源；所有訊號關閉時透傳剩餘功率。
 logicGateXOR,blocks,Block,,,,XOR Logic Gate,,,,,,,,,,,,异或门,XOR 邏輯閘
 logicGateXORDesc,blocks,Block,,,,Zero-consumption gate. First input is power-through; outputs its remaining power when an odd number of signal inputs is active.,,,,,,,,,,,,零耗电逻辑门。第一条线为主电源；开启信号为奇数时透传剩余功率。,零耗電邏輯閘。第一條線為主電源；開啟訊號為奇數時透傳剩餘功率。
+logicAlarmPerimeter,blocks,Block,,,,Perimeter Detector,,,,,,,,,,,,外围警戒探测器,外围警戒探测器
+logicAlarmBreach,blocks,Block,,,,Inner Defense Detector,,,,,,,,,,,,近距入侵探测器,近距入侵探测器
+logicAlarmSiege,blocks,Block,,,,Siege Unit Detector,,,,,,,,,,,,攻城单位探测器,攻城单位探测器
+logicAlarmBloodMoon,blocks,Block,,,,Blood Moon Signal Relay,,,,,,,,,,,,血月信号器,血月信号器
+logicAlarmPerimeterDesc,blocks,Block,,,,"5W. Detects awake living enemies within a 32m sphere through walls. Checks twice per second; holds for 3s after the last detection. Connect power first, then a lamp, speaker, turret or logic-gate signal input.",,,,,,,,,,,,耗电5W。以自身为中心探测32米球形范围内已苏醒的存活敌人，可穿墙感知，不识别玩家和休眠怪。每0.5秒检查，目标离开后保持输出3秒。先接主电源，再接灯、扬声器、炮塔或逻辑门的信号输入。仅探测已加载实体；断电清除信号。,耗电5W。以自身为中心探测32米球形范围内已苏醒的存活敌人，可穿墙感知，不识别玩家和休眠怪。每0.5秒检查，目标离开后保持输出3秒。先接主电源，再接灯、扬声器、炮塔或逻辑门的信号输入。仅探测已加载实体；断电清除信号。
+logicAlarmBreachDesc,blocks,Block,,,,"5W. Detects awake living enemies within a 12m sphere. Use near an inner wall to activate reserve defenses; this detects proximity, not wall damage. Clears 3s after enemies leave.",,,,,,,,,,,,耗电5W。探测12米球形范围内已苏醒的存活敌人，可穿墙感知。适合装在内墙后，控制内圈备用防御；它检测敌人接近，不直接判断墙是否损坏。每0.5秒检查，目标离开后保持输出3秒；断电清除信号。,耗电5W。探测12米球形范围内已苏醒的存活敌人，可穿墙感知。适合装在内墙后，控制内圈备用防御；它检测敌人接近，不直接判断墙是否损坏。每0.5秒检查，目标离开后保持输出3秒；断电清除信号。
+logicAlarmSiegeDesc,blocks,Block,,,,"10W. Detects awake T16-T19 AEC heavy, acid, disruptor, spotter and linesman siege units within a 64m sphere through walls. Does not detect generic bosses. Clears 3s after the last target leaves or dies.",,,,,,,,,,,,耗电10W。穿墙探测64米球形范围内已苏醒的T16–T19轰墙手、蚀墙喷射手、干扰者、观测手和破线者；普通怪及其他Boss不会触发。亮灯时优先寻找并清除攻城单位；全部目标死亡或离开后3秒解除。需要现有AEC终局攻城内容；探测器本身不生成敌人。,耗电10W。穿墙探测64米球形范围内已苏醒的T16–T19轰墙手、蚀墙喷射手、干扰者、观测手和破线者；普通怪及其他Boss不会触发。亮灯时优先寻找并清除攻城单位；全部目标死亡或离开后3秒解除。需要现有AEC终局攻城内容；探测器本身不生成敌人。
+logicAlarmBloodMoonDesc,blocks,Block,,,,1W. Outputs only while the world Blood Moon event is active. Combine with other detectors through an AND gate to enable defenses only during Blood Moon. Not a countdown or advance forecast.,,,,,,,,,,,,耗电1W。游戏血月事件开启时输出，事件结束后在下一次检查关闭。接入与门，可让另一探测器仅在血月触发防御。不是倒计时，不提前预测血月，也不代表范围内有敌人。断电关闭；工作台始终可制作。,耗电1W。游戏血月事件开启时输出，事件结束后在下一次检查关闭。接入与门，可让另一探测器仅在血月触发防御。不是倒计时，不提前预测血月，也不代表范围内有敌人。断电关闭；工作台始终可制作。
+logicAlarmNoPower,blocks,Block,,,,No power / offline,,,,,,,,,,,,未供电／离线,未供电／离线
+logicAlarmActive,blocks,Block,,,,Signal ON,,,,,,,,,,,,信号已触发,信号已触发
+logicAlarmReady,blocks,Block,,,,Monitoring / signal OFF,,,,,,,,,,,,监测中／无信号,监测中／无信号

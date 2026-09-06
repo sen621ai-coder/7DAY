@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
   <append xpath="/recipes">
+    <recipe name="logicAlarmPerimeter" count="1" craft_area="workbench" craft_time="30" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="10"/>
+      <ingredient name="resourceElectricParts" count="12"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+    </recipe>
+    <recipe name="logicAlarmBreach" count="1" craft_area="workbench" craft_time="25" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="8"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="4"/>
+    </recipe>
+    <recipe name="logicAlarmSiege" count="1" craft_area="workbench" craft_time="60" always_unlocked="true">
+      <ingredient name="resourceForgedSteel" count="10"/>
+      <ingredient name="resourceElectricParts" count="25"/>
+      <ingredient name="resourceMechanicalParts" count="8"/>
+    </recipe>
+    <recipe name="logicAlarmBloodMoon" count="1" craft_area="workbench" craft_time="20" always_unlocked="true">
+      <ingredient name="resourceForgedIron" count="5"/>
+      <ingredient name="resourceElectricParts" count="8"/>
+      <ingredient name="resourceMechanicalParts" count="2"/>
+    </recipe>
     <recipe name="logicGateAND" count="1" craft_area="workbench" always_unlocked="true">
       <ingredient name="resourceForgedIron" count="2"/>
       <ingredient name="resourceElectricParts" count="4"/>

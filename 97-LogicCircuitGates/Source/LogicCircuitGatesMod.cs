@@ -18,6 +18,8 @@ namespace LogicCircuitGates
         private static readonly HashSet<PowerItem> OffVisited = new HashSet<PowerItem>();
         private static float nextWireRebuildTime;
         private static bool registryChecked;
+        private static World currentWorld;
+        private static PowerManager currentManager;
 
         public void InitMod(Mod modInstance)
         {
@@ -38,7 +40,7 @@ namespace LogicCircuitGates
                     nameof(CheckForNewWiresPrefix), nameof(CheckForNewWiresPostfix));
                 Patch(harmony, typeof(TileEntityPowered), nameof(TileEntityPowered.DrawWires),
                     null, nameof(DrawWiresPostfix));
-                Debug.Log("[LogicGates] Zero-consumption pass-through AND/OR/NOT/XOR gates loaded.");
+                Debug.Log("[LogicGates] 1.3.0: AND/OR/NOT/XOR gates and four automatic base alarm sensors loaded.");
             }
             catch (Exception ex)
             {
@@ -130,8 +132,17 @@ namespace LogicCircuitGates
         {
             try
             {
+                var world = GameManager.Instance == null ? null : GameManager.Instance.World;
+                if (!ReferenceEquals(world, currentWorld) || !ReferenceEquals(__instance, currentManager))
+                {
+                    LastOutputs.Clear(); InputsByGate.Clear(); GatesBySource.Clear();
+                    WorkItems.Clear(); OffVisited.Clear(); nextWireRebuildTime = 0; registryChecked = false;
+                    BaseAlarmSensors.Reset(); currentWorld = world; currentManager = __instance;
+                }
+                if (world == null) return;
                 LogRegistryOnce();
                 if (__instance == null || __instance.PowerItemDictionary == null) return;
+                BaseAlarmSensors.Update(__instance, world, Time.time);
 
                 if (Time.time >= nextWireRebuildTime)
                 {
@@ -386,8 +397,8 @@ namespace LogicCircuitGates
         {
             GateType nested;
             bool cached;
-            if (TryGetGateType(input, out nested) && LastOutputs.TryGetValue(input.Position, out cached))
-                return cached;
+            if (TryGetGateType(input, out nested))
+                return input.IsPowered && LastOutputs.TryGetValue(input.Position, out cached) && cached;
             var trigger = input as PowerTrigger;
             if (trigger != null) return trigger.IsPowered && trigger.IsActive;
             var source = input as PowerSource;
@@ -408,7 +419,8 @@ namespace LogicCircuitGates
         {
             if (registryChecked || !Block.BlocksLoaded) return;
             registryChecked = true;
-            string[] names = { "logicGateAND", "logicGateOR", "logicGateNOT", "logicGateXOR" };
+            string[] names = { "logicGateAND", "logicGateOR", "logicGateNOT", "logicGateXOR",
+                "logicAlarmPerimeter", "logicAlarmBreach", "logicAlarmSiege", "logicAlarmBloodMoon" };
             for (int i = 0; i < names.Length; i++)
             {
                 Block block = Block.GetBlockByName(names[i], true);

@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
   <append xpath="/blocks">
+    <block name="logicAlarmPerimeter">
+      <property name="Extends" value="switch"/>
+      <property name="Class" value="LogicAlarmSensor,LogicCircuitGates"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="RequiredPower" value="5"/>
+      <property name="CustomIcon" value="motionsensor"/>
+      <property name="CustomIconTint" value="255,200,70"/>
+      <property name="DescriptionKey" value="logicAlarmPerimeterDesc"/>
+      <property name="EconomicValue" value="300"/>
+      <property name="MaxDamage" value="1000"/>
+      <property name="SortOrder2" value="0022"/>
+    </block>
+    <block name="logicAlarmBreach">
+      <property name="Extends" value="switch"/>
+      <property name="Class" value="LogicAlarmSensor,LogicCircuitGates"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="RequiredPower" value="5"/>
+      <property name="CustomIcon" value="motionsensor"/>
+      <property name="CustomIconTint" value="255,80,70"/>
+      <property name="DescriptionKey" value="logicAlarmBreachDesc"/>
+      <property name="EconomicValue" value="250"/>
+      <property name="MaxDamage" value="1000"/>
+      <property name="SortOrder2" value="0023"/>
+    </block>
+    <block name="logicAlarmSiege">
+      <property name="Extends" value="switch"/>
+      <property name="Class" value="LogicAlarmSensor,LogicCircuitGates"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="RequiredPower" value="10"/>
+      <property name="CustomIcon" value="motionsensor"/>
+      <property name="CustomIconTint" value="190,100,255"/>
+      <property name="DescriptionKey" value="logicAlarmSiegeDesc"/>
+      <property name="EconomicValue" value="600"/>
+      <property name="MaxDamage" value="1500"/>
+      <property name="SortOrder2" value="0024"/>
+    </block>
+    <block name="logicAlarmBloodMoon">
+      <property name="Extends" value="switch"/>
+      <property name="Class" value="LogicAlarmSensor,LogicCircuitGates"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="RequiredPower" value="1"/>
+      <property name="CustomIcon" value="electricwirerelay"/>
+      <property name="CustomIconTint" value="255,70,130"/>
+      <property name="DescriptionKey" value="logicAlarmBloodMoonDesc"/>
+      <property name="EconomicValue" value="200"/>
+      <property name="MaxDamage" value="1000"/>
+      <property name="SortOrder2" value="0025"/>
+    </block>
     <block name="logicGateAND">
       <property name="Extends" value="electricwirerelay"/>
       <property name="CreativeMode" value="Player"/>

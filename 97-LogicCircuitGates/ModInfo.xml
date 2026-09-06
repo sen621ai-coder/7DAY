@@ -2,9 +2,9 @@
 <xml>
   <Name value="LogicCircuitGates"/>
   <DisplayName value="Logic Circuit Gates | 逻辑门电路"/>
-  <Description value="Adds zero-consumption AND, OR, NOT and XOR gates with one power-through input and up to four wired signal inputs."/>
+  <Description value="AND/OR/NOT/XOR logic gates plus powered perimeter, breach, siege-unit and Blood Moon alarm sensors."/>
   <Author value="Codex + yf"/>
-  <Version value="1.2.0"/>
+  <Version value="1.3.0"/>
   <ServerSideOnly value="false"/>
   <SkipWithAntiCheat value="true"/>
 </xml>
