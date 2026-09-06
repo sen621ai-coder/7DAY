@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using HarmonyLib;
 using UnityEngine;
 
 namespace AECT16RuntimeFix
@@ -107,6 +108,7 @@ namespace AECT16RuntimeFix
         void CheckFallenLoot(ItemValue item)
         {
             EntityLootContainer loot = null;
+            var originalOrigin = Origin.position;
             try
             {
                 loot = EntityFactory.CreateEntity(EntityClass.FromString("EntityLootContainerStrong"), new Vector3(0, 100, 0)) as EntityLootContainer;
@@ -131,8 +133,34 @@ namespace AECT16RuntimeFix
                 Check(ReferenceEquals(bag, loot.bag) && loot.belongsPlayerId == 123 && loot.bag.items[0].itemValue.type == item.type, "bag contents and ownership preserved");
                 var recovered = loot.position;
                 Check(WorldLogRecovery.RecoverAtHeight(loot, 80) && loot.position == recovered, "recovery not repeated for healthy loot");
+                var updateTransform = AccessTools.Method(typeof(EntityItem), "updateTransform");
+                foreach (var offset in new[] { Vector3.zero, new Vector3(-1616, 48, -1152), new Vector3(-1616, 48, -1168) })
+                {
+                    Origin.position = offset;
+                    var underground = new Vector3(-1583.95f, -22730.63f, -1208.09f);
+                    var ground = new Vector3(underground.x, 67, underground.z);
+                    loot.isPhysicsMaster = true;
+                    loot.SetPosition(underground, true);
+                    loot.transform.position = underground - offset;
+                    if (loot.itemRB != null) loot.itemRB.position = underground - offset;
+                    // Reproduce the previous repair: position field changes,
+                    // but the native physics-master update restores the root's
+                    // old underground position on the very next frame.
+                    loot.SetPosition(ground, true);
+                    updateTransform.Invoke(loot, null);
+                    Check(loot.position.y < -32, "old SetPosition-only repair reproduces snap-back");
+                    Check(WorldLogRecovery.RecoverAtHeight(loot, 65), "repair after native snap-back");
+                    Check((loot.transform.position + offset - ground).sqrMagnitude < .001f, "root transform moved in scene coordinates");
+                    Check(loot.itemRB == null || (loot.itemRB.position + offset - ground).sqrMagnitude < .001f, "rigidbody moved in scene coordinates");
+                    for (int frame = 0; frame < 20; frame++) updateTransform.Invoke(loot, null);
+                    Check((loot.position - ground).sqrMagnitude < .001f, "20 physics-master updates cannot undo recovery");
+                    loot.isPhysicsMaster = false;
+                    for (int frame = 0; frame < 20; frame++) updateTransform.Invoke(loot, null);
+                    Check((loot.transform.position + offset - ground).sqrMagnitude < .001f, "20 interpolation updates remain at recovered position");
+                    Check(ReferenceEquals(bag, loot.bag) && loot.belongsPlayerId == 123, "repeated updates preserve bag and owner");
+                }
             }
-            finally { if (loot != null) UnityEngine.Object.Destroy(loot.gameObject); }
+            finally { Origin.position = originalOrigin; if (loot != null) UnityEngine.Object.Destroy(loot.gameObject); }
         }
 
         void ReadCopiedPlayers()

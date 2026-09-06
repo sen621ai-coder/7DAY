@@ -51,7 +51,14 @@ namespace AECT16RuntimeFix
             entity.motion = entity.physicsVel = entity.physicsAngVel = Vector3.zero;
             ResetVelocity(entity.itemRB);
             if (entity.physicsRB != entity.itemRB) ResetVelocity(entity.physicsRB);
-            entity.SetPosition(new Vector3(old.x, height + 2f, old.z), true);
+            var target = new Vector3(old.x, height + 2f, old.z);
+            entity.SetPosition(target, true);
+            // EntityItem.updateTransform reads the root Transform back into
+            // Entity.position while it is physics master. Entity.SetPosition
+            // alone does not move that root, so the next frame undoes recovery.
+            var scenePosition = target - Origin.position;
+            entity.transform.position = scenePosition;
+            if (entity.itemRB != null) entity.itemRB.position = scenePosition;
             T16RuntimeFixMod.SafeLog("[AEC-World-Fix] Recovered fallen loot entity=" + entity.entityId +
                 " from " + old + " to " + entity.position + "; bag and ownership preserved.");
             return true;

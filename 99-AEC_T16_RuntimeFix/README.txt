@@ -1,6 +1,15 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.25.4 fallen-loot snap-back fix
+- Recovery now moves the EntityItem root Transform and its Rigidbody as well
+  as Entity.position. Scene positions subtract Origin.position. This prevents
+  the next native physics-master update from restoring the underground pose.
+- Preserve the existing bag, contents, ownership and velocity reset. No loot
+  deletion and no global log suppression. Restart the game to load this DLL.
+- Regression covers the old snap-back path followed by repeated native physics
+  master and interpolation updates at zero origin and both recorded base offsets.
+
 Runtime 1.25.3 floating-origin interception fix
 - Convert projectile scene positions to world positions before comparing them
   with Skyguard block coordinates. Matches native ProjectileMoveScript.Fire.
