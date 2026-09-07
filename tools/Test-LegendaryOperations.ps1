@@ -16,7 +16,7 @@ $master = $dialogs.SelectSingleNode("//statement[@id='pzaec_aec_master_hub']")
 Assert-True ($master.response_entry.id -notcontains 'pzaec_go_to_t16') 'T16 still in master category'
 $hub = $dialogs.SelectSingleNode("//statement[@id='pzaec_aec_legendary_hub']")
 $sizes = @('small', 'medium', 'large', 'huge', 'massive')
-$thresholds = @{ 17 = 240000; 18 = 270000; 19 = 300000 }
+$thresholds = @{ 17 = 280000; 18 = 380000; 19 = 480000 }
 $textKeys = [System.Collections.Generic.HashSet[string]]::new()
 foreach ($node in $dialogs.SelectNodes('//*[@text]')) { [void]$textKeys.Add($node.text) }
 $localization = @{}

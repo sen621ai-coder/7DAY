@@ -1,6 +1,14 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.25.6 100000-GS endgame tiers
+- T16 spans GS 180000-279999; T17 spans 280000-379999; T18 spans
+  380000-479999; T19 begins at 480000.
+- Ordinary Blood Moons, engineering squads, trader offer generation, legendary
+  contract menus and XML fallback pools now share these exact thresholds.
+- The four runtime selectors use one set of named constants, and boundary
+  regressions verify both sides of every transition.
+
 Runtime 1.25.5 multiplayer trader-contract fix
 - T15-T19 trader pages now use 25 native page-specific quest tiers with local
   indices 0-5. A joining player can accept the server-supplied T contracts even
@@ -333,7 +341,7 @@ Blood Moon Ranged Siege Squad (Runtime 1.14.0; retuned in 1.16.6)
 ----------------------------------------------
 - Chinese behavior, damage values and live test checklist: BLOOD_MOON_SIEGE.md.
 - Siege ranks T16-T19 use the ordinary Blood Moon GS
-  180000/240000/270000/300000 ladder.
+  180000/280000/380000/480000 ladder.
 - Blood Moons can replace 25% of eligible ordinary zombie selections with heavy
   bombardiers / wall corroders in an approximate 2:1 ratio. Native spawn counts,
   boss rolls and animal branches remain in force.
@@ -474,7 +482,7 @@ Blood Moon current-game compatibility (1.8.0)
 - Hooks the actual selector call inside AIDirectorBloodMoonParty.SpawnZombie.
 - Current builds call GetRandomEntityFromGroupMaxTier, bypassing the old GetRandomFromGroup hook.
 - Selects by the chased player's current GS, never by party average or stale spawn context.
-- T16/T17/T18/T19 start at GS 180000/240000/270000/300000 and select only that exact tier.
+- T16/T17/T18/T19 start at GS 180000/280000/380000/480000 and select only that exact tier.
 - Uses the existing nighttime biome weights, beast/ranged mix and 18% high-tier boss roll.
 - Blood Moon selection does not enter the wilderness land-claim exclusion path.
 - Four exact-tier XML backup pools replace old high-GS stage references; each has 64 classes and 18% boss weight.
@@ -506,10 +514,10 @@ T16 ranged pressure
 
 T17-T19 progression
 --------------------
-- T16 begins at GS 180000 and runs through GS 239999.
-- T17 Ascendant begins at GS 240000 and runs through GS 269999.
-- T18 Eternal begins at GS 270000 and runs through GS 299999.
-- T19 Apocalyptic begins at GS 300000.
+- T16 begins at GS 180000 and runs through GS 279999.
+- T17 Ascendant begins at GS 280000 and runs through GS 379999.
+- T18 Eternal begins at GS 380000 and runs through GS 479999.
+- T19 Apocalyptic begins at GS 480000.
 - Each tier carries forward all 35 ordinary enemies, 21 bosses and eight beasts.
 - The existing ranged weighting and 18% Blood Moon boss roll continue at each tier.
 
@@ -521,7 +529,7 @@ Trader quest repair
 - Adds Legendary Operations for T16-T19; Master Operations now contains T11-T15.
 - Legendary pages use six logical slots resolved against server-generated, per-player synchronized quest lists. They never create quests or request POIs locally.
 - Each of five POI-size pages attempts six offers; availability depends on nearby matching POIs.
-- T17/T18/T19 menu entries unlock at current GS 240000/270000/300000; T16 keeps its existing area unlocks.
+- T17/T18/T19 menu entries unlock at current GS 280000/380000/480000; T16 keeps its existing area unlocks.
 - The assembly-qualified dialog requirement reads current player GS without waiting for watcher CVars.
 - The networking fix does not alter rewards or enemy strength. Host and joining players must both use the updated runtime DLL and dialog config.
 - Selection indices are absolute; the RemoveQuest packet uses the correctly computed difficulty-relative byte index, including preceding non-AEC/special quests.

@@ -7,6 +7,8 @@ namespace AECT16RuntimeFix
 {
     public static class BloodMoonSiege
     {
+        public const int T16MinGameStage = 180000, T17MinGameStage = 280000,
+            T18MinGameStage = 380000, T19MinGameStage = 480000;
         public const int ReplacementChance = 25, HeavyChance = 10, AcidChance = 5,
             DisruptorChance = 4, SpotterChance = 3, LinesmanChance = 3;
         public const int NearbyCap = 8, TargetCap = 4;
@@ -19,10 +21,10 @@ namespace AECT16RuntimeFix
         public static int Tier(string id) { var m = Names.Match(id ?? ""); return m.Success ? int.Parse(m.Groups[1].Value) : 0; }
         public static int TierForGameStage(int gs)
         {
-            if (gs >= 300000) return 19;
-            if (gs >= 270000) return 18;
-            if (gs >= 240000) return 17;
-            return gs >= 180000 ? 16 : 0;
+            if (gs >= T19MinGameStage) return 19;
+            if (gs >= T18MinGameStage) return 18;
+            if (gs >= T17MinGameStage) return 17;
+            return gs >= T16MinGameStage ? 16 : 0;
         }
         public static string Variant(int tier, int roll)
         {
@@ -57,7 +59,7 @@ namespace AECT16RuntimeFix
             int replacement = EntityClass.GetId(name);
             if (replacement == -1) return original;
             var replacementClass = EntityClass.GetEntityClass(replacement);
-            // Siege ranks follow the same GS 180000/240000/270000/300000
+            // Siege ranks follow the same GS 180000/280000/380000/480000
             // ladder as the ordinary Blood Moon selector.
             if (replacementClass == null || !replacementClass.bIsEnemyEntity || replacementClass.bIsAnimalEntity) return original;
             int nearby = 0, targeted = 0;

@@ -75,10 +75,10 @@ namespace AECT16RuntimeFix
 
         public static int TierForGameStage(int gs)
         {
-            if (gs >= 300000) return 19;
-            if (gs >= 270000) return 18;
-            if (gs >= 240000) return 17;
-            if (gs >= 180000) return 16;
+            if (gs >= BloodMoonSiege.T19MinGameStage) return 19;
+            if (gs >= BloodMoonSiege.T18MinGameStage) return 18;
+            if (gs >= BloodMoonSiege.T17MinGameStage) return 17;
+            if (gs >= BloodMoonSiege.T16MinGameStage) return 16;
             if (gs >= 25000) return 15;
             if (gs >= 22000) return 14;
             if (gs >= 18000) return 13;

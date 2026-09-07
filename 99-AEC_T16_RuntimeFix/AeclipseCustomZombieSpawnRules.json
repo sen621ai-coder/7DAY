@@ -2896,9 +2896,9 @@
       ]
     },
     {
-      "label": "T16 Blood Moon Boss Expansion | GS 180000-239999",
+      "label": "T16 Blood Moon Boss Expansion | GS 180000-279999",
       "minGameStage": 180000,
-      "maxGameStage": 239999,
+      "maxGameStage": 279999,
       "entries": [
         {
           "entityClass": "bossAECDumdumT16",
@@ -3991,9 +3991,9 @@
       ]
     },
     {
-      "label": "T17 Ascendant Blood Moon Pool | GS 240000-269999",
-      "minGameStage": 240000,
-      "maxGameStage": 269999,
+      "label": "T17 Ascendant Blood Moon Pool | GS 280000-379999",
+      "minGameStage": 280000,
+      "maxGameStage": 379999,
       "entries": [
         {
           "entityClass": "AECZombieArleneTier17Ascendant",
@@ -6206,9 +6206,9 @@
       ]
     },
     {
-      "label": "T18 Eternal Blood Moon Pool | GS 270000-299999",
-      "minGameStage": 270000,
-      "maxGameStage": 299999,
+      "label": "T18 Eternal Blood Moon Pool | GS 380000-479999",
+      "minGameStage": 380000,
+      "maxGameStage": 479999,
       "entries": [
         {
           "entityClass": "AECZombieArleneTier18Eternal",
@@ -8421,8 +8421,8 @@
       ]
     },
     {
-      "label": "T19 Apocalyptic Blood Moon Pool | GS 300000-999999",
-      "minGameStage": 300000,
+      "label": "T19 Apocalyptic Blood Moon Pool | GS 480000-999999",
+      "minGameStage": 480000,
       "maxGameStage": 999999,
       "entries": [
         {

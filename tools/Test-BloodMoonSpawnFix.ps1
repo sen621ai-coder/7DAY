@@ -139,9 +139,9 @@ public static class BloodMoonRegression
         var controller = new ServerSpawnController(rules);
         var random = new System.Random(190090);
         int checks = 0;
-        foreach (int gs in new[] { 30000, 30001, 179999, 180000, 190240, 239999, 240000, 269999, 270000, 299999, 300000, 999999, 1500000 })
+        foreach (int gs in new[] { 30000, 30001, 179999, 180000, 190240, 279999, 280000, 379999, 380000, 479999, 480000, 999999, 1500000 })
         {
-            int expected = gs >= 300000 ? 19 : gs >= 270000 ? 18 : gs >= 240000 ? 17 : gs >= 180000 ? 16 : 15;
+            int expected = gs >= 480000 ? 19 : gs >= 380000 ? 18 : gs >= 280000 ? 17 : gs >= 180000 ? 16 : 15;
             Check(BloodMoonSpawnFix.TierForGameStage(gs) == expected, "Wrong GS tier");
             if (expected < 16) continue;
             Check(BloodMoonSpawnFix.FallbackGroupForGameStage(gs) == "PZAECBloodMoonT" + expected + "Fallback", "Wrong fallback");
@@ -199,7 +199,7 @@ foreach ($op in $patchStages.configs.ChildNodes) {
     if ($op.Name -eq 'remove') { foreach ($node in @($effective.SelectNodes($op.xpath))) { [void]$node.ParentNode.RemoveChild($node) } }
     if ($op.Name -eq 'append') { foreach ($node in $op.ChildNodes) { if ($node.Name -eq 'gamestage') { [void]$spawner.AppendChild($effective.ImportNode($node, $true)) } } }
 }
-foreach ($gs in 30000,30001,179999,180000,239999,240000,269999,270000,299999,300000,999999) {
+foreach ($gs in 30000,30001,179999,180000,279999,280000,379999,380000,479999,480000,999999) {
     $stage = $spawner.gamestage | Where-Object { [int]$_.stage -le $gs } | Sort-Object { [int]$_.stage } | Select-Object -Last 1
     $expected = [AECT16RuntimeFix.BloodMoonSpawnFix]::FallbackGroupForGameStage($gs)
     if ($stage.spawn.group -ne $expected) { throw "Wrong effective GS $gs group: $($stage.spawn.group)" }
