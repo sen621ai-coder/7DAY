@@ -16,6 +16,48 @@ using UnityEngine;
 
 public static class SiegeRegression
 {
+    static bool testSiegeAim;
+    public static Ray TestLookRay(EntityAlive entity) { return new Ray(new Vector3(10,20,30), Vector3.forward); }
+    public static bool TestAim(EntityAlive entity, out Vector3 point) { point=new Vector3(40,50,60); return testSiegeAim; }
+    public static EntityAlive TestAttackTarget(EntityAlive entity) { return null; }
+    delegate int Launch(ItemActionPZAECSiegeVomit action, ItemActionData data, out Vector3 start, out Vector3 direction);
+    public static string MissingJoint(DynamicMethod method, List<CodeInstruction> code)
+    {
+        var il=method.GetILGenerator();
+        foreach(var c in code) {
+            var called=c.operand as MethodInfo;
+            if(called==null) continue;
+            Check(!(called.DeclaringType==typeof(ItemActionVomit) && called.Name=="GetActionEffectsValues"),"Unsafe native hand dereference restored");
+            string stub=called.Name=="GetLookRay"?"TestLookRay":called.Name=="TryAim"?"TestAim":called.Name=="GetAttackTarget"?"TestAttackTarget":null;
+            if(stub!=null) { c.opcode=OpCodes.Call; c.operand=AccessTools.Method(typeof(SiegeRegression),stub); }
+        }
+        // Only replace engine-owned ray/target queries. Execute the actual
+        // compiled launch-origin fallback with both model and joint absent.
+        foreach(var c in code) {
+            foreach(var label in c.labels) il.MarkLabel(label);
+            object p=c.operand;
+            if(p==null) il.Emit(c.opcode);
+            else if(p is Label) il.Emit(c.opcode,(Label)p);
+            else if(p is LocalBuilder) il.Emit(c.opcode,(LocalBuilder)p);
+            else if(p is MethodInfo) il.Emit(c.opcode,(MethodInfo)p);
+            else if(p is FieldInfo) il.Emit(c.opcode,(FieldInfo)p);
+            else if(p is Type) il.Emit(c.opcode,(Type)p);
+            else if(p is int) il.Emit(c.opcode,(int)p);
+            else if(p is byte) il.Emit(c.opcode,(byte)p);
+            else if(p is sbyte) il.Emit(c.opcode,(sbyte)p);
+            else throw new Exception("Unexpected launch IL operand: "+p);
+        }
+        var launch=(Launch)method.CreateDelegate(typeof(Launch));
+        var data=(ItemActionLauncher.ItemActionDataLauncher)RuntimeHelpers.GetUninitializedObject(typeof(ItemActionLauncher.ItemActionDataLauncher));
+        data.invData=(ItemInventoryData)RuntimeHelpers.GetUninitializedObject(typeof(ItemInventoryData));
+        AccessTools.Field(typeof(ItemInventoryData),"holdingEntity").SetValue(data.invData,RuntimeHelpers.GetUninitializedObject(typeof(EntityZombie)));
+        var action=new ItemActionPZAECSiegeVomit(); Vector3 start,direction;
+        testSiegeAim=true;
+        Check(launch(action,data,out start,out direction)==1 && start==new Vector3(10,20,30) && direction==new Vector3(40,50,60),"Missing-joint siege launch failed");
+        testSiegeAim=false;
+        Check(launch(action,data,out start,out direction)==0 && start==new Vector3(10,20,30) && direction==Vector3.forward,"Missing-joint/no-target fallback failed");
+        return "PASS: compiled siege launch handles missing projectile joint/right hand, preserves world origin and target-point network mode.";
+    }
     static void Check(bool ok,string why) { if(!ok) throw new Exception(why); }
     public static string Rules()
     {
@@ -131,6 +173,9 @@ public static class SiegeRegression
 }
 '@
 [SiegeRegression]::Rules()
+$siegeLaunch=[Reflection.Emit.DynamicMethod]::new('SiegeMissingJoint',[int],[Type[]]@([ItemActionPZAECSiegeVomit],[ItemActionData],[UnityEngine.Vector3].MakeByRefType(),[UnityEngine.Vector3].MakeByRefType()),[SiegeRegression].Module,$true)
+$siegeLaunchIL=[LegendaryNetworkingRegression]::ReadGameIL([HarmonyLib.AccessTools]::Method([ItemActionPZAECSiegeVomit],'GetActionEffectsValues'),$siegeLaunch.GetILGenerator())
+[SiegeRegression]::MissingJoint($siegeLaunch,$siegeLaunchIL)
 [SiegeRegression]::Projectiles((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/items.xml') -Raw))
 $siegeWriter=[Reflection.Emit.DynamicMethod]::new('SiegeNativePayload',[void],[Type[]]@([NetPackageItemActionEffects],[PooledBinaryWriter]),$true)
 $siegeIL=[LegendaryNetworkingRegression]::ReadGameIL([HarmonyLib.AccessTools]::Method([NetPackageItemActionEffects],'write'),$siegeWriter.GetILGenerator())

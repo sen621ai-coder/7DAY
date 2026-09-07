@@ -246,9 +246,26 @@ public sealed class ItemActionPZAECSiegeVomit : ItemActionVomit
 {
     public override int GetActionEffectsValues(ItemActionData data, out Vector3 startPos, out Vector3 direction)
     {
-        int result = base.GetActionEffectsValues(data, out startPos, out direction);
-        if (!AECT16RuntimeFix.BloodMoonSiege.TryAim(data.invData.holdingEntity, out var point)) return result;
-        direction = point;
+        // These dedicated projectiles all use negative FlyTime. Native Vomit
+        // assumes either a projectile joint or a right hand exists, which is
+        // false for some AEC models. Use the look-ray origin as the fallback.
+        var entity = data.invData.holdingEntity;
+        var ray = entity.GetLookRay();
+        startPos = ray.origin;
+        direction = ray.direction;
+        var joint = (data as ItemActionLauncher.ItemActionDataLauncher)?.projectileJointT;
+        if (!joint && entity.emodel != null) joint = entity.emodel.GetRightHandTransform();
+        if (joint) startPos = joint.position + Origin.position;
+        if (AECT16RuntimeFix.BloodMoonSiege.TryAim(entity, out var point))
+            direction = point;
+        else
+        {
+            var target = entity.GetAttackTarget();
+            if (!target) return 0;
+            point = target.getChestPosition();
+            if (!entity.IsInFrontOfMe(point)) return 0;
+            direction = point;
+        }
         // Native negative-FlyTime projectiles interpret userData=1 as a target
         // point. Both this point and the launch origin are sent to joining peers.
         return 1;
