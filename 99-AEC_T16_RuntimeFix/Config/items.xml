@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
+  <!-- Deployed drone health is initialized from item DegradationMax: 100x original. -->
+  <set xpath="/items/item[@name='gunBotT3JunkDrone']/effect_group/passive_effect[@name='DegradationMax' and @operation='base_set']/@value">30000,60000</set>
   <append xpath="/items">
     <item name="PZAECChallengeVoucherT16">
       <property name="Extends" value="questMaster" />

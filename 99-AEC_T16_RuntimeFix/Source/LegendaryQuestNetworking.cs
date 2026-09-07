@@ -14,7 +14,7 @@ namespace AECT16RuntimeFix
         // display unrelated vanilla offers when they do not have this DLL.
         public const int MenuMarker = -19;
         private static readonly Regex pagePattern = new Regex(
-            @"^pzaec_t(16|17|18|19)_(small|medium|large|huge|massive)$", RegexOptions.CultureInvariant);
+            @"^pzaec_t(0[0-9]|1[0-9])_(small|medium|large|huge|massive)$", RegexOptions.CultureInvariant);
         private static readonly string[] sizes = { "small", "medium", "large", "huge", "massive" };
         private static DateTime nextWarning;
 
@@ -62,6 +62,21 @@ namespace AECT16RuntimeFix
             return tiers;
         }
 
+        // T00-T15 XML still uses offsets into the upstream 510-offer list.
+        // The bounded server generator no longer produces that list. Translate
+        // only the six documented entries for this page to page-local slots.
+        public static int PageSlot(string page, int tier, int index)
+        {
+            var match = pagePattern.Match(page ?? "");
+            if (!match.Success) return -1;
+            int aecTier = int.Parse(match.Groups[1].Value);
+            if (tier == MenuMarker) return index >= 0 && index < 6 ? index : -1;
+            if (aecTier > 15 || tier != Math.Min(aecTier + 1, 6)) return -1;
+            int area = Array.IndexOf(sizes, match.Groups[2].Value);
+            int first = 7 + Math.Max(0, aecTier - 5) * 30 + area * 6;
+            return index >= first && index < first + 6 ? index - first : -1;
+        }
+
         // The UI reads an absolute list index; RemoveQuest packets count all
         // quests of the selected difficulty, even special/non-AEC quests.
         public static int ResolveIndex(IList<string> ids, IList<int> difficulties, IList<bool> ready,
@@ -99,8 +114,9 @@ namespace AECT16RuntimeFix
         {
             __state = -1;
             string wanted = QuestIdForPage(_returnStatementID);
-            if (_tier != MenuMarker || wanted == null) return;
-            int slot = _listIndex;
+            if (wanted == null) return;
+            int slot = PageSlot(_returnStatementID, _tier, _listIndex);
+            if (_tier != MenuMarker && slot < 0) return;
             // Never enter the native CreateQuest/SetupPosition(trader, null) path.
             _questID = "";
             _type = "";

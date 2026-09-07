@@ -69,7 +69,18 @@ public static class LegendaryNetworkingRegression
     public static string Mapping()
     {
         Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t18_huge") == "aec_quest_T18_A4_clear", "Page mapping");
-        Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t15_huge") == null, "Lower menus touched");
+        Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t15_huge") == "aec_quest_T15_A4_clear", "Lower page mapping missing");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 6, 307) == 0, "T15 stale offset not translated");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_massive", 6, 336) == 5, "T15 last slot");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t06_small", 6, 37) == 0, "T06 legacy slot");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t00_small", 1, 7) == 0, "T00 legacy slot");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 5, 307) == -1, "Wrong native tier accepted");
+        var peerIds = Enumerable.Repeat("vanilla", 42).Concat(Enumerable.Repeat("aec_quest_T15_A1_clear", 6)).ToList();
+        int peerRemoval;
+        Check(LegendaryQuestNetworking.ResolveIndex(peerIds, Enumerable.Repeat(6, 48).ToList(),
+            Enumerable.Repeat(true, 48).ToList(), "aec_quest_T15_A1_clear",
+            LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 6, 307), out peerRemoval) == 42 && peerRemoval == 42,
+            "Bounded peer list cannot resolve legacy T15 menu");
         Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t19_massive_extra") == null, "Invalid page accepted");
         Check(LegendaryQuestNetworking.OfferTiers(15).SequenceEqual(new[]{15}), "Lower tier generator changed");
         Check(LegendaryQuestNetworking.OfferTiers(16).SequenceEqual(new[]{16}), "T16 offers");
