@@ -10,8 +10,9 @@ namespace AECT16RuntimeFix
 {
     public static class LegendaryQuestNetworking
     {
-        // An impossible native difficulty makes stale clients fail closed, not
-        // display unrelated vanilla offers when they do not have this DLL.
+        // Kept for backward compatibility with saves/config packs produced by
+        // Runtime 1.17-1.18. New menus use native page-specific difficulties so
+        // a joining player can accept T contracts without a matching client DLL.
         public const int MenuMarker = -19;
         private static readonly Regex pagePattern = new Regex(
             @"^pzaec_t(0[0-9]|1[0-9])_(small|medium|large|huge|massive)$", RegexOptions.CultureInvariant);
@@ -28,7 +29,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(ctor,
                     prefix: new HarmonyMethod(typeof(LegendaryQuestNetworking), nameof(ResponsePrefix)),
                     postfix: new HarmonyMethod(typeof(LegendaryQuestNetworking), nameof(ResponsePostfix)));
-                Debug.Log("[AEC-Quest-NetFix] Legendary pages use server-assigned POIs and synchronized offers; per-difficulty removal indices enabled.");
+                Debug.Log("[AEC-Quest-NetFix] Legendary pages use server-assigned POIs and native multiplayer-safe page indices; legacy menu markers remain supported.");
             }
             catch (Exception ex) { Warn("Menu bridge installation failed: " + ex.GetBaseException().Message); }
             try
@@ -62,6 +63,15 @@ namespace AECT16RuntimeFix
             return tiers;
         }
 
+        // Every T15-T19 size page owns one otherwise-unused native difficulty.
+        // Its six entries therefore have stable list indices 0..5 on every peer,
+        // independent of vanilla trader offers and of the player's unlocked tiers.
+        public static int NativePageTier(int aecTier, int area)
+        {
+            if (aecTier < 15 || aecTier > 19 || area < 1 || area > 5) return -1;
+            return 16 + (aecTier - 15) * 5 + area - 1;
+        }
+
         // T00-T15 XML still uses offsets into the upstream 510-offer list.
         // The bounded server generator no longer produces that list. Translate
         // only the six documented entries for this page to page-local slots.
@@ -70,9 +80,11 @@ namespace AECT16RuntimeFix
             var match = pagePattern.Match(page ?? "");
             if (!match.Success) return -1;
             int aecTier = int.Parse(match.Groups[1].Value);
+            int area = Array.IndexOf(sizes, match.Groups[2].Value);
+            if (tier == NativePageTier(aecTier, area + 1))
+                return index >= 0 && index < 6 ? index : -1;
             if (tier == MenuMarker) return index >= 0 && index < 6 ? index : -1;
             if (aecTier > 15 || tier != Math.Min(aecTier + 1, 6)) return -1;
-            int area = Array.IndexOf(sizes, match.Groups[2].Value);
             int first = 7 + Math.Max(0, aecTier - 5) * 30 + area * 6;
             return index >= first && index < first + 6 ? index - first : -1;
         }

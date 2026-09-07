@@ -20,7 +20,9 @@ foreach ($tier in 16..19) {
         Assert-Reward ($nodes.Count -eq 1) "Missing or duplicate quest: $id"
         $quest = $nodes[0]
         Assert-Reward ($quest.template -eq "aec_base_A$area") "Changed template: $id"
-        Assert-Reward ($quest.SelectSingleNode("property[@name='difficulty_tier']").value -eq '6') "Changed native difficulty: $id"
+        $nativePageTier = 16 + ($tier - 15) * 5 + $area - 1
+        Assert-Reward ([int]$quest.SelectSingleNode("property[@name='difficulty_tier']").value -eq $nativePageTier) "Wrong multiplayer page tier: $id"
+        Assert-Reward ($quest.SelectSingleNode("property[@name='add_to_tier_complete']").value -eq 'false') "T contract changes vanilla trader progression: $id"
         $row = @{}
         foreach ($key in @('Exp', 'casinoCoin', 'aecUniversalToken', 'resourceAECMutationSampleT5')) {
             $selector = if ($key -eq 'Exp') { "reward[@type='Exp']" } else { "reward[@type='Item' and @id='$key']" }

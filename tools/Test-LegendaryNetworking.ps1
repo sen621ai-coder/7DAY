@@ -70,17 +70,24 @@ public static class LegendaryNetworkingRegression
     {
         Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t18_huge") == "aec_quest_T18_A4_clear", "Page mapping");
         Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t15_huge") == "aec_quest_T15_A4_clear", "Lower page mapping missing");
+        Check(LegendaryQuestNetworking.NativePageTier(15,1) == 16 && LegendaryQuestNetworking.NativePageTier(19,5) == 40,
+            "Native page tier range changed");
+        Check(LegendaryQuestNetworking.NativePageTier(14,1) == -1 && LegendaryQuestNetworking.NativePageTier(19,6) == -1,
+            "Invalid native page tier accepted");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 16, 0) == 0, "Native T15 slot unavailable");
+        Check(LegendaryQuestNetworking.PageSlot("pzaec_t19_massive", 40, 5) == 5, "Native T19 slot unavailable");
         Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 6, 307) == 0, "T15 stale offset not translated");
         Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_massive", 6, 336) == 5, "T15 last slot");
         Check(LegendaryQuestNetworking.PageSlot("pzaec_t06_small", 6, 37) == 0, "T06 legacy slot");
         Check(LegendaryQuestNetworking.PageSlot("pzaec_t00_small", 1, 7) == 0, "T00 legacy slot");
         Check(LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 5, 307) == -1, "Wrong native tier accepted");
         var peerIds = Enumerable.Repeat("vanilla", 42).Concat(Enumerable.Repeat("aec_quest_T15_A1_clear", 6)).ToList();
+        var peerTiers = Enumerable.Repeat(6,42).Concat(Enumerable.Repeat(16,6)).ToList();
         int peerRemoval;
-        Check(LegendaryQuestNetworking.ResolveIndex(peerIds, Enumerable.Repeat(6, 48).ToList(),
+        Check(LegendaryQuestNetworking.ResolveIndex(peerIds, peerTiers,
             Enumerable.Repeat(true, 48).ToList(), "aec_quest_T15_A1_clear",
-            LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 6, 307), out peerRemoval) == 42 && peerRemoval == 42,
-            "Bounded peer list cannot resolve legacy T15 menu");
+            LegendaryQuestNetworking.PageSlot("pzaec_t15_small", 16, 0), out peerRemoval) == 42 && peerRemoval == 0,
+            "Native peer list cannot resolve isolated T15 menu");
         Check(LegendaryQuestNetworking.QuestIdForPage("pzaec_t19_massive_extra") == null, "Invalid page accepted");
         Check(LegendaryQuestNetworking.OfferTiers(15).SequenceEqual(new[]{15}), "Lower tier generator changed");
         Check(LegendaryQuestNetworking.OfferTiers(16).SequenceEqual(new[]{16}), "T16 offers");
@@ -127,7 +134,7 @@ public static class LegendaryNetworkingRegression
         LegendaryQuestNetworking.ResponsePostfix(response, 17);
         Check(action.ListIndex == 17, "Removal index not applied to real dialog action");
         Check(!LegendaryQuestNetworking.PacketPrefix(null, null), "Null world packet not rejected");
-        return "PASS: per-player cached-list mapping, distinct legendary labels, sparse pages, no local quest creation, difficulty-relative removal and byte-limit guards.";
+        return "PASS: native page tiers, per-player cached-list mapping, distinct labels, sparse pages, legacy fallback, removal and byte-limit guards.";
     }
 
     public static string Wire()
@@ -213,3 +220,45 @@ public static class LegendaryNetworkingRegression
 [LegendaryNetworkingRegression]::Mapping()
 [LegendaryNetworkingRegression]::Wire()
 [LegendaryNetworkingRegression]::PacketIL()
+
+[xml]$dialogs = Get-Content -LiteralPath (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/dialogs.xml') -Raw
+$sizes = @('small','medium','large','huge','massive')
+foreach ($aecTier in 15..19) {
+    foreach ($area in 1..5) {
+        $id = 'pzaec_t{0}_{1}' -f $aecTier.ToString('D2'), $sizes[$area - 1]
+        $statement = $dialogs.SelectSingleNode("//statement[@id='$id']")
+        if ($null -eq $statement) { throw "Missing native multiplayer page $id" }
+        $nativeTier = 16 + ($aecTier - 15) * 5 + $area - 1
+        $entries = @($statement.quest_entry)
+        if ($entries.Count -ne 6) { throw "Wrong native entry count: $id" }
+        for ($slot = 0; $slot -lt 6; $slot++) {
+            if ([int]$entries[$slot].listindex -ne $slot -or [int]$entries[$slot].tier -ne $nativeTier) {
+                throw "Non-native quest selector: $id slot $slot"
+            }
+        }
+    }
+}
+Write-Output 'PASS: all 25 T15-T19 trader pages use native client-independent selectors.'
+
+$contractDefinitions = @()
+foreach ($relative in @(
+    '04-AEC-ENDGAME_OVERHAUL/Config/quests.xml',
+    '98-AECxProjectZ_Tweaks/Config/quests.xml',
+    '99-AEC_T16_RuntimeFix/Config/quests.xml'
+)) {
+    [xml]$definitionFile = Get-Content -LiteralPath (Join-Path $modRoot $relative) -Raw
+    $contractDefinitions += @($definitionFile.SelectNodes('//quest') | Where-Object {
+        $_.id -match '(?i)^aec_quest_T(15|16|17|18|19)_A([1-5])_clear(?:_[a-z]+)?$'
+    })
+}
+if ($contractDefinitions.Count -ne 125) { throw "Expected 125 T15-T19 contract definitions, got $($contractDefinitions.Count)" }
+if (@($contractDefinitions | Group-Object id | Where-Object Count -ne 1).Count -ne 0) { throw 'Duplicate T15-T19 contract IDs' }
+foreach ($quest in $contractDefinitions) {
+    $match = [regex]::Match($quest.id, '(?i)_T(\d+)_A(\d+)_')
+    $nativeTier = 16 + ([int]$match.Groups[1].Value - 15) * 5 + [int]$match.Groups[2].Value - 1
+    $difficulty = $quest.SelectSingleNode("property[@name='difficulty_tier']")
+    $progression = $quest.SelectSingleNode("property[@name='add_to_tier_complete']")
+    if ($null -eq $difficulty -or [int]$difficulty.value -ne $nativeTier) { throw "Wrong page tier: $($quest.id)" }
+    if ($null -eq $progression -or $progression.value -ne 'false') { throw "Vanilla trader progression leak: $($quest.id)" }
+}
+Write-Output 'PASS: all 125 T15-T19 contracts are isolated from vanilla offer and trader-progression tiers.'

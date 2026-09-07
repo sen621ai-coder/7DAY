@@ -2426,7 +2426,8 @@
 
 <!-- T15 -->
 <quest id="aec_quest_T15_A1_clear" template="aec_base_A1">
-<property name="difficulty_tier" value="6"/>
+<property name="add_to_tier_complete" value="false" />
+<property name="difficulty_tier" value="16" />
 <variable name="name" value="aec_quest_T15_A1_name"/>
 <variable name="offer" value="aec_quest_T15_A1_offer"/>
 <reward type="Exp" value="150000"/>
@@ -2438,7 +2439,8 @@
 <reward type="Item" id="resourceAECMutationSampleT5" value="500"/>
 </quest>
 <quest id="aec_quest_T15_A2_clear" template="aec_base_A2">
-<property name="difficulty_tier" value="6"/>
+<property name="add_to_tier_complete" value="false" />
+<property name="difficulty_tier" value="17" />
 <variable name="name" value="aec_quest_T15_A2_name"/>
 <variable name="offer" value="aec_quest_T15_A2_offer"/>
 <reward type="Exp" value="300000"/>
@@ -2450,7 +2452,8 @@
 <reward type="Item" id="resourceAECMutationSampleT5" value="1000"/>
 </quest>
 <quest id="aec_quest_T15_A3_clear" template="aec_base_A3">
-<property name="difficulty_tier" value="6"/>
+<property name="add_to_tier_complete" value="false" />
+<property name="difficulty_tier" value="18" />
 <variable name="name" value="aec_quest_T15_A3_name"/>
 <variable name="offer" value="aec_quest_T15_A3_offer"/>
 <reward type="Exp" value="450000"/>
@@ -2462,7 +2465,8 @@
 <reward type="Item" id="resourceAECMutationSampleT5" value="1500"/>
 </quest>
 <quest id="aec_quest_T15_A4_clear" template="aec_base_A4">
-<property name="difficulty_tier" value="6"/>
+<property name="add_to_tier_complete" value="false" />
+<property name="difficulty_tier" value="19" />
 <variable name="name" value="aec_quest_T15_A4_name"/>
 <variable name="offer" value="aec_quest_T15_A4_offer"/>
 <reward type="Exp" value="600000"/>
@@ -2474,7 +2478,8 @@
 <reward type="Item" id="resourceAECMutationSampleT5" value="2000"/>
 </quest>
 <quest id="aec_quest_T15_A5_clear" template="aec_base_A5">
-<property name="difficulty_tier" value="6"/>
+<property name="add_to_tier_complete" value="false" />
+<property name="difficulty_tier" value="20" />
 <variable name="name" value="aec_quest_T15_A5_name"/>
 <variable name="offer" value="aec_quest_T15_A5_offer"/>
 <reward type="Exp" value="750000"/>

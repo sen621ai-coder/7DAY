@@ -1,6 +1,17 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.25.5 multiplayer trader-contract fix
+- T15-T19 trader pages now use 25 native page-specific quest tiers with local
+  indices 0-5. A joining player can accept the server-supplied T contracts even
+  when their client DLL is missing or older; the -19 menu bridge remains as a
+  compatibility path for earlier configurations.
+- Page tiers are isolated from vanilla trader offers and do not advance vanilla
+  trader progression. Server POIs, rewards, offer removal and quest IDs remain
+  unchanged. Restart the host; reconnecting clients receive the XML definitions.
+- Regression verifies all 25 pages, 125 T15-T19 quest definitions, native removal
+  indices, 120 serialized T16-T19 offers and the legacy network fallback.
+
 Runtime 1.25.4 fallen-loot snap-back fix
 - Recovery now moves the EntityItem root Transform and its Rigidbody as well
   as Entity.position. Scene positions subtract Origin.position. This prevents
