@@ -145,9 +145,22 @@ namespace AECT16RuntimeFix
         {
             var quest = __instance.OwnerQuest;
             if (ChallengeTier(quest?.ID) == 0) return true;
-            return Owned(quest, out _) && quest.CurrentPhase == 1 &&
-                quest.DataVariables.TryGetValue(SpawnMarker, out var queued) && queued == EventFor(quest.ID, SpawnMarker) &&
-                killedEntity != null && MatchesTrialKill(quest.ID, quest.QuestCode, killedEntity.spawnByName);
+            var player = quest.OwnerJournal?.OwnerPlayer;
+            return player != null && killedEntity != null &&
+                CanCountTrialKill(quest.ID, quest.QuestCode, quest.Active, quest.CurrentPhase,
+                    quest.SharedOwnerID, player.entityId, quest.DataVariables, killedEntity.spawnByName);
+        }
+
+        public static bool CanCountTrialKill(string questId, int code, bool active, int phase,
+            int sharedOwner, int playerId, IDictionary<string, string> data, string spawnByName)
+        {
+            if (!active || phase != 1 || playerId < 0 || data == null ||
+                !MatchesTrialKill(questId, code, spawnByName)) return false;
+            // Native shared invitations preserve QuestCode but do not transmit
+            // DataVariables. Participants match the original encounter's tag;
+            // only the ticket owner requires its own saved dispatch marker.
+            if (sharedOwner >= 0 && sharedOwner != playerId) return true;
+            return data.TryGetValue(SpawnMarker, out var queued) && queued == EventFor(questId, SpawnMarker);
         }
 
         public static bool DispatchOnce(IDictionary<string, string> data, string marker, string eventId, Func<string, bool> dispatch)

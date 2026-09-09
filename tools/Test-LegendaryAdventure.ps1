@@ -13,6 +13,45 @@ using HarmonyLib;
 public static class AdventureRegression
 {
     static void Check(bool ok, string message) { if (!ok) throw new Exception(message); }
+    public static string SharedTrials()
+    {
+        int checks=0;
+        foreach(int tier in new[]{16,17,18,19}) foreach(int code in new[]{int.MinValue,-42,1,int.MaxValue})
+        {
+            string id="PZAECChallengeT"+tier, tag=LegendaryAdventure.Request(code,LegendaryAdventure.SpawnMarker);
+            var data=new Dictionary<string,string>();
+            // A native remote invitation contains a code, but no spawn markers.
+            Check(LegendaryAdventure.CanCountTrialKill(id,code,true,1,42,43,data,tag),"Shared trial kill rejected without owner's dispatch data");
+            Check(data.Count==0,"Shared kill fabricated a summon reservation");
+            Check(!LegendaryAdventure.IsOwner(true,42,43),"Participant can summon another encounter");
+            Check(!LegendaryAdventure.CanCountTrialKill(id,code,true,1,-1,42,data,tag),"Unstarted owner trial counted a kill");
+            data[LegendaryAdventure.SpawnMarker]=LegendaryAdventure.EventFor(id,LegendaryAdventure.SpawnMarker);
+            Check(LegendaryAdventure.CanCountTrialKill(id,code,true,1,-1,42,data,tag),"Ticket owner lost own kills");
+            Check(LegendaryAdventure.CanCountTrialKill(id,code,true,1,42,43,new Dictionary<string,string>(data),tag),"Reloaded/shared copy lost own encounter");
+            foreach(int owner in new[]{-1,42})
+            {
+                Check(!LegendaryAdventure.CanCountTrialKill(id,code,false,1,owner,43,data,tag),"Inactive trial counted a kill");
+                Check(!LegendaryAdventure.CanCountTrialKill(id,code,true,2,owner,43,data,tag),"Finished trial counted a kill");
+                Check(!LegendaryAdventure.CanCountTrialKill(id,code,true,1,owner,-1,data,tag),"Missing player counted a kill");
+                Check(!LegendaryAdventure.CanCountTrialKill(id,code,true,1,owner,43,data,null),"Untagged enemy counted");
+                Check(!LegendaryAdventure.CanCountTrialKill(id,code,true,1,owner,43,data,LegendaryAdventure.Request(unchecked(code+1),LegendaryAdventure.SpawnMarker)),"Other trial's enemy counted");
+            }
+            checks++;
+        }
+        using(var game=Mono.Cecil.ModuleDefinition.ReadModule(typeof(Quest).Assembly.Location))
+        using(var mod=Mono.Cecil.ModuleDefinition.ReadModule(typeof(LegendaryAdventure).Assembly.Location))
+        {
+            var shared=game.Types.Single(t=>t.Name=="SharedQuestEntry").Methods.Single(m=>m.Name==".ctor");
+            Check(shared.Body.Instructions.Any(i=>i.OpCode.Code==Mono.Cecil.Cil.Code.Stfld && i.Operand is Mono.Cecil.FieldReference f && f.FullName=="System.Int32 Quest::QuestCode"),"Native sharing no longer preserves encounter code");
+            var partyKill=game.Types.Single(t=>t.Name=="GameManager").Methods.Single(m=>m.Name=="SharedKillClient");
+            Check(partyKill.Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference r && r.DeclaringType.Name=="QuestEventManager" && r.Name=="EntityKilled"),"Party kills no longer reach objective hook");
+            var helper=mod.Types.Single(t=>t.FullName=="AECT16RuntimeFix.LegendaryAdventure");
+            Check(helper.Methods.Single(m=>m.Name=="BeforeTrialKill").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference r && r.Name=="CanCountTrialKill"),"Shared kill eligibility not wired");
+            Check(helper.Methods.Single(m=>m.Name=="AfterStart").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference r && r.Name=="Owned"),"Shared startup can summon bosses");
+            Check(helper.Methods.Single(m=>m.Name=="AfterAdvance").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference r && r.Name=="Owned"),"Shared phase can summon bosses");
+        }
+        return "PASS: "+checks+" shared trial identities; owner-only summons, participant kill attribution, reload/foreign-encounter guards and native party-kill routing.";
+    }
     public static string Boundaries()
     {
         int replies=0, wire=0;
@@ -173,6 +212,7 @@ public static class AdventureRegression
 '@
 [AdventureRegression]::Run()
 [AdventureRegression]::Boundaries()
+[AdventureRegression]::SharedTrials()
 
 function Assert-Adventure([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
 function Get-ObjectiveTemplate([xml]$document, $quest) {
@@ -243,7 +283,7 @@ foreach ($tier in 16..19) {
     }
     $challenge = $quests.SelectSingleNode("//quest[@id='PZAECChallengeT$tier']")
     Assert-Adventure ($challenge.SelectSingleNode("property[@name='completiontype']").value -eq 'AutoComplete') 'Trial reward not automatic'
-    Assert-Adventure ($challenge.SelectSingleNode("property[@name='shareable']").value -eq 'false') 'Instant trial must not duplicate shared owners'
+    Assert-Adventure ($challenge.SelectSingleNode("property[@name='shareable']").value -eq 'true') 'Trial must allow native party sharing'
     Assert-Adventure ($challenge.SelectNodes('objective').Count -eq 3) 'Require one of each champion'
     Assert-Adventure ($challenge.SelectNodes('reward[@ischosen]').Count -eq 0) 'Automatic rewards cannot need selection'
     Assert-Adventure ($challenge.SelectNodes('reward').Count -eq 6) 'Expected five original guarantees plus tactical components'

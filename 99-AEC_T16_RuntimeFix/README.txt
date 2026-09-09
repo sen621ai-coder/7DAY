@@ -1,6 +1,15 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.25.7 shared legendary trials
+- T16-T19 voucher trials now support native quest sharing. Accept the invitation
+  before killing any champions and stay within native shared-kill range. Each
+  participant completes their own objectives and receives the normal rewards.
+- Only the voucher owner summons. Shared quest codes identify the original
+  encounter even though remote invitations do not carry dispatch markers.
+- Update the runtime DLL on every peer and restart. Late participants do not
+  receive retroactive kill credit.
+
 Runtime 1.25.6 100000-GS endgame tiers
 - T16 spans GS 180000-279999; T17 spans 280000-379999; T18 spans
   380000-479999; T19 begins at 480000.
