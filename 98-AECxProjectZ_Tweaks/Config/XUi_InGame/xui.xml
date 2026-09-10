@@ -4,6 +4,9 @@
 RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: интеграция контроллеров и групп окон XUi.
 EN: Operations are applied in file order; keep selectors specific and preserve load order.
 RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!-- Personal crafting and scrapping: use the existing two-row, ten-slot layout. -->
+  <set xpath="/xui/window_group[@name='crafting']/window[@name='windowCraftingQueue']/@name">windowCraftingQueue10</set>
+  <set xpath="/xui/window_group[@name='crafting']/window[@name='windowCraftingList']/@name">windowCraftingListImp</set>
   <append xpath="/xui">
     <window_group name="workstation_aecMutationIncubator" controller="XUiC_WorkstationWindowGroup" open_backpack_on_open="true" close_compass_on_open="true" defaultselected="bp.content">
       <window name="windowCraftingListAECMutationIncubator"/>
