@@ -24,6 +24,7 @@ namespace AECT16RuntimeFix
                 LootContainerNullGuard.Install(harmony);
                 LocalRespawnRecovery.Install(harmony);
                 PassiveEffectOverflowGuard.Install(harmony);
+                SpreadPercentStacking.Install(harmony);
                 EndgameExpansionRuntime.Install(harmony);
                 EndgameSocketMigration.Install(harmony);
                 ItemMetadataReadFix.Install(harmony);
