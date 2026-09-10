@@ -101,10 +101,12 @@ public static class AdventureRegression
         Check(AccessTools.Method(typeof(ObjectiveEntityKill),"Current_EntityKill").GetParameters()
             .Any(p=>p.Name=="killedEntity" && p.ParameterType==typeof(EntityAlive)),"Trial kill hook signature changed");
         Check(AccessTools.Method(typeof(NetPackageGameEventResponse),"ProcessPackage").GetParameters()[0].ParameterType==typeof(World),"Reply hook first argument changed");
+        Check(AccessTools.Method(typeof(GameEvent.SequenceActions.ActionBaseSpawn),"SpawnEntity").ReturnType==typeof(Entity),"Trial spawn diagnostic target changed");
+        Check(AccessTools.Method(typeof(GameManager),"AwardKill").GetParameters().Select(p=>p.ParameterType).SequenceEqual(new[]{typeof(EntityAlive),typeof(EntityAlive)}),"Trial award diagnostic target changed");
         using(var module=Mono.Cecil.ModuleDefinition.ReadModule(typeof(LegendaryAdventure).Assembly.Location)) {
             var helper=module.Types.Single(t=>t.FullName=="AECT16RuntimeFix.LegendaryAdventure");
             var install=helper.Methods.Single(m=>m.Name=="Install");
-            foreach(string hook in new[]{"BeforeAccept","BeforeTrialKill","AfterReply"})
+            foreach(string hook in new[]{"BeforeAccept","BeforeTrialKill","AfterReply","AfterObjectiveKill"})
                 Check(install.Body.Instructions.Any(i=>i.Operand is string s && s==hook),"Boundary hook not registered: "+hook);
             Check(helper.Methods.Single(m=>m.Name=="BeforeTrialKill").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name=="spawnByName"),"Trial attribution not checked in kill hook");
             var dispatch=helper.NestedTypes.SelectMany(t=>t.Methods).Single(m=>m.Name.Contains("b__") && m.Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference r && r.Name=="HandleAction"));

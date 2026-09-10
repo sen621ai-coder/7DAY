@@ -30,6 +30,7 @@ namespace AECT16RuntimeFix
         {
             try
             {
+                LegendaryTrialDiagnostics.Install(harmony);
                 harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.AdvancePhase), Type.EmptyTypes),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeAdvance)),
                     postfix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(AfterAdvance)));
@@ -40,7 +41,8 @@ namespace AECT16RuntimeFix
                 harmony.Patch(AccessTools.Method(typeof(XUiC_QuestOfferWindow), "btnAccept_OnPress"),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeAccept)));
                 harmony.Patch(AccessTools.Method(typeof(ObjectiveEntityKill), "Current_EntityKill"),
-                    prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeTrialKill)));
+                    prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeTrialKill)),
+                    postfix: new HarmonyMethod(typeof(LegendaryTrialDiagnostics), nameof(LegendaryTrialDiagnostics.AfterObjectiveKill)));
                 harmony.Patch(AccessTools.Method(typeof(NetPackageGameEventResponse), nameof(NetPackageGameEventResponse.ProcessPackage)),
                     postfix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(AfterReply)));
                 harmony.Patch(AccessTools.Method(typeof(EntityAlive), nameof(EntityAlive.damageEntityLocal),
