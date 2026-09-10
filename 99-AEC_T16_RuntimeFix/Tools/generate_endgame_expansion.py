@@ -62,6 +62,46 @@ FORTRESS_BLOCKS = {
 }
 
 
+# Final wall values are anchored to Project Z's 25k HP alloy block.
+# Apply after generic defense scaling so this balance is not multiplied twice.
+WALL_BALANCE = {
+    "ReactiveWall": ([60000, 90000, 135000, 200000], [3, 4, 6, 8], [40, 60, 90, 128]),
+    "AblativeWall": ([50000, 75000, 110000, 165000], [2, 3, 4, 6], [32, 48, 72, 108]),
+    "Embrasure": ([55000, 82500, 125000, 185000], [3, 4, 6, 8], [36, 54, 80, 120]),
+}
+WALL_RUIN_HP = [5000, 7500, 11000, 16500]
+
+
+def balance_alloy_walls(root, rows):
+    for stem, (health, costs, repairs) in WALL_BALANCE.items():
+        for i, tier in enumerate(TIERS):
+            name = f"PZAEC{stem}T{tier}"
+            block = root.find(f"block[@name='{name}']")
+            block.find("property[@name='MaxDamage']").set("value", str(health[i]))
+            block.insert(1, ET.Element("property", {"name": "Material", "value": "MAlloys_shapes"}))
+            repair = block.find("property[@class='RepairItems']")
+            repair.clear()
+            repair.set("class", "RepairItems")
+            prop(repair, "resourceForgedSteel", repairs[i])
+            for j, (key, file_name, en, cn) in enumerate(rows):
+                if key != name + "Desc":
+                    continue
+                en += f" Durability: {health[i]}. Alloy armor material. Repair with forged steel."
+                cn += f" 耐久：{health[i]}。合金装甲材质，使用锻钢维修。"
+                if stem == "AblativeWall":
+                    en += f" Leaves a {WALL_RUIN_HP[i]} HP frame when destroyed; rebuild with {i + 1} durable alloys using an improved nailgun."
+                    cn += f" 损毁后留下{WALL_RUIN_HP[i]}耐久残骸；用改良型钉枪和{i + 1}个耐用合金重建。"
+                rows[j] = (key, file_name, en, cn)
+    for i, tier in enumerate(TIERS):
+        ruin = root.find(f"block[@name='PZAECAblativeWallRuinT{tier}']")
+        ruin.insert(1, ET.Element("property", {"name": "Material", "value": "MAlloys_shapes"}))
+        repair = ET.Element("property", {"class": "RepairItems"})
+        prop(repair, "resourceForgedSteel", [4, 5, 8, 11][i])
+        ruin.insert(2, repair)
+        ruin.find("property[@name='MaxDamage']").set("value", str(WALL_RUIN_HP[i]))
+        ruin.find("property[@class='UpgradeBlock']/property[@name='ItemCount']").set("value", str(i + 1))
+
+
 def replace_generated(path: pathlib.Path, body: str) -> None:
     text = path.read_text(encoding="utf-8-sig")
     if BEGIN in text:
@@ -619,6 +659,7 @@ def build_blocks() -> tuple[str, list[tuple[str, str, str, str]]]:
                 prop(up, "ItemCount", [20, 28, 38, 50][i])
                 prop(up, "UpgradeHitCount", 4)
     progression.defense_blocks(root)
+    balance_alloy_walls(root, rows)
     apply_block_colors(root, rows)
     return xml(root), rows
 
@@ -694,7 +735,7 @@ def build_recipes() -> str:
     add_recipe(root, "PZAECTacticalRelay", [("electricwirerelay", 1), ("resourceDurablAlloys", 80), ("resourceElectricParts", 60), ("resourcePZAECSiegeCapacitorT16", 2)], 3)
     for stem in FORTRESS_BLOCKS:
         for i, tier in enumerate(TIERS):
-            costs = [("steelShapes:VariantHelper", 1), ("resourceDurablAlloys", [40, 55, 75, 100][i]), ("resourceScrapPolymers", [20, 25, 30, 40][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [1, 1, 1, 2][i])]
+            costs = [("steelShapes:VariantHelper", 1), ("resourceDurablAlloys", WALL_BALANCE[stem][1][i] if stem in WALL_BALANCE else [40, 55, 75, 100][i]), ("resourceScrapPolymers", [20, 25, 30, 40][i]), (f"resourcePZAECSiegeCapacitorT{tier}", [1, 1, 1, 2][i])]
             if stem == "BlastGate": costs[0] = ("vaultDoor01_Powered", 1)
             if stem == "ArmoredConduit": costs[0] = ("electricwirerelay", 1)
             add_recipe(root, f"PZAEC{stem}T{tier}", costs, 2 + i)

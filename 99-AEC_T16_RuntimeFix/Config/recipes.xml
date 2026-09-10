@@ -2235,73 +2235,73 @@
       </recipe>
       <recipe name="PZAECReactiveWallT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="40" />
+        <ingredient name="resourceDurablAlloys" count="3" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECReactiveWallT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="55" />
+        <ingredient name="resourceDurablAlloys" count="4" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECReactiveWallT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="75" />
+        <ingredient name="resourceDurablAlloys" count="6" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECReactiveWallT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="100" />
+        <ingredient name="resourceDurablAlloys" count="8" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
       <recipe name="PZAECAblativeWallT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="40" />
+        <ingredient name="resourceDurablAlloys" count="2" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECAblativeWallT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="55" />
+        <ingredient name="resourceDurablAlloys" count="3" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECAblativeWallT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="75" />
+        <ingredient name="resourceDurablAlloys" count="4" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECAblativeWallT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="100" />
+        <ingredient name="resourceDurablAlloys" count="6" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>
       <recipe name="PZAECEmbrasureT16" count="1" craft_area="workbench" craft_time="120" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="40" />
+        <ingredient name="resourceDurablAlloys" count="3" />
         <ingredient name="resourceScrapPolymers" count="20" />
         <ingredient name="resourcePZAECSiegeCapacitorT16" count="1" />
       </recipe>
       <recipe name="PZAECEmbrasureT17" count="1" craft_area="workbench" craft_time="180" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="55" />
+        <ingredient name="resourceDurablAlloys" count="4" />
         <ingredient name="resourceScrapPolymers" count="25" />
         <ingredient name="resourcePZAECSiegeCapacitorT17" count="1" />
       </recipe>
       <recipe name="PZAECEmbrasureT18" count="1" craft_area="workbench" craft_time="240" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="75" />
+        <ingredient name="resourceDurablAlloys" count="6" />
         <ingredient name="resourceScrapPolymers" count="30" />
         <ingredient name="resourcePZAECSiegeCapacitorT18" count="1" />
       </recipe>
       <recipe name="PZAECEmbrasureT19" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false">
         <ingredient name="steelShapes:VariantHelper" count="1" />
-        <ingredient name="resourceDurablAlloys" count="100" />
+        <ingredient name="resourceDurablAlloys" count="8" />
         <ingredient name="resourceScrapPolymers" count="40" />
         <ingredient name="resourcePZAECSiegeCapacitorT19" count="2" />
       </recipe>

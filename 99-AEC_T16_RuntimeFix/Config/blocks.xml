@@ -548,13 +548,14 @@
       </block>
       <block name="PZAECReactiveWallT16">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT16Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="8D3632" />
-        <property name="MaxDamage" value="27000" />
+        <property name="MaxDamage" value="60000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -562,20 +563,21 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="16" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="20" />
+          <property name="resourceForgedSteel" value="40" />
         </property>
         <property name="TintColor" value="8D3632" />
         <property name="Texture" value="537,537,540,540,540,540" />
       </block>
       <block name="PZAECReactiveWallT17">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT17Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="A23E3A" />
-        <property name="MaxDamage" value="39600" />
+        <property name="MaxDamage" value="90000" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -583,20 +585,21 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="17" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="30" />
+          <property name="resourceForgedSteel" value="60" />
         </property>
         <property name="TintColor" value="A23E3A" />
         <property name="Texture" value="543,543,540,540,540,540" />
       </block>
       <block name="PZAECReactiveWallT18">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT18Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="B64541" />
-        <property name="MaxDamage" value="59400" />
+        <property name="MaxDamage" value="135000" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -604,20 +607,21 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="18" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="40" />
+          <property name="resourceForgedSteel" value="90" />
         </property>
         <property name="TintColor" value="B64541" />
         <property name="Texture" value="536,536,540,540,540,540" />
       </block>
       <block name="PZAECReactiveWallT19">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECReactiveWallT19Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="CA4D48" />
-        <property name="MaxDamage" value="89100" />
+        <property name="MaxDamage" value="200000" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -625,20 +629,21 @@
         <property name="PZAECFortressType" value="ReactiveWall" />
         <property name="PZAECTier" value="19" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="50" />
+          <property name="resourceForgedSteel" value="128" />
         </property>
         <property name="TintColor" value="CA4D48" />
         <property name="Texture" value="540,540,540,540,540,540" />
       </block>
       <block name="PZAECAblativeWallT16">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT16Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="9B7130" />
-        <property name="MaxDamage" value="18000" />
+        <property name="MaxDamage" value="50000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -647,36 +652,41 @@
         <property name="PZAECTier" value="16" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT16" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="20" />
+          <property name="resourceForgedSteel" value="32" />
         </property>
         <property name="TintColor" value="9B7130" />
         <property name="Texture" value="537,537,539,539,539,539" />
       </block>
       <block name="PZAECAblativeWallRuinT16">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
+        <property class="RepairItems">
+          <property name="resourceForgedSteel" value="4" />
+        </property>
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
-        <property name="MaxDamage" value="2500" />
+        <property name="MaxDamage" value="5000" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT16" />
           <property name="Item" value="resourceDurablAlloys" />
-          <property name="ItemCount" value="20" />
+          <property name="ItemCount" value="1" />
           <property name="UpgradeHitCount" value="4" />
         </property>
         <property name="Texture" value="355,355,356,356,356,356" />
       </block>
       <block name="PZAECAblativeWallT17">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT17Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="B28236" />
-        <property name="MaxDamage" value="27000" />
+        <property name="MaxDamage" value="75000" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -685,36 +695,41 @@
         <property name="PZAECTier" value="17" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT17" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="30" />
+          <property name="resourceForgedSteel" value="48" />
         </property>
         <property name="TintColor" value="B28236" />
         <property name="Texture" value="543,543,539,539,539,539" />
       </block>
       <block name="PZAECAblativeWallRuinT17">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
+        <property class="RepairItems">
+          <property name="resourceForgedSteel" value="5" />
+        </property>
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
-        <property name="MaxDamage" value="2500" />
+        <property name="MaxDamage" value="7500" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT17" />
           <property name="Item" value="resourceDurablAlloys" />
-          <property name="ItemCount" value="28" />
+          <property name="ItemCount" value="2" />
           <property name="UpgradeHitCount" value="4" />
         </property>
         <property name="Texture" value="355,355,356,356,356,356" />
       </block>
       <block name="PZAECAblativeWallT18">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT18Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="C8923D" />
-        <property name="MaxDamage" value="41800" />
+        <property name="MaxDamage" value="110000" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -723,36 +738,41 @@
         <property name="PZAECTier" value="18" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT18" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="40" />
+          <property name="resourceForgedSteel" value="72" />
         </property>
         <property name="TintColor" value="C8923D" />
         <property name="Texture" value="536,536,539,539,539,539" />
       </block>
       <block name="PZAECAblativeWallRuinT18">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
+        <property class="RepairItems">
+          <property name="resourceForgedSteel" value="8" />
+        </property>
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
-        <property name="MaxDamage" value="2500" />
+        <property name="MaxDamage" value="11000" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT18" />
           <property name="Item" value="resourceDurablAlloys" />
-          <property name="ItemCount" value="38" />
+          <property name="ItemCount" value="3" />
           <property name="UpgradeHitCount" value="4" />
         </property>
         <property name="Texture" value="355,355,356,356,356,356" />
       </block>
       <block name="PZAECAblativeWallT19">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Player" />
         <property name="DescriptionKey" value="PZAECAblativeWallT19Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="DEA244" />
-        <property name="MaxDamage" value="64800" />
+        <property name="MaxDamage" value="165000" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -761,29 +781,34 @@
         <property name="PZAECTier" value="19" />
         <property name="DowngradeBlock" value="PZAECAblativeWallRuinT19" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="50" />
+          <property name="resourceForgedSteel" value="108" />
         </property>
         <property name="TintColor" value="DEA244" />
         <property name="Texture" value="540,540,539,539,539,539" />
       </block>
       <block name="PZAECAblativeWallRuinT19">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
+        <property class="RepairItems">
+          <property name="resourceForgedSteel" value="11" />
+        </property>
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/Cube.fbx" />
         <property name="CreativeMode" value="Dev" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="555555" />
-        <property name="MaxDamage" value="2500" />
+        <property name="MaxDamage" value="16500" />
         <property class="UpgradeBlock">
           <property name="ToBlock" value="PZAECAblativeWallT19" />
           <property name="Item" value="resourceDurablAlloys" />
-          <property name="ItemCount" value="50" />
+          <property name="ItemCount" value="4" />
           <property name="UpgradeHitCount" value="4" />
         </property>
         <property name="Texture" value="355,355,356,356,356,356" />
       </block>
       <block name="PZAECEmbrasureT16">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="Collide" value="sight,movement,melee,rocket" />
@@ -791,7 +816,7 @@
         <property name="DescriptionKey" value="PZAECEmbrasureT16Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="386A9C" />
-        <property name="MaxDamage" value="21000" />
+        <property name="MaxDamage" value="55000" />
         <property name="LPHardnessScale" value="4" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="8000" />
@@ -799,13 +824,14 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="16" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="20" />
+          <property name="resourceForgedSteel" value="36" />
         </property>
         <property name="TintColor" value="386A9C" />
         <property name="Texture" value="537,537,537,537,537,537" />
       </block>
       <block name="PZAECEmbrasureT17">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="Collide" value="sight,movement,melee,rocket" />
@@ -813,7 +839,7 @@
         <property name="DescriptionKey" value="PZAECEmbrasureT17Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="4079B2" />
-        <property name="MaxDamage" value="31500" />
+        <property name="MaxDamage" value="82500" />
         <property name="LPHardnessScale" value="5" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="12000" />
@@ -821,13 +847,14 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="17" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="30" />
+          <property name="resourceForgedSteel" value="54" />
         </property>
         <property name="TintColor" value="4079B2" />
         <property name="Texture" value="543,543,537,537,537,537" />
       </block>
       <block name="PZAECEmbrasureT18">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="Collide" value="sight,movement,melee,rocket" />
@@ -835,7 +862,7 @@
         <property name="DescriptionKey" value="PZAECEmbrasureT18Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="4888C9" />
-        <property name="MaxDamage" value="47300" />
+        <property name="MaxDamage" value="125000" />
         <property name="LPHardnessScale" value="6" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="16000" />
@@ -843,13 +870,14 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="18" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="40" />
+          <property name="resourceForgedSteel" value="80" />
         </property>
         <property name="TintColor" value="4888C9" />
         <property name="Texture" value="536,536,537,537,537,537" />
       </block>
       <block name="PZAECEmbrasureT19">
         <property name="Extends" value="steelMaster" />
+        <property name="Material" value="MAlloys_shapes" />
         <property name="Shape" value="New" />
         <property name="Model" value="@:Shapes/arrow_slit.fbx" />
         <property name="Collide" value="sight,movement,melee,rocket" />
@@ -857,7 +885,7 @@
         <property name="DescriptionKey" value="PZAECEmbrasureT19Desc" />
         <property name="CustomIcon" value="steelMaster" />
         <property name="CustomIconTint" value="5097DF" />
-        <property name="MaxDamage" value="71550" />
+        <property name="MaxDamage" value="185000" />
         <property name="LPHardnessScale" value="7" />
         <property name="TakeDelay" value="30" />
         <property name="EconomicValue" value="20000" />
@@ -865,7 +893,7 @@
         <property name="PZAECFortressType" value="Embrasure" />
         <property name="PZAECTier" value="19" />
         <property class="RepairItems">
-          <property name="resourceDurablAlloys" value="50" />
+          <property name="resourceForgedSteel" value="120" />
         </property>
         <property name="TintColor" value="5097DF" />
         <property name="Texture" value="540,540,537,537,537,537" />
