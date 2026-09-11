@@ -5,7 +5,7 @@ $managed = Join-Path (Split-Path -Parent $modRoot) '7DaysToDie_Data/Managed'
 Get-ChildItem $managed -Filter '*.dll' | ForEach-Object {
     try { [void][Reflection.Assembly]::LoadFrom($_.FullName) } catch {}
 }
-[void][Reflection.Assembly]::LoadFrom((Join-Path $modRoot '00-TFP_Harmony/0Harmony.dll'))
+[void][Reflection.Assembly]::LoadFrom((Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll'))
 [void][Reflection.Assembly]::LoadFrom((Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'))
 
 function Assert-Near([double]$actual, [double]$expected, [string]$message) {

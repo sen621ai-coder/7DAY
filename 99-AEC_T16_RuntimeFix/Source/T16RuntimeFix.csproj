@@ -22,7 +22,7 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>..\..\00-TFP_Harmony\0Harmony.dll</HintPath>
+      <HintPath>..\..\0_TFP_Harmony\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">

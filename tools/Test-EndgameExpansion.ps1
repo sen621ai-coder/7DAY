@@ -6,8 +6,8 @@ Get-ChildItem -LiteralPath $managed -Filter '*.dll' | ForEach-Object {
     try { [void][Reflection.Assembly]::LoadFrom($_.FullName) } catch { }
 }
 $references = @(
-    (Join-Path $modRoot '00-TFP_Harmony/0Harmony.dll'),
-    (Join-Path $modRoot '00-TFP_Harmony/Mono.Cecil.dll'),
+    (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll'),
+    (Join-Path $modRoot '0_TFP_Harmony/Mono.Cecil.dll'),
     (Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'),
     (Join-Path $managed 'Assembly-CSharp.dll'),
     (Join-Path $managed 'UnityEngine.CoreModule.dll')

@@ -35,7 +35,7 @@ for ($i = 0; $i -lt $relayNames.Count; $i++) {
 $pickup = $fixBlocks.SelectSingleNode('/configs/append[@xpath="/blocks/block[@name=''aecQuestRelay'']"]/property[@name="CanPickup"]')
 Assert-Relay ($null -ne $pickup -and $pickup.value -eq 'true') 'Contract relay pickup was not enabled.'
 
-Add-Type -Path (Join-Path $modRoot '00-TFP_Harmony/Mono.Cecil.dll')
+Add-Type -Path (Join-Path $modRoot '0_TFP_Harmony/Mono.Cecil.dll')
 $runtime = [Mono.Cecil.ModuleDefinition]::ReadModule($runtimePath)
 try {
     $pickupFix = $runtime.Types | Where-Object FullName -eq 'AECT16RuntimeFix.ContractRelayPickup'

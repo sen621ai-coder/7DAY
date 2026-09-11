@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $modRoot = Split-Path -Parent $PSScriptRoot
 $references = @(
-    (Join-Path $modRoot '00-TFP_Harmony/Mono.Cecil.dll'),
+    (Join-Path $modRoot '0_TFP_Harmony/Mono.Cecil.dll'),
     (Join-Path $modRoot '../7DaysToDie_Data/Managed/Assembly-CSharp.dll')
 )
 foreach ($reference in $references) {

@@ -1,7 +1,7 @@
 #Requires -Version 7.0
 $ErrorActionPreference = 'Stop'
 $modRoot = Split-Path -Parent $PSScriptRoot
-[void][Reflection.Assembly]::LoadFrom((Join-Path $modRoot '00-TFP_Harmony/Mono.Cecil.dll'))
+[void][Reflection.Assembly]::LoadFrom((Join-Path $modRoot '0_TFP_Harmony/Mono.Cecil.dll'))
 $module = [Mono.Cecil.ModuleDefinition]::ReadModule((Join-Path (Split-Path -Parent $modRoot) '7DaysToDie_Data/Managed/Assembly-CSharp.dll'))
 try {
     $type = $module.Types | Where-Object Name -eq 'XUiC_CombineGrid'
