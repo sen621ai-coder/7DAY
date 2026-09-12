@@ -9,7 +9,7 @@ using UnityEngine;
 namespace AECT16RuntimeFix
 {
     // Quest IDs, entity IDs and native serialized buffs carry the encounter
-    // identity across peers. No custom packets or client-generated trader POIs.
+    // identity across peers. Trial kill receipts also carry this identity.
     public static class LegendaryAdventure
     {
         public const string SpawnMarker = "PZAECAdventureSpawn_v1";
@@ -48,6 +48,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(AccessTools.Method(typeof(EntityAlive), nameof(EntityAlive.damageEntityLocal),
                     new[] { typeof(DamageSource), typeof(int), typeof(bool), typeof(float) }),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeDamage)));
+                LegendaryTrialSharing.Install(harmony);
                 T16RuntimeFixMod.SafeLog("[AEC-Adventure] Affix contracts, optional trials and encounter-only weaknesses installed.");
             }
             catch (Exception ex) { Warn("Installation failed", ex); }
