@@ -13,6 +13,58 @@ using HarmonyLib;
 public static class AdventureRegression
 {
     static void Check(bool ok, string message) { if (!ok) throw new Exception(message); }
+    public static string SharedVouchers()
+    {
+        int recipients=0;
+        foreach(int tier in new[]{16,17,18,19})
+        foreach(string suffix in new[]{"","_infested","_fetch","_hunter","_bulwark","_storm"})
+        {
+            string id="aec_quest_T"+tier+"_A1_clear"+suffix;
+            string eventId=LegendaryAdventure.EventFor(id,LegendaryAdventure.VoucherMarker);
+            int sent=0, summons=0;
+            foreach(int playerId in new[]{42,43,44})
+            {
+                // Every journal copy has its own persisted receipt markers;
+                // sharing the same quest code must not suppress another player.
+                var data=new Dictionary<string,string>();
+                Check(!LegendaryAdventure.CanReceiveVoucher(data,id,true,playerId,4),"Old phase-4 quest backfilled");
+                Check(!LegendaryAdventure.MarkVoucherEligible(data,id,true,playerId,4,4),"Reload fabricated clear transition");
+                Check(LegendaryAdventure.MarkVoucherEligible(data,id,true,playerId,3,4),"Shared participant lost eligibility");
+                Check(LegendaryAdventure.CanReceiveVoucher(data,id,true,playerId,4),"Eligible participant denied voucher");
+                Check(!data.ContainsKey(LegendaryAdventure.SpawnMarker),"Voucher gave participant summon permission");
+                if(LegendaryAdventure.IsOwner(true,42,playerId)) summons++;
+                Check(LegendaryAdventure.DispatchOnce(data,LegendaryAdventure.VoucherMarker,eventId,e=>{sent++; return true;}),"Per-player voucher not sent");
+                Check(!LegendaryAdventure.CanReceiveVoucher(data,id,true,playerId,4),"Reserved voucher offered twice");
+                Check(LegendaryAdventure.MarkVoucherEligible(data,id,true,playerId,3,4),"Duplicate callback test");
+                Check(!LegendaryAdventure.DispatchOnce(data,LegendaryAdventure.VoucherMarker,eventId,e=>{sent++;return true;}),"Repeated transition duplicated voucher");
+                var reloaded=new Dictionary<string,string>(data);
+                Check(!LegendaryAdventure.CanReceiveVoucher(reloaded,id,true,playerId,4),"Reload duplicated voucher");
+                string tag=LegendaryAdventure.Request(-42,LegendaryAdventure.VoucherMarker);
+                Check(LegendaryAdventure.ApplyReply(data,id,-42,eventId,tag,true),"Shared approval rejected");
+                Check(!LegendaryAdventure.ApplyReply(data,id,-42,eventId,tag,false),"Late denial reopened delivered voucher");
+                recipients++;
+            }
+            Check(sent==3 && summons==1,"Party size multiplied spawns or suppressed personal vouchers");
+        }
+        foreach(string id in new[]{"aec_quest_T15_A1_clear","PZAECChallengeT16","PZAECDefenseT16","ordinary",null})
+            Check(!LegendaryAdventure.MarkVoucherEligible(new Dictionary<string,string>(),id,true,42,3,4),"Unrelated quest earned voucher");
+        var rejected=new Dictionary<string,string>();
+        const string contract="aec_quest_T16_A1_clear";
+        Check(!LegendaryAdventure.MarkVoucherEligible(rejected,contract,false,42,3,4),"Failed quest earned voucher");
+        Check(!LegendaryAdventure.MarkVoucherEligible(rejected,contract,true,-1,3,4),"Missing player earned voucher");
+        Check(!LegendaryAdventure.MarkVoucherEligible(rejected,contract,true,42,2,3),"Rally earned voucher");
+        Check(rejected.Count==0,"Rejected transition mutated journal");
+        using(var mod=Mono.Cecil.ModuleDefinition.ReadModule(typeof(LegendaryAdventure).Assembly.Location)) {
+            var helper=mod.Types.Single(t=>t.Name=="LegendaryAdventure");
+            foreach(string hook in new[]{"AfterAdvance","AfterStart"}) {
+                var calls=helper.Methods.Single(m=>m.Name==hook).Body.Instructions.Select(i=>i.Operand).OfType<Mono.Cecil.MethodReference>().Select(r=>r.Name).ToList();
+                Check(calls.Contains("Participant") && calls.IndexOf("ResumeVoucher")>=0 && calls.IndexOf("ResumeVoucher")<calls.IndexOf("Owned"),"Voucher remains behind owner-only gate: "+hook);
+            }
+            var reply=helper.Methods.Single(m=>m.Name=="AfterReply").Body.Instructions.Select(i=>i.Operand).OfType<Mono.Cecil.MethodReference>().Select(r=>r.Name).ToList();
+            Check(reply.Contains("Participant") && reply.Contains("Owned") && reply.Contains("EventFor"),"Reply scope lost participant vouchers or owner-only spawns");
+        }
+        return "PASS: "+recipients+" personal vouchers across 4 tiers / 6 variants; 3 recipients but one summoner; duplicate/reload/legacy/inactive/unrelated guards (offline journal-state tests).";
+    }
     public static string SharedTrials()
     {
         int checks=0;
@@ -215,6 +267,7 @@ public static class AdventureRegression
 [AdventureRegression]::Run()
 [AdventureRegression]::Boundaries()
 [AdventureRegression]::SharedTrials()
+[AdventureRegression]::SharedVouchers()
 
 function Assert-Adventure([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
 function Get-ObjectiveTemplate([xml]$document, $quest) {
@@ -300,6 +353,7 @@ foreach ($tier in 16..19) {
     $voucherEvent = $events.SelectSingleNode("//action_sequence[@name='PZAECGiveVoucherT$tier']")
     Assert-Adventure ($voucherEvent.SelectSingleNode("action[@class='AddItems']/property[@name='added_items']").value -eq $item.name) 'Voucher reward target wrong'
     Assert-Adventure ($voucherEvent.SelectSingleNode("action[@class='AddItems']/property[@name='added_item_counts']").value -eq '1') 'One clear must give one voucher'
+    Assert-Adventure ($voucherEvent.SelectSingleNode("property[@name='single_instance']").value -eq 'false') 'Concurrent participant voucher events must not suppress one another'
     $trial = $events.SelectSingleNode("//action_sequence[@name='PZAECTrialT$tier']")
     Assert-Adventure ($trial.SelectNodes("action[@class='SpawnEntity']").Count -eq 3) 'Trial needs three distinct spawn actions'
     foreach ($affix in @('hunter','bulwark','storm')) {

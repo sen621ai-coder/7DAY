@@ -94,6 +94,21 @@ namespace AECT16RuntimeFix
             return ContractTier(id) != 0 && previous == 3 && current == 4;
         }
 
+        public static bool MarkVoucherEligible(IDictionary<string, string> data, string id,
+            bool active, int playerId, int previous, int current)
+        {
+            if (data == null || !active || playerId < 0 || !IsClearTransition(id, previous, current)) return false;
+            data[ClearMarker] = "1";
+            return true;
+        }
+
+        public static bool CanReceiveVoucher(IDictionary<string, string> data, string id,
+            bool active, int playerId, int phase)
+        {
+            return data != null && active && playerId >= 0 && ContractTier(id) != 0 && phase == 4 &&
+                data.ContainsKey(ClearMarker) && !data.ContainsKey(VoucherMarker);
+        }
+
         public static string Request(int code, string marker)
         {
             return "PZAECAdventure:" + code.ToString(CultureInfo.InvariantCulture) + ":" + marker;
@@ -133,7 +148,10 @@ namespace AECT16RuntimeFix
             bool approved = __instance.responseType == NetPackageGameEventResponse.ResponseTypes.Approved;
             foreach (var quest in player.QuestJournal.quests)
             {
-                if (!Owned(quest, out var owner) || owner != player) continue;
+                if (!Participant(quest, out var owner) || owner != player) continue;
+                // Each participant owns their voucher request. Spawn replies
+                // remain restricted to the original quest owner.
+                if (__instance.eventName != EventFor(quest.ID, VoucherMarker) && !Owned(quest, out _)) continue;
                 if (ApplyReply(quest.DataVariables, quest.ID, quest.QuestCode, __instance.eventName, __instance.tag, approved) && !approved)
                     T16RuntimeFixMod.SafeLog("[AEC-Adventure] Server denied enqueue; released for retry: " + __instance.eventName);
             }
@@ -181,9 +199,13 @@ namespace AECT16RuntimeFix
         {
             try
             {
+                if (Participant(__instance, out var participant))
+                {
+                    MarkVoucherEligible(__instance.DataVariables, __instance.ID, __instance.Active,
+                        participant.entityId, __state, __instance.CurrentPhase);
+                    ResumeVoucher(__instance, participant);
+                }
                 if (!Owned(__instance, out var player)) return;
-                if (IsClearTransition(__instance.ID, __state, __instance.CurrentPhase))
-                    __instance.DataVariables[ClearMarker] = "1";
                 Resume(__instance, player);
             }
             catch (Exception ex) { Warn("Quest phase hook failed", ex); }
@@ -191,14 +213,31 @@ namespace AECT16RuntimeFix
 
         public static void AfterStart(Quest __instance)
         {
-            try { if (Owned(__instance, out var player)) Resume(__instance, player); }
+            try
+            {
+                // Reload may resume an earned, unreserved voucher, but never
+                // invents a clear marker for an already-finished shared quest.
+                if (Participant(__instance, out var participant)) ResumeVoucher(__instance, participant);
+                if (Owned(__instance, out var player)) Resume(__instance, player);
+            }
             catch (Exception ex) { Warn("Quest start hook failed", ex); }
         }
 
         private static bool Owned(Quest quest, out EntityPlayerLocal player)
         {
+            return Participant(quest, out player) && IsOwner(quest.Active, quest.SharedOwnerID, player.entityId);
+        }
+
+        private static bool Participant(Quest quest, out EntityPlayerLocal player)
+        {
             player = quest?.OwnerJournal?.OwnerPlayer;
-            return player != null && quest.DataVariables != null && IsOwner(quest.Active, quest.SharedOwnerID, player.entityId);
+            return player != null && player.entityId >= 0 && quest.Active && quest.DataVariables != null;
+        }
+
+        private static void ResumeVoucher(Quest quest, EntityPlayerLocal player)
+        {
+            if (CanReceiveVoucher(quest.DataVariables, quest.ID, quest.Active, player.entityId, quest.CurrentPhase))
+                Queue(quest, player, VoucherMarker, "PZAECGiveVoucherT" + ContractTier(quest.ID), 4, false);
         }
 
         private static void Resume(Quest quest, EntityPlayerLocal player)
@@ -207,8 +246,6 @@ namespace AECT16RuntimeFix
             string affix = Affix(quest.ID);
             if (tier != 0 && quest.CurrentPhase == 3 && affix != "")
                 Queue(quest, player, SpawnMarker, "PZAECAffix_" + affix + "_T" + tier, 3, true);
-            if (tier != 0 && quest.CurrentPhase == 4 && quest.DataVariables.ContainsKey(ClearMarker))
-                Queue(quest, player, VoucherMarker, "PZAECGiveVoucherT" + tier, 4, false);
             tier = ChallengeTier(quest.ID);
             if (tier != 0 && quest.CurrentPhase == 1)
                 Queue(quest, player, SpawnMarker, "PZAECTrialT" + tier, 1, true);
