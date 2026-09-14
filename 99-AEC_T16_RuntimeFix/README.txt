@@ -1,6 +1,16 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.26.1 four-in-one modifier correction
+- All 88 AEC four-ingredient modifiers (22 families x 4 rarity tiers) retain
+  their recipe ingredients' inherent bonuses. Same-scope values use the better
+  of the ingredient total and existing product; repeated ingredients count twice.
+- Restore omitted effects and original sneak/kill-only conditions, remove
+  product speed/stamina penalties, and consolidate equivalent combat triggers.
+- Descriptions show the corrected values and actual installation restrictions.
+- XML/localization update only. Restart to update existing items; no recrafting.
+  Native per-slot weapon bonuses still count this as one installed modifier.
+
 Runtime 1.25.7 shared legendary trials
 - T16-T19 voucher trials now support native quest sharing. Accept the invitation
   before killing any champions and stay within native shared-kill range. Each

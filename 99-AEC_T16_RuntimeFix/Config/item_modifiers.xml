@@ -1181,4 +1181,1105 @@
 <append xpath="/item_modifiers/item_modifier[@name='modPZAECInsulatedTreadsT18']"><property name="DisplayType" value="AECDisplay_modPZAECInsulatedTreadsT18" /></append>
 <append xpath="/item_modifiers/item_modifier[@name='modPZAECInsulatedTreadsT19']"><property name="DisplayType" value="AECDisplay_modPZAECInsulatedTreadsT19" /></append>
 <!-- END GENERATED EQUIPMENT DISPLAY -->
+<!-- BEGIN GENERATED FOUR IN ONE -->
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3" duration="4" force="1500000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.90" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="2" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaShockwaveMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaShockwaveMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.8" duration="3.5" force="1800000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.75" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="2" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaDirectRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaDirectRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" duration="4" force="2500000" range="1.99" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.70" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="2.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="3" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaThorMace']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaThorMace']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.4" duration="3" force="1250000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.4" duration="6" buff="buffShocked">
+                            </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="2.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+      <display_value name="dShockChance" value="100" />
+      <display_value name="dShockDuration" value="6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaImpactGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaImpactGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+                            </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="5" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaPinningBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaPinningBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+                            </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.00" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.75" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="3" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaChaosHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaChaosHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.1" duration="2.98" force="1100000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="100" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="3" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.50" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaDemolisherTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaDemolisherTool']">
+    <effect_group tiered="false">
+      <passive_effect name="BlockDamage" operation="perc_add" value="6" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="4" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-1" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaHunterHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaHunterHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="60" />
+      </triggered_effect>
+      <passive_effect name="DamageBonus" operation="base_add" value="2.50" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.60" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="6" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaTitanArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaTitanArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="HealthChangeOT" operation="base_add" value="8" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="8.00" />
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.6" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="1.50" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.25" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.25" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaSprintLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaSprintLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="2" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="2" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="2" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.70" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="2" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaGravHammer']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaGravHammer']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.2" duration="4.5" force="1750000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="1.50" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="2" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaValkyrieBlade']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaValkyrieBlade']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.2" duration="4.96" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.00" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.70" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+      <display_value name="dShockChance" value="99.99" />
+      <display_value name="dShockDuration" value="4.96" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="3" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaJudgementGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaJudgementGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+                            </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="5" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaFrenzyGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaFrenzyGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="2.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="5" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="5" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaStormBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaStormBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="3" duration="5" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.50" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="1" />
+      <display_value name="dShockChance" value="99.99" />
+      <display_value name="dShockDuration" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaHarpoonBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaHarpoonBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.4">
+                            </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="DamageBonus" operation="base_add" value="3.00" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.50" />
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="1.99" duration="2.98" force="19900.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="3" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaSeismicTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaSeismicTool']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.00" duration="2.20" force="1000000.00" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="5" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="3" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-1" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaBastionArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaBastionArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.75" />
+      <passive_effect name="HealthChangeOT" operation="base_add" value="10" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="5.00" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.25" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.25" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaPhantomLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaPhantomLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="2.5" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="2" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="2" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.75" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="2" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaSkyLeapLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaSkyLeapLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="JumpStrength" operation="perc_add" value="8" />
+      <passive_effect name="RunSpeed" operation="perc_add" value="2" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="2" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="2" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaCatapultBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorMegaCatapultBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.8" duration="5" force="2000000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.8">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="99.99" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="50" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3" duration="4" force="30000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.20" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.5" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3" duration="4" force="120000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.45" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.1" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.65" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3" duration="4" force="330000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.70" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.7" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.95" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypShockwaveMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypShockwaveMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.8" duration="3.5" force="45000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.18" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.5" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareShockwaveMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareShockwaveMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.8" duration="3.5" force="180000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.38" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.1" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.65" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqShockwaveMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqShockwaveMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.8" duration="3.5" force="520000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.58" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.7" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.95" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypDirectRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypDirectRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" duration="2.5" force="75000" range="1.14" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.16" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="0.50">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="31.82" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.9" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="0.9" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareDirectRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareDirectRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" duration="3" force="300000" range="1.44" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.35" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="1.10">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="59.09" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.95" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="1.95" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqDirectRagdollMelee']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqDirectRagdollMelee']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" duration="3.5" force="900000" range="1.74" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.54" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="1.70">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="86.36" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.85" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="2.85" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypThorMace']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypThorMace']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.4" duration="3" force="25000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.4" duration="6" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="28" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="0.50">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="31.82" />
+      </triggered_effect>
+      <display_value name="dShockChance" value="28" />
+      <display_value name="dShockDuration" value="6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareThorMace']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareThorMace']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.4" duration="3" force="100000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.4" duration="6" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="55" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="1.10">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="59.09" />
+      </triggered_effect>
+      <display_value name="dShockChance" value="55" />
+      <display_value name="dShockDuration" value="6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqThorMace']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqThorMace']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.4" duration="3" force="275000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.4" duration="6" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="82" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="1.70">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="86.36" />
+      </triggered_effect>
+      <display_value name="dShockChance" value="82" />
+      <display_value name="dShockDuration" value="6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypImpactGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypImpactGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="28" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.25" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="1.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareImpactGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareImpactGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="55" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="2.75" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="3.25" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqImpactGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqImpactGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="82" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="4.25" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="4.75" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypPinningBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypPinningBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="28" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.44" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.17" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.3" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.75" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="0.75" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRarePinningBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRarePinningBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="55" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.00" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.38" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.65" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.65" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="1.65" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqPinningBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqPinningBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="82" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.56" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.58" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.95" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.55" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="2.55" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypChaosHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypChaosHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.1" duration="2.5" force="22000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="0.66" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.11" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareChaosHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareChaosHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.1" duration="2.5" force="88000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="45" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="1.5" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.25" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqChaosHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqChaosHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.1" duration="2.88" force="242000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="75" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="2.34" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.39" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypDemolisherTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypDemolisherTool']">
+    <effect_group tiered="false">
+      <passive_effect name="BlockDamage" operation="perc_add" value="1.32" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="0.88" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.25" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="15" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareDemolisherTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareDemolisherTool']">
+    <effect_group tiered="false">
+      <passive_effect name="BlockDamage" operation="perc_add" value="3" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="2" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.55" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqDemolisherTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqDemolisherTool']">
+    <effect_group tiered="false">
+      <passive_effect name="BlockDamage" operation="perc_add" value="4.68" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="3.12" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.85" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="47.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypHunterHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypHunterHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="17" />
+      </triggered_effect>
+      <passive_effect name="DamageBonus" operation="base_add" value="0.55" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="15" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.13" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.25" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.75" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="0.75" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareHunterHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareHunterHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="33" />
+      </triggered_effect>
+      <passive_effect name="DamageBonus" operation="base_add" value="1.25" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.30" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.55" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.4" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="2.4" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqHunterHybrid']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqHunterHybrid']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="49" />
+      </triggered_effect>
+      <passive_effect name="DamageBonus" operation="base_add" value="1.95" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="47.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.47" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.85" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="4.2" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="4.2" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypTitanArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypTitanArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="HealthChangeOT" operation="base_add" value="1.76" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="1.76" />
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.13" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.33" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.04" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.06" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareTitanArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareTitanArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="HealthChangeOT" operation="base_add" value="4" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="4.00" />
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.3" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.75" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.12" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.14" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqTitanArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqTitanArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="HealthChangeOT" operation="base_add" value="6.24" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="6.24" />
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.47" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="1.17" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.19" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.21" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypSprintLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypSprintLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="0.44" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="0.33" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="0.5" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.15" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="0.6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareSprintLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareSprintLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="1" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="0.9" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="1.1" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.35" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="1.3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqSprintLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqSprintLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="1.56" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="1.5" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="1.7" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.55" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="1.9" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypGravHammer']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypGravHammer']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.2" duration="4.5" force="35000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="0.33" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="0.5" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareGravHammer']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareGravHammer']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.2" duration="4.5" force="140000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="0.75" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.1" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.65" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqGravHammer']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqGravHammer']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.2" duration="4.5" force="385000" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="1.17" />
+      <passive_effect name="AttacksPerMinute" operation="perc_add" value="1.7" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.95" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypValkyrieBlade']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypValkyrieBlade']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.2" duration="4" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="22.73" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.44" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.15" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.3" />
+      <display_value name="dShockChance" value="22.73" />
+      <display_value name="dShockDuration" value="4" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.75" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="0.75" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareValkyrieBlade']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareValkyrieBlade']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.2" duration="4" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="50" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.00" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.35" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.65" />
+      <display_value name="dShockChance" value="50" />
+      <display_value name="dShockDuration" value="4" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.65" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="1.65" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqValkyrieBlade']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqValkyrieBlade']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="2.2" duration="4" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="77.27" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.56" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.55" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.95" />
+      <display_value name="dShockChance" value="77.27" />
+      <display_value name="dShockDuration" value="4" />
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.55" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="2.55" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypJudgementGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypJudgementGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="28" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.25" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="1.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareJudgementGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareJudgementGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="55" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="2.75" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="3.25" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqJudgementGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqJudgementGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="82" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="4.25" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="4.75" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypFrenzyGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypFrenzyGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="2.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="36.36" />
+      </triggered_effect>
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="0.77" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="1.25" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareFrenzyGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareFrenzyGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="2.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="68.18" />
+      </triggered_effect>
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="2.25" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="2.75" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqFrenzyGun']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqFrenzyGun']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="2.5">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="95.45" />
+      </triggered_effect>
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="3.75" />
+      <passive_effect name="ReloadSpeedMultiplier" operation="perc_add" value="4.25" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypStormBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypStormBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="3" duration="5" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="24" />
+      </triggered_effect>
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="31.82" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.11" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.3" />
+      <display_value name="dShockChance" value="24" />
+      <display_value name="dShockDuration" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareStormBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareStormBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="3" duration="5" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="50" />
+      </triggered_effect>
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="59.09" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.25" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.65" />
+      <display_value name="dShockChance" value="50" />
+      <display_value name="dShockDuration" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqStormBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqStormBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" range="3" duration="5" buff="buffShocked">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="77.27" />
+      </triggered_effect>
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="86.36" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.39" />
+      <passive_effect name="DismemberChance" operation="perc_add" value="0.95" />
+      <display_value name="dShockChance" value="77.27" />
+      <display_value name="dShockDuration" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypHarpoonBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypHarpoonBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.4">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="31.82" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.66" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.11" />
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="1.14" duration="1.28" force="2900.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="22.73" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="0.9" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="0.9" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareHarpoonBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareHarpoonBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.4">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="59.09" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.50" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.25" />
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="1.44" duration="1.88" force="8900.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="50.00" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="1.95" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="1.95" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqHarpoonBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqHarpoonBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.4">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="86.36" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.34" />
+      <passive_effect name="DismemberChance" operation="base_add" value="0.39" />
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="1.74" duration="2.48" force="14900.00">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="77.27" />
+      </triggered_effect>
+    </effect_group>
+    <effect_group tiered="false">
+      <requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1" />
+      <requirement name="CVarCompare" cvar="_notAlerted" operation="GT" value="0" target="other" />
+      <passive_effect name="DamageBonus" operation="base_add" value="2.85" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="2.85" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypSeismicTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypSeismicTool']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.00" duration="2.20" force="20000.00" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="1.1" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="0.66" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.3" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareSeismicTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareSeismicTool']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.00" duration="2.20" force="80000.00" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="2.5" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="1.5" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.65" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="17.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqSeismicTool']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqSeismicTool']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="2.00" duration="2.20" force="220000.00" />
+      <passive_effect name="BlockDamage" operation="perc_add" value="3.9" />
+      <passive_effect name="HarvestCount" operation="perc_add" value="2.34" />
+      <passive_effect name="DegradationPerUse" operation="perc_add" value="-0.95" />
+      <passive_effect name="EntityDamage" operation="perc_add" value="32.5" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypBastionArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypBastionArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.17" />
+      <passive_effect name="HealthChangeOT" operation="base_add" value="2.2" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="1.10" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.04" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.07" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareBastionArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareBastionArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.38" />
+      <passive_effect name="HealthChangeOT" operation="base_add" value="5" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="2.50" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.12" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.16" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqBastionArmor']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqBastionArmor']">
+    <effect_group tiered="false">
+      <passive_effect name="StaminaMax" operation="perc_add" value="0.58" />
+      <passive_effect name="HealthChangeOT" operation="base_add" value="7.8" />
+      <passive_effect name="StaminaChangeOT" operation="base_add" value="3.90" />
+      <passive_effect name="StaminaChangeOT" operation="perc_add" value="0.19" />
+      <passive_effect name="PlayerExpGain" operation="perc_add" value="0.24" tags="Kill" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypPhantomLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypPhantomLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="0.55" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="0.44" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="0.5" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.17" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="0.6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRarePhantomLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRarePhantomLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="1.25" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="1" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="1.1" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.38" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="1.3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqPhantomLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqPhantomLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="RunSpeed" operation="perc_add" value="1.95" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="1.56" />
+      <passive_effect name="JumpStrength" operation="perc_add" value="1.7" />
+      <passive_effect name="StaminaLoss" operation="perc_add" value="-0.58" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="1.9" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypSkyLeapLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypSkyLeapLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="JumpStrength" operation="perc_add" value="1.76" />
+      <passive_effect name="RunSpeed" operation="perc_add" value="0.3" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="0.5" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="0.6" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareSkyLeapLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareSkyLeapLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="JumpStrength" operation="perc_add" value="4" />
+      <passive_effect name="RunSpeed" operation="perc_add" value="0.9" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="1.1" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="1.3" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqSkyLeapLeg']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqSkyLeapLeg']">
+    <effect_group tiered="false">
+      <passive_effect name="JumpStrength" operation="perc_add" value="6.24" />
+      <passive_effect name="RunSpeed" operation="perc_add" value="1.5" />
+      <passive_effect name="WalkSpeed" operation="perc_add" value="1.7" />
+      <passive_effect name="CrouchSpeed" operation="perc_add" value="1.9" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypCatapultBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorAtypCatapultBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.8" duration="5" force="40000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.8">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="36.36" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="7.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="1.25" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareCatapultBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorRareCatapultBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.8" duration="5" force="160000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.8">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="68.18" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="22.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="2.75" />
+    </effect_group>
+  </append>
+<remove xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqCatapultBow']/effect_group" />
+<append xpath="/item_modifiers/item_modifier[@name='modAECMutatorUniqCatapultBow']">
+    <effect_group tiered="false">
+      <triggered_effect trigger="onSelfAttackedOther" action="Ragdoll" target="otherAOE" range="3.8" duration="5" force="440000" />
+      <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="otherAOE" buff="buffInjuryKnockdown01" range="3.8">
+        <requirement name="RandomRoll" seed_type="Random" target="self" min_max="0,100" operation="LTE" value="95.45" />
+      </triggered_effect>
+      <passive_effect name="EntityDamage" operation="perc_add" value="37.5" />
+      <passive_effect name="RoundsPerMinute" operation="perc_add" value="4.25" />
+    </effect_group>
+  </append>
+<!-- END GENERATED FOUR IN ONE -->
 </configs>
