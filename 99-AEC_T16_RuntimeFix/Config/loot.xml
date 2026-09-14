@@ -1512,7 +1512,7 @@
     <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']">
       <item name="itemPZAECArmoryBlueprintCrateT17" count="1" prob="0.12" force_prob="true" />
       <item name="itemPZAECComponentChoiceCrateT17" count="1" prob="0.25" force_prob="true" />
-      <item group="PZAECExpansionWeaponT17" count="1" prob="0.03" force_prob="true" />
+      <item group="PZAECExpansionWeaponT17" count="1" prob="0.04" force_prob="true" />
     </append>
     <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT17']">
       <item name="resourcePZAECCapacitorFragmentT17" count="1,3" prob=".75" />
@@ -1522,7 +1522,7 @@
     <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']">
       <item name="itemPZAECArmoryBlueprintCrateT18" count="1" prob="0.18" force_prob="true" />
       <item name="itemPZAECComponentChoiceCrateT18" count="1" prob="0.35" force_prob="true" />
-      <item group="PZAECExpansionWeaponT18" count="1" prob="0.04" force_prob="true" />
+      <item group="PZAECExpansionWeaponT18" count="1" prob="0.06" force_prob="true" />
     </append>
     <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT18']">
       <item name="resourcePZAECCapacitorFragmentT18" count="1,3" prob=".75" />
@@ -1532,7 +1532,7 @@
     <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
       <item name="itemPZAECArmoryBlueprintCrateT19" count="1" prob="0.25" force_prob="true" />
       <item name="itemPZAECComponentChoiceCrateT19" count="1" prob="0.5" force_prob="true" />
-      <item group="PZAECExpansionWeaponT19" count="1" prob="0.06" force_prob="true" />
+      <item group="PZAECExpansionWeaponT19" count="1" prob="0.08" force_prob="true" />
       <item group="PZAECCalibrationT19" count="1" prob=".15" force_prob="true" />
     </append>
     <append xpath="/lootcontainers/lootgroup[@name='PZAECSiegeMaterialsT19']">
@@ -1541,4 +1541,25 @@
       <item name="itemPZAECDefenseBlueprintCrateT19" count="1" prob="0.12" />
     </append>
   <!-- END GENERATED ENDGAME EXPANSION -->
+  <!-- Boss-box-only magazine pool: ordinary perk books/schematics have no
+       entries (0%). Keep both native crafting-magazine branches and counts;
+       the separate groupSkillBook reward and global book pools are unchanged. -->
+  <insertBefore xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+    <lootgroup name="PZAECBossSkillMagazinesOnly" count="1">
+      <item group="skillMagazines" loot_prob_template="medHigh" tags="riflesCSM,explosivesCSM,spearsCSM,salvageToolsCSM,shotgunsCSM,clubsCSM,sledgehammersCSM,harvestingToolsCSM,knucklesCSM,machineGunsCSM,bowsCSM,handgunsCSM,bladesCSM,roboticsCSM,medicalCSM,electricianCSM,trapsCSM,workstationCSM,repairToolsCSM,vehiclesCSM,armorCSM,foodCSM,seedCSM" />
+      <item group="groupChallengeRewardSkillMagazinesAll" loot_prob_template="high" tags="riflesCSM,explosivesCSM,spearsCSM,salvageToolsCSM,shotgunsCSM,clubsCSM,sledgehammersCSM,harvestingToolsCSM,knucklesCSM,machineGunsCSM,bowsCSM,handgunsCSM,bladesCSM,roboticsCSM,medicalCSM,electricianCSM,trapsCSM,workstationCSM,repairToolsCSM,vehiclesCSM,armorCSM,foodCSM,seedCSM" />
+    </lootgroup>
+  </insertBefore>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss02']/@group">PZAECBossSkillMagazinesOnly</set>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="prob">1</setattribute>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="force_prob">true</setattribute>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupZpackBoss02']/@group">PZAECBossSkillMagazinesOnly</set>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="prob">1</setattribute>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="force_prob">true</setattribute>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupZpackBoss02']/@group">PZAECBossSkillMagazinesOnly</set>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="prob">1</setattribute>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="force_prob">true</setattribute>
+  <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupZpackBoss02']/@group">PZAECBossSkillMagazinesOnly</set>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="prob">1</setattribute>
+  <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="force_prob">true</setattribute>
 </configs>

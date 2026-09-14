@@ -101,6 +101,7 @@ namespace AECT16RuntimeFix
                     prefix: new HarmonyMethod(typeof(LegendaryDefense), nameof(BeforeNativeSpawn)));
                 harmony.Patch(AccessTools.Method(typeof(NetPackageGameEventResponse), nameof(NetPackageGameEventResponse.ProcessPackage)),
                     postfix: new HarmonyMethod(typeof(LegendaryDefense), nameof(AfterReply)));
+                LegendaryDefenseSharing.Install(harmony);
                 Log("Three-wave voluntary defense enabled; native spawn lease and fixed-origin gate installed.");
             }
             catch (Exception ex) { Log("Installation failed: " + ex.GetBaseException().Message); }
@@ -157,7 +158,7 @@ namespace AECT16RuntimeFix
             BlockValue value = world.GetBlock(position);
             return value.isair || value.Block == null ? "" : value.Block.blockName ?? "";
         }
-        private static bool IsAt(World world, Vector3i position, string name)
+        internal static bool IsAt(World world, Vector3i position, string name)
         {
             return string.Equals(NameAt(world, position), name, StringComparison.OrdinalIgnoreCase);
         }
@@ -187,7 +188,7 @@ namespace AECT16RuntimeFix
                 n.Contains("batterybank") || n.Contains("solarbank") || n.Contains("speaker") ||
                 n.Contains("relay") || n == PowerBlock.ToLowerInvariant();
         }
-        private static bool Inspect(World world, Vector3 playerPosition, out FortificationReport report, out string reason)
+        internal static bool Inspect(World world, Vector3 playerPosition, out FortificationReport report, out string reason)
         {
             report = null;
             reason = null;
@@ -223,7 +224,7 @@ namespace AECT16RuntimeFix
             report.Grade = ConstructionGrade(report.Score);
             return true;
         }
-        private static long RemainingHitPoints(World world, FortificationReport report)
+        internal static long RemainingHitPoints(World world, FortificationReport report)
         {
             long total = 0;
             if (world == null || report == null) return 0;
@@ -301,6 +302,14 @@ namespace AECT16RuntimeFix
         {
             if (Tier(__instance.Quest?.ID) == 0) return true;
             var player = __instance.xui?.playerUI?.entityPlayer;
+            if (player != null && __instance.Quest.SharedOwnerID >= 0 && __instance.Quest.SharedOwnerID != player.entityId)
+            {
+                // Shared invitations never inspect/claim a second core or
+                // consume a second beacon. The server validates party/session.
+                if (player.IsDead() || HasActive(player.QuestJournal.quests.FindAll(q => q.Active).ConvertAll(q => q.ID)))
+                { Tell(player, "PZAECDefenseAlreadyActive"); return false; }
+                return true;
+            }
             string reason = CanStart(player);
             if (reason == null) return true;
             if (player != null) Tell(player, reason);
@@ -309,15 +318,18 @@ namespace AECT16RuntimeFix
 
         public static void AfterStart(Quest __instance, bool newQuest)
         {
-            if (Tier(__instance.ID) == 0 || !Owned(__instance, out var player)) return;
+            if (Tier(__instance.ID) == 0) return;
+            var player = __instance.OwnerJournal?.OwnerPlayer;
+            if (player == null) return;
             try
             {
-                if (!newQuest)
+                if (!LegendaryDefenseSharing.BeginLocal(__instance, newQuest))
                 {
-                    Revoke(player, __instance.QuestCode);
+                    if (Owned(__instance, out _)) Revoke(player, __instance.QuestCode);
                     GameManager.Instance.StartCoroutine(FailLoaded(__instance, player));
                     return;
                 }
+                if (!Owned(__instance, out _)) return;
                 if (Sessions.ContainsKey(__instance)) return;
                 if (!Inspect(player.world, player.position, out var report, out string reason))
                 {
@@ -478,58 +490,43 @@ namespace AECT16RuntimeFix
             }
             // NearPosition uses this cached origin for every entry, not the last
             // entity's position (native WanderingHorde can drift after each spawn).
+            if (!LegendaryDefenseSharing.AllowSpawn(player, owner.Tag, (int)player.Buffs.GetCustomVar(Scope + "Wave")))
+            { __result = BaseAction.ActionCompleteStates.InComplete; return false; }
             owner.TargetPosition = anchor;
             __instance.position = anchor;
             return true;
         }
         public static bool BeforeKill(ObjectiveEntityKill __instance, EntityAlive killedEntity)
         {
-            var q = __instance.OwnerQuest;
-            if (Tier(q?.ID) == 0) return true;
-            if (!Owned(q, out var player) || !Sessions.TryGetValue(q, out var s)) return false;
-            // Native phase advancement can precede the next one-second Tick.
-            // Ignore callbacks for that unscheduled wave before checking the
-            // old deadline; otherwise an unrelated kill can fail a cleared wave.
-            if (q.CurrentPhase != s.Clock.Wave || __instance.Phase != s.Clock.Wave) return false;
-            string reason = Check(s, Time.time);
-            if (reason != null) { Fail(q, player, reason); return false; }
-            // Game-event ExtraData becomes native spawnByName before the first
-            // EntityCreationData packet. spawnById stays -1 (not a Twitch spawn).
-            // No dependency on later/delta-only entity-buff synchronization.
-            return killedEntity != null && string.Equals(killedEntity.spawnByName,
-                Request(q.QuestCode, Tier(q.ID), s.Clock.Wave), StringComparison.Ordinal) &&
-                Inside(player.position, s.Anchor) && __instance.Phase == s.Clock.Wave && q.CurrentPhase == s.Clock.Wave &&
-                q.DataVariables.ContainsKey(WaveMarker(s.Clock.Wave));
+            // Cumulative server receipts are the ONLY defense counter writer.
+            // Native callbacks cannot double-count the same enemy or depend on
+            // whether that enemy's corpse exists on a participant's client.
+            return Tier(__instance.OwnerQuest?.ID) == 0;
         }
-        public static void BeforeClose(Quest __instance, ref Quest.QuestState finalState)
+        public static bool BeforeClose(Quest __instance, ref Quest.QuestState finalState)
         {
-            if (Tier(__instance.ID) == 0) return;
+            if (Tier(__instance.ID) == 0) return true;
+            if (LegendaryDefenseSharing.IsSettled(__instance)) return false;
             if (finalState == Quest.QuestState.Completed)
             {
-                bool valid = Sessions.TryGetValue(__instance, out var s) && s.Clock.Wave == 3 &&
-                    Check(s, Time.time) == null && Inside(s.Player.position, s.Anchor);
-                for (int wave = 1; wave <= 3 && valid; wave++) valid &= __instance.DataVariables.ContainsKey(WaveMarker(wave));
-                foreach (var objective in __instance.Objectives) valid &= objective.Complete;
-                if (!valid) finalState = Quest.QuestState.Failed;
+                if (!LegendaryDefenseSharing.AuthorizeCompletion(__instance, out int rank)) finalState = Quest.QuestState.Failed;
                 else
                 {
-                    long remaining = RemainingHitPoints(s.Player.world, s.Fortification);
-                    bool power = IsAt(s.Player.world, s.Fortification.Power, PowerBlock);
-                    bool supply = IsAt(s.Player.world, s.Fortification.Supply, SupplyBlock);
-                    int rank = RewardRank(s.Fortification.Grade, s.Fortification.InitialHitPoints, remaining, power, supply);
+                    var player = __instance.OwnerJournal.OwnerPlayer;
                     string eventId = BonusEventId(Tier(__instance.ID), rank);
                     bool awarded = LegendaryAdventure.DispatchOnce(__instance.DataVariables, Scope + "Bonus_v1", eventId, id =>
-                        GameEventManager.Current != null && GameEventManager.Current.HandleAction(id, s.Player, s.Player, false,
-                            Scope + ":" + __instance.QuestCode + ":" + rank, Scope + ":" + __instance.QuestCode + ":" + rank,
+                        GameEventManager.Current != null && GameEventManager.Current.HandleAction(id, player, player, false,
+                            Scope + ":" + __instance.QuestCode + ":" + rank + ":" + player.entityId,
+                            Scope + ":" + __instance.QuestCode + ":" + rank + ":" + player.entityId,
                             false, false, "", null));
-                    TellFormatted(s.Player, "PZAECStrongholdComplete", rank,
-                        s.Fortification.InitialHitPoints <= 0 ? 0 : (int)Math.Round(100d * remaining / s.Fortification.InitialHitPoints),
-                        power ? 1 : 0, supply ? 1 : 0);
-                    Log("Completed rank=" + rank + " integrity=" + remaining + "/" + s.Fortification.InitialHitPoints +
-                        " power=" + power + " supply=" + supply + " bonusQueued=" + awarded + " code=" + __instance.QuestCode);
+                    TellFormatted(player, "PZAECDefenseShareComplete", rank);
+                    Log("Completed rank=" + rank + " bonusQueued=" + awarded + " code=" + __instance.QuestCode + " recipient=" + player.entityId);
                 }
             }
-            Revoke(__instance.OwnerJournal?.OwnerPlayer, __instance.QuestCode);
+            LegendaryDefenseSharing.Closed(__instance);
+            if (__instance.SharedOwnerID < 0 || __instance.SharedOwnerID == __instance.OwnerJournal?.OwnerPlayer?.entityId)
+                Revoke(__instance.OwnerJournal?.OwnerPlayer, __instance.QuestCode);
+            return true;
         }
         private static void Fail(Quest quest, EntityPlayerLocal player, string reason)
         {

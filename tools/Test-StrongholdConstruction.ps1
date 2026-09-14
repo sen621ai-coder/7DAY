@@ -47,8 +47,10 @@ public static class StrongholdRegression
             Check(inspect.Body.Instructions.Count(i => i.Operand is Mono.Cecil.MethodReference r && r.Name == "GetBlock") > 0,
                 "Construction scan no longer reads world blocks");
             var close = type.Methods.Single(m => m.Name == "BeforeClose");
-            Check(close.Body.Instructions.Any(i => i.Operand is Mono.Cecil.MethodReference r && r.Name == "RewardRank"),
-                "Completion no longer calculates stronghold rank");
+            var sharing = module.Types.Single(t => t.Name == "LegendaryDefenseSharing");
+            Check(sharing.Methods.Single(m => m.Name == "End").Body.Instructions.Any(i => i.Operand is Mono.Cecil.MethodReference r && r.Name == "RewardRank"),
+                "Server completion no longer calculates shared stronghold rank");
+            Check(close.Body.Instructions.Any(i => i.Operand is Mono.Cecil.MethodReference r && r.Name == "AuthorizeCompletion"), "Client rewards lack terminal authorization");
             Check(close.Body.Instructions.Any(i => i.Operand is Mono.Cecil.MethodReference r && r.Name == "DispatchOnce"),
                 "Conditional bonus lost duplicate guard");
         }
@@ -99,5 +101,6 @@ foreach ($key in @('PZAECStrongholdNeedCore','PZAECStrongholdNeedPower','PZAECSt
     'PZAECStrongholdCoreLost','PZAECStrongholdPowerLost','PZAECStrongholdSupplyLost','PZAECStrongholdComplete')) {
     Assert-Stronghold ($localization.ContainsKey($key) -and -not [string]::IsNullOrWhiteSpace($localization[$key].schinese)) "Missing stronghold text $key"
 }
-Assert-Stronghold ((Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw) -match '<Version value="1\.25\.5"') 'Runtime version was not bumped'
+[xml]$runtimeInfo = Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/ModInfo.xml') -Raw
+Assert-Stronghold ([version]$runtimeInfo.xml.Version.value -ge [version]'1.26.0') 'Shared defense runtime version was not bumped'
 'PASS: three craftable 12k+ HP facilities, native parents, Chinese text and 12 exact-tier construction bonus events.'

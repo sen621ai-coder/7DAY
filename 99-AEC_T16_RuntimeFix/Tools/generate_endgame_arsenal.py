@@ -162,7 +162,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
         ET.SubElement(item, "property", {"name": "DescriptionKey", "value": name + "Desc"})
         ET.SubElement(item, "property", {"name": "CustomIcon", "value": "resourceLegendaryParts"})
         ET.SubElement(item, "property", {"name": "CustomIconTint", "value": {"weapon": "FF8844", "armor": "66BBFF", "device": "AA88FF"}[kind]})
-        ET.SubElement(item, "property", {"name": "Stacknumber", "value": "20"})
+        ET.SubElement(item, "property", {"name": "Stacknumber", "value": "50000"})
         ET.SubElement(item, "property", {"name": "SellableToTrader", "value": "false"})
         loc += [(name, "items", en, cn), (name + "Desc", "items", "A reusable endgame crafting frame made at a workbench.", "在工作台制作的终局装备通用底盘。")]
 
@@ -176,7 +176,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             ET.SubElement(item, "property", {"name": "DescriptionKey", "value": name + "Desc"})
             ET.SubElement(item, "property", {"name": "CustomIcon", "value": "resourceElectricParts" if stem == "SiegeCapacitor" else "resourceLegendaryParts"})
             ET.SubElement(item, "property", {"name": "CustomIconTint", "value": data["color"]})
-            ET.SubElement(item, "property", {"name": "Stacknumber", "value": "100" if stem == "SiegeCapacitor" else "20"})
+            ET.SubElement(item, "property", {"name": "Stacknumber", "value": "50000"})
             ET.SubElement(item, "property", {"name": "SellableToTrader", "value": "false"})
             desc_en = "Recovered from Blood Moon siege engineers." if stem == "SiegeCapacitor" else "Recovered from same-tier endgame boss caches."
             desc_cn = "由血月工程小队掉落。" if stem == "SiegeCapacitor" else "由同阶终局 Boss 奖励箱产出。"

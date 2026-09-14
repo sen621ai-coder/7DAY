@@ -1678,7 +1678,7 @@
       <property name="statement_key" value="PZAECDefenseDesc" />
       <property name="response_key" value="PZAECDefenseSubtitle" />
       <property name="repeatable" value="true" />
-      <property name="shareable" value="false" />
+      <property name="shareable" value="true" />
       <property name="add_to_tier_complete" value="false" />
       <property name="category_key" value="PZAECDefenseCategory" />
       <property name="icon" value="ui_game_symbol_quest" />
@@ -1712,7 +1712,7 @@
       <property name="statement_key" value="PZAECDefenseDesc" />
       <property name="response_key" value="PZAECDefenseSubtitle" />
       <property name="repeatable" value="true" />
-      <property name="shareable" value="false" />
+      <property name="shareable" value="true" />
       <property name="add_to_tier_complete" value="false" />
       <property name="category_key" value="PZAECDefenseCategory" />
       <property name="icon" value="ui_game_symbol_quest" />
@@ -1746,7 +1746,7 @@
       <property name="statement_key" value="PZAECDefenseDesc" />
       <property name="response_key" value="PZAECDefenseSubtitle" />
       <property name="repeatable" value="true" />
-      <property name="shareable" value="false" />
+      <property name="shareable" value="true" />
       <property name="add_to_tier_complete" value="false" />
       <property name="category_key" value="PZAECDefenseCategory" />
       <property name="icon" value="ui_game_symbol_quest" />
@@ -1780,7 +1780,7 @@
       <property name="statement_key" value="PZAECDefenseDesc" />
       <property name="response_key" value="PZAECDefenseSubtitle" />
       <property name="repeatable" value="true" />
-      <property name="shareable" value="false" />
+      <property name="shareable" value="true" />
       <property name="add_to_tier_complete" value="false" />
       <property name="category_key" value="PZAECDefenseCategory" />
       <property name="icon" value="ui_game_symbol_quest" />

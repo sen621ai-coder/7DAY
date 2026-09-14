@@ -214,7 +214,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             prop(item, "DescriptionKey", name + "Desc")
             prop(item, "CustomIcon", base)
             prop(item, "CustomIconTint", COLOR[tier])
-            prop(item, "Stacknumber", 100 if stem == "SkyguardInterceptor" else 20)
+            prop(item, "Stacknumber", 50000)
             prop(item, "SellableToTrader", "false")
             eg = ET.SubElement(item, "effect_group", {"tiered": "false"})
             if stem == "SkyguardInterceptor":
@@ -244,9 +244,9 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
                 loc(rows, name + "Desc", "items", "Specialized ammunition for AEC endgame equipment.", "AEC 终局设备使用的专属弹药。")
 
     field = [
-        ("itemPZAECQuickArmorGel", "快凝装甲胶", "Quick Armor Gel", "buffPZAECQuickArmorGel", 10, "resourceRepairKit"),
-        ("itemPZAECResonanceInjector", "共鸣注射剂", "Resonance Injector", "buffPZAECResonanceInjector", 5, "medicalFirstAidKit"),
-        ("itemPZAECDecoyBeacon", "诱饵信标", "Decoy Beacon", "buffPZAECDecoyBeacon", 5, "thrownGrenade"),
+        ("itemPZAECQuickArmorGel", "快凝装甲胶", "Quick Armor Gel", "buffPZAECQuickArmorGel", 50000, "resourceRepairKit"),
+        ("itemPZAECResonanceInjector", "共鸣注射剂", "Resonance Injector", "buffPZAECResonanceInjector", 50000, "medicalFirstAidKit"),
+        ("itemPZAECDecoyBeacon", "诱饵信标", "Decoy Beacon", "buffPZAECDecoyBeacon", 50000, "thrownGrenade"),
         ("itemPZAECEvacAnchor", "撤离锚", "Evacuation Anchor", "buffPZAECEvacAnchor", 1, "resourceLegendaryParts"),
     ]
     for name, cn, en, buff, stack, icon in field:
@@ -289,7 +289,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             prop(item, "DescriptionKey", name + "Desc")
             prop(item, "CustomIcon", "thrownGrenade" if stem == "CounterJammer" else "resourceRepairKit")
             prop(item, "CustomIconTint", COLOR[tier])
-            prop(item, "Stacknumber", 10 if stem == "CounterJammer" else 5)
+            prop(item, "Stacknumber", 50000)
             prop(item, "SellableToTrader", "false")
             eg = ET.SubElement(item, "effect_group", {"tiered": "false"})
             if stem == "CounterJammer":
@@ -333,7 +333,7 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
         prop(item, "CustomIcon", icon)
         tier = next((t for t in TIERS if name.endswith(f"T{t}")), 16)
         prop(item, "CustomIconTint", COLOR[tier])
-        prop(item, "Stacknumber", 20 if "Crate" in name or "Choice" in name else 100)
+        prop(item, "Stacknumber", 50000)
         prop(item, "SellableToTrader", "false")
         loc(rows, name, "items", en, cn)
         loc(rows, name + "Desc", "items", "Endgame crafting and reward material. Choice tokens are spent on the exact recipe you select.", "终局制作与奖励材料；选择箱代币用于你主动选择的对应配方。")
@@ -761,7 +761,7 @@ def build_loot() -> str:
         boss = ET.Element("append", {"xpath": f"/lootcontainers/lootgroup[@name='PZAECBossLootBundleT{tier}_Content']"})
         ET.SubElement(boss, "item", {"name": f"itemPZAECArmoryBlueprintCrateT{tier}", "count": "1", "prob": str([.08, .12, .18, .25][i]), "force_prob": "true"})
         ET.SubElement(boss, "item", {"name": f"itemPZAECComponentChoiceCrateT{tier}", "count": "1", "prob": str([.18, .25, .35, .50][i]), "force_prob": "true"})
-        ET.SubElement(boss, "item", {"group": f"PZAECExpansionWeaponT{tier}", "count": "1", "prob": str([.02, .03, .04, .06][i]), "force_prob": "true"})
+        ET.SubElement(boss, "item", {"group": f"PZAECExpansionWeaponT{tier}", "count": "1", "prob": str([.02, .04, .06, .08][i]), "force_prob": "true"})
         if tier == 19:
             ET.SubElement(boss, "item", {"group": "PZAECCalibrationT19", "count": "1", "prob": ".15", "force_prob": "true"})
         chunks.append(xml(boss))

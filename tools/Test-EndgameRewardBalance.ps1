@@ -91,6 +91,13 @@ foreach($tier in 16..19) {
         Assert-Balance ($bonus.SelectNodes("item[@name='$id']").Count -eq 1) "Missing utility drop $id/T$tier"
     }
     $bundle=$loot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']")
+    $magazinesOnly=$bundle.SelectSingleNode("item[@group='PZAECBossSkillMagazinesOnly']")
+    Assert-Balance ($null -ne $magazinesOnly -and [int]$magazinesOnly.count -eq @(5,6,8,10)[$tier-16]) "Boss magazine draw count changed T$tier"
+    Assert-Balance ($magazinesOnly.prob -eq '1' -and $magazinesOnly.force_prob -eq 'true') "Boss magazine pool must trigger at 100% T$tier"
+    Assert-Balance ($bundle.SelectNodes("item[@group='groupZpackBoss02' or @group='PZAECBossBooksOnly' or @group='booksAllScaled']").Count -eq 0) "Ordinary boss book/schematic pool still active T$tier"
+    $newWeapon=$bundle.SelectSingleNode("item[@group='PZAECExpansionWeaponT$tier']")
+    Assert-Balance ([double]$newWeapon.prob -eq @(.02,.04,.06,.08)[$tier-16] -and $newWeapon.force_prob -eq 'true' -and $newWeapon.count -eq '1') "Wrong new weapon probability T$tier"
+    Assert-Balance ([double]$bundle.SelectSingleNode("item[@group='groupSkillBook']").prob -eq @(.20,.25,.30,.40)[$tier-16]) "Separate skill-point book reward changed T$tier"
     $expectedBreadth=if($tier -eq 19){22}else{21}
     Assert-Balance ($bundle.item.Count -eq $expectedBreadth) "Wrong boss bundle breadth T${tier}: expected $expectedBreadth, got $($bundle.item.Count)"
     foreach($groupName in @("PZAECExpansionWeaponT$tier")){Assert-Balance ($bundle.SelectNodes("item[@group='$groupName']").Count -eq 1) "Missing expansion weapon reward T$tier"}
@@ -106,6 +113,28 @@ foreach($groupName in @('groupUnique_Weapon','groupLegend_Weapon','groupLegend_M
         Assert-Balance ($p -gt $last) "Boss rarity chance not increasing: $groupName/T$tier"; $last=$p
     }
 }
+$bookPool=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossSkillMagazinesOnly']")
+Assert-Balance ($bookPool.count -eq '1' -and $bookPool.item.Count -eq 2 -and $bookPool.SelectNodes("item[@group='skillMagazines' or @group='groupChallengeRewardSkillMagazinesAll']").Count -eq 2) 'Boss pool must contain only the two crafting-magazine branches'
+$sharedBooks=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='groupZpackBoss02']")
+Assert-Balance ($sharedBooks.SelectNodes("item[@group='skillMagazines' or @group='groupChallengeRewardSkillMagazinesAll']").Count -eq 2) 'Global crafting magazine pool was modified'
+Assert-Balance ($sharedBooks.SelectNodes("item[@group='booksAllScaled']").Count -eq 1) 'Global ordinary book pool was modified'
+$seenBookGroups=[Collections.Generic.HashSet[string]]::new()
+$pendingBookGroups=[Collections.Generic.Queue[string]]::new()
+$pendingBookGroups.Enqueue('PZAECBossSkillMagazinesOnly')
+$magazineNames=[Collections.Generic.HashSet[string]]::new()
+while($pendingBookGroups.Count) {
+    $name=$pendingBookGroups.Dequeue()
+    if(-not $seenBookGroups.Add($name)){continue}
+    Assert-Balance ($name -notin @('booksAllScaled','perkBooks','schematicsModsAndGeneralCommon','schematicsVehiclesCommon')) "Ordinary book/schematic branch reachable: $name"
+    $group=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='$name']")
+    Assert-Balance ($null -ne $group) "Missing magazine subgroup: $name"
+    foreach($entry in $group.SelectNodes('item')) {
+        if($entry.group){$pendingBookGroups.Enqueue([string]$entry.group)}
+        elseif($entry.name){[void]$magazineNames.Add([string]$entry.name)}
+    }
+}
+Assert-Balance ($magazineNames.Count -eq 23 -and @($magazineNames | Where-Object {$_ -notlike '*SkillMagazine'}).Count -eq 0) 'Boss magazine pool contains unexpected leaf items'
+'PASS: four boss boxes trigger crafting magazines at 100%; all 23 magazines reachable; ordinary books/schematics excluded; separate skill-point book and global pools unchanged; new weapons use 2/4/6/8%.'
 
 # Every original T16 family is preserved at T17-T19 with its own bag/table.
 [xml]$tweaksEntities=Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/entityclasses.xml') -Raw

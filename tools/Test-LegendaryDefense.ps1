@@ -116,11 +116,11 @@ public static class DefenseRegression
                 Check(ops[i-1].OpCode.Code==Mono.Cecil.Cil.Code.Ldc_I4_1,"Owner CVars not force-sent by joining client"); forced++;
             }
             Check(forced==6,"Missing scope coordinates/identity/wave fields");
-            Check(helper.Methods.Single(m=>m.Name=="BeforeKill").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name=="spawnByName"),"Kill credit not encounter-specific");
-            var killOps=helper.Methods.Single(m=>m.Name=="BeforeKill").Body.Instructions.ToList();
-            int phaseGuard=killOps.FindIndex(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="get_CurrentPhase");
-            int deadlineCheck=killOps.FindIndex(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="Check");
-            Check(phaseGuard>=0 && phaseGuard<deadlineCheck,"Next-wave kill callback can fail against previous-wave deadline");
+            var sharing=mod.Types.Single(t=>t.Name=="LegendaryDefenseSharing");
+            var killOps=sharing.Methods.Single(m=>m.Name=="AfterAwardKill").Body.Instructions.ToList();
+            Check(killOps.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name=="spawnByName"),"Server kill credit not encounter-specific");
+            Check(killOps.Any(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="WaveFor"),"Server kill wave not validated");
+            Check(!helper.Methods.Single(m=>m.Name=="BeforeKill").Body.Instructions.Any(i=>i.Operand is Mono.Cecil.MethodReference m && m.Name=="Check"),"Native callbacks can still mutate defense state");
             var gate=helper.Methods.Single(m=>m.Name=="BeforeNativeSpawn");
             foreach(string field in new[]{"Tag","Requester","TargetPosition","position"})
                 Check(gate.Body.Instructions.Any(i=>i.Operand is Mono.Cecil.FieldReference f && f.Name==field),"Missing server scope/anchor guard "+field);
@@ -155,7 +155,7 @@ foreach($tier in 16..19) {
     $qid="PZAECDefenseT$tier"; $itemId="PZAECDefenseBeaconT$tier"
     $quest=$quests.SelectSingleNode("//quest[@id='$qid']")
     Assert-Defense ($quest.SelectSingleNode("property[@name='completiontype']").value -eq 'AutoComplete') 'Defense must reward only automatic completion'
-    Assert-Defense ($quest.SelectSingleNode("property[@name='shareable']").value -eq 'false') 'Defense must not duplicate shared journals'
+    Assert-Defense ($quest.SelectSingleNode("property[@name='shareable']").value -eq 'true') 'Defense sharing disabled'
     Assert-Defense ($quest.SelectNodes('objective').Count -eq 11 -and $quest.SelectNodes('action').Count -eq 0) 'Unexpected objective count or unguarded spawn action'
     foreach($wave in 1..3) {
         $sequence=$events.SelectSingleNode("//action_sequence[@name='${qid}W$wave']")
