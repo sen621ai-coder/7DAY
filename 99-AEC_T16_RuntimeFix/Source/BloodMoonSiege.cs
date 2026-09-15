@@ -54,7 +54,7 @@ namespace AECT16RuntimeFix
             // native fallback, so mirror it here before rolling the squad slot.
             GameRandom selectionRandom = random ?? target.world.GetGameRandom();
             if (selectionRandom == null) return original;
-            string name = Variant(tier, selectionRandom.RandomRange(100));
+            string name = BloodMoonVariety.Select(target, tier, selectionRandom);
             if (name == null) return original;
             int replacement = EntityClass.GetId(name);
             if (replacement == -1) return original;

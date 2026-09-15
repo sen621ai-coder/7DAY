@@ -1,0 +1,382 @@
+<configs>
+  <append xpath="/dialogs">
+    <dialog id="sakuraNative" startstatementid="start">
+      <statement id="start" text="sakuraNative_start">
+        <response_entry id="about" />
+        <response_entry id="missions" />
+        <response_entry id="follow" />
+        <response_entry id="wait" />
+        <response_entry id="chat" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="missions" text="sakuraNative_missions">
+        <response_entry id="t16" />
+        <response_entry id="t17" />
+        <response_entry id="t18" />
+        <response_entry id="t19" />
+        <response_entry id="locked" />
+        <response_entry id="progress" />
+        <response_entry id="claim" />
+        <response_entry id="takeover" />
+        <response_entry id="abandon" />
+        <response_entry id="back" />
+      </statement>
+      <statement id="confirm" text="sakuraNative_confirm">
+        <response_entry id="abandonYes" />
+        <response_entry id="back" />
+      </statement>
+      <statement id="waiting" text="sakuraNative_waiting">
+        <response_entry id="back" />
+      </statement>
+      <statement id="reply0" text="sakuraNative_reply0">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply1" text="sakuraNative_reply1">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply2" text="sakuraNative_reply2">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply3" text="sakuraNative_reply3">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply4" text="sakuraNative_reply4">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply5" text="sakuraNative_reply5">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply6" text="sakuraNative_reply6">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply16" text="sakuraNative_reply16">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply20" text="sakuraNative_reply20">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply21" text="sakuraNative_reply21">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply22" text="sakuraNative_reply22">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply23" text="sakuraNative_reply23">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply30" text="sakuraNative_reply30">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply31" text="sakuraNative_reply31">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply32" text="sakuraNative_reply32">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply33" text="sakuraNative_reply33">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply34" text="sakuraNative_reply34">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply35" text="sakuraNative_reply35">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply36" text="sakuraNative_reply36">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply37" text="sakuraNative_reply37">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply38" text="sakuraNative_reply38">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply39" text="sakuraNative_reply39">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <response id="abandon" text="sakuraNative_response_abandon" nextstatementid="confirm">
+      </response>
+      <response id="abandonYes" text="sakuraNative_response_abandonYes" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="21" />
+      </response>
+      <response id="about" text="sakuraNative_response_about" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="1" />
+      </response>
+      <response id="back" text="sakuraNative_response_back" nextstatementid="start">
+      </response>
+      <response id="chat" text="sakuraNative_response_chat" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="4" />
+      </response>
+      <response id="claim" text="sakuraNative_response_claim" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="22" />
+      </response>
+      <response id="done" text="sakuraNative_response_done">
+      </response>
+      <response id="follow" text="sakuraNative_response_follow" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="2" />
+      </response>
+      <response id="locked" text="sakuraNative_response_locked" nextstatementid="missions">
+        <requirement type="SakuraTier, Sakura.Preview" id="0" />
+      </response>
+      <response id="missions" text="sakuraNative_response_missions" nextstatementid="missions">
+      </response>
+      <response id="progress" text="sakuraNative_response_progress" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="20" />
+      </response>
+      <response id="t16" text="sakuraNative_response_t16" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="16" />
+        <action type="Sakura, Sakura.Preview" id="16" />
+      </response>
+      <response id="t17" text="sakuraNative_response_t17" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="17" />
+        <action type="Sakura, Sakura.Preview" id="17" />
+      </response>
+      <response id="t18" text="sakuraNative_response_t18" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="18" />
+        <action type="Sakura, Sakura.Preview" id="18" />
+      </response>
+      <response id="t19" text="sakuraNative_response_t19" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="19" />
+        <action type="Sakura, Sakura.Preview" id="19" />
+      </response>
+      <response id="takeover" text="sakuraNative_response_takeover" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="23" />
+      </response>
+      <response id="wait" text="sakuraNative_response_wait" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="3" />
+      </response>
+    </dialog>
+    <dialog id="mintNative" startstatementid="start">
+      <statement id="start" text="mintNative_start">
+        <response_entry id="about" />
+        <response_entry id="missions" />
+        <response_entry id="chat" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="missions" text="mintNative_missions">
+        <response_entry id="t16" />
+        <response_entry id="t17" />
+        <response_entry id="t18" />
+        <response_entry id="t19" />
+        <response_entry id="locked" />
+        <response_entry id="progress" />
+        <response_entry id="claim" />
+        <response_entry id="takeover" />
+        <response_entry id="abandon" />
+        <response_entry id="back" />
+      </statement>
+      <statement id="confirm" text="mintNative_confirm">
+        <response_entry id="abandonYes" />
+        <response_entry id="back" />
+      </statement>
+      <statement id="waiting" text="mintNative_waiting">
+        <response_entry id="back" />
+      </statement>
+      <statement id="reply0" text="mintNative_reply0">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply1" text="mintNative_reply1">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply2" text="mintNative_reply2">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply3" text="mintNative_reply3">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply4" text="mintNative_reply4">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply5" text="mintNative_reply5">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply6" text="mintNative_reply6">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply16" text="mintNative_reply16">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply20" text="mintNative_reply20">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply21" text="mintNative_reply21">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply22" text="mintNative_reply22">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply23" text="mintNative_reply23">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply30" text="mintNative_reply30">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply31" text="mintNative_reply31">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply32" text="mintNative_reply32">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply33" text="mintNative_reply33">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply34" text="mintNative_reply34">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply35" text="mintNative_reply35">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply36" text="mintNative_reply36">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply37" text="mintNative_reply37">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply38" text="mintNative_reply38">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <statement id="reply39" text="mintNative_reply39">
+        <response_entry id="missions" />
+        <response_entry id="back" />
+        <response_entry id="done" />
+      </statement>
+      <response id="abandon" text="mintNative_response_abandon" nextstatementid="confirm">
+      </response>
+      <response id="abandonYes" text="mintNative_response_abandonYes" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="21" />
+      </response>
+      <response id="about" text="mintNative_response_about" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="1" />
+      </response>
+      <response id="back" text="mintNative_response_back" nextstatementid="start">
+      </response>
+      <response id="chat" text="mintNative_response_chat" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="4" />
+      </response>
+      <response id="claim" text="mintNative_response_claim" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="22" />
+      </response>
+      <response id="done" text="mintNative_response_done">
+      </response>
+      <response id="follow" text="mintNative_response_follow" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="2" />
+      </response>
+      <response id="locked" text="mintNative_response_locked" nextstatementid="missions">
+        <requirement type="SakuraTier, Sakura.Preview" id="0" />
+      </response>
+      <response id="missions" text="mintNative_response_missions" nextstatementid="missions">
+      </response>
+      <response id="progress" text="mintNative_response_progress" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="20" />
+      </response>
+      <response id="t16" text="mintNative_response_t16" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="16" />
+        <action type="Sakura, Sakura.Preview" id="16" />
+      </response>
+      <response id="t17" text="mintNative_response_t17" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="17" />
+        <action type="Sakura, Sakura.Preview" id="17" />
+      </response>
+      <response id="t18" text="mintNative_response_t18" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="18" />
+        <action type="Sakura, Sakura.Preview" id="18" />
+      </response>
+      <response id="t19" text="mintNative_response_t19" nextstatementid="waiting">
+        <requirement type="SakuraTier, Sakura.Preview" id="19" />
+        <action type="Sakura, Sakura.Preview" id="19" />
+      </response>
+      <response id="takeover" text="mintNative_response_takeover" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="23" />
+      </response>
+      <response id="wait" text="mintNative_response_wait" nextstatementid="waiting">
+        <action type="Sakura, Sakura.Preview" id="3" />
+      </response>
+    </dialog>
+  </append>
+</configs>

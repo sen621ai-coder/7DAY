@@ -1,0 +1,10 @@
+{
+  "source_faces": 39895,
+  "preview_faces": 39895,
+  "bones": 153,
+  "height_metres": 1.68,
+  "source": "E:\\soft\\7DTD-Modding\\Incoming\\TDA\\model\\Tda\u5f0f\u521d\u97f3\u30df\u30af_ArlvitbodyWater_Hiro_P.glb",
+  "animations": 0,
+  "attribution": "User supplied tda-arlvitbodywater-hiro-p; upstream authors/license not verified",
+  "changes": "Decimated mesh, normalized height, converted texture and exported FBX. No new animation."
+}

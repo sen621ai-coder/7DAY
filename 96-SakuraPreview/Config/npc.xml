@@ -1,0 +1,6 @@
+<configs>
+  <append xpath="/npc">
+    <npc_info id="sakuraNativeNPC" name="小樱" name_key="sakuraCompanion" faction="whiteriver" portrait="npc_jen" greeting_type="nearby" stance="Like" voice_set="trader_jen" trader_id="2" dialog_id="sakuraNative" quest_faction="1" localization_id="npcTraderJen" quest_list="trader_jen_quests" dms_section_type="TraderJen" />
+    <npc_info id="mintNativeNPC" name="Mint" name_key="mintGuardian" faction="whiteriver" portrait="npc_jen" greeting_type="nearby" stance="Like" voice_set="trader_jen" trader_id="2" dialog_id="mintNative" quest_faction="1" localization_id="npcTraderJen" quest_list="trader_jen_quests" dms_section_type="TraderJen" />
+  </append>
+</configs>

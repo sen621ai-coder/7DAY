@@ -1,0 +1,6 @@
+<configs>
+  <append xpath="/xui/window_group[@name='dialog']">
+    <window name="windowSakuraStatement" />
+  </append>
+</configs>
+

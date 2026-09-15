@@ -1,0 +1,25 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
+sakuraNpcPreview,blocks,Block,,false,Sakura model preview,小樱人物外观预览
+sakuraNpcPreviewDesc,blocks,Block,,false,Visual prototype only. No dialogue or escort AI.,仅人物外观预览；暂未接入对话和护送功能。
+sakuraCompanion,entityclasses,Entity,,false,Sakura,小樱
+sakuraAmbushT16,entityclasses,Entity,,false,Escort ambusher T16,护送伏击者 T16
+sakuraAmbushT17,entityclasses,Entity,,false,Escort ambusher T17,护送伏击者 T17
+sakuraAmbushT18,entityclasses,Entity,,false,Escort ambusher T18,护送伏击者 T18
+sakuraAmbushT19,entityclasses,Entity,,false,Escort ambusher T19,护送伏击者 T19
+sakuraAmbushT16Runner,entityclasses,Entity,,false,Escort Runner T16,突袭摩托党 T16
+sakuraAmbushT16Soldier,entityclasses,Entity,,false,Escort Soldier T16,装甲士兵 T16
+sakuraAmbushT16Tank,entityclasses,Entity,,false,Escort Tank T16,重装怀特 T16
+sakuraAmbushT16Boss,entityclasses,Entity,,false,Escort Boss T16,护送伏击首领 T16
+sakuraAmbushT17Runner,entityclasses,Entity,,false,Escort Runner T17,突袭摩托党 T17
+sakuraAmbushT17Soldier,entityclasses,Entity,,false,Escort Soldier T17,装甲士兵 T17
+sakuraAmbushT17Tank,entityclasses,Entity,,false,Escort Tank T17,重装怀特 T17
+sakuraAmbushT17Boss,entityclasses,Entity,,false,Escort Boss T17,护送伏击首领 T17
+sakuraAmbushT18Runner,entityclasses,Entity,,false,Escort Runner T18,突袭摩托党 T18
+sakuraAmbushT18Soldier,entityclasses,Entity,,false,Escort Soldier T18,装甲士兵 T18
+sakuraAmbushT18Tank,entityclasses,Entity,,false,Escort Tank T18,重装怀特 T18
+sakuraAmbushT18Boss,entityclasses,Entity,,false,Escort Boss T18,护送伏击首领 T18
+sakuraAmbushT19Runner,entityclasses,Entity,,false,Escort Runner T19,突袭摩托党 T19
+sakuraAmbushT19Soldier,entityclasses,Entity,,false,Escort Soldier T19,装甲士兵 T19
+sakuraAmbushT19Tank,entityclasses,Entity,,false,Escort Tank T19,重装怀特 T19
+sakuraAmbushT19Boss,entityclasses,Entity,,false,Escort Boss T19,护送伏击首领 T19
+mintGuardian,entityclasses,Entity,,false,Mint Guardian,Mint 原地守护

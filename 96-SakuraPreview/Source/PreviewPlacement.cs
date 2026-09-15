@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using HarmonyLib;
 using UnityEngine;
@@ -14,10 +14,15 @@ namespace SakuraPreview
         const string BlockName="sakuraNpcPreview";
         public void InitMod(Mod mod)
         {
-            new Harmony("yf.sakura.preview.placement").Patch(
-                AccessTools.Method(typeof(GameManager),"Update"),
-                postfix:new HarmonyMethod(typeof(PreviewPlacement),nameof(Tick)));
-            Log.Out("[SakuraPreview] Model-only preview. GUA2/Navezgane, Joel west side: 1590 W 1185 S.");
+            SakuraVisual.ModPath=mod.Path;
+            new Harmony("yf.sakura.escort.death.events").Patch(
+                AccessTools.Method(typeof(EntityAlive),nameof(EntityAlive.OnEntityDeath)),
+                prefix:new HarmonyMethod(typeof(SakuraMissionServer),nameof(SakuraMissionServer.RecordEnemyDeath)));
+            SakuraFriendlyProtection.Install(new Harmony("yf.sakura.friendly.protection"));
+            SakuraTraderRescue.Install(new Harmony("yf.sakura.trader.rescue"));
+            new Harmony("yf.sakura.escort.missions").Patch(AccessTools.Method(typeof(GameManager),"Update"),
+                postfix:new HarmonyMethod(typeof(SakuraMissionServer),nameof(SakuraMissionServer.Tick)));
+            Log.Out("[SakuraPreview] Trader rescue enabled: complete T16-T19 trader quests to locate Sakura. Timed and fixed placement disabled.");
         }
         static void Tick()
         {
@@ -33,7 +38,7 @@ namespace SakuraPreview
                 var save=GameIO.GetSaveGameDir().TrimEnd(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar);
                 if(!string.Equals(Path.GetFileName(save),"GUA2",StringComparison.OrdinalIgnoreCase) ||
                     !string.Equals(Path.GetFileName(Path.GetDirectoryName(save)),"Navezgane",StringComparison.OrdinalIgnoreCase))return;
-                var marker=Path.Combine(save,"sakura-preview-placement.txt");
+                var marker=Path.Combine(save,"sakura-companion-placement.txt");
                 if(File.Exists(marker)){done=true;return;}
                 // Wait until an actual player loads this area. Never force a new
                 // region or overwrite existing construction to place a preview.
@@ -41,6 +46,10 @@ namespace SakuraPreview
                 foreach(var player in world.Players.list)
                     if(player!=null && (player.position-new Vector3(X,player.position.y,Z)).sqrMagnitude<6400){nearby=true;break;}
                 if(!nearby || world.GetChunkFromWorldPos(X,Z)==null)return;
+                foreach(var existing in world.Entities.list)
+                    if(existing is EntitySakura existingNpc && !existingNpc.IsGuardian){File.WriteAllText(marker,"existing entity "+existing.entityId);done=true;return;}
+                int entityType=EntityClass.FromString("sakuraCompanion");
+                if(!EntityClass.list.ContainsKey(entityType)){done=true;Log.Error("[SakuraPreview] Companion class missing; placement cancelled.");return;}
                 var block=Block.GetBlockValue(BlockName,true);
                 if(block.isair){done=true;Log.Error("[SakuraPreview] Preview block was not registered; no placement.");return;}
                 int surface=world.GetHeight(X,Z);
@@ -48,12 +57,17 @@ namespace SakuraPreview
                 {
                     var p=new Vector3i(X,y,Z);
                     var current=world.GetBlock(p);
-                    if(current.type==block.type){File.WriteAllText(marker,p.ToString());done=true;return;}
-                    if(!current.isair || !world.GetBlock(new Vector3i(X,y+1,Z)).isair ||
+                    bool oldPreview=current.type==block.type;
+                    if((!current.isair && !oldPreview) || !world.GetBlock(new Vector3i(X,y+1,Z)).isair ||
                         world.GetBlock(new Vector3i(X,y-1,Z)).isair || world.IsWithinTraderArea(p))continue;
-                    world.SetBlockRPC(new BlockValueRef(p),block);
-                    // Mark only after observing the placed block on a later tick.
-                    Log.Out("[SakuraPreview] Requested model preview placement at "+p+". No quest/NPC AI.");
+                    var npc=EntityFactory.CreateEntity(entityType,new Vector3(X+.5f,y,Z+.5f)) as EntitySakura;
+                    if(npc==null)throw new Exception("Companion factory returned wrong entity type");
+                    world.SpawnEntityInWorld(npc);
+                    // Remove only our own old decorative block after the real entity exists.
+                    if(oldPreview)world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
+                    File.WriteAllText(marker,"entity "+npc.entityId+" at "+p);
+                    done=true;
+                    Log.Out("[SakuraPreview] Spawned companion at "+p+". Dialogue/follow prototype; no escort quest rewards.");
                     return;
                 }
                 done=true;
@@ -63,3 +77,5 @@ namespace SakuraPreview
         }
     }
 }
+
+

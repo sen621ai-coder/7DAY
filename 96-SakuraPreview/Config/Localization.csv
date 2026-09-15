@@ -1,3 +1,127 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
 sakuraNpcPreview,blocks,Block,,false,Sakura model preview,小樱人物外观预览
 sakuraNpcPreviewDesc,blocks,Block,,false,Visual prototype only. No dialogue or escort AI.,仅人物外观预览；暂未接入对话和护送功能。
+sakuraCompanion,entityclasses,Entity,,false,Sakura,小樱
+sakuraAmbushT16,entityclasses,Entity,,false,Escort ambusher T16,护送伏击者 T16
+sakuraAmbushT17,entityclasses,Entity,,false,Escort ambusher T17,护送伏击者 T17
+sakuraAmbushT18,entityclasses,Entity,,false,Escort ambusher T18,护送伏击者 T18
+sakuraAmbushT19,entityclasses,Entity,,false,Escort ambusher T19,护送伏击者 T19
+sakuraAmbushT16Runner,entityclasses,Entity,,false,Escort Runner T16,突袭摩托党 T16
+sakuraAmbushT16Soldier,entityclasses,Entity,,false,Escort Soldier T16,装甲士兵 T16
+sakuraAmbushT16Tank,entityclasses,Entity,,false,Escort Tank T16,重装怀特 T16
+sakuraAmbushT16Boss,entityclasses,Entity,,false,Escort Boss T16,护送伏击首领 T16
+sakuraAmbushT17Runner,entityclasses,Entity,,false,Escort Runner T17,突袭摩托党 T17
+sakuraAmbushT17Soldier,entityclasses,Entity,,false,Escort Soldier T17,装甲士兵 T17
+sakuraAmbushT17Tank,entityclasses,Entity,,false,Escort Tank T17,重装怀特 T17
+sakuraAmbushT17Boss,entityclasses,Entity,,false,Escort Boss T17,护送伏击首领 T17
+sakuraAmbushT18Runner,entityclasses,Entity,,false,Escort Runner T18,突袭摩托党 T18
+sakuraAmbushT18Soldier,entityclasses,Entity,,false,Escort Soldier T18,装甲士兵 T18
+sakuraAmbushT18Tank,entityclasses,Entity,,false,Escort Tank T18,重装怀特 T18
+sakuraAmbushT18Boss,entityclasses,Entity,,false,Escort Boss T18,护送伏击首领 T18
+sakuraAmbushT19Runner,entityclasses,Entity,,false,Escort Runner T19,突袭摩托党 T19
+sakuraAmbushT19Soldier,entityclasses,Entity,,false,Escort Soldier T19,装甲士兵 T19
+sakuraAmbushT19Tank,entityclasses,Entity,,false,Escort Tank T19,重装怀特 T19
+sakuraAmbushT19Boss,entityclasses,Entity,,false,Escort Boss T19,护送伏击首领 T19
+mintGuardian,entityclasses,Entity,,false,Mint Guardian,Mint 原地守护
+sakuraNative_start,dialogs,UI,,false,"你好，我是小樱。需要我帮忙吗？","你好，我是小樱。需要我帮忙吗？"
+sakuraNative_missions,dialogs,UI,,false,"护送 ：只显示已分配给你的救援档位。找到角色后开始救援。任务自动共享给在线队友；任一成员都可开始救援。参与至少一半护送时间才能领奖。","护送 ：只显示已分配给你的救援档位。找到角色后开始救援。任务自动共享给在线队友；任一成员都可开始救援。参与至少一半护送时间才能领奖。"
+sakuraNative_confirm,dialogs,UI,,false,"确定放弃本次任务？放弃后没有奖励，角色会离开，需要寻找新的角色。","确定放弃本次任务？放弃后没有奖励，角色会离开，需要寻找新的角色。"
+sakuraNative_waiting,dialogs,UI,,false,"正在等待服务器回应……","正在等待服务器回应……"
+sakuraNative_reply0,dialogs,UI,,false,"你好，很高兴见到你！","你好，很高兴见到你！"
+sakuraNative_reply1,dialogs,UI,,false,"废土里很危险。选择任务后，我们一起坚持到最后吧。","废土里很危险。选择任务后，我们一起坚持到最后吧。"
+sakuraNative_reply2,dialogs,UI,,false,"好呀，我跟着你。","好呀，我跟着你。"
+sakuraNative_reply3,dialogs,UI,,false,"我在这里等你，记得回来。","我在这里等你，记得回来。"
+sakuraNative_reply4,dialogs,UI,,false,"能平安见到你，就是今天的好事。","能平安见到你，就是今天的好事。"
+sakuraNative_reply5,dialogs,UI,,false,"我正在跟随另一位伙伴，请先让对方叫停。","我正在跟随另一位伙伴，请先让对方叫停。"
+sakuraNative_reply6,dialogs,UI,,false,"我是原地守护角色，请选择守护任务。","我是原地守护角色，请选择守护任务。"
+sakuraNative_reply16,dialogs,UI,,false,"任务已接取！可以在任务日志中查看进度，并在地图和指南针上查看目标。","任务已接取！可以在任务日志中查看进度，并在地图和指南针上查看目标。"
+sakuraNative_reply20,dialogs,UI,,false,"任务进度已更新，请查看任务日志。","任务进度已更新，请查看任务日志。"
+sakuraNative_reply21,dialogs,UI,,false,"任务已放弃，本次没有奖励。","任务已放弃，本次没有奖励。"
+sakuraNative_reply22,dialogs,UI,,false,"奖励已发放：公爵币和同阶奖励箱在你脚边，经验已到账。","奖励已发放：公爵币和同阶奖励箱在你脚边，经验已到账。"
+sakuraNative_reply23,dialogs,UI,,false,"现在由你带路。","现在由你带路。"
+sakuraNative_reply30,dialogs,UI,,false,"任务系统暂时无法处理，请联系服主查看日志。","任务系统暂时无法处理，请联系服主查看日志。"
+sakuraNative_reply31,dialogs,UI,,false,"这位角色已经接取过任务，或你已有进行中的任务。","这位角色已经接取过任务，或你已有进行中的任务。"
+sakuraNative_reply32,dialogs,UI,,false,"没有找到地图上的商店，暂时无法接取。","没有找到地图上的商店，暂时无法接取。"
+sakuraNative_reply33,dialogs,UI,,false,"需要先完成 T16–T19 商人任务，获得对应救援委托。","需要先完成 T16–T19 商人任务，获得对应救援委托。"
+sakuraNative_reply34,dialogs,UI,,false,"只有任务成员可以操作；暂停和放弃需要当前带领者。","只有任务成员可以操作；暂停和放弃需要当前带领者。"
+sakuraNative_reply35,dialogs,UI,,false,"暂不可领奖：须完成任务并参与至少一半时间，且尚未领取。","暂不可领奖：须完成任务并参与至少一半时间，且尚未领取。"
+sakuraNative_reply36,dialogs,UI,,false,"缺少奖励箱物品配置。未消耗领奖资格，请联系服主。","缺少奖励箱物品配置。未消耗领奖资格，请联系服主。"
+sakuraNative_reply37,dialogs,UI,,false,"服务器没有及时回应，请查看任务进度后重试。","服务器没有及时回应，请查看任务进度后重试。"
+sakuraNative_reply38,dialogs,UI,,false,"这次任务已失败，护送已结束，本次没有奖励。","这次任务已失败，护送已结束，本次没有奖励。"
+sakuraNative_reply39,dialogs,UI,,false,"这不是分配给你的救援委托，或已开始救援。请查看任务日志。","这不是分配给你的救援委托，或已开始救援。请查看任务日志。"
+sakuraNative_response_abandon,dialogs,UI,,false,"放弃任务…","放弃任务…"
+sakuraNative_response_abandonYes,dialogs,UI,,false,"确认放弃","确认放弃"
+sakuraNative_response_about,dialogs,UI,,false,"你在这里做什么？","你在这里做什么？"
+sakuraNative_response_back,dialogs,UI,,false,"返回","返回"
+sakuraNative_response_chat,dialogs,UI,,false,"聊聊天","聊聊天"
+sakuraNative_response_claim,dialogs,UI,,false,"领取任务奖励","领取任务奖励"
+sakuraNative_response_done,dialogs,UI,,false,"再见","再见"
+sakuraNative_response_follow,dialogs,UI,,false,"跟我来","跟我来"
+sakuraNative_response_locked,dialogs,UI,,false,"暂无待开始的救援（先交付 T16–T19 商人任务）","暂无待开始的救援（先交付 T16–T19 商人任务）"
+sakuraNative_response_missions,dialogs,UI,,false,"护送 任务","护送 任务"
+sakuraNative_response_progress,dialogs,UI,,false,"查看任务进度","查看任务进度"
+sakuraNative_response_t16,dialogs,UI,,false,"开始 T16 救援 — 公爵币 4000 + 奖励箱 ×1","开始 T16 救援 — 公爵币 4000 + 奖励箱 ×1"
+sakuraNative_response_t17,dialogs,UI,,false,"开始 T17 救援 — 公爵币 8000 + 奖励箱 ×1","开始 T17 救援 — 公爵币 8000 + 奖励箱 ×1"
+sakuraNative_response_t18,dialogs,UI,,false,"开始 T18 救援 — 公爵币 12000 + 奖励箱 ×1","开始 T18 救援 — 公爵币 12000 + 奖励箱 ×1"
+sakuraNative_response_t19,dialogs,UI,,false,"开始 T19 救援 — 公爵币 16000 + 奖励箱 ×1","开始 T19 救援 — 公爵币 16000 + 奖励箱 ×1"
+sakuraNative_response_takeover,dialogs,UI,,false,"接替掉线队友带路","接替掉线队友带路"
+sakuraNative_response_wait,dialogs,UI,,false,"在这里等我","在这里等我"
+mintNative_start,dialogs,UI,,false,"你好，我是Mint。需要我帮忙吗？","你好，我是Mint。需要我帮忙吗？"
+mintNative_missions,dialogs,UI,,false,"原地守护 ：只显示已分配给你的救援档位。找到角色后开始救援。任务自动共享给在线队友；任一成员都可开始救援。参与至少一半护送时间才能领奖。","原地守护 ：只显示已分配给你的救援档位。找到角色后开始救援。任务自动共享给在线队友；任一成员都可开始救援。参与至少一半护送时间才能领奖。"
+mintNative_confirm,dialogs,UI,,false,"确定放弃本次任务？放弃后没有奖励，角色会离开，需要寻找新的角色。","确定放弃本次任务？放弃后没有奖励，角色会离开，需要寻找新的角色。"
+mintNative_waiting,dialogs,UI,,false,"正在等待服务器回应……","正在等待服务器回应……"
+mintNative_reply0,dialogs,UI,,false,"你好，很高兴见到你！","你好，很高兴见到你！"
+mintNative_reply1,dialogs,UI,,false,"废土里很危险。选择任务后，我们一起坚持到最后吧。","废土里很危险。选择任务后，我们一起坚持到最后吧。"
+mintNative_reply2,dialogs,UI,,false,"好呀，我跟着你。","好呀，我跟着你。"
+mintNative_reply3,dialogs,UI,,false,"我在这里等你，记得回来。","我在这里等你，记得回来。"
+mintNative_reply4,dialogs,UI,,false,"能平安见到你，就是今天的好事。","能平安见到你，就是今天的好事。"
+mintNative_reply5,dialogs,UI,,false,"我正在跟随另一位伙伴，请先让对方叫停。","我正在跟随另一位伙伴，请先让对方叫停。"
+mintNative_reply6,dialogs,UI,,false,"我是原地守护角色，请选择守护任务。","我是原地守护角色，请选择守护任务。"
+mintNative_reply16,dialogs,UI,,false,"任务已接取！可以在任务日志中查看进度，并在地图和指南针上查看目标。","任务已接取！可以在任务日志中查看进度，并在地图和指南针上查看目标。"
+mintNative_reply20,dialogs,UI,,false,"任务进度已更新，请查看任务日志。","任务进度已更新，请查看任务日志。"
+mintNative_reply21,dialogs,UI,,false,"任务已放弃，本次没有奖励。","任务已放弃，本次没有奖励。"
+mintNative_reply22,dialogs,UI,,false,"奖励已发放：公爵币和同阶奖励箱在你脚边，经验已到账。","奖励已发放：公爵币和同阶奖励箱在你脚边，经验已到账。"
+mintNative_reply23,dialogs,UI,,false,"现在由你带路。","现在由你带路。"
+mintNative_reply30,dialogs,UI,,false,"任务系统暂时无法处理，请联系服主查看日志。","任务系统暂时无法处理，请联系服主查看日志。"
+mintNative_reply31,dialogs,UI,,false,"这位角色已经接取过任务，或你已有进行中的任务。","这位角色已经接取过任务，或你已有进行中的任务。"
+mintNative_reply32,dialogs,UI,,false,"没有找到地图上的商店，暂时无法接取。","没有找到地图上的商店，暂时无法接取。"
+mintNative_reply33,dialogs,UI,,false,"需要先完成 T16–T19 商人任务，获得对应救援委托。","需要先完成 T16–T19 商人任务，获得对应救援委托。"
+mintNative_reply34,dialogs,UI,,false,"只有任务成员可以操作；暂停和放弃需要当前带领者。","只有任务成员可以操作；暂停和放弃需要当前带领者。"
+mintNative_reply35,dialogs,UI,,false,"暂不可领奖：须完成任务并参与至少一半时间，且尚未领取。","暂不可领奖：须完成任务并参与至少一半时间，且尚未领取。"
+mintNative_reply36,dialogs,UI,,false,"缺少奖励箱物品配置。未消耗领奖资格，请联系服主。","缺少奖励箱物品配置。未消耗领奖资格，请联系服主。"
+mintNative_reply37,dialogs,UI,,false,"服务器没有及时回应，请查看任务进度后重试。","服务器没有及时回应，请查看任务进度后重试。"
+mintNative_reply38,dialogs,UI,,false,"这次任务已失败，护送已结束，本次没有奖励。","这次任务已失败，护送已结束，本次没有奖励。"
+mintNative_reply39,dialogs,UI,,false,"这不是分配给你的救援委托，或已开始救援。请查看任务日志。","这不是分配给你的救援委托，或已开始救援。请查看任务日志。"
+mintNative_response_abandon,dialogs,UI,,false,"放弃任务…","放弃任务…"
+mintNative_response_abandonYes,dialogs,UI,,false,"确认放弃","确认放弃"
+mintNative_response_about,dialogs,UI,,false,"你在这里做什么？","你在这里做什么？"
+mintNative_response_back,dialogs,UI,,false,"返回","返回"
+mintNative_response_chat,dialogs,UI,,false,"聊聊天","聊聊天"
+mintNative_response_claim,dialogs,UI,,false,"领取任务奖励","领取任务奖励"
+mintNative_response_done,dialogs,UI,,false,"再见","再见"
+mintNative_response_follow,dialogs,UI,,false,"跟我来","跟我来"
+mintNative_response_locked,dialogs,UI,,false,"暂无待开始的救援（先交付 T16–T19 商人任务）","暂无待开始的救援（先交付 T16–T19 商人任务）"
+mintNative_response_missions,dialogs,UI,,false,"原地守护 任务","原地守护 任务"
+mintNative_response_progress,dialogs,UI,,false,"查看任务进度","查看任务进度"
+mintNative_response_t16,dialogs,UI,,false,"开始 T16 救援 — 公爵币 4000 + 奖励箱 ×1","开始 T16 救援 — 公爵币 4000 + 奖励箱 ×1"
+mintNative_response_t17,dialogs,UI,,false,"开始 T17 救援 — 公爵币 8000 + 奖励箱 ×1","开始 T17 救援 — 公爵币 8000 + 奖励箱 ×1"
+mintNative_response_t18,dialogs,UI,,false,"开始 T18 救援 — 公爵币 12000 + 奖励箱 ×1","开始 T18 救援 — 公爵币 12000 + 奖励箱 ×1"
+mintNative_response_t19,dialogs,UI,,false,"开始 T19 救援 — 公爵币 16000 + 奖励箱 ×1","开始 T19 救援 — 公爵币 16000 + 奖励箱 ×1"
+mintNative_response_takeover,dialogs,UI,,false,"接替掉线队友带路","接替掉线队友带路"
+mintNative_response_wait,dialogs,UI,,false,"在这里等我","在这里等我"
+sakuraEscortT16Name,dialogs,UI,,false,"拯救小樱 T16","拯救小樱 T16"
+sakuraEscortT16Desc,dialogs,UI,,false,"先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：4000 公爵币、10000 经验、T16 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：4000 公爵币、10000 经验、T16 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+sakuraEscortT17Name,dialogs,UI,,false,"拯救小樱 T17","拯救小樱 T17"
+sakuraEscortT17Desc,dialogs,UI,,false,"先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：8000 公爵币、15000 经验、T17 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：8000 公爵币、15000 经验、T17 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+sakuraEscortT18Name,dialogs,UI,,false,"拯救小樱 T18","拯救小樱 T18"
+sakuraEscortT18Desc,dialogs,UI,,false,"先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：12000 公爵币、20000 经验、T18 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：12000 公爵币、20000 经验、T18 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+sakuraEscortT19Name,dialogs,UI,,false,"拯救小樱 T19","拯救小樱 T19"
+sakuraEscortT19Desc,dialogs,UI,,false,"先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：16000 公爵币、25000 经验、T19 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","先到地图标记处找到小樱并对话，然后保护她前往最近商店外围，清除全部伏击。寻找期间不计护送时间。 奖励：16000 公爵币、25000 经验、T19 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+mintGuardT16Name,dialogs,UI,,false,"Mint 原地守护 T16","Mint 原地守护 T16"
+mintGuardT16Desc,dialogs,UI,,false,"在据点保护 Mint，击败全部来袭波次。 奖励：4000 公爵币、10000 经验、T16 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","在据点保护 Mint，击败全部来袭波次。 奖励：4000 公爵币、10000 经验、T16 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+mintGuardT17Name,dialogs,UI,,false,"Mint 原地守护 T17","Mint 原地守护 T17"
+mintGuardT17Desc,dialogs,UI,,false,"在据点保护 Mint，击败全部来袭波次。 奖励：8000 公爵币、15000 经验、T17 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","在据点保护 Mint，击败全部来袭波次。 奖励：8000 公爵币、15000 经验、T17 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+mintGuardT18Name,dialogs,UI,,false,"Mint 原地守护 T18","Mint 原地守护 T18"
+mintGuardT18Desc,dialogs,UI,,false,"在据点保护 Mint，击败全部来袭波次。 奖励：12000 公爵币、20000 经验、T18 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","在据点保护 Mint，击败全部来袭波次。 奖励：12000 公爵币、20000 经验、T18 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"
+mintGuardT19Name,dialogs,UI,,false,"Mint 原地守护 T19","Mint 原地守护 T19"
+mintGuardT19Desc,dialogs,UI,,false,"在据点保护 Mint，击败全部来袭波次。 奖励：16000 公爵币、25000 经验、T19 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。","在据点保护 Mint，击败全部来袭波次。 奖励：16000 公爵币、25000 经验、T19 奖励箱 ×1。完成后与任务人物交谈领奖；物品掉在领奖者脚边。在线同队自动共享坐标和进度；已有其他同伴任务时不能加入。参与至少一半护送时间。离开人物活动范围（护送 60 米、守护 30 米）超过 60 秒、目标死亡或超过 30 分钟会失败。服务器重启会结束未完成任务。失败后角色离开，需要寻找新的角色。"

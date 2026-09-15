@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xml>
-  <Name value="SakuraPreview"/>
-  <DisplayName value="Sakura NPC 外观预览"/>
-  <Description value="GUA2 废土 Joel 西侧人物模型预览；无对话或护送行为。"/>
-  <Author value="Codex + yf"/>
-  <Version value="0.1.0"/>
-  <ServerSideOnly value="false"/>
-  <SkipWithAntiCheat value="true"/>
+  <Name value="SakuraPreview" />
+  <DisplayName value="小樱护送与 Mint 原地守护" />
+  <Description value="完成 T16-T19 商人任务获得同档救援：定位小樱、对话并护送到商店。" />
+  <Author value="Codex + yf" />
+  <Version value="0.8.1" />
+  <ServerSideOnly value="false" />
+  <SkipWithAntiCheat value="true" />
 </xml>

@@ -61,6 +61,32 @@ public static class SiegeRegression
     static void Check(bool ok,string why) { if(!ok) throw new Exception(why); }
     public static string Rules()
     {
+        Check(BloodMoonVariety.Night(7,22)==BloodMoonVariety.Night(8,3), "Theme changes at midnight");
+        foreach(var clock in new[]{new[]{21,59,-1},new[]{22,0,0},new[]{22,59,0},new[]{23,0,1},
+            new[]{0,59,1},new[]{1,0,2},new[]{1,59,2},new[]{2,0,3},new[]{3,59,3},new[]{4,0,-1}})
+            Check(BloodMoonVariety.Phase(clock[0],clock[1])==clock[2], "Wrong blood moon phase boundary");
+        var themes=new HashSet<int>();
+        for(int day=7;day<=700;day+=7) {
+            int theme=BloodMoonVariety.Theme(day); themes.Add(theme);
+            Check(theme>=0 && theme<4 && theme==BloodMoonVariety.Theme(day), "Unstable night theme");
+        }
+        Check(themes.Count==4,"Default weekly schedule misses themes");
+        foreach(int tier in new[]{16,17,18,19}) for(int theme=0;theme<4;theme++)
+        for(int phase=0;phase<4;phase++) {
+            int selected=0; var roles=new HashSet<string>();
+            for(int chance=0;chance<100;chance++) for(int role=0;role<25;role++) {
+                string name=BloodMoonVariety.Variant(tier,theme,phase,chance,role);
+                if(name==null) continue;
+                selected++; roles.Add(name);
+                Check(BloodMoonSiege.Tier(name)==tier,"Themed selection changes tier");
+            }
+            Check(selected==BloodMoonVariety.Chance(phase)*25 && roles.Count==5,"Theme weights/chance invalid");
+        }
+        Check(BloodMoonVariety.Variant(15,0,0,0,0)==null && BloodMoonVariety.Variant(20,0,0,0,0)==null,
+            "Themes escape T16-T19 scope");
+        ulong midnight=GameUtils.DayTimeToWorldTime(8,1,30);
+        Check(GameUtils.WorldTimeToHours(midnight)==1 && GameUtils.WorldTimeToMinutes(midnight)==30,
+            "Native time conversion differs from phase clock");
         foreach(var pair in new[]{new[]{179999,0},new[]{180000,16},new[]{279999,16},new[]{280000,17},
             new[]{379999,17},new[]{380000,18},new[]{479999,18},new[]{480000,19},new[]{999999,19}})
             Check(BloodMoonSiege.TierForGameStage(pair[0])==pair[1],"Wrong siege GS tier");

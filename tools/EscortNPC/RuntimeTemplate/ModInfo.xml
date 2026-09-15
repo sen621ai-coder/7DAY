@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <Name value="SakuraPreview" />
+  <DisplayName value="小樱 T16～T19 护送任务" />
+  <Description value="随机野外 NPC、中文对话、跟随、最近商店护送、分档伏击及联机奖励。" />
+  <Author value="Codex + yf" />
+  <Version value="0.5.0" />
+  <ServerSideOnly value="false" />
+  <SkipWithAntiCheat value="true" />
+</xml>

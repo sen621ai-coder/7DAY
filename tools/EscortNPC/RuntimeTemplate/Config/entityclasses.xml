@@ -1,0 +1,285 @@
+<configs>
+  <append xpath="/entity_classes">
+    <entity_class name="sakuraCompanion" extends="npcTraderJen">
+      <property name="Class" value="SakuraPreview.EntitySakura, Sakura.Preview" />
+      <property name="UserSpawnType" value="Menu" />
+      <property name="Tags" value="entity,npc,human,sakuraCompanion" />
+      <property name="Faction" value="whiteriver" />
+      <property name="IsEnemyEntity" value="false" />
+      <property name="HasRagdoll" value="false" />
+      <property name="HasDeathAnim" value="false" />
+      <property name="Weight" value="55" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MaxHealth" value="6000" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootList" value="" />
+      <property name="NavObject" value="" />
+      <effect_group name="Sakura health">
+        <passive_effect name="HealthMax" operation="base_set" value="6000" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT16" extends="zombieSoldierRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="2000" />
+      <effect_group name="Sakura escort T16">
+        <passive_effect name="HealthMax" operation="base_set" value="2000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT17" extends="zombieSoldierRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="4000" />
+      <effect_group name="Sakura escort T17">
+        <passive_effect name="HealthMax" operation="base_set" value="4000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT18" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="8000" />
+      <effect_group name="Sakura escort T18">
+        <passive_effect name="HealthMax" operation="base_set" value="8000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT19" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="16000" />
+      <effect_group name="Sakura escort T19">
+        <passive_effect name="HealthMax" operation="base_set" value="16000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="2" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT16Runner" extends="zombieBikerRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.5, 1.6" />
+      <property name="MaxHealth" value="1300" />
+      <effect_group name="Sakura 16 Runner">
+        <passive_effect name="HealthMax" operation="base_set" value="1300" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT16Soldier" extends="zombieSoldierRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="2000" />
+      <effect_group name="Sakura 16 Soldier">
+        <passive_effect name="HealthMax" operation="base_set" value="2000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT16Tank" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="0.9, 1.0" />
+      <property name="MaxHealth" value="2700" />
+      <effect_group name="Sakura 16 Tank">
+        <passive_effect name="HealthMax" operation="base_set" value="2700" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT16Boss" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.0, 1.1" />
+      <property name="MaxHealth" value="6000" />
+      <effect_group name="Sakura 16 Boss">
+        <passive_effect name="HealthMax" operation="base_set" value="6000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="0.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT17Runner" extends="zombieBikerRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.5, 1.6" />
+      <property name="MaxHealth" value="2600" />
+      <effect_group name="Sakura 17 Runner">
+        <passive_effect name="HealthMax" operation="base_set" value="2600" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT17Soldier" extends="zombieSoldierRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="4000" />
+      <effect_group name="Sakura 17 Soldier">
+        <passive_effect name="HealthMax" operation="base_set" value="4000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT17Tank" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="0.9, 1.0" />
+      <property name="MaxHealth" value="5400" />
+      <effect_group name="Sakura 17 Tank">
+        <passive_effect name="HealthMax" operation="base_set" value="5400" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT17Boss" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.0, 1.1" />
+      <property name="MaxHealth" value="12000" />
+      <effect_group name="Sakura 17 Boss">
+        <passive_effect name="HealthMax" operation="base_set" value="12000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT18Runner" extends="zombieBikerRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.5, 1.6" />
+      <property name="MaxHealth" value="5200" />
+      <effect_group name="Sakura 18 Runner">
+        <passive_effect name="HealthMax" operation="base_set" value="5200" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT18Soldier" extends="zombieSoldierRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="8000" />
+      <effect_group name="Sakura 18 Soldier">
+        <passive_effect name="HealthMax" operation="base_set" value="8000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT18Tank" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="0.9, 1.0" />
+      <property name="MaxHealth" value="10800" />
+      <effect_group name="Sakura 18 Tank">
+        <passive_effect name="HealthMax" operation="base_set" value="10800" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT18Boss" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.0, 1.1" />
+      <property name="MaxHealth" value="24000" />
+      <effect_group name="Sakura 18 Boss">
+        <passive_effect name="HealthMax" operation="base_set" value="24000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="1.5" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT19Runner" extends="zombieBikerRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.5, 1.6" />
+      <property name="MaxHealth" value="10400" />
+      <effect_group name="Sakura 19 Runner">
+        <passive_effect name="HealthMax" operation="base_set" value="10400" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="2" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT19Soldier" extends="zombieSoldierRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.1, 1.3" />
+      <property name="MaxHealth" value="16000" />
+      <effect_group name="Sakura 19 Soldier">
+        <passive_effect name="HealthMax" operation="base_set" value="16000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="2" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT19Tank" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="0.9, 1.0" />
+      <property name="MaxHealth" value="21600" />
+      <effect_group name="Sakura 19 Tank">
+        <passive_effect name="HealthMax" operation="base_set" value="21600" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="2" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="sakuraAmbushT19Boss" extends="zombieWightRadiated">
+      <property name="UserSpawnType" value="None" />
+      <property name="Tags" value="entity,zombie,enemy,sakuraAmbush" />
+      <property name="ExperienceGain" value="0" />
+      <property name="LootDropProb" value="0" />
+      <property name="MoveSpeed" value="0.8" />
+      <property name="MoveSpeedAggro" value="1.0, 1.1" />
+      <property name="MaxHealth" value="48000" />
+      <effect_group name="Sakura 19 Boss">
+        <passive_effect name="HealthMax" operation="base_set" value="48000" />
+        <passive_effect name="EntityDamage" operation="perc_add" value="2" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="mintGuardian" extends="sakuraCompanion">
+      <property name="Tags" value="entity,npc,human,mintGuardian" />
+    </entity_class>
+  </append>
+</configs>

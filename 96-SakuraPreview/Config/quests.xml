@@ -1,0 +1,156 @@
+<configs>
+  <append xpath="/quests">
+    <quest id="sakuraEscortT16">
+      <property name="name_key" value="sakuraEscortT16Name" />
+      <property name="subtitle_key" value="sakuraEscortT16Name" />
+      <property name="description_key" value="sakuraEscortT16Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="sakuraEscortT17">
+      <property name="name_key" value="sakuraEscortT17Name" />
+      <property name="subtitle_key" value="sakuraEscortT17Name" />
+      <property name="description_key" value="sakuraEscortT17Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="sakuraEscortT18">
+      <property name="name_key" value="sakuraEscortT18Name" />
+      <property name="subtitle_key" value="sakuraEscortT18Name" />
+      <property name="description_key" value="sakuraEscortT18Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="sakuraEscortT19">
+      <property name="name_key" value="sakuraEscortT19Name" />
+      <property name="subtitle_key" value="sakuraEscortT19Name" />
+      <property name="description_key" value="sakuraEscortT19Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="mintGuardT16">
+      <property name="name_key" value="mintGuardT16Name" />
+      <property name="subtitle_key" value="mintGuardT16Name" />
+      <property name="description_key" value="mintGuardT16Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="mintGuardT17">
+      <property name="name_key" value="mintGuardT17Name" />
+      <property name="subtitle_key" value="mintGuardT17Name" />
+      <property name="description_key" value="mintGuardT17Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="mintGuardT18">
+      <property name="name_key" value="mintGuardT18Name" />
+      <property name="subtitle_key" value="mintGuardT18Name" />
+      <property name="description_key" value="mintGuardT18Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+    <quest id="mintGuardT19">
+      <property name="name_key" value="mintGuardT19Name" />
+      <property name="subtitle_key" value="mintGuardT19Name" />
+      <property name="description_key" value="mintGuardT19Desc" />
+      <property name="category" value="同伴任务" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="allow_remove" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="difficulty" value="1" />
+      <property name="difficulty_tier" value="1" />
+      <property name="completiontype" value="TurnIn" />
+      <property name="return_to_quest_giver" value="false" />
+      <objective type="SakuraMission, Sakura.Preview" id="goal" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="health" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="waves" phase="1" />
+      <objective type="SakuraMission, Sakura.Preview" id="enemies" phase="1" />
+    </quest>
+  </append>
+</configs>
