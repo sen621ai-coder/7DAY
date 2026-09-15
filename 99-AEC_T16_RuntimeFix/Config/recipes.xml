@@ -2355,4 +2355,19 @@
       </recipe>
     </append>
   <!-- END GENERATED ENDGAME EXPANSION -->
+  <!-- Supplemental capacitor sources; outside generated sections. -->
+  <append xpath="/recipes">
+    <recipe name="resourcePZAECSiegeCapacitorT16" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourcePZAECCapacitorFragmentT16" count="10" />
+    </recipe>
+    <recipe name="resourcePZAECSiegeCapacitorT17" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourcePZAECCapacitorFragmentT17" count="10" />
+    </recipe>
+    <recipe name="resourcePZAECSiegeCapacitorT18" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourcePZAECCapacitorFragmentT18" count="10" />
+    </recipe>
+    <recipe name="resourcePZAECSiegeCapacitorT19" count="1" craft_area="workbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourcePZAECCapacitorFragmentT19" count="10" />
+    </recipe>
+  </append>
 </configs>

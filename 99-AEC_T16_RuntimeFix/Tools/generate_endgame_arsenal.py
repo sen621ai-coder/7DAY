@@ -178,8 +178,8 @@ def build_items() -> tuple[str, list[tuple[str, str, str, str]]]:
             ET.SubElement(item, "property", {"name": "CustomIconTint", "value": data["color"]})
             ET.SubElement(item, "property", {"name": "Stacknumber", "value": "50000"})
             ET.SubElement(item, "property", {"name": "SellableToTrader", "value": "false"})
-            desc_en = "Recovered from Blood Moon siege engineers." if stem == "SiegeCapacitor" else "Recovered from same-tier endgame boss caches."
-            desc_cn = "由血月工程小队掉落。" if stem == "SiegeCapacitor" else "由同阶终局 Boss 奖励箱产出。"
+            desc_en = "Recovered from Blood Moon siege engineers and same-tier boss caches. Craft one from 10 same-tier Capacitor Fragments at a workbench." if stem == "SiegeCapacitor" else "Recovered from same-tier endgame boss caches."
+            desc_cn = "由血月工程小队及同阶BOSS宝箱产出。工作台消耗10个同阶电容碎片可合成1个。" if stem == "SiegeCapacitor" else "由同阶终局 Boss 奖励箱产出。"
             loc += [(name, "items", en, cn), (name + "Desc", "items", desc_en, desc_cn)]
 
     for set_name, spec in SETS.items():

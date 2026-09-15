@@ -1830,4 +1830,272 @@
   <set xpath="/quests/quest[@id='aec_quest_T17_A5_clear' or starts-with(@id,'aec_quest_T17_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT17</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear' or starts-with(@id,'aec_quest_T18_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT18</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear' or starts-with(@id,'aec_quest_T19_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT19</set>
+  <!-- BEGIN RELAY HIGH-TIER HUNTS: independent of legendary progression. -->
+  <append xpath="/quests">
+    <quest id="PZAECRelayHuntDumdumT16">
+      <property name="name_key" value="PZAECRelayHuntDumdumT16Name" />
+      <property name="description_key" value="PZAECRelayHuntDumdumT16Desc" />
+      <property name="offer_key" value="PZAECRelayHuntDumdumT16Desc" />
+      <property name="statement_key" value="PZAECRelayHuntDumdumT16Desc" />
+      <property name="response_key" value="PZAECRelayHuntDumdumT16Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntDumdumT16" phase="4" />
+      <objective type="EntityKill" id="bossAECDumdumT16" value="1" phase="4" />
+      <reward type="Exp" value="15000" />
+    </quest>
+    <quest id="PZAECRelayHuntExecutionerT16">
+      <property name="name_key" value="PZAECRelayHuntExecutionerT16Name" />
+      <property name="description_key" value="PZAECRelayHuntExecutionerT16Desc" />
+      <property name="offer_key" value="PZAECRelayHuntExecutionerT16Desc" />
+      <property name="statement_key" value="PZAECRelayHuntExecutionerT16Desc" />
+      <property name="response_key" value="PZAECRelayHuntExecutionerT16Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT16" phase="4" />
+      <objective type="EntityKill" id="AECTheExecutionerBossT16" value="1" phase="4" />
+      <reward type="Exp" value="15000" />
+    </quest>
+    <quest id="PZAECRelayHuntMechanicianT16">
+      <property name="name_key" value="PZAECRelayHuntMechanicianT16Name" />
+      <property name="description_key" value="PZAECRelayHuntMechanicianT16Desc" />
+      <property name="offer_key" value="PZAECRelayHuntMechanicianT16Desc" />
+      <property name="statement_key" value="PZAECRelayHuntMechanicianT16Desc" />
+      <property name="response_key" value="PZAECRelayHuntMechanicianT16Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT16" phase="4" />
+      <objective type="EntityKill" id="AECTheMechanicianBossT16" value="1" phase="4" />
+      <reward type="Exp" value="15000" />
+    </quest>
+    <quest id="PZAECRelayHuntDumdumT17">
+      <property name="name_key" value="PZAECRelayHuntDumdumT17Name" />
+      <property name="description_key" value="PZAECRelayHuntDumdumT17Desc" />
+      <property name="offer_key" value="PZAECRelayHuntDumdumT17Desc" />
+      <property name="statement_key" value="PZAECRelayHuntDumdumT17Desc" />
+      <property name="response_key" value="PZAECRelayHuntDumdumT17Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntDumdumT17" phase="4" />
+      <objective type="EntityKill" id="bossAECDumdumT17" value="1" phase="4" />
+      <reward type="Exp" value="20000" />
+    </quest>
+    <quest id="PZAECRelayHuntExecutionerT17">
+      <property name="name_key" value="PZAECRelayHuntExecutionerT17Name" />
+      <property name="description_key" value="PZAECRelayHuntExecutionerT17Desc" />
+      <property name="offer_key" value="PZAECRelayHuntExecutionerT17Desc" />
+      <property name="statement_key" value="PZAECRelayHuntExecutionerT17Desc" />
+      <property name="response_key" value="PZAECRelayHuntExecutionerT17Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT17" phase="4" />
+      <objective type="EntityKill" id="AECTheExecutionerBossT17" value="1" phase="4" />
+      <reward type="Exp" value="20000" />
+    </quest>
+    <quest id="PZAECRelayHuntMechanicianT17">
+      <property name="name_key" value="PZAECRelayHuntMechanicianT17Name" />
+      <property name="description_key" value="PZAECRelayHuntMechanicianT17Desc" />
+      <property name="offer_key" value="PZAECRelayHuntMechanicianT17Desc" />
+      <property name="statement_key" value="PZAECRelayHuntMechanicianT17Desc" />
+      <property name="response_key" value="PZAECRelayHuntMechanicianT17Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT17" phase="4" />
+      <objective type="EntityKill" id="AECTheMechanicianBossT17" value="1" phase="4" />
+      <reward type="Exp" value="20000" />
+    </quest>
+    <quest id="PZAECRelayHuntDumdumT18">
+      <property name="name_key" value="PZAECRelayHuntDumdumT18Name" />
+      <property name="description_key" value="PZAECRelayHuntDumdumT18Desc" />
+      <property name="offer_key" value="PZAECRelayHuntDumdumT18Desc" />
+      <property name="statement_key" value="PZAECRelayHuntDumdumT18Desc" />
+      <property name="response_key" value="PZAECRelayHuntDumdumT18Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntDumdumT18" phase="4" />
+      <objective type="EntityKill" id="bossAECDumdumT18" value="1" phase="4" />
+      <reward type="Exp" value="25000" />
+    </quest>
+    <quest id="PZAECRelayHuntExecutionerT18">
+      <property name="name_key" value="PZAECRelayHuntExecutionerT18Name" />
+      <property name="description_key" value="PZAECRelayHuntExecutionerT18Desc" />
+      <property name="offer_key" value="PZAECRelayHuntExecutionerT18Desc" />
+      <property name="statement_key" value="PZAECRelayHuntExecutionerT18Desc" />
+      <property name="response_key" value="PZAECRelayHuntExecutionerT18Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT18" phase="4" />
+      <objective type="EntityKill" id="AECTheExecutionerBossT18" value="1" phase="4" />
+      <reward type="Exp" value="25000" />
+    </quest>
+    <quest id="PZAECRelayHuntMechanicianT18">
+      <property name="name_key" value="PZAECRelayHuntMechanicianT18Name" />
+      <property name="description_key" value="PZAECRelayHuntMechanicianT18Desc" />
+      <property name="offer_key" value="PZAECRelayHuntMechanicianT18Desc" />
+      <property name="statement_key" value="PZAECRelayHuntMechanicianT18Desc" />
+      <property name="response_key" value="PZAECRelayHuntMechanicianT18Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT18" phase="4" />
+      <objective type="EntityKill" id="AECTheMechanicianBossT18" value="1" phase="4" />
+      <reward type="Exp" value="25000" />
+    </quest>
+    <quest id="PZAECRelayHuntDumdumT19">
+      <property name="name_key" value="PZAECRelayHuntDumdumT19Name" />
+      <property name="description_key" value="PZAECRelayHuntDumdumT19Desc" />
+      <property name="offer_key" value="PZAECRelayHuntDumdumT19Desc" />
+      <property name="statement_key" value="PZAECRelayHuntDumdumT19Desc" />
+      <property name="response_key" value="PZAECRelayHuntDumdumT19Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntDumdumT19" phase="4" />
+      <objective type="EntityKill" id="bossAECDumdumT19" value="1" phase="4" />
+      <reward type="Exp" value="30000" />
+    </quest>
+    <quest id="PZAECRelayHuntExecutionerT19">
+      <property name="name_key" value="PZAECRelayHuntExecutionerT19Name" />
+      <property name="description_key" value="PZAECRelayHuntExecutionerT19Desc" />
+      <property name="offer_key" value="PZAECRelayHuntExecutionerT19Desc" />
+      <property name="statement_key" value="PZAECRelayHuntExecutionerT19Desc" />
+      <property name="response_key" value="PZAECRelayHuntExecutionerT19Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT19" phase="4" />
+      <objective type="EntityKill" id="AECTheExecutionerBossT19" value="1" phase="4" />
+      <reward type="Exp" value="30000" />
+    </quest>
+    <quest id="PZAECRelayHuntMechanicianT19">
+      <property name="name_key" value="PZAECRelayHuntMechanicianT19Name" />
+      <property name="description_key" value="PZAECRelayHuntMechanicianT19Desc" />
+      <property name="offer_key" value="PZAECRelayHuntMechanicianT19Desc" />
+      <property name="statement_key" value="PZAECRelayHuntMechanicianT19Desc" />
+      <property name="response_key" value="PZAECRelayHuntMechanicianT19Name" />
+      <property name="completion_key" value="PZAECRelayHuntComplete" />
+      <property name="icon" value="ui_game_symbol_quest" />
+      <property name="category_key" value="PZAECRelayHuntCategory" />
+      <property name="repeatable" value="true" />
+      <property name="shareable" value="false" />
+      <property name="add_to_tier_complete" value="false" />
+      <property name="login_rally_reset" value="false" />
+      <property name="completiontype" value="AutoComplete" />
+      <property name="difficulty_tier" value="6" />
+      <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
+      <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
+      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT19" phase="4" />
+      <objective type="EntityKill" id="AECTheMechanicianBossT19" value="1" phase="4" />
+      <reward type="Exp" value="30000" />
+    </quest>
+  </append>
+  <!-- END RELAY HIGH-TIER HUNTS -->
 </configs>

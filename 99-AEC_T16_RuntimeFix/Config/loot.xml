@@ -1562,4 +1562,17 @@
   <set xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupZpackBoss02']/@group">PZAECBossSkillMagazinesOnly</set>
   <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="prob">1</setattribute>
   <setattribute xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='PZAECBossSkillMagazinesOnly']" name="force_prob">true</setattribute>
+  <!-- Supplemental capacitor sources; outside generated sections. -->
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+    <item name="resourcePZAECSiegeCapacitorT16" count="1" prob="1" force_prob="true" />
+  </append>
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']">
+    <item name="resourcePZAECSiegeCapacitorT17" count="1" prob="1" force_prob="true" />
+  </append>
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']">
+    <item name="resourcePZAECSiegeCapacitorT18" count="1,2" prob="1" force_prob="true" />
+  </append>
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
+    <item name="resourcePZAECSiegeCapacitorT19" count="1,2" prob="1" force_prob="true" />
+  </append>
 </configs>

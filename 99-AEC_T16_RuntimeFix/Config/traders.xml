@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <!-- Keep original current-tier stock; add lower tiers independently. -->
+  <append xpath="/traders/trader_info[@id='93']/trader_items[1]">
+    <item group="aecContractsPool1star" count="100,100" />
+  </append>
+  <append xpath="/traders/trader_info[@id='94']/trader_items[1]">
+    <item group="aecContractsPool1star" count="100,100" />
+    <item group="aecContractsPool2star" count="100,100" />
+  </append>
+  <append xpath="/traders/trader_info[@id='95']/trader_items[1]">
+    <item group="aecContractsPool1star" count="100,100" />
+    <item group="aecContractsPool2star" count="100,100" />
+    <item group="aecContractsPool3star" count="100,100" />
+  </append>
+  <append xpath="/traders/trader_info[@id='96']/trader_items[1]">
+    <item group="aecContractsPool1star" count="100,100" />
+    <item group="aecContractsPool2star" count="100,100" />
+    <item group="aecContractsPool3star" count="100,100" />
+    <item group="aecContractsPool4star" count="100,100" />
+  </append>
+  <append xpath="/traders/trader_info[@id='96']/trader_items[1]">
+    <item name="itemPZAECRelayHuntDumdumT16" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntExecutionerT16" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntMechanicianT16" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntDumdumT17" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntExecutionerT17" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntMechanicianT17" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntDumdumT18" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntExecutionerT18" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntMechanicianT18" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntDumdumT19" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntExecutionerT19" count="1" prob="1" />
+    <item name="itemPZAECRelayHuntMechanicianT19" count="1" prob="1" />
+  </append>
+</configs>

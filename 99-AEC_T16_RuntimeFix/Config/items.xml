@@ -6167,4 +6167,188 @@
   </item>
 </append>
 <!-- END RETIRED ITEM SAVE COMPATIBILITY -->
+  <!-- BEGIN RELAY HIGH-TIER HUNTS: independent of legendary progression. -->
+  <append xpath="/items">
+    <item name="itemPZAECRelayHuntDumdumT16">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntDumdumT16Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="1000" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntDumdumT16" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntExecutionerT16">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntExecutionerT16Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="1000" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntExecutionerT16" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntMechanicianT16">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntMechanicianT16Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="1000" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntMechanicianT16" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntDumdumT17">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntDumdumT17Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="1500" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntDumdumT17" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntExecutionerT17">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntExecutionerT17Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="1500" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntExecutionerT17" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntMechanicianT17">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntMechanicianT17Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="1500" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntMechanicianT17" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntDumdumT18">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntDumdumT18Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="2000" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntDumdumT18" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntExecutionerT18">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntExecutionerT18Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="2000" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntExecutionerT18" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntMechanicianT18">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntMechanicianT18Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="2000" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntMechanicianT18" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntDumdumT19">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntDumdumT19Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="2500" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntDumdumT19" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntExecutionerT19">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntExecutionerT19Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="2500" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntExecutionerT19" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+    <item name="itemPZAECRelayHuntMechanicianT19">
+      <property name="Extends" value="questMaster" />
+      <property name="DescriptionKey" value="PZAECRelayHuntMechanicianT19Desc" />
+      <property name="CustomIcon" value="cntBookPile08" />
+      <property name="CustomIconTint" value="FFAA33" />
+      <property name="Stacknumber" value="50000" />
+      <property name="EconomicValue" value="2500" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+      <property name="Class" value="Quest" />
+      <property name="QuestGiven" value="PZAECRelayHuntMechanicianT19" />
+      <property name="Delay" value="0.5" />
+      <property name="UseAnimation" value="false" />
+      </property>
+    </item>
+  </append>
+  <!-- END RELAY HIGH-TIER HUNTS -->
 </configs>

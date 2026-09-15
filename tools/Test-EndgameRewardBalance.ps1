@@ -98,7 +98,10 @@ foreach($tier in 16..19) {
     $newWeapon=$bundle.SelectSingleNode("item[@group='PZAECExpansionWeaponT$tier']")
     Assert-Balance ([double]$newWeapon.prob -eq @(.02,.04,.06,.08)[$tier-16] -and $newWeapon.force_prob -eq 'true' -and $newWeapon.count -eq '1') "Wrong new weapon probability T$tier"
     Assert-Balance ([double]$bundle.SelectSingleNode("item[@group='groupSkillBook']").prob -eq @(.20,.25,.30,.40)[$tier-16]) "Separate skill-point book reward changed T$tier"
-    $expectedBreadth=if($tier -eq 19){22}else{21}
+    $expectedBreadth=if($tier -eq 19){23}else{22}
+    $capacitor=@($bundle.item | Where-Object name -eq "resourcePZAECSiegeCapacitorT$tier")
+    $capacitorCount=if($tier -lt 18){'1'}else{'1,2'}
+    Assert-Balance ($capacitor.Count -eq 1 -and $capacitor[0].count -eq $capacitorCount -and $capacitor[0].prob -eq '1' -and $capacitor[0].force_prob -eq 'true') "Wrong guaranteed capacitor reward T$tier"
     Assert-Balance ($bundle.item.Count -eq $expectedBreadth) "Wrong boss bundle breadth T${tier}: expected $expectedBreadth, got $($bundle.item.Count)"
     foreach($groupName in @("PZAECExpansionWeaponT$tier")){Assert-Balance ($bundle.SelectNodes("item[@group='$groupName']").Count -eq 1) "Missing expansion weapon reward T$tier"}
     foreach($itemName in @("itemPZAECArmoryBlueprintCrateT$tier","itemPZAECComponentChoiceCrateT$tier")){Assert-Balance ($bundle.SelectNodes("item[@name='$itemName']").Count -eq 1) "Missing expansion choice reward $itemName"}
