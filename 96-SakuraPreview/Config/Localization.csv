@@ -1,0 +1,3 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
+sakuraNpcPreview,blocks,Block,,false,Sakura model preview,小樱人物外观预览
+sakuraNpcPreviewDesc,blocks,Block,,false,Visual prototype only. No dialogue or escort AI.,仅人物外观预览；暂未接入对话和护送功能。

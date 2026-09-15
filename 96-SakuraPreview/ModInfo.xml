@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <Name value="SakuraPreview"/>
+  <DisplayName value="Sakura NPC 外观预览"/>
+  <Description value="GUA2 废土 Joel 西侧人物模型预览；无对话或护送行为。"/>
+  <Author value="Codex + yf"/>
+  <Version value="0.1.0"/>
+  <ServerSideOnly value="false"/>
+  <SkipWithAntiCheat value="true"/>
+</xml>
