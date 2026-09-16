@@ -12,7 +12,7 @@ for kind in kinds:
     block.find("property[@name='Model']").set('value',f'#@modfolder:Resources/automation-machines.unity3d?Assets/Machines/Machine{kind}.prefab')
 E.indent(tree,space='  ')
 tree.write(path,encoding='utf-8',xml_declaration=True)
-info=E.parse(root/'ModInfo.xml');info.find('Version').set('value','0.5.1')
+info=E.parse(root/'ModInfo.xml');info.find('Version').set('value','0.5.2')
 E.indent(info,space='  ');info.write(root/'ModInfo.xml',encoding='utf-8',xml_declaration=True)
 loc=root/'Config/Localization.csv'
 with loc.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.reader(f))

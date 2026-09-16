@@ -3,6 +3,23 @@ namespace YFAutomation
 {
     public static class MachineDisplay
     {
+        public static void AttachInteraction(TileEntityComposite __instance,BlockEntityData __0)
+        {
+            if(__0?.transform==null)return;
+            string name=__instance.block.GetBlockName();
+            if(IsMachine(name)||ConveyorPath.IsBelt(name))BindInteraction(__0.transform);
+        }
+        public static void BindInteraction(Transform root)
+        {
+            // Voxel.Raycast recognizes T_Block and resolves its owning block through
+            // RootTransformRefParent. A plain Unity collider is not an interactable block.
+            foreach(var collider in root.GetComponentsInChildren<Collider>(true)){
+                collider.gameObject.tag="T_Block";
+                collider.gameObject.layer=16; // Matches the native steel crate: TerrainCollision (16).
+                var reference=collider.GetComponent<RootTransformRefParent>()??collider.gameObject.AddComponent<RootTransformRefParent>();
+                reference.RootTransform=root;
+            }
+        }
         public static bool IsMachine(string name)
         {
             switch(name){
