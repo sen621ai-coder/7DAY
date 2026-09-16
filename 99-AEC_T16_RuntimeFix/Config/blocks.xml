@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
   <append xpath="/blocks">
+    <!-- Match the vanilla steel wall cabinet without its later storage-upgrade path. -->
+    <block name="PZAECWallCabinetBaseNoUpgrade">
+      <property name="Extends" value="cntSteelWallCabinetInsecure" />
+      <property name="CreativeMode" value="None" />
+      <property name="Class" value="CompositeTileEntity" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="playerDrawer" />
+        </property>
+      </property>
+      <property name="DowngradeBlock" value="cntSteelWallCabinetInsecure" />
+      <property name="SortOrder1" value="B438" />
+      <property name="SortOrder2" value="0004" />
+      <property name="Tags" value="timecharge,scrap100" />
+      <property name="SoundPickup" value="steel_misc_hvy_grab" />
+      <property name="SoundPlace" value="steel_misc_hvy_place" />
+    </block>
     <block name="PZAECStrongholdCore">
-      <property name="Extends" value="cntSteelWallCabinetSecure" />
+      <property name="Extends" value="PZAECWallCabinetBaseNoUpgrade" />
       <property name="CreativeMode" value="Player" />
       <property name="CustomIcon" value="keystoneBlock" />
       <property name="CustomIconTint" value="FF6633" />
@@ -39,7 +56,7 @@
       </property>
     </block>
     <block name="PZAECStrongholdSupply">
-      <property name="Extends" value="cntSteelWallCabinetSecure" />
+      <property name="Extends" value="PZAECWallCabinetBaseNoUpgrade" />
       <property name="CreativeMode" value="Player" />
       <property name="CustomIcon" value="cntSteelWallCabinetSecure" />
       <property name="CustomIconTint" value="FFD34D" />

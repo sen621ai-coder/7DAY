@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <Name value="PZAEC_StorageExpansion" />
+  <DisplayName value="Project Z / AEC | Steel Storage Expansion" />
+  <Description value="Adds 150-slot upgrade tiers for steel storage crates and steel wall cabinets without resizing existing containers." />
+  <Author value="Codex" />
+  <Version value="1.0.0" />
+  <ServerSideOnly value="true" />
+</xml>
