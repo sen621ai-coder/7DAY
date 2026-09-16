@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <!-- Newly built cabinets can use the same total materials as building then upgrading. -->
+  <append xpath="/recipes">
+    <recipe name="PZAECSteelCrateExpanded" count="1" always_unlocked="true" tags="packMuleCrafting">
+      <ingredient name="cntSteelWritableCrate" count="1" />
+      <ingredient name="resourceForgedSteel" count="20" />
+    </recipe>
+    <recipe name="PZAECSteelWallCabinetExpanded" count="1" craft_area="workbench" always_unlocked="true" tags="workbenchCrafting">
+      <ingredient name="cntSteelWallCabinetSecure" count="1" />
+      <ingredient name="resourceForgedSteel" count="20" />
+    </recipe>
+  </append>
+</configs>

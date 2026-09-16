@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/blocks">
+    <block name="PZAECSteelCrateExpanded">
+      <property name="Extends" value="cntSteelWritableCrateInsecure" />
+      <property name="CreativeMode" value="Player" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="PZAECSteelCrateStorage150" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="90" />
+          <property name="LineCount" value="3" />
+          <property name="LineWidth" value="0.55" />
+          <property name="LineSpacing" value="1" />
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntSteelWritableCrate" />
+      <property name="CustomIconTint" value="66CCFF" />
+      <property name="DescriptionKey" value="PZAECSteelCrateExpandedDesc" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property name="DowngradeBlock" value="PZAECSteelCrateExpandedInsecure" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="Tags" value="timecharge,scrap100" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor" />
+      <property name="SortOrder2" value="0006" />
+    </block>
+    <block name="PZAECSteelCrateExpandedInsecure">
+      <property name="Extends" value="cntSteelWritableCrateInsecure" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="PZAECSteelCrateStorage150" />
+        </property>
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="90" />
+          <property name="LineCount" value="3" />
+          <property name="LineWidth" value="0.55" />
+          <property name="LineSpacing" value="1" />
+        </property>
+      </property>
+      <property name="CustomIconTint" value="66CCFF" />
+    </block>
+    <block name="PZAECSteelWallCabinetExpanded">
+      <property name="Extends" value="cntSteelWallCabinetInsecure" />
+      <property name="CreativeMode" value="Player" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="PZAECSteelWallCabinetStorage150" />
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntSteelWallCabinetSecure" />
+      <property name="CustomIconTint" value="66CCFF" />
+      <property name="DescriptionKey" value="PZAECSteelWallCabinetExpandedDesc" />
+      <property name="DowngradeBlock" value="PZAECSteelWallCabinetExpandedInsecure" />
+      <property name="SortOrder1" value="B438" />
+      <property name="SortOrder2" value="0005" />
+      <property name="Tags" value="timecharge,scrap100" />
+      <property name="SoundPickup" value="steel_misc_hvy_grab" />
+      <property name="SoundPlace" value="steel_misc_hvy_place" />
+    </block>
+    <block name="PZAECSteelWallCabinetExpandedInsecure">
+      <property name="Extends" value="cntSteelWallCabinetInsecure" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="PZAECSteelWallCabinetStorage150" />
+        </property>
+      </property>
+      <property name="CustomIcon" value="cntSteelWallCabinetSecure" />
+      <property name="CustomIconTint" value="66CCFF" />
+    </block>
+  </append>
+  <append xpath="/blocks/block[@name='cntSteelWritableCrate']">
+    <property class="UpgradeBlock">
+      <property name="ToBlock" value="PZAECSteelCrateExpanded" />
+      <property name="Item" value="resourceForgedSteel" />
+      <property name="ItemCount" value="20" />
+      <property name="UpgradeHitCount" value="4" />
+    </property>
+    <property name="UpgradeSound" value="place_block_metal" />
+  </append>
+  <append xpath="/blocks/block[@name='cntSteelWallCabinetSecure']">
+    <property class="UpgradeBlock">
+      <property name="ToBlock" value="PZAECSteelWallCabinetExpanded" />
+      <property name="Item" value="resourceForgedSteel" />
+      <property name="ItemCount" value="20" />
+      <property name="UpgradeHitCount" value="4" />
+    </property>
+    <property name="UpgradeSound" value="place_block_metal" />
+  </append>
+</configs>
