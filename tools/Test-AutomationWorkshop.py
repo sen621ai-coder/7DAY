@@ -1,4 +1,4 @@
-﻿from pathlib import Path
+from pathlib import Path
 import xml.etree.ElementTree as E
 import csv
 root=Path(__file__).resolve().parents[1]
@@ -18,7 +18,7 @@ assert b.find("property[@class='Workstation']/property[@name='CraftingAreaRecipe
 items=E.parse(c/'items.xml').findall('.//item');assert len(items)==14
 for item in items:assert item.find("property[@name='Extends']").get('value') in baseitems
 names=baseitems|baseblocks|{v.get('name') for v in E.parse(c/'blocks.xml').findall('.//block')}|{i.get('name') for i in items}
-recipes=E.parse(c/'recipes.xml').findall('.//recipe');assert len(recipes)==28
+recipes=E.parse(c/'recipes.xml').findall('.//recipe');assert len(recipes)==33
 for r in recipes:
  assert r.get('name') in names and r.get('always_unlocked')=='true' and int(r.get('count'))==1
  assert r.get('craft_area')==('workbench' if r.get('name')==b.get('name') else 'yfAutomationWorkbench')
@@ -32,4 +32,19 @@ for n in E.parse(c/'blocks.xml').findall('.//block')+items:
  assert n.get('name') in loc
  assert n.find("property[@name='DescriptionKey']").get('value') in loc
 for p in c.rglob('*.xml'):E.parse(p)
-print('PASS: workstation, 14 items, 28 recipes, vanilla materials, isolated crafting area, native UI references and localization.')
+for prop in E.parse(c/'blocks.xml').findall('.//property'):
+ for key in ('name','class'):
+  if prop.get(key):assert '.' not in prop.get(key) and ',' not in prop.get(key), 'Invalid native dynamic property key'
+for suffix in ('Straight','Left','Right','Up','Down'):
+ belt=E.parse(c/'blocks.xml').find(f".//block[@name='yfAutoBelt{suffix}']")
+ assert belt.find("property[@class='CompositeFeatures']/property[@class='TEFeatureAutomationState']") is not None
+ assert belt.find("property[@class='CompositeFeatures']/property[@class='TEFeatureStorage']/property[@name='LootList']").get('value')=='yfAutoBeltBuffer'
+ assert (root/'97-AutomationWorkshop/Resources/automation-conveyors.unity3d').is_file()
+assert E.parse(c/'loot.xml').find(".//lootcontainer[@name='yfAutoBeltBuffer']").get('size')=='1,1'
+for kind in ('Sorter','Kitchen','Smelter','Forge','Recycler','Farm','Miner','Transfer','WaterPump','WaterTank','AmmoFeed'):
+ machine=E.parse(c/'blocks.xml').find(f".//block[@name='yfAuto{kind}']")
+ assert machine.find("property[@name='Model']").get('value')==f'#@modfolder:Resources/automation-machines.unity3d?Assets/Machines/Machine{kind}.prefab'
+ assert machine.find("property[@name='MultiBlockDim']") is None, 'Keep the saved single-block footprint'
+ assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureSignable']") is not None, 'Retain persisted status feature'
+assert (root/'97-AutomationWorkshop/Resources/automation-machines.unity3d').is_file()
+print('PASS: workstation, 14 items, 33 recipes, vanilla materials, isolated crafting area, native UI references and localization.')

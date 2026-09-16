@@ -17,7 +17,9 @@ foreach($method in $t.Methods|Where-Object Name -in @('.cctor','IsMainThread')){
 }
 New-Item -ItemType Directory -Force $Directory | Out-Null
 $m.Write((Join-Path $Directory 'Assembly-CSharp.dll'));$m.Dispose()
-Copy-Item E:/soft/7DTD-Modding/Automation020-Staging/AutomationSmoke.exe,E:/soft/7DTD-Modding/Automation020-Staging/YF.Automation.dll -Destination $Directory -Force
+$runtime=Join-Path $root '97-AutomationWorkshop/YF.Automation.dll'
+& (Join-Path $PSScriptRoot 'Build-AutomationSmoke.ps1') -RuntimeDll $runtime -Output (Join-Path $Directory 'AutomationSmoke.exe')
+Copy-Item $runtime -Destination $Directory -Force
 $env:MONO_PATH=$Directory+';'+$game+';'+(Join-Path $root '0_TFP_Harmony')
 & E:/soft/unity20223/Editor/Data/MonoBleedingEdge/bin/mono.exe (Join-Path $Directory 'AutomationSmoke.exe')
 if($LASTEXITCODE -ne 0){throw 'Automation inventory harness failed'}

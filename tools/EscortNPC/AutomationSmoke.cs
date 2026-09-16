@@ -13,6 +13,15 @@ public static class AutomationSmoke
  public static int Main()
  {
   try {
+   foreach(int count in new[]{1,16,17,100,1000}){
+    var a=new[]{Stack(1,count)};var b=new[]{ItemStack.Empty};
+    int moved=ConveyorTransfer.Move(a,b,i=>false,i=>false,16,16,v=>6000);
+    Check(moved==Math.Min(count,16)&&a.Sum(s=>s.count)+b.Sum(s=>s.count)==count,"belt packet capacity and conservation");
+    Check(ConveyorTransfer.Move(b,b,i=>false,i=>false,16,16,v=>6000)==0,"belt rejects self-transfer");
+    var sink=new[]{ItemStack.Empty};Check(ConveyorTransfer.Move(b,sink,i=>false,i=>false,0,16,v=>6000)==0,"zero initial budget cannot forward arrivals");
+    Check(ConveyorTransfer.Move(b,sink,i=>true,i=>false,16,16,v=>6000)==0,"locked belt does not move");
+    Check(ConveyorTransfer.Move(b,sink,i=>false,i=>false,16,16,v=>6000,2)==0,"output filter blocks wrong item");
+   }
    Check(TransferRules.SameChunk(-16,-1,-1,-16),"negative chunk coordinates");
    var invalidUnlockItem=(ItemClass)FormatterServices.GetUninitializedObject(typeof(ItemClass));
    invalidUnlockItem.Properties=new DynamicProperties();invalidUnlockItem.Properties.Values["UnlockedBy"]="";

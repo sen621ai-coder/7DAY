@@ -32,7 +32,7 @@ public static class AutomationQACompiler
 }
 '@
 # $sources = Get-ChildItem (Join-Path $modRoot '97-AutomationWorkshop/Source') -Filter '*.cs' | Sort-Object Name | ForEach-Object FullName
-$sources = @((Join-Path $modRoot 'tools/EscortNPC/AutomationGameQA.cs'))
+$sources = @((Join-Path $modRoot 'tools/EscortNPC/AutomationGameQA.cs'),(Join-Path $modRoot 'tools/EscortNPC/ConveyorGameQA.cs'),(Join-Path $modRoot 'tools/EscortNPC/FactoryPhotoQA.cs'))
 $gameRefs = @(Get-ChildItem $managed -Filter '*.dll' | ForEach-Object FullName) + (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll')
 if(-not $Output){$Output='E:/soft/7DTD-Modding/AutomationGameQA/UserData/Mods/98-AutomationGameQA/Automation.GameQA.dll'}
 $gameRefs += (Join-Path $modRoot '97-AutomationWorkshop/YF.Automation.dll')

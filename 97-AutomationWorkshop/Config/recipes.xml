@@ -141,4 +141,33 @@
       <ingredient name="yfAutoTransport" count="2" />
     </recipe>
   </append>
+  <append xpath="/recipes">
+    </append>
+  <append xpath="/recipes">
+    <recipe name="yfAutoBeltStraight" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoTransport" count="1" />
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+    <recipe name="yfAutoBeltLeft" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoTransport" count="1" />
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+    <recipe name="yfAutoBeltRight" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoTransport" count="1" />
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+    <recipe name="yfAutoBeltUp" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoTransport" count="1" />
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+    <recipe name="yfAutoBeltDown" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoTransport" count="1" />
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+  </append>
 </configs>

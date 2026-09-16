@@ -28,7 +28,7 @@ public class AutomationGameQA : IModApi
   Case("workbench native queue for every automation recipe",()=>{
    var value=Block.GetBlockValue("yfAutomationWorkbench");var block=(BlockWorkstation)value.Block;
    Check(block.WorkstationData.WorkstationWindow=="workstation_yfAutomationWorkbench","wrong window group");
-   var recipes=CraftingManager.GetRecipes().Where(r=>r.craftingArea=="yfAutomationWorkbench").ToArray();Check(recipes.Length==27,"expected 27 station recipes, got "+recipes.Length);
+   var recipes=CraftingManager.GetRecipes().Where(r=>r.craftingArea=="yfAutomationWorkbench").ToArray();Check(recipes.Length==32,"expected 32 station recipes, got "+recipes.Length);
    foreach(var recipe in recipes){
     var chunk=new Chunk(200,200);chunk.SetBlockRaw(1,100,1,value);var station=new TileEntityWorkstation(chunk);station.bDisableModifiedCheck=true;station.localChunkPos=new Vector3i(1,100,1);
     for(int i=0;i<station.Queue.Length;i++)station.Queue[i]=new RecipeQueueItem();

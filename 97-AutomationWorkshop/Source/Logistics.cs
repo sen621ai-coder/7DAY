@@ -18,10 +18,15 @@ namespace YFAutomation
                 postfix:new HarmonyMethod(typeof(Logistics),nameof(Logistics.Observe)));
             h.Patch(AccessTools.Method(typeof(GameManager),"Update"),
                 postfix:new HarmonyMethod(typeof(Logistics),nameof(Logistics.Tick)));
+            h.Patch(AccessTools.Method(typeof(GameManager),"Update"),postfix:new HarmonyMethod(typeof(Conveyors),nameof(Conveyors.Tick)));
+            h.Patch(AccessTools.Method(typeof(TileEntityComposite),"SetBlockEntityData"),postfix:new HarmonyMethod(typeof(ConveyorVisual),nameof(ConveyorVisual.Attach)));
+            h.Patch(AccessTools.Method(typeof(TEFeatureStorage),"GetActivationText"),postfix:new HarmonyMethod(typeof(ConveyorVisual),nameof(ConveyorVisual.ActivationText)));
+            h.Patch(AccessTools.Method(typeof(TEFeatureSignable),"GetActivationText"),postfix:new HarmonyMethod(typeof(MachineDisplay),nameof(MachineDisplay.ActivationText)));
+            h.Patch(AccessTools.Method(typeof(TEFeatureStorage),"GetActivationText"),postfix:new HarmonyMethod(typeof(MachineDisplay),nameof(MachineDisplay.ActivationText)));
             h.Patch(AccessTools.Method(typeof(Chunk),"write",new[]{typeof(PooledBinaryWriter),typeof(bool)}),
                 prefix:new HarmonyMethod(typeof(ChunkTransferLock),nameof(ChunkTransferLock.BeforeWrite)),
                 finalizer:new HarmonyMethod(typeof(ChunkTransferLock),nameof(ChunkTransferLock.AfterWrite)));
-            Log.Out("[YFAutomation] 0.4.1 logistics, production, irrigation and external turret magazines installed.");
+            Log.Out("[YFAutomation] 0.5.1 machine models, logistics, production, irrigation and external turret magazines installed.");
         }
     }
     public static class Logistics
@@ -38,6 +43,7 @@ namespace YFAutomation
         {
             // Harmony argument index avoids dependence on the native parameter's name.
             ObserveCore(__instance,__0);
+            Conveyors.Observe(__instance,__0);
         }
         static void ObserveCore(TileEntityComposite te,World w)
         {
