@@ -32,4 +32,4 @@ for name,tree in trees.items():write(tree,c/(name+'.xml'))
 with (c/'Localization.csv').open(encoding='utf-8-sig',newline='') as f:rows=list(csv.reader(f))
 rows=[r for r in rows if r and r[0].removesuffix('Desc') not in ids]
 with (c/'Localization.csv').open('w',encoding='utf-8-sig',newline='') as f:csv.writer(f).writerows(rows+loc)
-p=root/'ModInfo.xml';tree=E.parse(p).getroot();tree.find('Version').set('value','0.4.0');write(tree,p)
+p=root/'ModInfo.xml';tree=E.parse(p).getroot();tree.find('Version').set('value','0.4.1');write(tree,p)

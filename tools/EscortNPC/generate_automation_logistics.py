@@ -1,5 +1,6 @@
 from pathlib import Path
 import xml.etree.ElementTree as E,csv
+from automation_config_helpers import remove_inherited_unlocks
 root=Path(__file__).resolve().parents[2]/'97-AutomationWorkshop';c=root/'Config'
 def write(node,path):E.indent(node,space='  ');E.ElementTree(node).write(path,encoding='utf-8',xml_declaration=True)
 def prop(node,k,v):E.SubElement(node,'property',name=k,value=str(v))
@@ -32,6 +33,7 @@ for id,title,tint,desc,cost in [
  r=E.SubElement(ra,'recipe',name=id,count='1',craft_area='yfAutomationWorkbench',craft_time='30',always_unlocked='true',use_ingredient_modifier='false')
  for item,count in cost:E.SubElement(r,'ingredient',name=item,count=str(count))
  loc += [[id,'blocks','Block','','false',title,title],[id+'Desc','blocks','Block','','false',desc,desc]]
+remove_inherited_unlocks(blocks,root.parent.parent/'Data/Config/blocks.xml')
 write(blocks,c/'blocks.xml');write(recipes,c/'recipes.xml')
 with (c/'Localization.csv').open(encoding='utf-8-sig',newline='') as f:rows=list(csv.reader(f))
 rows=[r for r in rows if r and r[0].removesuffix('Desc') not in names]

@@ -6,7 +6,14 @@ c=root/'97-AutomationWorkshop/Config';game=root.parent/'Data/Config'
 baseblocks={n.get('name') for n in E.parse(game/'blocks.xml').findall('./block')}
 baseitems={n.get('name') for n in E.parse(game/'items.xml').findall('./item')}
 b=E.parse(c/'blocks.xml').find('.//block');assert b.get('name')=='yfAutomationWorkbench'
-assert b.find("property[@name='Extends']").get('value') in baseblocks
+assert b.find("property[@name='Class']").get('value')=='Workstation'
+assert b.find("property[@name='MultiBlockDim']").get('value')=='2,2,1'
+for id in ('yfAutomationWorkbench','yfAutoPowerPort'):
+ block=E.parse(c/'blocks.xml').find(f".//block[@name='{id}']")
+ assert block.find("property[@name='Extends']") is None, 'Must not re-inherit skill unlocks'
+ assert block.find("property[@name='UnlockedBy']") is None, 'Empty unlock crashes native recipe UI'
+for prop in E.parse(c/'blocks.xml').findall(".//property[@name='UnlockedBy']"):
+ assert all(part.strip() for part in prop.get('value','').split(','))
 assert b.find("property[@class='Workstation']/property[@name='CraftingAreaRecipes']").get('value')=='yfAutomationWorkbench'
 items=E.parse(c/'items.xml').findall('.//item');assert len(items)==14
 for item in items:assert item.find("property[@name='Extends']").get('value') in baseitems

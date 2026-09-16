@@ -14,6 +14,13 @@ public static class AutomationSmoke
  {
   try {
    Check(TransferRules.SameChunk(-16,-1,-1,-16),"negative chunk coordinates");
+   var invalidUnlockItem=(ItemClass)FormatterServices.GetUninitializedObject(typeof(ItemClass));
+   invalidUnlockItem.Properties=new DynamicProperties();invalidUnlockItem.Properties.Values["UnlockedBy"]="";
+   Check(invalidUnlockItem.UnlockedBy.Length==1,"native empty unlock produces one invalid entry");
+   bool reproduced=false;try{invalidUnlockItem.UnlockedBy[0].GetName();}catch(NullReferenceException){reproduced=true;}
+   Check(reproduced,"reproduces reported recipe unlock UI null reference");
+   var fixedUnlockItem=(ItemClass)FormatterServices.GetUninitializedObject(typeof(ItemClass));fixedUnlockItem.Properties=new DynamicProperties();
+   Check(fixedUnlockItem.UnlockedBy.Length==0,"omitted unlock yields no invalid UI entries");
    Check(!TransferRules.SameChunk(-1,0,0,0)&&!TransferRules.SameChunk(15,0,16,0),"boundary rejected");
    Check(!TransferRules.SameOwner(null,null)&&!TransferRules.SameOwner("a","b")&&TransferRules.SameOwner("a","a"),"owner checks");
    foreach(int count in new[]{1,15,16,17,100,1000}){

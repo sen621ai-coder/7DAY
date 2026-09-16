@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -21,7 +21,7 @@ namespace YFAutomation
             h.Patch(AccessTools.Method(typeof(Chunk),"write",new[]{typeof(PooledBinaryWriter),typeof(bool)}),
                 prefix:new HarmonyMethod(typeof(ChunkTransferLock),nameof(ChunkTransferLock.BeforeWrite)),
                 finalizer:new HarmonyMethod(typeof(ChunkTransferLock),nameof(ChunkTransferLock.AfterWrite)));
-            Log.Out("[YFAutomation] 0.4.0 logistics, production, irrigation and external turret magazines installed.");
+            Log.Out("[YFAutomation] 0.4.1 logistics, production, irrigation and external turret magazines installed.");
         }
     }
     public static class Logistics
@@ -47,7 +47,7 @@ namespace YFAutomation
         }
         public static void Tick()
         {
-            if(ConnectionManager.Instance==null||!ConnectionManager.Instance.IsServer||Time.realtimeSinceStartup<next)return;
+            if(ConnectionManager.Instance==null||!ConnectionManager.Instance.IsServer||GameManager.Instance?.IsPaused()==true||Time.realtimeSinceStartup<next)return;
             next=Time.realtimeSinceStartup+1;
             var w=GameManager.Instance?.World;if(w==null||w!=world)return;
             // Bound per-tick work; round-robin avoids starving large factories.
