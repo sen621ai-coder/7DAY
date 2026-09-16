@@ -6351,4 +6351,6 @@
     </item>
   </append>
   <!-- END RELAY HIGH-TIER HUNTS -->
+  <!-- ShowQuality also controls the native remaining-durability bar. -->
+  <set xpath="/items/item[property[@name='Tags' and contains(@value,'PZAECAdvancedWeapon')]]/property[@name='ShowQuality']/@value">true</set>
 </configs>

@@ -36,6 +36,8 @@ namespace AECT16RuntimeFix
                 FusionTierUpgrade.Install(harmony);
                 ContractRelayPickup.Install(harmony);
                 RelayHuntPartyCredit.Install(harmony);
+                RelayHuntStageGate.Install(harmony);
+                RelayCatalogDisplay.Install(harmony);
                 PlayerHeadshotDamagePatch.Install(harmony);
                 BloodMoonSpawnFix.Install(harmony);
                 PatchHighTierNavigation(harmony);

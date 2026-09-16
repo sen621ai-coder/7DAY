@@ -60,6 +60,27 @@ namespace AECT16RuntimeFix
                     if (Math.Abs(actual-expected) > .02f) throw new Exception("Attached mod display scope: " + actual + " expected " + expected);
                 }
                 float ignored = 0;
+                foreach (string name in names.Where(EquipmentStatDisplay.ShowsWeaponDurability))
+                {
+                    var weapon = new ItemValue(ItemClass.GetItem(name, false).type, 6, 6, false, null, 1f);
+                    if (!weapon.ItemClass.ShowQualityBar) throw new Exception("Hidden durability bar: " + name);
+                    var durability = UIDisplayInfoManager.instance.GetDisplayStatsForTag(weapon.ItemClass.DisplayType)
+                        .DisplayStats.Single(e => e.CustomName == "aecBase_DegradationMax");
+                    foreach (int rank in new[] { 0, 1, 10 })
+                    foreach (float permanent in new[] { 1f, .75f })
+                    foreach (float worn in new[] { 0f, .5f, 1f })
+                    {
+                        weapon.SetMetadata(EquipmentFusion.RankKey, rank);
+                        weapon.SetMetadata("DurabilityModifier", permanent);
+                        weapon.UseTimes = weapon.MaxUseTimes * worn;
+                        float before = weapon.UseTimes;
+                        string expectedText = EquipmentStatDisplay.FormatDurability(weapon.MaxUseTimes, before);
+                        string actualText = XUiM_ItemStack.GetStatItemValueTextWithModInfo(new ItemStack(weapon, 1), null, durability);
+                        checks++;
+                        if (actualText != expectedText || weapon.UseTimes != before)
+                            throw new Exception("Remaining durability display: " + name + " " + actualText);
+                    }
+                }
                 checks++;
                 if (!EquipmentStatDisplay.Prefix(health, ItemClass.GetItem("armorRangerOutfit", false), true, ref ignored)) throw new Exception("Legacy armor intercepted");
             }

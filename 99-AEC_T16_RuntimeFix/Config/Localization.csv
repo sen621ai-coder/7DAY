@@ -1,4 +1,11 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,KeepLoaded,english,Context / Alternate Text,german,spanish,french,italian,japanese,koreana,polish,brazilian,russian,turkish,schinese,tchinese
+aecRelayCatalogKind0,ui,RelayCatalog,,,,Hunt,,,,,,,,,,,,猎杀,獵殺
+aecRelayCatalogKind1,ui,RelayCatalog,,,,Assault,,,,,,,,,,,,突袭,突襲
+aecRelayCatalogKind2,ui,RelayCatalog,,,,100 waves,,,,,,,,,,,,百波,百波
+aecRelayCatalogKind3,ui,RelayCatalog,,,,Combined hunt,,,,,,,,,,,,联合猎杀,聯合獵殺
+aecRelayCatalogKind4,ui,RelayCatalog,,,,Special,,,,,,,,,,,,特殊,特殊
+aecRelayHuntStageDenied,ui,RelayCatalog,,,,Personal game stage {0} / required {1}. Contract locked.,,,,,,,,,,,,个人游戏阶段 {0}／需要 {1}：未达到契约购买或使用门槛。,個人遊戲階段 {0}／需要 {1}：未達到契約購買或使用門檻。
+aecDisplay_WeaponDurabilityRemaining,ui,Display,,,,Durability remaining / maximum,,,,,,,,,,,,剩余耐久／最大耐久,剩餘耐久／最大耐久
 "aecQuestRelay2starDesc","blocks","RelayCatalog","","","","Tier 2 relay: offers contract tiers 1-2. Original trader prices apply. Existing stock updates on restock. Another contract trader within 30m prevents spawning.","","","","","","","","","","","","2星契约工作站：提供一至2星契约，各档独立刷新。价格沿用本站倍率。旧商人需等待库存刷新。附近30米已有契约商人时不会重复召唤。","2星契约工作站：提供一至2星契约，各档独立刷新。价格沿用本站倍率。旧商人需等待库存刷新。附近30米已有契约商人时不会重复召唤。"
 "aecQuestRelay3starDesc","blocks","RelayCatalog","","","","Tier 3 relay: offers contract tiers 1-3. Original trader prices apply. Existing stock updates on restock. Another contract trader within 30m prevents spawning.","","","","","","","","","","","","3星契约工作站：提供一至3星契约，各档独立刷新。价格沿用本站倍率。旧商人需等待库存刷新。附近30米已有契约商人时不会重复召唤。","3星契约工作站：提供一至3星契约，各档独立刷新。价格沿用本站倍率。旧商人需等待库存刷新。附近30米已有契约商人时不会重复召唤。"
 "aecQuestRelay4starDesc","blocks","RelayCatalog","","","","Tier 4 relay: offers contract tiers 1-4. Original trader prices apply. Existing stock updates on restock. Another contract trader within 30m prevents spawning.","","","","","","","","","","","","4星契约工作站：提供一至4星契约，各档独立刷新。价格沿用本站倍率。旧商人需等待库存刷新。附近30米已有契约商人时不会重复召唤。","4星契约工作站：提供一至4星契约，各档独立刷新。价格沿用本站倍率。旧商人需等待库存刷新。附近30米已有契约商人时不会重复召唤。"

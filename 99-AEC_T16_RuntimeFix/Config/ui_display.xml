@@ -975,4 +975,5 @@
       </item_display_info>
     </append>
   <!-- END GENERATED ENDGAME EXPANSION -->
+  <set xpath="/ui_display_info/item_display/item_display_info[starts-with(@display_type,'AECDisplay_gunPZAEC') or starts-with(@display_type,'AECDisplay_meleePZAEC')]/display_entry[@name='aecBase_DegradationMax']/@title_key">aecDisplay_WeaponDurabilityRemaining</set>
 </configs>
