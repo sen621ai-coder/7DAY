@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/windows">
+    <window name="windowYFAutomationStorage" width="{windowWidth}" height="546" controller="LootWindow" panel="Right" cursor_area="true">
+      <rect name="header" height="43" depth="0" anchor_left="queue,0,-3" anchor_right="queue,1,0">
+        <sprite depth="1" name="headerbackground" sprite="ui_game_panel_header" anchor_left="queue,0,-3" anchor_right="queue,1,0" />
+        <sprite depth="3" name="windowIcon" style="icon32px" pivot="center" pos="21,-21" sprite="ui_game_symbol_loot_sack" />
+        <label depth="2" name="lootName" pos="39,-6" width="172" height="32" text="{lootcontainer_name}" font_size="32" pivot="left" anchor_left="queue,0,39" anchor_right="queue,1,-170" anchor_bottom="header,0,2" anchor_top="header,1,-2" />
+        <rect anchor_left="queue,1,-300" anchor_right="queue,1,0" pos="0,0" controller="ContainerStandardControls" visible="{buttons_visible}">
+          <button depth="3" name="btnToggleLockMode" sprite="ui_game_symbol_lock" tooltip_key="xuiStashLockModeToggle" pos="154, -22" style="icon32px, press, hover" pivot="center" sound="[paging_click]" selected="{userlockmode}" visible="{hasslotlocks}" />
+          <button depth="3" name="btnMoveAll" sprite="ui_game_symbol_store_all_up" tooltip="{take_all_tooltip}" pos="274, -22" style="icon32px, press, hover" pivot="center" sound="[paging_click]" />
+          <button depth="3" name="btnMoveFillAndSmart" sprite="ui_game_symbol_store_similar_up" tooltip_key="xuiLootTakeFillAndSmart" pos="234, -22" style="icon32px, press, hover" pivot="center" sound="[paging_click]" />
+        </rect>
+      </rect>
+      <rect name="content" pos="3,-49">
+        <sprite depth="0" name="bg" color="255,255,255,1" type="sliced" sprite="menu_empty" anchor_left="queue,0,-3" anchor_bottom="queue,0,0" anchor_right="queue,1,0" anchor_top="queue,1,49" />
+        <grid depth="12" name="queue" rows="10" cols="9" cell_width="75" cell_height="75" repeat_content="true" controller="LootContainer">
+          <item_stack name="0" />
+        </grid>
+        <sprite name="partition" pos="0,-225" width="450" height="3" depth="20" sprite="menu_empty3px" color="71,197,216,255" />
+      </rect>
+      <label name="partitionHelp" text="上3行：原料 / 工具    下3行：成品" pos="3,-510" width="450" height="30" font_size="21" depth="3" color="[white]" />
+    </window>
+    <window name="windowYFAutomationConfiguration" width="430" height="752" panel="Center" cursor_area="true" controller="YFAutomation.YFAutomationConfiguration, YF.Automation">
+      <sprite name="background" depth="0" width="430" height="752" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
+      <sprite name="header" depth="1" width="430" height="43" sprite="ui_game_panel_header" />
+      <label name="title" text="自动化设备" pos="10,-6" width="410" height="30" font_size="25" depth="3" color="[white]" justify="left" />
+      <label name="status" text="正在读取…" pos="10,-48" width="410" height="38" font_size="20" depth="3" color="[white]" justify="left" />
+      <textfield name="search" pos="10,-90" width="410" height="32" font_size="22" character_limit="60" on_return="Submit" open_vk_on_open="false" focus_on_open="false" clear_button="true" />
+      <button name="recipe0" pos="10,-130" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe0Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe1" pos="10,-160" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe1Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe2" pos="10,-190" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe2Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe3" pos="10,-220" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe3Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe4" pos="10,-250" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe4Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe5" pos="10,-280" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe5Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe6" pos="10,-310" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe6Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe7" pos="10,-340" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe7Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="previous" pos="10,-380" width="100" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="previousText" text="上一页" pos="8,-3" width="84" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <label name="pages" text="" pos="125,-380" width="160" height="30" font_size="21" depth="3" color="[white]" justify="left" />
+      <button name="next" pos="320,-380" width="100" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="nextText" text="下一页" pos="8,-3" width="84" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="product" pos="10,-414" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="productText" text="目标产品" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="mode" pos="10,-450" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="modeText" text="库存模式" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="source" pos="10,-486" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="sourceText" text="输入箱" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="target" pos="10,-522" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="targetText" text="输出箱" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <label name="details" text="" pos="10,-486" width="410" height="66" font_size="18" depth="3" color="[white]" justify="left" />
+      <button name="toggle" pos="10,-558" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="toggleText" text="启动 / 暂停" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <label name="help" text="" pos="10,-596" width="410" height="72" font_size="18" depth="3" color="[white]" justify="left" />
+      <label name="notice" text="" pos="10,-672" width="410" height="32" font_size="19" depth="3" color="[white]" justify="left" />
+      <button name="save" pos="10,-712" width="126" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="saveText" text="保存" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="refresh" pos="152,-712" width="126" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="refreshText" text="刷新" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="close" pos="294,-712" width="126" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="closeText" text="关闭" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+    </window>
+    <window name="windowYFAutomationInventoryControls" width="430" height="752" panel="Left" cursor_area="true" controller="YFAutomation.YFAutomationInventoryControls, YF.Automation">
+      <sprite name="background" depth="0" width="430" height="752" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
+      <sprite name="header" depth="1" width="430" height="43" sprite="ui_game_panel_header" />
+      <label name="title" text="自动化设备" pos="10,-6" width="410" height="30" font_size="25" depth="3" color="[white]" justify="left" />
+      <label name="status" text="正在读取…" pos="10,-48" width="410" height="38" font_size="20" depth="3" color="[white]" justify="left" />
+      <textfield name="search" pos="10,-90" width="410" height="32" font_size="22" character_limit="60" on_return="Submit" open_vk_on_open="false" focus_on_open="false" clear_button="true" />
+      <button name="recipe0" pos="10,-130" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe0Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe1" pos="10,-160" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe1Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe2" pos="10,-190" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe2Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe3" pos="10,-220" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe3Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe4" pos="10,-250" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe4Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe5" pos="10,-280" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe5Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe6" pos="10,-310" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe6Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="recipe7" pos="10,-340" width="410" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="recipe7Text" text="" pos="8,-3" width="394" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="previous" pos="10,-380" width="100" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="previousText" text="上一页" pos="8,-3" width="84" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <label name="pages" text="" pos="125,-380" width="160" height="30" font_size="21" depth="3" color="[white]" justify="left" />
+      <button name="next" pos="320,-380" width="100" height="28" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="nextText" text="下一页" pos="8,-3" width="84" height="24" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="product" pos="10,-414" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="productText" text="目标产品" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="mode" pos="10,-450" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="modeText" text="库存模式" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="source" pos="10,-486" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="sourceText" text="输入箱" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="target" pos="10,-522" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="targetText" text="输出箱" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <label name="details" text="" pos="10,-486" width="410" height="66" font_size="18" depth="3" color="[white]" justify="left" />
+      <button name="toggle" pos="10,-558" width="410" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="toggleText" text="启动 / 暂停" pos="8,-3" width="394" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <label name="help" text="" pos="10,-596" width="410" height="72" font_size="18" depth="3" color="[white]" justify="left" />
+      <label name="notice" text="" pos="10,-672" width="410" height="32" font_size="19" depth="3" color="[white]" justify="left" />
+      <button name="save" pos="10,-712" width="126" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="saveText" text="保存" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="refresh" pos="152,-712" width="126" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="refreshText" text="刷新" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="close" pos="294,-712" width="126" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="closeText" text="关闭" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+    </window>
+  </append>
+</configs>

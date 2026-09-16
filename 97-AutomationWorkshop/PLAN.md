@@ -3,9 +3,64 @@
 ## 目标与当前版本
 在七日杀 V3.2 整合包中建立可联机使用的工厂系统：自动采矿、运输分拣、农场和食物生产、装备分解、冶炼锻造、炮塔补弹。使用独立 Mod `97-AutomationWorkshop`，设备统一由自动化工作台制造。
 
-当前正式交接基线为 **0.5.2 / Git 08ce610**。已加入五种可见传送带、11 种机器独立模型，并修复新模型的原生方块交互识别。机器配置界面、跨区块运输、分流器及真实双客户端联机验收仍待完成。
+已提交的功能基线为 **0.5.2 / Git 08ce610**，最近文档提交为 `d227a72`。本地已实现并安装 **0.7.0 原生面板、机器内置库存与传送带直连**，尚未提交或推送；当前安装与验证结果见下方最新进展。跨区块运输、分流器及真实双客户端联机验收仍待完成。
 
-## 接续任务交接（2026-09-16，优先阅读）
+## 0.7.0 内置库存与原生面板（2026-09-17）
+
+用户明确要求忽略电线、开始修改机器原生风格面板与内置库存/传送带直连。本轮未改 WireVisibility。
+
+- 10种机器新增原生 TEFeatureStorage，36格，上18格输入、下18格输出；水泵用输出区，供弹器用输入区。传送带按自身入口/出口方向连接机器，无需外部箱子。继续沿用所有权、同区块、电力、容器编辑锁和每段预算。
+- 新增 TEFeatureMachineInventory 保存兼容标志，旧V18存档缺此功能时默认旧外接模式，新放设备默认内置。面板可显式切换，两边库存不搬动；原有所有者、进度和箱子保留。
+- Production 同一库存使用扣料后的快照规划输出，最后只提交一次，避免两个全量数组互相覆盖造成复制。成品不当原料，原料不挤占成品格，满成品区暂停且不扣料。农场灌溉水纳入同一原料快照。
+- 原生 LootWindowGroup + LootContainer 物品格/背包/同步/锁，左侧自定义原生XUi产品列表（搜索、8项翻页）、材料参考、启停、模式设置；右侧库存有分区线与说明。不提供整箱排序。仅真实持有原生库存锁的配置玩家可在打开库存期间保存。
+- UI生成源 `tools/EscortNPC/generate_automation_configuration.py` 同时维护新增功能、loot定义与窗口。重新生成其他设备XML后，最后再次运行此生成器。
+- 新源码 `MachineInventory.cs`、`MachineInventoryUI.cs`；修改 Production、Conveyors、Logistics、WaterSystem、TurretFeed、MachineSettings、MachineConfigurationUI。网络包加入经过验证的库存模式，服务端和客户端须整体同版本。
+- XML检查、2031项离线回归及61项原生无界面集成测试全部通过。覆盖同机扣料出货、成品满仓不扣料、成品不作为原料、V18旧功能布局迁移、新库存存读、当前持锁人保存、他人锁不能借用、内置分拣过滤、传送带送入/取出分区、打开库存阻断运输、切外接模式保留内库存并断开内置传送端口。传送带测试使用真实原生设备和Step逻辑，供电状态由测试固定；不等于完整电网或双客户端实测。图形实际布局、双客户端现场验收未完成。
+- 已安装DLL SHA256：`FE17450C02FA6FBCC2DC505912CE584E07E942E5C8599A7B45920BA6C893955A`，与暂存及原生测试副本一致；旧DLL备份在 `.local-tests/AutomationBackups`。测试报告和日志：`.local-tests/AutomationConfiguration/native-report.txt`、`native-game.log`。需重启游戏。未提交或推送。
+- 首次原生测试因EOS网络登录失败未启动世界；独立测试脚本加入 `-crossplatform=None -serverplatforms=Steam,LAN`，仅影响测试进程，不改正式平台配置。
+
+## 0.6.1 电线常显（2026-09-16）
+
+- 用户要求显示电线。新增 `Source/WireVisibility.cs`，在原生 `FastWireNode.SetVisible` 入口保留线条可见性；收起接线工具不再隐藏。原生旧 WireNode 的 SetVisible 本身为空，无需修改。电流脉冲、供电状态、接线权限和上限、存档电路不变。对象池直接停用对象的流程不变，拆线和卸载仍隐藏线条。
+- 已编译并安装，安装前确认游戏退出，旧 DLL 自动备份于 `.local-tests/AutomationBackups`。当前 DLL SHA256：`A71992B26FE9C3DC14D2526B7B0D64ACCA44071D9F2AD388DC5751FC3743C53F`。以下 0.6.0 安装记录为历史版本。
+- 配置检查通过；1997 项库存/生产/配置回归通过；隔离原生无界面游戏 37 项通过，含 3 项新增线条测试：原生网格在隐藏请求后仍激活、关闭工具脉冲后仍激活、回收至对象池后停用。报告：`.local-tests/AutomationConfiguration/GameQA/UserData/Saves/Navezgane/AutomationConfigQA_Isolated/machine-configuration-qa.txt`。尚未做图形客户端截图验收。
+- 需重新启动游戏生效。此补丁只控制已有线条显示，未加载或缺失端点仍遵循原生生成逻辑；没有修改用户世界的既有接线或解决旧演示发电机 11 条子连接超限问题。
+
+## 0.6.0 接续实施进展（2026-09-16，当前进度优先于下方旧交接）
+
+当前工作区为 `D:/SteamLibrary/steamapps/common/7 Days To Die/Mods`，不是旧交接中的 E 盘环境。启动游戏后长按交互键，选择“配置机器”；没有自动启动用户游戏。
+
+### 已实现
+
+- 原生长按交互菜单新增“配置机器”，窗口使用原生 XUi。生产机器、分拣机、箱间输送器有启停、输入/输出箱选择；适用机器有产品/过滤物品搜索与循环选择。
+- 所有设置接入服务端执行；水泵和炮塔供弹器仅提供启停。暂停供弹器会阻止外接弹药消耗，原生炮塔自身弹药不受此设置控制。
+- 未配置时保留旧样品和邻接模式；显式产品/过滤可不放样品，仍保留输出首格。指定箱子不可用时不回退到其他箱子。
+- 配置变化重置加工进度，暂停保留进度；分解保护、材料/工具/解锁检查继续沿用原流程。选择的是目标产品，同产品多个配方仍自动使用首个可执行配方。
+- 服务端认证真实发包玩家，核验所有者/锁具明确授权、8米距离、目标箱子所有者/范围/区块、设备产品目录、并发版本和设备会话标识。网络字段有长度上限，旧会话和旧版本保存被拒绝。
+- 设置以 `automation-machine-settings.xml` 保存在当前世界存档目录，原子替换并保留 `.bak`。配置文件损坏时停机。拆除删除配置，新摆设备不继承孤立旧配置；区块卸载只丢弃会话标识，不删除配置。
+- **没有改变 CompositeFeatures、库存格式、TEFeatureAutomationState 序列化或传送带逻辑；没有恢复已撤销的 0.5.3 改动。**
+
+### 安装与验证
+
+- 已安装0.6.0 DLL，暂存、原生测试环境和安装文件SHA-256一致：`96AE00133DFD3352E94CDA8A526B111995B70334F0EE8BCB5CD0E29791617D8B`。原0.5.2 DLL备份在 `.local-tests/AutomationBackups/20260916-232418-YF.Automation.dll`。
+- 配置/XML检查通过；1997项独立库存、生产与配置检查通过（保留原1953项）。新增测试覆盖显式过滤、样品保留、物品品质/耐久、配置读写/备份/损坏、并发版本、会话标识和有界网络字段。
+- 独立原生游戏测试世界 `AutomationConfigQA_Isolated`：最终35项全部通过，覆盖服务器重启恢复、权限/距离、非法目标/产品、原生编辑锁、无样品实际冶炼、暂停不扣料、切换产品重置进度、并发旧版本/会话拒绝、完整请求/回复包、原生菜单入口、各设备产品目录及拆除清理。报告 `.local-tests/AutomationConfiguration/native-report.txt`，日志 `native-game.log`（同目录）。所有独立测试进程已退出，未修改正式存档。
+- 图形客户端实际打开、按钮布局/按键、真实双客户端同步和并发操作仍未验收。独立服务器里的身份模拟和网络包读写测试不等于两个真实客户端。
+
+### 新增入口与复测命令
+
+- `Source/MachineSettings.cs`：世界配置持久化、所有权/目标验证、产品目录、版本检查。
+- `Source/MachineConfigurationUI.cs`：原生交互入口、XUi控制器、客户端请求和服务器回复。
+- `tools/EscortNPC/generate_automation_configuration.py`：窗口、窗口组与菜单本地化生成源，重复运行不增加重复窗口组。
+- `pwsh -NoProfile -File tools/Build-AutomationWorkshop.ps1 -Output .local-tests/AutomationConfiguration/YF.Automation.dll`。
+- `python tools/Test-AutomationWorkshop.py`。
+- `pwsh -NoProfile -File tools/Test-AutomationInventory.ps1 -RuntimeDll .local-tests/AutomationConfiguration/YF.Automation.dll -MonoPath D:/unity/2022.3.48f1c1/Editor/Data/MonoBleedingEdge/bin/mono.exe`。
+- `pwsh -NoProfile -File tools/Test-AutomationConfigurationGame.ps1`：单独启动隐藏的测试服务器，独立UserData、独立测试存档和端口；超时只停止脚本创建的进程，不操作正式存档。
+- 退出游戏后运行 `pwsh -NoProfile -File tools/Install-AutomationWorkshop.ps1`，默认使用上述暂存DLL，备份旧DLL到 `.local-tests/AutomationBackups` 并校验哈希。
+
+接下来先做图形界面和双客户端现场验收，再考虑多条过滤规则、优先级、精确配方变体选择与跨区块物流。不要把这些后续扩展说成已经实现。
+
+## 0.5.2 历史交接（2026-09-16，仅作基线与撤销记录）
 
 ### 用户最新要求
 

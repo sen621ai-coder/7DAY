@@ -27,7 +27,7 @@ namespace YFAutomation
             {
                 int type=ItemClass.GetItem("yfAutoIrrigationWater").type;
                 if(type==0)return "灌溉水配置缺失";
-                foreach(var tank in Tanks(world,machine))
+                foreach(var tank in MachineInventory.UsesInternal(machine)?new[]{machine}:Tanks(world,machine))
                 {
                     var storage=tank.GetFeature<TEFeatureStorage>();
                     int stored=storage.items.Where(s=>s!=null&&!s.IsEmpty()&&s.itemValue.type==type).Sum(s=>s.count);
@@ -35,7 +35,7 @@ namespace YFAutomation
                     var copy=ProductionInventory.Clone(storage.items);
                     // Transport helper handles slot zero normally; no filter sample in a tank.
                     var unit=new[]{new ItemStack(new ItemValue(type),1)};
-                    if(InventoryTransfer.MoveUnfiltered(unit,copy,i=>false,i=>Logistics.Locked(storage,i),v=>v.ItemClass.Stacknumber.Value)==0)continue;
+                    if(InventoryTransfer.MoveUnfiltered(unit,copy,i=>false,i=>Logistics.Locked(storage,i)||tank==machine&&!MachineInventory.IsOutput(i),v=>v.ItemClass.Stacknumber.Value)==0)continue;
                     var state=machine.GetFeature<TEFeatureAutomationState>();
                     if(state.Job!="pump"){state.Job="pump";state.Seconds=0;}
                     state.Seconds++;machine.SetChunkModified();
@@ -49,6 +49,14 @@ namespace YFAutomation
         public static void Irrigate(World world,TileEntityComposite machine,FieldMachines.Work work)
         {
             int type=ItemClass.GetItem("yfAutoIrrigationWater").type;if(type==0)return;
+            if(MachineInventory.UsesInternal(machine))
+            {
+                var storage=machine.GetFeature<TEFeatureStorage>();
+                var copy=ProductionInventory.Clone(work.Input);
+                if(ProductionInventory.Consume(copy,type,1,i=>!MachineInventory.IsInput(i)||Logistics.Locked(storage,i)))
+                {work.Input=copy;work.Duration=5;work.Key+=":irrigated";}
+                return;
+            }
             foreach(var tank in Tanks(world,machine))
             {
                 var storage=tank.GetFeature<TEFeatureStorage>();var copy=ProductionInventory.Clone(storage.items);

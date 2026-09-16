@@ -61,14 +61,14 @@ namespace YFAutomation
    Func<TileEntityComposite,TileEntityComposite,bool> allowed=(a,b)=>b!=null&&!b.IsRemoving&&TransferRules.SameOwner(Owner(a),Owner(b))&&TransferRules.SameChunk(a.ToWorldPos().x,a.ToWorldPos().z,b.ToWorldPos().x,b.ToWorldPos().z)&&!Logistics.Busy(b)&&b.GetFeature<TEFeatureStorage>()!=null;
    var budget=nodes.ToDictionary(t=>t,t=>t.GetFeature<TEFeatureStorage>().items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count));
    foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b)||budget[b]==0)continue;var target=world.GetTileEntity(Exit(b)) as TileEntityComposite;if(!allowed(b,target))continue;
-    bool belt=ConveyorPath.IsBelt(target.block.GetBlockName());string kind=target.block.GetBlockName();if(belt&&(!map.ContainsKey(target.ToWorldPos())||!Matches(b,target)||!powered.Contains(target)))continue;if(!belt&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
+    bool belt=ConveyorPath.IsBelt(target.block.GetBlockName());string kind=target.block.GetBlockName();if(belt&&(!map.ContainsKey(target.ToWorldPos())||!Matches(b,target)||!powered.Contains(target)))continue;bool machine=MachineInventory.UsesInternal(target);if(!belt&&!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
     var src=b.GetFeature<TEFeatureStorage>();var dst=target.GetFeature<TEFeatureStorage>();int filter=0;if(kind=="yfAutoOutput"){if(dst.items[0].IsEmpty())continue;filter=dst.items[0].itemValue.type;}
-    int count=ConveyorTransfer.Move(inventory(b),inventory(target),i=>Logistics.Locked(src,i),i=>Logistics.Locked(dst,i)||kind=="yfAutoOutput"&&i==0,budget[b],belt?16:int.MaxValue,v=>v.ItemClass.Stacknumber.Value,filter);
+    int count=ConveyorTransfer.Move(inventory(b),inventory(target),i=>Logistics.Locked(src,i),i=>Logistics.Locked(dst,i)||kind=="yfAutoOutput"&&i==0||machine&&(!MachineInventory.IsInput(i)||kind=="yfAutoWaterPump"),budget[b],belt?16:int.MaxValue,v=>v.ItemClass.Stacknumber.Value,filter);
     if(count>0){changed.Add(b);changed.Add(target);moved.Add(b);if(belt)moved.Add(target);}
    }
    // Load boxes only after movement; newly loaded parcels wait for the next tick.
-   foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b))continue;var source=world.GetTileEntity(Entry(b)) as TileEntityComposite;if(!allowed(b,source))continue;string kind=source.block.GetBlockName();if(kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
-    var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||kind=="yfAutoOutput"&&i==0,i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value);
+   foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b))continue;var source=world.GetTileEntity(Entry(b)) as TileEntityComposite;if(!allowed(b,source))continue;string kind=source.block.GetBlockName();bool machine=MachineInventory.UsesInternal(source);if(!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
+    var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||kind=="yfAutoOutput"&&i==0||machine&&!MachineInventory.IsOutput(i),i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value);
     if(count>0){changed.Add(source);changed.Add(b);moved.Add(b);}
    }
    foreach(var t in changed){var s=t.GetFeature<TEFeatureStorage>();Array.Copy(working[t],s.items,s.items.Length);t.SetChunkModified();}

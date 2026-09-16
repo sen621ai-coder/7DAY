@@ -63,10 +63,14 @@ namespace YFAutomation
             var state=machine.GetFeature<TEFeatureAutomationState>();
             var input=source.GetFeature<TEFeatureStorage>();var output=target.GetFeature<TEFeatureStorage>();
             if(state==null||input==null||output==null)return "机器组件不完整";
-            if(output.items.Length<2||output.items[0].IsEmpty())return "输出箱首格放产品样品";
-            int type=output.items[0].itemValue.type;
+            var config=MachineConfiguration.Get(machine);
+            if(config.Paused)return "已暂停（机器配置）";
+            if(output.items.Length<2)return "输出箱容量不足";
+            bool internalStorage=ReferenceEquals(source,machine)&&ReferenceEquals(target,machine)&&MachineInventory.Has(machine);
+            int type=config.Product==""&&internalStorage?0:config.Product==""?(output.items[0].IsEmpty()?0:output.items[0].itemValue.type):ItemClass.GetItem(config.Product).type;
+            if(type==0)return internalStorage?"在面板选择目标产品并保存":"配置目标产品或输出箱首格放样品";
             string kind=machine.block.GetBlockName();
-            Func<int,bool> inputLocked=i=>Locked(input,i)||i==0&&source.block.GetBlockName()=="yfAutoOutput";
+            Func<int,bool> inputLocked=i=>Locked(input,i)||internalStorage&&!MachineInventory.IsInput(i)||i==0&&source.block.GetBlockName()=="yfAutoOutput";
             Recipe recipe=null;ItemStack product=null;ItemStack[] nextInput=null;
             float duration=0;string key=null;
             Action complete=null;
@@ -78,7 +82,7 @@ namespace YFAutomation
             }
             else if(kind=="yfAutoSmelter")
             {
-                string sample=output.items[0].itemValue.ItemClass.GetItemName();
+                string sample=ItemClass.GetForId(type).GetItemName();
                 if(!sample.StartsWith("yfAutoIngot_"))return "首格放自动化冶炼料样品";
                 string category=sample.Substring("yfAutoIngot_".Length);
                 for(int i=0;i<input.items.Length;i++)
@@ -119,10 +123,10 @@ namespace YFAutomation
             {
                 if(player==null)return "等待机器所有者上线";
                 string area=kind=="yfAutoKitchen"?"campfire":"forge";
-                foreach(var candidate in CraftingManager.GetRecipes(output.items[0].itemValue.ItemClass.GetItemName()))
+                foreach(var candidate in CraftingManager.GetRecipes(ItemClass.GetForId(type).GetItemName()))
                 {
                     if(candidate.IsScrap||candidate.craftingArea!=area||candidate.itemValueType!=type||!candidate.IsUnlocked(player)||candidate.GetOutputItemClass().HasQuality)continue;
-                    if(candidate.craftingToolType>0&&!input.items.Any(s=>!s.IsEmpty()&&s.itemValue.type==candidate.craftingToolType))continue;
+                    if(candidate.craftingToolType>0&&!input.items.Where((s,i)=>!internalStorage||MachineInventory.IsInput(i)).Any(s=>!s.IsEmpty()&&s.itemValue.type==candidate.craftingToolType))continue;
                     var trial=ProductionInventory.Clone(input.items);bool enough=true;
                     candidate.craftingTier=candidate.GetCraftingTier(player);
                     foreach(var ingredient in candidate.GetIngredientsSummedUp())
@@ -150,14 +154,15 @@ namespace YFAutomation
                 if(recipe==null)return "缺材料/工具或配方未解锁";
             }
             if(float.IsNaN(duration)||float.IsInfinity(duration)||duration<=0||product.count<=0)return "配方数据异常";
-            var nextOutput=ProductionInventory.Clone(output.items);
-            if(!ProductionInventory.Produce(nextOutput,product,i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value))return "输出箱满，生产暂停";
+            var nextOutput=ProductionInventory.Clone(internalStorage?nextInput:output.items);
+            if(!ProductionInventory.Produce(nextOutput,product,i=>Locked(output,i)||internalStorage&&!MachineInventory.IsOutput(i),v=>v.ItemClass.Stacknumber.Value))return "输出箱满，生产暂停";
             if(state.Job!=key){state.Job=key;state.Seconds=0;}
             state.Seconds=Math.Min(duration,state.Seconds+1);machine.SetChunkModified();
             if(state.Seconds<duration)return "生产中 "+(int)(state.Seconds*100/duration)+"%";
             // One chunk serialization gate is held by Logistics throughout this commit.
             complete?.Invoke();
-            Array.Copy(nextInput,input.items,nextInput.Length);Array.Copy(nextOutput,output.items,nextOutput.Length);
+            if(!internalStorage)Array.Copy(nextInput,input.items,nextInput.Length);
+            Array.Copy(nextOutput,output.items,nextOutput.Length);
             state.Seconds=0;source.SetChunkModified();target.SetChunkModified();
             source.SetModified();target.SetModified();return "完成：产出 "+product.count;
         }

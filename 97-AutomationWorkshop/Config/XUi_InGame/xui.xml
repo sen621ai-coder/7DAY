@@ -9,4 +9,14 @@
       <window name="windowNonPagingHeader" />
     </window_group>
   </append>
+  <append xpath="/xui">
+    <window_group name="yfMachineConfiguration" close_compass_on_open="true">
+      <window name="windowYFAutomationConfiguration" />
+    </window_group>
+    <window_group name="yfMachineInventory" controller="XUiC_LootWindowGroup" close_compass_on_open="true">
+      <window name="windowYFAutomationStorage" />
+      <window name="windowYFAutomationInventoryControls" />
+      <window name="windowNonPagingHeader" />
+    </window_group>
+  </append>
 </configs>

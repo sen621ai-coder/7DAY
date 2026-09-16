@@ -24,7 +24,12 @@ for r in recipes:
  assert r.get('craft_area')==('workbench' if r.get('name')==b.get('name') else 'yfAutomationWorkbench')
  for i in r:assert i.get('name') in names and int(i.get('count'))>0
 windows={w.get('name') for w in E.parse(game/'XUi_InGame/windows.xml').findall('.//window')}
-group=E.parse(c/'XUi_InGame/xui.xml').find('.//window_group')
+windows |= {w.get('name') for w in E.parse(c/'XUi_InGame/windows.xml').findall('.//window')}
+groups=E.parse(c/'XUi_InGame/xui.xml').findall('.//window_group')
+assert len({g.get('name') for g in groups}) == len(groups), 'Duplicate UI group'
+for g in groups:
+ for w in g: assert w.get('name') in windows, 'Unresolved native window reference'
+group=groups[0]
 assert group.get('name')==b.find("property[@name='WorkstationWindow']").get('value')
 for w in group:assert w.get('name') in windows
 with (c/'Localization.csv').open(encoding='utf-8-sig',newline='') as f:loc={r['Key']:r for r in csv.DictReader(f)}
@@ -48,3 +53,13 @@ for kind in ('Sorter','Kitchen','Smelter','Forge','Recycler','Farm','Miner','Tra
  assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureSignable']") is not None, 'Retain persisted status feature'
 assert (root/'97-AutomationWorkshop/Resources/automation-machines.unity3d').is_file()
 print('PASS: workstation, 14 items, 33 recipes, vanilla materials, isolated crafting area, native UI references and localization.')
+
+for kind in ('Sorter','Kitchen','Smelter','Forge','Recycler','Farm','Miner','Transfer','WaterPump','AmmoFeed'):
+ machine=E.parse(c/'blocks.xml').find(f".//block[@name='yfAuto{kind}']")
+ assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureStorage']/property[@name='LootList']").get('value')=='yfAutoMachineInventory'
+ assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureMachineInventory']") is not None
+assert E.parse(c/'loot.xml').find(".//lootcontainer[@name='yfAutoMachineInventory']").get('size')=='6,6'
+storage=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutomationStorage']")
+assert storage.get('controller')=='LootWindow' and storage.find(".//*[@name='btnSort']") is None
+assert storage.find(".//grid[@controller='LootContainer']") is not None
+print('PASS: 10 built-in machine inventories, migration features, native loot grid and partition-safe controls.')

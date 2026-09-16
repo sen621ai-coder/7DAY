@@ -12,6 +12,8 @@ namespace YFAutomation
         public void InitMod(Mod mod)
         {
             var h=new Harmony("yf.automation.logistics");
+            MachineConfigurationUI.Install(h);
+            WireVisibility.Install(h);
             h.Patch(AccessTools.Method(typeof(TileEntityPoweredRangedTrap),"DecrementAmmo"),
                 postfix:new HarmonyMethod(typeof(TurretFeed),nameof(TurretFeed.AfterDecrement)));
             h.Patch(AccessTools.Method(typeof(TileEntityComposite),nameof(TileEntityComposite.UpdateTick)),
@@ -27,7 +29,7 @@ namespace YFAutomation
             h.Patch(AccessTools.Method(typeof(Chunk),"write",new[]{typeof(PooledBinaryWriter),typeof(bool)}),
                 prefix:new HarmonyMethod(typeof(ChunkTransferLock),nameof(ChunkTransferLock.BeforeWrite)),
                 finalizer:new HarmonyMethod(typeof(ChunkTransferLock),nameof(ChunkTransferLock.AfterWrite)));
-            Log.Out("[YFAutomation] 0.5.2 native interaction, machine models, logistics, production, irrigation and external turret magazines installed.");
+            Log.Out("[YFAutomation] 0.7.0 native machine inventory panels, direct conveyor endpoints, native interaction, logistics, production, irrigation and external turret magazines installed.");
         }
     }
     public static class Logistics
@@ -86,17 +88,31 @@ namespace YFAutomation
         static void Run(TileEntityComposite sorter)
         {
             if(Busy(sorter))return;
+            var config=MachineConfiguration.Get(sorter);
+            if(config.Paused){Status(sorter,"已暂停（机器配置）");return;}
             var at=sorter.ToWorldPos();string owner=Owner(sorter);
             if(string.IsNullOrEmpty(owner)){Status(sorter,"等待所有者");return;}
             bool powered=Powered(world,at);
             if(!powered){Status(sorter,"缺电：邻接供电口");return;}
             if(sorter.block.GetBlockName()=="yfAutoWaterPump"){Status(sorter,WaterSystem.Pump(world,sorter));return;}
             if(sorter.block.GetBlockName()=="yfAutoAmmoFeed"){Status(sorter,TurretFeed.Run(sorter));return;}
+            if(MachineInventory.UsesInternal(sorter))
+            {
+                var localChunk=world.GetChunkFromWorldPos(at.x,at.z) as Chunk;
+                if(localChunk==null||localChunk.IsLocked)return;
+                lock(ChunkTransferLock.For(localChunk))
+                {
+                    var player=GameManager.Instance.GetPersistentPlayerList()?.GetEntityPlayerFromUserId(sorter.GetFeature<TEFeatureLockable>()?.GetOwner()??sorter.Owner);
+                    Status(sorter,Production.IsMachine(sorter.block.GetBlockName())?Production.Step(sorter,sorter,sorter,player):MachineInventory.PassThrough(sorter,config.Product));
+                }
+                return;
+            }
             if(sorter.block.GetBlockName()=="yfAutoTransfer"){RunTransfer(sorter,owner);return;}
             bool production=Production.IsMachine(sorter.block.GetBlockName());
             var sources=sides.Select(offset=>world.GetTileEntity(Add(at,offset)) as TileEntityComposite)
                 .Where(te=>Available(te,"yfAutoInput",owner)||production&&Available(te,"yfAutoOutput",owner)).ToArray();
-            if(sources.Length==0){Status(sorter,"邻接同主人的输入箱");return;}
+            if(config.Source!="")sources=sources.Where(t=>MachineConfiguration.Key(t.ToWorldPos())==config.Source).ToArray();
+            if(sources.Length==0){Status(sorter,config.Source!=""?"指定输入箱不可用/正在打开":"邻接同主人的输入箱");return;}
             int start;sourceCursors.TryGetValue(at,out start);start%=sources.Length;sourceCursors[at]=(start+1)%sources.Length;
             if(!production)sources=sources.Skip(start).Concat(sources.Take(start)).ToArray();
             var outputs=new List<TileEntityComposite>();bool boundary=false;
@@ -112,7 +128,8 @@ namespace YFAutomation
             }
             outputs=outputs.OrderBy(te=>{var p=te.ToWorldPos();return Math.Abs(p.x-at.x)+Math.Abs(p.y-at.y)+Math.Abs(p.z-at.z);})
                 .ThenBy(te=>te.ToWorldPos().x).ThenBy(te=>te.ToWorldPos().z).ThenBy(te=>te.ToWorldPos().y).ToList();
-            if(outputs.Count==0){Status(sorter,boundary?"输出箱跨区块，请移近":"4米内放输出箱和样品");return;}
+            if(config.Target!="")outputs=outputs.Where(t=>MachineConfiguration.Key(t.ToWorldPos())==config.Target).ToList();
+            if(outputs.Count==0){Status(sorter,config.Target!=""?"指定输出箱不可用/正在打开":boundary?"输出箱跨区块，请移近":"4米内放输出箱和样品");return;}
             if(production)
             {
                 // Exactly one job gets time per machine tick, irrespective of box count.
@@ -141,7 +158,7 @@ namespace YFAutomation
                 if(!TransferRules.SameChunk(at.x,at.z,p.x,p.z)){boundary=true;continue;}
                 foreach(var target in outputs)
                 {
-                    int moved=Transfer(source,target,owner);
+                    int moved=Transfer(source,target,owner,config.Product);
                     if(moved>0){Status(sorter,"运行：已搬运 "+moved);return;}
                 }
             }
@@ -153,12 +170,13 @@ namespace YFAutomation
         {
             var at=machine.ToWorldPos();var chunk=world.GetChunkFromWorldPos(at.x,at.z) as Chunk;
             if(chunk==null||chunk.IsLocked)return;
+            var config=MachineConfiguration.Get(machine);
             var boxes=sides.Select(o=>world.GetTileEntity(Add(at,o)) as TileEntityComposite).Where(t=>t!=null).ToArray();
             int moved=0;
             lock(ChunkTransferLock.For(chunk))
             {
-                foreach(var source in boxes.Where(t=>Available(t,"yfAutoOutput",owner)))
-                foreach(var target in boxes.Where(t=>Available(t,"yfAutoInput",owner)))
+                foreach(var source in boxes.Where(t=>Available(t,"yfAutoOutput",owner)&&(config.Source==""||MachineConfiguration.Key(t.ToWorldPos())==config.Source)))
+                foreach(var target in boxes.Where(t=>Available(t,"yfAutoInput",owner)&&(config.Target==""||MachineConfiguration.Key(t.ToWorldPos())==config.Target)))
                 {
                     var a=source.ToWorldPos();var b=target.ToWorldPos();
                     if(!TransferRules.SameChunk(at.x,at.z,a.x,a.z)||!TransferRules.SameChunk(at.x,at.z,b.x,b.z))continue;
@@ -169,7 +187,7 @@ namespace YFAutomation
             }
             Status(machine,moved>0?"输送："+moved:"邻接输出箱→输入箱");
         }
-        static int Transfer(TileEntityComposite source,TileEntityComposite target,string owner)
+        static int Transfer(TileEntityComposite source,TileEntityComposite target,string owner,string filter)
         {
             var a=source.ToWorldPos();var b=target.ToWorldPos();
             if(!TransferRules.SameChunk(a.x,a.z,b.x,b.z))return 0;
@@ -182,8 +200,8 @@ namespace YFAutomation
             {
                 if(world.GetTileEntity(a)!=source||world.GetTileEntity(b)!=target||!Available(source,"yfAutoInput",owner)||!Available(target,"yfAutoOutput",owner))return 0;
                 var input=source.GetFeature<TEFeatureStorage>();var output=target.GetFeature<TEFeatureStorage>();
-                if(input==null||output==null)return 0;
-                moved=InventoryTransfer.Move(input.items,output.items,i=>Locked(input,i),i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value);
+                if(input==null||output==null||filter!=""&&ItemClass.GetItem(filter).type==0)return 0;
+                moved=InventoryTransfer.Move(input.items,output.items,i=>Locked(input,i),i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value,filter==""?0:ItemClass.GetItem(filter).type);
                 if(moved>0){source.SetChunkModified();target.SetChunkModified();}
                 return moved;
             }

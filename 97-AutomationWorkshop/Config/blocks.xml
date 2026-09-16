@@ -158,6 +158,10 @@
           <property name="LineWidth" value="0.55" />
           <property name="LineSpacing" value="1" />
         </property>
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -238,6 +242,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -274,6 +282,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -310,6 +322,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -346,6 +362,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -382,6 +402,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -418,6 +442,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -454,6 +482,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -492,6 +524,10 @@
           <property name="LineSpacing" value="1" />
         </property>
         <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />
@@ -565,6 +601,10 @@
           <property name="LineWidth" value="0.55" />
           <property name="LineSpacing" value="1" />
         </property>
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="10" />

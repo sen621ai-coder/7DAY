@@ -5,4 +5,7 @@
       <item name="cobweb" count="0" />
     </lootcontainer>
   </append>
+  <append xpath="/lootcontainers">
+    <lootcontainer name="yfAutoMachineInventory" count="0" size="6,6" open_time="0" sound_open="UseActions/crate_steel_open" sound_close="UseActions/crate_steel_close" loot_quality_template="qualBaseTemplate" />
+  </append>
 </configs>

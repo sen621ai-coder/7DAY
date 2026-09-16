@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param([string]$Output)
+param([string]$Output,[string]$RuntimeDll,[switch]$ConfigurationOnly)
 $ErrorActionPreference = 'Stop'
 # Offline SDK-less fallback. PowerShell's Roslyn is only the compiler host;
 # the output references the installed game's Mono assemblies, NOT CoreCLR.
@@ -33,8 +33,10 @@ public static class AutomationQACompiler
 '@
 # $sources = Get-ChildItem (Join-Path $modRoot '97-AutomationWorkshop/Source') -Filter '*.cs' | Sort-Object Name | ForEach-Object FullName
 $sources = @((Join-Path $modRoot 'tools/EscortNPC/AutomationGameQA.cs'),(Join-Path $modRoot 'tools/EscortNPC/ConveyorGameQA.cs'),(Join-Path $modRoot 'tools/EscortNPC/FactoryPhotoQA.cs'),(Join-Path $modRoot 'tools/EscortNPC/InteractionGameQA.cs'))
+if($ConfigurationOnly){$sources=@((Join-Path $PSScriptRoot 'EscortNPC/MachineConfigurationGameQA.cs'))}
 $gameRefs = @(Get-ChildItem $managed -Filter '*.dll' | ForEach-Object FullName) + (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll')
 if(-not $Output){$Output='E:/soft/7DTD-Modding/AutomationGameQA/UserData/Mods/98-AutomationGameQA/Automation.GameQA.dll'}
-$gameRefs += (Join-Path $modRoot '97-AutomationWorkshop/YF.Automation.dll')
+if(-not $RuntimeDll){$RuntimeDll=Join-Path $modRoot '97-AutomationWorkshop/YF.Automation.dll'}
+$gameRefs += $RuntimeDll
 [AutomationQACompiler]::Build($sources, $gameRefs, $Output)
 Write-Output 'Runtime build succeeded (offline Roslyn; game/Mono references).'

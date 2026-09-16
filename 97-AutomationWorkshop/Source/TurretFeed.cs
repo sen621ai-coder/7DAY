@@ -50,14 +50,15 @@ namespace YFAutomation
                 {
                     var fpos=Logistics.Add(pos,side);
                     var feeder=world.GetTileEntity(fpos) as TileEntityComposite;
-                    if(!Logistics.Available(feeder,"yfAutoAmmoFeed",owner)||!Logistics.Powered(world,fpos)||!TransferRules.SameChunk(pos.x,pos.z,fpos.x,fpos.z))continue;
-                    foreach(var inputSide in Logistics.Sides)
+                    if(!Logistics.Available(feeder,"yfAutoAmmoFeed",owner)||MachineConfiguration.Paused(feeder)||!Logistics.Powered(world,fpos)||!TransferRules.SameChunk(pos.x,pos.z,fpos.x,fpos.z))continue;
+                    bool internalStorage=MachineInventory.UsesInternal(feeder);
+                    foreach(var inputSide in internalStorage?new[]{Vector3i.zero}:Logistics.Sides)
                     {
                         var inputPos=Logistics.Add(fpos,inputSide);var box=world.GetTileEntity(inputPos) as TileEntityComposite;
                         if(!TransferRules.SameChunk(pos.x,pos.z,inputPos.x,inputPos.z)||
-                            !(Logistics.Available(box,"yfAutoInput",owner)||Logistics.Available(box,"yfAutoOutput",owner)))continue;
+                            !(internalStorage&&box==feeder||Logistics.Available(box,"yfAutoInput",owner)||Logistics.Available(box,"yfAutoOutput",owner)))continue;
                         var storage=box.GetFeature<TEFeatureStorage>();if(storage==null)continue;
-                        int slot=FindRound(storage.items,i=>Logistics.Locked(storage,i)||i==0&&box.block.GetBlockName()=="yfAutoOutput",
+                        int slot=FindRound(storage.items,i=>Logistics.Locked(storage,i)||internalStorage&&!MachineInventory.IsInput(i)||i==0&&box.block.GetBlockName()=="yfAutoOutput",
                             type=>turret.AmmoItems.Any(v=>v!=null&&v.Id==type));
                         if(slot<0)continue;
                         ammo=storage.items[slot].itemValue.ItemClass;

@@ -4,7 +4,7 @@
   <DisplayName value="自动化工厂：设备制造工作台" />
   <Description value="自动化工作台、分拣输送、厨房、农场、矿点采集、装备分解及冶炼锻造。" />
   <Author value="yf + Codex" />
-  <Version value="0.5.2" />
+  <Version value="0.7.0" />
   <ServerSideOnly value="false" />
   <SkipWithAntiCheat value="true" />
 </xml>
