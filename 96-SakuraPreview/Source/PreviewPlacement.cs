@@ -20,6 +20,7 @@ namespace SakuraPreview
                 prefix:new HarmonyMethod(typeof(SakuraMissionServer),nameof(SakuraMissionServer.RecordEnemyDeath)));
             SakuraFriendlyProtection.Install(new Harmony("yf.sakura.friendly.protection"));
             SakuraTraderRescue.Install(new Harmony("yf.sakura.trader.rescue"));
+            SakuraVoucherRewards.Install(new Harmony("yf.sakura.voucher.rewards"));
             new Harmony("yf.sakura.escort.missions").Patch(AccessTools.Method(typeof(GameManager),"Update"),
                 postfix:new HarmonyMethod(typeof(SakuraMissionServer),nameof(SakuraMissionServer.Tick)));
             Log.Out("[SakuraPreview] Trader rescue enabled: complete T16-T19 trader quests to locate Sakura. Timed and fixed placement disabled.");

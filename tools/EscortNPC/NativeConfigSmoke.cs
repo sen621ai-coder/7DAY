@@ -19,6 +19,14 @@ public static class NativeConfigSmoke
       SakuraPreview.SakuraTraderRescue.ShouldGrant("aec_quest_T16_A1_clear",1,7,-1,Quest.QuestState.InProgress,Quest.QuestState.Failed) ||
       SakuraPreview.SakuraTraderRescue.ShouldGrant("aec_quest_T16_A1_clear",-1,7,-1,Quest.QuestState.ReadyForTurnIn,Quest.QuestState.Completed))throw new Exception("Shared, failed or non-trader trigger");
    Console.WriteLine("PASS: 120 trader contracts, invalid IDs, turn-in transitions and shared-copy exclusion");
+   foreach(int tier in new[]{16,17,18,19})foreach(string kind in new[]{"sakura","mint"})
+    if(SakuraPreview.SakuraTraderRescue.DispatchTier(kind+"DispatchT"+tier)!=tier)throw new Exception("Blueprint tier mismatch");
+   foreach(string id in new[]{"sakuraDispatch","mintDispatchT20","mintDispatchT16extra","aec_quest_T16_A1_clear"})if(SakuraPreview.SakuraTraderRescue.IsDispatch(id))throw new Exception("Invalid dispatch");
+   foreach(int tier in new[]{16,17,18,19}){
+    var expected=new[]{"PZAECChallengeVoucherT"+tier,"sakuraMissionBlueprintT"+tier,"mintMissionBlueprintT"+tier};
+    for(int roll=0;roll<3;roll++)if(SakuraPreview.SakuraVoucherRewards.Select(tier,roll)!=expected[roll])throw new Exception("Three-way voucher choice mismatch");
+   }
+   Console.WriteLine("PASS: three-champions / escort / guard fixed-tier voucher selection");
    int dialogs=0,objectives=0,actions=0;
    foreach(var d in XDocument.Load(args[0]+"/dialogs.xml").Descendants("dialog")) {
     var parsed=DialogFromXml.ParseDialog(d);

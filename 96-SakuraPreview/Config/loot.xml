@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/lootcontainers">
+    <lootgroup name="SakuraMissionRewardT16" count="1">
+      <item name="PZAECChallengeVoucherT16" count="1" prob="1" />
+      <item name="sakuraMissionBlueprintT16" count="1" prob="1" />
+      <item name="mintMissionBlueprintT16" count="1" prob="1" />
+    </lootgroup>
+    <lootgroup name="SakuraMissionRewardT17" count="1">
+      <item name="PZAECChallengeVoucherT17" count="1" prob="1" />
+      <item name="sakuraMissionBlueprintT17" count="1" prob="1" />
+      <item name="mintMissionBlueprintT17" count="1" prob="1" />
+    </lootgroup>
+    <lootgroup name="SakuraMissionRewardT18" count="1">
+      <item name="PZAECChallengeVoucherT18" count="1" prob="1" />
+      <item name="sakuraMissionBlueprintT18" count="1" prob="1" />
+      <item name="mintMissionBlueprintT18" count="1" prob="1" />
+    </lootgroup>
+    <lootgroup name="SakuraMissionRewardT19" count="1">
+      <item name="PZAECChallengeVoucherT19" count="1" prob="1" />
+      <item name="sakuraMissionBlueprintT19" count="1" prob="1" />
+      <item name="mintMissionBlueprintT19" count="1" prob="1" />
+    </lootgroup>
+  </append>
+</configs>

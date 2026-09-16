@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 using UnityEngine;
@@ -20,11 +20,21 @@ namespace SakuraPreview
         }
         public static void Install(Harmony harmony)
         {
-            harmony.Patch(AccessTools.Method(typeof(Quest),nameof(Quest.CloseQuest)),
-                prefix:new HarmonyMethod(typeof(SakuraTraderRescue),nameof(BeforeClose)),
-                postfix:new HarmonyMethod(typeof(SakuraTraderRescue),nameof(AfterClose)));
+            harmony.Patch(AccessTools.Method(typeof(Quest),nameof(Quest.StartQuest),new[]{typeof(bool),typeof(bool)}),
+                postfix:new HarmonyMethod(typeof(SakuraTraderRescue),nameof(AfterStart)));
             harmony.Patch(AccessTools.Method(typeof(GameManager),"Update"),
                 postfix:new HarmonyMethod(typeof(SakuraTraderRescue),nameof(Tick)));
+        }
+        public static int DispatchTier(string id)
+        {var m=Regex.Match(id??"",@"\A(?:sakura|mint)DispatchT(16|17|18|19)\z");return m.Success?int.Parse(m.Groups[1].Value):0;}
+        public static bool IsDispatch(string id)=>DispatchTier(id)!=0;
+        static void AfterStart(Quest __instance)
+        {
+            if(!IsDispatch(__instance.QuestClass.ID) || __instance.OwnerJournal?.OwnerPlayer==null ||
+               __instance.CurrentState==Quest.QuestState.Completed || __instance.CurrentState==Quest.QuestState.Failed)return;
+            if(!__instance.DataVariables.ContainsKey(Pending))__instance.DataVariables[Pending]="1";
+            __instance.DataVariables["sakuraStatus"]="正在请求服务器安排任务地点（已有任务时排队）";
+            next=0;
         }
         static void BeforeClose(Quest __instance,out Quest.QuestState __state){__state=__instance.CurrentState;}
         static void AfterClose(Quest __instance,Quest.QuestState __state)
@@ -38,9 +48,9 @@ namespace SakuraPreview
         public static void Acknowledge(string id,int code)
         {
             var p=GameManager.Instance?.World?.GetPrimaryPlayer();if(p?.QuestJournal==null)return;
-            foreach(var q in p.QuestJournal.quests)
+            foreach(var q in p.QuestJournal.quests.ToArray())
                 if(q.QuestClass.ID==id && q.QuestCode==code && q.DataVariables.TryGetValue(Pending,out var value) && value=="1")
-                {q.DataVariables[Pending]="2";GameManager.ShowTooltip(p,"已获得 T"+Tier(id)+" 拯救任务。服务器正在安排救援地点；已有同伴任务时会排队。",false,false,8f);}
+                {q.DataVariables[Pending]="2";if(IsDispatch(id))q.CloseQuest(Quest.QuestState.Completed,null);GameManager.ShowTooltip(p,"任务图纸已受理，正在安排坐标；已有同伴任务时排队。请在开阔地稍候。",false,false,8f);}
         }
         static void Tick()
         {
@@ -48,7 +58,7 @@ namespace SakuraPreview
             var p=GameManager.Instance?.World?.GetPrimaryPlayer();if(p?.QuestJournal==null)return;
             foreach(var q in p.QuestJournal.quests.ToArray())
             {
-                if(q.CurrentState!=Quest.QuestState.Completed || !q.DataVariables.TryGetValue(Pending,out var value) || value!="1")continue;
+                if(!IsDispatch(q.QuestClass.ID) || q.CurrentState==Quest.QuestState.Failed || q.CurrentState==Quest.QuestState.Completed || !q.DataVariables.TryGetValue(Pending,out var value) || value!="1")continue;
                 if(ConnectionManager.Instance.IsServer)
                 {if(SakuraMissionServer.GrantRescue(p,q.QuestClass.ID,q.QuestCode,q.QuestGiverID))Acknowledge(q.QuestClass.ID,q.QuestCode);}
                 else ConnectionManager.Instance.SendToServer(NetPackageManager.GetPackage<NetPackageSakuraRescueGrant>().Setup(q.QuestClass.ID,q.QuestCode,q.QuestGiverID,false));

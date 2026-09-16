@@ -22,7 +22,7 @@ public sealed class DialogRequirementSakuraTier : BaseDialogRequirement
         var quest=player.QuestJournal?.quests.Find(q=>q.QuestGiverID==respondent.entityId &&
             q.CurrentState!=Quest.QuestState.Completed && q.CurrentState!=Quest.QuestState.Failed &&
             q.DataVariables.TryGetValue("sakuraSearching",out var value) && value=="1");
-        return tier==0?quest==null:quest!=null && quest.QuestClass.ID=="sakuraEscortT"+tier;
+        return tier==0?quest==null:quest!=null && quest.QuestClass.ID==(((SakuraPreview.EntitySakura)respondent).IsGuardian?"mintGuardT":"sakuraEscortT")+tier;
     }
     public override BaseDialogRequirement Clone()=>new DialogRequirementSakuraTier{ID=ID,Value=Value,Tag=Tag,Owner=Owner,RequirementVisibilityType=RequirementVisibilityType};
 }

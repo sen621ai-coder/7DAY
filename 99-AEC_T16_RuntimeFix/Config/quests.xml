@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <configs>
   <append xpath="/quests">
-    <!-- Each page mixes ordinary clear, infestation and fetch work; all IDs stay unique. -->
     <quest id="aec_quest_T16_A1_clear_infested" template="tier2_clear_infested">
       <property name="difficulty_tier" value="21" />
       <property name="add_to_tier_complete" value="false" />
@@ -1668,7 +1667,6 @@
       <reward type="Item" id="PZAECBuildPartsR5" value="3" />
     </quest>
   </append>
-  <!-- Voluntary, leased three-wave base-defense encounters. -->
   <append xpath="/quests">
     <quest id="PZAECDefenseT16">
       <property name="name_key" value="PZAECDefenseT16_name" />
@@ -1830,7 +1828,6 @@
   <set xpath="/quests/quest[@id='aec_quest_T17_A5_clear' or starts-with(@id,'aec_quest_T17_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT17</set>
   <set xpath="/quests/quest[@id='aec_quest_T18_A5_clear' or starts-with(@id,'aec_quest_T18_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT18</set>
   <set xpath="/quests/quest[@id='aec_quest_T19_A5_clear' or starts-with(@id,'aec_quest_T19_A5_clear_')]/reward[@id='itemPZAECBossLootBundleT16']/@id">itemPZAECBossLootBundleT19</set>
-  <!-- BEGIN RELAY HIGH-TIER HUNTS: independent of legendary progression. -->
   <append xpath="/quests">
     <quest id="PZAECRelayHuntDumdumT16">
       <property name="name_key" value="PZAECRelayHuntDumdumT16Name" />
@@ -1849,7 +1846,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntDumdumT16" phase="4" />
       <objective type="EntityKill" id="bossAECDumdumT16" value="1" phase="4" />
       <reward type="Exp" value="15000" />
@@ -1871,7 +1871,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT16" phase="4" />
       <objective type="EntityKill" id="AECTheExecutionerBossT16" value="1" phase="4" />
       <reward type="Exp" value="15000" />
@@ -1893,7 +1896,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT16" phase="4" />
       <objective type="EntityKill" id="AECTheMechanicianBossT16" value="1" phase="4" />
       <reward type="Exp" value="15000" />
@@ -1915,7 +1921,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntDumdumT17" phase="4" />
       <objective type="EntityKill" id="bossAECDumdumT17" value="1" phase="4" />
       <reward type="Exp" value="20000" />
@@ -1937,7 +1946,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT17" phase="4" />
       <objective type="EntityKill" id="AECTheExecutionerBossT17" value="1" phase="4" />
       <reward type="Exp" value="20000" />
@@ -1959,7 +1971,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT17" phase="4" />
       <objective type="EntityKill" id="AECTheMechanicianBossT17" value="1" phase="4" />
       <reward type="Exp" value="20000" />
@@ -1981,7 +1996,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntDumdumT18" phase="4" />
       <objective type="EntityKill" id="bossAECDumdumT18" value="1" phase="4" />
       <reward type="Exp" value="25000" />
@@ -2003,7 +2021,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT18" phase="4" />
       <objective type="EntityKill" id="AECTheExecutionerBossT18" value="1" phase="4" />
       <reward type="Exp" value="25000" />
@@ -2025,7 +2046,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT18" phase="4" />
       <objective type="EntityKill" id="AECTheMechanicianBossT18" value="1" phase="4" />
       <reward type="Exp" value="25000" />
@@ -2047,7 +2071,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntDumdumT19" phase="4" />
       <objective type="EntityKill" id="bossAECDumdumT19" value="1" phase="4" />
       <reward type="Exp" value="30000" />
@@ -2069,7 +2096,10 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntExecutionerT19" phase="4" />
       <objective type="EntityKill" id="AECTheExecutionerBossT19" value="1" phase="4" />
       <reward type="Exp" value="30000" />
@@ -2091,11 +2121,13 @@
       <property name="difficulty_tier" value="6" />
       <action type="GameEvent" id="eventAECQuestGiveSignalLure" phase="1" />
       <objective type="BlockPlace" id="aecQuestSignalLure" value="1" phase="2" />
-      <objective type="Time" phase="3"><property name="phase" value="3" /><property name="time" value="15" /></objective>
+      <objective type="Time" phase="3">
+        <property name="phase" value="3" />
+        <property name="time" value="15" />
+      </objective>
       <action type="GameEvent" id="eventPZAECRelayHuntMechanicianT19" phase="4" />
       <objective type="EntityKill" id="AECTheMechanicianBossT19" value="1" phase="4" />
       <reward type="Exp" value="30000" />
     </quest>
   </append>
-  <!-- END RELAY HIGH-TIER HUNTS -->
 </configs>

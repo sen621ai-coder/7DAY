@@ -44,7 +44,7 @@ namespace SakuraPreview
                     quest.QuestGiverID=npc;
                 }
                 quest.DataVariables["sakuraSearching"]=phase==(byte)EscortPhase.Searching?"1":"0";
-                string status=phase==(byte)EscortPhase.Searching?"前往标记地点寻找小樱，与她对话开始救援":phase==(byte)EscortPhase.Completed?(receipt==2?"奖励已发放":receipt==1?"领奖待核对，请联系服主":claim?"已完成，请与任务人物交谈领奖":!string.IsNullOrEmpty(failure)?failure:"已完成，参与时间不足，无法领奖"):
+                string status=phase==(byte)EscortPhase.Searching?(guard?"前往标记地点寻找 Mint，与她对话开始守护":"前往标记地点寻找小樱，与她对话开始救援"):phase==(byte)EscortPhase.Completed?(receipt==2?"奖励已发放":receipt==1?"领奖待核对，请联系服主":claim?"已完成，请与任务人物交谈领奖":!string.IsNullOrEmpty(failure)?failure:"已完成，参与时间不足，无法领奖"):
                     phase==(byte)EscortPhase.Failed?"失败："+failure:phase==(byte)EscortPhase.Ambush?(waves==tier-14?"最终波：击败首领及护卫":"清除伏击敌人"):paused?"原地等待":guard?"保护 Mint，等待下一波":"护送小樱到目标商店外围";
                 quest.DataVariables["sakuraStatus"]=status+(phase!=(byte)EscortPhase.Failed && missing>0?" · 请返回人物附近（"+Mathf.Max(0,Mathf.CeilToInt(60-missing))+" 秒）":"");
                 quest.DataVariables["sakuraHealth"]=health.ToString();quest.DataVariables["sakuraWaves"]=waves+"/"+(tier-14);quest.DataVariables["sakuraEnemies"]=enemies.ToString();

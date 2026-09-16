@@ -286,16 +286,18 @@ namespace SakuraPreview
         public static bool GrantRescue(EntityPlayer player,string questId,int code,int traderId)
         {
             if(player==null || !Ready(player.world) || string.IsNullOrEmpty(Key(player)))return false;
-            int tier=SakuraTraderRescue.Tier(questId);if(tier==0 || !QuestClass.s_Quests.ContainsKey(questId))return false;
+            bool dispatch=SakuraTraderRescue.IsDispatch(questId);
+            int tier=dispatch?SakuraTraderRescue.DispatchTier(questId):0;
+            if(tier==0 || !QuestClass.s_Quests.ContainsKey(questId))return false;
             string key=Key(player);
             // Durable idempotency: the same completed native quest cannot spawn twice.
             if(journal.RescueGrants.Any(g=>g.Key==key&&g.QuestId==questId&&g.Code==code))return true;
             var trader=current.GetEntity(traderId) as EntityTrader;
-            if(player.IsDead() || trader==null || (trader.position-player.position).sqrMagnitude>1024)return false;
+            if(player.IsDead())return false;
             try
             {
                 journal.RescueGrants.Add(new SakuraRescueGrant{Key=key,QuestId=questId,Code=code,TraderId=traderId,Tier=tier});Save();
-                Log.Out("[SakuraRescue] Trader completion queued: "+questId+" code="+code);return true;
+                Log.Out("[SakuraRescue] Manual contract queued: "+questId+" code="+code);return true;
             }
             catch(Exception ex){StopAll();Log.Error("[SakuraRescue] Grant failed: "+ex.Message);return false;}
         }
@@ -309,13 +311,14 @@ namespace SakuraPreview
                 // Only loaded, walkable terrain. No forced chunk loads or building replacement.
                 for(int attempt=0;attempt<80;attempt++)
                 {
-                    double angle=random.NextDouble()*Math.PI*2;float radius=90+(float)random.NextDouble()*50;Vector3 p;
+                    bool guard=grant.QuestId.StartsWith("mintDispatchT",StringComparison.Ordinal);
+                    double angle=random.NextDouble()*Math.PI*2;float radius=guard?35+(float)random.NextDouble()*20:90+(float)random.NextDouble()*50;Vector3 p;
                     if(!Ground(player.position.x+(float)Math.Cos(angle)*radius,player.position.z+(float)Math.Sin(angle)*radius,player.position.y,out p))continue;
-                    var trader=NearestTrader(p);if(trader==null||Distance(p,trader.Value.x,trader.Value.z)<40)continue;
+                    var trader=NearestTrader(p);if(!guard&&(trader==null||Distance(p,trader.Value.x,trader.Value.z)<40))continue;
                     if(current.Entities.list.Any(e=>e is EntitySakura&&(e.position-p).sqrMagnitude<900))continue;
-                    int type=EntityClass.FromString("sakuraCompanion");if(!EntityClass.list.ContainsKey(type))return;
+                    int type=EntityClass.FromString(guard?"mintGuardian":"sakuraCompanion");if(!EntityClass.list.ContainsKey(type))return;
                     var npc=EntityFactory.CreateEntity(type,p) as EntitySakura;if(npc==null)return;
-                    var mission=new SakuraMissionState{NpcId=npc.entityId,Tier=grant.Tier,Leader=grant.Key,Phase=EscortPhase.Searching,TargetX=p.x,TargetZ=p.z};
+                    var mission=new SakuraMissionState{Guard=guard,NpcId=npc.entityId,Tier=grant.Tier,Leader=grant.Key,Phase=EscortPhase.Searching,TargetX=p.x,TargetZ=p.z};
                     mission.Members.Add(new EscortMember{Key=grant.Key});
                     // Save intent before spawn. Restart cancels incomplete missions instead of duplicating NPCs.
                     grant.Spawned=true;journal.Missions.Add(mission);journal.EncounterIds.Add(npc.entityId);Save();

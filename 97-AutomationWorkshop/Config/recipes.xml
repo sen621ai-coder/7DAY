@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="yfAutomationWorkbench" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="40" />
+      <ingredient name="resourceMechanicalParts" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+      <ingredient name="resourceWood" count="30" />
+    </recipe>
+    <recipe name="yfAutoFrame" count="1" craft_area="yfAutomationWorkbench" craft_time="15" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="20" />
+      <ingredient name="resourceMechanicalParts" count="4" />
+    </recipe>
+    <recipe name="yfAutoMotor" count="1" craft_area="yfAutomationWorkbench" craft_time="20" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="8" />
+      <ingredient name="resourceMechanicalParts" count="6" />
+      <ingredient name="resourceElectricParts" count="4" />
+    </recipe>
+    <recipe name="yfAutoController" count="1" craft_area="yfAutomationWorkbench" craft_time="20" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceElectricParts" count="10" />
+      <ingredient name="resourceScrapPolymers" count="5" />
+      <ingredient name="resourceMechanicalParts" count="2" />
+    </recipe>
+    <recipe name="yfAutoPump" count="1" craft_area="yfAutomationWorkbench" craft_time="15" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="8" />
+      <ingredient name="resourceMechanicalParts" count="4" />
+      <ingredient name="resourceSpring" count="2" />
+    </recipe>
+    <recipe name="yfAutoCutter" count="1" craft_area="yfAutomationWorkbench" craft_time="20" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedSteel" count="10" />
+      <ingredient name="resourceMechanicalParts" count="4" />
+    </recipe>
+    <recipe name="yfAutoTransport" count="1" craft_area="yfAutomationWorkbench" craft_time="15" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="8" />
+      <ingredient name="resourceMechanicalParts" count="3" />
+      <ingredient name="resourceScrapPolymers" count="8" />
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="yfAutoInput" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="1" />
+      <ingredient name="resourceWood" count="20" />
+    </recipe>
+    <recipe name="yfAutoOutput" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="1" />
+      <ingredient name="resourceWood" count="20" />
+    </recipe>
+    <recipe name="yfAutoSorter" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoMotor" count="1" />
+      <ingredient name="yfAutoController" count="1" />
+      <ingredient name="yfAutoTransport" count="1" />
+    </recipe>
+    <recipe name="yfAutoPowerPort" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="5" />
+      <ingredient name="resourceElectricParts" count="10" />
+      <ingredient name="yfAutoController" count="1" />
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    </append>
+  <append xpath="/recipes">
+    </append>
+  <append xpath="/recipes">
+    </append>
+  <append xpath="/recipes">
+    </append>
+  <append xpath="/recipes">
+    <recipe name="yfAutoKitchen" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoController" count="1" />
+      <ingredient name="yfAutoPump" count="1" />
+    </recipe>
+    <recipe name="yfAutoSmelter" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="3" />
+      <ingredient name="yfAutoController" count="1" />
+      <ingredient name="yfAutoMotor" count="1" />
+    </recipe>
+    <recipe name="yfAutoForge" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="3" />
+      <ingredient name="yfAutoController" count="2" />
+      <ingredient name="yfAutoMotor" count="1" />
+    </recipe>
+    <recipe name="yfAutoRecycler" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoController" count="1" />
+      <ingredient name="yfAutoCutter" count="1" />
+    </recipe>
+    <recipe name="yfAutoFarm" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoController" count="1" />
+      <ingredient name="yfAutoPump" count="2" />
+    </recipe>
+    <recipe name="yfAutoMiner" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="4" />
+      <ingredient name="yfAutoController" count="2" />
+      <ingredient name="yfAutoMotor" count="2" />
+      <ingredient name="yfAutoCutter" count="2" />
+    </recipe>
+    <recipe name="yfAutoTransfer" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="1" />
+      <ingredient name="yfAutoMotor" count="1" />
+      <ingredient name="yfAutoTransport" count="2" />
+    </recipe>
+    <recipe name="yfAutoIngot_iron" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceScrapIron" count="1" />
+    </recipe>
+    <recipe name="yfAutoIngot_brass" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceScrapBrass" count="1" />
+    </recipe>
+    <recipe name="yfAutoIngot_lead" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceScrapLead" count="1" />
+    </recipe>
+    <recipe name="yfAutoIngot_glass" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceCrushedSand" count="1" />
+    </recipe>
+    <recipe name="yfAutoIngot_stone" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceRockSmall" count="1" />
+    </recipe>
+    <recipe name="yfAutoIngot_clay" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceClayLump" count="1" />
+    </recipe>
+    <recipe name="yfAutoDrillCharge" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="1" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="yfAutoWaterPump" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoPump" count="2" />
+      <ingredient name="yfAutoController" count="1" />
+    </recipe>
+    <recipe name="yfAutoWaterTank" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoPump" count="1" />
+    </recipe>
+    <recipe name="yfAutoAmmoFeed" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="2" />
+      <ingredient name="yfAutoController" count="2" />
+      <ingredient name="yfAutoTransport" count="2" />
+    </recipe>
+  </append>
+</configs>

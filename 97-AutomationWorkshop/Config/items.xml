@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/items">
+    <item name="yfAutoFrame">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoFrameDesc" />
+      <property name="CustomIcon" value="resourceForgedSteel" />
+      <property name="CustomIconTint" value="47C5D8" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoMotor">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoMotorDesc" />
+      <property name="CustomIcon" value="resourceMechanicalParts" />
+      <property name="CustomIconTint" value="47C5D8" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoController">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoControllerDesc" />
+      <property name="CustomIcon" value="resourceElectricParts" />
+      <property name="CustomIconTint" value="47C5D8" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoPump">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoPumpDesc" />
+      <property name="CustomIcon" value="resourceMechanicalParts" />
+      <property name="CustomIconTint" value="47C5D8" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoCutter">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoCutterDesc" />
+      <property name="CustomIcon" value="resourceForgedSteel" />
+      <property name="CustomIconTint" value="47C5D8" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoTransport">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoTransportDesc" />
+      <property name="CustomIcon" value="resourceSpring" />
+      <property name="CustomIconTint" value="47C5D8" />
+      <property name="Stacknumber" value="100" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+  </append>
+  <append xpath="/items">
+    </append>
+  <append xpath="/items">
+    </append>
+  <append xpath="/items">
+    </append>
+  <append xpath="/items">
+    </append>
+  <append xpath="/items">
+    <item name="yfAutoIngot_iron">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="CustomIcon" value="resourceScrapIron" />
+      <property name="CustomIconTint" value="E8BF6C" />
+      <property name="DescriptionKey" value="yfAutoIngot_ironDesc" />
+      <property name="Weight" value="0" />
+      <property name="Stacknumber" value="30000" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoIngot_brass">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="CustomIcon" value="resourceScrapBrass" />
+      <property name="CustomIconTint" value="E8BF6C" />
+      <property name="DescriptionKey" value="yfAutoIngot_brassDesc" />
+      <property name="Weight" value="0" />
+      <property name="Stacknumber" value="30000" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoIngot_lead">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="CustomIcon" value="resourceScrapLead" />
+      <property name="CustomIconTint" value="E8BF6C" />
+      <property name="DescriptionKey" value="yfAutoIngot_leadDesc" />
+      <property name="Weight" value="0" />
+      <property name="Stacknumber" value="30000" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoIngot_glass">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="CustomIcon" value="resourceCrushedSand" />
+      <property name="CustomIconTint" value="E8BF6C" />
+      <property name="DescriptionKey" value="yfAutoIngot_glassDesc" />
+      <property name="Weight" value="0" />
+      <property name="Stacknumber" value="30000" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoIngot_stone">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="CustomIcon" value="resourceRockSmall" />
+      <property name="CustomIconTint" value="E8BF6C" />
+      <property name="DescriptionKey" value="yfAutoIngot_stoneDesc" />
+      <property name="Weight" value="0" />
+      <property name="Stacknumber" value="30000" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoIngot_clay">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="CustomIcon" value="resourceClayLump" />
+      <property name="CustomIconTint" value="E8BF6C" />
+      <property name="DescriptionKey" value="yfAutoIngot_clayDesc" />
+      <property name="Weight" value="0" />
+      <property name="Stacknumber" value="30000" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+    <item name="yfAutoDrillCharge">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoDrillChargeDesc" />
+      <property name="CustomIcon" value="resourceMechanicalParts" />
+      <property name="CustomIconTint" value="83B9DF" />
+      <property name="Stacknumber" value="100" />
+      <property name="Weight" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+  </append>
+  <append xpath="/items">
+    <item name="yfAutoIrrigationWater">
+      <property name="Extends" value="resourceMechanicalParts" />
+      <property name="DescriptionKey" value="yfAutoIrrigationWaterDesc" />
+      <property name="CustomIcon" value="drinkJarRiverWater" />
+      <property name="CustomIconTint" value="69BCE6" />
+      <property name="Stacknumber" value="200" />
+      <property name="Weight" value="0" />
+      <property name="EconomicValue" value="0" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+  </append>
+</configs>
