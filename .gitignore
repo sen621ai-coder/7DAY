@@ -1,6 +1,4 @@
 **/__pycache__/
 /.local-tests/
-# Third-party MD-500: local installation only; author prohibits redistribution.
-/MD-500/
 **/Source/obj/
 /04-AEC-ENDGAME_OVERHAUL/AeclipseNemesisPool.json

@@ -1,0 +1,5 @@
+<config>
+	<append xpath="/quests/quest[@id='quest_tier6complete']">
+		<reward type="LootItem" id="groupQuestMD500Parts" ischosen="true" value="7"/>
+	</append>
+</config>

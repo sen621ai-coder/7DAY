@@ -1,0 +1,7 @@
+<configs>		
+	<append xpath="/traders/trader_item_groups/trader_item_group[@name='groupVehicles']">
+		<item name="vehicleMD500chassis"/>
+		<item name="vehicleMD500accessories"/>
+		<item name="vehicleMD500placeable"/>
+	</append>
+</configs>

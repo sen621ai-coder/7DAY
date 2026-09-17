@@ -1,0 +1,26 @@
+<configs>
+	<append xpath="/entity_classes">
+		<entity_class name="vehicleMD500">
+			<property name="Tags" value="vehicle,usesGas"/>
+			<property name="Class" value="EntityVGyroCopter"/>
+			<property name="Parent" value="Cars"/>
+			<property name="Prefab" value="#@modfolder:Resources/MD500.unity3d?MD500heli.prefab"/>
+			<property name="ModelType" value="Standard"/>
+			<property name="SurfaceCategory" value="metal"/>
+			<property name="IgnoreTrigger" value="true"/>
+			<property name="LootList" value="vehicleGyrocopter"/>
+			<property name="IsEnemyEntity" value="false"/>
+			<property class="Explosion">
+				<property name="ParticleIndex" value="32"/>
+				<property name="RadiusBlocks" value="5"/>
+				<property name="RadiusEntities" value="5"/>
+				<property name="BlockDamage" value="100"/>
+				<property name="EntityDamage" value="100"/>
+			</property>
+			<property name="RotateToGround" value="true"/>
+			<property name="Faction" value="none"/>
+			<property name="MapIcon" value="MD500UIicon"/>
+			<property name="NavObject" value="MD500"/>
+		</entity_class>
+	</append>
+</configs>

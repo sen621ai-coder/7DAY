@@ -1,0 +1,54 @@
+<configs>
+	<append xpath="/items">
+		<item name="vehicleMD500chassis">
+			<property name="Extends" value="vehicleWheels"/>
+			<property name="UnlockedBy" value="craftingVehicles"/>
+			<property name="CustomIcon" value="MD500chassis"/>
+			<property name="DescriptionKey" value="vehicleMD500chassisDesc"/>
+			<property name="EconomicValue" value="20000"/>
+			<property name="TraderStageTemplate" value="vehicleTier4"/>
+		</item>
+		<item name="vehicleMD500accessories">
+			<property name="Extends" value="vehicleWheels"/>
+			<property name="UnlockedBy" value="craftingVehicles"/>
+			<property name="CustomIcon" value="MD500accessories"/>
+			<property name="DescriptionKey" value="vehicleMD500accessoriesDesc"/>
+			<property name="EconomicValue" value="20000"/>
+			<property name="TraderStageTemplate" value="vehicleTier4"/>
+		</item>
+		<item name="vehicleMD500placeable">
+			<property name="Extends" value="vehicleGyrocopterPlaceable"/>
+			<property name="Tags" value="vehicle,vstorage,vengine,vfuel,vseat,vlight,canHaveCosmetic"/>
+			<property name="CustomIcon" value="MD500"/>
+			<property name="DescriptionKey" value="vehicleMD500placeableDesc"/>
+			<property name="Meshfile" value="#@modfolder:Resources/MD500.unity3d?MD500heli.prefab"/>
+			<property name="EconomicValue" value="60000"/>
+			<property name="TraderStageTemplate" value="vehicleTier5"/>
+			<property class="Action1">
+				<property name="Vehicle" value="vehicleMD500"/>
+				<property name="VehicleSize" value="4.7, 4.8, 5"/>
+			</property>
+			<effect_group name="Base Effects" tiered="false">
+				<passive_effect name="ModSlots" operation="base_set" value="5"/>
+				<passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+				<passive_effect name="DegradationMax" operation="base_set" value="5000"/>
+			</effect_group>
+		</item>
+		<item name="questRewardMD500PartsBundle">
+			<property name="Extends" value="questRewardBundleMaster"/>
+			<property name="CreativeMode" value="Player"/>
+			<property name="CustomIcon" value="bundleVehicleGyro"/>
+			<property name="CustomIconTint" value="FFFFFF"/>
+			<property name="ItemTypeIcon" value="bundle"/>
+			<property name="DescriptionKey" value="questRewardVehicleBundleDesc"/>
+			<property class="Action0">
+				<property name="Create_item" value="vehiclesSkillMagazine,vehicleWheels,questRewardVehiclePartsBundle"/>
+				<property name="Create_item_count" value="3,4,1"/>
+				<property name="Random_item" value="vehicleMD500chassis,vehicleMD500accessories"/>
+				<property name="Random_item_count" value="1,1"/>
+				<property name="Random_count" value="1"/>
+				<property name="Unique_random_only" value="true"/>
+			</property>
+		</item>
+	</append>
+</configs>

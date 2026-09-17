@@ -1,0 +1,67 @@
+﻿<configs>
+  
+  <append xpath="/buffs">
+		<buff name="buffVehicleArmorLow" hidden="true">
+			<duration value="0"/>
+			<damage_type value="heat"/>
+			<effect_group tiered="false">
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" target_tags="player" range=".75" buff="buffVehicleArmorLowEffect"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorLowEffect" hidden="true">
+			<duration value="3"/>
+			<stack_type value="replace"/>
+			<effect_group tiered="false">
+				<requirement name="IsAttachedToEntity" />
+				<passive_effect name="VehicleSelfDamage" operation="perc_add" value="-.2" tags="vehicle"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorMedium" hidden="true">
+			<duration value="0"/>
+			<damage_type value="heat"/>
+			<effect_group tiered="false">
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" target_tags="player" range=".75" buff="buffVehicleArmorMediumEffect"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorMediumEffect" hidden="true">
+			<duration value="3"/>
+			<stack_type value="replace"/>
+			<effect_group tiered="false">
+				<requirement name="IsAttachedToEntity" />
+				<passive_effect name="VehicleSelfDamage" operation="perc_add" value="-.5" tags="vehicle"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorHigh" hidden="true">
+			<duration value="0"/>
+			<damage_type value="heat"/>
+			<effect_group tiered="false">
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" target_tags="player" range=".75" buff="buffVehicleArmorHighEffect"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorHighEffect" hidden="true">
+			<duration value="3"/>
+			<stack_type value="replace"/>
+			<effect_group tiered="false">
+				<requirement name="IsAttachedToEntity" />
+				<passive_effect name="VehicleSelfDamage" operation="perc_add" value="-.75" tags="vehicle"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorHighBlockDamage" hidden="true">
+			<duration value="0"/>
+			<damage_type value="heat"/>
+			<effect_group tiered="false">
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" target="selfAOE" target_tags="player" range=".75" buff="buffVehicleArmorHighBlockDamageEffect"/>
+			</effect_group>
+		</buff>
+		<buff name="buffVehicleArmorHighBlockDamageEffect" hidden="true">
+			<duration value="3"/>
+			<stack_type value="replace"/>
+			<effect_group tiered="false">
+				<requirement name="IsAttachedToEntity" />
+				<passive_effect name="VehicleSelfDamage" operation="perc_add" value="-.75" tags="vehicle"/>
+				<passive_effect name="VehicleBlockDamage" operation="perc_add" value="1"/>
+			</effect_group>
+		</buff>
+  </append>
+  
+</configs>
