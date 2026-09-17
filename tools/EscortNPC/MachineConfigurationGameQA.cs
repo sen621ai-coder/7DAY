@@ -56,9 +56,10 @@ public sealed class MachineConfigurationGameQA : IModApi
         wires.ReturnToPool(wire);
         Check(!wire.GetGameObject().activeSelf&&!wires.activeWires.Contains(wire),"removed wire stays hidden in native pool");
         var owner=PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000001",false);
+        world.SetBlockRPC(new BlockValueRef(6,160,8),BlockValue.Air);
         var existing=world.GetTileEntity(new Vector3i(8,160,8)) as TileEntityComposite;
         if(existing!=null){var saved=MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.FirstOrDefault(s=>s.Position=="8,160,8");if(saved!=null)Check(MachineConfiguration.Get(existing).Product==saved.Product,"server reload restores persisted machine configuration");}
-        var player=(EntityPlayer)EntityFactory.CreateEntity(EntityClass.FromString("playerMale"),new Vector3(8,160,8));player.entityId=900001;
+        var player=(EntityPlayer)EntityFactory.CreateEntity(EntityClass.FromString("playerMale"),new Vector3(8,160,8));player.entityId=900001;player.MinEventContext.ItemValue=ItemValue.None;
         var pp=GameManager.Instance.persistentPlayers.CreatePlayerData(owner,owner,"AutomationQA",default(EPlayGroup));pp.EntityId=player.entityId;GameManager.Instance.persistentPlayers.MapPlayer(pp);
         var m=Place("yfAutoSmelter",new Vector3i(8,160,8),owner);
         var input=Place("yfAutoInput",new Vector3i(9,160,8),owner);
@@ -110,6 +111,7 @@ public sealed class MachineConfigurationGameQA : IModApi
         foreach(var kind in new[]{"yfAutoKitchen","yfAutoForge","yfAutoRecycler","yfAutoFarm","yfAutoMiner","yfAutoSorter"})
             Check(MachineConfiguration.Products(kind).Count>0,"native supported product catalog: "+kind);
         InventoryChecks(m,player,owner);
+        ForgeChecks(player,owner);
         world.SetBlockRPC(new BlockValueRef(m.ToWorldPos()),BlockValue.Air);
         Check(MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Count==0,"removing machine deletes saved settings");
     }
@@ -188,6 +190,44 @@ public sealed class MachineConfigurationGameQA : IModApi
         world.SetBlockRPC(new BlockValueRef(sorter.ToWorldPos()),BlockValue.Air);
         world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),BlockValue.Air);
         world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
+    }
+
+    static void ForgeChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
+    {
+        var forge=Place("yfAutoForge",new Vector3i(6,160,8),owner);var store=forge.GetFeature<TEFeatureStorage>();
+        var config=MachineConfiguration.Get(forge).Clone();config.Product="resourceForgedSteel";config.StorageMode="internal";
+        Check(MachineConfiguration.Apply(world,forge,player,config,MachineConfiguration.Token(forge))=="已保存","select steel for direct raw-material production");
+        string empty=RecipePreview.Describe(world,forge,config,player);
+        Check(empty.Contains("缺")&&empty.Contains("工具"),"steel preview explains missing ingredients and crucible");
+        store.items[0]=new ItemStack(ItemClass.GetItem("resourceScrapIron"),500);
+        store.items[1]=new ItemStack(ItemClass.GetItem("resourceClayLump"),100);
+        store.items[2]=new ItemStack(ItemClass.GetItem("toolForgeCrucible"),1);
+        var plan=RecipePlan.Select("resourceForgedSteel","yfAutoForge",store.items,i=>!MachineInventory.IsInput(i),player);
+        Check(plan!=null&&plan.Ready,"native steel recipe accepts ordinary iron, clay and crucible");
+        string ready=RecipePreview.Describe(world,forge,config,player);
+        Check(ready.Contains("材料与工具已齐")&&ready.Contains("需要")&&ready.Contains("已有"),"server preview and production share the same adjusted recipe plan");
+        Check(RecipePreview.Describe(world,forge,config,null).Contains("所有者上线"),"preview does not substitute another player's recipe modifiers");
+        string status="";for(int i=0;i<5000;i++){status=Production.Step(forge,forge,forge,player);if(status.StartsWith("完成"))break;}
+        int steel=ItemClass.GetItem("resourceForgedSteel").type;
+        Check(status.StartsWith("完成")&&store.items.Skip(18).Any(v=>v.itemValue.type==steel&&v.count>0),"native steel finishes from raw materials without an intermediate machine");
+        Check(store.items[2].count==1&&store.items.Take(18).Zip(plan.Input.Take(18),(a,b)=>a.count==b.count&&a.itemValue.type==b.itemValue.type).All(v=>v),"steel consumes exactly the displayed plan and retains its tool");
+        for(int i=0;i<36;i++)store.items[i]=ItemStack.Empty;
+        store.items[0]=new ItemStack(ItemClass.GetItem("yfAutoIngot_iron"),500);
+        store.items[1]=new ItemStack(ItemClass.GetItem("yfAutoIngot_clay"),100);
+        store.items[2]=new ItemStack(ItemClass.GetItem("toolForgeCrucible"),1);
+        plan=RecipePlan.Select("resourceForgedSteel","yfAutoForge",store.items,i=>!MachineInventory.IsInput(i),player);
+        Check(plan!=null&&plan.Ready,"existing refined-material pipeline remains usable");
+        using(var stream=new MemoryStream())
+        {
+            var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);var reader=new PooledBinaryReader();reader.SetBaseStream(stream);
+            var request=new NetPackageYFAutomationRecipeRequest{At=forge.ToWorldPos(),Request=88,Draft=config};request.write(writer);writer.Flush();
+            Check(stream.Length==request.GetLength(),"recipe preview request wire length");stream.Position=2;var requestCopy=new NetPackageYFAutomationRecipeRequest();requestCopy.read(reader);
+            Check(requestCopy.Draft.Product==config.Product&&requestCopy.Request==88&&stream.Position==stream.Length,"recipe preview request round trip");
+            stream.SetLength(0);stream.Position=0;var reply=new NetPackageYFAutomationRecipeReply{At=forge.ToWorldPos(),Request=88,Text=ready};reply.write(writer);writer.Flush();
+            Check(stream.Length==reply.GetLength(),"recipe preview reply UTF8 wire length");stream.Position=2;var replyCopy=new NetPackageYFAutomationRecipeReply();replyCopy.read(reader);
+            Check(replyCopy.Text==ready&&replyCopy.Request==88&&stream.Position==stream.Length,"recipe preview reply round trip");
+        }
+        world.SetBlockRPC(new BlockValueRef(forge.ToWorldPos()),BlockValue.Air);
     }
 
 }

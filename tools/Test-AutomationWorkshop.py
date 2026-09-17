@@ -63,3 +63,9 @@ storage=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutom
 assert storage.get('controller')=='LootWindow' and storage.find(".//*[@name='btnSort']") is None
 assert storage.find(".//grid[@controller='LootContainer']") is not None
 print('PASS: 10 built-in machine inventories, migration features, native loot grid and partition-safe controls.')
+
+recipe_panel=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutomationRecipe']")
+assert recipe_panel is not None and recipe_panel.get('panel')=='Center'
+assert recipe_panel.get('controller')=='YFAutomation.YFAutomationRecipePanel, YF.Automation'
+assert E.parse(c/'XUi_InGame/xui.xml').find(".//window_group[@name='yfMachineInventory']/window[@name='windowYFAutomationRecipe']") is not None
+print('PASS: dedicated center recipe panel is included in the machine inventory screen.')

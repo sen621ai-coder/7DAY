@@ -97,10 +97,27 @@ public static class AutomationSmoke
     stream.Position=0;restored.Job="trusted";restored.Seconds=3;restored.Read(reader,TileEntity.StreamModeRead.FromClient);
     Check(restored.Job=="trusted"&&restored.Seconds==3,"client cannot forge production progress");
    }
+   RawForgeChecks();
    InternalInventoryChecks();
    ConfigurationChecks();
    Console.WriteLine("PASS: "+checks+" inventory/production/configuration checks: conservation, filters, metadata, progress, settings persistence, stale edits and bounded wire data.");return 0;
   }catch(Exception ex){Console.WriteLine(ex);return 1;}
+ }
+ static void RawForgeChecks()
+ {
+  foreach(int weight in new[]{1,2,5,10})foreach(int need in new[]{1,3,10,31})foreach(int old in new[]{0,2,8}){
+   var stock=ItemStack.CreateArray(36);stock[0]=Stack(1,100);stock[1]=Stack(2,old);int rawUsed;
+   Check(ForgeMaterials.Consume(stock,2,1,weight,need,i=>!MachineInventory.IsInput(i),v=>1000,out rawUsed),"raw forge accepts standard material and old refined stock");
+   int raw=stock.Where(v=>v.itemValue.type==1).Sum(v=>v.count),refined=stock.Where(v=>v.itemValue.type==2).Sum(v=>v.count);
+   Check(raw*weight+refined==100*weight+old-need,"raw forge preserves exact furnace units including fractional change");
+   Check(stock.Skip(18).All(v=>v.IsEmpty()),"refining change stays in input partition");
+  }
+  var baseline=ItemStack.CreateArray(36);baseline[0]=Stack(1,1);var trial=ProductionInventory.Clone(baseline);int used;
+  Check(!ForgeMaterials.Consume(trial,2,1,1,2,i=>false,v=>100,out used)&&baseline[0].count==1,"failed raw-material plan does not alter live inventory");
+  trial=ProductionInventory.Clone(baseline);Check(!ForgeMaterials.Consume(trial,2,1,1,1,i=>i==0,v=>100,out used),"locked raw material is unavailable");
+  baseline=ItemStack.CreateArray(36);for(int i=0;i<18;i++)baseline[i]=Stack(1,100);
+  trial=ProductionInventory.Clone(baseline);Check(!ForgeMaterials.Consume(trial,2,1,5,3,i=>!MachineInventory.IsInput(i),v=>100,out used)&&baseline[0].count==100,"no room for furnace change aborts transaction without deleting value");
+  Check(ForgeMaterials.RawName("iron")=="resourceScrapIron"&&ForgeMaterials.RawName("clay")=="resourceClayLump","steel uses ordinary iron and clay");
  }
  static void InternalInventoryChecks()
  {

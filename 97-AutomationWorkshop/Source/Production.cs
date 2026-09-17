@@ -40,10 +40,10 @@ namespace YFAutomation
             }
             return count==0;
         }
-        public static bool Produce(ItemStack[] items,ItemStack product,Func<int,bool> locked,Func<ItemValue,int> capacity)
+        public static bool Produce(ItemStack[] items,ItemStack product,Func<int,bool> locked,Func<ItemValue,int> capacity,int firstSlot=1)
         {
             int left=product.count;
-            for(int pass=0;pass<2;pass++)for(int i=1;i<items.Length&&left>0;i++)
+            for(int pass=0;pass<2;pass++)for(int i=firstSlot;i<items.Length&&left>0;i++)
             {
                 if(locked(i))continue;var s=items[i];bool empty=s==null||s.IsEmpty();
                 if(pass==0&&empty||pass==1&&!empty||!empty&&!s.itemValue.Equals(product.itemValue))continue;
@@ -123,33 +123,15 @@ namespace YFAutomation
             {
                 if(player==null)return "等待机器所有者上线";
                 string area=kind=="yfAutoKitchen"?"campfire":"forge";
-                foreach(var candidate in CraftingManager.GetRecipes(ItemClass.GetForId(type).GetItemName()))
+                var plan=RecipePlan.Select(ItemClass.GetForId(type).GetItemName(),kind,input.items,inputLocked,player);
+                if(plan!=null&&plan.Ready)
                 {
-                    if(candidate.IsScrap||candidate.craftingArea!=area||candidate.itemValueType!=type||!candidate.IsUnlocked(player)||candidate.GetOutputItemClass().HasQuality)continue;
-                    if(candidate.craftingToolType>0&&!input.items.Where((s,i)=>!internalStorage||MachineInventory.IsInput(i)).Any(s=>!s.IsEmpty()&&s.itemValue.type==candidate.craftingToolType))continue;
-                    var trial=ProductionInventory.Clone(input.items);bool enough=true;
-                    candidate.craftingTier=candidate.GetCraftingTier(player);
-                    foreach(var ingredient in candidate.GetIngredientsSummedUp())
-                    {
-                        int count=ingredient.count;
-                        if(candidate.UseIngredientModifier)
-                        {
-                            count=(int)EffectManager.GetValue(PassiveEffects.CraftingIngredientCount,null,count,player,candidate,
-                                FastTags<TagGroup.Global>.Parse(ingredient.itemValue.ItemClass.GetItemName()),true,true,true,true,true,candidate.craftingTier,true,false);
-                            if(count>0)count=Math.Max(1,(int)(count*XUiM_Recipes.GetCraftingInputModifier(candidate)));
-                        }
-                        int ingredientType=ingredient.itemValue.type;
-                        string ingredientName=ingredient.itemValue.ItemClass.GetItemName();
-                        if(ingredientName.StartsWith("unit_"))ingredientType=ItemClass.GetItem("yfAutoIngot_"+ingredientName.Substring(5)).type;
-                        if(count>0&&(ingredientType==0||!ProductionInventory.Consume(trial,ingredientType,count,inputLocked))){enough=false;break;}
-                    }
-                    if(!enough)continue;
-                    recipe=candidate;nextInput=trial;
+                    var candidate=plan.Recipe;recipe=candidate;nextInput=plan.Input;
                     float modifier=candidate.tags.Test_AnySet(XUiM_Recipes.SandboxIgnoreTag)?1:XUiM_Recipes.CraftingOutputModifier;
                     int result=Math.Max(1,(int)(EffectManager.GetValue(PassiveEffects.CraftingOutputCount,null,candidate.count,player,candidate,candidate.tags)*modifier));
                     product=new ItemStack(new ItemValue(type),result);
-                    duration=Math.Max(1,EffectManager.GetValue(PassiveEffects.CraftingTime,null,candidate.craftingTime,player,candidate,candidate.tags)*XUiM_Recipes.CraftingTimeModifier);
-                    key=area+":"+type+":"+result+":"+duration+":"+string.Join(";",candidate.ingredients.Select(v=>v.itemValue.type+"x"+v.count));break;
+                    duration=Math.Max(1,EffectManager.GetValue(PassiveEffects.CraftingTime,null,candidate.craftingTime,player,candidate,candidate.tags)*XUiM_Recipes.CraftingTimeModifier)+plan.MeltSeconds;
+                    key=area+":"+type+":"+result+":"+duration+":"+string.Join(";",candidate.ingredients.Select(v=>v.itemValue.type+"x"+v.count));
                 }
                 if(recipe==null)return "缺材料/工具或配方未解锁";
             }
