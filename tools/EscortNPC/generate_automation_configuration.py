@@ -36,7 +36,7 @@ app = E.SubElement(xui, 'append', xpath='/xui')
 group = E.SubElement(app, 'window_group', name='yfMachineConfiguration', close_compass_on_open='true')
 E.SubElement(group, 'window', name='windowYFAutomationConfiguration')
 group = E.SubElement(app, 'window_group', name='yfMachineInventory', controller='XUiC_LootWindowGroup', close_compass_on_open='true')
-for name in ('windowYFAutomationStorage','windowYFAutomationInventoryControls','windowYFAutomationRecipe','windowNonPagingHeader'):
+for name in ('windowYFAutomationStorage','windowYFAutomationInventoryControls','windowNonPagingHeader'):
     E.SubElement(group,'window',name=name)
 write(xui, root / 'XUi_InGame/xui.xml')
 
@@ -77,15 +77,6 @@ for name,controller,panel in [('windowYFAutomationConfiguration','YFAutomation.Y
     label(w,'help','','10,-596',height=72,size=18)
     label(w,'notice','','10,-672',height=32,size=19)
     button('save','保存',10,-712,126);button('refresh','刷新',152,-712,126);button('close','关闭',294,-712,126)
-recipe=E.SubElement(app,'window',name='windowYFAutomationRecipe',width='606',height='365',panel='Center',cursor_area='true',controller='YFAutomation.YFAutomationRecipePanel, YF.Automation')
-E.SubElement(recipe,'sprite',name='background',width='606',height='365',depth='0',sprite='menu_empty3px',color='[darkGrey]',type='sliced')
-E.SubElement(recipe,'sprite',name='header',width='606',height='43',depth='1',sprite='ui_game_panel_header')
-label(recipe,'title','配方与材料','12,-6',580,34,26)
-label(recipe,'body','','12,-54',580,265,22)
-label(recipe,'page','','270,-330',90,30,20)
-for name,text,x in [('back','上一页',12),('forward','下一页',488)]:
-    b=E.SubElement(recipe,'button',name=name,pos=f'{x},-326',width='106',height='32',depth='2',sprite='menu_empty3px',defaultcolor='[mediumGrey]',hoversprite='menu_empty3px',hovercolor='[lightGrey]',type='sliced')
-    label(b,name+'Text',text,'8,-4',90,25,20)
 write(windows,root/'XUi_InGame/windows.xml')
 
 path = root / 'Localization.csv'

@@ -98,7 +98,7 @@ namespace YFAutomation
     {
         public static XUiC_YFAutomationConfiguration Active;
         protected virtual bool InventoryScreen=>false;
-        int page,previewRequest;float nextPreview;string previewKey="",serverPreview="";
+        int page,previewRequest=0;string previewKey="",serverPreview="";
         public string PreviewText=>kind=="yfAutoForge"||kind=="yfAutoKitchen"?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
         string PreviewKey()=>draft.Product+"|"+draft.StorageMode+"|"+draft.Source;
         string lastQuery="";
@@ -130,7 +130,7 @@ namespace YFAutomation
         {base.OnOpen();open=true;Active=this;
             var native=xui.FindWindowGroupByName(MachineInventoryUI.Group) as XUiC_LootWindowGroup;
             at=InventoryScreen&&native?.te!=null?native.te.ToWorldPos():MachineConfigurationUI.Pending;
-            kind="";draft=new MachineSettings();search.Text="";page=0;lastQuery="";nextPreview=0;previewKey="";serverPreview="";Send(false);}
+            kind="";draft=new MachineSettings();search.Text="";page=0;lastQuery="";previewKey="";serverPreview="";Send(false);}
         public override void OnClose(){open=false;ready=false;if(Active==this)Active=null;base.OnClose();}
         void Send(bool save)
         {
@@ -157,12 +157,6 @@ namespace YFAutomation
         {
             base.Update(dt);if(!open)return;
             if(lastQuery!=(search.Text??"")){lastQuery=search.Text??"";page=0;RenderProducts();}
-            if(ready&&(kind=="yfAutoForge"||kind=="yfAutoKitchen")&&Time.realtimeSinceStartup>=nextPreview)
-            {
-                nextPreview=Time.realtimeSinceStartup+1;previewKey=PreviewKey();previewRequest=++sequence;
-                var p=NetPackageManager.GetPackage<NetPackageYFAutomationRecipeRequest>();p.At=at;p.Request=previewRequest;p.Draft=draft.Clone();
-                if(ConnectionManager.Instance.IsServer)p.Handle(GameManager.Instance.World,xui.playerUI.entityPlayer.entityId);else ConnectionManager.Instance.SendToServer(p);
-            }
             if(!ready&&Time.realtimeSinceStartup-sent>8){notice="未收到可用配置；请刷新，或关闭后重试";sent=float.MaxValue;Render();}
             var t=GameManager.Instance?.World?.GetTileEntity(at) as TileEntityComposite;
             Label("status",t?.GetFeature<TEFeatureSignable>()?.GetAuthoredText().Text??"设备已卸载或移除");
@@ -215,7 +209,7 @@ namespace YFAutomation
             bool boxes=!InternalMode()&&MachineConfiguration.HasBoxes(kind),product=MachineConfiguration.HasProduct(kind);
             GetChildById("source").ViewComponent.IsVisible=boxes;GetChildById("target").ViewComponent.IsVisible=boxes;
             GetChildById("product").ViewComponent.IsVisible=product;search.ViewComponent.IsVisible=product;
-            GetChildById("details").ViewComponent.IsVisible=!boxes;Label("details",kind=="yfAutoForge"||kind=="yfAutoKitchen"?"材料、工具和缺少数量见中间配方面板。\n上3行放原料，下3行留空收成品。":Details());
+            GetChildById("details").ViewComponent.IsVisible=!boxes;Label("details",kind=="yfAutoForge"||kind=="yfAutoKitchen"?"上3行放原料和工具，下3行收成品。\n选择产品后保存，关闭库存开始加工。":Details());
             Label("help",InternalMode()?"内置库存：上3行原料/工具，下3行成品。\n传送带指向机器送入原料，背向机器取走成品。\n打开库存期间暂停加工；关闭后自动继续。":
                 "外接箱模式：同主人、同区块，输出首格保留。\n选择产品后保存。切换库存模式不搬动物品。");
             RenderProducts();
