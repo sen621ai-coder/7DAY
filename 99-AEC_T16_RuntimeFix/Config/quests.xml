@@ -2130,4 +2130,28 @@
       <reward type="Exp" value="30000" />
     </quest>
   </append>
+  <append xpath="/quests/quest[@id='PZAECChallengeT16']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="1" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECDefenseT16']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="2" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECChallengeT17']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="1" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECDefenseT17']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="2" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECChallengeT18']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="1" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECDefenseT18']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="2" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECChallengeT19']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="1" />
+  </append>
+  <append xpath="/quests/quest[@id='PZAECDefenseT19']">
+    <reward type="Item" id="resourcePZAECArmoryVoucher" value="2" />
+  </append>
 </configs>

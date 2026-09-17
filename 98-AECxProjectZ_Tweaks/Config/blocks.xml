@@ -103,4 +103,46 @@ RU: aecHeadConverter сохраняется только как скрытая �
   <append xpath="/blocks/block[@name='aecHeadConverter']">
     <property name="WorkstationWindow" value="workstation_aecMutationIncubator"/>
   </append>
+<!-- Reuses Project Z's proven fuel-powered Collector interface and storage. -->
+  <append xpath="/blocks">
+    <block name="yfAutoForestry">
+      <property name="Extends" value="AutoMinerIron" />
+      <property name="DescriptionKey" value="yfAutoForestryEfficientDesc" />
+      <property name="LootLabelKey" value="xuiAutoForestry" />
+      <property name="ItemIconBackdrop" value="ui_game_symbol_farming" />
+      <property name="ItemBackgroundColor" value="107,145,75,255" />
+      <property name="CustomIcon" value="backhoeGreen" />
+      <property name="CustomIconTint" value="6B914B" />
+      <property name="TintColor" value="4E7139" />
+      <property name="OutputTypes" value="{IronBundle,GasCan,1000,0,1000,yfForestryWoodBundle,yfForestryWoodBundle,2,2,48000,48000,collector_complete_item}" />
+      <property name="HasItem1Text" value="yfAutoForestryHasItemText" />
+      <property name="HasItem2Text" value="yfAutoForestryHasItemText" />
+    </block>
+  </append>
+  <append xpath="/blocks">
+    <block name="AutoMinerBrass">
+      <property name="Extends" value="AutoMinerIron" />
+      <property name="DescriptionKey" value="AutoMinerBrassDesc" />
+      <property name="LootLabelKey" value="xuiAutoMinerBrass" />
+      <property name="CustomIconTint" value="D4AF37" />
+      <property name="TintColor" value="D4AF37" />
+      <property name="OutputTypes" value="{IronBundle,GasCan,1000,0,1000,resourceScrapBrassBundle,resourceScrapBrassBundle,2,2,48000,48000,collector_complete_item}" />
+      <property name="HasItem1Text" value="AutoMinerBrassHasItemText" />
+      <property name="HasItem2Text" value="AutoMinerBrassHasItemText" />
+    </block>
+  </append>
+  <!-- Keep existing 6000-resource bundles; halve fuel cost to 500 per base batch. -->
+  <set xpath="/blocks/block[@name='AutoMinerIron']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourceScrapIronBundle,resourceScrapIronBundle,2,2,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerLead']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourceLeadBundle,resourceLeadBundle,2,2,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerCoal']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourceCoalBundle,resourceCoalBundle,2,2,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerNitrate']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourcePotassiumNitratePowderBundle,resourcePotassiumNitratePowderBundle,2,2,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerClay']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourceClayLumpBundle,resourceClayLumpBundle,4,4,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerShale']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourceOilShaleBundle,resourceOilShaleBundle,2,2,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerBrass']/property[@name='OutputTypes']/@value">{IronBundle,GasCan,500,0,500,resourceScrapBrassBundle,resourceScrapBrassBundle,2,2,48000,48000,collector_complete_item}</set>
+  <set xpath="/blocks/block[@name='AutoMinerIron' or @name='AutoMinerLead' or @name='AutoMinerCoal' or @name='AutoMinerNitrate' or @name='AutoMinerClay' or @name='AutoMinerShale' or @name='AutoMinerBrass']/property[@name='DescriptionKey']/@value">yfAutoMinerEfficientDesc</set>
+  <!-- A single chicken can breed; egg and feather requirements stay unchanged. -->
+  <set xpath="/blocks/block[@name='cntChickenCoop']/property[@name='CatalystRequirements']/@value">egg=1,feather=1,chicken=1</set>
+  <!-- Runtime doubles progress while fed; unfed apiaries still produce at half speed. -->
+  <set xpath="/blocks/block[@name='cntApiary']/property[@name='OutputTypes']/@value">{honey,flower,10,0,10,foodHoney,foodHoney,2,2,96000,96000,apiary_complete_item}</set>
+  <set xpath="/blocks/block[@name='cntApiary']/property[@name='DescriptionKey']/@value">yfApiaryForagingDesc</set>
 </configs>

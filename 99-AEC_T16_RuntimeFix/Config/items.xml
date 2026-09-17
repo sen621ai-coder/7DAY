@@ -6353,4 +6353,13 @@
   <!-- END RELAY HIGH-TIER HUNTS -->
   <!-- ShowQuality also controls the native remaining-durability bar. -->
   <set xpath="/items/item[property[@name='Tags' and contains(@value,'PZAECAdvancedWeapon')]]/property[@name='ShowQuality']/@value">true</set>
+  <append xpath="/items">
+    <item name="resourcePZAECArmoryVoucher">
+      <property name="Extends" value="resourceLegendaryParts" />
+      <property name="DescriptionKey" value="resourcePZAECArmoryVoucherDesc" />
+      <property name="CustomIcon" value="bundleRifle" />
+      <property name="Stacknumber" value="50000" />
+      <property name="SellableToTrader" value="false" />
+    </item>
+  </append>
 </configs>

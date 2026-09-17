@@ -15027,3 +15027,19 @@ PZAECMobT19_EntityLootContainerSoldier,entityclasses,Entity,false,,,T19 Zombie L
 PZAECMobT19_EntityLootContainerThug,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
 PZAECMobT19_EntityLootContainerUtility,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
 PZAECMobT19_EntityLootContainerPlague,entityclasses,Entity,false,,,T19 Zombie Loot,,,,,,,,,,,,T19 小怪战利品,T19 小怪戰利品
+
+"yfAutoForestry","blocks","Workstation","","false",,"[A8D86D]Automatic Forestry[-]",,,,,,,,,,,,"[A8D86D]自动林场[-]",
+"yfAutoForestryDesc","blocks","Workstation","","false",,"A fuel-powered forestry platform that needs no saplings. Every 1000 gasoline produces 12000 wood. Output rate is doubled from a standard autominer.",,,,,,,,,,,,"消耗汽油的自动林场，无需树苗。每 1000 汽油产出 12000 木头，产出效率为标准自动采矿机的两倍。",
+"xuiAutoForestry","UI","XUI","","false",,"Wood harvesting",,,,,,,,,,,,"木材采集",
+"yfAutoForestryHasItemText","UI","Use Prompt","","false",,"{0} Open {1} ([A8D86D]Wood reserves[-])",,,,,,,,,,,,"{0} 开启{1}（[A8D86D]木材储备[-]）",
+"yfForestryWoodBundle","items","Item","","false",,"Forestry wood bundle",,,,,,,,,,,,"林场木材包",
+"yfForestryWoodBundleDesc","items","Item","","false",,"A compressed bundle containing 12000 wood. Use it to unpack.",,,,,,,,,,,,"内含 12000 木头的压缩木材包。使用即可拆包。",
+"AutoMinerBrassHasItemText","blocks","Block",,"false",,"{0} 开启{1}（黄铜储量）",,,,,,,,,,,,"{0} 开启{1}（黄铜储量）",
+"AutoMinerBrassDesc","blocks","Block",,"false",,"消耗汽油自动产出黄铜资源包。基础每 1000 汽油产出 6000 黄铜。共6格：未装资源打包器每格3包；装入后每格6包。",,,,,,,,,,,,"消耗汽油自动产出黄铜资源包。基础每 1000 汽油产出 6000 黄铜。共6格：未装资源打包器每格3包；装入后每格6包。",
+"xuiAutoMinerBrass","blocks","Block",,"false",,"黄铜开采",,,,,,,,,,,,"黄铜开采",
+"AutoMinerBrass","blocks","Block",,"false",,"黄铜自动采矿机",,,,,,,,,,,,"黄铜自动采矿机",
+
+"yfAutoForestryEfficientDesc","blocks","Block","","false","","无需树苗的汽油自动林场。基础每1000汽油产出1包12000木头。3列2行共6格；未装资源打包器每格3包，装入后每格6包。配件增产与加速效果保留。","","","","","","","","","","","","无需树苗的汽油自动林场。基础每1000汽油产出1包12000木头。3列2行共6格；未装资源打包器每格3包，装入后每格6包。配件增产与加速效果保留。",""
+"yfAutoMinerEfficientDesc","blocks","Block","","false","","基础产出：每500汽油获得1包6000资源，折合每1000汽油12000资源。3列2行共6格；未装资源打包器每格3包，装入后每格6包。配件增产与加速效果保留。","","","","","","","","","","","","基础产出：每500汽油获得1包6000资源，折合每1000汽油12000资源。3列2行共6格；未装资源打包器每格3包，装入后每格6包。配件增产与加速效果保留。",""
+
+"yfApiaryForagingDesc","blocks","Block","","false","","每批基础产出5份蜂蜜，育蜂箱翻倍至10份。有足够原料时每批消耗10份菊花、黄花或棉花，周期48游戏小时；原料不足时自动从环境采蜜，不消耗原料，速度减半（96游戏小时）。采蜜器使上述周期减半。6个产出格，每格存一批。","","","","","","","","","","","","每批基础产出5份蜂蜜，育蜂箱翻倍至10份。有足够原料时每批消耗10份菊花、黄花或棉花，周期48游戏小时；原料不足时自动从环境采蜜，不消耗原料，速度减半（96游戏小时）。采蜜器使上述周期减半。6个产出格，每格存一批。",""

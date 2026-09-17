@@ -157,6 +157,7 @@
       <property name="name_key" value="sakuraMissionBlueprintT16" />
       <property name="subtitle_key" value="sakuraMissionBlueprintT16" />
       <property name="description_key" value="sakuraMissionBlueprintT16Desc" />
+      <property name="offer_key" value="sakuraMissionBlueprintT16Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -176,6 +177,7 @@
       <property name="name_key" value="mintMissionBlueprintT16" />
       <property name="subtitle_key" value="mintMissionBlueprintT16" />
       <property name="description_key" value="mintMissionBlueprintT16Desc" />
+      <property name="offer_key" value="mintMissionBlueprintT16Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -195,6 +197,7 @@
       <property name="name_key" value="sakuraMissionBlueprintT17" />
       <property name="subtitle_key" value="sakuraMissionBlueprintT17" />
       <property name="description_key" value="sakuraMissionBlueprintT17Desc" />
+      <property name="offer_key" value="sakuraMissionBlueprintT17Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -214,6 +217,7 @@
       <property name="name_key" value="mintMissionBlueprintT17" />
       <property name="subtitle_key" value="mintMissionBlueprintT17" />
       <property name="description_key" value="mintMissionBlueprintT17Desc" />
+      <property name="offer_key" value="mintMissionBlueprintT17Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -233,6 +237,7 @@
       <property name="name_key" value="sakuraMissionBlueprintT18" />
       <property name="subtitle_key" value="sakuraMissionBlueprintT18" />
       <property name="description_key" value="sakuraMissionBlueprintT18Desc" />
+      <property name="offer_key" value="sakuraMissionBlueprintT18Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -252,6 +257,7 @@
       <property name="name_key" value="mintMissionBlueprintT18" />
       <property name="subtitle_key" value="mintMissionBlueprintT18" />
       <property name="description_key" value="mintMissionBlueprintT18Desc" />
+      <property name="offer_key" value="mintMissionBlueprintT18Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -271,6 +277,7 @@
       <property name="name_key" value="sakuraMissionBlueprintT19" />
       <property name="subtitle_key" value="sakuraMissionBlueprintT19" />
       <property name="description_key" value="sakuraMissionBlueprintT19Desc" />
+      <property name="offer_key" value="sakuraMissionBlueprintT19Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
@@ -290,6 +297,7 @@
       <property name="name_key" value="mintMissionBlueprintT19" />
       <property name="subtitle_key" value="mintMissionBlueprintT19" />
       <property name="description_key" value="mintMissionBlueprintT19Desc" />
+      <property name="offer_key" value="mintMissionBlueprintT19Desc" />
       <property name="category" value="同伴任务" />
       <property name="icon" value="ui_game_symbol_quest" />
       <property name="repeatable" value="true" />
