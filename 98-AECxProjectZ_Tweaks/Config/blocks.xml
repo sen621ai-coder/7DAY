@@ -106,18 +106,14 @@ RU: aecHeadConverter сохраняется только как скрытая �
 <!-- Reuses Project Z's proven fuel-powered Collector interface and storage. -->
   <append xpath="/blocks">
     <block name="yfAutoForestry">
-      <property name="Extends" value="AutoMinerIron" param1="ModTransformEnableNames,ModTransformDisableNames" />
+      <property name="Extends" value="AutoMinerIron" />
       <property name="DescriptionKey" value="yfAutoForestryEfficientDesc" />
       <property name="LootLabelKey" value="xuiAutoForestry" />
       <property name="ItemIconBackdrop" value="ui_game_symbol_farming" />
       <property name="ItemBackgroundColor" value="107,145,75,255" />
       <property name="CustomIcon" value="workbench" />
       <property name="CustomIconTint" value="6B914B" />
-      <!-- Visual-only replacement: retain the inherited 4x3x3 footprint for placed collectors. -->
-      <property name="Model" value="@:Entities/Crafting/table_sawPrefab.prefab" />
-      <property name="ModelOffset" value="0,0,0" />
-      <property name="OpenSound" value="open_workbench" />
-      <property name="CloseSound" value="close_workbench" />
+      <!-- Keep the inherited backhoe model and transforms: its 4x3x3 geometry matches the collector interaction bounds. -->
       <property name="TintColor" value="4E7139" />
       <property name="OutputTypes" value="{IronBundle,GasCan,1000,0,1000,yfForestryWoodBundle,yfForestryWoodBundle,2,2,48000,48000,collector_complete_item}" />
       <property name="HasItem1Text" value="yfAutoForestryHasItemText" />

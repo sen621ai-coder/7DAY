@@ -1,4 +1,5 @@
 #Requires -Version 7.0
+param([string]$OutputPath)
 $ErrorActionPreference = 'Stop'
 # Offline SDK-less fallback. PowerShell's Roslyn is only the compiler host;
 # the output references the installed game's Mono assemblies, NOT CoreCLR.
@@ -32,5 +33,6 @@ public static class RuntimeFixCompiler
 '@
 $sources = Get-ChildItem (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Source') -Filter '*.cs' | Sort-Object Name | ForEach-Object FullName
 $gameRefs = @(Get-ChildItem $managed -Filter '*.dll' | ForEach-Object FullName) + (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll')
-[RuntimeFixCompiler]::Build($sources, $gameRefs, (Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll'))
+if (!$OutputPath) { $OutputPath = Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.T16.RuntimeFix.dll' }
+[RuntimeFixCompiler]::Build($sources, $gameRefs, $OutputPath)
 Write-Output 'Runtime build succeeded (offline Roslyn; game/Mono references).'

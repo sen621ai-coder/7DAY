@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ZZPZAECMD500Compatibility" />
+  <DisplayName value="PZAEC MD-500 Compatibility" />
+  <Description value="MD-500: 1,000,000 durability and 30% higher speed limits than the installed AEC Armored Gyro. Original MD-500 resources are required separately." />
+  <Author value="PZAEC" />
+  <Version value="1.0.1" />
+</xml>

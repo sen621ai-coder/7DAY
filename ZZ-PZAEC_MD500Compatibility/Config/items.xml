@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <conditional>
+    <if cond="mod_loaded('MD-500')">
+      <set xpath="/items/item[@name='vehicleMD500placeable']/effect_group/passive_effect[@name='DegradationMax']/@value">1000000</set>
+    </if>
+  </conditional>
+</configs>

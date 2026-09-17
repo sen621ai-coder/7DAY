@@ -20,6 +20,7 @@ namespace AECT16RuntimeFix
             try
             {
                 var harmony = new Harmony(HarmonyId);
+                MD500FlightControls.Install(harmony);
                 CollectorBatchStorage.Install(harmony);
                 ApiaryProduction.Install(harmony);
                 CompactSteelStorage.Install(harmony);
