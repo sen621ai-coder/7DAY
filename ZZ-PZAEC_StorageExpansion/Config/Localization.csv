@@ -1,7 +1,7 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,KeepLoaded,english,Context / Alternate Text,german,spanish,french,italian,japanese,koreana,polish,brazilian,russian,turkish,schinese,tchinese
 PZAECSteelCrateExpanded,blocks,Block,,,,Expanded Steel Storage Crate,,,,,,,,,,,,扩容钢储藏箱,擴容鋼儲藏箱
-PZAECSteelCrateExpandedDesc,blocks,Block,,,,A lockable and writable steel crate with 150 storage slots.,,,,,,,,,,,,可上锁且可书写的钢储藏箱，容量150格。,可上鎖且可書寫的鋼儲藏箱，容量150格。
+PZAECSteelCrateExpandedDesc,blocks,Block,,,,A lockable and writable steel crate with 156 storage slots (12 columns by 13 rows).,,,,,,,,,,,,可上锁且可书写的钢储藏箱，容量156格（12列×13行）。,可上鎖且可書寫的鋼儲藏箱，容量156格（12列×13行）。
 PZAECSteelCrateExpandedInsecure,blocks,Block,,,,Expanded Steel Storage Crate (Damaged),,,,,,,,,,,,受损的扩容钢储藏箱,受損的擴容鋼儲藏箱
 PZAECSteelWallCabinetExpanded,blocks,Block,,,,Expanded Steel Wall Cabinet,,,,,,,,,,,,扩容钢制壁橱,擴容鋼製壁櫃
-PZAECSteelWallCabinetExpandedDesc,blocks,Block,,,,A steel wall cabinet with 150 storage slots.,,,,,,,,,,,,钢制壁橱，容量150格。,鋼製壁櫃，容量150格。
+PZAECSteelWallCabinetExpandedDesc,blocks,Block,,,,A steel wall cabinet with 156 storage slots (12 columns by 13 rows).,,,,,,,,,,,,钢制壁橱，容量156格（12列×13行）。,鋼製壁櫃，容量156格（12列×13行）。
 PZAECSteelWallCabinetExpandedInsecure,blocks,Block,,,,Expanded Steel Wall Cabinet (Damaged),,,,,,,,,,,,受损的扩容钢制壁橱,受損的擴容鋼製壁櫃

@@ -31,7 +31,13 @@ public class TileEntityCollector {
  public int Chickens=3;
  public BlockCollector.OutputType[] SlotTypes;
  public BlockCollector.OutputType GetSlotOutputType(int i)=>SlotTypes==null?collector.Output:SlotTypes[i];
- public int getCurrentConvertCount(BlockCollector.OutputType t)=>t.Name=="honey"?(HasModCount?10:5):t.Name=="egg"?2*Chickens:t.Name=="feather"?5*Chickens:Chickens>0?1:0;
+ public int getCurrentConvertCount(BlockCollector.OutputType t) {
+  int native=t.Name=="honey"?(HasModCount?10:5):t.Name=="egg"?2*Chickens:t.Name=="feather"?5*Chickens:Chickens>0?1:0;
+  if(blockValue.Block.Name!="cntChickenCoop")return native;
+  object[] args={this,native};
+  typeof(AECT16RuntimeFix.CollectorBatchStorage).GetMethod("BatchCount",BindingFlags.NonPublic|BindingFlags.Static).Invoke(null,args);
+  return (int)args[1];
+ }
  public int FuelCount;
  public int fuelCost(BlockCollector.OutputType t,int count)=>10;
  public int getFuelCount(BlockCollector.FuelType type)=>FuelCount;
@@ -76,6 +82,19 @@ public static class CollectorFixture {
   foreach(string name in new[]{"AutoMinerIron","AutoMinerLead","AutoMinerCoal","AutoMinerNitrate","AutoMinerClay","AutoMinerShale","AutoMinerBrass","yfAutoForestry"})
    Check(AECT16RuntimeFix.CollectorBatchStorage.Applies(name),"missing machine: "+name);
   Check(!AECT16RuntimeFix.CollectorBatchStorage.Applies("dewCollector"),"unrelated collector affected");
+  foreach(string name in new[]{"AutoMinerIron","AutoMinerLead","AutoMinerCoal","AutoMinerNitrate","AutoMinerClay","AutoMinerShale","AutoMinerBrass","yfAutoForestry"})
+   foreach(bool packer in new[]{false,true}) {
+    var machine=new TileEntityCollector{HasModCount=packer}; machine.blockValue.Block.Name=name;
+    object[] count={machine,packer?4:1};Call("BatchCount",count);
+    int batch=(int)count[1];Check(batch==(packer?6:3),"batch must equal full slot: "+name);
+    Check(Produce(machine,batch)==batch && machine.Items[0].count==batch,"first batch fills one slot");
+    Check(Produce(machine,batch)==batch && machine.Items[1].count==batch,"next batch fills next slot");
+   }
+  foreach(string name in new[]{"cntApiary","dewCollector"}) {
+   var other=new TileEntityCollector();other.blockValue.Block.Name=name;
+   object[] count={other,7};Call("BatchCount",count);Check((int)count[1]==7,"non-miner yield changed");
+  }
+  Console.WriteLine("PASS: all eight miners/forestry yield 3/6 per batch and fill one slot; coop/apiary/other yields unchanged.");
   foreach(int chickens in new[]{1,3,6})foreach(int slots in new[]{6,9}) {
    var coop=new TileEntityCollector{Chickens=chickens,Items=new ItemStack[slots],SlotTypes=new BlockCollector.OutputType[slots]};
    coop.blockValue.Block.Name="cntChickenCoop";
@@ -85,16 +104,19 @@ public static class CollectorFixture {
    for(int j=0;j<slots;j++)coop.SlotTypes[j]=outputs[j/3];
    for(int j=0;j<slots/3;j++) {
     var output=outputs[j];int batch=coop.getCurrentConvertCount(output),total=0,steps=0;
-    while(Find(coop,output)>=0){total+=Produce(coop,batch,output);Check(++steps<=6,"coop should hold two batches per slot");}
-    Check(total==batch*6,"coop group total");
-    for(int k=j*3;k<j*3+3;k++)Check(coop.Items[k].count==batch*2 && coop.Items[k].itemValue.ItemClass.Name==output.OutputItem,"coop cap or product crossed rows");
+    Check(batch==(j==0?4*chickens:j==1?10*chickens:2),"coop aligned batch yield");
+    while(Find(coop,output)>=0){total+=Produce(coop,batch,output);Check(++steps<=3,"coop should fill one slot per batch");}
+    Check(total==batch*3,"coop group total");
+    for(int k=j*3;k<j*3+3;k++)Check(coop.Items[k].count==batch && coop.Items[k].itemValue.ItemClass.Name==output.OutputItem,"coop cap or product crossed rows");
     coop.Items[j*3].count--;Check(Produce(coop,batch,output)==1,"coop partial refill");
    }
    object[] coopSize={coop,new Vector2i(3,slots/3)};Call("Size",coopSize);Check(((Vector2i)coopSize[1]).y==slots/3,"coop nesting box layout changed");
    coop.Chickens=1;foreach(var output in outputs)Produce(coop,coop.getCurrentConvertCount(output),output);
    if(chickens>1)Check(coop.Items[0].count==4*chickens,"removing chickens deleted stored products");
   }
-  Console.WriteLine("PASS: coop 1/3/6 chickens; 6/9 slots; two batches per slot; separate output rows; refill; chicken removal preserves output.");
+  var emptyCoop=new TileEntityCollector{Chickens=0};emptyCoop.blockValue.Block.Name="cntChickenCoop";
+  foreach(string name in new[]{"egg","feather","chicken"})Check(emptyCoop.getCurrentConvertCount(new BlockCollector.OutputType{Name=name})==0,"empty coop produced");
+  Console.WriteLine("PASS: coop 1/3/6 chickens; zero chickens yields zero; 6/9 slots; one batch per slot; separate output rows; refill; chicken removal preserves output.");
   var honey=new BlockCollector.OutputType{Name="honey",OutputItem="foodHoney",OutputItemModded="foodHoney"};
   var hive=new TileEntityCollector();hive.blockValue.Block.Name="cntApiary";
   var hivePatch=typeof(AECT16RuntimeFix.ApiaryProduction);

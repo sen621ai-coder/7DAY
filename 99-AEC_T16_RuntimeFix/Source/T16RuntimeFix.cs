@@ -22,6 +22,7 @@ namespace AECT16RuntimeFix
                 var harmony = new Harmony(HarmonyId);
                 CollectorBatchStorage.Install(harmony);
                 ApiaryProduction.Install(harmony);
+                CompactSteelStorage.Install(harmony);
                 PatchModelTintSafety(harmony);
                 LootContainerNullGuard.Install(harmony);
                 LocalRespawnRecovery.Install(harmony);

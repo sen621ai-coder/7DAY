@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configs>
   <append xpath="/lootcontainers">
-    <lootcontainer name="PZAECSteelCrateStorage150" count="0" size="15,10" sound_open="UseActions/crate_steel_open" sound_close="UseActions/crate_steel_close" loot_quality_template="qualBaseTemplate">
+    <lootcontainer name="PZAECSteelCrateStorage150" count="0" size="12,13" sound_open="UseActions/crate_steel_open" sound_close="UseActions/crate_steel_close" loot_quality_template="qualBaseTemplate">
       <item name="cobweb" count="0" />
     </lootcontainer>
-    <lootcontainer name="PZAECSteelWallCabinetStorage150" count="0" size="15,10" sound_open="UseActions/open_dumpster" sound_close="UseActions/close_dumpster" loot_quality_template="qualBaseTemplate">
+    <lootcontainer name="PZAECSteelWallCabinetStorage150" count="0" size="12,13" sound_open="UseActions/open_dumpster" sound_close="UseActions/close_dumpster" loot_quality_template="qualBaseTemplate">
       <item name="cobweb" count="0" />
     </lootcontainer>
   </append>

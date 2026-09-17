@@ -19,11 +19,12 @@ namespace AECT16RuntimeFix
         static bool IsCoop(TileEntityCollector te) => te.blockValue.Block.GetBlockName() == "cntChickenCoop";
         static int SlotCapacity(TileEntityCollector te, BlockCollector.OutputType type)
         {
-            // Two native batches; follows chicken count and sandbox production multiplier.
-            return IsCoop(te) ? 2 * te.getCurrentConvertCount(type) : Capacity(te.HasModCount);
+            // Coop yield is now doubled by BatchCount; keep the previous slot capacity.
+            return IsCoop(te) ? te.getCurrentConvertCount(type) : Capacity(te.HasModCount);
         }
         public static void Install(Harmony h)
         {
+            Patch(h, "getCurrentConvertCount", nameof(BatchCount), false);
             Patch(h, "getFirstFreeIndex", nameof(FreeSlot), true);
             Patch(h, "handleUpdateForOutputType", nameof(Prepare), true);
             Patch(h, "getMaxProductionCount", nameof(LimitBatch), false);
@@ -37,6 +38,13 @@ namespace AECT16RuntimeFix
         {
             var patch = new HarmonyMethod(typeof(CollectorBatchStorage), method);
             h.Patch(AccessTools.Method(typeof(TileEntityCollector), target), prefix: prefix ? patch : null, postfix: prefix ? null : patch);
+        }
+        static void BatchCount(TileEntityCollector __instance, ref int __result)
+        {
+            // Exactly one full slot per batch for miners/forestry, including clay.
+            // Native fuel and timer logic remains unchanged. Zero chickens still yields zero.
+            if (!Applies(__instance)) return;
+            __result = IsCoop(__instance) ? __result * 2 : Capacity(__instance.HasModCount);
         }
         static bool CanFill(ItemStack stack, BlockCollector.OutputType type, int capacity)
         {
