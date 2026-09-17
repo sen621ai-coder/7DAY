@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param([string]$RuntimeDll,[int]$TimeoutSeconds=600)
+param([string]$RuntimeDll,[int]$TimeoutSeconds=600,[string]$ModDirectory)
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot
 $game=Split-Path $root
@@ -10,7 +10,8 @@ $mod=Join-Path $qaRoot 'UserData/Mods/97-AutomationWorkshop'
 $qaMod=Join-Path $qaRoot 'UserData/Mods/98-MachineConfigurationQA'
 New-Item -ItemType Directory -Force $mod,$qaMod | Out-Null
 foreach($item in @('Config','Resources','ModInfo.xml')){
-    Copy-Item -LiteralPath (Join-Path $root "97-AutomationWorkshop/$item") -Destination $mod -Recurse -Force
+    $sourceMod=if($ModDirectory){$ModDirectory}else{Join-Path $root '97-AutomationWorkshop'}
+    Copy-Item -LiteralPath (Join-Path $sourceMod $item) -Destination $mod -Recurse -Force
 }
 Copy-Item -LiteralPath $RuntimeDll -Destination (Join-Path $mod 'YF.Automation.dll') -Force
 & (Join-Path $PSScriptRoot 'Build-AutomationGameQA.ps1') -ConfigurationOnly -RuntimeDll $RuntimeDll -Output (Join-Path $qaMod 'Automation.GameQA.dll')

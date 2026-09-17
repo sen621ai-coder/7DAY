@@ -100,6 +100,9 @@ namespace YFAutomation
         protected virtual bool InventoryScreen=>false;
         int page,previewRequest;float nextPreview;string previewKey="",serverPreview="";
         public string PreviewText=>kind=="yfAutoForge"||kind=="yfAutoKitchen"?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
+        public string SelectedProduct=>draft.Product;
+        public bool IsInternalInventory=>InternalMode();
+        public List<RecipeMaterial> PreviewMaterials=new List<RecipeMaterial>();
         string PreviewKey()=>draft.Product+"|"+draft.StorageMode+"|"+draft.Source;
         string lastQuery="";
         List<string> matches=new List<string>();
@@ -112,7 +115,7 @@ namespace YFAutomation
         public override void Init()
         {
             base.Init();search=GetChildById("search") as XUiC_TextInput;
-            GetChildById("toggle").OnPress+=(s,b)=>{if(ready){draft.Paused=!draft.Paused;Render();}};
+            GetChildById("toggle").OnPress+=(s,b)=>{if(ready){draft.Paused=!draft.Paused;Send(true);}};
             GetChildById("source").OnPress+=(s,b)=>{if(ready){draft.Source=Next(sources,draft.Source,b==1?-1:1);Render();}};
             GetChildById("target").OnPress+=(s,b)=>{if(ready){draft.Target=Next(targets,draft.Target,b==1?-1:1);Render();}};
             GetChildById("product").OnPress+=(s,b)=>{if(ready){var q=search.Text??"";var matches=products.Where(n=>n==""||n.IndexOf(q,StringComparison.OrdinalIgnoreCase)>=0||Localization.Get(n).IndexOf(q,StringComparison.OrdinalIgnoreCase)>=0).ToList();draft.Product=Next(matches,draft.Product,b==1?-1:1);Render();}};
@@ -130,7 +133,7 @@ namespace YFAutomation
         {base.OnOpen();open=true;Active=this;
             var native=xui.FindWindowGroupByName(MachineInventoryUI.Group) as XUiC_LootWindowGroup;
             at=InventoryScreen&&native?.te!=null?native.te.ToWorldPos():MachineConfigurationUI.Pending;
-            kind="";draft=new MachineSettings();search.Text="";page=0;lastQuery="";nextPreview=0;previewKey="";serverPreview="";Send(false);}
+            kind="";draft=new MachineSettings();PreviewMaterials.Clear();search.Text="";page=0;lastQuery="";nextPreview=0;previewKey="";serverPreview="";Send(false);}
         public override void OnClose(){open=false;ready=false;if(Active==this)Active=null;base.OnClose();}
         void Send(bool save)
         {
@@ -168,7 +171,7 @@ namespace YFAutomation
             Label("status",t?.GetFeature<TEFeatureSignable>()?.GetAuthoredText().Text??"设备已卸载或移除");
         }
         public void ReceiveRecipe(NetPackageYFAutomationRecipeReply reply)
-        {if(open&&reply.At==at&&reply.Request==previewRequest&&previewKey==PreviewKey())serverPreview=reply.Text;}
+        {if(open&&reply.At==at&&reply.Request==previewRequest&&previewKey==PreviewKey()){serverPreview=reply.Text;PreviewMaterials=reply.Materials;}}
         bool InternalMode()
         {
             var t=GameManager.Instance?.World?.GetTileEntity(at) as TileEntityComposite;
@@ -182,7 +185,8 @@ namespace YFAutomation
             bool supported=MachineConfiguration.HasProduct(kind);
             for(int row=0;row<8;row++)
             {int index=page*8+row;GetChildById("recipe"+row).ViewComponent.IsVisible=supported&&index<matches.Count;
-             Label("recipe"+row+"Text",index<matches.Count?(draft.Product==matches[index]?"✓ ":"")+Localization.Get(matches[index]):"");}
+             var entry=GetChildById("recipe"+row) as XUiC_YFAutomationProductEntry;
+             if(entry!=null){entry.Product=index<matches.Count?matches[index]:"";entry.IsChosen=entry.Product==draft.Product;entry.RefreshBindings();}}
             Label("pages",supported?(page+1)+" / "+Math.Max(1,(matches.Count+7)/8):"无需选择产品");
             GetChildById("previous").ViewComponent.IsVisible=supported;GetChildById("next").ViewComponent.IsVisible=supported;
         }
@@ -205,9 +209,10 @@ namespace YFAutomation
         }
         void Render()
         {
-            if(previewKey!=PreviewKey())serverPreview="";
+            if(InventoryScreen&&open)MachineInventoryUI.ShowRecipe(xui);
+            if(previewKey!=PreviewKey()){serverPreview="";PreviewMaterials.Clear();nextPreview=0;}
             Label("title","机器配置 · "+(kind==""?"读取中":Localization.Get(kind)));
-            Label("toggleText",draft.Paused?"状态：暂停（点击切换）":"状态：启动（点击切换）");
+            Label("toggleText",draft.Paused?"启动并保存":"暂停并保存");
             Label("sourceText","输入箱："+(draft.Source==""?"自动选择":draft.Source));
             Label("targetText","输出箱："+(draft.Target==""?"自动选择":draft.Target));
             Label("productText",(kind=="yfAutoSorter"?"过滤物品：":"目标产品：")+(draft.Product==""?(InternalMode()?"请选择":"沿用输出箱首格样品"):Localization.Get(draft.Product)));
@@ -216,6 +221,7 @@ namespace YFAutomation
             GetChildById("source").ViewComponent.IsVisible=boxes;GetChildById("target").ViewComponent.IsVisible=boxes;
             GetChildById("product").ViewComponent.IsVisible=product;search.ViewComponent.IsVisible=product;
             GetChildById("details").ViewComponent.IsVisible=!boxes;Label("details",kind=="yfAutoForge"||kind=="yfAutoKitchen"?"材料、工具和缺少数量见中间配方面板。\n上3行放原料，下3行留空收成品。":Details());
+            GetChildById("details").ViewComponent.IsVisible=false;GetChildById("product").ViewComponent.IsVisible=false;
             Label("help",InternalMode()?"内置库存：上3行原料/工具，下3行成品。\n传送带指向机器送入原料，背向机器取走成品。\n打开库存期间暂停加工；关闭后自动继续。":
                 "外接箱模式：同主人、同区块，输出首格保留。\n选择产品后保存。切换库存模式不搬动物品。");
             RenderProducts();

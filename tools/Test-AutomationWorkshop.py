@@ -1,8 +1,9 @@
 from pathlib import Path
 import xml.etree.ElementTree as E
 import csv
+import sys
 root=Path(__file__).resolve().parents[1]
-c=root/'97-AutomationWorkshop/Config';game=root.parent/'Data/Config'
+c=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else root/'97-AutomationWorkshop/Config';game=root.parent/'Data/Config'
 baseblocks={n.get('name') for n in E.parse(game/'blocks.xml').findall('./block')}
 baseitems={n.get('name') for n in E.parse(game/'items.xml').findall('./item')}
 b=E.parse(c/'blocks.xml').find('.//block');assert b.get('name')=='yfAutomationWorkbench'
@@ -60,8 +61,8 @@ for kind in ('Sorter','Kitchen','Smelter','Forge','Recycler','Farm','Miner','Tra
  assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureMachineInventory']") is not None
 assert E.parse(c/'loot.xml').find(".//lootcontainer[@name='yfAutoMachineInventory']").get('size')=='6,6'
 storage=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutomationStorage']")
-assert storage.get('controller')=='LootWindow' and storage.find(".//*[@name='btnSort']") is None
-assert storage.find(".//grid[@controller='LootContainer']") is not None
+assert storage.get('controller')=='YFAutomation.YFAutomationStorageWindow, YF.Automation'
+assert len(storage.findall(".//*[@name='btnSort']"))==2
 print('PASS: 10 built-in machine inventories, migration features, native loot grid and partition-safe controls.')
 
 recipe_panel=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutomationRecipe']")
@@ -69,3 +70,23 @@ assert recipe_panel is not None and recipe_panel.get('panel')=='Center'
 assert recipe_panel.get('controller')=='YFAutomation.YFAutomationRecipePanel, YF.Automation'
 assert E.parse(c/'XUi_InGame/xui.xml').find(".//window_group[@name='yfMachineInventory']/window[@name='windowYFAutomationRecipe']") is not None
 print('PASS: dedicated center recipe panel is included in the machine inventory screen.')
+
+ui=E.parse(c/'XUi_InGame/windows.xml')
+controls=ui.find(".//window[@name='windowYFAutomationInventoryControls']")
+assert controls.get('width')=='350' and controls.get('height')=='747'
+grid=storage.find(".//grid[@name='queue']")
+assert grid.get('cell_width')=='54' and grid.get('cell_height')=='36'
+assert grid.get('repeat_content')=='false'
+assert len(grid.findall('.//backpack_item_stack'))==2
+for part in (0,1):
+ slots=grid.find(f".//grid[@name='slots{part}']")
+ assert slots.get('rows')=='3' and slots.get('cols')=='6'
+assert recipe_panel.get('width')=='870' and recipe_panel.get('height')=='300'
+assert 350+870+6*54+20<=1600 and 300+437+10<=752
+print('PASS: machine layout fits Project Z backpack bounds; compact inventory uses matching item controls.')
+assert all(p.tag=='append' and p.get('xpath')=='/windows' for p in ui.getroot())
+assert all(w.get('name').startswith('windowYFAutomation') for w in ui.findall('.//window'))
+assert len(recipe_panel.findall("rect[@controller='YFAutomation.YFAutomationMaterialEntry, YF.Automation']"))==4
+assert len(controls.findall(".//rect[@controller='YFAutomation.YFAutomationProductEntry, YF.Automation']"))==8
+assert storage.get('height')=='747'
+print('PASS: two native 18-slot partitions, material rows and recipe entries; no edits to shared windows/templates.')

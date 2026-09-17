@@ -8,7 +8,7 @@ namespace YFAutomation
 {
     public static class RecipePreview
     {
-        public static string Describe(World world,TileEntityComposite machine,MachineSettings draft,EntityPlayer owner)
+        public static string Describe(World world,TileEntityComposite machine,MachineSettings draft,EntityPlayer owner,List<RecipeMaterial> materials=null)
         {
             string kind=machine.block.GetBlockName();
             if(kind!="yfAutoForge"&&kind!="yfAutoKitchen")return "";
@@ -27,8 +27,9 @@ namespace YFAutomation
             }
             if(best==null)best=RecipePlan.Select(draft.Product,kind,ItemStack.CreateArray(0),i=>false,owner);
             if(best==null)return "此设备没有适用配方。";
+            materials?.AddRange(best.Materials.Take(128));
             return Localization.Get(draft.Product)+"\n"+(best.Ready?"材料与工具已齐，保存并关闭面板后加工。":"请按下面的缺少数量补充原料/工具。")+
-                "\n"+string.Join("\n",best.Lines)+"\n下3行留空：成品自动放入，无需样品。"+
+                "\n"+string.Join("\n",best.Lines)+(internalMode?"\n内置模式：上3行原料，下3行自动收成品。":"\n外接箱模式：原料从输入箱读取，产物送至输出箱。")+
                 (kind=="yfAutoForge"?"\n普通材料可直接用；旧冶炼料也能抵用。":"")+
                 (!internalMode?"\n当前统计外接输入箱；多配方自动选可加工的一种。":"");
         }
@@ -52,7 +53,8 @@ namespace YFAutomation
             if(!MachineConfiguration.CanAccess(world,machine,player))return;
             var owner=GameManager.Instance.GetPersistentPlayerList()?.GetEntityPlayerFromUserId(machine.GetFeature<TEFeatureLockable>()?.GetOwner()??machine.Owner);
             var reply=NetPackageManager.GetPackage<NetPackageYFAutomationRecipeReply>();reply.At=At;reply.Request=Request;
-            reply.Text=RecipePreview.Describe(world,machine,Draft,owner);
+            reply.Materials=new List<RecipeMaterial>();
+            reply.Text=RecipePreview.Describe(world,machine,Draft,owner,reply.Materials);
             if(Encoding.UTF8.GetByteCount(reply.Text)>8192)reply.Text="配方材料信息过长，无法显示。";
             if(player is EntityPlayerLocal)reply.Deliver();else ConnectionManager.Instance.SendPackage(reply,false,actor);
         }
@@ -60,15 +62,16 @@ namespace YFAutomation
     public sealed class NetPackageYFAutomationRecipeReply : NetPackage
     {
         public Vector3i At;public int Request;public string Text="";
+        public List<RecipeMaterial> Materials=new List<RecipeMaterial>();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>20+Encoding.UTF8.GetByteCount(Text);
-        public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);ConfigurationWire.Text(w,Text,8192);}
-        public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Text=ConfigurationWire.Text(r,8192);}
+        public override int GetLength()=>22+Encoding.UTF8.GetByteCount(Text)+Materials.Sum(m=>11+Encoding.UTF8.GetByteCount(m.Name));
+        public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);ConfigurationWire.Text(w,Text,8192);if(Materials.Count>128)throw new System.IO.InvalidDataException();w.Write((ushort)Materials.Count);foreach(var m in Materials){ConfigurationWire.Text(w,m.Name);w.Write(m.Need);w.Write(m.Have);w.Write(m.Tool);}}
+        public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Text=ConfigurationWire.Text(r,8192);int count=r.ReadUInt16();if(count>128)throw new System.IO.InvalidDataException();Materials=new List<RecipeMaterial>();for(int i=0;i<count;i++)Materials.Add(new RecipeMaterial{Name=ConfigurationWire.Text(r),Need=r.ReadInt32(),Have=r.ReadInt32(),Tool=r.ReadBoolean()});}
         public override void ProcessPackage(World world,GameManager callbacks){if(world!=null&&ConnectionManager.Instance!=null&&!ConnectionManager.Instance.IsServer)Deliver();}
         public void Deliver()=>XUiC_YFAutomationConfiguration.Active?.ReceiveRecipe(this);
     }
     [Preserve]
-    public sealed class XUiC_YFAutomationRecipePanel : XUiController
+    public sealed class XUiC_YFAutomationRecipePanel : XUiC_InfoWindow
     {
         int page;string previous="";
         public override void Init()
@@ -81,8 +84,20 @@ namespace YFAutomation
         {
             base.Update(dt);string text=XUiC_YFAutomationConfiguration.Active?.PreviewText??"选择左侧产品查看配方。";
             if(previous!=text){previous=text;page=0;}
-            var lines=text.Split('\n');int pages=Math.Max(1,(lines.Length+9)/10);page=Math.Min(page,pages-1);
-            ((XUiV_Label)GetChildById("body").ViewComponent).Text=string.Join("\n",lines.Skip(page*10).Take(10));
+            var active=XUiC_YFAutomationConfiguration.Active;
+            var materials=active?.PreviewMaterials??new List<RecipeMaterial>();
+            int pages=Math.Max(1,(materials.Count+3)/4);page=Math.Min(page,pages-1);
+            // Keep explanations separate from the native ingredient rows.
+            var lines=text.Split('\n').Where(s=>!s.Contains("：需要 ")&&!s.StartsWith("工具：")&&s!=Localization.Get(active?.SelectedProduct??"")).ToArray();
+            string summary=string.Join("\n",lines.Take(6));
+            if(materials.Count>0)summary=(text.Contains("尚未解锁")?"配方尚未解锁":text.Contains("材料与工具已齐")?"材料与工具已齐":"缺少材料、工具或余料空格")+
+                "\n工具保留，不会消耗。\n"+(active.IsInternalInventory?"右侧材料区放原料和工具。\n成品自动进入右下方。":"当前从外接输入箱取料。\n产物送至外接输出箱。")+
+                "\n保存并关闭面板后加工。";
+            ((XUiV_Label)GetChildById("body").ViewComponent).Text=summary;
+            var item=ItemClass.GetItem(active?.SelectedProduct??"").ItemClass;
+            ((XUiV_Label)GetChildById("productName").ViewComponent).Text=item==null?"选择左侧物品":Localization.Get(item.GetItemName());
+            var icon=(XUiV_Sprite)GetChildById("productIcon").ViewComponent;icon.SpriteName=item?.GetIconName()??"";icon.IsVisible=item!=null;
+            for(int i=0;i<4;i++){var row=GetChildById("material"+i) as XUiC_YFAutomationMaterialEntry;int index=page*4+i;row.Material=index<materials.Count?materials[index]:null;row.RefreshBindings();row.ViewComponent.IsVisible=row.Material!=null;}
             ((XUiV_Label)GetChildById("page").ViewComponent).Text=(page+1)+" / "+pages;
             GetChildById("back").ViewComponent.IsVisible=pages>1;GetChildById("forward").ViewComponent.IsVisible=pages>1;
         }

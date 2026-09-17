@@ -223,10 +223,24 @@ public sealed class MachineConfigurationGameQA : IModApi
             var request=new NetPackageYFAutomationRecipeRequest{At=forge.ToWorldPos(),Request=88,Draft=config};request.write(writer);writer.Flush();
             Check(stream.Length==request.GetLength(),"recipe preview request wire length");stream.Position=2;var requestCopy=new NetPackageYFAutomationRecipeRequest();requestCopy.read(reader);
             Check(requestCopy.Draft.Product==config.Product&&requestCopy.Request==88&&stream.Position==stream.Length,"recipe preview request round trip");
-            stream.SetLength(0);stream.Position=0;var reply=new NetPackageYFAutomationRecipeReply{At=forge.ToWorldPos(),Request=88,Text=ready};reply.write(writer);writer.Flush();
+            stream.SetLength(0);stream.Position=0;var reply=new NetPackageYFAutomationRecipeReply{At=forge.ToWorldPos(),Request=88,Text=ready,Materials=plan.Materials};reply.write(writer);writer.Flush();
             Check(stream.Length==reply.GetLength(),"recipe preview reply UTF8 wire length");stream.Position=2;var replyCopy=new NetPackageYFAutomationRecipeReply();replyCopy.read(reader);
             Check(replyCopy.Text==ready&&replyCopy.Request==88&&stream.Position==stream.Length,"recipe preview reply round trip");
+            Check(replyCopy.Materials.Count==plan.Materials.Count&&replyCopy.Materials.Zip(plan.Materials,(a,b)=>a.Name==b.Name&&a.Need==b.Need&&a.Have==b.Have&&a.Tool==b.Tool).All(v=>v),"native material icon/count data round trip");
         }
+        var ironValue=ItemClass.GetItem("resourceScrapIron");
+        store.items=ItemStack.CreateArray(36);store.SlotLocks=new PackedBoolArray(36);store.SlotLocks[0]=true;
+        var inputPartition=new MachinePartitionInventory(store,0);var outputPartition=new MachinePartitionInventory(store,18);
+        Check(inputPartition.AddItem(new ItemStack(ironValue.Clone(),4))&&store.items[0].IsEmpty()&&store.items[1].count==4&&store.items.Skip(18).All(s=>s.IsEmpty()),"deposit respects locked input and never enters output");
+        Check(outputPartition.AddItem(new ItemStack(ironValue.Clone(),7))&&store.items[18].count==7&&store.items[1].count==4,"explicit output deposit stays in its own partition");
+        var more=new ItemStack(ironValue.Clone(),3);inputPartition.TryStackItem(0,more);
+        Check(more.count==0&&store.items[1].count==7&&store.items[18].count==7,"partial stack transfer conserves counts and preserves output");
+        var mask=XUiC_YFAutomationStorageWindow.Mask(store,0);
+        Check(mask[0]&&!mask[1]&&Enumerable.Range(18,18).All(i=>mask[i]),"input sort/take mask excludes all output slots and locked input");
+        var sorted=StackSortUtil.CombineAndSortStacks(ProductionInventory.Clone(store.items),0,mask);
+        Check(sorted[18].count==7&&sorted.Take(18).Sum(s=>s.count)==7,"native masked sorting preserves output and input quantities");
+        for(int i=0;i<18;i++)store.items[i]=new ItemStack(ironValue.Clone(),ironValue.ItemClass.Stacknumber.Value);
+        Check(!inputPartition.AddItem(new ItemStack(ironValue.Clone(),1))&&store.items[19].IsEmpty(),"full input cannot spill deposits into empty output slots");
         world.SetBlockRPC(new BlockValueRef(forge.ToWorldPos()),BlockValue.Air);
     }
 

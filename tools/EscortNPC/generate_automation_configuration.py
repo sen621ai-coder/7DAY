@@ -2,8 +2,10 @@
 from pathlib import Path
 import csv
 import xml.etree.ElementTree as E
+import sys
 
-root = Path(__file__).resolve().parents[2] / '97-AutomationWorkshop/Config'
+workspace = Path(__file__).resolve().parents[2]
+root = Path(sys.argv[1]).resolve() if len(sys.argv)>1 else workspace / '97-AutomationWorkshop/Config'
 
 def write(node, path):
     E.indent(node, space='  ')
@@ -44,16 +46,22 @@ windows=E.Element('configs');app=E.SubElement(windows,'append',xpath='/windows')
 # Reuse native loot-grid and native item synchronization. Sorting is omitted because
 # sorting the whole container would mix the input and output partitions.
 import copy
-native=root.parents[2]/'Data/Config/XUi_InGame/windows.xml'
+native=workspace.parent/'Data/Config/XUi_InGame/windows.xml'
 storage=copy.deepcopy(E.parse(native).find("window[@name='windowLooting']"))
 storage.set('name','windowYFAutomationStorage');storage.set('panel','Right')
 for node in storage.iter():
     for child in list(node):
         if child.get('name')=='btnSort': node.remove(child)
-storage.set('height','546')
+storage.set('height','312')
+grid=storage.find("rect[@name='content']/grid[@name='queue']")
+grid.set('rows','6');grid.set('cols','6');grid.set('cell_width','54');grid.set('cell_height','36')
+for child in list(grid):grid.remove(child)
+E.SubElement(grid,'backpack_item_stack',name='0')
+caption=storage.find("rect[@name='header']/label[@name='lootName']")
+caption.set('text','内置库存');caption.set('font_size','22')
 app.append(storage)
-E.SubElement(storage,'label',name='partitionHelp',text='上3行：原料 / 工具    下3行：成品',pos='3,-510',width='450',height='30',font_size='21',depth='3',color='[white]')
-E.SubElement(storage.find("rect[@name='content']"),'sprite',name='partition',pos='0,-225',width='450',height='3',depth='20',sprite='menu_empty3px',color='71,197,216,255')
+E.SubElement(storage,'label',name='partitionHelp',text='上3行：原料 / 工具    下3行：成品',pos='3,-277',width='324',height='30',font_size='18',depth='3',color='[white]')
+E.SubElement(storage.find("rect[@name='content']"),'sprite',name='partition',pos='0,-108',width='324',height='3',depth='20',sprite='menu_empty3px',color='71,197,216,255')
 
 for name,controller,panel in [('windowYFAutomationConfiguration','YFAutomation.YFAutomationConfiguration, YF.Automation','Center'),('windowYFAutomationInventoryControls','YFAutomation.YFAutomationInventoryControls, YF.Automation','Left')]:
     w=E.SubElement(app,'window',name=name,width='430',height='752',panel=panel,cursor_area='true',controller=controller)
@@ -77,15 +85,27 @@ for name,controller,panel in [('windowYFAutomationConfiguration','YFAutomation.Y
     label(w,'help','','10,-596',height=72,size=18)
     label(w,'notice','','10,-672',height=32,size=19)
     button('save','保存',10,-712,126);button('refresh','刷新',152,-712,126);button('close','关闭',294,-712,126)
-recipe=E.SubElement(app,'window',name='windowYFAutomationRecipe',width='606',height='365',panel='Center',cursor_area='true',controller='YFAutomation.YFAutomationRecipePanel, YF.Automation')
-E.SubElement(recipe,'sprite',name='background',width='606',height='365',depth='0',sprite='menu_empty3px',color='[darkGrey]',type='sliced')
-E.SubElement(recipe,'sprite',name='header',width='606',height='43',depth='1',sprite='ui_game_panel_header')
-label(recipe,'title','配方与材料','12,-6',580,34,26)
-label(recipe,'body','','12,-54',580,265,22)
-label(recipe,'page','','270,-330',90,30,20)
-for name,text,x in [('back','上一页',12),('forward','下一页',488)]:
-    b=E.SubElement(recipe,'button',name=name,pos=f'{x},-326',width='106',height='32',depth='2',sprite='menu_empty3px',defaultcolor='[mediumGrey]',hoversprite='menu_empty3px',hovercolor='[lightGrey]',type='sliced')
+recipe=E.SubElement(app,'window',name='windowYFAutomationRecipe',width='870',height='300',panel='Center',cursor_area='true',controller='YFAutomation.YFAutomationRecipePanel, YF.Automation')
+E.SubElement(recipe,'sprite',name='background',width='870',height='300',depth='0',sprite='menu_empty3px',color='[darkGrey]',type='sliced')
+E.SubElement(recipe,'sprite',name='header',width='870',height='43',depth='1',sprite='ui_game_panel_header')
+label(recipe,'title','配方与材料','12,-6',846,34,26)
+label(recipe,'body','','12,-48',846,218,20)
+label(recipe,'page','','390,-270',90,30,20)
+for name,text,x in [('back','上一页',12),('forward','下一页',752)]:
+    b=E.SubElement(recipe,'button',name=name,pos=f'{x},-266',width='106',height='32',depth='2',sprite='menu_empty3px',defaultcolor='[mediumGrey]',hoversprite='menu_empty3px',hovercolor='[lightGrey]',type='sliced')
     label(b,name+'Text',text,'8,-4',90,25,20)
+# Fit alongside Project Z's 870-wide backpack; keep readable font sizes.
+for window in app.findall('window'):
+    if window.get('name') not in ('windowYFAutomationConfiguration','windowYFAutomationInventoryControls'):continue
+    for node in window.iter():
+        if 'width' in node.attrib:node.set('width',str(round(int(node.get('width'))*350/430)))
+        if 'height' in node.attrib:node.set('height',str(round(int(node.get('height'))*700/752)))
+        if 'pos' in node.attrib:
+            x,y=node.get('pos').split(',');node.set('pos',f'{round(int(x)*350/430)},{round(int(y)*700/752)}')
+    window.find("label[@name='help']").set('font_size','15')
+    window.find("label[@name='details']").set('font_size','16')
+from automation_panel_layout import apply
+apply(app, workspace)
 write(windows,root/'XUi_InGame/windows.xml')
 
 path = root / 'Localization.csv'

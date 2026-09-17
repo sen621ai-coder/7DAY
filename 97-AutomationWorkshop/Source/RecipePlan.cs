@@ -28,6 +28,10 @@ namespace YFAutomation
             rawUsed=needed;return true;
         }
     }
+    public sealed class RecipeMaterial
+    {
+        public string Name="";public int Need,Have;public bool Tool;
+    }
     public sealed class RecipePlan
     {
         public Recipe Recipe;
@@ -35,6 +39,7 @@ namespace YFAutomation
         public bool Ready;
         public float MeltSeconds;
         public readonly List<string> Lines=new List<string>();
+        public readonly List<RecipeMaterial> Materials=new List<RecipeMaterial>();
         public static int Required(Recipe recipe,ItemStack ingredient,EntityPlayer player)
         {
             int count=ingredient.count;
@@ -55,6 +60,7 @@ namespace YFAutomation
             if(recipe.craftingToolType>0)
             {
                 bool tool=ForgeMaterials.Count(input,recipe.craftingToolType,locked)>0;
+                plan.Materials.Add(new RecipeMaterial{Name=ItemClass.GetForId(recipe.craftingToolType).GetItemName(),Need=1,Have=tool?1:0,Tool=true});
                 plan.Lines.Add("工具："+Localization.Get(ItemClass.GetForId(recipe.craftingToolType).GetItemName())+(tool?"  已放入（不消耗）":"  缺少，请放原料区"));
                 plan.Ready&=tool;
             }
@@ -71,6 +77,7 @@ namespace YFAutomation
                     int old=ForgeMaterials.Count(plan.Input,refined,locked),rawType=weight>0?raw.Id:0;
                     int needed=weight>0?(int)(((long)Math.Max(0,count-old)+weight-1)/weight):0;
                     int have=ForgeMaterials.Count(plan.Input,rawType,locked);
+                    plan.Materials.Add(new RecipeMaterial{Name=weight>0?rawName:"yfAutoIngot_"+category,Need=weight>0?needed:count,Have=weight>0?have:old});
                     plan.Lines.Add(weight>0?Line(Localization.Get(rawName),needed,have):Line(Localization.Get("yfAutoIngot_"+category),count,old));
                     if(old>0)plan.Lines.Add("  兼容冶炼料抵用 "+Math.Min(old,count)+" 单位");
                     int used;bool enough=ForgeMaterials.Consume(plan.Input,refined,rawType,weight,count,locked,v=>v.ItemClass.Stacknumber.Value,out used);
@@ -81,6 +88,7 @@ namespace YFAutomation
                 else
                 {
                     int have=ForgeMaterials.Count(plan.Input,ingredient.itemValue.type,locked);
+                    plan.Materials.Add(new RecipeMaterial{Name=name,Need=count,Have=have});
                     plan.Lines.Add(Line(Localization.Get(name),count,have));
                     plan.Ready&=ProductionInventory.Consume(plan.Input,ingredient.itemValue.type,count,locked);
                 }
