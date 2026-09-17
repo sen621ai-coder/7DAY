@@ -17,7 +17,9 @@ namespace SakuraPreview
         static readonly System.Random random=new System.Random();
         static readonly XmlSerializer serializer=new XmlSerializer(typeof(SakuraMissionJournal));
         static readonly Dictionary<int,float> requests=new Dictionary<int,float>();
+        static readonly HashSet<string> noSafeSite=new HashSet<string>();
         public static string Key(EntityPlayer player)=>player?.PersistentPlayerData?.PrimaryId?.CombinedString;
+        static string GrantKey(SakuraRescueGrant grant)=>grant.Key+":"+grant.QuestId.ToLowerInvariant()+":"+grant.Code;
         static EntityPlayer Player(string key)=>current.Players.list.FirstOrDefault(p=>p!=null && Key(p)==key);
         static SakuraMissionState For(int id)=>journal?.Missions.Find(m=>m.NpcId==id);
         static bool SameParty(EntityPlayer a,EntityPlayer b)=>a!=null&&b!=null&&(a.entityId==b.entityId || a.party!=null&&a.party==b.party);
@@ -33,7 +35,7 @@ namespace SakuraPreview
         {
             if(world==null || world.IsRemote())return false;
             if(current==world)return !blocked;
-            current=world;blocked=false;requests.Clear();lastTick=Time.realtimeSinceStartup;
+            current=world;blocked=false;requests.Clear();noSafeSite.Clear();lastTick=Time.realtimeSinceStartup;
             file=Path.Combine(GameIO.GetSaveGameDir(),"sakura-escort-journal.xml");
             try
             {
@@ -283,23 +285,30 @@ namespace SakuraPreview
                 mission.Enemies.Remove(id);
             }
         }
-        public static bool GrantRescue(EntityPlayer player,string questId,int code,int traderId)
+        public static byte GrantRescueStatus(EntityPlayer player,string questId,int code,int traderId)
         {
-            if(player==null || !Ready(player.world) || string.IsNullOrEmpty(Key(player)))return false;
-            bool dispatch=SakuraTraderRescue.IsDispatch(questId);
-            int tier=dispatch?SakuraTraderRescue.DispatchTier(questId):0;
-            if(tier==0 || !QuestClass.s_Quests.ContainsKey(questId))return false;
+            if(player==null || !Ready(player.world) || string.IsNullOrEmpty(Key(player)))return SakuraDispatchPolicy.Rejected;
+            int tier=SakuraDispatchPolicy.Tier(questId);
+            if(tier==0 || !QuestClass.s_Quests.Keys.Any(id=>string.Equals(id,questId,StringComparison.OrdinalIgnoreCase)))
+                return SakuraDispatchPolicy.Rejected;
             string key=Key(player);
-            // Durable idempotency: the same completed native quest cannot spawn twice.
-            if(journal.RescueGrants.Any(g=>g.Key==key&&g.QuestId==questId&&g.Code==code))return true;
-            var trader=current.GetEntity(traderId) as EntityTrader;
-            if(player.IsDead())return false;
+            var grant=journal.RescueGrants.Find(g=>g.Key==key &&
+                string.Equals(g.QuestId,questId,StringComparison.OrdinalIgnoreCase) && g.Code==code);
+            if(grant==null && player.IsDead())return SakuraDispatchPolicy.Rejected;
             try
             {
-                journal.RescueGrants.Add(new SakuraRescueGrant{Key=key,QuestId=questId,Code=code,TraderId=traderId,Tier=tier});Save();
-                Log.Out("[SakuraRescue] Manual contract queued: "+questId+" code="+code);return true;
+                if(grant==null)
+                {
+                    grant=new SakuraRescueGrant{Key=key,QuestId=questId,Code=code,TraderId=traderId,Tier=tier};
+                    journal.RescueGrants.Add(grant);Save();
+                    Log.Out("[SakuraRescue] Blueprint registered: "+questId+" code="+code+" player="+player.entityId);
+                }
+                if(grant.Spawned)return SakuraDispatchPolicy.Spawned;
+                return journal.Missions.Any(m=>m.Active&&m.Members.Any(v=>v.Key==key))
+                    ?SakuraDispatchPolicy.Queued:noSafeSite.Contains(GrantKey(grant))
+                        ?SakuraDispatchPolicy.NoSite:SakuraDispatchPolicy.Selecting;
             }
-            catch(Exception ex){StopAll();Log.Error("[SakuraRescue] Grant failed: "+ex.Message);return false;}
+            catch(Exception ex){StopAll();Log.Error("[SakuraRescue] Grant failed: "+ex.Message);return SakuraDispatchPolicy.Rejected;}
         }
         static void TryRescueGrants()
         {
@@ -309,9 +318,10 @@ namespace SakuraPreview
                 var player=Player(grant.Key);
                 if(player==null || player.IsDead() || journal.Missions.Any(m=>m.Active&&m.Members.Any(v=>v.Key==grant.Key)))continue;
                 // Only loaded, walkable terrain. No forced chunk loads or building replacement.
+                bool spawned=false;
                 for(int attempt=0;attempt<80;attempt++)
                 {
-                    bool guard=grant.QuestId.StartsWith("mintDispatchT",StringComparison.Ordinal);
+                    bool guard=SakuraDispatchPolicy.IsMint(grant.QuestId);
                     double angle=random.NextDouble()*Math.PI*2;float radius=guard?35+(float)random.NextDouble()*20:90+(float)random.NextDouble()*50;Vector3 p;
                     if(!Ground(player.position.x+(float)Math.Cos(angle)*radius,player.position.z+(float)Math.Sin(angle)*radius,player.position.y,out p))continue;
                     var trader=NearestTrader(p);if(!guard&&(trader==null||Distance(p,trader.Value.x,trader.Value.z)<40))continue;
@@ -323,8 +333,11 @@ namespace SakuraPreview
                     // Save intent before spawn. Restart cancels incomplete missions instead of duplicating NPCs.
                     grant.Spawned=true;journal.Missions.Add(mission);journal.EncounterIds.Add(npc.entityId);Save();
                     current.SpawnEntityInWorld(npc);SendStatus(mission,npc,player);
+                    noSafeSite.Remove(GrantKey(grant));spawned=true;
                     Log.Out("[SakuraRescue] T"+grant.Tier+" target spawned at "+p+" entity="+npc.entityId);break;
                 }
+                if(!spawned && noSafeSite.Add(GrantKey(grant)))
+                    Log.Warning("[SakuraRescue] No safe site after 80 attempts: "+grant.QuestId+" code="+grant.Code+" player="+player.entityId);
             }
         }
         static void SendStatus(SakuraMissionState mission,EntitySakura npc,EntityPlayer player)

@@ -23,7 +23,7 @@ namespace SakuraPreview
             SakuraVoucherRewards.Install(new Harmony("yf.sakura.voucher.rewards"));
             new Harmony("yf.sakura.escort.missions").Patch(AccessTools.Method(typeof(GameManager),"Update"),
                 postfix:new HarmonyMethod(typeof(SakuraMissionServer),nameof(SakuraMissionServer.Tick)));
-            Log.Out("[SakuraPreview] Trader rescue enabled: complete T16-T19 trader quests to locate Sakura. Timed and fixed placement disabled.");
+            Log.Out("[SakuraPreview] 0.8.3 dispatch reconciliation enabled for Sakura and Mint T16-T19 blueprints.");
         }
         static void Tick()
         {
