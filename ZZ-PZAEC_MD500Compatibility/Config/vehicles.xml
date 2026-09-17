@@ -2,9 +2,9 @@
 <configs>
   <conditional>
     <if cond="mod_loaded('MD-500')">
-      <!-- AECArmoredGyroVehicle baseline 10.8,10.8,18,10.8 multiplied by 1.30.
+      <!-- AECArmoredGyroVehicle baseline 10.8,10.8,18,10.8 multiplied by 1.60.
            Normal forward/reverse, turbo forward/reverse (m/s); no ascent/descent change. -->
-      <set xpath="/vehicles/vehicle[@name='vehicleMD500']/property[@name='velocityMax_turbo']/@value">14.04, 14.04, 23.4, 14.04</set>
+      <set xpath="/vehicles/vehicle[@name='vehicleMD500']/property[@name='velocityMax_turbo']/@value">17.28, 17.28, 28.8, 17.28</set>
     </if>
   </conditional>
 </configs>

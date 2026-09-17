@@ -6,7 +6,7 @@ $patchDir = Join-Path $root 'ZZ-PZAEC_MD500Compatibility'
 if ($metadata.xml.Name.value -ne 'ZZPZAECMD500Compatibility') { throw 'Wrong mod identity' }
 [xml]$aec = Get-Content (Join-Path $root '07-AEC-Vehicles-NoMicrocraft/Config/vehicles.xml') -Raw
 $baseline = $aec.SelectSingleNode("//vehicle[@name='AECArmoredGyroVehicle']/property[@name='velocityMax_turbo']")
-$expected = @($baseline.value.Split(',') | ForEach-Object { [double]::Parse($_.Trim(), $culture) * 1.3 })
+$expected = @($baseline.value.Split(',') | ForEach-Object { [double]::Parse($_.Trim(), $culture) * 1.6 })
 [xml]$speed = Get-Content (Join-Path $patchDir 'Config/vehicles.xml') -Raw
 [xml]$health = Get-Content (Join-Path $patchDir 'Config/items.xml') -Raw
 foreach ($doc in @($speed, $health)) {
@@ -20,7 +20,7 @@ $speedSet = $speed.SelectSingleNode('//set')
 $actual = @($speedSet.InnerText.Split(',') | ForEach-Object { [double]::Parse($_.Trim(), $culture) })
 if ($actual.Count -ne 4) { throw 'Speed tuple must contain four values' }
 for ($i = 0; $i -lt 4; $i++) {
-    if ([Math]::Abs($actual[$i] - $expected[$i]) -gt .00001) { throw "Speed component $i is not AEC baseline +30%" }
+    if ([Math]::Abs($actual[$i] - $expected[$i]) -gt .00001) { throw "Speed component $i is not AEC baseline +60%" }
 }
 if ($speedSet.xpath -ne "/vehicles/vehicle[@name='vehicleMD500']/property[@name='velocityMax_turbo']/@value") { throw 'Speed patch scope changed' }
 $healthSet = $health.SelectSingleNode('//set')
@@ -45,4 +45,4 @@ foreach ($file in @('vehicles.xml','items.xml')) {
     $targets[0].Value = $operation.InnerText
     if ($merged.SelectSingleNode($operation.xpath).Value -ne $operation.InnerText) { throw 'Patch did not apply' }
 }
-Write-Output 'PASS: MD-500 maximum durability 1,000,000; all four horizontal speed limits exactly AEC Armored Gyro x1.30; optional dependency and exact scope verified; author files unchanged.'
+Write-Output 'PASS: MD-500 maximum durability 1,000,000; all four horizontal speed limits exactly AEC Armored Gyro x1.60; optional dependency and exact scope verified; author files unchanged.'

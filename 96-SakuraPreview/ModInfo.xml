@@ -4,7 +4,7 @@
   <DisplayName value="小樱护送与 Mint 原地守护" />
   <Description value="T16-T19 传奇任务原凭证改为三选一：三强决战、小樱护送、Mint 守护；同阶图纸，联机共享。" />
   <Author value="Codex + yf" />
-  <Version value="0.8.3" />
+  <Version value="0.8.4" />
   <ServerSideOnly value="false" />
   <SkipWithAntiCheat value="true" />
 </xml>
