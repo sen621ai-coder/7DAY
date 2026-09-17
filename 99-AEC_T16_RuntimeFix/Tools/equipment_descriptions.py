@@ -93,7 +93,7 @@ def duration(buff):
 
 def fusion_rules(tier):
     craft = '制作需对应传奇装备及材料。' if tier == 16 else f'仅由T{tier-1}同款装备＋材料逐级升级。'
-    upgrade = '升阶继承融合次数20%（向下取整）。' if tier < 19 else '已达最高T阶。'
+    upgrade = '升阶继承融合次数50%（向上取整）。' if tier < 19 else '已达最高T阶。'
     return craft + '同名同阶、同融合次数两件在合并工作站融合，固有数值强化5%，耗耐/后坐等向有利方向改善；6槽不变。' + upgrade
 
 

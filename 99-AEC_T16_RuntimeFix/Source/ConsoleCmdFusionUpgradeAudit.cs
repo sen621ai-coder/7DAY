@@ -52,9 +52,9 @@ namespace AECT16RuntimeFix
                         var ui = (XUiC_RecipeStack)FormatterServices.GetUninitializedObject(typeof(XUiC_RecipeStack));
                         AccessTools.Field(typeof(XUiC_RecipeStack), "recipe").SetValue(ui, queue.Recipe);
                         var preview = FusionTierUpgrade.ApplyUI(Item(target.ItemClass.GetItemName()), ui);
-                        Check(EquipmentFusion.Rank(preview) == rank / 5, "UI inheritance");
+                        Check(EquipmentFusion.Rank(preview) == (rank + 1) / 2, "UI inheritance");
                         FusionTierUpgrade.ApplyUI(preview, ui);
-                        Check(EquipmentFusion.Rank(preview) == rank / 5, "Repeated output retry compounded inheritance");
+                        Check(EquipmentFusion.Rank(preview) == (rank + 1) / 2, "Repeated output retry compounded inheritance");
                         // Real patched native background crafting, temporary TE only.
                         var station = new TileEntityWorkstation(null);
                         // Detached test TE: suppress only world dirty/network
@@ -65,7 +65,7 @@ namespace AECT16RuntimeFix
                         AccessTools.Method(typeof(TileEntityWorkstation), "HandleRecipeQueue").Invoke(station, new object[] { .1f });
                         var output = (ItemStack[])AccessTools.Field(typeof(TileEntityWorkstation), "output").GetValue(station);
                         var result = output.Single(i => !i.IsEmpty());
-                        Check(result.count == 1 && result.itemValue.type == target.type && EquipmentFusion.Rank(result.itemValue) == rank / 5, "Native workstation inheritance");
+                        Check(result.count == 1 && result.itemValue.type == target.type && EquipmentFusion.Rank(result.itemValue) == (rank + 1) / 2, "Native workstation inheritance");
                         Check(EquipmentFusion.Rank(ingredient.itemValue) == rank && EquipmentFusion.Rank(original.itemValue) == 0, "Input/shared definition mutated");
                     }
                 }
@@ -74,7 +74,7 @@ namespace AECT16RuntimeFix
                 var direct = new Recipe { itemValueType = Item("gunPZAECHorizonNeedleT19").type, count = 1, ingredients = new List<ItemStack> { new ItemStack(source, 1) } };
                 var inherited = FusionTierUpgrade.Apply(Item("gunPZAECHorizonNeedleT19"), direct);
                 float damage = EffectManager.GetValue(PassiveEffects.EntityDamage, inherited, 0, null, null, FastTags<TagGroup.Global>.Parse("perkDeadEye"), false, false, false, false, false, 1, false, false);
-                Check(Math.Abs(damage - 1800 * 1.1025f) < .01f, "Inherited rank did not affect target stats");
+                Check(Math.Abs(damage - 1800 * (float)Math.Pow(1.05, 5)) < .01f, "Inherited rank did not affect target stats");
                 Check(!FusionTierUpgrade.IsHigherSameFamily(source, Item("gunPZAECStormReservoirT19")), "Different family accepted");
                 Check(!FusionTierUpgrade.IsHigherSameFamily(source, Item("gunPZAECHorizonNeedleT18")), "Same tier accepted");
                 Check(!FusionTierUpgrade.IsHigherSameFamily(Item("gunPZAECHorizonNeedleT19"), source), "Downgrade accepted");
@@ -83,9 +83,9 @@ namespace AECT16RuntimeFix
                 {
                     var target = Item("gunPZAECHorizonNeedleT" + tier);
                     chain = FusionTierUpgrade.Apply(target, new Recipe { itemValueType = target.type, count = 1, ingredients = new List<ItemStack> { new ItemStack(chain, 1) } });
-                    Check(EquipmentFusion.Rank(chain) == (tier == 17 ? 2 : 0), "Sequential 20% inheritance failed");
+                    Check(EquipmentFusion.Rank(chain) == (tier == 17 ? 5 : tier == 18 ? 3 : 2), "Sequential 50% inheritance failed");
                 }
-                SdtdConsole.Instance.Output("[AEC-Upgrade-Audit] PASS checks=" + checks + "; failures=0. 69 adjacent-only recipes; T18+10 -> T19+2, damage=" + damage + "; sequential T16+10 -> T17+2 -> T18+0 -> T19+0");
+                SdtdConsole.Instance.Output("[AEC-Upgrade-Audit] PASS checks=" + checks + "; failures=0. 69 adjacent-only recipes; T18+10 -> T19+5, damage=" + damage + "; sequential T16+10 -> T17+5 -> T18+3 -> T19+2");
             }
             catch (Exception ex) { SdtdConsole.Instance.Output("[AEC-Upgrade-Audit] FAIL checks=" + checks + "; " + ex.GetBaseException()); }
         }

@@ -550,4 +550,22 @@ RU: Архивное радио показывает один всегда до�
 RU: Устаревшие пользовательские рецепты удаляются только единым слоем твиков.-->
   <remove xpath="/recipes/recipe[@name='aecHeadConverter']"/>
   <remove xpath="/recipes/recipe[@name='aecEndgameDiscordNote' or @name='aecProjectDiscordNote' or @name='aecAIOBossDiscordNote']"/>
+<append xpath="/recipes">
+    <recipe name="yfAutoForestry" count="1" craft_time="900" craft_area="workbenchImp" always_unlocked="true">
+      <ingredient name="smallEngine" count="3" />
+      <ingredient name="resourceForgedSteel" count="60" />
+      <ingredient name="resourceForgedIron" count="180" />
+      <ingredient name="vehicleTruck4x4Chassis" count="1" />
+      <ingredient name="meleeToolAxeT3Chainsaw" count="2" />
+    </recipe>
+  </append>
+  <append xpath="/recipes">
+    <recipe name="AutoMinerBrass" count="1" craft_time="1200" craft_area="workbenchImp" always_unlocked="true">
+      <ingredient name="smallEngine" count="4" />
+      <ingredient name="resourceForgedSteel" count="100" />
+      <ingredient name="resourceForgedIron" count="250" />
+      <ingredient name="vehicleTruck4x4Chassis" count="1" />
+      <ingredient name="meleeToolPickT3Auger" count="3" />
+    </recipe>
+  </append>
 </configs>

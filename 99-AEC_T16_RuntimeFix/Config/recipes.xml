@@ -2370,4 +2370,20 @@
       <ingredient name="resourcePZAECCapacitorFragmentT19" count="10" />
     </recipe>
   </append>
+  <!-- Progression supply: downward-only blueprints and deterministic pity currency. -->
+  <set xpath="/recipes/recipe[@name='resourceDurablAlloys']/ingredient[@name='resourceUltraStrengthAlloys']/@count">3</set>
+  <append xpath="/recipes">
+    <recipe name="itemPZAECArmoryBlueprintCrateT18" count="1" craft_area="workbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="itemPZAECArmoryBlueprintCrateT19" count="1" />
+    </recipe>
+    <recipe name="itemPZAECArmoryBlueprintCrateT17" count="1" craft_area="workbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="itemPZAECArmoryBlueprintCrateT18" count="1" />
+    </recipe>
+    <recipe name="itemPZAECArmoryBlueprintCrateT16" count="1" craft_area="workbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="itemPZAECArmoryBlueprintCrateT17" count="1" />
+    </recipe>
+    <recipe name="itemPZAECArmoryBlueprintCrateT16" count="1" craft_area="workbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourcePZAECArmoryVoucher" count="4" />
+    </recipe>
+  </append>
 </configs>

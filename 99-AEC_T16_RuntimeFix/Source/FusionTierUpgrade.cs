@@ -30,7 +30,8 @@ namespace AECT16RuntimeFix
                 if (source != null || ingredient.count != 1 || !IsHigherSameFamily(ingredient.itemValue, output)) return output;
                 source = ingredient.itemValue;
             }
-            if (source != null) output.SetMetadata(EquipmentFusion.RankKey, EquipmentFusion.Rank(source) / 5);
+            // Retain half the rank, rounding up so a first fusion is not erased.
+            if (source != null) output.SetMetadata(EquipmentFusion.RankKey, (EquipmentFusion.Rank(source) + 1) / 2);
             return output;
         }
 
