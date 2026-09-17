@@ -151,5 +151,18 @@
         <label name="closeText" text="关闭" pos="8,-3" width="110" height="28" font_size="20" depth="3" color="[white]" justify="left" />
       </button>
     </window>
+    <window name="windowYFAutomationRecipe" width="606" height="365" panel="Center" cursor_area="true" controller="YFAutomation.YFAutomationRecipePanel, YF.Automation">
+      <sprite name="background" width="606" height="365" depth="0" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
+      <sprite name="header" width="606" height="43" depth="1" sprite="ui_game_panel_header" />
+      <label name="title" text="配方与材料" pos="12,-6" width="580" height="34" font_size="26" depth="3" color="[white]" justify="left" />
+      <label name="body" text="" pos="12,-54" width="580" height="265" font_size="22" depth="3" color="[white]" justify="left" />
+      <label name="page" text="" pos="270,-330" width="90" height="30" font_size="20" depth="3" color="[white]" justify="left" />
+      <button name="back" pos="12,-326" width="106" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="backText" text="上一页" pos="8,-4" width="90" height="25" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+      <button name="forward" pos="488,-326" width="106" height="32" depth="2" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hoversprite="menu_empty3px" hovercolor="[lightGrey]" type="sliced">
+        <label name="forwardText" text="下一页" pos="8,-4" width="90" height="25" font_size="20" depth="3" color="[white]" justify="left" />
+      </button>
+    </window>
   </append>
 </configs>
