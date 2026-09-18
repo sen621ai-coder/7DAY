@@ -95,7 +95,8 @@ namespace PZAEC.M1
             nodes["GunObstructionStart"]=Add(nodes["GunPitch"],"GunObstructionStart",Vector3.zero);
             nodes["GunnerSight"]=Add(nodes["TurretYaw"],"GunnerSight",new Vector3(.45f,2.32f,.65f)-YawPivot);
             nodes["M1AbramsRoot"]=physics;
-            var anchors=JsonUtility.FromJson<AnchorFile>(File.ReadAllText(System.IO.Path.Combine(Path,"anchors.json")));
+            var anchors=Newtonsoft.Json.JsonConvert.DeserializeObject<AnchorFile>(File.ReadAllText(System.IO.Path.Combine(Path,"anchors.json")));
+            if(anchors==null||anchors.nodes==null)throw new InvalidDataException("M1 anchors.json is missing its nodes array");
             foreach(var a in anchors.nodes){
                 if(nodes.ContainsKey(a.name))continue;
                 var parent=nodes[a.parent];var global=new Vector3(a.position[0],a.position[1],a.position[2]);

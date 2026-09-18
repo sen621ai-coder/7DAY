@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using HarmonyLib;
 using UnityEngine;
 
@@ -10,6 +11,13 @@ namespace AECT16RuntimeFix
     public static class MD500FlightControls
     {
         private static bool enabled;
+        private sealed class ThrustState
+        {
+            public float Forward, LastTime;
+        }
+        // Weak ownership avoids retaining despawned vehicles or old worlds.
+        private static readonly ConditionalWeakTable<EntityVehicle, ThrustState> thrustStates =
+            new ConditionalWeakTable<EntityVehicle, ThrustState>();
         public const string VehicleName = "vehicleMD500";
         public const string ApacheVehicleName = "vehicleApacheHelicopter";
 
@@ -57,9 +65,18 @@ namespace AECT16RuntimeFix
             var code = new List<CodeInstruction>(instructions);
             var jump = AccessTools.Field(typeof(MovementInput), "jump");
             var down = AccessTools.Field(typeof(MovementInput), "down");
-            int patched = 0;
+            var tilt = AccessTools.PropertyGetter(typeof(Vehicle), "TiltUpForce");
+            int patched = 0, tiltPatched = 0;
             for (int i = 0; i < code.Count; i++)
             {
+                if (code[i].Calls(tilt))
+                {
+                    code.Insert(++i, new CodeInstruction(OpCodes.Ldarg_0));
+                    code.Insert(++i, new CodeInstruction(OpCodes.Call,
+                        AccessTools.Method(typeof(MD500FlightControls), nameof(NativeTiltForce))));
+                    tiltPatched++;
+                    continue;
+                }
                 if (!code[i].LoadsField(jump) && !code[i].LoadsField(down)) continue;
                 code.Insert(++i, new CodeInstruction(OpCodes.Ldarg_0));
                 code.Insert(++i, new CodeInstruction(OpCodes.Call,
@@ -67,6 +84,7 @@ namespace AECT16RuntimeFix
                 patched++;
             }
             if (patched != 3) throw new InvalidOperationException("Unexpected V3.2 ground-input layout: " + patched);
+            if (tiltPatched != 2) throw new InvalidOperationException("Unexpected V3.2 tilt-force layout: " + tiltPatched);
             return code;
         }
 
@@ -100,6 +118,12 @@ namespace AECT16RuntimeFix
                 (entity.vehicle.GetFuelLevel() > 0f || EntityVehicle.VehicleFuelUsageModifier == 0f);
         }
 
+        public static float NativeTiltForce(float original, EntityVehicle entity)
+        {
+            // Native wheel-based roll stabilization otherwise fights our bank target.
+            return entity != null && Applies(entity.vehicle) ? 0f : original;
+        }
+
         public static void BeforeEngineSimulation(Vehicle __instance)
         {
             if (!Applies(__instance)) return;
@@ -122,11 +146,13 @@ namespace AECT16RuntimeFix
             // Only the native physics authority drives the body. No powered
             // lift after dismount, fuel exhaustion, destruction or submersion.
             if (__instance.isEntityRemote || !__instance.RBActive || rb == null || rb.isKinematic ||
-                input == null || !Powered(__instance) || __instance.timeInWater > 0f) return false;
+                input == null || !Powered(__instance) || __instance.timeInWater > 0f)
+            { thrustStates.Remove(__instance); return false; }
             Vector3 bodyUp = rb.rotation * Vector3.up;
-            if (bodyUp.y < .25f) return false;
+            if (bodyUp.y < .25f) { thrustStates.Remove(__instance); return false; }
             var motors = __instance.motors;
-            if (motors == null || motors.Length == 0 || motors[0] == null || motors[0].rpmMax <= 0f) return false;
+            if (motors == null || motors.Length == 0 || motors[0] == null || motors[0].rpmMax <= 0f)
+            { thrustStates.Remove(__instance); return false; }
             float power = Mathf.Clamp01(motors[0].rpm / motors[0].rpmMax);
             Vector3 forward = Vector3.ProjectOnPlane(rb.rotation * Vector3.forward, Vector3.up).normalized;
             Vector3 right = Vector3.Cross(Vector3.up, forward);
@@ -139,11 +165,26 @@ namespace AECT16RuntimeFix
                 rb.angularVelocity.y, __instance.position.y, power,
                 forwardMax * vehicle.EffectVelocityMaxPer, backwardMax * vehicle.EffectVelocityMaxPer,
                 vehicle.EffectMotorTorquePer);
+            var thrust = thrustStates.GetValue(__instance, key => new ThrustState());
+            float now = Time.fixedTime;
+            if (now < thrust.LastTime || now - thrust.LastTime > .2f) thrust.Forward = 0f;
+            thrust.Forward = MD500FlightMath.SmoothThrust(thrust.Forward, force.Forward,
+                Time.fixedDeltaTime, power, vehicle.EffectMotorTorquePer);
+            thrust.LastTime = now;
+            force.Forward = thrust.Forward;
             // Native PhysicsFixedUpdate already adds gravity (-9.81). Replace
             // only the supported helicopter XML forces; collisions/drag/speed caps remain.
             rb.AddForce(forward * force.Forward + right * force.Right + Vector3.up * force.Up,
                 ForceMode.Acceleration);
-            Vector3 levelTorque = Vector3.Cross(bodyUp, Vector3.up) * 6f -
+            var attitude = MD500FlightMath.TargetAttitude(Vector3.Dot(velocity, forward),
+                rb.angularVelocity.y, force.Forward, __instance.GetWheelsOnGround() == 0, vehicle.IsTurbo);
+            float pitch = attitude.Pitch * (float)(Math.PI / 180.0);
+            float bank = attitude.Bank * (float)(Math.PI / 180.0);
+            Vector3 targetUp = (Vector3.up + forward * (float)Math.Tan(pitch) +
+                right * (float)Math.Tan(bank)).normalized;
+            // Damped torque changes the real body gradually, so native networking,
+            // camera and weapon mounts all follow the same attitude.
+            Vector3 levelTorque = Vector3.Cross(bodyUp, targetUp) * 6f -
                 Vector3.ProjectOnPlane(rb.angularVelocity, Vector3.up) * 3f;
             rb.AddTorque(Vector3.ClampMagnitude(levelTorque, 3f) * power + Vector3.up * force.Yaw,
                 ForceMode.Acceleration);

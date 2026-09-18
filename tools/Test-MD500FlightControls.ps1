@@ -3,6 +3,7 @@ $root = Split-Path $PSScriptRoot
 $source = Join-Path $root '99-AEC_T16_RuntimeFix/Source'
 $fixture = @'
 namespace UnityEngine {
+ public static class Time {public static float fixedTime;public static float fixedDeltaTime=.02f;}
  public enum ForceMode { Acceleration }
  public struct Vector3 {
   public float x,y,z; public Vector3(float a,float b,float c){x=a;y=b;z=c;}
@@ -47,6 +48,7 @@ public static class Log { public static void Out(string s){} public static void 
 public class MovementInput {public bool jump,down;public float moveForward,moveStrafe;}
 public class Vehicle {
  public string Name="vehicleMD500"; public EntityVehicle entity; public bool CurrentIsAccel,IsTurbo;
+ public float TiltUpForce=>1f;
  public float VelocityMaxForward=25,VelocityMaxBackward=10,VelocityMaxTurboForward=29,VelocityMaxTurboBackward=10;
  public float EffectVelocityMaxPer=1,EffectMotorTorquePer=1,Fuel=400; public int Health=5000;
  public string GetName()=>Name == null ? null : Name.ToLowerInvariant();public int GetHealth()=>Health;public float GetFuelLevel()=>Fuel;public void UpdateSimulation(){}
@@ -77,6 +79,34 @@ public static class MD500Tests {
   Near(v,expected,.02f,"vertical target dt="+dt);
  }
  public static void Run(){
+  foreach(float dt in new[]{.01f,.02f,.04f}){
+   float velocity=0,thrust=0;
+   for(int i=0;i<(int)(20/dt);i++){
+    float next=AECT16RuntimeFix.MD500FlightMath.SmoothThrust(thrust,Law(f:1,vf:velocity).Forward,dt,1,1);
+    if(Math.Abs(next-thrust)>4*dt+.00001f)throw new Exception("thrust slew exceeded");
+    thrust=next;velocity+=thrust*dt;
+   }
+   Near(velocity,25,.08f,"smooth start reaches cruise dt="+dt);
+   float coastV=20,brakeV=20,coastA=0,brakeA=0;
+   for(int i=0;i<(int)(3/dt);i++){
+    coastA=AECT16RuntimeFix.MD500FlightMath.SmoothThrust(coastA,Law(vf:coastV).Forward,dt,1,1);
+    brakeA=AECT16RuntimeFix.MD500FlightMath.SmoothThrust(brakeA,Law(f:-1,vf:brakeV).Forward,dt,1,1);
+    coastV+=coastA*dt;brakeV+=brakeA*dt;
+   }
+   Check(coastV>brakeV+4,"release coasts farther than active braking dt="+dt);
+   for(int i=0;i<(int)(40/dt);i++){
+    thrust=AECT16RuntimeFix.MD500FlightMath.SmoothThrust(thrust,Law(vf:velocity).Forward,dt,1,1);
+    velocity+=thrust*dt;
+   }
+   Near(velocity,0,.02f,"release settles without persistent drift dt="+dt);
+   for(int i=0;i<(int)(15/dt);i++){
+    thrust=AECT16RuntimeFix.MD500FlightMath.SmoothThrust(thrust,Law(f:-1,vf:velocity).Forward,dt,1,1);
+    velocity+=thrust*dt;
+   }
+   Near(velocity,-10,.08f,"reverse settles at speed cap dt="+dt);
+  }
+  Near(AECT16RuntimeFix.MD500FlightMath.SmoothThrust(4,-4,.02f,1,1),3.92f,.0001f,"direction reversal does not flip thrust instantly");
+  Near(AECT16RuntimeFix.MD500FlightMath.SmoothThrust(4,0,.02f,0,1),0,.0001f,"rotor power loss cuts residual thrust");
   var h=Law();Near(h.Up,9.81f,.0001f,"hover gravity compensation");Near(h.Forward,0,.0001f,"no unintended forward thrust");
   Check(Law(up:true).Up>9.81f,"Space rises");Check(Law(down:true).Up<9.81f,"C descends");
   Near(Law(up:true,down:true).Up,9.81f,.0001f,"opposing inputs cancel");
@@ -90,6 +120,36 @@ public static class MD500Tests {
   Near(AECT16RuntimeFix.MD500FlightMath.FuelSpeed(0,25),2.5f,.0001f,"hover fuel floor");
   Near(AECT16RuntimeFix.MD500FlightMath.FuelSpeed(20,25),20,.0001f,"cruise fuel preserved");
   var harmony=new HarmonyLib.Harmony();AECT16RuntimeFix.MD500FlightControls.Install(harmony);
+  var ramp=new EntityVehicle();ramp.movementInput.moveForward=1;
+  for(int i=0;i<50;i++){UnityEngine.Time.fixedTime+=.02f;ramp.vehicleRB.force=new UnityEngine.Vector3();AECT16RuntimeFix.MD500FlightControls.BeforeForces(ramp);}
+  Near(ramp.vehicleRB.force.z,4,.001f,"runtime builds thrust over one second");
+  ramp.vehicle.Fuel=0;AECT16RuntimeFix.MD500FlightControls.BeforeForces(ramp);ramp.vehicle.Fuel=1;ramp.vehicleRB.force=new UnityEngine.Vector3();
+  AECT16RuntimeFix.MD500FlightControls.BeforeForces(ramp);Near(ramp.vehicleRB.force.z,.08f,.001f,"restored power starts fresh");
+  UnityEngine.Time.fixedTime+=1;ramp.vehicleRB.force=new UnityEngine.Vector3();AECT16RuntimeFix.MD500FlightControls.BeforeForces(ramp);
+  Near(ramp.vehicleRB.force.z,.08f,.001f,"authority or simulation gap resets stored thrust");
+  var cruising=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(20,0,0,true,false);
+  Check(cruising.Pitch>0,"cruise retains nose-down attitude");
+  Check(AECT16RuntimeFix.MD500FlightMath.TargetAttitude(20,0,-4,true,false).Pitch<0,"braking raises nose");
+  Check(AECT16RuntimeFix.MD500FlightMath.TargetAttitude(-8,0,-4,true,false).Pitch<0,"reverse raises nose");
+  foreach(float speed in new[]{-25f,0f,25f}){
+   var a=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(speed,.65f,4,true,true);
+   var b=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(speed,-.65f,4,true,true);
+   Near(a.Bank,-b.Bank,.0001f,"symmetric banking");
+   Check(Math.Abs(a.Bank)<=14&&a.Pitch<=14&&a.Pitch>=-10,"attitude bounds");
+   if(speed==0)Near(a.Bank,0,.0001f,"hover yaw stays level");
+  }
+  var grounded=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(25,1,4,false,true);
+  Near(grounded.Pitch,0,.0001f,"ground has no commanded pitch");Near(grounded.Bank,0,.0001f,"ground has no commanded bank");
+  foreach(string name in new[]{"vehicleMD500","vehicleApacheHelicopter"}){
+   var flying=new EntityVehicle();flying.vehicle.Name=name;flying.movementInput.moveForward=1;
+   AECT16RuntimeFix.MD500FlightControls.BeforeForces(flying);
+   Check(flying.vehicleRB.torque.x>0,"forward command tilts real body "+name);
+   Near(AECT16RuntimeFix.MD500FlightControls.NativeTiltForce(1,flying),0,.0001f,"native roll does not fight bank");
+   flying=new EntityVehicle();flying.vehicle.Name=name;flying.vehicleRB.velocity=new UnityEngine.Vector3(0,0,20);flying.vehicleRB.angularVelocity=new UnityEngine.Vector3(0,.5f,0);
+   AECT16RuntimeFix.MD500FlightControls.BeforeForces(flying);
+   Check(flying.vehicleRB.torque.z<0,"right turn leans right");Check(flying.vehicleRB.force.z<0,"release at speed applies gradual braking");
+   Near(flying.vehicleRB.force.y,9.81f,.0001f,"attitude preserves independent lift");
+  }
   foreach(string name in new[]{"vehicleMD500","vehiclemd500","VEHICLEMD500","vehicleApacheHelicopter","vehicleapachehelicopter","VEHICLEAPACHEHELICOPTER"}){
    var actual=new EntityVehicle();actual.vehicle.Name=name;actual.movementInput.jump=true;
    Check(!AECT16RuntimeFix.MD500FlightControls.BeforeForces(actual),"normalized vehicle suppresses original pitch: "+name);
@@ -107,6 +167,7 @@ public static class MD500Tests {
   foreach(string name in new[]{"vehicleGyrocopter","AECArmoredGyroVehicle","vehicleUH60","vehicleMD500Other","vehicleApacheHelicopterOther"}){
    e=new EntityVehicle();e.vehicle.Name=name;Check(AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"unrelated vehicle unchanged "+name);
    Check(!AECT16RuntimeFix.ApacheWeapons.IsApache(e),"unrelated vehicle has no Apache weapons "+name);
+   Near(AECT16RuntimeFix.MD500FlightControls.NativeTiltForce(1,e),1,.0001f,"unrelated native roll retained");
    Check(AECT16RuntimeFix.MD500FlightControls.GroundAction(true,e),"unrelated Space/C unchanged");
    Near(AECT16RuntimeFix.MD500FlightControls.EffectiveFuelSpeed(0,new VPEngine{vehicle=e.vehicle}),0,.0001f,"unrelated fuel unchanged");
   }
@@ -132,7 +193,8 @@ public static class MD500Tests {
    Near(e.vehicleRB.force.magnitude,0,.0001f,"Apache no active force: "+reason);
   }
   var inputCode=new List<HarmonyLib.CodeInstruction>();for(int i=0;i<3;i++)inputCode.Add(new HarmonyLib.CodeInstruction(OpCodes.Ldfld,typeof(MovementInput).GetField(i==0?"jump":"down")));
-  int n=0;foreach(var op in AECT16RuntimeFix.MD500FlightControls.GroundActionsTranspiler(inputCode))n++;Check(n==9,"three ground loads wrapped");
+  for(int i=0;i<2;i++)inputCode.Add(new HarmonyLib.CodeInstruction(OpCodes.Callvirt,typeof(Vehicle).GetProperty("TiltUpForce").GetMethod));
+  int n=0;foreach(var op in AECT16RuntimeFix.MD500FlightControls.GroundActionsTranspiler(inputCode))n++;Check(n==15,"three ground loads and two native tilt forces wrapped");
   bool rejected=false;try{AECT16RuntimeFix.MD500FlightControls.GroundActionsTranspiler(new List<HarmonyLib.CodeInstruction>());}catch(InvalidOperationException){rejected=true;}Check(rejected,"unsupported ground IL rejected");
   var fuelCode=new[]{new HarmonyLib.CodeInstruction(OpCodes.Call,typeof(UnityEngine.Vector3).GetProperty("magnitude").GetMethod)};
   n=0;foreach(var op in AECT16RuntimeFix.MD500FlightControls.FuelTranspiler(fuelCode))n++;Check(n==3,"fuel magnitude wrapped once");
@@ -163,6 +225,8 @@ try {
     if (!($constructor.Body.Instructions | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.String System.String::ToLower()' })) { throw 'Recheck native Vehicle name normalization and fixture' }
     $entity = $game.MainModule.Types | Where-Object Name -eq 'EntityVehicle'
     $physics = $entity.Methods | Where-Object Name -eq 'PhysicsFixedUpdate'
+    $tiltSites = @($physics.Body.Instructions | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.Single Vehicle::get_TiltUpForce()' })
+    if ($tiltSites.Count -ne 2) { throw 'Unsupported native tilt-force sites' }
     $loads = @($physics.Body.Instructions | Where-Object { $_.OpCode.Name -eq 'ldfld' -and $_.Operand.DeclaringType.FullName -eq 'MovementInput' -and $_.Operand.Name -in @('jump','down') })
     if ($loads.Count -ne 3) { throw "Unsupported native ground-input sites: $($loads.Count)" }
     $engine = ($game.MainModule.Types | Where-Object Name -eq 'VPEngine').Methods | Where-Object Name -eq 'Update'
