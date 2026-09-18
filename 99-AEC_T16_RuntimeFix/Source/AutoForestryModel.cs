@@ -149,6 +149,10 @@ namespace AECT16RuntimeFix
             UnityEngine.Object.DontDestroyOnLoad(cache);
             var go = new GameObject("yfAutoForestryRuntime");
             go.transform.SetParent(cache.transform, false);
+            // Native ray hits resolve child colliders through this reference before
+            // looking up BlockEntityData. Without it they look up the child itself.
+            // Set explicitly while inactive: Awake must not pick the cache/chunk root.
+            go.AddComponent<RootTransformRefParent>().RootTransform = go.transform;
             try
             {
                 Material[] materials;
@@ -266,7 +270,7 @@ namespace AECT16RuntimeFix
                 foreach (var t in go.GetComponentsInChildren<Transform>(true))
                 {
                     t.gameObject.layer = nativeCollider.gameObject.layer;
-                    t.gameObject.tag = nativeCollider.gameObject.tag;
+                    t.gameObject.tag = "T_Block";
                 }
                 Log.Out("[AutoForestry] Model ready: six surface materials, machinery, production visuals and distance LOD.");
                 return go.transform;

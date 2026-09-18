@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
   <Name value="ZZPZAECMD500Compatibility" />
-  <DisplayName value="PZAEC MD-500 Compatibility" />
-  <Description value="MD-500: 1,000,000 durability and 60% higher speed limits than the installed AEC Armored Gyro. Original MD-500 resources are required separately." />
+  <DisplayName value="PZAEC MD-500 直升机适配与汉化" />
+  <Description value="MD-500中文名称与说明、100万耐久及速度适配。需要另行安装原MD-500模组，飞控由当前AEC运行时提供。" />
   <Author value="PZAEC" />
-  <Version value="1.0.2" />
+  <Version value="1.0.3" />
 </xml>

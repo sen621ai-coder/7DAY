@@ -14,7 +14,8 @@ foreach ($doc in @($speed, $health)) {
         $doc.SelectSingleNode('/configs/conditional/if').cond -ne "mod_loaded('MD-500')") {
         throw 'Patches must be conditional on the independent MD-500 mod'
     }
-    if ($doc.SelectNodes('//*[@xpath]').Count -ne 1) { throw 'Unexpected extra changes' }
+    $expectedCount = if ($doc -eq $health) { 2 } else { 1 }
+    if ($doc.SelectNodes('//*[@xpath]').Count -ne $expectedCount) { throw 'Unexpected extra changes' }
 }
 $speedSet = $speed.SelectSingleNode('//set')
 $actual = @($speedSet.InnerText.Split(',') | ForEach-Object { [double]::Parse($_.Trim(), $culture) })
@@ -24,6 +25,8 @@ for ($i = 0; $i -lt 4; $i++) {
 }
 if ($speedSet.xpath -ne "/vehicles/vehicle[@name='vehicleMD500']/property[@name='velocityMax_turbo']/@value") { throw 'Speed patch scope changed' }
 $healthSet = $health.SelectSingleNode('//set')
+$bundleSet = $health.SelectSingleNode("//set[contains(@xpath,'questRewardMD500PartsBundle')]")
+if (!$bundleSet -or $bundleSet.InnerText -ne 'questRewardMD500PartsBundleDesc') { throw 'Bundle description override missing' }
 if ($healthSet.InnerText -ne '1000000' -or
     $healthSet.xpath -ne "/items/item[@name='vehicleMD500placeable']/effect_group/passive_effect[@name='DegradationMax']/@value") { throw 'Health or health scope mismatch' }
 

@@ -144,7 +144,7 @@ def build(source):
     (OUT/'model-report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     preview(parts,images,doc,OUT/'preview.png',900)
     preview(distant,images,doc,OUT/'preview-lod.png',900)
-    icons=ROOT/'98-AECxProjectZ_Tweaks/ItemIcons'; icons.mkdir(exist_ok=True)
+    icons=ROOT/'98-AECxProjectZ_Tweaks/UIAtlases/ItemIconAtlas'; icons.mkdir(parents=True,exist_ok=True)
     preview(parts,images,doc,icons/'yfAutoForestry.png',256,True)
     print(json.dumps(report,indent=2))
 

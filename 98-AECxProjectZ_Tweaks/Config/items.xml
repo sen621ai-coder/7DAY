@@ -2133,4 +2133,6 @@
       </property>
     </item>
   </append>
+  <!-- Domestic chickens carried in inventory/storage; collector slot rules stay native. -->
+  <set xpath="/items/item[@name='domesticatedChicken']/property[@name='Stacknumber']/@value">1000</set>
 </configs>

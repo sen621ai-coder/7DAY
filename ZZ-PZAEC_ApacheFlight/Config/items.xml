@@ -1,4 +1,7 @@
 <configs>
+  <append xpath="/items/item[@name='aecGyroPieces']">
+    <property name="DescriptionKey" value="aecGyroPiecesDesc"/>
+  </append>
   <append xpath="/items">
     <item name="pzApacheRocket">
       <property name="Extends" value="ammoRocketHE"/>

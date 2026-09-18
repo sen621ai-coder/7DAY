@@ -83,6 +83,14 @@ namespace UnityEngine {
 }
 namespace HarmonyLib{public class Harmony{public void Patch(object m,HarmonyMethod prefix=null){}}public class HarmonyMethod{public HarmonyMethod(Type t,string n){}}public static class AccessTools{public static object Method(Type t,string n)=>null;}}
 public class BlockShapeModelEntity{public Block block;}public class Block{public Props Properties=new Props();public string GetBlockName()=>"yfAutoForestry";}public class Props{public string GetValue(string n)=>"";}
+public class RootTransformRefParent : UnityEngine.Component {
+ public UnityEngine.Transform RootTransform;
+ // Mirrors the installed game's FindRoot: without a reference it returns the hit child.
+ public static UnityEngine.Transform FindRoot(UnityEngine.Transform hit){
+  for(var t=hit;t!=null;t=t.parent){var r=t.GetComponent<RootTransformRefParent>();if(r!=null)return r.RootTransform;}
+  return hit;
+ }
+}
 public static class GameManager{public static bool IsDedicatedServer=>false;}
 public static class Log{public static void Out(string s){}}
 public static class DataLoader{public static T LoadAsset<T>(string s,bool b)where T:class{var g=new UnityEngine.GameObject("NativeColliderReference");g.AddComponent<UnityEngine.BoxCollider>();return g.transform as T;}}
@@ -93,6 +101,11 @@ public static class ForestryRenderExport {
   var type=typeof(AECT16RuntimeFix.AutoForestryModel);type.GetField("assetPath",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static).SetValue(null,assets);
   var root=(UnityEngine.Transform)type.GetMethod("CreatePrefab",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static).Invoke(null,null);
   root.SetParent(null,false);
+  foreach(var collider in root.GetComponentsInChildren<UnityEngine.Collider>(true)){
+   if(RootTransformRefParent.FindRoot(collider.transform)!=root || collider.gameObject.tag!="T_Block")
+    throw new InvalidOperationException("Forestry collider cannot resolve its block: "+collider.name);
+  }
+  Console.WriteLine("PASS: all forestry collider hits resolve to the block root, including inactive upgrades.");
   // Deliberately show full inventory/all three upgrades, rather than imply a save state.
   foreach(var t in root.GetComponentsInChildren<UnityEngine.Transform>(true))if(t.name=="ForestrySpeed"||t.name=="ForestryPacker"||t.name=="ForestrySiren")t.gameObject.SetActive(true);
   var renderers=root.GetComponentsInChildren<UnityEngine.MeshRenderer>().Where(r=>r.sharedMaterial!=null).ToArray();var materials=renderers.Select(r=>r.sharedMaterial).Distinct().ToArray();

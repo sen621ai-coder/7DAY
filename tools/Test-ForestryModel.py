@@ -61,7 +61,7 @@ for p in range(6):
 assert offset==len(lod) and lod_triangles==report['lodTriangles'] and lod_triangles<triangles*.5
 timber=Image.open(assets/'timber.png'); timber.load()
 assert timber.width==2*timber.height
-icon=Image.open(root/'98-AECxProjectZ_Tweaks/ItemIcons/yfAutoForestry.png')
+icon=Image.open(root/'98-AECxProjectZ_Tweaks/UIAtlases/ItemIconAtlas/yfAutoForestry.png')
 assert icon.size==(256,256) and icon.getextrema()[3]==(0,255)
 tree=ET.parse(root/'98-AECxProjectZ_Tweaks/Config/blocks.xml')
 block=tree.find(".//block[@name='yfAutoForestry']")

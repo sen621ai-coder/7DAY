@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
   <Name value="ZZPZAECApacheFlight"/>
-  <DisplayName value="PZAEC AH-64 Apache Flight"/>
-  <Description value="Independent AH-64 for V3.2: shared VTOL controls, pilot rockets, gunner cannon and server-authoritative cargo ammunition. Requires the local AEC runtime."/>
+  <DisplayName value="PZAEC AH-64 阿帕奇武装直升机"/>
+  <Description value="适配V3.2的独立双座武装直升机，包含垂直起降、主驾火箭、副驾机炮与中文界面。需要当前AEC运行时及载具制作模组。"/>
   <Author value="Zilox (original assets); local PZAEC adaptation"/>
-  <Version value="0.5.0"/>
+  <Version value="0.5.1"/>
 </xml>

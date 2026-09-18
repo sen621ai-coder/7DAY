@@ -7,6 +7,12 @@ foreach($file in Get-ChildItem "$mod/Config" -Filter '*.xml') {
  [xml]$doc=Get-Content $file.FullName -Raw
  $docs[$file.BaseName]=$doc
  [xml]$vanilla=Get-Content (Join-Path $base $file.Name) -Raw
+ if($file.Name -eq 'items.xml'){
+  [xml]$aecItems=Get-Content (Join-Path $root '07-AEC-Vehicles-NoMicrocraft/Config/items.xml') -Raw
+  foreach($item in $aecItems.SelectNodes('//item[@name]')){
+   if(!$vanilla.SelectSingleNode("/items/item[@name='$($item.name)']")){[void]$vanilla.DocumentElement.AppendChild($vanilla.ImportNode($item,$true))}
+  }
+ }
  foreach($op in $doc.DocumentElement.ChildNodes) {
   if($op.NodeType -ne 'Element'){continue}
   if($op.Name -ne 'append'){throw "Unexpected global mutation: $($file.Name)"}
@@ -48,6 +54,6 @@ $bundle="$mod/Resources/ApacheHelicopterPrefab.unity3d"
 $source=Join-Path $root '.local-tests/apache-research/apache/AH-64-Apache-Helicopter/Resources/ApacheHelicopterPrefab.unity3d'
 if((Get-Item $bundle).Length -ne 14971698){throw 'Unexpected model bundle size'}
 if((Test-Path $source) -and (Get-FileHash $bundle).Hash -ne (Get-FileHash $source).Hash){throw 'Model differs from original'}
-$localization=Import-Csv "$mod/Config/Localization.txt"
+$localization=Import-Csv "$mod/Config/Localization.csv"
 foreach($r in $recipes){if(!($localization | Where-Object Key -eq $r.name)){throw "Missing recipe localization $($r.name)"}}
 Write-Output 'PASS: Apache XML targets, recipe ingredients/workstation, level-100 gating, speed tier, rotor/seat layout, weapon isolation, localization and original model hash.'
