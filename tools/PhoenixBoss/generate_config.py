@@ -1,4 +1,4 @@
-﻿from pathlib import Path
+from pathlib import Path
 import xml.etree.ElementTree as E,copy,csv
 root=Path(__file__).resolve().parents[2];out=root/'95-PhoenixBoss';native=E.parse(root.parent/'Data/Config/items.xml')
 def prop(e,k,v):E.SubElement(e,'property',name=k,value=str(v))
@@ -8,7 +8,7 @@ health=[80000000,150000000,260000000,450666667];rows=[['Key','File','Type','Used
 for tier in range(16,20):
  i=tier-16;hand='yfPhoenixHandT'+str(tier);ammo='yfPhoenixFireballT'+str(tier);name='yfPhoenixBossT'+str(tier)
  h=copy.deepcopy(native.find("item[@name='meleeHandAnimalZombieVultureRadiated']"));h.set('name',hand);ia.append(h)
- a=h.find("property[@class='Action0']");a.find("property[@name='DamageEntity']").set('value',str(450+150*i));a.find("property[@name='DamageBlock']").set('value',str(3000+1000*i))
+ a=h.find("property[@class='Action0']");a.find("property[@name='DamageEntity']").set('value',str(0));a.find("property[@name='DamageBlock']").set('value',str(0))
  a=h.find("property[@class='Action1']");a.find("property[@name='Magazine_items']").set('value',ammo);a.find("property[@name='Particles_muzzle_fire']").set('value','');a.find("property[@name='Delay']").set('value','1.2');prop(a,'WarningMax',0);prop(a,'WarningDelay',0)
  for eg in list(h.findall('effect_group')):h.remove(eg)
  eg=E.SubElement(h,'effect_group',name=hand,tiered='false')
@@ -25,5 +25,5 @@ for tier in range(16,20):
 write(items,out/'Config/items.xml');write(entities,out/'Config/entityclasses.xml')
 with (out/'Config/Localization.csv').open('w',encoding='utf-8-sig',newline='') as f:csv.writer(f).writerows(rows)
 info=E.Element('xml')
-for k,v in dict(Name='YFPhoenixBoss',DisplayName='血月终章：焚天凤凰',Description='T16-T19血月结束后的飞行火焰Boss。',Author='yf',Version='0.1.0',ServerSideOnly='false',SkipWithAntiCheat='true').items():E.SubElement(info,k,value=v)
+for k,v in dict(Name='YFPhoenixBoss',DisplayName='血月终章：焚天凤凰',Description='T16-T19血月结束后的飞行火焰Boss。',Author='yf',Version='0.1.1',ServerSideOnly='false',SkipWithAntiCheat='true').items():E.SubElement(info,k,value=v)
 write(info,out/'ModInfo.xml')

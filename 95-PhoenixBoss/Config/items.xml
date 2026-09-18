@@ -6,8 +6,8 @@
       <property name="CreativeMode" value="None" />
       <property class="Action0">
         <property name="Delay" value=".7" />
-        <property name="DamageEntity" value="450" />
-        <property name="DamageBlock" value="3000" />
+        <property name="DamageEntity" value="0" />
+        <property name="DamageBlock" value="0" />
       </property>
       <property class="Action1">
         <property name="Class" value="Vomit" />
@@ -69,8 +69,8 @@
       <property name="CreativeMode" value="None" />
       <property class="Action0">
         <property name="Delay" value=".7" />
-        <property name="DamageEntity" value="600" />
-        <property name="DamageBlock" value="4000" />
+        <property name="DamageEntity" value="0" />
+        <property name="DamageBlock" value="0" />
       </property>
       <property class="Action1">
         <property name="Class" value="Vomit" />
@@ -132,8 +132,8 @@
       <property name="CreativeMode" value="None" />
       <property class="Action0">
         <property name="Delay" value=".7" />
-        <property name="DamageEntity" value="750" />
-        <property name="DamageBlock" value="5000" />
+        <property name="DamageEntity" value="0" />
+        <property name="DamageBlock" value="0" />
       </property>
       <property class="Action1">
         <property name="Class" value="Vomit" />
@@ -195,8 +195,8 @@
       <property name="CreativeMode" value="None" />
       <property class="Action0">
         <property name="Delay" value=".7" />
-        <property name="DamageEntity" value="900" />
-        <property name="DamageBlock" value="6000" />
+        <property name="DamageEntity" value="0" />
+        <property name="DamageBlock" value="0" />
       </property>
       <property class="Action1">
         <property name="Class" value="Vomit" />

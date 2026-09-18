@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -62,26 +62,74 @@ namespace YFPhoenix {
   }
  }
  public sealed class EntityPhoenixBoss:EntityVulture {
-  float nextVolley,fireUntil;bool firing;EntityPlayer fireTarget;
-  public override Vector3 GetLookVector(){if(firing&&fireTarget!=null)return (fireTarget.position+Vector3.up-position).normalized;return base.GetLookVector();}
+  float nextVolley,fireUntil,nextTarget,nextRing;bool firing,radial;Vector3 radialDirection;EntityPlayer fireTarget;
+  bool Eligible(EntityPlayer p)=>p!=null&&!p.IsDead()&&(p.position-position).sqrMagnitude<10000&&!world.IsWithinTraderArea(new Vector3i(p.position));
+  public override bool IsAttackValid(){
+   if(!firing)return base.IsAttackValid();
+   // Custom visual animation must not inherit a stuck hidden-carrier attack gate.
+   return !IsDead()&&!Electrocuted&&bodyDamage.CurrentStun!=EnumEntityStunType.Prone&&bodyDamage.CurrentStun!=EnumEntityStunType.Kneel;
+  }
+  public override bool UseHoldingItem(int action,bool released){if(action==0)return false;return base.UseHoldingItem(action,released);}
+  public override Vector3 GetLookVector(){if(radial)return radialDirection;if(firing&&fireTarget!=null)return (fireTarget.position+Vector3.up-position).normalized;return base.GetLookVector();}
+  ItemActionVomit.ItemActionDataVomit AttackData=>inventory?.holdingItemData?.actionData[1] as ItemActionVomit.ItemActionDataVomit;
+  void ResetShot(){
+   UseHoldingItem(1,true);
+   var action=inventory.holdingItem.Actions[1] as ItemActionRanged;
+   if(action!=null&&AttackData!=null)action.ResetBurstShot(AttackData);
+  }
+  void Fire(){
+   var action=AttackData;if(action==null)return;
+   action.numWarningsPlayed=999;action.muzzle=emodel.GetHeadTransform();
+   // Ranged OnHoldingUpdate recalculates this from shared item effects. This
+   // boss has a fixed, explicit fire interval independent of melee modifiers.
+   action.Delay=1.2f;
+   UseHoldingItem(1,false);
+  }
+  void FireRing(float now){
+   nextRing=now+20+rand.RandomFloat*20;
+   bool wasFiring=firing;firing=true;
+   try{
+    radial=true;float offset=rand.RandomFloat*Mathf.PI*2;
+    for(int i=0;i<12;i++){
+     ResetShot();float angle=offset+i*Mathf.PI/6;
+     // Downward component lays the fire around the boss instead of losing it
+     // into the sky. All twelve directions use the native replicated projectile.
+     radialDirection=new Vector3(Mathf.Cos(angle),-.55f,Mathf.Sin(angle)).normalized;
+     AttackData.m_LastShotTime=now-10;
+     Fire();
+    }
+   }finally{ResetShot();radial=false;firing=wasFiring;}
+  }
   public override void updateTasks(){
-   base.updateTasks();if(world==null||world.IsRemote()||IsDead())return;
-   var target=GetAttackTarget() as EntityPlayer;
-   if(target==null||target.IsDead())target=world.Players.list.Where(p=>p!=null&&!p.IsDead()&&(p.position-position).sqrMagnitude<10000).OrderBy(p=>(p.position-position).sqrMagnitude).FirstOrDefault();
-   float distance=target==null?0:(target.position-position).magnitude;
-   if(target==null||distance<6||distance>60||world.IsWithinTraderArea(new Vector3i(target.position))){if(firing)UseHoldingItem(1,true);firing=false;return;}
-   SetAttackTarget(target,600);SetRevengeTarget(target);fireTarget=target;
-   // Vulture flight remains native. A boss also volleys at healthy players,
-   // without the ordinary vulture's narrow dive-angle requirement.
-   float now=Time.time;if(!firing&&now>=nextVolley){firing=true;fireUntil=now+2.6f;nextVolley=now+6f;}
+   isAttack2On=false;attack2Delay=2;attackDelay=2;
+   base.updateTasks();
+   if(world==null||world.IsRemote()||IsDead()||GamePrefs.GetBool(EnumGamePrefs.DebugStopEnemiesMoving))return;
+   float now=Time.time;
+   if(nextRing==0)nextRing=now+20+rand.RandomFloat*20;
+   if(!Eligible(fireTarget)||now>=nextTarget){
+    var choices=world.Players.list.Where(Eligible).ToList();
+    if(choices.Count>1)choices.Remove(fireTarget);
+    fireTarget=choices.Count==0?null:choices[Mathf.Min(choices.Count-1,(int)(rand.RandomFloat*choices.Count))];
+    nextTarget=now+6;
+   }
+   if(fireTarget==null){if(firing)ResetShot();firing=false;return;}
+   SetAttackTarget(fireTarget,600);SetRevengeTarget(fireTarget);
+   // Orbit above the target. Native entity physics still handles collision and
+   // replication; neither movement nor fire is simulated by remote clients.
+   float orbit=now*.18f+entityId;
+   Vector3 station=fireTarget.position+new Vector3(Mathf.Cos(orbit)*24,16,Mathf.Sin(orbit)*24);
+   station.y=Mathf.Min(245,Mathf.Max(station.y,world.GetHeightAt(station.x,station.z)+10));
+   var delta=station-position;motion=Vector3.MoveTowards(motion,delta.normalized*Mathf.Min(.4f,delta.magnitude*.04f),.12f);
+   if((fireTarget.position-position).sqrMagnitude>3600){if(firing)ResetShot();firing=false;return;}
+   if(!IsDead()&&!Electrocuted&&bodyDamage.CurrentStun!=EnumEntityStunType.Prone&&bodyDamage.CurrentStun!=EnumEntityStunType.Kneel&&now>=nextRing&&AttackData!=null)FireRing(now);
+   if(!firing&&now>=nextVolley){ResetShot();firing=true;fireUntil=now+2.6f;nextVolley=now+6;}
    if(!firing)return;
-   if(now>=fireUntil){UseHoldingItem(1,true);firing=false;return;}
-   var action=inventory.holdingItemData.actionData[1] as ItemActionVomit.ItemActionDataVomit;
-   if(action==null)return;action.numWarningsPlayed=999;action.muzzle=emodel.GetHeadTransform();SetLookPosition(target.position+Vector3.up);UseHoldingItem(1,false);
+   if(now>=fireUntil){ResetShot();firing=false;return;}
+   SetLookPosition(fireTarget.position+Vector3.up);Fire();
   }
   public override bool IsSavedToFile()=>true;
   public override string LocalizedEntityName=>"焚天凤凰 · T"+EntityClass.GetEntityClassName(entityClass).Replace("yfPhoenixBossT","");
-  public override void PostInit(){base.PostInit();if(!GameManager.IsDedicatedServer)gameObject.AddComponent<PhoenixVisual>().Owner=this;}
+  public override void PostInit(){base.PostInit();foreach(var a in GetComponentsInChildren<Animator>(true))a.cullingMode=AnimatorCullingMode.AlwaysAnimate;if(!GameManager.IsDedicatedServer)gameObject.AddComponent<PhoenixVisual>().Owner=this;}
  }
  public sealed class PhoenixVisual:MonoBehaviour {
   public static string ModPath;static AssetBundle bundle;public EntityPhoenixBoss Owner;GameObject model;Transform carrier;Renderer[] originals;bool failed;
