@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/entity_classes">
+    <entity_class name="yfPhoenixBossT16" extends="animalZombieVulture">
+      <property name="Class" value="YFPhoenix.EntityPhoenixBoss, YF.Phoenix" />
+      <property name="UserSpawnType" value="Menu" />
+      <property name="Tags" value="entity,animal,zombie,hostile,vulture,boss,yfPhoenix" />
+      <property name="SizeScale" value="2" />
+      <property name="HandItem" value="yfPhoenixHandT16" />
+      <property name="ExperienceGain" value="200000" />
+      <property name="LootDropProb" value="1" />
+      <property name="LootDropEntityClass" value="EntityLootContainerBoss" />
+      <property name="SightRange" value="90" />
+      <property name="MoveSpeed" value="1.3" />
+      <property name="MoveSpeedAggro" value="2.1, 2.1" />
+      <property name="Mass" value="300" />
+      <effect_group name="Phoenix finale health">
+        <passive_effect name="HealthMax" operation="base_set" value="80000000" />
+        <passive_effect name="HealthMax" operation="perc_set" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="yfPhoenixBossT17" extends="animalZombieVulture">
+      <property name="Class" value="YFPhoenix.EntityPhoenixBoss, YF.Phoenix" />
+      <property name="UserSpawnType" value="Menu" />
+      <property name="Tags" value="entity,animal,zombie,hostile,vulture,boss,yfPhoenix" />
+      <property name="SizeScale" value="2" />
+      <property name="HandItem" value="yfPhoenixHandT17" />
+      <property name="ExperienceGain" value="300000" />
+      <property name="LootDropProb" value="1" />
+      <property name="LootDropEntityClass" value="EntityLootContainerBoss" />
+      <property name="SightRange" value="90" />
+      <property name="MoveSpeed" value="1.3" />
+      <property name="MoveSpeedAggro" value="2.1, 2.1" />
+      <property name="Mass" value="300" />
+      <effect_group name="Phoenix finale health">
+        <passive_effect name="HealthMax" operation="base_set" value="150000000" />
+        <passive_effect name="HealthMax" operation="perc_set" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="yfPhoenixBossT18" extends="animalZombieVulture">
+      <property name="Class" value="YFPhoenix.EntityPhoenixBoss, YF.Phoenix" />
+      <property name="UserSpawnType" value="Menu" />
+      <property name="Tags" value="entity,animal,zombie,hostile,vulture,boss,yfPhoenix" />
+      <property name="SizeScale" value="2" />
+      <property name="HandItem" value="yfPhoenixHandT18" />
+      <property name="ExperienceGain" value="400000" />
+      <property name="LootDropProb" value="1" />
+      <property name="LootDropEntityClass" value="EntityLootContainerBoss" />
+      <property name="SightRange" value="90" />
+      <property name="MoveSpeed" value="1.3" />
+      <property name="MoveSpeedAggro" value="2.1, 2.1" />
+      <property name="Mass" value="300" />
+      <effect_group name="Phoenix finale health">
+        <passive_effect name="HealthMax" operation="base_set" value="260000000" />
+        <passive_effect name="HealthMax" operation="perc_set" value="1" />
+      </effect_group>
+    </entity_class>
+    <entity_class name="yfPhoenixBossT19" extends="animalZombieVulture">
+      <property name="Class" value="YFPhoenix.EntityPhoenixBoss, YF.Phoenix" />
+      <property name="UserSpawnType" value="Menu" />
+      <property name="Tags" value="entity,animal,zombie,hostile,vulture,boss,yfPhoenix" />
+      <property name="SizeScale" value="2" />
+      <property name="HandItem" value="yfPhoenixHandT19" />
+      <property name="ExperienceGain" value="500000" />
+      <property name="LootDropProb" value="1" />
+      <property name="LootDropEntityClass" value="EntityLootContainerBoss" />
+      <property name="SightRange" value="90" />
+      <property name="MoveSpeed" value="1.3" />
+      <property name="MoveSpeedAggro" value="2.1, 2.1" />
+      <property name="Mass" value="300" />
+      <effect_group name="Phoenix finale health">
+        <passive_effect name="HealthMax" operation="base_set" value="450666667" />
+        <passive_effect name="HealthMax" operation="perc_set" value="1" />
+      </effect_group>
+    </entity_class>
+  </append>
+</configs>

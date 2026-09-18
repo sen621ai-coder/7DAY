@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/items">
+    <item name="yfPhoenixHandT16">
+      <property name="Extends" value="meleeHandAnimalZombieVulture" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action0">
+        <property name="Delay" value=".7" />
+        <property name="DamageEntity" value="450" />
+        <property name="DamageBlock" value="3000" />
+      </property>
+      <property class="Action1">
+        <property name="Class" value="Vomit" />
+        <property name="Hitmask_override" value="Arrow" />
+        <property name="Delay" value="1.2" />
+        <property name="Infinite_ammo" value="true" />
+        <property name="Magazine_items" value="yfPhoenixFireballT16" />
+        <property name="Particles_muzzle_fire" value="" />
+        <property name="Sound_warning" value="vulturevomitwarning" />
+        <property name="Sound_start" value="vulturevomitattack" />
+        <property name="Sound_repeat" value="" />
+        <property name="Sound_end" value="" />
+        <property name="Sound_empty" value="" />
+        <property name="Sound_reload" value="" />
+        <property name="WarningMax" value="0" />
+        <property name="WarningDelay" value="0" />
+      </property>
+      <effect_group name="yfPhoenixHandT16" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesVertical" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesHorizontal" operation="base_set" value="2" />
+        <passive_effect name="MaxRange" operation="base_set" value="60" />
+        <passive_effect name="DamageFalloffRange" operation="base_set" value="60" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixFireballT16">
+      <property name="Meshfile" value="#@modfolder:Resources/phoenix-fire.unity3d?Assets/Phoenix/PhoenixFireball.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="ammoRocketHE" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="600" />
+        <property name="DamageBlock" value="3000" />
+        <property name="Velocity" value="24" />
+        <property name="FlyTime" value="5" />
+        <property name="LifeTime" value="6" />
+        <property name="Gravity" value="0" />
+        <property name="CollisionRadius" value="0.28" />
+        <property name="Buff" value="buffBurningFlamingArrow" />
+        <property class="Explosion">
+          <property name="BlockDamage" value="6000" />
+          <property name="EntityDamage" value="1200" />
+          <property name="ParticleIndex" value="10" />
+          <property name="Duration" value="30" />
+          <property name="Buff" value="buffBurningMolotov" />
+          <property name="RadiusBlocks" value="4" />
+          <property name="RadiusEntities" value="5" />
+        </property>
+      </property>
+      <effect_group name="yfPhoenixFireballT16" tiered="false">
+        <passive_effect name="BuffProcChance" operation="base_set" value="1" tags="buffBurningFlamingArrow" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixHandT17">
+      <property name="Extends" value="meleeHandAnimalZombieVulture" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action0">
+        <property name="Delay" value=".7" />
+        <property name="DamageEntity" value="600" />
+        <property name="DamageBlock" value="4000" />
+      </property>
+      <property class="Action1">
+        <property name="Class" value="Vomit" />
+        <property name="Hitmask_override" value="Arrow" />
+        <property name="Delay" value="1.2" />
+        <property name="Infinite_ammo" value="true" />
+        <property name="Magazine_items" value="yfPhoenixFireballT17" />
+        <property name="Particles_muzzle_fire" value="" />
+        <property name="Sound_warning" value="vulturevomitwarning" />
+        <property name="Sound_start" value="vulturevomitattack" />
+        <property name="Sound_repeat" value="" />
+        <property name="Sound_end" value="" />
+        <property name="Sound_empty" value="" />
+        <property name="Sound_reload" value="" />
+        <property name="WarningMax" value="0" />
+        <property name="WarningDelay" value="0" />
+      </property>
+      <effect_group name="yfPhoenixHandT17" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesVertical" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesHorizontal" operation="base_set" value="2" />
+        <passive_effect name="MaxRange" operation="base_set" value="60" />
+        <passive_effect name="DamageFalloffRange" operation="base_set" value="60" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixFireballT17">
+      <property name="Meshfile" value="#@modfolder:Resources/phoenix-fire.unity3d?Assets/Phoenix/PhoenixFireball.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="ammoRocketHE" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="800" />
+        <property name="DamageBlock" value="4000" />
+        <property name="Velocity" value="24" />
+        <property name="FlyTime" value="5" />
+        <property name="LifeTime" value="6" />
+        <property name="Gravity" value="0" />
+        <property name="CollisionRadius" value="0.28" />
+        <property name="Buff" value="buffBurningFlamingArrow" />
+        <property class="Explosion">
+          <property name="BlockDamage" value="8000" />
+          <property name="EntityDamage" value="1600" />
+          <property name="ParticleIndex" value="10" />
+          <property name="Duration" value="30" />
+          <property name="Buff" value="buffBurningMolotov" />
+          <property name="RadiusBlocks" value="4" />
+          <property name="RadiusEntities" value="5" />
+        </property>
+      </property>
+      <effect_group name="yfPhoenixFireballT17" tiered="false">
+        <passive_effect name="BuffProcChance" operation="base_set" value="1" tags="buffBurningFlamingArrow" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixHandT18">
+      <property name="Extends" value="meleeHandAnimalZombieVulture" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action0">
+        <property name="Delay" value=".7" />
+        <property name="DamageEntity" value="750" />
+        <property name="DamageBlock" value="5000" />
+      </property>
+      <property class="Action1">
+        <property name="Class" value="Vomit" />
+        <property name="Hitmask_override" value="Arrow" />
+        <property name="Delay" value="1.2" />
+        <property name="Infinite_ammo" value="true" />
+        <property name="Magazine_items" value="yfPhoenixFireballT18" />
+        <property name="Particles_muzzle_fire" value="" />
+        <property name="Sound_warning" value="vulturevomitwarning" />
+        <property name="Sound_start" value="vulturevomitattack" />
+        <property name="Sound_repeat" value="" />
+        <property name="Sound_end" value="" />
+        <property name="Sound_empty" value="" />
+        <property name="Sound_reload" value="" />
+        <property name="WarningMax" value="0" />
+        <property name="WarningDelay" value="0" />
+      </property>
+      <effect_group name="yfPhoenixHandT18" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesVertical" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesHorizontal" operation="base_set" value="2" />
+        <passive_effect name="MaxRange" operation="base_set" value="60" />
+        <passive_effect name="DamageFalloffRange" operation="base_set" value="60" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixFireballT18">
+      <property name="Meshfile" value="#@modfolder:Resources/phoenix-fire.unity3d?Assets/Phoenix/PhoenixFireball.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="ammoRocketHE" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="1000" />
+        <property name="DamageBlock" value="5000" />
+        <property name="Velocity" value="24" />
+        <property name="FlyTime" value="5" />
+        <property name="LifeTime" value="6" />
+        <property name="Gravity" value="0" />
+        <property name="CollisionRadius" value="0.28" />
+        <property name="Buff" value="buffBurningFlamingArrow" />
+        <property class="Explosion">
+          <property name="BlockDamage" value="10000" />
+          <property name="EntityDamage" value="2000" />
+          <property name="ParticleIndex" value="10" />
+          <property name="Duration" value="30" />
+          <property name="Buff" value="buffBurningMolotov" />
+          <property name="RadiusBlocks" value="4" />
+          <property name="RadiusEntities" value="5" />
+        </property>
+      </property>
+      <effect_group name="yfPhoenixFireballT18" tiered="false">
+        <passive_effect name="BuffProcChance" operation="base_set" value="1" tags="buffBurningFlamingArrow" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixHandT19">
+      <property name="Extends" value="meleeHandAnimalZombieVulture" />
+      <property name="CreativeMode" value="None" />
+      <property class="Action0">
+        <property name="Delay" value=".7" />
+        <property name="DamageEntity" value="900" />
+        <property name="DamageBlock" value="6000" />
+      </property>
+      <property class="Action1">
+        <property name="Class" value="Vomit" />
+        <property name="Hitmask_override" value="Arrow" />
+        <property name="Delay" value="1.2" />
+        <property name="Infinite_ammo" value="true" />
+        <property name="Magazine_items" value="yfPhoenixFireballT19" />
+        <property name="Particles_muzzle_fire" value="" />
+        <property name="Sound_warning" value="vulturevomitwarning" />
+        <property name="Sound_start" value="vulturevomitattack" />
+        <property name="Sound_repeat" value="" />
+        <property name="Sound_end" value="" />
+        <property name="Sound_empty" value="" />
+        <property name="Sound_reload" value="" />
+        <property name="WarningMax" value="0" />
+        <property name="WarningDelay" value="0" />
+      </property>
+      <effect_group name="yfPhoenixHandT19" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+        <passive_effect name="MagazineSize" operation="base_set" value="1" />
+        <passive_effect name="BurstRoundCount" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesVertical" operation="base_set" value="2" />
+        <passive_effect name="SpreadDegreesHorizontal" operation="base_set" value="2" />
+        <passive_effect name="MaxRange" operation="base_set" value="60" />
+        <passive_effect name="DamageFalloffRange" operation="base_set" value="60" />
+      </effect_group>
+    </item>
+    <item name="yfPhoenixFireballT19">
+      <property name="Meshfile" value="#@modfolder:Resources/phoenix-fire.unity3d?Assets/Phoenix/PhoenixFireball.prefab" />
+      <property name="Material" value="Morganic" />
+      <property name="CreativeMode" value="None" />
+      <property name="CustomIcon" value="ammoRocketHE" />
+      <property class="Action1">
+        <property name="Class" value="Projectile" />
+        <property name="DamageEntity" value="1200" />
+        <property name="DamageBlock" value="6000" />
+        <property name="Velocity" value="24" />
+        <property name="FlyTime" value="5" />
+        <property name="LifeTime" value="6" />
+        <property name="Gravity" value="0" />
+        <property name="CollisionRadius" value="0.28" />
+        <property name="Buff" value="buffBurningFlamingArrow" />
+        <property class="Explosion">
+          <property name="BlockDamage" value="12000" />
+          <property name="EntityDamage" value="2400" />
+          <property name="ParticleIndex" value="10" />
+          <property name="Duration" value="30" />
+          <property name="Buff" value="buffBurningMolotov" />
+          <property name="RadiusBlocks" value="4" />
+          <property name="RadiusEntities" value="5" />
+        </property>
+      </property>
+      <effect_group name="yfPhoenixFireballT19" tiered="false">
+        <passive_effect name="BuffProcChance" operation="base_set" value="1" tags="buffBurningFlamingArrow" />
+      </effect_group>
+    </item>
+  </append>
+</configs>
