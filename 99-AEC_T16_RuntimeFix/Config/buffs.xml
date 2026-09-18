@@ -524,24 +524,24 @@
       </buff>
       <buff name="buffPZAECHarrierT16Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECHarrierT16Resonance" />
+        <display_value value="$PZAECHarrierResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT16Resonance" operation="add" value="16">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT16Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="add" value="16">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT16Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
             <requirement name="HitLocation" body_parts="Head" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT16Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT16Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECHarrierT16Ready">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT16Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT16Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierT16Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECHarrierT16Ready" />
         </effect_group>
       </buff>
@@ -577,24 +577,24 @@
       </buff>
       <buff name="buffPZAECHarrierT17Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECHarrierT17Resonance" />
+        <display_value value="$PZAECHarrierResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT17Resonance" operation="add" value="20">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT17Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="add" value="20">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT17Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
             <requirement name="HitLocation" body_parts="Head" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT17Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT17Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECHarrierT17Ready">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT17Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT17Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierT17Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECHarrierT17Ready" />
         </effect_group>
       </buff>
@@ -630,24 +630,24 @@
       </buff>
       <buff name="buffPZAECHarrierT18Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECHarrierT18Resonance" />
+        <display_value value="$PZAECHarrierResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT18Resonance" operation="add" value="25">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT18Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="add" value="25">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT18Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
             <requirement name="HitLocation" body_parts="Head" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT18Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT18Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECHarrierT18Ready">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT18Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT18Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierT18Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECHarrierT18Ready" />
         </effect_group>
       </buff>
@@ -683,24 +683,24 @@
       </buff>
       <buff name="buffPZAECHarrierT19Set3" name_key="buffPZAECHarrierResonanceName" description_key="buffPZAECHarrierResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECHarrierT19Resonance" />
+        <display_value value="$PZAECHarrierResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT19Resonance" operation="add" value="34">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT19Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="add" value="34">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT19Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
             <requirement name="HitLocation" body_parts="Head" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierT19Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT19Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECHarrierResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECHarrierT19Ready">
-            <requirement name="CVarCompare" cvar="$PZAECHarrierT19Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECHarrierResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECHarrierT19Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierT19Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECHarrierResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECHarrierT19Ready" />
         </effect_group>
       </buff>
@@ -735,23 +735,23 @@
       </buff>
       <buff name="buffPZAECStormT16Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECStormT16Resonance" />
+        <display_value value="$PZAECStormResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT16Resonance" operation="add" value="8">
-            <requirement name="CVarCompare" cvar="$PZAECStormT16Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="add" value="8">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT16Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT16Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECStormT16Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECStormT16Ready">
-            <requirement name="CVarCompare" cvar="$PZAECStormT16Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT16Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormT16Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECStormT16Ready" />
         </effect_group>
       </buff>
@@ -788,23 +788,23 @@
       </buff>
       <buff name="buffPZAECStormT17Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECStormT17Resonance" />
+        <display_value value="$PZAECStormResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT17Resonance" operation="add" value="10">
-            <requirement name="CVarCompare" cvar="$PZAECStormT17Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="add" value="10">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT17Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT17Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECStormT17Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECStormT17Ready">
-            <requirement name="CVarCompare" cvar="$PZAECStormT17Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT17Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormT17Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECStormT17Ready" />
         </effect_group>
       </buff>
@@ -841,23 +841,23 @@
       </buff>
       <buff name="buffPZAECStormT18Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECStormT18Resonance" />
+        <display_value value="$PZAECStormResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT18Resonance" operation="add" value="13">
-            <requirement name="CVarCompare" cvar="$PZAECStormT18Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="add" value="13">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT18Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT18Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECStormT18Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECStormT18Ready">
-            <requirement name="CVarCompare" cvar="$PZAECStormT18Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT18Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormT18Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECStormT18Ready" />
         </effect_group>
       </buff>
@@ -894,23 +894,23 @@
       </buff>
       <buff name="buffPZAECStormT19Set3" name_key="buffPZAECStormResonanceName" description_key="buffPZAECStormResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECStormT19Resonance" />
+        <display_value value="$PZAECStormResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT19Resonance" operation="add" value="17">
-            <requirement name="CVarCompare" cvar="$PZAECStormT19Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="add" value="17">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECStormT19Active" />
             <requirement name="HoldingItemHasTags" tags="ranged" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormT19Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECStormT19Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECStormResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECStormT19Ready">
-            <requirement name="CVarCompare" cvar="$PZAECStormT19Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECStormResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECStormT19Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormT19Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECStormResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECStormT19Ready" />
         </effect_group>
       </buff>
@@ -948,24 +948,24 @@
       </buff>
       <buff name="buffPZAECTremorT16Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECTremorT16Resonance" />
+        <display_value value="$PZAECTremorResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT16Resonance" operation="add" value="25">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT16Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="add" value="25">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT16Active" />
             <requirement name="HoldingItemHasTags" tags="melee" />
             <requirement name="IsSecondaryAttack" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT16Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT16Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECTremorT16Ready">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT16Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT16Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorT16Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECTremorT16Ready" />
         </effect_group>
       </buff>
@@ -1002,24 +1002,24 @@
       </buff>
       <buff name="buffPZAECTremorT17Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECTremorT17Resonance" />
+        <display_value value="$PZAECTremorResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT17Resonance" operation="add" value="34">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT17Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="add" value="34">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT17Active" />
             <requirement name="HoldingItemHasTags" tags="melee" />
             <requirement name="IsSecondaryAttack" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT17Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT17Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECTremorT17Ready">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT17Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT17Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorT17Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECTremorT17Ready" />
         </effect_group>
       </buff>
@@ -1056,24 +1056,24 @@
       </buff>
       <buff name="buffPZAECTremorT18Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECTremorT18Resonance" />
+        <display_value value="$PZAECTremorResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT18Resonance" operation="add" value="50">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT18Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="add" value="50">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT18Active" />
             <requirement name="HoldingItemHasTags" tags="melee" />
             <requirement name="IsSecondaryAttack" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT18Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT18Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECTremorT18Ready">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT18Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT18Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorT18Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECTremorT18Ready" />
         </effect_group>
       </buff>
@@ -1110,24 +1110,24 @@
       </buff>
       <buff name="buffPZAECTremorT19Set3" name_key="buffPZAECTremorResonanceName" description_key="buffPZAECTremorResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECTremorT19Resonance" />
+        <display_value value="$PZAECTremorResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT19Resonance" operation="add" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT19Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="add" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT19Active" />
             <requirement name="HoldingItemHasTags" tags="melee" />
             <requirement name="IsSecondaryAttack" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorT19Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT19Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onSelfAttackedOther" action="ModifyCVar" cvar="$PZAECTremorResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onSelfAttackedOther" action="AddBuff" buff="buffPZAECTremorT19Ready">
-            <requirement name="CVarCompare" cvar="$PZAECTremorT19Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECTremorResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECTremorT19Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorT19Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECTremorResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECTremorT19Ready" />
         </effect_group>
       </buff>
@@ -1163,22 +1163,22 @@
       </buff>
       <buff name="buffPZAECWardenT16Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECWardenT16Resonance" />
+        <display_value value="$PZAECWardenResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT16Resonance" operation="add" value="25">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT16Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="add" value="25">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT16Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT16Active" />
           </triggered_effect>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT16Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT16Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onOtherAttackedSelf" action="AddBuff" buff="buffPZAECWardenT16Ready">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT16Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT16Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenT16Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECWardenT16Ready" />
         </effect_group>
       </buff>
@@ -1224,22 +1224,22 @@
       </buff>
       <buff name="buffPZAECWardenT17Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECWardenT17Resonance" />
+        <display_value value="$PZAECWardenResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT17Resonance" operation="add" value="34">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT17Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="add" value="34">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT17Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT17Active" />
           </triggered_effect>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT17Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT17Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onOtherAttackedSelf" action="AddBuff" buff="buffPZAECWardenT17Ready">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT17Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT17Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenT17Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECWardenT17Ready" />
         </effect_group>
       </buff>
@@ -1285,22 +1285,22 @@
       </buff>
       <buff name="buffPZAECWardenT18Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECWardenT18Resonance" />
+        <display_value value="$PZAECWardenResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT18Resonance" operation="add" value="50">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT18Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="add" value="50">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT18Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT18Active" />
           </triggered_effect>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT18Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT18Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onOtherAttackedSelf" action="AddBuff" buff="buffPZAECWardenT18Ready">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT18Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT18Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenT18Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECWardenT18Ready" />
         </effect_group>
       </buff>
@@ -1346,22 +1346,22 @@
       </buff>
       <buff name="buffPZAECWardenT19Set3" name_key="buffPZAECWardenResonanceName" description_key="buffPZAECWardenResonanceDesc" icon="ui_game_symbol_armor_iron" icon_color="255,200,64">
         <stack_type value="ignore" />
-        <display_value value="$PZAECWardenT19Resonance" />
+        <display_value value="$PZAECWardenResonance" />
         <display_value_key value="{0:0}/100" />
         <effect_group>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT19Resonance" operation="add" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT19Resonance" operation="LT" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="add" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="LT" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT19Ready" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT19Active" />
           </triggered_effect>
-          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenT19Resonance" operation="set" value="100">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT19Resonance" operation="GTE" value="100" />
+          <triggered_effect trigger="onOtherAttackedSelf" action="ModifyCVar" cvar="$PZAECWardenResonance" operation="set" value="100">
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
           </triggered_effect>
           <triggered_effect trigger="onOtherAttackedSelf" action="AddBuff" buff="buffPZAECWardenT19Ready">
-            <requirement name="CVarCompare" cvar="$PZAECWardenT19Resonance" operation="GTE" value="100" />
+            <requirement name="CVarCompare" cvar="$PZAECWardenResonance" operation="GTE" value="100" />
             <requirement name="!HasBuff" buff="buffPZAECWardenT19Ready" />
           </triggered_effect>
-          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenT19Resonance" />
+          <triggered_effect trigger="onSelfBuffRemove" action="RemoveCVar" cvar="$PZAECWardenResonance" />
           <triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffPZAECWardenT19Ready" />
         </effect_group>
       </buff>
@@ -1774,4 +1774,198 @@
       </buff>
     </append>
   <!-- END GENERATED ENDGAME EXPANSION -->
+<!-- BEGIN MIXED TIER FAMILY SETS -->
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT16Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrier" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT16Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT16Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT16" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT16Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT16Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT16" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT16Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT16Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT16" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT17Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrier" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT17Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT17Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT17" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT17Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT17Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT17" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT17Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT17Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT17" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT18Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrier" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT18Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT18Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT18" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT18Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT18Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT18" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT18Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT18Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT18" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT19Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrier" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT19Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT19Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT19" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT19Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT19Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT19" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECHarrierT19Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECHarrierT19Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECHarrierT19" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT16Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStorm" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT16Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT16Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT16" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT16Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT16Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT16" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT16Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT16Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT16" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT17Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStorm" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT17Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT17Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT17" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT17Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT17Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT17" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT17Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT17Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT17" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT18Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStorm" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT18Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT18Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT18" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT18Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT18Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT18" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT18Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT18Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT18" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT19Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStorm" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT19Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT19Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT19" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT19Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT19Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT19" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECStormT19Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECStormT19Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECStormT19" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT16Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremor" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT16Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT16Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT16" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT16Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT16Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT16" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT16Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT16Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT16" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT17Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremor" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT17Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT17Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT17" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT17Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT17Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT17" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT17Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT17Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT17" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT18Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremor" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT18Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT18Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT18" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT18Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT18Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT18" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT18Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT18Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT18" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT19Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremor" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT19Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT19Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT19" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT19Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT19Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT19" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECTremorT19Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECTremorT19Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECTremorT19" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT16Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWarden" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT16Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT16Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT16" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT16Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT16Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT16" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT16Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT16Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT16" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT17Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWarden" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT17Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT17Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT17" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT17Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT17Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT17" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT17Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT17Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT17" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT18Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWarden" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT18Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT18Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT18" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT18Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT18Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT18" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT18Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT18Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT18" operation="GTE" value="4"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT19Set3']/effect_group/triggered_effect[@trigger='onSelfBuffRemove' and @action='RemoveCVar']">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWarden" operation="LTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT19Set2']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT19Set2']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT19" operation="GTE" value="2"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT19Set3']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT19Set3']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT19" operation="GTE" value="3"/>
+</append>
+<append xpath="/buffs/buff[@name='buffPZAECWardenT19Active']/effect_group/passive_effect | /buffs/buff[@name='buffPZAECWardenT19Active']/effect_group/triggered_effect[not(@trigger='onSelfBuffRemove' or @trigger='onSelfBuffFinish' or @trigger='onSelfDied' or @trigger='onSelfLeaveGame')]">
+  <requirement name="ArmorGroupCount" group_name="groupPZAECWardenT19" operation="GTE" value="4"/>
+</append>
+<!-- END MIXED TIER FAMILY SETS -->
 </configs>

@@ -69,6 +69,7 @@ namespace AECT16RuntimeFix
             states.Clear(); rockets.Clear(); currentWorld = null;
             nextInput = nextAim = 0; inputVehicle = inputSeat = -1; inputHeld=false;
             ApacheWeaponVisuals.Clear();
+            ApacheAirframeAppearance.Clear();
             ApacheFlightAssist.Clear();
             ApachePilotHUD.Clear();localGuided=false;
         }
@@ -112,10 +113,11 @@ namespace AECT16RuntimeFix
         }
         public static Vector3 CannonPivot(State state)
         {
-            var local = new Vector3(0,.35f,3.65f);
+            var local = CannonAnchorLocal;
             return state.Mesh != null ? state.Mesh.TransformPoint(local) + Origin.position :
                 state.Vehicle.position + BodyRotation(state.Vehicle) * local;
         }
+        public static Vector3 CannonAnchorLocal { get { return new Vector3(0,.35f,3.65f); } }
         private static bool ReadyOperator(State state, int actor, int seat)
         {
             var player = currentWorld?.GetEntity(actor) as EntityPlayer;

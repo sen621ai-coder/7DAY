@@ -17,21 +17,64 @@ namespace AECT16RuntimeFix
             renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
             return obj;
         }
+        public static GameObject Rod(Transform parent,string name,Vector3 a,Vector3 b,float radius,Material material)
+        {
+            var rod=Part(parent,PrimitiveType.Cylinder,name,(a+b)*.5f,
+                new Vector3(radius,Vector3.Distance(a,b)*.5f,radius),Vector3.zero,material);
+            rod.transform.localRotation=Quaternion.FromToRotation(Vector3.up,b-a);
+            return rod;
+        }
+        public static GameObject BellyFairing(Transform parent,Material material)
+        {
+            const int n=20;
+            var vertices=new Vector3[n*2+2];var triangles=new int[n*12];int k=0;
+            for(int i=0;i<n;i++)
+            {
+                float a=i*Mathf.PI*2/n,c=Mathf.Cos(a),s=Mathf.Sin(a);
+                vertices[i]=new Vector3(c*.25f,.31f,s*.31f-.12f);
+                vertices[n+i]=new Vector3(c*.63f,1.18f,s*.73f-.16f);
+            }
+            vertices[n*2]=new Vector3(0,.31f,-.12f);
+            vertices[n*2+1]=new Vector3(0,1.18f,-.16f);
+            for(int i=0;i<n;i++)
+            {
+                int j=(i+1)%n;
+                triangles[k++]=i;triangles[k++]=n+j;triangles[k++]=j;
+                triangles[k++]=i;triangles[k++]=n+i;triangles[k++]=n+j;
+                triangles[k++]=n*2;triangles[k++]=i;triangles[k++]=j;
+                triangles[k++]=n*2+1;triangles[k++]=n+j;triangles[k++]=n+i;
+            }
+            var mesh=new Mesh{name="Apache belly fairing"};mesh.vertices=vertices;mesh.triangles=triangles;
+            mesh.RecalculateNormals();mesh.RecalculateBounds();
+            var obj=new GameObject("BellyFairing");obj.hideFlags=HideFlags.DontSave;
+            obj.transform.SetParent(parent,false);
+            obj.AddComponent<MeshFilter>().sharedMesh=mesh;
+            var renderer=obj.AddComponent<MeshRenderer>();renderer.sharedMaterial=material;
+            renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
+            return obj;
+        }
         public static Transform BuildGun(Transform pivot,Material olive,Material steel,Material dark)
         {
-            Part(pivot,PrimitiveType.Cube,"Receiver",new Vector3(0,0,.06f),new Vector3(.27f,.24f,.48f),Vector3.zero,olive);
-            Part(pivot,PrimitiveType.Cube,"ReceiverTop",new Vector3(0,.145f,.02f),new Vector3(.21f,.055f,.38f),Vector3.zero,steel);
-            Part(pivot,PrimitiveType.Cube,"FeedHousing",new Vector3(-.19f,-.015f,-.03f),new Vector3(.15f,.17f,.24f),new Vector3(0,0,-12),olive);
-            Part(pivot,PrimitiveType.Cube,"DriveHousing",new Vector3(.175f,-.01f,.02f),new Vector3(.10f,.14f,.29f),Vector3.zero,steel);
+            Part(pivot,PrimitiveType.Cube,"Receiver",new Vector3(0,0,.05f),new Vector3(.28f,.24f,.43f),Vector3.zero,olive);
+            Part(pivot,PrimitiveType.Cube,"BreechBlock",new Vector3(0,-.02f,-.25f),new Vector3(.25f,.21f,.22f),Vector3.zero,dark);
+            Part(pivot,PrimitiveType.Cube,"ReceiverTop",new Vector3(0,.145f,.01f),new Vector3(.23f,.045f,.38f),Vector3.zero,steel);
+            Part(pivot,PrimitiveType.Cube,"FeedHousing",new Vector3(-.18f,-.005f,-.08f),new Vector3(.13f,.16f,.30f),new Vector3(0,0,-10),olive);
+            Part(pivot,PrimitiveType.Cube,"DriveHousing",new Vector3(.17f,-.015f,.02f),new Vector3(.11f,.15f,.30f),Vector3.zero,steel);
+            Part(pivot,PrimitiveType.Cylinder,"ChainDrive",new Vector3(.23f,-.01f,-.08f),new Vector3(.105f,.045f,.105f),new Vector3(0,0,90),dark);
             for(int side=-1;side<=1;side+=2){
-                Part(pivot,PrimitiveType.Cube,"CradleArm",new Vector3(side*.21f,.035f,-.14f),new Vector3(.055f,.29f,.24f),new Vector3(12,0,0),olive);
-                Part(pivot,PrimitiveType.Cylinder,"Trunnion",new Vector3(side*.25f,.06f,-.09f),new Vector3(.14f,.035f,.14f),new Vector3(0,0,90),steel);
+                Part(pivot,PrimitiveType.Cube,"CradleArm",new Vector3(side*.205f,.075f,-.13f),new Vector3(.052f,.32f,.28f),new Vector3(12,0,0),olive);
+                Part(pivot,PrimitiveType.Cylinder,"Trunnion",new Vector3(side*.25f,.065f,-.09f),new Vector3(.14f,.037f,.14f),new Vector3(0,0,90),steel);
+                Part(pivot,PrimitiveType.Cylinder,"TrunnionBolt",new Vector3(side*.292f,.065f,-.09f),new Vector3(.055f,.018f,.055f),new Vector3(0,0,90),dark);
             }
+            Rod(pivot,"FeedChuteRear",new Vector3(-.21f,.03f,-.27f),new Vector3(-.29f,.17f,-.48f),.055f,dark);
+            Rod(pivot,"FeedChuteFront",new Vector3(-.29f,.17f,-.48f),new Vector3(-.12f,.29f,-.55f),.055f,steel);
             var assembly=new GameObject("RecoilAssembly");assembly.hideFlags=HideFlags.DontSave;assembly.transform.SetParent(pivot,false);
             var barrel=assembly.transform;
-            Part(barrel,PrimitiveType.Cylinder,"BarrelJacket",new Vector3(0,0,.43f),new Vector3(.105f,.18f,.105f),new Vector3(90,0,0),steel);
+            Part(barrel,PrimitiveType.Cylinder,"RecoilCollar",new Vector3(0,0,.26f),new Vector3(.13f,.045f,.13f),new Vector3(90,0,0),dark);
+            Part(barrel,PrimitiveType.Cylinder,"BarrelJacket",new Vector3(0,0,.48f),new Vector3(.105f,.21f,.105f),new Vector3(90,0,0),steel);
             Part(barrel,PrimitiveType.Cylinder,"BarrelTube",new Vector3(0,0,.89f),new Vector3(.055f,.31f,.055f),new Vector3(90,0,0),dark);
             for(int i=0;i<3;i++)Part(barrel,PrimitiveType.Cylinder,"Collar",new Vector3(0,0,.31f+i*.13f),new Vector3(.12f,.025f,.12f),new Vector3(90,0,0),dark);
+            Part(barrel,PrimitiveType.Cylinder,"MuzzleSleeve",new Vector3(0,0,1.17f),new Vector3(.075f,.055f,.075f),new Vector3(90,0,0),steel);
             // An actual open ring, rather than a solid cylinder cap painted black.
             var muzzle=new GameObject("OpenMuzzle");muzzle.hideFlags=HideFlags.DontSave;muzzle.transform.SetParent(barrel,false);
             muzzle.transform.localPosition=new Vector3(0,0,1.20f);
@@ -61,6 +104,13 @@ namespace AECT16RuntimeFix
             var muzzle=pivot.transform.Find("RecoilAssembly/OpenMuzzle");
             if(muzzle!=null)Object.Destroy(muzzle.GetComponent<MeshFilter>().sharedMesh);
             Object.Destroy(pivot);
+        }
+        public static void DestroyMount(GameObject mount)
+        {
+            if(mount==null)return;
+            var fairing=mount.transform.Find("BellyFairing");
+            if(fairing!=null){var filter=fairing.GetComponent<MeshFilter>();if(filter!=null)Object.Destroy(filter.sharedMesh);}
+            Object.Destroy(mount);
         }
         private static void Box(float x,float y,float w,float h,Color color)
         {GUI.color=color;GUI.DrawTexture(new Rect(x,y,w,h),Texture2D.whiteTexture);}

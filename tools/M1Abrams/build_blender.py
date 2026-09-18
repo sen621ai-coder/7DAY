@@ -129,7 +129,7 @@ bpy.ops.object.light_add(type='AREA',location=xyz((3,9,4)));bpy.context.object.d
 bpy.context.object.rotation_euler=(Vector(xyz((0,1,0)))-bpy.context.object.location).to_track_quat('-Z','Y').to_euler()
 bpy.ops.object.camera_add(location=xyz((11,7,13)));cam=bpy.context.object;cam.rotation_euler=(Vector(xyz((0,1.5,.5)))-cam.location).to_track_quat('-Z','Y').to_euler();cam.data.type='ORTHO';cam.data.ortho_scale=12;scene.camera=cam
 scene.render.film_transparent=False;scene.render.filepath=str(OUT/'M1-textured.png');bpy.ops.render.render(write_still=True)
-icons=MOD/'ItemIcons';icons.mkdir(exist_ok=True)
+icons=MOD/'UIAtlases/ItemIconAtlas';icons.mkdir(parents=True,exist_ok=True)
 scene.render.resolution_x=scene.render.resolution_y=256;scene.render.film_transparent=True;cam.data.ortho_scale=10.5
 scene.render.filepath=str(icons/'vehicleM1AbramsPlaceable.png');bpy.ops.render.render(write_still=True)
 scene.render.resolution_x=1280;scene.render.resolution_y=900;scene.render.film_transparent=False;cam.data.ortho_scale=12

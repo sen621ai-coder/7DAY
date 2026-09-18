@@ -49,10 +49,12 @@ public sealed class MachineConfigurationGameQA : IModApi
         var wire=wires.GetWireNodeFromPool();
         wire.SetWireCanHide(true);
         wire.SetStartPosition(new Vector3(8,160,8));wire.SetEndPosition(new Vector3(10,160,8));wire.BuildMesh();
+        wire.SetVisible(true);
+        Check(wire.GetGameObject().activeSelf,"native wire appears while the wire tool is held");
         wire.SetVisible(false);
-        Check(wire.GetGameObject().activeSelf,"ordinary native wire remains visible without wire tool");
+        Check(!wire.GetGameObject().activeSelf,"native wire hides when the wire tool is put away");
         wires.ToggleAllWirePulse(false);
-        Check(wire.GetGameObject().activeSelf&&!wires.ShowPulse,"putting wire tool away preserves wire visibility without pulse");
+        Check(!wire.GetGameObject().activeSelf&&!wires.ShowPulse,"putting wire tool away hides wire without pulse");
         wires.ReturnToPool(wire);
         Check(!wire.GetGameObject().activeSelf&&!wires.activeWires.Contains(wire),"removed wire stays hidden in native pool");
         var owner=PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000001",false);

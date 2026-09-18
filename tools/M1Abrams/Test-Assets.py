@@ -53,6 +53,13 @@ for i,hp in enumerate([1000000,1500000,2200000,3200000]):
     entity='vehicleM1Abrams'+('' if i==0 else 'T'+str(16+i));name=entity+'Placeable'
     item=item_defs.find(f"./append/item[@name='{name}']");v=vehicle_defs.find(f"./append/vehicle[@name='{entity}']");r=recipe_defs.find(f"./append/recipe[@name='{name}']")
     check(item is not None and v is not None and r is not None,f'T{16+i} vehicle/item/recipe closure')
+    icon=item.find("property[@name='CustomIcon']").get('value')
+    icon_file=MOD/'UIAtlases/ItemIconAtlas'/f'{icon}.png'
+    check(icon_file.is_file(),f'T{16+i} custom icon exists in game-loaded mod atlas')
+    from PIL import Image
+    with Image.open(icon_file) as image:
+        image.load()
+        check(image.format=='PNG' and min(image.size)>0 and image.getbbox() is not None,f'T{16+i} custom icon decodes and is not empty')
     check(int(item.find("effect_group/passive_effect[@name='DegradationMax']").get('value'))==hp,f'T{16+i} approved million durability')
     check(item.find("property[@class='Action1']/property[@name='Vehicle']").get('value')==entity,f'T{16+i} placement entity')
     speed=list(map(float,v.find("property[@name='velocityMax_turbo']").get('value').split(',')))

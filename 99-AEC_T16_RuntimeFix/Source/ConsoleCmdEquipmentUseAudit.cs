@@ -123,7 +123,7 @@ namespace AECT16RuntimeFix
                 foreach (int tier in Enumerable.Range(16, 4))
                 {
                     string prefix = "buffPZAEC" + family + "T" + tier;
-                    string charge = "$PZAEC" + family + "T" + tier + "Resonance";
+                    string charge = ArmorFamilySets.Charge(family);
                     var retired = ItemClass.GetItemClass("itemPZAEC" + family + "DeviceT" + tier, false);
                     Check(retired != null && retired.Actions[0] == null && retired.Properties.GetString("CreativeMode") == "None", "manual device hidden and disabled " + family + tier);
                     string[] slots = { "Helmet", "Outfit", "Gloves", "Boots" };
@@ -145,7 +145,12 @@ namespace AECT16RuntimeFix
                     Check(!player.Buffs.HasBuff(prefix+"Active") && player.Buffs.GetCustomVar(charge)==100, family+tier+" three pieces cannot activate");
                     player.equipment.SetSlotItem(3, Item("armorPZAEC"+family+"BootsT"+(tier==19?18:tier+1)), false);
                     AutoUpdate(player);
-                    Check(!player.Buffs.HasBuff(prefix+"Active"), family+tier+" mixed tier cannot activate");
+                    int mixedTier=tier==19?18:tier;
+                    string mixedPrefix="buffPZAEC"+family+"T"+mixedTier;
+                    Check(player.Buffs.HasBuff(mixedPrefix+"Active"), family+tier+" mixed tier activates at lowest worn tier");
+                    player.Buffs.RemoveBuff(mixedPrefix+"Active",-1,false);
+                    player.Buffs.RemoveBuff(mixedPrefix+"Cooldown",-1,false);FlushRemoved(player);
+                    player.Buffs.SetCustomVar(charge,100);
                     player.equipment.SetSlotItem(3, Item("armorPZAEC"+family+"BootsT"+tier), false);
                     player.FireEvent(MinEventTypes.onSelfBuffUpdate, true);
                     AutoUpdate(player);

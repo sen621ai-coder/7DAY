@@ -29,9 +29,11 @@ namespace AECT16RuntimeFix
                 CompactSteelStorage.Install(harmony);
                 PatchModelTintSafety(harmony);
                 LootContainerNullGuard.Install(harmony);
+                LootBagWorldLifetime.Install(harmony);
                 LocalRespawnRecovery.Install(harmony);
                 PassiveEffectOverflowGuard.Install(harmony);
                 SpreadPercentStacking.Install(harmony);
+                ArmorFamilySets.Install(harmony);
                 EndgameExpansionRuntime.Install(harmony);
                 EndgameSocketMigration.Install(harmony);
                 ItemMetadataReadFix.Install(harmony);

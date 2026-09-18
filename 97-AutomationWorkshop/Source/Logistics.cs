@@ -13,7 +13,6 @@ namespace YFAutomation
         {
             var h=new Harmony("yf.automation.logistics");
             MachineConfigurationUI.Install(h);
-            WireVisibility.Install(h);
             h.Patch(AccessTools.Method(typeof(TileEntityPoweredRangedTrap),"DecrementAmmo"),
                 postfix:new HarmonyMethod(typeof(TurretFeed),nameof(TurretFeed.AfterDecrement)));
             h.Patch(AccessTools.Method(typeof(TileEntityComposite),nameof(TileEntityComposite.UpdateTick)),

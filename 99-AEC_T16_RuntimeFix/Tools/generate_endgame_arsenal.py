@@ -264,7 +264,7 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
                 add_effect(eg, "StaminaLoss", "perc_add", ["-.08", "-.10", "-.12", "-.14"][idx], "secondary")
             else: add_effect(eg, "PhysicalDamageResist", "base_add", ["3", "4", "5", "6"][idx])
 
-            cvar = f"$PZAEC{set_name}T{tier}Resonance"
+            cvar = f"$PZAEC{set_name}Resonance"
             three = ET.SubElement(definitions, "buff", {"name": f"buffPZAEC{set_name}T{tier}Set3",
                 "name_key": f"buffPZAEC{set_name}ResonanceName", "description_key": f"buffPZAEC{set_name}ResonanceDesc",
                 "icon": "ui_game_symbol_armor_iron", "icon_color": "255,200,64"})
@@ -492,6 +492,8 @@ def main() -> None:
     refresh(CONFIG)
     import equipment_display
     equipment_display.refresh(CONFIG)
+    import runpy
+    runpy.run_path(str(CONFIG.parent.parent / "tools" / "Update-MixedTierSets.py"))
 
 
 if __name__ == "__main__":

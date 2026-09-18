@@ -85,11 +85,14 @@ namespace AECT16RuntimeFix
             }
             if (name == "itemPZAECResonanceInjector")
             {
-                reason = "需要同阶三件套且共鸣未满；注射剂未消耗。";
+                reason = "需要同系列三件套且共鸣未满（可跨阶混穿）；注射剂未消耗。";
                 foreach (string family in new[] { "Harrier", "Storm", "Tremor", "Warden" })
-                for (int tier = 16; tier <= 19; tier++)
-                    if (player.Buffs.HasBuff("buffPZAEC" + family + "T" + tier + "Set3") &&
-                        player.Buffs.GetCustomVar("$PZAEC" + family + "T" + tier + "Resonance") < 100) return true;
+                {
+                    if(player.equipment==null)continue;
+                    ArmorFamilySets.MigrateCharge(player,family);
+                    if (player.equipment!=null && player.equipment.GetArmorGroupCount("groupPZAEC"+family)>=3 &&
+                        player.Buffs.GetCustomVar(ArmorFamilySets.Charge(family)) < 100) return true;
+                }
                 return false;
             }
             if (name == "itemPZAECQuickArmorGel")
@@ -181,11 +184,12 @@ namespace AECT16RuntimeFix
             {
                 foreach (int tier in new[] { 16, 17, 18, 19 })
                 {
-                    if (!player.Buffs.HasBuff("buffPZAEC" + setName + "T" + tier + "Set3"))
+                    if (player.equipment.GetArmorGroupCount("groupPZAEC" + setName + "T" + tier)<3)
                     {
                         continue;
                     }
-                    string cvar = "$PZAEC" + setName + "T" + tier + "Resonance";
+                    ArmorFamilySets.MigrateCharge(player,setName);
+                    string cvar = ArmorFamilySets.Charge(setName);
                     float next = Math.Min(100f, player.Buffs.GetCustomVar(cvar) + 25f);
                     player.Buffs.SetCustomVar(cvar, next, true, CVarOperation.set);
                     if (next >= 100f)
@@ -313,15 +317,16 @@ namespace AECT16RuntimeFix
         public static void UpdateAutomaticResonance(EntityPlayer player)
         {
             if (player == null || player.world == null || player.world.IsRemote() || player.IsDead() || player.equipment == null) return;
+            foreach(string family in ArmorFamilySets.Families)ArmorFamilySets.MigrateCharge(player,family);
             foreach (string family in new[] { "Harrier", "Storm", "Tremor", "Warden" })
             foreach (int tier in new[] {16,17,18,19})
             {
                 string prefix = "buffPZAEC" + family + "T" + tier;
-                string charge = "$PZAEC" + family + "T" + tier + "Resonance";
+                string charge = ArmorFamilySets.Charge(family);
                 int pieces = player.equipment.GetArmorGroupCount("groupPZAEC" + family + "T" + tier);
                 if (pieces < 3)
                 {
-                    if (player.Buffs.GetCustomVar(charge) != 0) player.Buffs.SetCustomVar(charge, 0, true, CVarOperation.set);
+                    if (player.equipment.GetArmorGroupCount("groupPZAEC"+family)<3 && player.Buffs.GetCustomVar(charge) != 0) player.Buffs.SetCustomVar(charge, 0, true, CVarOperation.set);
                     if (player.Buffs.HasBuff(prefix + "Ready")) player.Buffs.RemoveBuff(prefix + "Ready", -1, true);
                 }
                 if (pieces < 4)
@@ -335,7 +340,7 @@ namespace AECT16RuntimeFix
                     }
                     continue;
                 }
-                if (player.Buffs.GetCustomVar(charge) < 100 || player.Buffs.HasBuff(prefix + "Cooldown") || player.Buffs.HasBuff(prefix + "Active")) continue;
+                if (player.Buffs.GetCustomVar(charge) < 100 || ArmorFamilySets.Busy(player,family)) continue;
                 // Commit the charge/cooldown before applying effects so repeated
                 // updates cannot consume or activate the same charge twice.
                 player.Buffs.SetCustomVar(charge, 0, true, CVarOperation.set);

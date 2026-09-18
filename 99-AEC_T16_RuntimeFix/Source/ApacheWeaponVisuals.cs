@@ -14,14 +14,14 @@ namespace AECT16RuntimeFix
         private static readonly List<Tracer> tracers=new List<Tracer>();
         private static readonly Stack<Tracer> tracerPool=new Stack<Tracer>();
         private static readonly List<int> remove=new List<int>();
-        private static Material lightMaterial,gunMaterial,steelMaterial,darkMaterial;
+        private static Material lightMaterial,gunMaterial,steelMaterial,darkMaterial,fairingMaterial;
         private static float nextNearbyScan;
         private static Material Material(bool gun)
         {
             if(gun ? gunMaterial!=null : lightMaterial!=null)return gun ? gunMaterial : lightMaterial;
             var shader=Shader.Find(gun ? "Standard" : "Sprites/Default") ?? Shader.Find("Unlit/Color");
             if(shader==null)return null;
-            var material=new Material(shader){color=gun ? new Color(.17f,.19f,.16f) : new Color(1,.55f,.1f)};
+            var material=new Material(shader){color=gun ? new Color(.25f,.29f,.21f) : new Color(1,.55f,.1f)};
             if(gun)gunMaterial=material;else lightMaterial=material;
             return material;
         }
@@ -35,14 +35,33 @@ namespace AECT16RuntimeFix
         }
         private static Turret GetTurret(EntityVehicle vehicle)
         {
-            if(turrets.TryGetValue(vehicle.entityId,out var existing)&&existing.Vehicle==vehicle&&existing.Pivot!=null)return existing;
-            if(existing!=null){ApacheGunnerPresentation.DestroyGun(existing.Pivot);if(existing.Mount!=null)Object.Destroy(existing.Mount);}
+            if(turrets.TryGetValue(vehicle.entityId,out var existing)&&existing.Vehicle==vehicle&&existing.Pivot!=null&&existing.Mount!=null)return existing;
+            if(existing!=null){ApacheGunnerPresentation.DestroyGun(existing.Pivot);ApacheGunnerPresentation.DestroyMount(existing.Mount);}
+            var state=ApacheWeapons.GetState(vehicle);
+            ApacheAirframeAppearance.Apply(vehicle);
             var pivot=new GameObject("PZAEC_Apache_Cannon");pivot.hideFlags=HideFlags.DontSave;
-            if(steelMaterial==null){steelMaterial=new Material(Material(true)){color=new Color(.25f,.28f,.29f)};if(steelMaterial.HasProperty("_Metallic"))steelMaterial.SetFloat("_Metallic",.7f);}
+            if(steelMaterial==null){steelMaterial=new Material(Material(true)){color=new Color(.20f,.23f,.21f)};if(steelMaterial.HasProperty("_Metallic"))steelMaterial.SetFloat("_Metallic",.55f);}
             if(darkMaterial==null)darkMaterial=new Material(Material(true)){color=new Color(.065f,.075f,.08f)};
+            if(fairingMaterial==null)fairingMaterial=new Material(Material(true)){color=new Color(.38f,.42f,.29f)};
             var mount=new GameObject("PZAEC_Apache_CannonMount");mount.hideFlags=HideFlags.DontSave;
-            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"AzimuthBearing",new Vector3(0,.29f,-.10f),new Vector3(.46f,.06f,.46f),Vector3.zero,steelMaterial);
-            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cube,"Suspension",new Vector3(0,.17f,-.10f),new Vector3(.20f,.20f,.25f),Vector3.zero,Material(true));
+            // Bind the complete assembly to the actual model transform. The
+            // mount follows vehicle animation/physics between Update calls;
+            // the aiming pivot is free to rotate within this anchored mount.
+            var parent=state.Mesh!=null?state.Mesh:vehicle.ModelTransform!=null?vehicle.ModelTransform:vehicle.transform;
+            mount.transform.SetParent(parent,false);
+            if(state.Mesh!=null)mount.transform.localPosition=ApacheWeapons.CannonAnchorLocal;
+            else mount.transform.position=ApacheWeapons.CannonPivot(state)-Origin.position;
+            pivot.transform.SetParent(mount.transform,false);
+            pivot.transform.localPosition=Vector3.zero;
+            pivot.transform.rotation=ApacheWeapons.BodyRotation(vehicle);
+            ApacheGunnerPresentation.BellyFairing(mount.transform,fairingMaterial);
+            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"AzimuthBearing",new Vector3(0,.26f,-.10f),new Vector3(.34f,.05f,.34f),Vector3.zero,steelMaterial);
+            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"BearingCore",new Vector3(0,.13f,-.10f),new Vector3(.22f,.09f,.22f),Vector3.zero,darkMaterial);
+            for(int side=-1;side<=1;side+=2)
+            {
+                ApacheGunnerPresentation.Rod(mount.transform,"FairingBrace",new Vector3(side*.43f,.82f,-.16f),new Vector3(side*.23f,.27f,-.10f),.035f,steelMaterial);
+                ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"BraceBolt",new Vector3(side*.23f,.27f,-.10f),new Vector3(.065f,.025f,.065f),new Vector3(0,0,90),darkMaterial);
+            }
             var barrel=ApacheGunnerPresentation.BuildGun(pivot.transform,Material(true),steelMaterial,darkMaterial);
             var turret=new Turret{Vehicle=vehicle,Pivot=pivot,Mount=mount,Barrel=barrel,Flash=ApacheMuzzleFlash.Create(barrel),Direction=ApacheWeapons.BodyRotation(vehicle)*Vector3.forward};
             turrets[vehicle.entityId]=turret;return turret;
@@ -51,14 +70,15 @@ namespace AECT16RuntimeFix
         {
             foreach(var p in projectiles.Values)if(p.Object!=null)Object.Destroy(p.Object);
             foreach(var t in tracers)if(t.Line!=null)Object.Destroy(t.Line.gameObject);
-            foreach(var t in turrets.Values){ApacheGunnerPresentation.DestroyGun(t.Pivot);if(t.Mount!=null)Object.Destroy(t.Mount);}
+            foreach(var t in turrets.Values){ApacheGunnerPresentation.DestroyGun(t.Pivot);ApacheGunnerPresentation.DestroyMount(t.Mount);}
             foreach(var t in tracerPool)if(t.Line!=null)Object.Destroy(t.Line.gameObject);tracerPool.Clear();
             projectiles.Clear();tracers.Clear();turrets.Clear();
             ApacheMuzzleFlash.Clear();
             nextNearbyScan=0;
             if(lightMaterial!=null)Object.Destroy(lightMaterial);if(gunMaterial!=null)Object.Destroy(gunMaterial);
             if(steelMaterial!=null)Object.Destroy(steelMaterial);if(darkMaterial!=null)Object.Destroy(darkMaterial);
-            lightMaterial=gunMaterial=steelMaterial=darkMaterial=null;
+            if(fairingMaterial!=null)Object.Destroy(fairingMaterial);
+            lightMaterial=gunMaterial=steelMaterial=darkMaterial=fairingMaterial=null;
         }
         public static void Receive(World world,int vehicleId,int id,byte kind,Vector3 a,Vector3 b,float heat)
         {
@@ -140,7 +160,7 @@ namespace AECT16RuntimeFix
             foreach(var pair in turrets)
             {
                 var t=pair.Value;
-                if(t.Vehicle==null||world.GetEntity(pair.Key)!=t.Vehicle||t.Pivot==null){ApacheGunnerPresentation.DestroyGun(t.Pivot);if(t.Mount!=null)Object.Destroy(t.Mount);remove.Add(pair.Key);continue;}
+                if(t.Vehicle==null||world.GetEntity(pair.Key)!=t.Vehicle||t.Pivot==null||t.Mount==null){ApacheGunnerPresentation.DestroyGun(t.Pivot);ApacheGunnerPresentation.DestroyMount(t.Mount);remove.Add(pair.Key);continue;}
                 var state=ApacheWeapons.GetState(t.Vehicle);
                 if(t.Vehicle.GetAttached(1)==null)t.Direction=ApacheWeapons.BodyRotation(t.Vehicle)*Vector3.forward;
                 else if(t.Vehicle.GetAttached(1)==world.GetPrimaryPlayer())
@@ -149,8 +169,8 @@ namespace AECT16RuntimeFix
                     t.AimReason=ApacheWeapons.ResolveAim(state,sight.origin,sight.direction,out var direction,out var muzzle);
                     if(t.AimReason==0)t.Direction=direction;
                 }
-                t.Pivot.transform.position=ApacheWeapons.CannonPivot(state)-Origin.position;
-                if(t.Mount!=null){t.Mount.transform.position=t.Pivot.transform.position;t.Mount.transform.rotation=ApacheWeapons.BodyRotation(t.Vehicle);}
+                // Position comes from the parented model, not a one-frame-late
+                // world-space copy. Only the gun's independent aim rotates.
                 t.Recoil=Mathf.Max(0,t.Recoil-dt*12);if(t.Barrel!=null)t.Barrel.localPosition=new Vector3(0,0,-.045f*t.Recoil);
                 ApacheMuzzleFlash.Update(t.Flash);
                 if(t.Direction.sqrMagnitude>.01f){var target=Quaternion.LookRotation(t.Direction,Vector3.up);t.Pivot.transform.rotation=t.Vehicle.GetAttached(1)==world.GetPrimaryPlayer()?target:Quaternion.Slerp(t.Pivot.transform.rotation,target,1-Mathf.Exp(-20*dt));}

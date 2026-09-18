@@ -843,6 +843,8 @@ def main() -> None:
     refresh(CONFIG)
     import equipment_display
     equipment_display.refresh(CONFIG)
+    import runpy
+    runpy.run_path(str(CONFIG.parent.parent / "tools" / "Update-MixedTierSets.py"))
 
 
 if __name__ == "__main__":
