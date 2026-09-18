@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingVehicles']/effect_group">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="100" value="1" tags="vehicleM1AbramsPlaceable,pzM1Shell" />
+  </append>
+</configs>

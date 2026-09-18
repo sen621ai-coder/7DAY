@@ -24,8 +24,7 @@ namespace AECT16RuntimeFix
 
         public static void AfterInit(EntityVehicle __instance)
         {
-            if (__instance == null || __instance.vehicle == null ||
-                __instance.vehicle.GetName() != MD500FlightControls.ApacheVehicleName) return;
+            if (!ApacheWeapons.IsApache(__instance)) return;
             foreach (var particles in __instance.GetComponentsInChildren<ParticleSystem>(true))
             {
                 bool weapon = false;

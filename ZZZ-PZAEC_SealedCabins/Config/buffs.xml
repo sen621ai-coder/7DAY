@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configs>
+  <!--Live seat requirements; cumulative illness and direct-hit/drug effects remain intact.-->
+  <insertBefore xpath="/buffs/buff[@name='buffStatusCheck01']/effect_group[1]">
+    <effect_group name="PZAEC occupied cabin exposure reset">
+      <requirement name="PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+      <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$HotStatus" operation="set" value="0"/>
+      <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$ColdStatus" operation="set" value="0"/>
+      <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$ActiveRadiationStatus" operation="set" value="0"/>
+      <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffElementHot,buffElementSweltering,buffElementCold,buffElementFreezing,buffRadiation01,buffRadiation03,buffRadiationPool,buffActiveRadiationImpact1,buffActiveRadiationImpact2,buffActiveRadiationImpact3"/>
+    </effect_group>
+  </insertBefore>
+  <append xpath="/buffs/buff[@name='buffStatusCheck01']/effect_group/triggered_effect[@action='ModifyCVar' and (@cvar='$HotStatus' or @cvar='$ColdStatus') and @value='1']">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffStatusCheck01']/effect_group[@name='AR_Calculation']/triggered_effect[@cvar='$ActiveRadiationStatus']">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffStatusCheck01']/effect_group[@name='IRRADIATION_Impact']/triggered_effect[@cvar='$IRradiationStatus' and @operation='add']">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffElementHot' or @name='buffElementSweltering' or @name='buffElementCold' or @name='buffElementFreezing' or @name='buffRadiation01' or @name='buffRadiation03' or @name='buffRadiationPool' or @name='buffActiveRadiationImpact1' or @name='buffActiveRadiationImpact2' or @name='buffActiveRadiationImpact3']/effect_group/passive_effect">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffElementHot' or @name='buffElementSweltering' or @name='buffElementCold' or @name='buffElementFreezing' or @name='buffRadiation01' or @name='buffRadiation03' or @name='buffRadiationPool' or @name='buffActiveRadiationImpact1' or @name='buffActiveRadiationImpact2' or @name='buffActiveRadiationImpact3']/effect_group/triggered_effect[@action='ModifyStats' or @action='AddHealth' or @action='PlaySound' or (@action='ModifyScreenEffect' and @intensity!='0')]">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff/effect_group/triggered_effect[@action='AddBuff' and (@buff='buffElementHot' or @buff='buffElementSweltering' or @buff='buffElementCold' or @buff='buffElementFreezing' or @buff='buffRadiation01' or @buff='buffRadiation03' or @buff='buffRadiationPool' or @buff='buffActiveRadiationImpact1' or @buff='buffActiveRadiationImpact2' or @buff='buffActiveRadiationImpact3')]">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffDesert_Hazard01' or @name='buffDesert_Hazard02' or @name='buffSnow_Hazard01' or @name='buffSnow_Hazard02' or @name='buffWasteland_Hazard01' or @name='buffWasteland_Hazard02']/effect_group/triggered_effect[@action='AddHealth' or @action='ModifyStats' or @action='PlaySound' or @action='AttachParticleEffectToEntity']">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffDesert_Hazard' or @name='buffSnow_Hazard' or @name='buffWasteland_Hazard']/effect_group/triggered_effect[@action='ModifyCVar' and @operation='subtract' and (@cvar='$DesertHazardTimer' or @cvar='$SnowHazardTimer' or @cvar='$WastelandHazardTimer')]">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffThermoplegiaInc1' or @name='buffThermoplegiaInc2' or @name='buffThermoplegiaInc3' or @name='buffFrostbiteInc1' or @name='buffFrostbiteInc2' or @name='buffFrostbiteInc3']/effect_group/passive_effect">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+  <append xpath="/buffs/buff[@name='buffThermoplegiaInc1' or @name='buffThermoplegiaInc2' or @name='buffThermoplegiaInc3' or @name='buffFrostbiteInc1' or @name='buffFrostbiteInc2' or @name='buffFrostbiteInc3']/effect_group/triggered_effect[@action='AddHealth' or @action='ModifyStats' or @action='PlaySound' or (@action='AddBuff' and @buff='buffInjuryKnockdown01')]">
+    <requirement name="!PZAEC.SealedCabins.CabinProtected, PZAEC.SealedCabins"/>
+  </append>
+</configs>

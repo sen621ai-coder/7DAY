@@ -23,7 +23,7 @@ for prop in existing:
 for name in ('Extends','ImposterExchange','TintColor'):
     for old in block.findall("property[@name='%s']"%name): block.remove(old)
 values={
- 'Model':'yfAutoForestryRuntime.prefab','ModelOffset':'0,0.5,0',
+ 'Model':'yfAutoForestryRuntime.prefab','ModelOffset':'0,0,0',
  'MultiBlockDim':'10,4,6','OversizedBounds':'(-0.5,1.9,-0.5),(10,4.8,6)',
  'CustomIcon':'yfAutoForestry','CustomIconTint':'FFFFFF',
  'ItemTypeIcon':'farming','ModTransformEnableNames':'ForestrySpeed,ForestryPacker,ForestrySiren',

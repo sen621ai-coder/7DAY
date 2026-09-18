@@ -1,0 +1,98 @@
+[
+  {
+    "name": "EndWheel_L_Rear",
+    "mat": 0
+  },
+  {
+    "name": "EndWheel_R_Rear",
+    "mat": 0
+  },
+  {
+    "name": "Barrel",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_07",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_06",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_05",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_04",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_03",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_02",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_L_01",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_07",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_06",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_05",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_04",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_03",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_02",
+    "mat": 0
+  },
+  {
+    "name": "RoadWheel_R_01",
+    "mat": 0
+  },
+  {
+    "name": "EndWheel_L_Front",
+    "mat": 0
+  },
+  {
+    "name": "EndWheel_R_Front",
+    "mat": 0
+  },
+  {
+    "name": "Hull",
+    "mat": 0
+  },
+  {
+    "name": "Turret",
+    "mat": 0
+  },
+  {
+    "name": "GunMount",
+    "mat": 0
+  },
+  {
+    "name": "TrackL",
+    "mat": 1
+  },
+  {
+    "name": "TrackR",
+    "mat": 1
+  }
+]

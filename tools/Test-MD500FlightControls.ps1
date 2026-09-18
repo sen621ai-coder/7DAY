@@ -49,7 +49,7 @@ public class Vehicle {
  public string Name="vehicleMD500"; public EntityVehicle entity; public bool CurrentIsAccel,IsTurbo;
  public float VelocityMaxForward=25,VelocityMaxBackward=10,VelocityMaxTurboForward=29,VelocityMaxTurboBackward=10;
  public float EffectVelocityMaxPer=1,EffectMotorTorquePer=1,Fuel=400; public int Health=5000;
- public string GetName()=>Name;public int GetHealth()=>Health;public float GetFuelLevel()=>Fuel;public void UpdateSimulation(){}
+ public string GetName()=>Name == null ? null : Name.ToLowerInvariant();public int GetHealth()=>Health;public float GetFuelLevel()=>Fuel;public void UpdateSimulation(){}
 }
 public class VPEngine {public Vehicle vehicle;public void Update(float dt){} }
 public class EntityVehicle {
@@ -90,6 +90,14 @@ public static class MD500Tests {
   Near(AECT16RuntimeFix.MD500FlightMath.FuelSpeed(0,25),2.5f,.0001f,"hover fuel floor");
   Near(AECT16RuntimeFix.MD500FlightMath.FuelSpeed(20,25),20,.0001f,"cruise fuel preserved");
   var harmony=new HarmonyLib.Harmony();AECT16RuntimeFix.MD500FlightControls.Install(harmony);
+  foreach(string name in new[]{"vehicleMD500","vehiclemd500","VEHICLEMD500","vehicleApacheHelicopter","vehicleapachehelicopter","VEHICLEAPACHEHELICOPTER"}){
+   var actual=new EntityVehicle();actual.vehicle.Name=name;actual.movementInput.jump=true;
+   Check(!AECT16RuntimeFix.MD500FlightControls.BeforeForces(actual),"normalized vehicle suppresses original pitch: "+name);
+   Check(actual.vehicleRB.force.y>9.81f,"normalized vehicle Space supplies upward force: "+name);
+   Near(actual.vehicleRB.torque.x,0,.0001f,"Space does not pitch level helicopter: "+name);
+   Check(AECT16RuntimeFix.ApacheWeapons.IsApache(actual)==name.ToLowerInvariant().Contains("apache"),"Apache weapon recognition: "+name);
+  }
+  Check(!AECT16RuntimeFix.ApacheWeapons.IsApache(null),"null is not Apache");
   var e=new EntityVehicle();Check(!AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"native MD forces replaced");
   Near(e.vehicleRB.force.y,9.81f,.0001f,"runtime hover");
   foreach(string reason in new[]{"remote","no driver","no fuel","broken","engine off","water","sleep","kinematic","no input","no rotor"}){
@@ -98,6 +106,7 @@ public static class MD500Tests {
   }
   foreach(string name in new[]{"vehicleGyrocopter","AECArmoredGyroVehicle","vehicleUH60","vehicleMD500Other","vehicleApacheHelicopterOther"}){
    e=new EntityVehicle();e.vehicle.Name=name;Check(AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"unrelated vehicle unchanged "+name);
+   Check(!AECT16RuntimeFix.ApacheWeapons.IsApache(e),"unrelated vehicle has no Apache weapons "+name);
    Check(AECT16RuntimeFix.MD500FlightControls.GroundAction(true,e),"unrelated Space/C unchanged");
    Near(AECT16RuntimeFix.MD500FlightControls.EffectiveFuelSpeed(0,new VPEngine{vehicle=e.vehicle}),0,.0001f,"unrelated fuel unchanged");
   }
@@ -139,13 +148,19 @@ public static class MD500Tests {
 $runtime = Get-Content (Join-Path $source 'MD500FlightControls.cs') -Raw
 $math = Get-Content (Join-Path $source 'MD500FlightMath.cs') -Raw
 # Separate source units permit their normal using directives.
-Add-Type -TypeDefinition ($runtime + "`n" + ($math -replace '^using System;','') + "`n" + $fixture)
+$weapons = Get-Content (Join-Path $source 'ApacheWeapons.cs') -Raw
+$identity = [regex]::Match($weapons, '(?s)public static bool IsApache\(EntityVehicle v\).*?(?=public static void Install)').Value
+if (!$identity) { throw 'Cannot extract actual Apache vehicle identity method' }
+Add-Type -TypeDefinition ($runtime + "`n" + ($math -replace '^using System;','') + "`nnamespace AECT16RuntimeFix { public static class ApacheWeapons { $identity } }`n" + $fixture)
 [MD500Tests]::Run()
 
 # Check the installed game's IL, independent of the fixture.
 Add-Type -Path (Join-Path $root '0_TFP_Harmony/Mono.Cecil.dll')
 $game = [Mono.Cecil.AssemblyDefinition]::ReadAssembly((Join-Path (Split-Path $root) '7DaysToDie_Data/Managed/Assembly-CSharp.dll'))
 try {
+    $vehicleType = $game.MainModule.Types | Where-Object Name -eq 'Vehicle'
+    $constructor = $vehicleType.Methods | Where-Object { $_.Name -eq '.ctor' -and $_.Parameters.Count -eq 2 }
+    if (!($constructor.Body.Instructions | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.String System.String::ToLower()' })) { throw 'Recheck native Vehicle name normalization and fixture' }
     $entity = $game.MainModule.Types | Where-Object Name -eq 'EntityVehicle'
     $physics = $entity.Methods | Where-Object Name -eq 'PhysicsFixedUpdate'
     $loads = @($physics.Body.Instructions | Where-Object { $_.OpCode.Name -eq 'ldfld' -and $_.Operand.DeclaringType.FullName -eq 'MovementInput' -and $_.Operand.Name -in @('jump','down') })

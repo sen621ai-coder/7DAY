@@ -1,0 +1,3030 @@
+{
+  "poses": [
+    {
+      "yaw": 0,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 0,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 0,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 0,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 0,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 0,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 5,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 5,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 5,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 5,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 5,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 5,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 10,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 10,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 10,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 10,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 10,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 10,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 15,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 15,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 15,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 15,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 15,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 15,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 20,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 20,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 20,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 20,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 20,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 20,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 25,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 25,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 25,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 25,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 25,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 25,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 30,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 30,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 30,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 30,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 30,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 30,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 35,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 35,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 35,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 35,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 35,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 35,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 40,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 40,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 40,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 40,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 40,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 40,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 45,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 45,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 45,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 45,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 45,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 45,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 50,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 50,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 50,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 50,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 50,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 50,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 55,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 55,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 55,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 55,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 55,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 55,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 60,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 60,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 60,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 60,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 60,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 60,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 65,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 65,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 65,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 65,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 65,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 65,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 70,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 70,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 70,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 70,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 70,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 70,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 75,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 75,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 75,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 75,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 75,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 75,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 80,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 80,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 80,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 80,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 80,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 80,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 85,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 85,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 85,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 85,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 85,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 85,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 90,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 90,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 90,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 90,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 90,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 90,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 95,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 95,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 95,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 95,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 95,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 95,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 100,
+      "pitch": -5.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 100,
+      "pitch": -5.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 100,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 100,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 100,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 100,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 105,
+      "pitch": -4.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 105,
+      "pitch": -4.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 105,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 105,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 105,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 105,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 110,
+      "pitch": -3.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 110,
+      "pitch": -3.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 110,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 110,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 110,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 110,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 115,
+      "pitch": -2.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 115,
+      "pitch": -2.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 115,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 115,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 115,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 115,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 120,
+      "pitch": -1.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 120,
+      "pitch": -1.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 120,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 120,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 120,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 120,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 125,
+      "pitch": 0.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 125,
+      "pitch": 0.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 125,
+      "pitch": 0.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 125,
+      "pitch": 0.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 125,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 125,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 130,
+      "pitch": 1.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 130,
+      "pitch": 1.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 130,
+      "pitch": 1.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 130,
+      "pitch": 1.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 130,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 130,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 135,
+      "pitch": 2.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 135,
+      "pitch": 2.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 135,
+      "pitch": 2.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 135,
+      "pitch": 2.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 135,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 135,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 140,
+      "pitch": 3.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 140,
+      "pitch": 3.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 140,
+      "pitch": 3.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 140,
+      "pitch": 3.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 140,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 140,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 145,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 145,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 145,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 145,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 145,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 145,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 150,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 150,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 150,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 150,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 150,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 150,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 155,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 155,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 155,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 155,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 155,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 155,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 160,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 160,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 160,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 160,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 160,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 160,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 165,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 165,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 165,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 165,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 165,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 165,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 170,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 170,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 170,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 170,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 170,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 170,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 175,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 175,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 175,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 175,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 175,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 175,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 180,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 180,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 180,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 180,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 180,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 180,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 185,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 185,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 185,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 185,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 185,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 185,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 190,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 190,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 190,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 190,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 190,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 190,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 195,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 195,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 195,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 195,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 195,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 195,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 200,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 200,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 200,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 200,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 200,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 200,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 205,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 205,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 205,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 205,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 205,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 205,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 210,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 210,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 210,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 210,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 210,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 210,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 215,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 215,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 215,
+      "pitch": 4,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 215,
+      "pitch": 4,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 215,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 215,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 220,
+      "pitch": 3.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 220,
+      "pitch": 3.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 220,
+      "pitch": 3.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 220,
+      "pitch": 3.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 220,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 220,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 225,
+      "pitch": 2.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 225,
+      "pitch": 2.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 225,
+      "pitch": 2.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 225,
+      "pitch": 2.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 225,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 225,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 230,
+      "pitch": 1.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 230,
+      "pitch": 1.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 230,
+      "pitch": 1.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 230,
+      "pitch": 1.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 230,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 230,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 235,
+      "pitch": 0.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 235,
+      "pitch": 0.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 235,
+      "pitch": 0.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 235,
+      "pitch": 0.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 235,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 235,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 240,
+      "pitch": -1.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 240,
+      "pitch": -1.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 240,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 240,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 240,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 240,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 245,
+      "pitch": -2.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 245,
+      "pitch": -2.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 245,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 245,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 245,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 245,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 250,
+      "pitch": -3.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 250,
+      "pitch": -3.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 250,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 250,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 250,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 250,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 255,
+      "pitch": -4.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 255,
+      "pitch": -4.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 255,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 255,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 255,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 255,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 260,
+      "pitch": -5.0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 260,
+      "pitch": -5.0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 260,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 260,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 260,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 260,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 265,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 265,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 265,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 265,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 265,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 265,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 270,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 270,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 270,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 270,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 270,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 270,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 275,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 275,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 275,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 275,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 275,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 275,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 280,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 280,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 280,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 280,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 280,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 280,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 285,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 285,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 285,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 285,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 285,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 285,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 290,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 290,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 290,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 290,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 290,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 290,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 295,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 295,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 295,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 295,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 295,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 295,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 300,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 300,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 300,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 300,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 300,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 300,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 305,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 305,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 305,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 305,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 305,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 305,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 310,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 310,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 310,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 310,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 310,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 310,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 315,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 315,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 315,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 315,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 315,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 315,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 320,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 320,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 320,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 320,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 320,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 320,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 325,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 325,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 325,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 325,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 325,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 325,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 330,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 330,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 330,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 330,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 330,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 330,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 335,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 335,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 335,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 335,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 335,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 335,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 340,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 340,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 340,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 340,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 340,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 340,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 345,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 345,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 345,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 345,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 345,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 345,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 350,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 350,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 350,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 350,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 350,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 350,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 355,
+      "pitch": -6,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 355,
+      "pitch": -6,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 355,
+      "pitch": 0,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 355,
+      "pitch": 0,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 355,
+      "pitch": 20,
+      "recoil": false,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    },
+    {
+      "yaw": 355,
+      "pitch": 20,
+      "recoil": true,
+      "barrelHullIntersections": 0,
+      "mountHullIntersections": 0
+    }
+  ],
+  "checked": 432,
+  "intersections": 0
+}

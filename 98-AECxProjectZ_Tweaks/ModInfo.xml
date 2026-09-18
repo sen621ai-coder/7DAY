@@ -6,5 +6,6 @@
   <Author value="Exodusoul" />
   <Version value="3.9.9" />
   <Website value="https://discord.gg/Ef4bBuhEEw" />
-  <ServerSideOnly value="true" />
+  <!-- Forestry meshes, textures and inventory icons must also be installed on clients. -->
+  <ServerSideOnly value="false" />
 </xml>

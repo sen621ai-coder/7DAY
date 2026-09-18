@@ -122,7 +122,7 @@ RU: aecHeadConverter сохраняется только как скрытая �
       <property name="Stacknumber" value="1" />
       <property name="Shape" value="ModelEntity" />
       <property name="Model" value="yfAutoForestryRuntime.prefab" />
-      <property name="ModelOffset" value="0,0.5,0" />
+      <property name="ModelOffset" value="0,0,0" />
       <property name="OversizedBounds" value="(-0.5,1.9,-0.5),(10,4.8,6)" />
       <property name="MultiBlockDim" value="10,4,6" />
       <property name="WaterFlow" value="permitted" />

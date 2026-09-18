@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/Sounds">
+    <SoundDataNode name="pzM1CannonNoise">
+      <Noise ID="0" noise="90" time="2" muffled_when_crouched="1" heat_map_strength="1.5" heat_map_time="180" />
+      <NoiseScale value="1" />
+    </SoundDataNode>
+  </append>
+</configs>

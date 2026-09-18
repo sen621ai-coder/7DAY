@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="ZZZPZAECSealedCabins" />
+  <DisplayName value="PZAEC 密闭座舱环境防护" />
+  <Description value="Unified environmental radiation, heat and cold protection for all occupied M1, MD-500 and Apache seats; Project Z/V3.2 integration." />
+  <Author value="PZAEC" />
+  <Version value="1.0.0" />
+</xml>

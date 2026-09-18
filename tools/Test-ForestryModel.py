@@ -68,6 +68,7 @@ block=tree.find(".//block[@name='yfAutoForestry']")
 props={p.get('name'):p.get('value') for p in block.findall('property') if p.get('name')}
 assert len(props)==len([p for p in block.findall('property') if p.get('name')])
 assert props['Model']=='yfAutoForestryRuntime.prefab' and props['MultiBlockDim']=='10,4,6'
+assert props['ModelOffset']=='0,0,0', 'The foundation starts at local Y=0; a half-block offset makes it float.'
 assert props['OversizedBounds']=='(-0.5,1.9,-0.5),(10,4.8,6)'
 assert report['footprint']==[10,4,6] and 3.58<report['modelSize'][1]<3.60 and report['heightScale']==1.36
 assert props['Class']=='Collector' and props['AllowedRotations']=='Basic90'

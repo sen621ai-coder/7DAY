@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="vehicleM1AbramsPlaceable" count="1" craft_area="workbench" craft_time="1200" use_ingredient_modifier="false" tags="learnable,workbenchCrafting">
+      <ingredient name="vehicleTruck4x4Placeable" count="1" />
+      <ingredient name="PZAECBuildPartsR2" count="12" />
+      <ingredient name="resourcePZAECMutantHeartT16" count="3" />
+      <ingredient name="resourcePZAECSiegeCapacitorT16" count="6" />
+      <ingredient name="resourceLegendaryParts" count="30" />
+      <ingredient name="resourceForgedSteel" count="1200" />
+      <ingredient name="resourceDurablAlloys" count="50" />
+      <ingredient name="resourceMechanicalParts" count="300" />
+      <ingredient name="resourceElectricParts" count="200" />
+      <ingredient name="resourceSpring" count="120" />
+      <ingredient name="smallEngine" count="2" />
+    </recipe>
+    <recipe name="vehicleM1AbramsT17Placeable" count="1" craft_area="workbench" craft_time="720" use_ingredient_modifier="false" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="vehicleM1AbramsPlaceable" count="1" />
+      <ingredient name="PZAECBuildPartsR3" count="12" />
+      <ingredient name="resourcePZAECMutantHeartT17" count="3" />
+      <ingredient name="resourcePZAECSiegeCapacitorT17" count="6" />
+      <ingredient name="resourceLegendaryParts" count="40" />
+      <ingredient name="resourceForgedSteel" count="600" />
+      <ingredient name="resourceDurablAlloys" count="100" />
+      <ingredient name="resourceMechanicalParts" count="150" />
+      <ingredient name="resourceElectricParts" count="100" />
+      <ingredient name="resourceSpring" count="60" />
+    </recipe>
+    <recipe name="vehicleM1AbramsT18Placeable" count="1" craft_area="workbench" craft_time="900" use_ingredient_modifier="false" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="vehicleM1AbramsT17Placeable" count="1" />
+      <ingredient name="PZAECBuildPartsR4" count="15" />
+      <ingredient name="resourcePZAECMutantHeartT18" count="4" />
+      <ingredient name="resourcePZAECSiegeCapacitorT18" count="8" />
+      <ingredient name="resourceLegendaryParts" count="60" />
+      <ingredient name="resourceForgedSteel" count="800" />
+      <ingredient name="resourceDurablAlloys" count="150" />
+      <ingredient name="resourceMechanicalParts" count="200" />
+      <ingredient name="resourceElectricParts" count="150" />
+      <ingredient name="resourceSpring" count="80" />
+    </recipe>
+    <recipe name="vehicleM1AbramsT19Placeable" count="1" craft_area="workbench" craft_time="1080" use_ingredient_modifier="false" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="vehicleM1AbramsT18Placeable" count="1" />
+      <ingredient name="PZAECBuildPartsR5" count="18" />
+      <ingredient name="resourcePZAECMutantHeartT19" count="5" />
+      <ingredient name="resourcePZAECSiegeCapacitorT19" count="10" />
+      <ingredient name="resourceLegendaryParts" count="90" />
+      <ingredient name="resourceForgedSteel" count="1000" />
+      <ingredient name="resourceDurablAlloys" count="200" />
+      <ingredient name="resourceMechanicalParts" count="250" />
+      <ingredient name="resourceElectricParts" count="200" />
+      <ingredient name="resourceSpring" count="100" />
+    </recipe>
+    <recipe name="pzM1Shell" count="10" craft_area="workbench" craft_time="90" use_ingredient_modifier="false" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="resourceRocketCasing" count="10" />
+      <ingredient name="resourceRocketTip" count="10" />
+      <ingredient name="resourceForgedSteel" count="40" />
+      <ingredient name="resourceGunPowder" count="400" />
+      <ingredient name="resourceMechanicalParts" count="10" />
+    </recipe>
+    <recipe name="pzM1ShellAP" count="10" craft_area="workbench" craft_time="120" use_ingredient_modifier="false" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="resourceRocketCasing" count="10" />
+      <ingredient name="resourceForgedSteel" count="100" />
+      <ingredient name="resourceScrapLead" count="200" />
+      <ingredient name="resourceGunPowder" count="600" />
+      <ingredient name="resourceMechanicalParts" count="20" />
+    </recipe>
+    <recipe name="pzM1RepairKit" count="1" craft_area="workbench" craft_time="30" use_ingredient_modifier="false" tags="workbenchCrafting" always_unlocked="true">
+      <ingredient name="resourceForgedSteel" count="20" />
+      <ingredient name="resourceDurablAlloys" count="2" />
+      <ingredient name="resourceMechanicalParts" count="5" />
+      <ingredient name="resourceDuctTape" count="2" />
+    </recipe>
+  </append>
+</configs>

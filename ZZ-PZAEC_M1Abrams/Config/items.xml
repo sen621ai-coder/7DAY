@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/items">
+    <item name="vehicleM1AbramsPlaceable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="Tags" value="vehicle,vengine,vfuel,PZAECM1" />
+      <property name="CustomIcon" value="vehicleM1AbramsPlaceable" />
+      <property name="DescriptionKey" value="vehicleM1AbramsPlaceableDesc" />
+      <property name="Meshfile" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab" />
+      <property name="EconomicValue" value="100000" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehicleM1Abrams" />
+        <property name="VehicleSize" value="3.5, 2.5, 7.6" />
+      </property>
+      <effect_group name="M1 Base" tiered="false">
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000" />
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+      </effect_group>
+      <property name="Stacknumber" value="1" />
+      <property name="RepairTools" value="pzM1RepairKit" />
+    </item>
+    <item name="vehicleM1AbramsT17Placeable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="Tags" value="vehicle,vengine,vfuel,PZAECM1" />
+      <property name="CustomIcon" value="vehicleM1AbramsPlaceable" />
+      <property name="DescriptionKey" value="vehicleM1AbramsT17PlaceableDesc" />
+      <property name="Meshfile" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab" />
+      <property name="EconomicValue" value="200000" />
+      <property name="UnlockedBy" value="" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehicleM1AbramsT17" />
+        <property name="VehicleSize" value="3.5, 2.5, 7.6" />
+      </property>
+      <effect_group name="M1 Base" tiered="false">
+        <passive_effect name="DegradationMax" operation="base_set" value="1500000" />
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+      </effect_group>
+      <property name="Stacknumber" value="1" />
+      <property name="RepairTools" value="pzM1RepairKit" />
+    </item>
+    <item name="vehicleM1AbramsT18Placeable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="Tags" value="vehicle,vengine,vfuel,PZAECM1" />
+      <property name="CustomIcon" value="vehicleM1AbramsPlaceable" />
+      <property name="DescriptionKey" value="vehicleM1AbramsT18PlaceableDesc" />
+      <property name="Meshfile" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab" />
+      <property name="EconomicValue" value="300000" />
+      <property name="UnlockedBy" value="" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehicleM1AbramsT18" />
+        <property name="VehicleSize" value="3.5, 2.5, 7.6" />
+      </property>
+      <effect_group name="M1 Base" tiered="false">
+        <passive_effect name="DegradationMax" operation="base_set" value="2200000" />
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+      </effect_group>
+      <property name="Stacknumber" value="1" />
+      <property name="RepairTools" value="pzM1RepairKit" />
+    </item>
+    <item name="vehicleM1AbramsT19Placeable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="Tags" value="vehicle,vengine,vfuel,PZAECM1" />
+      <property name="CustomIcon" value="vehicleM1AbramsPlaceable" />
+      <property name="DescriptionKey" value="vehicleM1AbramsT19PlaceableDesc" />
+      <property name="Meshfile" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab" />
+      <property name="EconomicValue" value="400000" />
+      <property name="UnlockedBy" value="" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehicleM1AbramsT19" />
+        <property name="VehicleSize" value="3.5, 2.5, 7.6" />
+      </property>
+      <effect_group name="M1 Base" tiered="false">
+        <passive_effect name="DegradationMax" operation="base_set" value="3200000" />
+        <passive_effect name="ModSlots" operation="base_set" value="0" />
+      </effect_group>
+      <property name="Stacknumber" value="1" />
+      <property name="RepairTools" value="pzM1RepairKit" />
+    </item>
+    <item name="pzM1Shell">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="ammoRocketHE" />
+      <property name="DescriptionKey" value="pzM1ShellDesc" />
+      <property name="Stacknumber" value="20" />
+      <property name="EconomicValue" value="500" />
+      <property name="Group" value="Ammo/Weapons" />
+    </item>
+    <item name="pzM1ShellAP">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="ammoRocketFrag" />
+      <property name="DescriptionKey" value="pzM1ShellAPDesc" />
+      <property name="Stacknumber" value="20" />
+      <property name="EconomicValue" value="500" />
+      <property name="Group" value="Ammo/Weapons" />
+    </item>
+    <item name="pzM1RepairKit">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceRepairKit" />
+      <property name="DescriptionKey" value="pzM1RepairKitDesc" />
+      <property name="Stacknumber" value="20" />
+      <property name="EconomicValue" value="500" />
+      <property name="Group" value="Ammo/Weapons" />
+    </item>
+  </append>
+</configs>

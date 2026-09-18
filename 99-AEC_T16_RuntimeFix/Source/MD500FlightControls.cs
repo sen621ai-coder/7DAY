@@ -39,7 +39,9 @@ namespace AECT16RuntimeFix
         public static bool Applies(Vehicle vehicle)
         {
             return enabled && vehicle != null &&
-                (vehicle.GetName() == VehicleName || vehicle.GetName() == ApacheVehicleName);
+                // Vehicle's native constructor normalizes its name to lowercase.
+                (string.Equals(vehicle.GetName(), VehicleName, StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(vehicle.GetName(), ApacheVehicleName, StringComparison.OrdinalIgnoreCase));
         }
 
         public static bool GroundAction(bool pressed, EntityVehicle entity)

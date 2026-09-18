@@ -1,0 +1,903 @@
+{
+  "nodes": [
+    {
+      "name": "M1AbramsRoot",
+      "parent": "",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "VisualRoot",
+      "parent": "M1AbramsRoot",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "TurretYaw",
+      "parent": "VisualRoot",
+      "position": [
+        0.0013,
+        1.45,
+        0.3208
+      ]
+    },
+    {
+      "name": "GunPitch",
+      "parent": "TurretYaw",
+      "position": [
+        0.0065,
+        1.7991,
+        1.38
+      ]
+    },
+    {
+      "name": "GunRecoil",
+      "parent": "GunPitch",
+      "position": [
+        0.0065,
+        1.7991,
+        1.38
+      ]
+    },
+    {
+      "name": "Muzzle",
+      "parent": "GunRecoil",
+      "position": [
+        0.0065,
+        1.7991,
+        5.5858
+      ]
+    },
+    {
+      "name": "MuzzleFX",
+      "parent": "GunRecoil",
+      "position": [
+        0.0065,
+        1.7991,
+        5.5858
+      ]
+    },
+    {
+      "name": "GunObstructionStart",
+      "parent": "GunPitch",
+      "position": [
+        0.0065,
+        1.7991,
+        1.38
+      ]
+    },
+    {
+      "name": "GunnerSight",
+      "parent": "TurretYaw",
+      "position": [
+        0.45,
+        2.32,
+        0.65
+      ]
+    },
+    {
+      "name": "Mounts",
+      "parent": "M1AbramsRoot",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "PhysicsMounts",
+      "parent": "M1AbramsRoot",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Collision",
+      "parent": "M1AbramsRoot",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "SeatDriver",
+      "parent": "Mounts",
+      "position": [
+        0,
+        0.8,
+        2
+      ]
+    },
+    {
+      "name": "SeatGunner",
+      "parent": "Mounts",
+      "position": [
+        0.45,
+        1.12,
+        0.2
+      ]
+    },
+    {
+      "name": "CameraDriver",
+      "parent": "Mounts",
+      "position": [
+        0,
+        2.5,
+        1.8
+      ]
+    },
+    {
+      "name": "CameraChase",
+      "parent": "Mounts",
+      "position": [
+        0,
+        3.8,
+        -8
+      ]
+    },
+    {
+      "name": "ExitLeft",
+      "parent": "Mounts",
+      "position": [
+        -2.4,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "ExitRight",
+      "parent": "Mounts",
+      "position": [
+        2.4,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "ExitRear",
+      "parent": "Mounts",
+      "position": [
+        0,
+        0.2,
+        -4.5
+      ]
+    },
+    {
+      "name": "HeadlightLeft",
+      "parent": "Mounts",
+      "position": [
+        -0.94,
+        1.25,
+        3.7
+      ]
+    },
+    {
+      "name": "HeadlightRight",
+      "parent": "Mounts",
+      "position": [
+        0.94,
+        1.25,
+        3.7
+      ]
+    },
+    {
+      "name": "ExhaustLeft",
+      "parent": "Mounts",
+      "position": [
+        -0.5,
+        1.1,
+        -3.75
+      ]
+    },
+    {
+      "name": "ExhaustRight",
+      "parent": "Mounts",
+      "position": [
+        0.5,
+        1.1,
+        -3.75
+      ]
+    },
+    {
+      "name": "CenterOfMass",
+      "parent": "PhysicsMounts",
+      "position": [
+        0,
+        0.72,
+        0
+      ]
+    },
+    {
+      "name": "RecoilForcePoint",
+      "parent": "PhysicsMounts",
+      "position": [
+        0,
+        0.8,
+        0.3
+      ]
+    },
+    {
+      "name": "Contact_L_01",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        2.146
+      ]
+    },
+    {
+      "name": "Contact_L_02",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        1.297
+      ]
+    },
+    {
+      "name": "Contact_L_03",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        0.579
+      ]
+    },
+    {
+      "name": "Contact_L_04",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        -0.111
+      ]
+    },
+    {
+      "name": "Contact_L_05",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        -0.81
+      ]
+    },
+    {
+      "name": "Contact_L_06",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        -1.503
+      ]
+    },
+    {
+      "name": "Contact_L_07",
+      "parent": "PhysicsMounts",
+      "position": [
+        -1.36,
+        0.404,
+        -2.187
+      ]
+    },
+    {
+      "name": "Contact_R_01",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        2.146
+      ]
+    },
+    {
+      "name": "Contact_R_02",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        1.297
+      ]
+    },
+    {
+      "name": "Contact_R_03",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        0.579
+      ]
+    },
+    {
+      "name": "Contact_R_04",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        -0.111
+      ]
+    },
+    {
+      "name": "Contact_R_05",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        -0.81
+      ]
+    },
+    {
+      "name": "Contact_R_06",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        -1.503
+      ]
+    },
+    {
+      "name": "Contact_R_07",
+      "parent": "PhysicsMounts",
+      "position": [
+        1.36,
+        0.404,
+        -2.187
+      ]
+    },
+    {
+      "name": "EndWheel_L_Rear",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3597408353749358,
+        0.7652655165250025,
+        -2.976309232606912
+      ]
+    },
+    {
+      "name": "EndWheel_R_Rear",
+      "parent": "VisualRoot",
+      "position": [
+        1.3619661102098235,
+        0.7652650731021604,
+        -2.976309232606912
+      ]
+    },
+    {
+      "name": "RoadWheel_L_07",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -2.186683664195849
+      ]
+    },
+    {
+      "name": "RoadWheel_L_06",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -1.5032824922551826
+      ]
+    },
+    {
+      "name": "RoadWheel_L_05",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -0.8103920914992031
+      ]
+    },
+    {
+      "name": "RoadWheel_L_04",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -0.11117165896838577
+      ]
+    },
+    {
+      "name": "RoadWheel_L_03",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        0.5785557719981005
+      ]
+    },
+    {
+      "name": "RoadWheel_L_02",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        1.2965121386692757
+      ]
+    },
+    {
+      "name": "RoadWheel_L_01",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        2.1460723024067545
+      ]
+    },
+    {
+      "name": "RoadWheel_R_07",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -2.186683664195849
+      ]
+    },
+    {
+      "name": "RoadWheel_R_06",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -1.5032824922551826
+      ]
+    },
+    {
+      "name": "RoadWheel_R_05",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -0.8103920914992031
+      ]
+    },
+    {
+      "name": "RoadWheel_R_04",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -0.11117165896838577
+      ]
+    },
+    {
+      "name": "RoadWheel_R_03",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        0.5785557719981005
+      ]
+    },
+    {
+      "name": "RoadWheel_R_02",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        1.2965121386692757
+      ]
+    },
+    {
+      "name": "RoadWheel_R_01",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558984792953968,
+        0.4040924594663385,
+        2.1460723024067545
+      ]
+    },
+    {
+      "name": "EndWheel_L_Front",
+      "parent": "VisualRoot",
+      "position": [
+        -1.3536711904064376,
+        0.8325553955109584,
+        2.9482524262658405
+      ]
+    },
+    {
+      "name": "EndWheel_R_Front",
+      "parent": "VisualRoot",
+      "position": [
+        1.3558985491009348,
+        0.8325549540651462,
+        2.9482524262658405
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "name": "EndWheel_L_Rear",
+      "parent": "EndWheel_L_Rear",
+      "pivot": [
+        -1.3597408353749358,
+        0.7652655165250025,
+        -2.976309232606912
+      ],
+      "material": 0,
+      "triangles": 1516,
+      "lodTriangles": [
+        1516,
+        833,
+        379
+      ]
+    },
+    {
+      "name": "EndWheel_R_Rear",
+      "parent": "EndWheel_R_Rear",
+      "pivot": [
+        1.3619661102098235,
+        0.7652650731021604,
+        -2.976309232606912
+      ],
+      "material": 0,
+      "triangles": 1516,
+      "lodTriangles": [
+        1516,
+        833,
+        379
+      ]
+    },
+    {
+      "name": "Barrel",
+      "parent": "GunRecoil",
+      "pivot": [
+        0.0065,
+        1.7991,
+        1.38
+      ],
+      "material": 0,
+      "triangles": 1124,
+      "lodTriangles": [
+        1124,
+        618,
+        281
+      ]
+    },
+    {
+      "name": "RoadWheel_L_07",
+      "parent": "RoadWheel_L_07",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -2.186683664195849
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_L_06",
+      "parent": "RoadWheel_L_06",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -1.5032824922551826
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_L_05",
+      "parent": "RoadWheel_L_05",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -0.8103920914992031
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_L_04",
+      "parent": "RoadWheel_L_04",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        -0.11117165896838577
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_L_03",
+      "parent": "RoadWheel_L_03",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        0.5785557719981005
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_L_02",
+      "parent": "RoadWheel_L_02",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        1.2965121386692757
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_L_01",
+      "parent": "RoadWheel_L_01",
+      "pivot": [
+        -1.3536712602119758,
+        0.4040929009121506,
+        2.1460723024067545
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_07",
+      "parent": "RoadWheel_R_07",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -2.186683664195849
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_06",
+      "parent": "RoadWheel_R_06",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -1.5032824922551826
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_05",
+      "parent": "RoadWheel_R_05",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -0.8103920914992031
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_04",
+      "parent": "RoadWheel_R_04",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        -0.11117165896838577
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_03",
+      "parent": "RoadWheel_R_03",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        0.5785557719981005
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_02",
+      "parent": "RoadWheel_R_02",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        1.2965121386692757
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "RoadWheel_R_01",
+      "parent": "RoadWheel_R_01",
+      "pivot": [
+        1.3558984792953968,
+        0.4040924594663385,
+        2.1460723024067545
+      ],
+      "material": 0,
+      "triangles": 676,
+      "lodTriangles": [
+        676,
+        371,
+        169
+      ]
+    },
+    {
+      "name": "EndWheel_L_Front",
+      "parent": "EndWheel_L_Front",
+      "pivot": [
+        -1.3536711904064376,
+        0.8325553955109584,
+        2.9482524262658405
+      ],
+      "material": 0,
+      "triangles": 596,
+      "lodTriangles": [
+        596,
+        327,
+        149
+      ]
+    },
+    {
+      "name": "EndWheel_R_Front",
+      "parent": "EndWheel_R_Front",
+      "pivot": [
+        1.3558985491009348,
+        0.8325549540651462,
+        2.9482524262658405
+      ],
+      "material": 0,
+      "triangles": 596,
+      "lodTriangles": [
+        596,
+        327,
+        149
+      ]
+    },
+    {
+      "name": "Hull",
+      "parent": "VisualRoot",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "material": 0,
+      "triangles": 12673,
+      "lodTriangles": [
+        12673,
+        6970,
+        3168
+      ]
+    },
+    {
+      "name": "Turret",
+      "parent": "TurretYaw",
+      "pivot": [
+        0.0013,
+        1.45,
+        0.3208
+      ],
+      "material": 0,
+      "triangles": 8594,
+      "lodTriangles": [
+        8594,
+        4726,
+        2148
+      ]
+    },
+    {
+      "name": "GunMount",
+      "parent": "GunPitch",
+      "pivot": [
+        0.0065,
+        1.7991,
+        1.38
+      ],
+      "material": 0,
+      "triangles": 432,
+      "lodTriangles": [
+        432,
+        236,
+        108
+      ]
+    },
+    {
+      "name": "TrackL",
+      "parent": "VisualRoot",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "material": 1,
+      "triangles": 1828,
+      "lodTriangles": [
+        1828,
+        1005,
+        457
+      ]
+    },
+    {
+      "name": "TrackR",
+      "parent": "VisualRoot",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "material": 1,
+      "triangles": 1828,
+      "lodTriangles": [
+        1828,
+        1005,
+        457
+      ]
+    }
+  ]
+}

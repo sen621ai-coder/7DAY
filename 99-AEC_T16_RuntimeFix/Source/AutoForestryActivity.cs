@@ -54,12 +54,22 @@ namespace AECT16RuntimeFix
                 // The block pool may rename an instance root; our child marker is stable.
                 if(lod.transform.Find("MachineryNear")==null)continue;
                 var activity=lod.GetComponent<AutoForestryActivity>()??lod.gameObject.AddComponent<AutoForestryActivity>();
-                activity.Bind(__0,__1);break;
+                try { activity.Bind(__0,__1); }
+                catch(Exception ex)
+                {
+                    // Cosmetic setup must never abort Chunk.OnDisplayBlockEntities
+                    // before it activates the building and its interaction colliders.
+                    activity.bound=false;activity.initialized=false;activity.enabled=false;
+                    Log.Error("[AutoForestry] Animation setup failed; static building remains available: "+ex);
+                }
+                break;
             }
         }
         void Initialize()
         {
-            if(initialized)return;initialized=true;screenProperties=new MaterialPropertyBlock();logProperties=new MaterialPropertyBlock();
+            if(initialized)return;
+            rollers.Clear();originalRotations.Clear();timber.Clear();logRenderers.Clear();logColliders.Clear();
+            screenProperties=new MaterialPropertyBlock();logProperties=new MaterialPropertyBlock();
             foreach(var t in GetComponentsInChildren<Transform>(true))
             {
                 if(t.name=="SawBlade"){blade=t;bladeStart=t.localRotation;bladeRenderer=t.GetComponent<Renderer>();}
@@ -73,7 +83,8 @@ namespace AECT16RuntimeFix
                 if(t.name=="DrivePulley"){drivePulley=t;drivePulleyStart=t.localRotation;}
                 if(t.name.StartsWith("FeedRoller",StringComparison.Ordinal))
                 {rollers.Add(t);originalRotations.Add(t.localRotation);}
-                if(t.name.StartsWith("Timber",StringComparison.Ordinal))timber.Add(t.gameObject);
+                if(t.name.Length==7&&t.name.StartsWith("Timber",StringComparison.Ordinal)&&t.name[6]>='0'&&t.name[6]<='4'
+                    &&t.GetComponent<Renderer>()!=null)timber.Add(t.gameObject);
                 if(t.name=="ControlScreen")screen=t.GetComponent<Renderer>();
                 if(t.name=="WorkLamp")workLight=t.GetComponent<Light>();
                 if(t.name=="Sawdust")dust=t.GetComponent<ParticleSystem>();
@@ -82,7 +93,11 @@ namespace AECT16RuntimeFix
             foreach(var log in timber){logRenderers.Add(log.GetComponent<Renderer>());logColliders.Add(log.GetComponent<Collider>());}
             if(logRenderers.Count>0)
             {
-                solidLog=logRenderers[0].sharedMaterial;
+                // Pooled renderers may have lost their material. Never copy null or
+                // another instance's temporary fade material into this instance.
+                solidLog=AutoForestryModel.GetTimberMaterial();
+                foreach(var renderer in logRenderers)renderer.sharedMaterial=solidLog;
+                if(fadeLog!=null)Destroy(fadeLog);
                 fadeLog=new Material(solidLog){name="ForestryLogTransition"};
                 fadeLog.SetFloat("_Mode",2);fadeLog.SetOverrideTag("RenderType","Transparent");
                 fadeLog.SetInt("_SrcBlend",(int)UnityEngine.Rendering.BlendMode.SrcAlpha);
@@ -90,10 +105,11 @@ namespace AECT16RuntimeFix
                 fadeLog.SetInt("_ZWrite",0);fadeLog.DisableKeyword("_ALPHATEST_ON");fadeLog.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                 fadeLog.EnableKeyword("_ALPHABLEND_ON");fadeLog.renderQueue=3000;
             }
+            initialized=true;
         }
         void Bind(WorldBase source,Vector3i at)
         {
-            Initialize();ResetPresentation();world=source;position=at;bound=true;nextPoll=0;
+            Initialize();ResetPresentation();world=source;position=at;bound=true;nextPoll=0;enabled=true;
         }
         void ResetPresentation()
         {
@@ -113,7 +129,14 @@ namespace AECT16RuntimeFix
             SetScreen(0);
         }
         void OnDisable(){bound=false;world=null;if(initialized)ResetPresentation();}
-        void OnDestroy(){if(fadeLog!=null)Destroy(fadeLog);}
+        void OnDestroy()
+        {
+            // Cloned/pooled renderers must not retain an instance-owned material
+            // after its owner is destroyed.
+            foreach(var renderer in logRenderers)
+                if(renderer!=null&&solidLog!=null)renderer.sharedMaterial=solidLog;
+            if(fadeLog!=null)Destroy(fadeLog);
+        }
         bool PoseBoards()
         {
             bool cutting=false;

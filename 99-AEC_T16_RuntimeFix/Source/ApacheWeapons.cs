@@ -43,7 +43,7 @@ namespace AECT16RuntimeFix
         }
         public static bool Server { get { return ConnectionManager.Instance != null && ConnectionManager.Instance.IsServer; } }
         public static bool IsApache(EntityVehicle v)
-        { return v != null && v.vehicle != null && v.vehicle.GetName() == MD500FlightControls.ApacheVehicleName; }
+        { return v != null && v.vehicle != null && string.Equals(v.vehicle.GetName(), MD500FlightControls.ApacheVehicleName, StringComparison.OrdinalIgnoreCase); }
         public static void Install(Harmony harmony)
         {
             try

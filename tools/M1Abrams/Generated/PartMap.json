@@ -1,0 +1,1747 @@
+[
+  {
+    "component": 0,
+    "part": "EndWheel_L_Rear",
+    "triangles": 1516
+  },
+  {
+    "component": 1,
+    "part": "EndWheel_R_Rear",
+    "triangles": 1516
+  },
+  {
+    "component": 2,
+    "part": "Barrel",
+    "triangles": 886
+  },
+  {
+    "component": 3,
+    "part": "RoadWheel_L_07",
+    "triangles": 676
+  },
+  {
+    "component": 4,
+    "part": "RoadWheel_L_06",
+    "triangles": 676
+  },
+  {
+    "component": 5,
+    "part": "RoadWheel_L_05",
+    "triangles": 676
+  },
+  {
+    "component": 6,
+    "part": "RoadWheel_L_04",
+    "triangles": 676
+  },
+  {
+    "component": 7,
+    "part": "RoadWheel_L_03",
+    "triangles": 676
+  },
+  {
+    "component": 8,
+    "part": "RoadWheel_L_02",
+    "triangles": 676
+  },
+  {
+    "component": 9,
+    "part": "RoadWheel_L_01",
+    "triangles": 676
+  },
+  {
+    "component": 10,
+    "part": "RoadWheel_R_07",
+    "triangles": 676
+  },
+  {
+    "component": 11,
+    "part": "RoadWheel_R_06",
+    "triangles": 676
+  },
+  {
+    "component": 12,
+    "part": "RoadWheel_R_05",
+    "triangles": 676
+  },
+  {
+    "component": 13,
+    "part": "RoadWheel_R_04",
+    "triangles": 676
+  },
+  {
+    "component": 14,
+    "part": "RoadWheel_R_03",
+    "triangles": 676
+  },
+  {
+    "component": 15,
+    "part": "RoadWheel_R_02",
+    "triangles": 676
+  },
+  {
+    "component": 16,
+    "part": "RoadWheel_R_01",
+    "triangles": 676
+  },
+  {
+    "component": 17,
+    "part": "EndWheel_L_Front",
+    "triangles": 596
+  },
+  {
+    "component": 18,
+    "part": "EndWheel_R_Front",
+    "triangles": 596
+  },
+  {
+    "component": 19,
+    "part": "Hull",
+    "triangles": 332
+  },
+  {
+    "component": 20,
+    "part": "Hull",
+    "triangles": 332
+  },
+  {
+    "component": 21,
+    "part": "Hull",
+    "triangles": 332
+  },
+  {
+    "component": 22,
+    "part": "Hull",
+    "triangles": 332
+  },
+  {
+    "component": 23,
+    "part": "Hull",
+    "triangles": 316
+  },
+  {
+    "component": 24,
+    "part": "Turret",
+    "triangles": 316
+  },
+  {
+    "component": 25,
+    "part": "Turret",
+    "triangles": 316
+  },
+  {
+    "component": 26,
+    "part": "Hull",
+    "triangles": 316
+  },
+  {
+    "component": 27,
+    "part": "Hull",
+    "triangles": 298
+  },
+  {
+    "component": 28,
+    "part": "Turret",
+    "triangles": 298
+  },
+  {
+    "component": 29,
+    "part": "Hull",
+    "triangles": 298
+  },
+  {
+    "component": 30,
+    "part": "Hull",
+    "triangles": 292
+  },
+  {
+    "component": 31,
+    "part": "GunMount",
+    "triangles": 258
+  },
+  {
+    "component": 32,
+    "part": "Hull",
+    "triangles": 250
+  },
+  {
+    "component": 33,
+    "part": "Turret",
+    "triangles": 238
+  },
+  {
+    "component": 34,
+    "part": "Turret",
+    "triangles": 202
+  },
+  {
+    "component": 35,
+    "part": "Turret",
+    "triangles": 202
+  },
+  {
+    "component": 36,
+    "part": "Turret",
+    "triangles": 202
+  },
+  {
+    "component": 37,
+    "part": "Turret",
+    "triangles": 202
+  },
+  {
+    "component": 38,
+    "part": "Turret",
+    "triangles": 202
+  },
+  {
+    "component": 39,
+    "part": "Turret",
+    "triangles": 202
+  },
+  {
+    "component": 40,
+    "part": "Turret",
+    "triangles": 196
+  },
+  {
+    "component": 41,
+    "part": "Turret",
+    "triangles": 188
+  },
+  {
+    "component": 42,
+    "part": "Hull",
+    "triangles": 170
+  },
+  {
+    "component": 43,
+    "part": "Hull",
+    "triangles": 170
+  },
+  {
+    "component": 44,
+    "part": "Hull",
+    "triangles": 170
+  },
+  {
+    "component": 45,
+    "part": "Hull",
+    "triangles": 170
+  },
+  {
+    "component": 46,
+    "part": "Hull",
+    "triangles": 164
+  },
+  {
+    "component": 47,
+    "part": "Hull",
+    "triangles": 164
+  },
+  {
+    "component": 48,
+    "part": "GunMount",
+    "triangles": 162
+  },
+  {
+    "component": 49,
+    "part": "Turret",
+    "triangles": 160
+  },
+  {
+    "component": 50,
+    "part": "Turret",
+    "triangles": 160
+  },
+  {
+    "component": 51,
+    "part": "Turret",
+    "triangles": 160
+  },
+  {
+    "component": 52,
+    "part": "Hull",
+    "triangles": 160
+  },
+  {
+    "component": 53,
+    "part": "Turret",
+    "triangles": 160
+  },
+  {
+    "component": 54,
+    "part": "Turret",
+    "triangles": 160
+  },
+  {
+    "component": 55,
+    "part": "Turret",
+    "triangles": 160
+  },
+  {
+    "component": 56,
+    "part": "Turret",
+    "triangles": 156
+  },
+  {
+    "component": 57,
+    "part": "Turret",
+    "triangles": 156
+  },
+  {
+    "component": 58,
+    "part": "Barrel",
+    "triangles": 156
+  },
+  {
+    "component": 59,
+    "part": "Turret",
+    "triangles": 156
+  },
+  {
+    "component": 60,
+    "part": "Turret",
+    "triangles": 156
+  },
+  {
+    "component": 61,
+    "part": "Hull",
+    "triangles": 138
+  },
+  {
+    "component": 62,
+    "part": "Hull",
+    "triangles": 138
+  },
+  {
+    "component": 63,
+    "part": "Hull",
+    "triangles": 136
+  },
+  {
+    "component": 64,
+    "part": "Hull",
+    "triangles": 136
+  },
+  {
+    "component": 65,
+    "part": "Hull",
+    "triangles": 131
+  },
+  {
+    "component": 66,
+    "part": "Turret",
+    "triangles": 128
+  },
+  {
+    "component": 67,
+    "part": "Hull",
+    "triangles": 120
+  },
+  {
+    "component": 68,
+    "part": "Hull",
+    "triangles": 120
+  },
+  {
+    "component": 69,
+    "part": "Turret",
+    "triangles": 116
+  },
+  {
+    "component": 70,
+    "part": "Hull",
+    "triangles": 98
+  },
+  {
+    "component": 71,
+    "part": "Hull",
+    "triangles": 98
+  },
+  {
+    "component": 72,
+    "part": "Turret",
+    "triangles": 98
+  },
+  {
+    "component": 73,
+    "part": "Hull",
+    "triangles": 98
+  },
+  {
+    "component": 74,
+    "part": "Hull",
+    "triangles": 98
+  },
+  {
+    "component": 75,
+    "part": "Hull",
+    "triangles": 92
+  },
+  {
+    "component": 76,
+    "part": "Hull",
+    "triangles": 92
+  },
+  {
+    "component": 77,
+    "part": "Hull",
+    "triangles": 92
+  },
+  {
+    "component": 78,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 79,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 80,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 81,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 82,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 83,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 84,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 85,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 86,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 87,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 88,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 89,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 90,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 91,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 92,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 93,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 94,
+    "part": "Turret",
+    "triangles": 92
+  },
+  {
+    "component": 95,
+    "part": "Hull",
+    "triangles": 92
+  },
+  {
+    "component": 96,
+    "part": "Hull",
+    "triangles": 92
+  },
+  {
+    "component": 97,
+    "part": "Hull",
+    "triangles": 92
+  },
+  {
+    "component": 98,
+    "part": "Hull",
+    "triangles": 88
+  },
+  {
+    "component": 99,
+    "part": "Hull",
+    "triangles": 88
+  },
+  {
+    "component": 100,
+    "part": "Hull",
+    "triangles": 83
+  },
+  {
+    "component": 101,
+    "part": "Turret",
+    "triangles": 76
+  },
+  {
+    "component": 102,
+    "part": "Turret",
+    "triangles": 76
+  },
+  {
+    "component": 103,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 104,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 105,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 106,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 107,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 108,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 109,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 110,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 111,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 112,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 113,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 114,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 115,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 116,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 117,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 118,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 119,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 120,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 121,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 122,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 123,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 124,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 125,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 126,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 127,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 128,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 129,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 130,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 131,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 132,
+    "part": "Hull",
+    "triangles": 76
+  },
+  {
+    "component": 133,
+    "part": "Turret",
+    "triangles": 76
+  },
+  {
+    "component": 134,
+    "part": "Turret",
+    "triangles": 76
+  },
+  {
+    "component": 135,
+    "part": "Turret",
+    "triangles": 68
+  },
+  {
+    "component": 136,
+    "part": "Turret",
+    "triangles": 68
+  },
+  {
+    "component": 137,
+    "part": "Turret",
+    "triangles": 68
+  },
+  {
+    "component": 138,
+    "part": "Turret",
+    "triangles": 68
+  },
+  {
+    "component": 139,
+    "part": "Hull",
+    "triangles": 60
+  },
+  {
+    "component": 140,
+    "part": "Turret",
+    "triangles": 60
+  },
+  {
+    "component": 141,
+    "part": "Hull",
+    "triangles": 60
+  },
+  {
+    "component": 142,
+    "part": "Hull",
+    "triangles": 59
+  },
+  {
+    "component": 143,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 144,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 145,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 146,
+    "part": "Hull",
+    "triangles": 58
+  },
+  {
+    "component": 147,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 148,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 149,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 150,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 151,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 152,
+    "part": "Turret",
+    "triangles": 58
+  },
+  {
+    "component": 153,
+    "part": "Hull",
+    "triangles": 58
+  },
+  {
+    "component": 154,
+    "part": "Hull",
+    "triangles": 56
+  },
+  {
+    "component": 155,
+    "part": "Hull",
+    "triangles": 56
+  },
+  {
+    "component": 156,
+    "part": "Hull",
+    "triangles": 52
+  },
+  {
+    "component": 157,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 158,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 159,
+    "part": "Hull",
+    "triangles": 52
+  },
+  {
+    "component": 160,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 161,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 162,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 163,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 164,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 165,
+    "part": "Turret",
+    "triangles": 52
+  },
+  {
+    "component": 166,
+    "part": "Hull",
+    "triangles": 52
+  },
+  {
+    "component": 167,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 168,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 169,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 170,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 171,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 172,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 173,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 174,
+    "part": "Turret",
+    "triangles": 44
+  },
+  {
+    "component": 175,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 176,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 177,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 178,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 179,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 180,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 181,
+    "part": "Hull",
+    "triangles": 44
+  },
+  {
+    "component": 182,
+    "part": "Hull",
+    "triangles": 42
+  },
+  {
+    "component": 183,
+    "part": "Hull",
+    "triangles": 42
+  },
+  {
+    "component": 184,
+    "part": "Hull",
+    "triangles": 40
+  },
+  {
+    "component": 185,
+    "part": "Hull",
+    "triangles": 40
+  },
+  {
+    "component": 186,
+    "part": "Hull",
+    "triangles": 40
+  },
+  {
+    "component": 187,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 188,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 189,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 190,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 191,
+    "part": "Turret",
+    "triangles": 36
+  },
+  {
+    "component": 192,
+    "part": "Turret",
+    "triangles": 36
+  },
+  {
+    "component": 193,
+    "part": "Turret",
+    "triangles": 36
+  },
+  {
+    "component": 194,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 195,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 196,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 197,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 198,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 199,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 200,
+    "part": "Hull",
+    "triangles": 36
+  },
+  {
+    "component": 201,
+    "part": "Hull",
+    "triangles": 34
+  },
+  {
+    "component": 202,
+    "part": "Hull",
+    "triangles": 34
+  },
+  {
+    "component": 203,
+    "part": "Hull",
+    "triangles": 34
+  },
+  {
+    "component": 204,
+    "part": "Barrel",
+    "triangles": 34
+  },
+  {
+    "component": 205,
+    "part": "Hull",
+    "triangles": 34
+  },
+  {
+    "component": 206,
+    "part": "Hull",
+    "triangles": 34
+  },
+  {
+    "component": 207,
+    "part": "Hull",
+    "triangles": 34
+  },
+  {
+    "component": 208,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 209,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 210,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 211,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 212,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 213,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 214,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 215,
+    "part": "Hull",
+    "triangles": 32
+  },
+  {
+    "component": 216,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 217,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 218,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 219,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 220,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 221,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 222,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 223,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 224,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 225,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 226,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 227,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 228,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 229,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 230,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 231,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 232,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 233,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 234,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 235,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 236,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 237,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 238,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 239,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 240,
+    "part": "Turret",
+    "triangles": 28
+  },
+  {
+    "component": 241,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 242,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 243,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 244,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 245,
+    "part": "Hull",
+    "triangles": 28
+  },
+  {
+    "component": 246,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 247,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 248,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 249,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 250,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 251,
+    "part": "Turret",
+    "triangles": 26
+  },
+  {
+    "component": 252,
+    "part": "Turret",
+    "triangles": 26
+  },
+  {
+    "component": 253,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 254,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 255,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 256,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 257,
+    "part": "Hull",
+    "triangles": 26
+  },
+  {
+    "component": 258,
+    "part": "Hull",
+    "triangles": 24
+  },
+  {
+    "component": 259,
+    "part": "Hull",
+    "triangles": 24
+  },
+  {
+    "component": 260,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 261,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 262,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 263,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 264,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 265,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 266,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 267,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 268,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 269,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 270,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 271,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 272,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 273,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 274,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 275,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 276,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 277,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 278,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 279,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 280,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 281,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 282,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 283,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 284,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 285,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 286,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 287,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 288,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 289,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 290,
+    "part": "Hull",
+    "triangles": 20
+  },
+  {
+    "component": 291,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 292,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 293,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 294,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 295,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 296,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 297,
+    "part": "GunMount",
+    "triangles": 12
+  },
+  {
+    "component": 298,
+    "part": "Barrel",
+    "triangles": 12
+  },
+  {
+    "component": 299,
+    "part": "Barrel",
+    "triangles": 12
+  },
+  {
+    "component": 300,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 301,
+    "part": "Barrel",
+    "triangles": 12
+  },
+  {
+    "component": 302,
+    "part": "Barrel",
+    "triangles": 12
+  },
+  {
+    "component": 303,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 304,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 305,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 306,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 307,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 308,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 309,
+    "part": "Turret",
+    "triangles": 12
+  },
+  {
+    "component": 310,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 311,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 312,
+    "part": "Hull",
+    "triangles": 12
+  },
+  {
+    "component": 313,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 314,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 315,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 316,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 317,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 318,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 319,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 320,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 321,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 322,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 323,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 324,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 325,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 326,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 327,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 328,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 329,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 330,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 331,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 332,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 333,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 334,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 335,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 336,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 337,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 338,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 339,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 340,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 341,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 342,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 343,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 344,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 345,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 346,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 347,
+    "part": "Hull",
+    "triangles": 10
+  },
+  {
+    "component": 348,
+    "part": "Turret",
+    "triangles": 6
+  }
+]

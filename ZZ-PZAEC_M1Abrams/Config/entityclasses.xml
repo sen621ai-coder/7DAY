@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/entity_classes">
+    <entity_class name="vehicleM1Abrams">
+      <property name="Class" value="EntityVJeep" />
+      <property name="Tags" value="vehicle,usesGas" />
+      <property name="Prefab" value="M1AbramsRuntime.prefab" />
+      <property name="ModelType" value="Standard" />
+      <property name="SurfaceCategory" value="metal" />
+      <property name="IgnoreTrigger" value="true" />
+      <property name="LootList" value="vehicle4x4Truck" />
+      <property name="IsEnemyEntity" value="false" />
+      <property class="Explosion">
+        <property name="ParticleIndex" value="29" />
+        <property name="RadiusBlocks" value="5" />
+        <property name="RadiusEntities" value="5" />
+        <property name="BlockDamage" value="100" />
+        <property name="EntityDamage" value="100" />
+      </property>
+      <property name="RotateToGround" value="true" />
+      <property name="Faction" value="none" />
+      <property name="MapIcon" value="ui_game_symbol_4x4" />
+      <property name="NavObject" value="4x4" />
+    </entity_class>
+    <entity_class name="vehicleM1AbramsT17">
+      <property name="Class" value="EntityVJeep" />
+      <property name="Tags" value="vehicle,usesGas" />
+      <property name="Prefab" value="M1AbramsRuntime.prefab" />
+      <property name="ModelType" value="Standard" />
+      <property name="SurfaceCategory" value="metal" />
+      <property name="IgnoreTrigger" value="true" />
+      <property name="LootList" value="vehicle4x4Truck" />
+      <property name="IsEnemyEntity" value="false" />
+      <property class="Explosion">
+        <property name="ParticleIndex" value="29" />
+        <property name="RadiusBlocks" value="5" />
+        <property name="RadiusEntities" value="5" />
+        <property name="BlockDamage" value="100" />
+        <property name="EntityDamage" value="100" />
+      </property>
+      <property name="RotateToGround" value="true" />
+      <property name="Faction" value="none" />
+      <property name="MapIcon" value="ui_game_symbol_4x4" />
+      <property name="NavObject" value="4x4" />
+    </entity_class>
+    <entity_class name="vehicleM1AbramsT18">
+      <property name="Class" value="EntityVJeep" />
+      <property name="Tags" value="vehicle,usesGas" />
+      <property name="Prefab" value="M1AbramsRuntime.prefab" />
+      <property name="ModelType" value="Standard" />
+      <property name="SurfaceCategory" value="metal" />
+      <property name="IgnoreTrigger" value="true" />
+      <property name="LootList" value="vehicle4x4Truck" />
+      <property name="IsEnemyEntity" value="false" />
+      <property class="Explosion">
+        <property name="ParticleIndex" value="29" />
+        <property name="RadiusBlocks" value="5" />
+        <property name="RadiusEntities" value="5" />
+        <property name="BlockDamage" value="100" />
+        <property name="EntityDamage" value="100" />
+      </property>
+      <property name="RotateToGround" value="true" />
+      <property name="Faction" value="none" />
+      <property name="MapIcon" value="ui_game_symbol_4x4" />
+      <property name="NavObject" value="4x4" />
+    </entity_class>
+    <entity_class name="vehicleM1AbramsT19">
+      <property name="Class" value="EntityVJeep" />
+      <property name="Tags" value="vehicle,usesGas" />
+      <property name="Prefab" value="M1AbramsRuntime.prefab" />
+      <property name="ModelType" value="Standard" />
+      <property name="SurfaceCategory" value="metal" />
+      <property name="IgnoreTrigger" value="true" />
+      <property name="LootList" value="vehicle4x4Truck" />
+      <property name="IsEnemyEntity" value="false" />
+      <property class="Explosion">
+        <property name="ParticleIndex" value="29" />
+        <property name="RadiusBlocks" value="5" />
+        <property name="RadiusEntities" value="5" />
+        <property name="BlockDamage" value="100" />
+        <property name="EntityDamage" value="100" />
+      </property>
+      <property name="RotateToGround" value="true" />
+      <property name="Faction" value="none" />
+      <property name="MapIcon" value="ui_game_symbol_4x4" />
+      <property name="NavObject" value="4x4" />
+    </entity_class>
+  </append>
+</configs>

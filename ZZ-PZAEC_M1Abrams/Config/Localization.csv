@@ -1,0 +1,19 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
+vehicleM1Abrams,entityclasses,Vehicle,,,M1 Abrams T16,M1艾布拉姆斯 T16
+vehicleM1AbramsPlaceable,items,Vehicle,,,M1 Abrams T16,M1艾布拉姆斯 T16
+vehicleM1AbramsPlaceableDesc,items,Vehicle,,,T16 tank. HE/AP in cargo. R switches shell. Hold G outside for cargo repair kit.,T16主战坦克，耐久100万。货仓装填HE/AP；左键开火，右键瞄准，R切弹。车外对准坦克按住G维修，维修包放货仓。升级前满修、清空燃油、拆下改装并收起车辆。
+vehicleM1AbramsT17,entityclasses,Vehicle,,,M1 Abrams T17,M1艾布拉姆斯 T17
+vehicleM1AbramsT17Placeable,items,Vehicle,,,M1 Abrams T17,M1艾布拉姆斯 T17
+vehicleM1AbramsT17PlaceableDesc,items,Vehicle,,,T17 tank. HE/AP in cargo. R switches shell. Hold G outside for cargo repair kit.,T17主战坦克，耐久150万。货仓装填HE/AP；左键开火，右键瞄准，R切弹。车外对准坦克按住G维修，维修包放货仓。升级前满修、清空燃油、拆下改装并收起车辆。
+vehicleM1AbramsT18,entityclasses,Vehicle,,,M1 Abrams T18,M1艾布拉姆斯 T18
+vehicleM1AbramsT18Placeable,items,Vehicle,,,M1 Abrams T18,M1艾布拉姆斯 T18
+vehicleM1AbramsT18PlaceableDesc,items,Vehicle,,,T18 tank. HE/AP in cargo. R switches shell. Hold G outside for cargo repair kit.,T18主战坦克，耐久220万。货仓装填HE/AP；左键开火，右键瞄准，R切弹。车外对准坦克按住G维修，维修包放货仓。升级前满修、清空燃油、拆下改装并收起车辆。
+vehicleM1AbramsT19,entityclasses,Vehicle,,,M1 Abrams T19,M1艾布拉姆斯 T19
+vehicleM1AbramsT19Placeable,items,Vehicle,,,M1 Abrams T19,M1艾布拉姆斯 T19
+vehicleM1AbramsT19PlaceableDesc,items,Vehicle,,,T19 tank. HE/AP in cargo. R switches shell. Hold G outside for cargo repair kit.,T19主战坦克，耐久320万。货仓装填HE/AP；左键开火，右键瞄准，R切弹。车外对准坦克按住G维修，维修包放货仓。升级前满修、清空燃油、拆下改装并收起车辆。
+pzM1Shell,items,Item,,,pzM1Shell,M1高爆榴弹 HE
+pzM1ShellDesc,items,Item,,,放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。,放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。
+pzM1ShellAP,items,Item,,,pzM1ShellAP,M1穿甲弹 AP
+pzM1ShellAPDesc,items,Item,,,放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。,放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。
+pzM1RepairKit,items,Item,,,pzM1RepairKit,M1装甲维修包
+pzM1RepairKitDesc,items,Item,,,放入坦克货仓。车外对准坦克按住G 8秒；停车停火且10秒内未受伤，每包将坦克耐久完全修满。受击或松开中断不扣包；满耐久不消耗。,放入坦克货仓。车外对准坦克按住G 8秒；停车停火且10秒内未受伤，每包将坦克耐久完全修满。受击或松开中断不扣包；满耐久不消耗。

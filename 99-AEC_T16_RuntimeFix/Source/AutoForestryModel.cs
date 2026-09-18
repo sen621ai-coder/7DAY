@@ -14,6 +14,7 @@ namespace AECT16RuntimeFix
         static string assetPath;
         static GameObject cache;
         static Transform prefab;
+        static Material timberMaterial;
         const string BlockName = "yfAutoForestry";
 
         public static void Install(Harmony harmony, string modPath)
@@ -69,6 +70,17 @@ namespace AECT16RuntimeFix
             var m = new Material(shader) { name = name, color = color };
             m.SetFloat("_Glossiness", .2f);
             return m;
+        }
+
+        internal static Material GetTimberMaterial()
+        {
+            if(timberMaterial!=null)return timberMaterial;
+            var shader=Shader.Find("Standard");
+            if(shader==null)throw new InvalidOperationException("Standard shader unavailable for forestry timber");
+            timberMaterial=Solid(shader,"ForestryBarkAndEndgrain",Color.white);
+            timberMaterial.mainTexture=Texture("timber.png",false);
+            timberMaterial.SetFloat("_Glossiness",.12f);
+            return timberMaterial;
         }
 
         static GameObject Box(Transform parent, string name, Vector3 at, Vector3 size, Material material)
@@ -223,8 +235,7 @@ namespace AECT16RuntimeFix
                 var amber = Solid(shader, "ForestryWarning", new Color(.85f,.45f,.08f));
                 dark.mainTexture=materials[0].mainTexture;
                 dark.mainTextureScale=new Vector2(.25f,.30f); dark.mainTextureOffset=new Vector2(.72f,.06f);
-                var timber=Solid(shader,"ForestryBarkAndEndgrain",Color.white);
-                timber.mainTexture=Texture("timber.png",false); timber.SetFloat("_Glossiness",.12f);
+                var timber=GetTimberMaterial();
                 var trim=Solid(shader,"ForestryMetalTrim",new Color(.48f,.49f,.44f));
                 trim.SetFloat("_Metallic",.8f); trim.SetFloat("_Glossiness",.35f);
                 var red=Solid(shader,"ForestryStopButton",new Color(.6f,.055f,.035f));
