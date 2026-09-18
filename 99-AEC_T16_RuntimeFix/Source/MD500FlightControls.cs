@@ -6,11 +6,12 @@ using UnityEngine;
 
 namespace AECT16RuntimeFix
 {
-    // Standalone adapter. Never edits or redistributes Bdub's model/configuration.
+    // Shared flight adapter, restricted to explicitly supported helicopter entities.
     public static class MD500FlightControls
     {
         private static bool enabled;
         public const string VehicleName = "vehicleMD500";
+        public const string ApacheVehicleName = "vehicleApacheHelicopter";
 
         public static void Install(Harmony harmony)
         {
@@ -26,7 +27,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(AccessTools.Method(typeof(EntityVehicle), "FixedUpdateForces"),
                     prefix: new HarmonyMethod(typeof(MD500FlightControls), nameof(BeforeForces)));
                 enabled = true;
-                Log.Out("[MD500-VTOL] Independent lift/translation active for vehicleMD500 only; native fuel and networking retained.");
+                Log.Out("[MD500-VTOL] Independent lift/translation active for vehicleMD500 and vehicleApacheHelicopter; native fuel and networking retained.");
             }
             catch (Exception ex)
             {
@@ -37,7 +38,8 @@ namespace AECT16RuntimeFix
 
         public static bool Applies(Vehicle vehicle)
         {
-            return enabled && vehicle != null && vehicle.GetName() == VehicleName;
+            return enabled && vehicle != null &&
+                (vehicle.GetName() == VehicleName || vehicle.GetName() == ApacheVehicleName);
         }
 
         public static bool GroundAction(bool pressed, EntityVehicle entity)
@@ -136,7 +138,7 @@ namespace AECT16RuntimeFix
                 forwardMax * vehicle.EffectVelocityMaxPer, backwardMax * vehicle.EffectVelocityMaxPer,
                 vehicle.EffectMotorTorquePer);
             // Native PhysicsFixedUpdate already adds gravity (-9.81). Replace
-            // only the six MD-500 XML forces; collisions/drag/speed caps remain.
+            // only the supported helicopter XML forces; collisions/drag/speed caps remain.
             rb.AddForce(forward * force.Forward + right * force.Right + Vector3.up * force.Up,
                 ForceMode.Acceleration);
             Vector3 levelTorque = Vector3.Cross(bodyUp, Vector3.up) * 6f -

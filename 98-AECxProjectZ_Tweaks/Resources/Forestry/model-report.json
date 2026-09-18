@@ -1,0 +1,68 @@
+{
+  "source": "old_sawmill_industrial_building.glb",
+  "sha256": "25caf3451996ec168c3fa12837f1db2384ddd119094455daa4337889d90aa17c",
+  "sourceSize": [
+    369.4495849609375,
+    66.75098037719731,
+    245.6630859375
+  ],
+  "scale": 0.039531488066619984,
+  "heightScale": 1.36,
+  "modelSize": [
+    9.5,
+    3.5887211945342505,
+    3.841884460915898
+  ],
+  "footprint": [
+    10,
+    4,
+    6
+  ],
+  "heightProfile": {
+    "knee": 1.15,
+    "lowerGain": 1.8,
+    "upperGain": 1.069208202525437
+  },
+  "adaptation": "Removed detached yard and fence; raised lower walls, total height ratio 1.36; base y=.10, center z=.30",
+  "parts": 6,
+  "triangles": 23706,
+  "materials": 6,
+  "meshSha256": "c03aa232c318c0475d333b37120d8ce4d4f6c3487753ca7710f2c913a3ea391c",
+  "detailAlbedo": true,
+  "surfaceMaterials": [
+    "source_misc",
+    "source_fallback",
+    "roof",
+    "brick",
+    "wood",
+    "painted_metal"
+  ],
+  "lodTriangles": 8194,
+  "lodSha256": "fa5df6aa1ab2949ada9ae7d010b47095234bc052cc62a468919e27ef46326a99",
+  "albedoSizes": [
+    [
+      1024,
+      1024
+    ],
+    [
+      1254,
+      1254
+    ],
+    [
+      627,
+      627
+    ],
+    [
+      627,
+      627
+    ],
+    [
+      627,
+      627
+    ],
+    [
+      627,
+      627
+    ]
+  ]
+}

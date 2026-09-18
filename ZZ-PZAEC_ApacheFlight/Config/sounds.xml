@@ -1,0 +1,70 @@
+<Zilox>
+  <append xpath="/Sounds">
+    <SoundDataNode name="pzApacheRocketFire">
+      <AudioSource name="@:Sounds/Prefabs/AudioSource_WeaponFire.prefab" />
+      <AudioClip ClipName="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?missile_fire" />
+      <LocalCrouchVolumeScale value="1" />
+      <CrouchNoiseScale value="1" />
+      <NoiseScale value="1" />
+      <MaxVoices value="12" />
+      <MaxRepeatRate value="0.01" />
+    </SoundDataNode>
+    <!-- HELICOPTER SOUNDS -->
+    <SoundDataNode name="ApacheHelicopter_Start">
+      <AudioSource name="@:Sounds/Prefabs/AudioSource_Vehicle.prefab" />
+      <Noise ID="2" noise="11" time="3" muffled_when_crouched="0.5" />
+      <AudioClip ClipName="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?HelicopterStart" />
+      <LocalCrouchVolumeScale value="1.0" />
+      <CrouchNoiseScale value="0.5" />
+      <NoiseScale value="1" />
+      <MaxVoices value="10" />
+      <MaxRepeatRate value="0.01" />
+    </SoundDataNode>
+    <SoundDataNode name="ApacheHelicopter_ShutOff">
+      <AudioSource name="@:Sounds/Prefabs/AudioSource_Vehicle.prefab" />
+      <Noise ID="2" noise="11" time="3" muffled_when_crouched="0.5" />
+      <AudioClip ClipName="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?HelicopterShutOff" />
+      <LocalCrouchVolumeScale value="1.0" />
+      <CrouchNoiseScale value="0.5" />
+      <NoiseScale value="1" />
+      <MaxVoices value="10" />
+      <MaxRepeatRate value="0.01" />
+    </SoundDataNode>
+    <SoundDataNode name="ApacheHelicopter_Flying">
+      <AudioSource name="@:Sounds/Prefabs/AudioSource_SmallHorn.prefab" />
+      <AudioClip ClipName="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?HelicopterFlying" Loop="true" />
+      <LocalCrouchVolumeScale value="1.0" />
+      <CrouchNoiseScale value="0.5" />
+      <NoiseScale value="1" />
+      <MaxVoices value="10" />
+      <MaxRepeatRate value="0.01" />
+    </SoundDataNode>
+    <SoundDataNode name="ApacheHelicopter_Flying1">
+      <AudioSource name="@:Sounds/Prefabs/AudioSource_SmallHorn.prefab" />
+      <AudioClip ClipName="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?HelicopterFlying" Loop="true" />
+      <LocalCrouchVolumeScale value="1.0" />
+      <CrouchNoiseScale value="0.5" />
+      <NoiseScale value="1" />
+      <MaxVoices value="10" />
+      <MaxRepeatRate value="0.01" />
+    </SoundDataNode>
+    <SoundDataNode name="pzApacheCannonFire">
+      <AudioSource name="@:Sounds/Prefabs/AudioSource_WeaponFire.prefab" />
+      <NetworkAudioSource name="@:Sounds/Prefabs/AudioSource_WeaponFire_Network.prefab" />
+      <Noise ID="0" noise="54" time="2" muffled_when_crouched="0.8" heat_map_strength="0.9" heat_map_time="180" />
+      <AudioClip ClipName="@:Sounds/Weapons/Ranged/M60/m60_fire1.wav" />
+      <AudioClip ClipName="@:Sounds/Weapons/Ranged/M60/m60_fire2.wav" />
+      <AudioClip ClipName="@:Sounds/Weapons/Ranged/M60/m60_fire3.wav" />
+      <AudioClip ClipName="@:Sounds/Weapons/Ranged/M60/m60_fire4.wav" />
+      <AudioClip ClipName="@:Sounds/Twitch/Silly/m60_fire_silly1.wav" AltSound="true" />
+      <AudioClip ClipName="@:Sounds/Twitch/Silly/m60_fire_silly2.wav" AltSound="true" />
+      <AudioClip ClipName="@:Sounds/Twitch/Silly/m60_fire_silly3.wav" AltSound="true" />
+      <LocalCrouchVolumeScale value="1" />
+      <CrouchNoiseScale value="1" />
+      <NoiseScale value="1" />
+      <MaxVoices value="30" />
+      <MaxVoicesPerEntity value="10" />
+      <MaxRepeatRate value="0.001" />
+    </SoundDataNode>
+  </append>
+</Zilox>

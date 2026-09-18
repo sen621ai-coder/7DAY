@@ -1,0 +1,25 @@
+<configs>
+  <append xpath="/entity_classes">
+    <entity_class name="vehicleApacheHelicopter">
+      <property name="Class" value="EntityVGyroCopter"/>
+      <property name="Tags" value="vehicle,usesGas"/>
+      <property name="Prefab" value="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?AH64ApacheHelicopter.prefab"/>
+      <property name="ModelType" value="Standard"/>
+      <property name="SurfaceCategory" value="metal"/>
+      <property name="IgnoreTrigger" value="true"/>
+      <property name="LootList" value="vehicleGyrocopter"/>
+      <property name="IsEnemyEntity" value="false"/>
+      <property class="Explosion">
+        <property name="ParticleIndex" value="28"/>
+        <property name="RadiusBlocks" value="3"/>
+        <property name="RadiusEntities" value="3"/>
+        <property name="BlockDamage" value="30"/>
+        <property name="EntityDamage" value="30"/>
+      </property>
+      <property name="RotateToGround" value="true"/>
+      <property name="Faction" value="none"/>
+      <property name="MapIcon" value="pzApacheUIicon"/>
+      <property name="NavObject" value="pzApacheHelicopter"/>
+    </entity_class>
+  </append>
+</configs>

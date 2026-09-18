@@ -21,7 +21,10 @@ namespace AECT16RuntimeFix
             {
                 var harmony = new Harmony(HarmonyId);
                 MD500FlightControls.Install(harmony);
+                ApacheFlightVisuals.Install(harmony);
+                ApacheWeapons.Install(harmony);
                 CollectorBatchStorage.Install(harmony);
+                AutoForestryModel.Install(harmony, modInstance.Path);
                 ApiaryProduction.Install(harmony);
                 CompactSteelStorage.Install(harmony);
                 PatchModelTintSafety(harmony);

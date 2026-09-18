@@ -2,8 +2,8 @@
 
 ## 范围
 
-仅匹配 `Vehicle.GetName() == "vehicleMD500"`。由现有 `99-AEC_T16_RuntimeFix`
-运行时补丁提供，不改 MD-500 作者文件，不复制其他直升机的配置或模型。
+仅匹配 `vehicleMD500` 与 `vehicleApacheHelicopter` 两个实体名称。由现有 `99-AEC_T16_RuntimeFix`
+运行时补丁提供，不改 MD-500 作者文件。独立阿帕奇的资源与配方位于 `ZZ-PZAEC_ApacheFlight`，两者共享飞控但保留各自车辆参数。
 普通旋翼机、AEC 装甲旋翼机和 UH-60 不受此补丁控制。
 控制器本身不修改耐久、储物、座位、配件槽、油箱、配方或解锁条件。
 

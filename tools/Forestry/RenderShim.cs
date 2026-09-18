@@ -1,0 +1,105 @@
+// Offline geometry adapter only. Compiles the actual prefab builders without a
+// Unity player; no game DLL is replaced. Primitives are equivalent low-poly meshes.
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using N=System.Numerics;
+namespace UnityEngine.Rendering { public enum IndexFormat { UInt32 } }
+namespace UnityEngine {
+ public class Object { public virtual string name{get;set;} public static void DestroyImmediate(Object o){if(o is Component c)c.gameObject.components.Remove(c);} public static void Destroy(Object o)=>DestroyImmediate(o);public static void DontDestroyOnLoad(Object o){} }
+ public struct Vector2 {public float x,y;public Vector2(float a,float b){x=a;y=b;}public static Vector2 zero=>new Vector2();public static Vector2 right=>new Vector2(1,0);public static Vector2 up=>new Vector2(0,1);}
+ public struct Vector3 {
+  public float x,y,z;public Vector3(float a,float b,float c){x=a;y=b;z=c;}
+  public N.Vector3 N=>new N.Vector3(x,y,z);public static Vector3 From(N.Vector3 v)=>new Vector3(v.X,v.Y,v.Z);
+  public float magnitude=>N.Length();public Vector3 normalized=>magnitude<1e-8?new Vector3():this/magnitude;
+  public static Vector3 up=>new Vector3(0,1,0);public static Vector3 left=>new Vector3(-1,0,0);public static Vector3 right=>new Vector3(1,0,0);
+  public static Vector3 operator +(Vector3 a,Vector3 b)=>From(a.N+b.N);public static Vector3 operator -(Vector3 a,Vector3 b)=>From(a.N-b.N);
+  public static Vector3 operator *(Vector3 a,float f)=>From(a.N*f);public static Vector3 operator /(Vector3 a,float f)=>From(a.N/f);
+  public static float Distance(Vector3 a,Vector3 b)=>(a-b).magnitude;
+ }
+ public struct Quaternion {
+  public N.Quaternion q;public Quaternion(N.Quaternion v){q=v;}public static Quaternion identity=>new Quaternion(N.Quaternion.Identity);
+  public static Quaternion Euler(float x,float y,float z)=>new Quaternion(N.Quaternion.CreateFromYawPitchRoll(y*Mathf.PI/180,x*Mathf.PI/180,z*Mathf.PI/180));
+  public static Quaternion FromToRotation(Vector3 a,Vector3 b){var v=a.normalized.N;var w=b.normalized.N;float d=N.Vector3.Dot(v,w);if(d<-.99999f)return new Quaternion(N.Quaternion.CreateFromAxisAngle(N.Vector3.UnitX,Mathf.PI));return new Quaternion(N.Quaternion.Normalize(new N.Quaternion(N.Vector3.Cross(v,w),1+d)));}
+ }
+ public struct Matrix4x4 {
+  public N.Matrix4x4 m;public Matrix4x4(N.Matrix4x4 v){m=v;}public static Matrix4x4 operator *(Matrix4x4 a,Matrix4x4 b)=>new Matrix4x4(b.m*a.m);
+  public Vector3 Point(Vector3 p)=>Vector3.From(N.Vector3.Transform(p.N,m));
+  public Vector3 Normal(Vector3 n){N.Matrix4x4.Invert(m,out var inv);return Vector3.From(N.Vector3.TransformNormal(n.N,N.Matrix4x4.Transpose(inv))).normalized;}
+ }
+ public static class Mathf {public const float PI=(float)Math.PI;public static float Sin(float a)=>(float)Math.Sin(a);public static float Cos(float a)=>(float)Math.Cos(a);public static float Sqrt(float a)=>(float)Math.Sqrt(a);public static float Max(float a,float b)=>Math.Max(a,b);}
+ public struct Color {public float r,g,b,a;public Color(float x,float y,float z,float w=1){r=x;g=y;b=z;a=w;}public static Color white=>new Color(1,1,1);}
+ public class Component:Object {public GameObject gameObject;public Transform transform=>gameObject.transform;public override string name{get=>gameObject.name;set=>gameObject.name=value;}public T GetComponent<T>() where T:Component=>gameObject.GetComponent<T>();public T[] GetComponentsInChildren<T>(bool includeInactive=false) where T:Component=>gameObject.GetComponentsInChildren<T>(includeInactive);public T GetComponentInChildren<T>(bool includeInactive=false) where T:Component=>GetComponentsInChildren<T>(includeInactive).FirstOrDefault();}
+ public class Transform:Component,IEnumerable<Transform> {
+  public Vector3 localPosition,localScale=new Vector3(1,1,1);public Quaternion localRotation=Quaternion.identity;public Transform parent;public List<Transform> children=new List<Transform>();
+  public void SetParent(Transform p,bool world){parent?.children.Remove(this);parent=p;p?.children.Add(this);}
+  public Matrix4x4 localToWorldMatrix {get {var l=new Matrix4x4(N.Matrix4x4.CreateScale(localScale.N)*N.Matrix4x4.CreateFromQuaternion(localRotation.q)*N.Matrix4x4.CreateTranslation(localPosition.N));return parent==null?l:parent.localToWorldMatrix*l;}}
+  public Matrix4x4 worldToLocalMatrix {get {N.Matrix4x4.Invert(localToWorldMatrix.m,out var inv);return new Matrix4x4(inv);}}
+  public IEnumerator<Transform> GetEnumerator()=>children.GetEnumerator();IEnumerator IEnumerable.GetEnumerator()=>GetEnumerator();
+ }
+ public enum PrimitiveType {Cube,Cylinder} public class GameObject:Object {
+  public Transform transform;public int layer;public string tag;public bool activeSelf=true;public bool activeInHierarchy=>activeSelf&&(transform.parent==null||transform.parent.gameObject.activeInHierarchy);
+  public List<Component> components=new List<Component>();public GameObject(string n=""){name=n;transform=new Transform{gameObject=this};components.Add(transform);}
+  public T AddComponent<T>()where T:Component,new(){var c=new T{gameObject=this};components.Add(c);return c;}
+  public T GetComponent<T>()where T:Component=>components.OfType<T>().FirstOrDefault();
+  public T[] GetComponentsInChildren<T>(bool includeInactive=false)where T:Component {var r=new List<T>(components.OfType<T>());foreach(var t in transform.children)if(includeInactive||t.gameObject.activeInHierarchy)r.AddRange(t.gameObject.GetComponentsInChildren<T>(includeInactive));return r.ToArray();}
+  public void SetActive(bool a){activeSelf=a;}
+  public static GameObject CreatePrimitive(PrimitiveType t){var g=new GameObject(t.ToString());g.AddComponent<MeshFilter>().sharedMesh=PrimitiveMesh.Create(t);g.AddComponent<MeshRenderer>();g.AddComponent<BoxCollider>();return g;}
+ }
+ public class Collider:Component{}public class MeshCollider:Collider{public Mesh sharedMesh;}public class BoxCollider:Collider{public Vector3 center,size;public bool isTrigger;}public class CapsuleCollider:Collider{public int direction;public float radius,height;}
+ public class Renderer:Component{public Material sharedMaterial;}public class MeshRenderer:Renderer{}public class MeshFilter:Component{public Mesh sharedMesh;}
+ public class Shader:Object{public static Shader Find(string n)=>new Shader{name=n};}
+ public enum TextureFormat{RGBA32}public enum TextureWrapMode{Repeat}public enum FilterMode{Trilinear}
+ public class Texture2D:Object{public Texture2D(int w,int h,TextureFormat f,bool mip,bool lin){}public TextureWrapMode wrapMode;public int anisoLevel;public FilterMode filterMode;}
+ public static class ImageConversion{public static bool LoadImage(Texture2D t,byte[] b,bool r)=>true;}
+ public class Material:Object {
+  public Color color=Color.white;public Texture2D mainTexture;public Vector2 mainTextureScale=new Vector2(1,1),mainTextureOffset;public int renderQueue;
+  public Dictionary<string,Texture2D> maps=new Dictionary<string,Texture2D>();
+  public Material(Shader s){}public Material(Material m){color=m.color;mainTexture=m.mainTexture;mainTextureScale=m.mainTextureScale;mainTextureOffset=m.mainTextureOffset;maps=new Dictionary<string,Texture2D>(m.maps);}
+  public void SetFloat(string n,float f){}public void SetColor(string n,Color c){}public void SetTexture(string n,Texture2D t){maps[n]=t;if(n=="_MainTex")mainTexture=t;}public void EnableKeyword(string k){}public void SetOverrideTag(string k,string v){}
+ }
+ public struct CombineInstance{public Mesh mesh;public Matrix4x4 transform;}
+ public class Mesh:Object {
+  public Rendering.IndexFormat indexFormat;public Vector3[] vertices=new Vector3[0],normals=new Vector3[0];public Vector2[] uv=new Vector2[0];public int[] triangles=new int[0];
+  public void SetVertices(List<Vector3> a){vertices=a.ToArray();}public void SetNormals(List<Vector3> a){normals=a.ToArray();}public void SetUVs(int n,List<Vector2> a){uv=a.ToArray();}public void SetTriangles(List<int> a,int n){triangles=a.ToArray();}
+  public void RecalculateBounds(){}public void RecalculateTangents(){}
+  public void RecalculateNormals(){var nn=new N.Vector3[vertices.Length];for(int i=0;i<triangles.Length;i+=3){int a=triangles[i],b=triangles[i+1],c=triangles[i+2];var n=N.Vector3.Cross(vertices[b].N-vertices[a].N,vertices[c].N-vertices[a].N);nn[a]+=n;nn[b]+=n;nn[c]+=n;}normals=nn.Select(v=>Vector3.From(v.LengthSquared()>1e-16?N.Vector3.Normalize(v):N.Vector3.UnitY)).ToArray();}
+  public void CombineMeshes(CombineInstance[] parts,bool merge,bool transform){var v=new List<Vector3>();var n=new List<Vector3>();var u=new List<Vector2>();var f=new List<int>();foreach(var p in parts){int off=v.Count;v.AddRange(p.mesh.vertices.Select(p.transform.Point));n.AddRange(p.mesh.normals.Select(p.transform.Normal));u.AddRange(p.mesh.uv);f.AddRange(p.mesh.triangles.Select(i=>i+off));}vertices=v.ToArray();normals=n.ToArray();uv=u.ToArray();triangles=f.ToArray();}
+ }
+ public static class PrimitiveMesh {
+  public static Mesh Create(PrimitiveType type){var m=new Mesh{name=type.ToString()};var v=new List<Vector3>();var uv=new List<Vector2>();var f=new List<int>();
+   if(type==PrimitiveType.Cube){
+    var axes=new[]{new Vector3(1,0,0),new Vector3(-1,0,0),new Vector3(0,1,0),new Vector3(0,-1,0),new Vector3(0,0,1),new Vector3(0,0,-1)};
+    foreach(var n in axes){var u=Vector3.From(N.Vector3.Cross(Math.Abs(n.y)>.5f?N.Vector3.UnitZ:N.Vector3.UnitY,n.N));var w=Vector3.From(N.Vector3.Cross(n.N,u.N));int o=v.Count;v.Add(n*.5f-u*.5f-w*.5f);v.Add(n*.5f+u*.5f-w*.5f);v.Add(n*.5f+u*.5f+w*.5f);v.Add(n*.5f-u*.5f+w*.5f);uv.AddRange(new[]{new Vector2(0,0),new Vector2(1,0),new Vector2(1,1),new Vector2(0,1)});f.AddRange(new[]{o,o+1,o+2,o,o+2,o+3});}
+   }else{
+    const int s=24;for(int ring=0;ring<2;ring++)for(int i=0;i<=s;i++){float a=i*Mathf.PI*2/s;v.Add(new Vector3(Mathf.Cos(a)*.5f,ring*2-1,Mathf.Sin(a)*.5f));uv.Add(new Vector2(i/(float)s,ring));}
+    for(int i=0;i<s;i++){int a=i,b=i+s+1;f.AddRange(new[]{a,b,a+1,a+1,b,b+1});}
+    for(int end=0;end<2;end++){int o=v.Count;v.Add(new Vector3(0,end*2-1,0));uv.Add(new Vector2(.5f,.5f));for(int i=0;i<=s;i++){float a=i*Mathf.PI*2/s;v.Add(new Vector3(Mathf.Cos(a)*.5f,end*2-1,Mathf.Sin(a)*.5f));uv.Add(new Vector2(Mathf.Cos(a)*.5f+.5f,Mathf.Sin(a)*.5f+.5f));if(i<s)f.AddRange(end==0?new[]{o,o+i+1,o+i+2}:new[]{o,o+i+2,o+i+1});}}
+   }m.vertices=v.ToArray();m.uv=uv.ToArray();m.triangles=f.ToArray();m.RecalculateNormals();return m;
+  }
+ }
+}
+namespace HarmonyLib{public class Harmony{public void Patch(object m,HarmonyMethod prefix=null){}}public class HarmonyMethod{public HarmonyMethod(Type t,string n){}}public static class AccessTools{public static object Method(Type t,string n)=>null;}}
+public class BlockShapeModelEntity{public Block block;}public class Block{public Props Properties=new Props();public string GetBlockName()=>"yfAutoForestry";}public class Props{public string GetValue(string n)=>"";}
+public static class GameManager{public static bool IsDedicatedServer=>false;}
+public static class Log{public static void Out(string s){}}
+public static class DataLoader{public static T LoadAsset<T>(string s,bool b)where T:class{var g=new UnityEngine.GameObject("NativeColliderReference");g.AddComponent<UnityEngine.BoxCollider>();return g.transform as T;}}
+namespace AECT16RuntimeFix{public static class AutoForestryActivity{public static void Install(HarmonyLib.Harmony h){}}}
+public static class ForestryRenderExport {
+ static void String(BinaryWriter w,string s){var b=System.Text.Encoding.UTF8.GetBytes(s??"");w.Write(b.Length);w.Write(b);}
+ public static void Run(string assets,string output){
+  var type=typeof(AECT16RuntimeFix.AutoForestryModel);type.GetField("assetPath",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static).SetValue(null,assets);
+  var root=(UnityEngine.Transform)type.GetMethod("CreatePrefab",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static).Invoke(null,null);
+  root.SetParent(null,false);
+  // Deliberately show full inventory/all three upgrades, rather than imply a save state.
+  foreach(var t in root.GetComponentsInChildren<UnityEngine.Transform>(true))if(t.name=="ForestrySpeed"||t.name=="ForestryPacker"||t.name=="ForestrySiren")t.gameObject.SetActive(true);
+  var renderers=root.GetComponentsInChildren<UnityEngine.MeshRenderer>().Where(r=>r.sharedMaterial!=null).ToArray();var materials=renderers.Select(r=>r.sharedMaterial).Distinct().ToArray();
+  using(var w=new BinaryWriter(File.Create(output))){w.Write(new byte[]{89,70,82,49});w.Write(materials.Length);w.Write(renderers.Length);
+   foreach(var m in materials){String(w,m.name);String(w,m.mainTexture?.name.Replace("Forestry_",""));w.Write(m.color.r);w.Write(m.color.g);w.Write(m.color.b);w.Write(m.color.a);w.Write(m.mainTextureScale.x);w.Write(m.mainTextureScale.y);w.Write(m.mainTextureOffset.x);w.Write(m.mainTextureOffset.y);}
+   foreach(var r in renderers){var mesh=r.GetComponent<UnityEngine.MeshFilter>().sharedMesh;var mat=r.transform.localToWorldMatrix;String(w,r.name);w.Write(Array.IndexOf(materials,r.sharedMaterial));w.Write(mesh.vertices.Length);w.Write(mesh.triangles.Length);for(int i=0;i<mesh.vertices.Length;i++){var v=mat.Point(mesh.vertices[i]);var n=mat.Normal(mesh.normals[i]);w.Write(v.x);w.Write(v.y);w.Write(v.z);w.Write(n.x);w.Write(n.y);w.Write(n.z);w.Write(mesh.uv[i].x);w.Write(mesh.uv[i].y);}foreach(int i in mesh.triangles)w.Write(i);}
+  }
+  Console.WriteLine("Exported {0} renderers, {1} materials, {2} triangles",renderers.Length,materials.Length,renderers.Sum(r=>r.GetComponent<UnityEngine.MeshFilter>().sharedMesh.triangles.Length/3));
+ }
+}

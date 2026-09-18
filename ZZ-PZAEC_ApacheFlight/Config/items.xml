@@ -1,0 +1,74 @@
+<configs>
+  <append xpath="/items">
+    <item name="pzApacheRocket">
+      <property name="Extends" value="ammoRocketHE"/>
+      <property name="CustomIcon" value="ammoRocketHE"/>
+      <property name="DescriptionKey" value="pzApacheRocketDesc"/>
+      <property name="UnlockedBy" value="craftingVehicles"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="250"/>
+      <property class="Action1">
+        <property class="Explosion">
+          <property name="BlockDamage" value="50"/>
+          <property name="EntityDamage" value="100000"/>
+          <property name="RadiusBlocks" value="5"/>
+          <property name="RadiusEntities" value="10"/>
+          <property name="ParticleIndex" value="5"/>
+        </property>
+      </property>
+      <effect_group name="ammoRocketHE" tiered="false">
+        <display_value name="dExRadius" value="10"/>
+        <display_value name="dExBlockDamage" value="50"/>
+        <display_value name="dExEntityDamage" value="100000"/>
+      </effect_group>
+    </item>
+    <item name="pzApache30mm">
+      <property name="Extends" value="ammo762mmBulletBall"/>
+      <property name="CustomIcon" value="ammo762mmBulletAP"/>
+      <property name="DescriptionKey" value="pzApache30mmDesc"/>
+      <property name="UnlockedBy" value="craftingVehicles"/>
+      <property name="Stacknumber" value="500"/>
+      <property name="EconomicValue" value="45"/>
+      <effect_group name="ammo762mmBulletBall" tiered="false">
+        <passive_effect name="EntityDamage" operation="base_set" value="20000"/>
+        <passive_effect name="BlockDamage" operation="base_set" value="8"/>
+      </effect_group>
+    </item>
+    <item name="vehicleApacheHelicopterPlaceable">
+      <property name="Extends" value="vehicleGyrocopterPlaceable"/>
+      <property name="Tags" value="vehicle,vengine,vfuel,canHaveCosmetic"/>
+      <property name="CustomIcon" value="vehicleApacheHelicopterPlaceable"/>
+      <property name="DescriptionKey" value="vehicleApacheHelicopterPlaceableDesc"/>
+      <property name="UnlockedBy" value="craftingVehicles"/>
+      <property name="Group" value="AECvehicleFinalAirplane"/>
+      <property name="Meshfile" value="#@modfolder:Resources/ApacheHelicopterPrefab.unity3d?AH64ApacheHelicopter.prefab"/>
+      <property name="EconomicValue" value="70000"/>
+      <property name="TraderStageTemplate" value="vehicleTier5"/>
+      <property class="Action1">
+        <property name="Vehicle" value="vehicleApacheHelicopter"/>
+        <property name="VehicleSize" value="2.5, 2.5, 5.5"/>
+      </property>
+      <effect_group name="Apache Base Effects" tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="4"/>
+        <passive_effect name="ModPowerBonus" operation="base_add" value="300" tags="EconomicValue"/>
+        <passive_effect name="DegradationMax" operation="base_set" value="1000000"/>
+      </effect_group>
+    </item>
+    <item name="vehicleApacheHelicopterChassis">
+      <property name="Extends" value="vehicleWheels"/>
+      <property name="CustomIcon" value="vehicleApacheHelicopterChassis"/>
+      <property name="DescriptionKey" value="vehicleApacheHelicopterChassisDesc"/>
+      <property name="UnlockedBy" value="craftingVehicles"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+      <property name="EconomicValue" value="20000"/>
+    </item>
+    <item name="vehicleApacheHelicopterAccessories">
+      <property name="Extends" value="vehicleWheels"/>
+      <property name="CustomIcon" value="vehicleApacheHelicopterAccessories"/>
+      <property name="DescriptionKey" value="vehicleApacheHelicopterAccessoriesDesc"/>
+      <property name="UnlockedBy" value="craftingVehicles"/>
+      <property name="Group" value="AECvehicleFinalAssembly"/>
+      <property name="EconomicValue" value="20000"/>
+    </item>
+  </append>
+</configs>

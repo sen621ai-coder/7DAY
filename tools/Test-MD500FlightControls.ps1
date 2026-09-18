@@ -96,7 +96,7 @@ public static class MD500Tests {
    e=new EntityVehicle();switch(reason){case "remote":e.isEntityRemote=true;break;case "no driver":e.hasDriver=false;break;case "no fuel":e.vehicle.Fuel=0;break;case "broken":e.vehicle.Health=0;break;case "engine off":e.IsEngineRunning=false;break;case "water":e.timeInWater=1;break;case "sleep":e.RBActive=false;break;case "kinematic":e.vehicleRB.isKinematic=true;break;case "no input":e.movementInput=null;break;case "no rotor":e.motors=null;break;}
    Check(!AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),reason+" disables native lift too");Near(e.vehicleRB.force.magnitude,0,.0001f,reason+" no custom force");
   }
-  foreach(string name in new[]{"vehicleGyrocopter","AECArmoredGyroVehicle","vehicleUH60","vehicleMD500Other"}){
+  foreach(string name in new[]{"vehicleGyrocopter","AECArmoredGyroVehicle","vehicleUH60","vehicleMD500Other","vehicleApacheHelicopterOther"}){
    e=new EntityVehicle();e.vehicle.Name=name;Check(AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"unrelated vehicle unchanged "+name);
    Check(AECT16RuntimeFix.MD500FlightControls.GroundAction(true,e),"unrelated Space/C unchanged");
    Near(AECT16RuntimeFix.MD500FlightControls.EffectiveFuelSpeed(0,new VPEngine{vehicle=e.vehicle}),0,.0001f,"unrelated fuel unchanged");
@@ -106,6 +106,22 @@ public static class MD500Tests {
   AECT16RuntimeFix.MD500FlightControls.BeforeEngineSimulation(e.vehicle);Check(e.vehicle.CurrentIsAccel,"hover sound flight RPM");
   e=new EntityVehicle();e.Wheels=3;AECT16RuntimeFix.MD500FlightControls.BeforeEngineSimulation(e.vehicle);Check(!e.vehicle.CurrentIsAccel,"landed idle retained");
   e=new EntityVehicle();e.isEntityRemote=true;AECT16RuntimeFix.MD500FlightControls.BeforeEngineSimulation(e.vehicle);Check(!e.vehicle.CurrentIsAccel,"remote sync flag not overwritten");
+  e=new EntityVehicle();e.vehicle.Name="vehicleApacheHelicopter";
+  Check(AECT16RuntimeFix.MD500FlightControls.Applies(e.vehicle),"Apache shares controller");
+  Check(!AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"Apache replaces native lift");
+  Near(e.vehicleRB.force.y,9.81f,.0001f,"Apache hover gravity");
+  Check(!AECT16RuntimeFix.MD500FlightControls.GroundAction(true,e),"Apache ground brake suppressed");
+  Near(AECT16RuntimeFix.MD500FlightControls.EffectiveFuelSpeed(0,new VPEngine{vehicle=e.vehicle}),2.5f,.0001f,"Apache hover consumes fuel");
+  e.movementInput.jump=true;e.movementInput.moveForward=1;e.vehicleRB.force=new UnityEngine.Vector3();
+  AECT16RuntimeFix.MD500FlightControls.BeforeForces(e);
+  Check(e.vehicleRB.force.y>9.81f&&e.vehicleRB.force.z>0,"Apache simultaneous rise and forward");
+  Check(e.movementInput.jump,"Apache shared input retained");
+  foreach(string reason in new[]{"remote","no fuel","no driver","engine off","broken","water"}){
+   e=new EntityVehicle();e.vehicle.Name="vehicleApacheHelicopter";
+   switch(reason){case "remote":e.isEntityRemote=true;break;case "no fuel":e.vehicle.Fuel=0;break;case "no driver":e.hasDriver=false;break;case "engine off":e.IsEngineRunning=false;break;case "broken":e.vehicle.Health=0;break;case "water":e.timeInWater=1;break;}
+   Check(!AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"Apache native forces blocked: "+reason);
+   Near(e.vehicleRB.force.magnitude,0,.0001f,"Apache no active force: "+reason);
+  }
   var inputCode=new List<HarmonyLib.CodeInstruction>();for(int i=0;i<3;i++)inputCode.Add(new HarmonyLib.CodeInstruction(OpCodes.Ldfld,typeof(MovementInput).GetField(i==0?"jump":"down")));
   int n=0;foreach(var op in AECT16RuntimeFix.MD500FlightControls.GroundActionsTranspiler(inputCode))n++;Check(n==9,"three ground loads wrapped");
   bool rejected=false;try{AECT16RuntimeFix.MD500FlightControls.GroundActionsTranspiler(new List<HarmonyLib.CodeInstruction>());}catch(InvalidOperationException){rejected=true;}Check(rejected,"unsupported ground IL rejected");
@@ -114,6 +130,7 @@ public static class MD500Tests {
   AECT16RuntimeFix.MD500FlightControls.Install(new HarmonyLib.Harmony{Fail=true});
   e=new EntityVehicle();Check(AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"failed install preserves original controls");
   Check(AECT16RuntimeFix.MD500FlightControls.GroundAction(true,e),"failed install ground unchanged");
+  e.vehicle.Name="vehicleApacheHelicopter";Check(AECT16RuntimeFix.MD500FlightControls.BeforeForces(e),"failed install Apache original controls retained");
   Console.WriteLine("PASS: "+checks+" MD-500 flight-control assertions (math simulation and runtime fixtures; not a Unity playtest).");
  }
 }

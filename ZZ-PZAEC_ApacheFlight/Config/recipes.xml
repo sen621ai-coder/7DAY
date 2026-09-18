@@ -1,0 +1,42 @@
+<configs>
+  <append xpath="/recipes">
+    <recipe name="pzApacheRocket" count="5" craft_time="90" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
+      <ingredient name="resourceRocketTip" count="5"/>
+      <ingredient name="resourceGunPowder" count="150"/>
+      <ingredient name="resourceDuctTape" count="10"/>
+      <ingredient name="ammoGasCan" count="1000"/>
+      <ingredient name="resourceRocketCasing" count="5"/>
+      <ingredient name="resourceForgedSteel" count="10"/>
+    </recipe>
+    <recipe name="pzApache30mm" count="50" craft_time="180" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
+      <ingredient name="resourceBulletTip" count="150"/>
+      <ingredient name="resourceBulletCasing" count="100"/>
+      <ingredient name="resourceGunPowder" count="500"/>
+      <ingredient name="resourceForgedSteel" count="25"/>
+    </recipe>
+    <!-- AEC conversion route: one donor gyro; extra engine makes this a twin-engine build. -->
+    <recipe name="vehicleApacheHelicopterChassis" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
+      <ingredient name="aecGyroPieces" count="1"/>
+      <ingredient name="resourceForgedSteel" count="24"/>
+      <ingredient name="resourceMechanicalParts" count="35"/>
+      <ingredient name="resourceElectricParts" count="20"/>
+      <ingredient name="resourceLegendaryParts" count="2"/>
+    </recipe>
+    <recipe name="vehicleApacheHelicopterAccessories" count="1" craft_time="600" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
+      <ingredient name="resourceForgedSteel" count="16"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="resourceElectricParts" count="30"/>
+      <ingredient name="resourceMetalPipe" count="20"/>
+      <ingredient name="resourceSpring" count="10"/>
+      <ingredient name="resourceHeadlight" count="2"/>
+    </recipe>
+    <recipe name="vehicleApacheHelicopterPlaceable" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAirplane" tags="learnable" always_unlocked="false">
+      <ingredient name="vehicleApacheHelicopterChassis" count="1"/>
+      <ingredient name="vehicleApacheHelicopterAccessories" count="1"/>
+      <ingredient name="smallEngine" count="1"/>
+      <ingredient name="carBattery" count="1"/>
+      <ingredient name="vehicleWheels" count="3"/>
+      <ingredient name="resourceMechanicalParts" count="20"/>
+    </recipe>
+  </append>
+</configs>
