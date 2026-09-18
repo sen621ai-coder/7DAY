@@ -40,7 +40,7 @@ namespace AECT16RuntimeFix
             var player=GameManager.Instance?.World?.GetPrimaryPlayer();
             var vehicle=player?.AttachedToEntity as EntityVehicle;
             var ui=player!=null?LocalPlayerUI.GetUIForPlayer(player):null;
-            bool usable=player!=null&&!player.IsDead()&&ApacheWeapons.IsApache(vehicle)&&ApacheWeapons.Seat(vehicle,player.entityId)==1&&
+            bool usable=player!=null&&!player.IsDead()&&ApacheWeapons.IsApache(vehicle)&&ApacheWeapons.Seat(vehicle,player.entityId)>=0&&
                 GameManager.Instance.GameIsFocused&&!GameManager.Instance.IsPaused()&&
                 !(ui!=null&&(LocalPlayerUI.AnyModalWindowOpen()||ui.windowManager.IsCursorWindowOpen()||ui.windowManager.IsInputActive()));
             if(!usable||!Input.GetKey(Key(vehicle,"pzApacheZoomKey",KeyCode.Mouse1))||player.playerCamera==null){RestoreZoom();return;}
@@ -60,7 +60,7 @@ namespace AECT16RuntimeFix
         {
             var player=world?.GetPrimaryPlayer();var vehicle=player?.AttachedToEntity as EntityVehicle;
             if(!ApacheWeapons.IsApache(vehicle)||player.IsDead()) {RestoreZoom();predictionVehicle=-1;markVehicle=-1;return;}
-            if(ApacheWeapons.Seat(vehicle,player.entityId)!=1)RestoreZoom();
+            if(ApacheWeapons.Seat(vehicle,player.entityId)<0)RestoreZoom();
             if(ApacheWeapons.Seat(vehicle,player.entityId)!=0)return;
             if(predictionVehicle!=vehicle.entityId||Time.time>=nextPrediction){
                 predictionVehicle=vehicle.entityId;nextPrediction=Time.time+.1f;
@@ -88,10 +88,6 @@ namespace AECT16RuntimeFix
             if(label==null)label=new GUIStyle(GUI.skin.label){fontSize=12};
             var old=GUI.color;
             try{
-                if(seat==0&&predictionVehicle==vehicle.entityId){
-                    for(int i=0;i<2;i++)if(collision[i])Point(camera,predicted[i],L(i==0?"RocketLeft":"RocketRight")+" "+flightTime[i].ToString("0.0")+"s",new Color(1,.76f,.3f),i);
-                    GUI.color=new Color(1,.76f,.3f);GUI.Label(new Rect(360,490,700,22),L(collision[0]||collision[1]?"PredictionHint":"NoPrediction"),label);
-                }
                 if(markVehicle==vehicle.entityId&&Time.time<markUntil)Point(camera,marker,L("SharedMark")+" "+Vector3.Distance(vehicle.position,marker).ToString("0")+"m",new Color(.45f,.85f,1),2);
                 if(seat==1){GUI.color=new Color(.6f,.88f,.82f);GUI.Label(new Rect(360,490,780,22),"["+Key(vehicle,"pzApacheZoomKey",KeyCode.Mouse1)+"] "+L(Zooming?"ZoomActive":"ZoomHint")+"    ["+Key(vehicle,"pzApacheMarkKey",KeyCode.Mouse2)+"] "+L("MarkHint"),label);}
             }finally{GUI.color=old;}

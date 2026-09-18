@@ -23,10 +23,16 @@ foreach($file in Get-ChildItem "$mod/Config" -Filter '*.xml') {
 $items=@{}
 foreach($file in @((Join-Path $base 'items.xml'),(Join-Path $root '07-AEC-Vehicles-NoMicrocraft/Config/items.xml'),"$mod/Config/items.xml")) {
  [xml]$doc=Get-Content $file -Raw
- foreach($item in $doc.SelectNodes('//item[@name]')){$items[$item.name]=$true}
+ foreach($item in $doc.SelectNodes('//item[@name]')){
+  $parent=$item.SelectSingleNode("property[@name='Extends']")
+  if($parent -and !$items.ContainsKey($parent.value)){
+   throw "Item $($item.name) extends $($parent.value) before that item is registered"
+  }
+  $items[$item.name]=$true
+ }
 }
 $recipes=$docs.recipes.SelectNodes('//recipe')
-if($recipes.Count -ne 5){throw 'Expected three aircraft recipes and two ammunition recipes'}
+if($recipes.Count -ne 6){throw 'Expected three aircraft recipes and three ammunition recipes'}
 foreach($r in $recipes){
  if(!$items.ContainsKey($r.name)){throw "Unknown recipe output: $($r.name)"}
  $station=if($r.name -like 'pzApache*'){'workbench'}else{'aecVehicleFinalAssemblyBench'}

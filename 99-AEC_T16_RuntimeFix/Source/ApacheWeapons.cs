@@ -7,7 +7,7 @@ namespace AECT16RuntimeFix
 {
     // Only the server consumes cargo ammo, advances projectiles and invokes native damage.
     // Client packets contain intent/direction, never a hit result, damage, or ammo count.
-    public static class ApacheWeapons
+    public static partial class ApacheWeapons
     {
         public const byte Aim = 0, Fire = 1, Stop = 2, Mark = 3;
         public const byte AimEvent = 0, CannonEvent = 1, RocketEvent = 2, ImpactEvent = 3, StatusEvent = 4, MarkerEvent = 5;
@@ -20,7 +20,7 @@ namespace AECT16RuntimeFix
         private static readonly List<int> removeStates=new List<int>();
         private static float nextInput, nextAim, nextError;
         private static int inputVehicle = -1, inputSeat = -1;
-        public sealed class State
+        public sealed partial class State
         {
             public EntityVehicle Vehicle;
             public Transform Mesh, Left, Right;
@@ -40,6 +40,10 @@ namespace AECT16RuntimeFix
             public EntityVehicle Vehicle;
             public Vector3 Position, Velocity;
             public float Age;
+            public bool Guided;
+            public EntityAlive Target;
+            public Vector3 TargetOffset;
+            public float NextSync;
         }
         public static bool Server { get { return ConnectionManager.Instance != null && ConnectionManager.Instance.IsServer; } }
         public static bool IsApache(EntityVehicle v)
@@ -66,6 +70,7 @@ namespace AECT16RuntimeFix
             nextInput = nextAim = 0; inputVehicle = inputSeat = -1; inputHeld=false;
             ApacheWeaponVisuals.Clear();
             ApacheFlightAssist.Clear();
+            ApachePilotHUD.Clear();localGuided=false;
         }
         private static void EnsureWorld(World world)
         { if (world != currentWorld) { Clear(); currentWorld = world; } }
@@ -154,11 +159,12 @@ namespace AECT16RuntimeFix
                 (origin-vehicle.position).sqrMagnitude<=40*40;
         }        public static void Request(World world,int actor,int vehicleId,byte op,Vector3 direction,Vector3 origin,int sequence)
         {
-            if(!enabled||!Server||world==null||op>Mark)return;
+            if(!enabled||!Server||world==null||op>GuidedFire)return;
             EnsureWorld(world);var vehicle=world.GetEntity(vehicleId) as EntityVehicle;
             if(!IsApache(vehicle))return;
             int seat=Seat(vehicle,actor);if(seat<0)return;
             var state=GetState(vehicle);
+            if(op>=PilotAim){if(seat==0)PilotRequest(state,actor,op,origin,direction,sequence);return;}
             if(op==Mark){
                 if(seat!=1||!ReadyOperator(state,actor,seat)||!ValidSight(vehicle,origin,direction)||
                     !state.MarkLease.Accept(actor,sequence,false,Time.time)||Time.time<state.NextMark)return;
@@ -171,7 +177,8 @@ namespace AECT16RuntimeFix
             }
             var trigger=state.Triggers[seat];
             if(!trigger.Accept(actor,sequence,op==Fire,Time.time))return;
-            if(op==Stop){trigger.Stop();if(seat==0)state.SalvoRemaining=0;return;}
+            if(op==Stop){trigger.Stop();if(seat==0){state.SalvoRemaining=0;ResetPilot(state);state.GuidedSpent=false;}return;}
+            if(seat==0){ResetPilot(state);trigger.Stop();return;}
             if(!ReadyOperator(state,actor,seat)){trigger.Stop();return;}
             if(seat==1){
                 if(!ApacheWeaponRules.ValidDirection(direction.x,direction.y,direction.z)||
@@ -187,6 +194,8 @@ namespace AECT16RuntimeFix
                 lease.Stop();if(seat==0)s.SalvoRemaining=0;return;
             }
             if(seat==1&&(!s.HasSight||s.AimReason!=0))return;
+            if(seat==0&&!PilotCanFire(s,now))return;
+            if(seat==0&&s.PilotGuided){FireGuided(s,lease.Actor,now);return;}
             if(!s.Gate.Ready(seat,now))return;
             if(seat==0){
                 if(s.SalvoRemaining>0||!Consume(s,ApacheWeaponRules.RocketAmmo))return;
@@ -205,13 +214,19 @@ namespace AECT16RuntimeFix
             int flags=(s.Gate.Overheated?1:0)|(locked?2:0)|(s.AimReason==1?4:0)|(s.AimReason==2?8:0);
             Broadcast(s.Vehicle.entityId,flags,StatusEvent,new Vector3(Ammo(s,ApacheWeaponRules.RocketAmmo),Ammo(s,ApacheWeaponRules.CannonAmmo),Mathf.Max(0,s.Gate.NextRocket-now)),
                 new Vector3(s.Gate.Overheated?Mathf.Max(0,(s.Gate.Heat-ApacheWeaponRules.ResumeHeat)/ApacheWeaponRules.Cooling):0,0,0),s.Gate.Heat);
+            SendPilotStatus(s,now);
         }
         public static void RocketKinematics(State state,bool right,out Vector3 origin,out Vector3 velocity)
         {
             var mount=right?state.Right:state.Left;var rotation=BodyRotation(state.Vehicle);
             origin=mount!=null?mount.position+Origin.position:state.Vehicle.position+rotation*new Vector3(right?1.87f:-1.892f,.924f,4.508f);
             var inherited=state.Vehicle.vehicleRB!=null?Vector3.ClampMagnitude(state.Vehicle.vehicleRB.velocity,40):Vector3.zero;
-            velocity=rotation*Vector3.forward*ApacheWeaponRules.RocketSpeed+inherited;
+            Vector3 direction=state.PilotAiming?(state.PilotPoint-origin).normalized:rotation*Vector3.forward;
+            float along=Vector3.Dot(inherited,direction);
+            float lateral=Mathf.Max(0,inherited.sqrMagnitude-along*along);
+            // Compensate inherited lateral velocity so the indicated sight point
+            // is on the actual flight line, independently for both launchers.
+            velocity=state.PilotAiming?direction*(along+Mathf.Sqrt(Mathf.Max(1,ApacheWeaponRules.RocketSpeed*ApacheWeaponRules.RocketSpeed-lateral))):direction*ApacheWeaponRules.RocketSpeed+inherited;
         }
         public static bool PredictRocket(EntityVehicle vehicle,bool right,out Vector3 point,out float seconds)
         {
@@ -224,8 +239,8 @@ namespace AECT16RuntimeFix
         private static void Launch(State state,int actor)
         {
             bool right=(state.Side++&1)!=0;RocketKinematics(state,right,out var origin,out var velocity);
-            var rocket=new Rocket{Id=++serial,VehicleId=state.Vehicle.entityId,Vehicle=state.Vehicle,ShooterId=actor,Position=origin,Velocity=velocity};
-            rockets.Add(rocket);Broadcast(rocket.VehicleId,rocket.Id,RocketEvent,origin,velocity,0);
+            var rocket=new Rocket{Id=++serial,VehicleId=state.Vehicle.entityId,Vehicle=state.Vehicle,ShooterId=actor,Position=origin,Velocity=velocity,Guided=state.PilotGuided,Target=state.PilotGuided?state.LockTarget:null,TargetOffset=state.PilotGuided?state.LockOffset:Vector3.zero};
+            rockets.Add(rocket);Broadcast(rocket.VehicleId,rocket.Id,RocketEvent,origin,velocity,rocket.Guided?1:0);
         }        // Raycast through the originating vehicle/crew only. All other geometry remains opaque.
         private static bool Trace(EntityVehicle vehicle, Vector3 start, Vector3 direction, float range, out WorldRayHitInfo hit)
         {
@@ -273,6 +288,7 @@ namespace AECT16RuntimeFix
             {
                 var r=rockets[i]; float dt=Mathf.Min(Mathf.Max(0,delta),ApacheWeaponRules.RocketLifetime-r.Age);
                 r.Age += dt;
+                GuideRocket(r,dt);
                 Vector3 step=r.Velocity*dt;
                 WorldRayHitInfo impact=null;
                 bool hit=step.sqrMagnitude>.00001f && Trace(r.Vehicle,r.Position,step.normalized,step.magnitude,out impact);
@@ -283,11 +299,11 @@ namespace AECT16RuntimeFix
                     Vector3 point=impact.hit.pos;
                     Broadcast(r.VehicleId,r.Id,ImpactEvent,point,Vector3.zero,0);
                     GameManager.Instance.ExplosionServer(point,new Vector3i(Mathf.FloorToInt(point.x),Mathf.FloorToInt(point.y),Mathf.FloorToInt(point.z)),
-                        Quaternion.identity,RocketExplosion(),r.ShooterId,0,false,ItemClass.GetItem(ApacheWeaponRules.RocketAmmo,false));
+                        Quaternion.identity,r.Guided?GuidedExplosion():RocketExplosion(),r.ShooterId,0,false,ItemClass.GetItem(r.Guided?ApacheWeaponRules.GuidedAmmo:ApacheWeaponRules.RocketAmmo,false));
                 }
                 else if (r.Age>=ApacheWeaponRules.RocketLifetime)
                 { rockets.RemoveAt(i); Broadcast(r.VehicleId,r.Id,ImpactEvent,r.Position,Vector3.zero,0); }
-                else r.Position += step;
+                else {r.Position += step;if(r.Guided&&Time.time>=r.NextSync){r.NextSync=Time.time+.1f;Broadcast(r.VehicleId,r.Id,GuidedMoveEvent,r.Position,r.Velocity,0);}}
             }
         }
         public static void Update()
@@ -307,12 +323,13 @@ namespace AECT16RuntimeFix
                         var s=pair.Value;
                         if(s.Vehicle==null || world.GetEntity(pair.Key)!=s.Vehicle) {removeStates.Add(pair.Key);continue;}
                         s.Gate.Cool(Time.time);
+                        UpdatePilot(s,Time.time);
                         if(s.HasSight&&s.Vehicle.GetAttached(1)!=null){s.AimReason=ResolveAim(s,s.Vehicle.position+s.SightOffset,s.SightDirection,out var aim,out var muzzle);if(s.AimReason==0)s.AimDirection=aim;}
                         FireHeld(s,0,Time.time);FireHeld(s,1,Time.time);
                         if((s.Vehicle.GetAttached(0)!=null||s.Vehicle.GetAttached(1)!=null)&&Time.time>=s.NextStatus){s.NextStatus=Time.time+.2f;SendStatus(s,Time.time);Broadcast(s.Vehicle.entityId,0,AimEvent,CannonPivot(s),s.AimDirection,s.Gate.Heat);}
                         if(s.SalvoRemaining>0 && Time.time>=s.NextSalvo)
                         {
-                            if(!ReadyOperator(s,s.SalvoActor,0)||!Consume(s,ApacheWeaponRules.RocketAmmo)) s.SalvoRemaining=0;
+                            if(!ReadyOperator(s,s.SalvoActor,0)||!PilotCanFire(s,Time.time)||s.PilotGuided||!Consume(s,ApacheWeaponRules.RocketAmmo)) s.SalvoRemaining=0;
                             else {s.SalvoRemaining--;s.NextSalvo=Time.time+ApacheWeaponRules.SalvoInterval;Launch(s,s.SalvoActor);}
                         }
                         if(s.BagDirty && Time.time>=s.NextBagSync)
@@ -331,7 +348,7 @@ namespace AECT16RuntimeFix
         private static void ReleaseInput(World world,EntityPlayerLocal player)
         {
             var previous=world.GetEntity(inputVehicle) as EntityVehicle;
-            if(inputHeld&&player!=null&&IsApache(previous))SendIntent(player,previous,Stop,new Ray(Vector3.zero,Vector3.forward));
+            if(player!=null&&IsApache(previous))SendIntent(player,previous,Stop,new Ray(Vector3.zero,Vector3.forward));
             inputHeld=false;
         }
         private static void LocalInput(World world)
@@ -343,6 +360,7 @@ namespace AECT16RuntimeFix
             var ui=LocalPlayerUI.GetUIForPlayer(player);
             if(!GameManager.Instance.GameIsFocused||(ui!=null&&(LocalPlayerUI.AnyModalWindowOpen()||ui.windowManager.IsCursorWindowOpen()||ui.windowManager.IsInputActive()))){ReleaseInput(world,player);nextInput=Time.time+.25f;return;}
             if(seat==1&&Time.time>=nextInput&&Input.GetKeyDown(ApacheFlightAssist.Key(v,"pzApacheMarkKey",KeyCode.Mouse2)))SendIntent(player,v,Mark,SightRay(player));
+            if(seat==0){PilotInput(player,v);return;}
             bool held=Time.time>=nextInput&&Input.GetKey(FireKey(v,seat));
             if(held!=inputHeld||Time.time>=nextAim){
                 nextAim=Time.time+.1f;SendIntent(player,v,held?Fire:inputHeld?Stop:Aim,SightRay(player));inputHeld=held;

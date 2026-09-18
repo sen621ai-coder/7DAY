@@ -36,7 +36,7 @@ $tests=@'
    for(int i=0;i<100;i++)Frame();Check(Math.Abs(c.fieldOfView-expected)<.001,"no compounding FOV across frames");
    BeforeCameraUpdated();Check(c.fieldOfView==80,"native camera sees unmodified FOV before update");
    c.fieldOfView=90;CameraUpdated();Input.Held=false;Frame();Check(c.fieldOfView==90&&zoomCamera==null,"release restores newly updated native FOV");
-   Input.Held=true;Frame();p.AttachedToEntity.Seat=0;Frame();Check(c.fieldOfView==90,"seat switch restores FOV");
+   Input.Held=true;Frame();p.AttachedToEntity.Seat=0;Frame();Check(c.fieldOfView<90,"pilot also has aiming magnification");
    p.AttachedToEntity.Seat=1;Frame();LocalPlayerUI.Modal=true;Frame();Check(c.fieldOfView==90,"menu restores FOV");LocalPlayerUI.Modal=false;
    Frame();GameManager.Instance.GameIsFocused=false;Frame();Check(c.fieldOfView==90,"focus loss restores FOV");GameManager.Instance.GameIsFocused=true;
    Frame();p.Dead=true;Frame();Check(c.fieldOfView==90,"death restores FOV");p.Dead=false;

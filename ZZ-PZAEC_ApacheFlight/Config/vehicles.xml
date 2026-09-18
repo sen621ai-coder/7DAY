@@ -2,6 +2,7 @@
   <append xpath="/vehicles">
     <vehicle name="vehicleApacheHelicopter">
       <property name="pzApachePilotFireKey" value="G" />
+      <property name="pzApacheModeKey" value="R" />
       <property name="pzApacheGunnerFireKey" value="Mouse0" />
       <property name="pzApacheZoomKey" value="Mouse1" />
       <property name="pzApacheMarkKey" value="Mouse2" />

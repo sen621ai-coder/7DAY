@@ -64,6 +64,11 @@ namespace AECT16RuntimeFix
         {
             if(world?.GetPrimaryPlayer()==null)return;
             var vehicle=world.GetEntity(vehicleId) as EntityVehicle;
+            if(kind==ApacheWeapons.PilotStatusEvent){ApachePilotHUD.Receive(world,vehicleId,id,a,b,heat);return;}
+            if(kind==ApacheWeapons.GuidedMoveEvent){
+                if(projectiles.TryGetValue(id,out var guided)){guided.Position=a;guided.Velocity=b;}
+                return;
+            }
             if(kind==ApacheWeapons.MarkerEvent){ApacheFlightAssist.ReceiveMark(world,vehicleId,a,heat);return;}
             if(kind==ApacheWeapons.ImpactEvent)
             {if(projectiles.TryGetValue(id,out var old)){if(old.Object!=null)Object.Destroy(old.Object);projectiles.Remove(id);}return;}
@@ -122,7 +127,7 @@ namespace AECT16RuntimeFix
             {
                 var p=pair.Value;p.Position+=p.Velocity*Mathf.Min(Mathf.Max(0,dt),p.Life);p.Life-=dt;
                 if(p.Life<=0||p.Object==null){if(p.Object!=null)Object.Destroy(p.Object);remove.Add(pair.Key);}
-                else p.Object.transform.position=p.Position-Origin.position;
+                else {p.Object.transform.position=p.Position-Origin.position;if(p.Velocity.sqrMagnitude>.01f)p.Object.transform.rotation=Quaternion.FromToRotation(Vector3.up,p.Velocity.normalized);}
             }
             foreach(int id in remove)projectiles.Remove(id);
             for(int i=tracers.Count-1;i>=0;i--)

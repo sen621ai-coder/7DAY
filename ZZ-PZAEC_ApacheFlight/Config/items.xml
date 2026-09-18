@@ -3,6 +3,26 @@
     <property name="DescriptionKey" value="aecGyroPiecesDesc"/>
   </append>
   <append xpath="/items">
+    <item name="pzApacheGuidedMissile">
+      <property name="Extends" value="ammoRocketHE"/>
+      <property name="CustomIcon" value="ammoRocketHE"/>
+      <property name="CustomIconTint" value="77CCFF"/>
+      <property name="DescriptionKey" value="pzApacheGuidedMissileDesc"/>
+      <property name="UnlockedBy" value="craftingVehicles"/>
+      <property name="Stacknumber" value="25"/>
+      <property name="EconomicValue" value="1250"/>
+      <property class="Action1"><property class="Explosion">
+        <property name="EntityDamage" value="150000"/>
+        <property name="BlockDamage" value="50"/>
+        <property name="RadiusEntities" value="5"/>
+        <property name="RadiusBlocks" value="3"/>
+      </property></property>
+      <effect_group name="ammoRocketHE" tiered="false">
+        <display_value name="dExRadius" value="5"/>
+        <display_value name="dExBlockDamage" value="50"/>
+        <display_value name="dExEntityDamage" value="150000"/>
+      </effect_group>
+    </item>
     <item name="pzApacheRocket">
       <property name="Extends" value="ammoRocketHE"/>
       <property name="CustomIcon" value="ammoRocketHE"/>

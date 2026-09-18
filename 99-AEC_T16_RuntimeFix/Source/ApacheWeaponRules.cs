@@ -6,6 +6,9 @@ namespace AECT16RuntimeFix
     public static class ApacheWeaponRules
     {
         public const string RocketAmmo = "pzApacheRocket";
+        public const string GuidedAmmo = "pzApacheGuidedMissile";
+        public const float LockSeconds = 2f, GuidedCooldown = 8f, PilotRange = 350f;
+        public const float GuidedDamage = 150000f, GuidedTurnRate = 45f;
         public const string CannonAmmo = "pzApache30mm";
         public const int SalvoSize = 3;
         public const float SalvoInterval = .15f, RocketCooldown = 1.5f;

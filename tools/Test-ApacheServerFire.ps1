@@ -14,11 +14,14 @@ public static class FireFixture {
   public Vehicle Vehicle=new Vehicle();public ApacheWeaponRules.Gate Gate=new ApacheWeaponRules.Gate();
   public ApacheWeaponRules.TriggerLease[] Triggers={new ApacheWeaponRules.TriggerLease(),new ApacheWeaponRules.TriggerLease()};
   public bool HasSight=true,Ready=true;public byte AimReason;public int SalvoRemaining,SalvoActor,Ammo=100,Shots;public float NextSalvo;
+  public bool PilotGuided,PilotReady=true;
  }
  static bool ReadyOperator(State s,int actor,int seat)=>s.Ready&&s.Vehicle.Person.entityId==actor;
  static bool Consume(State s,string name){if(s.Ammo==0)return false;s.Ammo--;return true;}
  static void Launch(State s,int actor){s.Shots++;}
  static void ShootCannon(State s,int actor){s.Shots++;}
+ static bool PilotCanFire(State s,float now)=>s.PilotReady;
+ static void FireGuided(State s,int actor,float now){s.Shots++;}
 '@
 $tests=@'
  static int checks;static void Check(bool ok,string message){checks++;if(!ok)throw new Exception(message);}

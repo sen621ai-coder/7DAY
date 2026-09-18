@@ -1,5 +1,12 @@
 <configs>
   <append xpath="/recipes">
+    <recipe name="pzApacheGuidedMissile" count="1" craft_time="120" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
+      <ingredient name="pzApacheRocket" count="2"/>
+      <ingredient name="resourceElectricParts" count="10"/>
+      <ingredient name="resourceMechanicalParts" count="5"/>
+      <ingredient name="resourceForgedSteel" count="5"/>
+      <ingredient name="resourceDuctTape" count="3"/>
+    </recipe>
     <recipe name="pzApacheRocket" count="5" craft_time="90" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
       <ingredient name="resourceRocketTip" count="5"/>
       <ingredient name="resourceGunPowder" count="150"/>

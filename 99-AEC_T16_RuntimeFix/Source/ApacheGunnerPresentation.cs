@@ -74,6 +74,7 @@ namespace AECT16RuntimeFix
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
             try{
                 GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-720*scale)/2,0),Quaternion.identity,new Vector3(scale,scale,1));
+                if(seat==0){ApachePilotHUD.Draw(vehicle);return;}
                 ApacheFlightAssist.Draw(vehicle,seat);
                 var local=Quaternion.Inverse(ApacheWeapons.BodyRotation(vehicle))*direction.normalized;
                 float yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg,pitch=Mathf.Atan2(local.y,new Vector2(local.x,local.z).magnitude)*Mathf.Rad2Deg;

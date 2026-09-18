@@ -1,6 +1,6 @@
 <configs>
   <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingVehicles']/effect_group[1]">
-    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="100,100" value="1" tags="vehicleApacheHelicopterChassis,vehicleApacheHelicopterAccessories,vehicleApacheHelicopterPlaceable,pzApacheRocket,pzApache30mm"/>
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="100,100" value="1" tags="vehicleApacheHelicopterChassis,vehicleApacheHelicopterAccessories,vehicleApacheHelicopterPlaceable,pzApacheRocket,pzApache30mm,pzApacheGuidedMissile"/>
   </append>
-  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingVehicles']/display_entry[@icon='vehicleGyrocopterPlaceable']/unlock_entry/@item">,vehicleApacheHelicopterChassis,vehicleApacheHelicopterAccessories,vehicleApacheHelicopterPlaceable,pzApacheRocket,pzApache30mm</append>
+  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingVehicles']/display_entry[@icon='vehicleGyrocopterPlaceable']/unlock_entry/@item">,vehicleApacheHelicopterChassis,vehicleApacheHelicopterAccessories,vehicleApacheHelicopterPlaceable,pzApacheRocket,pzApache30mm,pzApacheGuidedMissile</append>
 </configs>
