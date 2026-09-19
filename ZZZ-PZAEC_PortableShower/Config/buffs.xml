@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/buffs/buff[@name='buffStatusCheck01']">
+    <effect_group>
+      <triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffPZAECShowerController" />
+      <triggered_effect trigger="onSelfEnteredGame" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfRespawn" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onCombatEntered" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onOtherAttackedSelf" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onOtherDamagedSelf" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfDamagedSelf" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfPrimaryActionStart" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfSecondaryActionStart" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfPrimaryActionRayHit" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfPrimaryActionRayMiss" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfSecondaryActionRayHit" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfSecondaryActionRayMiss" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfRangedBurstShotStart" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfRangedBurstShotEnd" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfAttackedOther" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfDamagedOther" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfExplosionAttackedOther" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfExplosionDamagedOther" action="PZAECShowerCombat,PZAEC.PortableShower" />
+      <triggered_effect trigger="onSelfVehicleAttackedOther" action="PZAECShowerCombat,PZAEC.PortableShower" />
+    </effect_group>
+  </append>
+  <append xpath="/buffs">
+    <buff name="buffPZAECShowerController" hidden="true" remove_on_death="false">
+      <stack_type value="ignore" />
+      <duration value="0" />
+      <update_rate value="1" />
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="PZAECShowerTick,PZAEC.PortableShower" />
+      </effect_group>
+    </buff>
+    <buff name="buffPZAECShowerActive" name_key="buffPZAECShowerActive" description_key="buffPZAECShowerActiveDesc" tooltip_key="buffPZAECShowerActiveDesc" icon="ui_game_symbol_swim" icon_color="85,210,240">
+      <stack_type value="replace" />
+      <duration value="2" />
+    </buff>
+    <buff name="buffPZAECShowerEmpty" name_key="buffPZAECShowerEmpty" description_key="buffPZAECShowerEmptyDesc" tooltip_key="buffPZAECShowerEmptyDesc" icon="ui_game_symbol_swim" icon_color="240,180,80">
+      <stack_type value="replace" />
+      <duration value="2" />
+    </buff>
+  </append>
+</configs>

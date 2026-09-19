@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/item_modifiers">
+    <item_modifier name="modPZAECWristShower" installable_tags="armorHands" modifier_tags="PZAECWristShower" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modArmorWaterPurifier" />
+      <property name="CustomIconTint" value="85,210,240" />
+      <property name="DescriptionKey" value="modPZAECWristShowerDesc" />
+      <property name="UnlockedBy" value="craftingArmor" />
+      <property name="EconomicValue" value="1500" />
+      <property name="Material" value="Mmetal" />
+      <property name="Group" value="Mods,Armor" />
+    </item_modifier>
+  </append>
+</configs>

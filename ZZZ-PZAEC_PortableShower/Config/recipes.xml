@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="modPZAECWristShower" count="1" craft_area="workbench" craft_time="120" tags="learnable,workbenchCrafting" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedSteel" count="10" />
+      <ingredient name="resourceMechanicalParts" count="8" />
+      <ingredient name="resourceElectricParts" count="8" />
+      <ingredient name="resourceScrapPolymers" count="20" />
+      <ingredient name="resourceMetalPipe" count="4" />
+      <ingredient name="resourceDuctTape" count="5" />
+    </recipe>
+  </append>
+</configs>

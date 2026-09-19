@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingArmor']">
+    <display_entry icon="modArmorWaterPurifier" name_key="modPZAECWristShower" has_quality="false" unlock_level="50">
+      <unlock_entry item="modPZAECWristShower" unlock_tier="1" />
+    </display_entry>
+  </append>
+  <append xpath="/progression/crafting_skills/crafting_skill[@name='craftingArmor']/effect_group[1]">
+    <passive_effect name="RecipeTagUnlocked" operation="base_set" level="50,100" value="1" tags="modPZAECWristShower" />
+  </append>
+</configs>
