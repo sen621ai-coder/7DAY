@@ -33,13 +33,17 @@
         <triggered_effect trigger="onSelfBuffUpdate" action="PZAECShowerTick,PZAEC.PortableShower" />
       </effect_group>
     </buff>
-    <buff name="buffPZAECShowerActive" name_key="buffPZAECShowerActive" description_key="buffPZAECShowerActiveDesc" tooltip_key="buffPZAECShowerActiveDesc" icon="ui_game_symbol_swim" icon_color="85,210,240">
+    <buff name="buffPZAECShowerActive" hidden="true" name_key="buffPZAECShowerActive" description_key="buffPZAECShowerActiveDesc" tooltip_key="buffPZAECShowerActiveDesc" icon="ui_game_symbol_swim" icon_color="85,210,240">
       <stack_type value="replace" />
       <duration value="2" />
     </buff>
-    <buff name="buffPZAECShowerEmpty" name_key="buffPZAECShowerEmpty" description_key="buffPZAECShowerEmptyDesc" tooltip_key="buffPZAECShowerEmptyDesc" icon="ui_game_symbol_swim" icon_color="240,180,80">
+    <buff name="buffPZAECShowerEmpty" hidden="true" name_key="buffPZAECShowerEmpty" description_key="buffPZAECShowerEmptyDesc" tooltip_key="buffPZAECShowerEmptyDesc" icon="ui_game_symbol_swim" icon_color="240,180,80">
       <stack_type value="replace" />
       <duration value="2" />
+    </buff>
+    <buff name="buffPZAECShowerRefilled" name_key="buffPZAECShowerRefilled" description_key="buffPZAECShowerRefilledDesc" tooltip_key="buffPZAECShowerRefilledDesc" icon="ui_game_symbol_swim" icon_color="85,210,240">
+      <stack_type value="replace" />
+      <duration value="4" />
     </buff>
   </append>
 </configs>

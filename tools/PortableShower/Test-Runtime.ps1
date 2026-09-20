@@ -16,10 +16,11 @@ public class EntityAlive {public EntityBuffs Buffs=new EntityBuffs();}
 public class EntityPlayer:EntityAlive {}
 public class EntityPlayerLocal:EntityPlayer {public object world=new object(),AttachedToEntity;public bool Dead,IsRunning,MovementRunning,Swimming;public Equipment equipment=new Equipment();public Bag bag=new Bag();public bool IsDead()=>Dead;public bool CalcIfSwimming()=>Swimming;}
 public class EntityBuffs {
+ public int RefillNotifications;
  public System.Collections.Generic.Dictionary<string,float> Vars=new System.Collections.Generic.Dictionary<string,float>();
  public System.Collections.Generic.HashSet<string> Buffs=new System.Collections.Generic.HashSet<string>();
  public float GetCustomVar(string s)=>Vars.TryGetValue(s,out var v)?v:0;public void SetCustomVar(string s,float v,bool n)=>Vars[s]=v;
- public bool HasBuff(string s)=>Buffs.Contains(s);public void AddBuff(string s)=>Buffs.Add(s);public void RemoveBuff(string s)=>Buffs.Remove(s);
+ public bool HasBuff(string s)=>Buffs.Contains(s);public void AddBuff(string s){Buffs.Add(s);if(s=="buffPZAECShowerRefilled")RefillNotifications++;}public void RemoveBuff(string s)=>Buffs.Remove(s);
 }
 public static class ShowerTests {
  static int count;static void Check(bool b,string s){count++;if(!b)throw new System.Exception(s);}
@@ -48,6 +49,11 @@ public static class ShowerTests {
   var remote=new EntityPlayer();new MinEventActionPZAECShowerTick().Execute(new MinEventParams{Self=remote});new MinEventActionPZAECShowerCombat().Execute(new MinEventParams{Self=remote});Check(remote.Buffs.Vars.Count==0,"remote/server replicas never write");
   var dup=New();dup.equipment.Items[0].Modifications=new[]{ItemClass.GetItem("modPZAECWristShower",false),ItemClass.GetItem("modPZAECWristShower",false)};Tick(dup,30);Near(dup.Buffs.GetCustomVar("$HygieneStatus"),100f/300,"duplicate mods do not stack");
   Check(PZAEC.PortableShower.Rules.Clamp(float.NaN,60)==0,"invalid stored water rejected");
+  Check(full.Buffs.RefillNotifications==5,"exactly one notification per consumed bottle across five refills");
+  Check(p.Buffs.RefillNotifications==1,"combat, movement and equipment pauses do not repeat notification");
+  Check(restored.Buffs.RefillNotifications==0,"resuming saved water never notifies");
+  Check(reserve.Buffs.RefillNotifications==1,"water shortage never repeats notification");
+  Check(failed.Buffs.RefillNotifications==0,"failed water consumption never notifies");
   System.Console.WriteLine("PASS "+count+" runtime behavior checks (actual source with game API fixtures).");
  }
 }

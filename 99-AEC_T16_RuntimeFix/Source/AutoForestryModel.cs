@@ -15,6 +15,7 @@ namespace AECT16RuntimeFix
         static GameObject cache;
         static Transform prefab;
         static Material timberMaterial;
+        static Material nativeMaterial;
         const string BlockName = "yfAutoForestry";
 
         public static void Install(Harmony harmony, string modPath)
@@ -67,17 +68,46 @@ namespace AECT16RuntimeFix
 
         static Material Solid(Shader shader, string name, Color color)
         {
-            var m = new Material(shader) { name = name, color = color };
+            var m = NativeMaterial(name); m.color=color;
             m.SetFloat("_Glossiness", .2f);
             return m;
+        }
+
+        // Reuse a shipped workstation material and its compiled shader keywords.
+        // Shader.Find("Standard") can return a shader without the player variants
+        // needed by dynamically generated materials on another client's renderer.
+        static Material NativeMaterial(string name)
+        {
+            if(nativeMaterial==null)
+            {
+                var native=DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab",false);
+                if(native!=null)
+                foreach(var renderer in native.GetComponentsInChildren<Renderer>(true))
+                {
+                    foreach(var candidate in renderer.sharedMaterials)
+                    {
+                        if(candidate==null||candidate.shader==null||!candidate.shader.isSupported
+                            ||candidate.renderQueue>=3000||!candidate.HasProperty("_MainTex")||!candidate.HasProperty("_Color"))continue;
+                        nativeMaterial=candidate;break;
+                    }
+                    if(nativeMaterial!=null)break;
+                }
+                if(nativeMaterial==null)throw new InvalidOperationException("No supported native workstation material for forestry");
+                Log.Out("[AutoForestry] Native material v2: "+nativeMaterial.name+", shader="+nativeMaterial.shader.name
+                    +", graphics="+SystemInfo.graphicsDeviceType+", keywords="+String.Join(",",nativeMaterial.shaderKeywords));
+            }
+            var material=new Material(nativeMaterial){name=name,color=Color.white};
+            // Do not retain the workbench's atlas, normal or emission textures.
+            foreach(var property in material.GetTexturePropertyNames())material.SetTexture(property,null);
+            material.mainTextureScale=new Vector2(1,1);material.mainTextureOffset=Vector2.zero;
+            if(material.HasProperty("_EmissionColor"))material.SetColor("_EmissionColor",Color.black);
+            return material;
         }
 
         internal static Material GetTimberMaterial()
         {
             if(timberMaterial!=null)return timberMaterial;
-            var shader=Shader.Find("Standard");
-            if(shader==null)throw new InvalidOperationException("Standard shader unavailable for forestry timber");
-            timberMaterial=Solid(shader,"ForestryBarkAndEndgrain",Color.white);
+            timberMaterial=NativeMaterial("ForestryBarkAndEndgrain");
             timberMaterial.mainTexture=Texture("timber.png",false);
             timberMaterial.SetFloat("_Glossiness",.12f);
             return timberMaterial;
@@ -148,8 +178,7 @@ namespace AECT16RuntimeFix
 
         static Transform CreatePrefab()
         {
-            var shader = Shader.Find("Standard");
-            if (shader == null) throw new InvalidOperationException("Standard shader unavailable for forestry");
+            var shader = GetTimberMaterial().shader;
             // Obtain collision layer/tag from an installed native workstation rather
             // than hard-coding version-dependent game layer numbers.
             var native = DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab", false);
@@ -176,11 +205,10 @@ namespace AECT16RuntimeFix
                     materials = new Material[materialCount];
                     for (int i = 0; i < materialCount; i++)
                     {
-                        var m = new Material(shader) { name = "ForestrySurface" + i };
+                        var m = NativeMaterial("ForestrySurface" + i);
                         m.SetTexture("_MainTex", Texture("color" + i + ".png", false));
                         m.SetTexture("_MetallicGlossMap", Texture("metal" + i + ".png", true));
                         m.SetTexture("_BumpMap", Texture("normal" + i + ".png", true));
-                        m.EnableKeyword("_METALLICGLOSSMAP"); m.EnableKeyword("_NORMALMAP");
                         m.SetFloat("_GlossMapScale", .65f);
                         m.SetFloat("_BumpScale", i == 1 ? .55f : .85f);
                         if(i>=2)
@@ -190,9 +218,7 @@ namespace AECT16RuntimeFix
                         }
                         if (i == 0)
                         {
-                            m.SetFloat("_Mode", 1); m.SetFloat("_Cutoff", .4f);
-                            m.SetOverrideTag("RenderType", "TransparentCutout");
-                            m.EnableKeyword("_ALPHATEST_ON"); m.renderQueue = 2450;
+                            if(m.HasProperty("_Cutoff"))m.SetFloat("_Cutoff", .4f);
                         }
                         materials[i] = m;
                     }
@@ -239,7 +265,7 @@ namespace AECT16RuntimeFix
                 var trim=Solid(shader,"ForestryMetalTrim",new Color(.48f,.49f,.44f));
                 trim.SetFloat("_Metallic",.8f); trim.SetFloat("_Glossiness",.35f);
                 var red=Solid(shader,"ForestryStopButton",new Color(.6f,.055f,.035f));
-                green.EnableKeyword("_EMISSION"); green.SetColor("_EmissionColor",new Color(.015f,.10f,.025f));
+                green.SetColor("_EmissionColor",new Color(.015f,.10f,.025f));
                 // A trigger supplies full native selection bounds without creating
                 // invisible physical walls. Child colliders follow the real geometry.
                 var foundation = Box(go.transform, "Foundation", new Vector3(0,.045f,0), new Vector3(9.95f,.09f,5.95f), dark);
