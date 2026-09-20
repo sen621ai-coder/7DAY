@@ -66,6 +66,10 @@ for name in ['buffPZAECShowerController','buffPZAECShowerActive','buffPZAECShowe
 for effect in E.parse(str(MOD/'Config/buffs.xml')).xpath('//triggered_effect[@buff]'):
     check(bool(buffs.xpath('/buffs/buff[@name=$name]',name=effect.get('buff'))),'Referenced buff exists')
 controller=buffs.xpath("/buffs/buff[@name='buffPZAECShowerController']")[0]
+for name in ['buffPZAECShowerActive','buffPZAECShowerEmpty']:
+    check(buffs.xpath('/buffs/buff[@name=$name]',name=name)[0].get('hidden')=='true','Frequent status is silent '+name)
+notice=buffs.xpath("/buffs/buff[@name='buffPZAECShowerRefilled']")
+check(len(notice)==1 and notice[0].get('hidden')!='true' and notice[0].find('duration').get('value')=='4','One short visible refill notice')
 check(controller.find('update_rate').get('value')=='1','One-second controller')
 check((MOD/'PZAEC.PortableShower.dll').stat().st_size>0,'Runtime DLL installed')
 with (MOD/'Config/Localization.csv').open(encoding='utf-8') as f:

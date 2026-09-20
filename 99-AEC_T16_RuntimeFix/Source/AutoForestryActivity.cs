@@ -99,11 +99,8 @@ namespace AECT16RuntimeFix
                 foreach(var renderer in logRenderers)renderer.sharedMaterial=solidLog;
                 if(fadeLog!=null)Destroy(fadeLog);
                 fadeLog=new Material(solidLog){name="ForestryLogTransition"};
-                fadeLog.SetFloat("_Mode",2);fadeLog.SetOverrideTag("RenderType","Transparent");
-                fadeLog.SetInt("_SrcBlend",(int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                fadeLog.SetInt("_DstBlend",(int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                fadeLog.SetInt("_ZWrite",0);fadeLog.DisableKeyword("_ALPHATEST_ON");fadeLog.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                fadeLog.EnableKeyword("_ALPHABLEND_ON");fadeLog.renderQueue=3000;
+                // Keep the native opaque shader variant. Runtime alpha keywords
+                // can select a stripped variant and turn the inventory logs pink.
             }
             initialized=true;
         }
@@ -160,14 +157,9 @@ namespace AECT16RuntimeFix
             {
                 float alpha=Mathf.MoveTowards(logAlpha[i],i<desiredLogs?1:0,dt*2.5f);
                 if(alpha==logAlpha[i])continue;
-                logAlpha[i]=alpha;timber[i].SetActive(alpha>0);
-                if(logColliders[i]!=null)logColliders[i].enabled=alpha>=.99f;
-                if(alpha>=1||alpha<=0){logRenderers[i].sharedMaterial=solidLog;logRenderers[i].SetPropertyBlock(null);}
-                else
-                {
-                    logRenderers[i].sharedMaterial=fadeLog;
-                    logProperties.SetColor(ColorId,new Color(1,1,1,alpha));logRenderers[i].SetPropertyBlock(logProperties);
-                }
+                logAlpha[i]=alpha;timber[i].SetActive(alpha>=.5f);
+                if(logColliders[i]!=null)logColliders[i].enabled=alpha>=.5f;
+                logRenderers[i].sharedMaterial=solidLog;logRenderers[i].SetPropertyBlock(null);
             }
         }
         void SetScreen(int status)

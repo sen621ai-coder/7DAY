@@ -86,6 +86,8 @@ namespace PZAEC.PortableShower
                 }
                 water = 60;
                 Set(player, Rules.Water, water);
+                // Notify only after a real bottle was consumed, never on resume/tick.
+                player.Buffs.AddBuff("buffPZAECShowerRefilled");
             }
             float used = Rules.CleanSeconds(hygiene, maximum, water, elapsed);
             if (used <= 0) { Hide(player); return; }

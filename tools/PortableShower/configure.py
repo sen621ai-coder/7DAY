@@ -14,7 +14,7 @@ def save(name, root):
     E.ElementTree(root).write(CONFIG / name, encoding='utf-8', xml_declaration=True)
 
 root = E.Element('xml')
-for name, value in [('Name','PZAECPortableShower'),('DisplayName','PZAEC 腕式便携清洁模块'),('Description','Project Z hygiene integration; glove attachment with water reserve and combat pause.'),('Author','PZAEC'),('Version','1.0.0')]:
+for name, value in [('Name','PZAECPortableShower'),('DisplayName','PZAEC 腕式便携清洁模块'),('Description','Project Z hygiene integration; glove attachment with water reserve and combat pause.'),('Author','PZAEC'),('Version','1.0.1')]:
     E.SubElement(root, name, value=value)
 E.ElementTree(root).write(MOD/'ModInfo.xml', encoding='utf-8', xml_declaration=True)
 
@@ -47,12 +47,17 @@ controller=E.SubElement(append,'buff',name='buffPZAECShowerController',hidden='t
 for tag,value in [('stack_type','ignore'),('duration','0'),('update_rate','1')]: E.SubElement(controller,tag,value=value)
 E.SubElement(E.SubElement(controller,'effect_group'),'triggered_effect',trigger='onSelfBuffUpdate',action='PZAECShowerTick,PZAEC.PortableShower')
 for name,color in [('buffPZAECShowerActive','85,210,240'),('buffPZAECShowerEmpty','240,180,80')]:
-    buff=E.SubElement(append,'buff',name=name,name_key=name,description_key=name+'Desc',tooltip_key=name+'Desc',icon='ui_game_symbol_swim',icon_color=color)
+    buff=E.SubElement(append,'buff',name=name,hidden='true',name_key=name,description_key=name+'Desc',tooltip_key=name+'Desc',icon='ui_game_symbol_swim',icon_color=color)
     E.SubElement(buff,'stack_type',value='replace')
     E.SubElement(buff,'duration',value='2')
+buff=E.SubElement(append,'buff',name='buffPZAECShowerRefilled',name_key='buffPZAECShowerRefilled',description_key='buffPZAECShowerRefilledDesc',tooltip_key='buffPZAECShowerRefilledDesc',icon='ui_game_symbol_swim',icon_color='85,210,240')
+E.SubElement(buff,'stack_type',value='replace')
+E.SubElement(buff,'duration',value='4')
 save('buffs.xml',root)
 
 rows=[
+    ('buffPZAECShowerRefilled','Cleaner: used 1 bottle of water','清洁模块：已使用1瓶清水'),
+    ('buffPZAECShowerRefilledDesc','Added 60 seconds of spray water. Only a new bottle triggers this reminder.','已补充60秒喷淋用水。仅消耗新的一瓶清水时提醒，持续清洁、暂停恢复和缺水均不再提醒。'),
     (NAME,'Wrist Shower Module','腕式便携清洁模块'),
     (NAME+'Desc','Glove attachment. Armor crafting 50; workbench 120 seconds. Cleans hygiene over about 5 minutes of active use. Wait 30 seconds after combat or weapon/tool use. Pauses while running, swimming, riding or bathing. Each ordinary bottled water supplies 60 seconds; consumes backpack water only and reserves the last 2 bottles. Remaining spray time is saved on the player. No stacking or disease treatment.','安装在手部护甲，占用1个模组槽。护甲制作50级解锁，工作台基础制作120秒。脱战30秒后自动缓慢清洁，约5分钟有效喷淋恢复一整条卫生值（自然变脏会延长时间）。攻击、受击及武器/工具操作重置脱战计时；奔跑、游泳、乘车、固定沐浴时暂停。每瓶普通清水提供60秒有效喷淋，只从背包补水并保留最后2瓶。剩余水量随角色保存；拆装不重置，多个不叠加。不治疗感染、伤口或辐射病。'),
     ('buffPZAECShowerActive','Portable cleaning','便携清洁中'),

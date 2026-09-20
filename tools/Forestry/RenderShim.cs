@@ -30,7 +30,7 @@ namespace UnityEngine {
   public Vector3 Normal(Vector3 n){N.Matrix4x4.Invert(m,out var inv);return Vector3.From(N.Vector3.TransformNormal(n.N,N.Matrix4x4.Transpose(inv))).normalized;}
  }
  public static class Mathf {public const float PI=(float)Math.PI;public static float Sin(float a)=>(float)Math.Sin(a);public static float Cos(float a)=>(float)Math.Cos(a);public static float Sqrt(float a)=>(float)Math.Sqrt(a);public static float Max(float a,float b)=>Math.Max(a,b);}
- public struct Color {public float r,g,b,a;public Color(float x,float y,float z,float w=1){r=x;g=y;b=z;a=w;}public static Color white=>new Color(1,1,1);}
+ public struct Color {public float r,g,b,a;public Color(float x,float y,float z,float w=1){r=x;g=y;b=z;a=w;}public static Color white=>new Color(1,1,1);public static Color black=>new Color(0,0,0);}
  public class Component:Object {public GameObject gameObject;public Transform transform=>gameObject.transform;public override string name{get=>gameObject.name;set=>gameObject.name=value;}public T GetComponent<T>() where T:Component=>gameObject.GetComponent<T>();public T[] GetComponentsInChildren<T>(bool includeInactive=false) where T:Component=>gameObject.GetComponentsInChildren<T>(includeInactive);public T GetComponentInChildren<T>(bool includeInactive=false) where T:Component=>GetComponentsInChildren<T>(includeInactive).FirstOrDefault();}
  public class Transform:Component,IEnumerable<Transform> {
   public Vector3 localPosition,localScale=new Vector3(1,1,1);public Quaternion localRotation=Quaternion.identity;public Transform parent;public List<Transform> children=new List<Transform>();
@@ -49,15 +49,17 @@ namespace UnityEngine {
   public static GameObject CreatePrimitive(PrimitiveType t){var g=new GameObject(t.ToString());g.AddComponent<MeshFilter>().sharedMesh=PrimitiveMesh.Create(t);g.AddComponent<MeshRenderer>();g.AddComponent<BoxCollider>();return g;}
  }
  public class Collider:Component{}public class MeshCollider:Collider{public Mesh sharedMesh;}public class BoxCollider:Collider{public Vector3 center,size;public bool isTrigger;}public class CapsuleCollider:Collider{public int direction;public float radius,height;}
- public class Renderer:Component{public Material sharedMaterial;}public class MeshRenderer:Renderer{}public class MeshFilter:Component{public Mesh sharedMesh;}
- public class Shader:Object{public static Shader Find(string n)=>new Shader{name=n};}
+ public class Renderer:Component{public Material sharedMaterial;public Material[] sharedMaterials=>new[]{sharedMaterial};}public class MeshRenderer:Renderer{}public class MeshFilter:Component{public Mesh sharedMesh;}
+ public class Shader:Object{public bool isSupported=true;public static Shader Find(string n)=>new Shader{name=n};}
+ public static class SystemInfo{public static string graphicsDeviceType=>"OfflineStub";}
  public enum TextureFormat{RGBA32}public enum TextureWrapMode{Repeat}public enum FilterMode{Trilinear}
  public class Texture2D:Object{public Texture2D(int w,int h,TextureFormat f,bool mip,bool lin){}public TextureWrapMode wrapMode;public int anisoLevel;public FilterMode filterMode;}
  public static class ImageConversion{public static bool LoadImage(Texture2D t,byte[] b,bool r)=>true;}
  public class Material:Object {
   public Color color=Color.white;public Texture2D mainTexture;public Vector2 mainTextureScale=new Vector2(1,1),mainTextureOffset;public int renderQueue;
   public Dictionary<string,Texture2D> maps=new Dictionary<string,Texture2D>();
-  public Material(Shader s){}public Material(Material m){color=m.color;mainTexture=m.mainTexture;mainTextureScale=m.mainTextureScale;mainTextureOffset=m.mainTextureOffset;maps=new Dictionary<string,Texture2D>(m.maps);}
+  public Shader shader; public string[] shaderKeywords=new string[0];public bool HasProperty(string n)=>true;public string[] GetTexturePropertyNames()=>maps.Keys.ToArray();
+  public Material(Shader s){shader=s;}public Material(Material m){shader=m.shader;shaderKeywords=m.shaderKeywords;color=m.color;mainTexture=m.mainTexture;mainTextureScale=m.mainTextureScale;mainTextureOffset=m.mainTextureOffset;maps=new Dictionary<string,Texture2D>(m.maps);}
   public void SetFloat(string n,float f){}public void SetColor(string n,Color c){}public void SetTexture(string n,Texture2D t){maps[n]=t;if(n=="_MainTex")mainTexture=t;}public void EnableKeyword(string k){}public void SetOverrideTag(string k,string v){}
  }
  public struct CombineInstance{public Mesh mesh;public Matrix4x4 transform;}
@@ -93,7 +95,7 @@ public class RootTransformRefParent : UnityEngine.Component {
 }
 public static class GameManager{public static bool IsDedicatedServer=>false;}
 public static class Log{public static void Out(string s){}}
-public static class DataLoader{public static T LoadAsset<T>(string s,bool b)where T:class{var g=new UnityEngine.GameObject("NativeColliderReference");g.AddComponent<UnityEngine.BoxCollider>();return g.transform as T;}}
+public static class DataLoader{public static T LoadAsset<T>(string s,bool b)where T:class{var g=new UnityEngine.GameObject("NativeColliderReference");g.AddComponent<UnityEngine.BoxCollider>();g.AddComponent<UnityEngine.MeshRenderer>().sharedMaterial=new UnityEngine.Material(UnityEngine.Shader.Find("NativeWorkstation")){name="NativeWorkstationMaterial"};return g.transform as T;}}
 namespace AECT16RuntimeFix{public static class AutoForestryActivity{public static void Install(HarmonyLib.Harmony h){}}}
 public static class ForestryRenderExport {
  static void String(BinaryWriter w,string s){var b=System.Text.Encoding.UTF8.GetBytes(s??"");w.Write(b.Length);w.Write(b);}
@@ -109,6 +111,9 @@ public static class ForestryRenderExport {
   // Deliberately show full inventory/all three upgrades, rather than imply a save state.
   foreach(var t in root.GetComponentsInChildren<UnityEngine.Transform>(true))if(t.name=="ForestrySpeed"||t.name=="ForestryPacker"||t.name=="ForestrySiren")t.gameObject.SetActive(true);
   var renderers=root.GetComponentsInChildren<UnityEngine.MeshRenderer>().Where(r=>r.sharedMaterial!=null).ToArray();var materials=renderers.Select(r=>r.sharedMaterial).Distinct().ToArray();
+  foreach(var m in materials)if(m.shader==null||m.shader.name!="NativeWorkstation"||!m.shader.isSupported)
+   throw new InvalidOperationException("Forestry surface did not inherit the native shader: "+m.name);
+  Console.WriteLine("PASS: every exported material uses the native workstation shader; no standalone Standard lookup.");
   using(var w=new BinaryWriter(File.Create(output))){w.Write(new byte[]{89,70,82,49});w.Write(materials.Length);w.Write(renderers.Length);
    foreach(var m in materials){String(w,m.name);String(w,m.mainTexture?.name.Replace("Forestry_",""));w.Write(m.color.r);w.Write(m.color.g);w.Write(m.color.b);w.Write(m.color.a);w.Write(m.mainTextureScale.x);w.Write(m.mainTextureScale.y);w.Write(m.mainTextureOffset.x);w.Write(m.mainTextureOffset.y);}
    foreach(var r in renderers){var mesh=r.GetComponent<UnityEngine.MeshFilter>().sharedMesh;var mat=r.transform.localToWorldMatrix;String(w,r.name);w.Write(Array.IndexOf(materials,r.sharedMaterial));w.Write(mesh.vertices.Length);w.Write(mesh.triangles.Length);for(int i=0;i<mesh.vertices.Length;i++){var v=mat.Point(mesh.vertices[i]);var n=mat.Normal(mesh.normals[i]);w.Write(v.x);w.Write(v.y);w.Write(v.z);w.Write(n.x);w.Write(n.y);w.Write(n.z);w.Write(mesh.uv[i].x);w.Write(mesh.uv[i].y);}foreach(int i in mesh.triangles)w.Write(i);}
