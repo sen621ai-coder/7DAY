@@ -101,7 +101,7 @@ namespace YFAutomation
             RecipePlan first=null;
             foreach(var r in CraftingManager.GetRecipes(product))
             {
-                if(r.IsScrap||r.craftingArea!=(kind=="yfAutoKitchen"?"campfire":"forge")||r.GetOutputItemClass().HasQuality)continue;
+                if(!RecipeMachines.Supports(kind,r))continue;
                 var plan=Build(r,input,locked,player);if(plan.Ready)return plan;
                 if(first==null||player!=null&&!first.Recipe.IsUnlocked(player)&&r.IsUnlocked(player))first=plan;
             }

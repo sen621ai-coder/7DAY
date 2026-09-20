@@ -114,6 +114,7 @@ public sealed class MachineConfigurationGameQA : IModApi
             Check(MachineConfiguration.Products(kind).Count>0,"native supported product catalog: "+kind);
         InventoryChecks(m,player,owner);
         ForgeChecks(player,owner);
+        WorkbenchChecks(player,owner);
         world.SetBlockRPC(new BlockValueRef(m.ToWorldPos()),BlockValue.Air);
         Check(MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Count==0,"removing machine deletes saved settings");
     }
@@ -194,6 +195,81 @@ public sealed class MachineConfigurationGameQA : IModApi
         world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
     }
 
+    static void WorkbenchChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
+    {
+        const string kind="yfAutoWorkbench";
+        var table=Place(kind,new Vector3i(6,160,8),owner);var storage=table.GetFeature<TEFeatureStorage>();
+        Check(Production.IsMachine(kind)&&MachineDisplay.IsMachine(kind)&&MachineInventory.UsesInternal(table),"automatic workbench supports production, interaction and internal conveyors");
+        var products=MachineConfiguration.Products(kind);
+        foreach(var product in new[]{"resourceGunPowder","ammo9mmBulletBall","ammo762mmBulletBall","ammoShotgunShell"})
+        {
+            Check(products.Contains(product),"automatic workbench lists "+product);
+            var config=MachineConfiguration.Get(table).Clone();config.Product=product;config.StorageMode="internal";
+            Check(MachineConfiguration.Apply(world,table,player,config,MachineConfiguration.Token(table))=="已保存","configure automatic workbench "+product);
+            var recipe=CraftingManager.GetRecipes(product).First(r=>RecipeMachines.Supports(kind,r)&&r.IsUnlocked(player));
+            FillRecipe(storage,recipe,player);
+            var plan=RecipePlan.Select(product,kind,storage.items,i=>!MachineInventory.IsInput(i),player);
+            Check(plan!=null&&plan.Ready,"actual ingredient plan is ready for "+product);
+            Check(RecipePreview.Describe(world,table,config,player).Contains("材料与工具已齐"),"server preview is available for "+product);
+            var before=ProductionInventory.Clone(storage.items);
+            Check(Production.Step(table,table,table,null).Contains("所有者上线")&&SameItems(before,storage.items),"offline owner cannot craft "+product);
+            float modifier=recipe.tags.Test_AnySet(XUiM_Recipes.SandboxIgnoreTag)?1:XUiM_Recipes.CraftingOutputModifier;
+            int expected=Math.Max(1,(int)(EffectManager.GetValue(PassiveEffects.CraftingOutputCount,null,recipe.count,player,recipe,recipe.tags)*modifier));
+            string status="";for(int i=0;i<10000;i++){status=Production.Step(table,table,table,player);if(status.StartsWith("完成"))break;}
+            Check(status.StartsWith("完成")&&storage.items.Skip(18).Sum(s=>s.count)==expected&&storage.items.Skip(18).Where(s=>!s.IsEmpty()).All(s=>s.itemValue.ItemClass.GetItemName()==product),"native production yields the exact recipe output for "+product);
+            Check(SameItems(storage.items.Take(18),plan.Input.Take(18)),"native production consumes exactly the previewed materials for "+product);
+        }
+        Check(!RecipeMachines.Supports(kind,CraftingManager.GetRecipes("resourceGunPowder").First(r=>r.craftingArea=="chemistryStation")),"automatic workbench rejects chemistry-only gunpowder recipe");
+        Check(!RecipeMachines.Supports(kind,CraftingManager.GetRecipes("resourceForgedSteel").First(r=>r.craftingArea=="forge")),"automatic workbench rejects forge-only recipe");
+        var quality=CraftingManager.GetAllRecipes().First(r=>r.craftingArea=="workbench"&&r.GetOutputItemClass().HasQuality);
+        Check(!RecipeMachines.Supports(kind,quality)&&!products.Contains(quality.GetOutputItemClass().GetItemName()),"quality equipment cannot be produced with a default item quality");
+        Check(!RecipeMachines.Supports("yfAutoForge",CraftingManager.GetRecipes("ammo9mmBulletBall").First(r=>r.craftingArea=="workbench")),"forge does not inherit workbench ammo recipes");
+        var c=MachineConfiguration.Get(table).Clone();c.Product="ammo9mmBulletBall";c.StorageMode="internal";
+        Check(MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table))=="已保存","select ammo for interruption tests");
+        var ammo=CraftingManager.GetRecipes(c.Product).First(r=>RecipeMachines.Supports(kind,r)&&r.IsUnlocked(player));FillRecipe(storage,ammo,player);
+        for(int i=18;i<36;i++)storage.items[i]=new ItemStack(ItemClass.GetItem("resourceWood"),ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
+        var snapshot=ProductionInventory.Clone(storage.items);var state=table.GetFeature<TEFeatureAutomationState>();float progress=state.Seconds;
+        Check(Production.Step(table,table,table,player).Contains("满")&&SameItems(snapshot,storage.items)&&state.Seconds==progress,"full ammo output pauses without consuming ingredients or progress");
+        FillRecipe(storage,ammo,player);storage.SlotLocks=new PackedBoolArray(36);storage.SlotLocks[0]=true;snapshot=ProductionInventory.Clone(storage.items);
+        Check(Production.Step(table,table,table,player).Contains("缺材料")&&SameItems(snapshot,storage.items),"locked ingredients cannot be consumed by automatic workbench");storage.SlotLocks[0]=false;
+        c=MachineConfiguration.Get(table).Clone();c.Paused=true;MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));
+        Check(Production.Step(table,table,table,player).Contains("暂停")&&SameItems(snapshot,storage.items),"paused automatic workbench preserves materials");
+        c=MachineConfiguration.Get(table).Clone();c.Paused=false;MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));
+        var locked=CraftingManager.GetAllRecipes().First(r=>RecipeMachines.Supports(kind,r)&&!r.IsUnlocked(player)&&CraftingManager.GetRecipes(r.GetOutputItemClass().GetItemName()).Where(v=>RecipeMachines.Supports(kind,v)).All(v=>!v.IsUnlocked(player)));
+        c=MachineConfiguration.Get(table).Clone();c.Product=locked.GetOutputItemClass().GetItemName();MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));FillRecipe(storage,locked,player);snapshot=ProductionInventory.Clone(storage.items);
+        Check(RecipePreview.Describe(world,table,c,player).Contains("尚未解锁")&&!Production.Step(table,table,table,player).StartsWith("完成")&&SameItems(snapshot,storage.items),"locked recipe cannot be automated even with all ingredients");
+        c=MachineConfiguration.Get(table).Clone();c.Product="ammo9mmBulletBall";MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));storage.items=ItemStack.CreateArray(36);
+        var belt=Place("yfAutoBeltStraight",new Vector3i(6,160,7),owner);var bv=world.GetBlock(belt.ToWorldPos());
+        for(byte r=0;r<24;r++){bv.rotation=r;if(bv.Block.SupportsRotation(r)&&ConveyorPath.Offset(bv,Vector3.forward)==new Vector3i(0,0,1))break;}
+        world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),bv);belt=(TileEntityComposite)world.GetTileEntity(new Vector3i(6,160,7));belt.SetOwner(owner);
+        var at=new Vector3i(7,160,7);world.SetBlockRPC(new BlockValueRef(at),Block.GetBlockValue("yfAutoPowerPort"));var port=world.GetTileEntity(at) as TileEntityPowered;
+        if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(at);port=((BlockPowered)world.GetBlock(at).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(at);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
+        Conveyors.Observe(belt,world);var step=AccessTools.Method(typeof(Conveyors),"Step");belt.GetFeature<TEFeatureStorage>().items[0]=new ItemStack(ItemClass.GetItem("resourceBulletCasing"),5);step.Invoke(null,new object[]{new[]{belt}});
+        Check(storage.items.Take(18).Sum(s=>s.count)==5&&storage.items.Skip(18).All(s=>s.IsEmpty()),"conveyor inserts ammunition ingredients into workbench input only");
+        storage.items[18]=new ItemStack(ItemClass.GetItem("ammo9mmBulletBall"),7);
+        for(byte r=0;r<24;r++){bv.rotation=r;if(bv.Block.SupportsRotation(r)&&ConveyorPath.Offset(bv,Vector3.forward)==new Vector3i(0,0,-1))break;}
+        world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),bv);belt=(TileEntityComposite)world.GetTileEntity(new Vector3i(6,160,7));belt.SetOwner(owner);step.Invoke(null,new object[]{new[]{belt}});
+        Check(storage.items[18].IsEmpty()&&storage.items.Take(18).Sum(s=>s.count)==5&&belt.GetFeature<TEFeatureStorage>().items[0].count==7,"conveyor extracts finished ammo without taking ingredients");
+        state.Job="workbench:resume";state.Seconds=1;storage.items[18]=new ItemStack(ItemClass.GetItem("ammo9mmBulletBall"),2);
+        using(var stream=new MemoryStream()){
+            var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);table.write(writer,TileEntity.StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
+            var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(table.ToWorldPos()),table.blockValue);restored.localChunkPos=table.localChunkPos;restored.read(reader,TileEntity.StreamModeRead.Persistency);
+            Check(restored.GetFeature<TEFeatureAutomationState>().Job==state.Job&&restored.GetFeature<TEFeatureAutomationState>().Seconds==1&&SameItems(restored.GetFeature<TEFeatureStorage>().items,storage.items),"automatic workbench native save/load preserves inventory and progress");
+        }
+        Check(MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Any(s=>s.Kind==kind&&s.Product=="ammo9mmBulletBall"),"automatic workbench recipe configuration persists");
+        world.SetBlockRPC(new BlockValueRef(table.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(at),BlockValue.Air);
+    }
+    static bool SameItems(IEnumerable<ItemStack> a,IEnumerable<ItemStack> b)=>a.Zip(b,(x,y)=>x.count==y.count&&x.itemValue.Equals(y.itemValue)).All(v=>v);
+    static void FillRecipe(TEFeatureStorage store,Recipe recipe,EntityPlayer player)
+    {
+        store.items=ItemStack.CreateArray(36);int slot=0;recipe.craftingTier=recipe.GetCraftingTier(player);
+        foreach(var item in recipe.GetIngredientsSummedUp()){
+            int remaining=RecipePlan.Required(recipe,item,player);
+            while(remaining>0){Check(slot<18,"test recipe ingredients fit input partition");int count=Math.Min(remaining,item.itemValue.ItemClass.Stacknumber.Value);store.items[slot++]=new ItemStack(item.itemValue.Clone(),count);remaining-=count;}
+        }
+        if(recipe.craftingToolType>0)store.items[slot]=new ItemStack(new ItemValue(recipe.craftingToolType),1);
+    }
+
     static void ForgeChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
     {
         var forge=Place("yfAutoForge",new Vector3i(6,160,8),owner);var store=forge.GetFeature<TEFeatureStorage>();
@@ -247,4 +323,3 @@ public sealed class MachineConfigurationGameQA : IModApi
     }
 
 }
-

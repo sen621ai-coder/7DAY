@@ -56,7 +56,7 @@ namespace YFAutomation
     }
     public static class Production
     {
-        public static bool IsMachine(string name)=>name=="yfAutoKitchen"||name=="yfAutoForge"||name=="yfAutoRecycler"||name=="yfAutoSmelter"||name=="yfAutoFarm"||name=="yfAutoMiner";
+        public static bool IsMachine(string name)=>RecipeMachines.IsMachine(name)||name=="yfAutoRecycler"||name=="yfAutoSmelter"||name=="yfAutoFarm"||name=="yfAutoMiner";
         static bool Locked(TEFeatureStorage s,int i)=>s.HasSlotLocksSupport&&s.SlotLocks!=null&&s.SlotLocks[i];
         public static string Step(TileEntityComposite machine,TileEntityComposite source,TileEntityComposite target,EntityPlayer player)
         {
@@ -122,7 +122,7 @@ namespace YFAutomation
             else
             {
                 if(player==null)return "等待机器所有者上线";
-                string area=kind=="yfAutoKitchen"?"campfire":"forge";
+                string area=RecipeMachines.Area(kind);
                 var plan=RecipePlan.Select(ItemClass.GetForId(type).GetItemName(),kind,input.items,inputLocked,player);
                 if(plan!=null&&plan.Ready)
                 {

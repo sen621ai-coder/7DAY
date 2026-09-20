@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -99,7 +99,7 @@ namespace YFAutomation
         public static XUiC_YFAutomationConfiguration Active;
         protected virtual bool InventoryScreen=>false;
         int page,previewRequest;float nextPreview;string previewKey="",serverPreview="";
-        public string PreviewText=>kind=="yfAutoForge"||kind=="yfAutoKitchen"?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
+        public string PreviewText=>RecipeMachines.IsMachine(kind)?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
         public string SelectedProduct=>draft.Product;
         public bool IsInternalInventory=>InternalMode();
         public List<RecipeMaterial> PreviewMaterials=new List<RecipeMaterial>();
@@ -160,7 +160,7 @@ namespace YFAutomation
         {
             base.Update(dt);if(!open)return;
             if(lastQuery!=(search.Text??"")){lastQuery=search.Text??"";page=0;RenderProducts();}
-            if(ready&&(kind=="yfAutoForge"||kind=="yfAutoKitchen")&&Time.realtimeSinceStartup>=nextPreview)
+            if(ready&&(RecipeMachines.IsMachine(kind))&&Time.realtimeSinceStartup>=nextPreview)
             {
                 nextPreview=Time.realtimeSinceStartup+1;previewKey=PreviewKey();previewRequest=++sequence;
                 var p=NetPackageManager.GetPackage<NetPackageYFAutomationRecipeRequest>();p.At=at;p.Request=previewRequest;p.Draft=draft.Clone();
@@ -200,8 +200,8 @@ namespace YFAutomation
             if(kind=="yfAutoRecycler")return "原料区放装备。品质6、模组、Meta>0保护。\n锁定格不处理；需要所有者在线。";
             if(kind=="yfAutoSorter"||kind=="yfAutoTransfer")return "每次最多16件，从原料区转入成品区。\n分拣机按所选物品过滤；未选则全部通过。";
             if(draft.Product=="")return "先从上方选择产品。";
-            var player=xui.playerUI.entityPlayer;string area=kind=="yfAutoKitchen"?"campfire":"forge";
-            var recipes=CraftingManager.GetRecipes(draft.Product).Where(r=>!r.IsScrap&&r.craftingArea==area).ToList();
+            var player=xui.playerUI.entityPlayer;
+            var recipes=CraftingManager.GetRecipes(draft.Product).Where(r=>RecipeMachines.Supports(kind,r)).ToList();
             var recipe=recipes.FirstOrDefault(r=>r.IsUnlocked(player))??recipes.FirstOrDefault();
             if(recipe==null)return "没有适用配方。";
             string ingredients=string.Join("、",recipe.GetIngredientsSummedUp().Select(v=>Localization.Get(v.itemValue.ItemClass.GetItemName().Replace("unit_","yfAutoIngot_"))+"×"+v.count));
@@ -220,7 +220,7 @@ namespace YFAutomation
             bool boxes=!InternalMode()&&MachineConfiguration.HasBoxes(kind),product=MachineConfiguration.HasProduct(kind);
             GetChildById("source").ViewComponent.IsVisible=boxes;GetChildById("target").ViewComponent.IsVisible=boxes;
             GetChildById("product").ViewComponent.IsVisible=product;search.ViewComponent.IsVisible=product;
-            GetChildById("details").ViewComponent.IsVisible=!boxes;Label("details",kind=="yfAutoForge"||kind=="yfAutoKitchen"?"材料、工具和缺少数量见中间配方面板。\n上3行放原料，下3行留空收成品。":Details());
+            GetChildById("details").ViewComponent.IsVisible=!boxes;Label("details",RecipeMachines.IsMachine(kind)?"材料、工具和缺少数量见中间配方面板。\n上3行放原料，下3行留空收成品。":Details());
             GetChildById("details").ViewComponent.IsVisible=false;GetChildById("product").ViewComponent.IsVisible=false;
             Label("help",InternalMode()?"内置库存：上3行原料/工具，下3行成品。\n传送带指向机器送入原料，背向机器取走成品。\n打开库存期间暂停加工；关闭后自动继续。":
                 "外接箱模式：同主人、同区块，输出首格保留。\n选择产品后保存。切换库存模式不搬动物品。");

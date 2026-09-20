@@ -11,7 +11,7 @@ namespace YFAutomation
         public static string Describe(World world,TileEntityComposite machine,MachineSettings draft,EntityPlayer owner,List<RecipeMaterial> materials=null)
         {
             string kind=machine.block.GetBlockName();
-            if(kind!="yfAutoForge"&&kind!="yfAutoKitchen")return "";
+            if(!RecipeMachines.IsMachine(kind))return "";
             if(string.IsNullOrEmpty(draft.Product))return "选择左侧产品后，这里显示材料和工具。\n原料放上3行，下面3行留空收成品。";
             if(owner==null)return "等待设备所有者上线，才能计算实际配方和技能加成。";
             if(!MachineSettingsStorage.ValidStorageMode(draft.StorageMode))return "库存模式无效";

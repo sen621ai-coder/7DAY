@@ -126,8 +126,8 @@ namespace YFAutomation
         public static List<string> Products(string kind)
         {
             IEnumerable<string> names=Enumerable.Empty<string>();
-            if(kind=="yfAutoKitchen"||kind=="yfAutoForge")
-                names=CraftingManager.GetAllRecipes().Where(r=>!r.IsScrap&&r.craftingArea==(kind=="yfAutoKitchen"?"campfire":"forge")&&!r.GetOutputItemClass().HasQuality).Select(r=>r.GetOutputItemClass().GetItemName());
+            if(RecipeMachines.IsMachine(kind))
+                names=CraftingManager.GetAllRecipes().Where(r=>RecipeMachines.Supports(kind,r)).Select(r=>r.GetOutputItemClass().GetItemName());
             else if(kind=="yfAutoSmelter")names=ItemClass.list.Where(i=>i!=null&&i.GetItemName().StartsWith("yfAutoIngot_")).Select(i=>i.GetItemName());
             else if(kind=="yfAutoMiner")names=new[]{"resourceScrapIron","resourceScrapLead","resourceCoal","resourcePotassiumNitratePowder","resourceOilShale"};
             else if(kind=="yfAutoFarm")names=Block.list.Where(b=>b!=null&&b.GetBlockName().EndsWith("3HarvestPlayer")&&b.itemsToDrop.ContainsKey(EnumDropEvent.Harvest)).SelectMany(b=>b.itemsToDrop[EnumDropEvent.Harvest]).Where(d=>d.tag=="cropHarvest"&&d.prob>=1&&d.minCount>0).Select(d=>d.name);
