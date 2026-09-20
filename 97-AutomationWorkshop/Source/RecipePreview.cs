@@ -95,7 +95,7 @@ namespace YFAutomation
                 "\n保存并关闭面板后加工。";
             ((XUiV_Label)GetChildById("body").ViewComponent).Text=summary;
             var item=ItemClass.GetItem(active?.SelectedProduct??"").ItemClass;
-            ((XUiV_Label)GetChildById("productName").ViewComponent).Text=item==null?"选择左侧物品":Localization.Get(item.GetItemName());
+            ((XUiV_Label)GetChildById("productName").ViewComponent).Text=active?.AutomaticRecycling==true?"自动分解 · 无需选择产物":item==null?"选择左侧物品":Localization.Get(item.GetItemName());
             var icon=(XUiV_Sprite)GetChildById("productIcon").ViewComponent;icon.SpriteName=item?.GetIconName()??"";icon.IsVisible=item!=null;
             for(int i=0;i<4;i++){var row=GetChildById("material"+i) as XUiC_YFAutomationMaterialEntry;int index=page*4+i;row.Material=index<materials.Count?materials[index]:null;row.RefreshBindings();row.ViewComponent.IsVisible=row.Material!=null;}
             ((XUiV_Label)GetChildById("page").ViewComponent).Text=(page+1)+" / "+pages;

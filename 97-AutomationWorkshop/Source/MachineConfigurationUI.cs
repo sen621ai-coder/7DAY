@@ -101,6 +101,7 @@ namespace YFAutomation
         int page,previewRequest;float nextPreview;string previewKey="",serverPreview="";
         public string PreviewText=>RecipeMachines.IsMachine(kind)?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
         public string SelectedProduct=>draft.Product;
+        public bool AutomaticRecycling=>kind=="yfAutoRecycler";
         public bool IsInternalInventory=>InternalMode();
         public List<RecipeMaterial> PreviewMaterials=new List<RecipeMaterial>();
         string PreviewKey()=>draft.Product+"|"+draft.StorageMode+"|"+draft.Source;
@@ -149,6 +150,7 @@ namespace YFAutomation
             if(ready)
             {
                 draft=reply.Value.Clone();kind=reply.Kind;token=reply.Token;
+                if(AutomaticRecycling)draft.Product="";
                 sources.Clear();targets.Clear();products.Clear();sources.Add("");targets.Add("");products.Add("");
                 var w=GameManager.Instance.World;var t=w.GetTileEntity(at) as TileEntityComposite;
                 if(t!=null){sources.AddRange(MachineConfiguration.Boxes(w,t,true).Select(b=>MachineConfiguration.Key(b.ToWorldPos())));targets.AddRange(MachineConfiguration.Boxes(w,t,false).Select(b=>MachineConfiguration.Key(b.ToWorldPos())));}
@@ -197,7 +199,7 @@ namespace YFAutomation
             if(kind=="yfAutoMiner")return "原料区：钻头耗材，每60秒消耗1份。\n下方须为自有领地真实矿点，每次产出20份。";
             if(kind=="yfAutoFarm")return "原料区放对应种子，可放灌溉水加速。\n收获自有领地成熟作物并补种。";
             if(kind=="yfAutoSmelter")return "原料区放同类可冶炼材料，按原生重量出料。\n成品区无需放样品。";
-            if(kind=="yfAutoRecycler")return "原料区放装备。品质6、模组、Meta>0保护。\n锁定格不处理；需要所有者在线。";
+            if(kind=="yfAutoRecycler")return "自动识别装备的原生拆解产物。\n无需选材料，无需放样品。\n原料区放废装备，成品区收材料。\n品质6及以上、带模组、特殊数据\n及锁定格中的装备不会分解。\n所有者在线，启动后关闭面板。";
             if(kind=="yfAutoSorter"||kind=="yfAutoTransfer")return "每次最多16件，从原料区转入成品区。\n分拣机按所选物品过滤；未选则全部通过。";
             if(draft.Product=="")return "先从上方选择产品。";
             var player=xui.playerUI.entityPlayer;

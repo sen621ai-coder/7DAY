@@ -92,7 +92,7 @@ namespace YFAutomation
             var at=sorter.ToWorldPos();string owner=Owner(sorter);
             if(string.IsNullOrEmpty(owner)){Status(sorter,"等待所有者");return;}
             bool powered=Powered(world,at);
-            if(!powered){Status(sorter,"缺电：邻接供电口");return;}
+            if(!powered){Status(sorter,"缺电：4格内需通电供电口");return;}
             if(sorter.block.GetBlockName()=="yfAutoWaterPump"){Status(sorter,WaterSystem.Pump(world,sorter));return;}
             if(sorter.block.GetBlockName()=="yfAutoAmmoFeed"){Status(sorter,TurretFeed.Run(sorter));return;}
             if(MachineInventory.UsesInternal(sorter))
@@ -128,7 +128,7 @@ namespace YFAutomation
             outputs=outputs.OrderBy(te=>{var p=te.ToWorldPos();return Math.Abs(p.x-at.x)+Math.Abs(p.y-at.y)+Math.Abs(p.z-at.z);})
                 .ThenBy(te=>te.ToWorldPos().x).ThenBy(te=>te.ToWorldPos().z).ThenBy(te=>te.ToWorldPos().y).ToList();
             if(config.Target!="")outputs=outputs.Where(t=>MachineConfiguration.Key(t.ToWorldPos())==config.Target).ToList();
-            if(outputs.Count==0){Status(sorter,config.Target!=""?"指定输出箱不可用/正在打开":boundary?"输出箱跨区块，请移近":"4米内放输出箱和样品");return;}
+            if(outputs.Count==0){Status(sorter,config.Target!=""?"指定输出箱不可用/正在打开":boundary?"输出箱跨区块，请移近":sorter.block.GetBlockName()=="yfAutoRecycler"?"4米内放输出箱，无需样品":"4米内放输出箱和样品");return;}
             if(production)
             {
                 // Exactly one job gets time per machine tick, irrespective of box count.
@@ -163,7 +163,14 @@ namespace YFAutomation
             }
             Status(sorter,boundary?"输入箱跨区块，请移近":"等待物料/空位/样品");
         }
-        internal static bool Powered(World w,Vector3i at)=>Sides.Any(offset=>w.GetTileEntity(Add(at,offset)) is TileEntityPowered p&&p.block.GetBlockName()=="yfAutoPowerPort"&&p.IsPowered);
+        // Block-center distance, including vertical distance; build the offsets once.
+        static readonly Vector3i[] powerOffsets=(from x in Enumerable.Range(-4,9)
+            from y in Enumerable.Range(-4,9) from z in Enumerable.Range(-4,9)
+            where x*x+y*y+z*z<=16
+            orderby x*x+y*y+z*z
+            select new Vector3i(x,y,z)).ToArray();
+        internal static bool Powered(World w,Vector3i at)=>w!=null&&powerOffsets.Any(offset=>
+            w.GetTileEntity(Add(at,offset)) is TileEntityPowered p&&p.block.GetBlockName()=="yfAutoPowerPort"&&p.IsPowered);
         internal static bool Locked(TEFeatureStorage storage,int slot)=>storage.HasSlotLocksSupport&&storage.SlotLocks!=null&&storage.SlotLocks[slot];
         static void RunTransfer(TileEntityComposite machine,string owner)
         {

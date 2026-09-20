@@ -55,7 +55,7 @@ namespace YFAutomation
         public static string Owner(TileEntityComposite t)=>(t?.GetFeature<TEFeatureLockable>()?.GetOwner()??t?.Owner)?.CombinedString??"";
         public static bool Supported(string k)=>Production.IsMachine(k)||k=="yfAutoSorter"||k=="yfAutoTransfer"||k=="yfAutoWaterPump"||k=="yfAutoAmmoFeed";
         public static bool HasBoxes(string k)=>Production.IsMachine(k)||k=="yfAutoSorter"||k=="yfAutoTransfer";
-        public static bool HasProduct(string k)=>Production.IsMachine(k)||k=="yfAutoSorter";
+        public static bool HasProduct(string k)=>k!="yfAutoRecycler"&&(Production.IsMachine(k)||k=="yfAutoSorter");
         static bool Ready(World world)
         {
             if(world==null||world.IsRemote())return false;
@@ -147,8 +147,9 @@ namespace YFAutomation
             if((proposed.Source!=""&&!Boxes(w,t,true).Any(b=>Key(b.ToWorldPos())==proposed.Source))||
                (proposed.Target!=""&&!Boxes(w,t,false).Any(b=>Key(b.ToWorldPos())==proposed.Target)))return "所选箱子不存在、越界或不属于设备所有者";
             if(proposed.Source!=""&&proposed.Source==proposed.Target)return "输入和输出不能是同一个箱子";
-            if(proposed.Product!=""&&!Products(kind).Contains(proposed.Product))return "该设备不支持所选产品/物品";
+            if(kind!="yfAutoRecycler"&&proposed.Product!=""&&!Products(kind).Contains(proposed.Product))return "该设备不支持所选产品/物品";
             var updated=proposed.Clone();updated.Position=old.Position;updated.Owner=old.Owner;updated.Kind=old.Kind;
+            if(kind=="yfAutoRecycler")updated.Product="";
             if(old.Revision==int.MaxValue)return "配置版本已达上限";
             updated.Revision=old.Revision+1;
             string key=Key(t.ToWorldPos());MachineSettings previous;bool existed=settings.TryGetValue(key,out previous);

@@ -25,7 +25,7 @@ for kind,title in kinds.items():
  E.SubElement(b,'drop',event='Destroy',name='resourceScrapIron',count='2')
  r=E.SubElement(ra,'recipe',name=name,count='1',craft_area='yfAutomationWorkbench',craft_time='5',always_unlocked='true',use_ingredient_modifier='false')
  for item,count in [('yfAutoTransport',1),('resourceForgedIron',2),('resourceMechanicalParts',1)]:E.SubElement(r,'ingredient',name=item,count=str(count))
- desc='按黄色方向标记铺设，后端取输入箱或输出箱，前端接下一段或箱子。每秒前进一段、最多16件；输出箱保留首格样品。连通线路任一段邻接通电供电口即可，每条最多32段。只连接同一所有者、同一16×16区块；断电、满箱、打开库存时暂停。按E查看带上货物；拆除前先取空。坡道末端连接高/低一格的下一段。'
+ desc='按黄色方向标记铺设，后端取输入箱或输出箱，前端接下一段或箱子。每秒前进一段、最多16件；传送带向输出箱送货无需样品，所有未锁定格可收取任意货物。连通线路任一段4格范围内有通电供电口即可，每条最多32段。只连接同一所有者、同一16×16区块；断电、满箱、打开库存时暂停。按E查看带上货物；拆除前先取空。坡道末端连接高/低一格的下一段。'
  rows.extend([[name,'blocks','Block','','false',title+'传送带',title+'传送带'],[name+'Desc','blocks','Block','','false',desc,desc]])
 for name,tree in trees.items():write(tree,c/(name+'.xml'))
 loot=E.Element('configs');a=E.SubElement(loot,'append',xpath='/lootcontainers')

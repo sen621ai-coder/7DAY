@@ -67,9 +67,9 @@ namespace YFAutomation
             if(config.Paused)return "已暂停（机器配置）";
             if(output.items.Length<2)return "输出箱容量不足";
             bool internalStorage=ReferenceEquals(source,machine)&&ReferenceEquals(target,machine)&&MachineInventory.Has(machine);
-            int type=config.Product==""&&internalStorage?0:config.Product==""?(output.items[0].IsEmpty()?0:output.items[0].itemValue.type):ItemClass.GetItem(config.Product).type;
-            if(type==0)return internalStorage?"在面板选择目标产品并保存":"配置目标产品或输出箱首格放样品";
             string kind=machine.block.GetBlockName();
+            int type=config.Product==""&&internalStorage?0:config.Product==""?(output.items[0].IsEmpty()?0:output.items[0].itemValue.type):ItemClass.GetItem(config.Product).type;
+            if(type==0&&kind!="yfAutoRecycler")return internalStorage?"在面板选择目标产品并保存":"配置目标产品或输出箱首格放样品";
             Func<int,bool> inputLocked=i=>Locked(input,i)||internalStorage&&!MachineInventory.IsInput(i)||i==0&&source.block.GetBlockName()=="yfAutoOutput";
             Recipe recipe=null;ItemStack product=null;ItemStack[] nextInput=null;
             float duration=0;string key=null;
@@ -105,7 +105,9 @@ namespace YFAutomation
                     // Equipment only; keep top quality, modifications and locked slots safe.
                     if(inputLocked(i)||s.IsEmpty()||!s.itemValue.ItemClass.HasQuality||s.itemValue.Quality>=6||s.itemValue.HasMods()||s.itemValue.Meta>0)continue;
                     var scrap=CraftingManager.GetScrapableRecipe(s.itemValue,1);
-                    if(scrap==null||scrap.itemValueType!=type||scrap.count<=0)continue;
+                    if(scrap==null||scrap.itemValueType<=0||scrap.count<=0)continue;
+                    // Each item determines its own native scrap output; old saved filters are ignored.
+                    type=scrap.itemValueType;
                     var raw=s.itemValue.ItemClass;var material=ItemClass.GetForId(type);
                     int yield=ProductionInventory.ScrapYield(raw.GetWeight(),material.GetWeight(),XUiM_Recipes.ScrappingOutputModifier,
                         XUiM_Recipes.DisableSmelter&&raw.HasAnyTags(FastTags<TagGroup.Global>.Parse("scrap100")));
@@ -117,7 +119,7 @@ namespace YFAutomation
                         EffectManager.GetValue(PassiveEffects.ScrappingTime,null,material.CraftComponentTime*yield,player));
                     key="scrap:"+s.itemValue.type+":"+s.itemValue.Quality+":"+yield;break;
                 }
-                if(recipe==null)return "待分解装备/材料样品不符";
+                if(recipe==null)return "等待可分解装备（受保护装备跳过）";
             }
             else
             {

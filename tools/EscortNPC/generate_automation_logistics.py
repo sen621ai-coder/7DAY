@@ -14,9 +14,9 @@ ba=E.SubElement(blocks,'append',xpath='/blocks');ra=E.SubElement(recipes,'append
 loc=[]
 for id,title,tint,desc,cost in [
  ('yfAutoInput','自动化输入箱','47C5D8','紧贴分拣机放置，投入待分拣物品；需与分拣机和输出箱由同一玩家放置。打开箱子时暂停搬运。',[('yfAutoFrame',1),('resourceWood',20)]),
- ('yfAutoOutput','自动化输出箱','65CC85','第一格放一个样品，分拣机只接收相同物品类型，样品不消耗。其余格储存产物。放在分拣机水平4米、上下1米内及同一区块。多个匹配箱优先距离较近的。',[('yfAutoFrame',1),('resourceWood',20)]),
- ('yfAutoSorter','自动分拣机','E2B85B','邻接输入箱和通电的自动化供电接口，按输出箱第一格样品分类；每秒最多搬16件。箱子需同一所有者、同一16×16地图区块。显示运行状态，本体不储物。',[('yfAutoFrame',2),('yfAutoMotor',1),('yfAutoController',1),('yfAutoTransport',1)]),
- ('yfAutoPowerPort','自动化供电接口','D7B657','用接线工具连接发电机，紧贴分拣机的任意一面供电。每个接口需要10W，断电暂停；接口本身不储物。',[('resourceForgedIron',5),('resourceElectricParts',10),('yfAutoController',1)])]:
+ ('yfAutoOutput','自动化输出箱','65CC85','传送带送入时无需样品，可混合接收任意物品，首格也可正常收取。旧式外接分拣机仍按首格样品分类；需要保留的物品请锁定格子。放在分拣机水平4米、上下1米内及同一区块。多个匹配箱优先距离较近的。',[('yfAutoFrame',1),('resourceWood',20)]),
+ ('yfAutoSorter','自动分拣机','E2B85B','邻接输入箱，4格范围内放通电的自动化供电接口，按输出箱第一格样品分类；每秒最多搬16件。箱子需同一所有者、同一16×16地图区块。显示运行状态，本体不储物。',[('yfAutoFrame',2),('yfAutoMotor',1),('yfAutoController',1),('yfAutoTransport',1)]),
+ ('yfAutoPowerPort','自动化供电接口','D7B657','用接线工具连接发电机，为直线距离4格内的自动化设备供电（含上下方向）。每个接口需要10W，断电暂停；接口本身不储物。',[('resourceForgedIron',5),('resourceElectricParts',10),('yfAutoController',1)])]:
  b=E.SubElement(ba,'block',name=id)
  if id=='yfAutoPowerPort':
   for k,v in [('Extends','electricwirerelay'),('RequiredPower',10),('UnlockedBy',''),('CustomIcon','electricwirerelay')]:prop(b,k,v)
