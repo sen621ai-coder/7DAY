@@ -16,7 +16,7 @@ namespace YFPhoenix {
   public static bool InWindow(int night,int day)=>day==night||day==night+1;
  }
  public static class PhoenixEncounter {
-  static World world;static EncounterState state;static string file;static float next;static bool blocked;
+  static World world;static EncounterState state;static string file;static float next,nextReason;static bool blocked;
   static readonly XmlSerializer serializer=new XmlSerializer(typeof(EncounterState));
   static string Key(EntityPlayer p)=>p.PersistentPlayerData?.PrimaryId?.CombinedString;
   static void Save(){string temp=file+".tmp";using(var s=new FileStream(temp,FileMode.Create,FileAccess.Write,FileShare.None)){serializer.Serialize(s,state);s.Flush(true);}if(File.Exists(file))File.Replace(temp,file,file+".bak");else File.Move(temp,file);}
@@ -35,14 +35,19 @@ namespace YFPhoenix {
     }
     if(!state.Armed)return;
     if(!PhoenixRules.InWindow(state.Night,day)){Consume();return;}
-    if(state.Deadline==0){state.Deadline=time+1000;Save();} // one in-game hour to find an eligible loaded participant
-    if(time>state.Deadline){Consume();return;}
+    // isEventBloodMoon can briefly become false during the night. Do not start
+    // the finale timeout until the recorded night has actually reached dawn.
+    ulong dawn=GameUtils.DayTimeToWorldTime(state.Night+1,w.DawnHour,0);
+    if(time<dawn){if(state.Deadline!=0){state.Deadline=0;Save();}return;}
+    // Repair a pre-dawn deadline written by older versions.
+    if(state.Deadline<dawn){state.Deadline=time+3000;Save();Log.Out("[PhoenixBoss] Dawn finale pending night="+state.Night);}
+    if(time>state.Deadline){Log.Out("[PhoenixBoss] Finale expired: no eligible participant or loaded spawn site night="+state.Night);Consume();return;}
     var target=w.Players.list.Where(p=>p!=null&&!p.IsDead()&&PhoenixRules.Tier(p.gameStage)>0&&state.Participants.Contains(Key(p))&&!w.IsWithinTraderArea(new Vector3i(p.position))).OrderByDescending(p=>p.gameStage).FirstOrDefault();
-    if(target==null)return;
+    if(target==null){Reason("Waiting for a living T16-T19 participant outside trader protection");return;}
     if(w.Entities.list.OfType<EntityPhoenixBoss>().Any(e=>!e.IsDead())){Consume();return;}
     Vector3 site=Vector3.zero;bool found=false;
     for(int i=0;i<12;i++){float a=i*Mathf.PI/6;var candidate=target.position+new Vector3(Mathf.Cos(a)*40,0,Mathf.Sin(a)*40);if(!w.IsChunkAreaLoaded(candidate)||w.IsWithinTraderArea(new Vector3i(candidate)))continue;candidate.y=Mathf.Max(target.position.y+12,w.GetHeightAt(candidate.x,candidate.z)+12);if(candidate.y>245)continue;if(!w.GetBlock(new Vector3i(candidate)).isair||!w.GetBlock(new Vector3i(candidate+Vector3.up*2)).isair)continue;site=candidate;found=true;break;}
-    if(!found)return;
+    if(!found){Reason("Waiting for loaded open air near participant entity="+target.entityId);return;}
     int tier=PhoenixRules.Tier(target.gameStage),id=EntityClass.FromString("yfPhoenixBossT"+tier);if(id<0)throw new Exception("Missing phoenix entity class");
     var boss=EntityFactory.CreateEntity(id,site) as EntityPhoenixBoss;if(boss==null)throw new Exception("Phoenix entity construction failed");
     // Reserve before spawning: a crash may skip a finale, but never awards a second boss for the same night.
@@ -52,6 +57,7 @@ namespace YFPhoenix {
    }catch(Exception ex){blocked=true;Log.Error("[PhoenixBoss] Disabled for this session: "+ex);}
   }
   static void Consume(){state.Armed=false;state.LastConsumedNight=Math.Max(state.LastConsumedNight,state.Night);Save();}
+  static void Reason(string reason){if(Time.realtimeSinceStartup<nextReason)return;nextReason=Time.realtimeSinceStartup+30;Log.Out("[PhoenixBoss] "+reason);}
  }
  public static class PhoenixFire {
   // Native explosion packets do not carry Duration. Match the server's 30s
@@ -129,17 +135,71 @@ namespace YFPhoenix {
   }
   public override bool IsSavedToFile()=>true;
   public override string LocalizedEntityName=>"焚天凤凰 · T"+EntityClass.GetEntityClassName(entityClass).Replace("yfPhoenixBossT","");
-  public override void PostInit(){base.PostInit();foreach(var a in GetComponentsInChildren<Animator>(true))a.cullingMode=AnimatorCullingMode.AlwaysAnimate;if(!GameManager.IsDedicatedServer)gameObject.AddComponent<PhoenixVisual>().Owner=this;}
+  public override void PostInit(){base.PostInit();foreach(var a in GetComponentsInChildren<Animator>(true))a.cullingMode=AnimatorCullingMode.AlwaysAnimate;gameObject.AddComponent<PhoenixVisual>().Owner=this;}
  }
  public sealed class PhoenixVisual:MonoBehaviour {
-  public static string ModPath;static AssetBundle bundle;public EntityPhoenixBoss Owner;GameObject model;Transform carrier;Renderer[] originals;bool failed;
-  void LateUpdate(){if(Owner==null||failed)return;
-   if(model==null){carrier=Owner.emodel?.GetModelTransform();if(carrier==null||carrier.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length==0)return;
-    try{const string asset="Assets/Phoenix/PhoenixBoss.prefab";if(bundle==null)bundle=AssetBundle.GetAllLoadedAssetBundles().FirstOrDefault(b=>b.Contains(asset))??AssetBundle.LoadFromFile(Path.Combine(ModPath,"Resources/phoenix.unity3d"));var prefab=bundle?.LoadAsset<GameObject>(asset);if(prefab==null)throw new Exception("Missing phoenix asset");originals=carrier.GetComponentsInChildren<Renderer>(true);model=Instantiate(prefab,carrier.parent);model.transform.localScale=carrier.localScale;foreach(var r in originals)r.enabled=false;foreach(var a in model.GetComponentsInChildren<Animation>()){a.wrapMode=WrapMode.Loop;a.Play();}Log.Out("[PhoenixBoss] Custom animated model attached entity="+Owner.entityId);
-    }catch(Exception ex){failed=true;Log.Error("[PhoenixBoss] Model failed: "+ex);return;}}
-   if(carrier!=null){model.transform.localPosition=carrier.localPosition;model.transform.localRotation=carrier.localRotation;}foreach(var r in originals)if(r!=null)r.enabled=false;
+  public static string ModPath;static AssetBundle bundle;public EntityPhoenixBoss Owner;
+  GameObject model;Transform carrier,pelvis;Renderer[] originals;bool failed;
+  readonly List<Tuple<Transform,Transform,CapsuleCollider,float>> hitboxes=new List<Tuple<Transform,Transform,CapsuleCollider,float>>();
+  void AddHitbox(string from,string to,float radius,Collider template){
+   var bones=model.GetComponentsInChildren<Transform>();var a=bones.FirstOrDefault(t=>t.name==from);var b=bones.FirstOrDefault(t=>t.name==to);
+   if(a==null||b==null)throw new Exception("Missing hitbox bone "+from+" / "+to);
+   var go=new GameObject("PhoenixHit_"+from);go.transform.SetParent(Owner.transform,false);go.layer=template.gameObject.layer;go.tag=template.tag;
+   go.AddComponent<RootTransformRefEntity>().RootTransform=Owner.transform;
+   var collider=go.AddComponent<CapsuleCollider>();collider.direction=2;collider.isTrigger=template.isTrigger;
+   hitboxes.Add(Tuple.Create(a,b,collider,radius));
+  }
+  void LateUpdate(){
+   if(Owner==null||failed)return;
+   if(model==null){
+    carrier=Owner.emodel?.GetModelTransform();if(carrier==null)return;
+    var templates=carrier.GetComponentsInChildren<Collider>(true).Where(c=>c.tag.StartsWith("E_BP_")).ToArray();if(templates.Length==0)return;
+    try{
+     const string asset="Assets/Phoenix/PhoenixBoss.prefab";
+     if(bundle==null)bundle=AssetBundle.GetAllLoadedAssetBundles().FirstOrDefault(b=>b.Contains(asset))??AssetBundle.LoadFromFile(Path.Combine(ModPath,"Resources/phoenix.unity3d"));
+     var prefab=bundle?.LoadAsset<GameObject>(asset);if(prefab==null)throw new Exception("Missing phoenix asset");
+     originals=carrier.GetComponentsInChildren<Renderer>(true);model=Instantiate(prefab,Owner.transform);
+     // Never copy the imported vulture carrier scale: it is not a world-size
+     // multiplier and can make the replacement many times larger than its hits.
+     var parent=Owner.transform.lossyScale;
+     model.transform.localScale=new Vector3(1/parent.x,1/parent.y,1/parent.z);
+     foreach(var a in model.GetComponentsInChildren<Animation>()){a.wrapMode=WrapMode.Loop;a.Play();a[a.clip.name].time=.8f;a.Sample();}
+     // Imported skinned bounds are not the animated mesh bounds. Normalize
+     // actual skinned vertices after sampling, not the FBX's stale AABB.
+     var baked=new Mesh();var bounds=new Bounds();bool first=true;
+     foreach(var skin in model.GetComponentsInChildren<SkinnedMeshRenderer>()){
+      skin.BakeMesh(baked);
+      foreach(var v in baked.vertices){var point=model.transform.InverseTransformPoint(skin.transform.TransformPoint(v));if(first){bounds=new Bounds(point,Vector3.zero);first=false;}else bounds.Encapsulate(point);}
+     }
+     Destroy(baked);float extent=Mathf.Max(bounds.size.x,Mathf.Max(bounds.size.y,bounds.size.z));
+     if(first||extent<.001f)throw new Exception("Invalid animated Phoenix bounds");
+     float fit=6/extent;model.transform.localScale=new Vector3(fit/parent.x,fit/parent.y,fit/parent.z);
+     pelvis=model.GetComponentsInChildren<Transform>().Single(t=>t.name=="B_Pelvis");
+     var body=templates.FirstOrDefault(c=>!c.tag.ToLowerInvariant().Contains("head"))??templates[0];
+     var head=templates.FirstOrDefault(c=>c.tag.ToLowerInvariant().Contains("head"))??body;
+     AddHitbox("B_Pelvis","B_Spine",.45f,body);AddHitbox("B_Spine","b_Head",.35f,head);
+     foreach(string side in new[]{"Left","Right"}){
+      AddHitbox("B_"+side+"_Wing_0","B_"+side+"_Wing_2",.35f,body);
+      AddHitbox("B_"+side+"_Wing_2","B_"+side+"_Wing_8",.4f,body);
+     }
+     AddHitbox("B_Tail_0","B_Tail_3",.35f,body);AddHitbox("B_Tail_3","B_Tail_5",.3f,body);
+     foreach(var r in originals)r.enabled=false;
+     if(GameManager.IsDedicatedServer)foreach(var r in model.GetComponentsInChildren<Renderer>())r.enabled=false;
+     Log.Out("[PhoenixBoss] Animated model and eight body/wing hitboxes attached entity="+Owner.entityId+" carrierScale="+carrier.lossyScale);
+    }catch(Exception ex){failed=true;Log.Error("[PhoenixBoss] Model failed: "+ex);return;}
+   }
+   model.transform.rotation=Owner.transform.rotation;
+   model.transform.position+=Owner.transform.position+Vector3.up*.4f-pelvis.position;
+   foreach(var r in originals)if(r!=null)r.enabled=false;
+   var scale=Owner.transform.lossyScale;
+   foreach(var entry in hitboxes){
+    var a=entry.Item1.position;var b=entry.Item2.position;var c=entry.Item3;
+    c.transform.localScale=new Vector3(1/scale.x,1/scale.y,1/scale.z);c.transform.position=(a+b)*.5f;
+    if((b-a).sqrMagnitude>.0001f)c.transform.rotation=Quaternion.LookRotation(b-a);
+    c.radius=entry.Item4;c.height=Vector3.Distance(a,b)+2*c.radius;c.enabled=!Owner.IsDead();
+   }
    if(Owner.IsDead())foreach(var a in model.GetComponentsInChildren<Animation>())a.Stop();
   }
-  void OnDestroy(){if(model!=null)Destroy(model);}
+  void OnDestroy(){if(model!=null)Destroy(model);foreach(var entry in hitboxes)if(entry.Item3!=null)Destroy(entry.Item3.gameObject);}
  }
 }

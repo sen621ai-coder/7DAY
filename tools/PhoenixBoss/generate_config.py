@@ -25,5 +25,5 @@ for tier in range(16,20):
 write(items,out/'Config/items.xml');write(entities,out/'Config/entityclasses.xml')
 with (out/'Config/Localization.csv').open('w',encoding='utf-8-sig',newline='') as f:csv.writer(f).writerows(rows)
 info=E.Element('xml')
-for k,v in dict(Name='YFPhoenixBoss',DisplayName='血月终章：焚天凤凰',Description='T16-T19血月结束后的飞行火焰Boss。',Author='yf',Version='0.1.1',ServerSideOnly='false',SkipWithAntiCheat='true').items():E.SubElement(info,k,value=v)
+for k,v in dict(Name='YFPhoenixBoss',DisplayName='血月终章：焚天凤凰',Description='T16-T19血月结束后的飞行火焰Boss。',Author='yf',Version='0.1.2',ServerSideOnly='false',SkipWithAntiCheat='true').items():E.SubElement(info,k,value=v)
 write(info,out/'ModInfo.xml')
