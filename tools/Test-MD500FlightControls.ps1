@@ -92,6 +92,9 @@ public static class MD500Tests {
   foreach(string name in new[]{"vehicleMD500","vehicleApacheHelicopter"})
    foreach(float dt in new[]{.01f,.02f,.04f})foreach(int sign in new[]{-1,1})RuntimeTurnResponse(name,dt,sign);
   UnityEngine.Time.fixedDeltaTime=.02f;
+  foreach(string name in new[]{"vehicleMD500","vehicleApacheHelicopter"})
+   foreach(float power in new[]{.75f,.85f,1f})foreach(float dt in new[]{.01f,.02f,.04f})RuntimeLevelHeight(name,power,dt);
+  UnityEngine.Time.fixedDeltaTime=.02f;
   foreach(float dt in new[]{.01f,.02f,.04f}){
    float velocity=0,thrust=0;
    for(int i=0;i<(int)(20/dt);i++){
@@ -305,6 +308,38 @@ public static class MD500Tests {
    AECT16RuntimeFix.MD500FlightControls.BeforeForces(parked);
    Near(parked.vehicleRB.torque.magnitude,0,.001f,"touchdown immediately stops pulling toward world-horizontal");
   }
+ }
+
+ static void RuntimeLevelHeight(string name,float power,float dt){
+  UnityEngine.Time.fixedDeltaTime=dt;UnityEngine.Time.fixedTime+=1;
+  var e=new EntityVehicle();e.vehicle.Name=name;e.motors[0].rpm=e.motors[0].rpmMax*power;
+  var p=AECT16RuntimeFix.MD500FlightMath.Handling(name=="vehicleApacheHelicopter");
+  double heading=0;float cleanError=0,dip=0;
+  bool disturbed=false;
+  for(int i=0;i<(int)(60/dt);i++){
+   float time=i*dt;
+   e.movementInput.moveForward=time<10?0:time<40?1:time<50?0:-1;
+   e.movementInput.moveStrafe=time>=20&&time<40?1:0;
+   e.vehicle.IsTurbo=time>=15&&time<35;
+   // Exercise maximum commanded pitch/bank, including the new larger turn limits.
+   e.vehicleRB.rotation=new UnityEngine.Quaternion{Yaw=(float)(heading*180/Math.PI),Pitch=time>=10?p.PitchMax:0,Roll=time>=20&&time<40?p.BankMax:0};
+   if(time>=45&&!disturbed){e.vehicleRB.velocity.y=-1;disturbed=true;}
+   e.vehicleRB.velocity=e.vehicleRB.velocity*e.vehicle.AirDragVelScale;
+   e.vehicleRB.angularVelocity=e.vehicleRB.angularVelocity*e.vehicle.AirDragAngVelScale;
+   e.vehicleRB.force=new UnityEngine.Vector3();e.vehicleRB.torque=new UnityEngine.Vector3();
+   UnityEngine.Time.fixedTime+=dt;AECT16RuntimeFix.MD500FlightControls.BeforeForces(e);
+   e.vehicleRB.velocity=e.vehicleRB.velocity+(e.vehicleRB.force-new UnityEngine.Vector3(0,9.81f,0))*dt;
+   e.position=e.position+e.vehicleRB.velocity*dt;
+   e.vehicleRB.angularVelocity=new UnityEngine.Vector3(0,e.vehicleRB.angularVelocity.y+e.vehicleRB.torque.y*dt,0);
+   heading+=e.vehicleRB.angularVelocity.y*dt;
+   if(!disturbed)cleanError=Math.Max(cleanError,Math.Abs(e.position.y-100));
+   else dip=Math.Max(dip,100-e.position.y);
+  }
+  Check(cleanError<.001f,"hover/cruise/turbo/banked turn/braking do not lose height at flight RPM");
+  Check(dip>0&&dip<.6f,"external downward velocity has a bounded temporary dip");
+  Near(e.position.y,100,.01f,"altitude hold returns to original height after downward disturbance");
+  Near(e.vehicleRB.velocity.y,0,.01f,"vertical motion settles after recovery");
+  Console.WriteLine("Height "+name+" power="+power+" dt="+dt+" normalError="+cleanError.ToString("F5")+" disturbedDip="+dip.ToString("F3")+" final="+e.position.y.ToString("F4"));
  }
 
  static void RuntimeTurnResponse(string name,float dt,int sign){

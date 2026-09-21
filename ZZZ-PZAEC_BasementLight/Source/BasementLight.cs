@@ -19,7 +19,7 @@ namespace PZAEC.BasementLight
             harmony.Patch(AccessTools.Method(typeof(BlockPoweredLight),
                 nameof(BlockPoweredLight.OnBlockEntityTransformAfterActivated)),
                 postfix:new HarmonyMethod(typeof(ModApi),nameof(Attach)));
-            Log.Out("[BasementLight] v1.0.4 independent 15W panel; native root collision and wire anchor installed.");
+            Log.Out("[BasementLight] v1.0.7 12x12 softlight with dim shadowed wall/ceiling fill; power 15W.");
         }
         public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
         {
@@ -41,6 +41,7 @@ namespace PZAEC.BasementLight
         public static void BeforePoolDestroy(GameObject __0)
         {
             if(__0==null || __0.GetComponent<PanelView>()==null)return;
+            __0.GetComponent<PanelView>().Retiring=true;
             // The native pool destroys runtime shared materials during retirement.
             // Detach this instance so its removal cannot erase other lamps/previews.
             foreach(var renderer in __0.GetComponentsInChildren<Renderer>(true))
@@ -63,14 +64,17 @@ namespace PZAEC.BasementLight
     public sealed class PanelView : MonoBehaviour
     {
         public WorldBase World;
+        [NonSerialized] public bool Retiring;
         public Vector3i Position;
         [SerializeField] Light lamp;
+        [SerializeField] Light fill;
         [SerializeField] Renderer diffuser;
         float next;
         string colliderTag;
         int colliderLayer;
         static Material frame,off,on;
         static Cubemap cookie;
+        static Cubemap fillCookie;
         static Material MaterialFromNative(string name,Color color)
         {
             var prefab=DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab",false);
@@ -94,8 +98,24 @@ namespace PZAEC.BasementLight
             if(frame!=null && off!=null && on!=null)return;
             frame=MaterialFromNative("Basement charcoal frame",new Color(.16f,.18f,.20f));
             off=MaterialFromNative("Basement diffuser off",new Color(.58f,.60f,.61f));
-            on=MaterialFromNative("Basement diffuser on",new Color(.82f,.84f,.83f));
-            if(on.HasProperty("_EmissionColor")){on.EnableKeyword("_EMISSION");on.SetColor("_EmissionColor",new Color(.28f,.29f,.28f));}
+            // The workstation shader is lit and its emission keywords are not a
+            // reliable lamp surface. Use a supported unlit surface when powered:
+            // visible in darkness, without adding another light or HDR bloom.
+            Shader shader=Shader.Find("Unlit/Color");
+            if(shader==null || !shader.isSupported)shader=Shader.Find("Sprites/Default");
+            if(shader!=null && shader.isSupported)
+            {
+                on=new Material(shader){name="Basement diffuser on",color=new Color(.82f,.84f,.80f),renderQueue=2000};
+                if(on.HasProperty("_MainTex"))on.mainTexture=Texture2D.whiteTexture;
+                if(on.HasProperty("_ZWrite"))on.SetFloat("_ZWrite",1);
+            }
+            else
+            {
+                on=MaterialFromNative("Basement diffuser on",new Color(.82f,.84f,.80f));
+                if(on.HasProperty("_EmissionMap"))on.SetTexture("_EmissionMap",Texture2D.whiteTexture);
+                if(on.HasProperty("_EmissionColor")){on.EnableKeyword("_EMISSION");on.SetColor("_EmissionColor",new Color(.82f,.84f,.80f));}
+                Log.Out("[BasementLight] Unlit diffuser shader unavailable; native emission fallback in use.");
+            }
         }
         GameObject Box(string name,Vector3 position,Vector3 scale,Material material)
         {
@@ -138,6 +158,15 @@ namespace PZAEC.BasementLight
             lamp.color=new Color(1f,.97f,.92f);lamp.renderMode=LightRenderMode.ForcePixel;
             lamp.shadows=LightShadows.Soft;lamp.shadowStrength=1;lamp.shadowBias=.02f;lamp.shadowNormalBias=.1f;
             lamp.cookie=Cookie();lamp.enabled=false;
+            var bounce=new GameObject("BasementWallCeilingFill");bounce.transform.SetParent(transform,false);
+            // A virtual reflected-light origin below the panel, never inside a
+            // ceiling voxel. Full-strength shadows retain room/wall occlusion.
+            bounce.transform.localPosition=new Vector3(0,-.15f,0);
+            fill=bounce.AddComponent<Light>();fill.type=LightType.Point;
+            fill.range=Photometry.FillRange;fill.intensity=Photometry.FillIntensity;
+            fill.color=new Color(1f,.98f,.95f);fill.renderMode=LightRenderMode.ForcePixel;
+            fill.shadows=LightShadows.Soft;fill.shadowStrength=1;fill.shadowBias=.02f;fill.shadowNormalBias=.1f;
+            fill.cookie=Cookie(true);fill.enabled=false;
         }
         public void Bind(WorldBase world,Vector3i position)
         {
@@ -145,11 +174,12 @@ namespace PZAEC.BasementLight
             var rootRef=GetComponent<RootTransformRefParent>();
             if(rootRef!=null)rootRef.RootTransform=transform;
         }
-        static Cubemap Cookie()
+        static Cubemap Cookie(bool isFill=false)
         {
-            if(cookie!=null)return cookie;
+            var cached=isFill?fillCookie:cookie;
+            if(cached!=null)return cached;
             const int size=128;
-            cookie=new Cubemap(size,TextureFormat.RGBA32,false){name="Basement batwing distribution",wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
+            var result=new Cubemap(size,TextureFormat.RGBA32,false){name=isFill?"Basement soft bounce":"Basement batwing distribution",wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};
             for(int face=0;face<6;face++)
             {
                 var pixels=new Color[size*size];
@@ -159,23 +189,36 @@ namespace PZAEC.BasementLight
                     Vector3 d=face==0?new Vector3(1,-v,-u):face==1?new Vector3(-1,-v,u):
                         face==2?new Vector3(u,1,v):face==3?new Vector3(u,-1,-v):
                         face==4?new Vector3(u,-v,1):new Vector3(-u,-v,-1);
-                    float t=Photometry.Transmission(d.x,d.y,d.z);pixels[y*size+x]=new Color(t,t,t,t);
+                    float t=isFill?Photometry.FillTransmission(d.x,d.y,d.z):Photometry.Transmission(d.x,d.y,d.z);pixels[y*size+x]=new Color(t,t,t,t);
                 }
-                cookie.SetPixels(pixels,(CubemapFace)face);
+                result.SetPixels(pixels,(CubemapFace)face);
             }
-            cookie.Apply(false,true);return cookie;
+            result.Apply(false,true);
+            if(isFill)fillCookie=result;else cookie=result;
+            return result;
         }
         void Update()
         {
             if(lamp==null || World==null || Time.time<next)return;
             next=Time.time+.2f;
             var value=World.GetBlock(Position);
-            if(value.Block.GetBlockName()!="pzaecBasementPanelLight"){lamp.enabled=false;return;}
+            if(value.Block.GetBlockName()!="pzaecBasementPanelLight"){ApplyState(false);return;}
             // Native meta synchronizes powered state to clients; native toggle remains authoritative.
             var te=World.GetTileEntity(Position) as TileEntityPoweredBlock;
             bool lit=(value.meta&2)!=0 && te!=null && te.IsToggled;
-            lamp.enabled=lit;diffuser.sharedMaterial=lit?on:off;
+            ApplyState(lit);
         }
-        void OnDisable(){if(lamp!=null)lamp.enabled=false;World=null;next=0;}
+        void ApplyState(bool lit)
+        {
+            if(lamp!=null)lamp.enabled=lit;
+            if(fill!=null)fill.enabled=lit;
+            if(diffuser!=null)diffuser.sharedMaterial=lit?on:off;
+        }
+        void OnDisable()
+        {
+            if(Retiring){if(lamp!=null)lamp.enabled=false;if(fill!=null)fill.enabled=false;}
+            else ApplyState(false);
+            World=null;next=0;
+        }
     }
 }

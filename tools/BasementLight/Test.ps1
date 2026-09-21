@@ -7,19 +7,29 @@ $minimum=[double]::MaxValue;$maximum=0.0
 # Check full target floor, including corners, with 8-bit cookie quantization.
 foreach($height in @(3.8,4.0,4.2,4.5,4.8,5.0)) {
  $low=[double]::MaxValue;$high=0.0
- for($x=-9;$x -le 9;$x+=0.5) {for($z=-9;$z -le 9;$z+=0.5) {
+ for($x=-6;$x -le 6;$x+=0.5) {for($z=-6;$z -le 6;$z+=0.5) {
   $distance=[Math]::Sqrt($x*$x+$z*$z+$height*$height)
   $cookie=[Math]::Round(255*[PZAEC.BasementLight.Photometry]::Transmission($x,-$height,$z))/255
-  $estimate=12*[PZAEC.BasementLight.Photometry]::Falloff($distance)*($height/$distance)*$cookie
+  $estimate=[PZAEC.BasementLight.Photometry]::Intensity*[PZAEC.BasementLight.Photometry]::Falloff($distance)*($height/$distance)*$cookie
   $low=[Math]::Min($low,$estimate);$high=[Math]::Max($high,$estimate)
  }}
- if($low -le 0.025 -or $high/$low -gt 2.5){throw "Photometry failed at height $height : $low to $high"}
+ if($low -le 0.002 -or $high/$low -gt 3.5 -or $high -gt .02){throw "Photometry failed at height $height : $low to $high"}
  Write-Output "Analytic floor check, height $height : minimum=$low maximum=$high ratio=$($high/$low) (not a game render)"
 }
 if([PZAEC.BasementLight.Photometry]::Transmission(0,1,0) -ne 0){throw 'Upward leakage in cookie'}
 $centre=[PZAEC.BasementLight.Photometry]::Transmission(0,-4.2,0)
-$corner=[PZAEC.BasementLight.Photometry]::Transmission(9,-4.2,9)
-if($corner -le $centre*10){throw 'Centre suppression missing'}
+$corner=[PZAEC.BasementLight.Photometry]::Transmission(6,-4.2,6)
+if($corner -le $centre*5){throw 'Centre suppression missing'}
+if([PZAEC.BasementLight.Photometry]::Intensity -gt 1){throw 'Unsafe fallback intensity if cookie is ignored by renderer'}
+$previous=0.0
+for($angle=0;$angle -le 180;$angle+=.25){
+ $radians=$angle*[Math]::PI/180
+ $t=[PZAEC.BasementLight.Photometry]::Transmission([Math]::Cos($radians),-[Math]::Sin($radians),0)
+ if($t -lt 0 -or $t -gt .65 -or [Math]::Abs($t-$previous) -gt .02){throw 'Angular cutoff or excessive grazing output'}
+ $rotated=[PZAEC.BasementLight.Photometry]::Transmission(0,-[Math]::Sin($radians),[Math]::Cos($radians))
+ if([Math]::Abs($rotated-$t) -gt .000001){throw 'Azimuth seam in radial distribution'}
+ $previous=$t
+}
 [xml]$blocks=Get-Content "$mod/Config/blocks.xml"
 $b=$blocks.SelectSingleNode("//block[@name='pzaecBasementPanelLight']")
 if($b.SelectSingleNode("property[@name='UnlockedBy']")){throw 'Free recipe must omit UnlockedBy, not define an empty unlock entry'}
@@ -57,3 +67,15 @@ try {
  if(-not ($bind.Body.Instructions.Operand -contains 'WireOffset')){throw 'Native wire anchor contract changed'}
 } finally {$game.Dispose()}
 Write-Output 'PASS: coverage model, power, one-block config, ingredients, localization and native hook.'
+
+
+if([PZAEC.BasementLight.Photometry]::FillIntensity -gt .1){throw 'Bounce light too strong'}
+if([PZAEC.BasementLight.Photometry]::FillTransmission(0,-1,0) -ne 0){throw 'Bounce floods floor'}
+if([PZAEC.BasementLight.Photometry]::FillTransmission(1,0,0) -le 0 -or [PZAEC.BasementLight.Photometry]::FillTransmission(0,1,0) -le 0){throw 'Missing wall/ceiling fill'}
+$lastFill=0.0
+for($a=-90;$a -le 90;$a+=.25){
+ $r=$a*[Math]::PI/180
+ $f=[PZAEC.BasementLight.Photometry]::FillTransmission([Math]::Cos($r),[Math]::Sin($r),0)
+ if($f -lt 0 -or $f -gt .65 -or [Math]::Abs($f-$lastFill) -gt .02){throw 'Invalid bounce transition'}
+ $lastFill=$f
+}
