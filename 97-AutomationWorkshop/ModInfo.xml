@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xml>
   <Name value="YFAutomationWorkshop" />
   <DisplayName value="自动化工厂：设备制造工作台" />
   <Description value="自动化工作台、分拣输送、厨房、农场、矿点采集、装备分解及冶炼锻造。" />
   <Author value="yf + Codex" />
-  <Version value="0.9.0" />
+  <Version value="0.9.4" />
   <ServerSideOnly value="false" />
   <SkipWithAntiCheat value="true" />
 </xml>
