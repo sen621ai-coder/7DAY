@@ -13,6 +13,10 @@ public static class AutomationSmoke
  public static int Main()
  {
   try {
+   var powerOffsets=(Vector3i[])typeof(Logistics).GetField("powerOffsets",BindingFlags.NonPublic|BindingFlags.Static).GetValue(null);
+   Check(powerOffsets.Distinct().Count()==powerOffsets.Length,"power scan has no duplicate positions");
+   for(int x=-5;x<=5;x++)for(int y=-5;y<=5;y++)for(int z=-5;z<=5;z++)
+    Check(powerOffsets.Contains(new Vector3i(x,y,z))==(x*x+y*y+z*z<=16),"four-block power radius boundary "+x+","+y+","+z);
    foreach(int count in new[]{1,16,17,100,1000}){
     var a=new[]{Stack(1,count)};var b=new[]{ItemStack.Empty};
     int moved=ConveyorTransfer.Move(a,b,i=>false,i=>false,16,16,v=>6000);
@@ -22,6 +26,15 @@ public static class AutomationSmoke
     Check(ConveyorTransfer.Move(b,sink,i=>true,i=>false,16,16,v=>6000)==0,"locked belt does not move");
     Check(ConveyorTransfer.Move(b,sink,i=>false,i=>false,16,16,v=>6000,2)==0,"output filter blocks wrong item");
    }
+   var mixedBox=ItemStack.CreateArray(3);
+   var firstCargo=new[]{Stack(1,6)};var secondCargo=new[]{Stack(2,9)};
+   Check(ConveyorTransfer.Move(firstCargo,mixedBox,i=>false,i=>false,16,int.MaxValue,v=>100)==6&&mixedBox[0].count==6,"empty receiving box accepts cargo in first slot without sample");
+   Check(ConveyorTransfer.Move(secondCargo,mixedBox,i=>false,i=>false,16,int.MaxValue,v=>100)==9&&mixedBox[1].itemValue.type==2&&mixedBox[0].itemValue.type==1,"receiving box accepts mixed cargo irrespective of first-slot type");
+   var outgoing=ItemStack.CreateArray(1);
+   Check(ConveyorTransfer.Move(mixedBox,outgoing,i=>false,i=>false,16,16,v=>100)==6&&mixedBox[0].IsEmpty()&&outgoing[0].count==6,"conveyor can extract all first-slot cargo without retaining sample");
+   var lockedCargo=new[]{Stack(3,4)};var fullBox=new[]{Stack(1,100),Stack(2,100)};
+   Check(ConveyorTransfer.Move(lockedCargo,fullBox,i=>false,i=>false,16,int.MaxValue,v=>100)==0&&lockedCargo[0].count==4,"full mixed receiving box leaves cargo on belt");
+   Check(ConveyorTransfer.Move(lockedCargo,mixedBox,i=>false,i=>i!=1,16,int.MaxValue,v=>100)==0&&lockedCargo[0].count==4,"locked empty receiving slots remain protected");
    Check(TransferRules.SameChunk(-16,-1,-1,-16),"negative chunk coordinates");
    var invalidUnlockItem=(ItemClass)FormatterServices.GetUninitializedObject(typeof(ItemClass));
    invalidUnlockItem.Properties=new DynamicProperties();invalidUnlockItem.Properties.Values["UnlockedBy"]="";

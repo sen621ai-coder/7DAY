@@ -175,6 +175,16 @@ public sealed class MachineConfigurationGameQA : IModApi
         var port=world.GetTileEntity(pp) as TileEntityPowered;
         if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(pp);port=((BlockPowered)world.GetBlock(pp).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(pp);chunk.AddTileEntity(port);}
         port.InitializePowerData();port.PowerItem.isPowered=true;
+        var powerCheck=AccessTools.Method(typeof(Logistics),"Powered");
+        Func<Vector3i,bool> hasPower=point=>(bool)powerCheck.Invoke(null,new object[]{world,point});
+        Check(hasPower(pp+new Vector3i(4,0,0)),"powered interface reaches exactly four horizontal blocks");
+        Check(hasPower(pp+new Vector3i(0,4,0)),"powered interface reaches exactly four vertical blocks");
+        Check(hasPower(pp+new Vector3i(2,2,2)),"powered interface reaches diagonal positions within radius four");
+        Check(!hasPower(pp+new Vector3i(5,0,0)),"powered interface excludes five blocks");
+        Check(!hasPower(pp+new Vector3i(3,0,3)),"powered interface excludes diagonal beyond radius four");
+        port.PowerItem.isPowered=false;
+        Check(!hasPower(pp+new Vector3i(4,0,0)),"unpowered interface does not supply radius four");
+        port.PowerItem.isPowered=true;
         Conveyors.Observe(belt,world);var step=AccessTools.Method(typeof(Conveyors),"Step");
         belt.GetFeature<TEFeatureStorage>().items[0]=new ItemStack(new ItemValue(iron),5);
         step.Invoke(null,new object[]{new[]{belt}});
