@@ -22,9 +22,12 @@ $corner=[PZAEC.BasementLight.Photometry]::Transmission(9,-4.2,9)
 if($corner -le $centre*10){throw 'Centre suppression missing'}
 [xml]$blocks=Get-Content "$mod/Config/blocks.xml"
 $b=$blocks.SelectSingleNode("//block[@name='pzaecBasementPanelLight']")
+if($b.SelectSingleNode("property[@name='UnlockedBy']")){throw 'Free recipe must omit UnlockedBy, not define an empty unlock entry'}
+if($b.SelectSingleNode("property[@name='Extends']").param1 -ne 'UnlockedBy'){throw 'Parent lamp unlock must be excluded from inheritance'}
 if($b.SelectSingleNode("property[@name='RequiredPower']").value -ne '15'){throw 'Not 15W'}
 if($b.SelectSingleNode("property[@name='MultiBlockDim']")){throw 'Footprint must be one voxel'}
 [xml]$recipes=Get-Content "$mod/Config/recipes.xml"
+if($recipes.SelectSingleNode('//recipe').tags -match 'learnable'){throw 'Free lamp recipe must not require learning'}
 [xml]$items=Get-Content (Join-Path (Split-Path $root) 'Data/Config/items.xml')
 foreach($ingredient in $recipes.SelectNodes('//ingredient')){
  if(-not $items.SelectSingleNode("/items/item[@name='$($ingredient.name)']")){throw "Missing ingredient $($ingredient.name)"}

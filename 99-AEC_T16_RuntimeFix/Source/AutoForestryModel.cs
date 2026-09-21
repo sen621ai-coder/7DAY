@@ -16,25 +16,50 @@ namespace AECT16RuntimeFix
         static Transform prefab;
         static Material timberMaterial;
         static Material nativeMaterial;
+        static readonly Dictionary<string,Transform> prefabs=new Dictionary<string,Transform>();
         const string BlockName = "yfAutoForestry";
 
         public static void Install(Harmony harmony, string modPath)
         {
             assetPath = Path.GetFullPath(Path.Combine(modPath, "../98-AECxProjectZ_Tweaks/Resources/Forestry"));
-            if (!File.Exists(Path.Combine(assetPath, "sawmill.meshbin")))
-                throw new FileNotFoundException("Auto forestry model resources missing", assetPath);
+            ForestryPreflight.Validate(assetPath);
             var method = AccessTools.Method(typeof(BlockShapeModelEntity), "getPrefab");
             if (method == null) throw new MissingMethodException("BlockShapeModelEntity.getPrefab");
-            harmony.Patch(method, prefix: new HarmonyMethod(typeof(AutoForestryModel), nameof(GetPrefab)));
-            AutoForestryActivity.Install(harmony);
-            Log.Out("[AutoForestry] Sawmill prefab provider installed (10x6 footprint).");
+            var destroy=AccessTools.Method(typeof(GameObjectPool),"DestroyObject",new[]{typeof(GameObject)});
+            if(destroy==null)throw new MissingMethodException("GameObjectPool.DestroyObject");
+            if(AccessTools.Method(typeof(BlockCollector),"OnBlockEntityTransformBeforeActivated")==null)
+                throw new MissingMethodException("BlockCollector activation hook");
+            var visualHarmony=new Harmony("pzaec.forestry.visual.v5");
+            try
+            {
+                visualHarmony.Patch(method,prefix:new HarmonyMethod(typeof(AutoForestryModel),nameof(GetPrefab)));
+                visualHarmony.Patch(destroy,prefix:new HarmonyMethod(typeof(AutoForestryModel),nameof(BeforePoolDestroy)));
+                AutoForestryActivity.Install(visualHarmony);
+            }
+            catch { visualHarmony.UnpatchSelf();throw; }
+            Log.Out("[AutoForestry] v5 lifecycle recovery installed; resources preflight passed.");
+        }
+
+        static void BeforePoolDestroy(GameObject __0)
+        {
+            if(__0==null||__0.GetComponent<ForestrySharedMaterialOwner>()==null)return;
+            __0.GetComponent<ForestrySharedMaterialOwner>().retiring=true;
+            ForestryResources.InstanceRetired();
+            // Native DestroyObject calls Utils.CleanupMaterialsOfRenderers, which
+            // destroys EVERY runtime material (negative instance ID), including
+            // shared ones. Detach only the retiring forestry instance first, so
+            // other buildings, ghosts and the cached prefab keep their materials.
+            foreach(var renderer in __0.GetComponentsInChildren<Renderer>(true))
+                renderer.sharedMaterials=new Material[0];
         }
 
         static bool GetPrefab(BlockShapeModelEntity __instance, ref Transform __result)
         {
             if (__instance.block == null || __instance.block.GetBlockName() != BlockName) return true;
             if (__instance.block.Properties.GetValue("Model") != "yfAutoForestryRuntime.prefab") return true;
-            if (prefab == null)
+            string mode=__instance.block.Properties.GetValue("MultiBlockDim");
+            if(mode!="6,4,4")mode="10,4,6";
+            if (!prefabs.TryGetValue(mode,out prefab)||prefab==null)
             {
                 prefab = CreatePrefab();
                 // Optional cleanup mode restores the previous 6x4 occupied cells.
@@ -49,14 +74,22 @@ namespace AECT16RuntimeFix
                     var bounds = prefab.GetComponent<BoxCollider>();
                     bounds.center *= .6f; bounds.size *= .6f;
                 }
+                prefabs[mode]=prefab;
             }
+            prefab.GetComponent<ForestrySharedMaterialOwner>().Restore();
             __result = prefab;
             return false;
         }
 
         static Texture2D Texture(string filename, bool linear)
         {
-            var texture = new Texture2D(2, 2, TextureFormat.RGBA32, true, linear);
+            return ForestryResources.Texture(()=>LoadTexture(filename,linear));
+        }
+        static Texture2D LoadTexture(string filename,bool linear)
+        {
+            var texture = ForestryResources.Own(new Texture2D(2, 2, TextureFormat.RGBA32, true, linear));
+            try
+            {
             texture.name = "Forestry_" + filename;
             if (!ImageConversion.LoadImage(texture, File.ReadAllBytes(Path.Combine(assetPath, filename)), true))
                 throw new InvalidDataException("Cannot read forestry texture: " + filename);
@@ -64,6 +97,8 @@ namespace AECT16RuntimeFix
             texture.anisoLevel = 8;
             texture.filterMode = FilterMode.Trilinear;
             return texture;
+            }
+            catch { ForestryResources.Release(texture);throw; }
         }
 
         static Material Solid(Shader shader, string name, Color color)
@@ -78,8 +113,9 @@ namespace AECT16RuntimeFix
         // needed by dynamically generated materials on another client's renderer.
         static Material NativeMaterial(string name)
         {
-            if(nativeMaterial==null)
+            if(nativeMaterial==null||nativeMaterial.shader==null||!nativeMaterial.shader.isSupported)
             {
+                nativeMaterial=null;
                 var native=DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab",false);
                 if(native!=null)
                 foreach(var renderer in native.GetComponentsInChildren<Renderer>(true))
@@ -93,12 +129,15 @@ namespace AECT16RuntimeFix
                     if(nativeMaterial!=null)break;
                 }
                 if(nativeMaterial==null)throw new InvalidOperationException("No supported native workstation material for forestry");
-                Log.Out("[AutoForestry] Native material v2: "+nativeMaterial.name+", shader="+nativeMaterial.shader.name
+                Log.Out("[AutoForestry] Native material v5 (auxiliary maps preserved): "+nativeMaterial.name+", shader="+nativeMaterial.shader.name
                     +", graphics="+SystemInfo.graphicsDeviceType+", keywords="+String.Join(",",nativeMaterial.shaderKeywords));
             }
-            var material=new Material(nativeMaterial){name=name,color=Color.white};
-            // Do not retain the workbench's atlas, normal or emission textures.
-            foreach(var property in material.GetTexturePropertyNames())material.SetTexture(property,null);
+            var material=ForestryResources.Own(new Material(nativeMaterial){name=name,color=Color.white});
+            // Game/Entity Tint Mask has shader-specific auxiliary texture slots.
+            // Preserve those native bindings; clearing every slot also clears masks
+            // and lookup maps whose meaning is not defined by Standard's properties.
+            // Plain props start white; textured surfaces explicitly replace their maps.
+            material.mainTexture=Texture2D.whiteTexture;
             material.mainTextureScale=new Vector2(1,1);material.mainTextureOffset=Vector2.zero;
             if(material.HasProperty("_EmissionColor"))material.SetColor("_EmissionColor",Color.black);
             return material;
@@ -106,11 +145,22 @@ namespace AECT16RuntimeFix
 
         internal static Material GetTimberMaterial()
         {
+            ForestryResources.Check();
+            var restored=ForestryResources.NamedMaterial("ForestryBarkAndEndgrain");
+            if(restored!=null)timberMaterial=restored;
             if(timberMaterial!=null)return timberMaterial;
             timberMaterial=NativeMaterial("ForestryBarkAndEndgrain");
             timberMaterial.mainTexture=Texture("timber.png",false);
             timberMaterial.SetFloat("_Glossiness",.12f);
             return timberMaterial;
+        }
+        internal static Shader ReloadNativeShader()
+        {
+            nativeMaterial=null;
+            var probe=NativeMaterial("ForestryShaderRecoveryProbe");
+            var shader=probe.shader;ForestryResources.Release(probe);
+            Log.Out("[AutoForestry] Reloaded native shader: "+shader.name);
+            return shader;
         }
 
         static GameObject Box(Transform parent, string name, Vector3 at, Vector3 size, Material material)
@@ -165,7 +215,7 @@ namespace AECT16RuntimeFix
                     if(s<segments) triangles.AddRange(end==0?new[]{center,center+s+2,center+s+1}:new[]{center,center+s+1,center+s+2});
                 }
             }
-            var mesh=new Mesh{name="DetailedTimber"+number};
+            var mesh=ForestryResources.Own(new Mesh{name="DetailedTimber"+number});
             mesh.SetVertices(vertices); mesh.SetNormals(normals); mesh.SetUVs(0,uv); mesh.SetTriangles(triangles,0);
             mesh.RecalculateBounds(); mesh.RecalculateTangents();
             var log=new GameObject("Timber"+number); log.transform.SetParent(parent,false);
@@ -178,6 +228,10 @@ namespace AECT16RuntimeFix
 
         static Transform CreatePrefab()
         {
+            ForestryResources.Check();
+            var checkpoint=ForestryResources.Begin();var oldCache=cache;
+            try
+            {
             var shader = GetTimberMaterial().shader;
             // Obtain collision layer/tag from an installed native workstation rather
             // than hard-coding version-dependent game layer numbers.
@@ -190,12 +244,11 @@ namespace AECT16RuntimeFix
             UnityEngine.Object.DontDestroyOnLoad(cache);
             var go = new GameObject("yfAutoForestryRuntime");
             go.transform.SetParent(cache.transform, false);
+            go.AddComponent<ForestrySharedMaterialOwner>();
             // Native ray hits resolve child colliders through this reference before
             // looking up BlockEntityData. Without it they look up the child itself.
             // Set explicitly while inactive: Awake must not pick the cache/chunk root.
             go.AddComponent<RootTransformRefParent>().RootTransform = go.transform;
-            try
-            {
                 Material[] materials;
                 using (var reader = new BinaryReader(File.OpenRead(Path.Combine(assetPath, "sawmill.meshbin"))))
                 {
@@ -243,7 +296,7 @@ namespace AECT16RuntimeFix
                             indices[t] = reader.ReadInt32();
                             if (indices[t] < 0 || indices[t] >= count) throw new InvalidDataException("Bad forestry triangle index");
                         }
-                        var mesh = new Mesh { name = "ForestryMesh" + p, indexFormat = IndexFormat.UInt32 };
+                        var mesh = ForestryResources.Own(new Mesh{ name = "ForestryMesh" + p, indexFormat = IndexFormat.UInt32 });
                         mesh.vertices = vertices; mesh.normals = normals; mesh.uv = uv; mesh.triangles = indices;
                         mesh.RecalculateBounds(); mesh.RecalculateTangents();
                         var child = new GameObject("SawmillPart" + p); child.transform.SetParent(go.transform, false);
@@ -254,9 +307,9 @@ namespace AECT16RuntimeFix
                     }
                     if (reader.BaseStream.Position != reader.BaseStream.Length) throw new InvalidDataException("Trailing forestry mesh data");
                 }
-                var steel = new Material(materials[5]) { name="ForestrySteel" };
+                var steel = ForestryResources.Own(new Material(materials[5]){ name="ForestrySteel" });
                 var dark = Solid(shader, "ForestryBase", new Color(.18f,.17f,.15f));
-                var wood = new Material(materials[4]) { name="ForestryWood" };
+                var wood = ForestryResources.Own(new Material(materials[4]){ name="ForestryWood" });
                 var green = Solid(shader, "ForestryScreen", new Color(.18f,.55f,.26f));
                 var amber = Solid(shader, "ForestryWarning", new Color(.85f,.45f,.08f));
                 dark.mainTexture=materials[0].mainTexture;
@@ -309,14 +362,18 @@ namespace AECT16RuntimeFix
                     t.gameObject.layer = nativeCollider.gameObject.layer;
                     t.gameObject.tag = "T_Block";
                 }
+                go.GetComponent<ForestrySharedMaterialOwner>().Capture();
                 Log.Out("[AutoForestry] Model ready: six surface materials, machinery, production visuals and distance LOD.");
                 return go.transform;
             }
             catch
             {
-                UnityEngine.Object.Destroy(cache); cache = null;
+                if(cache!=oldCache&&cache!=null)UnityEngine.Object.Destroy(cache);
+                cache=oldCache;timberMaterial=null;
+                ForestryResources.Rollback(checkpoint);
                 throw;
             }
         }
     }
+
 }

@@ -50,7 +50,7 @@ namespace AECT16RuntimeFix
                 int a=1+i,b=1+(i+1)%count,c=a+count+1,d=b+count+1;
                 tris.AddRange(new[]{a,b,c,b,d,c});
             }
-            var mesh=new Mesh{name="Forestry32ToothBlade"}; mesh.SetVertices(v);mesh.SetUVs(0,uv);
+            var mesh=ForestryResources.Own(new Mesh{name="Forestry32ToothBlade"}); mesh.SetVertices(v);mesh.SetUVs(0,uv);
             mesh.SetTriangles(tris,0);mesh.RecalculateNormals();mesh.RecalculateBounds();mesh.RecalculateTangents();return mesh;
         }
 

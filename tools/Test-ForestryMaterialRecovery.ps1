@@ -4,7 +4,7 @@ $source=Get-Content (Join-Path $root '99-AEC_T16_RuntimeFix/Source/AutoForestryA
 # Execute the actual material initialization block with a strict null-copy stub.
 # This reproduces the Material(source:null) exception in the supplied game log.
 $start=$source.IndexOf('            if(logRenderers.Count>0)')
-$end=$source.IndexOf('            initialized=true;', $start)
+$end=$source.IndexOf('            if(blade==null', $start)
 if($start -lt 0 -or $end -lt $start){throw 'Material initialization block not found'}
 $body=$source.Substring($start,$end-$start)
 $fixture=@'
@@ -20,7 +20,7 @@ public class Material {
 public class Renderer { public Material sharedMaterial; }
 public static class AutoForestryModel { public static readonly Material Original=new Material(); public static Material GetTimberMaterial()=>Original; }
 public class ForestryMaterialFixture {
- List<Renderer> logRenderers=new List<Renderer>(); Material solidLog,fadeLog;
+ List<Renderer> logRenderers=new List<Renderer>(); Material solidLog;
  static void Destroy(Material m){}
  void Initialize(){ BODY }
  public static void Run(){
@@ -29,8 +29,8 @@ public class ForestryMaterialFixture {
   a.Initialize();
   foreach(var r in a.logRenderers)if(r.sharedMaterial!=AutoForestryModel.Original)throw new Exception("Null material not restored");
   var b=new ForestryMaterialFixture();
-  b.logRenderers.Add(new Renderer{sharedMaterial=a.fadeLog}); b.Initialize();
-  if(b.solidLog!=AutoForestryModel.Original||b.fadeLog==a.fadeLog)throw new Exception("Instance material leaked");
+  b.logRenderers.Add(new Renderer{sharedMaterial=new Material()}); b.Initialize();
+  if(b.solidLog!=AutoForestryModel.Original)throw new Exception("Unexpected material adopted");
   a.logRenderers[0].sharedMaterial=null; a.Initialize();
   if(a.logRenderers[0].sharedMaterial!=AutoForestryModel.Original)throw new Exception("Reinitialization failed");
  }
@@ -38,4 +38,4 @@ public class ForestryMaterialFixture {
 '@
 Add-Type -TypeDefinition $fixture.Replace('BODY',$body)
 [ForestryMaterialFixture]::Run()
-Write-Output 'PASS: empty/null timber materials, five log renderers, independent fade materials, repeated initialization.'
+Write-Output 'PASS: empty/null timber materials, five log renderers, canonical shared material, repeated initialization.'

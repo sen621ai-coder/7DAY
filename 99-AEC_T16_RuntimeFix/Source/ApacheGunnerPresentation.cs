@@ -24,50 +24,21 @@ namespace AECT16RuntimeFix
             rod.transform.localRotation=Quaternion.FromToRotation(Vector3.up,b-a);
             return rod;
         }
-        public static GameObject BellyFairing(Transform parent,Material material)
-        {
-            const int n=20;
-            var vertices=new Vector3[n*2+2];var triangles=new int[n*12];int k=0;
-            for(int i=0;i<n;i++)
-            {
-                float a=i*Mathf.PI*2/n,c=Mathf.Cos(a),s=Mathf.Sin(a);
-                vertices[i]=new Vector3(c*.25f,.31f,s*.31f-.12f);
-                vertices[n+i]=new Vector3(c*.63f,1.18f,s*.73f-.16f);
-            }
-            vertices[n*2]=new Vector3(0,.31f,-.12f);
-            vertices[n*2+1]=new Vector3(0,1.18f,-.16f);
-            for(int i=0;i<n;i++)
-            {
-                int j=(i+1)%n;
-                triangles[k++]=i;triangles[k++]=n+j;triangles[k++]=j;
-                triangles[k++]=i;triangles[k++]=n+i;triangles[k++]=n+j;
-                triangles[k++]=n*2;triangles[k++]=i;triangles[k++]=j;
-                triangles[k++]=n*2+1;triangles[k++]=n+j;triangles[k++]=n+i;
-            }
-            var mesh=new Mesh{name="Apache belly fairing"};mesh.vertices=vertices;mesh.triangles=triangles;
-            mesh.RecalculateNormals();mesh.RecalculateBounds();
-            var obj=new GameObject("BellyFairing");obj.hideFlags=HideFlags.DontSave;
-            obj.transform.SetParent(parent,false);
-            obj.AddComponent<MeshFilter>().sharedMesh=mesh;
-            var renderer=obj.AddComponent<MeshRenderer>();renderer.sharedMaterial=material;
-            renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
-            return obj;
-        }
         public static Transform BuildGun(Transform pivot,Material olive,Material steel,Material dark)
         {
-            Part(pivot,PrimitiveType.Cube,"Receiver",new Vector3(0,0,.05f),new Vector3(.28f,.24f,.43f),Vector3.zero,olive);
-            Part(pivot,PrimitiveType.Cube,"BreechBlock",new Vector3(0,-.02f,-.25f),new Vector3(.25f,.21f,.22f),Vector3.zero,dark);
-            Part(pivot,PrimitiveType.Cube,"ReceiverTop",new Vector3(0,.145f,.01f),new Vector3(.23f,.045f,.38f),Vector3.zero,steel);
-            Part(pivot,PrimitiveType.Cube,"FeedHousing",new Vector3(-.18f,-.005f,-.08f),new Vector3(.13f,.16f,.30f),new Vector3(0,0,-10),olive);
-            Part(pivot,PrimitiveType.Cube,"DriveHousing",new Vector3(.17f,-.015f,.02f),new Vector3(.11f,.15f,.30f),Vector3.zero,steel);
-            Part(pivot,PrimitiveType.Cylinder,"ChainDrive",new Vector3(.23f,-.01f,-.08f),new Vector3(.105f,.045f,.105f),new Vector3(0,0,90),dark);
+            Part(pivot,PrimitiveType.Cube,"Receiver",new Vector3(0,.01f,.08f),new Vector3(.22f,.17f,.34f),Vector3.zero,olive);
+            Part(pivot,PrimitiveType.Cube,"BreechBlock",new Vector3(0,0,-.18f),new Vector3(.19f,.14f,.17f),Vector3.zero,dark);
+            Part(pivot,PrimitiveType.Cube,"ReceiverTop",new Vector3(0,.115f,.05f),new Vector3(.18f,.035f,.28f),Vector3.zero,steel);
+            Part(pivot,PrimitiveType.Cube,"FeedHousing",new Vector3(-.145f,.005f,-.05f),new Vector3(.09f,.12f,.22f),new Vector3(0,0,-10),olive);
+            Part(pivot,PrimitiveType.Cube,"DriveHousing",new Vector3(.14f,0,.04f),new Vector3(.08f,.11f,.22f),Vector3.zero,steel);
+            Part(pivot,PrimitiveType.Cylinder,"ChainDrive",new Vector3(.185f,0,-.05f),new Vector3(.075f,.035f,.075f),new Vector3(0,0,90),dark);
             for(int side=-1;side<=1;side+=2){
-                Part(pivot,PrimitiveType.Cube,"CradleArm",new Vector3(side*.205f,.075f,-.13f),new Vector3(.052f,.32f,.28f),new Vector3(12,0,0),olive);
-                Part(pivot,PrimitiveType.Cylinder,"Trunnion",new Vector3(side*.25f,.065f,-.09f),new Vector3(.14f,.037f,.14f),new Vector3(0,0,90),steel);
-                Part(pivot,PrimitiveType.Cylinder,"TrunnionBolt",new Vector3(side*.292f,.065f,-.09f),new Vector3(.055f,.018f,.055f),new Vector3(0,0,90),dark);
+                Part(pivot,PrimitiveType.Cube,"CradleArm",new Vector3(side*.16f,.07f,-.09f),new Vector3(.04f,.23f,.20f),new Vector3(10,0,0),olive);
+                Part(pivot,PrimitiveType.Cylinder,"Trunnion",new Vector3(side*.20f,.055f,-.05f),new Vector3(.10f,.03f,.10f),new Vector3(0,0,90),steel);
+                Part(pivot,PrimitiveType.Cylinder,"TrunnionBolt",new Vector3(side*.232f,.055f,-.05f),new Vector3(.04f,.014f,.04f),new Vector3(0,0,90),dark);
             }
-            Rod(pivot,"FeedChuteRear",new Vector3(-.21f,.03f,-.27f),new Vector3(-.29f,.17f,-.48f),.055f,dark);
-            Rod(pivot,"FeedChuteFront",new Vector3(-.29f,.17f,-.48f),new Vector3(-.12f,.29f,-.55f),.055f,steel);
+            Rod(pivot,"FeedChuteRear",new Vector3(-.16f,.02f,-.20f),new Vector3(-.22f,.13f,-.34f),.038f,dark);
+            Rod(pivot,"FeedChuteFront",new Vector3(-.22f,.13f,-.34f),new Vector3(-.10f,.22f,-.40f),.038f,steel);
             var assembly=new GameObject("RecoilAssembly");assembly.hideFlags=HideFlags.DontSave;assembly.transform.SetParent(pivot,false);
             var barrel=assembly.transform;
             Part(barrel,PrimitiveType.Cylinder,"RecoilCollar",new Vector3(0,0,.26f),new Vector3(.13f,.045f,.13f),new Vector3(90,0,0),dark);
@@ -108,8 +79,6 @@ namespace AECT16RuntimeFix
         public static void DestroyMount(GameObject mount)
         {
             if(mount==null)return;
-            var fairing=mount.transform.Find("BellyFairing");
-            if(fairing!=null){var filter=fairing.GetComponent<MeshFilter>();if(filter!=null)Object.Destroy(filter.sharedMesh);}
             Object.Destroy(mount);
         }
         private static void Box(float x,float y,float w,float h,Color color)
@@ -143,10 +112,11 @@ namespace AECT16RuntimeFix
                     Box(714,575,188,7,new Color(.18f,.25f,.25f));Box(714,575,188*Mathf.Clamp01(heat/100),7,tint);
                     Box(714+188*ApacheWeaponRules.ResumeHeat/100,572,1,13,Green);
                     Text(713,587,205,20,L("Resume"),small,new Color(.65f,.73f,.7f));
-                    // Open-center reticle preserves visibility of small targets.
-                    Box(612,359,18,2,tint);Box(650,359,18,2,tint);Box(639,332,2,18,tint);Box(639,370,2,18,tint);
-                    for(int s=-1;s<=1;s+=2){float x=640+s*46;Box(x,328,2,12,tint);Box(x,380,2,12,tint);Box(s<0?x:x-10,328,12,2,tint);Box(s<0?x:x-10,390,12,2,tint);}
-                    Text(695,346,220,22,status,small,tint);
+                    // Floating open-center reticle drives the same ray sent to the server.
+                    var cursor=ApacheAimCursor.CanvasPoint();float cx=cursor.x,cy=cursor.y;
+                    Box(cx-28,cy-1,18,2,tint);Box(cx+10,cy-1,18,2,tint);Box(cx-1,cy-28,2,18,tint);Box(cx-1,cy+10,2,18,tint);
+                    for(int s=-1;s<=1;s+=2){float x=cx+s*46;Box(x,cy-32,2,12,tint);Box(x,cy+20,2,12,tint);Box(s<0?x:x-10,cy-32,12,2,tint);Box(s<0?x:x-10,cy+30,12,2,tint);}
+                    Text(Mathf.Clamp(cx+55,20,1040),Mathf.Clamp(cy-14,20,470),220,22,status,small,tint);
                     Text(553,401,280,22,L("DirectionSight"),small,Green);
                     // Mechanical limits, not a lock-on indicator or a range measurement.
                     Box(510,455,260,2,Green);

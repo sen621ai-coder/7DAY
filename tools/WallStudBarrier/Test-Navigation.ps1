@@ -10,6 +10,7 @@ namespace UnityEngine {
 }
 namespace Pathfinding {
  public class Path {}
+ public class ABPath:Path {public GraphNode startNode;}
  public class GraphNode {public UnityEngine.Vector3 position;public bool Walkable=true;}
  public struct Connection {public GraphNode node;}
  public interface ITraversalProvider {bool CanTraverse(Path p,GraphNode n,int d);bool CanTraverseConnection(Path p,Connection c);uint GetTraversalCost(Path p,GraphNode n);}
@@ -52,6 +53,11 @@ public static class RouteTests {
   var low=new PZAEC.WallStudBarrier.StudTraversal(original,cache,new UnityEngine.Vector3(100,0,-100),.3f,.8f);Check(low.CanTraverse(path,Node(.5f,0,.5f),-1),"short entity may use genuine clearance underneath");
   var blocked=Node(9.5f,0,9.5f);blocked.Walkable=false;Check(!provider.CanTraverse(path,blocked,0),"native impassable stays impassable");Check(provider.GetTraversalCost(path,blocked)==123,"other terrain costs preserved");
   Check(PZAEC.WallStudBarrier.RouteRules.Occupied(new UnityEngine.Vector3(99.8f,0,-99.5f),.3f,1.8f,(x,y,z)=>cache.GetBlock(x,y,z).IsStud),"body radius rejects corner squeeze");
+  var startNode=Node(.5f,0,.5f);var touching=new Pathfinding.ABPath{startNode=startNode};
+  Check(provider.CanTraverse(touching,startNode,-1),"touching stud start node may escape");
+  Check(!provider.CanTraverse(new Pathfinding.Path(),startNode,-1),"same node remains blocked for a different search");
+  Check(!provider.CanTraverse(touching,Node(.55f,0,.5f),-1),"start exemption does not spill into neighbouring nodes");
+  startNode.Walkable=false;Check(!provider.CanTraverse(touching,startNode,-1),"start exemption preserves native unwalkability");
   System.Console.WriteLine("PASS "+count+" navigation/detour checks using actual traversal wrapper and body occupancy code.");
  }
 }

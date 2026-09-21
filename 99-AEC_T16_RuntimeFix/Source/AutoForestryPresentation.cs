@@ -57,7 +57,7 @@ namespace AECT16RuntimeFix
                         var a=v[i];if(float.IsNaN(a.x+a.y+a.z)||Math.Abs(a.x)>5||a.y<0||a.y>4||Math.Abs(a.z)>3)throw new InvalidDataException("LOD outside footprint");
                     }
                     for(int i=0;i<k;i++){indices[i]=reader.ReadInt32();if(indices[i]<0||indices[i]>=count)throw new InvalidDataException("Invalid LOD index");}
-                    var mesh=new Mesh{name="ForestryDistant"+p,indexFormat=IndexFormat.UInt32};
+                    var mesh=ForestryResources.Own(new Mesh{name="ForestryDistant"+p,indexFormat=IndexFormat.UInt32});
                     mesh.vertices=v;mesh.normals=n;mesh.uv=uv;mesh.triangles=indices;mesh.RecalculateBounds();mesh.RecalculateTangents();
                     var obj=new GameObject("SawmillDistantPart"+p);obj.transform.SetParent(root.transform,false);
                     obj.AddComponent<MeshFilter>().sharedMesh=mesh;

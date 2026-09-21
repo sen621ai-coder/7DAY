@@ -2,15 +2,20 @@ $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path $PSScriptRoot)
 $source=Get-Content "$root/ZZZ-PZAEC_WallStudBarrier/Source/WallStudBarrier.cs" -Raw
 $source=$source.Substring(0,$source.IndexOf('    public sealed class ModApi'))+"}`n"
+$recovery=Get-Content "$root/ZZZ-PZAEC_WallStudBarrier/Source/Recovery.cs" -Raw
+$recovery=$recovery.Substring($recovery.IndexOf('namespace PZAEC'))
+$recovery=$recovery.Substring(0,$recovery.IndexOf('        public static void Install'))+"    }`n}`n"
+$source="using System.Runtime.CompilerServices;`nusing GamePath;`n"+$source+$recovery
 $fixture=@'
 namespace HarmonyLib {}
 namespace UnityEngine {
+ public static class Time {public static float time;}
  public struct Vector3 {public float x,y,z;public Vector3(float a,float b,float c){x=a;y=b;z=c;}public float sqrMagnitude=>x*x+y*y+z*z;public static Vector3 operator +(Vector3 a,Vector3 b)=>new Vector3(a.x+b.x,a.y+b.y,a.z+b.z);public static Vector3 operator -(Vector3 a,Vector3 b)=>new Vector3(a.x-b.x,a.y-b.y,a.z-b.z);}
  public static class Mathf {public static int FloorToInt(float f)=>(int)System.Math.Floor(f);public static float Clamp(float f,float a,float b)=>System.Math.Max(a,System.Math.Min(b,f));}
 }
 public struct Vector3i {public int x,y,z;public Vector3i(int a,int b,int c){x=a;y=b;z=c;}public override string ToString()=>x+","+y+","+z;}
-public class Entity {public int entityClass;public UnityEngine.Vector3 position;public float physicsHeight=1;}
-public class EntityAlive:Entity {public WorldBase world;public EntityMoveHelper moveHelper;}
+public class Entity {public int entityClass,entityId;public UnityEngine.Vector3 position;public float physicsHeight=1;}
+public class EntityAlive:Entity {public WorldBase world;public EntityMoveHelper moveHelper;public bool IsBreakingBlocks,IsBreakingDoors,Dead;public GamePath.PathNavigate navigator;public EntityAlive Target;public bool IsDead()=>Dead;public EntityAlive GetAttackTarget()=>Target;public float GetMoveSpeedAggro()=>1;}
 public class EntityPlayer:EntityAlive {}
 public class EntityClass {public bool bIsEnemyEntity;public static System.Collections.Generic.Dictionary<int,EntityClass> list=new System.Collections.Generic.Dictionary<int,EntityClass>();}
 public class Block {public string Shape;public string GetAutoShapeShapeName()=>Shape;}
@@ -18,8 +23,13 @@ public struct BlockValue {public Block Block;}
 public class BlockValueRef {public Vector3i BlockPosition;}
 public struct HitInfoDetails {public Vector3i blockPos;}
 public class WorldRayHitInfo {public bool bHitValid;public HitInfoDetails hit;}
-public class EntityMoveHelper {public WorldRayHitInfo HitInfo;}
+public class EntityMoveHelper {public WorldRayHitInfo HitInfo;public bool IsDestroyArea,CanBreakBlocks=true;public int Clears;public void ClearBlocked(){Clears++;}}
+namespace GamePath {
+ public class PathInfoSingleTarget {public PathInfoSingleTarget(EntityAlive e,UnityEngine.Vector3 t,bool b,float s,object task){}}
+ public class PathNavigate {public bool Planning;public int Requests,Clears;public bool isPlanningPath()=>Planning;public void clearPath(){Clears++;}public void GetPathTo(PathInfoSingleTarget info){Requests++;}}
+}
 public class WorldBase {
+ public bool Remote;public bool IsRemote()=>Remote;
  public EntityAlive Attacker;public System.Collections.Generic.Dictionary<string,BlockValue> Blocks=new System.Collections.Generic.Dictionary<string,BlockValue>();
  public BlockValue GetBlock(int x,int y,int z)=>GetBlock(new Vector3i(x,y,z));
  public BlockValue GetBlock(Vector3i p)=>Blocks.TryGetValue(p.ToString(),out var v)?v:new BlockValue();
@@ -36,7 +46,9 @@ public static class BarrierTests {
    Check(PZAEC.WallStudBarrier.Barrier.Protected(world,enemy,target),"six-direction barrier "+axis+" "+sign);
    enemy.moveHelper=new EntityMoveHelper{HitInfo=new WorldRayHitInfo{bHitValid=true,hit=new HitInfoDetails{blockPos=target}}};
    bool result=true;PZAEC.WallStudBarrier.Barrier.CanBreakPostfix(enemy,ref result);Check(!result,"AI does not select shielded wall");
-   Check(!PZAEC.WallStudBarrier.Barrier.BreakPrefix(enemy),"existing break task is stopped");result=true;Check(!PZAEC.WallStudBarrier.Barrier.AttackPrefix(enemy,ref result)&&!result,"attack animation admission blocked");
+   Check(!PZAEC.WallStudBarrier.Barrier.BreakPrefix(enemy),"existing break task is stopped");result=true;
+   Check(PZAEC.WallStudBarrier.Barrier.AttackPrefix(enemy,ref result),"stale wall hit does not block normal entity attacks");
+   enemy.IsBreakingBlocks=true;Check(!PZAEC.WallStudBarrier.Barrier.AttackPrefix(enemy,ref result)&&!result,"demolition animation admission blocked");
    result=true;PZAEC.WallStudBarrier.Barrier.FindDestroyPostfix(enemy,new UnityEngine.Vector3(.5f,.5f,.5f),ref result);Check(!result,"destroy-area target rejected");
    int damage=99;Check(!PZAEC.WallStudBarrier.Barrier.DamagePrefix(world,new BlockValueRef{BlockPosition=target},1,ref damage)&&damage==0,"fallback does not damage or drop loot");
    world.Blocks.Clear();Check(PZAEC.WallStudBarrier.Barrier.BreakPrefix(enemy),"removing stud immediately restores attacks");
@@ -51,7 +63,18 @@ public static class BarrierTests {
   int d=0;Check(PZAEC.WallStudBarrier.Barrier.DamagePrefix(w,new BlockValueRef{BlockPosition=new Vector3i(0,0,0)},-1,ref d),"unknown/environment source unchanged");
   Check(!PZAEC.WallStudBarrier.Barrier.Crosses(new UnityEngine.Vector3(0,0,0),new UnityEngine.Vector3(0,0,0),(x,y,z)=>false),"zero-length traversal terminates");
   Check(PZAEC.WallStudBarrier.Barrier.Crosses(new UnityEngine.Vector3(-2.5f,-2.5f,-2.5f),new UnityEngine.Vector3(.5f,.5f,.5f),(x,y,z)=>x==-1&&y==-1&&z==-1),"negative coordinate diagonal traversal");
-  System.Console.WriteLine("PASS "+count+" actual-source barrier behavior checks.");
+  var stuck=new EntityAlive{entityClass=1,world=w,position=new UnityEngine.Vector3(.5f,0,.5f),moveHelper=new EntityMoveHelper(),navigator=new GamePath.PathNavigate(),Target=new EntityAlive{position=new UnityEngine.Vector3(8,0,0)}};
+  PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);UnityEngine.Time.time=2;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==0,"no premature recovery");
+  UnityEngine.Time.time=3;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==1&&stuck.navigator.Clears==1&&stuck.moveHelper.Clears==1,"stalled pursuit explicitly gets a fresh path");
+  bool canDestroy=true;PZAEC.WallStudBarrier.Recovery.DestroyPostfix(stuck,ref canDestroy);Check(!canDestroy,"old destruction task releases during recovery");
+  UnityEngine.Time.time=4;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==1,"retry throttle");
+  stuck.navigator.Planning=true;UnityEngine.Time.time=10;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==1,"never cancel a pending path");
+  stuck.navigator.Planning=false;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);UnityEngine.Time.time=11;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==2,"retry after pending path ends");
+  stuck.position=new UnityEngine.Vector3(1.5f,0,.5f);UnityEngine.Time.time=20;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==2,"moving detour is not reset");
+  w.Remote=true;UnityEngine.Time.time=30;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==2,"client replica never replans");w.Remote=false;
+  stuck.Target.position=stuck.position;UnityEngine.Time.time=31;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==2,"nearby combat not interrupted");
+  stuck.Target.position=new UnityEngine.Vector3(8,0,0);w.Blocks.Clear();UnityEngine.Time.time=40;PZAEC.WallStudBarrier.Recovery.UpdatePostfix(stuck);Check(stuck.navigator.Requests==2,"unrelated jams without studs untouched");
+  System.Console.WriteLine("PASS "+count+" actual-source barrier and recovery behavior checks.");
  }
 }
 '@

@@ -59,6 +59,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(AccessTools.Method(typeof(EntityPlayerLocal), "OnGUI"),
                     postfix: new HarmonyMethod(typeof(ApacheWeaponVisuals), nameof(ApacheWeaponVisuals.DrawHUD)));
                 ApacheFlightAssist.Install(harmony);
+                ApacheFiringFeedback.Install(harmony);
                 enabled = true;
                 Log.Out("[Apache-Weapons] Pilot rockets / gunner cannon enabled; server-authoritative cargo ammunition.");
             }
@@ -68,8 +69,10 @@ namespace AECT16RuntimeFix
         {
             states.Clear(); rockets.Clear(); currentWorld = null;
             nextInput = nextAim = 0; inputVehicle = inputSeat = -1; inputHeld=false;
+            ApacheAimVisibility.Clear();
+            ApacheFiringFeedback.Clear();
             ApacheWeaponVisuals.Clear();
-            ApacheAirframeAppearance.Clear();
+            ApacheAimCursor.Clear();
             ApacheFlightAssist.Clear();
             ApachePilotHUD.Clear();localGuided=false;
         }
@@ -117,7 +120,7 @@ namespace AECT16RuntimeFix
             return state.Mesh != null ? state.Mesh.TransformPoint(local) + Origin.position :
                 state.Vehicle.position + BodyRotation(state.Vehicle) * local;
         }
-        public static Vector3 CannonAnchorLocal { get { return new Vector3(0,.35f,3.65f); } }
+        public static Vector3 CannonAnchorLocal { get { return new Vector3(0,.48f,3.58f); } }
         private static bool ReadyOperator(State state, int actor, int seat)
         {
             var player = currentWorld?.GetEntity(actor) as EntityPlayer;
@@ -135,9 +138,7 @@ namespace AECT16RuntimeFix
         }
         public static Ray SightRay(EntityPlayerLocal player)
         {
-            if(player.playerCamera==null)return player.GetLookRay();
-            var ray=player.playerCamera.ViewportPointToRay(new Vector3(.5f,.5f,0));
-            ray.origin+=Origin.position;return ray;
+            return ApacheAimCursor.Ray(player);
         }
         public static byte ResolveAim(State state,Vector3 origin,Vector3 view,out Vector3 direction,out Vector3 muzzle)
         {
@@ -275,7 +276,7 @@ namespace AECT16RuntimeFix
                     new ItemActionAttack.AttackHitInfo(),0,1,1,null,null,ItemActionAttack.EnumAttackMode.RealNoHarvesting,
                     null,-1,ammo);
             }
-            Broadcast(state.Vehicle.entityId,0,CannonEvent,start,end,state.Gate.Heat);
+            Broadcast(state.Vehicle.entityId,unchecked(++serial),CannonEvent,start,end,state.Gate.Heat);
         }
         private static ExplosionData RocketExplosion()
         {
@@ -361,6 +362,7 @@ namespace AECT16RuntimeFix
             if(inputVehicle!=v.entityId||inputSeat!=seat){ReleaseInput(world,player);inputVehicle=v.entityId;inputSeat=seat;nextInput=Time.time+.25f;nextAim=0;}
             var ui=LocalPlayerUI.GetUIForPlayer(player);
             if(!GameManager.Instance.GameIsFocused||(ui!=null&&(LocalPlayerUI.AnyModalWindowOpen()||ui.windowManager.IsCursorWindowOpen()||ui.windowManager.IsInputActive()))){ReleaseInput(world,player);nextInput=Time.time+.25f;return;}
+            ApacheAimCursor.Update(v,seat);
             if(seat==1&&Time.time>=nextInput&&Input.GetKeyDown(ApacheFlightAssist.Key(v,"pzApacheMarkKey",KeyCode.Mouse2)))SendIntent(player,v,Mark,SightRay(player));
             if(seat==0){PilotInput(player,v);return;}
             bool held=Time.time>=nextInput&&Input.GetKey(FireKey(v,seat));

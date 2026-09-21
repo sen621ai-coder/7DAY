@@ -36,7 +36,10 @@ namespace AECT16RuntimeFix
         readonly List<Renderer> logRenderers=new List<Renderer>();
         readonly List<Collider> logColliders=new List<Collider>();
         readonly float[] logAlpha=new float[5];
-        Material solidLog,fadeLog;MaterialPropertyBlock logProperties;
+        Material solidLog;
+        readonly ForestryRetryState retry=new ForestryRetryState();
+        int resourceGeneration=-1;
+        int failureGeneration=-1;
         Renderer screen,bladeRenderer;MaterialPropertyBlock screenProperties;Light workLight;ParticleSystem dust;
         static readonly int ColorId=Shader.PropertyToID("_Color"),EmissionId=Shader.PropertyToID("_EmissionColor");
 
@@ -59,8 +62,7 @@ namespace AECT16RuntimeFix
                 {
                     // Cosmetic setup must never abort Chunk.OnDisplayBlockEntities
                     // before it activates the building and its interaction colliders.
-                    activity.bound=false;activity.initialized=false;activity.enabled=false;
-                    Log.Error("[AutoForestry] Animation setup failed; static building remains available: "+ex);
+                    activity.Fault(ex);
                 }
                 break;
             }
@@ -69,7 +71,9 @@ namespace AECT16RuntimeFix
         {
             if(initialized)return;
             rollers.Clear();originalRotations.Clear();timber.Clear();logRenderers.Clear();logColliders.Clear();
-            screenProperties=new MaterialPropertyBlock();logProperties=new MaterialPropertyBlock();
+            screenProperties=new MaterialPropertyBlock();
+            Array.Clear(boards,0,boards.Length);blade=null;sawPulley=null;drivePulley=null;
+            screen=null;bladeRenderer=null;workLight=null;dust=null;
             foreach(var t in GetComponentsInChildren<Transform>(true))
             {
                 if(t.name=="SawBlade"){blade=t;bladeStart=t.localRotation;bladeRenderer=t.GetComponent<Renderer>();}
@@ -97,16 +101,25 @@ namespace AECT16RuntimeFix
                 // another instance's temporary fade material into this instance.
                 solidLog=AutoForestryModel.GetTimberMaterial();
                 foreach(var renderer in logRenderers)renderer.sharedMaterial=solidLog;
-                if(fadeLog!=null)Destroy(fadeLog);
-                fadeLog=new Material(solidLog){name="ForestryLogTransition"};
-                // Keep the native opaque shader variant. Runtime alpha keywords
-                // can select a stripped variant and turn the inventory logs pink.
             }
+            if(blade==null||screen==null||timber.Count!=5||rollers.Count==0)
+                throw new InvalidOperationException("Forestry animation nodes incomplete");
+            resourceGeneration=ForestryResources.Generation;
             initialized=true;
         }
         void Bind(WorldBase source,Vector3i at)
         {
-            Initialize();ResetPresentation();world=source;position=at;bound=true;nextPoll=0;enabled=true;
+            world=source;position=at;bound=false;nextPoll=0;enabled=true;retry.Reset();
+            Initialize();solidLog=AutoForestryModel.GetTimberMaterial();resourceGeneration=ForestryResources.Generation;
+            ResetPresentation();bound=true;
+        }
+        void Fault(Exception ex)
+        {
+            bound=false;initialized=false;retry.Fail(Time.unscaledTime);
+            failureGeneration=ForestryResources.Generation;
+            try{if(workLight!=null)workLight.enabled=false;if(dust!=null)dust.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);}catch{}
+            Log.Error("[AutoForestry] Animation failure at "+position+", attempt="+retry.Failures
+                +(retry.Failures<=3?", delayed retry scheduled: ":", retries exhausted until reload: ")+ex);
         }
         void ResetPresentation()
         {
@@ -125,15 +138,8 @@ namespace AECT16RuntimeFix
             if(dust!=null)dust.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
             SetScreen(0);
         }
-        void OnDisable(){bound=false;world=null;if(initialized)ResetPresentation();}
-        void OnDestroy()
-        {
-            // Cloned/pooled renderers must not retain an instance-owned material
-            // after its owner is destroyed.
-            foreach(var renderer in logRenderers)
-                if(renderer!=null&&solidLog!=null)renderer.sharedMaterial=solidLog;
-            if(fadeLog!=null)Destroy(fadeLog);
-        }
+        void OnDisable()
+        {bound=false;world=null;retry.Reset();try{if(initialized)ResetPresentation();}catch(Exception ex){initialized=false;Log.Error("[AutoForestry] Reset failed: "+ex.Message);}}
         bool PoseBoards()
         {
             bool cutting=false;
@@ -172,7 +178,27 @@ namespace AECT16RuntimeFix
         }
         void Update()
         {
-            if(!bound||GameManager.IsDedicatedServer)return;
+            if(world==null||GameManager.IsDedicatedServer)return;
+            try
+            {
+                if(retry.Pending)
+                {
+                    // A confirmed resource repair is a new condition, not another
+                    // blind retry against the same exhausted failure.
+                    if(failureGeneration!=ForestryResources.Generation)retry.Restart(Time.unscaledTime);
+                    if(!retry.Ready(Time.unscaledTime))return;
+                    Initialize();ResetPresentation();bound=true;retry.Recovered();nextPoll=0;
+                    Log.Out("[AutoForestry] Animation rebound at "+position);
+                }
+                if(!bound)return;
+                if(resourceGeneration!=ForestryResources.Generation)
+                {solidLog=AutoForestryModel.GetTimberMaterial();resourceGeneration=ForestryResources.Generation;}
+                Tick();
+            }
+            catch(Exception ex){Fault(ex);}
+        }
+        void Tick()
+        {
             if(Time.unscaledTime>=nextPoll)
             {
                 nextPoll=Time.unscaledTime+.5f;

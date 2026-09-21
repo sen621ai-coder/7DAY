@@ -8,7 +8,20 @@ using System.Collections.Generic;
 using N=System.Numerics;
 namespace UnityEngine.Rendering { public enum IndexFormat { UInt32 } }
 namespace UnityEngine {
- public class Object { public virtual string name{get;set;} public static void DestroyImmediate(Object o){if(o is Component c)c.gameObject.components.Remove(c);} public static void Destroy(Object o)=>DestroyImmediate(o);public static void DontDestroyOnLoad(Object o){} }
+ [Flags] public enum HideFlags {None=0,DontUnloadUnusedAsset=32}
+ public class Object {
+  static int nextId;readonly int id=--nextId;public bool destroyed;public HideFlags hideFlags;public int GetInstanceID()=>id;
+  public virtual string name{get;set;}
+  public static bool operator ==(Object a,Object b){bool na=ReferenceEquals(a,null)||a.destroyed,nb=ReferenceEquals(b,null)||b.destroyed;return na||nb?na&&nb:ReferenceEquals(a,b);}
+  public static bool operator !=(Object a,Object b)=>!(a==b);public override bool Equals(object o)=>ReferenceEquals(this,o);public override int GetHashCode()=>id;
+  public static void DestroyImmediate(Object o){if(ReferenceEquals(o,null))return;o.destroyed=true;if(o is Component c)c.gameObject.components.Remove(c);}
+  public static void Destroy(Object o)=>DestroyImmediate(o);public static void DontDestroyOnLoad(Object o){}
+  public static T Instantiate<T>(T o)where T:Object{
+   if(o is Mesh m)return new Mesh{name=m.name,vertices=(Vector3[])m.vertices.Clone(),normals=(Vector3[])m.normals.Clone(),uv=(Vector2[])m.uv.Clone(),triangles=(int[])m.triangles.Clone()} as T;
+   throw new NotSupportedException("Only mesh recovery cloning is modeled here");
+  }
+ }
+ public static class Time{public static float unscaledTime;}
  public struct Vector2 {public float x,y;public Vector2(float a,float b){x=a;y=b;}public static Vector2 zero=>new Vector2();public static Vector2 right=>new Vector2(1,0);public static Vector2 up=>new Vector2(0,1);}
  public struct Vector3 {
   public float x,y,z;public Vector3(float a,float b,float c){x=a;y=b;z=c;}
@@ -49,18 +62,21 @@ namespace UnityEngine {
   public static GameObject CreatePrimitive(PrimitiveType t){var g=new GameObject(t.ToString());g.AddComponent<MeshFilter>().sharedMesh=PrimitiveMesh.Create(t);g.AddComponent<MeshRenderer>();g.AddComponent<BoxCollider>();return g;}
  }
  public class Collider:Component{}public class MeshCollider:Collider{public Mesh sharedMesh;}public class BoxCollider:Collider{public Vector3 center,size;public bool isTrigger;}public class CapsuleCollider:Collider{public int direction;public float radius,height;}
- public class Renderer:Component{public Material sharedMaterial;public Material[] sharedMaterials=>new[]{sharedMaterial};}public class MeshRenderer:Renderer{}public class MeshFilter:Component{public Mesh sharedMesh;}
+ public class MonoBehaviour:Component{}
+ public class Renderer:Component{public Material sharedMaterial;public Material[] sharedMaterials{get=>sharedMaterial==null?new Material[0]:new[]{sharedMaterial};set=>sharedMaterial=value.Length==0?null:value[0];}}public class MeshRenderer:Renderer{}public class MeshFilter:Component{public Mesh sharedMesh;}
  public class Shader:Object{public bool isSupported=true;public static Shader Find(string n)=>new Shader{name=n};}
  public static class SystemInfo{public static string graphicsDeviceType=>"OfflineStub";}
  public enum TextureFormat{RGBA32}public enum TextureWrapMode{Repeat}public enum FilterMode{Trilinear}
- public class Texture2D:Object{public Texture2D(int w,int h,TextureFormat f,bool mip,bool lin){}public TextureWrapMode wrapMode;public int anisoLevel;public FilterMode filterMode;}
+ public class Texture:Object{}
+ public class Texture2D:Texture{public static readonly Texture2D whiteTexture=new Texture2D(1,1,TextureFormat.RGBA32,false,false){name="White"};public Texture2D(int w,int h,TextureFormat f,bool mip,bool lin){}public TextureWrapMode wrapMode;public int anisoLevel;public FilterMode filterMode;}
  public static class ImageConversion{public static bool LoadImage(Texture2D t,byte[] b,bool r)=>true;}
  public class Material:Object {
-  public Color color=Color.white;public Texture2D mainTexture;public Vector2 mainTextureScale=new Vector2(1,1),mainTextureOffset;public int renderQueue;
-  public Dictionary<string,Texture2D> maps=new Dictionary<string,Texture2D>();
-  public Shader shader; public string[] shaderKeywords=new string[0];public bool HasProperty(string n)=>true;public string[] GetTexturePropertyNames()=>maps.Keys.ToArray();
-  public Material(Shader s){shader=s;}public Material(Material m){shader=m.shader;shaderKeywords=m.shaderKeywords;color=m.color;mainTexture=m.mainTexture;mainTextureScale=m.mainTextureScale;mainTextureOffset=m.mainTextureOffset;maps=new Dictionary<string,Texture2D>(m.maps);}
-  public void SetFloat(string n,float f){}public void SetColor(string n,Color c){}public void SetTexture(string n,Texture2D t){maps[n]=t;if(n=="_MainTex")mainTexture=t;}public void EnableKeyword(string k){}public void SetOverrideTag(string k,string v){}
+  public Color color=Color.white;public Texture mainTexture;public Vector2 mainTextureScale=new Vector2(1,1),mainTextureOffset;public int renderQueue;
+  public Dictionary<string,Texture> maps=new Dictionary<string,Texture>();
+  public Shader shader; public string[] shaderKeywords=new string[0];public bool HasProperty(string n)=>true;public string[] GetTexturePropertyNames()=>maps.Keys.Concat(new[]{"_MainTex"}).Distinct().ToArray();
+  public Texture GetTexture(string n)=>n=="_MainTex"?mainTexture:maps.TryGetValue(n,out var t)?t:null;
+  public Material(Shader s){shader=s;}public Material(Material m){if(m==null)throw new ArgumentNullException("source");shader=m.shader;shaderKeywords=m.shaderKeywords;color=m.color;mainTexture=m.mainTexture;mainTextureScale=m.mainTextureScale;mainTextureOffset=m.mainTextureOffset;maps=new Dictionary<string,Texture>(m.maps);}
+  public void SetFloat(string n,float f){}public void SetColor(string n,Color c){}public void SetTexture(string n,Texture t){maps[n]=t;if(n=="_MainTex")mainTexture=t;}public void EnableKeyword(string k){}public void SetOverrideTag(string k,string v){}
  }
  public struct CombineInstance{public Mesh mesh;public Matrix4x4 transform;}
  public class Mesh:Object {
@@ -83,8 +99,10 @@ namespace UnityEngine {
   }
  }
 }
-namespace HarmonyLib{public class Harmony{public void Patch(object m,HarmonyMethod prefix=null){}}public class HarmonyMethod{public HarmonyMethod(Type t,string n){}}public static class AccessTools{public static object Method(Type t,string n)=>null;}}
-public class BlockShapeModelEntity{public Block block;}public class Block{public Props Properties=new Props();public string GetBlockName()=>"yfAutoForestry";}public class Props{public string GetValue(string n)=>"";}
+namespace HarmonyLib{public class Harmony{public Harmony(string id){}public void UnpatchSelf(){}public void Patch(object m,HarmonyMethod prefix=null){}}public class HarmonyMethod{public HarmonyMethod(Type t,string n){}}public static class AccessTools{public static object Method(Type t,string n,Type[] args=null)=>null;}}
+public class GameObjectPool{}
+public class BlockCollector{}
+public class BlockShapeModelEntity{public Block block;}public class Block{public Props Properties=new Props();public string GetBlockName()=>"yfAutoForestry";}public class Props{public Dictionary<string,string> values=new Dictionary<string,string>();public string GetValue(string n)=>values.TryGetValue(n,out var v)?v:"";}
 public class RootTransformRefParent : UnityEngine.Component {
  public UnityEngine.Transform RootTransform;
  // Mirrors the installed game's FindRoot: without a reference it returns the hit child.
@@ -94,8 +112,8 @@ public class RootTransformRefParent : UnityEngine.Component {
  }
 }
 public static class GameManager{public static bool IsDedicatedServer=>false;}
-public static class Log{public static void Out(string s){}}
-public static class DataLoader{public static T LoadAsset<T>(string s,bool b)where T:class{var g=new UnityEngine.GameObject("NativeColliderReference");g.AddComponent<UnityEngine.BoxCollider>();g.AddComponent<UnityEngine.MeshRenderer>().sharedMaterial=new UnityEngine.Material(UnityEngine.Shader.Find("NativeWorkstation")){name="NativeWorkstationMaterial"};return g.transform as T;}}
+public static class Log{public static void Out(string s){}public static void Error(string s){Console.WriteLine(s);}}
+public static class DataLoader{public static T LoadAsset<T>(string s,bool b)where T:class{var g=new UnityEngine.GameObject("NativeColliderReference");g.AddComponent<UnityEngine.BoxCollider>();var m=new UnityEngine.Material(UnityEngine.Shader.Find("NativeWorkstation")){name="NativeWorkstationMaterial"};m.SetTexture("_NativeAuxiliaryMask",UnityEngine.Texture2D.whiteTexture);g.AddComponent<UnityEngine.MeshRenderer>().sharedMaterial=m;return g.transform as T;}}
 namespace AECT16RuntimeFix{public static class AutoForestryActivity{public static void Install(HarmonyLib.Harmony h){}}}
 public static class ForestryRenderExport {
  static void String(BinaryWriter w,string s){var b=System.Text.Encoding.UTF8.GetBytes(s??"");w.Write(b.Length);w.Write(b);}
@@ -114,11 +132,71 @@ public static class ForestryRenderExport {
   foreach(var m in materials)if(m.shader==null||m.shader.name!="NativeWorkstation"||!m.shader.isSupported)
    throw new InvalidOperationException("Forestry surface did not inherit the native shader: "+m.name);
   Console.WriteLine("PASS: every exported material uses the native workstation shader; no standalone Standard lookup.");
+  foreach(var m in materials)if(!m.maps.TryGetValue("_NativeAuxiliaryMask",out var mask)||mask==null)
+   throw new InvalidOperationException("Native auxiliary texture was cleared: "+m.name);
+  Console.WriteLine("PASS: native auxiliary texture bindings survive all forestry material copies.");
   using(var w=new BinaryWriter(File.Create(output))){w.Write(new byte[]{89,70,82,49});w.Write(materials.Length);w.Write(renderers.Length);
-   foreach(var m in materials){String(w,m.name);String(w,m.mainTexture?.name.Replace("Forestry_",""));w.Write(m.color.r);w.Write(m.color.g);w.Write(m.color.b);w.Write(m.color.a);w.Write(m.mainTextureScale.x);w.Write(m.mainTextureScale.y);w.Write(m.mainTextureOffset.x);w.Write(m.mainTextureOffset.y);}
+   foreach(var m in materials){String(w,m.name);String(w,m.mainTexture==UnityEngine.Texture2D.whiteTexture?null:m.mainTexture?.name.Replace("Forestry_",""));w.Write(m.color.r);w.Write(m.color.g);w.Write(m.color.b);w.Write(m.color.a);w.Write(m.mainTextureScale.x);w.Write(m.mainTextureScale.y);w.Write(m.mainTextureOffset.x);w.Write(m.mainTextureOffset.y);}
    foreach(var r in renderers){var mesh=r.GetComponent<UnityEngine.MeshFilter>().sharedMesh;var mat=r.transform.localToWorldMatrix;String(w,r.name);w.Write(Array.IndexOf(materials,r.sharedMaterial));w.Write(mesh.vertices.Length);w.Write(mesh.triangles.Length);for(int i=0;i<mesh.vertices.Length;i++){var v=mat.Point(mesh.vertices[i]);var n=mat.Normal(mesh.normals[i]);w.Write(v.x);w.Write(v.y);w.Write(v.z);w.Write(n.x);w.Write(n.y);w.Write(n.z);w.Write(mesh.uv[i].x);w.Write(mesh.uv[i].y);}foreach(int i in mesh.triangles)w.Write(i);}
   }
   Console.WriteLine("Exported {0} renderers, {1} materials, {2} triangles",renderers.Length,materials.Length,renderers.Sum(r=>r.GetComponent<UnityEngine.MeshFilter>().sharedMesh.triangles.Length/3));
+  // Exercise the production prefix with two users of one runtime material.
+  // Mirror native cleanup: every runtime material still attached is destroyed.
+  var cleanup=type.GetMethod("BeforePoolDestroy",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static);
+  var shared=renderers[0].sharedMaterial;
+  var destroyed=new HashSet<UnityEngine.Material>();
+  for(int pass=0;pass<3;pass++){
+   var retiring=new UnityEngine.GameObject("RetiringForestry");retiring.AddComponent<AECT16RuntimeFix.ForestrySharedMaterialOwner>();
+   retiring.AddComponent<UnityEngine.MeshRenderer>().sharedMaterial=shared;
+   var child=new UnityEngine.GameObject("InactiveStock");child.transform.SetParent(retiring.transform,false);child.AddComponent<UnityEngine.MeshRenderer>().sharedMaterial=shared;child.SetActive(false);
+   cleanup.Invoke(null,new object[]{retiring});
+   foreach(var r in retiring.GetComponentsInChildren<UnityEngine.Renderer>(true))foreach(var m in r.sharedMaterials)destroyed.Add(m);
+   if(destroyed.Contains(shared)||renderers[0].sharedMaterial!=shared)throw new Exception("Pool cleanup destroyed live forestry material");
+  }
+  var other=new UnityEngine.GameObject("UnrelatedBlock");var otherRenderer=other.AddComponent<UnityEngine.MeshRenderer>();otherRenderer.sharedMaterial=shared;
+  cleanup.Invoke(null,new object[]{other});
+  if(otherRenderer.sharedMaterial!=shared)throw new Exception("Cleanup guard affected unrelated block");
+  Console.WriteLine("PASS: repeated pool disposal preserves live shared materials; inactive children protected; unrelated blocks unchanged.");
+  // Inject lost GPU objects into the real recovery code; two instances share them.
+  var live=new UnityEngine.GameObject("LiveForestry");
+  var liveRenderer=live.AddComponent<UnityEngine.MeshRenderer>();liveRenderer.sharedMaterial=shared;
+  var originalMesh=renderers[0].GetComponent<UnityEngine.MeshFilter>().sharedMesh;
+  live.AddComponent<UnityEngine.MeshFilter>().sharedMesh=originalMesh;
+  live.AddComponent<UnityEngine.MeshCollider>().sharedMesh=originalMesh;
+  var liveOwner=live.AddComponent<AECT16RuntimeFix.ForestrySharedMaterialOwner>();liveOwner.Capture();
+  var originalTexture=shared.mainTexture;int triangleCount=originalMesh.triangles.Length;
+  UnityEngine.Object.Destroy(originalTexture);UnityEngine.Object.Destroy(shared);UnityEngine.Object.Destroy(originalMesh);
+  UnityEngine.Time.unscaledTime=10;
+  if(!AECT16RuntimeFix.ForestryResources.Check(true))throw new Exception("Recovery failed");
+  root.GetComponent<AECT16RuntimeFix.ForestrySharedMaterialOwner>().Restore();liveOwner.Restore();
+  if(liveRenderer.sharedMaterial==null||liveRenderer.sharedMaterial!=renderers[0].sharedMaterial
+      ||liveRenderer.sharedMaterial.mainTexture==null)throw new Exception("Live instances did not recover shared material/texture");
+  var repairedMesh=live.GetComponent<UnityEngine.MeshFilter>().sharedMesh;
+  if(repairedMesh==null||repairedMesh.triangles.Length!=triangleCount||live.GetComponent<UnityEngine.MeshCollider>().sharedMesh!=repairedMesh)
+      throw new Exception("Render/collision mesh recovery diverged");
+  liveRenderer.sharedMaterials=new UnityEngine.Material[0];liveOwner.Restore();
+  if(liveRenderer.sharedMaterial==null)throw new Exception("Empty renderer slots were not rebound");
+  var checkpoint=AECT16RuntimeFix.ForestryResources.Begin();
+  var failedAsset=AECT16RuntimeFix.ForestryResources.Own(new UnityEngine.Material(UnityEngine.Shader.Find("Failure")));
+  AECT16RuntimeFix.ForestryResources.MaterialId(failedAsset);
+  AECT16RuntimeFix.ForestryResources.Rollback(checkpoint);
+  if(failedAsset!=null||liveRenderer.sharedMaterial==null)throw new Exception("Rollback destroyed committed resources or leaked failed allocation");
+  cleanup.Invoke(null,new object[]{live});liveOwner.Restore();
+  if(liveRenderer.sharedMaterials.Length!=0)throw new Exception("Retiring instance rebound materials during native cleanup");
+  Console.WriteLine("PASS: destroyed material+texture+mesh repaired across two instances; collider restored; empty slots rebound; allocation rollback isolated; retiring instance stays detached.");
+  var survivor=renderers[0].sharedMaterial;
+  UnityEngine.Object.Destroy(survivor.shader);UnityEngine.Time.unscaledTime=20;
+  if(!AECT16RuntimeFix.ForestryResources.Check(true)||survivor.shader==null||!survivor.shader.isSupported)
+   throw new Exception("Destroyed native shader was not reacquired");
+  Console.WriteLine("PASS: lost native shader reacquired from the workstation template.");
+  var getPrefab=type.GetMethod("GetPrefab",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static);
+  var shape=new BlockShapeModelEntity{block=new Block()};shape.block.Properties.values["Model"]="yfAutoForestryRuntime.prefab";
+  shape.block.Properties.values["MultiBlockDim"]="10,4,6";object[] args={shape,null};getPrefab.Invoke(null,args);var large=(UnityEngine.Transform)args[1];
+  shape.block.Properties.values["MultiBlockDim"]="6,4,4";args[1]=null;getPrefab.Invoke(null,args);var compact=(UnityEngine.Transform)args[1];
+  shape.block.Properties.values["MultiBlockDim"]="10,4,6";args[1]=null;getPrefab.Invoke(null,args);
+  if(!Object.ReferenceEquals(args[1],large)||compact==large||Math.Abs(compact.GetComponent<UnityEngine.BoxCollider>().size.x-5.97f)>.001f
+     ||Math.Abs(large.GetComponent<UnityEngine.BoxCollider>().size.x-9.95f)>.001f)throw new Exception("Mode cache reused wrong footprint");
+  Console.WriteLine("PASS: large/compact/large mode switching preserves independent caches and collision sizes.");
  }
 }
 

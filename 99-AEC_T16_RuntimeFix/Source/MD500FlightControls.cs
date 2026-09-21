@@ -13,7 +13,8 @@ namespace AECT16RuntimeFix
         private static bool enabled;
         private sealed class ThrustState
         {
-            public float Forward, LastTime;
+            public float Forward, Right, Yaw, VerticalCorrection, LastTime, HoldAltitude, ContactTime, AirBlend;
+            public bool HoldingAltitude, Initialized, Airborne;
         }
         // Weak ownership avoids retaining despawned vehicles or old worlds.
         private static readonly ConditionalWeakTable<EntityVehicle, ThrustState> thrustStates =
@@ -158,35 +159,69 @@ namespace AECT16RuntimeFix
             Vector3 right = Vector3.Cross(Vector3.up, forward);
             Vector3 velocity = rb.velocity;
             var vehicle = __instance.vehicle;
+            var profile = MD500FlightMath.Handling(string.Equals(vehicle.GetName(),ApacheVehicleName,StringComparison.OrdinalIgnoreCase));
             float forwardMax = vehicle.IsTurbo ? vehicle.VelocityMaxTurboForward : vehicle.VelocityMaxForward;
             float backwardMax = vehicle.IsTurbo ? vehicle.VelocityMaxTurboBackward : vehicle.VelocityMaxBackward;
-            var force = MD500FlightMath.Calculate(input.moveForward, input.moveStrafe, input.jump, input.down,
-                Vector3.Dot(velocity, forward), Vector3.Dot(velocity, right), velocity.y,
-                rb.angularVelocity.y, __instance.position.y, power,
-                forwardMax * vehicle.EffectVelocityMaxPer, backwardMax * vehicle.EffectVelocityMaxPer,
-                vehicle.EffectMotorTorquePer);
             var thrust = thrustStates.GetValue(__instance, key => new ThrustState());
             float now = Time.fixedTime;
-            if (now < thrust.LastTime || now - thrust.LastTime > .2f) thrust.Forward = 0f;
-            thrust.Forward = MD500FlightMath.SmoothThrust(thrust.Forward, force.Forward,
-                Time.fixedDeltaTime, power, vehicle.EffectMotorTorquePer);
+            if (now < thrust.LastTime || now - thrust.LastTime > .2f)
+            { thrust.Forward=thrust.Right=thrust.Yaw=thrust.VerticalCorrection=0f; thrust.HoldingAltitude=false; thrust.Initialized=false; }
+            float dt = Time.fixedDeltaTime;
+            bool offGround = __instance.GetWheelsOnGround() == 0;
+            if (!thrust.Initialized)
+            { thrust.Initialized=true; thrust.Airborne=offGround; thrust.AirBlend=offGround ? 1f : 0f; thrust.ContactTime=0f; }
+            if (offGround==thrust.Airborne) thrust.ContactTime=0f;
+            else
+            {
+                thrust.ContactTime+=dt;
+                if (thrust.ContactTime >= (offGround ? .12f : .16f))
+                { thrust.Airborne=offGround; thrust.ContactTime=0f; }
+            }
+            thrust.AirBlend=MD500FlightMath.SmoothAxis(thrust.AirBlend,thrust.Airborne ? 1f : 0f,dt,1f,
+                thrust.Airborne ? 2f : 4f);
+            bool verticalCommand = input.jump != input.down;
+            // Brake vertical motion first, then capture the settled altitude. Raw
+            // wheel contact releases hold immediately so it cannot fight a slope.
+            if (!offGround || !thrust.Airborne || verticalCommand) thrust.HoldingAltitude = false;
+            else if (!thrust.HoldingAltitude && Math.Abs(velocity.y)<.15f)
+            { thrust.HoldAltitude = __instance.position.y; thrust.HoldingAltitude = true; }
+            var force = MD500FlightMath.Calculate(input.moveForward, input.moveStrafe, input.jump, input.down,
+                Vector3.Dot(velocity, forward), Vector3.Dot(velocity, right), velocity.y,
+                rb.angularVelocity.y, __instance.position.y, thrust.HoldAltitude, thrust.HoldingAltitude, power,
+                forwardMax * vehicle.EffectVelocityMaxPer, backwardMax * vehicle.EffectVelocityMaxPer,
+                vehicle.EffectMotorTorquePer,profile);
+            float torqueScale=MD500FlightMath.Clamp(vehicle.EffectMotorTorquePer,.25f,3f);
+            float accelerationLimit=profile.Acceleration*torqueScale*power;
+            thrust.Forward=MD500FlightMath.SmoothAxis(thrust.Forward,force.Forward,dt,accelerationLimit,profile.Jerk*torqueScale);
+            thrust.Right=MD500FlightMath.SmoothAxis(thrust.Right,force.Right,dt,accelerationLimit,profile.LateralJerk*torqueScale);
+            thrust.Yaw=MD500FlightMath.SmoothAxis(thrust.Yaw,force.Yaw,dt,2f*power,profile.YawJerk);
+            float liftPower=MD500FlightMath.LiftPower(power);
+            thrust.VerticalCorrection=MD500FlightMath.SmoothAxis(thrust.VerticalCorrection,force.Up-9.81f*liftPower,
+                dt,6f*liftPower,profile.VerticalJerk);
             thrust.LastTime = now;
-            force.Forward = thrust.Forward;
+            force.Forward=thrust.Forward; force.Right=thrust.Right; force.Yaw=thrust.Yaw;
+            force.Up=9.81f*liftPower+thrust.VerticalCorrection;
             // Native PhysicsFixedUpdate already adds gravity (-9.81). Replace
             // only the supported helicopter XML forces; collisions/drag/speed caps remain.
             rb.AddForce(forward * force.Forward + right * force.Right + Vector3.up * force.Up,
                 ForceMode.Acceleration);
-            var attitude = MD500FlightMath.TargetAttitude(Vector3.Dot(velocity, forward),
-                rb.angularVelocity.y, force.Forward, __instance.GetWheelsOnGround() == 0, vehicle.IsTurbo);
-            float pitch = attitude.Pitch * (float)(Math.PI / 180.0);
-            float bank = attitude.Bank * (float)(Math.PI / 180.0);
+            float forwardVelocity=Vector3.Dot(velocity,forward);
+            float netAcceleration=force.Forward-MD500FlightMath.DragAcceleration(forwardVelocity,vehicle.AirDragVelScale,dt);
+            var attitude = MD500FlightMath.TargetAttitude(forwardVelocity,input.moveForward,force.Forward,
+                netAcceleration,force.Right,velocity.y,thrust.Airborne,vehicle.IsTurbo,profile);
+            float pitch = attitude.Pitch * thrust.AirBlend * (float)(Math.PI / 180.0);
+            float bank = attitude.Bank * thrust.AirBlend * (float)(Math.PI / 180.0);
             Vector3 targetUp = (Vector3.up + forward * (float)Math.Tan(pitch) +
                 right * (float)Math.Tan(bank)).normalized;
             // Damped torque changes the real body gradually, so native networking,
             // camera and weapon mounts all follow the same attitude.
-            Vector3 levelTorque = Vector3.Cross(bodyUp, targetUp) * 6f -
-                Vector3.ProjectOnPlane(rb.angularVelocity, Vector3.up) * 3f;
-            rb.AddTorque(Vector3.ClampMagnitude(levelTorque, 3f) * power + Vector3.up * force.Yaw,
+            // On contact, damp remaining rocking without pulling a slope-parked
+            // airframe back to world-horizontal. Both profiles are independent of aim.
+            if (!offGround) targetUp=bodyUp;
+            // Pitch/roll stabilization must not inject a second yaw command.
+            Vector3 levelTorque = Vector3.ProjectOnPlane(Vector3.Cross(bodyUp, targetUp),Vector3.up) * profile.AttitudeGain -
+                Vector3.ProjectOnPlane(rb.angularVelocity, Vector3.up) * profile.AttitudeDamping;
+            rb.AddTorque(Vector3.ClampMagnitude(levelTorque, 3f) * (power*thrust.AirBlend) + Vector3.up * force.Yaw,
                 ForceMode.Acceleration);
             return false;
         }

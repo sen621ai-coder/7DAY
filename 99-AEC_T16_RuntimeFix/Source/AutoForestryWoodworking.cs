@@ -32,7 +32,7 @@ namespace AECT16RuntimeFix
         }
         static GameObject MeshObject(Transform p,string name,List<Vector3> v,List<Vector2> uv,List<int> faces,Material m)
         {
-            var mesh=new Mesh{name="Woodwork_"+name};mesh.SetVertices(v);mesh.SetUVs(0,uv);mesh.SetTriangles(faces,0);
+            var mesh=ForestryResources.Own(new Mesh{name="Woodwork_"+name});mesh.SetVertices(v);mesh.SetUVs(0,uv);mesh.SetTriangles(faces,0);
             mesh.RecalculateNormals();mesh.RecalculateBounds();mesh.RecalculateTangents();
             var g=new GameObject(name);g.transform.SetParent(p,false);
             g.AddComponent<MeshFilter>().sharedMesh=mesh;g.AddComponent<MeshRenderer>().sharedMaterial=m;return g;
@@ -109,7 +109,7 @@ namespace AECT16RuntimeFix
             }
             foreach(var pair in batches)
             {
-                var mesh=new Mesh{name=name,indexFormat=IndexFormat.UInt32};mesh.CombineMeshes(pair.Value.ToArray(),true,true);
+                var mesh=ForestryResources.Own(new Mesh{name=name,indexFormat=IndexFormat.UInt32});mesh.CombineMeshes(pair.Value.ToArray(),true,true);
                 var g=new GameObject(name);g.transform.SetParent(group,false);g.AddComponent<MeshFilter>().sharedMesh=mesh;
                 g.AddComponent<MeshRenderer>().sharedMaterial=pair.Key;
             }
@@ -128,8 +128,8 @@ namespace AECT16RuntimeFix
             corner.transform.localPosition=new Vector3(1.25f,0,-2.13f);
             var coarse=new GameObject("WoodworkFrame");coarse.transform.SetParent(corner.transform,false);var p=coarse.transform;
             var details=new GameObject("WoodworkDetails");details.transform.SetParent(corner.transform,false);var d=details.transform;
-            var fresh=new Material(wood){name="ForestryPlanedWood",color=new Color(1f,.87f,.64f)};
-            var pencil=new Material(dark){name="ForestryPencilMark",color=new Color(.10f,.075f,.05f)};
+            var fresh=ForestryResources.Own(new Material(wood){name="ForestryPlanedWood",color=new Color(1f,.87f,.64f)});
+            var pencil=ForestryResources.Own(new Material(dark){name="ForestryPencilMark",color=new Color(.10f,.075f,.05f)});
             BeveledTop(p,wood);
             foreach(float x in new[]{-.56f,.56f})foreach(float z in new[]{-.24f,.24f})
                 Box(p,"WoodworkLeg",new Vector3(x,.46f,z),new Vector3(.09f,.74f,.09f),wood,true);

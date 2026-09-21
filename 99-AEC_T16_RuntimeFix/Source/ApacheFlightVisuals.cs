@@ -25,7 +25,6 @@ namespace AECT16RuntimeFix
         public static void AfterInit(EntityVehicle __instance)
         {
             if (!ApacheWeapons.IsApache(__instance)) return;
-            ApacheAirframeAppearance.Apply(__instance);
             foreach (var particles in __instance.GetComponentsInChildren<ParticleSystem>(true))
             {
                 bool weapon = false;

@@ -20,11 +20,13 @@ namespace AECT16RuntimeFix
             try
             {
                 var harmony = new Harmony(HarmonyId);
+                HighDamageNetworking.Install();
                 MD500FlightControls.Install(harmony);
                 ApacheFlightVisuals.Install(harmony);
                 ApacheWeapons.Install(harmony);
                 CollectorBatchStorage.Install(harmony);
-                AutoForestryModel.Install(harmony, modInstance.Path);
+                try { AutoForestryModel.Install(harmony, modInstance.Path); }
+                catch(Exception ex) { SafeLog("[AutoForestry] Visual provider unavailable; other runtime systems continue: "+ex); }
                 ApiaryProduction.Install(harmony);
                 CompactSteelStorage.Install(harmony);
                 PatchModelTintSafety(harmony);

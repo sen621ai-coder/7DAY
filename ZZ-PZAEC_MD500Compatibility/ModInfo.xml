@@ -4,5 +4,5 @@
   <DisplayName value="PZAEC MD-500 直升机适配与汉化" />
   <Description value="MD-500中文名称与说明、100万耐久及速度适配。需要另行安装原MD-500模组，飞控由当前AEC运行时提供。" />
   <Author value="PZAEC" />
-  <Version value="1.0.3" />
+  <Version value="1.0.4" />
 </xml>

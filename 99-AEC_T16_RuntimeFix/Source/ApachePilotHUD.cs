@@ -43,9 +43,10 @@ namespace AECT16RuntimeFix
             Label(346,582,600,"["+ApacheFlightAssist.Key(vehicle,"pzApacheZoomKey",KeyCode.Mouse1)+"] "+L("Aim")+"   ["+ApacheFlightAssist.Key(vehicle,"pzApacheModeKey",KeyCode.R)+"] "+L("Switch")+"   ["+ApacheWeapons.FireKey(vehicle,0)+"] "+L("Fire"),Color.white);
             Label(346,610,600,L(mode?"GuidedHint":"RocketHint"),color);
             if(!aiming)return;
-            Box(614,359,16,2,color);Box(650,359,16,2,color);Box(639,334,2,16,color);Box(639,370,2,16,color);
-            Label(685,348,400,status,color);
-            if(mode){Box(550,407,180,6,new Color(.2f,.25f,.25f));Box(550,407,180*(fresh?progress:0),6,color);}
+            var cursor=ApacheAimCursor.CanvasPoint();float cx=cursor.x,cy=cursor.y;
+            Box(cx-26,cy-1,16,2,color);Box(cx+10,cy-1,16,2,color);Box(cx-1,cy-26,2,16,color);Box(cx-1,cy+10,2,16,color);
+            Label(Mathf.Clamp(cx+34,20,900),Mathf.Clamp(cy-13,20,460),360,status,color);
+            if(mode){float bx=Mathf.Clamp(cx-90,20,1080),by=Mathf.Clamp(cy+34,45,476);Box(bx,by,180,6,new Color(.2f,.25f,.25f));Box(bx,by,180*(fresh?progress:0),6,color);}
             var camera=player.playerCamera;
             if(camera!=null&&(displayReason==0||displayReason==5||displayReason==8)){
                 // Correct view/mount parallax and inherited drift are applied to the

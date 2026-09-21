@@ -59,7 +59,7 @@
     </item>
     <item name="vehicleApacheHelicopterPlaceable">
       <property name="Extends" value="vehicleGyrocopterPlaceable"/>
-      <property name="Tags" value="vehicle,vengine,vfuel,canHaveCosmetic"/>
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic"/>
       <property name="CustomIcon" value="vehicleApacheHelicopterPlaceable"/>
       <property name="DescriptionKey" value="vehicleApacheHelicopterPlaceableDesc"/>
       <property name="UnlockedBy" value="craftingVehicles"/>

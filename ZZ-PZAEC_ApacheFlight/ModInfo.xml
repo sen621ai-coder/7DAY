@@ -4,5 +4,5 @@
   <DisplayName value="PZAEC AH-64 阿帕奇武装直升机"/>
   <Description value="适配V3.2的独立双座武装直升机，包含垂直起降、主驾火箭、副驾机炮与中文界面。需要当前AEC运行时及载具制作模组。"/>
   <Author value="Zilox (original assets); local PZAEC adaptation"/>
-  <Version value="0.6.1"/>
+  <Version value="0.7.4"/>
 </xml>

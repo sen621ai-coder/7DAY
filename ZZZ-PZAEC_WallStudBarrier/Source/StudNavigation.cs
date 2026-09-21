@@ -31,8 +31,12 @@ namespace PZAEC.WallStudBarrier
         private readonly Dictionary<GraphNode,bool> allowed=new Dictionary<GraphNode,bool>();
         public StudTraversal(ITraversalProvider original, ChunkCache blocks, Vector3 origin, float radius, float height)
         {this.original=original;this.blocks=blocks;this.origin=origin;this.radius=radius;this.height=height;}
-        private bool Allowed(GraphNode node)
+        private bool Allowed(Path path,GraphNode node)
         {
+            // An entity already touching a stud must be able to leave its start
+            // node. Only the actual native start node is exempt, not its neighbours.
+            var ab=path as ABPath;
+            if(ab!=null && ReferenceEquals(ab.startNode,node)) return true;
             bool value;
             if(allowed.TryGetValue(node,out value)) return value;
             Vector3 feet=(Vector3)node.position+origin;
@@ -40,9 +44,9 @@ namespace PZAEC.WallStudBarrier
             allowed[node]=value;return value;
         }
         public bool CanTraverse(Path path,GraphNode node,int direction)
-        {return original.CanTraverse(path,node,direction)&&Allowed(node);}
+        {return original.CanTraverse(path,node,direction)&&Allowed(path,node);}
         public bool CanTraverseConnection(Path path,Connection connection)
-        {return original.CanTraverseConnection(path,connection)&&Allowed(connection.node);}
+        {return original.CanTraverseConnection(path,connection)&&Allowed(path,connection.node);}
         public uint GetTraversalCost(Path path,GraphNode node) {return original.GetTraversalCost(path,node);}
     }
     public static class Navigation

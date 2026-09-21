@@ -57,11 +57,12 @@ namespace PZAEC.WallStudBarrier
             return hit != null && hit.bHitValid && Protected(enemy.world, enemy, hit.hit.blockPos);
         }
         public static void CanBreakPostfix(EntityAlive ___theEntity, ref bool __result)
-        { if (__result && BlockedHit(___theEntity)) __result = false; }
+        { if (__result && (Recovery.CoolingDown(___theEntity) || BlockedHit(___theEntity))) __result = false; }
         public static bool BreakPrefix(EntityAlive ___theEntity) { return !BlockedHit(___theEntity); }
         public static bool AttackPrefix(EntityAlive __instance, ref bool __result)
         {
-            if (!BlockedHit(__instance)) return true;
+            // A stale obstacle hit must not veto normal entity combat.
+            if (!__instance.IsBreakingBlocks || !BlockedHit(__instance)) return true;
             __result = false; return false;
         }
         public static void FindDestroyPostfix(EntityAlive ___entity, Vector3 __0, ref bool __result)
@@ -84,6 +85,7 @@ namespace PZAEC.WallStudBarrier
         {
             var harmony = new Harmony("pzaec.wallstudbarrier");
             Navigation.Install(harmony);
+            Recovery.Install(harmony);
             harmony.Patch(AccessTools.Method(typeof(EAIBreakBlock),"CanExecute"),postfix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.CanBreakPostfix)));
             harmony.Patch(AccessTools.Method(typeof(EAIBreakBlock),"AttackBlock"),prefix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.BreakPrefix)));
             harmony.Patch(AccessTools.Method(typeof(EntityAlive),"Attack",new[]{typeof(bool)}),prefix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.AttackPrefix)));

@@ -33,6 +33,7 @@
       <property class="engine">
         <property name="class" value="Engine" />
         <property name="slot_type" value="engine" />
+        <property name="mod" value="speed" />
         <property name="particleOn" value="p_on" />
         <property name="fuelKmPerL" value="0.06" />
         <property name="foodDrain" value=".002,.00811" />
@@ -82,6 +83,7 @@
       <property class="fuelTank">
         <property name="class" value="FuelTank" />
         <property name="capacity" value="500" />
+        <property name="mod" value="fueltank" />
       </property>
       <property class="motor0">
         <property name="engine" value="engine" />
@@ -148,10 +150,12 @@
       <property class="headlight">
         <property name="class" value="Headlight" />
         <property name="bright" value=".9" />
-        <property name="transform" value="Origin/headlight" />
+        <property name="transform" value="Origin/headlight/lightSource" />
+        <property name="mod" value="light" />
       </property>
       <property class="storage">
         <property name="class" value="Storage" />
+        <property name="mod" value="storage" />
       </property>
     </vehicle>
   </append>

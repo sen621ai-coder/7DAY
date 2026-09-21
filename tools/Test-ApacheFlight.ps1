@@ -50,6 +50,14 @@ if($speeds[0] -le 17.28 -or $speeds[2] -le 28.8 -or $speeds[2] -gt 36 -or $speed
 if($v.SelectNodes("property[starts-with(@class,'seat')]").Count -ne 2){throw 'Apache must retain two seats'}
 if($v.SelectNodes("property[starts-with(@class,'force')]").Count -ne 6){throw 'Flight fallback structure changed'}
 if(!$v.SelectSingleNode("property[@class='motor0']/property[@name='transform' and @value='Origin/TopPropellerJoint']")){throw 'Original rotor path lost'}
+$apacheItem=$docs.items.SelectSingleNode("//item[@name='vehicleApacheHelicopterPlaceable']")
+$apacheTags=@($apacheItem.SelectSingleNode("property[@name='Tags']").value.Split(','))
+foreach($tag in @('vehicle','varmor','vengine','vfuel','vlight','vstorage','canHaveCosmetic')){if($tag -notin $apacheTags){throw "Apache vehicle mod tag missing: $tag"}}
+foreach($tag in @('vseat','vplow')){if($tag -in $apacheTags){throw "Unsupported Apache vehicle mod tag: $tag"}}
+if([int]$apacheItem.SelectSingleNode("effect_group/passive_effect[@name='ModSlots']").value -ne 4){throw 'Apache must retain four vehicle-mod slots'}
+$headlight=$v.SelectSingleNode("property[@class='headlight']")
+if(!$headlight -or !$headlight.SelectSingleNode("property[@name='class' and @value='Headlight']") -or !$headlight.SelectSingleNode("property[@name='transform' and @value='Origin/headlight/lightSource']") -or !$headlight.SelectSingleNode("property[@name='mod' and @value='light']")){throw 'Apache headlight binding/mod integration invalid'}
+foreach($part in @(@('engine','speed'),@('fuelTank','fueltank'),@('storage','storage'))){if(!$v.SelectSingleNode("property[@class='$($part[0])']/property[@name='mod' and @value='$($part[1])']")){throw "Apache vehicle part mod binding invalid: $($part[0])"}}
 if($docs.entityclasses.SelectSingleNode("//property[@name='Class']").value -ne 'EntityVGyroCopter'){throw 'Wrong vehicle physics class'}
 if($docs.entityclasses.SelectSingleNode("//property[@name='LootList']").value -ne 'vehicleGyrocopter'){throw 'Storage compatibility changed'}
 foreach($prop in $docs.items.SelectNodes("//item[starts-with(@name,'vehicleApache')]/property[@name='CustomIcon']")){if(!(Test-Path "$mod/UIAtlases/ItemIconAtlas/$($prop.value).png")){throw "Missing icon $($prop.value)"}}
@@ -62,4 +70,4 @@ if((Get-Item $bundle).Length -ne 14971698){throw 'Unexpected model bundle size'}
 if((Test-Path $source) -and (Get-FileHash $bundle).Hash -ne (Get-FileHash $source).Hash){throw 'Model differs from original'}
 $localization=Import-Csv "$mod/Config/Localization.csv"
 foreach($r in $recipes){if(!($localization | Where-Object Key -eq $r.name)){throw "Missing recipe localization $($r.name)"}}
-Write-Output 'PASS: Apache XML targets, recipe ingredients/workstation, level-100 gating, speed tier, rotor/seat layout, weapon isolation, localization and original model hash.'
+Write-Output 'PASS: Apache XML targets, recipes, progression, speed/seat layout, vehicle-mod tags/parts, headlight binding, weapon isolation, localization and original model hash.'

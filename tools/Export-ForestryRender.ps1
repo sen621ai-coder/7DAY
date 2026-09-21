@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot
-$files=@('AutoForestryModel.cs','AutoForestryMachinery.cs','AutoForestryWoodworking.cs','AutoForestryRailStock.cs','ForestryMotion.cs')
+$files=@('AutoForestryModel.cs','AutoForestryMachinery.cs','AutoForestryWoodworking.cs','AutoForestryRailStock.cs','ForestryMotion.cs','ForestryResources.cs','ForestryPreflight.cs')
 $code=Get-Content (Join-Path $PSScriptRoot 'Forestry/RenderShim.cs') -Raw
 # Include the actual light-fixture geometry, but exclude Unity's particle/LOD systems.
 $presentation=Get-Content (Join-Path $root '99-AEC_T16_RuntimeFix/Source/AutoForestryPresentation.cs') -Raw

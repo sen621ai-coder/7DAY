@@ -1,12 +1,11 @@
 <configs>
   <append xpath="/blocks">
     <block name="pzaecBasementPanelLight">
-      <property name="Extends" value="ceilingLight07_player"/>
+      <property name="Extends" value="ceilingLight07_player" param1="UnlockedBy"/>
       <property name="DescriptionKey" value="pzaecBasementPanelLightDesc"/>
       <property name="CustomIcon" value="lightCeiling07"/>
       <property name="CustomIconTint" value="E1E5EA"/>
       <property name="TintColor" value="FFFFFF"/>
-      <property name="UnlockedBy" value=""/>
       <property name="RequiredPower" value="15"/>
       <property name="MaxDamage" value="400"/>
       <property name="Light" value="0.3"/>

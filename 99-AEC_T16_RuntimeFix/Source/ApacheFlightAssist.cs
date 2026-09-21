@@ -29,9 +29,10 @@ namespace AECT16RuntimeFix
             if(zoomCamera!=null&&Mathf.Abs(zoomCamera.fieldOfView-lastFov)<.05f)zoomCamera.fieldOfView=baseFov;
             zoomCamera=null;
         }
-        public static void Clear(){RestoreZoom();predictionVehicle=markVehicle=-1;markUntil=nextPrediction=0;}
+        public static void Clear(){RestoreZoom();ApacheFiringFeedback.Clear();ApacheAimVisibility.Clear();ApacheNightVision.Clear();predictionVehicle=markVehicle=-1;markUntil=nextPrediction=0;}
         public static void BeforeCameraUpdated()
         {
+            ApacheFiringFeedback.RestoreCamera();
             // Native damping must see its own FOV, not yesterday's magnified FOV.
             if(zoomCamera!=null&&Mathf.Abs(zoomCamera.fieldOfView-lastFov)<.05f)zoomCamera.fieldOfView=baseFov;
         }
@@ -43,7 +44,11 @@ namespace AECT16RuntimeFix
             bool usable=player!=null&&!player.IsDead()&&ApacheWeapons.IsApache(vehicle)&&ApacheWeapons.Seat(vehicle,player.entityId)>=0&&
                 GameManager.Instance.GameIsFocused&&!GameManager.Instance.IsPaused()&&
                 !(ui!=null&&(LocalPlayerUI.AnyModalWindowOpen()||ui.windowManager.IsCursorWindowOpen()||ui.windowManager.IsInputActive()));
-            if(!usable||!Input.GetKey(Key(vehicle,"pzApacheZoomKey",KeyCode.Mouse1))||player.playerCamera==null){RestoreZoom();return;}
+            bool aiming=usable&&Input.GetKey(Key(vehicle,"pzApacheZoomKey",KeyCode.Mouse1))&&player.playerCamera!=null;
+            ApacheAimVisibility.Update(vehicle,aiming);
+            ApacheNightVision.Update(aiming&&SkyManager.IsDark());
+            ApacheFiringFeedback.UpdateCamera(player,usable,aiming);
+            if(!aiming){RestoreZoom();return;}
             var camera=player.playerCamera;
             if(zoomCamera!=camera){RestoreZoom();zoomCamera=camera;baseFov=camera.fieldOfView;}
             else baseFov=camera.fieldOfView;

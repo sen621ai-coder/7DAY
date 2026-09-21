@@ -22,7 +22,7 @@ namespace PZAEC.PortableShower
             {
                 if (holder.Effect == null)
                 {
-                    var go = new GameObject("PZAEC wrist shower mist");
+                    var go = new GameObject("PZAEC wrist shower audio");
                     go.transform.SetParent(player.transform, false);
                     go.transform.localPosition = new Vector3(.28f, 1.1f, .35f);
                     go.transform.localRotation = Quaternion.Euler(90, 0, 0);
@@ -42,32 +42,13 @@ namespace PZAEC.PortableShower
     public sealed class Spray : MonoBehaviour
     {
         private EntityPlayerLocal player;
-        private ParticleSystem mist;
         private AudioSource flow;
         private AudioClip clip;
-        private Material material;
         private float expires;
         public void Init(EntityPlayerLocal owner)
         {
             player = owner;
-            mist = gameObject.AddComponent<ParticleSystem>();
-            mist.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            var main = mist.main;
-            main.playOnAwake = false; main.loop = true; main.startLifetime = .35f;
-            main.startSpeed = .65f; main.startSize = .025f; main.maxParticles = 24;
-            main.startColor = new Color(.7f, .9f, 1, .18f);
-            main.simulationSpace = ParticleSystemSimulationSpace.World;
-            main.gravityModifier = .12f;
-            var emission = mist.emission; emission.rateOverTime = 18;
-            var shape = mist.shape; shape.shapeType = ParticleSystemShapeType.Cone;
-            shape.angle = 15; shape.radius = .025f;
-            var shader = Shader.Find("Sprites/Default") ?? Shader.Find("Unlit/Transparent");
-            if (shader == null) throw new InvalidOperationException("transparent particle shader missing");
-            material = new Material(shader);
-            var renderer = mist.GetComponent<ParticleSystemRenderer>();
-            renderer.material = material;
-            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            renderer.receiveShadows = false;
+            // Visual water spray intentionally removed; keep the existing quiet audio.
             // Filtered low-volume noise gives a soft spray without shipping an audio asset.
             var samples = new float[22050]; var random = new System.Random(7301); float previous = 0;
             for (int i = 0; i < samples.Length; i++)
@@ -83,13 +64,11 @@ namespace PZAEC.PortableShower
         public void Refresh()
         {
             expires = Time.time + 1.5f;
-            if (!mist.isPlaying) mist.Play();
             if (!flow.isPlaying) flow.Play();
         }
         public void Stop()
         {
             expires = 0;
-            if (mist != null) mist.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (flow != null) flow.Stop();
         }
         private void Update()
@@ -101,7 +80,6 @@ namespace PZAEC.PortableShower
         private void OnDestroy()
         {
             if (clip != null) UnityEngine.Object.Destroy(clip);
-            if (material != null) UnityEngine.Object.Destroy(material);
         }
     }
 }

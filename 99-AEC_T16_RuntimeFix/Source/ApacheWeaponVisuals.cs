@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AECT16RuntimeFix
 {
-    // Cosmetic-only objects. No colliders, damage callbacks or ammo mutation.
+    // Cosmetic objects plus confirmed-shot feedback routing. No damage or ammo mutation.
     public static class ApacheWeaponVisuals
     {
         private sealed class ProjectileVisual {public GameObject Object;public Vector3 Position,Velocity;public float Life;}
@@ -21,7 +21,9 @@ namespace AECT16RuntimeFix
             if(gun ? gunMaterial!=null : lightMaterial!=null)return gun ? gunMaterial : lightMaterial;
             var shader=Shader.Find(gun ? "Standard" : "Sprites/Default") ?? Shader.Find("Unlit/Color");
             if(shader==null)return null;
-            var material=new Material(shader){color=gun ? new Color(.25f,.29f,.21f) : new Color(1,.55f,.1f)};
+            var material=new Material(shader){color=gun ? new Color(.27f,.29f,.29f) : new Color(1,.55f,.1f)};
+            if(gun&&material.HasProperty("_Metallic"))material.SetFloat("_Metallic",.15f);
+            if(gun&&material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",.24f);
             if(gun)gunMaterial=material;else lightMaterial=material;
             return material;
         }
@@ -38,11 +40,10 @@ namespace AECT16RuntimeFix
             if(turrets.TryGetValue(vehicle.entityId,out var existing)&&existing.Vehicle==vehicle&&existing.Pivot!=null&&existing.Mount!=null)return existing;
             if(existing!=null){ApacheGunnerPresentation.DestroyGun(existing.Pivot);ApacheGunnerPresentation.DestroyMount(existing.Mount);}
             var state=ApacheWeapons.GetState(vehicle);
-            ApacheAirframeAppearance.Apply(vehicle);
             var pivot=new GameObject("PZAEC_Apache_Cannon");pivot.hideFlags=HideFlags.DontSave;
-            if(steelMaterial==null){steelMaterial=new Material(Material(true)){color=new Color(.20f,.23f,.21f)};if(steelMaterial.HasProperty("_Metallic"))steelMaterial.SetFloat("_Metallic",.55f);}
+            if(steelMaterial==null){steelMaterial=new Material(Material(true)){color=new Color(.20f,.22f,.23f)};if(steelMaterial.HasProperty("_Metallic"))steelMaterial.SetFloat("_Metallic",.55f);}
             if(darkMaterial==null)darkMaterial=new Material(Material(true)){color=new Color(.065f,.075f,.08f)};
-            if(fairingMaterial==null)fairingMaterial=new Material(Material(true)){color=new Color(.38f,.42f,.29f)};
+            if(fairingMaterial==null)fairingMaterial=new Material(Material(true)){color=new Color(.42f,.44f,.43f)};
             var mount=new GameObject("PZAEC_Apache_CannonMount");mount.hideFlags=HideFlags.DontSave;
             // Bind the complete assembly to the actual model transform. The
             // mount follows vehicle animation/physics between Update calls;
@@ -54,13 +55,16 @@ namespace AECT16RuntimeFix
             pivot.transform.SetParent(mount.transform,false);
             pivot.transform.localPosition=Vector3.zero;
             pivot.transform.rotation=ApacheWeapons.BodyRotation(vehicle);
-            ApacheGunnerPresentation.BellyFairing(mount.transform,fairingMaterial);
-            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"AzimuthBearing",new Vector3(0,.26f,-.10f),new Vector3(.34f,.05f,.34f),Vector3.zero,steelMaterial);
-            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"BearingCore",new Vector3(0,.13f,-.10f),new Vector3(.22f,.09f,.22f),Vector3.zero,darkMaterial);
+            // Compact mechanical pylon: no broad procedural fairing, which was
+            // visibly stretched by this prefab's non-uniform model transform.
+            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cube,"HullMountPad",new Vector3(0,.57f,-.10f),new Vector3(.38f,.055f,.31f),Vector3.zero,fairingMaterial);
+            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"SwivelNeck",new Vector3(0,.43f,-.10f),new Vector3(.15f,.13f,.15f),Vector3.zero,steelMaterial);
+            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"AzimuthBearing",new Vector3(0,.26f,-.10f),new Vector3(.27f,.05f,.27f),Vector3.zero,steelMaterial);
+            ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"BearingCore",new Vector3(0,.13f,-.10f),new Vector3(.18f,.08f,.18f),Vector3.zero,darkMaterial);
             for(int side=-1;side<=1;side+=2)
             {
-                ApacheGunnerPresentation.Rod(mount.transform,"FairingBrace",new Vector3(side*.43f,.82f,-.16f),new Vector3(side*.23f,.27f,-.10f),.035f,steelMaterial);
-                ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"BraceBolt",new Vector3(side*.23f,.27f,-.10f),new Vector3(.065f,.025f,.065f),new Vector3(0,0,90),darkMaterial);
+                ApacheGunnerPresentation.Rod(mount.transform,"MountBrace",new Vector3(side*.24f,.54f,-.10f),new Vector3(side*.16f,.28f,-.10f),.025f,steelMaterial);
+                ApacheGunnerPresentation.Part(mount.transform,PrimitiveType.Cylinder,"BraceBolt",new Vector3(side*.16f,.28f,-.10f),new Vector3(.045f,.018f,.045f),new Vector3(0,0,90),darkMaterial);
             }
             var barrel=ApacheGunnerPresentation.BuildGun(pivot.transform,Material(true),steelMaterial,darkMaterial);
             var turret=new Turret{Vehicle=vehicle,Pivot=pivot,Mount=mount,Barrel=barrel,Flash=ApacheMuzzleFlash.Create(barrel),Direction=ApacheWeapons.BodyRotation(vehicle)*Vector3.forward};
@@ -82,8 +86,10 @@ namespace AECT16RuntimeFix
         }
         public static void Receive(World world,int vehicleId,int id,byte kind,Vector3 a,Vector3 b,float heat)
         {
-            if(world?.GetPrimaryPlayer()==null)return;
+            if(world==null)return;
             var vehicle=world.GetEntity(vehicleId) as EntityVehicle;
+            ApacheFiringFeedback.Receive(vehicle,id,kind,a,b,heat);
+            if(world.GetPrimaryPlayer()==null)return;
             if(kind==ApacheWeapons.PilotStatusEvent){ApachePilotHUD.Receive(world,vehicleId,id,a,b,heat);return;}
             if(kind==ApacheWeapons.GuidedMoveEvent){
                 if(projectiles.TryGetValue(id,out var guided)){guided.Position=a;guided.Velocity=b;}
