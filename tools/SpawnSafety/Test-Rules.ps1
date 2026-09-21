@@ -3,6 +3,8 @@ $root=Split-Path (Split-Path $PSScriptRoot)
 $rules=Get-Content "$root/ZZZ-PZAEC_SpawnSafety/Source/SiteRules.cs" -Raw
 $sites=Get-Content "$root/ZZZ-PZAEC_SpawnSafety/Source/Sites.cs" -Raw
 $runtime='namespace PZAEC.SpawnSafety {'+$sites.Substring($sites.IndexOf('    public sealed class Request'))
+$recovery=Get-Content "$root/ZZZ-PZAEC_SpawnSafety/Source/Recovery.cs" -Raw
+$recovery=$recovery.Substring($recovery.IndexOf('namespace PZAEC'))
 $fixtures=@'
 namespace UnityEngine {
  public struct Vector3 {
@@ -19,7 +21,14 @@ namespace UnityEngine {
  public static class Mathf {public static int FloorToInt(float f)=>(int)System.Math.Floor(f);}
  public static class Object {public static int Destroyed;public static void Destroy(object o){Destroyed++;}}
 }
-public class World {public Fixture Site=new Fixture();public bool Remote,Native=true;public bool IsRemote()=>Remote;public bool IsChunkAreaLoaded(UnityEngine.Vector3 p)=>Site.Loaded(p);public float GetTerrainHeight(int x,int z)=>Site.Terrain(x,z);public bool CanMobsSpawnAtPos(UnityEngine.Vector3 p)=>Native;}
+public struct Vector3i {public Vector3i(UnityEngine.Vector3 v){}}
+public class World {
+ public Fixture Site=new Fixture();public bool Remote,Native=true,Claims=true;public int NativeCalls,PlayerDistance;public bool Beds;
+ public System.Func<int,int,UnityEngine.Vector3?> Select;
+ public bool IsRemote()=>Remote;public bool IsChunkAreaLoaded(UnityEngine.Vector3 p)=>Site.Loaded(p);public float GetTerrainHeight(int x,int z)=>Site.Terrain(x,z);public bool CanMobsSpawnAtPos(UnityEngine.Vector3 p)=>Native;
+ public bool CanPlaceBlockAt(Vector3i p,object owner,bool b)=>Claims;
+ public bool GetMobRandomSpawnPosWithWater(UnityEngine.Vector3 center,int lo,int hi,int players,bool beds,out UnityEngine.Vector3 p){NativeCalls++;PlayerDistance=players;Beds=beds;var chosen=Select==null?(UnityEngine.Vector3?)null:Select(lo,hi);p=chosen.GetValueOrDefault();return chosen.HasValue;}
+}
 public class GameManager {public static GameManager Instance=new GameManager();public World World=new World();}
 public class Prefab {public bool Active=true;public void SetActive(bool b){Active=b;}}
 public class Entity {public int entityClass=1;public UnityEngine.Vector3 position;public float physicsColliderRadius=.3f,physicsHeight=1.8f;public UnityEngine.Bounds boundingBox;public Prefab gameObject=new Prefab();public void SetPosition(UnityEngine.Vector3 p,bool force){position=p;}}
@@ -65,7 +74,7 @@ public static class SpawnRulesTests {
   Expect(new Fixture{Ground=40},P(y:41),false,true,"underground profile has no roof raising");
   var roof=new Fixture();roof.Cover.Add("0,0");Expect(roof,P(),true,false,"covered-ground");Expect(roof,P(),false,true,"underground ceiling allowed with clearance");
   roof=new Fixture();roof.Cover.Add("1,0");Expect(roof,P(),true,true,"single neighbouring column is not counted twice");
-  roof.Cover.Add("-1,0");roof.Cover.Add("0,1");Expect(roof,P(),true,false,"covered-ground");
+  roof.Cover.Add("-1,0");roof.Cover.Add("0,1");Expect(roof,P(),true,true,"open-air gap beside buildings remains legal");
   var wall=new Fixture();wall.Obstacles.Add(new UnityEngine.Bounds(P(y:31),new UnityEngine.Vector3(1,2,1)));Expect(wall,P(),true,false,"body-overlap");
   var low=new Fixture();low.Obstacles.Add(new UnityEngine.Bounds(P(y:33),new UnityEngine.Vector3(4,.2f,4)));Expect(low,P(),false,true,"ordinary fits");Expect(low,P(),false,false,"body-overlap",height:4);
   var narrow=new Fixture();narrow.Obstacles.Add(new UnityEngine.Bounds(P(x:1,y:31),new UnityEngine.Vector3(.2f,2,4)));Expect(narrow,P(),false,true,"small fits");Expect(narrow,P(),false,false,"body-overlap",radius:1);
@@ -94,11 +103,30 @@ public static class SpawnRulesTests {
   world.Site.TerrainY=40;Check(!PZAEC.SpawnSafety.Safety.IsSurface(world,P()),"known loaded underground anchor retained");
   world.Site=new Fixture();enemy=Enemy();enemy.physicsHeight=0;enemy.physicsColliderRadius=0;EntityClass.list[1].SizeScale=2;Check(PZAEC.SpawnSafety.Safety.Accept(enemy,new PZAEC.SpawnSafety.Request{Surface=true}),"uninitialized physics fallback");Check(world.Site.LastBody.size.y>4.5f&&world.Site.LastBody.size.x>1.5f,"fallback uses conservative scaled body");
   EntityClass.list[1].SizeScale=1;enemy=Enemy();enemy.boundingBox=new UnityEngine.Bounds(P(),new UnityEngine.Vector3(3,5,3));Check(PZAEC.SpawnSafety.Safety.Accept(enemy,new PZAEC.SpawnSafety.Request{Surface=true}),"scaled capsule accepted");Check(world.Site.LastBody.size.y>4.9f&&world.Site.LastBody.size.x==3,"real scaled bounds retained");
+  // A large foundation covers every nearby original attempt. Preserve the same
+  // prefab and find ground in a later outward band instead of dropping the spawn.
+  world.Site=new Fixture();world.Site.Obstacles.Add(new UnityEngine.Bounds(P(y:31),new UnityEngine.Vector3(60,2,60)));world.NativeCalls=0;
+  world.Select=(lo,hi)=>hi<=30?(UnityEngine.Vector3?)null:P(hi-1);
+  request=new PZAEC.SpawnSafety.Request{Source="foundation",Surface=true,Remaining=1,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};
+  enemy=Enemy();destroyed=UnityEngine.Object.Destroyed;int accepted=PZAEC.SpawnSafety.Diagnostics.AcceptedCount;
+  Check(PZAEC.SpawnSafety.Safety.Accept(enemy,request),"foundation failure recovers to perimeter");Check(enemy.position.x>30&&enemy.position.x<=64,"fallback stays in bounded outer area");
+  Check(UnityEngine.Object.Destroyed==destroyed&&PZAEC.SpawnSafety.Diagnostics.AcceptedCount==accepted+1,"same prefab accepted once, no synthetic replacement or deletion");
+  Check(world.PlayerDistance==12&&world.Beds,"normal fallback preserves chosen proximity/bedroll policy");
+  world.Select=(lo,hi)=>null;world.NativeCalls=0;var exhausted=PZAEC.SpawnSafety.Recovery.Create(P());for(int i=0;i<100;i++)exhausted();Check(world.NativeCalls==16,"native search has hard cap even across callers");
+  world.Select=(lo,hi)=>P(hi);world.NativeCalls=0;request=new PZAEC.SpawnSafety.Request{Surface=true,Fallback=PZAEC.SpawnSafety.Recovery.Create(P(),30,80,30,false)};var chosenPosition=P();
+  Check(PZAEC.SpawnSafety.Recovery.BeforeFactory(request,ref chosenPosition)&&request.SelectorRecovered,"original selector failure recovered before factory");Check(world.PlayerDistance==30&&!world.Beds,"bloodmoon original player/bedroll policy retained");
+  request=new PZAEC.SpawnSafety.Request{Surface=false,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};int before=world.NativeCalls;Check(!PZAEC.SpawnSafety.Recovery.BeforeFactory(request,ref chosenPosition)&&world.NativeCalls==before,"underground event never relocated to surface");
+  world.Claims=false;var claimed=PZAEC.SpawnSafety.Recovery.Create(P(),8,64,12,true,true);Check(!claimed().HasValue,"event fallback respects land protection when safe_spawn is false");world.Claims=true;
+  world.Site.Available=false;world.NativeCalls=0;request=new PZAEC.SpawnSafety.Request{Surface=true,Remaining=1,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};Check(!PZAEC.SpawnSafety.Safety.Accept(Enemy(),request),"fallback never accepts unloaded site");Check(world.NativeCalls==16,"geometry failures bounded as well");
+  world.Site=new Fixture();world.Site.Obstacles.Add(new UnityEngine.Bounds(P(y:31),new UnityEngine.Vector3(60,2,60)));request=new PZAEC.SpawnSafety.Request{Surface=true,Remaining=1,Allowed=p=>p.x<30,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};Check(!PZAEC.SpawnSafety.Safety.Accept(Enemy(),request),"fallback cannot escape source trader restriction");
+  world.Site=new Fixture();world.Site.Obstacles.Add(new UnityEngine.Bounds(P(y:31),new UnityEngine.Vector3(160,2,160)));world.NativeCalls=0;
+  request=new PZAEC.SpawnSafety.Request{Surface=true,Remaining=1,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};accepted=PZAEC.SpawnSafety.Diagnostics.AcceptedCount;
+  Check(!PZAEC.SpawnSafety.Safety.Accept(Enemy(),request)&&PZAEC.SpawnSafety.Diagnostics.AcceptedCount==accepted,"no fake success or unsafe spawn when entire recovery area is blocked");Check(world.NativeCalls==16,"fully blocked base search terminates");
   return "PASS: "+checks+" spawn rules/runtime checks (synthetic world; actual Unity collider mesh needs live validation).";
  }
 }
 '@
-Add-Type -TypeDefinition ($rules+$runtime+$fixtures)
+Add-Type -TypeDefinition ($rules+$runtime+$recovery+$fixtures)
 [SpawnRulesTests]::Run()
 
 

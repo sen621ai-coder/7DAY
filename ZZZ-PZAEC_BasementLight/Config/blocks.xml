@@ -2,6 +2,8 @@
   <append xpath="/blocks">
     <block name="pzaecBasementPanelLight">
       <property name="Extends" value="ceilingLight07_player" param1="UnlockedBy"/>
+      <property name="Model" value="pzaecBasementPanelRuntime.prefab"/>
+      <property name="WireOffset" value="0,0.836,0"/>
       <property name="DescriptionKey" value="pzaecBasementPanelLightDesc"/>
       <property name="CustomIcon" value="lightCeiling07"/>
       <property name="CustomIconTint" value="E1E5EA"/>

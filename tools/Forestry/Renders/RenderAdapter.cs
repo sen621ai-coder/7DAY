@@ -129,6 +129,13 @@ public static class ForestryRenderExport {
   // Deliberately show full inventory/all three upgrades, rather than imply a save state.
   foreach(var t in root.GetComponentsInChildren<UnityEngine.Transform>(true))if(t.name=="ForestrySpeed"||t.name=="ForestryPacker"||t.name=="ForestrySiren")t.gameObject.SetActive(true);
   var renderers=root.GetComponentsInChildren<UnityEngine.MeshRenderer>().Where(r=>r.sharedMaterial!=null).ToArray();var materials=renderers.Select(r=>r.sharedMaterial).Distinct().ToArray();
+  var slab=renderers.Single(r=>r.name=="Foundation");
+  var slabVertices=slab.GetComponent<UnityEngine.MeshFilter>().sharedMesh.vertices.Select(v=>slab.transform.localToWorldMatrix.Point(v)).ToArray();
+  if(Math.Abs(slabVertices.Min(v=>v.y))>.00001f || Math.Abs(slabVertices.Max(v=>v.y)-.10f)>.00001f)
+   throw new InvalidOperationException("Foundation must span ground Y=0 to building Y=.10");
+  if(slab.sharedMaterial.mainTexture==null || slab.sharedMaterial.mainTexture.name!="Forestry_color3.png")
+   throw new InvalidOperationException("Foundation must use the verified opaque structural atlas");
+  Console.WriteLine("PASS: foundation is grounded, meets the building, and uses the opaque structural atlas.");
   foreach(var m in materials)if(m.shader==null||m.shader.name!="NativeWorkstation"||!m.shader.isSupported)
    throw new InvalidOperationException("Forestry surface did not inherit the native shader: "+m.name);
   Console.WriteLine("PASS: every exported material uses the native workstation shader; no standalone Standard lookup.");

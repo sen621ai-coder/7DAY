@@ -7,12 +7,44 @@ namespace PZAEC.BasementLight
 {
     public sealed class ModApi : IModApi
     {
+        static GameObject cache;
+        static Transform prefab;
         public void InitMod(Mod mod)
         {
-            new Harmony("pzaec.basementlight").Patch(AccessTools.Method(typeof(BlockPoweredLight),
+            var harmony=new Harmony("pzaec.basementlight");
+            harmony.Patch(AccessTools.Method(typeof(BlockShapeModelEntity),"getPrefab"),
+                prefix:new HarmonyMethod(typeof(ModApi),nameof(GetPrefab)));
+            harmony.Patch(AccessTools.Method(typeof(GameObjectPool),"DestroyObject",new[]{typeof(GameObject)}),
+                prefix:new HarmonyMethod(typeof(ModApi),nameof(BeforePoolDestroy)));
+            harmony.Patch(AccessTools.Method(typeof(BlockPoweredLight),
                 nameof(BlockPoweredLight.OnBlockEntityTransformAfterActivated)),
                 postfix:new HarmonyMethod(typeof(ModApi),nameof(Attach)));
-            Log.Out("[BasementLight] 15W single-block softlight panel installed.");
+            Log.Out("[BasementLight] v1.0.4 independent 15W panel; native root collision and wire anchor installed.");
+        }
+        public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
+        {
+            if(__instance.block==null || __instance.block.GetBlockName()!="pzaecBasementPanelLight")return true;
+            if(prefab==null)
+            {
+                cache=new GameObject("BasementPanelCache");cache.SetActive(false);
+                UnityEngine.Object.DontDestroyOnLoad(cache);
+                var root=new GameObject("pzaecBasementPanelRuntime");root.transform.SetParent(cache.transform,false);
+                try
+                {
+                    root.AddComponent<PanelView>().Build();
+                    prefab=root.transform;
+                }
+                catch{UnityEngine.Object.Destroy(cache);cache=null;throw;}
+            }
+            __result=prefab;return false;
+        }
+        public static void BeforePoolDestroy(GameObject __0)
+        {
+            if(__0==null || __0.GetComponent<PanelView>()==null)return;
+            // The native pool destroys runtime shared materials during retirement.
+            // Detach this instance so its removal cannot erase other lamps/previews.
+            foreach(var renderer in __0.GetComponentsInChildren<Renderer>(true))
+                renderer.sharedMaterials=new Material[0];
         }
         public static void Attach(WorldBase _world,Vector3i _blockPos,BlockValue _blockValue,BlockEntityData _ebcd)
         {
@@ -21,8 +53,8 @@ namespace PZAEC.BasementLight
             try
             {
                 var view=_ebcd.transform.GetComponent<PanelView>();
-                if(view==null){view=_ebcd.transform.gameObject.AddComponent<PanelView>();view.Build();}
-                view.World=_world;view.Position=_blockPos;
+                if(view==null)throw new InvalidOperationException("Independent panel prefab missing; restart with matching lamp config and DLL");
+                view.Bind(_world,_blockPos);
             }
             catch(Exception e){Log.Error("[BasementLight] Panel creation failed: "+e);}
         }
@@ -32,9 +64,8 @@ namespace PZAEC.BasementLight
     {
         public WorldBase World;
         public Vector3i Position;
-        Light lamp;
-        Renderer diffuser;
-        Light[] inheritedLights;
+        [SerializeField] Light lamp;
+        [SerializeField] Renderer diffuser;
         float next;
         string colliderTag;
         int colliderLayer;
@@ -49,7 +80,8 @@ namespace PZAEC.BasementLight
                 if(source==null || source.shader==null || !source.shader.isSupported || source.renderQueue>=3000 ||
                     !source.HasProperty("_MainTex") || !source.HasProperty("_Color"))continue;
                 var m=new Material(source){name=name,color=color};
-                foreach(var p in m.GetTexturePropertyNames())m.SetTexture(p,null);
+                // Preserve native shader masks/lookups; use opaque white albedo.
+                m.mainTexture=Texture2D.whiteTexture;
                 m.mainTextureScale=Vector2.one;m.mainTextureOffset=Vector2.zero;
                 if(m.HasProperty("_Glossiness"))m.SetFloat("_Glossiness",.12f);
                 if(m.HasProperty("_EmissionColor"))m.SetColor("_EmissionColor",Color.black);
@@ -59,7 +91,7 @@ namespace PZAEC.BasementLight
         }
         static void Materials()
         {
-            if(frame!=null)return;
+            if(frame!=null && off!=null && on!=null)return;
             frame=MaterialFromNative("Basement charcoal frame",new Color(.16f,.18f,.20f));
             off=MaterialFromNative("Basement diffuser off",new Color(.58f,.60f,.61f));
             on=MaterialFromNative("Basement diffuser on",new Color(.82f,.84f,.83f));
@@ -69,21 +101,29 @@ namespace PZAEC.BasementLight
         {
             var g=GameObject.CreatePrimitive(PrimitiveType.Cube);g.name=name;
             g.layer=colliderLayer;g.tag=colliderTag;g.transform.SetParent(transform,false);
+            // One root collider handles every hit; decorative children cannot
+            // resolve to an unregistered BlockEntityData transform.
+            var collider=g.GetComponent<Collider>();collider.enabled=false;
+            UnityEngine.Object.DestroyImmediate(collider);
             g.transform.localPosition=position;g.transform.localScale=scale;
             g.GetComponent<Renderer>().sharedMaterial=material;
             return g;
         }
         public void Build()
         {
+            var native=DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab",false);
+            var nativeCollider=native.GetComponentInChildren<Collider>(true);
+            if(nativeCollider==null)throw new InvalidOperationException("Native block collision template missing");
+            colliderTag=nativeCollider.tag;colliderLayer=nativeCollider.gameObject.layer;
+            gameObject.tag=colliderTag;gameObject.layer=colliderLayer;
+            // Explicit reference while inactive, before Awake can see a chunk/cache parent.
+            gameObject.AddComponent<RootTransformRefParent>().RootTransform=transform;
+            var bounds=gameObject.AddComponent<BoxCollider>();
+            bounds.center=new Vector3(0,.913f,0);bounds.size=new Vector3(.92f,.154f,.92f);
+            var wire=new GameObject("WireOffset");wire.transform.SetParent(transform,false);
+            wire.transform.localPosition=new Vector3(0,.836f,0);
+            if(SystemInfo.graphicsDeviceType==GraphicsDeviceType.Null)return;
             Materials();
-            var nativeCollider=GetComponentInChildren<Collider>(true);
-            colliderTag=nativeCollider!=null?nativeCollider.tag:gameObject.tag;
-            colliderLayer=nativeCollider!=null?nativeCollider.gameObject.layer:gameObject.layer;
-            foreach(var r in GetComponentsInChildren<Renderer>(true))r.enabled=false;
-            foreach(var c in GetComponentsInChildren<Collider>(true))c.enabled=false;
-            inheritedLights=GetComponentsInChildren<Light>(true);
-            foreach(var l in inheritedLights)l.enabled=false;
-            foreach(var lod in GetComponentsInChildren<LightLOD>(true))lod.enabled=false;
             // The entire physical fixture stays in one voxel; underside is 0.85 above its base.
             Box("PanelFrame",new Vector3(0,.92f,0),new Vector3(.92f,.14f,.92f),frame);
             var face=Box("MilkDiffuser",new Vector3(0,.845f,0),new Vector3(.82f,.018f,.82f),off);
@@ -98,6 +138,12 @@ namespace PZAEC.BasementLight
             lamp.color=new Color(1f,.97f,.92f);lamp.renderMode=LightRenderMode.ForcePixel;
             lamp.shadows=LightShadows.Soft;lamp.shadowStrength=1;lamp.shadowBias=.02f;lamp.shadowNormalBias=.1f;
             lamp.cookie=Cookie();lamp.enabled=false;
+        }
+        public void Bind(WorldBase world,Vector3i position)
+        {
+            World=world;Position=position;next=0;
+            var rootRef=GetComponent<RootTransformRefParent>();
+            if(rootRef!=null)rootRef.RootTransform=transform;
         }
         static Cubemap Cookie()
         {
@@ -128,9 +174,8 @@ namespace PZAEC.BasementLight
             // Native meta synchronizes powered state to clients; native toggle remains authoritative.
             var te=World.GetTileEntity(Position) as TileEntityPoweredBlock;
             bool lit=(value.meta&2)!=0 && te!=null && te.IsToggled;
-            foreach(var l in inheritedLights)if(l!=null)l.enabled=false;
             lamp.enabled=lit;diffuser.sharedMaterial=lit?on:off;
         }
-        void OnDisable(){if(lamp!=null)lamp.enabled=false;}
+        void OnDisable(){if(lamp!=null)lamp.enabled=false;World=null;next=0;}
     }
 }

@@ -25,6 +25,8 @@ $b=$blocks.SelectSingleNode("//block[@name='pzaecBasementPanelLight']")
 if($b.SelectSingleNode("property[@name='UnlockedBy']")){throw 'Free recipe must omit UnlockedBy, not define an empty unlock entry'}
 if($b.SelectSingleNode("property[@name='Extends']").param1 -ne 'UnlockedBy'){throw 'Parent lamp unlock must be excluded from inheritance'}
 if($b.SelectSingleNode("property[@name='RequiredPower']").value -ne '15'){throw 'Not 15W'}
+if($b.SelectSingleNode("property[@name='Model']").value -ne 'pzaecBasementPanelRuntime.prefab'){throw 'Panel shares the vanilla lamp model pool'}
+if($b.SelectSingleNode("property[@name='WireOffset']").value -ne '0,0.836,0'){throw 'Missing dedicated-server wire offset fallback'}
 if($b.SelectSingleNode("property[@name='MultiBlockDim']")){throw 'Footprint must be one voxel'}
 [xml]$recipes=Get-Content "$mod/Config/recipes.xml"
 if($recipes.SelectSingleNode('//recipe').tags -match 'learnable'){throw 'Free lamp recipe must not require learning'}
@@ -42,5 +44,16 @@ try {
  if(($hook.Parameters.Name -join ',') -ne '_world,_blockPos,_blockValue,_ebcd'){throw 'Hook signature changed'}
  $update=$powered.Methods|Where-Object Name -eq updateLightState
  if(-not ($update.Body.Instructions.Operand -match 'get_IsToggled')){throw 'Native toggle contract changed'}
+ $shape=$game.MainModule.Types|Where-Object Name -eq BlockShapeModelEntity
+ foreach($name in @('CloneModel','PoolLoadCallback')){
+  $method=$shape.Methods|Where-Object Name -eq $name
+  if(-not ($method.Body.Instructions.Operand -match 'BlockShapeModelEntity::getPrefab')){throw "Common preview/world prefab entry changed: $name"}
+ }
+ $utils=$game.MainModule.Types|Where-Object Name -eq GameUtils
+ $hit=$utils.Methods|Where-Object Name -eq FindMasterBlockForEntityModelBlock
+ if(-not ($hit.Body.Instructions.Operand -match 'RootTransformRefParent::FindRoot')){throw 'Native block hit ownership contract changed'}
+ $tile=$game.MainModule.Types|Where-Object Name -eq TileEntityPowered
+ $bind=$tile.Methods|Where-Object Name -eq set_BlockTransform
+ if(-not ($bind.Body.Instructions.Operand -contains 'WireOffset')){throw 'Native wire anchor contract changed'}
 } finally {$game.Dispose()}
 Write-Output 'PASS: coverage model, power, one-block config, ingredients, localization and native hook.'

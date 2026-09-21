@@ -312,8 +312,9 @@ namespace AECT16RuntimeFix
                 var wood = ForestryResources.Own(new Material(materials[4]){ name="ForestryWood" });
                 var green = Solid(shader, "ForestryScreen", new Color(.18f,.55f,.26f));
                 var amber = Solid(shader, "ForestryWarning", new Color(.85f,.45f,.08f));
-                dark.mainTexture=materials[0].mainTexture;
-                dark.mainTextureScale=new Vector2(.25f,.30f); dark.mainTextureOffset=new Vector2(.72f,.06f);
+                // The native shader clips atlas alpha: color0's old UV region is
+                // mostly transparent. Structural surfaces must use opaque albedo.
+                dark.mainTexture=materials[3].mainTexture;
                 var timber=GetTimberMaterial();
                 var trim=Solid(shader,"ForestryMetalTrim",new Color(.48f,.49f,.44f));
                 trim.SetFloat("_Metallic",.8f); trim.SetFloat("_Glossiness",.35f);
@@ -321,7 +322,8 @@ namespace AECT16RuntimeFix
                 green.SetColor("_EmissionColor",new Color(.015f,.10f,.025f));
                 // A trigger supplies full native selection bounds without creating
                 // invisible physical walls. Child colliders follow the real geometry.
-                var foundation = Box(go.transform, "Foundation", new Vector3(0,.045f,0), new Vector3(9.95f,.09f,5.95f), dark);
+                // Source building starts at Y=.10; keep the slab grounded at zero.
+                var foundation = Box(go.transform, "Foundation", new Vector3(0,.05f,0), new Vector3(9.95f,.10f,5.95f), dark);
                 var rootCollider = go.AddComponent<BoxCollider>();
                 rootCollider.isTrigger = true;
                 rootCollider.center = new Vector3(0,1.9f,0); rootCollider.size = new Vector3(9.95f,3.8f,5.95f);

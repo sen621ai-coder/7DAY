@@ -60,7 +60,7 @@ public class Vehicle {
  public float TiltUpForce=>1f;
  public float VelocityMaxForward=25,VelocityMaxBackward=10,VelocityMaxTurboForward=29,VelocityMaxTurboBackward=10;
  public float EffectVelocityMaxPer=1,EffectMotorTorquePer=1,Fuel=400; public int Health=5000;
- public float AirDragVelScale=.997f;
+ public float AirDragVelScale=.997f,AirDragAngVelScale=.97f;
  public string GetName()=>Name == null ? null : Name.ToLowerInvariant();public int GetHealth()=>Health;public float GetFuelLevel()=>Fuel;public void UpdateSimulation(){}
 }
 public class VPEngine {public Vehicle vehicle;public void Update(float dt){} }
@@ -89,6 +89,9 @@ public static class MD500Tests {
   Near(v,expected,.02f,"vertical target dt="+dt);
  }
  public static void Run(){
+  foreach(string name in new[]{"vehicleMD500","vehicleApacheHelicopter"})
+   foreach(float dt in new[]{.01f,.02f,.04f})foreach(int sign in new[]{-1,1})RuntimeTurnResponse(name,dt,sign);
+  UnityEngine.Time.fixedDeltaTime=.02f;
   foreach(float dt in new[]{.01f,.02f,.04f}){
    float velocity=0,thrust=0;
    for(int i=0;i<(int)(20/dt);i++){
@@ -149,7 +152,7 @@ public static class MD500Tests {
    var a=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(speed,.65f,4,true,true);
    var b=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(speed,-.65f,4,true,true);
    Near(a.Bank,-b.Bank,.0001f,"symmetric banking");
-   Check(Math.Abs(a.Bank)<=16&&a.Pitch<=14&&a.Pitch>=-10,"attitude bounds");
+   Check(Math.Abs(a.Bank)<=AECT16RuntimeFix.MD500FlightMath.Handling(false).BankMax&&a.Pitch<=14&&a.Pitch>=-10,"attitude bounds");
    if(speed==0)Near(a.Bank,0,.0001f,"hover yaw stays level");
   }
   var grounded=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(25,1,4,false,true);
@@ -252,7 +255,7 @@ public static class MD500Tests {
    Near(hover.Pitch,0,.0001f,"vertical-only climb stays level");
    foreach(float speed in new[]{-25f,-10f,0f,10f,25f,32.4f}){
     float r=AECT16RuntimeFix.MD500FlightMath.TurnRateLimit(Math.Abs(speed),1,1,p);
-    Check(Math.Abs(speed*r)<=.8f*p.Acceleration+.001f,"turn demand fits lateral authority");
+    Check(Math.Abs(speed*r)<=.85f*AECT16RuntimeFix.MD500FlightMath.LateralLimit(1,1,p)+.001f,"turn demand fits lateral authority");
     var force=AECT16RuntimeFix.MD500FlightMath.Calculate(1,1,false,false,speed,0,0,r,100,100,true,1,32.4f,17.28f,1,p);
     var a=AECT16RuntimeFix.MD500FlightMath.TargetAttitude(speed,1,0,0,force.Right,0,true,false,p);
     Check(speed==0?Math.Abs(a.Bank)<.001f:a.Bank*speed>0,"bank matches signed forward/reverse centripetal force");
@@ -304,6 +307,36 @@ public static class MD500Tests {
   }
  }
 
+ static void RuntimeTurnResponse(string name,float dt,int sign){
+  AECT16RuntimeFix.MD500FlightControls.Install(new HarmonyLib.Harmony());
+  UnityEngine.Time.fixedDeltaTime=dt;UnityEngine.Time.fixedTime+=1;
+  var e=new EntityVehicle();e.vehicle.Name=name;e.vehicleRB.velocity=new UnityEngine.Vector3(0,0,25);
+  e.movementInput.moveForward=1;
+  var p=AECT16RuntimeFix.MD500FlightMath.Handling(name=="vehicleApacheHelicopter");
+  double heading=0;float maxSlip=0,turnRate=0,releaseHeading=0;
+  for(int i=0;i<(int)(16/dt);i++){
+   float time=i*dt;e.movementInput.moveStrafe=time<12?sign:0;
+   e.vehicleRB.rotation=new UnityEngine.Quaternion{Yaw=(float)(heading*180/Math.PI)};
+   e.vehicleRB.velocity=e.vehicleRB.velocity*e.vehicle.AirDragVelScale;
+   e.vehicleRB.angularVelocity=e.vehicleRB.angularVelocity*e.vehicle.AirDragAngVelScale;
+   e.vehicleRB.force=new UnityEngine.Vector3();e.vehicleRB.torque=new UnityEngine.Vector3();
+   UnityEngine.Time.fixedTime+=dt;AECT16RuntimeFix.MD500FlightControls.BeforeForces(e);
+   Check(Math.Abs(e.vehicleRB.torque.y)<=2.0001f,"drag compensation respects yaw torque bound");
+   e.vehicleRB.velocity=e.vehicleRB.velocity+(e.vehicleRB.force-new UnityEngine.Vector3(0,9.81f,0))*dt;
+   e.vehicleRB.angularVelocity=new UnityEngine.Vector3(0,e.vehicleRB.angularVelocity.y+e.vehicleRB.torque.y*dt,0);
+   heading+=e.vehicleRB.angularVelocity.y*dt;
+   var right=e.vehicleRB.rotation*new UnityEngine.Vector3(1,0,0);
+   maxSlip=Math.Max(maxSlip,Math.Abs(UnityEngine.Vector3.Dot(e.vehicleRB.velocity,right)));
+   if(time<12){turnRate=e.vehicleRB.angularVelocity.y;releaseHeading=(float)heading;}
+   if(time>=14)Check(Math.Abs(e.vehicleRB.angularVelocity.y)<.01f,"turn release settles within two seconds");
+  }
+  float oldLimit=(name=="vehicleApacheHelicopter"?4.48f:5.16f)*(float)Math.PI/180;
+  Check(turnRate*sign>oldLimit*2,"runtime cruise turn exceeds twice former target despite native drag");
+  Check(maxSlip<2.5f,"stronger runtime turn remains coordinated, slip="+maxSlip);
+  Check(Math.Abs(heading-releaseHeading)*180/Math.PI<15,"release does not keep swinging through a large angle");
+  Console.WriteLine("Turn "+name+" dt="+dt+" sign="+sign+" deg/s="+(turnRate*180/Math.PI).ToString("F2")+" maxSlip="+maxSlip.ToString("F2"));
+ }
+
  static void RuntimeClimbTurn(string name,float dt,int verticalSign){
   UnityEngine.Time.fixedDeltaTime=dt;UnityEngine.Time.fixedTime+=1;
   var e=new EntityVehicle();e.vehicle.Name=name;e.vehicle.IsTurbo=true;e.movementInput.moveForward=1;
@@ -343,7 +376,7 @@ public static class MD500Tests {
    float turn=i*dt<12?1:0;
    var f=AECT16RuntimeFix.MD500FlightMath.Calculate(initial>0?1:-1,turn,false,false,vf,vr,0,yaw,100,100,true,power,25,10,torque,p);
    fx=AECT16RuntimeFix.MD500FlightMath.SmoothAxis(fx,f.Forward,dt,p.Acceleration*torque*power,p.Jerk*torque);
-   fy=AECT16RuntimeFix.MD500FlightMath.SmoothAxis(fy,f.Right,dt,p.Acceleration*torque*power,p.LateralJerk*torque);
+   fy=AECT16RuntimeFix.MD500FlightMath.SmoothAxis(fy,f.Right,dt,AECT16RuntimeFix.MD500FlightMath.LateralLimit(power,torque,p),p.LateralJerk*torque);
    yawForce=AECT16RuntimeFix.MD500FlightMath.SmoothAxis(yawForce,f.Yaw,dt,2*power,p.YawJerk);
    // Deliberately omit native drag: this is the more demanding turn case.
    vx+=(s*fx+c*fy)*dt;vz+=(c*fx-s*fy)*dt;yaw+=yawForce*dt;heading+=yaw*dt;
@@ -381,6 +414,9 @@ try {
     $magnitudes = @($engine.Body.Instructions | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.Single UnityEngine.Vector3::get_magnitude()' })
     if ($magnitudes.Count -ne 1) { throw 'Unsupported engine fuel IL' }
     $ops = $physics.Body.Instructions
+    $angularDrag = $ops | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.Single Vehicle::AirDragAngVelScale' }
+    $forces = $ops | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.Void EntityVehicle::FixedUpdateForces()' }
+    if (!$angularDrag -or !$forces -or $angularDrag.Offset -ge $forces.Offset) { throw 'Recheck native angular damping order before applying compensation' }
     $simulation = $ops | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.Void Vehicle::UpdateSimulation()' }
     $sends = @($ops | Where-Object { $_.Operand -and $_.Operand.ToString() -eq 'System.Void EntityVehicle::SendSyncData(System.UInt16)' })
     if (!$simulation -or !$sends.Count -or $simulation.Offset -ge $sends[0].Offset) { throw 'Engine state would be updated after sync' }

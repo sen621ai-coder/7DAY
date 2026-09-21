@@ -47,13 +47,11 @@ namespace PZAEC.SpawnSafety
                 reason="elevated-platform";
                 // Do not fix a foundation collision by lifting the spawn onto its roof.
                 if(feet.y>terrain+2.5f)return false;
-                int cover=0;int cx=Mathf.FloorToInt(feet.x),cz=Mathf.FloorToInt(feet.z);
+                int cx=Mathf.FloorToInt(feet.x),cz=Mathf.FloorToInt(feet.z);
                 reason="covered-ground";
                 if(world.StructuralCover(cx,cz,Mathf.FloorToInt(feet.y+height),254))return false;
-                foreach(var offset in new[]{new Vector3(0,0,0),new Vector3(1,0,0),new Vector3(-1,0,0),new Vector3(0,0,1),new Vector3(0,0,-1)})
-                    if(world.StructuralCover(cx+(int)offset.x,cz+(int)offset.z,Mathf.FloorToInt(feet.y+height),254))cover++;
-                reason="covered-ground";
-                if(cover>=3)return false;
+                // Walls beside a valid open-air location do not make it underground.
+                // Body overlap and the actual overhead column remain hard exclusions.
             }
             reason="ok";return true;
         }

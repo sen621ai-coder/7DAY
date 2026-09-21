@@ -23,18 +23,18 @@ namespace AECT16RuntimeFix
         // These are handling profiles, not weapon/aiming modes.
         public struct Profile
         {
-            public float Acceleration, Jerk, LateralJerk, YawRate, YawJerk, VerticalJerk;
+            public float Acceleration, LateralAcceleration, Jerk, LateralJerk, YawRate, YawJerk, VerticalJerk;
             public float PitchMax, BankMax, CruisePitch, PitchGain, AttitudeGain, AttitudeDamping;
         }
 
         public static Profile Handling(bool apache)
         {
             return apache ? new Profile {
-                Acceleration=4f, Jerk=3f, LateralJerk=4f, YawRate=.49f, YawJerk=2f, VerticalJerk=8f,
-                PitchMax=12f, BankMax=14f, CruisePitch=3.5f, PitchGain=.38f, AttitudeGain=5f, AttitudeDamping=3.6f
+                Acceleration=4f, LateralAcceleration=6f, Jerk=3f, LateralJerk=10f, YawRate=.78f, YawJerk=4f, VerticalJerk=8f,
+                PitchMax=12f, BankMax=30f, CruisePitch=3.5f, PitchGain=.38f, AttitudeGain=5f, AttitudeDamping=3.6f
             } : new Profile {
-                Acceleration=4f, Jerk=4f, LateralJerk=6f, YawRate=.61f, YawJerk=3f, VerticalJerk=10f,
-                PitchMax=14f, BankMax=16f, CruisePitch=4f, PitchGain=.42f, AttitudeGain=6f, AttitudeDamping=3.4f
+                Acceleration=4f, LateralAcceleration=7f, Jerk=4f, LateralJerk=12f, YawRate=.95f, YawJerk=5f, VerticalJerk=10f,
+                PitchMax=14f, BankMax=34f, CruisePitch=4f, PitchGain=.42f, AttitudeGain=6f, AttitudeDamping=3.4f
             };
         }
 
@@ -45,12 +45,16 @@ namespace AECT16RuntimeFix
             return Clamp(previous + Clamp(target - previous, -step, step), -limit, limit);
         }
 
+        public static float LateralLimit(float power,float torqueScale,Profile profile)
+        {
+            return Math.Min(profile.LateralAcceleration * Clamp(torqueScale,.25f,3f) * Clamp(power,0f,1f),
+                9.81f * (float)Math.Tan(profile.BankMax * Math.PI / 180));
+        }
+
         public static float TurnRateLimit(float horizontalSpeed, float power, float torqueScale, Profile profile)
         {
-            float lateral = Math.Min(profile.Acceleration * Clamp(torqueScale,.25f,3f) * Clamp(power,0f,1f),
-                9.81f * (float)Math.Tan(profile.BankMax * Math.PI / 180));
             // Reserve lateral authority for existing slip and transient disturbances.
-            return Math.Min(profile.YawRate, .8f * lateral / Math.Max(1f, Math.Abs(horizontalSpeed)));
+            return Math.Min(profile.YawRate, .85f * LateralLimit(power,torqueScale,profile) / Math.Max(1f, Math.Abs(horizontalSpeed)));
         }
 
         public static float DragAcceleration(float velocity, float perStepDrag, float seconds)
@@ -156,6 +160,7 @@ namespace AECT16RuntimeFix
                 verticalTarget = Math.Min(verticalTarget, -Math.Min(DescentSpeed, altitude - Ceiling));
             float target = forward * Math.Max(0f, forward >= 0f ? maxForward : maxBackward);
             float accelerationLimit = profile.Acceleration * Clamp(torqueScale, .25f, 3f);
+            float lateralLimit = LateralLimit(power,torqueScale,profile);
             float horizontalSpeed = (float)Math.Sqrt(forwardVelocity*forwardVelocity + rightVelocity*rightVelocity);
             float yawTarget = turn * TurnRateLimit(horizontalSpeed,power,torqueScale,profile);
             bool coasting = Math.Abs(forward) < .01f;
@@ -163,9 +168,9 @@ namespace AECT16RuntimeFix
             return new Output {
                 Forward = Clamp((target - forwardVelocity) * (coasting ? .45f : 1.5f), -forwardLimit, forwardLimit) * power,
                 // Signed forward velocity also gives the correct centripetal force in reverse.
-                Right = Clamp(forwardVelocity*yawVelocity - rightVelocity * 2f, -accelerationLimit, accelerationLimit) * power,
+                Right = Clamp(forwardVelocity*yawVelocity - rightVelocity * 2f, -lateralLimit, lateralLimit),
                 Up = (9.81f + Clamp((verticalTarget - verticalVelocity) * 2.5f, -6f, 6f)) * liftPower,
-                Yaw = Clamp((yawTarget - yawVelocity) * 3f, -2f, 2f) * power
+                Yaw = Clamp((yawTarget - yawVelocity) * 4f, -2f, 2f) * power
             };
         }
     }

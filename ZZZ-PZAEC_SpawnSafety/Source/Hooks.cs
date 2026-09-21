@@ -32,7 +32,7 @@ namespace PZAEC.SpawnSafety
         {
             __state=new ScopeState{Previous=Safety.Current};var center=__1;int index=__2,attempt=0;
             Safety.Current=new Request{Source="AEC-follower",Direct=true,Surface=Safety.IsSurface(World,center),Center=center,
-                Next=()=> (Vector3)FollowerPosition.Invoke(null,new object[]{center,index,(attempt++)%4}),Allowed=OutsideTrader};
+                Next=()=> (Vector3)FollowerPosition.Invoke(null,new object[]{center,index,(attempt++)%4}),Allowed=OutsideTrader,Fallback=Recovery.Create(center)};
         }
         public static bool DirectPrefix(Vector3 __1,ref string __2,ref bool __result,out DirectState __state)
         {
@@ -44,12 +44,11 @@ namespace PZAEC.SpawnSafety
             {
                 var template=Safety.Current;
                 Safety.Current=new Request{Source=template.Source,Direct=true,Surface=template.Surface,Center=template.Center,
-                    Next=template.Next,Allowed=template.Allowed,Remaining=template.Next==null?1:12};
+                    Next=template.Next,Allowed=template.Allowed,Remaining=template.Next==null?1:12,Fallback=Recovery.Create(__1)};
             }
             if(Safety.Current==null)
             {
-                // Unknown direct callers keep their exact requested location: no invented range.
-                Safety.Current=new Request{Source="AEC-direct",Direct=true,Surface=true,Center=__1,Remaining=1,Allowed=OutsideTrader};
+                Safety.Current=new Request{Source="AEC-direct",Direct=true,Surface=true,Center=__1,Remaining=1,Allowed=OutsideTrader,Fallback=Recovery.Create(__1)};
             }
             activeDirect=Safety.Current;
             if(!Safety.Current.Bypass && Safety.Current.Remaining<=0){__2="spawn-safety-budget-exhausted";__result=false;return false;}
@@ -74,19 +73,31 @@ namespace PZAEC.SpawnSafety
             __state=new ScopeState{Previous=Safety.Current};var world=__0;var center=__2;var radius=__3;var instance=__instance;
             // CalcSpawnPos already applies native distance/protection/water policy.
             // CanMobsSpawnAtPos would re-floor its adjusted Y and forces water checks on.
-            Safety.Current=new Request{Source="blood-moon",Surface=true,Center=center,
-                Next=()=>{object[] args={world,center,radius,Vector3.zero};return (bool)BloodPosition.Invoke(instance,args)?(Vector3?)args[3]:null;}};
+            Safety.Current=new Request{Source="blood-moon",Surface=true,Center=center,RecoverSelector=true,
+                Next=()=>{object[] args={world,center,radius,Vector3.zero};return (bool)BloodPosition.Invoke(instance,args)?(Vector3?)args[3]:null;},
+                Fallback=Recovery.Create(center,Math.Max(30,(int)radius.magnitude-10),Math.Max(64,(int)radius.magnitude+32),30,false)};
         }
-        public static void EventPrefix(GameEvent.SequenceActions.ActionBaseSpawn __instance,Vector3 __2,float __3,float __4,bool __5,float __6,bool ___airSpawn,float ___raycastOffset,out ScopeState __state)
+        public static void BloodPositionPostfix(ref Vector3 __3,ref bool __result)
+        {if(!__result&&Safety.Current!=null&&Safety.Current.RecoverSelector&&Safety.Current.Source=="blood-moon")__result=Recovery.BeforeFactory(Safety.Current,ref __3);}
+        public static void EventPositionPostfix(ref Vector3 __0,ref bool __result)
+        {
+            if(!__result&&Safety.Current!=null&&Safety.Current.RecoverSelector&&Safety.Current.Source!=null&&Safety.Current.Source.StartsWith("event:",StringComparison.Ordinal))
+                __result=Recovery.BeforeFactory(Safety.Current,ref __0);
+        }
+        public static void EventPrefix(GameEvent.SequenceActions.ActionBaseSpawn __instance,int __0,Vector3 __2,float __3,float __4,bool __5,float __6,bool ___airSpawn,float ___raycastOffset,out ScopeState __state)
         {
             __state=new ScopeState{Previous=Safety.Current};
             var name=__instance.Owner==null?"":__instance.Owner.Name;
             // A vanilla sleeper/POI event is deliberately outside this module's scope.
-            if(___airSpawn||string.IsNullOrEmpty(name)||!(name.StartsWith("PZAEC",StringComparison.Ordinal)||name.StartsWith("eventPZAEC",StringComparison.Ordinal)))
+            EntityClass definition;
+            bool groundEnemy=EntityClass.list.TryGetValue(__0,out definition)&&definition.bIsEnemyEntity&&
+                (definition.classname==null||!typeof(EntityFlying).IsAssignableFrom(definition.classname));
+            if(___airSpawn||!groundEnemy||string.IsNullOrEmpty(name)||!(name.StartsWith("PZAEC",StringComparison.Ordinal)||name.StartsWith("eventPZAEC",StringComparison.Ordinal)))
             {Safety.Current=new Request{Bypass=true};return;}
             var center=__2;var min=__3;var max=__4;var safe=__5;var offset=__6;var ray=___raycastOffset;
-            Safety.Current=new Request{Source="event:"+name,Surface=Safety.IsSurface(World,center),Center=center,Min=min,Max=max,
-                Next=()=>{object[] args={Vector3.zero,center,min,max,safe,offset,false,ray};return (bool)EventPosition.Invoke(null,args)?(Vector3?)((Vector3)args[0]+Vector3.up*.5f):null;}};
+            Safety.Current=new Request{Source="event:"+name,Surface=Safety.IsSurface(World,center),Center=center,Min=min,Max=max,RecoverSelector=true,
+                Next=()=>{object[] args={Vector3.zero,center,min,max,safe,offset,false,ray};return (bool)EventPosition.Invoke(null,args)?(Vector3?)((Vector3)args[0]+Vector3.up*.5f):null;},
+                Fallback=Recovery.Create(center,Math.Max(8,(int)min),Math.Max((int)min+1,Math.Min(96,Math.Max(64,(int)max+16))),12,!safe,!safe)};
         }
         public static void MegaPrefix(World __0,Vector3 __1,out ScopeState __state)
         {
@@ -98,6 +109,7 @@ namespace PZAEC.SpawnSafety
         {
             // The native loop has a null branch before its successful-spawn counter.
             if(Safety.Current!=null)Safety.Current.Remaining=12;
+            if(Safety.Current!=null&&entity!=null)Safety.Current.Fallback=Recovery.Create(entity.position);
             return Safety.Accept(entity,Safety.Current)?entity:null;
         }
         public static void SourcePrefix(object[] __args,MethodBase __originalMethod,out ScopeState __state)
@@ -107,7 +119,8 @@ namespace PZAEC.SpawnSafety
             // A captured kill/spawn position takes precedence over a moved entity.
             Vector3? center=__args.OfType<Vector3>().Select(p=>(Vector3?)p).FirstOrDefault();
             if(!center.HasValue&&anchor!=null)center=anchor.position;
-            // Preserve each caller's chosen coordinates and its own retry/cooldown semantics.
+            // Preserve the first choice and cooldown semantics; DirectPrefix supplies
+            // a fresh bounded recovery search for each actual spawn in this batch.
             var request=new Request{Source="skill:"+__originalMethod.Name,Direct=true,Surface=!center.HasValue||Safety.IsSurface(World,center.Value),PerEntity=true,Allowed=OutsideTrader};
             if(center.HasValue)
             {
@@ -183,10 +196,12 @@ namespace PZAEC.SpawnSafety
                 var blood=typeof(AIDirectorBloodMoonParty);
                 Hooks.BloodPosition=AccessTools.Method(blood,"CalcSpawnPos");
                 if(Hooks.BloodPosition==null)throw new MissingMethodException("CalcSpawnPos");
+                h.Patch(Hooks.BloodPosition,postfix:Method(nameof(Hooks.BloodPositionPostfix)));
                 Patch(h,AccessTools.Method(blood,"SpawnZombie"),nameof(Hooks.BloodPrefix),nameof(Hooks.FactoryTranspiler));
                 var events=typeof(GameEvent.SequenceActions.ActionBaseSpawn);
                 Hooks.EventPosition=AccessTools.Method(events,"FindValidPosition",new[]{typeof(Vector3).MakeByRefType(),typeof(Vector3),typeof(float),typeof(float),typeof(bool),typeof(float),typeof(bool),typeof(float)});
                 if(Hooks.EventPosition==null)throw new MissingMethodException("FindValidPosition");
+                h.Patch(Hooks.EventPosition,postfix:Method(nameof(Hooks.EventPositionPostfix)));
                 Patch(h,AccessTools.Method(events,"SpawnEntity"),nameof(Hooks.EventPrefix),nameof(Hooks.FactoryTranspiler));
                 Patch(h,AccessTools.Method(AccessTools.TypeByName("AeclipseCustomZombieAI01.MegaHordeRuntime"),"SpawnVanillaPack"),nameof(Hooks.MegaPrefix),nameof(Hooks.FactoryTranspiler));
                 foreach(var name in new[]{"TrySpawnEventBoss","TrySpawnEventBossForHeatmap","SpawnHeatmapEscortZombies","TrySpawnReplacementOnKill","TryApplySpawnRateBonus"})
@@ -200,7 +215,7 @@ namespace PZAEC.SpawnSafety
                 var console=AccessTools.TypeByName("AeclipseCustomZombieSpawner.ConsoleCmdAec");
                 var cmd=AccessTools.Method(console,"CmdSpawn");if(cmd!=null)Patch(h,cmd,nameof(Hooks.ConsolePrefix));
                 ModEvents.GameUpdate.RegisterHandler(Diagnostics.Update);
-                Log.Out("[SpawnSafety] 1.0.1 loaded: followers -> blood moon -> custom events/skills; vanilla sleepers unchanged.");
+                Log.Out("[SpawnSafety] 1.1.0 loaded: bounded perimeter recovery for followers, blood moon and custom events/skills.");
             }
             catch(Exception ex)
             {h.UnpatchSelf();Log.Error("[SpawnSafety] NOT ACTIVE: hooks incompatible; rolled back all safety hooks. "+ex);}

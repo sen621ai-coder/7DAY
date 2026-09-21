@@ -193,13 +193,18 @@ namespace AECT16RuntimeFix
             float torqueScale=MD500FlightMath.Clamp(vehicle.EffectMotorTorquePer,.25f,3f);
             float accelerationLimit=profile.Acceleration*torqueScale*power;
             thrust.Forward=MD500FlightMath.SmoothAxis(thrust.Forward,force.Forward,dt,accelerationLimit,profile.Jerk*torqueScale);
-            thrust.Right=MD500FlightMath.SmoothAxis(thrust.Right,force.Right,dt,accelerationLimit,profile.LateralJerk*torqueScale);
+            thrust.Right=MD500FlightMath.SmoothAxis(thrust.Right,force.Right,dt,MD500FlightMath.LateralLimit(power,torqueScale,profile),profile.LateralJerk*torqueScale);
             thrust.Yaw=MD500FlightMath.SmoothAxis(thrust.Yaw,force.Yaw,dt,2f*power,profile.YawJerk);
             float liftPower=MD500FlightMath.LiftPower(power);
             thrust.VerticalCorrection=MD500FlightMath.SmoothAxis(thrust.VerticalCorrection,force.Up-9.81f*liftPower,
                 dt,6f*liftPower,profile.VerticalJerk);
             thrust.LastTime = now;
             force.Forward=thrust.Forward; force.Right=thrust.Right; force.Yaw=thrust.Yaw;
+            // Native air drag has already reduced angular velocity before this callback.
+            // Compensate only while actively turning in the same direction; retain
+            // native braking on release/reversal and never bypass the torque bound.
+            if(offGround && thrust.Airborne && Math.Abs(input.moveStrafe)>.01f && input.moveStrafe*rb.angularVelocity.y>0f)
+                force.Yaw=MD500FlightMath.Clamp(force.Yaw+MD500FlightMath.DragAcceleration(rb.angularVelocity.y,vehicle.AirDragAngVelScale,dt)*power,-2f*power,2f*power);
             force.Up=9.81f*liftPower+thrust.VerticalCorrection;
             // Native PhysicsFixedUpdate already adds gravity (-9.81). Replace
             // only the supported helicopter XML forces; collisions/drag/speed caps remain.

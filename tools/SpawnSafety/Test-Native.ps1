@@ -119,7 +119,9 @@ public static class SpawnNativeTests {
   Factory(Target("AeclipseCustomZombieAI01.MegaHordeRuntime","SpawnVanillaPack"),"MegaPrefix");
   foreach(var name in new[]{"TrySpawnEventBoss","TrySpawnEventBossForHeatmap","SpawnHeatmapEscortZombies","TrySpawnReplacementOnKill","TryApplySpawnRateBonus"})Bind(Target(aec,name),"SourcePrefix");
   Target(aec,"GetFollowerSpawnPositionNearLeader");Target(aec,"IsNearTrader");Target("AIDirectorBloodMoonParty","CalcSpawnPos");
+  Bind(Target("AIDirectorBloodMoonParty","CalcSpawnPos"),"BloodPositionPostfix");
   var events=AccessTools.TypeByName("GameEvent.SequenceActions.ActionBaseSpawn");Check(AccessTools.Method(events,"FindValidPosition",new[]{typeof(Vector3).MakeByRefType(),typeof(Vector3),typeof(float),typeof(float),typeof(bool),typeof(float),typeof(bool),typeof(float)})!=null,"native event selector overload");
+  Bind(AccessTools.Method(events,"FindValidPosition",new[]{typeof(Vector3).MakeByRefType(),typeof(Vector3),typeof(float),typeof(float),typeof(bool),typeof(float),typeof(bool),typeof(float)}),"EventPositionPostfix");
   // Compose both orders with the existing high-tier class-selector patch.
   var blood=Target("AIDirectorBloodMoonParty","SpawnZombie");var old=AccessTools.Method(AccessTools.TypeByName("AECT16RuntimeFix.BloodMoonSpawnFix"),"Transpiler");Check(old!=null,"existing bloodmoon patch");
   foreach(bool safetyFirst in new[]{false,true}){
@@ -148,6 +150,12 @@ public static class SpawnNativeTests {
   var batch=new Request{Source="batch",Direct=true,PerEntity=true,Remaining=0,Next=()=>default(Vector3)};Safety.Current=batch;
   Check(Hooks.DirectPrefix(default(Vector3),ref description,ref result,out saved)&&Safety.Current.Remaining==12,"each skill batch entity receives its own bounded budget");Hooks.RestoreDirect(null,saved);
   Check(ReferenceEquals(Safety.Current,batch),"skill template restored");Safety.Current=null;
+  int retryCalls=0;Safety.Current=new Request{Source="blood-moon",RecoverSelector=true,Surface=true,Fallback=()=>{retryCalls++;return new Vector3(40,30,0);}};
+  var site=default(Vector3);bool found=false;Hooks.BloodPositionPostfix(ref site,ref found);Check(found&&site.x==40&&retryCalls==1,"initial blood selector failure gets fallback before entity creation");
+  Hooks.BloodPositionPostfix(ref site,ref found);Check(retryCalls==1,"valid original selector output is not replaced");
+  Safety.Current.RecoverSelector=false;found=false;Hooks.BloodPositionPostfix(ref site,ref found);Check(!found&&retryCalls==1,"registration callbacks cannot recover unrelated selectors");
+  Safety.Current=new Request{Source="event:PZAECDefenseT19W3",RecoverSelector=true,Surface=true,Fallback=()=>new Vector3(48,30,0)};found=false;Hooks.EventPositionPostfix(ref site,ref found);Check(found&&site.x==48,"custom event selector failure recovers before factory");
+  Safety.Current=new Request{Bypass=true,Fallback=()=>throw new Exception("vanilla touched")};found=false;Hooks.EventPositionPostfix(ref site,ref found);Check(!found,"ordinary/air event selector left unchanged");Safety.Current=null;
   return "PASS: "+checks+" native IL/signature/branch/patch-composition checks. Unity/Mono in-game hook activation remains a live check.";
  }
 }

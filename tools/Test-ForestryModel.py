@@ -40,6 +40,7 @@ for m in range(materials):
         ao=Image.open(assets/f'ao{m}.png'); ao.load()
         assert ao.size==sizes[0] and ao.mode=='RGBA'
 assert report['detailAlbedo'] and report['albedoSizes'][1]==[1254,1254]
+assert Image.open(assets/'color3.png').convert('RGBA').getchannel('A').getextrema()==(255,255), 'Foundation atlas must remain fully opaque'
 assert triangles==23706, 'UV splitting must preserve every source triangle'
 lod=(assets/'sawmill-lod.meshbin').read_bytes()
 assert hashlib.sha256(lod).hexdigest()==report['lodSha256']

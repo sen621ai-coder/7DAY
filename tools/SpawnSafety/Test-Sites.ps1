@@ -6,7 +6,7 @@ $rules=Get-Content "$root/ZZZ-PZAEC_SpawnSafety/Source/SiteRules.cs" -Raw
 # Reuse only the managed vector/bounds fixture; native Unity physics is simulated explicitly.
 $fixtureText=Get-Content "$PSScriptRoot/Test-Rules.ps1" -Raw
 $start=$fixtureText.IndexOf('namespace UnityEngine {')
-$vectors=$fixtureText.Substring($start,$fixtureText.IndexOf('public class World {')-$start)
+$vectors=$fixtureText.Substring($start,$fixtureText.IndexOf('public struct Vector3i')-$start)
 $vectors=$vectors.Replace('public float x,y,z;','public static Vector3 up=>new Vector3(0,1,0);public static Vector3 down=>new Vector3(0,-1,0);public static Vector3 operator *(Vector3 v,float f)=>new Vector3(v.x*f,v.y*f,v.z*f);public float x,y,z;')
 $fakes=@'
 namespace UnityEngine {

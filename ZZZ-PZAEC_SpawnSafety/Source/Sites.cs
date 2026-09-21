@@ -66,6 +66,9 @@ namespace PZAEC.SpawnSafety
         public bool Surface,Bypass,PerEntity,Direct;
         public int Remaining=12;
         public Func<Vector3?> Next;
+        public Func<Vector3?> Fallback;
+        public bool SelectorRecovered;
+        public bool RecoverSelector;
         public Func<Vector3,bool> Allowed;
         public Vector3? LastAccepted;
     }
@@ -83,6 +86,9 @@ namespace PZAEC.SpawnSafety
         }
         public static bool Accept(Entity e,Request request)
         {
+            // Initial selection is finished. Nested callbacks during registration
+            // must not recover unrelated selectors using this request's perimeter.
+            if(request!=null)request.RecoverSelector=false;
             if(request==null||request.Bypass||!Enemy(e)||Flying(e))return true;
             World world=GameManager.Instance==null?null:GameManager.Instance.World;
             if(world==null||world.IsRemote())return true;
@@ -93,25 +99,34 @@ namespace PZAEC.SpawnSafety
             float height=e.physicsHeight>0?e.physicsHeight:2.3f*scale;
             radius=Math.Max(radius,Math.Max(e.boundingBox.extents.x,e.boundingBox.extents.z));
             height=Math.Max(height,e.boundingBox.size.y);
-            for(int attempt=0;attempt<12&&request.Remaining>0;attempt++)
+            // First keep the original selector, then search outward before returning
+            // failure to a caller that may not have a persistent retry queue.
+            for(int attempt=0;attempt<12+PerimeterSearch.Limit;attempt++)
             {
-                request.Remaining--;
+                bool recovery=attempt>=12;
+                if(!recovery&&request.Remaining<=0){attempt=11;continue;}
                 Vector3 candidate;
-                if(attempt==0)candidate=original;
+                if(recovery)
+                {
+                    if(!request.Surface||request.Fallback==null)break;
+                    Vector3? next=request.Fallback();if(!next.HasValue)continue;candidate=next.Value;
+                }
+                else if(attempt==0){request.Remaining--;candidate=original;}
                 else
                 {
-                    if(request.Next==null)break;
+                    if(request.Next==null){attempt=11;continue;}
+                    request.Remaining--;
                     Vector3? next=request.Next();
                     if(!next.HasValue)continue;
                     candidate=next.Value;
                 }
-                // The originating selector owns allowed distances and protection rules.
+                // Source protection applies equally to original and perimeter candidates.
                 if(request.Allowed!=null&&!request.Allowed(candidate)){reason="source-disallowed";continue;}
                 if(!SiteRules.Validate(sites,candidate,radius,height,request.Surface,out chosen,out reason))continue;
                 if(request.Allowed!=null&&!request.Allowed(chosen)){reason="source-disallowed";continue;}
                 e.SetPosition(chosen,true);
                 request.LastAccepted=chosen;
-                Diagnostics.Accepted(world,e,request.Source,original,chosen,attempt,request.Surface);
+                Diagnostics.Accepted(world,e,request.Source+(recovery||request.SelectorRecovered?" perimeter-fallback":""),original,chosen,attempt,request.Surface);
                 return true;
             }
             Diagnostics.Rejected(request.Source,e.entityClass,original,reason);
