@@ -46,7 +46,7 @@ namespace YFAutomation
             for(int pass=0;pass<2;pass++)for(int i=firstSlot;i<items.Length&&left>0;i++)
             {
                 if(locked(i))continue;var s=items[i];bool empty=s==null||s.IsEmpty();
-                if(pass==0&&empty||pass==1&&!empty||!empty&&!s.itemValue.Equals(product.itemValue))continue;
+                if(pass==0&&empty||pass==1&&!empty||!empty&&!StackCompatibility.Matches(s.itemValue,product.itemValue))continue;
                 int amount=Math.Min(left,Math.Max(0,capacity(product.itemValue)-(empty?0:s.count)));
                 if(amount==0)continue;
                 if(empty){s=product.Clone();s.count=0;items[i]=s;}s.count+=amount;left-=amount;

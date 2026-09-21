@@ -12,7 +12,7 @@ namespace YFAutomation
                 for(int pass=0;pass<2;pass++)for(int j=0;j<output.Length;j++)
                 {
                     if(outputLocked(j))continue;var dst=output[j];bool empty=dst==null||dst.IsEmpty();
-                    if(pass==0&&empty||pass==1&&!empty||!empty&&!dst.itemValue.Equals(stack.itemValue))continue;
+                    if(pass==0&&empty||pass==1&&!empty||!empty&&!StackCompatibility.Matches(dst.itemValue,stack.itemValue))continue;
                     int amount=TransferRules.Amount(stack.count,empty?0:dst.count,capacity(stack.itemValue),TransferRules.Batch);
                     if(amount==0)continue;
                     var from=stack.Clone();from.count-=amount;var to=empty?stack.Clone():dst.Clone();to.count=(empty?0:dst.count)+amount;
@@ -33,7 +33,7 @@ namespace YFAutomation
                 {
                     if(outputLocked(j))continue;
                     var dst=output[j];bool empty=dst==null||dst.IsEmpty();
-                    if(pass==0&&empty||pass==1&&!empty||!empty&&!dst.itemValue.Equals(stack.itemValue))continue;
+                    if(pass==0&&empty||pass==1&&!empty||!empty&&!StackCompatibility.Matches(dst.itemValue,stack.itemValue))continue;
                     int amount=TransferRules.Amount(stack.count,empty?0:dst.count,capacity(stack.itemValue),TransferRules.Batch);
                     if(amount==0)continue;
                     var from=stack.Clone();from.count-=amount;

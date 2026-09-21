@@ -24,7 +24,7 @@ namespace YFAutomation
    for(int i=0;i<a.Length;i++){
     var s=a[i];if(s==null||s.IsEmpty()||skipA(i)||filter!=0&&s.itemValue.type!=filter)continue;
     for(int pass=0;pass<2;pass++)for(int j=0;j<b.Length;j++){
-     if(skipB(j))continue;var d=b[j];bool empty=d==null||d.IsEmpty();if(pass==0&&empty||pass==1&&!empty||!empty&&!s.itemValue.Equals(d.itemValue))continue;
+     if(skipB(j))continue;var d=b[j];bool empty=d==null||d.IsEmpty();if(pass==0&&empty||pass==1&&!empty||!empty&&!StackCompatibility.Matches(s.itemValue,d.itemValue))continue;
      int max=Math.Min(capacity,stackLimit(s.itemValue));int count=Math.Min(Math.Min(16,budget),Math.Min(s.count,max-(empty?0:d.count)));if(count<=0)continue;
      var from=s.Clone();var to=empty?s.Clone():d.Clone();from.count-=count;to.count=(empty?0:d.count)+count;a[i]=from.count==0?ItemStack.Empty:from;b[j]=to;return count;
     }
