@@ -204,4 +204,8 @@ RU: aecHeadConverter сохраняется только как скрытая �
     <property name="OutputGridHeight" value="3" />
   </append>
   <set xpath="/blocks/block[@name='cntApiary']/property[@name='Outputs']/@value">honey,honey,honey,honey,honey,honey,honey,honey,honey</set>
+  <!-- Solar power for the expanded base: 300W per quality-6 cell, 1800W with six.
+       Native quality scaling, daylight checks and sandbox power multiplier still apply. -->
+  <set xpath="/blocks/block[@name='solarbank']/property[@name='OutputPerStack']/@value">300</set>
+  <set xpath="/blocks/block[@name='solarbank']/property[@name='MaxPower']/@value">1800</set>
 </configs>
