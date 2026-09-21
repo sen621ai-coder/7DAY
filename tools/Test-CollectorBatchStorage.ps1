@@ -18,25 +18,25 @@ public class ItemStack { public int count; public ItemValue itemValue=new ItemVa
 public class Block { public string Name="AutoMinerIron"; public string GetBlockName()=>Name; }
 public class BlockValue { public Block Block=new Block(); }
 public class BlockCollector {
- public class OutputType { public string Name="IronBundle",OutputItem="bundle",OutputItemModded="bundle",Fuel="flower"; }
+ public class OutputType { public string Name="IronBundle",OutputItem="bundle",OutputItemModded="bundle",Fuel="flower"; public int DiscountedFuelDivisor=2; }
  public class FuelType {}
  public FuelType GetFuelType(string name)=>new FuelType();
- public int GetSandboxModifiedFuelNeeded(int count)=>count;
+ public int GetSandboxModifiedFuelNeeded(int count)=>count; public float OutputMultiplier=1; public int GetSandboxModifiedOutput(int count)=>(int)(count*OutputMultiplier);
  public OutputType Output=new OutputType(); public OutputType GetOutputType(string n)=>Output;
 }
 public class TileEntityCollector {
  public class FillData { public int slot,fillTime,fillTimeLeft; }
  public BlockValue blockValue=new BlockValue(); public BlockCollector collector=new BlockCollector();
- public bool HasModCount; public ItemStack[] Items=new ItemStack[6];
- public int Chickens=3;
+ public bool HasModCount,HasModCost; public ItemStack[] Items=new ItemStack[6];
+ public int Chickens=3; public int getCatalystCount()=>Chickens; public int getFuelCost(BlockCollector.OutputType t)=>30;
  public BlockCollector.OutputType[] SlotTypes;
  public BlockCollector.OutputType GetSlotOutputType(int i)=>SlotTypes==null?collector.Output:SlotTypes[i];
  public int getCurrentConvertCount(BlockCollector.OutputType t) {
   int native=t.Name=="honey"?(HasModCount?10:5):t.Name=="egg"?2*Chickens:t.Name=="feather"?5*Chickens:Chickens>0?1:0;
   if(blockValue.Block.Name!="cntChickenCoop")return native;
-  object[] args={this,native};
+  object[] args={this,t,native};
   typeof(AECT16RuntimeFix.CollectorBatchStorage).GetMethod("BatchCount",BindingFlags.NonPublic|BindingFlags.Static).Invoke(null,args);
-  return (int)args[1];
+  return (int)args[2];
  }
  public int FuelCount;
  public int fuelCost(BlockCollector.OutputType t,int count)=>10;
@@ -85,17 +85,17 @@ public static class CollectorFixture {
   foreach(string name in new[]{"AutoMinerIron","AutoMinerLead","AutoMinerCoal","AutoMinerNitrate","AutoMinerClay","AutoMinerShale","AutoMinerBrass","yfAutoForestry"})
    foreach(bool packer in new[]{false,true}) {
     var machine=new TileEntityCollector{HasModCount=packer}; machine.blockValue.Block.Name=name;
-    object[] count={machine,packer?4:1};Call("BatchCount",count);
-    int batch=(int)count[1];Check(batch==(packer?6:3),"batch must equal full slot: "+name);
+    object[] count={machine,machine.collector.Output,packer?4:1};Call("BatchCount",count);
+    int batch=(int)count[2];Check(batch==(packer?6:3),"batch must equal full slot: "+name);
     Check(Produce(machine,batch)==batch && machine.Items[0].count==batch,"first batch fills one slot");
     Check(Produce(machine,batch)==batch && machine.Items[1].count==batch,"next batch fills next slot");
    }
   foreach(string name in new[]{"cntApiary","dewCollector"}) {
    var other=new TileEntityCollector();other.blockValue.Block.Name=name;
-   object[] count={other,7};Call("BatchCount",count);Check((int)count[1]==7,"non-miner yield changed");
+   object[] count={other,other.collector.Output,7};Call("BatchCount",count);Check((int)count[2]==7,"non-miner yield changed");
   }
   Console.WriteLine("PASS: all eight miners/forestry yield 3/6 per batch and fill one slot; coop/apiary/other yields unchanged.");
-  foreach(int chickens in new[]{1,3,6})foreach(int slots in new[]{6,9}) {
+  foreach(int chickens in new[]{1,2,3,4,5,6})foreach(int slots in new[]{6,9}) {
    var coop=new TileEntityCollector{Chickens=chickens,Items=new ItemStack[slots],SlotTypes=new BlockCollector.OutputType[slots]};
    coop.blockValue.Block.Name="cntChickenCoop";
    var outputs=new[]{new BlockCollector.OutputType{Name="egg",OutputItem="foodEgg",OutputItemModded="foodEgg"},
@@ -104,7 +104,7 @@ public static class CollectorFixture {
    for(int j=0;j<slots;j++)coop.SlotTypes[j]=outputs[j/3];
    for(int j=0;j<slots/3;j++) {
     var output=outputs[j];int batch=coop.getCurrentConvertCount(output),total=0,steps=0;
-    Check(batch==(j==0?4*chickens:j==1?10*chickens:2),"coop aligned batch yield");
+    Check(batch==(j==0?4*chickens:j==1?10*chickens:chickens<=2?2:chickens<=4?3:4),"coop aligned batch yield");
     while(Find(coop,output)>=0){total+=Produce(coop,batch,output);Check(++steps<=3,"coop should fill one slot per batch");}
     Check(total==batch*3,"coop group total");
     for(int k=j*3;k<j*3+3;k++)Check(coop.Items[k].count==batch && coop.Items[k].itemValue.ItemClass.Name==output.OutputItem,"coop cap or product crossed rows");
@@ -113,10 +113,29 @@ public static class CollectorFixture {
    object[] coopSize={coop,new Vector2i(3,slots/3)};Call("Size",coopSize);Check(((Vector2i)coopSize[1]).y==slots/3,"coop nesting box layout changed");
    coop.Chickens=1;foreach(var output in outputs)Produce(coop,coop.getCurrentConvertCount(output),output);
    if(chickens>1)Check(coop.Items[0].count==4*chickens,"removing chickens deleted stored products");
+   if(slots==9)Check(coop.Items[6].count==(chickens<=2?2:chickens<=4?3:4),"removing chickens deleted bred chickens");
   }
   var emptyCoop=new TileEntityCollector{Chickens=0};emptyCoop.blockValue.Block.Name="cntChickenCoop";
   foreach(string name in new[]{"egg","feather","chicken"})Check(emptyCoop.getCurrentConvertCount(new BlockCollector.OutputType{Name=name})==0,"empty coop produced");
-  Console.WriteLine("PASS: coop 1/3/6 chickens; zero chickens yields zero; 6/9 slots; one batch per slot; separate output rows; refill; chicken removal preserves output.");
+  Console.WriteLine("PASS: coop 1/2/3/4/5/6 chickens; zero chickens yields zero; 6/9 slots; one batch per slot; separate output rows; refill; chicken removal preserves output.");
+  var breeding=new BlockCollector.OutputType{Name="chicken"};
+  var breeder=new TileEntityCollector{Chickens=6};breeder.blockValue.Block.Name="cntChickenCoop";
+  foreach(bool discount in new[]{false,true})foreach(int count in new[]{0,1,2,3,4}) {
+   breeder.HasModCost=discount;
+   object[] fuelArgs={breeder,breeding,count,30};Call("BreedingFuelCost",fuelArgs);
+   Check((int)fuelArgs[3]==(discount?(15*count+1)/2:15*count),"breeding cost must scale with actual output and round up");
+  }
+  foreach(int fuel in new[]{0,7,8,14,15,22,23,29,30,44,45,59,60})foreach(bool discount in new[]{false,true}) {
+   breeder.HasModCost=discount;int count=4;
+   while(count>0){object[] cost={breeder,breeding,count,30};Call("BreedingFuelCost",cost);if((int)cost[3]<=fuel)break;count--;}
+   Check(count==(discount?Math.Min(4,2*fuel/15):Math.Min(4,fuel/15)),"insufficient feed production limit");
+  }
+  breeder.collector.OutputMultiplier=0.5f;Check(breeder.getCurrentConvertCount(breeding)==2,"sandbox output scaling");
+  breeder.collector.OutputMultiplier=2;Check(breeder.getCurrentConvertCount(breeding)==8,"sandbox output scaling twice");
+  breeder.Chickens=0;Check(breeder.getCurrentConvertCount(breeding)==0,"sandbox cannot produce without chickens");
+  object[] eggCost={breeder,new BlockCollector.OutputType{Name="egg"},4,123};Call("BreedingFuelCost",eggCost);Check((int)eggCost[3]==123,"egg fuel changed");
+  breeder.blockValue.Block.Name="cntApiary";object[] otherCost={breeder,breeding,4,123};Call("BreedingFuelCost",otherCost);Check((int)otherCost[3]==123,"other collector fuel changed");
+  Console.WriteLine("PASS: breeding costs 30/45/60; discount rounding; partial output; insufficient feed; sandbox scaling; fuel patch scope.");
   var honey=new BlockCollector.OutputType{Name="honey",OutputItem="foodHoney",OutputItemModded="foodHoney"};
   var hive=new TileEntityCollector();hive.blockValue.Block.Name="cntApiary";
   var hivePatch=typeof(AECT16RuntimeFix.ApiaryProduction);

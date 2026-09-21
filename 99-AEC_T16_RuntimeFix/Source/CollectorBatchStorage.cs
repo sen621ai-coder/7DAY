@@ -19,12 +19,13 @@ namespace AECT16RuntimeFix
         static bool IsCoop(TileEntityCollector te) => te.blockValue.Block.GetBlockName() == "cntChickenCoop";
         static int SlotCapacity(TileEntityCollector te, BlockCollector.OutputType type)
         {
-            // Coop yield is now doubled by BatchCount; keep the previous slot capacity.
+            // Each slot holds one current batch; reducing the flock preserves stored items.
             return IsCoop(te) ? te.getCurrentConvertCount(type) : Capacity(te.HasModCount);
         }
         public static void Install(Harmony h)
         {
             Patch(h, "getCurrentConvertCount", nameof(BatchCount), false);
+            Patch(h, "fuelCost", nameof(BreedingFuelCost), false);
             Patch(h, "getFirstFreeIndex", nameof(FreeSlot), true);
             Patch(h, "handleUpdateForOutputType", nameof(Prepare), true);
             Patch(h, "getMaxProductionCount", nameof(LimitBatch), false);
@@ -39,12 +40,28 @@ namespace AECT16RuntimeFix
             var patch = new HarmonyMethod(typeof(CollectorBatchStorage), method);
             h.Patch(AccessTools.Method(typeof(TileEntityCollector), target), prefix: prefix ? patch : null, postfix: prefix ? null : patch);
         }
-        static void BatchCount(TileEntityCollector __instance, ref int __result)
+        static void BatchCount(TileEntityCollector __instance, BlockCollector.OutputType __0, ref int __result)
         {
             // Exactly one full slot per batch for miners/forestry, including clay.
             // Native fuel and timer logic remains unchanged. Zero chickens still yields zero.
             if (!Applies(__instance)) return;
+            if (IsCoop(__instance) && __0.Name == "chicken")
+            {
+                int chickens = __instance.getCatalystCount();
+                int batch = chickens <= 0 ? 0 : chickens <= 2 ? 2 : chickens <= 4 ? 3 : 4;
+                __result = __instance.collector.GetSandboxModifiedOutput(batch);
+                return;
+            }
             __result = IsCoop(__instance) ? __result * 2 : Capacity(__instance.HasModCount);
+        }
+        static void BreedingFuelCost(TileEntityCollector __instance, BlockCollector.OutputType __0, int __1, ref int __result)
+        {
+            if (!IsCoop(__instance) || __0.Name != "chicken") return;
+            // Preserve the old two-chicken batch price, charging for actual new output.
+            // Apply the native sandbox fuel setting and run discount before rounding up.
+            int divisor = 2 * (__instance.HasModCost ? Math.Max(1, __0.DiscountedFuelDivisor) : 1);
+            long cost = (long)__instance.getFuelCost(__0) * Math.Max(0, __1);
+            __result = (int)Math.Min(int.MaxValue, (cost + divisor - 1) / divisor);
         }
         static bool CanFill(ItemStack stack, BlockCollector.OutputType type, int capacity)
         {
