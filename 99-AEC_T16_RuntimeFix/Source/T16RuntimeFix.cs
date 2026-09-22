@@ -24,6 +24,8 @@ namespace AECT16RuntimeFix
                 MD500FlightControls.Install(harmony);
                 ApacheFlightVisuals.Install(harmony);
                 ApacheWeapons.Install(harmony);
+                ApacheArmor.Install();
+                AutoMinerAudit.Install();
                 CollectorBatchStorage.Install(harmony);
                 try { AutoForestryModel.Install(harmony, modInstance.Path); }
                 catch(Exception ex) { SafeLog("[AutoForestry] Visual provider unavailable; other runtime systems continue: "+ex); }

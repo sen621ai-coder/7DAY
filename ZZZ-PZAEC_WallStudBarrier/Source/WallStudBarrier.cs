@@ -45,7 +45,8 @@ namespace PZAEC.WallStudBarrier
         public static bool Protected(WorldBase world, EntityAlive enemy, Vector3i target)
         {
             if (world == null || !Enemy(enemy)) return false;
-            if (Stud(world.GetBlock(target))) return true;
+            // The stud itself can be damaged; only a target behind it is shielded.
+            if (Stud(world.GetBlock(target))) return false;
             var start = enemy.position + new Vector3(0, Mathf.Clamp(enemy.physicsHeight * .5f, .2f, 1.5f), 0);
             var end = new Vector3(target.x + .5f, target.y + .5f, target.z + .5f);
             return Crosses(start,end,(x,y,z) => Stud(world.GetBlock(x,y,z)));
@@ -54,7 +55,14 @@ namespace PZAEC.WallStudBarrier
         {
             if (!Enemy(enemy) || enemy.world == null || enemy.moveHelper == null) return false;
             var hit = enemy.moveHelper.HitInfo;
-            return hit != null && hit.bHitValid && Protected(enemy.world, enemy, hit.hit.blockPos);
+            return hit != null && hit.bHitValid && AvoidTarget(enemy.world, enemy, hit.hit.blockPos);
+        }
+        public static bool AvoidTarget(WorldBase world, EntityAlive enemy, Vector3i target)
+        {
+            // AI target refusal is independent of damage resistance. Even old
+            // demolition tasks cannot choose a stud while a detour is pending.
+            return world != null && Enemy(enemy) &&
+                (Stud(world.GetBlock(target)) || Protected(world, enemy, target));
         }
         public static void CanBreakPostfix(EntityAlive ___theEntity, ref bool __result)
         { if (__result && (Recovery.CoolingDown(___theEntity) || BlockedHit(___theEntity))) __result = false; }
@@ -67,13 +75,33 @@ namespace PZAEC.WallStudBarrier
         }
         public static void FindDestroyPostfix(EntityAlive ___entity, Vector3 __0, ref bool __result)
         {
-            if (__result && Enemy(___entity) && Protected(___entity.world, ___entity,
+            if (__result && Enemy(___entity) && AvoidTarget(___entity.world, ___entity,
                 new Vector3i(Mathf.FloorToInt(__0.x),Mathf.FloorToInt(__0.y),Mathf.FloorToInt(__0.z)))) __result = false;
         }
-        public static bool DamagePrefix(WorldBase _world, BlockValueRef _blockValueRef,
-            int _entityIdThatDamaged, ref int __result)
+        public static int ReducedDamage(int damage)
         {
+            // Round positive damage up: weak hits must not become absolute immunity.
+            return damage <= 0 ? damage : damage / 5 + (damage % 5 == 0 ? 0 : 1);
+        }
+        public static void ExplosionResistancePostfix(Block __instance, ref float __result)
+        {
+            if (string.Equals(__instance.GetAutoShapeShapeName(), "wallStud", StringComparison.OrdinalIgnoreCase))
+                __result = 1f - (1f - __result) * .2f;
+        }
+        public static bool DamagePrefix(WorldBase _world, BlockValueRef _blockValueRef,
+            int _entityIdThatDamaged, ItemActionAttack.AttackHitInfo _attackHitInfo,
+            ref int _damagePoints, ref int __result)
+        {
+            if (_world == null || _damagePoints <= 0) return true;
             var attacker = _world == null ? null : _world.GetEntity(_entityIdThatDamaged) as EntityAlive;
+            if (Stud(_world.GetBlock(_blockValueRef.BlockPosition)))
+            {
+                // Native player tool/weapon hits provide attack details; environmental
+                // damage has none. Native explosions use GetExplosionResistance instead.
+                if (!(attacker is EntityPlayer) || _attackHitInfo == null)
+                    _damagePoints = ReducedDamage(_damagePoints);
+                return true;
+            }
             if (!Protected(_world, attacker, _blockValueRef.BlockPosition)) return true;
             // Returning before native damage avoids destruction, drops and damage callbacks.
             __result = 0; return false;
@@ -86,12 +114,13 @@ namespace PZAEC.WallStudBarrier
             var harmony = new Harmony("pzaec.wallstudbarrier");
             Navigation.Install(harmony);
             Recovery.Install(harmony);
+            harmony.Patch(AccessTools.Method(typeof(Block), "GetExplosionResistance"), postfix:new HarmonyMethod(typeof(Barrier), nameof(Barrier.ExplosionResistancePostfix)));
             harmony.Patch(AccessTools.Method(typeof(EAIBreakBlock),"CanExecute"),postfix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.CanBreakPostfix)));
             harmony.Patch(AccessTools.Method(typeof(EAIBreakBlock),"AttackBlock"),prefix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.BreakPrefix)));
             harmony.Patch(AccessTools.Method(typeof(EntityAlive),"Attack",new[]{typeof(bool)}),prefix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.AttackPrefix)));
             harmony.Patch(AccessTools.Method(typeof(EntityMoveHelper),"FindDestroyPos",new[]{typeof(Vector3).MakeByRefType(),typeof(int),typeof(bool)}),postfix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.FindDestroyPostfix)));
             harmony.Patch(AccessTools.Method(typeof(Block),"DamageBlock",new[]{typeof(WorldBase),typeof(BlockValueRef),typeof(BlockValue),typeof(int),typeof(int),typeof(ItemActionAttack.AttackHitInfo),typeof(bool),typeof(bool)}),prefix:new HarmonyMethod(typeof(Barrier),nameof(Barrier.DamagePrefix)));
-            Log.Out("[WallStudBarrier] Enemy path search excludes intact wallStud cells; smoothing and demolition guards enabled.");
+            Log.Out("[WallStudBarrier] Stud damage reduced by 80%; explosion resistance, rear-wall guards and navigation enabled.");
         }
     }
 }

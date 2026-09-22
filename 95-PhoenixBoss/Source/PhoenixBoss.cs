@@ -7,7 +7,7 @@ using UnityEngine;
 using HarmonyLib;
 namespace YFPhoenix {
  public sealed class PhoenixMod:IModApi {
-  public void InitMod(Mod mod){PhoenixVisual.ModPath=mod.Path;new Harmony("yf.phoenix.fire").Patch(AccessTools.Method(typeof(GameManager),"ExplosionClient"),postfix:new HarmonyMethod(typeof(PhoenixFire),nameof(PhoenixFire.SynchronizeLifetime)));ModEvents.GameUpdate.RegisterHandler(PhoenixEncounter.Update);Log.Out("[PhoenixBoss] T16-T19 blood moon finale loaded.");}
+  public void InitMod(Mod mod){PhoenixVisual.ModPath=mod.Path;new Harmony("yf.phoenix.fire").Patch(AccessTools.Method(typeof(GameManager),"ExplosionClient"),postfix:new HarmonyMethod(typeof(PhoenixFire),nameof(PhoenixFire.SynchronizeLifetime)));ModEvents.GameUpdate.RegisterHandler(PhoenixEncounter.Update);Log.Out("[PhoenixBoss] 0.1.3 T16-T19 blood moon finale loaded; registry-based entity lookup.");}
  }
  public sealed class EncounterState {public int Night=-1,LastConsumedNight=-1;public bool Armed;public ulong Deadline;public List<string> Participants=new List<string>();}
  public static class PhoenixRules {
@@ -48,8 +48,9 @@ namespace YFPhoenix {
     Vector3 site=Vector3.zero;bool found=false;
     for(int i=0;i<12;i++){float a=i*Mathf.PI/6;var candidate=target.position+new Vector3(Mathf.Cos(a)*40,0,Mathf.Sin(a)*40);if(!w.IsChunkAreaLoaded(candidate)||w.IsWithinTraderArea(new Vector3i(candidate)))continue;candidate.y=Mathf.Max(target.position.y+12,w.GetHeightAt(candidate.x,candidate.z)+12);if(candidate.y>245)continue;if(!w.GetBlock(new Vector3i(candidate)).isair||!w.GetBlock(new Vector3i(candidate+Vector3.up*2)).isair)continue;site=candidate;found=true;break;}
     if(!found){Reason("Waiting for loaded open air near participant entity="+target.entityId);return;}
-    int tier=PhoenixRules.Tier(target.gameStage),id=EntityClass.FromString("yfPhoenixBossT"+tier);if(id<0)throw new Exception("Missing phoenix entity class");
-    var boss=EntityFactory.CreateEntity(id,site) as EntityPhoenixBoss;if(boss==null)throw new Exception("Phoenix entity construction failed");
+    int tier=PhoenixRules.Tier(target.gameStage);string entityName="yfPhoenixBossT"+tier;
+    int id=PhoenixEntityLookup.Resolve(entityName);
+    var boss=EntityFactory.CreateEntity(id,site) as EntityPhoenixBoss;if(boss==null)throw new Exception("Phoenix entity construction failed: name="+entityName+" id="+id);
     // Reserve before spawning: a crash may skip a finale, but never awards a second boss for the same night.
     Consume();w.SpawnEntityInWorld(boss);boss.SetAttackTarget(target,1200);boss.SetRevengeTarget(target);
     GameManager.Instance.ChatMessageServer(null,EChatType.Global,-1,"[血月终章] T"+tier+" 焚天凤凰降临！位置："+Mathf.RoundToInt(site.x)+", "+Mathf.RoundToInt(site.z),null,EMessageSender.Server,GeneratedTextManager.BbCodeSupportMode.NotSupported);

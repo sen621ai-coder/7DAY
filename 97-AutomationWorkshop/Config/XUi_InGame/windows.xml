@@ -5,9 +5,9 @@
       <sprite name="background" width="1060" height="680" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
       <sprite name="header" width="1060" height="43" sprite="ui_game_panel_header" depth="1" />
       <label name="title" text="搬运无人机 · 停机坪" pos="14,-8" width="592" height="30" font_size="23" depth="4" color="[white]" />
-      <label name="details" text="" pos="14,-55" width="592" height="310" font_size="18" depth="4" color="[white]" />
-      <label name="coordinateHint" text="采集设备最多 8 台 · 从右侧列表选择" pos="14,-374" width="592" height="26" font_size="19" depth="4" color="[white]" />
-      <label name="selection" text="在右侧点击设备即可绑定，无需输入坐标" pos="14,-406" width="592" height="32" font_size="18" depth="4" color="[white]" />
+      <label name="selection" text="" pos="14,-55" width="592" height="90" font_size="18" depth="4" color="[white]" />
+      <label name="details" text="" pos="14,-155" width="592" height="248" font_size="17" depth="4" color="[white]" />
+      <label name="coordinateHint" text="采集范围 64 格 · 目标范围 1000 格 · 状态自动刷新" pos="14,-412" width="592" height="26" font_size="17" depth="4" color="[white]" />
       <button name="add" pos="14,-448" width="142" height="34" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
         <label name="addText" text="选择矿机/林场" pos="8,-4" width="126" height="26" font_size="18" depth="4" color="[white]" />
       </button>
@@ -32,8 +32,14 @@
       <button name="close" pos="464,-496" width="142" height="34" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
         <label name="closeText" text="关闭" pos="8,-4" width="126" height="26" font_size="18" depth="4" color="[white]" />
       </button>
-      <label name="notice" text="" pos="14,-546" width="592" height="54" font_size="18" depth="4" color="[white]" />
-      <label name="hint" text="来源和仓库不限放置者。\n暂停调度不影响已出发航班；需要返回时使用召回。" pos="14,-608" width="592" height="58" font_size="17" depth="4" color="[white]" />
+      <button name="locate" pos="14,-546" width="292" height="34" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+        <label name="locateText" text="定位新货目标箱" pos="8,-4" width="276" height="26" font_size="18" depth="4" color="[white]" />
+      </button>
+      <button name="locateShipment" pos="314,-546" width="292" height="34" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+        <label name="locateShipmentText" text="定位本批货目标箱" pos="8,-4" width="276" height="26" font_size="18" depth="4" color="[white]" />
+      </button>
+      <label name="notice" text="" pos="14,-590" width="592" height="36" font_size="17" depth="4" color="[white]" />
+      <label name="hint" text="暂停只停止新航班；要停机请先暂停再召回。\n定位会更新地图临时导航点；来源和仓库不限放置者。" pos="14,-633" width="592" height="40" font_size="16" depth="4" color="[white]" />
       <label name="warehouseTitle" text="选择收货仓库" pos="636,-55" width="408" height="28" font_size="22" depth="4" color="[white]" />
       <label name="warehouseScope" text="已加载区域 · 停机坪 1000 格内" pos="636,-87" width="408" height="23" font_size="17" depth="4" color="[white]" />
       <textfield name="warehouseQuery" pos="636,-118" width="296" height="32" font_size="18" character_limit="64" clear_button="true" focus_on_open="false" />

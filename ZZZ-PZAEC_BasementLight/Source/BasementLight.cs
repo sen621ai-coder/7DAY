@@ -19,7 +19,7 @@ namespace PZAEC.BasementLight
             harmony.Patch(AccessTools.Method(typeof(BlockPoweredLight),
                 nameof(BlockPoweredLight.OnBlockEntityTransformAfterActivated)),
                 postfix:new HarmonyMethod(typeof(ModApi),nameof(Attach)));
-            Log.Out("[BasementLight] v1.0.7 12x12 softlight with dim shadowed wall/ceiling fill; power 15W.");
+            Log.Out("[BasementLight] v1.0.8 12x12 softlight for 5-6 block ceilings with shadowed wall/ceiling fill; power 15W.");
         }
         public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
         {
@@ -222,3 +222,4 @@ namespace PZAEC.BasementLight
         }
     }
 }
+

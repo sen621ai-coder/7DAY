@@ -118,7 +118,7 @@ RU: aecHeadConverter сохраняется только как скрытая �
       <property name="UnlockedBy" value="MasterWorkstations" />
       <property name="CreativeMode" value="Player" />
       <property name="ItemTypeIcon" value="farming" />
-      <property name="Material" value="Mmetal" />
+      <property name="Material" value="MyfArmoredAutoMiner" />
       <property name="Stacknumber" value="1" />
       <property name="Shape" value="ModelEntity" />
       <property name="Model" value="yfAutoForestryRuntime.prefab" />
@@ -142,7 +142,7 @@ RU: aecHeadConverter сохраняется только как скрытая �
       <property name="EconomicValue" value="5" />
       <property name="EconomicBundleSize" value="1" />
       <property name="SellableToTrader" value="false" />
-      <property name="MaxDamage" value="2500" />
+      <property name="MaxDamage" value="500000" />
       <property name="HeatMapStrength" value="1.2" />
       <property name="HeatMapTime" value="5000" />
       <property name="HeatMapFrequency" value="1000" />
@@ -208,4 +208,7 @@ RU: aecHeadConverter сохраняется только как скрытая �
        Native quality scaling, daylight checks and sandbox power multiplier still apply. -->
   <set xpath="/blocks/block[@name='solarbank']/property[@name='OutputPerStack']/@value">300</set>
   <set xpath="/blocks/block[@name='solarbank']/property[@name='MaxPower']/@value">1800</set>
+  <!-- Armored resource collectors: inherited by lead/coal/nitrate/clay/shale/brass. -->
+  <set xpath="/blocks/block[@name='AutoMinerIron']/property[@name='MaxDamage']/@value">500000</set>
+  <set xpath="/blocks/block[@name='AutoMinerIron']/property[@name='Material']/@value">MyfArmoredAutoMiner</set>
 </configs>

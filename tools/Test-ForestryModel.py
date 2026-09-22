@@ -79,7 +79,8 @@ assert props['OutputTypes']=='{IronBundle,GasCan,1000,0,1000,yfForestryWoodBundl
 assert props['ModTypes']=='Speed,Count,Modify'
 assert props['ModTransformEnableNames']=='ForestrySpeed,ForestryPacker,ForestrySiren'
 assert props['ModTransformDisableNames']==',,' and props['RequiredModsOnly']=='true'
-assert props['CloseEvent']=='block_autominer_uw' and props['MaxDamage']=='2500'
+assert props['CloseEvent']=='block_autominer_uw' and props['MaxDamage']=='500000'
+assert props['Material']=='MyfArmoredAutoMiner'
 source=(root/'99-AEC_T16_RuntimeFix/Source/AutoForestryModel.cs').read_text()
 for name in props['ModTransformEnableNames'].split(','): assert '"'+name+'"' in source
 assert len(block.findall("property[@class='RepairItems']"))==1

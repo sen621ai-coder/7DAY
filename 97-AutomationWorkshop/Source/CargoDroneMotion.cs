@@ -55,6 +55,8 @@ namespace YFAutomation.CargoDrones
         CargoLocalRoute search;
         double ceiling;
         bool routeFailed;
+        long blockedWait;
+        const long PathRetryUnits=3000;
         readonly CargoReturnTrail trail;
         readonly long returnReserve;
         public bool ReturningHome{get;private set;}
@@ -104,11 +106,11 @@ namespace YFAutomation.CargoDrones
         {
             // On return, keep the current edge and remaining corridor. Clearing
             // them here would silently replace an obstructed route with a shortcut.
-            if(!ReturningHome){hasSegment=false;detour.Clear();}search=null;routeFailed=false;
+            if(!ReturningHome){hasSegment=false;detour.Clear();}search=null;routeFailed=false;blockedWait=0;
         }
         public void ReturnHome()
         {
-            if(ReturningHome)return;
+            if(ReturningHome){RetryPath();return;}
             hasSegment=false;detour.Clear();search=null;routeFailed=false;ReturningHome=true;
             Target=trail.Home;foreach(var point in trail.ReverseWaypoints())detour.Enqueue(point);
             Arrived=detour.Count==0;Hold=CargoHold.None;
@@ -124,7 +126,15 @@ namespace YFAutomation.CargoDrones
             if(!ownerOnline||paused){Hold=CargoHold.OwnerOffline;return;}
             if(Arrived){Hold=CargoHold.None;return;}
             if(elapsedUnits==0)return;
-            if(routeFailed){Hold=CargoHold.PathBlocked;return;}
+            if(routeFailed)
+            {
+                // Transient entities (including the player operating the hub)
+                // must not latch navigation forever. Retry at a bounded rate,
+                // keeping the recorded return corridor and all collision checks.
+                Hold=CargoHold.PathBlocked;blockedWait+=Math.Min(100,elapsedUnits);
+                if(blockedWait<PathRetryUnits)return;
+                RetryPath();
+            }
             if(search!=null)
             {
                 search.Advance();Hold=search.Hold;

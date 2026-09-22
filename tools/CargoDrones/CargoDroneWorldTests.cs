@@ -10,15 +10,16 @@ public static class CargoDroneWorldTests
     static void Check(bool ok,string message){checks++;if(!ok)throw new Exception("World FAIL: "+message);}
     static void Reject(Action action,string message){bool threw=false;try{action();}catch{threw=true;}Check(threw,message);}
     sealed class Air : ICargoAirspace
-    {public bool Released,Loading;public int Prepares;public CargoHold Prepare(CargoPoint a,CargoPoint b){if(Released)throw new Exception("Released airspace reused");Prepares++;return Loading?CargoHold.ChunkLoading:CargoHold.None;}public CargoSweep Sweep(CargoPoint a,CargoPoint b){if(Released)throw new Exception("Released airspace reused");return CargoSweep.Clear;}public void ReachedSegment(CargoPoint p){}}
+    {public bool Released,Loading,Blocked;public int Prepares;public CargoHold Prepare(CargoPoint a,CargoPoint b){if(Released)throw new Exception("Released airspace reused");Prepares++;return Loading?CargoHold.ChunkLoading:CargoHold.None;}public CargoSweep Sweep(CargoPoint a,CargoPoint b){if(Released)throw new Exception("Released airspace reused");return Blocked?CargoSweep.Blocked:CargoSweep.Clear;}public void ReachedSegment(CargoPoint p){}}
     sealed class Endpoint : ICargoDurableEndpoint
     {
         public CargoInventory Value;
+        public int SnapshotCalls;
         public Guid LastTransaction{get;private set;}
         public bool Pending;
         public bool Uncertain;
         Guid fence;
-        public CargoInventory Snapshot(){return Value;}
+        public CargoInventory Snapshot(){SnapshotCalls++;return Value;}
         public bool AcquireFence(Guid id,long revision){if(fence!=Guid.Empty||revision!=Value.Revision)return false;fence=id;return true;}
         public void Apply(CargoPlan p,Guid id){if(fence!=id||!p.Matches(Value))throw new Exception("Plan/fence mismatch");Value=new CargoInventory(Value.Id,Value.Incarnation,Value.Revision+1,Value.Owner,p.EndpointAfter,new bool[Value.Length],Enumerable.Repeat(true,Value.Length).ToArray());LastTransaction=id;}
         public void RequestDurableSave(Guid id){}
@@ -98,6 +99,23 @@ public static class CargoDroneWorldTests
             Check(restored.Status()[0].Configuration.Paused&&restored.Status()[0].Battery==battery,"world checkpoint restores config and battery");
             Reject(()=>new CargoWorldState(saved.Missions,new CargoHubState[0]),"orphaned missions rejected");
             Reject(()=>service.Configure(config.HubId,"intruder",config.Revision,config),"configuration ownership enforced");
+        }
+        // A docked hub checks immediately, then backs off for five seconds only
+        // after every configured and available source is confirmed empty.
+        world=Guid.NewGuid();adapter=new Adapter();root=Path.Combine(root,"empty-poll");Directory.CreateDirectory(root);config=Config(world,adapter);
+        using(var journal=new CargoFileJournal(Path.Combine(root,"world.wal"),world))using(var store=new CargoCheckpointStore(Path.Combine(root,"checkpoint"),world))
+        {
+            var source=adapter.Endpoints[config.Sources[0].EndpointId];var empty=source.Value;
+            source.Value=new CargoInventory(empty.Id,empty.Incarnation,empty.Revision+1,empty.Owner,new CargoItem[empty.Length],new bool[empty.Length],Enumerable.Repeat(true,empty.Length).ToArray());
+            var service=new CargoWorldService(world,journal,store,adapter);service.Register(config);service.Tick(100);
+            int emptyScans=source.SnapshotCalls;
+            Check(service.ActiveFlights==0&&emptyScans>0&&service.Status()[0].Message.Contains("每5秒检查"),"empty hub enters five-second polling wait after an immediate scan");
+            var current=source.Value;
+            source.Value=new CargoInventory(current.Id,current.Incarnation,current.Revision+1,current.Owner,new[]{new CargoItem(new byte[]{4,5,6},4,6000)},new bool[1],new[]{true});
+            for(int i=0;i<49;i++)service.Tick(100);
+            Check(service.ActiveFlights==0&&source.SnapshotCalls==emptyScans,"empty polling performs no inventory reads before five seconds elapse");
+            for(int i=0;i<2&&service.ActiveFlights==0;i++)service.Tick(100);
+            Check(service.ActiveFlights==1&&source.SnapshotCalls>emptyScans,"cargo discovered and dispatched on the five-second retry");
         }
         // More than four eligible hubs must queue; no hub can claim a fifth slot.
         world=Guid.NewGuid();adapter=new Adapter();root=Path.Combine(root,"limits");Directory.CreateDirectory(root);
@@ -211,6 +229,34 @@ public static class CargoDroneWorldTests
             var unload=CargoPlanner.Unload(adapter.Endpoints[config.Target.EndpointId].Value,tx.Plan.CargoAfter,config.Owner);
             journal.Append(CargoJournalKind.Prepare,new CargoTransaction(Guid.NewGuid(),tx.FlightId,world,1,unload));
             Reject(()=>store.LoadWorldForRecovery(journal),"recovery refuses a tail spanning another uncheckpointed transaction");
+        }
+        // Reproduce recall -> change target -> clear -> recall while an entity
+        // blocks the return edge, including reopening a saved blocked flight.
+        world=Guid.NewGuid();adapter=new Adapter();root=Path.Combine(root,"blocked-recall");Directory.CreateDirectory(root);
+        using(var journal=new CargoFileJournal(Path.Combine(root,"world.wal"),world))using(var store=new CargoCheckpointStore(Path.Combine(root,"checkpoint"),world))
+        {
+            var service=new CargoWorldService(world,journal,store,adapter);config=Config(world,adapter);service.Register(config);
+            for(int i=0;i<100&&service.Status()[0].Packages==0;i++)service.Tick(100);
+            var original=config.Target;Guid id=config.HubId,flight=service.Status()[0].Flight;
+            adapter.Spaces[flight].Blocked=true;service.Recall(id,"owner");service.Tick(100);
+            Check(service.Status()[0].Hold==CargoHold.PathBlocked,"recall is blocked by a transient obstacle");
+            var next=adapter.Bind(world,"owner",new CargoPosition(12,100,0),false);
+            var updated=config.SetTarget("owner",config.Revision,next,new CargoRules());service.Configure(id,"owner",config.Revision,updated);config=updated;
+            updated=config.SetTarget("owner",config.Revision,null,new CargoRules());service.Configure(id,"owner",config.Revision,updated);config=updated;
+            updated=config.SetPaused("owner",config.Revision,true);service.Configure(id,"owner",config.Revision,updated);config=updated;
+            service.Recall(id,"owner");service.Tick(100);
+            Check(service.Status()[0].ShipmentTarget.Matches(original)&&service.Status()[0].Configuration.Target==null&&service.Status()[0].Packages==4,"clear and repeated recall retain the real shipment target and all cargo");
+            var held=service.Status()[0].Position;var battery=service.Status()[0].Battery;
+            for(int i=0;i<100;i++)service.Tick(100);
+            Check(service.Status()[0].Position.Distance(held)==0&&service.Status()[0].Battery==battery&&!service.Faulted,"persistent obstacle is retried safely without moving or draining battery");
+            service.Checkpoint();var saved=store.LoadWorld(journal);
+            Check(saved.Missions.Single().Motion.Blocked,"fixture saves the formerly permanent blocked state");
+            service=new CargoWorldService(world,journal,store,adapter);service.Restore(saved);
+            for(int i=0;i<200&&service.Status()[0].Phase!=CargoPhase.Docked;i++)service.Tick(100);
+            Check(service.Status()[0].Phase==CargoPhase.Docked&&service.Status()[0].Packages==4&&!service.Faulted,"restored blocked return recovers automatically after obstacle disappears");
+            updated=config.SetPaused("owner",config.Revision,false);service.Configure(id,"owner",config.Revision,updated);
+            for(int i=0;i<300&&(service.Status()[0].Packages>0||service.Status()[0].Phase!=CargoPhase.Docked);i++)service.Tick(100);
+            Check(CargoPlanner.Count(adapter.Endpoints[original.EndpointId].Value.Items)==4&&CargoPlanner.Count(adapter.Endpoints[next.EndpointId].Value.Items)==0&&service.Status()[0].Packages==0,"resuming after recall and clear delivers old cargo exactly once to its original box");
         }
         return checks;
     }

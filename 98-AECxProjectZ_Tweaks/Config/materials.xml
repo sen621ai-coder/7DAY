@@ -1,5 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <configs>
+  <!-- Dedicated miner armor; preserve ordinary metal mass and support properties. -->
+  <append xpath="/materials">
+    <material id="MyfArmoredAutoMiner">
+      <property name="damage_category" value="metal"/>
+      <property name="surface_category" value="metal"/>
+      <property name="forge_category" value="iron"/>
+      <property name="Hardness" type="float" value="4"/>
+      <property name="explosionresistance" value="2"/>
+      <property name="stepsound" value="metal"/>
+      <property name="stability_glue" value="300"/>
+      <property name="Mass" type="int" value="20"/>
+      <property name="MaxDamage" value="500000"/>
+      <property name="Experience" value="2"/>
+    </material>
+  </append>
   <!-- EN: Module purpose: unified late balance, progression and compatibility tweaks. File purpose: material definitions and smelting properties.
 RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: определения материалов и параметры переплавки.
 EN: Operations are applied in file order; keep selectors specific and preserve load order.

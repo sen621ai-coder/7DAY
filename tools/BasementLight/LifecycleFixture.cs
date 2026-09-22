@@ -62,8 +62,8 @@ public static class BasementLifecycleTests {
   Check(renderers.Length==6,"Unexpected visible geometry");
   foreach(var r in renderers){Check(r.sharedMaterial.maps.ContainsKey("nativeAuxMask"),"Shader auxiliary mask erased");Check(r.sharedMaterial.mainTexture==Texture2D.whiteTexture,"Opaque albedo missing");}
   foreach(string field in new[]{"lamp","fill","diffuser"})Check(typeof(PanelView).GetField(field,BindingFlags.NonPublic|BindingFlags.Instance).IsDefined(typeof(SerializeField),true),"Cloned runtime reference not serialized");
-  var lights=root.GetComponentsInChildren<Light>(true);Check(lights.Length==2,"Expected main and fill only");var light=lights.Single(l=>l.gameObject.name=="BasementSoftlight");var fill=lights.Single(l=>l.gameObject.name=="BasementWallCeilingFill");Check(fill.intensity==.08f && fill.range==12f && fill.shadowStrength==1,"Fill brightness/occlusion changed");Check(!light.enabled,"Preview starts illuminated");
-  Check(light.intensity==.75f && light.range==16f,"Runtime did not use revised brightness and range");
+  var lights=root.GetComponentsInChildren<Light>(true);Check(lights.Length==2,"Expected main and fill only");var light=lights.Single(l=>l.gameObject.name=="BasementSoftlight");var fill=lights.Single(l=>l.gameObject.name=="BasementWallCeilingFill");Check(fill.intensity==.14f && fill.range==14f && fill.shadowStrength==1,"Fill brightness/occlusion changed");Check(!light.enabled,"Preview starts illuminated");
+  Check(light.intensity==1f && light.range==20f,"Runtime did not use revised brightness and range");
   var world=new WorldBase();view.Bind(world,new Vector3i());Call(view,"Update");Check(!light.enabled,"Unpowered lamp emits light");
   world.value.meta=2;world.tile.IsToggled=true;Time.time=1;Call(view,"Update");Check(light.enabled && fill.enabled,"Powered and toggled lamp remains dark");Check(prefab.Find("MilkDiffuser").GetComponent<Renderer>().sharedMaterial.shader.name=="Unlit/Color","Powered diffuser still depends on room lighting");
   world.tile.IsToggled=false;Time.time=2;Call(view,"Update");Check(!light.enabled && !fill.enabled,"Switch off ignored");Check(prefab.Find("MilkDiffuser").GetComponent<Renderer>().sharedMaterial.name=="Basement diffuser off","Off diffuser still glows");
@@ -79,3 +79,4 @@ public static class BasementLifecycleTests {
   Console.WriteLine("PASS: "+count+" actual-source geometry, root hit reference, anchor, shader bindings, power and pooling assertions (mock Unity scene; not in-game rendering).");
  }
 }
+

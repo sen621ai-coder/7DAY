@@ -20,11 +20,12 @@ namespace YFAutomation.CargoDrones
         }
         static Mesh Plate(Transform root,string name,float half,float corner,float bottom,float top,float bevel,Material material)
         {
-            var vertices=new List<Vector3>();var triangles=new List<int>();
+            var vertices=new List<Vector3>();var triangles=new List<int>();var uvs=new List<Vector2>();
             Action<Vector3,Vector3,Vector3,Vector3> face=(a,b,c,normal)=>
             {
                 if(Vector3.Dot(Vector3.Cross(b-a,c-a),normal)<0){var swap=b;b=c;c=swap;}
-                int start=vertices.Count;vertices.Add(a);vertices.Add(b);vertices.Add(c);triangles.Add(start);triangles.Add(start+1);triangles.Add(start+2);
+                Func<Vector3,Vector2> project=v=>Mathf.Abs(normal.y)>=Mathf.Max(Mathf.Abs(normal.x),Mathf.Abs(normal.z))?new Vector2(v.x,v.z):Mathf.Abs(normal.x)>Mathf.Abs(normal.z)?new Vector2(v.z,v.y):new Vector2(v.x,v.y);
+                int start=vertices.Count;vertices.Add(a);vertices.Add(b);vertices.Add(c);uvs.Add(project(a));uvs.Add(project(b));uvs.Add(project(c));triangles.Add(start);triangles.Add(start+1);triangles.Add(start+2);
             };
             var low=Ring(half,corner,bottom);var middle=Ring(half,corner,top-bevel);var high=Ring(half-bevel,corner*.9f,top);
             for(int i=0;i<8;i++)
@@ -35,21 +36,60 @@ namespace YFAutomation.CargoDrones
                 face(low[i],low[j],middle[j],outward);face(low[i],middle[j],middle[i],outward);
                 face(middle[i],middle[j],high[j],outward+Vector3.up);face(middle[i],high[j],high[i],outward+Vector3.up);
             }
-            var mesh=new Mesh{name=name};mesh.SetVertices(vertices);mesh.SetTriangles(triangles,0);mesh.RecalculateNormals();mesh.RecalculateBounds();
+            var mesh=new Mesh{name=name};mesh.SetVertices(vertices);mesh.SetUVs(0,uvs);mesh.SetTriangles(triangles,0);mesh.RecalculateNormals();mesh.RecalculateTangents();mesh.RecalculateBounds();
             var part=new GameObject(name);part.transform.SetParent(root,false);part.AddComponent<MeshFilter>().sharedMesh=mesh;part.AddComponent<MeshRenderer>().sharedMaterial=material;return mesh;
+        }
+        static float DetailHeight(int x,int y,bool grip)
+        {
+            if(grip)
+            {
+                int a=(x+y)&15,b=(x-y+64)&15;float groove=(a<2||b<2)?-.32f:.06f;
+                return groove+.035f*Mathf.Sin(x*Mathf.PI/4)*Mathf.Sin(y*Mathf.PI/4);
+            }
+            return .055f*Mathf.Sin(y*Mathf.PI/2)+.025f*Mathf.Sin((x+y)*Mathf.PI/8)+.012f*Mathf.Cos(x*Mathf.PI/16);
+        }
+        static Texture2D DetailTexture(string name,bool grip,bool normal)
+        {
+            const int size=64;var texture=new Texture2D(size,size,TextureFormat.RGBA32,true,normal){name=name,wrapMode=TextureWrapMode.Repeat,filterMode=FilterMode.Bilinear,anisoLevel=4};var pixels=new Color32[size*size];
+            for(int y=0;y<size;y++)for(int x=0;x<size;x++)
+            {
+                float h=DetailHeight(x,y,grip);
+                if(normal)
+                {
+                    float dx=DetailHeight((x+1)&63,y,grip)-DetailHeight((x+63)&63,y,grip),dy=DetailHeight(x,(y+1)&63,grip)-DetailHeight(x,(y+63)&63,grip);
+                    var n=new Vector3(-dx*(grip?1.8f:1.1f),-dy*(grip?1.8f:1.1f),1).normalized;byte r=(byte)Mathf.RoundToInt((n.x*.5f+.5f)*255),g=(byte)Mathf.RoundToInt((n.y*.5f+.5f)*255);
+                    pixels[y*size+x]=new Color32(r,g,255,r);
+                }
+                else
+                {
+                    int variation=Mathf.RoundToInt(h*(grip?42:75));int fine=((x*37+y*17+x*y*3)&15)-7;byte value=(byte)Mathf.Clamp((grip?188:211)+variation+fine,72,238);
+                    pixels[y*size+x]=new Color32(value,value,value,255);
+                }
+            }
+            texture.SetPixels32(pixels);texture.Apply(true,true);return texture;
+        }
+        static void Finish(Material material,Texture2D albedo,Texture2D normal,float metallic,float smoothness,float tiles=2)
+        {
+            if(material.HasProperty("_MainTex")){material.SetTexture("_MainTex",albedo);material.SetTextureScale("_MainTex",new Vector2(tiles,tiles));}
+            if(material.HasProperty("_BumpMap")){material.SetTexture("_BumpMap",normal);material.SetTextureScale("_BumpMap",new Vector2(tiles,tiles));material.EnableKeyword("_NORMALMAP");}
+            if(material.HasProperty("_Metallic"))material.SetFloat("_Metallic",metallic);if(material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",smoothness);
         }
         public static GameObject Create()
         {
             var root=new GameObject("CargoHub");var owner=root.AddComponent<CargoModelMaterials>();
-            var charcoal=CargoDroneModel.Material(new Color(.055f,.065f,.06f));
-            var shell=CargoDroneModel.Material(new Color(.48f,.50f,.46f));
-            var steel=CargoDroneModel.Material(new Color(.24f,.27f,.25f));
-            var rubber=CargoDroneModel.Material(new Color(.09f,.105f,.095f));
-            var green=CargoDroneModel.Material(new Color(.26f,.64f,.10f));
-            var caution=CargoDroneModel.Material(new Color(.63f,.43f,.12f));
-            owner.Values=new[]{charcoal,shell,steel,rubber,green,caution};
-            foreach(var mat in owner.Values){if(mat.HasProperty("_Glossiness"))mat.SetFloat("_Glossiness",.24f);}
-            rubber.SetFloat("_Metallic",0);green.EnableKeyword("_EMISSION");green.SetColor("_EmissionColor",new Color(.10f,.30f,.025f));
+            // Match the Buster's cool neutral body and blue optical accents. The
+            // darker value range keeps the pad grounded without the former olive cast.
+            var charcoal=CargoDroneModel.Material(new Color(.06f,.067f,.072f));
+            var shell=CargoDroneModel.Material(new Color(.36f,.375f,.38f));
+            var steel=CargoDroneModel.Material(new Color(.235f,.25f,.26f));
+            var rubber=CargoDroneModel.Material(new Color(.07f,.075f,.08f));
+            var signal=CargoDroneModel.Material(new Color(.055f,.25f,.39f));
+            var caution=CargoDroneModel.Material(new Color(.57f,.35f,.105f));
+            owner.Values=new[]{charcoal,shell,steel,rubber,signal,caution};
+            string[] materialNames={"CargoHubCharcoal","CargoHubShell","CargoHubSteel","CargoHubGrip","CargoHubSignal","CargoHubCaution"};for(int i=0;i<owner.Values.Length;i++)owner.Values[i].name=materialNames[i];
+            var metalAlbedo=DetailTexture("HubBrushedMetal",false,false);var metalNormal=DetailTexture("HubBrushedMetalNormal",false,true);var gripAlbedo=DetailTexture("HubDiamondGrip",true,false);var gripNormal=DetailTexture("HubDiamondGripNormal",true,true);owner.Textures=new[]{metalAlbedo,metalNormal,gripAlbedo,gripNormal};
+            Finish(charcoal,metalAlbedo,metalNormal,.62f,.19f,2.4f);Finish(shell,metalAlbedo,metalNormal,.68f,.31f,2.2f);Finish(steel,metalAlbedo,metalNormal,.76f,.27f,3);Finish(rubber,gripAlbedo,gripNormal,.08f,.13f,3.2f);Finish(signal,metalAlbedo,metalNormal,.5f,.34f,2);Finish(caution,metalAlbedo,metalNormal,.58f,.23f,2);
+            signal.EnableKeyword("_EMISSION");signal.SetColor("_EmissionColor",new Color(.018f,.09f,.18f));
             var temporaryMeshes=new List<Mesh>();
             try
             {
@@ -73,17 +113,17 @@ namespace YFAutomation.CargoDrones
                     var rotation=Quaternion.Euler(0,side*90,0);
                     Action<string,Vector3,Vector3,Material> edge=(name,at,size,mat)=>Box(p,name,rotation*at,size,mat,side*90);
                     edge("LightRecess",new Vector3(0,.932f,.924f),new Vector3(.82f,.025f,.018f),charcoal);
-                    for(int segment=-1;segment<=1;segment++)edge("GuidanceLight",new Vector3(segment*.25f,.937f,.936f),new Vector3(.19f,.012f,.012f),green);
+                    for(int segment=-1;segment<=1;segment++)edge("GuidanceLight",new Vector3(segment*.25f,.937f,.936f),new Vector3(.19f,.012f,.012f),signal);
                     edge("PanelSeam",new Vector3(0,.955f,.814f),new Vector3(1.1f,.002f,.014f),charcoal);
                     edge("VentRecess",new Vector3(0,.48f,.799f),new Vector3(.89f,.30f,.019f),charcoal);
                     for(int slat=0;slat<5;slat++)edge("VentSlat",new Vector3(0,.37f+slat*.055f,.816f),new Vector3(.76f,.021f,.029f),steel);
-                    edge("GuideMark",new Vector3(0,.972f,.60f),new Vector3(.28f,.002f,.025f),green);
+                    edge("GuideMark",new Vector3(0,.972f,.60f),new Vector3(.28f,.002f,.025f),signal);
                     for(int stripe=-1;stripe<=1;stripe++)edge("CautionMark",new Vector3(stripe*.14f,.956f,.856f),new Vector3(.065f,.002f,.046f),caution);
                 }
                 // A recessed front console stays below the touchdown surface and rotor envelope.
                 Box(p,"ConsoleFrame",new Vector3(0,.73f,-.82f),new Vector3(.54f,.17f,.06f),charcoal);
                 Box(p,"ConsoleScreen",new Vector3(-.08f,.74f,-.854f),new Vector3(.28f,.095f,.008f),rubber);
-                for(int bar=0;bar<3;bar++)Box(p,"ChargeReadout",new Vector3(-.16f+bar*.075f,.74f,-.86f),new Vector3(.046f,.056f,.004f),green);
+                for(int bar=0;bar<3;bar++)Box(p,"ChargeReadout",new Vector3(-.16f+bar*.075f,.74f,-.86f),new Vector3(.046f,.056f,.004f),signal);
                 Box(p,"ConsoleSwitch",new Vector3(.16f,.74f,-.857f),new Vector3(.055f,.055f,.014f),caution);
                 // Merge fixed parts by material: six renderers instead of one per bolt/slat.
                 var filters=root.GetComponentsInChildren<MeshFilter>();var combined=new List<Mesh>();owner.Meshes=new Mesh[owner.Values.Length];

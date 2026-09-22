@@ -33,7 +33,8 @@ namespace YFAutomation.CargoDrones
     {
         public Material[] Values;
         public Mesh[] Meshes;
-        void OnDestroy(){if(Values!=null)foreach(var value in Values)if(value!=null)Destroy(value);if(Meshes!=null)foreach(var value in Meshes)if(value!=null)Destroy(value);}
+        public Texture2D[] Textures;
+        void OnDestroy(){if(Values!=null)foreach(var value in Values)if(value!=null)Destroy(value);if(Meshes!=null)foreach(var value in Meshes)if(value!=null)Destroy(value);if(Textures!=null)foreach(var value in Textures)if(value!=null)Destroy(value);}
     }
     public sealed class CargoDroneVisual : MonoBehaviour
     {

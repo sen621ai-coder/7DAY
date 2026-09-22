@@ -24,6 +24,12 @@ namespace YFAutomation.CargoDrones
     public static class CargoWarehouseFilter
     {
         public const int PageSize=8,MaxResults=256;
+        public static string RelativeLocation(CargoPosition home,CargoPosition target)
+        {
+            long x=(long)target.X-home.X,y=(long)target.Y-home.Y,z=(long)target.Z-home.Z;
+            string horizontal=(z==0?"":(z>0?"北":"南")+Math.Abs(z)+"格 ")+(x==0?"":(x>0?"东":"西")+Math.Abs(x)+"格 ");
+            return "距坪 "+Math.Round(Math.Sqrt((double)x*x+(double)y*y+(double)z*z))+" 格 · "+(horizontal.Length==0?"原地 ":horizontal)+(y==0?"同层":(y>0?"上":"下")+Math.Abs(y)+"格");
+        }
         public static string Clean(string value,int limit=96)
         {
             var result=new StringBuilder();

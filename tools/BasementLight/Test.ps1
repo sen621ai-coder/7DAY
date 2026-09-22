@@ -5,7 +5,7 @@ $mod=Join-Path $root 'ZZZ-PZAEC_BasementLight'
 Add-Type -TypeDefinition (Get-Content "$mod/Source/Photometry.cs" -Raw)
 $minimum=[double]::MaxValue;$maximum=0.0
 # Check full target floor, including corners, with 8-bit cookie quantization.
-foreach($height in @(3.8,4.0,4.2,4.5,4.8,5.0)) {
+foreach($height in @(4.8,5.0,5.2,5.5,5.8,6.0)) {
  $low=[double]::MaxValue;$high=0.0
  for($x=-6;$x -le 6;$x+=0.5) {for($z=-6;$z -le 6;$z+=0.5) {
   $distance=[Math]::Sqrt($x*$x+$z*$z+$height*$height)
@@ -17,9 +17,9 @@ foreach($height in @(3.8,4.0,4.2,4.5,4.8,5.0)) {
  Write-Output "Analytic floor check, height $height : minimum=$low maximum=$high ratio=$($high/$low) (not a game render)"
 }
 if([PZAEC.BasementLight.Photometry]::Transmission(0,1,0) -ne 0){throw 'Upward leakage in cookie'}
-$centre=[PZAEC.BasementLight.Photometry]::Transmission(0,-4.2,0)
-$corner=[PZAEC.BasementLight.Photometry]::Transmission(6,-4.2,6)
-if($corner -le $centre*5){throw 'Centre suppression missing'}
+$centre=[PZAEC.BasementLight.Photometry]::Transmission(0,-5.4,0)
+$corner=[PZAEC.BasementLight.Photometry]::Transmission(6,-5.4,6)
+if($corner -le $centre*3){throw 'Centre suppression missing'}
 if([PZAEC.BasementLight.Photometry]::Intensity -gt 1){throw 'Unsafe fallback intensity if cookie is ignored by renderer'}
 $previous=0.0
 for($angle=0;$angle -le 180;$angle+=.25){
@@ -69,7 +69,7 @@ try {
 Write-Output 'PASS: coverage model, power, one-block config, ingredients, localization and native hook.'
 
 
-if([PZAEC.BasementLight.Photometry]::FillIntensity -gt .1){throw 'Bounce light too strong'}
+if([PZAEC.BasementLight.Photometry]::FillIntensity -gt .15){throw 'Bounce light too strong'}
 if([PZAEC.BasementLight.Photometry]::FillTransmission(0,-1,0) -ne 0){throw 'Bounce floods floor'}
 if([PZAEC.BasementLight.Photometry]::FillTransmission(1,0,0) -le 0 -or [PZAEC.BasementLight.Photometry]::FillTransmission(0,1,0) -le 0){throw 'Missing wall/ceiling fill'}
 $lastFill=0.0
@@ -79,3 +79,4 @@ for($a=-90;$a -le 90;$a+=.25){
  if($f -lt 0 -or $f -gt .65 -or [Math]::Abs($f-$lastFill) -gt .02){throw 'Invalid bounce transition'}
  $lastFill=$f
 }
+

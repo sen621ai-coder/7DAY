@@ -1,4 +1,4 @@
-$ErrorActionPreference='Stop'
+﻿$ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path $PSScriptRoot)
 $source=Get-Content "$root/ZZZ-PZAEC_WallStudBarrier/Source/WallStudBarrier.cs" -Raw
 $source=$source.Substring(0,$source.IndexOf('    public sealed class ModApi'))+"}`n"
@@ -18,6 +18,7 @@ public class Entity {public int entityClass,entityId;public UnityEngine.Vector3 
 public class EntityAlive:Entity {public WorldBase world;public EntityMoveHelper moveHelper;public bool IsBreakingBlocks,IsBreakingDoors,Dead;public GamePath.PathNavigate navigator;public EntityAlive Target;public bool IsDead()=>Dead;public EntityAlive GetAttackTarget()=>Target;public float GetMoveSpeedAggro()=>1;}
 public class EntityPlayer:EntityAlive {}
 public class EntityClass {public bool bIsEnemyEntity;public static System.Collections.Generic.Dictionary<int,EntityClass> list=new System.Collections.Generic.Dictionary<int,EntityClass>();}
+public class ItemActionAttack {public class AttackHitInfo {}}
 public class Block {public string Shape;public string GetAutoShapeShapeName()=>Shape;}
 public struct BlockValue {public Block Block;}
 public class BlockValueRef {public Vector3i BlockPosition;}
@@ -50,17 +51,39 @@ public static class BarrierTests {
    Check(PZAEC.WallStudBarrier.Barrier.AttackPrefix(enemy,ref result),"stale wall hit does not block normal entity attacks");
    enemy.IsBreakingBlocks=true;Check(!PZAEC.WallStudBarrier.Barrier.AttackPrefix(enemy,ref result)&&!result,"demolition animation admission blocked");
    result=true;PZAEC.WallStudBarrier.Barrier.FindDestroyPostfix(enemy,new UnityEngine.Vector3(.5f,.5f,.5f),ref result);Check(!result,"destroy-area target rejected");
-   int damage=99;Check(!PZAEC.WallStudBarrier.Barrier.DamagePrefix(world,new BlockValueRef{BlockPosition=target},1,ref damage)&&damage==0,"fallback does not damage or drop loot");
+   int points=100,damage=99;Check(!PZAEC.WallStudBarrier.Barrier.DamagePrefix(world,new BlockValueRef{BlockPosition=target},1,null,ref points,ref damage)&&damage==0,"fallback does not damage or drop loot");
    world.Blocks.Clear();Check(PZAEC.WallStudBarrier.Barrier.BreakPrefix(enemy),"removing stud immediately restores attacks");
    world.Put(x,y,z,"wallStudBroken");Check(!PZAEC.WallStudBarrier.Barrier.Protected(world,enemy,target),"broken shape not protected");
    world.Put(x,y,z,"wallStud");enemy.entityClass=2;Check(!PZAEC.WallStudBarrier.Barrier.Protected(world,enemy,target),"friendly entity excluded");
    var player=new EntityPlayer{entityClass=1,world=world,position=enemy.position};Check(!PZAEC.WallStudBarrier.Barrier.Protected(world,player,target),"player may dismantle");
   }
   var w=new WorldBase();w.Put(0,0,0,"wallStud");var e=new EntityAlive{entityClass=1,world=w,position=new UnityEngine.Vector3(-2,0,.5f)};w.Attacker=e;
-  Check(PZAEC.WallStudBarrier.Barrier.Protected(w,e,new Vector3i(0,0,0)),"direct stud damage rejected");
+  Check(!PZAEC.WallStudBarrier.Barrier.Protected(w,e,new Vector3i(0,0,0)),"direct stud is not shielded");
   Check(!PZAEC.WallStudBarrier.Barrier.Protected(w,e,new Vector3i(-3,0,0)),"wall on attacker side remains vulnerable");
   Check(!PZAEC.WallStudBarrier.Barrier.Protected(w,e,new Vector3i(0,0,5)),"uncovered side remains vulnerable");
-  int d=0;Check(PZAEC.WallStudBarrier.Barrier.DamagePrefix(w,new BlockValueRef{BlockPosition=new Vector3i(0,0,0)},-1,ref d),"unknown/environment source unchanged");
+  int d=0;
+  var studRef=new BlockValueRef{BlockPosition=new Vector3i(0,0,0)};
+  foreach(int id in new[]{1,-1})foreach(int input in new[]{-100,0,1,4,5,6,99,100,1000,int.MaxValue}){
+   int amount=input;d=77;
+   Check(PZAEC.WallStudBarrier.Barrier.DamagePrefix(w,studRef,id,null,ref amount,ref d),"stud damage runs native handler");
+   int expected=input<=0?input:(int)(((long)input+4)/5);
+   Check(amount==expected&&d==77,"80 percent reduction, repairs and overflow boundary "+input);
+  }
+  e.moveHelper=new EntityMoveHelper{HitInfo=new WorldRayHitInfo{bHitValid=true,hit=new HitInfoDetails{blockPos=studRef.BlockPosition}}};e.IsBreakingBlocks=true;
+  bool allowed=true;PZAEC.WallStudBarrier.Barrier.CanBreakPostfix(e,ref allowed);Check(!allowed,"direct stud task refused independently of damage");
+  Check(!PZAEC.WallStudBarrier.Barrier.BreakPrefix(e),"direct stud attack refused");
+  Check(!PZAEC.WallStudBarrier.Barrier.AttackPrefix(e,ref allowed),"direct stud animation refused");
+  allowed=true;PZAEC.WallStudBarrier.Barrier.FindDestroyPostfix(e,new UnityEngine.Vector3(.5f,.5f,.5f),ref allowed);Check(!allowed,"direct stud destroy target refused");
+  w.Attacker=new EntityPlayer{entityClass=1};int playerDamage=100;
+  PZAEC.WallStudBarrier.Barrier.DamagePrefix(w,studRef,1,new ItemActionAttack.AttackHitInfo(),ref playerDamage,ref d);Check(playerDamage==100,"player direct tools unchanged");
+  PZAEC.WallStudBarrier.Barrier.DamagePrefix(w,studRef,1,null,ref playerDamage,ref d);Check(playerDamage==20,"player attributed environmental damage reduced");
+  w.Put(0,0,0,"wallStudBroken");int ordinaryDamage=100;
+  PZAEC.WallStudBarrier.Barrier.DamagePrefix(w,studRef,-1,null,ref ordinaryDamage,ref d);Check(ordinaryDamage==100,"broken studs not reduced");w.Put(0,0,0,"wallStud");
+  foreach(string shape in new[]{"wallStud","wallStudBroken","cube"})foreach(float resistance in new[]{0f,.25f,.8f,1f}){
+   float actual=resistance;PZAEC.WallStudBarrier.Barrier.ExplosionResistancePostfix(new Block{Shape=shape},ref actual);
+   float expected=shape=="wallStud"?(1-resistance)*.2f:1-resistance;
+   Check(System.Math.Abs((1-actual)-expected)<.000001f,"explosion remaining damage scales multiplicatively "+shape);
+  }
   Check(!PZAEC.WallStudBarrier.Barrier.Crosses(new UnityEngine.Vector3(0,0,0),new UnityEngine.Vector3(0,0,0),(x,y,z)=>false),"zero-length traversal terminates");
   Check(PZAEC.WallStudBarrier.Barrier.Crosses(new UnityEngine.Vector3(-2.5f,-2.5f,-2.5f),new UnityEngine.Vector3(.5f,.5f,.5f),(x,y,z)=>x==-1&&y==-1&&z==-1),"negative coordinate diagonal traversal");
   var stuck=new EntityAlive{entityClass=1,world=w,position=new UnityEngine.Vector3(.5f,0,.5f),moveHelper=new EntityMoveHelper(),navigator=new GamePath.PathNavigate(),Target=new EntityAlive{position=new UnityEngine.Vector3(8,0,0)}};
@@ -82,7 +105,7 @@ Add-Type -TypeDefinition ($source+"`n"+$fixture)
 [BarrierTests]::Run()
 Add-Type -Path "$root/0_TFP_Harmony/Mono.Cecil.dll"
 $a=[Mono.Cecil.AssemblyDefinition]::ReadAssembly((Join-Path (Split-Path $root) '7DaysToDie_Data/Managed/Assembly-CSharp.dll'))
-foreach($pair in @(@('EAIBreakBlock','CanExecute',0),@('EAIBreakBlock','AttackBlock',0),@('EntityAlive','Attack',1),@('EntityMoveHelper','FindDestroyPos',3),@('Block','DamageBlock',8))){
+foreach($pair in @(@('EAIBreakBlock','CanExecute',0),@('EAIBreakBlock','AttackBlock',0),@('EntityAlive','Attack',1),@('EntityMoveHelper','FindDestroyPos',3),@('Block','DamageBlock',8),@('Block','GetExplosionResistance',0))){
  $type=$a.MainModule.Types|Where-Object Name -eq $pair[0]
  $method=@($type.Methods|Where-Object {$_.Name -eq $pair[1] -and $_.Parameters.Count -eq $pair[2]})
  if($method.Count -ne 1){throw "Native hook changed: $($pair[0]).$($pair[1])"}
@@ -90,5 +113,10 @@ foreach($pair in @(@('EAIBreakBlock','CanExecute',0),@('EAIBreakBlock','AttackBl
 foreach($pair in @(@('EAIBase','theEntity'),@('EntityMoveHelper','entity'))){if(!(($a.MainModule.Types|Where-Object Name -eq $pair[0]).Fields|Where-Object Name -eq $pair[1])){throw 'Native injected field changed'}}
 $shape=($a.MainModule.Types|Where-Object Name -eq 'Block').Methods|Where-Object Name -eq 'GetAutoShapeShapeName'
 if(!($shape.Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'autoShapeShapeName'})){throw 'Shape identity implementation changed'}
+$block=$a.MainModule.Types|Where-Object Name -eq Block
+$damage=$block.Methods|Where-Object Name -eq DamageBlock
+if($damage.Parameters[3].Name -ne '_damagePoints' -or $damage.Parameters[5].Name -ne '_attackHitInfo'){throw 'Damage prefix parameter binding changed'}
+$explosion=($a.MainModule.Types|Where-Object Name -eq Explosion).Methods|Where-Object Name -eq AttackBlocks
+if(!($explosion.Body.Instructions|Where-Object {$_.Operand -is [Mono.Cecil.MethodReference] -and $_.Operand.Name -eq 'GetExplosionResistance'})){throw 'Native explosion no longer uses resistance hook'}
 $a.Dispose()
 Write-Output 'PASS installed native hook signatures, inherited AI fields and shape identity.'

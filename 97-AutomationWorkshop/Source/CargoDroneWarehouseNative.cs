@@ -22,6 +22,16 @@ namespace YFAutomation.CargoDrones
     }
     public static class CargoWarehouseSearch
     {
+        public static bool MatchesBinding(World world,CargoBinding binding)
+        {
+            if(world==null||binding==null)return false;
+            var chunk=world.GetChunkFromWorldPos(binding.Position.X,binding.Position.Z) as Chunk;
+            if(chunk==null||chunk.IsLocked||chunk.NeedsDecoration)return false;
+            var tile=world.GetTileEntity(new Vector3i(binding.Position.X,binding.Position.Y,binding.Position.Z));
+            if(tile==null||tile.IsRemoving)return false;
+            var marker=CargoNativeMarkers.Read(tile,binding.WorldId);
+            return marker!=null&&marker.EndpointId==binding.EndpointId&&marker.Incarnation==binding.Incarnation&&marker.BlockName==binding.BlockName;
+        }
         // Discovery reads loaded chunks only: opening a picker never creates
         // observers, loads distant terrain or registers endpoint identities.
         public static CargoWarehousePage Find(World world,CargoPosition hub,string query,CargoWarehouseKind kind,int page)
@@ -113,7 +123,8 @@ namespace YFAutomation.CargoDrones
                 var state=runtime?.Service.Status().SingleOrDefault(s=>s.Configuration.HubId==Hub&&s.Configuration.Position.Equals(new CargoPosition(At.x,At.y,At.z)));
                 if(state==null||player==null||player.IsDead()||(player.position-new Vector3(At.x+.5f,At.y+.5f,At.z+.5f)).sqrMagnitude>64||player.PersistentPlayerData?.PrimaryId?.CombinedString!=state.Configuration.Owner||!runtime.HubExists(state.Configuration))throw new InvalidOperationException("需要停机坪所有者在 8 格内搜索");
                 reply.Result=Sources?CargoSourceSearch.Find(world,state.Configuration,Query,SourceKind,Page,BoundOnly):CargoWarehouseSearch.Find(world,state.Configuration.Position,Query,Kind,Page);reply.Success=true;
-                reply.Message=reply.Result.Limited?"结果超过 256 项，请缩小名称或类型范围":reply.Result.Total==0?(Sources?"未找到匹配设备；只发现 64 格内已加载的矿机和林场":"未找到匹配仓库；远处目标区域需先加载"):Sources?"点击绑定；已绑定项点击移除。最多 8 台。":"点击条目直接设为收货仓库";
+                if(!Sources&&CargoWarehouseSearch.MatchesBinding(world,state.Configuration.Target))foreach(var row in reply.Result.Rows)row.Bound=row.Position.Equals(state.Configuration.Target.Position);
+                reply.Message=reply.Result.Limited?"结果超过 256 项，请缩小名称或类型范围":reply.Result.Total==0?(Sources?"未找到匹配设备；只发现 64 格内已加载的矿机和林场":"未找到匹配仓库；远处目标区域需先加载"):Sources?"点击绑定；已绑定项点击移除。最多 8 台。":"点击设置新货目标；定位按钮可在罗盘标记箱子";
             }
             catch(Exception error){reply.Message=CargoWarehouseFilter.Clean(error.Message,128);}
             if(player is EntityPlayerLocal)reply.Deliver();else if(player!=null)ConnectionManager.Instance.SendPackage(reply,false,actor);

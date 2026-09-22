@@ -370,7 +370,7 @@ public sealed class CargoDroneNativeQA : IModApi
             if(phase==9)
             {
                 if(world.ChunkCache.GetChunkKeysCopySync().Count>baselineChunks)return;
-                Check(!Resources.FindObjectsOfTypeAll<Mesh>().Any(m=>m.name.StartsWith("BusterMesh",StringComparison.Ordinal))&&!Resources.FindObjectsOfTypeAll<Material>().Any(m=>m.name=="BusterBody"||m.name=="BusterLegs"),"last Buster instance releases shared native meshes and materials");
+                Check(!Resources.FindObjectsOfTypeAll<Mesh>().Any(m=>m.name.StartsWith("BusterMesh",StringComparison.Ordinal))&&!Resources.FindObjectsOfTypeAll<Material>().Any(m=>m.name=="BusterBody"||m.name=="BusterLegs"||m.name.StartsWith("CargoHub",StringComparison.Ordinal))&&!Resources.FindObjectsOfTypeAll<Texture2D>().Any(t=>t.name.StartsWith("HubBrushed",StringComparison.Ordinal)||t.name.StartsWith("HubDiamond",StringComparison.Ordinal)),"last drone and hub instances release native meshes materials and detail textures");
                 Check(true,"test observer cleanup returns resident chunks to baseline");Finish(null);return;
             }
             int x=phase==2?808:8;var chunk=world.GetChunkFromWorldPos(x,8) as Chunk;
@@ -566,6 +566,10 @@ public sealed class CargoDroneNativeQA : IModApi
         var point=chunk.GetWorldPos()+p;block.Block.OnBlockAdded(world,chunk,point,block,actor);
         var hub=world.GetTileEntity(point) as TileEntityComposite;
         Check(hub!=null&&CargoNativeMarkers.Read(hub,worldId)?.Owner==owner,"formal cargo hub is placed and receives identity through native callbacks");
+        var repairs=block.Block.RepairItems.ToDictionary(v=>v.ItemName,v=>v.Count);
+        Check(block.Block.MaxDamage==500000,"formal cargo hub durability matches armored miners and forestry");
+        int steel,mechanical,electrical;bool repairMatch=repairs.Count==3&&repairs.TryGetValue("resourceForgedSteel",out steel)&&steel==25&&repairs.TryGetValue("resourceMechanicalParts",out mechanical)&&mechanical==50&&repairs.TryGetValue("resourceElectricParts",out electrical)&&electrical==50;
+        Check(repairMatch,"formal cargo hub repair bill matches armored miners and forestry; actual="+string.Join(",",repairs.Select(v=>v.Key+":"+v.Value).ToArray()));
         var bounds=new List<Bounds>();block.Block.GetCollisionAABB(block,point.x,point.y,point.z,0,bounds);
         Check(bounds.Any(b=>b.size.x>1.9f&&b.max.y>=point.y+1),"formal pad has its real solid two-block-wide collision envelope");
         worldCheckpoints=new CargoCheckpointStore(Path.Combine(GameIO.GetSaveGameDir(),"cargo-world-checkpoint"),worldId);
@@ -635,11 +639,12 @@ public sealed class CargoDroneNativeQA : IModApi
             var at=new Vector3i(config.Position.X,config.Position.Y,config.Position.Z);
             var request=new NetPackageYFCargoHubRequest{At=at,Hub=config.HubId,Revision=config.Revision,Request=2200,Action=CargoHubAction.Read};
             var reply=request.Evaluate(world,id);
-            Check(reply!=null&&reply.Allowed&&reply.Revision==config.Revision&&reply.Details.Contains("采集设备"),"actual command authorization reads fresh state for the nearby hub owner");NetPackageManager.FreePackage(reply);
+            Check(reply!=null&&reply.Allowed&&reply.Revision==config.Revision&&reply.Details.Contains("采集设备"),"actual command authorization reads fresh state for the nearby hub owner");
+            Check(reply.Destinations.Contains("QA 流程收货箱")&&reply.Destinations.Contains("距坪")&&reply.HasTarget&&reply.Target==inventoryTarget.ToWorldPos(),"reopened hub resolves authored target name, direction and navigation from saved binding");NetPackageManager.FreePackage(reply);
             request.Action=CargoHubAction.ClearTarget;reply=request.Evaluate(world,id);
             Check(reply.Allowed&&reply.Message.Contains("过快")&&reply.Revision==config.Revision&&CargoNativeWorld.Current.Service.Status().Single().Configuration.Target.Matches(config.Target),"rate-limited action returns retryable authorized state without clearing the target");NetPackageManager.FreePackage(reply);
             player.position=point+new Vector3(30,0,0);reply=request.Evaluate(world,id);
-            Check(!reply.Allowed&&reply.Hub==Guid.Empty,"distance failure revokes edit readiness and does not disclose hub state");NetPackageManager.FreePackage(reply);
+            Check(!reply.Allowed&&reply.Hub==Guid.Empty&&!reply.HasTarget&&!reply.HasShipment&&reply.Destinations=="","distance failure revokes edit readiness and does not disclose hub state or pooled navigation");NetPackageManager.FreePackage(reply);
             player.position=point;
             CargoNativeAccessSessions.Register(inventoryCollector,config.WorldId);
             var endpoint=new CargoNativeValidationEndpoint(world,inventoryCollector,config.WorldId,(world.ChunkCache.ChunkProvider as ChunkProviderGenerateWorld).m_RegionFileManager);
@@ -846,8 +851,9 @@ public sealed class CargoDroneNativeQA : IModApi
         Check(visualCopy.Epoch==visual.Epoch&&visualCopy.Sequence==4&&visualCopy.States.Single().Hub==visual.States[0].Hub&&visualCopy.States[0].RestPose&&visualCopy.States[0].Packages==2,"visual snapshot codec preserves world epoch sequence pose and cargo");
         var request=new NetPackageYFCargoHubRequest{At=new Vector3i(1,2,3),Endpoint=new Vector3i(-100,150,400),Request=71,Action=CargoHubAction.AddSource,Hub=Guid.NewGuid(),Revision=long.MaxValue};var requestCopy=new NetPackageYFCargoHubRequest();CopyPacket(request,requestCopy);
         Check(requestCopy.Hub==request.Hub&&requestCopy.Revision==long.MaxValue&&requestCopy.Endpoint==request.Endpoint&&requestCopy.Action==CargoHubAction.AddSource,"hub request preserves incarnation token revision and coordinates");
-        var reply=new NetPackageYFCargoHubReply{At=request.At,Request=71,Allowed=true,Hub=request.Hub,Revision=99,Paused=true,Message="已保存",Details="采集范围 64；搬运范围 1000"};var replyCopy=new NetPackageYFCargoHubReply();CopyPacket(reply,replyCopy);
+        var reply=new NetPackageYFCargoHubReply{At=request.At,Request=71,Allowed=true,Hub=request.Hub,Revision=99,Paused=true,Message="已保存",Details="采集范围 64；搬运范围 1000",Destinations="新货目标：燃料材料\n本批货送往：货包样本",HasTarget=true,Target=new Vector3i(1136,86,1126),HasShipment=true,Shipment=new Vector3i(1132,86,1126)};var replyCopy=new NetPackageYFCargoHubReply();CopyPacket(reply,replyCopy);
         Check(replyCopy.Details==reply.Details&&replyCopy.Paused&&replyCopy.Revision==99,"hub reply preserves bounded Chinese UI state");
+        Check(replyCopy.Destinations==reply.Destinations&&replyCopy.HasTarget&&replyCopy.Target==reply.Target&&replyCopy.HasShipment&&replyCopy.Shipment==reply.Shipment,"hub reply distinguishes configured and shipment names and navigation positions");
         var search=new NetPackageYFCargoWarehouseRequest{At=request.At,Hub=request.Hub,Request=72,Page=1,Kind=CargoWarehouseKind.Cabinet,Query="铁矿 壁橱"};var searchCopy=new NetPackageYFCargoWarehouseRequest();CopyPacket(search,searchCopy);
         Check(searchCopy.Query==search.Query&&searchCopy.Kind==search.Kind&&searchCopy.Page==1&&searchCopy.Hub==search.Hub,"warehouse request preserves query type page and hub identity");
         search.Sources=true;search.SourceKind=CargoSourceKind.Forestry;search.BoundOnly=true;CopyPacket(search,searchCopy);
@@ -917,6 +923,8 @@ public sealed class CargoDroneNativeQA : IModApi
             drone.SetActive(false);hub.SetActive(true);RenderModel(hub,Path.Combine(GameIO.GetSaveGameDir(),"cargo-hub-preview.png"),new Vector3(2.4f,2.3f,-3.1f));
             var surfaces=hub.GetComponentsInChildren<MeshRenderer>();
             Check(surfaces.Length==6,"industrial hub batches armor bolts vents and lights into six material surfaces");
+            Check(surfaces.All(r=>r.sharedMaterial.mainTexture!=null&&r.sharedMaterial.GetTexture("_BumpMap")!=null),"hub uses tiled albedo and normal detail instead of flat colors");
+            Check(surfaces.Select(r=>r.sharedMaterial.color).Any(c=>c.b>c.g&&c.g>c.r),"hub signal lighting uses the Buster's cool blue accent family");
             Check(surfaces.All(r=>r.bounds.min.x>=-1&&r.bounds.max.x<=1&&r.bounds.min.z>=-1&&r.bounds.max.z<=1&&r.bounds.min.y>=-.001f&&r.bounds.max.y<=1),"industrial hub fits its two by two footprint and one-block body height");
             var anchor=hub.transform.Find("LandingAnchor");
             Check(Math.Abs(anchor.localPosition.y-CargoHubModel.LandingHeight)<1e-5,"visible hub landing anchor matches authoritative home height");

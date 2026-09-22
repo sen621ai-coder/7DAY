@@ -2,7 +2,7 @@
 <xml>
   <Name value="PZAECWallStudBarrier" />
   <DisplayName value="PZAEC 墙钉拒止" />
-  <Description value="Intact wall studs block enemy demolition targeting and through-stud block damage." />
+  <Description value="Wall studs take 20% monster/environment/explosion damage and shield rear walls from enemy attacks." />
   <Author value="PZAEC" />
-  <Version value="1.1.1" />
+  <Version value="1.2.1" />
 </xml>

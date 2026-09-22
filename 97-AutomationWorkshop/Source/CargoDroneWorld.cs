@@ -64,13 +64,14 @@ namespace YFAutomation.CargoDrones
         public readonly CargoHubConfiguration Configuration;
         public readonly Guid Flight;
         public readonly CargoPhase Phase;
+        public readonly CargoBinding ShipmentTarget;
         public readonly CargoHold Hold;
         public readonly CargoPoint Position;
         public readonly long Battery;
         public readonly int Packages;
         public readonly string Message;
-        internal CargoHubStatus(CargoHubConfiguration config,CargoMission mission,long battery,CargoPoint home,string message)
-        {Configuration=config;Flight=mission==null?Guid.Empty:mission.Id;Phase=mission==null?CargoPhase.Docked:mission.Phase;Hold=mission==null?CargoHold.None:mission.Hold;Position=mission==null?home:mission.Position;Battery=mission==null?battery:mission.Battery;Packages=mission==null?0:CargoPlanner.Count(mission.Cargo);Message=message;}
+        internal CargoHubStatus(CargoHubConfiguration config,CargoMission mission,long battery,CargoPoint home,string message,CargoBinding shipmentTarget=null)
+        {Configuration=config;ShipmentTarget=shipmentTarget;Flight=mission==null?Guid.Empty:mission.Id;Phase=mission==null?CargoPhase.Docked:mission.Phase;Hold=mission==null?CargoHold.None:mission.Hold;Position=mission==null?home:mission.Position;Battery=mission==null?battery:mission.Battery;Packages=mission==null?0:CargoPlanner.Count(mission.Cargo);Message=message;}
     }
 
     // One server-thread coordinator per world. Native inventory access stays in
@@ -84,11 +85,13 @@ namespace YFAutomation.CargoDrones
             public CargoBinding Source,Target;
             public long Battery=600000;
             public int Cursor;
+            public double NextEmptyPoll;
             public bool Removed;
             public bool Suspended;
             public CargoRecoveryDelivery Recovery;
             public string Message="等待配置";
         }
+        const double EmptyPollSeconds=5;
         readonly Guid world;
         readonly CargoFileJournal journal;
         readonly CargoCheckpointStore checkpoints;
@@ -113,7 +116,7 @@ namespace YFAutomation.CargoDrones
         void Healthy(){if(faulted)throw new InvalidOperationException("World cargo service requires recovery: "+Failure);}
         Hub Find(Guid id){var h=hubs.SingleOrDefault(v=>v.Config.HubId==id);if(h==null)throw new ArgumentException("Unknown hub");return h;}
         public CargoHubStatus[] Status()
-        {return hubs.Select(h=>new CargoHubStatus(h.Config,h.Mission,h.Battery,adapter.Home(h.Config),h.Message)).ToArray();}
+        {return hubs.Select(h=>new CargoHubStatus(h.Config,h.Mission,h.Battery,adapter.Home(h.Config),h.Message,h.Target)).ToArray();}
         public void Register(CargoHubConfiguration config)
         {
             Healthy();if(!Ready)throw new InvalidOperationException("Inventory checkpoint pending");
@@ -126,7 +129,7 @@ namespace YFAutomation.CargoDrones
             Healthy();var h=Find(id);
             if(actor!=h.Config.Owner)throw new UnauthorizedAccessException("Hub owner required");
             if(!Ready||h.Removed||h.Config.Revision!=revision||replacement==null||replacement.WorldId!=world||replacement.HubId!=id||replacement.Owner!=actor||!replacement.Position.Equals(h.Config.Position)||replacement.Revision<revision||replacement.Revision>checked(revision+1))throw new InvalidOperationException("Refresh hub configuration");
-            h.Config=replacement;Publish();
+            h.Config=replacement;h.NextEmptyPoll=0;Publish();
         }
         public void Recall(Guid id,string actor)
         {Healthy();var h=Find(id);if(actor!=h.Config.Owner)throw new UnauthorizedAccessException();h.Mission?.Recall();if(Ready)Publish();}
@@ -256,7 +259,10 @@ namespace YFAutomation.CargoDrones
                     if(h.Config.Paused){h.Message="已暂停，通电时充电";continue;}
                     if(!adapter.Powered(h.Config)){h.Message="等待供电";continue;}
                     if(ActiveFlights>=4){h.Message="等待飞行名额";continue;}
-                    if(TryDepart(h)){Publish();return;}
+                    if(activeTime<h.NextEmptyPoll)continue;
+                    bool allSourcesEmpty;
+                    if(TryDepart(h,out allSourcesEmpty)){h.NextEmptyPoll=0;Publish();return;}
+                    h.NextEmptyPoll=allSourcesEmpty?activeTime+EmptyPollSeconds:0;
                 }
             }
             catch(CargoEndpointUnavailableException ex)
@@ -267,8 +273,9 @@ namespace YFAutomation.CargoDrones
             }
             catch(Exception ex){Fail(ex);throw;}
         }
-        bool TryDepart(Hub h)
+        bool TryDepart(Hub h,out bool allSourcesEmpty)
         {
+            allSourcesEmpty=false;
             ICargoDurableEndpoint endpoint;CargoPoint targetPoint;CargoHold hold;
             bool carrying=h.Mission!=null&&CargoPlanner.Count(h.Mission.Cargo)>0;
             var target=carrying?h.Target:h.Config.Target;
@@ -282,12 +289,15 @@ namespace YFAutomation.CargoDrones
                 h.Mission=h.Mission.RetryDelivery(adapter.OpenAirspace(h.Mission.Id));h.Message="优先重送旧货";return true;
             }
             var sources=h.Config.Sources;
+            bool sourceUnavailable=false,sourceHasCargo=false;
             for(int i=0;i<sources.Length;i++)
             {
                 int index=(h.Cursor+i)%sources.Length;var source=sources[index];CargoPoint pickup;
-                if(!adapter.Resolve(source,out endpoint,out pickup,out hold))continue;
+                if(!adapter.Resolve(source,out endpoint,out pickup,out hold)){sourceUnavailable=true;continue;}
                 var plan=CargoPlanner.Load(endpoint.Snapshot(),new CargoItem[6],h.Config.Owner,6);
-                if(plan.Moved==0||CargoPlanner.Unload(targetInventory,plan.CargoAfter,h.Config.Owner).Moved==0)continue;
+                if(plan.Moved==0)continue;
+                sourceHasCargo=true;
+                if(CargoPlanner.Unload(targetInventory,plan.CargoAfter,h.Config.Owner).Moved==0)continue;
                 // Include the recorded-corridor return, handling and approach
                 // overhead. In-flight energy checks also budget actual detours.
                 double distance=home.Distance(pickup)+pickup.Distance(targetPoint);
@@ -297,7 +307,8 @@ namespace YFAutomation.CargoDrones
                 h.Mission=new CargoMission(world,flight,source.EndpointId,target.EndpointId,h.Config.Owner,adapter.OpenAirspace(flight),home,pickup,targetPoint,battery);
                 h.Source=source;h.Target=target;h.Cursor=(index+1)%sources.Length;h.Message="飞往采集设备";return true;
             }
-            h.Message="等待物资、容量或充电";return false;
+            allSourcesEmpty=!sourceHasCargo&&!sourceUnavailable;
+            h.Message=allSourcesEmpty?"等待矿机产出（每5秒检查）":"等待物资、容量或充电";return false;
         }
     }
 }

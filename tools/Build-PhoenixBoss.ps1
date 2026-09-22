@@ -31,7 +31,11 @@ public static class PhoenixCompiler
     }
 }
 '@
-$sources = Get-ChildItem (Join-Path $modRoot '95-PhoenixBoss/Source') -Filter '*.cs' | Sort-Object Name | ForEach-Object FullName
+# Match the installed runtime's capsule-hitbox implementation in PhoenixBoss.cs.
+# PhoenixHitboxes.cs is an unused older prototype referencing a removed field.
+$sources = @('PhoenixBoss.cs', 'PhoenixEntityLookup.cs') | ForEach-Object {
+    Join-Path $modRoot ('95-PhoenixBoss/Source/' + $_)
+}
 $gameRefs = @(Get-ChildItem $managed -Filter '*.dll' | ForEach-Object FullName) + (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll')
 if(-not $Output){$Output=Join-Path $modRoot '95-PhoenixBoss/YF.Phoenix.dll'}
 [PhoenixCompiler]::Build($sources, $gameRefs, $Output)
