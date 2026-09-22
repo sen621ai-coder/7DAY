@@ -7,10 +7,12 @@ namespace YFAutomation
  public static class ConveyorPath
  {
   public static bool IsBelt(string n)=>n!=null&&n.StartsWith("yfAutoBelt",StringComparison.Ordinal);
+  public static bool IsMerge(string n)=>n=="yfAutoBeltMerge";
   public static Vector3 LocalExit(string n)=>n.EndsWith("Left")?Vector3.left:n.EndsWith("Right")?Vector3.right:n.EndsWith("Up")?new Vector3(0,1,1):n.EndsWith("Down")?new Vector3(0,-1,1):Vector3.forward;
   public static Vector3i Offset(BlockValue v,Vector3 local){var d=v.Block.shape.GetRotation(v)*local;return new Vector3i(Mathf.RoundToInt(d.x),Mathf.RoundToInt(d.y),Mathf.RoundToInt(d.z));}
   public static Vector3 Point(string n,float t){
    t=Mathf.Clamp01(t);if(n.EndsWith("Left"))return t<.5f?new Vector3(0,0,t-.5f):new Vector3(.5f-t,0,0);
+   if(IsMerge(n))return new Vector3(0,0,t*.5f);
    if(n.EndsWith("Right"))return t<.5f?new Vector3(0,0,t-.5f):new Vector3(t-.5f,0,0);
    return new Vector3(0,n.EndsWith("Up")?t:n.EndsWith("Down")?-t:0,t-.5f);
   }
@@ -34,15 +36,19 @@ namespace YFAutomation
  public static class Conveyors
  {
   static World world;static float next;static readonly Dictionary<Vector3i,TileEntityComposite> belts=new Dictionary<Vector3i,TileEntityComposite>();
-  public static void Observe(TileEntityComposite te,World w){if(w==null||w.IsRemote()||!ConveyorPath.IsBelt(te.block.GetBlockName()))return;if(world!=w){world=w;belts.Clear();next=0;}belts[te.ToWorldPos()]=te;}
+  static readonly Dictionary<TileEntityComposite,int> mergeTurns=new Dictionary<TileEntityComposite,int>();
+  public static void Observe(TileEntityComposite te,World w){if(w==null||w.IsRemote()||!ConveyorPath.IsBelt(te.block.GetBlockName()))return;if(world!=w){world=w;belts.Clear();mergeTurns.Clear();next=0;}belts[te.ToWorldPos()]=te;}
   static string Owner(TileEntityComposite t)=>(t?.GetFeature<TEFeatureLockable>()?.GetOwner()??t?.Owner)?.CombinedString;
   static Vector3i Add(Vector3i a,Vector3i b)=>Logistics.Add(a,b);
   static Vector3i Exit(TileEntityComposite t)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),ConveyorPath.LocalExit(t.block.GetBlockName())));
   static Vector3i Entry(TileEntityComposite t)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),Vector3.back));
-  static bool Matches(TileEntityComposite a,TileEntityComposite b){var p=a.ToWorldPos();var e=Entry(b);return Exit(a)==b.ToWorldPos()&&p.x==e.x&&p.z==e.z&&TransferRules.SameOwner(Owner(a),Owner(b));}
+  static Vector3i MergeEntry(TileEntityComposite t,int side)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),side==0?Vector3.left:Vector3.right));
+  static bool OnMergeArm(TileEntityComposite source,TileEntityComposite merge,int side){var p=source.ToWorldPos();var e=MergeEntry(merge,side);return p.x==e.x&&p.z==e.z;}
+  static bool Matches(TileEntityComposite a,TileEntityComposite b){var p=a.ToWorldPos();var e=Entry(b);bool input=ConveyorPath.IsMerge(b.block.GetBlockName())?OnMergeArm(a,b,0)||OnMergeArm(a,b,1):p.x==e.x&&p.z==e.z;return Exit(a)==b.ToWorldPos()&&input&&TransferRules.SameOwner(Owner(a),Owner(b));}
   public static void Tick(){
    if(GameManager.Instance?.World!=world||world==null||world.IsRemote()||world.Players.Count==0||GameManager.Instance.IsPaused()||Time.realtimeSinceStartup<next)return;next=Time.realtimeSinceStartup+1;
-   foreach(var p in belts.ToArray())if(world.GetTileEntity(p.Key)!=p.Value||p.Value.IsRemoving)belts.Remove(p.Key);
+   foreach(var p in belts.ToArray())if(world.GetTileEntity(p.Key)!=p.Value||p.Value.IsRemoving){belts.Remove(p.Key);mergeTurns.Remove(p.Value);}
+   foreach(var t in mergeTurns.Keys.ToArray())if(world.GetTileEntity(t.ToWorldPos())!=t||t.IsRemoving)mergeTurns.Remove(t);
    // Same-chunk transactions share the existing native chunk serialization gate.
    foreach(var group in belts.Values.GroupBy(t=>world.GetChunkFromWorldPos(t.ToWorldPos()) as Chunk)){
     var chunk=group.Key;if(chunk==null||chunk.IsLocked)continue;
@@ -62,13 +68,27 @@ namespace YFAutomation
    var budget=nodes.ToDictionary(t=>t,t=>t.GetFeature<TEFeatureStorage>().items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count));
    foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b)||budget[b]==0)continue;var target=world.GetTileEntity(Exit(b)) as TileEntityComposite;if(!allowed(b,target))continue;
     bool belt=ConveyorPath.IsBelt(target.block.GetBlockName());string kind=target.block.GetBlockName();if(belt&&(!map.ContainsKey(target.ToWorldPos())||!Matches(b,target)||!powered.Contains(target)))continue;bool machine=MachineInventory.UsesInternal(target);if(!belt&&!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
+    if(ConveyorPath.IsMerge(kind))continue; // The receiver arbitrates both inputs fairly below.
     var src=b.GetFeature<TEFeatureStorage>();var dst=target.GetFeature<TEFeatureStorage>();
     // Output boxes are general conveyor storage: no sample, filter or reserved first slot.
     int count=ConveyorTransfer.Move(inventory(b),inventory(target),i=>Logistics.Locked(src,i),i=>Logistics.Locked(dst,i)||machine&&(!MachineInventory.IsInput(i)||kind=="yfAutoWaterPump"),budget[b],belt?16:int.MaxValue,v=>v.ItemClass.Stacknumber.Value);
-    if(count>0){changed.Add(b);changed.Add(target);moved.Add(b);if(belt)moved.Add(target);}
+    if(count>0){budget[b]-=count;changed.Add(b);changed.Add(target);moved.Add(b);if(belt)moved.Add(target);}
+   }
+   // One batch at a time; prefer the other arm after every successful pickup.
+   // Empty-only admission prevents a continuously supplied item from starving the other arm.
+   foreach(var b in nodes){if(!ConveyorPath.IsMerge(b.block.GetBlockName())||!powered.Contains(b)||Logistics.Busy(b)||inventory(b).Any(s=>s!=null&&!s.IsEmpty()))continue;
+    int turn;mergeTurns.TryGetValue(b,out turn);
+    for(int attempt=0;attempt<2;attempt++){int side=(turn+attempt)%2;var source=world.GetTileEntity(MergeEntry(b,side)) as TileEntityComposite;
+     // A ramp may end on the arm from an adjacent elevation.
+     if(source==null||!ConveyorPath.IsBelt(source.block.GetBlockName())){var ramp=nodes.FirstOrDefault(n=>Matches(n,b)&&OnMergeArm(n,b,side));if(ramp!=null)source=ramp;}
+     if(!allowed(b,source))continue;string kind=source.block.GetBlockName();bool belt=ConveyorPath.IsBelt(kind),machine=MachineInventory.UsesInternal(source);
+     if(belt?(!map.ContainsKey(source.ToWorldPos())||!Matches(source,b)||!powered.Contains(source)||budget[source]<=0):(!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput"))continue;
+     var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i),i=>Logistics.Locked(dst,i),belt?budget[source]:16,16,v=>v.ItemClass.Stacknumber.Value);
+     if(count<=0)continue;if(belt){budget[source]-=count;moved.Add(source);}changed.Add(source);changed.Add(b);moved.Add(b);mergeTurns[b]=1-side;break;
+    }
    }
    // Load boxes only after movement; newly loaded parcels wait for the next tick.
-   foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b))continue;var source=world.GetTileEntity(Entry(b)) as TileEntityComposite;if(!allowed(b,source))continue;string kind=source.block.GetBlockName();bool machine=MachineInventory.UsesInternal(source);if(!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
+   foreach(var b in nodes){if(ConveyorPath.IsMerge(b.block.GetBlockName())||!powered.Contains(b)||Logistics.Busy(b))continue;var source=world.GetTileEntity(Entry(b)) as TileEntityComposite;if(!allowed(b,source))continue;string kind=source.block.GetBlockName();bool machine=MachineInventory.UsesInternal(source);if(!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
     var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i),i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value);
     if(count>0){changed.Add(source);changed.Add(b);moved.Add(b);}
    }

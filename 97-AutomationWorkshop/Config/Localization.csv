@@ -71,3 +71,9 @@ yfConfigureMachine,,,,,Configure machine,配置机器
 
 yfAutoWorkbench,blocks,blocks,,false,自动制作工作台,自动制作工作台
 yfAutoWorkbenchDesc,blocks,blocks,,false,自动制作普通工作台及手工配方中的无品质产物，支持火药、子弹和零件。4格范围内放通电供电接口；选择产品并保存，上3行放材料及工具，下3行自动收成品，可直接接传送带。沿用所有者已解锁配方、技能消耗与制作时间；所有者须在线。化学工作站专属配方及有品质装备不支持。,自动制作普通工作台及手工配方中的无品质产物，支持火药、子弹和零件。4格范围内放通电供电接口；选择产品并保存，上3行放材料及工具，下3行自动收成品，可直接接传送带。沿用所有者已解锁配方、技能消耗与制作时间；所有者须在线。化学工作站专属配方及有品质装备不支持。
+
+yfAutoChemistry,blocks,Block,,false,Automatic Chemistry Station,自动化学合成台
+yfAutoChemistryDesc,blocks,Block,,false,自动执行已解锁的化学工作站无品质配方，可制作火药、胶水、汽油、染料等。半径4格内需有通电供电接口；选择产品并保存，上18格放材料和工具，下18格收成品，可接传送带。遵守所有者的配方解锁、技能材料消耗与制作时间；所有者须在线。灌溉水不能替代配方要求的瓶装净水。,自动执行已解锁的化学工作站无品质配方，可制作火药、胶水、汽油、染料等。半径4格内需有通电供电接口；选择产品并保存，上18格放材料和工具，下18格收成品，可接传送带。遵守所有者的配方解锁、技能材料消耗与制作时间；所有者须在线。灌溉水不能替代配方要求的瓶装净水。
+
+yfAutoBeltMerge,blocks,Block,,false,T Junction Merger,T字合流传送带
+yfAutoBeltMergeDesc,blocks,Block,,false,"Left and right inputs merge toward the output arrow. Alternates batches between available inputs; waits safely when blocked. Rotate to change direction.","左右两侧进料，沿箭头向前输出。两路有货时轮流取料，出口堵塞时保留货物等待。可旋转；沿用传送带供电及同区块规则。在自动化工作台制作。"
