@@ -6,6 +6,32 @@ using System.Runtime.Serialization;
 using YFAutomation;
 public static class AutomationSmoke
 {
+ static void StackingChecks()
+ {
+  var first=Stack(1,1);first.itemValue.Seed=11;var second=Stack(1,1);second.itemValue.Seed=22;
+  Check(!first.itemValue.Equals(second.itemValue),"reproduce strict equality rejecting different production seeds");
+  Check(StackCompatibility.Matches(first.itemValue,second.itemValue)&&first.itemValue.Seed==11&&second.itemValue.Seed==22,"resource seeds do not prevent stacking or mutate original values");
+  var box=ItemStack.CreateArray(1);
+  for(int i=1;i<=500;i++){
+   var batch=Stack(1,1);batch.itemValue.Seed=(ushort)i;
+   Check(ConveyorTransfer.Move(new[]{batch},box,j=>false,j=>false,16,int.MaxValue,v=>500)==1,"each independent production batch fits existing box stack");
+  }
+  Check(box[0].count==500,"five hundred production batches occupy one slot");
+  var overflow=new[]{second.Clone()};Check(ConveyorTransfer.Move(overflow,box,i=>false,i=>false,16,int.MaxValue,v=>500)==0&&overflow[0].count==1,"full stack retains incoming cargo without overflow");
+  var output=new[]{first.Clone()};Check(ProductionInventory.Produce(output,second,i=>false,v=>100,0)&&output[0].count==2,"machine production merges separate batches");
+  output=new[]{first.Clone()};Check(InventoryTransfer.MoveUnfiltered(new[]{second.Clone()},output,i=>false,i=>false,v=>100)==1&&output[0].count==2,"unfiltered boxes merge separate batches");
+  output=new[]{Stack(1,1),first.Clone()};Check(InventoryTransfer.Move(new[]{second.Clone()},output,i=>false,i=>false,v=>100)==1&&output[1].count==2&&output[0].count==1,"filtered boxes merge batches while preserving sample");
+  output=new[]{first.Clone()};Check(ConveyorTransfer.Move(new[]{second.Clone()},output,i=>false,i=>true,16,100,v=>100)==0&&output[0].count==1,"stack merge respects destination lock");
+  var distinct=second.Clone();distinct.itemValue.Meta=1;Check(!StackCompatibility.Matches(first.itemValue,distinct.itemValue),"distinct per-item metadata remains separate");
+  distinct=second.Clone();distinct.itemValue.UseTimes=1;Check(!StackCompatibility.Matches(first.itemValue,distinct.itemValue),"different durability remains separate");
+  distinct=second.Clone();distinct.itemValue.Quality=1;Check(!StackCompatibility.Matches(first.itemValue,distinct.itemValue),"different quality remains separate");
+  var equipmentA=first.Clone();var equipmentB=second.Clone();equipmentA.itemValue.Quality=equipmentB.itemValue.Quality=3;
+  Check(!StackCompatibility.Matches(equipmentA.itemValue,equipmentB.itemValue),"equipment random-stat seeds are not discarded");
+  equipmentA=first.Clone();equipmentB=second.Clone();equipmentA.itemValue.Modifications=equipmentB.itemValue.Modifications=new[]{new ItemValue{type=2}};
+  Check(!StackCompatibility.Matches(equipmentA.itemValue,equipmentB.itemValue),"modified items keep strict seed identity");
+  Check(!StackCompatibility.Matches(first.itemValue,Stack(2,1).itemValue),"different resource types never merge");
+ }
+
  static int checks;
  static void Check(bool ok,string name){checks++;if(!ok)throw new Exception(name);}
  static ItemStack Stack(int type,int count,float wear=0,ushort quality=0)=>new ItemStack(new ItemValue{type=type,UseTimes=wear,Quality=quality},count);
@@ -13,6 +39,7 @@ public static class AutomationSmoke
  public static int Main()
  {
   try {
+   StackingChecks();
    var powerOffsets=(Vector3i[])typeof(Logistics).GetField("powerOffsets",BindingFlags.NonPublic|BindingFlags.Static).GetValue(null);
    Check(powerOffsets.Distinct().Count()==powerOffsets.Length,"power scan has no duplicate positions");
    for(int x=-5;x<=5;x++)for(int y=-5;y<=5;y++)for(int z=-5;z<=5;z++)
