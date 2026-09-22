@@ -24,7 +24,7 @@ namespace YFAutomation
         {
             switch(name){
                 case "yfAutoSorter":case "yfAutoKitchen":case "yfAutoSmelter":
-                case "yfAutoForge":case "yfAutoWorkbench":case "yfAutoRecycler":case "yfAutoFarm":
+                case "yfAutoForge":case "yfAutoWorkbench":case "yfAutoChemistry":case "yfAutoRecycler":case "yfAutoFarm":
                 case "yfAutoMiner":case "yfAutoTransfer":case "yfAutoWaterPump":
                 case "yfAutoWaterTank":case "yfAutoAmmoFeed":return true;
                 default:return false;

@@ -17,8 +17,11 @@ public sealed class MachineConfigurationGameQA : IModApi
     public void InitMod(Mod mod)
     {
         if(!Environment.GetCommandLineArgs().Contains("-yfMachineConfigurationQA"))return;
+        // Headless-only fixture: forestry shaders cannot report GPU support under -nographics.
+        if(Environment.GetCommandLineArgs().Contains("-nographics")){var material=AccessTools.Method("AECT16RuntimeFix.AutoForestryModel:NativeMaterial");if(material!=null)new Harmony("yf.configuration.qa.headless-material").Patch(material,prefix:new HarmonyMethod(typeof(MachineConfigurationGameQA),nameof(HeadlessMaterial)));}
         ModEvents.GameStartDone.RegisterHandler(Ready);ModEvents.GameUpdate.RegisterHandler(Update);
     }
+    public static bool HeadlessMaterial(ref Material __result){if(GamePrefs.GetString(EnumGamePrefs.GameName)!="AutomationConfigQA_Isolated")return true;var shader=Shader.Find("Standard")??Shader.Find("Hidden/InternalErrorShader");if(shader==null)throw new Exception("No headless fixture shader");__result=new Material(shader);return false;}
     static void Check(bool ok,string message){if(!ok)throw new Exception(message);checks++;report.Add("PASS "+message);}
     static void Ready(ref ModEvents.SGameStartDoneData data)
     {
@@ -115,6 +118,8 @@ public sealed class MachineConfigurationGameQA : IModApi
         InventoryChecks(m,player,owner);
         ForgeChecks(player,owner);
         WorkbenchChecks(player,owner);
+        ChemistryChecks(player,owner);
+        MergeChecks(owner);
         world.SetBlockRPC(new BlockValueRef(m.ToWorldPos()),BlockValue.Air);
         Check(MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Count==0,"removing machine deletes saved settings");
     }
@@ -203,6 +208,111 @@ public sealed class MachineConfigurationGameQA : IModApi
         world.SetBlockRPC(new BlockValueRef(sorter.ToWorldPos()),BlockValue.Air);
         world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),BlockValue.Air);
         world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
+    }
+
+    static void MergeChecks(PlatformUserIdentifierAbs owner)
+    {
+        var step=AccessTools.Method(typeof(Conveyors),"Step");
+        Func<TileEntityComposite,TEFeatureStorage> storage=t=>t.GetFeature<TEFeatureStorage>();
+        Func<string,int,ItemStack> stack=(n,c)=>new ItemStack(ItemClass.GetItem(n),c);
+        Func<TileEntityComposite,string,int> count=(t,n)=>storage(t).items.Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
+        var center=new Vector3i(8,164,8);var placed=new List<Vector3i>();
+        Func<string,Vector3i,Vector3i,TileEntityComposite> place=(kind,p,forward)=>{
+            var t=Place(kind,p,owner);placed.Add(p);var v=world.GetBlock(p);bool found=false;
+            for(byte r=0;r<24;r++){v.rotation=r;if(v.Block.SupportsRotation(r)&&ConveyorPath.Offset(v,Vector3.forward)==forward){found=true;break;}}
+            Check(found,"merge fixture rotation "+kind);world.SetBlockRPC(new BlockValueRef(p),v);t=(TileEntityComposite)world.GetTileEntity(p);t.SetOwner(owner);return t;
+        };
+        foreach(var forward in new[]{new Vector3i(0,0,1),new Vector3i(1,0,0),new Vector3i(0,0,-1),new Vector3i(-1,0,0)}){
+            var merge=place("yfAutoBeltMerge",center,forward);var value=world.GetBlock(center);
+            var leftOffset=ConveyorPath.Offset(value,Vector3.left);var rightOffset=ConveyorPath.Offset(value,Vector3.right);
+            var left=place("yfAutoBeltStraight",center+leftOffset,new Vector3i(-leftOffset.x,0,-leftOffset.z));
+            var right=place("yfAutoBeltStraight",center+rightOffset,new Vector3i(-rightOffset.x,0,-rightOffset.z));
+            var back=place("yfAutoBeltStraight",center+new Vector3i(-forward.x,0,-forward.z),forward);
+            var sink=Place("yfAutoOutput",center+forward,owner);placed.Add(sink.ToWorldPos());
+            var powerAt=center+new Vector3i(0,2,0);placed.Add(powerAt);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));
+            var port=world.GetTileEntity(powerAt) as TileEntityPowered;
+            if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}
+            port.InitializePowerData();port.PowerItem.isPowered=true;
+            var nodes=new[]{left,merge,right,back};foreach(var node in nodes)Conveyors.Observe(node,world);
+            Action tick=()=>step.Invoke(null,new object[]{nodes});
+            storage(left).items[0]=stack("resourceCoal",16);storage(right).items[0]=stack("resourcePotassiumNitratePowder",16);storage(back).items[0]=stack("resourceWood",16);
+            tick();Check(count(merge,"resourceCoal")==16&&storage(sink).items.All(v=>v.IsEmpty()),"merge accepts first arm without same-tick forwarding "+forward);
+            storage(left).items[0]=stack("resourceCoal",16);tick();
+            Check(count(sink,"resourceCoal")==16&&count(merge,"resourcePotassiumNitratePowder")==16&&count(left,"resourceCoal")==16,"merge alternates under continuous first-arm supply "+forward);
+            tick();tick();Check(count(sink,"resourceCoal")==32&&count(sink,"resourcePotassiumNitratePowder")==16&&count(back,"resourceWood")==16,"both materials exit once; closed back refuses ingress "+forward);
+            storage(left).items[0]=stack("resourceCoal",16);port.PowerItem.isPowered=false;tick();Check(count(left,"resourceCoal")==16&&storage(merge).items[0].IsEmpty(),"unpowered merge retains source cargo");port.PowerItem.isPowered=true;
+            left.SetOwner(PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000002",false));tick();Check(count(left,"resourceCoal")==16,"merge rejects foreign source");left.SetOwner(owner);
+            left.bUserAccessing=true;tick();Check(count(left,"resourceCoal")==16,"merge respects open input inventory");left.bUserAccessing=false;
+            for(int i=0;i<storage(sink).items.Length;i++)storage(sink).items[i]=stack("resourceWood",ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
+            tick();storage(right).items[0]=stack("resourcePotassiumNitratePowder",16);for(int i=0;i<4;i++)tick();
+            Check(count(merge,"resourceCoal")==16&&count(right,"resourcePotassiumNitratePowder")==16,"blocked merge retains both batches");
+            for(int i=0;i<storage(sink).items.Length;i++)storage(sink).items[i]=ItemStack.Empty;
+            tick();tick();Check(count(sink,"resourceCoal")==16&&count(sink,"resourcePotassiumNitratePowder")==16,"unblocked merge resumes without loss or duplication");
+            // Direct machine endpoints only expose their output partition.
+            world.SetBlockRPC(new BlockValueRef(left.ToWorldPos()),BlockValue.Air);
+            var machine=Place("yfAutoWorkbench",center+leftOffset,owner);storage(machine).items[0]=stack("resourceWood",7);storage(machine).items[18]=stack("resourceCoal",9);
+            nodes=new[]{merge,right,back};tick();Check(count(merge,"resourceCoal")==9&&count(machine,"resourceWood")==7,"merge extracts machine products only");
+            foreach(var p in placed)world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);placed.Clear();
+        }
+        // Three mergers combine four independent materials without traversing two segments per tick.
+        center=new Vector3i(8,168,8);
+        var finalMerge=place("yfAutoBeltMerge",center,new Vector3i(0,0,1));
+        var firstMerge=place("yfAutoBeltMerge",center+new Vector3i(-1,0,0),new Vector3i(1,0,0));
+        var secondMerge=place("yfAutoBeltMerge",center+new Vector3i(1,0,0),new Vector3i(-1,0,0));
+        var destination=Place("yfAutoOutput",center+new Vector3i(0,0,1),owner);placed.Add(destination.ToWorldPos());
+        var inputPositions=new[]{new Vector3i(7,168,7),new Vector3i(7,168,9),new Vector3i(9,168,7),new Vector3i(9,168,9)};
+        var materials=new[]{"resourceCoal","resourcePotassiumNitratePowder","resourceWood","resourceScrapIron"};
+        var inputs=inputPositions.Select(p=>{var t=Place("yfAutoInput",p,owner);placed.Add(p);return t;}).ToArray();
+        for(int i=0;i<4;i++)storage(inputs[i]).items[0]=stack(materials[i],32);
+        var powerPos=center+new Vector3i(0,2,0);placed.Add(powerPos);world.SetBlockRPC(new BlockValueRef(powerPos),Block.GetBlockValue("yfAutoPowerPort"));
+        var supply=world.GetTileEntity(powerPos) as TileEntityPowered;
+        if(supply==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerPos);supply=((BlockPowered)world.GetBlock(powerPos).Block).CreateTileEntity(chunk);supply.localChunkPos=Chunk.ToLocalPosition(powerPos);chunk.AddTileEntity(supply);}
+        supply.InitializePowerData();supply.PowerItem.isPowered=true;
+        var chain=new[]{firstMerge,secondMerge,finalMerge};foreach(var node in chain)Conveyors.Observe(node,world);
+        step.Invoke(null,new object[]{chain});
+        Check(storage(finalMerge).items[0].IsEmpty()&&storage(destination).items.All(v=>v.IsEmpty()),"chained mergers cannot forward newly loaded cargo in same tick");
+        var all=inputs.Concat(chain).Concat(new[]{destination}).ToArray();
+        for(int i=0;i<20;i++){step.Invoke(null,new object[]{chain});Check(all.Sum(t=>storage(t).items.Sum(v=>v.count))==128,"four-material chain conserves all cargo at step "+i);}
+        Check(materials.All(n=>count(destination,n)==32),"three T mergers deliver all four materials without starvation");
+        foreach(var p in placed)world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
+    }
+
+    static void ChemistryChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
+    {
+        const string kind="yfAutoChemistry";
+        var machine=Place(kind,new Vector3i(6,160,8),owner);var store=machine.GetFeature<TEFeatureStorage>();
+        Check(MachineInventory.UsesInternal(machine)&&MachineDisplay.IsMachine(kind)&&Production.IsMachine(kind),"chemistry station has native inventory, interaction and production");
+        var products=MachineConfiguration.Products(kind);
+        foreach(var product in new[]{"resourceGunPowder","resourceGlue","resourcePaint","ammoGasCan"})
+        {
+            Check(products.Contains(product),"chemistry catalog contains "+product);
+            var config=MachineConfiguration.Get(machine).Clone();config.Product=product;config.StorageMode="internal";
+            Check(MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine))=="已保存","chemistry selection saves: "+product);
+            var recipes=CraftingManager.GetRecipes(product).Where(r=>RecipeMachines.Supports(kind,r)).ToArray();
+            Check(recipes.Length>0&&recipes.All(r=>r.craftingArea=="chemistryStation"),"chemistry product excludes handcraft and campfire variants: "+product);
+            var recipe=recipes.FirstOrDefault(r=>r.IsUnlocked(player))??recipes[0];FillRecipe(store,recipe,player);
+            var before=ProductionInventory.Clone(store.items);var plan=RecipePlan.Select(product,kind,store.items,i=>!MachineInventory.IsInput(i),player);
+            Check(plan!=null&&plan.Recipe.craftingArea=="chemistryStation","chemistry preview chooses correct workstation recipe: "+product);
+            if(!recipe.IsUnlocked(player)){
+                Check(!plan.Ready&&RecipePreview.Describe(world,machine,config,player).Contains("尚未解锁"),"chemistry preview respects unlock requirement: "+product);
+                for(int i=0;i<10;i++)Production.Step(machine,machine,machine,player);
+                Check(SameItems(before,store.items),"locked chemistry recipe consumes nothing: "+product);continue;
+            }
+            Check(plan.Ready&&RecipePreview.Describe(world,machine,config,player).Contains("材料与工具已齐"),"chemistry preview is ready with exact materials: "+product);
+            float modifier=recipe.tags.Test_AnySet(XUiM_Recipes.SandboxIgnoreTag)?1:XUiM_Recipes.CraftingOutputModifier;
+            int expected=Math.Max(1,(int)(EffectManager.GetValue(PassiveEffects.CraftingOutputCount,null,recipe.count,player,recipe,recipe.tags)*modifier));
+            string status="";for(int i=0;i<10000;i++){status=Production.Step(machine,machine,machine,player);if(status.StartsWith("完成"))break;}
+            Check(status.StartsWith("完成")&&store.items.Skip(18).Sum(s=>s.count)==expected&&store.items.Skip(18).Where(s=>!s.IsEmpty()).All(s=>s.itemValue.ItemClass.GetItemName()==product),"chemistry creates correct batch and product: "+product);
+            Check(SameItems(store.items.Take(18),plan.Input.Take(18)),"chemistry consumes exactly its previewed ingredients: "+product);
+        }
+        var hand=CraftingManager.GetRecipes("resourceGunPowder").First(r=>string.IsNullOrEmpty(r.craftingArea));
+        var chem=CraftingManager.GetRecipes("resourceGunPowder").First(r=>r.craftingArea=="chemistryStation");
+        Check(!RecipeMachines.Supports(kind,hand)&&RecipeMachines.Supports(kind,chem)&&!RecipeMachines.Supports("yfAutoWorkbench",chem),"handcraft and chemical gunpowder remain separate production policies");
+        Check(!RecipeMachines.Supports(kind,CraftingManager.GetRecipes("ammo9mmBulletBall").First(r=>r.craftingArea=="workbench")),"chemistry rejects bullet assembly recipes");
+        Check(!RecipeMachines.Supports(kind,CraftingManager.GetRecipes("resourceForgedSteel").First(r=>r.craftingArea=="forge")),"chemistry rejects forge recipes");
+        var saved=MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml"));
+        Check(saved.Machines.Any(s=>s.Kind==kind&&s.Product=="ammoGasCan"),"chemistry settings serialize and validate new machine kind");
+        world.SetBlockRPC(new BlockValueRef(machine.ToWorldPos()),BlockValue.Air);
     }
 
     static void WorkbenchChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)

@@ -10,6 +10,7 @@ namespace YFAutomation
                 case "yfAutoKitchen":return "campfire";
                 case "yfAutoForge":return "forge";
                 case "yfAutoWorkbench":return "workbench";
+                case "yfAutoChemistry":return "chemistryStation";
                 default:return null;
             }
         }

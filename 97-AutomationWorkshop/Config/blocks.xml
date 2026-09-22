@@ -379,6 +379,46 @@
       <property name="EconomicValue" value="200" />
       <property name="Stacknumber" value="10" />
     </block>
+    <block name="yfAutoChemistry">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-machines.unity3d?Assets/Machines/MachineKitchen.prefab" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Path" value="solid" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="chemistryStation" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_decor" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureSignable">
+          <property name="FontSize" value="75" />
+          <property name="LineCount" value="3" />
+          <property name="LineWidth" value="0.55" />
+          <property name="LineSpacing" value="1" />
+        </property>
+        <property class="TEFeatureAutomationState" />
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoMachineInventory" />
+        </property>
+        <property class="TEFeatureMachineInventory" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="10" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="5,10" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoChemistryDesc" />
+      <property name="CustomIconTint" value="78C89A" />
+      <property name="TintColor" value="78C89A" />
+      <property name="MaxDamage" value="2500" />
+      <property name="EconomicValue" value="200" />
+      <property name="Stacknumber" value="10" />
+    </block>
     <block name="yfAutoRecycler">
       <property name="Class" value="CompositeTileEntity" />
       <property name="Material" value="Msteel" />
@@ -669,6 +709,37 @@
       <property name="Model" value="#@modfolder:Resources/automation-conveyors.unity3d?Assets/Conveyor/ConveyorStraight.prefab" />
       <property name="CreativeMode" value="Player" />
       <property name="DescriptionKey" value="yfAutoBeltStraightDesc" />
+      <property name="Path" value="solid" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="electricwirerelay" />
+      <property name="CustomIconTint" value="E9B547" />
+      <property name="MaxDamage" value="2500" />
+      <property name="Stacknumber" value="50" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoBeltBuffer" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureAutomationState" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
+    </block>
+    <block name="yfAutoBeltMerge">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-conveyors.unity3d?Assets/Conveyor/ConveyorMerge.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoBeltMergeDesc" />
       <property name="Path" value="solid" />
       <property name="WaterFlow" value="permitted" />
       <property name="Place" value="TowardsPlacerInverted" />

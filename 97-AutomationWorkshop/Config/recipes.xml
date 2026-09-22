@@ -92,6 +92,12 @@
       <ingredient name="yfAutoController" count="2" />
       <ingredient name="yfAutoMotor" count="2" />
     </recipe>
+    <recipe name="yfAutoChemistry" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoFrame" count="3" />
+      <ingredient name="yfAutoController" count="2" />
+      <ingredient name="yfAutoPump" count="2" />
+      <ingredient name="toolBeaker" count="1" />
+    </recipe>
     <recipe name="yfAutoRecycler" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="yfAutoFrame" count="2" />
       <ingredient name="yfAutoController" count="1" />
@@ -156,6 +162,11 @@
     </append>
   <append xpath="/recipes">
     <recipe name="yfAutoBeltStraight" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="yfAutoTransport" count="1" />
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceMechanicalParts" count="1" />
+    </recipe>
+    <recipe name="yfAutoBeltMerge" count="1" craft_area="yfAutomationWorkbench" craft_time="5" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="yfAutoTransport" count="1" />
       <ingredient name="resourceForgedIron" count="2" />
       <ingredient name="resourceMechanicalParts" count="1" />
