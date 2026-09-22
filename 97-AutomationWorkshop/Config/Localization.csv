@@ -1,5 +1,9 @@
 ﻿Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
 yfAutomationWorkbench,blocks,Block,,false,Automation Workbench,自动化工作台
+yfCargoHub,blocks,Block,,false,Cargo Drone Hub,货运无人机停机坪
+yfCargoRecoveryCrate,blocks,Block,,false,Cargo Recovery Crate,无人机货物回收箱
+yfCargoRecoveryCrateDesc,blocks,Block,,false,Recovered cargo from a destroyed drone hub.,停机坪销毁后用于接收无人机剩余货物的回收箱。
+yfCargoHubDesc,blocks,Block,,false,"Place beside a powered automation connection. Select miners or forestry within 64 blocks and a destination within 1000 blocks. Keep the approach clear.","放在通电的自动化供电连接旁。选择 64 格内的矿机或林场及 1000 格内的收货仓库。保持台面和起降空间畅通；由放置者管理。"
 yfAutomationWorkbenchDesc,blocks,Block,,false,制造自动化设备、传送带和工厂零件的专用工作台。,制造自动化设备、传送带和工厂零件的专用工作台。
 yfAutoFrame,items,Item,,false,自动化机架,自动化机架
 yfAutoFrameDesc,items,Item,,false,机器共用的承重结构。,机器共用的承重结构。
@@ -68,6 +72,7 @@ yfAutoBeltUpDesc,blocks,Block,,false,按黄色方向标记铺设，后端取输�
 yfAutoBeltDown,blocks,Block,,false,下坡传送带,下坡传送带
 yfAutoBeltDownDesc,blocks,Block,,false,按黄色方向标记铺设，后端取输入箱或输出箱，前端接下一段或箱子。每秒前进一段、最多16件；输出箱保留首格样品。连通线路任一段在通电供电口半径4格内即可，每条最多32段。只连接同一所有者、同一16×16区块；断电、满箱、打开库存时暂停。按E查看带上货物；拆除前先取空。坡道末端连接高/低一格的下一段。,按黄色方向标记铺设，后端取输入箱或输出箱，前端接下一段或箱子。每秒前进一段、最多16件；输出箱保留首格样品。连通线路任一段在通电供电口半径4格内即可，每条最多32段。只连接同一所有者、同一16×16区块；断电、满箱、打开库存时暂停。按E查看带上货物；拆除前先取空。坡道末端连接高/低一格的下一段。
 yfConfigureMachine,,,,,Configure machine,配置机器
+yfCargoConfigure,,,,,Configure cargo hub,配置无人机停机坪
 
 yfAutoWorkbench,blocks,blocks,,false,自动制作工作台,自动制作工作台
 yfAutoWorkbenchDesc,blocks,blocks,,false,自动制作普通工作台及手工配方中的无品质产物，支持火药、子弹和零件。半径4格内有通电供电接口；选择产品并保存，上3行放材料及工具，下3行自动收成品，可直接接传送带。沿用所有者已解锁配方、技能消耗与制作时间；所有者须在线。化学工作站专属配方及有品质装备不支持。,自动制作普通工作台及手工配方中的无品质产物，支持火药、子弹和零件。半径4格内有通电供电接口；选择产品并保存，上3行放材料及工具，下3行自动收成品，可直接接传送带。沿用所有者已解锁配方、技能消耗与制作时间；所有者须在线。化学工作站专属配方及有品质装备不支持。

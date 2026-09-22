@@ -60,6 +60,7 @@ namespace YFAutomation
         static bool Locked(TEFeatureStorage s,int i)=>s.HasSlotLocksSupport&&s.SlotLocks!=null&&s.SlotLocks[i];
         public static string Step(TileEntityComposite machine,TileEntityComposite source,TileEntityComposite target,EntityPlayer player)
         {
+            if(Logistics.Busy(machine)||Logistics.Busy(source)||Logistics.Busy(target))return "库存正在使用，生产暂停";
             var state=machine.GetFeature<TEFeatureAutomationState>();
             var input=source.GetFeature<TEFeatureStorage>();var output=target.GetFeature<TEFeatureStorage>();
             if(state==null||input==null||output==null)return "机器组件不完整";
@@ -74,11 +75,12 @@ namespace YFAutomation
             Recipe recipe=null;ItemStack product=null;ItemStack[] nextInput=null;
             float duration=0;string key=null;
             Action complete=null;
+            Func<bool> ready=null;
             if(kind=="yfAutoFarm"||kind=="yfAutoMiner")
             {
                 var work=FieldMachines.Find(GameManager.Instance.World,machine,input.items,inputLocked,type,player);
                 if(work==null)return kind=="yfAutoFarm"?"等待自有领地成熟作物/种子":"等待自有领地矿点/钻头耗材";
-                nextInput=work.Input;product=work.Product;duration=work.Duration;key=work.Key;complete=work.Complete;
+                nextInput=work.Input;product=work.Product;duration=work.Duration;key=work.Key;complete=work.Complete;ready=work.Ready;
             }
             else if(kind=="yfAutoSmelter")
             {
@@ -144,6 +146,8 @@ namespace YFAutomation
             state.Seconds=Math.Min(duration,state.Seconds+1);machine.SetChunkModified();
             if(state.Seconds<duration)return "生产中 "+(int)(state.Seconds*100/duration)+"%";
             // One chunk serialization gate is held by Logistics throughout this commit.
+            // Check every participant before any world-side completion callback or debit.
+            if(Logistics.Busy(machine)||Logistics.Busy(source)||Logistics.Busy(target)||ready!=null&&!ready())return "库存正在使用，生产暂停";
             complete?.Invoke();
             if(!internalStorage)Array.Copy(nextInput,input.items,nextInput.Length);
             Array.Copy(nextOutput,output.items,nextOutput.Length);

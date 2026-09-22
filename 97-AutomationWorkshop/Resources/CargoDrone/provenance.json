@@ -1,0 +1,66 @@
+{
+  "source_sha256": "eab22a3b6c51eb5fadf8a5e31e3209b5b5c885c961cc37001b688e66c1d96918",
+  "asset": {
+    "extras": {
+      "author": "LaVADraGoN (https://sketchfab.com/lavadragon)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/buster-drone-294e79652f494130ad2ab00a13fdbafd",
+      "title": "Buster Drone"
+    },
+    "generator": "Sketchfab-16.67.0",
+    "version": "2.0"
+  },
+  "meshes": 38,
+  "triangles": 32714,
+  "nodes": 88,
+  "rotors": [
+    "Drone_Turb_Blade_L",
+    "Drone_Turb_Blade_R"
+  ],
+  "scale": 0.5121248671590093,
+  "yaw_degrees": -180.0,
+  "center": [
+    -3.123610227140361e-06,
+    -0.8673581264648991,
+    -0.0004102522768398842
+  ],
+  "radial_extent": 0.74,
+  "vertical_extent": 0.5215449361185981,
+  "textures": [
+    {
+      "material": "body",
+      "size": [
+        2048,
+        2048
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "material": "material",
+      "size": [
+        2048,
+        2048
+      ],
+      "alpha": [
+        255,
+        255
+      ]
+    }
+  ],
+  "changes": "Removed Env display stage; retained 38 rigid meshes; 2K PBR textures; mirrored coordinates/UVs and winding for Unity; packed Standard normal/metal maps; mechanical pose blend from source 0s/25s with root/body motion removed and flight turbine planes leveled; static pupil without morph animation; continuous blade rotation about measured local axes; normalized animated envelope.",
+  "files": {
+    "0-base.png": "a75cd1621a74dfcace7c5f98c8410db884f96e8158c8e3b1722836a102545dc4",
+    "0-emission.png": "16bb6e3e665fc12aaf36998858b362d5866820ecc365edc74bb9c1c26698235b",
+    "0-metal.png": "c8dee24e24b81317cb28e9a7122ef03f3700481247df048b9caad168634b458e",
+    "0-normal.png": "7a3f62edc462dc3774d6964e26305c80336f12afc228e17d4e764bcf05796996",
+    "0-occlusion.png": "541eff8317e417b2971662c112e679379a23171c93346e14de27c4905faeff59",
+    "1-base.png": "53e0fa396a21e60f1baebcf4abee627e6fdba5ed44a886cca640f843409af062",
+    "1-metal.png": "833c2510de6604476e46931d57b76133e0ad3c6ef55cc84e23a2d0fb5510f10a",
+    "1-normal.png": "f65ee41dd18097cedc93192528a188d0be10ab59a0ef7514161a661339bf9c66",
+    "1-occlusion.png": "129f5e114ae077012826d17a298c1001398696465265754257dcd057d893289e",
+    "buster.yfmesh": "0a5c316b09d1324bd829ed036bd9cb84eb9c34475719294df3ab966ef2594d48"
+  }
+}

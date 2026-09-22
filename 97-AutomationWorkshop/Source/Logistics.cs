@@ -11,7 +11,11 @@ namespace YFAutomation
     {
         public void InitMod(Mod mod)
         {
+            CargoDrones.CargoBusterAssets.Configure(mod.Path);
             var h=new Harmony("yf.automation.logistics");
+            CargoDrones.CargoCollectorOwnership.Install(h);
+            CargoDrones.CargoNativeWorld.InstallWorldUpdates();
+            CargoDrones.CargoRuntime.Install(h);
             MachineConfigurationUI.Install(h);
             h.Patch(AccessTools.Method(typeof(TileEntityPoweredRangedTrap),"DecrementAmmo"),
                 postfix:new HarmonyMethod(typeof(TurretFeed),nameof(TurretFeed.AfterDecrement)));
@@ -71,8 +75,10 @@ namespace YFAutomation
         }
         internal static Vector3i Add(Vector3i a,Vector3i b)=>new Vector3i(a.x+b.x,a.y+b.y,a.z+b.z);
         static string Owner(TileEntityComposite te)=>(te?.GetFeature<TEFeatureLockable>()?.GetOwner()??te?.Owner)?.CombinedString;
-        internal static bool Busy(TileEntityComposite te)
+        internal static bool Busy(TileEntityComposite te,bool includeCargoFence=true)
         {
+            if(te==null||te.IsRemoving)return true;
+            if(includeCargoFence&&CargoDrones.CargoNativeValidationEndpoint.IsFenced(te))return true;
             if(te.bUserAccessing)return true;
             var storage=te.GetFeature<TEFeatureStorage>();var sign=te.GetFeature<TEFeatureSignable>();
             return storage!=null&&LockManager.Instance.IsLockedServer(storage,0) || sign!=null&&LockManager.Instance.IsLockedServer(sign,0);

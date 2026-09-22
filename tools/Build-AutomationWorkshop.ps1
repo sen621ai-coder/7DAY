@@ -1,10 +1,12 @@
 ﻿#Requires -Version 7.0
-param([string]$Output)
+param([string]$Output,[string]$GameRoot)
 $ErrorActionPreference = 'Stop'
 # Offline SDK-less fallback. PowerShell's Roslyn is only the compiler host;
 # the output references the installed game's Mono assemblies, NOT CoreCLR.
 $modRoot = Split-Path -Parent $PSScriptRoot
-$managed = Join-Path (Split-Path -Parent $modRoot) '7DaysToDie_Data/Managed'
+if(-not $GameRoot){$GameRoot=Split-Path -Parent $modRoot}
+$managed = Join-Path $GameRoot '7DaysToDie_Data/Managed'
+if(-not(Test-Path -LiteralPath (Join-Path $managed 'Assembly-CSharp.dll'))){throw 'Specify -GameRoot pointing to the installed game when building from a worktree.'}
 $compilerRefs = @('Microsoft.CodeAnalysis.dll','Microsoft.CodeAnalysis.CSharp.dll') | ForEach-Object { Join-Path $PSHOME $_ }
 $frameworkRefs = Get-ChildItem (Join-Path $PSHOME 'ref') -Filter '*.dll' | ForEach-Object FullName
 Add-Type -CompilerOptions '/nowarn:1701' -ReferencedAssemblies ($compilerRefs + $frameworkRefs) -TypeDefinition @'
@@ -34,5 +36,7 @@ public static class AutomationCompiler
 $sources = Get-ChildItem (Join-Path $modRoot '97-AutomationWorkshop/Source') -Filter '*.cs' | Sort-Object Name | ForEach-Object FullName
 $gameRefs = @(Get-ChildItem $managed -Filter '*.dll' | ForEach-Object FullName) + (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll')
 if(-not $Output){$Output=Join-Path $modRoot '97-AutomationWorkshop/YF.Automation.dll'}
+$outputDirectory=Split-Path -Parent ([IO.Path]::GetFullPath($Output))
+[IO.Directory]::CreateDirectory($outputDirectory) | Out-Null
 [AutomationCompiler]::Build($sources, $gameRefs, $Output)
 Write-Output 'Runtime build succeeded (offline Roslyn; game/Mono references).'

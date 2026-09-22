@@ -20,6 +20,7 @@ namespace YFAutomation
         }
         public static string Pump(World world,TileEntityComposite machine)
         {
+            if(Logistics.Busy(machine))return "库存正在使用，抽水暂停";
             var at=machine.ToWorldPos();
             if(!Logistics.Sides.Any(s=>world.IsWater(Logistics.Add(at,s))))return "进水口须紧贴水体";
             var chunk=world.GetChunkFromWorldPos(at.x,at.z) as Chunk;if(chunk==null||chunk.IsLocked)return "等待区块可写";
@@ -29,6 +30,7 @@ namespace YFAutomation
                 if(type==0)return "灌溉水配置缺失";
                 foreach(var tank in MachineInventory.UsesInternal(machine)?new[]{machine}:Tanks(world,machine))
                 {
+                    if(Logistics.Busy(tank))continue;
                     var storage=tank.GetFeature<TEFeatureStorage>();
                     int stored=storage.items.Where(s=>s!=null&&!s.IsEmpty()&&s.itemValue.type==type).Sum(s=>s.count);
                     if(Free(stored)==0)continue;
@@ -40,6 +42,7 @@ namespace YFAutomation
                     if(state.Job!="pump"){state.Job="pump";state.Seconds=0;}
                     state.Seconds++;machine.SetChunkModified();
                     if(state.Seconds<5)return "抽水中 "+(int)(state.Seconds*20)+"%";
+                    if(Logistics.Busy(machine)||Logistics.Busy(tank))return "库存正在使用，抽水暂停";
                     Array.Copy(copy,storage.items,copy.Length);state.Seconds=0;
                     tank.SetChunkModified();tank.SetModified();return "储水："+(stored+1)+"/"+Capacity;
                 }
@@ -62,7 +65,9 @@ namespace YFAutomation
                 var storage=tank.GetFeature<TEFeatureStorage>();var copy=ProductionInventory.Clone(storage.items);
                 if(!ProductionInventory.Consume(copy,type,1,i=>Logistics.Locked(storage,i)))continue;
                 var original=work.Complete;
+                var originalReady=work.Ready;
                 work.Duration=5;work.Key+=":irrigated";
+                work.Ready=()=>world.GetTileEntity(tank.ToWorldPos())==tank&&!Logistics.Busy(tank)&&(originalReady==null||originalReady());
                 work.Complete=()=>{original?.Invoke();Array.Copy(copy,storage.items,copy.Length);tank.SetChunkModified();tank.SetModified();};
                 return;
             }

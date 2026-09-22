@@ -1,6 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <configs>
   <append xpath="/recipes">
+    <recipe name="yfCargoHub" count="1" craft_area="yfAutomationWorkbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedSteel" count="30" />
+      <ingredient name="resourceMechanicalParts" count="20" />
+      <ingredient name="resourceElectricParts" count="20" />
+      <ingredient name="resourceScrapPolymers" count="20" />
+    </recipe>
     <recipe name="yfAutomationWorkbench" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="resourceForgedIron" count="40" />
       <ingredient name="resourceMechanicalParts" count="20" />

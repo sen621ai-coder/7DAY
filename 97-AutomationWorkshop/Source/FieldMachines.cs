@@ -11,6 +11,7 @@ namespace YFAutomation
             public string Key;
             public float Duration;
             public Action Complete;
+            public Func<bool> Ready;
         }
         // Restrict field work to the placing player's active land claim and this chunk.
         // This is deliberately stricter than allies' access to shared chests.

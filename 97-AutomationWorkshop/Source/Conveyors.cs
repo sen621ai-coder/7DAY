@@ -72,6 +72,8 @@ namespace YFAutomation
     var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i),i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value);
     if(count>0){changed.Add(source);changed.Add(b);moved.Add(b);}
    }
+   // Abort the entire detached batch before publishing either side of any transfer.
+   if(changed.Any(t=>world.GetTileEntity(t.ToWorldPos())!=t||Logistics.Busy(t)))return;
    foreach(var t in changed){var s=t.GetFeature<TEFeatureStorage>();Array.Copy(working[t],s.items,s.items.Length);t.SetChunkModified();}
    foreach(var t in changed)t.SetModified();
    foreach(var b in nodes){if(Logistics.Busy(b))continue;var state=b.GetFeature<TEFeatureAutomationState>();if(state==null)continue;string status=!powered.Contains(b)?"缺电/线路超过32段":moved.Contains(b)?"运输中":"等待物品/出口堵塞";if(state.Job!=status||moved.Contains(b)){state.Job=status;state.Seconds+=1;b.SetChunkModified();b.SetModified();}}

@@ -818,4 +818,24 @@
       <drop event="Destroy" name="resourceScrapIron" count="2" />
     </block>
   </append>
+  <append xpath="/blocks">
+    <block name="yfCargoHub">
+      <property name="Extends" value="yfAutoInput" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfCargoHubDesc" />
+      <property name="CustomIcon" value="gunBotT3JunkDrone" />
+      <property name="CustomIconTint" value="7B9670" />
+      <property name="MaxDamage" value="3000" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="2500" />
+      <property name="TintColor" value="737D70" />
+    </block>
+    <block name="yfCargoRecoveryCrate">
+      <property name="Extends" value="yfAutoInput" />
+      <property name="CreativeMode" value="None" />
+      <property name="DescriptionKey" value="yfCargoRecoveryCrateDesc" />
+      <property name="CustomIconTint" value="C6A04B" />
+      <property name="TintColor" value="C6A04B" />
+    </block>
+  </append>
 </configs>
