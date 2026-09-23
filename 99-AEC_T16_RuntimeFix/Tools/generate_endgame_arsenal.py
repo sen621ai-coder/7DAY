@@ -266,7 +266,7 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
 
             cvar = f"$PZAEC{set_name}Resonance"
             three = ET.SubElement(definitions, "buff", {"name": f"buffPZAEC{set_name}T{tier}Set3",
-                "name_key": f"buffPZAEC{set_name}ResonanceName", "description_key": f"buffPZAEC{set_name}ResonanceDesc",
+                "name_key": f"buffPZAEC{set_name}T{tier}Set3Name", "description_key": f"buffPZAEC{set_name}ResonanceDesc",
                 "icon": "ui_game_symbol_armor_iron", "icon_color": "255,200,64"})
             ET.SubElement(three, "stack_type", {"value": "ignore"})
             ET.SubElement(three, "display_value", {"value": cvar})
@@ -296,7 +296,9 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
 
             ready_buff = ET.SubElement(definitions, "buff", {"name": f"buffPZAEC{set_name}T{tier}Ready", "hidden": "true"})
             ET.SubElement(ready_buff, "stack_type", {"value": "ignore"})
-            four = ET.SubElement(definitions, "buff", {"name": f"buffPZAEC{set_name}T{tier}Set4", "hidden": "true"})
+            four = ET.SubElement(definitions, "buff", {"name": f"buffPZAEC{set_name}T{tier}Set4",
+                "name_key": f"buffPZAEC{set_name}T{tier}Set4Name", "description_key": f"buffPZAEC{set_name}Set4Desc",
+                "icon": "ui_game_symbol_armor_iron", "icon_color": "100,160,255"})
             ET.SubElement(four, "stack_type", {"value": "ignore"})
             four_group = ET.SubElement(four, "effect_group")
             ET.SubElement(four_group, "triggered_effect", {"trigger": "onSelfBuffRemove", "action": "RemoveBuff",
@@ -353,6 +355,16 @@ def build_buffs() -> tuple[str, list[tuple[str, str, str, str]]]:
             (f"buffPZAEC{set_name}ActiveName", "buffs", spec["active_en"], spec["active_cn"]),
             (f"buffPZAEC{set_name}ActiveDesc", "buffs", f"The {set_name} resonance ability is active.", f"{spec['cn']}共鸣能力正在生效。"),
         ]
+        # Panel-visible tier markers: the resonance buff and a new fourth-piece
+        # buff both carry the effective tier (the lowest tier currently worn).
+        for tier in TIERS:
+            loc += [
+                (f"buffPZAEC{set_name}T{tier}Set3Name", "buffs", f"{set_name} Resonance (T{tier})", f"{spec['cn']}共鸣·T{tier}档"),
+                (f"buffPZAEC{set_name}T{tier}Set4Name", "buffs", f"{set_name} 4-Piece Set (T{tier})", f"{spec['cn']}四件套·T{tier}档"),
+            ]
+        loc += [(f"buffPZAEC{set_name}Set4Desc", "buffs",
+                 f"Four {set_name} pieces are equipped. The set ability auto-triggers at 100 resonance when its cooldown is ready. T16-T19 of the same family can be mixed; set bonuses use the lowest tier worn.",
+                 f"已凑齐{spec['cn']}系列四件套，套装技能待命：共鸣满100且冷却结束时自动触发。\\n同系列T16–T19可混穿，套装加成按所穿最低阶生效；共鸣与冷却按系列共享。")]
     loc += [
         ("buffPZAECResonanceCooldownName", "buffs", "Resonance Overload", "共鸣过载"),
         ("buffPZAECResonanceCooldownDesc", "buffs", "The resonance ability is cooling down.", "套装共鸣技能正在冷却。"),

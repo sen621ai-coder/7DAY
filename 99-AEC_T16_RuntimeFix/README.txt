@@ -1,6 +1,15 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.15 clearer set bonus feedback
+- Three-piece resonance buffs now carry the effective tier in their panel
+  name, e.g. "Harrier Resonance (T16)" - the lowest tier currently worn.
+- Four-piece set buffs are no longer hidden: a fourth-piece icon appears
+  once all four family pieces are equipped, with the pending auto-trigger
+  description. Two-piece bonuses remain passive stats on the character sheet.
+- Applies to all four families (Harrier, Storm, Tremor, Warden), T16-T19.
+  XML/localization update only; no DLL change.
+
 Runtime 1.26.1 four-in-one modifier correction
 - All 88 AEC four-ingredient modifiers (22 families x 4 rarity tiers) retain
   their recipe ingredients' inherent bonuses. Same-scope values use the better

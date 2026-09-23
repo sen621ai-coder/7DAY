@@ -4,6 +4,12 @@
 RU: Назначение модуля: единые поздние правки баланса, прогрессии и совместимости. Назначение файла: группы добычи, наборы и интеграция таблиц выпадения.
 EN: Operations are applied in file order; keep selectors specific and preserve load order.
 RU: Операции применяются по порядку файла; сохраняйте точные селекторы и порядок загрузки.-->
+  <!-- Make both common Project Z boss alloys frequent in AEC boss reward rolls. -->
+  <append xpath="/lootcontainers/lootgroup[@name='groupBossAlloys']">
+    <item group="groupUltraLightAlloysBoss" loot_prob_template="high"/>
+    <item group="groupStrengthAlloysBoss" loot_prob_template="high"/>
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='groupBossAlloys']/item[@group='groupUniqueParts']"/>
   <!-- Double only the mutation-sample quantities obtained by opening AEC corpses. Drop probability, recipes, quest rewards and Project Z butchering yields remain unchanged. -->
   <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='2,10']/@count">4,20</set>
   <set xpath="/lootcontainers/lootcontainer[starts-with(@name,'PassiveZombiePart')]/item[starts-with(@name,'resourceAECMutationSample') and @count='3,15']/@count">6,30</set>
