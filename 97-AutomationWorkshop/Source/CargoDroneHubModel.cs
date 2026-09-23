@@ -77,18 +77,18 @@ namespace YFAutomation.CargoDrones
         public static GameObject Create()
         {
             var root=new GameObject("CargoHub");var owner=root.AddComponent<CargoModelMaterials>();
-            // Match the Buster's cool neutral body and blue optical accents. The
-            // darker value range keeps the pad grounded without the former olive cast.
-            var charcoal=CargoDroneModel.Material(new Color(.06f,.067f,.072f));
-            var shell=CargoDroneModel.Material(new Color(.36f,.375f,.38f));
-            var steel=CargoDroneModel.Material(new Color(.235f,.25f,.26f));
-            var rubber=CargoDroneModel.Material(new Color(.07f,.075f,.08f));
+            // Exact neutral RGB prevents a green cast. Moderate metallic values
+            // keep snowfield and forest reflections from recoloring the shell.
+            var charcoal=CargoDroneModel.Material(new Color(.07f,.07f,.07f));
+            var shell=CargoDroneModel.Material(new Color(.43f,.43f,.43f));
+            var steel=CargoDroneModel.Material(new Color(.28f,.28f,.28f));
+            var rubber=CargoDroneModel.Material(new Color(.065f,.065f,.065f));
             var signal=CargoDroneModel.Material(new Color(.055f,.25f,.39f));
             var caution=CargoDroneModel.Material(new Color(.57f,.35f,.105f));
             owner.Values=new[]{charcoal,shell,steel,rubber,signal,caution};
             string[] materialNames={"CargoHubCharcoal","CargoHubShell","CargoHubSteel","CargoHubGrip","CargoHubSignal","CargoHubCaution"};for(int i=0;i<owner.Values.Length;i++)owner.Values[i].name=materialNames[i];
             var metalAlbedo=DetailTexture("HubBrushedMetal",false,false);var metalNormal=DetailTexture("HubBrushedMetalNormal",false,true);var gripAlbedo=DetailTexture("HubDiamondGrip",true,false);var gripNormal=DetailTexture("HubDiamondGripNormal",true,true);owner.Textures=new[]{metalAlbedo,metalNormal,gripAlbedo,gripNormal};
-            Finish(charcoal,metalAlbedo,metalNormal,.62f,.19f,2.4f);Finish(shell,metalAlbedo,metalNormal,.68f,.31f,2.2f);Finish(steel,metalAlbedo,metalNormal,.76f,.27f,3);Finish(rubber,gripAlbedo,gripNormal,.08f,.13f,3.2f);Finish(signal,metalAlbedo,metalNormal,.5f,.34f,2);Finish(caution,metalAlbedo,metalNormal,.58f,.23f,2);
+            Finish(charcoal,metalAlbedo,metalNormal,.20f,.18f,2.4f);Finish(shell,metalAlbedo,metalNormal,.24f,.28f,2.2f);Finish(steel,metalAlbedo,metalNormal,.34f,.24f,3);Finish(rubber,gripAlbedo,gripNormal,.04f,.13f,3.2f);Finish(signal,metalAlbedo,metalNormal,.35f,.30f,2);Finish(caution,metalAlbedo,metalNormal,.32f,.20f,2);
             signal.EnableKeyword("_EMISSION");signal.SetColor("_EmissionColor",new Color(.018f,.09f,.18f));
             var temporaryMeshes=new List<Mesh>();
             try

@@ -1,9 +1,11 @@
 Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
 yfAutomationWorkbench,blocks,Block,,false,Automation Workbench,自动化工作台
 yfCargoHub,blocks,Block,,false,Cargo Drone Hub,货运无人机停机坪
+yfCargoEntranceBeacon,blocks,Block,,false,Cargo Entrance Beacon,货运入口航标
+yfCargoEntranceBeaconDesc,blocks,Block,,false,"Place this non-blocking beacon in the center of a vertical entrance. Select it from the drone hub; one beacon creates the upper, throat and lower waypoints.","放在垂直入口的中心空区；航标不会阻挡移动。在无人机平台中选择后，一个航标会自动生成入口上方、入口中心和入口下方航点。"
 yfCargoRecoveryCrate,blocks,Block,,false,Cargo Recovery Crate,无人机货物回收箱
 yfCargoRecoveryCrateDesc,blocks,Block,,false,Recovered cargo from a destroyed drone hub.,停机坪销毁后用于接收无人机剩余货物的回收箱。
-yfCargoHubDesc,blocks,Block,,false,"Place beside a powered automation connection. Select miners or forestry within 64 blocks and a destination within 1000 blocks. Keep the approach clear.","放在通电的自动化供电连接旁。选择 64 格内的矿机或林场及 1000 格内的收货仓库。保持台面和起降空间畅通；由放置者管理。"
+yfCargoHubDesc,blocks,Block,,false,"Place within 4 blocks of a wired Automation Power Port; the pad itself is not a wire endpoint. Select sources within 64 blocks and a destination within 1000 blocks.","停机坪本体不是接线端：请在三维 4 格内放置“自动化供电接口”并给接口接线。采集范围 64 格，收货范围 1000 格。"
 yfAutomationWorkbenchDesc,blocks,Block,,false,制造自动化设备、传送带和工厂零件的专用工作台。,制造自动化设备、传送带和工厂零件的专用工作台。
 yfAutoFrame,items,Item,,false,自动化机架,自动化机架
 yfAutoFrameDesc,items,Item,,false,机器共用的承重结构。,机器共用的承重结构。

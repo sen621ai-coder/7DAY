@@ -63,6 +63,7 @@ public static class CargoDroneWorldTests
     {
         checks=0;var root=Path.Combine(directory,"world-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
         Guid world=Guid.NewGuid();var adapter=new Adapter();var config=Config(world,adapter);
+        var entrance=new CargoPosition(6,100,2);config=config.SetEntrance("owner",config.Revision,entrance,new CargoRules());
         using(var journal=new CargoFileJournal(Path.Combine(root,"world.wal"),world))using(var store=new CargoCheckpointStore(Path.Combine(root,"checkpoint"),world))
         {
             var service=new CargoWorldService(world,journal,store,adapter);service.Register(config);
@@ -70,6 +71,7 @@ public static class CargoDroneWorldTests
             service.Tick(100);Check(service.ActiveFlights==1,"configured powered hub autonomously departs");
             var saved=store.LoadWorld(journal);Check(saved.Hubs[0].Flight==service.Status()[0].Flight&&saved.Missions.Length==1,"departure and hub association published together");
             Check(saved.Hubs[0].ShipmentSource.Matches(config.Sources[0])&&saved.Hubs[0].ShipmentTarget.Matches(config.Target),"persistent shipment retains exact incarnations");
+            Check(saved.Hubs[0].Configuration.Entrance.Value.Equals(entrance)&&saved.Hubs[0].ShipmentEntrance.Value.Equals(entrance),"checkpoint preserves configured and shipment entrance waypoints");
             var position=service.Status()[0].Position;long battery=service.Status()[0].Battery;
             Guid initialFlight=service.Status()[0].Flight;var oldSpace=adapter.Spaces[initialFlight];
             adapter.BeforeRelease=id=>Check(store.LoadWorld(journal).Missions.Single(m=>m.Id==id).Motion.Position.Distance(position)==0,"offline checkpoint is readable before observer release");

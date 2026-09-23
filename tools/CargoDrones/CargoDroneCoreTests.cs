@@ -161,6 +161,11 @@ public static class CargoDroneCoreTests
         Throws(()=>configured.SetPaused("other",1,true),"foreign hub edit rejected");
         var distant=new CargoBinding(world,Guid.NewGuid(),Guid.NewGuid(),new CargoPosition(1000,0,0),"owner","playerBox");
         var withTarget=configured.SetTarget("owner",1,distant,rulesForHub);
+        var entrance=new CargoPosition(400,5,3);var withEntrance=withTarget.SetEntrance("owner",withTarget.Revision,entrance,rulesForHub);
+        Check(withEntrance.Entrance.Value.Equals(entrance),"target entrance accepts an arbitrary three-dimensional waypoint");
+        Check(withEntrance.SetTarget("owner",withEntrance.Revision,new CargoBinding(world,Guid.NewGuid(),Guid.NewGuid(),new CargoPosition(450,0,0),"owner","playerBox"),rulesForHub).Entrance==null,"changing target clears its entrance waypoint");
+        Throws(()=>configured.SetEntrance("owner",configured.Revision,entrance,rulesForHub),"entrance cannot exist without a target");
+        Throws(()=>withTarget.SetEntrance("owner",withTarget.Revision,new CargoPosition(0,253,0),rulesForHub),"entrance height is bounded");
         Check(withTarget.Target==distant&&withTarget.Revision==2,"delivery range independent from collection radius");
         Throws(()=>configured.AddSource("owner",1,new CargoBinding(world,Guid.NewGuid(),Guid.NewGuid(),new CargoPosition(65,0,0),"owner","yfAutoForestry"),rulesForHub),"source outside collection radius rejected");
         Throws(()=>configured.SetTarget("owner",1,new CargoBinding(Guid.NewGuid(),Guid.NewGuid(),Guid.NewGuid(),new CargoPosition(1,0,0),"owner","playerBox"),rulesForHub),"cross-world binding rejected");
@@ -446,6 +451,8 @@ public static class CargoDroneCoreTests
         var start=new CargoPoint(0,100,0);var pickup=new CargoPoint(8,100,0);var delivery=new CargoPoint(8,100,8);
         Func<long,CargoMission> create=battery=>new CargoMission(world,Guid.NewGuid(),source.Id,target.Id,"owner",new Airspace(),start,pickup,delivery,battery);
         var mission=create(600000);var input=new Endpoint(source);var output=new Endpoint(target);var journal=new FailingJournal();
+        var departure=mission.Capture().Motion.Remaining;
+        Check(departure.Length>=3&&Math.Abs(departure.Max(p=>p.Y)-112)<1e-7&&departure[0].X==start.X&&departure[0].Z==start.Z&&departure[1].Y==112,"mission climbs twelve blocks before translating over an outdoor endpoint");
         for(int i=0;i<300&&mission.Phase!=CargoPhase.Loading;i++)mission.Tick(100);
         Check(mission.Phase==CargoPhase.Loading&&!mission.TransferReady,"navigation arrival enters loading without early transfer");
         long before=mission.Battery;mission.Tick(5000,endpointHold:CargoHold.ContainerBusy);
@@ -612,12 +619,13 @@ public static class CargoDroneCoreTests
     sealed class ObstacleAirspace : ICargoAirspace
     {
         public readonly List<CargoBox> Obstacles=new List<CargoBox>();
+        public readonly List<CargoPoint> Reached=new List<CargoPoint>();
         public bool Unavailable;
         public int Sweeps;
         public CargoHold Prepare(CargoPoint from,CargoPoint end){return CargoHold.None;}
         public CargoSweep Sweep(CargoPoint from,CargoPoint to)
         {Sweeps++;if(Unavailable)return CargoSweep.Unavailable;return Obstacles.Any(b=>b.SweptHit(from,to))?CargoSweep.Blocked:CargoSweep.Clear;}
-        public void ReachedSegment(CargoPoint at){}
+        public void ReachedSegment(CargoPoint at){Reached.Add(at);}
     }
     static void RoutingChecks()
     {
@@ -625,14 +633,14 @@ public static class CargoDroneCoreTests
         var space=new ObstacleAirspace();space.Obstacles.Add(new CargoBox(new CargoPoint(5,98,-2),new CargoPoint(7,102,2)));
         var route=new CargoLocalRoute(space,origin,goal,124);
         for(int i=0;i<100&&!route.Complete&&!route.Failed;i++)route.Advance();
-        Check(route.Complete&&route.Probes<=256&&route.Waypoints.Any(p=>p.Y>100),"bounded local planner raises route above low wall");
+        Check(route.Complete&&route.Probes<=256&&route.Waypoints.Any(p=>p.Y>100)&&route.Waypoints.All(p=>Math.Abs(p.Z)<1e-7)&&route.Waypoints.Where(p=>p.Y>100).All(p=>Math.Abs((p.Y-100)%2)<1e-7),"bounded local planner raises first in two-block increments above low wall");
         var previous=origin;
         foreach(var point in route.Waypoints){Check(previous.Distance(point)<=16.000001&&space.Sweep(previous,point)==CargoSweep.Clear,"every returned route edge is swept and segmented");previous=point;}
         Check(previous.Distance(goal)<1e-7,"detour rejoins original segment endpoint");
         space.Obstacles.Add(new CargoBox(new CargoPoint(-2,103,-30),new CargoPoint(20,130,30)));
         route=new CargoLocalRoute(space,origin,goal,124);
         for(int i=0;i<100&&!route.Complete&&!route.Failed;i++)route.Advance();
-        Check(route.Complete&&route.Waypoints.Any(p=>Math.Abs(p.Z)>2)&&route.Waypoints.All(p=>p.Y<=124),"ceiling obstacle selects lateral detour");
+        Check(route.Complete&&route.Waypoints.Any(p=>Math.Abs(p.Z)>2)&&route.Waypoints.All(p=>p.Y<=124)&&route.Waypoints.Where(p=>Math.Abs(p.Z)>1e-7).All(p=>Math.Abs(Math.Abs(p.Z)%2)<1e-7),"after vertical candidates fail, ceiling obstacle selects a two-block lateral detour");
         var motion=new CargoMotion(space,origin,new CargoPoint(40,100,0),600000);
         for(int i=0;i<2000&&!motion.Arrived;i++)
         {
@@ -648,13 +656,18 @@ public static class CargoDroneCoreTests
         motion=new CargoMotion(closed,origin,goal,600000,returnReserve:180000);
         for(int i=0;i<100&&!motion.Capture().Blocked;i++)motion.Tick(100);
         Check(motion.Capture().Blocked,"impossible route reaches bounded failure");
-        int probes=closed.Sweeps;for(int i=0;i<29;i++)motion.Tick(100);
-        Check(motion.Hold==CargoHold.PathBlocked&&motion.Position.Distance(origin)==0&&motion.Battery==600000&&closed.Sweeps==probes&&motion.RouteProbes<=256,"blocked route waits three simulation seconds without motion, drain or busy replanning");
+        int probes=closed.Sweeps;for(int i=0;i<9;i++)motion.Tick(100);
+        Check(motion.Hold==CargoHold.PathBlocked&&motion.Position.Distance(origin)==0&&motion.Battery==600000&&closed.Sweeps==probes&&motion.RouteProbes<=256,"blocked route waits one simulation second without motion, drain or busy replanning");
         for(int i=0;i<50;i++)motion.Tick(100,false);
         Check(closed.Sweeps==probes,"offline time does not advance the retry timer");
         motion.Tick(100);Check(closed.Sweeps>probes,"blocked route automatically rechecks at the retry deadline");
         closed.Obstacles.Clear();for(int i=0;i<500&&!motion.Arrived;i++)motion.Tick(100);
         Check(motion.Arrived,"automatic retry recovers outbound flight after obstruction removed");
+        var viaSpace=new ObstacleAirspace();viaSpace.Obstacles.Add(new CargoBox(new CargoPoint(5,102,1),new CargoPoint(7,106,5)));
+        var viaA=new CargoPoint(0,104,0);var viaB=new CargoPoint(16,104,10);var approach=new CargoPoint(16,104,0);
+        motion=new CargoMotion(viaSpace,origin,goal,600000);motion.RetargetVia(goal,new[]{viaA,viaB,approach});
+        for(int i=0;i<2000&&!motion.Arrived;i++)motion.Tick(100);
+        Check(motion.Arrived&&viaSpace.Reached.Any(p=>p.Distance(approach)<1e-7),"local detour preserves later mandatory entrance and approach waypoints");
         var interrupted=new ObstacleAirspace();interrupted.Obstacles.Add(new CargoBox(new CargoPoint(5,98,-2),new CargoPoint(7,102,2)));
         motion=new CargoMotion(interrupted,origin,goal,600000);motion.Tick(100);int beforePause=interrupted.Sweeps;
         for(int i=0;i<20;i++)motion.Tick(100,false);

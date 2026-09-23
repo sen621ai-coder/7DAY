@@ -7,6 +7,11 @@
       <ingredient name="resourceElectricParts" count="20" />
       <ingredient name="resourceScrapPolymers" count="20" />
     </recipe>
+    <recipe name="yfCargoEntranceBeacon" count="1" craft_area="yfAutomationWorkbench" craft_time="20" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="2" />
+      <ingredient name="resourceElectricParts" count="4" />
+      <ingredient name="resourceScrapPolymers" count="2" />
+    </recipe>
     <recipe name="yfAutomationWorkbench" count="1" craft_area="workbench" craft_time="60" always_unlocked="true" use_ingredient_modifier="false">
       <ingredient name="resourceForgedIron" count="40" />
       <ingredient name="resourceMechanicalParts" count="20" />

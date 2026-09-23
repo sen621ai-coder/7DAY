@@ -22,6 +22,7 @@ namespace YFAutomation.CargoDrones
         bool failed;
         bool retired;
         bool busyObserved;
+        CargoPoint? deliveryEntrance;
         public long BusyWaitUnits{get;private set;}
         public CargoMissionReturnReason ReturnReason{get;private set;}
         public CargoPhase Phase{get{return flight.Phase;}}
@@ -35,12 +36,40 @@ namespace YFAutomation.CargoDrones
         public Guid TargetId{get{return target;}}
         public bool CheckpointReady{get{return !retired&&!failed&&transfer==null&&!flight.TransferPending;}}
         public bool TransferReady{get{return !failed&&!flight.TransferPending&&flight.Hold==CargoHold.None&&!flight.RecallRequested&&flight.HandlingUnits>=2000&&(Phase==CargoPhase.Loading||Phase==CargoPhase.Unloading);}}
-        public CargoMission(Guid world,Guid id,Guid source,Guid target,string owner,ICargoAirspace airspace,CargoPoint home,CargoPoint pickup,CargoPoint destination,long battery,long reserve=180000)
+        public CargoMission(Guid world,Guid id,Guid source,Guid target,string owner,ICargoAirspace airspace,CargoPoint home,CargoPoint pickup,CargoPoint destination,long battery,long reserve=180000,CargoPoint? entrance=null)
         {
             if(world==Guid.Empty||source==Guid.Empty||target==Guid.Empty||source==target||string.IsNullOrEmpty(owner)||reserve<0)throw new ArgumentException("Invalid mission");
-            this.world=world;this.source=source;this.target=target;this.owner=owner;this.reserve=reserve;this.destination=destination;
+            this.world=world;this.source=source;this.target=target;this.owner=owner;this.reserve=reserve;this.destination=destination;deliveryEntrance=entrance;
             energy=new CargoEnergy(battery);flight=new CargoFlight(id,target,energy);
-            motion=new CargoMotion(airspace,home,pickup,energy,returnReserve:reserve);flight.Depart(false);
+            motion=new CargoMotion(airspace,home,pickup,energy,returnReserve:reserve);RouteTo(pickup,null);flight.Depart(false);
+        }
+        static CargoPoint Cruise(CargoPoint from,CargoPoint to)
+        {
+            // Outdoor legs climb before translating and stay well above both
+            // endpoints. Local routing may raise this corridor in two-block
+            // steps as far as the motion ceiling (+24).
+            return new CargoPoint(from.X,Math.Min(252,Math.Max(from.Y,to.Y)+12),from.Z);
+        }
+        void RouteTo(CargoPoint target,CargoPoint? entrance)
+        {
+            if(!entrance.HasValue&&motion.Position.Distance(target)<1e-7){motion.Retarget(target);return;}
+            var first=entrance??target;var lift=Cruise(motion.Position,first);var waypoints=new List<CargoPoint>{lift,new CargoPoint(first.X,lift.Y,first.Z)};
+            if(entrance.HasValue)
+            {
+                // One beacon expands into the upper holding point above, this
+                // throat point, and a lower point at the destination elevation.
+                // Translation toward an underground box starts only after the
+                // complete vertical entrance corridor has been traversed.
+                waypoints.Add(entrance.Value);
+                if(Math.Abs(entrance.Value.Y-target.Y)>1)waypoints.Add(new CargoPoint(entrance.Value.X,target.Y,entrance.Value.Z));
+            }
+            motion.RetargetVia(target,waypoints);
+        }
+        void RouteDelivery(){RouteTo(destination,deliveryEntrance);}
+        public void SetDeliveryEntrance(CargoPoint? entrance)
+        {
+            if(retired||failed||flight.TransferPending)throw new InvalidOperationException("当前航段不能更改入口航点");
+            deliveryEntrance=entrance;if(Phase==CargoPhase.ToTarget)RouteDelivery();
         }
         public void Recall()
         {RequestReturn(CargoMissionReturnReason.Requested);}
@@ -61,8 +90,8 @@ namespace YFAutomation.CargoDrones
             if(retired||Phase!=CargoPhase.Docked||failed||CargoPlanner.Count(cargo)==0||Battery<reserve)throw new InvalidOperationException("Docked committed cargo required for redelivery");
             // Retain the shipment's WAL identity and immutable target until all
             // goods are delivered. This sortie cannot load any new source goods.
-            var next=new CargoMission(world,flight.Id,source,target,owner,airspace,Position,Position,destination,Battery,reserve);
-            next.cargo=Cargo;next.CargoRevision=CargoRevision;next.flight.Restore(CargoPhase.ToTarget,CargoHold.None,false,0);next.motion.Retarget(destination);retired=true;return next;
+            var next=new CargoMission(world,flight.Id,source,target,owner,airspace,Position,Position,destination,Battery,reserve,deliveryEntrance);
+            next.cargo=Cargo;next.CargoRevision=CargoRevision;next.flight.Restore(CargoPhase.ToTarget,CargoHold.None,false,0);next.RouteDelivery();retired=true;return next;
         }
         internal void AcceptRecovery(CargoRecoveredFlight recovered,CargoFileJournal journal)
         {
@@ -94,8 +123,8 @@ namespace YFAutomation.CargoDrones
         }
         internal void ConfirmDocked()
         {if(Phase!=CargoPhase.Docking||!CheckpointReady)throw new InvalidOperationException("Docking required");flight.SetHold(CargoHold.None);flight.Dock();BusyWaitUnits=0;busyObserved=false;}
-        public static CargoMission Restore(CargoMissionState state,ICargoAirspace airspace,CargoFileJournal journal)
-        {state.ValidateJournal(journal);return new CargoMission(state,airspace);}
+        public static CargoMission Restore(CargoMissionState state,ICargoAirspace airspace,CargoFileJournal journal,CargoPoint? entrance=null)
+        {state.ValidateJournal(journal);return new CargoMission(state,airspace,entrance);}
         public static CargoMissionState Reconcile(CargoMissionState saved,CargoFileJournal journal,ICargoAirspace airspace,bool removed)
         {
             var committed=CargoJournalReplay.Read(journal.WorldId,journal.Entries).SingleOrDefault(f=>f.FlightId==saved.Id);
@@ -110,11 +139,15 @@ namespace YFAutomation.CargoDrones
             if(!removed){mission.motion.ReturnHome();mission.flight.Restore(CargoPhase.Returning,CargoHold.None,true,0);}
             return mission.Capture();
         }
-        CargoMission(CargoMissionState state,ICargoAirspace airspace)
+        CargoMission(CargoMissionState state,ICargoAirspace airspace,CargoPoint? entrance=null)
         {
-            world=state.World;source=state.Source;target=state.Target;owner=state.Owner;destination=state.Destination;reserve=state.Reserve;
+            world=state.World;source=state.Source;target=state.Target;owner=state.Owner;destination=state.Destination;reserve=state.Reserve;deliveryEntrance=entrance;
             energy=new CargoEnergy(state.Battery);flight=new CargoFlight(state.Id,target,energy);flight.Restore(state.Phase,state.Hold,state.Recall,state.Handling);
             motion=new CargoMotion(airspace,energy,state.Motion);cargo=state.Cargo;CargoRevision=state.Revision;BusyWaitUnits=state.BusyWait;busyObserved=state.BusyObserved;ReturnReason=state.ReturnReason;
+            // Upgrade old near-ground outbound checkpoints to the current 3D
+            // departure/approach corridor. Returning flights retain the exact
+            // recorded trail so a safe corridor is never invented on recall.
+            if(state.Phase==CargoPhase.ToTarget&&state.Motion.Trail.Length>0&&state.Motion.Position.Distance(state.Motion.Trail[0])<1e-7)RouteDelivery();
         }
         void RequestReturn(CargoMissionReturnReason reason)
         {if(Phase==CargoPhase.RecoveryOnly||Phase==CargoPhase.Docked)return;if(ReturnReason==CargoMissionReturnReason.None)ReturnReason=reason;flight.Recall();if(!flight.TransferPending&&!failed)motion.ReturnHome();}
@@ -194,7 +227,7 @@ namespace YFAutomation.CargoDrones
             // safely; it cannot be mistaken for a successful load or unload.
             if(transfer.State==CargoTransferState.Aborted)RequestReturn(CargoMissionReturnReason.TransactionAborted);
             flight.CompleteTransfer(CargoPlanner.Count(cargo));transfer=null;flight.SetHold(CargoHold.None);
-            if(Phase==CargoPhase.Returning)motion.ReturnHome();else motion.Retarget(destination);
+            if(Phase==CargoPhase.Returning)motion.ReturnHome();else RouteDelivery();
         }
     }
 }

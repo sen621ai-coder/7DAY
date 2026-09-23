@@ -13,6 +13,7 @@ namespace YFAutomation.CargoDrones
     {
         public const string HubBlock="yfCargoHub";
         public const string RecoveryBlock="yfCargoRecoveryCrate";
+        public const string EntranceBeaconBlock="yfCargoEntranceBeacon";
         static World world;
         static CargoFileJournal journal;
         static CargoCheckpointStore checkpoints;

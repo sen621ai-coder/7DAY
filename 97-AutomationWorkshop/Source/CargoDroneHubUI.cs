@@ -8,7 +8,7 @@ using UnityEngine.Scripting;
 
 namespace YFAutomation.CargoDrones
 {
-    public enum CargoHubAction : byte{Read,TogglePause,Recall,AddSource,RemoveSource,SetTarget,ClearTarget}
+    public enum CargoHubAction : byte{Read,TogglePause,Recall,AddSource,RemoveSource,SetTarget,ClearTarget,SetEntrance,ClearEntrance}
     public static class CargoHubUI
     {
         public const string Group="yfCargoHub",Command="yfCargoConfigure";
@@ -44,6 +44,7 @@ namespace YFAutomation.CargoDrones
             var target=s.Configuration.Target;var text=new StringBuilder();
             text.AppendLine("新货目标："+WarehouseName(target));
             if(target!=null)text.AppendLine(Coordinates(target.Position)+" · "+CargoWarehouseFilter.RelativeLocation(s.Configuration.Position,target.Position));
+            text.AppendLine("入口航标："+(s.Configuration.Entrance.HasValue?Coordinates(s.Configuration.Entrance.Value)+"（自动生成上下通道点）":"未设置（使用高空直达进场）"));
             if(s.Packages>0&&s.ShipmentTarget!=null)
             {
                 text.AppendLine("本批货送往："+WarehouseName(s.ShipmentTarget));
@@ -75,8 +76,8 @@ namespace YFAutomation.CargoDrones
         internal static string Describe(CargoHubStatus s)
         {
             var c=s.Configuration;var text=new StringBuilder();
-            text.AppendLine("状态："+StateText(s)+(c.Paused&&s.Phase!=CargoPhase.Docked?" · 新航班已暂停":"")).AppendLine("电量："+(s.Battery/6000.0).ToString("0.0")+"%    货物："+s.Packages+" / 6");
-            if(s.Hold==CargoHold.PathBlocked)text.AppendLine("请让开航路；每 3 秒重试，再次召回可立即检查返航路。");
+            text.AppendLine("状态："+StateText(s)+(c.Paused&&s.Phase!=CargoPhase.Docked?" · 新航班已暂停":"")).AppendLine("供电："+(s.Powered?"已接通":"未接通 · 给三维4格内的自动化供电接口接线")).AppendLine("电量："+(s.Battery/6000.0).ToString("0.0")+"%    货物："+s.Packages+" / 6");
+            if(s.Hold==CargoHold.PathBlocked)text.AppendLine("三维航路正在改道；优先每 2 格升高，再每 2 格左右绕行。玩家不会阻挡，每 1 秒自动重试。");
             text.AppendLine("采集设备："+c.Sources.Length+" / 8");
             foreach(var source in c.Sources)text.AppendLine(CargoSourceFilter.Label(CargoSourceFilter.Kind(source.BlockName))+"  ·  "+Coordinates(source.Position));
             return text.ToString();
@@ -136,10 +137,14 @@ namespace YFAutomation.CargoDrones
                     case CargoHubAction.SetTarget:
                         var target=runtime.ResolveBinding(at,owner,false);if(target==null)throw new InvalidOperationException("未找到支持的玩家储物箱");changed=c.SetTarget(owner,c.Revision,target,rules);break;
                     case CargoHubAction.ClearTarget:changed=c.SetTarget(owner,c.Revision,null,rules);break;
+                    case CargoHubAction.SetEntrance:
+                        at=CargoEntranceSearch.Resolve(world,c.Position,at,owner);
+                        changed=c.SetEntrance(owner,c.Revision,at,rules);break;
+                    case CargoHubAction.ClearEntrance:changed=c.SetEntrance(owner,c.Revision,null,rules);break;
                 }
-                if(changed!=c)runtime.Service.Configure(c.HubId,owner,c.Revision,changed);
+                if(changed!=c)runtime.Service.Configure(c.HubId,owner,c.Revision,changed,Action==CargoHubAction.SetEntrance||Action==CargoHubAction.ClearEntrance);
                 state=runtime.Service.Status().Single(s=>s.Configuration.HubId==c.HubId);
-                reply.SetState(state);reply.Message=Action==CargoHubAction.Read?"状态已更新":Action==CargoHubAction.Recall?"已请求返航；返航后仍按调度配置运行":Action==CargoHubAction.ClearTarget?"已清除新货目标；本批货仍送往原箱":"操作已保存";
+                reply.SetState(state);reply.Message=Action==CargoHubAction.Read?"状态已更新":Action==CargoHubAction.Recall?"已请求返航；返航后仍按调度配置运行":Action==CargoHubAction.ClearTarget?"已清除新货目标；本批货仍送往原箱":Action==CargoHubAction.SetEntrance?"入口航标已用于新货和当前航班":Action==CargoHubAction.ClearEntrance?"入口航标已清除":"操作已保存";
             }
             catch(Exception ex)
             {
@@ -182,7 +187,7 @@ namespace YFAutomation.CargoDrones
         XUiC_TextInput warehouseQuery;
         CargoWarehouseKind warehouseKind;
         CargoSourceKind sourceKind;
-        bool sources=true,boundOnly,refreshAfterAction;
+        bool sources=true,entrances,boundOnly,refreshAfterAction;
         CargoWarehousePage warehouses=new CargoWarehousePage();
         int warehouseRequest,queuedPage=-1;bool searching;float warehouseSent;
         string lastWarehouseQuery="";
@@ -196,6 +201,7 @@ namespace YFAutomation.CargoDrones
             GetChildById("warehouseType").OnPress+=(s,b)=>
             {
                 if(!ready||searching)return;
+                if(entrances)return;
                 if(sources)sourceKind=(CargoSourceKind)(((int)sourceKind+1)%9);else warehouseKind=(CargoWarehouseKind)(((int)warehouseKind+1)%6);
                 PickerLabels();SearchWarehouses(0);
             };
@@ -208,13 +214,14 @@ namespace YFAutomation.CargoDrones
                     if(!ready||searching||queuedPage>=0||index>=warehouses.Rows.Length)return;
                     var row=warehouses.Rows[index];
                     if(sources&&!row.Available&&!row.Bound)return;
-                    refreshAfterAction=true;Send(sources?(row.Bound?CargoHubAction.RemoveSource:CargoHubAction.AddSource):CargoHubAction.SetTarget,row.Position);
+                    refreshAfterAction=true;Send(entrances?CargoHubAction.SetEntrance:sources?(row.Bound?CargoHubAction.RemoveSource:CargoHubAction.AddSource):CargoHubAction.SetTarget,row.Position);
                 };
             }
             GetChildById("add").OnPress+=(s,b)=>Pick(true,false);
             GetChildById("remove").OnPress+=(s,b)=>Pick(true,true);
             GetChildById("target").OnPress+=(s,b)=>Pick(false,false);
             Bind("refresh",CargoHubAction.Read);Bind("pause",CargoHubAction.TogglePause);Bind("recall",CargoHubAction.Recall);Bind("clear",CargoHubAction.ClearTarget);
+            GetChildById("setEntrance").OnPress+=(s,b)=>PickEntrance();Bind("clearEntrance",CargoHubAction.ClearEntrance);
             GetChildById("locate").OnPress+=(s,b)=>Locate(false);
             GetChildById("locateShipment").OnPress+=(s,b)=>Locate(true);
             GetChildById("close").OnPress+=(s,b)=>xui.playerUI.windowManager.Close(WindowGroup);
@@ -226,24 +233,30 @@ namespace YFAutomation.CargoDrones
             var player=xui.playerUI.entityPlayer;player.navMarkerHidden=false;player.markerPosition=shipment?shipmentPosition:targetPosition;
             Label("notice","已设置临时导航点，关闭面板后跟随罗盘标记前往。");
         }
+        void PickEntrance()
+        {
+            if(!ready)return;
+            sources=false;entrances=true;boundOnly=false;warehouseQuery.Text="";lastWarehouseQuery="";searching=false;warehouseRequest=++sequence;queuedPage=-1;
+            warehouses=new CargoWarehousePage();PickerLabels();ShowWarehouses();SearchWarehouses(0);
+        }
         void Bind(string name,CargoHubAction action){GetChildById(name).OnPress+=(s,b)=>{if(ready||action==CargoHubAction.Read){if(action==CargoHubAction.ClearTarget)refreshAfterAction=true;Send(action);}};}
         void PickerLabels()
         {
-            Label("warehouseTitle",sources?(boundOnly?"管理已绑定设备":"选择矿机 / 林场"):"选择收货仓库");
-            Label("warehouseScope",sources?(boundOnly?"包含暂不可用的绑定记录":"已加载区域 · 停机坪 64 格内"):"已加载区域 · 停机坪 1000 格内");
-            Label("warehouseTypeText",sources?CargoSourceFilter.Label(sourceKind):CargoWarehouseFilter.Label(warehouseKind));
+            Label("warehouseTitle",entrances?"选择入口航标":sources?(boundOnly?"管理已绑定设备":"选择矿机 / 林场"):"选择收货仓库");
+            Label("warehouseScope",entrances?"已加载区域 · 停机坪 1000 格内":sources?(boundOnly?"包含暂不可用的绑定记录":"已加载区域 · 停机坪 64 格内"):"已加载区域 · 停机坪 1000 格内");
+            Label("warehouseTypeText",entrances?"货运入口航标":sources?CargoSourceFilter.Label(sourceKind):CargoWarehouseFilter.Label(warehouseKind));
         }
         void Pick(bool sourceMode,bool onlyBound)
         {
             if(!ready)return;
-            sources=sourceMode;boundOnly=onlyBound;sourceKind=CargoSourceKind.All;warehouseKind=CargoWarehouseKind.All;
+            sources=sourceMode;entrances=false;boundOnly=onlyBound;sourceKind=CargoSourceKind.All;warehouseKind=CargoWarehouseKind.All;
             warehouseQuery.Text="";lastWarehouseQuery="";searching=false;warehouseRequest=++sequence;queuedPage=-1;
             warehouses=new CargoWarehousePage();PickerLabels();ShowWarehouses();SearchWarehouses(0);
         }
         public override void OnOpen()
         {
             base.OnOpen();Active=this;open=true;ready=false;awaiting=false;sent=-1;at=CargoHubUI.Pending;hub=Guid.Empty;revision=0;hasTarget=hasShipment=false;autoReading=false;
-            warehouseQuery.Text="";lastWarehouseQuery="";warehouseKind=CargoWarehouseKind.All;sourceKind=CargoSourceKind.All;sources=true;boundOnly=false;
+            warehouseQuery.Text="";lastWarehouseQuery="";warehouseKind=CargoWarehouseKind.All;sourceKind=CargoSourceKind.All;sources=true;entrances=false;boundOnly=false;
             searching=false;queuedPage=-1;warehouses=new CargoWarehousePage();refreshAfterAction=true;
             PickerLabels();ShowWarehouses();Label("warehouseNotice","读取配置后自动列出矿机和林场");Label("selection","正在读取目标箱…");Label("details","");Send(CargoHubAction.Read);
         }
@@ -254,7 +267,7 @@ namespace YFAutomation.CargoDrones
             if(Time.realtimeSinceStartup-warehouseSent<.55f){queuedPage=page;Label("warehouseNotice","正在刷新列表…");return;}
             queuedPage=-1;
             string query=CargoWarehouseFilter.Clean(warehouseQuery.Text,64);if(query!=lastWarehouseQuery)page=0;lastWarehouseQuery=query;
-            var packet=NetPackageManager.GetPackage<NetPackageYFCargoWarehouseRequest>();packet.At=at;packet.Hub=hub;packet.Request=warehouseRequest=++sequence;packet.Page=page;packet.Kind=warehouseKind;packet.Query=query;packet.Sources=sources;packet.SourceKind=sourceKind;packet.BoundOnly=boundOnly;
+            var packet=NetPackageManager.GetPackage<NetPackageYFCargoWarehouseRequest>();packet.At=at;packet.Hub=hub;packet.Request=warehouseRequest=++sequence;packet.Page=page;packet.Kind=warehouseKind;packet.Query=query;packet.Sources=sources;packet.Entrances=entrances;packet.SourceKind=sourceKind;packet.BoundOnly=boundOnly;
             warehouses=new CargoWarehousePage();ShowWarehouses();searching=true;warehouseSent=Time.realtimeSinceStartup;Label("warehouseNotice","正在查找设备…");
             if(ConnectionManager.Instance.IsServer)packet.Handle(GameManager.Instance.World,xui.playerUI.entityPlayer.entityId);else ConnectionManager.Instance.SendToServer(packet);
         }
@@ -263,23 +276,23 @@ namespace YFAutomation.CargoDrones
             for(int i=0;i<8;i++)
             {
                 if(i>=warehouses.Rows.Length){Label("warehouseName"+i,"");Label("warehouseInfo"+i,"");continue;}
-                var row=warehouses.Rows[i];string type=sources?CargoSourceFilter.Label(CargoSourceFilter.Kind(row.Block)):CargoWarehouseFilter.Label(row.Kind);
+                var row=warehouses.Rows[i];string type=entrances?"货运入口航标":sources?CargoSourceFilter.Label(CargoSourceFilter.Kind(row.Block)):CargoWarehouseFilter.Label(row.Kind);
                 string name=string.IsNullOrWhiteSpace(row.Sign)?row.Name:row.Sign;if(string.IsNullOrWhiteSpace(name))name=type;
-                Label("warehouseName"+i,(row.Bound?(sources?"[已绑定] ":"[当前目标] "):"")+CargoWarehouseFilter.Clean(name,row.Bound?15:22));
+                Label("warehouseName"+i,(row.Bound?(entrances?"[当前入口] ":sources?"[已绑定] ":"[当前目标] "):"")+CargoWarehouseFilter.Clean(name,row.Bound?15:22));
                 Label("warehouseInfo"+i,CargoHubUI.Coordinates(row.Position)+" · "+Math.Round(row.Distance)+" 格 · "+(sources&&row.Bound?(row.Available?"点击移除":"不可用，点击移除"):type));
             }
             Label("warehousePage",warehouses.Total==0?"暂无结果":(warehouses.Page+1)+" / "+((warehouses.Total+7)/8)+" 页 · "+warehouses.Total+" 项");
         }
         public void ReceiveWarehouses(NetPackageYFCargoWarehouseReply reply)
         {
-            if(!open||!searching||reply.At!=at||reply.Hub!=hub||reply.Request!=warehouseRequest||reply.Sources!=sources)return;
+            if(!open||!searching||reply.At!=at||reply.Hub!=hub||reply.Request!=warehouseRequest||reply.Sources!=sources||reply.Entrances!=entrances)return;
             searching=false;warehouses=reply.Success?reply.Result:new CargoWarehousePage();ShowWarehouses();Label("warehouseNotice",reply.Message);
         }
         void Send(CargoHubAction action,CargoPosition? selected=null,bool automatic=false)
         {
             if(awaiting)return;
             if(Time.realtimeSinceStartup-sent<.25f){Label("notice","操作过快，请稍后重试");return;}
-            if((action==CargoHubAction.AddSource||action==CargoHubAction.RemoveSource||action==CargoHubAction.SetTarget)&&!selected.HasValue)return;
+            if((action==CargoHubAction.AddSource||action==CargoHubAction.RemoveSource||action==CargoHubAction.SetTarget||action==CargoHubAction.SetEntrance)&&!selected.HasValue)return;
             var endpoint=selected.HasValue?new Vector3i(selected.Value.X,selected.Value.Y,selected.Value.Z):Vector3i.zero;
             var p=NetPackageManager.GetPackage<NetPackageYFCargoHubRequest>();p.At=at;p.Endpoint=endpoint;p.Action=action;p.Request=request=++sequence;p.Hub=hub;p.Revision=revision;
             autoReading=automatic;ready=false;awaiting=true;sent=Time.realtimeSinceStartup;if(!automatic)Label("notice","正在处理…");

@@ -50,7 +50,7 @@
       <property name="CustomIcon" value="ammo762mmBulletAP"/>
       <property name="DescriptionKey" value="pzApache30mmDesc"/>
       <property name="UnlockedBy" value="craftingVehicles"/>
-      <property name="Stacknumber" value="500"/>
+      <property name="Stacknumber" value="5000"/>
       <property name="EconomicValue" value="45"/>
       <effect_group name="ammo762mmBulletBall" tiered="false">
         <passive_effect name="EntityDamage" operation="base_set" value="20000"/>

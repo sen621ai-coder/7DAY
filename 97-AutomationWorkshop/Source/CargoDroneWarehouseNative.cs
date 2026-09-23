@@ -94,6 +94,46 @@ namespace YFAutomation.CargoDrones
             return new CargoWarehousePage{Page=actual,Total=found.Count,Limited=limited,Rows=found.OrderByDescending(r=>r.Bound).ThenBy(r=>r.Distance).ThenBy(r=>r.Position.X).ThenBy(r=>r.Position.Y).ThenBy(r=>r.Position.Z).Skip(actual*8).Take(8).ToArray()};
         }
     }
+    public static class CargoEntranceSearch
+    {
+        static string Owner(TileEntityComposite tile)
+        {return (tile?.GetFeature<TEFeatureLockable>()?.GetOwner()??tile?.Owner)?.CombinedString??"";}
+        static bool Matches(string query,string name,string sign)
+        {
+            string text=CargoWarehouseFilter.Clean(name)+" "+CargoWarehouseFilter.Clean(sign,256)+" 货运入口航标 入口 航标";
+            return CargoWarehouseFilter.Clean(query,64).Split(new[]{' '},StringSplitOptions.RemoveEmptyEntries).All(word=>text.IndexOf(word,StringComparison.OrdinalIgnoreCase)>=0);
+        }
+        public static CargoPosition Resolve(World world,CargoPosition hub,CargoPosition at,string owner)
+        {
+            if(world==null||world.IsRemote()||string.IsNullOrEmpty(owner))throw new ArgumentException("入口航标参数无效");
+            var rules=new CargoRules();if(!rules.CanDeliver(hub,at))throw new InvalidOperationException("入口航标超出停机坪 1000 格范围");
+            var chunk=world.GetChunkFromWorldPos(at.X,at.Z) as Chunk;
+            if(chunk==null||chunk.IsLocked||chunk.NeedsDecoration)throw new InvalidOperationException("入口航标所在区域尚未加载");
+            var tile=world.GetTileEntity(new Vector3i(at.X,at.Y,at.Z)) as TileEntityComposite;
+            if(tile==null||tile.IsRemoving||tile.block.GetBlockName()!=CargoRuntime.EntranceBeaconBlock||Owner(tile)!=owner)throw new InvalidOperationException("未找到属于你的货运入口航标");
+            return at;
+        }
+        public static CargoWarehousePage Find(World world,CargoHubConfiguration hub,string query,int page)
+        {
+            if(world==null||world.IsRemote()||hub==null||page<0||page>=32||query==null||query.Length>64)throw new ArgumentException("Invalid entrance search");
+            var found=new List<CargoWarehouseRow>();bool limited=false;var home=hub.Position;var rules=new CargoRules();
+            for(int x=(home.X-1000)>>4;x<=((home.X+1000)>>4);x++)for(int z=(home.Z-1000)>>4;z<=((home.Z+1000)>>4);z++)
+            {
+                var chunk=world.GetChunkFromWorldPos(x*16,z*16) as Chunk;if(chunk==null||chunk.IsLocked||chunk.NeedsDecoration)continue;
+                foreach(var tile in chunk.GetTileEntities().dict.Values.OfType<TileEntityComposite>())
+                {
+                    if(tile.IsRemoving||tile.block.GetBlockName()!=CargoRuntime.EntranceBeaconBlock||Owner(tile)!=hub.Owner)continue;
+                    var p=tile.ToWorldPos();var at=new CargoPosition(p.x,p.y,p.z);if(!rules.CanDeliver(home,at))continue;
+                    string name=tile.block.GetLocalizedBlockName(),sign=tile.GetFeature<TEFeatureSignable>()?.GetAuthoredText().Text??"";
+                    if(!Matches(query,name,sign))continue;if(found.Count>=CargoWarehouseFilter.MaxResults){limited=true;continue;}
+                    double dx=(double)at.X-home.X,dy=(double)at.Y-home.Y,dz=(double)at.Z-home.Z;
+                    found.Add(new CargoWarehouseRow{Position=at,Block=CargoRuntime.EntranceBeaconBlock,Name=CargoWarehouseFilter.Clean(name),Sign=CargoWarehouseFilter.Clean(sign),Bound=hub.Entrance.HasValue&&hub.Entrance.Value.Equals(at),Distance=Math.Sqrt(dx*dx+dy*dy+dz*dz)});
+                }
+            }
+            int actual=Math.Min(page,Math.Max(0,(found.Count-1)/CargoWarehouseFilter.PageSize));
+            return new CargoWarehousePage{Page=actual,Total=found.Count,Limited=limited,Rows=found.OrderByDescending(r=>r.Bound).ThenBy(r=>r.Distance).ThenBy(r=>r.Position.X).ThenBy(r=>r.Position.Y).ThenBy(r=>r.Position.Z).Skip(actual*CargoWarehouseFilter.PageSize).Take(CargoWarehouseFilter.PageSize).ToArray()};
+        }
+    }
     public sealed class NetPackageYFCargoWarehouseRequest : NetPackage
     {
         static World lastWorld;
@@ -102,29 +142,30 @@ namespace YFAutomation.CargoDrones
         public Guid Hub;
         public int Request,Page;
         public CargoWarehouseKind Kind;
-        public bool Sources,BoundOnly;
+        public bool Sources,Entrances,BoundOnly;
         public CargoSourceKind SourceKind;
         public string Query="";
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>44+Encoding.UTF8.GetByteCount(Query??"");
-        public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Hub.ToByteArray());w.Write(Request);w.Write(Page);w.Write((byte)Kind);w.Write(Sources);w.Write(BoundOnly);w.Write((byte)SourceKind);ConfigurationWire.Text(w,Query,256);}
-        public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Hub=new Guid(r.ReadBytes(16));Request=r.ReadInt32();Page=r.ReadInt32();Kind=(CargoWarehouseKind)r.ReadByte();Sources=r.ReadBoolean();BoundOnly=r.ReadBoolean();SourceKind=(CargoSourceKind)r.ReadByte();Query=ConfigurationWire.Text(r,256);}
+        public override int GetLength()=>45+Encoding.UTF8.GetByteCount(Query??"");
+        public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Hub.ToByteArray());w.Write(Request);w.Write(Page);w.Write((byte)Kind);w.Write(Sources);w.Write(Entrances);w.Write(BoundOnly);w.Write((byte)SourceKind);ConfigurationWire.Text(w,Query,256);}
+        public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Hub=new Guid(r.ReadBytes(16));Request=r.ReadInt32();Page=r.ReadInt32();Kind=(CargoWarehouseKind)r.ReadByte();Sources=r.ReadBoolean();Entrances=r.ReadBoolean();BoundOnly=r.ReadBoolean();SourceKind=(CargoSourceKind)r.ReadByte();Query=ConfigurationWire.Text(r,256);}
         public override void ProcessPackage(World world,GameManager callbacks){if(Sender!=null&&Sender.loginDone&&Sender.bAttachedToEntity)Handle(world,Sender.entityId);}
         public void Handle(World world,int actor)
         {
             if(world==null||world.IsRemote()||!(ConnectionManager.Instance?.IsServer??false))return;
             if(lastWorld!=world){lastWorld=world;next.Clear();}
             var player=world.GetEntity(actor) as EntityPlayer;
-            var reply=NetPackageManager.GetPackage<NetPackageYFCargoWarehouseReply>();reply.At=At;reply.Hub=Hub;reply.Request=Request;reply.Sources=Sources;reply.Success=false;reply.Result=new CargoWarehousePage();reply.Message="设备搜索不可用";
+            var reply=NetPackageManager.GetPackage<NetPackageYFCargoWarehouseReply>();reply.At=At;reply.Hub=Hub;reply.Request=Request;reply.Sources=Sources;reply.Entrances=Entrances;reply.Success=false;reply.Result=new CargoWarehousePage();reply.Message="设备搜索不可用";
             try
             {
                 float until;if(next.TryGetValue(actor,out until)&&Time.realtimeSinceStartup<until)throw new InvalidOperationException("搜索过快，请稍后再试");next[actor]=Time.realtimeSinceStartup+.5f;
                 var runtime=CargoNativeWorld.Current;
                 var state=runtime?.Service.Status().SingleOrDefault(s=>s.Configuration.HubId==Hub&&s.Configuration.Position.Equals(new CargoPosition(At.x,At.y,At.z)));
                 if(state==null||player==null||player.IsDead()||(player.position-new Vector3(At.x+.5f,At.y+.5f,At.z+.5f)).sqrMagnitude>64||player.PersistentPlayerData?.PrimaryId?.CombinedString!=state.Configuration.Owner||!runtime.HubExists(state.Configuration))throw new InvalidOperationException("需要停机坪所有者在 8 格内搜索");
-                reply.Result=Sources?CargoSourceSearch.Find(world,state.Configuration,Query,SourceKind,Page,BoundOnly):CargoWarehouseSearch.Find(world,state.Configuration.Position,Query,Kind,Page);reply.Success=true;
-                if(!Sources&&CargoWarehouseSearch.MatchesBinding(world,state.Configuration.Target))foreach(var row in reply.Result.Rows)row.Bound=row.Position.Equals(state.Configuration.Target.Position);
-                reply.Message=reply.Result.Limited?"结果超过 256 项，请缩小名称或类型范围":reply.Result.Total==0?(Sources?"未找到匹配设备；只发现 64 格内已加载的矿机和林场":"未找到匹配仓库；远处目标区域需先加载"):Sources?"点击绑定；已绑定项点击移除。最多 8 台。":"点击设置新货目标；定位按钮可在罗盘标记箱子";
+                if(Sources&&Entrances)throw new InvalidOperationException("设备搜索模式无效");
+                reply.Result=Sources?CargoSourceSearch.Find(world,state.Configuration,Query,SourceKind,Page,BoundOnly):Entrances?CargoEntranceSearch.Find(world,state.Configuration,Query,Page):CargoWarehouseSearch.Find(world,state.Configuration.Position,Query,Kind,Page);reply.Success=true;
+                if(!Sources&&!Entrances&&CargoWarehouseSearch.MatchesBinding(world,state.Configuration.Target))foreach(var row in reply.Result.Rows)row.Bound=row.Position.Equals(state.Configuration.Target.Position);
+                reply.Message=reply.Result.Limited?"结果超过 256 项，请缩小名称范围":reply.Result.Total==0?(Sources?"未找到匹配设备；只发现 64 格内已加载的矿机和林场":Entrances?"未找到你的入口航标；请把航标放在入口中心并加载该区域":"未找到匹配仓库；远处目标区域需先加载"):Sources?"点击绑定；已绑定项点击移除。最多 8 台。":Entrances?"点击航标即可设置入口；系统自动生成上方、入口和下方航点。":"点击设置新货目标；定位按钮可在罗盘标记箱子";
             }
             catch(Exception error){reply.Message=CargoWarehouseFilter.Clean(error.Message,128);}
             if(player is EntityPlayerLocal)reply.Deliver();else if(player!=null)ConnectionManager.Instance.SendPackage(reply,false,actor);
@@ -132,19 +173,19 @@ namespace YFAutomation.CargoDrones
     }
     public sealed class NetPackageYFCargoWarehouseReply : NetPackage
     {
-        public Vector3i At;public Guid Hub;public int Request;public bool Success,Sources;
+        public Vector3i At;public Guid Hub;public int Request;public bool Success,Sources,Entrances;
         public string Message="";public CargoWarehousePage Result=new CargoWarehousePage();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>48+Encoding.UTF8.GetByteCount(Message??"")+Result.Rows.Sum(r=>28+Encoding.UTF8.GetByteCount(r.Name+r.Sign+r.Block));
+        public override int GetLength()=>49+Encoding.UTF8.GetByteCount(Message??"")+Result.Rows.Sum(r=>28+Encoding.UTF8.GetByteCount(r.Name+r.Sign+r.Block));
         public override void write(PooledBinaryWriter w)
         {
-            base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Hub.ToByteArray());w.Write(Request);w.Write(Success);w.Write(Sources);ConfigurationWire.Text(w,Message,512);
+            base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Hub.ToByteArray());w.Write(Request);w.Write(Success);w.Write(Sources);w.Write(Entrances);ConfigurationWire.Text(w,Message,512);
             w.Write(Result.Page);w.Write(Result.Total);w.Write(Result.Limited);w.Write((byte)Result.Rows.Length);
             foreach(var row in Result.Rows){w.Write(row.Position.X);w.Write(row.Position.Y);w.Write(row.Position.Z);w.Write(row.Distance);w.Write(row.Bound);w.Write(row.Available);ConfigurationWire.Text(w,row.Name,512);ConfigurationWire.Text(w,row.Sign,512);ConfigurationWire.Text(w,row.Block,256);}
         }
         public override void read(PooledBinaryReader r)
         {
-            At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Hub=new Guid(r.ReadBytes(16));Request=r.ReadInt32();Success=r.ReadBoolean();Sources=r.ReadBoolean();Message=ConfigurationWire.Text(r,512);
+            At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Hub=new Guid(r.ReadBytes(16));Request=r.ReadInt32();Success=r.ReadBoolean();Sources=r.ReadBoolean();Entrances=r.ReadBoolean();Message=ConfigurationWire.Text(r,512);
             var page=new CargoWarehousePage{Page=r.ReadInt32(),Total=r.ReadInt32(),Limited=r.ReadBoolean()};int count=r.ReadByte();
             if(page.Page<0||page.Page>=32||page.Total<0||page.Total>256||count>8||count>page.Total)throw new System.IO.InvalidDataException("Invalid warehouse page");
             page.Rows=new CargoWarehouseRow[count];

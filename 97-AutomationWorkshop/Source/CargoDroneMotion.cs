@@ -56,7 +56,7 @@ namespace YFAutomation.CargoDrones
         double ceiling;
         bool routeFailed;
         long blockedWait;
-        const long PathRetryUnits=3000;
+        const long PathRetryUnits=1000;
         readonly CargoReturnTrail trail;
         readonly long returnReserve;
         public bool ReturningHome{get;private set;}
@@ -87,6 +87,21 @@ namespace YFAutomation.CargoDrones
             if(ReturningHome)throw new InvalidOperationException("A returning motion cannot discard its home corridor; start a new motion after docking");
             Target=target;ceiling=Math.Min(253,Math.Max(Position.Y,target.Y)+24);RetryPath();Arrived=false;Hold=CargoHold.None;
         }
+        public void RetargetVia(CargoPoint target,IEnumerable<CargoPoint> waypoints)
+        {
+            Retarget(target);if(waypoints==null)throw new ArgumentNullException("waypoints");
+            var from=Position;double highest=Math.Max(Position.Y,target.Y);
+            foreach(var waypoint in waypoints)
+            {
+                highest=Math.Max(highest,waypoint.Y);
+                while(from.Distance(waypoint)>1e-7){from=from.Toward(waypoint,16);detour.Enqueue(from);}
+            }
+            while(from.Distance(target)>1e-7){from=from.Toward(target,16);detour.Enqueue(from);}
+            // A high entrance can sit above both the source and an underground
+            // target. Keep twelve more blocks of detour headroom above the
+            // authored cruise corridor, equivalent to +24 over its endpoint.
+            ceiling=Math.Min(253,Math.Max(ceiling,highest+12));
+        }
         internal CargoMotionState Capture()
         {
             var remaining=new List<CargoPoint>();if(hasSegment)remaining.Add(segment);remaining.AddRange(detour);
@@ -100,7 +115,8 @@ namespace YFAutomation.CargoDrones
             // Persisted waypoints are intentions, not collision clearance. Every
             // resumed edge passes Prepare/Sweep again before the first movement.
             foreach(var point in saved.Remaining)detour.Enqueue(point);
-            ceiling=Math.Min(253,Math.Max(Position.Y,Target.Y)+24);
+            double highest=Math.Max(Position.Y,Target.Y);foreach(var point in saved.Remaining)highest=Math.Max(highest,point.Y);
+            ceiling=Math.Min(253,Math.Max(Math.Max(Position.Y,Target.Y)+24,highest+12));
         }
         public void RetryPath()
         {
@@ -118,7 +134,10 @@ namespace YFAutomation.CargoDrones
         void Blocked()
         {
             if(ReturningHome){routeFailed=true;Hold=CargoHold.PathBlocked;return;}
-            detour.Clear();search=new CargoLocalRoute(space,Position,segment,ceiling);Hold=CargoHold.PathBlocked;
+            // Preserve later mandatory waypoints while locally routing around the
+            // blocked edge. Entrance and approach points must never disappear.
+            var later=detour.ToArray();detour.Clear();search=new CargoLocalRoute(space,Position,segment,ceiling);
+            foreach(var point in later)detour.Enqueue(point);Hold=CargoHold.PathBlocked;
         }
         public void Tick(long elapsedUnits,bool ownerOnline=true,bool paused=false)
         {
@@ -141,7 +160,7 @@ namespace YFAutomation.CargoDrones
                 if(!search.Complete&&!search.Failed)return;
                 RouteProbes+=search.Probes;
                 if(search.Failed){routeFailed=true;return;}
-                foreach(var point in search.Waypoints)detour.Enqueue(point);
+                var later=detour.ToArray();detour.Clear();foreach(var point in search.Waypoints)detour.Enqueue(point);foreach(var point in later)detour.Enqueue(point);
                 search=null;hasSegment=false;
                 // Planning can leave the native lookahead on the last probe.
                 // Reacquire the actual first edge on the next tick before moving.

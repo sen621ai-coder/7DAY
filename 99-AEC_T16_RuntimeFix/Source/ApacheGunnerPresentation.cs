@@ -124,8 +124,9 @@ namespace AECT16RuntimeFix
                     Box(510+(Mathf.Clamp(yaw,-100,100)+100)/200*260-3,449,6,14,tint);
                     Text(510,468,270,20,L("Azimuth")+" "+yaw.ToString("+0;-0;0")+"° / ±100°",small,tint);
                     Box(797,285,2,140,Green);Box(793,285,10,1,Green);Box(793,425,10,1,Green);
-                    Box(791,285+(15-Mathf.Clamp(pitch,-70,15))/85*140-3,14,6,tint);
-                    Text(813,285,200,20,"+15°",small,Green);Text(813,406,200,20,"-70°",small,Green);
+                    Box(791,285+(ApacheWeaponRules.CannonMaxPitch-Mathf.Clamp(pitch,ApacheWeaponRules.CannonMinPitch,ApacheWeaponRules.CannonMaxPitch))/
+                        (ApacheWeaponRules.CannonMaxPitch-ApacheWeaponRules.CannonMinPitch)*140-3,14,6,tint);
+                    Text(813,285,200,20,"+15°",small,Green);Text(813,406,200,20,"-85°",small,Green);
                     Text(813,347,220,20,L("Elevation")+" "+pitch.ToString("+0;-0;0")+"°",small,tint);
                 }else Text(713,554,205,40,L("SalvoHint"),small,Green);
             }finally{GUI.matrix=matrix;GUI.color=color;}

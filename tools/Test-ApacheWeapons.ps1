@@ -29,9 +29,13 @@ public static class ApacheWeaponTests {
    double radians=yaw*System.Math.PI/180;
    Check(AECT16RuntimeFix.ApacheWeaponRules.InArc((float)System.Math.Sin(radians),0,(float)System.Math.Cos(radians)),"yaw limit accepted");
   }
-  foreach(double pitch in new[]{-70.0,15.0}){
+  foreach(double pitch in new[]{-85.0,-80.0,-70.0,15.0}){
    double radians=pitch*System.Math.PI/180;
    Check(AECT16RuntimeFix.ApacheWeaponRules.InArc(0,(float)System.Math.Sin(radians),(float)System.Math.Cos(radians)),"pitch limit accepted");
+  }
+  foreach(double pitch in new[]{-86.0,16.0}){
+   double radians=pitch*System.Math.PI/180;
+   Check(!AECT16RuntimeFix.ApacheWeaponRules.InArc(0,(float)System.Math.Sin(radians),(float)System.Math.Cos(radians)),"pitch beyond limit rejected");
   }
   var gate=new AECT16RuntimeFix.ApacheWeaponRules.Gate();
   Check(gate.Ready(0,0)&&gate.Ready(1,0),"both weapons initially ready");

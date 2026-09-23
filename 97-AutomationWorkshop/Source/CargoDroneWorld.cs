@@ -26,15 +26,17 @@ namespace YFAutomation.CargoDrones
         public readonly CargoHubConfiguration Configuration;
         public readonly Guid Flight;
         public readonly CargoBinding ShipmentSource,ShipmentTarget;
+        public readonly CargoPosition? ShipmentEntrance;
         public readonly long Battery;
         public readonly int SourceCursor;
         public readonly bool Removed;
-        public CargoHubState(CargoHubConfiguration configuration,Guid flight,CargoBinding source,CargoBinding target,long battery,int cursor,bool removed)
+        public CargoHubState(CargoHubConfiguration configuration,Guid flight,CargoBinding source,CargoBinding target,long battery,int cursor,bool removed,CargoPosition? shipmentEntrance=null)
         {
             if(configuration==null||battery<0||battery>600000||cursor<0||cursor>=CargoRules.MaxSources)throw new ArgumentException("Invalid hub checkpoint");
             if(flight==Guid.Empty?(source!=null||target!=null):(source==null||target==null))throw new ArgumentException("Shipment bindings required exactly when a flight exists");
+            if(flight==Guid.Empty&&shipmentEntrance.HasValue)throw new ArgumentException("Shipment entrance requires a flight");
             if(source!=null&&(source.WorldId!=configuration.WorldId||target.WorldId!=configuration.WorldId||source.EndpointId==target.EndpointId))throw new ArgumentException("Invalid shipment bindings");
-            Configuration=configuration;Flight=flight;ShipmentSource=source;ShipmentTarget=target;Battery=battery;SourceCursor=cursor;Removed=removed;
+            Configuration=configuration;Flight=flight;ShipmentSource=source;ShipmentTarget=target;ShipmentEntrance=shipmentEntrance;Battery=battery;SourceCursor=cursor;Removed=removed;
         }
     }
 
@@ -68,10 +70,11 @@ namespace YFAutomation.CargoDrones
         public readonly CargoHold Hold;
         public readonly CargoPoint Position;
         public readonly long Battery;
+        public readonly bool Powered;
         public readonly int Packages;
         public readonly string Message;
-        internal CargoHubStatus(CargoHubConfiguration config,CargoMission mission,long battery,CargoPoint home,string message,CargoBinding shipmentTarget=null)
-        {Configuration=config;ShipmentTarget=shipmentTarget;Flight=mission==null?Guid.Empty:mission.Id;Phase=mission==null?CargoPhase.Docked:mission.Phase;Hold=mission==null?CargoHold.None:mission.Hold;Position=mission==null?home:mission.Position;Battery=mission==null?battery:mission.Battery;Packages=mission==null?0:CargoPlanner.Count(mission.Cargo);Message=message;}
+        internal CargoHubStatus(CargoHubConfiguration config,CargoMission mission,long battery,CargoPoint home,string message,CargoBinding shipmentTarget=null,bool powered=false)
+        {Configuration=config;ShipmentTarget=shipmentTarget;Flight=mission==null?Guid.Empty:mission.Id;Phase=mission==null?CargoPhase.Docked:mission.Phase;Hold=mission==null?CargoHold.None:mission.Hold;Position=mission==null?home:mission.Position;Battery=mission==null?battery:mission.Battery;Packages=mission==null?0:CargoPlanner.Count(mission.Cargo);Message=message;Powered=powered;}
     }
 
     // One server-thread coordinator per world. Native inventory access stays in
@@ -83,6 +86,7 @@ namespace YFAutomation.CargoDrones
             public CargoHubConfiguration Config;
             public CargoMission Mission;
             public CargoBinding Source,Target;
+            public CargoPosition? ShipmentEntrance;
             public long Battery=600000;
             public int Cursor;
             public double NextEmptyPoll;
@@ -116,7 +120,7 @@ namespace YFAutomation.CargoDrones
         void Healthy(){if(faulted)throw new InvalidOperationException("World cargo service requires recovery: "+Failure);}
         Hub Find(Guid id){var h=hubs.SingleOrDefault(v=>v.Config.HubId==id);if(h==null)throw new ArgumentException("Unknown hub");return h;}
         public CargoHubStatus[] Status()
-        {return hubs.Select(h=>new CargoHubStatus(h.Config,h.Mission,h.Battery,adapter.Home(h.Config),h.Message,h.Target)).ToArray();}
+        {return hubs.Select(h=>new CargoHubStatus(h.Config,h.Mission,h.Battery,adapter.Home(h.Config),h.Message,h.Target,adapter.Powered(h.Config))).ToArray();}
         public void Register(CargoHubConfiguration config)
         {
             Healthy();if(!Ready)throw new InvalidOperationException("Inventory checkpoint pending");
@@ -124,12 +128,19 @@ namespace YFAutomation.CargoDrones
             if(!adapter.HubExists(config))throw new InvalidOperationException("Hub incarnation missing");
             hubs.Add(new Hub{Config=config});Publish();
         }
-        public void Configure(Guid id,string actor,long revision,CargoHubConfiguration replacement)
+        static CargoPoint? EntrancePoint(CargoPosition? entrance)
+        {return entrance.HasValue?(CargoPoint?)new CargoPoint(entrance.Value.X+.5,entrance.Value.Y+2.2,entrance.Value.Z+.5):null;}
+        public void Configure(Guid id,string actor,long revision,CargoHubConfiguration replacement,bool applyEntranceToShipment=false)
         {
             Healthy();var h=Find(id);
             if(actor!=h.Config.Owner)throw new UnauthorizedAccessException("Hub owner required");
             if(!Ready||h.Removed||h.Config.Revision!=revision||replacement==null||replacement.WorldId!=world||replacement.HubId!=id||replacement.Owner!=actor||!replacement.Position.Equals(h.Config.Position)||replacement.Revision<revision||replacement.Revision>checked(revision+1))throw new InvalidOperationException("Refresh hub configuration");
-            h.Config=replacement;h.NextEmptyPoll=0;Publish();
+            if(applyEntranceToShipment&&h.Mission!=null)
+            {
+                h.Mission.SetDeliveryEntrance(EntrancePoint(replacement.Entrance));h.ShipmentEntrance=replacement.Entrance;
+            }
+            h.Config=replacement;
+            h.NextEmptyPoll=0;Publish();
         }
         public void Recall(Guid id,string actor)
         {Healthy();var h=Find(id);if(actor!=h.Config.Owner)throw new UnauthorizedAccessException();h.Mission?.Recall();if(Ready)Publish();}
@@ -140,8 +151,8 @@ namespace YFAutomation.CargoDrones
             {
                 foreach(var saved in state.Hubs)
                 {
-                    var h=new Hub{Config=saved.Configuration,Battery=saved.Battery,Cursor=saved.SourceCursor,Removed=saved.Removed,Source=saved.ShipmentSource,Target=saved.ShipmentTarget};
-                    if(saved.Flight!=Guid.Empty)h.Mission=CargoMission.Restore(state.Missions.Single(m=>m.Id==saved.Flight),adapter.OpenAirspace(saved.Flight),journal);
+                    var h=new Hub{Config=saved.Configuration,Battery=saved.Battery,Cursor=saved.SourceCursor,Removed=saved.Removed,Source=saved.ShipmentSource,Target=saved.ShipmentTarget,ShipmentEntrance=saved.ShipmentEntrance};
+                    if(saved.Flight!=Guid.Empty)h.Mission=CargoMission.Restore(state.Missions.Single(m=>m.Id==saved.Flight),adapter.OpenAirspace(saved.Flight),journal,EntrancePoint(saved.ShipmentEntrance));
                     hubs.Add(h);
                 }
                 if(ActiveFlights>4)throw new InvalidOperationException("Saved active-flight limit exceeded");
@@ -151,7 +162,7 @@ namespace YFAutomation.CargoDrones
         CargoWorldState Capture(bool dock)
         {
             var missions=hubs.Where(h=>h.Mission!=null).Select(h=>dock&&h.Mission.Phase==CargoPhase.Docking?h.Mission.CaptureDocked():h.Mission.Capture()).ToArray();
-            return new CargoWorldState(missions,hubs.Select(h=>new CargoHubState(h.Config,h.Mission==null?Guid.Empty:h.Mission.Id,h.Source,h.Target,h.Mission==null?h.Battery:h.Mission.Battery,h.Cursor,h.Removed)));
+            return new CargoWorldState(missions,hubs.Select(h=>new CargoHubState(h.Config,h.Mission==null?Guid.Empty:h.Mission.Id,h.Source,h.Target,h.Mission==null?h.Battery:h.Mission.Battery,h.Cursor,h.Removed,h.Mission==null?null:h.ShipmentEntrance)));
         }
         public void Checkpoint(){Healthy();if(!Ready)throw new InvalidOperationException("Inventory checkpoint pending");Publish();}
         void Publish()
@@ -257,7 +268,7 @@ namespace YFAutomation.CargoDrones
                     if(m!=null&&m.Phase!=CargoPhase.Docked)continue;
                     if(m==null&&adapter.Powered(h.Config)){long before=h.Battery;h.Battery=Math.Min(600000,h.Battery+step*10);dirty|=before!=h.Battery;}
                     if(h.Config.Paused){h.Message="已暂停，通电时充电";continue;}
-                    if(!adapter.Powered(h.Config)){h.Message="等待供电";continue;}
+                    if(!adapter.Powered(h.Config)){h.Message="等待供电：给4格内的自动化供电接口接线";continue;}
                     if(ActiveFlights>=4){h.Message="等待飞行名额";continue;}
                     if(activeTime<h.NextEmptyPoll)continue;
                     bool allSourcesEmpty;
@@ -304,7 +315,8 @@ namespace YFAutomation.CargoDrones
                 if(!rules.CanDepart(battery,2*distance/rules.CruiseSpeed+16))continue;
                 Guid flight=Guid.NewGuid();if(!reservations.TryReserve(source.EndpointId,flight,activeTime,home.Distance(pickup)/2))continue;
                 if(h.Mission!=null)adapter.ReleaseAirspace(h.Mission.Id);
-                h.Mission=new CargoMission(world,flight,source.EndpointId,target.EndpointId,h.Config.Owner,adapter.OpenAirspace(flight),home,pickup,targetPoint,battery);
+                h.ShipmentEntrance=h.Config.Entrance;
+                h.Mission=new CargoMission(world,flight,source.EndpointId,target.EndpointId,h.Config.Owner,adapter.OpenAirspace(flight),home,pickup,targetPoint,battery,entrance:EntrancePoint(h.ShipmentEntrance));
                 h.Source=source;h.Target=target;h.Cursor=(index+1)%sources.Length;h.Message="飞往采集设备";return true;
             }
             allSourcesEmpty=!sourceHasCargo&&!sourceUnavailable;

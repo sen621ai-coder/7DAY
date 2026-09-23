@@ -574,6 +574,14 @@ public sealed class CargoDroneNativeQA : IModApi
         Check(bounds.Any(b=>b.size.x>1.9f&&b.max.y>=point.y+1),"formal pad has its real solid two-block-wide collision envelope");
         worldCheckpoints=new CargoCheckpointStore(Path.Combine(GameIO.GetSaveGameDir(),"cargo-world-checkpoint"),worldId);
         cargoWorld=new CargoNativeWorld(world,worldId,inventoryJournal,worldCheckpoints);var config=cargoWorld.RegisterHub(hub);
+        var powerAt=point+new Vector3i(2,0,0);Check(world.GetBlock(powerAt).isair,"hub power-port fixture position is unused");
+        var powerValue=Block.GetBlockValue("yfAutoPowerPort",false);world.SetBlockRPC(new BlockValueRef(powerAt),powerValue);var powerPort=world.GetTileEntity(powerAt) as TileEntityPowered;
+        if(powerPort==null){var powerChunk=(Chunk)world.GetChunkFromWorldPos(powerAt);powerPort=((BlockPowered)powerValue.Block).CreateTileEntity(powerChunk);powerPort.localChunkPos=Chunk.ToLocalPosition(powerAt);powerChunk.AddTileEntity(powerPort);}
+        powerPort.InitializePowerData();powerPort.PowerItem.isPowered=true;
+        var powered=HarmonyLib.AccessTools.Method(typeof(YFAutomation.Logistics),"Powered");
+        Check((bool)powered.Invoke(null,new object[]{world,point}),"wired automation power port energizes the formal hub within three-dimensional four-block range");
+        powerPort.PowerItem.isPowered=false;Check(!(bool)powered.Invoke(null,new object[]{world,point}),"unpowered nearby port cannot energize the hub");
+        world.SetBlockRPC(new BlockValueRef(powerAt),BlockValue.Air);
         if(Environment.GetCommandLineArgs().Contains("-yfCargoBindingAudit")){VerifyBindingPath(chunk,worldId,owner);VerifyWarehouseSearch(chunk,worldId,owner);VerifySourceSearch(chunk,config);}
         var sourceAt=inventoryCollector.ToWorldPos();var targetAt=inventoryTarget.ToWorldPos();
         // Select real catalogue rows and round-trip their wire payloads. This deliberately
@@ -587,6 +595,13 @@ public sealed class CargoDroneNativeQA : IModApi
         var targetPosition=SelectTransportFixture(config,false,targetAt);
         var target=cargoWorld.ResolveBinding(targetPosition,owner,false);
         config=config.SetTarget(owner,config.Revision,target,new CargoRules());cargoWorld.Service.Configure(config.HubId,owner,config.Revision-1,config);
+        var beaconLocal=new Vector3i(14,170,12);var beaconAt=chunk.GetWorldPos()+beaconLocal;var beaconBlock=Block.GetBlockValue(CargoRuntime.EntranceBeaconBlock,false);
+        Check(world.GetBlock(beaconAt).isair&&beaconBlock.Block.GetBlockName()==CargoRuntime.EntranceBeaconBlock,"entrance beacon fixture and configured block are available");
+        chunk.SetBlockRaw(beaconLocal.x,beaconLocal.y,beaconLocal.z,beaconBlock);beaconBlock.Block.OnBlockAdded(world,chunk,beaconAt,beaconBlock,actor);
+        var beacon=world.GetTileEntity(beaconAt) as TileEntityComposite;Check(beacon!=null&&!beaconBlock.Block.IsCollideMovement,"entrance beacon is a persistent non-movement-blocking composite tile");
+        var beacons=CargoEntranceSearch.Find(world,config,"",0);Check(beacons.Total==1&&beacons.Rows[0].Position.Equals(new CargoPosition(beaconAt.x,beaconAt.y,beaconAt.z)),"hub catalogue finds the owner's loaded entrance beacon");
+        var entrance=CargoEntranceSearch.Resolve(world,config.Position,beacons.Rows[0].Position,owner);config=config.SetEntrance(owner,config.Revision,entrance,new CargoRules());cargoWorld.Service.Configure(config.HubId,owner,config.Revision-1,config,true);
+        Check(cargoWorld.Service.Status().Single().Configuration.Entrance.Value.Equals(entrance),"selected entrance beacon is validated and applied through authoritative hub configuration");
         Check(config.Sources[0].Position.Equals(sourcePosition)&&config.Target.Position.Equals(targetPosition),"world scheduler uses exactly the source and target selected from wire catalogue rows");
         lines.Add("AUDIT SCOPE catalogue query/reply and selected action codecs feed real binding/configuration and transport; authenticated Handle success and XUi clicks are NOT exercised.");
         motionTime=Time.realtimeSinceStartup;
@@ -858,11 +873,15 @@ public sealed class CargoDroneNativeQA : IModApi
         Check(searchCopy.Query==search.Query&&searchCopy.Kind==search.Kind&&searchCopy.Page==1&&searchCopy.Hub==search.Hub,"warehouse request preserves query type page and hub identity");
         search.Sources=true;search.SourceKind=CargoSourceKind.Forestry;search.BoundOnly=true;CopyPacket(search,searchCopy);
         Check(searchCopy.Sources&&searchCopy.SourceKind==CargoSourceKind.Forestry&&searchCopy.BoundOnly,"source request preserves picker mode resource type and bound-only filter");
+        search.Sources=false;search.Entrances=true;search.BoundOnly=false;CopyPacket(search,searchCopy);
+        Check(!searchCopy.Sources&&searchCopy.Entrances&&!searchCopy.BoundOnly,"entrance request preserves its distinct picker mode");
         var result=new NetPackageYFCargoWarehouseReply{At=request.At,Hub=request.Hub,Request=72,Success=true,Message="选择仓库",Result=new CargoWarehousePage{Total=1,Rows=new[]{new CargoWarehouseRow{Position=new CargoPosition(4,5,6),Name="旧式壁橱",Sign="",Block="cntCupboardCabinetOldTopClosed",Distance=42.5}}}};
         var resultCopy=new NetPackageYFCargoWarehouseReply();CopyPacket(result,resultCopy);
         Check(resultCopy.Result.Rows.Length==1&&resultCopy.Result.Rows[0].Name=="旧式壁橱"&&resultCopy.Result.Rows[0].Sign==""&&resultCopy.Result.Rows[0].Distance==42.5,"warehouse reply preserves unsigned cabinet names and coordinates");
         result.Sources=true;result.Result.Rows[0].Block="AutoMinerIron";result.Result.Rows[0].Bound=true;result.Result.Rows[0].Available=false;CopyPacket(result,resultCopy);
         Check(resultCopy.Sources&&resultCopy.Result.Rows[0].Bound&&!resultCopy.Result.Rows[0].Available,"source reply preserves unavailable bound record for list removal");
+        result.Sources=false;result.Entrances=true;result.Result.Rows[0].Block=CargoRuntime.EntranceBeaconBlock;result.Result.Rows[0].Available=true;CopyPacket(result,resultCopy);
+        Check(!resultCopy.Sources&&resultCopy.Entrances&&resultCopy.Result.Rows[0].Block==CargoRuntime.EntranceBeaconBlock,"entrance reply preserves beacon picker identity");
         var token=Guid.NewGuid();var at=new Vector3i(-20,155,19);
         var source=new NetPackageCargoAccessData{At=at,Token=token,Sequence=21,Payload=Enumerable.Range(0,32000).Select(i=>(byte)i).ToArray()};
         var copy=new NetPackageCargoAccessData();CopyPacket(source,copy);
@@ -917,6 +936,8 @@ public sealed class CargoDroneNativeQA : IModApi
             Check(rig.RestBounds.min.y>=CargoDock.RestCenter-CargoDock.RestHalfHeight&&rig.RestBounds.max.y<=CargoDock.RestCenter+CargoDock.RestHalfHeight,"actual landed native vertices fit the asymmetric dock collision body");
             var deckBox=new CargoBox(new CargoPoint(-.97,0,-.97),new CargoPoint(.97,1,.97));var dockPoint=new CargoPoint(0,CargoHubModel.LandingHeight,0);var upPoint=new CargoPoint(0,CargoHubModel.LandingHeight+3,0);
             Check(!CargoDock.Hit(deckBox,dockPoint,upPoint,dockPoint)&&!CargoDock.Hit(deckBox,upPoint,dockPoint,dockPoint),"solid deck permits continuous takeoff and landing across the pose boundary");
+            var shallowDeparture=new CargoPoint(10,CargoHubModel.LandingHeight+.95,0);
+            Check(!CargoDock.Hit(deckBox,dockPoint,shallowDeparture,dockPoint)&&!CargoDock.Hit(deckBox,shallowDeparture,dockPoint,dockPoint),"shallow departure clears the pad before switching to the full flight envelope");
             Check(CargoDock.Hit(deckBox,dockPoint,new CargoPoint(0,.9,0),dockPoint),"dock collision still prevents passing down through its own solid pad");
             var roof=new CargoBox(new CargoPoint(-1,1.7,-1),new CargoPoint(1,1.8,1));Check(CargoDock.Hit(roof,dockPoint,upPoint,dockPoint),"rest-pose sweep still blocks a low ceiling");
             RenderModel(drone,Path.Combine(GameIO.GetSaveGameDir(),"cargo-drone-landed.png"),new Vector3(1.65f,1.05f,2.1f));
@@ -924,6 +945,8 @@ public sealed class CargoDroneNativeQA : IModApi
             var surfaces=hub.GetComponentsInChildren<MeshRenderer>();
             Check(surfaces.Length==6,"industrial hub batches armor bolts vents and lights into six material surfaces");
             Check(surfaces.All(r=>r.sharedMaterial.mainTexture!=null&&r.sharedMaterial.GetTexture("_BumpMap")!=null),"hub uses tiled albedo and normal detail instead of flat colors");
+            var neutral=surfaces.Where(r=>new[]{"CargoHubCharcoal","CargoHubShell","CargoHubSteel","CargoHubGrip"}.Contains(r.sharedMaterial.name)).Select(r=>r.sharedMaterial.color).ToArray();
+            Check(neutral.Length==4&&neutral.All(c=>Math.Abs(c.r-c.g)<1e-5&&Math.Abs(c.g-c.b)<1e-5),"hub structural materials use exact neutral gray without an olive tint");
             Check(surfaces.Select(r=>r.sharedMaterial.color).Any(c=>c.b>c.g&&c.g>c.r),"hub signal lighting uses the Buster's cool blue accent family");
             Check(surfaces.All(r=>r.bounds.min.x>=-1&&r.bounds.max.x<=1&&r.bounds.min.z>=-1&&r.bounds.max.z<=1&&r.bounds.min.y>=-.001f&&r.bounds.max.y<=1),"industrial hub fits its two by two footprint and one-block body height");
             var anchor=hub.transform.Find("LandingAnchor");

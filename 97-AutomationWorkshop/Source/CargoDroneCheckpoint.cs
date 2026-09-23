@@ -65,7 +65,7 @@ namespace YFAutomation.CargoDrones
     // Native endpoint/world epoch validation remains required before activation.
     public sealed class CargoCheckpointStore : IDisposable
     {
-        const int Magic=0x31504343,MaxBytes=16*1024*1024;
+        const int Magic=0x31504343,HubExtensionMagic=0x31505848,MaxBytes=16*1024*1024;
         readonly string directory;
         readonly Guid world;
         readonly FileStream lease;
@@ -103,7 +103,7 @@ namespace YFAutomation.CargoDrones
             {
                 writer.Write(world.ToByteArray());writer.Write(generation.ToByteArray());writer.Write(digest);writer.Write(states.Length);
                 foreach(var state in states)Write(writer,state);
-                writer.Write(hubs!=null);if(hubs!=null){writer.Write(hubs.Length);foreach(var hub in hubs)WriteHub(writer,hub);}
+                writer.Write(hubs!=null);if(hubs!=null){writer.Write(hubs.Length);foreach(var hub in hubs)WriteHub(writer,hub);WriteHubExtensions(writer,hubs);}
                 writer.Flush();body=memory.ToArray();
             }
             var snapshot=Frame(body);string name="ledger-"+generation.ToString("N")+".snapshot";
@@ -154,7 +154,7 @@ namespace YFAutomation.CargoDrones
                 // Old navigation-only snapshots end here. They remain readable,
                 // but cannot be promoted to world checkpoints by guessing hubs.
                 if(memory.Position<memory.Length&&Bool(reader))
-                {int n=reader.ReadInt32();if(n<0||n>16)throw new InvalidDataException("Invalid hub count");hubs=new CargoHubState[n];for(int i=0;i<n;i++)hubs[i]=ReadHub(reader);}
+                {int n=reader.ReadInt32();if(n<0||n>16)throw new InvalidDataException("Invalid hub count");hubs=new CargoHubState[n];for(int i=0;i<n;i++)hubs[i]=ReadHub(reader);if(memory.Position<memory.Length)hubs=ReadHubExtensions(reader,hubs);}
                 End(memory);
             }
             Validate(states,journal,prefix);return states;
@@ -181,6 +181,26 @@ namespace YFAutomation.CargoDrones
             int n=r.ReadInt32();if(n<0||n>CargoRules.MaxSources)throw new InvalidDataException("Invalid source count");var sources=new CargoBinding[n];for(int i=0;i<n;i++)sources[i]=Binding(r);
             var config=CargoHubConfiguration.Restore(world,hub,at,owner,revision,sources,Binding(r),paused);
             return new CargoHubState(config,Id(r),Binding(r),Binding(r),r.ReadInt64(),r.ReadInt32(),Bool(r));
+        }
+        static void OptionalCell(BinaryWriter w,CargoPosition? p){w.Write(p.HasValue);if(p.HasValue)Cell(w,p.Value);}
+        static CargoPosition? OptionalCell(BinaryReader r){return Bool(r)?(CargoPosition?)Cell(r):null;}
+        static void WriteHubExtensions(BinaryWriter w,CargoHubState[] hubs)
+        {
+            w.Write(HubExtensionMagic);w.Write(hubs.Length);
+            foreach(var h in hubs){w.Write(h.Configuration.HubId.ToByteArray());OptionalCell(w,h.Configuration.Entrance);OptionalCell(w,h.ShipmentEntrance);}
+        }
+        static CargoHubState[] ReadHubExtensions(BinaryReader r,CargoHubState[] hubs)
+        {
+            if(r.ReadInt32()!=HubExtensionMagic||r.ReadInt32()!=hubs.Length)throw new InvalidDataException("Invalid hub extension");
+            var result=new CargoHubState[hubs.Length];
+            for(int i=0;i<hubs.Length;i++)
+            {
+                var h=hubs[i];if(Id(r)!=h.Configuration.HubId)throw new InvalidDataException("Hub extension identity mismatch");
+                var entrance=OptionalCell(r);var shipment=OptionalCell(r);var c=h.Configuration;
+                var restored=CargoHubConfiguration.Restore(c.WorldId,c.HubId,c.Position,c.Owner,c.Revision,c.Sources,c.Target,c.Paused,entrance);
+                result[i]=new CargoHubState(restored,h.Flight,h.ShipmentSource,h.ShipmentTarget,h.Battery,h.SourceCursor,h.Removed,shipment);
+            }
+            return result;
         }
         void Validate(CargoMissionState[] states,CargoFileJournal journal,int count=-1)
         {

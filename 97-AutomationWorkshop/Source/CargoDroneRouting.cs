@@ -44,17 +44,20 @@ namespace YFAutomation.CargoDrones
         }
         bool BuildCandidate()
         {
-            // Six elevations, then twelve left/right offsets. The height ceiling
-            // is fixed by the caller for the whole leg, never raised on retries.
-            while(candidateIndex<18)
+            // Raise first in two-block steps through the full 24-block ceiling.
+            // Only after every vertical candidate fails do we alternate left and
+            // right offsets, also in two-block steps. The ceiling is fixed by the
+            // caller for the whole leg and never grows without bound on retries.
+            while(candidateIndex<36)
             {
                 int index=candidateIndex++;double ox=0,oy=0,oz=0;
-                if(index<6)oy=(index+1)*4;
+                if(index<12)oy=(index+1)*2;
                 else
                 {
                     double dx=goal.X-origin.X,dz=goal.Z-origin.Z,length=Math.Sqrt(dx*dx+dz*dz);
                     if(length<1e-7){dx=1;dz=0;length=1;}
-                    double offset=((index-6)/2+1)*4*((index%2==0)?1:-1);
+                    int lateral=index-12;
+                    double offset=(lateral/2+1)*2*((lateral%2==0)?1:-1);
                     ox=-dz/length*offset;oz=dx/length*offset;
                 }
                 if(Math.Max(origin.Y,goal.Y)+oy>ceiling)continue;

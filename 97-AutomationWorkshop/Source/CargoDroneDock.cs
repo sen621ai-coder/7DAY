@@ -8,16 +8,19 @@ namespace YFAutomation.CargoDrones
     // solid: only the actual drone body changes, not the set of tested obstacles.
     public static class CargoDock
     {
-        public const double RestCenter=.15,RestHalfHeight=.39,PoseRadius=1;
+        public const double RestCenter=.15,RestHalfHeight=.39,PoseRadius=1,DepartureClearanceRadius=1.8;
         public static bool Resting(CargoPoint at,CargoPoint home)=>at.Distance(home)<=PoseRadius;
+        static bool InDepartureClearance(CargoPoint at,CargoPoint home)=>at.Distance(home)<=DepartureClearanceRadius;
         public static bool Hit(CargoBox obstacle,CargoPoint from,CargoPoint to,CargoPoint? home)
         {
             if(!home.HasValue)return obstacle.SweptHit(from,to);
-            bool a=Resting(from,home.Value),b=Resting(to,home.Value);
+            // Keep the compact landed envelope until the full flight body has
+            // cleared the 1.94 m deck. Visual pose transition remains at 1 m.
+            bool a=InDepartureClearance(from,home.Value),b=InDepartureClearance(to,home.Value);
             if(a&&b)return RestHit(obstacle,from,to);
             if(!a&&!b)return obstacle.SweptHit(from,to);
             double dx=to.X-from.X,dy=to.Y-from.Y,dz=to.Z-from.Z,x=from.X-home.Value.X,y=from.Y-home.Value.Y,z=from.Z-home.Value.Z;
-            double aa=dx*dx+dy*dy+dz*dz,bb=2*(x*dx+y*dy+z*dz),cc=x*x+y*y+z*z-PoseRadius*PoseRadius;
+            double aa=dx*dx+dy*dy+dz*dz,bb=2*(x*dx+y*dy+z*dz),cc=x*x+y*y+z*z-DepartureClearanceRadius*DepartureClearanceRadius;
             double t=(-bb+(a?1:-1)*Math.Sqrt(Math.Max(0,bb*bb-4*aa*cc)))/(2*aa);
             var edge=new CargoPoint(from.X+dx*t,from.Y+dy*t,from.Z+dz*t);
             return a?RestHit(obstacle,from,edge)||obstacle.SweptHit(edge,to):obstacle.SweptHit(from,edge)||RestHit(obstacle,edge,to);

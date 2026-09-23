@@ -19,6 +19,7 @@ namespace AECT16RuntimeFix
         public const float CannonEntityDamage = 20000f, CannonBlockDamage = 8f;
         public const float RocketEntityDamage = 100000f, RocketBlockDamage = 50f;
         public const float HoldTimeout = .5f, MuzzleOffset = 1.295f;
+        public const float CannonMinPitch = -85f, CannonMaxPitch = 15f;
         // A sequence protects release against delayed/replayed keep-alive packets.
         public sealed class TriggerLease
         {
@@ -46,7 +47,7 @@ namespace AECT16RuntimeFix
             if (!ValidDirection(x,y,z)) return false;
             double yaw = Math.Atan2(x,z)*180/Math.PI;
             double pitch = Math.Atan2(y, Math.Sqrt((double)x*x+(double)z*z))*180/Math.PI;
-            return Math.Abs(yaw) <= 100.001 && pitch >= -70.001 && pitch <= 15.001;
+            return Math.Abs(yaw) <= 100.001 && pitch >= CannonMinPitch-.001 && pitch <= CannonMaxPitch+.001;
         }
         public static bool OperatorAllowed(int seat, int actor, int occupant, bool dead, bool vehicleDead, bool storageOpen)
         { return seat >= 0 && seat <= 1 && actor >= 0 && actor == occupant && !dead && !vehicleDead && !storageOpen; }

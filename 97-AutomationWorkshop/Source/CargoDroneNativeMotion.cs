@@ -91,7 +91,11 @@ namespace YFAutomation.CargoDrones
                 }
             }
             var envelope=new Bounds();envelope.SetMinMax(new Vector3(minX,minY,minZ),new Vector3(maxX+1,maxY+1,maxZ+1));
-            foreach(var entity in world.GetEntitiesInBounds((Entity)null,envelope))if(Hit(Box(entity.getBoundingBox()),from,to))return CargoSweep.Blocked;
+            // Players routinely stand beside the pad while using its panel. The
+            // cargo drone is cosmetic and deals no collision damage, so players
+            // must not be able to trap or grief an autonomous shipment.
+            foreach(var entity in world.GetEntitiesInBounds((Entity)null,envelope))
+                if(!(entity is EntityPlayer)&&Hit(Box(entity.getBoundingBox()),from,to))return CargoSweep.Blocked;
             missing=null;return CargoSweep.Clear;
         }
         public void ReachedSegment(CargoPoint at)

@@ -895,7 +895,7 @@
       <property name="CreativeMode" value="Player" />
       <property name="DescriptionKey" value="yfCargoHubDesc" />
       <property name="CustomIcon" value="gunBotT3JunkDrone" />
-      <property name="CustomIconTint" value="7B9670" />
+      <property name="CustomIconTint" value="A8ADB2" />
       <property name="MaxDamage" value="500000" />
       <property class="RepairItems">
         <property name="resourceForgedSteel" value="25" />
@@ -904,7 +904,39 @@
       </property>
       <property name="Stacknumber" value="1" />
       <property name="EconomicValue" value="2500" />
-      <property name="TintColor" value="737D70" />
+      <property name="TintColor" value="FFFFFF" />
+    </block>
+    <block name="yfCargoEntranceBeacon">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Mmetal_weak" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="@:Entities/Electrical/relayPrefab.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfCargoEntranceBeaconDesc" />
+      <property name="CustomIcon" value="electricwirerelay" />
+      <property name="CustomIconTint" value="64C8FF" />
+      <property name="TintColor" value="64C8FF" />
+      <property name="MaxDamage" value="2500" />
+      <property name="EconomicValue" value="250" />
+      <property name="Stacknumber" value="10" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="ImposterDontBlock" value="true" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="StabilitySupport" value="false" />
+      <property name="Collide" value="melee,bullet,arrow,rocket" />
+      <property name="SoundPickup" value="metal_grab" />
+      <property name="SoundPlace" value="metal_place" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureSignable" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+        <property name="resourceElectricParts" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
     </block>
     <block name="yfCargoRecoveryCrate">
       <property name="Extends" value="yfAutoInput" />
