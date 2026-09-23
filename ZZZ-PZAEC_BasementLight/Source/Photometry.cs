@@ -3,8 +3,8 @@ namespace PZAEC.BasementLight
 {
     public static class Photometry
     {
-        public const float Range=20f, Intensity=1f, Height=5.4f;
-        public const float FillRange=14f, FillIntensity=.14f;
+        public const float Range=20f, Intensity=1.2f, Height=5.4f;
+        public const float FillRange=14f, FillIntensity=.35f;
         // Analytic built-in point falloff approximation, for shaping the cookie.
         // Actual game renderer/exposure still requires an in-game visual acceptance pass.
         public static double Falloff(double distance)
