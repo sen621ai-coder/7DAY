@@ -105,15 +105,15 @@ namespace PZAEC.BasementLight
             if(shader==null || !shader.isSupported)shader=Shader.Find("Sprites/Default");
             if(shader!=null && shader.isSupported)
             {
-                on=new Material(shader){name="Basement diffuser on",color=new Color(.82f,.84f,.80f),renderQueue=2000};
+                on=new Material(shader){name="Basement diffuser on",color=new Color(.85f,.82f,.74f),renderQueue=2000};
                 if(on.HasProperty("_MainTex"))on.mainTexture=Texture2D.whiteTexture;
                 if(on.HasProperty("_ZWrite"))on.SetFloat("_ZWrite",1);
             }
             else
             {
-                on=MaterialFromNative("Basement diffuser on",new Color(.82f,.84f,.80f));
+                on=MaterialFromNative("Basement diffuser on",new Color(.85f,.82f,.74f));
                 if(on.HasProperty("_EmissionMap"))on.SetTexture("_EmissionMap",Texture2D.whiteTexture);
-                if(on.HasProperty("_EmissionColor")){on.EnableKeyword("_EMISSION");on.SetColor("_EmissionColor",new Color(.82f,.84f,.80f));}
+                if(on.HasProperty("_EmissionColor")){on.EnableKeyword("_EMISSION");on.SetColor("_EmissionColor",new Color(.85f,.82f,.74f));}
                 Log.Out("[BasementLight] Unlit diffuser shader unavailable; native emission fallback in use.");
             }
         }
@@ -155,7 +155,7 @@ namespace PZAEC.BasementLight
             g.transform.localPosition=new Vector3(0,.79f,0);
             lamp=g.AddComponent<Light>();lamp.type=LightType.Point;
             lamp.range=Photometry.Range;lamp.intensity=Photometry.Intensity;
-            lamp.color=new Color(1f,.97f,.92f);lamp.renderMode=LightRenderMode.ForcePixel;
+            lamp.color=new Color(1f,.87f,.73f);lamp.renderMode=LightRenderMode.ForcePixel;
             lamp.shadows=LightShadows.Soft;lamp.shadowStrength=1;lamp.shadowBias=.02f;lamp.shadowNormalBias=.1f;
             lamp.cookie=Cookie();lamp.enabled=false;
             var bounce=new GameObject("BasementWallCeilingFill");bounce.transform.SetParent(transform,false);
@@ -164,7 +164,7 @@ namespace PZAEC.BasementLight
             bounce.transform.localPosition=new Vector3(0,-.15f,0);
             fill=bounce.AddComponent<Light>();fill.type=LightType.Point;
             fill.range=Photometry.FillRange;fill.intensity=Photometry.FillIntensity;
-            fill.color=new Color(1f,.98f,.95f);fill.renderMode=LightRenderMode.ForcePixel;
+            fill.color=new Color(1f,.90f,.78f);fill.renderMode=LightRenderMode.ForcePixel;
             fill.shadows=LightShadows.Soft;fill.shadowStrength=1;fill.shadowBias=.02f;fill.shadowNormalBias=.1f;
             fill.cookie=Cookie(true);fill.enabled=false;
         }

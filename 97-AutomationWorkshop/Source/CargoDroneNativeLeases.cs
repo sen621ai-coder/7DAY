@@ -32,7 +32,7 @@ namespace YFAutomation.CargoDrones
         readonly CargoChunkBudget budget;
         readonly Dictionary<Guid,CargoNativeLease> leases=new Dictionary<Guid,CargoNativeLease>();
         bool disposed;
-        float nextRequest;
+        int requestFrame=-1,frameRequests;
         public int HeldChunks{get{return budget.HeldChunks;}}
         public int Count{get{return leases.Count;}}
         public CargoNativeLeaseService(World world,int perFlight=49,int total=128)
@@ -63,13 +63,16 @@ namespace YFAutomation.CargoDrones
             }
             var footprint=Footprint(center);
             if(!budget.TryAcquire(id,flight,footprint)){hold=CargoHold.ChunkBudget;return null;}
-            if(Time.realtimeSinceStartup<nextRequest){budget.Release(id,flight);hold=CargoHold.ChunkLoading;return null;}
+            // Bound main-thread work without imposing half a second of artificial
+            // waiting on every observer, including already loaded player areas.
+            if(requestFrame!=Time.frameCount){requestFrame=Time.frameCount;frameRequests=0;}
+            if(frameRequests>=4){budget.Release(id,flight);hold=CargoHold.ChunkLoading;return null;}
             ChunkManager.ChunkObserver observer=null;
             try
             {
                 observer=manager.AddChunkObserver(new Vector3(center.X,center.Y,center.Z),false,0,-1);
                 var lease=new CargoNativeLease(id,flight,center,footprint,observer);leases.Add(id,lease);
-                nextRequest=Time.realtimeSinceStartup+.5f;hold=CargoHold.ChunkLoading;return lease;
+                frameRequests++;hold=CargoHold.ChunkLoading;return lease;
             }
             catch{if(observer!=null)manager.RemoveChunkObserver(observer);budget.Release(id,flight);throw;}
         }

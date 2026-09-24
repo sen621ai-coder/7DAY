@@ -10,6 +10,7 @@
     </window_group>
   </append>
   <append xpath="/xui">
+    <window_group name="yfCargoDrone" close_compass_on_open="true"><window name="windowYFCargoDrone" /></window_group>
     <window_group name="yfCargoHub" close_compass_on_open="true">
       <window name="windowYFCargoHub" />
     </window_group>

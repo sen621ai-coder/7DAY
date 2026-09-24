@@ -40,6 +40,7 @@ namespace YFAutomation.CargoDrones
         {
             if(space==null||origin.Distance(goal)>16.001||double.IsNaN(ceiling)||double.IsInfinity(ceiling))throw new ArgumentException("Invalid local route");
             this.space=space;this.origin=origin;this.goal=goal;this.ceiling=Math.Min(253,ceiling);
+            CargoTrace.Emit(space,"plan-start","from="+CargoTrace.Point(origin)+" to="+CargoTrace.Point(goal)+" ceiling="+this.ceiling);
         }
         public void Advance()
         {
@@ -47,16 +48,16 @@ namespace YFAutomation.CargoDrones
             var clock=Stopwatch.StartNew();int work=0;
             while(work<4&&clock.Elapsed.TotalMilliseconds<2)
             {
-                if(candidate.Count==0&&!BuildCandidate()){Failed=true;Hold=CargoHold.PathBlocked;return;}
-                if(Probes>=256){Failed=true;Hold=CargoHold.PathBlocked;return;}
+                if(candidate.Count==0&&!BuildCandidate()){Failed=true;Hold=CargoHold.PathBlocked;CargoTrace.Emit(space,"plan-failed","reason=candidates-exhausted probes="+Probes);return;}
+                if(Probes>=256){Failed=true;Hold=CargoHold.PathBlocked;CargoTrace.Emit(space,"plan-failed","reason=probe-limit probes="+Probes);return;}
                 var from=edge==0?origin:candidate[edge-1];var to=candidate[edge];
                 Hold=space.Prepare(from,to);if(Hold!=CargoHold.None)return;
                 var result=space.Sweep(from,to);work++;
-                if(result==CargoSweep.Unavailable){Hold=CargoHold.ChunkLoading;return;}
+                if(result==CargoSweep.Unavailable){Hold=CargoHold.ChunkLoading;CargoTrace.Emit(space,"plan-wait","candidate="+candidateIndex+" edge="+edge+" from="+CargoTrace.Point(from)+" to="+CargoTrace.Point(to));return;}
                 Probes++;
-                if(result==CargoSweep.Blocked){candidate.Clear();edge=0;continue;}
+                if(result==CargoSweep.Blocked){CargoTrace.Emit(space,"plan-reject","candidate="+candidateIndex+" edge="+edge+" probes="+Probes);candidate.Clear();edge=0;continue;}
                 edge++;
-                if(edge==candidate.Count){Waypoints=candidate.ToArray();Complete=true;Hold=CargoHold.None;return;}
+                if(edge==candidate.Count){Waypoints=candidate.ToArray();Complete=true;Hold=CargoHold.None;CargoTrace.Emit(space,"plan-ready","candidate="+candidateIndex+" probes="+Probes+" waypoints="+string.Join(";",System.Linq.Enumerable.Select(Waypoints,CargoTrace.Point)));return;}
             }
             Hold=CargoHold.PathBlocked;
         }

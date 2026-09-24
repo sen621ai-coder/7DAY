@@ -60,7 +60,7 @@ namespace YFAutomation.CargoDrones
             {
                 CargoDroneVisual visual;
                 if(!drones.TryGetValue(state.Hub,out visual)||visual==null){visual=CargoDroneModel.Drone().AddComponent<CargoDroneVisual>();drones[state.Hub]=visual;}
-                visual.Apply(packet.Sequence,state.Position,state.Phase,state.Hold,state.Packages,state.RestPose);
+                visual.Hub=state.Hub;visual.Apply(packet.Sequence,state.Position,state.Phase,state.Hold,state.Packages,state.RestPose);
             }
         }
         public static void AttachHub(TileEntityComposite __instance,BlockEntityData __0)

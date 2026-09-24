@@ -2944,6 +2944,14 @@
 				</effect_group>
 			</recipe>
 
+			<recipe name="meleeToolRepairT5NailgunLegend" craft_time="1500" count="1" craft_area="workbenchImp" craft_tool="toolImprovedTools" tags="learnable">
+				<ingredient name="meleeToolRepairT4NailgunImp" count="1"/>
+				<ingredient name="resourceExperimentalAlloys" count="20"/>
+				<ingredient name="resourceUltraStrengthAlloys" count="12"/>
+				<ingredient name="resourceDurablAlloys" count="12"/>
+				<ingredient name="resourceLegendaryParts" count="5"/>
+			</recipe>
+
 			<recipe name="meleeToolPickT5AugerReact" craft_time="1500" count="1" craft_area="workbenchImp" tags="learnable">
 				<ingredient name="PortableReactor" count="1"/>
 				<ingredient name="meleeToolAxeT3ChainsawParts" count="5"/>

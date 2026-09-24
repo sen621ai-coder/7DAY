@@ -3,7 +3,7 @@
 
   "spawner": {
     "_comment_claimBlockExclusionRadius": "Radius (metres) around every Land Claim Block where custom zombie spawns are suppressed. Prevents bosses from spawning inside player bases. Set to 0 to disable.",
-    "claimBlockExclusionRadius": 100.0,
+    "claimBlockExclusionRadius": 50.0,
 
     "_comment_leaderZoneExclusionRadius": "Radius (metres) around the leader zombie within which followers will NOT spawn if a player is already close. Avoids instant aggro on spawn. Set to 0 to disable.",
     "leaderZoneExclusionRadius": 50.0,

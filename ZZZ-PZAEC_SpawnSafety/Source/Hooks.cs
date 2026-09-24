@@ -13,7 +13,7 @@ namespace PZAEC.SpawnSafety
         public sealed class ScopeState {public Request Previous;}
         public sealed class DirectState {public Request Previous,Active;}
         [ThreadStatic] static Request activeDirect;
-        public static MethodInfo FollowerPosition,NearTrader,BloodPosition,EventPosition;
+        public static MethodInfo FollowerPosition,NearTrader,NearClaim,BloodPosition,EventPosition,ClaimRadius;
         static World World {get{return GameManager.Instance==null?null:GameManager.Instance.World;}}
         static readonly System.Random Random=new System.Random();
         static Vector3 Offset(Vector3 p,float range)
@@ -26,6 +26,13 @@ namespace PZAEC.SpawnSafety
             p.y=terrain?world.GetTerrainHeight(Mathf.FloorToInt(p.x),Mathf.FloorToInt(p.z))+1:p.y+.1f;return p;
         }
         static bool OutsideTrader(Vector3 p){return !(bool)NearTrader.Invoke(null,new object[]{p,80f});}
+        public static bool OutsideTraderForRetry(Vector3 p){return OutsideTrader(p);}
+        public static bool AllowedCachedPoint(Vector3 p)
+        {
+            if(NearClaim==null)return false;
+            try{return OutsideTrader(p)&&!(bool)NearClaim.Invoke(null,new object[]{p});}
+            catch(Exception ex){Log.Error("[SpawnSafety] cached-site protection check failed: "+ex);return false;}
+        }
         public static Exception Restore(Exception __exception,ScopeState __state)
         {if(__state!=null)Safety.Current=__state.Previous;return __exception;}
         public static void FollowerPrefix(Vector3 __1,int __2,out ScopeState __state)
@@ -59,8 +66,44 @@ namespace PZAEC.SpawnSafety
             if(__state!=null){Safety.Current=__state.Previous;activeDirect=__state.Active;}
             return __exception;
         }
-        public static void FollowerPostfix(bool __result,ref Vector3 __3,ScopeState __state)
-        {if(__state!=null&&__result&&Safety.Current!=null&&Safety.Current.LastAccepted.HasValue)__3=Safety.Current.LastAccepted.Value;}
+        public static void FollowerPostfix(string __0,Vector3 __1,bool __result,ref Vector3 __3,ref string __4,ScopeState __state)
+        {
+            if(__state==null)return;
+            if(!__result){Diagnostics.FollowerFailed(__0,__1,__4);return;}
+            if(Safety.Current!=null&&Safety.Current.LastAccepted.HasValue)__3=Safety.Current.LastAccepted.Value;
+        }
+        public static void DirectPostfix(int __0,Vector3 __1,ref string __2,bool __result,DirectState __state)
+        {
+            if(__state==null)return;
+            if(__result)
+            {
+                var accepted=Safety.Current;
+                if(accepted!=null&&!accepted.Bypass&&accepted.Surface&&accepted.LastAccepted.HasValue)
+                    Deferred.Remember(__0,accepted.LastAccepted.Value);
+                return;
+            }
+            if(__2=="spawn-safety-no-valid-site")
+            {
+                var request=Safety.Current;
+                if(request!=null)Deferred.Enqueue(request.Source,__0,__1,request.Surface);
+                return;
+            }
+            string reason=__2=="spawn-safety-budget-exhausted"?"budget-exhausted":"aec-returned-false";
+            if(reason=="aec-returned-false"&&Hooks.NearTrader!=null)
+            {
+                try{if((bool)Hooks.NearTrader.Invoke(null,new object[]{__1,80f}))reason="trader-80m";}
+                catch(Exception){} // Diagnostics must not change the original spawn result.
+            }
+            Diagnostics.DirectFailed(Safety.Current==null||string.IsNullOrEmpty(Safety.Current.Source)?"AEC-direct":Safety.Current.Source,__0,__1,reason,__2);
+        }
+        public static void ClaimPostfix(Vector3 __0,bool __result)
+        {
+            if(!__result)return;
+            float radius=float.NaN;
+            try{if(ClaimRadius!=null)radius=Convert.ToSingle(ClaimRadius.Invoke(null,null));}
+            catch(Exception){} // Keep diagnostics observational.
+            Diagnostics.ClaimExcluded(__0,radius);
+        }
         public static bool AcceptDirect(object value,ref Vector3 position,ref string description)
         {
             var entity=value as Entity;
@@ -109,6 +152,7 @@ namespace PZAEC.SpawnSafety
         {
             // The native loop has a null branch before its successful-spawn counter.
             if(Safety.Current!=null)Safety.Current.Remaining=12;
+            if(entity==null){Diagnostics.FactoryNull("skill:MegaHorde");return null;}
             if(Safety.Current!=null&&entity!=null)Safety.Current.Fallback=Recovery.Create(entity.position);
             return Safety.Accept(entity,Safety.Current)?entity:null;
         }
@@ -136,7 +180,11 @@ namespace PZAEC.SpawnSafety
         }
         public static void ConsolePrefix(out ScopeState __state)
         {__state=new ScopeState{Previous=Safety.Current};Safety.Current=new Request{Direct=true,Bypass=true};}
-        public static bool AcceptCurrent(Entity entity){return Safety.Accept(entity,Safety.Current);}
+        public static bool AcceptCurrent(Entity entity)
+        {
+            if(entity==null&&Safety.Current!=null&&!Safety.Current.Bypass)Diagnostics.FactoryNull(Safety.Current.Source);
+            return Safety.Accept(entity,Safety.Current);
+        }
 
         public static IEnumerable<CodeInstruction> DirectTranspiler(IEnumerable<CodeInstruction> instructions,ILGenerator generator)
         {
@@ -189,10 +237,17 @@ namespace PZAEC.SpawnSafety
                 var aec=AccessTools.TypeByName("AeclipseCustomZombieSpawner.SpawnDebugPatcher");
                 Hooks.FollowerPosition=AccessTools.Method(aec,"GetFollowerSpawnPositionNearLeader");
                 Hooks.NearTrader=AccessTools.Method(aec,"IsNearTrader");
+                Hooks.ClaimRadius=AccessTools.PropertyGetter(aec,"ClaimBlockExclusionRadius");
                 if(Hooks.FollowerPosition==null||Hooks.NearTrader==null)throw new MissingMethodException("AEC selector");
+                Deferred.Configure(aec);
+                var claim=AccessTools.Method(aec,"IsNearAnyLandClaim");
+                Hooks.NearClaim=claim;
+                if(claim!=null)
+                {h.Patch(claim,postfix:Method(nameof(Hooks.ClaimPostfix)));Log.Out("[SpawnSafety] hook ready: AEC land claim exclusion diagnostics");}
                 Patch(h,AccessTools.Method(aec,"TrySpawnFollowerNearLeader"),nameof(Hooks.FollowerPrefix));
                 h.Patch(AccessTools.Method(aec,"TrySpawnFollowerNearLeader"),postfix:Method(nameof(Hooks.FollowerPostfix)));
                 Patch(h,AccessTools.Method(aec,"TrySpawnEntityByClassIdAtPosition"),nameof(Hooks.DirectPrefix),nameof(Hooks.DirectTranspiler),nameof(Hooks.RestoreDirect));
+                h.Patch(AccessTools.Method(aec,"TrySpawnEntityByClassIdAtPosition"),postfix:Method(nameof(Hooks.DirectPostfix)));
                 var blood=typeof(AIDirectorBloodMoonParty);
                 Hooks.BloodPosition=AccessTools.Method(blood,"CalcSpawnPos");
                 if(Hooks.BloodPosition==null)throw new MissingMethodException("CalcSpawnPos");
@@ -215,7 +270,8 @@ namespace PZAEC.SpawnSafety
                 var console=AccessTools.TypeByName("AeclipseCustomZombieSpawner.ConsoleCmdAec");
                 var cmd=AccessTools.Method(console,"CmdSpawn");if(cmd!=null)Patch(h,cmd,nameof(Hooks.ConsolePrefix));
                 ModEvents.GameUpdate.RegisterHandler(Diagnostics.Update);
-                Log.Out("[SpawnSafety] 1.1.0 loaded: bounded perimeter recovery for followers, blood moon and custom events/skills.");
+                ModEvents.GameUpdate.RegisterHandler(Deferred.Update);
+                Log.Out("[SpawnSafety] 1.2.1 loaded: deferred retries with revalidated previously successful sites.");
             }
             catch(Exception ex)
             {h.UnpatchSelf();Log.Error("[SpawnSafety] NOT ACTIVE: hooks incompatible; rolled back all safety hooks. "+ex);}

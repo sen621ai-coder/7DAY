@@ -21,7 +21,7 @@ namespace YFAutomation.CargoDrones
         public static GameObject Drone()
         {
             var root=new GameObject("CargoDrone");
-            try{root.AddComponent<CargoBusterRig>().Initialize();return root;}
+            try{root.AddComponent<CargoBusterRig>().Initialize();root.AddComponent<CargoDroneInteraction>();return root;}
             catch{UnityEngine.Object.Destroy(root);throw;}
         }
         public static GameObject Hub()
@@ -38,6 +38,7 @@ namespace YFAutomation.CargoDrones
     }
     public sealed class CargoDroneVisual : MonoBehaviour
     {
+        public Guid Hub;
         CargoBusterRig rig;
 
         World world;

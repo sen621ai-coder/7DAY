@@ -1585,6 +1585,7 @@
 			<crafting_skill name="MasterBuilder" max_level="30" parent="attmaster" name_key="MasterBuilderName" desc_key="MasterBuilderDesc" long_desc_key="MasterBuilderLongDesc" icon="ui_game_symbol_destruction2">
 
 				<display_entry item="meleeToolRepairT4NailgunImp" unlock_level="5,10,15,20,25,30"/>
+				<display_entry item="meleeToolRepairT5NailgunLegend" unlock_level="30"/>
 				<display_entry icon="crushedCars01White,decoCarBackBumperUpright,roadBarricadeLight,signOpenWallMountChain,signPosterWantedMissing01,cntSedan01White,airConditioner,cntSemiTruck01White" name_key="MasterBuilderT2-1,MasterBuilderT2-2,MasterBuilderT2-3,MasterBuilderT2-4,MasterBuilderT2-5,MasterBuilderT2-6,MasterBuilderT2-7,MasterBuilderT2-8" has_quality="false" unlock_level="2,6,10,14,18,22,26,30">
 					<unlock_entry item="zdecoCCarsVariantHelper" unlock_tier="1"/>
 					<unlock_entry item="zdecoGarageVariantHelper" unlock_tier="2"/>
@@ -1629,6 +1630,8 @@
 					<passive_effect name="RecipeTagUnlocked" operation="base_set" level="15,100" value="1" tags="zdecoCCarsVariantHelper"/>
 					<passive_effect name="RecipeTagUnlocked" operation="base_set" level="5,100" value="1" tags="meleeToolRepairT4NailgunImp"/>
 					<passive_effect name="CraftingTier" operation="base_add" level="10,15,20,25,30,100" value="1,2,3,4,5,5" tags="meleeToolRepairT4NailgunImp"/>
+					<passive_effect name="RecipeTagUnlocked" operation="base_set" level="30,100" value="1" tags="meleeToolRepairT5NailgunLegend"/>
+					<passive_effect name="CraftingTier" operation="base_add" level="30,100" value="5" tags="meleeToolRepairT5NailgunLegend"/>
 				</effect_group>
 
 			</crafting_skill>

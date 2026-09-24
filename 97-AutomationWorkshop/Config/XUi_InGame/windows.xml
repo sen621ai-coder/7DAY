@@ -1,6 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 <configs>
   <append xpath="/windows">
+    <window name="windowYFCargoDrone" width="650" height="640" panel="Center" cursor_area="true" controller="YFAutomation.CargoDrones.XUiC_YFCargoDrone, YF.Automation">
+      <sprite name="background" width="650" height="640" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
+      <sprite name="header" width="650" height="43" sprite="ui_game_panel_header" depth="1" />
+      <label name="title" text="货运无人机 · 状态与命令" pos="14,-8" width="620" height="30" font_size="23" depth="4" color="[white]" />
+      <label name="selection" text="" pos="14,-55" width="620" height="105" font_size="18" depth="4" color="[white]" />
+      <label name="details" text="" pos="14,-170" width="620" height="280" font_size="17" depth="4" color="[white]" />
+      <button name="refresh" pos="14,-462" width="145" height="36" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced"><label name="refreshText" text="刷新状态" pos="8,-4" width="129" height="28" font_size="18" depth="4" color="[white]" /></button>
+      <button name="recall" pos="171,-462" width="145" height="36" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced"><label name="recallText" text="召回无人机" pos="8,-4" width="129" height="28" font_size="18" depth="4" color="[white]" /></button>
+      <button name="pause" pos="328,-462" width="145" height="36" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced"><label name="pauseText" text="暂停调度" pos="8,-4" width="129" height="28" font_size="18" depth="4" color="[white]" /></button>
+      <button name="close" pos="485,-462" width="145" height="36" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced"><label name="closeText" text="关闭" pos="8,-4" width="129" height="28" font_size="18" depth="4" color="[white]" /></button>
+      <label name="notice" text="读取中…" pos="14,-512" width="620" height="48" font_size="18" depth="4" color="[white]" />
+      <label name="hint" text="暂停只停止新航班；要停机请先暂停再召回。\n绑定设备、目标箱和入口航标，请使用停机坪。" pos="14,-575" width="620" height="52" font_size="17" depth="4" color="[white]" />
+    </window>
     <window name="windowYFCargoHub" width="1060" height="730" panel="Center" cursor_area="true" controller="YFAutomation.CargoDrones.XUiC_YFCargoHub, YF.Automation">
       <sprite name="background" width="1060" height="730" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
       <sprite name="header" width="1060" height="43" sprite="ui_game_panel_header" depth="1" />
