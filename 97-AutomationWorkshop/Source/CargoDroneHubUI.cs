@@ -90,12 +90,13 @@ namespace YFAutomation.CargoDrones
         public Vector3i At,Endpoint;
         public int Request;
         public Guid Hub;
+        public bool FromDrone;
         public long Revision;
         public CargoHubAction Action;
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>55;
-        public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write((byte)Action);w.Write(Hub.ToByteArray());w.Write(Revision);w.Write(Endpoint.x);w.Write(Endpoint.y);w.Write(Endpoint.z);}
-        public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Action=(CargoHubAction)r.ReadByte();Hub=new Guid(r.ReadBytes(16));Revision=r.ReadInt64();Endpoint=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());}
+        public override int GetLength()=>56;
+        public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write((byte)Action);w.Write(Hub.ToByteArray());w.Write(Revision);w.Write(Endpoint.x);w.Write(Endpoint.y);w.Write(Endpoint.z);w.Write(FromDrone);}
+        public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Action=(CargoHubAction)r.ReadByte();Hub=new Guid(r.ReadBytes(16));Revision=r.ReadInt64();Endpoint=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());FromDrone=r.ReadBoolean();}
         public override void ProcessPackage(World world,GameManager callbacks)
         {if(Sender==null||!Sender.loginDone||!Sender.bAttachedToEntity)return;Handle(world,Sender.entityId);}
         public void Handle(World world,int actor)
@@ -116,9 +117,11 @@ namespace YFAutomation.CargoDrones
             try
             {
                 if(runtime==null&&CargoRuntime.Failure!=null)throw new InvalidOperationException("货运记录需要恢复，请查看服务器日志");
-                var state=runtime?.Service.Status().SingleOrDefault(s=>s.Configuration.Position.Equals(new CargoPosition(At.x,At.y,At.z)));
+                var state=runtime?.Service.Status().SingleOrDefault(s=>FromDrone?s.Configuration.HubId==Hub:s.Configuration.Position.Equals(new CargoPosition(At.x,At.y,At.z)));
                 if(state==null)throw new InvalidOperationException("停机坪尚未就绪；每人最多 4 座，全服最多 16 座，请稍后重试");
-                if(player==null||player.IsDead()||(player.position-new Vector3(At.x+.5f,At.y+.5f,At.z+.5f)).sqrMagnitude>64||player.PersistentPlayerData?.PrimaryId?.CombinedString!=state.Configuration.Owner||!runtime.HubExists(state.Configuration))throw new InvalidOperationException("需要停机坪所有者在 8 格内操作");
+                var controlAt=FromDrone?new Vector3((float)state.Position.X,(float)state.Position.Y,(float)state.Position.Z):new Vector3(At.x+.5f,At.y+.5f,At.z+.5f);
+                if(player==null||player.IsDead()||(player.position-controlAt).sqrMagnitude>64||player.PersistentPlayerData?.PrimaryId?.CombinedString!=state.Configuration.Owner||!runtime.HubExists(state.Configuration))throw new InvalidOperationException(FromDrone?"需要无人机所有者在 8 格内操作":"需要停机坪所有者在 8 格内操作");
+                if(FromDrone&&Action!=CargoHubAction.Read&&Action!=CargoHubAction.Recall&&Action!=CargoHubAction.TogglePause)throw new InvalidOperationException("无人机仅支持查看、召回和调度开关；绑定配置请使用停机坪");
                 authorized=state;
                 float until;if(next.TryGetValue(actor,out until)&&Time.realtimeSinceStartup<until)throw new InvalidOperationException("操作过快，请稍后重试");next[actor]=Time.realtimeSinceStartup+.2f;
                 if(!Enum.IsDefined(typeof(CargoHubAction),Action))throw new InvalidOperationException("未知操作");
@@ -176,7 +179,7 @@ namespace YFAutomation.CargoDrones
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write(Allowed);w.Write(Hub.ToByteArray());w.Write(Revision);w.Write(Paused);ConfigurationWire.Text(w,Message,512);ConfigurationWire.Text(w,Details,4096);ConfigurationWire.Text(w,Destinations,2048);w.Write(HasTarget);w.Write(Target.x);w.Write(Target.y);w.Write(Target.z);w.Write(HasShipment);w.Write(Shipment.x);w.Write(Shipment.y);w.Write(Shipment.z);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Allowed=r.ReadBoolean();Hub=new Guid(r.ReadBytes(16));Revision=r.ReadInt64();Paused=r.ReadBoolean();Message=ConfigurationWire.Text(r,512);Details=ConfigurationWire.Text(r,4096);Destinations=ConfigurationWire.Text(r,2048);HasTarget=r.ReadBoolean();Target=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());HasShipment=r.ReadBoolean();Shipment=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());}
         public override void ProcessPackage(World world,GameManager callbacks){if(world!=null&&!(ConnectionManager.Instance?.IsServer??true))Deliver();}
-        public void Deliver(){XUiC_YFCargoHub.Active?.Receive(this);}
+        public void Deliver(){XUiC_YFCargoHub.Active?.Receive(this);XUiC_YFCargoDrone.Active?.Receive(this);}
     }
     [Preserve]
     public sealed class XUiC_YFCargoHub : XUiController
@@ -294,7 +297,7 @@ namespace YFAutomation.CargoDrones
             if(Time.realtimeSinceStartup-sent<.25f){Label("notice","操作过快，请稍后重试");return;}
             if((action==CargoHubAction.AddSource||action==CargoHubAction.RemoveSource||action==CargoHubAction.SetTarget||action==CargoHubAction.SetEntrance)&&!selected.HasValue)return;
             var endpoint=selected.HasValue?new Vector3i(selected.Value.X,selected.Value.Y,selected.Value.Z):Vector3i.zero;
-            var p=NetPackageManager.GetPackage<NetPackageYFCargoHubRequest>();p.At=at;p.Endpoint=endpoint;p.Action=action;p.Request=request=++sequence;p.Hub=hub;p.Revision=revision;
+            var p=NetPackageManager.GetPackage<NetPackageYFCargoHubRequest>();p.FromDrone=false;p.At=at;p.Endpoint=endpoint;p.Action=action;p.Request=request=++sequence;p.Hub=hub;p.Revision=revision;
             autoReading=automatic;ready=false;awaiting=true;sent=Time.realtimeSinceStartup;if(!automatic)Label("notice","正在处理…");
             if(ConnectionManager.Instance.IsServer)p.Handle(GameManager.Instance.World,xui.playerUI.entityPlayer.entityId);else ConnectionManager.Instance.SendToServer(p);
         }

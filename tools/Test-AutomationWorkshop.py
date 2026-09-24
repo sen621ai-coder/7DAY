@@ -87,7 +87,7 @@ assert recipe_panel.get('width')=='870' and recipe_panel.get('height')=='300'
 assert 350+870+6*54+20<=1600 and 300+437+10<=752
 print('PASS: machine layout fits Project Z backpack bounds; compact inventory uses matching item controls.')
 assert all(p.tag=='append' and p.get('xpath')=='/windows' for p in ui.getroot())
-assert all(w.get('name').startswith('windowYFAutomation') or w.get('name')=='windowYFCargoHub' for w in ui.findall('.//window'))
+assert all(w.get('name').startswith('windowYFAutomation') or w.get('name') in ('windowYFCargoHub','windowYFCargoDrone') for w in ui.findall('.//window'))
 assert ui.find(".//window[@name='windowYFCargoHub']").get('controller')=='YFAutomation.CargoDrones.XUiC_YFCargoHub, YF.Automation'
 assert len(recipe_panel.findall("rect[@controller='YFAutomation.YFAutomationMaterialEntry, YF.Automation']"))==4
 assert len(controls.findall(".//rect[@controller='YFAutomation.YFAutomationProductEntry, YF.Automation']"))==8
@@ -107,3 +107,13 @@ assert chemistry.find("property[@name='MultiBlockDim']") is None
 assert chemistry.find("property[@name='Model']").get('value').endswith('MachineKitchen.prefab')
 assert chemistry.find("property[@class='CompositeFeatures']/property[@class='TEFeatureAutomationState']") is not None
 print('PASS: automatic chemistry station has a compatible model, inventory and persisted production state.')
+
+# The drone menu is deliberately limited to operations authenticated near the drone.
+drone_ui=ui.find(".//window[@name='windowYFCargoDrone']")
+assert drone_ui.get('controller')=='YFAutomation.CargoDrones.XUiC_YFCargoDrone, YF.Automation'
+assert {b.get('name') for b in drone_ui.findall('button')}=={'refresh','recall','pause','close'}
+assert E.parse(c/'XUi_InGame/xui.xml').find(".//window_group[@name='yfCargoDrone']/window").get('name')=='windowYFCargoDrone'
+sign=E.parse(c/'blocks.xml').find(".//block[@name='yfCargoEntranceBeacon']/property[@class='CompositeFeatures']/property[@class='TEFeatureSignable']")
+for field in ('LineWidth','LineCount','FontSize','LineSpacing'):
+ assert float(sign.find(f"property[@name='{field}']").get('value'))>0
+print('PASS: drone command window and entrance beacon sign properties.')

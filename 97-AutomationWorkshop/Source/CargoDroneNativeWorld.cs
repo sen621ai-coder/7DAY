@@ -197,7 +197,7 @@ namespace YFAutomation.CargoDrones
                 if(decks.ContainsKey(id))decks[id].transform.position=new Vector3(s.Configuration.Position.X+.5f,s.Configuration.Position.Y+1,s.Configuration.Position.Z+.5f)-Origin.position;
                 if(!HubExists(s.Configuration)&&decks.ContainsKey(id)){UnityEngine.Object.Destroy(decks[id]);decks.Remove(id);}
                 CargoDroneVisual visual;if(!drones.TryGetValue(id,out visual)){var model=CargoDroneModel.Drone();visual=model.AddComponent<CargoDroneVisual>();drones.Add(id,visual);}
-                visual.Apply(++sequence,s.Position,s.Phase,s.Hold,s.Packages,CargoDock.Resting(s.Position,Home(s.Configuration)));
+                visual.Hub=id;visual.Apply(++sequence,s.Position,s.Phase,s.Hold,s.Packages,CargoDock.Resting(s.Position,Home(s.Configuration)));
             }
         }
         public void Dispose()

@@ -14,6 +14,7 @@ namespace YFAutomation.CargoDrones
         readonly Guid flight;
         readonly List<CargoNativeLease> windows=new List<CargoNativeLease>();
         CargoPosition[] centers=new CargoPosition[0];
+        float waitingSince=-1,nextDiagnostic,nextBudgetRetry;
         bool disposed;
         readonly List<Bounds> boxes=new List<Bounds>();
         CargoPoint? dock;
@@ -26,21 +27,44 @@ namespace YFAutomation.CargoDrones
         public CargoHold Prepare(CargoPoint from,CargoPoint end)
         {
             if(disposed)throw new ObjectDisposedException("CargoNativeAirspace");leases.Poll();CargoHold hold;
+            if(Time.realtimeSinceStartup<nextBudgetRetry)return CargoHold.ChunkBudget;
             var required=CargoAirspaceCoverage.Centers(from,end);
             if(required.Length!=centers.Length||required.Where((p,i)=>!SameChunk(p,centers[i])).Any())
             {
-                // The drone remains stationary during replacement. Do not keep
-                // a stale probe that consumes the next corridor's chunk budget.
-                foreach(var window in windows)leases.Release(window.Id,flight);
-                windows.Clear();centers=required;
+                // Preserve overlap: releasing the whole corridor on every chunk
+                // boundary forces a moving drone to wait for the same data again.
+                foreach(var window in windows.Where(w=>!required.Any(p=>SameChunk(p,w.Center))).ToArray())
+                {leases.Release(window.Id,flight);windows.Remove(window);}
+                centers=required;
             }
-            while(windows.Count<centers.Length)
+            foreach(var center in centers)
             {
-                var window=leases.Request(Guid.NewGuid(),flight,centers[windows.Count],out hold);
-                if(window==null)return hold;windows.Add(window);
+                if(windows.Any(w=>SameChunk(w.Center,center)))continue;
+                var window=leases.Request(Guid.NewGuid(),flight,center,out hold);
+                if(window==null)
+                {
+                    // Never let several partially admitted corridors hold all
+                    // capacity while each waits for the others to release it.
+                    if(hold==CargoHold.ChunkBudget)
+                    {foreach(var held in windows)leases.Release(held.Id,flight);windows.Clear();nextBudgetRetry=Time.realtimeSinceStartup+1;}
+                    return Waiting(hold,center);
+                }
+                windows.Add(window);
             }
             if(windows.Any(w=>w.State==CargoNativeLeaseState.Failed||w.State==CargoNativeLeaseState.Released))return CargoHold.RecoveryRequired;
-            return Ready(from.Cell)&&Ready(end.Cell)?CargoHold.None:CargoHold.ChunkLoading;
+            foreach(var center in centers)if(!Ready(center))return Waiting(CargoHold.ChunkLoading,center);
+            waitingSince=-1;return CargoHold.None;
+        }
+        CargoHold Waiting(CargoHold hold,CargoPosition point)
+        {
+            float now=Time.realtimeSinceStartup;if(waitingSince<0)waitingSince=now;
+            if(now-waitingSince>=5&&now>=nextDiagnostic)
+            {
+                nextDiagnostic=now+10;
+                var chunk=world.GetChunkFromWorldPos(point.X,point.Z) as Chunk;
+                Log.Warning("[YFCargo] Loading wait flight="+flight+" chunk="+(point.X>>4)+","+(point.Z>>4)+" hold="+hold+" seconds="+(now-waitingSince).ToString("F1")+" resident="+(chunk!=null)+" locked="+(chunk!=null&&chunk.IsLocked)+" decoration="+(chunk!=null&&chunk.NeedsDecoration)+" windows="+windows.Count+" budget="+leases.HeldChunks);
+            }
+            return hold;
         }
         bool RequireData(int x,int z,int y)
         {return Ready(new CargoPosition(x,y,z));}

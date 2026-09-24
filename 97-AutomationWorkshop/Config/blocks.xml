@@ -1008,7 +1008,7 @@
       <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
       <property class="CompositeFeatures">
         <property class="TEFeatureLockable" />
-        <property class="TEFeatureSignable" />
+        <property class="TEFeatureSignable"><property name="LineWidth" value="0.55" /><property name="LineCount" value="1" /><property name="FontSize" value="75" /><property name="LineSpacing" value="1" /></property>
       </property>
       <property class="RepairItems">
         <property name="resourceForgedIron" value="2" />

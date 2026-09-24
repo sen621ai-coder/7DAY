@@ -331,6 +331,19 @@ public sealed class CargoDroneNativeQA : IModApi
                 motion=new CargoMotion(airspace,new CargoPoint(8,240,8),new CargoPoint(136,240,8),600000,returnReserve:180000);
                 motionTime=Time.realtimeSinceStartup;phase=7;deadline=motionTime+180;return;
             }
+            if(phase==59)
+            {
+                if(airspace.Prepare(new CargoPoint(-1630,230,-1149),new CargoPoint(-1608,230,-1137))!=CargoHold.None)return;
+                var stone=Block.GetBlockValue("terrStone",false);
+                for(int roomX=-1630;roomX<=-1608;roomX++)for(int z=-1149;z<=-1137;z++)for(int y=218;y<=227;y++)
+                {
+                    bool solid=y==218||roomX==-1630||roomX==-1608||z==-1149||z==-1137||y==227&&!(roomX>=-1629&&roomX<=-1624&&z>=-1148&&z<=-1143);
+                    var roomChunk=world.GetChunkFromWorldPos(roomX,z) as Chunk;
+                    roomChunk.SetBlockRaw(roomX&15,y,z&15,solid?stone:BlockValue.Air);
+                }
+                Check(true,"native enclosed room includes ceiling opening, vertical entrance and lateral destination");
+                phase=60;deadline=Time.realtimeSinceStartup+180;motionTime=Time.realtimeSinceStartup;return;
+            }
             if(phase==7||phase==8||phase==60)
             {
                 float now=Time.realtimeSinceStartup;long elapsed=(long)((now-motionTime)*1000);
@@ -374,7 +387,7 @@ public sealed class CargoDroneNativeQA : IModApi
                 var start=new CargoPoint(-1631.5,240,-1081.5);var target=new CargoPoint(-1611.5,220,-1140.5);
                 motion=new CargoMotion(airspace,start,target,600000,returnReserve:180000);
                 motion.RetargetVia(target,new[]{new CargoPoint(-1626.5,240,-1145.5),new CargoPoint(-1626.5,220,-1145.5)});
-                phase=60;deadline=now+180;motionTime=now;return;
+                phase=59;deadline=now+180;motionTime=now;return;
             }
             if(phase==9)
             {
@@ -670,6 +683,16 @@ public sealed class CargoDroneNativeQA : IModApi
             player.position=point+new Vector3(30,0,0);reply=request.Evaluate(world,id);
             Check(!reply.Allowed&&reply.Hub==Guid.Empty&&!reply.HasTarget&&!reply.HasShipment&&reply.Destinations=="","distance failure revokes edit readiness and does not disclose hub state or pooled navigation");NetPackageManager.FreePackage(reply);
             player.position=point;
+            var droneState=CargoNativeWorld.Current.Service.Status().Single(s=>s.Configuration.HubId==config.HubId);
+            player.position=new Vector3((float)droneState.Position.X,(float)droneState.Position.Y,(float)droneState.Position.Z);
+            request.FromDrone=true;request.At=new Vector3i(9999,200,9999);request.Action=CargoHubAction.Read;
+            reply=request.Evaluate(world,id);
+            Check(reply.Allowed&&reply.Hub==config.HubId,"drone interaction locates authoritative hub by identity and measures distance to drone instead of supplied hub coordinates");NetPackageManager.FreePackage(reply);
+            request.Action=CargoHubAction.ClearTarget;reply=request.Evaluate(world,id);
+            Check(!reply.Allowed&&reply.Message.Contains("仅支持")&&CargoNativeWorld.Current.Service.Status().Single().Configuration.Target.Matches(config.Target),"drone mode rejects binding edits before applying commands");NetPackageManager.FreePackage(reply);
+            player.position+=new Vector3(30,0,0);request.Action=CargoHubAction.Recall;reply=request.Evaluate(world,id);
+            Check(!reply.Allowed&&reply.Hub==Guid.Empty,"remote drone commands fail when the owner leaves interaction range");NetPackageManager.FreePackage(reply);
+            player.position=point;
             CargoNativeAccessSessions.Register(inventoryCollector,config.WorldId);
             var endpoint=new CargoNativeValidationEndpoint(world,inventoryCollector,config.WorldId,(world.ChunkCache.ChunkProvider as ChunkProviderGenerateWorld).m_RegionFileManager);
             var tx=Guid.NewGuid();Check(world.Players.Count>0&&endpoint.AcquireFence(tx,endpoint.Snapshot().Revision),"player presence alone no longer blocks a drained native endpoint transaction");
@@ -875,6 +898,9 @@ public sealed class CargoDroneNativeQA : IModApi
         Check(visualCopy.Epoch==visual.Epoch&&visualCopy.Sequence==4&&visualCopy.States.Single().Hub==visual.States[0].Hub&&visualCopy.States[0].RestPose&&visualCopy.States[0].Packages==2,"visual snapshot codec preserves world epoch sequence pose and cargo");
         var request=new NetPackageYFCargoHubRequest{At=new Vector3i(1,2,3),Endpoint=new Vector3i(-100,150,400),Request=71,Action=CargoHubAction.AddSource,Hub=Guid.NewGuid(),Revision=long.MaxValue};var requestCopy=new NetPackageYFCargoHubRequest();CopyPacket(request,requestCopy);
         Check(requestCopy.Hub==request.Hub&&requestCopy.Revision==long.MaxValue&&requestCopy.Endpoint==request.Endpoint&&requestCopy.Action==CargoHubAction.AddSource,"hub request preserves incarnation token revision and coordinates");
+        request.FromDrone=true;request.Action=CargoHubAction.Recall;request.Request=-71;CopyPacket(request,requestCopy);
+        Check(requestCopy.FromDrone&&requestCopy.Action==CargoHubAction.Recall&&requestCopy.Request==-71,"drone interaction request preserves authority mode and separate reply sequence");
+        request.FromDrone=false;CopyPacket(request,requestCopy);Check(!requestCopy.FromDrone,"pooled hub request resets drone authority mode");
         var reply=new NetPackageYFCargoHubReply{At=request.At,Request=71,Allowed=true,Hub=request.Hub,Revision=99,Paused=true,Message="已保存",Details="采集范围 64；搬运范围 1000",Destinations="新货目标：燃料材料\n本批货送往：货包样本",HasTarget=true,Target=new Vector3i(1136,86,1126),HasShipment=true,Shipment=new Vector3i(1132,86,1126)};var replyCopy=new NetPackageYFCargoHubReply();CopyPacket(reply,replyCopy);
         Check(replyCopy.Details==reply.Details&&replyCopy.Paused&&replyCopy.Revision==99,"hub reply preserves bounded Chinese UI state");
         Check(replyCopy.Destinations==reply.Destinations&&replyCopy.HasTarget&&replyCopy.Target==reply.Target&&replyCopy.HasShipment&&replyCopy.Shipment==reply.Shipment,"hub reply distinguishes configured and shipment names and navigation positions");
