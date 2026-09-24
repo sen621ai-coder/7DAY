@@ -114,6 +114,8 @@ public static class SpawnNativeTests {
    Check(enqueue.Any(i=>i.Operand!=null&&i.Operand.ToString().Contains("::PendingFollowersByKey")),"pending follower queue retained");
   }
   Bind(Target(aec,"TrySpawnFollowerNearLeader"),"FollowerPrefix");Bind(Target(aec,"TrySpawnFollowerNearLeader"),"FollowerPostfix");
+  Bind(direct,"DirectPostfix");Bind(Target(aec,"IsNearAnyLandClaim"),"ClaimPostfix");
+  Check(AccessTools.PropertyGetter(AccessTools.TypeByName(aec),"ClaimBlockExclusionRadius")!=null,"claim radius diagnostic getter exists");
   Factory(Target("AIDirectorBloodMoonParty","SpawnZombie"),"BloodPrefix");
   Factory(Target("GameEvent.SequenceActions.ActionBaseSpawn","SpawnEntity"),"EventPrefix");
   Factory(Target("AeclipseCustomZombieAI01.MegaHordeRuntime","SpawnVanillaPack"),"MegaPrefix");
@@ -135,7 +137,7 @@ public static class SpawnNativeTests {
   // Nested/failing scopes restore the previous request and original exception.
   var outer=new Request{Source="outer"};var inner=new Request{Source="inner"};Safety.Current=inner;var error=new Exception("test");Check(ReferenceEquals(Hooks.Restore(error,new Hooks.ScopeState{Previous=outer}),error)&&ReferenceEquals(Safety.Current,outer),"scope finally restores on exception");
   Hooks.Restore(null,null);Check(ReferenceEquals(Safety.Current,outer),"other mod skipping our prefix cannot clear an outer scope");
-  var unchanged=new Vector3(10,20,30);outer.LastAccepted=new Vector3(99,99,99);Hooks.FollowerPostfix(true,ref unchanged,null);Check(unchanged.x==10,"skipped follower prefix cannot borrow outer result");Safety.Current=null;
+  var unchanged=new Vector3(10,20,30);var followerReason="";outer.LastAccepted=new Vector3(99,99,99);Hooks.FollowerPostfix("test",default(Vector3),true,ref unchanged,ref followerReason,null);Check(unchanged.x==10,"skipped follower prefix cannot borrow outer result");Safety.Current=null;
   string description="";bool result=false;Hooks.DirectState saved,nested;
   Safety.Current=new Request{Source="blood",Remaining=0,Next=()=>default(Vector3)};var bloodScope=Safety.Current;
   Check(Hooks.DirectPrefix(default(Vector3),ref description,ref result,out saved),"nested AEC spawn does not inherit exhausted bloodmoon budget");

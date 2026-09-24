@@ -41,12 +41,20 @@ namespace PZAEC.SpawnSafety
         }
         public static bool BeforeFactory(Request request,ref Vector3 position)
         {
-            if(request==null||!request.Surface||request.Fallback==null)return false;
+            if(request==null)return false;
+            if(!request.Surface||request.Fallback==null)
+            {
+                Diagnostics.SelectorFailed(request.Source,request.Center,0,!request.Surface?"underground-no-perimeter":"no-perimeter-selector");
+                return false;
+            }
             for(int i=0;i<PerimeterSearch.Limit;i++)
             {
                 var candidate=request.Fallback();if(!candidate.HasValue)continue;
-                position=candidate.Value;request.SelectorRecovered=true;return true;
+                position=candidate.Value;request.SelectorRecovered=true;
+                Diagnostics.SelectorRecovered(request.Source,request.Center,position,i+1);
+                return true;
             }
+            Diagnostics.SelectorFailed(request.Source,request.Center,PerimeterSearch.Limit,"perimeter-exhausted");
             return false;
         }
     }

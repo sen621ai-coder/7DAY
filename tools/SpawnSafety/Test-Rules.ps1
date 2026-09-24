@@ -52,7 +52,7 @@ namespace PZAEC.SpawnSafety {
  public class Sites:ISiteWorld {
   Fixture f;public Sites(World w){f=w.Site;}public bool Loaded(UnityEngine.Vector3 p)=>f.Loaded(p);public float Terrain(int x,int z)=>f.Terrain(x,z);public bool Floor(UnityEngine.Vector3 p,out float y)=>f.Floor(p,out y);public bool Clear(UnityEngine.Bounds b)=>f.Clear(b);public bool StructuralCover(int x,int z,int low,int high)=>f.StructuralCover(x,z,low,high);
  }
- public static class Diagnostics {public static int AcceptedCount,RejectedCount;public static void Accepted(World w,Entity e,string s,UnityEngine.Vector3 p,UnityEngine.Vector3 q,int a,bool b){AcceptedCount++;}public static void Rejected(string s,int id,UnityEngine.Vector3 p,string r){RejectedCount++;}}
+ public static class Diagnostics {public static int AcceptedCount,RejectedCount,SelectorFailedCount,SelectorRecoveredCount;public static void Accepted(World w,Entity e,string s,UnityEngine.Vector3 p,UnityEngine.Vector3 q,int a,bool b){AcceptedCount++;}public static void Rejected(string s,int id,UnityEngine.Vector3 p,string r){RejectedCount++;}public static void SelectorFailed(string s,UnityEngine.Vector3 p,int a,string r){SelectorFailedCount++;}public static void SelectorRecovered(string s,UnityEngine.Vector3 p,UnityEngine.Vector3 q,int a){SelectorRecoveredCount++;}}
 }
 public static class SpawnRulesTests {
  static int checks;static void Check(bool b,string s){checks++;if(!b)throw new System.Exception(s);}
@@ -114,8 +114,12 @@ public static class SpawnRulesTests {
   Check(world.PlayerDistance==12&&world.Beds,"normal fallback preserves chosen proximity/bedroll policy");
   world.Select=(lo,hi)=>null;world.NativeCalls=0;var exhausted=PZAEC.SpawnSafety.Recovery.Create(P());for(int i=0;i<100;i++)exhausted();Check(world.NativeCalls==16,"native search has hard cap even across callers");
   world.Select=(lo,hi)=>P(hi);world.NativeCalls=0;request=new PZAEC.SpawnSafety.Request{Surface=true,Fallback=PZAEC.SpawnSafety.Recovery.Create(P(),30,80,30,false)};var chosenPosition=P();
-  Check(PZAEC.SpawnSafety.Recovery.BeforeFactory(request,ref chosenPosition)&&request.SelectorRecovered,"original selector failure recovered before factory");Check(world.PlayerDistance==30&&!world.Beds,"bloodmoon original player/bedroll policy retained");
+  int recoveredBefore=PZAEC.SpawnSafety.Diagnostics.SelectorRecoveredCount,failedBefore=PZAEC.SpawnSafety.Diagnostics.SelectorFailedCount;
+  Check(PZAEC.SpawnSafety.Recovery.BeforeFactory(request,ref chosenPosition)&&request.SelectorRecovered,"original selector failure recovered before factory");Check(PZAEC.SpawnSafety.Diagnostics.SelectorRecoveredCount==recoveredBefore+1,"pre-factory recovery is logged");Check(world.PlayerDistance==30&&!world.Beds,"bloodmoon original player/bedroll policy retained");
   request=new PZAEC.SpawnSafety.Request{Surface=false,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};int before=world.NativeCalls;Check(!PZAEC.SpawnSafety.Recovery.BeforeFactory(request,ref chosenPosition)&&world.NativeCalls==before,"underground event never relocated to surface");
+  Check(PZAEC.SpawnSafety.Diagnostics.SelectorFailedCount==failedBefore+1,"pre-factory underground failure is logged");
+  request=new PZAEC.SpawnSafety.Request{Surface=true,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};world.Select=(lo,hi)=>null;
+  Check(!PZAEC.SpawnSafety.Recovery.BeforeFactory(request,ref chosenPosition)&&PZAEC.SpawnSafety.Diagnostics.SelectorFailedCount==failedBefore+2,"exhausted pre-factory selector is logged");
   world.Claims=false;var claimed=PZAEC.SpawnSafety.Recovery.Create(P(),8,64,12,true,true);Check(!claimed().HasValue,"event fallback respects land protection when safe_spawn is false");world.Claims=true;
   world.Site.Available=false;world.NativeCalls=0;request=new PZAEC.SpawnSafety.Request{Surface=true,Remaining=1,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};Check(!PZAEC.SpawnSafety.Safety.Accept(Enemy(),request),"fallback never accepts unloaded site");Check(world.NativeCalls==16,"geometry failures bounded as well");
   world.Site=new Fixture();world.Site.Obstacles.Add(new UnityEngine.Bounds(P(y:31),new UnityEngine.Vector3(60,2,60)));request=new PZAEC.SpawnSafety.Request{Surface=true,Remaining=1,Allowed=p=>p.x<30,Fallback=PZAEC.SpawnSafety.Recovery.Create(P())};Check(!PZAEC.SpawnSafety.Safety.Accept(Enemy(),request),"fallback cannot escape source trader restriction");

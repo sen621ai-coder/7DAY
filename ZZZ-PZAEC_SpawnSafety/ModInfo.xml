@@ -2,8 +2,8 @@
 <xml>
   <Name value="PZAEC_SpawnSafety" />
   <DisplayName value="AEC 地基下刷怪防护" />
-  <Version value="1.1.0" />
-  <Description value="在随从、血月和自定义事件/召唤入世前校验落点；失败后分段寻找外围合法地面，减少基地周围刷怪损失。" />
+  <Version value="1.1.1" />
+  <Description value="在随从、血月和自定义事件/召唤入世前校验落点；失败后寻找外围合法地面，并记录实体创建前的刷怪失败原因。" />
   <Author value="PZAEC" />
 </xml>
 
