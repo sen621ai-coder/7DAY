@@ -467,6 +467,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-1" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
@@ -485,6 +487,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-1" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
@@ -503,6 +507,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-1" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />
@@ -521,6 +527,8 @@
         <property name="EconomicValue" value="0" />
         <property name="SellableToTrader" value="false" />
         <effect_group tiered="false">
+          <passive_effect name="SpreadMultiplierHip" operation="perc_add" value="-1" />
+          <passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-1" />
           <passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-1" />

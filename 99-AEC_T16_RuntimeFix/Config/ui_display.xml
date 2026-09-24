@@ -746,6 +746,8 @@
     <display_entry name="aecPercent_EntityDamage" title_key="aecDisplay_EntityDamage_Percent_ranged" display_type="Percent" display_leading_plus="true" tags="ranged" />
   </item_display_info>
   <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT16" display_group="groupRanged">
+    <display_entry name="aecPercent_SpreadMultiplierHip" title_key="aecDisplay_SpreadMultiplierHip_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
@@ -754,6 +756,8 @@
     <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
   </item_display_info>
   <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT17" display_group="groupRanged">
+    <display_entry name="aecPercent_SpreadMultiplierHip" title_key="aecDisplay_SpreadMultiplierHip_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
@@ -762,6 +766,8 @@
     <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
   </item_display_info>
   <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT18" display_group="groupRanged">
+    <display_entry name="aecPercent_SpreadMultiplierHip" title_key="aecDisplay_SpreadMultiplierHip_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
@@ -770,6 +776,8 @@
     <display_entry name="aecPercent_RoundsPerMinute" title_key="aecDisplay_RoundsPerMinute_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
   </item_display_info>
   <item_display_info display_type="AECDisplay_modPZAECCoolingSinkT19" display_group="groupRanged">
+    <display_entry name="aecPercent_SpreadMultiplierHip" title_key="aecDisplay_SpreadMultiplierHip_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
+    <display_entry name="aecPercent_SpreadMultiplierAiming" title_key="aecDisplay_SpreadMultiplierAiming_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMin" title_key="aecDisplay_KickDegreesVerticalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesVerticalMax" title_key="aecDisplay_KickDegreesVerticalMax_Percent_" display_type="Percent" display_leading_plus="true" tags="" />
     <display_entry name="aecPercent_KickDegreesHorizontalMin" title_key="aecDisplay_KickDegreesHorizontalMin_Percent_" display_type="Percent" display_leading_plus="true" tags="" />

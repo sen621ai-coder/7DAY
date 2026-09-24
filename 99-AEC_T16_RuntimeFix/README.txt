@@ -1,6 +1,12 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.16 cooling sink spread control
+- T16-T19 Cooling Sink now reduces hip-fire and aimed spread by 100%,
+  matching level-100 AEC Weapon Handling spread bonuses.
+- Updated modifier stat panels and descriptions; existing recoil, handling
+  and fire-rate bonuses are retained. XML-only update; restart to apply.
+
 Runtime 1.27.15 clearer set bonus feedback
 - Three-piece resonance buffs now carry the effective tier in their panel
   name, e.g. "Harrier Resonance (T16)" - the lowest tier currently worn.
