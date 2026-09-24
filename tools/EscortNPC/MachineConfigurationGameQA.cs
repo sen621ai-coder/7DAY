@@ -309,7 +309,7 @@ public sealed class MachineConfigurationGameQA : IModApi
             Action tick=()=>step.Invoke(null,new object[]{belts});
             storage(belts[3]).items[0]=stack("resourceCoal",3);tick();Check(count(router,"resourceCoal")==3&&storage(router).items[18].IsEmpty(),"rear belt feeds router input only");
             storage(router).items[1]=stack("resourceWood",4);storage(router).items[2]=stack("resourceScrapIron",5);
-            for(int i=0;i<3;i++)MachineInventory.PassThrough(router,"");tick();
+            ThreeWaySorter.Step(router);tick();
             Check(count(belts[0],"resourceCoal")==3&&count(belts[1],"resourceWood")==4&&count(belts[2],"resourceScrapIron")==5,"three outlet routing follows rotated box "+forward);
             foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
             storage(router).items[18]=stack("resourceCoal",7);storage(router).items[19]=stack("resourceWood",8);storage(router).items[20]=stack("resourceScrapIron",9);storage(belts[0]).items[0]=stack("resourceCoal",16);
@@ -322,6 +322,23 @@ public sealed class MachineConfigurationGameQA : IModApi
             config=MachineConfiguration.Get(router).Clone();config.Product="";config.Product2="";MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));tick();
             Check(count(belts[2],"resourceCoal")==7&&storage(belts[0]).items[0].IsEmpty()&&storage(belts[1]).items[0].IsEmpty(),"cleared filters send queued cargo to other outlet only");
             Check(!ThreeWaySorter.CanInput(router,belts[0].ToWorldPos())&&!ThreeWaySorter.CanInput(router,belts[1].ToWorldPos())&&!ThreeWaySorter.CanInput(router,belts[2].ToWorldPos()),"three output faces reject incoming cargo");
+            // Continuous large first stacks must not starve later input slots or other lanes.
+            for(int i=0;i<36;i++)storage(router).items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            config=MachineConfiguration.Get(router).Clone();config.Product="resourceCoal";config.Product2="resourceWood";MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));
+            storage(router).items[0]=stack("resourceCoal",1000);storage(router).items[8]=stack("resourceWood",1000);storage(router).items[16]=stack("resourceScrapIron",1000);storage(router).items[17]=stack("resourceScrapLead",1000);
+            ThreeWaySorter.Step(router);tick();
+            Check(count(belts[0],"resourceCoal")==16&&count(belts[1],"resourceWood")==16&&count(belts[2],"resourceScrapIron")==16&&storage(router).items[0].count==984,"one tick scans entire input and feeds all three lanes while first stack remains");
+            foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;ThreeWaySorter.Step(router);tick();
+            Check(count(belts[2],"resourceScrapLead")==16&&storage(router).items[16].count==984,"other-lane input rotates between different materials without draining first stack");
+            for(int i=0;i<36;i++)storage(router).items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            storage(router).items[18]=stack("resourceScrapIron",1000);storage(router).items[19]=stack("resourceScrapLead",1000);tick();var firstOther=storage(belts[2]).items[0].itemValue.type;storage(belts[2]).items[0]=ItemStack.Empty;tick();
+            Check(!storage(belts[2]).items[0].IsEmpty()&&storage(belts[2]).items[0].itemValue.type!=firstOther,"other outlet rotates cached item stacks under sustained supply");
+            for(int i=0;i<36;i++)storage(router).items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            int maxCoal=ItemClass.GetItem("resourceCoal").ItemClass.Stacknumber.Value;for(int i=18;i<24;i++)storage(router).items[i]=stack("resourceCoal",maxCoal);
+            storage(router).items[0]=stack("resourceCoal",32);storage(router).items[1]=stack("resourceWood",32);storage(router).items[2]=stack("resourceScrapIron",32);storage(belts[0]).items[0]=stack("resourceCoal",16);
+            int beforeTotal=storage(router).items.Sum(v=>v.count)+belts.Sum(b=>storage(b).items.Sum(v=>v.count));ThreeWaySorter.Step(router);tick();
+            Check(storage(router).items[0].count==32&&count(belts[1],"resourceWood")==16&&count(belts[2],"resourceScrapIron")==16,"full A cache and blocked outlet leave B and other independent");
+            Check(beforeTotal==storage(router).items.Sum(v=>v.count)+belts.Sum(b=>storage(b).items.Sum(v=>v.count)),"parallel routing conserves every item");
             foreach(var t in tiles)world.SetBlockRPC(new BlockValueRef(t.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(powerAt),BlockValue.Air);
         }
     }

@@ -102,6 +102,10 @@ namespace YFAutomation
         public string PreviewText=>RecipeMachines.IsMachine(kind)?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
         bool Router=>kind=="yfAutoRouter";
         public bool IsThreeWaySorter=>Router;
+        public string FilterLabel(bool second)=>((secondFilter==second)?"正在设置 · ":"")+(second?"B 前口：":"A 左口：")+(string.IsNullOrEmpty(second?draft.Product2:draft.Product)?"点击指定物品":Localization.Get(second?draft.Product2:draft.Product));
+        public void SelectFilter(bool second,bool clear=false){if(!ready||!Router)return;secondFilter=second;if(clear)ChooseProduct("");search.Text="";page=0;Render();}
+        public void SaveFilters(){if(ready&&Router)Send(true);}
+
         bool secondFilter;
         public string SelectedProduct=>Router&&secondFilter?draft.Product2:draft.Product;
         void ChooseProduct(string name){if(Router&&secondFilter)draft.Product2=name;else draft.Product=name;}

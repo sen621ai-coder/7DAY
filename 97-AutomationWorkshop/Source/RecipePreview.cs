@@ -78,6 +78,11 @@ namespace YFAutomation
         {
             base.Init();GetChildById("back").OnPress+=(s,b)=>{page=Math.Max(0,page-1);};
             GetChildById("forward").OnPress+=(s,b)=>{page++;};
+            GetChildById("filterA").OnPress+=(s,b)=>XUiC_YFAutomationConfiguration.Active?.SelectFilter(false);
+            GetChildById("filterB").OnPress+=(s,b)=>XUiC_YFAutomationConfiguration.Active?.SelectFilter(true);
+            GetChildById("clearA").OnPress+=(s,b)=>XUiC_YFAutomationConfiguration.Active?.SelectFilter(false,true);
+            GetChildById("clearB").OnPress+=(s,b)=>XUiC_YFAutomationConfiguration.Active?.SelectFilter(true,true);
+            GetChildById("saveFilters").OnPress+=(s,b)=>XUiC_YFAutomationConfiguration.Active?.SaveFilters();
         }
         public override void OnOpen(){base.OnOpen();page=0;previous="";}
         public override void Update(float dt)
@@ -86,6 +91,10 @@ namespace YFAutomation
             if(previous!=text){previous=text;page=0;}
             var active=XUiC_YFAutomationConfiguration.Active;
             ((XUiV_Label)GetChildById("recipeFrameTitle").ViewComponent).Text=active?.IsThreeWaySorter==true?"分拣设置 · 左A / 前B / 右其他":"物品配方";
+            bool router=active?.IsThreeWaySorter==true;
+            GetChildById("routerFilters").ViewComponent.IsVisible=router;
+            GetChildById("page").ViewComponent.IsVisible=!router;
+            if(router){((XUiV_Label)GetChildById("filterAText").ViewComponent).Text=active.FilterLabel(false);((XUiV_Label)GetChildById("filterBText").ViewComponent).Text=active.FilterLabel(true);}
             var materials=active?.PreviewMaterials??new List<RecipeMaterial>();
             int pages=Math.Max(1,(materials.Count+3)/4);page=Math.Min(page,pages-1);
             // Keep explanations separate from the native ingredient rows.

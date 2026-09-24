@@ -21,14 +21,14 @@ namespace YFAutomation
  // so a packet can never cross multiple belt segments in the same tick.
  public static class ConveyorTransfer
  {
-  public static int Move(ItemStack[] a,ItemStack[] b,Func<int,bool> skipA,Func<int,bool> skipB,int budget,int capacity,Func<ItemValue,int> stackLimit,int filter=0){
+  public static int Move(ItemStack[] a,ItemStack[] b,Func<int,bool> skipA,Func<int,bool> skipB,int budget,int capacity,Func<ItemValue,int> stackLimit,int filter=0,int startIndex=0,Action<int> movedFrom=null){
    if(a==null||b==null||ReferenceEquals(a,b)||budget<=0)return 0;
-   for(int i=0;i<a.Length;i++){
+   for(int offset=0;offset<a.Length;offset++){int i=(offset+startIndex)%a.Length;
     var s=a[i];if(s==null||s.IsEmpty()||skipA(i)||filter!=0&&s.itemValue.type!=filter)continue;
     for(int pass=0;pass<2;pass++)for(int j=0;j<b.Length;j++){
      if(skipB(j))continue;var d=b[j];bool empty=d==null||d.IsEmpty();if(pass==0&&empty||pass==1&&!empty||!empty&&!StackCompatibility.Matches(s.itemValue,d.itemValue))continue;
      int max=Math.Min(capacity,stackLimit(s.itemValue));int count=Math.Min(Math.Min(16,budget),Math.Min(s.count,max-(empty?0:d.count)));if(count<=0)continue;
-     var from=s.Clone();var to=empty?s.Clone():d.Clone();from.count-=count;to.count=(empty?0:d.count)+count;a[i]=from.count==0?ItemStack.Empty:from;b[j]=to;return count;
+     var from=s.Clone();var to=empty?s.Clone():d.Clone();from.count-=count;to.count=(empty?0:d.count)+count;a[i]=from.count==0?ItemStack.Empty:from;b[j]=to;movedFrom?.Invoke(i);return count;
     }
    }return 0;
   }
@@ -84,13 +84,13 @@ namespace YFAutomation
      if(source==null||!ConveyorPath.IsBelt(source.block.GetBlockName())){var ramp=nodes.FirstOrDefault(n=>Matches(n,b)&&OnMergeArm(n,b,side));if(ramp!=null)source=ramp;}
      if(!allowed(b,source))continue;string kind=source.block.GetBlockName();bool belt=ConveyorPath.IsBelt(kind),machine=MachineInventory.UsesInternal(source);
      if(belt?(!map.ContainsKey(source.ToWorldPos())||!Matches(source,b)||!powered.Contains(source)||budget[source]<=0):(!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput"))continue;
-     var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i)||!ThreeWaySorter.CanOutput(source,b.ToWorldPos(),inventory(source)[i]),i=>Logistics.Locked(dst,i),belt?budget[source]:16,16,v=>v.ItemClass.Stacknumber.Value);
+     var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i)||!ThreeWaySorter.CanOutput(source,b.ToWorldPos(),inventory(source)[i]),i=>Logistics.Locked(dst,i),belt?budget[source]:16,16,v=>v.ItemClass.Stacknumber.Value,startIndex:ThreeWaySorter.OutputStart(source,b.ToWorldPos()),movedFrom:i=>ThreeWaySorter.OutputMoved(source,b.ToWorldPos(),i));
      if(count<=0)continue;if(belt){budget[source]-=count;moved.Add(source);}changed.Add(source);changed.Add(b);moved.Add(b);mergeTurns[b]=1-side;break;
     }
    }
    // Load boxes only after movement; newly loaded parcels wait for the next tick.
    foreach(var b in nodes){if(ConveyorPath.IsMerge(b.block.GetBlockName())||!powered.Contains(b)||Logistics.Busy(b))continue;var source=world.GetTileEntity(Entry(b)) as TileEntityComposite;if(!allowed(b,source))continue;string kind=source.block.GetBlockName();bool machine=MachineInventory.UsesInternal(source);if(!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
-    var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i)||!ThreeWaySorter.CanOutput(source,b.ToWorldPos(),inventory(source)[i]),i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value);
+    var src=source.GetFeature<TEFeatureStorage>();var dst=b.GetFeature<TEFeatureStorage>();int count=ConveyorTransfer.Move(inventory(source),inventory(b),i=>Logistics.Locked(src,i)||machine&&!MachineInventory.IsOutput(i)||!ThreeWaySorter.CanOutput(source,b.ToWorldPos(),inventory(source)[i]),i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value,startIndex:ThreeWaySorter.OutputStart(source,b.ToWorldPos()),movedFrom:i=>ThreeWaySorter.OutputMoved(source,b.ToWorldPos(),i));
     if(count>0){changed.Add(source);changed.Add(b);moved.Add(b);}
    }
    // Abort the entire detached batch before publishing either side of any transfer.

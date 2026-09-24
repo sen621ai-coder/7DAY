@@ -311,6 +311,24 @@
       </rect>
     </window>
     <window name="windowYFAutomationRecipe" width="870" height="300" panel="Center" cursor_area="true" controller="YFAutomation.YFAutomationRecipePanel, YF.Automation">
+      <rect name="routerFilters" pos="350,-90" width="504" height="190" visible="false">
+        <button name="filterA" pos="0,0" width="414" height="40" depth="6" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+          <label name="filterAText" pos="8,-8" width="398" height="26" font_size="18" depth="7" color="[white]" text="A 左口：点击指定物品" />
+        </button>
+        <button name="clearA" pos="422,0" width="82" height="40" depth="6" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+          <label pos="12,-8" width="60" height="26" font_size="18" depth="7" color="[white]" text="清空" />
+        </button>
+        <button name="filterB" pos="0,-48" width="414" height="40" depth="6" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+          <label name="filterBText" pos="8,-8" width="398" height="26" font_size="18" depth="7" color="[white]" text="B 前口：点击指定物品" />
+        </button>
+        <button name="clearB" pos="422,-48" width="82" height="40" depth="6" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+          <label pos="12,-8" width="60" height="26" font_size="18" depth="7" color="[white]" text="清空" />
+        </button>
+        <label pos="0,-98" width="504" height="44" font_size="18" depth="7" color="[white]" text="先点击 A 或 B，再从左侧搜索、点击物品。\n右侧出口自动接收其他物品，无需指定。" />
+        <button name="saveFilters" pos="0,-146" width="180" height="36" depth="6" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+          <label pos="12,-6" width="156" height="26" font_size="18" depth="7" color="[white]" text="保存 A / B 筛选" />
+        </button>
+      </rect>
       <rect name="recipeFrame" pos="0,0" width="870" height="300">
         <sprite name="background" width="870" height="300" sprite="menu_empty3px" color="[darkGrey]" type="sliced" />
         <sprite name="header" width="870" height="43" sprite="ui_game_panel_header" depth="1" />

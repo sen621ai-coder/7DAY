@@ -108,7 +108,7 @@ namespace YFAutomation
                 lock(ChunkTransferLock.For(localChunk))
                 {
                     var player=GameManager.Instance.GetPersistentPlayerList()?.GetEntityPlayerFromUserId(sorter.GetFeature<TEFeatureLockable>()?.GetOwner()??sorter.Owner);
-                    Status(sorter,AutoUnpacker.Is(sorter)?AutoUnpacker.Step(sorter):Production.IsMachine(sorter.block.GetBlockName())?Production.Step(sorter,sorter,sorter,player):MachineInventory.PassThrough(sorter,ThreeWaySorter.Is(sorter)?"":config.Product));
+                    Status(sorter,AutoUnpacker.Is(sorter)?AutoUnpacker.Step(sorter):Production.IsMachine(sorter.block.GetBlockName())?Production.Step(sorter,sorter,sorter,player):ThreeWaySorter.Is(sorter)?ThreeWaySorter.Step(sorter):MachineInventory.PassThrough(sorter,config.Product));
                 }
                 return;
             }
