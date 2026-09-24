@@ -26,6 +26,7 @@ namespace PZAEC.SpawnSafety
             p.y=terrain?world.GetTerrainHeight(Mathf.FloorToInt(p.x),Mathf.FloorToInt(p.z))+1:p.y+.1f;return p;
         }
         static bool OutsideTrader(Vector3 p){return !(bool)NearTrader.Invoke(null,new object[]{p,80f});}
+        public static bool OutsideTraderForRetry(Vector3 p){return OutsideTrader(p);}
         public static Exception Restore(Exception __exception,ScopeState __state)
         {if(__state!=null)Safety.Current=__state.Previous;return __exception;}
         public static void FollowerPrefix(Vector3 __1,int __2,out ScopeState __state)
@@ -67,7 +68,13 @@ namespace PZAEC.SpawnSafety
         }
         public static void DirectPostfix(int __0,Vector3 __1,ref string __2,bool __result,DirectState __state)
         {
-            if(__state==null||__result||__2=="spawn-safety-no-valid-site")return;
+            if(__state==null||__result)return;
+            if(__2=="spawn-safety-no-valid-site")
+            {
+                var request=Safety.Current;
+                if(request!=null)Deferred.Enqueue(request.Source,__0,__1,request.Surface);
+                return;
+            }
             string reason=__2=="spawn-safety-budget-exhausted"?"budget-exhausted":"aec-returned-false";
             if(reason=="aec-returned-false"&&Hooks.NearTrader!=null)
             {
@@ -219,6 +226,7 @@ namespace PZAEC.SpawnSafety
                 Hooks.NearTrader=AccessTools.Method(aec,"IsNearTrader");
                 Hooks.ClaimRadius=AccessTools.PropertyGetter(aec,"ClaimBlockExclusionRadius");
                 if(Hooks.FollowerPosition==null||Hooks.NearTrader==null)throw new MissingMethodException("AEC selector");
+                Deferred.Configure(aec);
                 var claim=AccessTools.Method(aec,"IsNearAnyLandClaim");
                 if(claim!=null)
                 {h.Patch(claim,postfix:Method(nameof(Hooks.ClaimPostfix)));Log.Out("[SpawnSafety] hook ready: AEC land claim exclusion diagnostics");}
@@ -248,7 +256,8 @@ namespace PZAEC.SpawnSafety
                 var console=AccessTools.TypeByName("AeclipseCustomZombieSpawner.ConsoleCmdAec");
                 var cmd=AccessTools.Method(console,"CmdSpawn");if(cmd!=null)Patch(h,cmd,nameof(Hooks.ConsolePrefix));
                 ModEvents.GameUpdate.RegisterHandler(Diagnostics.Update);
-                Log.Out("[SpawnSafety] 1.1.1 loaded: bounded perimeter recovery and pre-registration failure diagnostics.");
+                ModEvents.GameUpdate.RegisterHandler(Deferred.Update);
+                Log.Out("[SpawnSafety] 1.2.0 loaded: bounded perimeter recovery, diagnostics and deferred independent-spawn retries.");
             }
             catch(Exception ex)
             {h.UnpatchSelf();Log.Error("[SpawnSafety] NOT ACTIVE: hooks incompatible; rolled back all safety hooks. "+ex);}

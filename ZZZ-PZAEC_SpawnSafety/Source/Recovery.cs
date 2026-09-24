@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PZAEC.SpawnSafety
 {
     // One bounded search per spawn request, also shared by selectors that fail
-    // before creating a prefab. No detached queue and no synthetic success counts.
+    // before creating a prefab. Deferred retries create a fresh request later.
     public sealed class PerimeterSearch
     {
         public const int Limit=16;

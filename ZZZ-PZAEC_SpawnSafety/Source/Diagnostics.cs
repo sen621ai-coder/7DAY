@@ -49,6 +49,8 @@ namespace PZAEC.SpawnSafety
         {Report("AEC claim-check hit","at="+point+" radius="+(radius>0?radius+"m":"unknown"));}
         public static void FactoryNull(string source)
         {Report(source+" factory-null","no entity created");}
+        public static void Deferred(string source,int id,Vector3 center,string state,int attempts)
+        {Report(source+" deferred:"+state,"class="+id+" center="+center+" attempts="+attempts);}
         public static void Update(ref ModEvents.SGameUpdateData data)
         {
             var world=GameManager.Instance==null?null:GameManager.Instance.World;

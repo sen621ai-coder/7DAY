@@ -120,6 +120,10 @@ public static class SpawnNativeTests {
   Factory(Target("GameEvent.SequenceActions.ActionBaseSpawn","SpawnEntity"),"EventPrefix");
   Factory(Target("AeclipseCustomZombieAI01.MegaHordeRuntime","SpawnVanillaPack"),"MegaPrefix");
   foreach(var name in new[]{"TrySpawnEventBoss","TrySpawnEventBossForHeatmap","SpawnHeatmapEscortZombies","TrySpawnReplacementOnKill","TryApplySpawnRateBonus"})Bind(Target(aec,name),"SourcePrefix");
+  Check(Deferred.Eligible("skill:TryApplySpawnRateBonus")&&Deferred.Eligible("skill:TrySpawnReplacementOnKill")&&Deferred.Eligible("skill:SpawnHeatmapEscortZombies"),"independent void spawns may enter deferred queue");
+  Check(!Deferred.Eligible("skill:TrySpawnEventBoss")&&!Deferred.Eligible("skill:TrySpawnEventBossForHeatmap")&&!Deferred.Eligible("AEC-follower")&&!Deferred.Eligible("blood-moon"),"owner-counted spawns never enter deferred queue");
+  foreach(var name in new[]{"TryApplySpawnRateBonus","TrySpawnReplacementOnKill","SpawnHeatmapEscortZombies"})Check(Target(aec,name).ReturnType==typeof(void),"deferred source is void: "+name);
+  Check(AccessTools.Field(AccessTools.TypeByName(aec),"_suppressSpawnRateBonus")?.FieldType==typeof(bool),"AEC bonus recursion guard exists");
   Target(aec,"GetFollowerSpawnPositionNearLeader");Target(aec,"IsNearTrader");Target("AIDirectorBloodMoonParty","CalcSpawnPos");
   Bind(Target("AIDirectorBloodMoonParty","CalcSpawnPos"),"BloodPositionPostfix");
   var events=AccessTools.TypeByName("GameEvent.SequenceActions.ActionBaseSpawn");Check(AccessTools.Method(events,"FindValidPosition",new[]{typeof(Vector3).MakeByRefType(),typeof(Vector3),typeof(float),typeof(float),typeof(bool),typeof(float),typeof(bool),typeof(float)})!=null,"native event selector overload");
