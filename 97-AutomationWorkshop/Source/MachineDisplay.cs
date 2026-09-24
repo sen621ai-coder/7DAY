@@ -23,7 +23,7 @@ namespace YFAutomation
         public static bool IsMachine(string name)
         {
             switch(name){
-                case "yfAutoSorter":case "yfAutoKitchen":case "yfAutoSmelter":
+                case "yfAutoUnpacker":case "yfAutoRouter":case "yfAutoSorter":case "yfAutoKitchen":case "yfAutoSmelter":
                 case "yfAutoForge":case "yfAutoWorkbench":case "yfAutoChemistry":case "yfAutoRecycler":case "yfAutoFarm":
                 case "yfAutoMiner":case "yfAutoTransfer":case "yfAutoWaterPump":
                 case "yfAutoWaterTank":case "yfAutoAmmoFeed":return true;

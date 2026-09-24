@@ -120,6 +120,8 @@ public sealed class MachineConfigurationGameQA : IModApi
         WorkbenchChecks(player,owner);
         ChemistryChecks(player,owner);
         MergeChecks(owner);
+        RouterChecks(player,owner);
+        UnpackerChecks(player,owner);
         world.SetBlockRPC(new BlockValueRef(m.ToWorldPos()),BlockValue.Air);
         Check(MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Count==0,"removing machine deletes saved settings");
     }
@@ -275,6 +277,84 @@ public sealed class MachineConfigurationGameQA : IModApi
         for(int i=0;i<20;i++){step.Invoke(null,new object[]{chain});Check(all.Sum(t=>storage(t).items.Sum(v=>v.count))==128,"four-material chain conserves all cargo at step "+i);}
         Check(materials.All(n=>count(destination,n)==32),"three T mergers deliver all four materials without starvation");
         foreach(var p in placed)world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
+    }
+
+    static void RouterChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
+    {
+        var step=AccessTools.Method(typeof(Conveyors),"Step");
+        Func<TileEntityComposite,TEFeatureStorage> storage=t=>t.GetFeature<TEFeatureStorage>();
+        Func<string,int,ItemStack> stack=(n,c)=>new ItemStack(ItemClass.GetItem(n),c);
+        Func<TileEntityComposite,string,int> count=(t,n)=>storage(t).items.Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
+        var center=new Vector3i(8,164,8);
+        foreach(var forward in new[]{new Vector3i(0,0,1),new Vector3i(1,0,0),new Vector3i(0,0,-1),new Vector3i(-1,0,0)}){
+            var tiles=new List<TileEntityComposite>();
+            Func<string,Vector3i,Vector3i,TileEntityComposite> place=(kind,p,f)=>{var t=Place(kind,p,owner);var v=world.GetBlock(p);bool found=false;
+                for(byte r=0;r<24;r++){v.rotation=r;if(v.Block.SupportsRotation(r)&&ConveyorPath.Offset(v,Vector3.forward)==f){found=true;break;}}
+                Check(found,"router native rotation "+kind);world.SetBlockRPC(new BlockValueRef(p),v);t=(TileEntityComposite)world.GetTileEntity(p);t.SetOwner(owner);tiles.Add(t);return t;};
+            var router=place("yfAutoRouter",center,forward);var value=world.GetBlock(center);
+            var config=MachineConfiguration.Get(router).Clone();config.Product="resourceCoal";config.Product2="resourceWood";
+            Check(MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router))=="已保存","save independent A and B filters");
+            var saved=MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Single(v=>v.Kind=="yfAutoRouter");
+            Check(saved.Product==config.Product&&saved.Product2==config.Product2,"both router filters persist on disk");
+            using(var stream=new MemoryStream()){var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);ConfigurationWire.Settings(writer,saved);writer.Flush();stream.Position=0;var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=ConfigurationWire.Settings(reader);Check(restored.Product==saved.Product&&restored.Product2==saved.Product2&&stream.Position==stream.Length,"both router filters survive network serialization");}
+            var invalid=MachineConfiguration.Get(router).Clone();invalid.Product2=invalid.Product;
+            Check(MachineConfiguration.Apply(world,router,player,invalid,MachineConfiguration.Token(router))!="已保存","duplicate route filters rejected");
+            invalid=MachineConfiguration.Get(router).Clone();invalid.StorageMode="external";
+            Check(MachineConfiguration.Apply(world,router,player,invalid,MachineConfiguration.Token(router))!="已保存","router refuses external mode");
+            var directions=new[]{Vector3.left,Vector3.forward,Vector3.right,Vector3.back};var belts=new TileEntityComposite[4];
+            for(int i=0;i<4;i++){var d=ConveyorPath.Offset(value,directions[i]);belts[i]=place("yfAutoBeltStraight",center+d,i==3?forward:d);Conveyors.Observe(belts[i],world);}
+            var powerAt=center+new Vector3i(0,2,0);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));
+            var port=world.GetTileEntity(powerAt) as TileEntityPowered;
+            if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
+            Action tick=()=>step.Invoke(null,new object[]{belts});
+            storage(belts[3]).items[0]=stack("resourceCoal",3);tick();Check(count(router,"resourceCoal")==3&&storage(router).items[18].IsEmpty(),"rear belt feeds router input only");
+            storage(router).items[1]=stack("resourceWood",4);storage(router).items[2]=stack("resourceScrapIron",5);
+            for(int i=0;i<3;i++)MachineInventory.PassThrough(router,"");tick();
+            Check(count(belts[0],"resourceCoal")==3&&count(belts[1],"resourceWood")==4&&count(belts[2],"resourceScrapIron")==5,"three outlet routing follows rotated box "+forward);
+            foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            storage(router).items[18]=stack("resourceCoal",7);storage(router).items[19]=stack("resourceWood",8);storage(router).items[20]=stack("resourceScrapIron",9);storage(belts[0]).items[0]=stack("resourceCoal",16);
+            tick();Check(count(router,"resourceCoal")==7&&count(belts[1],"resourceWood")==8&&count(belts[2],"resourceScrapIron")==9,"blocked A retains matching cargo while B and other continue");
+            foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            config=MachineConfiguration.Get(router).Clone();config.Paused=true;Check(MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router))=="已保存","router pause saved");tick();Check(count(router,"resourceCoal")==7,"paused router does not export");
+            config=MachineConfiguration.Get(router).Clone();config.Paused=false;MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));
+            port.PowerItem.isPowered=false;tick();Check(count(router,"resourceCoal")==7,"unpowered router does not export");port.PowerItem.isPowered=true;
+            router.bUserAccessing=true;tick();Check(count(router,"resourceCoal")==7,"open router inventory prevents transfer");router.bUserAccessing=false;
+            config=MachineConfiguration.Get(router).Clone();config.Product="";config.Product2="";MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));tick();
+            Check(count(belts[2],"resourceCoal")==7&&storage(belts[0]).items[0].IsEmpty()&&storage(belts[1]).items[0].IsEmpty(),"cleared filters send queued cargo to other outlet only");
+            Check(!ThreeWaySorter.CanInput(router,belts[0].ToWorldPos())&&!ThreeWaySorter.CanInput(router,belts[1].ToWorldPos())&&!ThreeWaySorter.CanInput(router,belts[2].ToWorldPos()),"three output faces reject incoming cargo");
+            foreach(var t in tiles)world.SetBlockRPC(new BlockValueRef(t.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(powerAt),BlockValue.Air);
+        }
+    }
+
+    static void UnpackerChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
+    {
+        var at=new Vector3i(8,164,8);var machine=Place("yfAutoUnpacker",at,owner);var store=machine.GetFeature<TEFeatureStorage>();
+        var powerAt=at+new Vector3i(0,2,0);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));var port=world.GetTileEntity(powerAt) as TileEntityPowered;
+        if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
+        Func<string,int,ItemStack> stack=(n,c)=>new ItemStack(ItemClass.GetItem(n),c);
+        Action clear=()=>{for(int i=0;i<36;i++)store.items[i]=ItemStack.Empty;};
+        Func<string,int> output=n=>store.items.Skip(18).Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
+        foreach(var test in new[]{new[]{"resourceWoodBundle","resourceWood","6000"},new[]{"ammoBundle9mmBulletBall","ammo9mmBulletBall","100"},new[]{"aecNecroBundleAmmo9mmT01","ammo9mmBulletBall","110"}}){
+            clear();store.items[0]=stack(test[0],2);Check(AutoUnpacker.Step(machine).StartsWith("已拆包")&&store.items[0].count==1&&output(test[1])==int.Parse(test[2]),"native unpack exact quantity for "+test[0]);
+        }
+        clear();store.items[0]=stack("resourceWoodBundle",1);store.SlotLocks=new PackedBoolArray(36);store.SlotLocks[0]=true;
+        AutoUnpacker.Step(machine);Check(store.items[0].count==1&&output("resourceWood")==0,"locked package is preserved");store.SlotLocks[0]=false;
+        for(int i=18;i<36;i++)store.items[i]=stack("resourceScrapIron",ItemClass.GetItem("resourceScrapIron").ItemClass.Stacknumber.Value);
+        var before=ProductionInventory.Clone(store.items);AutoUnpacker.Step(machine);Check(SameItems(before,store.items),"full unpacker rolls back whole package");
+        clear();store.items[0]=stack("resourceWoodBundle",1);port.PowerItem.isPowered=false;AutoUnpacker.Step(machine);Check(store.items[0].count==1,"unpowered unpacker preserves package");port.PowerItem.isPowered=true;
+        machine.bUserAccessing=true;AutoUnpacker.Step(machine);Check(store.items[0].count==1,"open unpacker preserves package");machine.bUserAccessing=false;
+        var config=MachineConfiguration.Get(machine).Clone();config.Paused=true;Check(MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine))=="已保存","unpacker pause saved");AutoUnpacker.Step(machine);Check(store.items[0].count==1,"paused unpacker preserves package");config=MachineConfiguration.Get(machine).Clone();config.Paused=false;MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine));
+        clear();store.items[0]=stack("resourceCoal",2);store.items[1]=stack("ammoBundle9mmBulletBall",1);AutoUnpacker.Step(machine);Check(store.items[0].count==2&&store.items[1].IsEmpty()&&output("ammo9mmBulletBall")==100,"ordinary items remain while later valid bundle is processed");
+        var bundle=ItemClass.GetItem("resourceWoodBundle");var action=bundle.ItemClass.Actions.OfType<ItemActionOpenBundle>().Single();var names=action.CreateItem;var amounts=action.CreateItemCount;var random=action.RandomItem;
+        try{
+            action.RandomItem=new[]{"resourceWood"};Check(AutoUnpacker.Products(bundle)==null,"random bundles are not partially unpacked");action.RandomItem=random;
+            action.CreateItem=new[]{"resourceWood","resourceCoal"};action.CreateItemCount=new[]{"10","20"};
+            clear();store.items[0]=stack("resourceWoodBundle",1);for(int i=18;i<36;i++)store.items[i]=stack("resourceScrapIron",ItemClass.GetItem("resourceScrapIron").ItemClass.Stacknumber.Value);store.items[18]=ItemStack.Empty;
+            before=ProductionInventory.Clone(store.items);AutoUnpacker.Step(machine);Check(SameItems(before,store.items),"multi-output package is atomic when only first product fits");
+            store.items[19]=ItemStack.Empty;Check(AutoUnpacker.Step(machine).StartsWith("已拆包")&&store.items[0].IsEmpty()&&output("resourceWood")==10&&output("resourceCoal")==20,"multi-output package commits all products once");
+            action.CreateItemCount=new[]{"bad","20"};Check(AutoUnpacker.Products(bundle)==null,"malformed count rejected without consuming input");
+        }finally{action.CreateItem=names;action.CreateItemCount=amounts;action.RandomItem=random;}
+        world.SetBlockRPC(new BlockValueRef(at),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(powerAt),BlockValue.Air);
     }
 
     static void ChemistryChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)

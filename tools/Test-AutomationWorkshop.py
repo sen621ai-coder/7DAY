@@ -20,7 +20,7 @@ assert b.find("property[@class='Workstation']/property[@name='CraftingAreaRecipe
 items=E.parse(c/'items.xml').findall('.//item');assert len(items)==14
 for item in items:assert item.find("property[@name='Extends']").get('value') in baseitems
 names=baseitems|baseblocks|{v.get('name') for v in E.parse(c/'blocks.xml').findall('.//block')}|{i.get('name') for i in items}
-recipes=E.parse(c/'recipes.xml').findall('.//recipe');assert len(recipes)==37
+recipes=E.parse(c/'recipes.xml').findall('.//recipe');assert len(recipes)==40
 assert len([r for r in recipes if r.get('name')=='yfCargoHub'])==1
 for r in recipes:
  assert r.get('name') in names and r.get('always_unlocked')=='true' and int(r.get('count'))==1
@@ -55,9 +55,9 @@ for kind in ('Sorter','Kitchen','Smelter','Forge','Recycler','Farm','Miner','Tra
  assert machine.find("property[@name='MultiBlockDim']") is None, 'Keep the saved single-block footprint'
  assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureSignable']") is not None, 'Retain persisted status feature'
 assert (root/'97-AutomationWorkshop/Resources/automation-machines.unity3d').is_file()
-print('PASS: workstation, 14 items, 37 recipes including cargo hub, vanilla materials, isolated crafting area, native UI references and localization.')
+print('PASS: workstation, 14 items, 40 recipes including cargo hub, entrance beacon and three-way sorter, vanilla materials, isolated crafting area, native UI references and localization.')
 
-for kind in ('Sorter','Kitchen','Smelter','Forge','Workbench','Chemistry','Recycler','Farm','Miner','Transfer','WaterPump','AmmoFeed'):
+for kind in ('Sorter','Router','Unpacker','Kitchen','Smelter','Forge','Workbench','Chemistry','Recycler','Farm','Miner','Transfer','WaterPump','AmmoFeed'):
  machine=E.parse(c/'blocks.xml').find(f".//block[@name='yfAuto{kind}']")
  assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureStorage']/property[@name='LootList']").get('value')=='yfAutoMachineInventory'
  assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureMachineInventory']") is not None
@@ -65,7 +65,7 @@ assert E.parse(c/'loot.xml').find(".//lootcontainer[@name='yfAutoMachineInventor
 storage=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutomationStorage']")
 assert storage.get('controller')=='YFAutomation.YFAutomationStorageWindow, YF.Automation'
 assert len(storage.findall(".//*[@name='btnSort']"))==2
-print('PASS: 12 built-in machine inventories, migration features, native loot grid and partition-safe controls.')
+print('PASS: 14 built-in machine inventories, migration features, native loot grid and partition-safe controls.')
 
 recipe_panel=E.parse(c/'XUi_InGame/windows.xml').find(".//window[@name='windowYFAutomationRecipe']")
 assert recipe_panel is not None and recipe_panel.get('panel')=='Center'

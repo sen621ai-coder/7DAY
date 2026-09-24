@@ -39,7 +39,7 @@ namespace YFAutomation
         static World current;static readonly Dictionary<int,float> next=new Dictionary<int,float>();
         public Vector3i At;public int Request;public MachineSettings Draft=new MachineSettings();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>31+Encoding.UTF8.GetByteCount(Draft.Source+Draft.Target+Draft.Product+Draft.StorageMode);
+        public override int GetLength()=>33+Encoding.UTF8.GetByteCount(Draft.Source+Draft.Target+Draft.Product+Draft.StorageMode+Draft.Product2);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);ConfigurationWire.Settings(w,Draft);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Draft=ConfigurationWire.Settings(r);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -85,6 +85,7 @@ namespace YFAutomation
             base.Update(dt);string text=XUiC_YFAutomationConfiguration.Active?.PreviewText??"选择左侧产品查看配方。";
             if(previous!=text){previous=text;page=0;}
             var active=XUiC_YFAutomationConfiguration.Active;
+            ((XUiV_Label)GetChildById("recipeFrameTitle").ViewComponent).Text=active?.IsThreeWaySorter==true?"分拣设置 · 左A / 前B / 右其他":"物品配方";
             var materials=active?.PreviewMaterials??new List<RecipeMaterial>();
             int pages=Math.Max(1,(materials.Count+3)/4);page=Math.Min(page,pages-1);
             // Keep explanations separate from the native ingredient rows.
@@ -95,7 +96,7 @@ namespace YFAutomation
                 "\n保存并关闭面板后加工。";
             ((XUiV_Label)GetChildById("body").ViewComponent).Text=summary;
             var item=ItemClass.GetItem(active?.SelectedProduct??"").ItemClass;
-            ((XUiV_Label)GetChildById("productName").ViewComponent).Text=active?.AutomaticRecycling==true?"自动分解 · 无需选择产物":item==null?"选择左侧物品":Localization.Get(item.GetItemName());
+            ((XUiV_Label)GetChildById("productName").ViewComponent).Text=active?.AutomaticUnpacking==true?"自动拆包 · 无需选择产物":active?.AutomaticRecycling==true?"自动分解 · 无需选择产物":item==null?"选择左侧物品":Localization.Get(item.GetItemName());
             var icon=(XUiV_Sprite)GetChildById("productIcon").ViewComponent;icon.SpriteName=item?.GetIconName()??"";icon.IsVisible=item!=null;
             for(int i=0;i<4;i++){var row=GetChildById("material"+i) as XUiC_YFAutomationMaterialEntry;int index=page*4+i;row.Material=index<materials.Count?materials[index]:null;row.RefreshBindings();row.ViewComponent.IsVisible=row.Material!=null;}
             ((XUiV_Label)GetChildById("page").ViewComponent).Text=(page+1)+" / "+pages;

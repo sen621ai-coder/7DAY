@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,8 +46,8 @@ namespace YFAutomation
         public static string Text(PooledBinaryReader r,int max=160)
         {int size=r.ReadUInt16();if(size>max)throw new System.IO.InvalidDataException("Configuration text too long");var b=r.ReadBytes(size);if(b.Length!=size)throw new System.IO.EndOfStreamException();return Encoding.UTF8.GetString(b);}
         public static void Settings(PooledBinaryWriter w,MachineSettings s)
-        {w.Write(s.Paused);w.Write(s.Revision);Text(w,s.Source);Text(w,s.Target);Text(w,s.Product);Text(w,s.StorageMode);}
-        public static MachineSettings Settings(PooledBinaryReader r)=>new MachineSettings{Paused=r.ReadBoolean(),Revision=r.ReadInt32(),Source=Text(r),Target=Text(r),Product=Text(r),StorageMode=Text(r)};
+        {w.Write(s.Paused);w.Write(s.Revision);Text(w,s.Source);Text(w,s.Target);Text(w,s.Product);Text(w,s.StorageMode);Text(w,s.Product2);}
+        public static MachineSettings Settings(PooledBinaryReader r)=>new MachineSettings{Paused=r.ReadBoolean(),Revision=r.ReadInt32(),Source=Text(r),Target=Text(r),Product=Text(r),StorageMode=Text(r),Product2=Text(r)};
     }
     public sealed class NetPackageYFAutomationConfigRequest : NetPackage
     {
@@ -55,7 +55,7 @@ namespace YFAutomation
         static readonly Dictionary<int,float> nextRequest=new Dictionary<int,float>();
         public Vector3i At;public int Request;public bool Save;public string Token="";public MachineSettings Value=new MachineSettings();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>34+Encoding.UTF8.GetByteCount(Token+Value.Source+Value.Target+Value.Product+Value.StorageMode);
+        public override int GetLength()=>36+Encoding.UTF8.GetByteCount(Token+Value.Source+Value.Target+Value.Product+Value.StorageMode+Value.Product2);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write(Save);ConfigurationWire.Text(w,Token,64);ConfigurationWire.Settings(w,Value);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Save=r.ReadBoolean();Token=ConfigurationWire.Text(r,64);Value=ConfigurationWire.Settings(r);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -85,7 +85,7 @@ namespace YFAutomation
     {
         public Vector3i At;public int Request;public bool Allowed;public string Message="",Kind="",Token="";public MachineSettings Value=new MachineSettings();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>38+Encoding.UTF8.GetByteCount(Message+Kind+Token+Value.Source+Value.Target+Value.Product+Value.StorageMode);
+        public override int GetLength()=>40+Encoding.UTF8.GetByteCount(Message+Kind+Token+Value.Source+Value.Target+Value.Product+Value.StorageMode+Value.Product2);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write(Allowed);ConfigurationWire.Text(w,Message,512);ConfigurationWire.Text(w,Kind);ConfigurationWire.Text(w,Token,64);ConfigurationWire.Settings(w,Value);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Allowed=r.ReadBoolean();Message=ConfigurationWire.Text(r,512);Kind=ConfigurationWire.Text(r);Token=ConfigurationWire.Text(r,64);Value=ConfigurationWire.Settings(r);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -100,7 +100,12 @@ namespace YFAutomation
         protected virtual bool InventoryScreen=>false;
         int page,previewRequest;float nextPreview;string previewKey="",serverPreview="";
         public string PreviewText=>RecipeMachines.IsMachine(kind)?(serverPreview==""?"正在读取配方材料…":serverPreview):Details();
-        public string SelectedProduct=>draft.Product;
+        bool Router=>kind=="yfAutoRouter";
+        public bool IsThreeWaySorter=>Router;
+        bool secondFilter;
+        public string SelectedProduct=>Router&&secondFilter?draft.Product2:draft.Product;
+        void ChooseProduct(string name){if(Router&&secondFilter)draft.Product2=name;else draft.Product=name;}
+        public bool AutomaticUnpacking=>kind=="yfAutoUnpacker";
         public bool AutomaticRecycling=>kind=="yfAutoRecycler";
         public bool IsInternalInventory=>InternalMode();
         public List<RecipeMaterial> PreviewMaterials=new List<RecipeMaterial>();
@@ -117,13 +122,13 @@ namespace YFAutomation
         {
             base.Init();search=GetChildById("search") as XUiC_TextInput;
             GetChildById("toggle").OnPress+=(s,b)=>{if(ready){draft.Paused=!draft.Paused;Send(true);}};
-            GetChildById("source").OnPress+=(s,b)=>{if(ready){draft.Source=Next(sources,draft.Source,b==1?-1:1);Render();}};
-            GetChildById("target").OnPress+=(s,b)=>{if(ready){draft.Target=Next(targets,draft.Target,b==1?-1:1);Render();}};
+            GetChildById("source").OnPress+=(s,b)=>{if(ready){if(Router){secondFilter=false;if(b==1)draft.Product="";}else draft.Source=Next(sources,draft.Source,b==1?-1:1);Render();}};
+            GetChildById("target").OnPress+=(s,b)=>{if(ready){if(Router){secondFilter=true;if(b==1)draft.Product2="";}else draft.Target=Next(targets,draft.Target,b==1?-1:1);Render();}};
             GetChildById("product").OnPress+=(s,b)=>{if(ready){var q=search.Text??"";var matches=products.Where(n=>n==""||n.IndexOf(q,StringComparison.OrdinalIgnoreCase)>=0||Localization.Get(n).IndexOf(q,StringComparison.OrdinalIgnoreCase)>=0).ToList();draft.Product=Next(matches,draft.Product,b==1?-1:1);Render();}};
-            GetChildById("mode").OnPress+=(s,b)=>{if(ready){draft.StorageMode=InternalMode()?"external":"internal";draft.Source="";draft.Target="";Render();}};
+            GetChildById("mode").OnPress+=(s,b)=>{if(ready&&!Router&&kind!="yfAutoUnpacker"){draft.StorageMode=InternalMode()?"external":"internal";draft.Source="";draft.Target="";Render();}};
             GetChildById("previous").OnPress+=(s,b)=>{page=Math.Max(0,page-1);RenderProducts();};
             GetChildById("next").OnPress+=(s,b)=>{page=Math.Min(Math.Max(0,(matches.Count-1)/8),page+1);RenderProducts();};
-            for(int row=0;row<8;row++){int index=row;GetChildById("recipe"+row).OnPress+=(s,b)=>{int entry=page*8+index;if(ready&&entry<matches.Count){draft.Product=matches[entry];Render();}};}
+            for(int row=0;row<8;row++){int index=row;GetChildById("recipe"+row).OnPress+=(s,b)=>{int entry=page*8+index;if(ready&&entry<matches.Count){ChooseProduct(matches[entry]);Render();}};}
             GetChildById("save").OnPress+=(s,b)=>{if(ready)Send(true);};
             GetChildById("refresh").OnPress+=(s,b)=>Send(false);
             GetChildById("close").OnPress+=(s,b)=>xui.playerUI.windowManager.Close(WindowGroup);
@@ -134,7 +139,7 @@ namespace YFAutomation
         {base.OnOpen();open=true;Active=this;
             var native=xui.FindWindowGroupByName(MachineInventoryUI.Group) as XUiC_LootWindowGroup;
             at=InventoryScreen&&native?.te!=null?native.te.ToWorldPos():MachineConfigurationUI.Pending;
-            kind="";draft=new MachineSettings();PreviewMaterials.Clear();search.Text="";page=0;lastQuery="";nextPreview=0;previewKey="";serverPreview="";Send(false);}
+            kind="";secondFilter=false;draft=new MachineSettings();PreviewMaterials.Clear();search.Text="";page=0;lastQuery="";nextPreview=0;previewKey="";serverPreview="";Send(false);}
         public override void OnClose(){open=false;ready=false;if(Active==this)Active=null;base.OnClose();}
         void Send(bool save)
         {
@@ -188,12 +193,14 @@ namespace YFAutomation
             for(int row=0;row<8;row++)
             {int index=page*8+row;GetChildById("recipe"+row).ViewComponent.IsVisible=supported&&index<matches.Count;
              var entry=GetChildById("recipe"+row) as XUiC_YFAutomationProductEntry;
-             if(entry!=null){entry.Product=index<matches.Count?matches[index]:"";entry.IsChosen=entry.Product==draft.Product;entry.RefreshBindings();}}
+             if(entry!=null){entry.Product=index<matches.Count?matches[index]:"";entry.IsChosen=entry.Product==SelectedProduct;entry.RefreshBindings();}}
             Label("pages",supported?(page+1)+" / "+Math.Max(1,(matches.Count+7)/8):"无需选择产品");
             GetChildById("previous").ViewComponent.IsVisible=supported;GetChildById("next").ViewComponent.IsVisible=supported;
         }
         string Details()
         {
+            if(Router)return "背面进料；左A、前B、右其他。\n点击A/B，再搜索选择物品。\n右键清空；保存后关闭面板。\n指定口堵塞，不会转入其他口。\n成品区共用缓存，按物品分流。\n改筛选也会改变缓存物品出口。";
+            if(kind=="yfAutoUnpacker")return "上方放资源包、弹药包等。\n自动读取固定产物及数量。\n下方收散件，可接传送带。\n每秒最多拆一包；空间不足等待。\n随机奖励、装备包暂不自动拆。\n保存并关闭面板后运行。";
             if(kind=="yfAutoWaterPump")return "紧贴水体，每5秒产出1份灌溉水。\n内置成品区上限200份；传送带可直接取水。";
             if(kind=="yfAutoAmmoFeed")return "原料区放匹配弹药，设备紧邻同主炮塔。\n只在炮塔实际射击时扣除1发。";
             if(kind=="yfAutoMiner")return "原料区：钻头耗材，每60秒消耗1份。\n下方须为自有领地真实矿点，每次产出20份。";
@@ -215,17 +222,19 @@ namespace YFAutomation
             if(previewKey!=PreviewKey()){serverPreview="";PreviewMaterials.Clear();nextPreview=0;}
             Label("title","机器配置 · "+(kind==""?"读取中":Localization.Get(kind)));
             Label("toggleText",draft.Paused?"启动并保存":"暂停并保存");
-            Label("sourceText","输入箱："+(draft.Source==""?"自动选择":draft.Source));
-            Label("targetText","输出箱："+(draft.Target==""?"自动选择":draft.Target));
+            Label("sourceText",Router?(secondFilter?"A 左口：":"▶ A 左口：")+(draft.Product==""?"未指定":Localization.Get(draft.Product)):"输入箱："+(draft.Source==""?"自动选择":draft.Source));
+            Label("targetText",Router?(secondFilter?"▶ B 前口：":"B 前口：")+(draft.Product2==""?"未指定":Localization.Get(draft.Product2)):"输出箱："+(draft.Target==""?"自动选择":draft.Target));
             Label("productText",(kind=="yfAutoSorter"?"过滤物品：":"目标产品：")+(draft.Product==""?(InternalMode()?"请选择":"沿用输出箱首格样品"):Localization.Get(draft.Product)));
             Label("modeText",InternalMode()?"库存：内置（点击改用外接箱）":"库存：外接箱（点击改用内置）");
             bool boxes=!InternalMode()&&MachineConfiguration.HasBoxes(kind),product=MachineConfiguration.HasProduct(kind);
-            GetChildById("source").ViewComponent.IsVisible=boxes;GetChildById("target").ViewComponent.IsVisible=boxes;
+            GetChildById("source").ViewComponent.IsVisible=boxes||Router;GetChildById("target").ViewComponent.IsVisible=boxes||Router;
             GetChildById("product").ViewComponent.IsVisible=product;search.ViewComponent.IsVisible=product;
             GetChildById("details").ViewComponent.IsVisible=!boxes;Label("details",RecipeMachines.IsMachine(kind)?"材料、工具和缺少数量见中间配方面板。\n上3行放原料，下3行留空收成品。":Details());
             GetChildById("details").ViewComponent.IsVisible=false;GetChildById("product").ViewComponent.IsVisible=false;
             Label("help",InternalMode()?"内置库存：上3行原料/工具，下3行成品。\n传送带指向机器送入原料，背向机器取走成品。\n打开库存期间暂停加工；关闭后自动继续。":
                 "外接箱模式：同主人、同区块，输出首格保留。\n选择产品后保存。切换库存模式不搬动物品。");
+            if(kind=="yfAutoUnpacker")Label("modeText","库存：内置 · 自动识别包裹");
+            if(Router){Label("modeText","库存：内置 · 一进三出");Label("help","背面进料，左A／前B／右侧其他。\n点击A或B后选物品；右键清空。\n保存并关闭面板后运行。");}
             RenderProducts();
             Label("notice",notice);
         }

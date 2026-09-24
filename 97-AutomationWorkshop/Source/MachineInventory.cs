@@ -23,6 +23,7 @@ namespace YFAutomation
         public static bool UsesInternal(TileEntityComposite t)
         {
             if(!Has(t))return false;
+            if(ThreeWaySorter.Is(t)||AutoUnpacker.Is(t))return true;
             var c=MachineConfiguration.Get(t);
             return c.StorageMode=="internal"||(c.StorageMode==""&&!t.GetFeature<TEFeatureMachineInventory>().Legacy);
         }
