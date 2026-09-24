@@ -12,8 +12,8 @@ namespace YFAutomation.CargoDrones
         readonly World world;
         readonly CargoNativeLeaseService leases;
         readonly Guid flight;
-        CargoNativeLease current,next,probe;
-        CargoPosition? missing;
+        readonly List<CargoNativeLease> windows=new List<CargoNativeLease>();
+        CargoPosition[] centers=new CargoPosition[0];
         bool disposed;
         readonly List<Bounds> boxes=new List<Bounds>();
         CargoPoint? dock;
@@ -21,28 +21,29 @@ namespace YFAutomation.CargoDrones
         public CargoNativeAirspace(World world,CargoNativeLeaseService leases,Guid flight)
         {if(world==null||leases==null||flight==Guid.Empty)throw new ArgumentException("Invalid airspace");this.world=world;this.leases=leases;this.flight=flight;}
         static bool SameChunk(CargoPosition a,CargoPosition b){return (a.X>>4)==(b.X>>4)&&(a.Z>>4)==(b.Z>>4);}
-        CargoNativeLease Acquire(CargoPoint point,out CargoHold hold){return leases.Request(Guid.NewGuid(),flight,point.Cell,out hold);}
         bool Ready(CargoPosition point)
-        {return current!=null&&leases.IsDataReadyAt(current.Id,point)||next!=null&&leases.IsDataReadyAt(next.Id,point)||probe!=null&&leases.IsDataReadyAt(probe.Id,point);}
+        {return windows.Any(window=>leases.IsDataReadyAt(window.Id,point));}
         public CargoHold Prepare(CargoPoint from,CargoPoint end)
         {
             if(disposed)throw new ObjectDisposedException("CargoNativeAirspace");leases.Poll();CargoHold hold;
-            if(current==null){current=Acquire(from,out hold);if(current==null)return hold;}
-            if(current.State==CargoNativeLeaseState.Failed||current.State==CargoNativeLeaseState.Released)return CargoHold.RecoveryRequired;
-            if(next!=null&&!SameChunk(next.Center,end.Cell)){leases.Release(next.Id,flight);next=null;}
-            if(!SameChunk(current.Center,end.Cell)&&next==null){next=Acquire(end,out hold);if(next==null)return hold;}
-            if(next!=null&&(next.State==CargoNativeLeaseState.Failed||next.State==CargoNativeLeaseState.Released))return CargoHold.RecoveryRequired;
-            if(missing.HasValue&&!Ready(missing.Value))
+            var required=CargoAirspaceCoverage.Centers(from,end);
+            if(required.Length!=centers.Length||required.Where((p,i)=>!SameChunk(p,centers[i])).Any())
             {
-                var point=missing.Value;
-                if(probe!=null&&!SameChunk(probe.Center,point)){leases.Release(probe.Id,flight);probe=null;}
-                if(probe==null){probe=Acquire(new CargoPoint(point.X+.5,point.Y,point.Z+.5),out hold);if(probe==null)return hold;}
-                if(probe.State==CargoNativeLeaseState.Failed||probe.State==CargoNativeLeaseState.Released)return CargoHold.RecoveryRequired;
+                // The drone remains stationary during replacement. Do not keep
+                // a stale probe that consumes the next corridor's chunk budget.
+                foreach(var window in windows)leases.Release(window.Id,flight);
+                windows.Clear();centers=required;
             }
+            while(windows.Count<centers.Length)
+            {
+                var window=leases.Request(Guid.NewGuid(),flight,centers[windows.Count],out hold);
+                if(window==null)return hold;windows.Add(window);
+            }
+            if(windows.Any(w=>w.State==CargoNativeLeaseState.Failed||w.State==CargoNativeLeaseState.Released))return CargoHold.RecoveryRequired;
             return Ready(from.Cell)&&Ready(end.Cell)?CargoHold.None:CargoHold.ChunkLoading;
         }
         bool RequireData(int x,int z,int y)
-        {var point=new CargoPosition(x,y,z);if(Ready(point))return true;missing=point;return false;}
+        {return Ready(new CargoPosition(x,y,z));}
         static CargoBox Box(Bounds bounds)
         {return new CargoBox(new CargoPoint(bounds.min.x,bounds.min.y,bounds.min.z),new CargoPoint(bounds.max.x,bounds.max.y,bounds.max.z));}
         public CargoSweep Sweep(CargoPoint from,CargoPoint to)
@@ -96,17 +97,16 @@ namespace YFAutomation.CargoDrones
             // must not be able to trap or grief an autonomous shipment.
             foreach(var entity in world.GetEntitiesInBounds((Entity)null,envelope))
                 if(!(entity is EntityPlayer)&&Hit(Box(entity.getBoundingBox()),from,to))return CargoSweep.Blocked;
-            missing=null;return CargoSweep.Clear;
+            return CargoSweep.Clear;
         }
         public void ReachedSegment(CargoPoint at)
         {
-            if(next!=null){leases.Release(current.Id,flight);current=next;next=null;}
-            if(probe!=null){leases.Release(probe.Id,flight);probe=null;}missing=null;
+            // Retain the complete corridor until Prepare selects the next one.
         }
         public void Dispose()
         {
             if(disposed)return;
-            if(current!=null)leases.Release(current.Id,flight);if(next!=null)leases.Release(next.Id,flight);if(probe!=null)leases.Release(probe.Id,flight);disposed=true;
+            foreach(var window in windows)leases.Release(window.Id,flight);windows.Clear();disposed=true;
         }
     }
 }

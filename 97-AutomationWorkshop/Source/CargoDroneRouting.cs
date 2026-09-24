@@ -4,6 +4,24 @@ using System.Diagnostics;
 
 namespace YFAutomation.CargoDrones
 {
+    // Cover the entire swept corridor, including oversized-model roots, before
+    // testing any voxel. Native observers each retain a 3x3 chunk square.
+    public static class CargoAirspaceCoverage
+    {
+        public static CargoPosition[] Centers(CargoPoint from,CargoPoint to)
+        {
+            if(from.Distance(to)>32.001)throw new ArgumentException("Flight sweeps must be segmented");
+            int x0=((int)Math.Floor(Math.Min(from.X,to.X)-1.8)-8)>>4;
+            int x1=((int)Math.Floor(Math.Max(from.X,to.X)+1.8)+8)>>4;
+            int z0=((int)Math.Floor(Math.Min(from.Z,to.Z)-1.8)-8)>>4;
+            int z1=((int)Math.Floor(Math.Max(from.Z,to.Z)+1.8)+8)>>4;
+            var points=new List<CargoPosition>();
+            // Padding may remain undecorated: every queried chunk needs its own center.
+            for(int x=x0;x<=x1;x++)for(int z=z0;z<=z1;z++)
+                points.Add(new CargoPosition(x*16+8,(int)from.Y,z*16+8));
+            return points.ToArray();
+        }
+    }
     // Bounded local doglegs, not a global pathfinder. Each candidate is verified
     // completely before motion may use it; unknown data suspends the same probe.
     public sealed class CargoLocalRoute

@@ -629,6 +629,18 @@ public static class CargoDroneCoreTests
     }
     static void RoutingChecks()
     {
+        var randomCoverage=new Random(924);
+        for(int sample=0;sample<300;sample++)
+        {
+            var a=new CargoPoint(randomCoverage.Next(-1700,1700)+.5,240,randomCoverage.Next(-1700,1700)+.5);
+            var b=a.Toward(new CargoPoint(a.X+randomCoverage.Next(-40,41),240,a.Z+randomCoverage.Next(-40,41)),32);
+            var centers=CargoAirspaceCoverage.Centers(a,b);var covered=new HashSet<string>();
+            foreach(var c in centers)for(int dx=-1;dx<=1;dx++)for(int dz=-1;dz<=1;dz++)covered.Add(((c.X>>4)+dx)+":"+((c.Z>>4)+dz));
+            bool complete=true;
+            for(int x=((int)Math.Floor(Math.Min(a.X,b.X)-1.8)-8)>>4;x<=(((int)Math.Floor(Math.Max(a.X,b.X)+1.8)+8)>>4);x++)
+            for(int z=((int)Math.Floor(Math.Min(a.Z,b.Z)-1.8)-8)>>4;z<=(((int)Math.Floor(Math.Max(a.Z,b.Z)+1.8)+8)>>4);z++)complete&=centers.Any(c=>(c.X>>4)==x&&(c.Z>>4)==z);
+            Check(complete&&covered.Count<=49,"whole sweep and oversized-root halo stay resident together within per-flight budget, including negative chunk boundaries");
+        }
         var origin=new CargoPoint(0,100,0);var goal=new CargoPoint(16,100,0);
         var space=new ObstacleAirspace();space.Obstacles.Add(new CargoBox(new CargoPoint(5,98,-2),new CargoPoint(7,102,2)));
         var route=new CargoLocalRoute(space,origin,goal,124);

@@ -35,7 +35,7 @@ namespace YFAutomation.CargoDrones
         float nextRequest;
         public int HeldChunks{get{return budget.HeldChunks;}}
         public int Count{get{return leases.Count;}}
-        public CargoNativeLeaseService(World world,int perFlight=24,int total=128)
+        public CargoNativeLeaseService(World world,int perFlight=49,int total=128)
         {
             if(world==null||world.IsRemote()||world.m_ChunkManager==null)throw new ArgumentException("Live server world required");
             if(typeof(Chunk).Module.ModuleVersionId!=new Guid("229796d0-95ca-4662-b426-1a6f1f1596ed"))throw new NotSupportedException("Observer footprint unverified on this game build");

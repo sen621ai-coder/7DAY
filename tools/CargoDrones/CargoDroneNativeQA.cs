@@ -326,12 +326,12 @@ public sealed class CargoDroneNativeQA : IModApi
                 if(queuedSave.Status!=CargoSaveResult.Durable)return;
                 Check(true,"world asynchronous save queue confirms exact endpoint snapshot after native flush and fresh-header readback");
                 Check(true,"native service disposal returns resident chunks to baseline");
-                leaseService=new CargoNativeLeaseService(world,24,128);
+                leaseService=new CargoNativeLeaseService(world,49,128);
                 airspace=new CargoNativeAirspace(world,leaseService,Guid.NewGuid());
                 motion=new CargoMotion(airspace,new CargoPoint(8,240,8),new CargoPoint(136,240,8),600000,returnReserve:180000);
                 motionTime=Time.realtimeSinceStartup;phase=7;deadline=motionTime+180;return;
             }
-            if(phase==7||phase==8)
+            if(phase==7||phase==8||phase==60)
             {
                 float now=Time.realtimeSinceStartup;long elapsed=(long)((now-motionTime)*1000);
                 if(elapsed<=0)return;motionTime=now;
@@ -339,10 +339,15 @@ public sealed class CargoDroneNativeQA : IModApi
                 if(phase==8)maxReturnHeight=Math.Max(maxReturnHeight,motion.Position.Y);
                 if(before.Distance(motion.Position)>.600001)throw new Exception("Native movement teleported");
                 maxMotionChunks=Math.Max(maxMotionChunks,leaseService.HeldChunks);
-                if(maxMotionChunks>24)throw new Exception("Native rolling window exceeded flight budget");
+                if(maxMotionChunks>49)throw new Exception("Native rolling window exceeded flight budget");
                 if(motion.Hold==CargoHold.RecoveryRequired)throw new Exception("Native high-altitude route failed: "+motion.Hold);
                 if(!motion.Arrived)return;
                 Check(world.Players.Count==0,"continuous native-data swept flight reached endpoint without players, phase="+phase);
+                if(phase==60)
+                {
+                    Check(leaseService.HeldChunks<=49,"negative-coordinate entrance descent and diagonal exit finish without recall or exceeding chunk budget");
+                    airspace.Dispose();leaseService.Dispose();phase=9;deadline=now+120;return;
+                }
                 if(phase==7)
                 {
                     var at=motion.Position;long battery=motion.Battery;motion.Tick(100,false);
@@ -365,7 +370,11 @@ public sealed class CargoDroneNativeQA : IModApi
                 lines.Add("Native motion peak charged chunks="+maxMotionChunks+" moving milliseconds="+motion.MovingUnits);
                 airspace.Dispose();airspace.Dispose();leaseService.Dispose();
                 Check(leaseService.HeldChunks==0&&world.m_ChunkManager.m_ObservedEntities.Count==baseline,"native airspace releases all rolling windows");
-                phase=9;deadline=now+120;return;
+                leaseService=new CargoNativeLeaseService(world,49,128);airspace=new CargoNativeAirspace(world,leaseService,Guid.NewGuid());
+                var start=new CargoPoint(-1631.5,240,-1081.5);var target=new CargoPoint(-1611.5,220,-1140.5);
+                motion=new CargoMotion(airspace,start,target,600000,returnReserve:180000);
+                motion.RetargetVia(target,new[]{new CargoPoint(-1626.5,240,-1145.5),new CargoPoint(-1626.5,220,-1145.5)});
+                phase=60;deadline=now+180;motionTime=now;return;
             }
             if(phase==9)
             {
