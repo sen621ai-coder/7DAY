@@ -9,7 +9,7 @@ namespace YFAutomation
 {
     public sealed class MachineSettings
     {
-        public string Position="", Owner="", Kind="", Source="", Target="", Product="", StorageMode="";
+        public string Position="", Owner="", Kind="", Source="", Target="", Product="", Product2="", StorageMode="";
         public bool Paused;
         public int Revision;
         public MachineSettings Clone() => (MachineSettings)MemberwiseClone();
@@ -30,7 +30,7 @@ namespace YFAutomation
             if(data.Schema!=1||data.Machines==null)throw new InvalidDataException("Unknown settings schema");
             var positions=new HashSet<string>();
             foreach(var s in data.Machines)
-                if(s==null||s.Position==null||s.Owner==null||s.Source==null||s.Target==null||s.Product==null||!ValidStorageMode(s.StorageMode)||
+                if(s==null||s.Position==null||s.Owner==null||s.Source==null||s.Target==null||s.Product==null||s.Product2==null||!ValidStorageMode(s.StorageMode)||
                    !MachineConfiguration.Supported(s.Kind)||s.Revision<0||!positions.Add(s.Position))throw new InvalidDataException("Invalid machine settings");
             return data;
         }
@@ -53,9 +53,9 @@ namespace YFAutomation
         static readonly Dictionary<TileEntityComposite,string> tokens=new Dictionary<TileEntityComposite,string>();
         public static string Key(Vector3i p)=>p.x+","+p.y+","+p.z;
         public static string Owner(TileEntityComposite t)=>(t?.GetFeature<TEFeatureLockable>()?.GetOwner()??t?.Owner)?.CombinedString??"";
-        public static bool Supported(string k)=>Production.IsMachine(k)||k=="yfAutoSorter"||k=="yfAutoTransfer"||k=="yfAutoWaterPump"||k=="yfAutoAmmoFeed";
+        public static bool Supported(string k)=>k=="yfAutoUnpacker"||Production.IsMachine(k)||(k=="yfAutoSorter"||k=="yfAutoRouter")||k=="yfAutoTransfer"||k=="yfAutoWaterPump"||k=="yfAutoAmmoFeed";
         public static bool HasBoxes(string k)=>Production.IsMachine(k)||k=="yfAutoSorter"||k=="yfAutoTransfer";
-        public static bool HasProduct(string k)=>k!="yfAutoRecycler"&&(Production.IsMachine(k)||k=="yfAutoSorter");
+        public static bool HasProduct(string k)=>k!="yfAutoRecycler"&&(Production.IsMachine(k)||(k=="yfAutoSorter"||k=="yfAutoRouter"));
         static bool Ready(World world)
         {
             if(world==null||world.IsRemote())return false;
@@ -132,7 +132,7 @@ namespace YFAutomation
             else if(kind=="yfAutoMiner")names=new[]{"resourceScrapIron","resourceScrapLead","resourceCoal","resourcePotassiumNitratePowder","resourceOilShale"};
             else if(kind=="yfAutoFarm")names=Block.list.Where(b=>b!=null&&b.GetBlockName().EndsWith("3HarvestPlayer")&&b.itemsToDrop.ContainsKey(EnumDropEvent.Harvest)).SelectMany(b=>b.itemsToDrop[EnumDropEvent.Harvest]).Where(d=>d.tag=="cropHarvest"&&d.prob>=1&&d.minCount>0).Select(d=>d.name);
             else if(kind=="yfAutoRecycler")names=ItemClass.list.Where(i=>i!=null&&i.HasQuality).Select(i=>CraftingManager.GetScrapableRecipe(new ItemValue(i.Id),1)).Where(r=>r!=null).Select(r=>r.GetOutputItemClass().GetItemName());
-            else if(kind=="yfAutoSorter")names=ItemClass.list.Where(i=>i!=null).Select(i=>i.GetItemName());
+            else if((kind=="yfAutoSorter"||kind=="yfAutoRouter"))names=ItemClass.list.Where(i=>i!=null).Select(i=>i.GetItemName());
             return names.Where(n=>ItemClass.GetItem(n).type>0).Distinct().OrderBy(n=>Localization.Get(n),StringComparer.Ordinal).ToList();
         }
         public static string Apply(World w,TileEntityComposite t,EntityPlayer player,MachineSettings proposed,string token)
@@ -148,6 +148,9 @@ namespace YFAutomation
                (proposed.Target!=""&&!Boxes(w,t,false).Any(b=>Key(b.ToWorldPos())==proposed.Target)))return "所选箱子不存在、越界或不属于设备所有者";
             if(proposed.Source!=""&&proposed.Source==proposed.Target)return "输入和输出不能是同一个箱子";
             if(kind!="yfAutoRecycler"&&proposed.Product!=""&&!Products(kind).Contains(proposed.Product))return "该设备不支持所选产品/物品";
+            if(kind=="yfAutoUnpacker"&&proposed.StorageMode=="external")return "拆包机仅支持内置库存";
+            if(kind=="yfAutoRouter"){if(proposed.StorageMode=="external")return "三路分拣箱仅支持内置库存";if(proposed.Product2!=""&&!Products(kind).Contains(proposed.Product2))return "第二路筛选物品无效";if(proposed.Product!=""&&proposed.Product==proposed.Product2)return "两路筛选请选择不同物品";}
+            else if(proposed.Product2!="")return "该设备不支持第二路筛选";
             var updated=proposed.Clone();updated.Position=old.Position;updated.Owner=old.Owner;updated.Kind=old.Kind;
             if(kind=="yfAutoRecycler")updated.Product="";
             if(old.Revision==int.MaxValue)return "配置版本已达上限";
@@ -156,7 +159,7 @@ namespace YFAutomation
             settings[key]=updated;
             try{Save();}
             catch(Exception ex){if(existed)settings[key]=previous;else settings.Remove(key);Log.Error("[YFAutomation] Settings save failed: "+ex.Message);return "保存失败，原配置未改变";}
-            if(old.StorageMode!=updated.StorageMode||old.Source!=updated.Source||old.Target!=updated.Target||old.Product!=updated.Product)
+            if(old.StorageMode!=updated.StorageMode||old.Source!=updated.Source||old.Target!=updated.Target||old.Product!=updated.Product||old.Product2!=updated.Product2)
             {var progress=t.GetFeature<TEFeatureAutomationState>();if(progress!=null){progress.Job="";progress.Seconds=0;t.SetChunkModified();t.SetModified();}}
             return "已保存";
         }

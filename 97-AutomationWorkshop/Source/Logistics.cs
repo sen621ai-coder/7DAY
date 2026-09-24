@@ -55,7 +55,7 @@ namespace YFAutomation
         {
             if(w==null||w.IsRemote()||te==null||te.IsRemoving)return;
             if(world!=w){world=w;machines.Clear();faulted.Clear();sourceCursors.Clear();cursor=0;}
-            if(te.block.GetBlockName()=="yfAutoSorter"||te.block.GetBlockName()=="yfAutoTransfer"||te.block.GetBlockName()=="yfAutoAmmoFeed"||te.block.GetBlockName()=="yfAutoWaterPump"||Production.IsMachine(te.block.GetBlockName()))machines[te.ToWorldPos()]=te;
+            if((te.block.GetBlockName()=="yfAutoSorter"||te.block.GetBlockName()=="yfAutoRouter"||te.block.GetBlockName()=="yfAutoUnpacker")||te.block.GetBlockName()=="yfAutoTransfer"||te.block.GetBlockName()=="yfAutoAmmoFeed"||te.block.GetBlockName()=="yfAutoWaterPump"||Production.IsMachine(te.block.GetBlockName()))machines[te.ToWorldPos()]=te;
         }
         public static void Tick()
         {
@@ -108,7 +108,7 @@ namespace YFAutomation
                 lock(ChunkTransferLock.For(localChunk))
                 {
                     var player=GameManager.Instance.GetPersistentPlayerList()?.GetEntityPlayerFromUserId(sorter.GetFeature<TEFeatureLockable>()?.GetOwner()??sorter.Owner);
-                    Status(sorter,Production.IsMachine(sorter.block.GetBlockName())?Production.Step(sorter,sorter,sorter,player):MachineInventory.PassThrough(sorter,config.Product));
+                    Status(sorter,AutoUnpacker.Is(sorter)?AutoUnpacker.Step(sorter):Production.IsMachine(sorter.block.GetBlockName())?Production.Step(sorter,sorter,sorter,player):MachineInventory.PassThrough(sorter,ThreeWaySorter.Is(sorter)?"":config.Product));
                 }
                 return;
             }

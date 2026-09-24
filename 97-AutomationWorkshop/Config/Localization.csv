@@ -84,3 +84,9 @@ yfAutoChemistryDesc,blocks,Block,,false,自动执行已解锁的化学工作站�
 
 yfAutoBeltMerge,blocks,Block,,false,T Junction Merger,T字合流传送带
 yfAutoBeltMergeDesc,blocks,Block,,false,"Left and right inputs merge toward the output arrow. Alternates batches between available inputs; waits safely when blocked. Rotate to change direction.","左右两侧进料，沿箭头向前输出。两路有货时轮流取料，出口堵塞时保留货物等待。可旋转；沿用传送带供电及同区块规则。在自动化工作台制作。"
+
+yfAutoRouter,blocks,Block,,false,Three-Way Sorting Box,三路分拣箱
+yfAutoRouterDesc,blocks,Block,,false,"Rear input. Blue left outlet A and green front outlet B filter two items; yellow right outlet handles the rest. Configure A and B then save. Internal storage only.","一进三出：背面进料，蓝色左口A和绿色前口B分别筛选指定物品，黄色右口输出其余物品。点击A/B再选择物品并保存。内置18格进料与18格共用出料缓存；4格内需要通电供电口。"
+
+yfAutoUnpacker,blocks,Block,,false,Automatic Unpacker,自动拆包机
+yfAutoUnpackerDesc,blocks,Block,,false,"Unpacks fixed-content resource and ammunition bundles into internal output storage. One package per second. Requires room for the entire contents; unsupported items remain untouched.","自动识别资源包、弹药包等固定内容包裹，按实际拆包定义还原散件。每秒最多一包；整包产物放不下时不消耗原包。上18格进料，下18格出料，可接传送带，4格内需通电供电接口。随机奖励包和装备包暂不自动拆。"
