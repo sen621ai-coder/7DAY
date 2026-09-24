@@ -24,11 +24,12 @@ namespace YFAutomation.CargoDrones
             try{current.Tick(elapsed,GameManager.Instance.IsPaused());}
             catch(Exception ex){Log.Error("[YFCargo] World scheduling stopped: "+ex);}
         }
-        sealed class Space : ICargoAirspace
+        sealed class Space : ICargoAirspace,ICargoFlightTrace
         {
             readonly CargoNativeWorld owner;readonly Guid flight;
             CargoNativeAirspace native;
             public Space(CargoNativeWorld owner,Guid flight){this.owner=owner;this.flight=flight;}
+            public void Trace(string kind,string detail){owner.Diagnostics.Write(kind,flight,detail,kind=="plan-wait"?10:kind=="plan-reject"?1:0);}
             CargoNativeAirspace Get(){owner.Context();if(native==null)native=new CargoNativeAirspace(owner.world,owner.leases,flight);return native;}
             public CargoHold Prepare(CargoPoint from,CargoPoint to){return Get().Prepare(from,to);}
             public CargoSweep Sweep(CargoPoint from,CargoPoint to){return Get().Sweep(from,to);}
@@ -50,11 +51,13 @@ namespace YFAutomation.CargoDrones
         bool validationOwnerOnline=true;
         long sequence;
         public CargoWorldService Service{get;private set;}
+        public CargoDiagnostics Diagnostics{get;private set;}
         public int HeldChunks{get{return leases.HeldChunks;}}
         public CargoNativeWorld(World world,Guid worldId,CargoFileJournal journal,CargoCheckpointStore checkpoints)
         {
             if(world==null||world.IsRemote()||GameManager.Instance?.World!=world||worldId==Guid.Empty||!CargoNativeAccessSessions.Installed)throw new InvalidOperationException("Server world with inventory session tracking required");
-            this.world=world;this.worldId=worldId;leases=new CargoNativeLeaseService(world);
+            this.world=world;this.worldId=worldId;leases=new CargoNativeLeaseService(world);Diagnostics=new CargoDiagnostics(worldId);
+            Diagnostics.Write("start",worldId,"diagnostics=0.10.3 perFlight=49 global=128",0);
             Service=new CargoWorldService(worldId,journal,checkpoints,this);
             CargoHubUI.Install(new HarmonyLib.Harmony("yf.cargo.qa.hubui"));
             if(Current!=null){leases.Dispose();throw new InvalidOperationException("Cargo world already attached");}lastUpdate=Time.realtimeSinceStartup;Current=this;
@@ -65,6 +68,7 @@ namespace YFAutomation.CargoDrones
             Context();if(hubs.Count!=0)throw new InvalidOperationException("Restore requires an empty native world");
             foreach(var hub in state.Hubs){hubs.Add(hub.Configuration.HubId,null);formalHubs.Add(hub.Configuration.HubId);}
             Service.Restore(state);
+            Diagnostics.Write("restore",worldId,"hubs="+state.Hubs.Length+" missions="+state.Missions.Length,0);
         }
         public CargoHubConfiguration RegisterHub(TileEntityComposite tile)
         {
@@ -128,22 +132,24 @@ namespace YFAutomation.CargoDrones
                 if(!preflight.TryGetValue(binding.EndpointId,out lease))
                 {lease=leases.Request(binding.EndpointId,binding.EndpointId,binding.Position,out hold);if(lease!=null)preflight.Add(binding.EndpointId,lease);}
                 preflightUsed[binding.EndpointId]=Time.realtimeSinceStartup;
+                if(hold==CargoHold.None)hold=CargoHold.ChunkLoading;
+                Diagnostics.Write("endpoint-wait",binding.EndpointId,CargoDiagnostics.ChunkState(world,binding.Position)+" hold="+hold+" lease="+(lease==null?"none":lease.State.ToString())+" budget="+leases.HeldChunks);
                 if(hold==CargoHold.None)hold=CargoHold.ChunkLoading;return false;
             }
             ReleasePreflight(binding.EndpointId);
-            var current=ResolveBinding(binding.Position,binding.Owner,CargoRules.IsSource(binding.BlockName));if(!binding.Matches(current))return false;
+            var current=ResolveBinding(binding.Position,binding.Owner,CargoRules.IsSource(binding.BlockName));if(!binding.Matches(current)){Diagnostics.Write("endpoint-invalid",binding.EndpointId,CargoDiagnostics.ChunkState(world,binding.Position)+" expectedBlock="+binding.BlockName);return false;}
             var tile=world.GetTileEntity(new Vector3i(binding.Position.X,binding.Position.Y,binding.Position.Z));
             if(tile.block.isOversized)approach=new CargoPoint(approach.X,binding.Position.Y+Math.Max(2.2,tile.block.oversizedBounds.max.y+1.5),approach.Z);
-            if(tile.bUserAccessing||LockManager.Instance.IsLockedServer(tile,0)||tile is TileEntityComposite composite&&Logistics.Busy(composite)){hold=CargoHold.ContainerBusy;return false;}
-            try{CargoNativeAccessSessions.Register(tile,worldId);}catch(CargoNativeAccessPendingException){hold=CargoHold.ContainerBusy;return false;}
-            if(!CargoNativeAccessSessions.ReadyForCargo(tile)){hold=CargoHold.ContainerBusy;return false;}
+            if(tile.bUserAccessing||LockManager.Instance.IsLockedServer(tile,0)||tile is TileEntityComposite composite&&Logistics.Busy(composite)){hold=CargoHold.ContainerBusy;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=player-or-machine-access "+CargoDiagnostics.ChunkState(world,binding.Position));return false;}
+            try{CargoNativeAccessSessions.Register(tile,worldId);}catch(CargoNativeAccessPendingException){hold=CargoHold.ContainerBusy;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=session-registration");return false;}
+            if(!CargoNativeAccessSessions.ReadyForCargo(tile)){hold=CargoHold.ContainerBusy;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=session-drain");return false;}
             try
             {
                 var provider=world.ChunkCache.ChunkProvider as ChunkProviderGenerateWorld;
                 endpoint=new CargoNativeValidationEndpoint(world,tile,worldId,provider.m_RegionFileManager);
-                if(endpoint.Snapshot().Busy){hold=CargoHold.ContainerBusy;endpoint=null;return false;}return true;
+                if(endpoint.Snapshot().Busy){hold=CargoHold.ContainerBusy;endpoint=null;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=inventory-fence");return false;}Diagnostics.Write("endpoint-ready",binding.EndpointId,CargoDiagnostics.ChunkState(world,binding.Position)+" approach="+CargoTrace.Point(approach));return true;
             }
-            catch(CargoEndpointUnavailableException){hold=CargoHold.ChunkLoading;return false;}
+            catch(CargoEndpointUnavailableException){hold=CargoHold.ChunkLoading;Diagnostics.Write("endpoint-wait",binding.EndpointId,"reason=snapshot-unavailable "+CargoDiagnostics.ChunkState(world,binding.Position));return false;}
         }
         public ICargoAirspace OpenAirspace(Guid flight)
         {Context();Space space;if(!spaces.TryGetValue(flight,out space)){space=new Space(this,flight);spaces.Add(flight,space);}return space;}
@@ -180,6 +186,7 @@ namespace YFAutomation.CargoDrones
         {
             Context();leases.Poll();foreach(var id in preflightUsed.Where(p=>Time.realtimeSinceStartup-p.Value>5).Select(p=>p.Key).ToArray())ReleasePreflight(id);Service.Tick(elapsed,paused);
             var all=Service.Status();var flights=new HashSet<Guid>(all.Select(s=>s.Flight));var hubIds=new HashSet<Guid>(all.Select(s=>s.Configuration.HubId));
+            foreach(var status in all)Diagnostics.Status(status,leases.HeldChunks);
             foreach(var id in recoveryLeases.Keys.Where(id=>!flights.Contains(id)).ToArray()){leases.Release(recoveryLeases[id].Id,id);recoveryLeases.Remove(id);}
             foreach(var id in hubs.Keys.Where(id=>!hubIds.Contains(id)).ToArray()){hubs.Remove(id);formalHubs.Remove(id);}
             CargoClientWorld.Publish(Service.Status());
@@ -202,6 +209,7 @@ namespace YFAutomation.CargoDrones
         }
         public void Dispose()
         {
+            Diagnostics?.Write("stop",worldId,"heldChunks="+leases.HeldChunks+" spaces="+spaces.Count,0);
             if(disposed)return;disposed=true;foreach(var space in spaces.Values)space.Release();spaces.Clear();leases.Dispose();
             preflight.Clear();preflightUsed.Clear();recoveryLeases.Clear();
             if(Current==this)Current=null;

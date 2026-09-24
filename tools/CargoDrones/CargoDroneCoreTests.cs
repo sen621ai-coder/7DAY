@@ -606,8 +606,11 @@ public static class CargoDroneCoreTests
             Check(motion.Arrived&&balance-motion.Battery<=expected&&motion.Battery>=180000,"random multi-leg measured return stays below energy estimate and above reserve");
         }
     }
-    sealed class Airspace : ICargoAirspace
+    sealed class Airspace : ICargoAirspace,ICargoFlightTrace
     {
+        public bool ThrowTrace;
+        public int TraceCalls;
+        public void Trace(string kind,string detail){TraceCalls++;if(ThrowTrace)throw new InvalidOperationException("diagnostic sink failure");}
         public CargoHold Wait;
         public CargoSweep Result;
         public int Sweeps,Reached,BlockOnSweep;
@@ -694,6 +697,8 @@ public static class CargoDroneCoreTests
     static void MotionChecks()
     {
         var start=new CargoPoint(0,100,0);var end=new CargoPoint(800,100,0);
+        var brokenTrace=new Airspace{ThrowTrace=true};var tracedMotion=new CargoMotion(brokenTrace,start,end,600000);tracedMotion.Tick(100);
+        Check(brokenTrace.TraceCalls>0&&tracedMotion.Position.Distance(start)>.59&&tracedMotion.Battery==599900,"diagnostic sink failure cannot stop motion or alter energy accounting");
         var wall=new CargoBox(new CargoPoint(5,99,-1),new CargoPoint(6,101,1));
         Check(wall.SweptHit(start,new CargoPoint(10,100,0)),"continuous sweep catches wall between endpoints");
         Check(wall.SweptHit(new CargoPoint(0,100,1.8),new CargoPoint(10,100,1.8)),"body tangent blocks");

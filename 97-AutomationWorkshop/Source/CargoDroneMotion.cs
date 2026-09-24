@@ -39,6 +39,13 @@ namespace YFAutomation.CargoDrones
         }
     }
     public enum CargoSweep{Clear,Blocked,Unavailable}
+    public interface ICargoFlightTrace { void Trace(string kind,string detail); }
+    public static class CargoTrace
+    {
+        public static string Point(CargoPoint p){return string.Format(System.Globalization.CultureInfo.InvariantCulture,"({0:F2},{1:F2},{2:F2})",p.X,p.Y,p.Z);}
+        public static void Emit(ICargoAirspace space,string kind,string detail)
+        {try{(space as ICargoFlightTrace)?.Trace(kind,detail);}catch{/* Diagnostics must never interrupt cargo or movement. */}}
+    }
     public interface ICargoAirspace
     {
         CargoHold Prepare(CargoPoint from,CargoPoint segmentEnd);
@@ -84,6 +91,7 @@ namespace YFAutomation.CargoDrones
         }
         public void Retarget(CargoPoint target)
         {
+            CargoTrace.Emit(space,"retarget","from="+CargoTrace.Point(Position)+" target="+CargoTrace.Point(target));
             if(ReturningHome)throw new InvalidOperationException("A returning motion cannot discard its home corridor; start a new motion after docking");
             Target=target;ceiling=Math.Min(253,Math.Max(Position.Y,target.Y)+24);RetryPath();Arrived=false;Hold=CargoHold.None;
         }
@@ -101,6 +109,7 @@ namespace YFAutomation.CargoDrones
             // target. Keep twelve more blocks of detour headroom above the
             // authored cruise corridor, equivalent to +24 over its endpoint.
             ceiling=Math.Min(253,Math.Max(ceiling,highest+12));
+            CargoTrace.Emit(space,"route-via","target="+CargoTrace.Point(target)+" ceiling="+ceiling+" remaining="+string.Join(";",System.Linq.Enumerable.Select(detour,CargoTrace.Point)));
         }
         internal CargoMotionState Capture()
         {
@@ -120,12 +129,14 @@ namespace YFAutomation.CargoDrones
         }
         public void RetryPath()
         {
+            CargoTrace.Emit(space,"retry","pos="+CargoTrace.Point(Position)+" target="+CargoTrace.Point(Target)+" returning="+ReturningHome+" remaining="+detour.Count);
             // On return, keep the current edge and remaining corridor. Clearing
             // them here would silently replace an obstructed route with a shortcut.
             if(!ReturningHome){hasSegment=false;detour.Clear();}search=null;routeFailed=false;blockedWait=0;
         }
         public void ReturnHome()
         {
+            CargoTrace.Emit(space,"return","pos="+CargoTrace.Point(Position)+" home="+CargoTrace.Point(trail.Home)+" battery="+Battery+" energyRecall="+EnergyRecall);
             if(ReturningHome){RetryPath();return;}
             hasSegment=false;detour.Clear();search=null;routeFailed=false;ReturningHome=true;
             Target=trail.Home;foreach(var point in trail.ReverseWaypoints())detour.Enqueue(point);
@@ -133,6 +144,7 @@ namespace YFAutomation.CargoDrones
         }
         void Blocked()
         {
+            CargoTrace.Emit(space,"blocked","from="+CargoTrace.Point(Position)+" to="+CargoTrace.Point(segment)+" returning="+ReturningHome+" ceiling="+ceiling);
             if(ReturningHome){routeFailed=true;Hold=CargoHold.PathBlocked;return;}
             // Preserve later mandatory waypoints while locally routing around the
             // blocked edge. Entrance and approach points must never disappear.
@@ -166,7 +178,7 @@ namespace YFAutomation.CargoDrones
                 // Reacquire the actual first edge on the next tick before moving.
                 return;
             }
-            if(!hasSegment){segment=detour.Count>0?detour.Dequeue():Position.Toward(Target,16);hasSegment=true;}
+            if(!hasSegment){segment=detour.Count>0?detour.Dequeue():Position.Toward(Target,16);hasSegment=true;CargoTrace.Emit(space,"segment","from="+CargoTrace.Point(Position)+" to="+CargoTrace.Point(segment)+" target="+CargoTrace.Point(Target)+" remaining="+detour.Count);}
             Hold=space.Prepare(Position,segment);if(Hold!=CargoHold.None)return;
             var validation=space.Sweep(Position,segment);
             if(validation!=CargoSweep.Clear){if(validation==CargoSweep.Blocked)Blocked();else Hold=CargoHold.ChunkLoading;return;}

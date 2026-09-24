@@ -116,12 +116,14 @@ namespace YFAutomation.CargoDrones
                 CargoNativeMarkers.Encode(after); // Validate before mutating inventory.
                 CargoNativeWriteGuards.Replace(tile,replacement);
                 CargoNativeMarkers.Write(tile,after);tile.SetChunkModified();
+                CargoNativeWorld.Current?.Diagnostics.Write("inventory-applied",transaction,"endpoint="+identity.EndpointId+" moved="+plan.Moved+" revision="+after.Revision,0);
             }
         }
         public void RequestDurableSave(Guid transaction)
         {
             Own(transaction);if(saveRequested)throw new InvalidOperationException("Save already requested");
             saveRequested=true;
+            CargoNativeWorld.Current?.Diagnostics.Write("save-request",transaction,"endpoint="+identity.EndpointId+" at="+tile.ToWorldPos(),0);
         }
         void TryCapture(Guid transaction)
         {
@@ -135,10 +137,12 @@ namespace YFAutomation.CargoDrones
         public CargoSaveResult PollDurableSave(Guid transaction)
         {
             Own(transaction);if(!saveRequested)return CargoSaveResult.Uncertain;
-            if(tile.GetChunk().IsLocked)return CargoSaveResult.Pending;
+            if(tile.GetChunk().IsLocked){CargoNativeWorld.Current?.Diagnostics.Write("save-wait",transaction,"endpoint="+identity.EndpointId+" reason=chunk-locked");return CargoSaveResult.Pending;}
             TryCapture(transaction);
             if(save!=null&&save.Status==CargoSaveResult.Uncertain)throw new InvalidOperationException("Native save confirmation failed: "+save.Failure);
-            return save==null?CargoSaveResult.Pending:save.Status;
+            var result=save==null?CargoSaveResult.Pending:save.Status;
+            CargoNativeWorld.Current?.Diagnostics.Write("save-status",transaction,"endpoint="+identity.EndpointId+" result="+result,10,result.ToString());
+            return result;
         }
         public void ReleaseFence(Guid transaction)
         {

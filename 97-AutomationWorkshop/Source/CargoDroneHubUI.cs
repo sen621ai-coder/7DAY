@@ -126,6 +126,7 @@ namespace YFAutomation.CargoDrones
                 float until;if(next.TryGetValue(actor,out until)&&Time.realtimeSinceStartup<until)throw new InvalidOperationException("操作过快，请稍后重试");next[actor]=Time.realtimeSinceStartup+.2f;
                 if(!Enum.IsDefined(typeof(CargoHubAction),Action))throw new InvalidOperationException("未知操作");
                 var c=state.Configuration;var changed=c;var rules=new CargoRules();string owner=c.Owner;
+                if(Action!=CargoHubAction.Read)runtime.Diagnostics.Write("command",c.HubId,"flight="+state.Flight+" action="+Action+" fromDrone="+FromDrone+" requestedRevision="+Revision+" actualRevision="+c.Revision+" endpoint="+Endpoint,0);
                 if(Action!=CargoHubAction.Read&&(Hub!=c.HubId||Revision!=c.Revision))throw new InvalidOperationException("配置或停机坪已改变，请刷新");
                 var at=new CargoPosition(Endpoint.x,Endpoint.y,Endpoint.z);
                 switch(Action)
@@ -146,11 +147,13 @@ namespace YFAutomation.CargoDrones
                     case CargoHubAction.ClearEntrance:changed=c.SetEntrance(owner,c.Revision,null,rules);break;
                 }
                 if(changed!=c)runtime.Service.Configure(c.HubId,owner,c.Revision,changed,Action==CargoHubAction.SetEntrance||Action==CargoHubAction.ClearEntrance);
+                if(Action!=CargoHubAction.Read)runtime.Diagnostics.Write("command-applied",c.HubId,"action="+Action+" revision="+changed.Revision,0);
                 state=runtime.Service.Status().Single(s=>s.Configuration.HubId==c.HubId);
                 reply.SetState(state);reply.Message=Action==CargoHubAction.Read?"状态已更新":Action==CargoHubAction.Recall?"已请求返航；返航后仍按调度配置运行":Action==CargoHubAction.ClearTarget?"已清除新货目标；本批货仍送往原箱":Action==CargoHubAction.SetEntrance?"入口航标已用于新货和当前航班":Action==CargoHubAction.ClearEntrance?"入口航标已清除":"操作已保存";
             }
             catch(Exception ex)
             {
+                if(Action!=CargoHubAction.Read)runtime?.Diagnostics.Write("command-rejected",Hub,"action="+Action+" reason="+ex.Message,1);
                 reply.Message=ex.Message.Length>150?"操作失败，请查看日志并重试":ex.Message;
                 // A rejected command does not revoke permission to view the hub.
                 // Return fresh state so capacity/version/throttle errors can be retried.

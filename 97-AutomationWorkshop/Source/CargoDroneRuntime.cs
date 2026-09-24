@@ -61,6 +61,7 @@ namespace YFAutomation.CargoDrones
                 {
                     recoveryState=saved;recoveryJobs=new Queue<CargoTransaction>(CargoJournalReplay.Read(id,journal.Entries).Where(f=>f.Pending!=null).Select(f=>f.Pending));
                     Recovering=true;
+                    runtime.Diagnostics.Write("recovery-start",id,"transactions="+recoveryJobs.Count+" missions="+saved.Missions.Length,0);
                     if(recoveryJobs.Count>0){recoveryLoads=new CargoNativeLeaseService(world);return;}
                     FinishRecovery();
                 }
@@ -81,8 +82,8 @@ namespace YFAutomation.CargoDrones
             if(world!=null&&Failure==null&&Recovering)
             {
                 try{Recover();}
-                catch(CargoEndpointUnavailableException){ }
-                catch(CargoNativeAccessPendingException){ }
+                catch(CargoEndpointUnavailableException){CargoNativeWorld.Current?.Diagnostics.Write("recovery-wait",journal.WorldId,"reason=endpoint-unavailable");}
+                catch(CargoNativeAccessPendingException){CargoNativeWorld.Current?.Diagnostics.Write("recovery-wait",journal.WorldId,"reason=access-session");}
                 catch(Exception error){Failure=error.Message;recoveryLoads?.Dispose();recoveryLoads=null;Log.Error("[YFCargo] Startup recovery blocked: "+error);}
                 return;
             }
@@ -118,7 +119,7 @@ namespace YFAutomation.CargoDrones
             recoveryLoads.Poll();CargoHold hold;
             if(recoveryLease==null){recoveryLease=recoveryLoads.Request(Guid.NewGuid(),tx.FlightId,binding.Position,out hold);return;}
             if(recoveryLease.State==CargoNativeLeaseState.Failed||recoveryLease.State==CargoNativeLeaseState.Released)throw new InvalidOperationException("Recovery region could not be loaded safely");
-            if(!recoveryLoads.IsDataReadyAt(recoveryLease.Id,binding.Position))return;
+            if(!recoveryLoads.IsDataReadyAt(recoveryLease.Id,binding.Position)){CargoNativeWorld.Current?.Diagnostics.Write("recovery-wait",tx.Id,"flight="+tx.FlightId+" endpoint="+binding.EndpointId+" "+CargoDiagnostics.ChunkState(world,binding.Position));return;}
             if(recovery==null)
             {
                 var at=new Vector3i(binding.Position.X,binding.Position.Y,binding.Position.Z);var tile=world.GetTileEntity(at);
@@ -131,6 +132,7 @@ namespace YFAutomation.CargoDrones
             else recovery.Poll();
             if(recovery.State==CargoTransferState.RecoveryRequired)throw new InvalidDataException(recovery.Failure??"Prepared inventory does not match a recoverable before/after image");
             if(recovery.State!=CargoTransferState.Committed&&recovery.State!=CargoTransferState.Aborted)return;
+            CargoNativeWorld.Current?.Diagnostics.Write("recovery-settled",tx.Id,"flight="+tx.FlightId+" result="+recovery.State,0);
             recoveryLoads.Release(recoveryLease.Id,tx.FlightId);recoveryLease=null;recovery=null;recoveryJobs.Dequeue();
         }
         static void FinishRecovery()
@@ -147,6 +149,7 @@ namespace YFAutomation.CargoDrones
             checkpoints.SaveWorld(restored,journal);runtime.Restore(restored);
             recoveryLoads?.Dispose();recoveryLoads=null;recoveryState=null;recoveryJobs=null;recoveryLease=null;recovery=null;
             CargoNativeValidationEndpoint.SetStartupQuarantine(journal.WorldId,new Guid[0]);Recovering=false;
+            runtime.Diagnostics.Write("recovery-finished",journal.WorldId,"missions="+missions.Count,0);
         }
         static void Stopping(ref ModEvents.SWorldShuttingDownData data){StopWorld();}
         static void Stopped(ref ModEvents.SGameShutdownData data){StopWorld();CargoClientWorld.Clear();}
