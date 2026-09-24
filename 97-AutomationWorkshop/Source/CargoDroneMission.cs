@@ -50,10 +50,10 @@ namespace YFAutomation.CargoDrones
             // steps as far as the motion ceiling (+24).
             return new CargoPoint(from.X,Math.Min(252,Math.Max(from.Y,to.Y)+12),from.Z);
         }
-        void RouteTo(CargoPoint target,CargoPoint? entrance)
+        static List<CargoPoint> RoutePoints(CargoPoint from,CargoPoint target,CargoPoint? entrance)
         {
-            if(!entrance.HasValue&&motion.Position.Distance(target)<1e-7){motion.Retarget(target);return;}
-            var first=entrance??target;var lift=Cruise(motion.Position,first);var waypoints=new List<CargoPoint>{lift,new CargoPoint(first.X,lift.Y,first.Z)};
+            if(!entrance.HasValue&&from.Distance(target)<1e-7)return new List<CargoPoint>{target};
+            var first=entrance??target;var lift=Cruise(from,first);var waypoints=new List<CargoPoint>{lift,new CargoPoint(first.X,lift.Y,first.Z)};
             if(entrance.HasValue)
             {
                 // One beacon expands into the upper holding point above, this
@@ -63,7 +63,42 @@ namespace YFAutomation.CargoDrones
                 waypoints.Add(entrance.Value);
                 if(Math.Abs(entrance.Value.Y-target.Y)>1)waypoints.Add(new CargoPoint(entrance.Value.X,target.Y,entrance.Value.Z));
             }
-            motion.RetargetVia(target,waypoints);
+            waypoints.Add(target);return waypoints;
+        }
+        void RouteTo(CargoPoint target,CargoPoint? entrance)
+        {
+            var points=RoutePoints(motion.Position,target,entrance);points.RemoveAt(points.Count-1);
+            motion.RetargetVia(target,points);
+        }
+        // Use the same vertical/entrance corridor as navigation. Bound each
+        // estimate edge like motion does, including slow final approaches.
+        static List<CargoPoint> BudgetEdges(CargoPoint from,IEnumerable<CargoPoint> route)
+        {
+            var edges=new List<CargoPoint>();
+            foreach(var to in route)
+            {
+                int count=Math.Max(1,(int)Math.Ceiling(from.Distance(to)/16));
+                for(int i=1;i<=count;i++){double t=(double)i/count;edges.Add(new CargoPoint(from.X+(to.X-from.X)*t,from.Y+(to.Y-from.Y)*t,from.Z+(to.Z-from.Z)*t));}
+                from=to;
+            }
+            return edges;
+        }
+        public static double EstimateSortieSeconds(CargoPoint home,CargoPoint? pickup,CargoPoint target,CargoPoint? entrance)
+        {
+            var outbound=new List<CargoPoint>();long units=0;var start=home;
+            if(pickup.HasValue)
+            {
+                var leg=BudgetEdges(home,RoutePoints(home,pickup.Value,null));outbound.AddRange(leg);
+                units+=new CargoReturnTrail(pickup.Value).EstimateRemaining(home,leg,6,2);start=pickup.Value;
+            }
+            var delivery=BudgetEdges(start,RoutePoints(start,target,entrance));outbound.AddRange(delivery);
+            units+=new CargoReturnTrail(target).EstimateRemaining(start,delivery,6,2);
+            // Return follows the recorded outbound corridor, not a straight line.
+            units+=new CargoReturnTrail(home).EstimateRemaining(home,outbound,6,2);
+            // Handling + ordinary detours; indoor allowance is additional and
+            // grows with entrance-to-box distance. The 30% reserve is separate.
+            double indoor=entrance.HasValue?Math.Max(60,entrance.Value.Distance(target)):0;
+            return units/1000.0+36+indoor;
         }
         void RouteDelivery(){RouteTo(destination,deliveryEntrance);}
         public void SetDeliveryEntrance(CargoPoint? entrance)

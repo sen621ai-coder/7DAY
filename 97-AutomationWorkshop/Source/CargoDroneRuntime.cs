@@ -143,7 +143,7 @@ namespace YFAutomation.CargoDrones
                 if(hub.Flight==Guid.Empty){hubs.Add(hub);continue;}
                 var saved=recoveryState.Missions.Single(m=>m.Id==hub.Flight);
                 var state=CargoMission.Reconcile(saved,journal,runtime.OpenAirspace(hub.Flight),hub.Removed);missions.Add(state);
-                hubs.Add(new CargoHubState(hub.Configuration,hub.Flight,hub.ShipmentSource,hub.ShipmentTarget,state.Battery,hub.SourceCursor,hub.Removed));
+                hubs.Add(new CargoHubState(hub.Configuration,hub.Flight,hub.ShipmentSource,hub.ShipmentTarget,state.Battery,hub.SourceCursor,hub.Removed,hub.ShipmentEntrance));
             }
             var restored=new CargoWorldState(missions,hubs);
             checkpoints.SaveWorld(restored,journal);runtime.Restore(restored);

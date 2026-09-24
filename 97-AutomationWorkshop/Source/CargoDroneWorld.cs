@@ -294,13 +294,16 @@ namespace YFAutomation.CargoDrones
             var targetInventory=endpoint.Snapshot();if(targetInventory.Busy)return false;
             long battery=h.Mission==null?h.Battery:h.Mission.Battery;
             var home=adapter.Home(h.Config);
+            if(h.Mission!=null&&h.Mission.ReturnReason==CargoMissionReturnReason.EnergyLow&&battery<600000)
+            {h.Message="低电量返航：充满后重试";return false;}
             if(carrying)
             {
-                if(CargoPlanner.Unload(targetInventory,h.Mission.Cargo,h.Config.Owner).Moved==0||!rules.CanDepart(battery,2*home.Distance(targetPoint)/rules.CruiseSpeed+10))return false;
+                if(CargoPlanner.Unload(targetInventory,h.Mission.Cargo,h.Config.Owner).Moved==0)return false;
+                if(!DepartureEnergy(h,battery,CargoMission.EstimateSortieSeconds(home,null,targetPoint,EntrancePoint(h.ShipmentEntrance))))return false;
                 h.Mission=h.Mission.RetryDelivery(adapter.OpenAirspace(h.Mission.Id));h.Message="优先重送旧货";return true;
             }
             var sources=h.Config.Sources;
-            bool sourceUnavailable=false,sourceHasCargo=false;
+            bool sourceUnavailable=false,sourceHasCargo=false,energyDenied=false;
             for(int i=0;i<sources.Length;i++)
             {
                 int index=(h.Cursor+i)%sources.Length;var source=sources[index];CargoPoint pickup;
@@ -311,8 +314,7 @@ namespace YFAutomation.CargoDrones
                 if(CargoPlanner.Unload(targetInventory,plan.CargoAfter,h.Config.Owner).Moved==0)continue;
                 // Include the recorded-corridor return, handling and approach
                 // overhead. In-flight energy checks also budget actual detours.
-                double distance=home.Distance(pickup)+pickup.Distance(targetPoint);
-                if(!rules.CanDepart(battery,2*distance/rules.CruiseSpeed+16))continue;
+                if(!DepartureEnergy(h,battery,CargoMission.EstimateSortieSeconds(home,pickup,targetPoint,EntrancePoint(h.Config.Entrance)))){energyDenied=true;continue;}
                 Guid flight=Guid.NewGuid();if(!reservations.TryReserve(source.EndpointId,flight,activeTime,home.Distance(pickup)/2))continue;
                 if(h.Mission!=null)adapter.ReleaseAirspace(h.Mission.Id);
                 h.ShipmentEntrance=h.Config.Entrance;
@@ -320,7 +322,14 @@ namespace YFAutomation.CargoDrones
                 h.Source=source;h.Target=target;h.Cursor=(index+1)%sources.Length;h.Message="飞往采集设备";return true;
             }
             allSourcesEmpty=!sourceHasCargo&&!sourceUnavailable;
-            h.Message=allSourcesEmpty?"等待矿机产出（每5秒检查）":"等待物资、容量或充电";return false;
+            if(!energyDenied)h.Message=allSourcesEmpty?"等待矿机产出（每5秒检查）":"等待物资、容量或充电";return false;
+        }
+        bool DepartureEnergy(Hub h,long battery,double seconds)
+        {
+            if(rules.CanDepart(battery,seconds))return true;
+            double required=seconds*1000+180000;
+            h.Message=required>600000?"航程预算超出满电能力，请缩短航线":"等待充电：航程预算需至少 "+Math.Ceiling(required/6000)+"%（含入口绕行和返航余量）";
+            return false;
         }
     }
 }

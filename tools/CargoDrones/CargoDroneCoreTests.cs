@@ -95,6 +95,12 @@ public static class CargoDroneCoreTests
         Check(!rules.CanCollect(new CargoPosition(int.MinValue,0,0),new CargoPosition(int.MaxValue,0,0)),"coordinates do not overflow");
         Check(rules.CanDepart(600000,420)&&!rules.CanDepart(600000,420.001),"30 percent reserve");
         Check(!rules.CanDepart(600000,double.NaN),"NaN denied");Throws(()=>new CargoRules(speed:double.PositiveInfinity),"infinite speed denied");
+        var budgetHome=new CargoPoint(-1630.5,70.25,-1081.5);var budgetBox=new CargoPoint(-1611.5,58.2,-1140.5);var budgetEntrance=new CargoPoint(-1626.5,58.2,-1145.5);
+        double deliveryBudget=CargoMission.EstimateSortieSeconds(budgetHome,null,budgetBox,budgetEntrance);
+        Check(!rules.CanDepart(211150,deliveryBudget)&&rules.CanDepart(600000,deliveryBudget),"reported 35 percent entrance loop denied while full charge admits sortie");
+        Check(deliveryBudget>CargoMission.EstimateSortieSeconds(budgetHome,null,budgetBox,null)+60,"entrance descent and indoor margin both budgeted");
+        Check(CargoMission.EstimateSortieSeconds(budgetHome,new CargoPoint(-1625.5,71,-1062.5),budgetBox,budgetEntrance)>deliveryBudget,"pickup climb and recorded return add energy");
+        Check(!rules.CanDepart(600000,CargoMission.EstimateSortieSeconds(budgetHome,null,budgetBox,new CargoPoint(-2000,30,-1400))),"unaffordable entrance corridor denied even with full charge");
         foreach(var name in new[]{"AutoMinerIron","AutoMinerLead","AutoMinerCoal","AutoMinerNitrate","AutoMinerClay","AutoMinerShale","AutoMinerBrass","yfAutoForestry"})Check(CargoRules.IsSource(name),"source "+name);
         Check(!CargoRules.IsSource("cntChickenCoop")&&!CargoRules.IsSource("cntApiary"),"independent source whitelist");
         var native=new[]{Item(1,6),Item(2,6)};var source=Inventory(native);var empty=Empty();var load=CargoPlanner.Load(source,empty,"owner",6);

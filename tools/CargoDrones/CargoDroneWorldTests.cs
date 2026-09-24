@@ -260,6 +260,37 @@ public static class CargoDroneWorldTests
             for(int i=0;i<300&&(service.Status()[0].Packages>0||service.Status()[0].Phase!=CargoPhase.Docked);i++)service.Tick(100);
             Check(CargoPlanner.Count(adapter.Endpoints[original.EndpointId].Value.Items)==4&&CargoPlanner.Count(adapter.Endpoints[next.EndpointId].Value.Items)==0&&service.Status()[0].Packages==0,"resuming after recall and clear delivers old cargo exactly once to its original box");
         }
+        // Host-log geometry: low initial charge used to turn around above the
+        // entrance repeatedly. Admission must wait, then complete the shipment.
+        world=Guid.NewGuid();adapter=new Adapter();root=Path.Combine(root,"entrance-energy");Directory.CreateDirectory(root);
+        config=new CargoHubConfiguration(world,Guid.NewGuid(),new CargoPosition(-1630,70,-1081),"owner");
+        config=config.AddSource("owner",config.Revision,adapter.Bind(world,"owner",new CargoPosition(-1626,71,-1063),true,6),new CargoRules());
+        config=config.SetTarget("owner",config.Revision,adapter.Bind(world,"owner",new CargoPosition(-1612,58,-1141),false),new CargoRules());
+        config=config.SetEntrance("owner",config.Revision,new CargoPosition(-1627,56,-1146),new CargoRules());
+        using(var journal=new CargoFileJournal(Path.Combine(root,"world.wal"),world))using(var store=new CargoCheckpointStore(Path.Combine(root,"checkpoint"),world))
+        {
+            var service=new CargoWorldService(world,journal,store,adapter);
+            service.Restore(new CargoWorldState(new CargoMissionState[0],new[]{new CargoHubState(config,Guid.Empty,null,null,211150,0,false)}));
+            service.Tick(100);Check(service.ActiveFlights==0,"35 percent charge cannot launch the basement pickup sortie");
+            for(int i=0;i<600&&service.ActiveFlights==0;i++)service.Tick(100);
+            Check(service.ActiveFlights==1&&service.Status()[0].Battery>300000,"waits for complete 3D sortie budget before launch");
+            for(int i=0;i<4000&&(service.Status()[0].Phase!=CargoPhase.Docked||service.Status()[0].Packages>0);i++)service.Tick(100);
+            Check(service.Status()[0].Phase==CargoPhase.Docked&&CargoPlanner.Count(adapter.Endpoints[config.Target.EndpointId].Value.Items)==6,"charged basement sortie delivers all six goods and returns");
+            service.Checkpoint();var saved=store.LoadWorld(journal);var m=saved.Missions.Single();
+            Check(m.ReturnReason!=CargoMissionReturnReason.EnergyLow&&m.Battery>=180000,"sortie completes without energy recall and preserves reserve");
+            var recalled=new CargoMissionState(m.World,m.Id,m.Source,m.Target,m.Owner,m.Destination,m.Reserve,m.Phase,m.Hold,m.Recall,m.Handling,m.BusyWait,m.BusyObserved,CargoMissionReturnReason.EnergyLow,211150,m.Revision,m.Cargo,m.Motion);
+            var hub=saved.Hubs.Single();
+            var sourceEndpoint=adapter.Endpoints[config.Sources[0].EndpointId];var sourceValue=sourceEndpoint.Value;
+            sourceEndpoint.Value=new CargoInventory(sourceValue.Id,sourceValue.Incarnation,sourceValue.Revision+1,sourceValue.Owner,new[]{new CargoItem(new byte[]{1,2,3},6,6000)},new bool[1],new[]{true});
+            service=new CargoWorldService(world,journal,store,adapter);
+            service.Restore(new CargoWorldState(new[]{recalled},new[]{new CargoHubState(config,hub.Flight,hub.ShipmentSource,hub.ShipmentTarget,211150,hub.SourceCursor,false,hub.ShipmentEntrance)}));
+            for(int i=0;i<200;i++)service.Tick(100);
+            Check(service.ActiveFlights==0&&service.Status()[0].Message.Contains("充满"),"persisted energy recall raises retry gate even above normal departure budget");
+            service.Checkpoint();service=new CargoWorldService(world,journal,store,adapter);service.Restore(store.LoadWorld(journal));
+            service.Tick(100);Check(service.ActiveFlights==0,"restart retains full-charge retry requirement");
+            for(int i=0;i<250&&service.ActiveFlights==0;i++)service.Tick(100);
+            Check(service.ActiveFlights==1&&service.Status()[0].Battery==600000,"energy-recalled mission retries only at full charge with goods available");
+        }
         return checks;
     }
 }
