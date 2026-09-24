@@ -115,6 +115,9 @@ public static class SpawnNativeTests {
   }
   Bind(Target(aec,"TrySpawnFollowerNearLeader"),"FollowerPrefix");Bind(Target(aec,"TrySpawnFollowerNearLeader"),"FollowerPostfix");
   Bind(direct,"DirectPostfix");Bind(Target(aec,"IsNearAnyLandClaim"),"ClaimPostfix");
+  var directPostfix=Read(AccessTools.Method(typeof(Hooks),"DirectPostfix"),Generator());
+  Check(directPostfix.Any(c=>Calls(c,"Remember")),"successful AEC direct registration records its validated site");
+  Check(AccessTools.Method(typeof(Hooks),"AllowedCachedPoint")!=null,"cached site protection gate exists");
   Check(AccessTools.PropertyGetter(AccessTools.TypeByName(aec),"ClaimBlockExclusionRadius")!=null,"claim radius diagnostic getter exists");
   Factory(Target("AIDirectorBloodMoonParty","SpawnZombie"),"BloodPrefix");
   Factory(Target("GameEvent.SequenceActions.ActionBaseSpawn","SpawnEntity"),"EventPrefix");

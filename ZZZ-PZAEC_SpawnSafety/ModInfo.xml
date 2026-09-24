@@ -2,8 +2,8 @@
 <xml>
   <Name value="PZAEC_SpawnSafety" />
   <DisplayName value="AEC 地基下刷怪防护" />
-  <Version value="1.2.0" />
-  <Description value="在随从、血月和自定义事件/召唤入世前校验落点；独立额外怪落点失败后可限量延后重试，并记录刷怪失败原因。" />
+  <Version value="1.2.1" />
+  <Description value="入世前校验刷怪落点；独立额外怪延后重试耗尽后可复用已成功且重新校验通过的落点。" />
   <Author value="PZAEC" />
 </xml>
 

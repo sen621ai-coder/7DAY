@@ -13,7 +13,7 @@ namespace PZAEC.SpawnSafety
         public sealed class ScopeState {public Request Previous;}
         public sealed class DirectState {public Request Previous,Active;}
         [ThreadStatic] static Request activeDirect;
-        public static MethodInfo FollowerPosition,NearTrader,BloodPosition,EventPosition,ClaimRadius;
+        public static MethodInfo FollowerPosition,NearTrader,NearClaim,BloodPosition,EventPosition,ClaimRadius;
         static World World {get{return GameManager.Instance==null?null:GameManager.Instance.World;}}
         static readonly System.Random Random=new System.Random();
         static Vector3 Offset(Vector3 p,float range)
@@ -27,6 +27,12 @@ namespace PZAEC.SpawnSafety
         }
         static bool OutsideTrader(Vector3 p){return !(bool)NearTrader.Invoke(null,new object[]{p,80f});}
         public static bool OutsideTraderForRetry(Vector3 p){return OutsideTrader(p);}
+        public static bool AllowedCachedPoint(Vector3 p)
+        {
+            if(NearClaim==null)return false;
+            try{return OutsideTrader(p)&&!(bool)NearClaim.Invoke(null,new object[]{p});}
+            catch(Exception ex){Log.Error("[SpawnSafety] cached-site protection check failed: "+ex);return false;}
+        }
         public static Exception Restore(Exception __exception,ScopeState __state)
         {if(__state!=null)Safety.Current=__state.Previous;return __exception;}
         public static void FollowerPrefix(Vector3 __1,int __2,out ScopeState __state)
@@ -68,7 +74,14 @@ namespace PZAEC.SpawnSafety
         }
         public static void DirectPostfix(int __0,Vector3 __1,ref string __2,bool __result,DirectState __state)
         {
-            if(__state==null||__result)return;
+            if(__state==null)return;
+            if(__result)
+            {
+                var accepted=Safety.Current;
+                if(accepted!=null&&!accepted.Bypass&&accepted.Surface&&accepted.LastAccepted.HasValue)
+                    Deferred.Remember(__0,accepted.LastAccepted.Value);
+                return;
+            }
             if(__2=="spawn-safety-no-valid-site")
             {
                 var request=Safety.Current;
@@ -228,6 +241,7 @@ namespace PZAEC.SpawnSafety
                 if(Hooks.FollowerPosition==null||Hooks.NearTrader==null)throw new MissingMethodException("AEC selector");
                 Deferred.Configure(aec);
                 var claim=AccessTools.Method(aec,"IsNearAnyLandClaim");
+                Hooks.NearClaim=claim;
                 if(claim!=null)
                 {h.Patch(claim,postfix:Method(nameof(Hooks.ClaimPostfix)));Log.Out("[SpawnSafety] hook ready: AEC land claim exclusion diagnostics");}
                 Patch(h,AccessTools.Method(aec,"TrySpawnFollowerNearLeader"),nameof(Hooks.FollowerPrefix));
@@ -257,7 +271,7 @@ namespace PZAEC.SpawnSafety
                 var cmd=AccessTools.Method(console,"CmdSpawn");if(cmd!=null)Patch(h,cmd,nameof(Hooks.ConsolePrefix));
                 ModEvents.GameUpdate.RegisterHandler(Diagnostics.Update);
                 ModEvents.GameUpdate.RegisterHandler(Deferred.Update);
-                Log.Out("[SpawnSafety] 1.2.0 loaded: bounded perimeter recovery, diagnostics and deferred independent-spawn retries.");
+                Log.Out("[SpawnSafety] 1.2.1 loaded: deferred retries with revalidated previously successful sites.");
             }
             catch(Exception ex)
             {h.UnpatchSelf();Log.Error("[SpawnSafety] NOT ACTIVE: hooks incompatible; rolled back all safety hooks. "+ex);}
