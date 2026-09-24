@@ -25767,6 +25767,138 @@
 		</effect_group>
 	</item>
 
+		<item name="meleeToolRepairT5NailgunLegend"> <!-- NA -->
+		<property name="Tags" value="tool,nailgun,sideAttachments,repairTool,attStrength,perkMiner69r,canHaveCosmetic,noMods,repairingSkill"/>
+		<property name="DisplayType" value="rangedRepairTool"/>
+		<property name="HoldType" value="37"/>
+		<property name="Meshfile" value="@:Other/Items/Tools/nailgunPrefab.prefab"/>
+		<property name="Material" value="MMotorToolParts"/>
+		<property name="TintColor" value="255,184,0"/>
+		<property name="Weight" value="1"/>
+		<property name="ScrapTimeOverride" value="15.0"/>
+		<property name="RepairTools" value="resourceRepairKitLeg"/>
+		<property name="DegradationBreaksAfter" value="false"/>
+		<property name="SoundJammed" value="weapon_jam"/>
+		<property name="CrosshairUpAfterShot" value="true"/>
+		<property name="Stacknumber" value="1"/>
+		<property name="UnlockedBy" value="MasterBuilder"/>
+		<property name="ShowQuality" value="true"/>
+		<property name="Group" value="Tools/Traps"/>
+		<property name="RepairExpMultiplier" value="10.8"/>
+		<property name="EconomicValue" value="60000"/>
+		<property name="SoundUnholster" value="weapon_unholster"/>
+		<property name="SoundHolster" value="weapon_holster"/>
+		<property name="SoundPickup" value="nailgun_grab"/>
+		<property name="SoundPlace" value="nailgun_place"/>
+		<property name="CustomIcon" value="meleeToolRepairT3Nailgun"/>
+		<property name="CustomIconTint" value="FFB800"/>
+		<property name="ItemTypeIcon" value="block_upgrade"/>
+
+		<property class="Action0">
+			<property name="Class" value="Launcher"/>
+			<property name="Hitmask_override" value="Arrow"/>
+			<property name="Delay" value=".3"/> <!-- obsolete if rounds per minute exists -->
+			<property name="Magazine_items" value="resourceNail,resourcePoisonedNail"/>
+			<property name="Instantiate_on_load" value="false"/>
+			<property name="Reload_time" value="2"/>
+			<property name="Sound_start" value="nailgun_fire"/>
+			<property name="Particles_muzzle_fire" value="nailgunfire"/>
+		<!-- <property name="Particles_muzzle_smoke" value="nozzlesmoke"/> -->
+			<property name="Sound_repeat" value=""/>
+			<property name="Sound_end" value=""/>
+			<property name="Sound_empty" value="dryfire"/>
+			<property name="Sound_reload" value="nailgun_reload"/>
+			<property name="AutoReload" value="false"/>
+		</property>
+		<property class="Action1"> <!-- UseAction -->
+			<property name="Class" value="Repair"/>
+			<property name="Delay" value=".20"/> <!-- Repair actions still need the delay amount -->
+			<property name="Repair_amount" value="4000"/>
+			<property name="Upgrade_hit_offset" value="-5"/>
+			<property name="Repair_action_sound" value="nailgun_fire"/>
+			<property name="Upgrade_action_sound" value="nailgun_fire"/>
+			<property name="Allowed_upgrade_items" value="resourceWood,resourceClayLump,resourceSnowBall,resourceScrapIron,resourceForgedIron,resourceForgedSteel,resourceConcreteMix,resourceCobblestones,ironDoorBlockVariantHelper,ironDoorDoubleBlockVariantHelper,vaultDoor01,vaultDoor01Double,ironHatchBlockVariantHelper,vaultHatch01,cellarDoorDoubleIron,cellarDoorDoubleSteel,shuttersIronBlockVariantHelper,shuttersSteelBlockVariantHelper,resourceYuccaFibers,resourceCloth,resourceScrapPolymers,resourceNail,glassBulletproofBlockVariantHelper,resourceDurablAlloys"/>
+			<!--<property name="Restricted_upgrade_items" value="concrete"/>-->
+		</property>
+
+			<stats>
+			<!-- Base_Random_Roll -->
+			<stat name="EntityDamage" value="0,0,1,0,.1"/>
+			<stat name="RoundsPerMinute" value="0,0,1,0,.02"/>
+			<stat name="DamageFalloffRange" value="0,0,1,0,.1"/>
+			<stat name="DegradationMax" value="0,0,1,0,.1"/>
+			<!-- Q1_Boosted_Rolls -->
+			<stat name="EntityDamage" value="1,0,.3,.1,.5"/>
+			<stat name="RoundsPerMinute" value="1,0,.3,.02,.1"/>
+			<stat name="DamageFalloffRange" value="1,0,.3,.1,.5"/>
+			<stat name="DegradationMax" value="1,0,.3,.1,.5"/>
+			<!-- Q2_Boosted_Rolls -->
+			<stat name="EntityDamage" value="2,10,.3,.1,.5"/>
+			<stat name="RoundsPerMinute" value="2,10,.3,.02,.1"/>
+			<stat name="DamageFalloffRange" value="2,10,.3,.1,.5"/>
+			<stat name="DegradationMax" value="2,10,.3,.1,.5"/>
+			<!-- Q3_Boosted_Rolls -->
+			<stat name="EntityDamage" value="3,11,.3,.1,.5"/>
+			<stat name="RoundsPerMinute" value="3,11,.3,.02,.1"/>
+			<stat name="DamageFalloffRange" value="3,11,.3,.1,.5"/>
+			<stat name="DegradationMax" value="3,11,.3,.1,.5"/>
+			<!-- Q4_Boosted_Rolls -->
+			<stat name="EntityDamage" value="4,12,.3,.1,.5"/>
+			<stat name="RoundsPerMinute" value="4,12,.3,.02,.1"/>
+			<stat name="DamageFalloffRange" value="4,12,.3,.1,.5"/>
+			<stat name="DegradationMax" value="4,12,.3,.1,.5"/>
+			<!-- Q5_Boosted_Rolls -->
+			<stat name="EntityDamage" value="5,14,.3,.1,.5"/>
+			<stat name="RoundsPerMinute" value="5,14,.3,.02,.1"/>
+			<stat name="DamageFalloffRange" value="5,14,.3,.1,.5"/>
+			<stat name="DegradationMax" value="5,14,.3,.1,.5"/>
+			<!-- Q6_Boosted_Rolls -->
+			<stat name="EntityDamage" value="6,16,.3,.1,.5"/>
+			<stat name="RoundsPerMinute" value="6,16,.3,.02,.1"/>
+			<stat name="DamageFalloffRange" value="6,16,.3,.1,.5"/>
+			<stat name="DegradationMax" value="6,16,.3,.1,.5"/>
+			<!-- Q6_Boosted_Rolls -->
+			<stat name="EntityDamage" value="6,20,.3,.5,.7"/>
+			<stat name="RoundsPerMinute" value="6,20,.3,.1,.3"/>
+			<stat name="DamageFalloffRange" value="6,20,.3,.5,.7"/>
+			<stat name="DegradationMax" value="6,20,.3,.5,.7"/>
+		</stats>
+		<effect_group name="meleeToolRepairT5NailgunLegend"> <!-- meleeToolRepairT5NailgunLegend -->
+			<passive_effect name="DamageFalloffRange" operation="base_set" value="3" tags="perkMiner69r"/>
+			<passive_effect name="MaxRange" operation="base_set" value="10" tags="perkMiner69r"/>
+			<passive_effect name="DegradationMax" operation="base_set" value="2500,5000" tier="1,6" tags="perkMiner69r"/>
+			<!-- <passive_effect name="DegradationMax" operation="perc_add" value="-.08,.08" tier="1,6" tags="perkMiner69r"/> --> <!-- random DegMax -->
+			<passive_effect name="DegradationPerUse" operation="base_set" value=".5" tags="perkMiner69r"/>
+			<passive_effect name="SpreadDegreesVertical" operation="base_set" value="1.3"/>
+			<passive_effect name="SpreadDegreesHorizontal" operation="base_set" value="1.3"/>
+			<passive_effect name="SpreadMultiplierAiming" operation="base_set" value=".4"/>
+			<passive_effect name="SpreadMultiplierCrouching" operation="base_set" value=".8"/>
+			<passive_effect name="SpreadMultiplierWalking" operation="base_set" value="1.5"/>
+			<passive_effect name="SpreadMultiplierRunning" operation="base_set" value="2.2"/>
+			<display_value name="dBlockRepairAmount" value="4000"/>
+			<display_value name="dPlayerExpGainRepairToolRange" value=".1,.2,.3,.4,.5,1" tier="1,2,3,4,5,6"/>
+			<passive_effect name="PlayerExpGain" operation="perc_add" value=".1,.2,.3,.4,.5,1" tier="1,2,3,4,5,6" tags="Upgrading">
+				<requirement name="HoldingItemHasTags" tags="repairTool"/>
+			</passive_effect>
+
+			<passive_effect name="IncrementalSpreadMultiplier" operation="base_set" value="2" tags="perkMiner69r"/>
+			<passive_effect name="WeaponHandling" operation="base_set" value=".7" tags="perkMiner69r"/> <!-- crosshair reset speed -->
+			<passive_effect name="RoundsPerMinute" operation="base_set" value="300" tags="perkMiner69r"/>
+			<passive_effect name="RoundsPerMinute" operation="perc_add" value="0,.02" tags="perkMiner69r"/>
+			<passive_effect name="RoundsPerMinute" operation="perc_add" value=".02,.1" tier="2,6" tags="perkMiner69r"/>
+			<passive_effect name="BurstRoundCount" operation="base_set" value="1" tags="perkMiner69r"/> <!-- for the Launcher class this instantly fires BurstRoundCount projectiles on pulling the trigger -->
+			<passive_effect name="MagazineSize" operation="base_set" value="100"/>
+			<!-- <passive_effect name="ReloadSpeedMultiplier" operation="base_set" value="1" tags="perkMiner69r"/> does not work at all on the nailgun -->
+
+			<passive_effect name="KickDegreesVerticalMin" operation="base_set" value="-.7" tags="perkMiner69r"/>
+			<passive_effect name="KickDegreesVerticalMax" operation="base_set" value=".7" tags="perkMiner69r"/>
+			<passive_effect name="KickDegreesHorizontalMin" operation="base_set" value="-.6" tags="perkMiner69r"/>
+			<passive_effect name="KickDegreesHorizontalMax" operation="base_set" value=".6" tags="perkMiner69r"/>
+
+			<passive_effect name="ModSlots" operation="base_set" value="0"/>
+		</effect_group>
+	</item>
+
 		<!-- *** xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
 		<!-- MASTER MAGAZINES -->
 		<!-- *** xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
