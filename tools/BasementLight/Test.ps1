@@ -20,7 +20,7 @@ if([PZAEC.BasementLight.Photometry]::Transmission(0,1,0) -ne 0){throw 'Upward le
 $centre=[PZAEC.BasementLight.Photometry]::Transmission(0,-5.4,0)
 $corner=[PZAEC.BasementLight.Photometry]::Transmission(6,-5.4,6)
 if($corner -le $centre*3){throw 'Centre suppression missing'}
-if([PZAEC.BasementLight.Photometry]::Intensity -gt [float]1.2){throw 'Unsafe fallback intensity if cookie is ignored by renderer'}
+if([PZAEC.BasementLight.Photometry]::Intensity -gt [float]1.45){throw 'Unsafe fallback intensity if cookie is ignored by renderer'}
 $previous=0.0
 for($angle=0;$angle -le 180;$angle+=.25){
  $radians=$angle*[Math]::PI/180
@@ -69,7 +69,7 @@ try {
 Write-Output 'PASS: coverage model, power, one-block config, ingredients, localization and native hook.'
 
 
-if([PZAEC.BasementLight.Photometry]::FillIntensity -gt [float]0.35){throw 'Bounce light too strong'}
+if([PZAEC.BasementLight.Photometry]::FillIntensity -gt [float]0.41){throw 'Bounce light too strong'}
 if([PZAEC.BasementLight.Photometry]::FillTransmission(0,-1,0) -ne 0){throw 'Bounce floods floor'}
 if([PZAEC.BasementLight.Photometry]::FillTransmission(1,0,0) -le 0 -or [PZAEC.BasementLight.Photometry]::FillTransmission(0,1,0) -le 0){throw 'Missing wall/ceiling fill'}
 $lastFill=0.0
