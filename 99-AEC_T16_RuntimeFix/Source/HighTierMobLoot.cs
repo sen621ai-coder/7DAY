@@ -18,6 +18,23 @@ namespace AECT16RuntimeFix
         private static readonly Regex bossLootPattern = new Regex(
             @"^(?:PZAECBossLootBundle|AEC.*(?:BossLoot|Loot)|DoomlordBossLoot|RunningKamikazeBossLoot)T(16|17|18|19)$",
             RegexOptions.CultureInvariant);
+        private static readonly Regex bossBundlePattern = new Regex(
+            @"^PZAECBossLootBundleT(?:16|17|18|19)$", RegexOptions.CultureInvariant);
+        private static readonly Regex vanillaArmorPattern = new Regex(
+            @"^armor(?:Lumberjack|Preacher|Rogue|Athletic|Enforcer|Farmer|Biker|Scavenger|Ranger|Commando|Assassin|Miner|Nomad|Nerd|Raider)(?:Helmet|Outfit|Gloves|Boots)$",
+            RegexOptions.CultureInvariant);
+        private static readonly HashSet<string> vanillaTieredTools = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "meleeToolRepairT0StoneAxe", "meleeToolShovelT0StoneShovel",
+            "meleeToolPickT1IronPickaxe", "meleeToolShovelT1IronShovel",
+            "meleeToolAxeT1IronFireaxe", "meleeWpnSledgeT1IronSledgehammer",
+            "meleeToolRepairT1ClawHammer", "meleeToolSalvageT1Wrench",
+            "meleeToolShovelT2SteelShovel", "meleeToolPickT2SteelPickaxe",
+            "meleeToolAxeT2SteelAxe", "meleeWpnSledgeT3SteelSledgehammer",
+            "meleeToolSalvageT2Ratchet", "meleeToolAxeT3Chainsaw",
+            "meleeToolPickT3Auger", "meleeToolRepairT3Nailgun",
+            "meleeToolSalvageT3ImpactDriver"
+        };
 
         public static void Install(Harmony harmony)
         {
@@ -29,11 +46,12 @@ namespace AECT16RuntimeFix
                 harmony.Patch(item, transpiler: new HarmonyMethod(typeof(HighTierMobLoot), nameof(ItemFactoryTranspiler)));
                 harmony.Patch(spawn,
                     prefix: new HarmonyMethod(typeof(HighTierMobLoot), nameof(SpawnPrefix)),
+                    postfix: new HarmonyMethod(typeof(HighTierMobLoot), nameof(SpawnPostfix)),
                     finalizer: new HarmonyMethod(typeof(HighTierMobLoot), nameof(SpawnFinalizer)));
                 harmony.Patch(AccessTools.Method(typeof(LootContainer), "GetRewardItem"),
                     prefix: new HarmonyMethod(typeof(HighTierMobLoot), nameof(RewardPrefix)),
                     finalizer: new HarmonyMethod(typeof(HighTierMobLoot), nameof(SpawnFinalizer)));
-                T16RuntimeFixMod.SafeLog("[AEC-Mob-Loot] T16-T19 mob and boss bags: ordinary quality 5-6; advanced quality 2/3/4/5; tiered supplies enabled.");
+                T16RuntimeFixMod.SafeLog("[AEC-Mob-Loot] T16-T19 mob and boss bags: ordinary quality 5-6; advanced quality 2/3/4/5; boss reward bundles filter vanilla armor and tiered tools after rolling.");
             }
             catch (Exception ex)
             {
@@ -61,6 +79,30 @@ namespace AECT16RuntimeFix
         public static void SpawnPrefix(LootContainer __instance, out int __state)
         {
             __state = EnterScope(__instance == null ? null : __instance.Name);
+        }
+        public static bool ShouldFilterBossBundleItem(string containerName, string itemName)
+        {
+            return !string.IsNullOrEmpty(containerName) && bossBundlePattern.IsMatch(containerName) &&
+                !string.IsNullOrEmpty(itemName) &&
+                (vanillaArmorPattern.IsMatch(itemName) || vanillaTieredTools.Contains(itemName));
+        }
+        public static int FilterBossBundleItems(string containerName, List<ItemStack> spawnedItems)
+        {
+            if (spawnedItems == null || !bossBundlePattern.IsMatch(containerName ?? string.Empty)) return 0;
+            int removed = 0;
+            // Filter only after every native roll. Do not reroll or change any shared loot group.
+            for (int i = spawnedItems.Count - 1; i >= 0; i--)
+            {
+                var itemClass = spawnedItems[i]?.itemValue?.ItemClass;
+                if (itemClass == null || !ShouldFilterBossBundleItem(containerName, itemClass.GetItemName())) continue;
+                spawnedItems.RemoveAt(i);
+                removed++;
+            }
+            return removed;
+        }
+        public static void SpawnPostfix(LootContainer __instance, List<ItemStack> __result)
+        {
+            if (__instance != null) FilterBossBundleItems(__instance.Name, __result);
         }
         public static void SpawnFinalizer(int __state) { ExitScope(__state); }
         public static void RewardPrefix(out int __state) { __state = EnterScope(null); }

@@ -87,6 +87,44 @@ public static class MobLootRegression
         finally { ItemClass.list=saved; qualityItems.Clear(); }
         return "PASS: actual factory IL executed with Unity constructor stub: real item-marker lookup, scope, quality arguments, materials/invalid IDs and native mod arguments verified.";
     }
+    public static void CheckBossBundleFilter()
+    {
+        var names = new[] {
+            "armorAthleticHelmet", "armorParts", "meleeWpnSledgeT1IronSledgehammer",
+            "meleeToolPickT3AugerRareMason", "meleeWpnSledgeT3SteelSledgehammer",
+            "meleeToolAxeT3ChainsawParts", "armorPZAECHarrierHelmetT16"
+        };
+        var saved = ItemClass.list;
+        try
+        {
+            var classes = new ItemClass[names.Length + 1];
+            var rolled = new List<ItemStack>();
+            for (int i = 0; i < names.Length; i++)
+            {
+                classes[i + 1] = (ItemClass)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(ItemClass));
+                classes[i + 1].pName = names[i];
+                classes[i + 1].pId = i + 1;
+                var value = (ItemValue)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(ItemValue));
+                value.type = i + 1;
+                var stack = (ItemStack)System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(typeof(ItemStack));
+                stack.itemValue = value;
+                stack.count = i + 1;
+                rolled.Add(stack);
+            }
+            ItemClass.list = classes;
+            var ordinary = new List<ItemStack>(rolled);
+            Check(HighTierMobLoot.FilterBossBundleItems("PZAECMobT16_zPackBoss", ordinary) == 0 && ordinary.SequenceEqual(rolled),
+                "Ordinary boss bag changed");
+            var rewards = new List<ItemStack>(rolled);
+            Check(HighTierMobLoot.FilterBossBundleItems("PZAECBossLootBundleT16", rewards) == 3,
+                "Wrong number of filtered reward items");
+            Check(rewards.SequenceEqual(new[] { rolled[1], rolled[3], rolled[5], rolled[6] }),
+                "Other reward items or their original order changed");
+            Check(HighTierMobLoot.FilterBossBundleItems("PZAECBossLootBundleT16", rewards) == 0,
+                "Filtering remaining items twice changed rewards");
+        }
+        finally { ItemClass.list = saved; }
+    }
     public static string Run()
     {
         int cases = 0;
@@ -131,6 +169,7 @@ public static class MobLootRegression
         catch (InvalidOperationException) { }
         finally { HighTierMobLoot.SpawnFinalizer(previous); }
         Check((int)scope.GetValue(null) == 0, "Finalizer did not restore after failure");
+        CheckBossBundleFilter();
         return "PASS: " + cases + " quality cases; 36 mob and 20 representative boss bag identities; unrelated loot, nested quest rewards, exception restoration and thread isolation.";
     }
     public static string CheckIL(List<CodeInstruction> original)
@@ -253,4 +292,20 @@ foreach ($entry in $projectLoot.SelectNodes("//lootgroup[@name='groupImp_Weapon'
 $localized = @(Import-Csv -LiteralPath (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/Localization.csv') | Where-Object { $_.Key.StartsWith('PZAECMobT') })
 Assert-MobLoot ($localized.Count -eq 36 -and @($localized | Group-Object Key | Where-Object Count -gt 1).Count -eq 0) 'Missing/duplicate bag names'
 foreach ($row in $localized) { Assert-MobLoot (-not [string]::IsNullOrWhiteSpace($row.schinese)) 'Missing Chinese bag name' }
-Write-Output "PASS: $mappedCount ordinary zombie mappings; 36 inherited bags; drop rates, mixed weights, original loot contents and special-item classification verified."
+$armorIds = @($baseLoot.SelectNodes("/lootcontainers/lootgroup[@name='groupAllArmor']/item[@name]") | ForEach-Object { $_.name })
+$toolIds = @(0..3 | ForEach-Object { $tier = $_; $baseLoot.SelectNodes("/lootcontainers/lootgroup[@name='groupToolsT$tier']/item[@name]") } | ForEach-Object { $_.name })
+Assert-MobLoot ($armorIds.Count -eq 60 -and $toolIds.Count -eq 17) 'Vanilla armor/tool pool changed; review boss filter'
+foreach ($tier in 16..19) {
+    $bundle = "PZAECBossLootBundleT$tier"
+    foreach ($id in $armorIds + $toolIds) {
+        Assert-MobLoot ([AECT16RuntimeFix.HighTierMobLoot]::ShouldFilterBossBundleItem($bundle, $id)) "Boss bundle retained $id"
+    }
+    foreach ($id in @('armorPZAECHarrierHelmetT16','armorPZAECWardenBootsT19','armorParts','resourceLegendaryParts','meleeToolAxeT3ChainsawParts','meleeToolPickT3AugerRareMason','meleeToolRepairT5NailgunLegend','gunRifleT5SniperRifleGaus')) {
+        Assert-MobLoot (-not [AECT16RuntimeFix.HighTierMobLoot]::ShouldFilterBossBundleItem($bundle, $id)) "Boss bundle incorrectly removed $id"
+    }
+}
+foreach ($name in @('PZAECMobT16_zPackBoss','AECArcherBossLootT16','PZAECBossLootBundleT15','PZAECBossLootBundleT20','groupZpackBoss03')) {
+    Assert-MobLoot (-not [AECT16RuntimeFix.HighTierMobLoot]::ShouldFilterBossBundleItem($name, 'armorAthleticHelmet')) "Unrelated loot filtered: $name"
+    Assert-MobLoot (-not [AECT16RuntimeFix.HighTierMobLoot]::ShouldFilterBossBundleItem($name, 'meleeWpnSledgeT3SteelSledgehammer')) "Unrelated loot filtered: $name"
+}
+Write-Output "PASS: $mappedCount ordinary zombie mappings; 36 inherited bags; original loot, quality, and all 77 boss-bundle exclusions verified."
