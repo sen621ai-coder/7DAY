@@ -1,0 +1,6 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese,tchinese
+PZAEC_SurveillanceCamera,blocks,Block,,,Base Surveillance Camera,基地监控摄像头,基地監控攝像頭
+PZAEC_SurveillanceCameraDesc,blocks,Block,,,"5W powered wireless camera. Adjust the view locally, then select it from a surveillance screen within 128 blocks.","5W无线监控摄像头。就地调整镜头后，在128格内的监控大屏上直接选择绑定；只需供电，不接视频线。","5W無線監控攝像頭。就地調整鏡頭後，在128格內的監控大屏上直接選擇綁定；只需供電，不接視頻線。"
+PZAEC_SurveillanceScreen4x3,blocks,Block,,,4x3 Base Surveillance Screen,4×3基地监控屏,4×3基地監控屏
+PZAEC_SurveillanceScreen4x3Desc,blocks,Block,,,"30W wall display occupying 4 by 3 blocks. Power it separately and choose up to four nearby wireless cameras from its configuration menu.","30W壁挂监控大屏，真实占用宽4格、高3格。单独供电后可在设置菜单中无线绑定最多4台基地周边摄像头。","30W壁掛監控大屏，真實佔用寬4格、高3格。單獨供電後可在設置菜單中無線綁定最多4台基地周邊攝像頭。"
+pzaecSurveillanceConfigure,blocks,Block,,,Configure surveillance,设置监控,設置監控

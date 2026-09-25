@@ -1,0 +1,14 @@
+<configs><append xpath="/recipes">
+  <recipe name="PZAEC_SurveillanceCamera" count="1" craft_area="workbench" craft_time="30">
+    <ingredient name="resourceForgedIron" count="8"/>
+    <ingredient name="resourceElectricParts" count="10"/>
+    <ingredient name="resourceMechanicalParts" count="4"/>
+    <ingredient name="resourceBrokenGlass" count="4"/>
+  </recipe>
+  <recipe name="PZAEC_SurveillanceScreen4x3" count="1" craft_area="workbench" craft_time="90">
+    <ingredient name="resourceForgedIron" count="30"/>
+    <ingredient name="resourceElectricParts" count="30"/>
+    <ingredient name="resourceScrapPolymers" count="40"/>
+    <ingredient name="resourceBrokenGlass" count="30"/>
+  </recipe>
+</append></configs>

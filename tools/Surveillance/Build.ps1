@@ -1,0 +1,31 @@
+#Requires -Version 7.0
+[CmdletBinding()]
+param([string]$OutputPath)
+$ErrorActionPreference='Stop'
+$root=Split-Path (Split-Path $PSScriptRoot)
+$project=Join-Path $root 'ZZZ-PZAEC_Surveillance/Source/PZAEC.Surveillance.csproj'
+$sdk=@(dotnet --list-sdks 2>$null)
+if($sdk.Count){
+  if($OutputPath){dotnet build $project -c Release -p:OutputPath=$OutputPath -p:AppendTargetFrameworkToOutputPath=false}
+  else{dotnet build $project -c Release}
+  if($LASTEXITCODE){throw "Surveillance build failed with exit code $LASTEXITCODE"}
+} else {
+  $managed=Join-Path (Split-Path $root) '7DaysToDie_Data/Managed'
+  $compilerRefs=@('Microsoft.CodeAnalysis.dll','Microsoft.CodeAnalysis.CSharp.dll')|ForEach-Object {Join-Path $PSHOME $_}
+  $frameworkRefs=Get-ChildItem (Join-Path $PSHOME 'ref') -Filter '*.dll'|ForEach-Object FullName
+  Add-Type -CompilerOptions '/nowarn:1701' -ReferencedAssemblies ($compilerRefs+$frameworkRefs) -TypeDefinition @'
+using System;using System.IO;using System.Linq;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.CSharp;
+public static class SurveillanceCompiler {
+ public static void Build(string[] sources,string[] references,string output){
+  var syntax=sources.Select(p=>CSharpSyntaxTree.ParseText(File.ReadAllText(p),new CSharpParseOptions(LanguageVersion.Latest),p));
+  var compilation=CSharpCompilation.Create("PZAEC.Surveillance",syntax,references.Distinct(StringComparer.OrdinalIgnoreCase).Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithOptimizationLevel(OptimizationLevel.Release).WithDeterministic(true));
+  using(var memory=new MemoryStream()){var result=compilation.Emit(memory);foreach(var d in result.Diagnostics.Where(d=>d.Severity>=DiagnosticSeverity.Warning))Console.WriteLine(d);if(!result.Success)throw new Exception("Surveillance compile failed; installed DLL was not changed");var temporary=output+".building";File.WriteAllBytes(temporary,memory.ToArray());if(File.Exists(output))File.Replace(temporary,output,null);else File.Move(temporary,output);}
+ }
+}
+'@
+  $sources=Get-ChildItem (Join-Path $root 'ZZZ-PZAEC_Surveillance/Source') -Filter '*.cs'|Sort-Object Name|ForEach-Object FullName
+  $refs=@(Get-ChildItem $managed -Filter '*.dll'|ForEach-Object FullName)+(Join-Path $root '0_TFP_Harmony/0Harmony.dll')
+  if(!$OutputPath){$OutputPath=Join-Path $root 'ZZZ-PZAEC_Surveillance/PZAEC.Surveillance.dll'}
+  [SurveillanceCompiler]::Build($sources,$refs,$OutputPath)
+}
+Write-Output 'Surveillance compiled against the installed game assemblies.'

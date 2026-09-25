@@ -1,0 +1,50 @@
+<configs>
+  <append xpath="/blocks">
+    <block name="PZAEC_SurveillanceCamera">
+      <property name="Extends" value="motionsensor"/>
+      <property name="Class" value="PZAEC_SurveillanceCamera,PZAEC.Surveillance"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="CustomIcon" value="motionsensor"/>
+      <property name="CustomIconTint" value="A9D8F5"/>
+      <property name="DescriptionKey" value="PZAEC_SurveillanceCameraDesc"/>
+      <property name="RequiredPower" value="5"/>
+      <property name="TakeDelay" value="4"/>
+      <property name="MaxDamage" value="300"/>
+      <property name="EconomicValue" value="650"/>
+      <property name="SortOrder2" value="0095"/>
+      <drop event="Destroy" count="0"/>
+    </block>
+    <block name="PZAEC_SurveillanceScreen4x3">
+      <property name="Extends" value="ceilingLight01_player" param1="UnlockedBy"/>
+      <property name="Class" value="PZAEC_SurveillanceScreen,PZAEC.Surveillance"/>
+      <property name="CreativeMode" value="Player"/>
+      <property name="Model" value="pzaecSurveillanceScreenRuntime.prefab"/>
+      <property name="ModelOffset" value="0,0,0"/>
+      <property name="MultiBlockDim" value="4,3,1"/>
+      <property name="Place" value="TowardsPlacerInverted"/>
+      <property name="HandleFace" value="South"/>
+      <property name="OnlySimpleRotations" value="true"/>
+      <property name="StabilitySupport" value="false"/>
+      <property name="ImposterDontBlock" value="true"/>
+      <property name="OversizedBounds" value="(-0.5,1,0),(4,3,1)"/>
+      <property name="WireOffset" value="0,0.25,-0.12"/>
+      <property name="RequiredPower" value="30"/>
+      <property name="RuntimeSwitch" value="true"/>
+      <property name="TakeDelay" value="6"/>
+      <property name="CanPickup" value="true"/>
+      <property name="MaxDamage" value="1000"/>
+      <property name="Material" value="Mmetal"/>
+      <property name="Collide" value="movement,melee,bullet,arrow,rocket"/>
+      <property name="CustomIcon" value="tvLargeWall3x2"/>
+      <property name="CustomIconTint" value="A9D8F5"/>
+      <property name="DescriptionKey" value="PZAEC_SurveillanceScreen4x3Desc"/>
+      <property name="Group" value="Science,TCScience"/>
+      <property name="Tags" value="electricianSkill,scrap100"/>
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical"/>
+      <property name="EconomicValue" value="2400"/>
+      <property name="SortOrder1" value="B202"/>
+      <property name="SortOrder2" value="0096"/>
+      <drop event="Destroy" count="0"/>
+    </block>
+  </append>
+</configs>
