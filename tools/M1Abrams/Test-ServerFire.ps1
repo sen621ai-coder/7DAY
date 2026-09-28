@@ -18,6 +18,7 @@ public static class FireFixture {
  public class EntityVehicle{public const int cSyncStorage=1;public Bag bag=new Bag();public Body vehicleRB;public int Syncs;public void SendSyncData(int i){Syncs++;}}
  public class State{public Rules.Trigger Trigger=new Rules.Trigger();public bool Allowed=true,AP;public int Reason,Epoch=1,Shot;public float NextFire,LastShot;public EntityVehicle Vehicle=new EntityVehicle();}
  public class Shell{public EntityVehicle Vehicle;public int Epoch,Id,Actor,Tier;public bool AP;public Vector3 Position,Velocity;}
+ public static class Modules{public static bool Auto;public static float Reload(EntityVehicle v)=>Spec(v).Reload*(Auto?.75f:1);}
  static int tier;static Rules.Spec Spec(EntityVehicle v)=>Rules.Specs[tier];static int Tier(EntityVehicle v)=>tier;
  static System.Collections.Generic.List<Shell> shells=new System.Collections.Generic.List<Shell>();
  static bool Ready(State s,int actor)=>s.Allowed;
@@ -36,6 +37,8 @@ $tests=@'
   Time.time=10;s.Vehicle.bag.Count=0;s.Trigger.Accept(8,3,true,10);Shoot(s);Check(s.Shot==2&&Events==2&&shells.Count==2,"empty bag creates no projectile/effect");
   s.Vehicle.bag.Count=1;s.Trigger.Stop();Shoot(s);Check(s.Shot==2,"release cancels firing");
   for(tier=0;tier<4;tier++){s=new State{AP=true};Time.time=20;s.Trigger.Accept(7,1,true,20);Shoot(s);var shell=shells[shells.Count-1];Check(shell.Tier==tier&&shell.AP,"shell snapshots tier/type at fire time");Check(System.Math.Abs(s.NextFire-20-Rules.Specs[tier].Reload)<.0001,"per tier reload");}
+  Modules.Auto=true;
+  for(tier=0;tier<4;tier++){s=new State();Time.time=40;s.Trigger.Accept(7,1,true,40);Shoot(s);Check(System.Math.Abs(s.NextFire-40-Rules.Specs[tier].Reload*.75f)<.0001,"autoloader actual shoot cooldown");Check(s.Vehicle.bag.Decrements==1,"autoloader still one shell");Time.time=s.NextFire-.01f;s.Trigger.Accept(7,2,true,Time.time);Shoot(s);Check(s.Shot==1,"autoloader cannot fire before reduced cooldown");Time.time=s.NextFire;s.Trigger.Accept(7,3,true,Time.time);Shoot(s);Check(s.Shot==2&&s.Vehicle.bag.Decrements==2,"autoloader fires at reduced cooldown");}
   Console.WriteLine("PASS "+n+" actual M1 server firing checks with mocked game inventory/authority");
  }
 }}

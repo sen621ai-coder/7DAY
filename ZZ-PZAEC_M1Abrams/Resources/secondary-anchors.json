@@ -1,0 +1,85 @@
+{
+  "nodes": [
+    {
+      "name": "RoofMGBase",
+      "parent": "TurretYaw",
+      "position": [
+        -1.25,
+        2.28,
+        0.3
+      ]
+    },
+    {
+      "name": "RoofMGYaw",
+      "parent": "RoofMGBase",
+      "position": [
+        -1.25,
+        2.61,
+        0.3
+      ]
+    },
+    {
+      "name": "RoofMGPitch",
+      "parent": "RoofMGYaw",
+      "position": [
+        -1.25,
+        2.98,
+        0.09999999999999998
+      ]
+    },
+    {
+      "name": "RoofMGMuzzle",
+      "parent": "RoofMGPitch",
+      "position": [
+        -1.25,
+        2.98,
+        1.7
+      ]
+    },
+    {
+      "name": "RoofMGSight",
+      "parent": "RoofMGYaw",
+      "position": [
+        -1.02,
+        2.93,
+        0.5
+      ]
+    },
+    {
+      "name": "AAMount",
+      "parent": "TurretYaw",
+      "position": [
+        1.1,
+        2.18,
+        -0.9500000000000001
+      ]
+    },
+    {
+      "name": "AAPitch",
+      "parent": "AAMount",
+      "position": [
+        1.1,
+        2.62,
+        -1.5699999999999998
+      ]
+    },
+    {
+      "name": "AAMuzzleL",
+      "parent": "AAPitch",
+      "position": [
+        0.94,
+        2.72,
+        -0.08000000000000002
+      ]
+    },
+    {
+      "name": "AAMuzzleR",
+      "parent": "AAPitch",
+      "position": [
+        1.26,
+        2.72,
+        -0.08000000000000002
+      ]
+    }
+  ]
+}

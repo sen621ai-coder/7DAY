@@ -1,0 +1,159 @@
+{
+  "status": "design_only_not_runtime",
+  "coordinates": "model-space metres, X right Y up Z forward; positions are absolute in neutral pose, not parent-local offsets",
+  "clearance": "not verified",
+  "nodes": [
+    {
+      "name": "RoofMGBase",
+      "parent": "TurretYaw",
+      "position": [
+        -0.55,
+        2.2,
+        0.15
+      ]
+    },
+    {
+      "name": "RoofMGYaw",
+      "parent": "RoofMGBase",
+      "position": [
+        -0.55,
+        2.65,
+        0.15
+      ]
+    },
+    {
+      "name": "RoofMGPitch",
+      "parent": "RoofMGYaw",
+      "position": [
+        -0.55,
+        2.7,
+        0.25
+      ]
+    },
+    {
+      "name": "RoofMGMuzzle",
+      "parent": "RoofMGPitch",
+      "position": [
+        -0.55,
+        2.7,
+        1.45
+      ]
+    },
+    {
+      "name": "AAMount",
+      "parent": "TurretYaw",
+      "position": [
+        1.15,
+        2.12,
+        -1.3
+      ]
+    },
+    {
+      "name": "AAPitch",
+      "parent": "AAMount",
+      "position": [
+        1.15,
+        2.43,
+        -1.3
+      ]
+    },
+    {
+      "name": "AAMuzzleL",
+      "parent": "AAPitch",
+      "position": [
+        1.0,
+        2.55,
+        -0.45
+      ]
+    },
+    {
+      "name": "AAMuzzleR",
+      "parent": "AAPitch",
+      "position": [
+        1.3,
+        2.55,
+        -0.45
+      ]
+    }
+  ],
+  "boundingVolumes": [
+    {
+      "name": "MG pedestal",
+      "min": [
+        -0.78,
+        2.2,
+        -0.08
+      ],
+      "max": [
+        -0.32,
+        2.65,
+        0.38
+      ]
+    },
+    {
+      "name": "MG receiver",
+      "min": [
+        -0.71,
+        2.58,
+        0.08
+      ],
+      "max": [
+        -0.39,
+        2.84,
+        0.65
+      ]
+    },
+    {
+      "name": "MG barrel",
+      "min": [
+        -0.59,
+        2.66,
+        0.65
+      ],
+      "max": [
+        -0.51,
+        2.74,
+        1.45
+      ]
+    },
+    {
+      "name": "SAM cradle",
+      "min": [
+        0.85,
+        2.12,
+        -1.95
+      ],
+      "max": [
+        1.45,
+        2.43,
+        -0.75
+      ]
+    },
+    {
+      "name": "SAM tube A",
+      "min": [
+        0.88,
+        2.43,
+        -2.05
+      ],
+      "max": [
+        1.12,
+        2.67,
+        -0.45
+      ]
+    },
+    {
+      "name": "SAM tube B",
+      "min": [
+        1.18,
+        2.43,
+        -2.05
+      ],
+      "max": [
+        1.42,
+        2.67,
+        -0.45
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ namespace PZAEC.M1
             try {
                 Model.Path=System.IO.Path.Combine(mod.Path,"Resources");
                 var harmony=new Harmony("pzaec.m1.abrams");Model.Install(harmony);Weapons.Install(harmony);
-                Log.Out("[M1-Abrams] Model, dual-seat main gun and firing presentation installed.");
+                Log.Out("[M1-Abrams] Model, dual-seat cannon, roof MG and guided AA installed (secondary protocol 1).");
             } catch(Exception e){Log.Error("[M1-Abrams] Initialization failed: "+e);}
         }
     }
@@ -120,6 +120,7 @@ namespace PZAEC.M1
                 }
                 if(r.BaseStream.Position!=r.BaseStream.Length)throw new InvalidDataException("M1 trailing data");
             }
+            SecondaryModel.Build(nodes,renderers,layer);
             // Recessed dark closures also exist in the editable source.
             var dark=new Material(materials[0]){name="M1_Interior",color=new Color(.08f,.07f,.055f)};dark.mainTexture=null;
             Primitive(nodes["TurretYaw"],"TurretBaseCap",PrimitiveType.Cylinder,new Vector3(0,-.002f,0),new Vector3(1.94f,.0125f,1.94f),Quaternion.identity,dark);

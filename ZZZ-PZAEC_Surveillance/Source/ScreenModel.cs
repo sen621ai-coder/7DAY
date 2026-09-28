@@ -26,6 +26,9 @@ namespace PZAEC.Surveillance
         int cycleChannel;
         float cycleAt;
         static Material frame,off;
+        static Texture2D frameTexture;
+        static Font statusFont;
+        const float FaceZ=ScreenLayout.FaceZ,LabelZ=ScreenLayout.LabelZ;
 
         static Material NativeMaterial(string name,Color color)
         {
@@ -41,10 +44,15 @@ namespace PZAEC.Surveillance
         }
         static void Materials()
         {
-            if(frame!=null&&off!=null)return;frame=NativeMaterial("Surveillance charcoal frame",new Color(.055f,.065f,.075f));
+            if(frame!=null&&off!=null)return;
             Shader shader=Shader.Find("Unlit/Texture");if(shader==null||!shader.isSupported)shader=Shader.Find("Sprites/Default");
             off=shader!=null&&shader.isSupported?new Material(shader){name="Surveillance display"}:NativeMaterial("Surveillance display",Color.black);
-            off.color=Color.black;if(off.HasProperty("_MainTex"))off.mainTexture=Texture2D.blackTexture;
+            if(off.HasProperty("_Color"))off.color=Color.white;off.mainTexture=Texture2D.blackTexture;
+            // Encode charcoal in the texture: native block tint updates must never whiten the cabinet.
+            frameTexture=new Texture2D(1,1,TextureFormat.RGBA32,false){name="Surveillance charcoal"};
+            frameTexture.SetPixel(0,0,new Color(.055f,.065f,.075f));frameTexture.Apply(false,true);
+            frame=new Material(off){name="Surveillance charcoal frame",mainTexture=frameTexture};
+            Log.Out("[Surveillance] Monitor shader="+off.shader.name+"; graphics="+SystemInfo.graphicsDeviceType);
         }
         GameObject Box(string name,Vector3 position,Vector3 scale,Material material,bool collider=false)
         {
@@ -57,18 +65,25 @@ namespace PZAEC.Surveillance
             var native=DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab",false);var nativeCollider=native.GetComponentInChildren<Collider>(true);
             if(nativeCollider==null)throw new InvalidOperationException("Native collision template missing");
             colliderLayer=nativeCollider.gameObject.layer;colliderTag=nativeCollider.tag;gameObject.layer=colliderLayer;gameObject.tag=colliderTag;
-            gameObject.AddComponent<RootTransformRefParent>().RootTransform=transform;Materials();
-            var wire=new GameObject("WireOffset");wire.transform.SetParent(transform,false);wire.transform.localPosition=new Vector3(0,.25f,-.12f);
+            gameObject.AddComponent<RootTransformRefParent>().RootTransform=transform;
+            // A root collider is also how the native model pool obtains accurate selection bounds.
+            var hit=gameObject.AddComponent<BoxCollider>();hit.center=new Vector3(ScreenLayout.X,ScreenLayout.Y,ScreenLayout.Z);hit.size=new Vector3(ScreenLayout.Width,ScreenLayout.Height,ScreenLayout.Depth);
+            var wire=new GameObject("WireOffset");wire.transform.SetParent(transform,false);wire.transform.localPosition=new Vector3(0,.25f,-.29f);
             if(SystemInfo.graphicsDeviceType==GraphicsDeviceType.Null)return;
-            // Native MultiBlockDim=4,3,1 occupies local child cells x=-2..1 and y=0..2.
-            // Center the physical panel on those cell centers so every rotation stays inside its footprint.
-            Box("MonitorBody",new Vector3(-.5f,1f,0),new Vector3(3.96f,2.96f,.18f),frame,true);
-            var face=Box("LiveDisplay",new Vector3(-.5f,1f,.101f),new Vector3(3.68f,2.76f,.018f),off);
+            Materials();
+            // ModelOffset.x cancels native even-width pivot correction. Root Y is the bottom of the cell.
+            // Back sits 1 cm inside the rear cell boundary; a full-block wall can touch it.
+            Box("MonitorBody",hit.center,hit.size,frame);
+            var face=Box("LiveDisplay",new Vector3(-.5f,1.5f,FaceZ),new Vector3(3.68f,2.76f,.018f),off);
             Surface=face.GetComponent<Renderer>();Surface.shadowCastingMode=ShadowCastingMode.Off;Surface.receiveShadows=false;
-            var label=new GameObject("MonitorStatus");label.transform.SetParent(transform,false);label.transform.localPosition=new Vector3(-.5f,1f,.116f);
+            var label=new GameObject("MonitorStatus");label.transform.SetParent(transform,false);label.transform.localPosition=new Vector3(-.5f,1.5f,LabelZ);
+            label.transform.localRotation=Quaternion.Euler(0,180,0);
             Status=label.AddComponent<TextMesh>();Status.text="请选择摄像头";Status.anchor=TextAnchor.MiddleCenter;Status.alignment=TextAlignment.Center;
+            if(statusFont==null)statusFont=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","Noto Sans CJK SC","Arial"},64);
+            Status.font=statusFont;
             Status.fontSize=64;Status.characterSize=.035f;Status.color=new Color(.68f,.84f,.92f);Status.gameObject.layer=colliderLayer;
             var textRenderer=Status.GetComponent<MeshRenderer>();textRenderer.shadowCastingMode=ShadowCastingMode.Off;textRenderer.receiveShadows=false;
+            if(statusFont!=null)textRenderer.sharedMaterial=statusFont.material;
         }
         public void Bind(WorldBase world,Vector3i position)
         {
@@ -103,11 +118,11 @@ namespace PZAEC.Surveillance
             if(shown&&shownTexture==texture&&shownText==text)return;
             bool textureChanged=!shown||shownTexture!=texture;
             shown=true;shownTexture=texture;shownText=text;
-            if(textureChanged&&instanceMaterial!=null){instanceMaterial.color=texture==null?Color.black:Color.white;instanceMaterial.mainTexture=texture??Texture2D.blackTexture;}
+            if(textureChanged&&instanceMaterial!=null){if(instanceMaterial.HasProperty("_Color"))instanceMaterial.color=Color.white;instanceMaterial.mainTexture=texture??Texture2D.blackTexture;}
             if(Status!=null)
             {
                 Status.text=text??"";Status.characterSize=texture==null?.035f:.022f;
-                Status.transform.localPosition=texture==null?new Vector3(-.5f,1f,.116f):new Vector3(-.5f,2.28f,.116f);
+                Status.transform.localPosition=texture==null?new Vector3(-.5f,1.5f,LabelZ):new Vector3(-.5f,2.78f,LabelZ);
                 Status.gameObject.SetActive(!string.IsNullOrEmpty(text));
             }
         }

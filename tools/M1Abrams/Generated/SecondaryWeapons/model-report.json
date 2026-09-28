@@ -1,0 +1,527 @@
+{
+  "status": "model_only_no_runtime_integration",
+  "base_source": "../M1Abrams.blend",
+  "coordinate_system": "model-space X right Y up Z forward; anchor positions neutral before AAPitch +20deg pose",
+  "nodes": [
+    {
+      "name": "RoofMGBase",
+      "parent": "TurretYaw",
+      "position": [
+        -1.25,
+        2.28,
+        0.3
+      ]
+    },
+    {
+      "name": "RoofMGYaw",
+      "parent": "RoofMGBase",
+      "position": [
+        -1.25,
+        2.61,
+        0.3
+      ]
+    },
+    {
+      "name": "RoofMGPitch",
+      "parent": "RoofMGYaw",
+      "position": [
+        -1.25,
+        2.98,
+        0.09999999999999998
+      ]
+    },
+    {
+      "name": "RoofMGMuzzle",
+      "parent": "RoofMGPitch",
+      "position": [
+        -1.25,
+        2.98,
+        1.7
+      ]
+    },
+    {
+      "name": "RoofMGSight",
+      "parent": "RoofMGYaw",
+      "position": [
+        -1.02,
+        2.93,
+        0.5
+      ]
+    },
+    {
+      "name": "AAMount",
+      "parent": "TurretYaw",
+      "position": [
+        1.1,
+        2.18,
+        -0.9500000000000001
+      ]
+    },
+    {
+      "name": "AAPitch",
+      "parent": "AAMount",
+      "position": [
+        1.1,
+        2.62,
+        -1.5699999999999998
+      ]
+    },
+    {
+      "name": "AAMuzzleL",
+      "parent": "AAPitch",
+      "position": [
+        0.94,
+        2.72,
+        -0.08000000000000002
+      ]
+    },
+    {
+      "name": "AAMuzzleR",
+      "parent": "AAPitch",
+      "position": [
+        1.26,
+        2.72,
+        -0.08000000000000002
+      ]
+    }
+  ],
+  "roof_support_heights": [
+    2.1912691593170166,
+    2.07838773727417,
+    2.253077268600464,
+    2.2377326488494873
+  ],
+  "meshes": [
+    {
+      "name": "MG_Foot_00_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 108
+    },
+    {
+      "name": "MG_BaseBolt_00_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 20
+    },
+    {
+      "name": "MG_Foot_01_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 108
+    },
+    {
+      "name": "MG_BaseBolt_01_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 20
+    },
+    {
+      "name": "MG_Foot_10_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 108
+    },
+    {
+      "name": "MG_BaseBolt_10_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 20
+    },
+    {
+      "name": "MG_Foot_11_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 108
+    },
+    {
+      "name": "MG_BaseBolt_11_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 20
+    },
+    {
+      "name": "MG_ArmoredPedestal_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 28
+    },
+    {
+      "name": "MG_BasePlate_LOD0",
+      "parent": "RoofMGBase",
+      "triangles": 108
+    },
+    {
+      "name": "MG_TraverseRing_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 124
+    },
+    {
+      "name": "MG_CradleFloor_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_Yoke_-1_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_Pivot_-1_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 76
+    },
+    {
+      "name": "MG_Yoke_1_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_Pivot_1_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 76
+    },
+    {
+      "name": "MG_Receiver_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_TopCover_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_RearBuffer_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_BarrelShroud_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 76
+    },
+    {
+      "name": "MG_Barrel_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_0_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_1_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_2_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_3_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_4_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_5_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_CoolingRing_6_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 60
+    },
+    {
+      "name": "MG_MuzzleBrake_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 160
+    },
+    {
+      "name": "MG_AmmoBox_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_AmmoLid_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_AmmoLatch_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_0_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_1_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_2_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_3_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_4_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_5_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_FeedSegment_6_LOD0",
+      "parent": "RoofMGPitch",
+      "triangles": 108
+    },
+    {
+      "name": "MG_OpticHousing_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 108
+    },
+    {
+      "name": "MG_OpticGlass_LOD0",
+      "parent": "RoofMGYaw",
+      "triangles": 76
+    },
+    {
+      "name": "AA_BaseRail_0_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_BaseRail_1_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_RoofFoot_00_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_RoofSaddle_00_LOD0",
+      "parent": "AAMount",
+      "triangles": 28
+    },
+    {
+      "name": "AA_RoofFoot_01_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_RoofSaddle_01_LOD0",
+      "parent": "AAMount",
+      "triangles": 28
+    },
+    {
+      "name": "AA_RoofFoot_10_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_RoofSaddle_10_LOD0",
+      "parent": "AAMount",
+      "triangles": 28
+    },
+    {
+      "name": "AA_RoofFoot_11_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_RoofSaddle_11_LOD0",
+      "parent": "AAMount",
+      "triangles": 28
+    },
+    {
+      "name": "AA_Yoke_-1_LOD0",
+      "parent": "AAMount",
+      "triangles": 28
+    },
+    {
+      "name": "AA_ElevationHub_-1_LOD0",
+      "parent": "AAMount",
+      "triangles": 92
+    },
+    {
+      "name": "AA_Yoke_1_LOD0",
+      "parent": "AAMount",
+      "triangles": 28
+    },
+    {
+      "name": "AA_ElevationHub_1_LOD0",
+      "parent": "AAMount",
+      "triangles": 92
+    },
+    {
+      "name": "AA_Crossbar_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_Canister_L_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_Band_L_0_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_Band_L_1_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_Band_L_2_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_FrontRim_L_LOD0",
+      "parent": "AAPitch",
+      "triangles": 128
+    },
+    {
+      "name": "AA_RearSeal_L_LOD0",
+      "parent": "AAPitch",
+      "triangles": 60
+    },
+    {
+      "name": "AA_Interior_L_LOD0",
+      "parent": "AAPitch",
+      "triangles": 76
+    },
+    {
+      "name": "AA_LoadedMissileNose_L_LOD0",
+      "parent": "AAPitch",
+      "triangles": 224
+    },
+    {
+      "name": "AA_WarningStripe_L_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_Canister_R_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_Band_R_0_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_Band_R_1_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_Band_R_2_LOD0",
+      "parent": "AAPitch",
+      "triangles": 64
+    },
+    {
+      "name": "AA_FrontRim_R_LOD0",
+      "parent": "AAPitch",
+      "triangles": 128
+    },
+    {
+      "name": "AA_RearSeal_R_LOD0",
+      "parent": "AAPitch",
+      "triangles": 60
+    },
+    {
+      "name": "AA_Interior_R_LOD0",
+      "parent": "AAPitch",
+      "triangles": 76
+    },
+    {
+      "name": "AA_LoadedMissileNose_R_LOD0",
+      "parent": "AAPitch",
+      "triangles": 224
+    },
+    {
+      "name": "AA_WarningStripe_R_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_Electronics_LOD0",
+      "parent": "AAMount",
+      "triangles": 108
+    },
+    {
+      "name": "AA_RailBolt_0_0_LOD0",
+      "parent": "AAMount",
+      "triangles": 20
+    },
+    {
+      "name": "AA_RailBolt_0_1_LOD0",
+      "parent": "AAMount",
+      "triangles": 20
+    },
+    {
+      "name": "AA_RailBolt_1_0_LOD0",
+      "parent": "AAMount",
+      "triangles": 20
+    },
+    {
+      "name": "AA_RailBolt_1_1_LOD0",
+      "parent": "AAMount",
+      "triangles": 20
+    },
+    {
+      "name": "AA_ClampLatch_L_0_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_ClampLatch_L_1_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_ClampLatch_L_2_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_ClampLatch_R_0_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_ClampLatch_R_1_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    },
+    {
+      "name": "AA_ClampLatch_R_2_LOD0",
+      "parent": "AAPitch",
+      "triangles": 108
+    }
+  ],
+  "lod_triangles": [
+    7200,
+    3854,
+    1778
+  ],
+  "original_blend_sha256": "4a8e12b2aa6fe1c88109a09e3b3caa3964f5d32c3a2936afa5aafd3cec34fc1b"
+}

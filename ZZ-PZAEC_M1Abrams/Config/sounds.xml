@@ -5,5 +5,13 @@
       <Noise ID="0" noise="90" time="2" muffled_when_crouched="1" heat_map_strength="1.5" heat_map_time="180" />
       <NoiseScale value="1" />
     </SoundDataNode>
+    <SoundDataNode name="pzM1MGNoise">
+      <Noise ID="0" noise="45" time="1" muffled_when_crouched="1" heat_map_strength=".015" heat_map_time="120" />
+      <NoiseScale value="1" />
+    </SoundDataNode>
+    <SoundDataNode name="pzM1AANoise">
+      <Noise ID="0" noise="65" time="1" muffled_when_crouched="1" heat_map_strength=".5" heat_map_time="120" />
+      <NoiseScale value="1" />
+    </SoundDataNode>
   </append>
 </configs>

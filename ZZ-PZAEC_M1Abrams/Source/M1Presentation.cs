@@ -134,8 +134,8 @@ namespace PZAEC.M1
                 v.LastPosition=v.Vehicle.position;v.LastBody=body;
                 foreach(var wheel in v.Wheels){double distance=wheel.name.Contains("_L_")?v.LeftDistance:v.RightDistance;float radius=wheel.name.Contains("Rear")?.37f:.30135f;wheel.localRotation=Quaternion.Euler((float)(distance/radius*Mathf.Rad2Deg%360),0,0);}
                 if(Time.time-v.LastMove>=.033f){foreach(var track in v.Tracks)track.Move(track.Left?v.LeftDistance:v.RightDistance);v.LastMove=Time.time;}
-                v.Yaw.localRotation=Quaternion.Euler(0,v.YawAngle,0);v.Pitch.localRotation=Quaternion.Euler(-v.PitchAngle,0,0);
-                float age=Time.time-v.ShotAt;v.Recoil.localPosition=Vector3.back*Rules.Recoil(age);
+                if(!Weapons.Server){v.Yaw.localRotation=Quaternion.Euler(0,v.YawAngle,0);v.Pitch.localRotation=Quaternion.Euler(-v.PitchAngle,0,0);}
+                float age=Time.time-v.ShotAt;if(!Weapons.Server)v.Recoil.localPosition=Vector3.back*Rules.Recoil(age);
                 if(v.Tracer.enabled){float t=Time.time-v.ShellAt;if(t>=v.ShellLife)v.Tracer.enabled=false;else{var end=v.ShellOrigin+v.ShellVelocity*t+Vector3.down*(4.905f*t*t)-Origin.position;v.Tracer.SetPosition(0,end);v.Tracer.SetPosition(1,end-v.ShellVelocity.normalized*1.5f);}}
                 if(v.ImpactAudio.isPlaying)v.ImpactAudio.transform.position=v.ImpactPosition-Origin.position;
                 if(v.Flame.gameObject.activeSelf){float alpha=Mathf.Clamp01(1-age/v.FlashLife);v.Properties.SetColor("_Color",new Color(1,1,1,alpha));v.Flame.GetComponent<Renderer>().SetPropertyBlock(v.Properties);v.Flash.intensity=lights++<2?3*alpha:0;if(alpha<=0)v.Flame.gameObject.SetActive(false);}
@@ -166,12 +166,12 @@ namespace PZAEC.M1
             var w=GameManager.Instance?.World;var p=w?.GetPrimaryPlayer();var v=p?.AttachedToEntity as EntityVehicle;
             if(!Weapons.IsTank(v)||!Weapons.UIReady(p)||!views.TryGetValue(v.entityId,out var view)||p.playerCamera==null)return;
             camera=p.playerCamera;basePosition=camera.transform.position;baseRotation=camera.transform.rotation;baseFov=camera.fieldOfView;
-            bool gunner=Weapons.Allowed(v,p.entityId),zoom=gunner&&Input.GetKey(KeyCode.Mouse1);float amount=1;
+            bool gunner=Weapons.Seat(v,p.entityId)>=0,zoom=gunner&&Input.GetKey(KeyCode.Mouse1);float amount=1;float zoomFactor=SecondaryPresentation.Mode(v,Weapons.Seat(v,p.entityId))==2?3:2;
             if(v.vehicle.Properties.Values.TryGetValue("m1CameraShake",out var text)&&float.TryParse(text,System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var parsed))amount=Mathf.Clamp01(parsed);
             float age=Time.time-view.ShotAt;float pulse=age>=0&&age<.35f?Mathf.Sin(age/.35f*Mathf.PI)*Mathf.Exp(-age*8):0;
             float kick=pulse*amount*(Weapons.Seat(v,p.entityId)==1?.6f:gunner?.35f:.2f)*(zoom?.6f:1);
             lastRotation=baseRotation*Quaternion.Euler(-kick,.13f*kick,0);lastPosition=basePosition-baseRotation*Vector3.forward*(kick*.045f);
-            lastFov=zoom?2*Mathf.Atan(Mathf.Tan(baseFov*Mathf.Deg2Rad/2)/2)*Mathf.Rad2Deg:baseFov;
+            lastFov=zoom?2*Mathf.Atan(Mathf.Tan(baseFov*Mathf.Deg2Rad/2)/zoomFactor)*Mathf.Rad2Deg:baseFov;
             camera.transform.SetPositionAndRotation(lastPosition,lastRotation);camera.fieldOfView=lastFov;cameraApplied=true;
         }
         public static void HUD()
@@ -184,12 +184,13 @@ namespace PZAEC.M1
                     GUI.Box(new Rect(Screen.width/2-260,Screen.height-150,520,36),"维修需要：空乘员、停车、停火/未受伤10秒、货仓维修包、车辆使用权限");
             }
             if(!Weapons.IsTank(vehicle)||!Weapons.UIReady(p)||!views.TryGetValue(vehicle.entityId,out var v))return;
+            if(SecondaryPresentation.HUD(p,vehicle))return;
             bool control=Weapons.Allowed(vehicle,p.entityId);float remaining=Mathf.Max(0,v.NextReady-Time.time);
             string reason=Time.time-v.LastStatus>1?"等待同步":!control?"炮手控制主炮":v.Reason==2?"炮口受阻":v.Reason==1?"超过俯仰范围":v.Reason==4?"炮塔转向中":v.Reason==3?"武器不可用":v.Ammo==0?"货仓缺少主炮弹":remaining>0?"装填 "+remaining.ToString("0.0")+"s":"主炮就绪";
             GUI.Box(new Rect(Screen.width/2-250,Screen.height-145,500,102),"M1 T"+(16+Weapons.Tier(vehicle))+" | "+(Weapons.Seat(vehicle,p.entityId)==1?"炮手":control?"驾驶 / 主炮":"驾驶员"));
             GUI.Label(new Rect(Screen.width/2-230,Screen.height-122,470,24),"耐久 "+vehicle.vehicle.GetHealth().ToString("N0")+" / "+vehicle.vehicle.GetMaxHealth().ToString("N0")+" · "+Weapons.Spec(vehicle).Horsepower+"马力");
             GUI.Label(new Rect(Screen.width/2-230,Screen.height-98,470,24),(v.AP?"AP穿甲":"HE榴弹")+" ×"+v.Ammo+"  |  "+reason);
-            GUI.Label(new Rect(Screen.width/2-230,Screen.height-74,470,24),"左键开火 · 右键瞄准 · R切弹 · W/S行驶 · A/D转向");
+            GUI.Label(new Rect(Screen.width/2-230,Screen.height-74,470,24),Modules.Invalid(vehicle)?"M1模组异常：效果已停用，请停车卸下并重新安装":"左键开火 · 右键瞄准 · R切弹 · W/S行驶 · A/D转向");
             if(control){float x=Screen.width/2,y=Screen.height/2;GUI.Label(new Rect(x-6,y-12,20,25),"+");
                 var dir=Weapons.Body(vehicle)*Quaternion.Euler(0,v.YawAngle,0)*Quaternion.Euler(-v.PitchAngle,0,0)*Vector3.forward;
                 if(p.playerCamera!=null){var screen=p.playerCamera.WorldToScreenPoint(v.Muzzle.position+dir*200);if(screen.z>0)GUI.Label(new Rect(screen.x-8,Screen.height-screen.y-12,25,25),"○");}

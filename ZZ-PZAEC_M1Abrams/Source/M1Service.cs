@@ -35,7 +35,7 @@ namespace PZAEC.M1
             if(slot==null||Rules.Index(slot.ItemStack?.itemValue?.ItemClass?.GetItemName())<0)return true;
             GameManager.ShowTooltip(slot.xui.playerUI.entityPlayer,"请先放置M1，将装甲维修包放入货仓，在车外对准坦克按住G维修。");return false;
         }
-        static bool Clean(ItemValue item)=>item.UseTimes<=.5f&&item.Meta==0&&
+        static bool Clean(ItemValue item)=>Secondary.Empty(item)&&item.UseTimes<=.5f&&item.Meta==0&&
             (item.Modifications==null||item.Modifications.All(m=>m==null||m.type==0))&&
             (item.CosmeticMods==null||item.CosmeticMods.All(m=>m==null||m.type==0));
         static bool CraftGuard(ItemActionEntryCraft __instance)
@@ -48,7 +48,7 @@ namespace PZAEC.M1
             foreach(var ingredient in recipe.ingredients){
                 var name=ingredient.itemValue.ItemClass?.GetItemName();if(Rules.Index(name)<0&&name!="vehicleTruck4x4Placeable")continue;
                 foreach(var stack in candidates)if(stack!=null&&stack.count>0&&stack.itemValue.type==ingredient.itemValue.type&&!Clean(stack.itemValue)){
-                    GameManager.ShowTooltip(xui.playerUI.entityPlayer,"前置车辆必须满修、清空燃油、卸下全部改装。请先放置车辆整理，再收起制作。");return false;
+                    GameManager.ShowTooltip(xui.playerUI.entityPlayer,"前置车辆必须满修、清空燃油、卸下全部改装并用完机枪内置弹链。请先放置车辆整理，再收起制作。");return false;
                 }
             }return true;
         }
@@ -57,7 +57,7 @@ namespace PZAEC.M1
             var v=s.Vehicle;
             return p!=null&&!p.IsDead()&&p.AttachedToEntity==null&&!v.IsDead()&&v.vehicle.GetHealth()>0&&!v.hasDriver&&v.GetAttached(1)==null&&
                 (p.position-v.position).sqrMagnitude<=64&&(v.vehicleRB==null||v.vehicleRB.velocity.sqrMagnitude<.04f)&&
-                Time.time-s.LastDamage>=10&&Time.time-s.LastShot>=10&&v.vehicle.GetRepairAmountNeeded()>0&&
+                Time.time-s.LastDamage>=10&&Time.time-s.LastShot>=10&&Time.time-s.LastWeaponActivity>=10&&v.vehicle.GetRepairAmountNeeded()>0&&
                 (LockManager.Instance==null||!LockManager.Instance.IsLockedServer(v,0))&&
                 (v.GetOwner()==null||(p.PersistentPlayerData!=null&&v.IsUserAllowed(p.PersistentPlayerData.PrimaryId)));
         }

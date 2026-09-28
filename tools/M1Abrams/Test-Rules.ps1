@@ -12,11 +12,19 @@ public static class M1RuleTests {
   Check(Rules.Recoil(100000)==0,"no accumulated drift");Check(Rules.MinPitch(0)==-6,"front depression");Check(Rules.MinPitch(180)==4&&Rules.MinPitch(-180)==4,"rear deck clearance");Check(Rules.MinPitch(120)>-6&&Rules.MinPitch(120)<4,"continuous rear transition");
   var t=new Rules.Trigger();Check(t.Accept(7,1,true,0)&&t.Active(.2f),"live trigger");Check(!t.Active(.36f),"network lease expiry");Check(!t.Accept(7,1,true,.4f),"duplicate rejected");Check(t.Accept(7,3,false,.4f)&&!t.Active(.4f),"release wins");Check(!t.Accept(7,2,true,.45f)&&!t.Active(.45f),"late fire cannot undo release");Check(t.Accept(8,1,true,.5f),"new operator starts own sequence");t.Stop();Check(!t.Active(.5f),"seat loss stops firing");
   Check(!Rules.Finite(float.NaN)&&!Rules.Finite(float.PositiveInfinity)&&Rules.Finite(1),"nonfinite guard");
+  Check(Rules.ArmorRegion(0,1,0)==4&&Rules.ArmorRegion(.8f,.6f,0)==4,"roof and roof boundary");
+  Check(Rules.ArmorRegion(0,-1,0)==3&&Rules.ArmorRegion(.8f,-.6f,0)==3,"bottom remains separate");
+  Check(Rules.ArmorRegion(0,0,0)==3&&Rules.ArmorRegion(float.NaN,0,1)==3,"unknown direction fallback");
+  Check(Rules.ArmorRegion(0,0,1)==0&&Rules.ArmorRegion(1,0,0)==1&&Rules.ArmorRegion(0,0,-1)==2,"horizontal regions retained");
+  Check(Rules.ArmorRegion(.8f,.599f,0)==1,"below roof boundary uses side");
   int[] hp={1000000,1500000,2200000,3200000},ap={4000000,8000000,16000000,28000000},he={400000,650000,1000000,1500000};
   for(int i=0;i<4;i++){
    Check(Rules.Specs[i].Health==hp[i]&&Rules.Specs[i].AP==ap[i]&&Rules.Specs[i].HE==he[i],"tier table "+i);
+   Check(Rules.Armor(i,4,false)==Rules.Armor(i,0,false)&&Rules.Armor(i,4,true)==Rules.Armor(i,0,true),"roof matches front for normal and acid");
+   Check(Rules.ProtectedDamage(100000,i,4,false)==30000-i*2000,"roof damage by tier");
+   Check(Math.Abs(Rules.Armor(i,3,false)-(.35f+i*.03f))<1e-6,"bottom and unknown unchanged");
    string name="vehicleM1Abrams"+(i==0?"":"T"+(16+i));Check(Rules.Index(name)==i&&Rules.Index(name+"Placeable")==i,"exact tier aliases");
-   for(int r=0;r<4;r++){Check(Rules.Armor(i,r,false)<.81f,"armor never immune");Check(Rules.ProtectedDamage(1000000,i,r,true)>Rules.ProtectedDamage(1000000,i,r,false),"acid weakens armor");Check(Rules.ProtectedDamage(0,i,r,false)==0,"zero does not become damage");}
+   for(int r=0;r<5;r++){Check(Rules.Armor(i,r,false)<.81f,"armor never immune");Check(Rules.ProtectedDamage(1000000,i,r,true)>Rules.ProtectedDamage(1000000,i,r,false),"acid weakens armor");Check(Rules.ProtectedDamage(0,i,r,false)==0,"zero does not become damage");}
   }
   Check(Rules.Index("vehicleTruck4x4")==-1&&Rules.Index("vehicleM1AbramsT20")==-1,"unrelated vehicle excluded");
   Check(Rules.HEFalloff(2)==1&&Rules.HEFalloff(5)==.5f&&Rules.HEFalloff(8)==0&&Rules.HEFalloff(9)==0,"HE blast falloff");

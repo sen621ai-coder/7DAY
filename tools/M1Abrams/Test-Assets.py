@@ -67,13 +67,13 @@ for i,hp in enumerate([1000000,1500000,2200000,3200000]):
     check(len([p for p in v.findall('property') if p.get('class','').startswith('seat')])==2,f'T{16+i} exactly two seats')
     previous='vehicleTruck4x4Placeable' if i==0 else 'vehicleM1Abrams'+('' if i==1 else 'T'+str(15+i))+'Placeable'
     check(r.find(f"ingredient[@name='{previous}']").get('count')=='1',f'T{16+i} consumes previous vehicle')
-    check(r.find(f"ingredient[@name='PZAECBuildPartsR{i+2}']").get('count')==str([12,12,15,18][i]),f'T{16+i} progression component count')
+    check(r.find(f"ingredient[@name='PZAECBuildPartsR{i+2}']").get('count')==str([3,3,4,5][i]),f'T{16+i} progression component count')
     check(r.get('use_ingredient_modifier')=='false',f'T{16+i} no material discount')
 for name in ['pzM1Shell','pzM1ShellAP']:
     r=recipe_defs.find(f"./append/recipe[@name='{name}']");check(r.get('count')=='10',name+' batch ten')
     check(item_defs.find(f"./append/item[@name='{name}']/property[@name='Stacknumber']").get('value')=='20',name+' stack twenty')
     check(not any('PZAEC' in x.get('name') for x in r.findall('ingredient')),name+' ammo does not consume progression drops')
-check(len(item_defs.findall('./append/item'))==7,'Four tanks and three supply items only')
+check(len(item_defs.findall('./append/item'))==9,'Four tanks and five supply items')
 for file in ['color0.png','color1.png','metal0.png','metal1.png','ao0.png','ao1.png','normalPacked0.png','normalPacked1.png','cannon-blast.wav','cannon-mechanism.wav','cannon-ready.wav']:
     check((MOD/'Resources'/file).stat().st_size>100,file+' exists')
 with (MOD/'Config/Localization.csv').open(encoding='utf8') as f:check(all(len(row)==7 for row in csv.reader(f)),'Localization column counts')

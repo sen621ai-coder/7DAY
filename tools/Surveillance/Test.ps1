@@ -10,13 +10,13 @@ $camera=$blocks.configs.append.block|Where-Object name -eq 'PZAEC_SurveillanceCa
 function Property($block,$name){($block.property|Where-Object name -eq $name).value}
 if(!$screen -or !$camera){throw 'Surveillance blocks missing'}
 if((Property $screen 'MultiBlockDim') -ne '4,3,1'){throw 'Screen is not 4x3x1'}
-if((Property $screen 'OversizedBounds') -ne '(-0.5,1,0),(4,3,1)'){throw 'Screen bounds do not match native x=-2..1, y=0..2 footprint'}
+if((Property $screen 'OversizedBounds') -ne '(-0.5,1.5,-0.4),(4,3,0.2)'){throw 'Screen bounds do not match the wall-mounted panel'}
 if((Property $screen 'RequiredPower') -ne '30'){throw 'Screen power mismatch'}
 if((Property $camera 'RequiredPower') -ne '5'){throw 'Camera power mismatch'}
 if((Property $screen 'Class') -ne 'PZAEC_SurveillanceScreen,PZAEC.Surveillance'){throw 'Screen runtime class binding mismatch'}
 if((Property $camera 'Class') -ne 'PZAEC_SurveillanceCamera,PZAEC.Surveillance'){throw 'Camera runtime class binding mismatch'}
 if(@($recipes.configs.append.recipe).Count -ne 2){throw 'Recipe count mismatch'}
-if($info.xml.Version.value -ne '1.0.3'){throw 'ModInfo version mismatch'}
+if($info.xml.Version.value -ne '1.0.5'){throw 'ModInfo version mismatch'}
 $dll=Join-Path $mod 'PZAEC.Surveillance.dll';if(!(Test-Path $dll)){throw 'Compiled DLL missing'}
 $source=Get-Content (Join-Path $mod 'Source/SurveillanceState.cs') -Raw
 if($source -notmatch 'WirelessRange=128f'){throw 'Wireless range contract missing'}
@@ -28,6 +28,8 @@ $protocol=Get-Content (Join-Path $mod 'Source/SurveillanceProtocol.cs') -Raw
 if($protocol -notmatch 'NetPackagePZSurveillanceResult'){throw 'Server configuration result package missing'}
 & (Join-Path $PSScriptRoot 'Test-Policy.ps1')
 & (Join-Path $PSScriptRoot 'Test-Markers.ps1')
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-ScreenRepair.ps1')
+if($LASTEXITCODE -ne 0){throw 'Screen placement/interaction regression tests failed'}
 # The state harness uses replacement world/network types; isolate it from the main process.
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-MarkerState.ps1')
 if($LASTEXITCODE -ne 0){throw 'Marker state/network tests failed'}

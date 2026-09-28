@@ -43,6 +43,8 @@ namespace PZAEC.Surveillance
             public int Tier=-1;
             public bool Markers;
             public Stream Feed;
+            public float AcquireRetryAt;
+            public string AcquireError="";
         }
         static readonly List<Watch> views=new List<Watch>();
         static readonly List<Watch> candidates=new List<Watch>();
@@ -55,7 +57,6 @@ namespace PZAEC.Surveillance
         static readonly StringBuilder samples=new StringBuilder();
         static readonly Comparison<Watch> compare=Compare;
         static WorldBase world;
-        static GameObject cameraTemplate;
         static ScreenView focus,pendingFocus;
         static float focusSince,statsAt,statsSince,sortNow,badSince=-1,goodSince=-1;
         static int pressure,frameCount;
@@ -161,9 +162,8 @@ namespace PZAEC.Surveillance
                 if(s.Parent==w.Parent&&s.Camera!=null)return s;
                 Destroy(s);streams.Remove(w.Id);
             }
-            if(cameraTemplate==null)cameraTemplate=Resources.Load("Prefabs/ElectricityCamera") as GameObject;
-            if(cameraTemplate==null)return null;
             if(createdThisFrame)return null;
+            if(now<w.AcquireRetryAt)return null;
             createdThisFrame=true;
             if(streams.Count>=RenderPolicy.MaxActive+RenderPolicy.MaxIdle)
             {
@@ -171,13 +171,11 @@ namespace PZAEC.Surveillance
                 foreach(var item in streams.Values)if(!item.Active&&(oldest==null||item.LastUse<oldest.LastUse))oldest=item;
                 if(oldest!=null){Destroy(oldest);streams.Remove(oldest.Id);}
             }
-            var go=UnityEngine.Object.Instantiate(cameraTemplate,w.Parent);go.name="PZAEC Surveillance Camera "+w.Id;
-            go.transform.localPosition=Vector3.zero;go.transform.localRotation=Quaternion.identity;
-            foreach(var listener in go.GetComponentsInChildren<AudioListener>(true))listener.enabled=false;
-            var camera=go.GetComponent<Camera>()??go.GetComponentInChildren<Camera>(true);
-            if(camera==null){UnityEngine.Object.Destroy(go);return null;}
-            camera.enabled=false;camera.nearClipPlane=.05f;camera.farClipPlane=80;camera.fieldOfView=60;camera.aspect=4f/3;
-            camera.depth=-10;camera.renderingPath=RenderingPath.Forward;
+            Camera camera;
+            try{camera=FeedCamera.Create(w.Parent,"PZAEC Surveillance Camera "+w.Id);}
+            catch(Exception e){w.AcquireRetryAt=now+5;w.AcquireError="视频相机初始化失败，请查看游戏日志";Log.Warning("[Surveillance] Camera creation failed: "+e.Message);return null;}
+            w.AcquireError="";
+            var go=camera.gameObject;
             s=new Stream{Id=w.Id,Object=go,Camera=camera,Parent=w.Parent,AdmittedAt=now,LastUse=now};
             // Join the due queue once, behind already overdue feeds.
             s.Clock.Due=now;streams.Add(w.Id,s);return s;
@@ -188,6 +186,7 @@ namespace PZAEC.Surveillance
             double previous=s.Clock.LastSuccess;bool success=false;
             try
             {
+                FeedCamera.Follow(s.Camera,s.Parent);
                 int width=RenderPolicy.Width(s.Quality.Tier);
                 if(s.Texture==null||s.Texture.width!=width)
                 {
@@ -312,7 +311,7 @@ namespace PZAEC.Surveillance
             {
                 Stream s;streams.TryGetValue(w.Id,out s);
                 if((s==null||!s.Active)&&active.Count>=RenderPolicy.MaxActive){w.View.Show(null,"待机：观看名额已满");continue;}
-                s=Acquire(w,now);if(s==null){w.View.Show(null,"正在连接画面");continue;}
+                s=Acquire(w,now);if(s==null){w.View.Show(null,w.AcquireError.Length>0?w.AcquireError:"正在连接画面");continue;}
                 if(!s.Active)
                 {
                     if(!s.WasActive){s.AdmittedAt=s.WakeAt=now;s.Clock.LastSuccess=-1;s.Clock.Due=now;}

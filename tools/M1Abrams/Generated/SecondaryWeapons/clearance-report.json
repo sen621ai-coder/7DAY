@@ -1,0 +1,1031 @@
+{
+  "samples": 168,
+  "collision_samples": 0,
+  "scope": "Triangle surface intersections of moving secondary meshes vs original body/main cannon and other weapon; stationary mounting feet are intentional contacts. Sampled poses, not proof of continuous swept clearance or enclosed-volume containment.",
+  "poses": [
+    {
+      "system": "MG",
+      "yaw": -180,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -180,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -180,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -180,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -180,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -165,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -165,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -165,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -165,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -165,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -150,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -150,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -150,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -150,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -150,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -135,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -135,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -135,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -135,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -135,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -120,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -120,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -120,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -120,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -120,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -105,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -105,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -105,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -105,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -105,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -90,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -90,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -90,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -90,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -90,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -75,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -75,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -75,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -75,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -75,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -60,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -60,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -60,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -60,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -60,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -45,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -45,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -45,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -45,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -45,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -30,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -30,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -30,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -30,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -30,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -15,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -15,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -15,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -15,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": -15,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 0,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 0,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 0,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 0,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 0,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 15,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 15,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 15,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 15,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 15,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 30,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 30,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 30,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 30,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 30,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 45,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 45,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 45,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 45,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 45,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 60,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 60,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 60,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 60,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 60,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 75,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 75,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 75,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 75,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 75,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 90,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 90,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 90,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 90,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 90,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 105,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 105,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 105,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 105,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 105,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 120,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 120,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 120,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 120,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 120,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 135,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 135,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 135,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 135,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 135,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 150,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 150,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 150,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 150,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 150,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 165,
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 165,
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 165,
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 165,
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG",
+      "yaw": 165,
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 15,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 20,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 25,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 35,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 40,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 45,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 50,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 60,
+      "collision": null
+    },
+    {
+      "system": "AA",
+      "pitch": 65,
+      "collision": null
+    },
+    {
+      "system": "MG-self",
+      "pitch": -10,
+      "collision": null
+    },
+    {
+      "system": "MG-self",
+      "pitch": 0,
+      "collision": null
+    },
+    {
+      "system": "MG-self",
+      "pitch": 30,
+      "collision": null
+    },
+    {
+      "system": "MG-self",
+      "pitch": 55,
+      "collision": null
+    },
+    {
+      "system": "MG-self",
+      "pitch": 80,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 0,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 0,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 0,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 0,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 45,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 45,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 45,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 45,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 90,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 90,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 90,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 90,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 135,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 135,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 135,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 135,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 180,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 180,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 180,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 180,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 225,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 225,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 225,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 225,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 270,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 270,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 270,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 270,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 315,
+      "cannon": 4,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 315,
+      "cannon": 4,
+      "recoil": 10,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 315,
+      "cannon": 20,
+      "recoil": 0,
+      "collision": null
+    },
+    {
+      "system": "combined",
+      "turret": 315,
+      "cannon": 20,
+      "recoil": 10,
+      "collision": null
+    }
+  ]
+}

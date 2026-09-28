@@ -112,7 +112,7 @@ namespace PZAEC.M1
                 var spec=Weapons.Spec(v);float damaged=v.vehicle.GetHealthPercent()<.3f?.7f:1;
                 if(damaged<1){
                     var horizontal=new Vector3(rb.velocity.x,0,rb.velocity.z);
-                    float cap=(Vector3.Dot(horizontal,forward)<0?spec.Reverse:v.vehicle.IsTurbo?spec.Turbo:spec.Forward)*damaged;
+                    float cap=(Vector3.Dot(horizontal,forward)<0?spec.Reverse:v.vehicle.IsTurbo?spec.Turbo:spec.Forward)*ModuleRules.Speed(Modules.Get(v))*damaged;
                     // Preserve the existing damaged-vehicle speed cap; this is
                     // separate from step assistance, which only applies forces.
                     if(horizontal.magnitude>cap){horizontal=horizontal.normalized*cap;rb.velocity=new Vector3(horizontal.x,rb.velocity.y,horizontal.z);}

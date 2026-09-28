@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/item_modifiers">
+    <item_modifier name="modPZAECM1Powertrain" installable_tags="PZAECM1" modifier_tags="m1Drive" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modVehicleSuperCharger" />
+      <property name="DescriptionKey" value="modPZAECM1PowertrainDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="1000" />
+      <property name="MaxModsAllowed" value="1" />
+      <effect_group tiered="false" />
+    </item_modifier>
+    <item_modifier name="modPZAECM1Economy" installable_tags="PZAECM1" modifier_tags="m1Drive" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modVehicleFuelSaver" />
+      <property name="DescriptionKey" value="modPZAECM1EconomyDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="1000" />
+      <property name="MaxModsAllowed" value="1" />
+      <effect_group tiered="false" />
+    </item_modifier>
+    <item_modifier name="modPZAECM1Armor" installable_tags="PZAECM1" modifier_tags="m1Armor" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modVehicleArmor" />
+      <property name="DescriptionKey" value="modPZAECM1ArmorDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="1000" />
+      <property name="MaxModsAllowed" value="1" />
+      <effect_group tiered="false" />
+    </item_modifier>
+    <item_modifier name="modPZAECM1Corrosion" installable_tags="PZAECM1" modifier_tags="m1Corrosion" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modArmorPlatingBasic" />
+      <property name="DescriptionKey" value="modPZAECM1CorrosionDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="1000" />
+      <property name="MaxModsAllowed" value="1" />
+      <effect_group tiered="false" />
+    </item_modifier>
+    <item_modifier name="modPZAECM1Stabilizer" installable_tags="PZAECM1" modifier_tags="m1FireControl" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modGunBipod" />
+      <property name="DescriptionKey" value="modPZAECM1StabilizerDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="1000" />
+      <property name="MaxModsAllowed" value="1" />
+      <effect_group tiered="false" />
+    </item_modifier>
+    <item_modifier name="modPZAECM1Autoloader" installable_tags="PZAECM1" modifier_tags="m1FireControl" blocked_tags="noMods" type="attachment">
+      <property name="Extends" value="modGeneralMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="modGunMagazineExtender" />
+      <property name="DescriptionKey" value="modPZAECM1AutoloaderDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="EconomicValue" value="1000" />
+      <property name="MaxModsAllowed" value="1" />
+      <effect_group tiered="false" />
+    </item_modifier>
+  </append>
+</configs>
