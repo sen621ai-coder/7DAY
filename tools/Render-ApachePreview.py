@@ -136,7 +136,8 @@ def main():
     # Current runtime-generated compact mount and M230-style gun.
     anchor=np.array([0,.48,3.58]); proc=[]
     def add(shape,color): proc.append((shape[0]+anchor,shape[1],np.array(color,float)))
-    gunmetal=(69,74,74);steel=(51,56,59);dark=(17,20,21);fairing=(107,112,110)
+    # Match the runtime's muted airframe-grey receiver and lighter mount.
+    gunmetal=(117,122,120);steel=(82,87,87);dark=(33,38,38);fairing=(148,153,150)
     add(cube((0,.57,-.10),(.38,.055,.31)),fairing)
     add(cylinder((0,.43,-.10),(.15,.13,.15)),steel);add(cylinder((0,.26,-.10),(.27,.05,.27)),steel);add(cylinder((0,.13,-.10),(.18,.08,.18)),dark)
     for side in (-1,1):

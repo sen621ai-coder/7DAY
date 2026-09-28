@@ -1,6 +1,14 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.19 Apache belly cannon finish
+
+- The gun receiver and mounting fairing now use muted greys closer to the
+  original Apache skin. The barrel and rotating hardware keep darker steel
+  tones; reduced gloss avoids a polished plastic appearance.
+- Airframe texture, attachment position, weapon aim and damage are unchanged.
+  Restart the game/server and update clients to load the rebuilt visual DLL.
+
 Runtime 1.27.18 tactical component scrap recovery
 - Completed T16-T19 armor scraps independently have a 50% chance of +1
   same-rank tactical component; the seven weapon families have 50% for +2.

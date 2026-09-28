@@ -21,9 +21,11 @@ namespace AECT16RuntimeFix
             if(gun ? gunMaterial!=null : lightMaterial!=null)return gun ? gunMaterial : lightMaterial;
             var shader=Shader.Find(gun ? "Standard" : "Sprites/Default") ?? Shader.Find("Unlit/Color");
             if(shader==null)return null;
-            var material=new Material(shader){color=gun ? new Color(.27f,.29f,.29f) : new Color(1,.55f,.1f)};
+            // The receiver is a muted grey like the original airframe; the
+            // moving barrel and joints remain darker for readable depth.
+            var material=new Material(shader){color=gun ? new Color(.46f,.48f,.47f) : new Color(1,.55f,.1f)};
             if(gun&&material.HasProperty("_Metallic"))material.SetFloat("_Metallic",.15f);
-            if(gun&&material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",.24f);
+            if(gun&&material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",.16f);
             if(gun)gunMaterial=material;else lightMaterial=material;
             return material;
         }
@@ -41,9 +43,9 @@ namespace AECT16RuntimeFix
             if(existing!=null){ApacheGunnerPresentation.DestroyGun(existing.Pivot);ApacheGunnerPresentation.DestroyMount(existing.Mount);}
             var state=ApacheWeapons.GetState(vehicle);
             var pivot=new GameObject("PZAEC_Apache_Cannon");pivot.hideFlags=HideFlags.DontSave;
-            if(steelMaterial==null){steelMaterial=new Material(Material(true)){color=new Color(.20f,.22f,.23f)};if(steelMaterial.HasProperty("_Metallic"))steelMaterial.SetFloat("_Metallic",.55f);}
-            if(darkMaterial==null)darkMaterial=new Material(Material(true)){color=new Color(.065f,.075f,.08f)};
-            if(fairingMaterial==null)fairingMaterial=new Material(Material(true)){color=new Color(.42f,.44f,.43f)};
+            if(steelMaterial==null){steelMaterial=new Material(Material(true)){color=new Color(.32f,.34f,.34f)};if(steelMaterial.HasProperty("_Metallic"))steelMaterial.SetFloat("_Metallic",.32f);}
+            if(darkMaterial==null)darkMaterial=new Material(Material(true)){color=new Color(.13f,.15f,.15f)};
+            if(fairingMaterial==null)fairingMaterial=new Material(Material(true)){color=new Color(.58f,.60f,.59f)};
             var mount=new GameObject("PZAEC_Apache_CannonMount");mount.hideFlags=HideFlags.DontSave;
             // Bind the complete assembly to the actual model transform. The
             // mount follows vehicle animation/physics between Update calls;
