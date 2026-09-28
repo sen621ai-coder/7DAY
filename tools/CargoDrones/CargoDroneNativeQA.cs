@@ -10,6 +10,7 @@ using YFAutomation.CargoDrones;
 public sealed class CargoDroneNativeQA : IModApi
 {
     static readonly List<string> lines=new List<string>();
+    static bool entranceObstructionRemoved,entranceThroatReached;
     static ChunkManager.ChunkObserver observer;
     static CargoNativeLeaseService leaseService;
     static CargoNativeLease nativeLease;
@@ -342,6 +343,9 @@ public sealed class CargoDroneNativeQA : IModApi
                     roomChunk.SetBlockRaw(roomX&15,y,z&15,solid?stone:BlockValue.Air);
                 }
                 Check(true,"native enclosed room includes ceiling opening, vertical entrance and lateral destination");
+                var throatChunk=world.GetChunkFromWorldPos(-1627,-1146) as Chunk;
+                throatChunk.SetBlockRaw(-1627&15,220,-1146&15,stone);
+                entranceObstructionRemoved=entranceThroatReached=false;
                 phase=60;deadline=Time.realtimeSinceStartup+180;motionTime=Time.realtimeSinceStartup;return;
             }
             if(phase==7||phase==8||phase==60)
@@ -349,6 +353,16 @@ public sealed class CargoDroneNativeQA : IModApi
                 float now=Time.realtimeSinceStartup;long elapsed=(long)((now-motionTime)*1000);
                 if(elapsed<=0)return;motionTime=now;
                 var before=motion.Position;motion.Tick(elapsed);
+                if(phase==60)
+                {
+                    if(motion.Position.Distance(new CargoPoint(-1626.5,220,-1145.5))<1e-7)entranceThroatReached=true;
+                    if(!entranceObstructionRemoved&&motion.RouteProbes>0&&motion.Hold==CargoHold.PathBlocked)
+                    {
+                        Check(motion.Position.Y>220,"temporary obstruction holds drone above entrance after local planning fails");
+                        (world.GetChunkFromWorldPos(-1627,-1146) as Chunk).SetBlockRaw(-1627&15,220,-1146&15,BlockValue.Air);
+                        entranceObstructionRemoved=true;
+                    }
+                }
                 if(phase==8)maxReturnHeight=Math.Max(maxReturnHeight,motion.Position.Y);
                 if(before.Distance(motion.Position)>.600001)throw new Exception("Native movement teleported");
                 maxMotionChunks=Math.Max(maxMotionChunks,leaseService.HeldChunks);
@@ -358,6 +372,7 @@ public sealed class CargoDroneNativeQA : IModApi
                 Check(world.Players.Count==0,"continuous native-data swept flight reached endpoint without players, phase="+phase);
                 if(phase==60)
                 {
+                    Check(entranceObstructionRemoved&&entranceThroatReached,"native automatic retry retains vertical throat after obstruction removal instead of shortcutting through roof");
                     Check(leaseService.HeldChunks<=49,"negative-coordinate entrance descent and diagonal exit finish without recall or exceeding chunk budget");
                     airspace.Dispose();leaseService.Dispose();phase=9;deadline=now+120;return;
                 }

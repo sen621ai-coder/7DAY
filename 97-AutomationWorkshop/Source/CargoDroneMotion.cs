@@ -93,6 +93,7 @@ namespace YFAutomation.CargoDrones
         {
             CargoTrace.Emit(space,"retarget","from="+CargoTrace.Point(Position)+" target="+CargoTrace.Point(target));
             if(ReturningHome)throw new InvalidOperationException("A returning motion cannot discard its home corridor; start a new motion after docking");
+            hasSegment=false;detour.Clear();
             Target=target;ceiling=Math.Min(253,Math.Max(Position.Y,target.Y)+24);RetryPath();Arrived=false;Hold=CargoHold.None;
         }
         public void RetargetVia(CargoPoint target,IEnumerable<CargoPoint> waypoints)
@@ -130,9 +131,10 @@ namespace YFAutomation.CargoDrones
         public void RetryPath()
         {
             CargoTrace.Emit(space,"retry","pos="+CargoTrace.Point(Position)+" target="+CargoTrace.Point(Target)+" returning="+ReturningHome+" remaining="+detour.Count);
-            // On return, keep the current edge and remaining corridor. Clearing
-            // them here would silently replace an obstructed route with a shortcut.
-            if(!ReturningHome){hasSegment=false;detour.Clear();}search=null;routeFailed=false;blockedWait=0;
+            // Retry the same edge on both outbound and return legs. Mandatory
+            // entrance points survive failed local searches and manual retries.
+            // Only explicit Retarget/ReturnHome may replace the corridor.
+            search=null;routeFailed=false;blockedWait=0;
         }
         public void ReturnHome()
         {

@@ -326,6 +326,17 @@ public static class CargoDroneCoreTests
                 if(stage>=5){for(int i=0;i<100&&!mission.TransferReady;i++)mission.Tick(100);mission.BeginTransfer(journal,output);output.Save=CargoSaveResult.Durable;mission.Tick(0);for(int i=0;i<5;i++)mission.Tick(100);}
                 if(stage>=6)for(int i=0;i<1000&&mission.Phase!=CargoPhase.Docking;i++)mission.Tick(100);
                 var captured=mission.Capture();int entries=journal.Entries.Count;
+                if(stage==2)
+                {
+                    var top=new CargoPoint(5,112,5);var entrance=new CargoPoint(5,100,5);
+                    var lost=new CargoMotionState(top,captured.Destination,new[]{new CargoPoint(0,100,0),top},new CargoPoint[0],false,false,false,true,CargoHold.PathBlocked,6,2,captured.Reserve,1000,13);
+                    var legacy=new CargoMissionState(world,captured.Id,captured.Source,captured.Target,captured.Owner,captured.Destination,captured.Reserve,CargoPhase.ToTarget,CargoHold.PathBlocked,false,0,0,false,captured.ReturnReason,captured.Battery,captured.Revision,captured.Cargo,lost);
+                    var repairSpace=new ObstacleAirspace{Unavailable=true};var repaired=CargoMission.Restore(legacy,repairSpace,journal,entrance);
+                    Check(repaired.Capture().Motion.Remaining.Any(p=>p.Distance(entrance)<1e-7)&&repaired.Capture().Motion.Trail.SequenceEqual(lost.Trail),"legacy lost entrance repair retains proven return trail and adds descent");
+                    repaired.Tick(100);Check(repaired.Position.Distance(top)<1e-7&&repaired.Battery==legacy.Battery&&CargoPlanner.Equal(repaired.Cargo,legacy.Cargo),"legacy repair still waits for collision data without altering cargo or battery");
+                    repairSpace.Unavailable=false;for(int i=0;i<1000&&repaired.Phase!=CargoPhase.Unloading;i++)repaired.Tick(100);
+                    Check(repaired.Phase==CargoPhase.Unloading&&repairSpace.Reached.Any(p=>p.Distance(entrance)<1e-7),"legacy mission descends through entrance before reaching its box");
+                }
                 using(var store=new CargoCheckpointStore(root,world))
                 {
                     store.Save(new[]{captured},journal);store.Save(new[]{captured},journal);
@@ -684,6 +695,22 @@ public static class CargoDroneCoreTests
         motion.Tick(100);Check(closed.Sweeps>probes,"blocked route automatically rechecks at the retry deadline");
         closed.Obstacles.Clear();for(int i=0;i<500&&!motion.Arrived;i++)motion.Tick(100);
         Check(motion.Arrived,"automatic retry recovers outbound flight after obstruction removed");
+        foreach(bool reload in new[]{false,true})
+        {
+            var shaft=new ObstacleAirspace();var top=new CargoPoint(-1626.5,67,-1145.5);var throat=new CargoPoint(-1626.5,58.2,-1145.5);var box=new CargoPoint(-1611.5,58.2,-1140.5);
+            shaft.Obstacles.Add(new CargoBox(new CargoPoint(-1628,57,-1147),new CargoPoint(-1625,60,-1144)));
+            var charge=new CargoEnergy(319380);var descent=new CargoMotion(shaft,top,box,charge,returnReserve:180000);descent.RetargetVia(box,new[]{throat});
+            for(int i=0;i<200&&!descent.Capture().Blocked;i++)descent.Tick(100);
+            Check(descent.Capture().Blocked&&descent.Position.Distance(top)<1e-7,"temporary entity at entrance exhausts local routes without moving");
+            if(reload)descent=new CargoMotion(shaft,charge,descent.Capture());
+            for(int i=0;i<200;i++)descent.Tick(100);
+            Check(descent.Capture().Remaining.Any(p=>p.Distance(throat)<1e-7)&&descent.Battery==319380,"repeated automatic retries retain entrance and spend no stalled energy, including reload");
+            descent.RetryPath();Check(descent.Capture().Remaining.Any(p=>p.Distance(throat)<1e-7),"manual retry also retains entrance");
+            shaft.Obstacles.Clear();for(int i=0;i<1000&&!descent.Arrived;i++)descent.Tick(100);
+            Check(descent.Arrived&&shaft.Reached.Any(p=>p.Distance(throat)<1e-7),"removed obstacle allows vertical descent before approaching box");
+            descent.RetargetVia(top,new[]{new CargoPoint(box.X,67,box.Z)});
+            Check(!descent.Capture().Remaining.Any(p=>p.Distance(throat)<1e-7),"explicit new target replaces obsolete corridor");
+        }
         var viaSpace=new ObstacleAirspace();viaSpace.Obstacles.Add(new CargoBox(new CargoPoint(5,102,1),new CargoPoint(7,106,5)));
         var viaA=new CargoPoint(0,104,0);var viaB=new CargoPoint(16,104,10);var approach=new CargoPoint(16,104,0);
         motion=new CargoMotion(viaSpace,origin,goal,600000);motion.RetargetVia(goal,new[]{viaA,viaB,approach});
