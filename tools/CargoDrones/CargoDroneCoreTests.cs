@@ -580,7 +580,7 @@ public static class CargoDroneCoreTests
         Throws(()=>motion.Retarget(new CargoPoint(100,100,0)),"active returned motion cannot discard corridor for another sortie");
         var changed=new ObstacleAirspace();motion=new CargoMotion(changed,home,new CargoPoint(40,100,0),600000,returnReserve:180000);
         for(int i=0;i<2000&&!motion.Arrived;i++)motion.Tick(100);
-        changed.Obstacles.Add(new CargoBox(new CargoPoint(25,98,-2),new CargoPoint(27,102,2)));motion.ReturnHome();
+        changed.Obstacles.Add(new CargoBox(new CargoPoint(25,1,-100),new CargoPoint(27,253,100)));motion.ReturnHome();
         for(int i=0;i<100;i++)motion.Tick(100);
         Check(motion.Hold==CargoHold.PathBlocked&&!motion.Arrived&&motion.Position.X>27,"new obstruction on historical return corridor freezes before wall");
         var held=motion.Position;long heldBattery=motion.Battery;for(int i=0;i<20;i++)motion.Tick(100);
@@ -686,10 +686,10 @@ public static class CargoDroneCoreTests
         unavailable.Unavailable=false;for(int i=0;i<100&&!route.Complete;i++)route.Advance();Check(route.Complete,"route resumes after data becomes available");
         var closed=new ObstacleAirspace();closed.Obstacles.Add(new CargoBox(new CargoPoint(4,0,-100),new CargoPoint(8,253,100)));
         motion=new CargoMotion(closed,origin,goal,600000,returnReserve:180000);
-        for(int i=0;i<100&&!motion.Capture().Blocked;i++)motion.Tick(100);
+        for(int i=0;i<20000&&!motion.Capture().Blocked;i++)motion.Tick(100);
         Check(motion.Capture().Blocked,"impossible route reaches bounded failure");
         int probes=closed.Sweeps;for(int i=0;i<9;i++)motion.Tick(100);
-        Check(motion.Hold==CargoHold.PathBlocked&&motion.Position.Distance(origin)==0&&motion.Battery==600000&&closed.Sweeps==probes&&motion.RouteProbes<=256,"blocked route waits one simulation second without motion, drain or busy replanning");
+        Check(motion.Hold==CargoHold.PathBlocked&&motion.Position.Distance(origin)==0&&motion.Battery==600000&&closed.Sweeps==probes&&motion.RouteProbes<=16640,"blocked route waits one simulation second without motion, drain or busy replanning");
         for(int i=0;i<50;i++)motion.Tick(100,false);
         Check(closed.Sweeps==probes,"offline time does not advance the retry timer");
         motion.Tick(100);Check(closed.Sweeps>probes,"blocked route automatically rechecks at the retry deadline");
@@ -700,7 +700,7 @@ public static class CargoDroneCoreTests
             var shaft=new ObstacleAirspace();var top=new CargoPoint(-1626.5,67,-1145.5);var throat=new CargoPoint(-1626.5,58.2,-1145.5);var box=new CargoPoint(-1611.5,58.2,-1140.5);
             shaft.Obstacles.Add(new CargoBox(new CargoPoint(-1628,57,-1147),new CargoPoint(-1625,60,-1144)));
             var charge=new CargoEnergy(319380);var descent=new CargoMotion(shaft,top,box,charge,returnReserve:180000);descent.RetargetVia(box,new[]{throat});
-            for(int i=0;i<200&&!descent.Capture().Blocked;i++)descent.Tick(100);
+            for(int i=0;i<20000&&!descent.Capture().Blocked;i++)descent.Tick(100);
             Check(descent.Capture().Blocked&&descent.Position.Distance(top)<1e-7,"temporary entity at entrance exhausts local routes without moving");
             if(reload)descent=new CargoMotion(shaft,charge,descent.Capture());
             for(int i=0;i<200;i++)descent.Tick(100);

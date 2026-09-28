@@ -338,11 +338,11 @@ public sealed class CargoDroneNativeQA : IModApi
                 var stone=Block.GetBlockValue("terrStone",false);
                 for(int roomX=-1630;roomX<=-1608;roomX++)for(int z=-1149;z<=-1137;z++)for(int y=218;y<=227;y++)
                 {
-                    bool solid=y==218||roomX==-1630||roomX==-1608||z==-1149||z==-1137||y==227&&!(roomX>=-1629&&roomX<=-1624&&z>=-1148&&z<=-1143);
+                    bool solid=y==218||roomX==-1630||roomX==-1608||z==-1149||z==-1137||y==227&&!(roomX>=-1629&&roomX<=-1624&&z>=-1148&&z<=-1143)||roomX==-1623&&z<=-1142||roomX==-1617&&z>=-1144;
                     var roomChunk=world.GetChunkFromWorldPos(roomX,z) as Chunk;
                     roomChunk.SetBlockRaw(roomX&15,y,z&15,solid?stone:BlockValue.Air);
                 }
-                Check(true,"native enclosed room includes ceiling opening, vertical entrance and lateral destination");
+                Check(true,"native approximation has ceiling opening, entrance and alternating partition gaps requiring multiple indoor turns");
                 var throatChunk=world.GetChunkFromWorldPos(-1627,-1146) as Chunk;
                 throatChunk.SetBlockRaw(-1627&15,220,-1146&15,stone);
                 entranceObstructionRemoved=entranceThroatReached=false;
@@ -373,7 +373,7 @@ public sealed class CargoDroneNativeQA : IModApi
                 if(phase==60)
                 {
                     Check(entranceObstructionRemoved&&entranceThroatReached,"native automatic retry retains vertical throat after obstruction removal instead of shortcutting through roof");
-                    Check(leaseService.HeldChunks<=49,"negative-coordinate entrance descent and diagonal exit finish without recall or exceeding chunk budget");
+                    Check(leaseService.HeldChunks<=49,"negative-coordinate entrance and multi-turn indoor maze finish without recall or exceeding chunk budget");
                     airspace.Dispose();leaseService.Dispose();phase=9;deadline=now+120;return;
                 }
                 if(phase==7)
@@ -401,7 +401,7 @@ public sealed class CargoDroneNativeQA : IModApi
                 leaseService=new CargoNativeLeaseService(world,49,128);airspace=new CargoNativeAirspace(world,leaseService,Guid.NewGuid());
                 var start=new CargoPoint(-1631.5,240,-1081.5);var target=new CargoPoint(-1611.5,220,-1140.5);
                 motion=new CargoMotion(airspace,start,target,600000,returnReserve:180000);
-                motion.RetargetVia(target,new[]{new CargoPoint(-1626.5,240,-1145.5),new CargoPoint(-1626.5,220,-1145.5)});
+                motion.RetargetVia(target,new[]{new CargoPoint(-1626.5,240,-1145.5),new CargoPoint(-1626.5,220,-1145.5)},1);
                 phase=59;deadline=now+180;motionTime=now;return;
             }
             if(phase==9)

@@ -24,7 +24,7 @@ namespace YFAutomation.CargoDrones
             try{current.Tick(elapsed,GameManager.Instance.IsPaused());}
             catch(Exception ex){Log.Error("[YFCargo] World scheduling stopped: "+ex);}
         }
-        sealed class Space : ICargoAirspace,ICargoFlightTrace
+        sealed class Space : ICargoAirspace,ICargoFlightTrace,ICargoPlanningSpace
         {
             readonly CargoNativeWorld owner;readonly Guid flight;
             CargoNativeAirspace native;
@@ -33,6 +33,11 @@ namespace YFAutomation.CargoDrones
             CargoNativeAirspace Get(){owner.Context();if(native==null)native=new CargoNativeAirspace(owner.world,owner.leases,flight);return native;}
             public CargoHold Prepare(CargoPoint from,CargoPoint to){return Get().Prepare(from,to);}
             public CargoSweep Sweep(CargoPoint from,CargoPoint to){return Get().Sweep(from,to);}
+            public void CancelPlanning(object search){Get().CancelPlanning(search);}
+            public bool BeginPlanning(object search){return Get().BeginPlanning(search);}
+            public void EndPlanning(double ms,int probes){Get().EndPlanning(ms,probes);}
+            public CargoSweep PlanningSweep(CargoPoint a,CargoPoint b){return Get().PlanningSweep(a,b);}
+            public bool DynamicObstacle{get{return Get().DynamicObstacle;}}
             public void ReachedSegment(CargoPoint at){Get().ReachedSegment(at);}
             public void Release(){native?.Dispose();native=null;}
         }
@@ -56,8 +61,8 @@ namespace YFAutomation.CargoDrones
         public CargoNativeWorld(World world,Guid worldId,CargoFileJournal journal,CargoCheckpointStore checkpoints)
         {
             if(world==null||world.IsRemote()||GameManager.Instance?.World!=world||worldId==Guid.Empty||!CargoNativeAccessSessions.Installed)throw new InvalidOperationException("Server world with inventory session tracking required");
-            this.world=world;this.worldId=worldId;leases=new CargoNativeLeaseService(world);Diagnostics=new CargoDiagnostics(worldId);
-            Diagnostics.Write("start",worldId,"diagnostics=0.10.3 perFlight=49 global=128",0);
+            CargoNavigationScheduler.Clear();this.world=world;this.worldId=worldId;leases=new CargoNativeLeaseService(world);Diagnostics=new CargoDiagnostics(worldId);
+            Diagnostics.Write("start",worldId,"diagnostics=0.11.0 perFlight=49 global=128 searchCpuMs=1500 frameCpuMs=2",0);
             Service=new CargoWorldService(worldId,journal,checkpoints,this);
             CargoHubUI.Install(new HarmonyLib.Harmony("yf.cargo.qa.hubui"));
             if(Current!=null){leases.Dispose();throw new InvalidOperationException("Cargo world already attached");}lastUpdate=Time.realtimeSinceStartup;Current=this;

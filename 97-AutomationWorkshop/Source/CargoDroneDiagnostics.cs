@@ -35,8 +35,8 @@ namespace YFAutomation.CargoDrones
         }
         public void Status(CargoHubStatus s,int budget)
         {
-            string state=s.Flight+"/"+s.Phase+"/"+s.Hold+"/"+s.Packages+"/"+s.Configuration.Revision+"/"+s.Message;
-            Write("state",s.Configuration.HubId,"flight="+s.Flight+" phase="+s.Phase+" hold="+s.Hold+" pos="+CargoTrace.Point(s.Position)+" battery="+s.Battery+" cargo="+s.Packages+" paused="+s.Configuration.Paused+" powered="+s.Powered+" revision="+s.Configuration.Revision+" budget="+budget+" target="+Binding(s.Configuration.Target)+" shipmentTarget="+Binding(s.ShipmentTarget)+" entrance="+(s.Configuration.Entrance.HasValue?CargoHubUI.Coordinates(s.Configuration.Entrance.Value):"none")+" message="+s.Message,10,state);
+            string state=s.Flight+"/"+s.Phase+"/"+s.Navigation+"/"+s.Hold+"/"+s.Packages+"/"+s.Configuration.Revision+"/"+s.Message;
+            Write("state",s.Configuration.HubId,"flight="+s.Flight+" phase="+s.Phase+" navigation="+s.Navigation+" hold="+s.Hold+" pos="+CargoTrace.Point(s.Position)+" battery="+s.Battery+" cargo="+s.Packages+" paused="+s.Configuration.Paused+" powered="+s.Powered+" revision="+s.Configuration.Revision+" budget="+budget+" target="+Binding(s.Configuration.Target)+" shipmentTarget="+Binding(s.ShipmentTarget)+" entrance="+(s.Configuration.Entrance.HasValue?CargoHubUI.Coordinates(s.Configuration.Entrance.Value):"none")+" message="+s.Message,10,state);
         }
         static string Binding(CargoBinding b){return b==null?"none":b.EndpointId+"@"+CargoHubUI.Coordinates(b.Position);}
     }

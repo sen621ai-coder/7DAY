@@ -7,7 +7,7 @@ namespace YFAutomation.CargoDrones
 {
     // Rolling windows and authoritative data-based sweeps. This adapter owns its
     // flight's handles, not the shared world lease service or any inventory.
-    public sealed class CargoNativeAirspace : ICargoAirspace,ICargoFlightTrace,IDisposable
+    public sealed class CargoNativeAirspace : ICargoAirspace,ICargoFlightTrace,ICargoPlanningSpace,IDisposable
     {
         readonly World world;
         readonly CargoNativeLeaseService leases;
@@ -16,7 +16,24 @@ namespace YFAutomation.CargoDrones
         readonly List<CargoNativeLease> windows=new List<CargoNativeLease>();
         CargoPosition[] centers=new CargoPosition[0];
         float waitingSince=-1,nextDiagnostic,nextBudgetRetry;
-        bool disposed;
+        bool disposed,planning,planningPrepare;
+        public bool DynamicObstacle{get;private set;}
+        sealed class CachedBlock { public BlockValue Value;public Bounds[] Bounds;public float At; }
+        readonly Dictionary<CargoPosition,CachedBlock> blockCache=new Dictionary<CargoPosition,CachedBlock>();
+        public void CancelPlanning(object search){CargoNavigationScheduler.Remove(search);}
+        public bool BeginPlanning(object search){planningPrepare=CargoNavigationScheduler.Begin(search);return planningPrepare;}
+        public void EndPlanning(double milliseconds,int probes){planningPrepare=false;CargoNavigationScheduler.End(milliseconds,probes);}
+        public CargoSweep PlanningSweep(CargoPoint from,CargoPoint to)
+        {planning=true;try{return Sweep(from,to);}finally{planning=false;}}
+        void CollisionBoxes(BlockValue value,int x,int y,int z)
+        {
+            var key=new CargoPosition(x,y,z);CachedBlock cached;
+            if(planning&&blockCache.TryGetValue(key,out cached)&&Time.realtimeSinceStartup-cached.At<1&&cached.Value.Equals(value))
+            {boxes.AddRange(cached.Bounds);return;}
+            value.Block.GetCollisionAABB(value,x,y,z,0,boxes);
+            if(planning&&boxes.Count<=64)
+            {if(blockCache.Count>=4096)blockCache.Clear();blockCache[key]=new CachedBlock{Value=value,Bounds=boxes.ToArray(),At=Time.realtimeSinceStartup};}
+        }
         readonly List<Bounds> boxes=new List<Bounds>();
         CargoPoint? dock;
         bool Hit(CargoBox obstacle,CargoPoint from,CargoPoint to,string reason="block")
@@ -32,11 +49,11 @@ namespace YFAutomation.CargoDrones
             if(disposed)throw new ObjectDisposedException("CargoNativeAirspace");leases.Poll();CargoHold hold;
             if(Time.realtimeSinceStartup<nextBudgetRetry)return CargoHold.ChunkBudget;
             var required=CargoAirspaceCoverage.Centers(from,end);
-            if(required.Length!=centers.Length||required.Where((p,i)=>!SameChunk(p,centers[i])).Any())
+            if(!planningPrepare||required.Length!=centers.Length||required.Where((p,i)=>!SameChunk(p,centers[i])).Any())
             {
                 // Preserve overlap: releasing the whole corridor on every chunk
                 // boundary forces a moving drone to wait for the same data again.
-                foreach(var window in windows.Where(w=>!required.Any(p=>SameChunk(p,w.Center))).ToArray())
+                foreach(var window in windows.Where(w=>!required.Any(p=>SameChunk(p,w.Center))&&(!planningPrepare||windows.Count>=9)).ToArray())
                 {leases.Release(window.Id,flight);windows.Remove(window);}
                 centers=required;
             }
@@ -76,6 +93,7 @@ namespace YFAutomation.CargoDrones
         {return new CargoBox(new CargoPoint(bounds.min.x,bounds.min.y,bounds.min.z),new CargoPoint(bounds.max.x,bounds.max.y,bounds.max.z));}
         public CargoSweep Sweep(CargoPoint from,CargoPoint to)
         {
+            DynamicObstacle=false;
             if(disposed||GameManager.Instance==null||GameManager.Instance.World!=world)return CargoSweep.Unavailable;
             var state=CargoNativeWorld.Current?.Service.Status().SingleOrDefault(s=>s.Flight==flight);
             dock=state==null?(CargoPoint?)null:CargoNativeWorld.Current.Home(state.Configuration);
@@ -115,7 +133,7 @@ namespace YFAutomation.CargoDrones
                         continue;
                     }
                     var block=value.Block;if(!block.IsCollideMovement)continue;
-                    boxes.Clear();block.GetCollisionAABB(value,x,y,z,0,boxes);
+                    boxes.Clear();CollisionBoxes(value,x,y,z);
                     foreach(var box in boxes)if(Hit(Box(box),from,to,block.GetBlockName()))return CargoSweep.Blocked;
                 }
             }
@@ -124,7 +142,7 @@ namespace YFAutomation.CargoDrones
             // cargo drone is cosmetic and deals no collision damage, so players
             // must not be able to trap or grief an autonomous shipment.
             foreach(var entity in world.GetEntitiesInBounds((Entity)null,envelope))
-                if(!(entity is EntityPlayer)&&Hit(Box(entity.getBoundingBox()),from,to,"entity:"+entity.entityId))return CargoSweep.Blocked;
+                if(!(entity is EntityPlayer)&&Hit(Box(entity.getBoundingBox()),from,to,"entity:"+entity.entityId)){DynamicObstacle=true;return CargoSweep.Blocked;}
             return CargoSweep.Clear;
         }
         public void ReachedSegment(CargoPoint at)
@@ -135,7 +153,7 @@ namespace YFAutomation.CargoDrones
         public void Dispose()
         {
             if(disposed)return;
-            foreach(var window in windows)leases.Release(window.Id,flight);windows.Clear();disposed=true;
+            foreach(var window in windows)leases.Release(window.Id,flight);windows.Clear();blockCache.Clear();disposed=true;
         }
     }
 }

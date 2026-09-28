@@ -27,6 +27,7 @@ namespace YFAutomation.CargoDrones
         public CargoMissionReturnReason ReturnReason{get;private set;}
         public CargoPhase Phase{get{return flight.Phase;}}
         public CargoHold Hold{get{return flight.Hold;}}
+        public CargoNavigationStatus Navigation{get{return motion.Navigation;}}
         public CargoPoint Position{get{return motion.Position;}}
         public long Battery{get{return flight.Battery;}}
         public long CargoRevision{get;private set;}
@@ -68,7 +69,7 @@ namespace YFAutomation.CargoDrones
         void RouteTo(CargoPoint target,CargoPoint? entrance)
         {
             var points=RoutePoints(motion.Position,target,entrance);points.RemoveAt(points.Count-1);
-            motion.RetargetVia(target,points);
+            motion.RetargetVia(target,points,entrance.HasValue?2:-1);
         }
         // Use the same vertical/entrance corridor as navigation. Bound each
         // estimate edge like motion does, including slow final approaches.
@@ -104,7 +105,7 @@ namespace YFAutomation.CargoDrones
         public void SetDeliveryEntrance(CargoPoint? entrance)
         {
             if(retired||failed||flight.TransferPending)throw new InvalidOperationException("当前航段不能更改入口航点");
-            deliveryEntrance=entrance;if(Phase==CargoPhase.ToTarget)RouteDelivery();
+            deliveryEntrance=entrance;motion.InvalidateFailure();if(Phase==CargoPhase.ToTarget)RouteDelivery();
         }
         public void Recall()
         {RequestReturn(CargoMissionReturnReason.Requested);}
@@ -120,6 +121,8 @@ namespace YFAutomation.CargoDrones
             if(Phase!=CargoPhase.Docked||!powered||!ownerOnline||paused)return;
             energy.Charge(Math.Min(elapsed,100)*10,600000);
         }
+        public void SuspendPlanning(){motion.SuspendPlanning();}
+        public bool PreflightFailure(ICargoAirspace airspace,double now){return motion.PreflightFailure(airspace,now);}
         public CargoMission RetryDelivery(ICargoAirspace airspace)
         {
             if(retired||Phase!=CargoPhase.Docked||failed||CargoPlanner.Count(cargo)==0||Battery<reserve)throw new InvalidOperationException("Docked committed cargo required for redelivery");
@@ -183,7 +186,7 @@ namespace YFAutomation.CargoDrones
             // departure/approach corridor. Returning flights retain the exact
             // recorded trail so a safe corridor is never invented on recall.
             if(state.Phase==CargoPhase.ToTarget&&state.Motion.Trail.Length>0&&state.Motion.Position.Distance(state.Motion.Trail[0])<1e-7)RouteDelivery();
-            else if(state.Phase==CargoPhase.ToTarget&&entrance.HasValue&&state.Motion.Position.Y>entrance.Value.Y&&
+            else if(state.Motion.Navigation==null&&state.Phase==CargoPhase.ToTarget&&entrance.HasValue&&state.Motion.Position.Y>entrance.Value.Y&&
                 Math.Abs(state.Motion.Position.X-entrance.Value.X)<.01&&Math.Abs(state.Motion.Position.Z-entrance.Value.Z)<.01&&
                 !state.Motion.Remaining.Any(p=>p.Distance(entrance.Value)<1e-7))
             {
@@ -192,9 +195,12 @@ namespace YFAutomation.CargoDrones
                 // preserve cargo, battery and the proven return trail.
                 var points=new List<CargoPoint>{entrance.Value};
                 if(Math.Abs(entrance.Value.Y-destination.Y)>1)points.Add(new CargoPoint(entrance.Value.X,destination.Y,entrance.Value.Z));
-                motion.RetargetVia(destination,points);
+                motion.RetargetVia(destination,points,0);
                 CargoTrace.Emit(airspace,"entrance-repaired","pos="+CargoTrace.Point(state.Motion.Position)+" entrance="+CargoTrace.Point(entrance.Value)+" target="+CargoTrace.Point(destination));
             }
+            else if(state.Motion.Navigation==null&&state.Phase==CargoPhase.ToTarget&&entrance.HasValue&&
+                !state.Motion.Remaining.Any(p=>p.Distance(entrance.Value)<1e-7)&&!state.Motion.Trail.Any(p=>p.Distance(entrance.Value)<1e-7))
+            {motion.RequireMigration();CargoTrace.Emit(airspace,"route-migration","reason=ambiguous-entrance-progress");}
         }
         void RequestReturn(CargoMissionReturnReason reason)
         {if(Phase==CargoPhase.RecoveryOnly||Phase==CargoPhase.Docked)return;if(ReturnReason==CargoMissionReturnReason.None)ReturnReason=reason;flight.Recall();if(!flight.TransferPending&&!failed)motion.ReturnHome();}
@@ -216,7 +222,7 @@ namespace YFAutomation.CargoDrones
                 catch{failed=true;flight.SetHold(CargoHold.RecoveryRequired);throw;}
                 if(failed||transfer!=null)return;
             }
-            if(!ownerOnline||paused){flight.SetHold(CargoHold.OwnerOffline);return;}
+            if(!ownerOnline||paused){motion.SuspendPlanning();flight.SetHold(CargoHold.OwnerOffline);return;}
             if(Phase==CargoPhase.Docking){flight.SetHold(CargoHold.PersistencePending);return;}
             flight.SetHold(CargoHold.None);
             if(Phase==CargoPhase.ToSource||Phase==CargoPhase.ToTarget||Phase==CargoPhase.Returning)

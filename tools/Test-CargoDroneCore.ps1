@@ -14,6 +14,7 @@ $sources=@(
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDronePreparedRecovery.cs'),
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDroneMotion.cs'),
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDroneRouting.cs'),
+    (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDronePathSearch.cs'),
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDroneReturnTrail.cs'),
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDroneMission.cs'),
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDroneCheckpoint.cs'),
@@ -22,10 +23,13 @@ $sources=@(
     (Join-Path $modRoot '97-AutomationWorkshop/Source/CargoDroneRecoveryDelivery.cs'),
     (Join-Path $PSScriptRoot 'CargoDrones/CargoDroneCoreTests.cs')
     (Join-Path $PSScriptRoot 'CargoDrones/CargoDroneWorldTests.cs')
+    (Join-Path $PSScriptRoot 'CargoDrones/CargoDronePathTests.cs')
 )
 Add-Type -Path $sources
 $report=[CargoDroneCoreTests]::Run([IO.Path]::GetFullPath($OutputDirectory))
 $worldChecks=[CargoDroneWorldTests]::Run([IO.Path]::GetFullPath($OutputDirectory))
+$pathChecks=[CargoDronePathTests]::Run()
+$report+="`nPASS 3D path checks=$pathChecks"
 $report+="`nPASS world orchestration checks=$worldChecks; scope=admission, real core endpoint transfers, world checkpoint, lifecycle; native and multiplayer NOT tested by this suite."
 $report | Set-Content -LiteralPath (Join-Path $OutputDirectory 'report.txt') -Encoding utf8
 $report

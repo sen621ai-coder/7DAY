@@ -68,13 +68,14 @@ namespace YFAutomation.CargoDrones
         public readonly CargoPhase Phase;
         public readonly CargoBinding ShipmentTarget;
         public readonly CargoHold Hold;
+        public readonly CargoNavigationStatus Navigation;
         public readonly CargoPoint Position;
         public readonly long Battery;
         public readonly bool Powered;
         public readonly int Packages;
         public readonly string Message;
         internal CargoHubStatus(CargoHubConfiguration config,CargoMission mission,long battery,CargoPoint home,string message,CargoBinding shipmentTarget=null,bool powered=false)
-        {Configuration=config;ShipmentTarget=shipmentTarget;Flight=mission==null?Guid.Empty:mission.Id;Phase=mission==null?CargoPhase.Docked:mission.Phase;Hold=mission==null?CargoHold.None:mission.Hold;Position=mission==null?home:mission.Position;Battery=mission==null?battery:mission.Battery;Packages=mission==null?0:CargoPlanner.Count(mission.Cargo);Message=message;Powered=powered;}
+        {Navigation=mission==null?CargoNavigationStatus.Ready:mission.Navigation;Configuration=config;ShipmentTarget=shipmentTarget;Flight=mission==null?Guid.Empty:mission.Id;Phase=mission==null?CargoPhase.Docked:mission.Phase;Hold=mission==null?CargoHold.None:mission.Hold;Position=mission==null?home:mission.Position;Battery=mission==null?battery:mission.Battery;Packages=mission==null?0:CargoPlanner.Count(mission.Cargo);Message=message;Powered=powered;}
     }
 
     // One server-thread coordinator per world. Native inventory access stays in
@@ -211,7 +212,7 @@ namespace YFAutomation.CargoDrones
                     {
                         // Reconstruct navigation with a new adapter; the old
                         // native airspace has been released, not merely paused.
-                        m=CargoMission.Restore(m.Capture(),adapter.OpenAirspace(m.Id),journal);h.Mission=m;h.Suspended=false;
+                        m=CargoMission.Restore(m.Capture(),adapter.OpenAirspace(m.Id),journal,EntrancePoint(h.ShipmentEntrance));h.Mission=m;h.Suspended=false;
                     }
                     CargoHold hold=CargoHold.None;ICargoDurableEndpoint endpoint;CargoPoint approach;
                     if(online&&!worldPaused&&(phase==CargoPhase.Loading||phase==CargoPhase.Unloading)&&m.CheckpointReady)
@@ -267,7 +268,7 @@ namespace YFAutomation.CargoDrones
                     }
                     if(m!=null&&m.Phase!=CargoPhase.Docked)continue;
                     if(m==null&&adapter.Powered(h.Config)){long before=h.Battery;h.Battery=Math.Min(600000,h.Battery+step*10);dirty|=before!=h.Battery;}
-                    if(h.Config.Paused){h.Message="已暂停，通电时充电";continue;}
+                    if(h.Config.Paused){if(m!=null){m.SuspendPlanning();adapter.ReleaseAirspace(m.Id);}h.Message="已暂停，通电时充电";continue;}
                     if(!adapter.Powered(h.Config)){h.Message="等待供电：给4格内的自动化供电接口接线";continue;}
                     if(ActiveFlights>=4){h.Message="等待飞行名额";continue;}
                     if(activeTime<h.NextEmptyPoll)continue;
@@ -300,6 +301,7 @@ namespace YFAutomation.CargoDrones
             {
                 if(CargoPlanner.Unload(targetInventory,h.Mission.Cargo,h.Config.Owner).Moved==0)return false;
                 if(!DepartureEnergy(h,battery,CargoMission.EstimateSortieSeconds(home,null,targetPoint,EntrancePoint(h.ShipmentEntrance))))return false;
+                if(!h.Mission.PreflightFailure(adapter.OpenAirspace(h.Mission.Id),activeTime)){h.Message="原受阻航段复查中，确认可通行后重送";return false;}
                 h.Mission=h.Mission.RetryDelivery(adapter.OpenAirspace(h.Mission.Id));h.Message="优先重送旧货";return true;
             }
             var sources=h.Config.Sources;

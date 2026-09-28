@@ -38,15 +38,16 @@ namespace YFAutomation.CargoDrones
         public CargoPoint[] Waypoints{get;private set;}
         public CargoLocalRoute(ICargoAirspace space,CargoPoint origin,CargoPoint goal,double ceiling)
         {
-            if(space==null||origin.Distance(goal)>16.001||double.IsNaN(ceiling)||double.IsInfinity(ceiling))throw new ArgumentException("Invalid local route");
+            if(space==null||origin.Distance(goal)>32.001||double.IsNaN(ceiling)||double.IsInfinity(ceiling))throw new ArgumentException("Invalid local route");
             this.space=space;this.origin=origin;this.goal=goal;this.ceiling=Math.Min(253,ceiling);
             CargoTrace.Emit(space,"plan-start","from="+CargoTrace.Point(origin)+" to="+CargoTrace.Point(goal)+" ceiling="+this.ceiling);
         }
         public void Advance()
         {
             if(Complete||Failed)return;
+            var native=space as ICargoPlanningSpace;if(native!=null&&!native.BeginPlanning(this)){Hold=CargoHold.PathBlocked;return;}
             var clock=Stopwatch.StartNew();int work=0;
-            while(work<4&&clock.Elapsed.TotalMilliseconds<2)
+            try { while(work<4&&clock.Elapsed.TotalMilliseconds<1)
             {
                 if(candidate.Count==0&&!BuildCandidate()){Failed=true;Hold=CargoHold.PathBlocked;CargoTrace.Emit(space,"plan-failed","reason=candidates-exhausted probes="+Probes);return;}
                 if(Probes>=256){Failed=true;Hold=CargoHold.PathBlocked;CargoTrace.Emit(space,"plan-failed","reason=probe-limit probes="+Probes);return;}
@@ -60,6 +61,7 @@ namespace YFAutomation.CargoDrones
                 if(edge==candidate.Count){Waypoints=candidate.ToArray();Complete=true;Hold=CargoHold.None;CargoTrace.Emit(space,"plan-ready","candidate="+candidateIndex+" probes="+Probes+" waypoints="+string.Join(";",System.Linq.Enumerable.Select(Waypoints,CargoTrace.Point)));return;}
             }
             Hold=CargoHold.PathBlocked;
+            } finally {if(native!=null){native.EndPlanning(clock.Elapsed.TotalMilliseconds,work);if(Complete||Failed)native.CancelPlanning(this);}}
         }
         bool BuildCandidate()
         {

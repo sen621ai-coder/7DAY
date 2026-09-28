@@ -54,6 +54,20 @@ namespace YFAutomation.CargoDrones
         }
         static string StateText(CargoHubStatus s)
         {
+            if(s.Hold==CargoHold.PathBlocked)
+            {
+                switch(s.Navigation)
+                {
+                    case CargoNavigationStatus.Planning:return "正在规划三维路线";
+                    case CargoNavigationStatus.Queued:return "等待规划名额";
+                    case CargoNavigationStatus.DynamicBlocked:return "通道被实体占用，等待让行";
+                    case CargoNavigationStatus.GoalBlocked:return "入口或交接位置净空不足";
+                    case CargoNavigationStatus.NoPathInBounds:return "搜索范围内未找到路线";
+                    case CargoNavigationStatus.SearchBudgetExceeded:return "寻路达到计算或范围限制";
+                    case CargoNavigationStatus.RouteInvalidated:return "环境改变，重新规划";
+                    case CargoNavigationStatus.MigrationRequired:return "旧路线需重新选择入口或召回";
+                }
+            }
             switch(s.Hold)
             {
                 case CargoHold.PathBlocked:return "航路受阻，自动重试中";
@@ -77,7 +91,7 @@ namespace YFAutomation.CargoDrones
         {
             var c=s.Configuration;var text=new StringBuilder();
             text.AppendLine("状态："+StateText(s)+(c.Paused&&s.Phase!=CargoPhase.Docked?" · 新航班已暂停":"")).AppendLine("供电："+(s.Powered?"已接通":"未接通 · 给三维4格内的自动化供电接口接线")).AppendLine("电量："+(s.Battery/6000.0).ToString("0.0")+"%    货物："+s.Packages+" / 6");
-            if(s.Hold==CargoHold.PathBlocked)text.AppendLine("三维航路正在改道；优先每 2 格升高，再每 2 格左右绕行。玩家不会阻挡，每 1 秒自动重试。");
+            if(s.Hold==CargoHold.PathBlocked)text.AppendLine("每1秒检查通道；完整重搜索至少间隔5秒。室外优先升高，室内支持三维转弯。");
             text.AppendLine("采集设备："+c.Sources.Length+" / 8");
             foreach(var source in c.Sources)text.AppendLine(CargoSourceFilter.Label(CargoSourceFilter.Kind(source.BlockName))+"  ·  "+Coordinates(source.Position));
             return text.ToString();

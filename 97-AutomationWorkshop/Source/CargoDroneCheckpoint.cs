@@ -10,6 +10,10 @@ namespace YFAutomation.CargoDrones
     public sealed class CargoMotionState
     {
         readonly CargoPoint[] trail,remaining;
+        readonly CargoAnchor[] navigation;
+        public CargoAnchor[] Navigation{get{return navigation==null?null:(CargoAnchor[])navigation.Clone();}}
+        public readonly CargoRouteFailure LastFailure;
+        public readonly long Generation;public readonly CargoNavigationStatus NavigationStatus;
         public CargoPoint[] Trail{get{return (CargoPoint[])trail.Clone();}}
         public CargoPoint[] Remaining{get{return (CargoPoint[])remaining.Clone();}}
         public readonly CargoPoint Position,Target;
@@ -17,9 +21,12 @@ namespace YFAutomation.CargoDrones
         public readonly CargoHold Hold;
         public readonly double Speed,ApproachSpeed,DistanceTravelled;
         public readonly long Reserve,MovingUnits;
-        internal CargoMotionState(CargoPoint position,CargoPoint target,CargoPoint[] trail,CargoPoint[] remaining,bool returning,bool energyRecall,bool arrived,bool blocked,CargoHold hold,double speed,double approachSpeed,long reserve,long movingUnits,double distance)
+        internal CargoMotionState(CargoPoint position,CargoPoint target,CargoPoint[] trail,CargoPoint[] remaining,bool returning,bool energyRecall,bool arrived,bool blocked,CargoHold hold,double speed,double approachSpeed,long reserve,long movingUnits,double distance,CargoAnchor[] navigation=null,long generation=0,CargoNavigationStatus navigationStatus=CargoNavigationStatus.Ready,CargoRouteFailure lastFailure=null)
         {
             CargoReturnTrail.Restore(trail);
+            if(generation<0||!Enum.IsDefined(typeof(CargoNavigationStatus),navigationStatus)||navigation!=null&&(navigation.Length>4096||navigation.Any(a=>!Enum.IsDefined(typeof(CargoLegKind),a.Kind))))throw new InvalidDataException("Invalid navigation state");
+            if(navigation!=null&&(!arrived&&(navigation.Length==0||navigation[navigation.Length-1].Point.Distance(target)>1e-7)||navigation.Any(a=>returning&&a.Kind!=CargoLegKind.Return)))throw new InvalidDataException("Navigation anchors disagree with mission");
+            this.navigation=navigation==null?null:(CargoAnchor[])navigation.Clone();Generation=generation;NavigationStatus=navigationStatus;LastFailure=lastFailure;
             if(remaining==null||remaining.Length>4096||!Enum.IsDefined(typeof(CargoHold),hold)||!Finite(speed)||speed<=0||speed>100||!Finite(approachSpeed)||approachSpeed<=0||approachSpeed>speed||reserve<0||movingUnits<0||!Finite(distance)||distance<0)throw new InvalidDataException("Invalid motion checkpoint");
             if(!returning&&trail[trail.Length-1].Distance(position)>1e-7||arrived&&position.Distance(target)>1e-7||returning&&target.Distance(trail[0])>1e-7)throw new InvalidDataException("Motion checkpoint position disagrees with route");
             var from=position;foreach(var to in remaining){if(from.Distance(to)>16.000001)throw new InvalidDataException("Saved route skips a segment");from=to;}
@@ -104,7 +111,7 @@ namespace YFAutomation.CargoDrones
                 writer.Write(world.ToByteArray());writer.Write(generation.ToByteArray());writer.Write(digest);writer.Write(states.Length);
                 foreach(var state in states)Write(writer,state);
                 writer.Write(hubs!=null);if(hubs!=null){writer.Write(hubs.Length);foreach(var hub in hubs)WriteHub(writer,hub);WriteHubExtensions(writer,hubs);}
-                writer.Flush();body=memory.ToArray();
+                WriteNavigation(writer,states);writer.Flush();body=memory.ToArray();
             }
             var snapshot=Frame(body);string name="ledger-"+generation.ToString("N")+".snapshot";
             byte[] manifest;
@@ -155,9 +162,30 @@ namespace YFAutomation.CargoDrones
                 // but cannot be promoted to world checkpoints by guessing hubs.
                 if(memory.Position<memory.Length&&Bool(reader))
                 {int n=reader.ReadInt32();if(n<0||n>16)throw new InvalidDataException("Invalid hub count");hubs=new CargoHubState[n];for(int i=0;i<n;i++)hubs[i]=ReadHub(reader);if(memory.Position<memory.Length)hubs=ReadHubExtensions(reader,hubs);}
+                if(memory.Position<memory.Length)states=ReadNavigation(reader,states);
                 End(memory);
             }
             Validate(states,journal,prefix);return states;
+        }
+        const int NavigationMagic=0x3141564E;
+        static void WriteNavigation(BinaryWriter w,CargoMissionState[] states)
+        {
+            w.Write(NavigationMagic);w.Write(states.Length);
+            foreach(var s in states){w.Write(s.Id.ToByteArray());var m=s.Motion;var anchors=m.Navigation;w.Write(anchors!=null);if(anchors==null)continue;w.Write(m.Generation);w.Write((byte)m.NavigationStatus);w.Write(anchors.Length);foreach(var a in anchors){Point(w,a.Point);w.Write((byte)a.Kind);}w.Write(m.LastFailure!=null);if(m.LastFailure!=null){Point(w,m.LastFailure.From);Point(w,m.LastFailure.Goal);w.Write(m.LastFailure.Indoor);}}
+        }
+        static CargoMissionState[] ReadNavigation(BinaryReader r,CargoMissionState[] states)
+        {
+            if(r.ReadInt32()!=NavigationMagic||r.ReadInt32()!=states.Length)throw new InvalidDataException("Invalid navigation extension");
+            for(int i=0;i<states.Length;i++)
+            {
+                var s=states[i];if(Id(r)!=s.Id)throw new InvalidDataException("Navigation identity mismatch");if(!Bool(r))continue;
+                long generation=r.ReadInt64();var status=(CargoNavigationStatus)r.ReadByte();int count=r.ReadInt32();if(count<0||count>4096)throw new InvalidDataException("Navigation anchor limit");
+                var a=new CargoAnchor[count];for(int j=0;j<count;j++)a[j]=new CargoAnchor(Point(r),(CargoLegKind)r.ReadByte());
+                var failure=Bool(r)?new CargoRouteFailure(Point(r),Point(r),Bool(r)):null;
+                var m=s.Motion;var motion=new CargoMotionState(m.Position,m.Target,m.Trail,m.Remaining,m.Returning,m.EnergyRecall,m.Arrived,m.Blocked,m.Hold,m.Speed,m.ApproachSpeed,m.Reserve,m.MovingUnits,m.DistanceTravelled,a,generation,status,failure);
+                states[i]=new CargoMissionState(s.World,s.Id,s.Source,s.Target,s.Owner,s.Destination,s.Reserve,s.Phase,s.Hold,s.Recall,s.Handling,s.BusyWait,s.BusyObserved,s.ReturnReason,s.Battery,s.Revision,s.Cargo,motion);
+            }
+            return states;
         }
         static void Text(BinaryWriter w,string value)
         {var bytes=new UTF8Encoding(false,true).GetBytes(value);if(bytes.Length<1||bytes.Length>512)throw new InvalidDataException("Invalid checkpoint text");w.Write(bytes.Length);w.Write(bytes);}
