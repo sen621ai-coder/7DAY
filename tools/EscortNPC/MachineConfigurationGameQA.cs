@@ -120,6 +120,7 @@ public sealed class MachineConfigurationGameQA : IModApi
         WorkbenchChecks(player,owner);
         ChemistryChecks(player,owner);
         MergeChecks(owner);
+        RobotArmChecks(owner);
         RouterChecks(player,owner);
         UnpackerChecks(player,owner);
         world.SetBlockRPC(new BlockValueRef(m.ToWorldPos()),BlockValue.Air);
@@ -212,6 +213,53 @@ public sealed class MachineConfigurationGameQA : IModApi
         world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
     }
 
+    static void RobotArmChecks(PlatformUserIdentifierAbs owner)
+    {
+        Func<TileEntityComposite,TEFeatureStorage> storage=t=>t.GetFeature<TEFeatureStorage>();
+        Func<TileEntityComposite,int> count=t=>storage(t).items.Sum(s=>s.count);
+        Func<int,ItemStack> coal=n=>new ItemStack(ItemClass.GetItem("resourceCoal"),n);
+        var foreign=PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000002",false);
+        foreach(int reach in new[]{1,2,3})foreach(var f in new[]{new Vector3i(0,0,1),new Vector3i(1,0,0),new Vector3i(0,0,-1),new Vector3i(-1,0,0)}){
+            var center=new Vector3i(8,176,8);var from=new Vector3i(center.x-f.x*reach,center.y,center.z-f.z*reach);var to=new Vector3i(center.x+f.x*reach,center.y,center.z+f.z*reach);
+            var arm=Place("yfAutoArm"+reach,center,owner);var value=world.GetBlock(center);bool rotated=false;
+            for(byte r=0;r<24;r++){value.rotation=r;if(value.Block.SupportsRotation(r)&&ConveyorPath.Offset(value,Vector3.forward)==f){rotated=true;break;}}
+            Check(rotated,"arm rotation "+reach+" "+f);world.SetBlockRPC(new BlockValueRef(center),value);arm=(TileEntityComposite)world.GetTileEntity(center);arm.SetOwner(owner);
+            var source=Place("yfAutoBeltStraight",from,owner);var target=Place("yfAutoBeltStraight",to,owner);
+            var powerAt=center+new Vector3i(0,-1,0);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));
+            var port=world.GetTileEntity(powerAt) as TileEntityPowered;if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
+            Action tick=()=>RobotArms.Step(world,arm);
+            storage(source).items[0]=coal(21);tick();Check(count(source)==5&&count(arm)==16&&count(target)==0,"arm pickup cap and separate release "+reach+" "+f);
+            using(var stream=new MemoryStream()){
+                var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);arm.write(writer,TileEntity.StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
+                var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(center),arm.blockValue);restored.localChunkPos=arm.localChunkPos;restored.read(reader,TileEntity.StreamModeRead.Persistency);
+                Check(SameItems(storage(restored).items,storage(arm).items)&&restored.GetFeature<TEFeatureAutomationState>().Job=="取货搬运"&&restored.Owner.Equals(owner),"arm native held cargo and animation state persist");
+                storage(arm).items[0]=ItemStack.Empty;stream.Position=0;arm.read(reader,TileEntity.StreamModeRead.Persistency);
+                Check(count(arm)==16,"arm in-place native reload restores held cargo before resume");
+            }
+            port.PowerItem.isPowered=false;tick();Check(count(arm)==16&&count(target)==0,"unpowered arm holds cargo");port.PowerItem.isPowered=true;
+            world.SetBlockRPC(new BlockValueRef(to),BlockValue.Air);tick();Check(count(arm)==16,"removed destination preserves held cargo");target=Place("yfAutoBeltStraight",to,owner);
+            target.bUserAccessing=true;tick();Check(count(arm)==16&&count(target)==0,"open destination prevents release");target.bUserAccessing=false;
+            target.SetOwner(foreign);tick();Check(count(arm)==16&&count(target)==0,"foreign destination prevents release");target.SetOwner(owner);
+            storage(target).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);tick();Check(count(arm)==16&&count(target)==16,"changed destination retains held cargo");
+            storage(target).items[0]=coal(1);tick();Check(count(arm)==16&&count(target)==1,"insufficient space does not partially release");
+            storage(target).items[0]=ItemStack.Empty;tick();Check(count(arm)==0&&count(target)==16&&count(source)==5,"arm resumes with exactly one batch");
+            tick();Check(count(source)==5&&count(arm)==0,"full target prevents next pickup");storage(target).items[0]=ItemStack.Empty;
+            source.bUserAccessing=true;tick();Check(count(source)==5&&count(arm)==0,"open source prevents pickup");source.bUserAccessing=false;
+            source.SetOwner(foreign);tick();Check(count(source)==5&&count(arm)==0,"foreign source prevents pickup");source.SetOwner(owner);
+            var obstacle=center+new Vector3i(0,1,0);world.SetBlockRPC(new BlockValueRef(obstacle),Block.GetBlockValue("yfAutoInput"));tick();Check(count(source)==5&&count(arm)==0,"arm cannot cross overhead obstruction");world.SetBlockRPC(new BlockValueRef(obstacle),BlockValue.Air);
+            tick();world.SetBlockRPC(new BlockValueRef(from),BlockValue.Air);tick();Check(count(arm)==0&&count(target)==5,"held batch releases after source removal");
+            storage(target).items[0]=ItemStack.Empty;storage(arm).items[0]=coal(21);tick();Check(count(arm)==5&&count(target)==16,"manual oversized arm stack releases bounded batch");storage(target).items[0]=ItemStack.Empty;tick();Check(count(arm)==0&&count(target)==5,"manual stack remainder releases without permanent jam");
+            foreach(var p in new[]{center,from,to,powerAt})world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
+        }
+        var at=new Vector3i(15,176,8);var a=Place("yfAutoArm3",at,owner);var v=world.GetBlock(at);
+        for(byte r=0;r<24;r++){v.rotation=r;if(v.Block.SupportsRotation(r)&&ConveyorPath.Offset(v,Vector3.forward)==new Vector3i(1,0,0))break;}
+        world.SetBlockRPC(new BlockValueRef(at),v);a=(TileEntityComposite)world.GetTileEntity(at);a.SetOwner(owner);
+        var input=Place("yfAutoBeltStraight",new Vector3i(12,176,8),owner);var output=Place("yfAutoBeltStraight",new Vector3i(18,176,8),owner);
+        var supply=at+new Vector3i(0,-1,0);world.SetBlockRPC(new BlockValueRef(supply),Block.GetBlockValue("yfAutoPowerPort"));
+        var power=world.GetTileEntity(supply) as TileEntityPowered;if(power==null){var c=(Chunk)world.GetChunkFromWorldPos(supply);power=((BlockPowered)world.GetBlock(supply).Block).CreateTileEntity(c);power.localChunkPos=Chunk.ToLocalPosition(supply);c.AddTileEntity(power);}power.InitializePowerData();power.PowerItem.isPowered=true;
+        storage(input).items[0]=coal(16);RobotArms.Step(world,a);Check(count(input)==16&&count(a)==0&&count(output)==0&&a.GetFeature<TEFeatureAutomationState>().Job.Contains("同一区块"),"arm refuses cross-chunk transaction");
+        foreach(var p in new[]{at,input.ToWorldPos(),output.ToWorldPos(),supply})world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
+    }
     static void MergeChecks(PlatformUserIdentifierAbs owner)
     {
         var step=AccessTools.Method(typeof(Conveyors),"Step");
