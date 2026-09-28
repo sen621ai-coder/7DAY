@@ -842,6 +842,68 @@
       </property>
       <drop event="Destroy" name="resourceScrapIron" count="2" />
     </block>
+    <block name="yfAutoBeltMergeLeft">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-conveyors.unity3d?Assets/Conveyor/ConveyorMergeLeft.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoBeltMergeLeftDesc" />
+      <property name="Path" value="solid" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="yfAutoBeltMerge" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="MaxDamage" value="2500" />
+      <property name="Stacknumber" value="50" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoBeltBuffer" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureAutomationState" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
+    </block>
+    <block name="yfAutoBeltMergeRight">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-conveyors.unity3d?Assets/Conveyor/ConveyorMergeRight.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoBeltMergeRightDesc" />
+      <property name="Path" value="solid" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="yfAutoBeltMerge" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="MaxDamage" value="2500" />
+      <property name="Stacknumber" value="50" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoBeltBuffer" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureAutomationState" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
+    </block>
     <block name="yfAutoBeltLeft">
       <property name="Class" value="CompositeTileEntity" />
       <property name="Material" value="Msteel" />

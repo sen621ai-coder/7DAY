@@ -17,8 +17,8 @@ public sealed class MachineConfigurationGameQA : IModApi
     public void InitMod(Mod mod)
     {
         if(!Environment.GetCommandLineArgs().Contains("-yfMachineConfigurationQA"))return;
-        // Headless-only fixture: forestry shaders cannot report GPU support under -nographics.
-        if(Environment.GetCommandLineArgs().Contains("-nographics")){var material=AccessTools.Method("AECT16RuntimeFix.AutoForestryModel:NativeMaterial");if(material!=null)new Harmony("yf.configuration.qa.headless-material").Patch(material,prefix:new HarmonyMethod(typeof(MachineConfigurationGameQA),nameof(HeadlessMaterial)));}
+        // Headless-only fixture: forestry and surveillance shaders cannot report GPU support under -nographics.
+        if(Environment.GetCommandLineArgs().Contains("-nographics")){var headless=new Harmony("yf.configuration.qa.headless-material");foreach(var name in new[]{"AECT16RuntimeFix.AutoForestryModel:NativeMaterial","PZAEC.Surveillance.ScreenView:NativeMaterial"}){var material=AccessTools.Method(name);if(material!=null)headless.Patch(material,prefix:new HarmonyMethod(typeof(MachineConfigurationGameQA),nameof(HeadlessMaterial)));}}
         ModEvents.GameStartDone.RegisterHandler(Ready);ModEvents.GameUpdate.RegisterHandler(Update);
     }
     public static bool HeadlessMaterial(ref Material __result){if(GamePrefs.GetString(EnumGamePrefs.GameName)!="AutomationConfigQA_Isolated")return true;var shader=Shader.Find("Standard")??Shader.Find("Hidden/InternalErrorShader");if(shader==null)throw new Exception("No headless fixture shader");__result=new Material(shader);return false;}
@@ -224,12 +224,14 @@ public sealed class MachineConfigurationGameQA : IModApi
             for(byte r=0;r<24;r++){v.rotation=r;if(v.Block.SupportsRotation(r)&&ConveyorPath.Offset(v,Vector3.forward)==forward){found=true;break;}}
             Check(found,"merge fixture rotation "+kind);world.SetBlockRPC(new BlockValueRef(p),v);t=(TileEntityComposite)world.GetTileEntity(p);t.SetOwner(owner);return t;
         };
+        foreach(string mergeKind in new[]{"yfAutoBeltMerge","yfAutoBeltMergeLeft","yfAutoBeltMergeRight"})
         foreach(var forward in new[]{new Vector3i(0,0,1),new Vector3i(1,0,0),new Vector3i(0,0,-1),new Vector3i(-1,0,0)}){
-            var merge=place("yfAutoBeltMerge",center,forward);var value=world.GetBlock(center);
-            var leftOffset=ConveyorPath.Offset(value,Vector3.left);var rightOffset=ConveyorPath.Offset(value,Vector3.right);
+            var merge=place(mergeKind,center,forward);var value=world.GetBlock(center);
+            var leftOffset=ConveyorPath.Offset(value,ConveyorPath.LocalMergeInput(mergeKind,0));var rightOffset=ConveyorPath.Offset(value,ConveyorPath.LocalMergeInput(mergeKind,1));
             var left=place("yfAutoBeltStraight",center+leftOffset,new Vector3i(-leftOffset.x,0,-leftOffset.z));
             var right=place("yfAutoBeltStraight",center+rightOffset,new Vector3i(-rightOffset.x,0,-rightOffset.z));
-            var back=place("yfAutoBeltStraight",center+new Vector3i(-forward.x,0,-forward.z),forward);
+            var closed=ConveyorPath.Offset(value,mergeKind=="yfAutoBeltMergeLeft"?Vector3.right:mergeKind=="yfAutoBeltMergeRight"?Vector3.left:Vector3.back);
+            var back=place("yfAutoBeltStraight",center+closed,new Vector3i(-closed.x,0,-closed.z));
             var sink=Place("yfAutoOutput",center+forward,owner);placed.Add(sink.ToWorldPos());
             var powerAt=center+new Vector3i(0,2,0);placed.Add(powerAt);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));
             var port=world.GetTileEntity(powerAt) as TileEntityPowered;
