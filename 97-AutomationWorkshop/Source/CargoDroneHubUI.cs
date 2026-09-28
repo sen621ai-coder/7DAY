@@ -114,6 +114,7 @@ namespace YFAutomation.CargoDrones
             if(requestWorld!=world){requestWorld=world;next.Clear();}
             var reply=NetPackageManager.GetPackage<NetPackageYFCargoHubReply>();reply.At=At;reply.Request=Request;reply.Allowed=false;reply.Hub=Guid.Empty;reply.Revision=0;reply.Paused=false;reply.Details="";reply.Destinations="";reply.HasTarget=false;reply.HasShipment=false;reply.Target=reply.Shipment=Vector3i.zero;reply.Message="停机坪不可用";
             var player=world.GetEntity(actor) as EntityPlayer;var runtime=CargoNativeWorld.Current;CargoHubStatus authorized=null;
+            if(FromDrone)runtime?.Diagnostics.Write("drone-request",Hub,"actor="+actor+" request="+Request+" action="+Action,Action==CargoHubAction.Read?10:0);
             try
             {
                 if(runtime==null&&CargoRuntime.Failure!=null)throw new InvalidOperationException("货运记录需要恢复，请查看服务器日志");
@@ -153,7 +154,7 @@ namespace YFAutomation.CargoDrones
             }
             catch(Exception ex)
             {
-                if(Action!=CargoHubAction.Read)runtime?.Diagnostics.Write("command-rejected",Hub,"action="+Action+" reason="+ex.Message,1);
+                if(Action!=CargoHubAction.Read||FromDrone)runtime?.Diagnostics.Write("command-rejected",Hub,"action="+Action+" fromDrone="+FromDrone+" request="+Request+" reason="+ex.Message,FromDrone&&Action==CargoHubAction.Read?10:1);
                 reply.Message=ex.Message.Length>150?"操作失败，请查看日志并重试":ex.Message;
                 // A rejected command does not revoke permission to view the hub.
                 // Return fresh state so capacity/version/throttle errors can be retried.

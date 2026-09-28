@@ -36,22 +36,28 @@ namespace PZAEC.M1
             var toward=-source.getDirection();int region=3;
             if(source.BuffClass==null&&toward.sqrMagnitude>.001f){
                 var d=Quaternion.Inverse(Weapons.Body(__instance))*toward.normalized;
-                if(Mathf.Abs(d.y)<.6f){float angle=Mathf.Abs(Mathf.Atan2(d.x,d.z)*Mathf.Rad2Deg);region=angle<=60?0:angle>=135?2:1;}
+                region=Rules.ArmorRegion(d.x,d.y,d.z);
             }
-            __0.Strength=Rules.ProtectedDamage(__0.Strength,Weapons.Tier(__instance),region,source.damageType==EnumDamageTypes.Corrosive);
+            __0.Strength=ModuleRules.Damage(__0.Strength,Weapons.Tier(__instance),region,source.damageType==EnumDamageTypes.Corrosive,Modules.Get(__instance));
         }
         static void CrewProtection(Vehicle __instance,ref float __result)
         {if(Rules.Index(__instance.GetName())>=0)__result=0;}
         static void Penetration(Equipment __instance,ItemValue attackingItem,ref float __result)
         {
-            string name=attackingItem?.ItemClass?.GetItemName();if(name!=Rules.Ammo&&name!=Rules.APAmmo)return;
+            string name=attackingItem?.ItemClass?.GetItemName();if(name!=Rules.Ammo&&name!=Rules.APAmmo&&name!=SecondaryRules.Belt&&name!=SecondaryRules.Missile)return;
             // Resolve defender armor without importing the gunner's handheld penetration bonuses.
             var tags=FastTags<TagGroup.Global>.Parse("coredamageresist");
             float armor=EffectManager.GetValue(PassiveEffects.PhysicalDamageResist,null,0,__instance.m_entity,null,tags);
-            __result=Mathf.Clamp(armor,0,100)*(name==Rules.APAmmo?.5f:1);
+            __result=Mathf.Clamp(armor,0,100)*(name==Rules.APAmmo||name==SecondaryRules.Missile?.5f:1);
         }
-        static bool Hostile(EntityAlive e)=>e!=null&&!(e is EntityPlayer)&&!(e is EntityVehicle)&&!e.IsDead()&&
+        public static bool Hostile(EntityAlive e)=>e!=null&&!(e is EntityPlayer)&&!(e is EntityVehicle)&&!e.IsDead()&&
             (e is EntityZombie||e.EntityClass.Tags.Test_AnySet(FastTags<TagGroup.Global>.Parse("hostile")));
+        public static void SecondaryHit(EntityAlive e,int actor,int damage,bool missile,Vector3 direction,Vector3 point)
+        {
+            if(!Weapons.Server||!Hostile(e)||damage<=0||missile&&!(e is EntityVulture))return;
+            var source=new DamageSourceEntity(EnumDamageSource.External,EnumDamageTypes.Piercing,actor,direction){AttackingItem=ItemClass.GetItem(missile?SecondaryRules.Missile:SecondaryRules.Belt,false),hitTransformPosition=point,canHitSpecialBodyParts=false,DismemberChance=0};
+            e.DamageEntity(source,damage,false,0);
+        }
         static void Hit(EntityAlive e,int actor,int damage,bool ap,Vector3 direction,Vector3 point)
         {
             if(!Hostile(e)||damage<=0)return;

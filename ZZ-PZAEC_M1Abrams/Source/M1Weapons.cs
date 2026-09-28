@@ -12,14 +12,14 @@ namespace PZAEC.M1
             public EntityVehicle Vehicle;public Transform Model,YawNode,PitchNode,RecoilNode;
             public readonly Rules.Trigger Trigger=new Rules.Trigger();
             public readonly Rules.Trigger RepairTrigger=new Rules.Trigger();
-            public bool AP;public float LastDamage=-100,RepairStarted=-1;
+            public bool AP;public float LastDamage=-100,RepairStarted=-1,LastWeaponActivity=-100;
             public int Epoch,Sequence,Shot,Actor=-1,Reason;public float Yaw,Pitch,NextFire,NextStatus,LastShot=-100;
             public Vector3 SightOffset,View=Vector3.forward;public bool HasSight;
         }
         sealed class Shell{public EntityVehicle Vehicle;public int Epoch,Id,Actor,Tier;public bool AP;public Vector3 Position,Velocity;public float Age,Distance;}
         public static readonly Dictionary<int,State> States=new Dictionary<int,State>();
         static readonly List<Shell> shells=new List<Shell>();static readonly List<int> removed=new List<int>();
-        static World world;static int generation=Environment.TickCount,sequence,inputVehicle=-1,repairVehicle=-1;static bool held;static float nextInput,nextError,nextDiscovery,nextRepair;
+        static World world;static int generation=Environment.TickCount,sequence,repairVehicle=-1;static float nextError,nextDiscovery,nextRepair;
         public static bool Server=>ConnectionManager.Instance!=null&&ConnectionManager.Instance.IsServer;
         public static int RepairTarget=>repairVehicle;
         public static bool IsTank(EntityVehicle v)=>v?.vehicle!=null&&Rules.Index(v.vehicle.GetName())>=0;
@@ -33,14 +33,14 @@ namespace PZAEC.M1
             h.Patch(AccessTools.Method(typeof(GameManager),"Update"),postfix:new HarmonyMethod(typeof(Weapons),nameof(Update)));
             h.Patch(AccessTools.Method(typeof(GameManager),"SaveAndCleanupWorld"),prefix:new HarmonyMethod(typeof(Weapons),nameof(Clear)));
             Presentation.Install(h);
-            Combat.Install(h);Service.Install(h);
+            Combat.Install(h);Service.Install(h);Modules.Install(h);Secondary.Install(h);
         }
-        public static void Clear(){States.Clear();shells.Clear();world=null;held=false;inputVehicle=-1;repairVehicle=-1;nextRepair=0;nextInput=0;nextDiscovery=0;Presentation.Clear();}
+        public static void Clear(){Secondary.Clear();States.Clear();shells.Clear();world=null;repairVehicle=-1;nextRepair=0;nextDiscovery=0;Presentation.Clear();}
         public static State Register(EntityVehicle v)
         {
             if(!States.TryGetValue(v.entityId,out var s)||s.Vehicle!=v){
                 Transform model=null;foreach(var t in (v.PhysicsTransform!=null?v.PhysicsTransform:v.transform).GetComponentsInChildren<Transform>(true))if(t.name=="M1Visual"){model=t;break;}
-                s=new State{Vehicle=v,Model=model,Epoch=unchecked(++generation)};States[v.entityId]=s;
+                s=new State{Vehicle=v,Model=model,Epoch=unchecked(++generation),NextFire=Time.time+Modules.Reload(v)};States[v.entityId]=s;
                 if(model!=null){s.YawNode=model.Find("TurretYaw");s.PitchNode=s.YawNode?.Find("GunPitch");s.RecoilNode=s.PitchNode?.Find("GunRecoil");}
             }return s;
         }
@@ -57,9 +57,9 @@ namespace PZAEC.M1
             if(!IsTank(v)||!Valid(origin)||!Valid(direction)||direction.sqrMagnitude<.5f||direction.sqrMagnitude>1.5f||(origin-v.position).sqrMagnitude>40*40)return;
             if(world!=w){Clear();world=w;}
             var s=Register(v);if(op>=Repair){Service.Request(w,actor,s,op,serial,origin,direction.normalized);return;}
-            if(!Allowed(v,actor)||!s.Trigger.Accept(actor,serial,op==Fire,Time.time))return;
+            if(!Allowed(v,actor)||!Secondary.MainControl(v,actor)||!s.Trigger.Accept(actor,serial,op==Fire,Time.time))return;
             if(op==Stop||!Ready(s,actor)){s.Trigger.Stop();return;}
-            if(op==SwitchAmmo){s.AP=!s.AP;s.NextFire=Mathf.Max(s.NextFire,Time.time+Spec(v).Reload);s.Trigger.Stop();}
+            if(op==SwitchAmmo){s.AP=!s.AP;s.NextFire=Mathf.Max(s.NextFire,Time.time+Modules.Reload(v));s.Trigger.Stop();}
             s.Actor=actor;s.SightOffset=origin-v.position;s.View=direction.normalized;s.HasSight=true;
         }
         public static Vector3 Pivot(State s)
@@ -82,7 +82,7 @@ namespace PZAEC.M1
         }
         static void AimGun(State s,float dt)
         {
-            if(!s.HasSight||!Ready(s,s.Actor)){s.Trigger.Stop();s.HasSight=false;s.Reason=3;return;}
+            if(!s.HasSight||!Ready(s,s.Actor)||!Secondary.MainControl(s.Vehicle,s.Actor)){s.Trigger.Stop();s.HasSight=false;s.Reason=3;return;}
             var origin=s.Vehicle.position+s.SightOffset;var target=origin+s.View*Rules.Range;
             if(Trace(s.Vehicle,origin,s.View,Rules.Range,out var sight))target=sight.hit.pos;
             var delta=target-Pivot(s);if(delta.sqrMagnitude<(Model.BarrelLength+.25f)*(Model.BarrelLength+.25f)){s.Reason=2;return;}
@@ -90,7 +90,7 @@ namespace PZAEC.M1
             float yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg,pitch=Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg;
             float lower=Rules.MinPitch(yaw);bool outside=pitch<lower||pitch>20;
             var spec=Spec(s.Vehicle);float damaged=s.Vehicle.vehicle.GetHealthPercent()<.3f?.75f:1;
-            s.Yaw=Mathf.MoveTowardsAngle(s.Yaw,yaw,spec.Yaw*damaged*dt);s.Pitch=Mathf.MoveTowards(s.Pitch,Mathf.Clamp(pitch,lower,20),spec.Pitch*dt);
+            s.Yaw=Mathf.MoveTowardsAngle(s.Yaw,yaw,spec.Yaw*ModuleRules.Tracking(Modules.Get(s.Vehicle))*damaged*dt);s.Pitch=Mathf.MoveTowards(s.Pitch,Mathf.Clamp(pitch,lower,20),spec.Pitch*ModuleRules.Tracking(Modules.Get(s.Vehicle))*dt);
             s.Pitch=Mathf.Max(s.Pitch,Rules.MinPitch(s.Yaw));
             // Sweep clearance uses the actual authoritative orientation, not the requested aim.
             s.Reason=outside?1:Quaternion.Angle(Quaternion.LookRotation(Direction(s)),Quaternion.LookRotation(delta))>1.5f?4:0;
@@ -102,17 +102,17 @@ namespace PZAEC.M1
         {
             if(!s.Trigger.Active(Time.time)||!Ready(s,s.Trigger.Actor)||s.Reason!=0||Time.time<s.NextFire)return;
             var ammo=ItemClass.GetItem(Rules.AmmoName(s.AP),false);if(ammo==null||ammo.type==0||s.Vehicle.bag==null||s.Vehicle.bag.GetItemCount(ammo)<1||s.Vehicle.bag.DecItem(ammo,1)!=1)return;
-            s.NextFire=Time.time+Spec(s.Vehicle).Reload;s.LastShot=Time.time;s.Shot++;s.Vehicle.SendSyncData(EntityVehicle.cSyncStorage);
+            s.NextFire=Time.time+Modules.Reload(s.Vehicle);s.LastShot=Time.time;s.Shot++;s.Vehicle.SendSyncData(EntityVehicle.cSyncStorage);
             var direction=Direction(s);var muzzle=Pivot(s)+direction*Model.BarrelLength;
             var velocity=direction*Rules.ShellSpeed(s.AP)+(s.Vehicle.vehicleRB!=null?Vector3.ClampMagnitude(s.Vehicle.vehicleRB.velocity,20):Vector3.zero);
             shells.Add(new Shell{Vehicle=s.Vehicle,Epoch=s.Epoch,Id=s.Shot,Actor=s.Trigger.Actor,Tier=Tier(s.Vehicle),AP=s.AP,Position=muzzle,Velocity=velocity});
-            Broadcast(s,ShotEvent,s.Shot,muzzle,velocity,Spec(s.Vehicle).Reload,s.AP?1:0);
+            Broadcast(s,ShotEvent,s.Shot,muzzle,velocity,Modules.Reload(s.Vehicle),s.AP?1:0);
             // Native noise is server-only and separate from the local sound layers.
             Audio.Manager.SignalAI(s.Vehicle,muzzle,"pzM1CannonNoise",1);
             RecoilImpulse(s.Vehicle,direction);
         }
         public static void RecoilImpulse(EntityVehicle vehicle,Vector3 direction)
-        {if(!vehicle.isEntityRemote&&vehicle.RBActive&&vehicle.vehicleRB!=null&&!vehicle.vehicleRB.isKinematic&&vehicle.GetWheelsOnGround()>0)vehicle.vehicleRB.AddForce(-direction*.04f,ForceMode.VelocityChange);}
+        {if(!vehicle.isEntityRemote&&vehicle.RBActive&&vehicle.vehicleRB!=null&&!vehicle.vehicleRB.isKinematic&&vehicle.GetWheelsOnGround()>0)vehicle.vehicleRB.AddForce(-direction*(.04f*ModuleRules.Recoil(Modules.Get(vehicle))),ForceMode.VelocityChange);}
         static void Advance(float delta)
         {
             for(int i=shells.Count-1;i>=0;i--){
@@ -143,7 +143,7 @@ namespace PZAEC.M1
                 if(Time.time>=nextDiscovery){nextDiscovery=Time.time+1;foreach(var entity in w.Entities.list)if(entity is EntityVehicle v&&IsTank(v))Register(v);}
                 removed.Clear();foreach(var entry in States){var s=entry.Value;
                     if(w.GetEntity(entry.Key)!=s.Vehicle){removed.Add(entry.Key);continue;}
-                    if(Server){AimGun(s,Time.deltaTime);Shoot(s);Service.Update(w,s);
+                    if(Server){AimGun(s,Time.deltaTime);Shoot(s);Secondary.Update(s,Time.deltaTime);Service.Update(w,s);
                         // Dedicated servers also need the authoritative turret collider pose.
                         if(s.YawNode!=null)s.YawNode.localRotation=Quaternion.Euler(0,s.Yaw,0);
                         if(s.PitchNode!=null)s.PitchNode.localRotation=Quaternion.Euler(-s.Pitch,0,0);
@@ -152,8 +152,8 @@ namespace PZAEC.M1
                     }
                 }
                 foreach(int id in removed)States.Remove(id);
-                if(Server)Advance(Time.deltaTime);
-                InputUpdate(w);Presentation.Update(w);
+                if(Server){Advance(Time.deltaTime);Secondary.Advance(Time.deltaTime);}
+                InputUpdate(w);Presentation.Update(w);SecondaryPresentation.Update(w);
             }catch(Exception e){if(Time.time>=nextError){nextError=Time.time+10;Log.Error("[M1-Abrams] "+e);}}
         }
         public static bool UIReady(EntityPlayerLocal p)
@@ -166,17 +166,8 @@ namespace PZAEC.M1
         }
         static void InputUpdate(World w)
         {
-            var p=w.GetPrimaryPlayer();var v=p?.AttachedToEntity as EntityVehicle;
-            if(p==null)return;
-            RepairInput(w,p);
-            if(!IsTank(v)||!Allowed(v,p.entityId)||!UIReady(p)){
-                if(held&&w.GetEntity(inputVehicle) is EntityVehicle old&&IsTank(old))Send(p,old,Stop);held=false;inputVehicle=-1;return;
-            }
-            if(inputVehicle!=v.entityId){if(held&&w.GetEntity(inputVehicle) is EntityVehicle old)Send(p,old,Stop);held=false;inputVehicle=v.entityId;nextInput=0;}
-            if(Input.GetKeyDown(KeyCode.R)){Send(p,v,SwitchAmmo);held=false;nextInput=Time.time+.1f;return;}
-            var key=KeyCode.Mouse0;if(v.vehicle.Properties.Values.TryGetValue("m1FireKey",out var text))Enum.TryParse(text,true,out key);
-            bool fire=Input.GetKey(key);
-            if(fire!=held||Time.time>=nextInput){nextInput=Time.time+.1f;Send(p,v,fire?Fire:held?Stop:Aim);held=fire;}
+            var p=w.GetPrimaryPlayer();if(p==null)return;
+            RepairInput(w,p);Secondary.InputUpdate(w,p);
         }
         static void RepairInput(World w,EntityPlayerLocal p)
         {

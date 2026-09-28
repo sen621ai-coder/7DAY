@@ -18,7 +18,7 @@ namespace PZAEC.Surveillance
             ModEvents.GameUpdate.RegisterHandler(Update);
             ModEvents.WorldShuttingDown.RegisterHandler(Stopping);
             ModEvents.GameShutdown.RegisterHandler(Stopped);
-            Log.Out("[Surveillance] v1.0.3 wireless cameras and 4x3 live monitor loaded.");
+            Log.Out("[Surveillance] v1.0.5 wireless cameras and 4x3 live monitor loaded.");
         }
         public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
         {
@@ -71,9 +71,13 @@ public sealed class BlockPZAEC_SurveillanceCamera : BlockMotionSensor
     }
 }
 
-public sealed class BlockPZAEC_SurveillanceScreen : BlockPoweredLight
+public sealed class BlockPZAEC_SurveillanceScreen : BlockPowered
 {
     const string Configure="pzaecSurveillanceConfigure";
+    const string Toggle="pzaecSurveillanceToggle";
+    public override void Init(){base.Init();BlockPlacementHelper=new PZAEC.Surveillance.ScreenPlacement();}
+    // Keep the existing tile/power type so previously placed screens retain wiring and switch state.
+    public override TileEntityPowered CreateTileEntity(Chunk chunk)=>new TileEntityPoweredBlock(chunk){PowerItemType=PowerItem.PowerItemTypes.ConsumerToggle};
     public override void OnBlockAdded(WorldBase world,Chunk chunk,Vector3i position,BlockValue value,PlatformUserIdentifierAbs addedBy)
     {
         base.OnBlockAdded(world,chunk,position,value,addedBy);
@@ -87,13 +91,25 @@ public sealed class BlockPZAEC_SurveillanceScreen : BlockPoweredLight
     static Vector3i Parent(Vector3i position,BlockValue value)=>value.ischild?value.Block.multiBlockPos.GetParentPos(position,value):position;
     public override BlockActivationCommand[] GetBlockActivationCommands(WorldBase world,BlockValue value,Vector3i position,EntityAlive focusing)
     {
+        position=Parent(position,value);value=world.GetBlock(position);
         var native=base.GetBlockActivationCommands(world,value,position,focusing)??BlockActivationCommand.Empty;
-        var result=new BlockActivationCommand[native.Length+1];Array.Copy(native,result,native.Length);
-        result[native.Length]=new BlockActivationCommand(Configure,"ui_game_symbol_camera",true);return result;
+        var result=new BlockActivationCommand[native.Length+2];Array.Copy(native,0,result,2,native.Length);
+        result[0]=new BlockActivationCommand(Configure,"camera",true);
+        result[1]=new BlockActivationCommand(Toggle,"electric_switch",true);return result;
     }
+    public override string GetActivationText(WorldBase world,BlockValue value,Vector3i position,EntityAlive focusing)
+    {
+        var player=focusing as EntityPlayerLocal;string binding="E";
+        if(player?.playerInput!=null)binding=XUiUtils.GetBindingXuiMarkupString(player.playerInput.Activate)+XUiUtils.GetBindingXuiMarkupString(player.playerInput.PermanentActions.Activate);
+        return "("+binding+") "+Localization.Get(Configure);
+    }
+    public override bool OnBlockActivated(WorldBase world,Vector3i position,BlockValue value,EntityPlayerLocal player)
+    {PZAEC.Surveillance.SurveillanceMenu.Open(Parent(position,value),player);return true;}
     public override bool OnBlockActivated(string command,WorldBase world,Vector3i position,BlockValue value,EntityPlayerLocal player)
     {
-        if(command==Configure){PZAEC.Surveillance.SurveillanceMenu.Open(Parent(position,value),player);return true;}
+        position=Parent(position,value);value=world.GetBlock(position);
+        if(command==Configure)return OnBlockActivated(world,position,value,player);
+        if(command==Toggle){var tile=world.GetTileEntity(position) as TileEntityPoweredBlock;if(tile!=null)tile.IsToggled=!tile.IsToggled;return true;}
         return base.OnBlockActivated(command,world,position,value,player);
     }
     public override void OnBlockEntityTransformAfterActivated(WorldBase world,Vector3i position,BlockValue value,BlockEntityData data)

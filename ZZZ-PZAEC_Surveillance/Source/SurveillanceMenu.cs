@@ -6,6 +6,8 @@ namespace PZAEC.Surveillance
 {
     public sealed class SurveillanceMenu : MonoBehaviour
     {
+        sealed class SettingsWindow : GUIWindow
+        {public SettingsWindow():base("pzaecSurveillanceSettings") {}}
         static SurveillanceMenu instance;
         Vector3i screen;
         EntityPlayerLocal player;
@@ -14,12 +16,26 @@ namespace PZAEC.Surveillance
         string message="选择摄像头后即可无线绑定，不需要视频线。";
         CursorLockMode previousLock;
         bool previousVisible;
+        PlayerMoveController controls;
+        bool previousInput;
+        float openedAt;
+        GUIWindow modal;
+        GUIWindowManager windows;
         public static void Open(Vector3i position,EntityPlayerLocal owner)
         {
             if(GameManager.Instance==null||owner==null)return;
             if(instance==null)instance=GameManager.Instance.gameObject.AddComponent<SurveillanceMenu>();
+            if(instance.player!=null)instance.CloseInstance();
             instance.screen=position;instance.player=owner;var state=SurveillanceClient.At(position);instance.channel=state==null?0:Mathf.Clamp(state.Selected,0,3);
             instance.previousLock=Cursor.lockState;instance.previousVisible=Cursor.visible;instance.enabled=true;instance.message="选择摄像头后即可无线绑定，不需要视频线。";
+            instance.openedAt=Time.realtimeSinceStartup;
+            var ui=LocalPlayerUI.GetUIForPlayer(owner);
+            instance.windows=ui.windowManager;
+            instance.modal=new SettingsWindow{playerUI=ui,alwaysUsesMouseCursor=true,isInputActive=true};
+            instance.modal.OnWindowClose=instance.CloseInstance;
+            instance.windows.Open(instance.modal,true);
+            instance.controls=owner.MoveController;
+            if(instance.controls!=null){instance.previousInput=instance.controls.bAllowPlayerInput;instance.controls.AllowPlayerInput(false);owner.ClearMovementInputs();}
             Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
         }
         public static void Close(){if(instance!=null)instance.CloseInstance();}
@@ -30,12 +46,17 @@ namespace PZAEC.Surveillance
         }
         void CloseInstance()
         {
+            if(player==null&&modal==null&&controls==null)return;
+            if(controls!=null)controls.AllowPlayerInput(previousInput);controls=null;
             Cursor.lockState=previousLock;Cursor.visible=previousVisible;enabled=false;player=null;
+            var closing=modal;modal=null;
+            if(closing!=null&&windows!=null)windows.Close(closing,false);
+            windows=null;
         }
         void Update()
         {
             if(!enabled)return;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
-            if(Input.GetKeyDown(KeyCode.Escape)||player==null||(player.position-new Vector3(screen.x+.5f,screen.y+1.5f,screen.z+.5f)).sqrMagnitude>100||SurveillanceClient.At(screen)==null)CloseInstance();
+            if(Input.GetKeyDown(KeyCode.Escape)||player==null||(player.position-new Vector3(screen.x+.5f,screen.y+1.5f,screen.z+.5f)).sqrMagnitude>100||(Time.realtimeSinceStartup-openedAt>5&&SurveillanceClient.At(screen)==null))CloseInstance();
         }
         void Send(Guid camera,bool modeOnly=false,bool cycle=false)
         {
@@ -58,7 +79,15 @@ namespace PZAEC.Surveillance
         }
         void OnGUI()
         {
-            if(!enabled)return;float width=Mathf.Min(760,Screen.width-40),height=Mathf.Min(620,Screen.height-40);
+            if(!enabled)return;
+            var matrix=GUI.matrix;var color=GUI.color;int depth=GUI.depth;
+            try{GUI.matrix=Matrix4x4.identity;GUI.color=Color.white;GUI.depth=-1000;DrawMenu();}
+            finally{GUI.matrix=matrix;GUI.color=color;GUI.depth=depth;}
+        }
+        void OnDestroy(){CloseInstance();}
+        void DrawMenu()
+        {
+            float width=Mathf.Min(760,Screen.width-40),height=Mathf.Min(620,Screen.height-40);
             var rect=new Rect((Screen.width-width)/2,(Screen.height-height)/2,width,height);GUI.Box(rect,"");
             GUILayout.BeginArea(new Rect(rect.x+20,rect.y+16,rect.width-40,rect.height-32));
             GUILayout.BeginHorizontal();GUILayout.Label("4×3基地监控屏 — 无线频道设置",GUILayout.Height(28));if(GUILayout.Button("关闭",GUILayout.Width(80)))CloseInstance();GUILayout.EndHorizontal();

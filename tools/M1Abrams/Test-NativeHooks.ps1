@@ -23,5 +23,12 @@ $steering=@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -mat
 $forces=@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'EntityVehicle::FixedUpdateForces'})
 Check ($steering.Count -eq 1 -and $forces.Count -eq 1 -and $steering[0].Offset -lt $forces[0].Offset) 'Chassis postfix follows native wheel steering in physics step'
 Check ((Method EntityVehicle FixedUpdateForces).Count -eq 1) 'Chassis physics hook unambiguous'
+foreach($pair in @(@('Vehicle','CalcEffects'),@('Vehicle','CalcMods'),@('Vehicle','SetItemValueMods'),@('Vehicle','LoadItems'),@('ItemValue','CalcModSlotCount'),@('ItemValue','Read'),@('XUiC_ItemPartStack','CanSwap'),@('XUiC_ItemPartStack','CanRemove'),@('XUiC_ItemCosmeticStack','CanSwap'))){Check ((Method $pair[0] $pair[1]).Count -eq 1) ('Module hook unambiguous: '+($pair -join '.'))}
+$m=Method VPEngine Update
+Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'Vehicle::EffectFuelUsePer'}).Count -eq 1) 'Native engine applies fuel multiplier exactly once'
+$m=Method EntityVehicle PhysicsFixedUpdate
+foreach($field in @('EffectMotorTorquePer','EffectVelocityMaxPer')){Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match ('Vehicle::'+$field)}).Count -eq 1) ('Native physics reads '+$field)}
+$m=Method Vehicle CalcEffects
+foreach($field in @('EffectMotorTorquePer','EffectVelocityMaxPer','EffectFuelUsePer')){Check (@($m[0].Body.Instructions|Where-Object {$_.OpCode.Code -eq 'Stfld' -and ($_.Operand -as [string]) -match ('Vehicle::'+$field)}).Count -eq 1) ('Native effects reset '+$field+' before module multiplication')}
 $a.Dispose()
 Write-Output "PASS $script:n installed-game hook and large-health compatibility checks"

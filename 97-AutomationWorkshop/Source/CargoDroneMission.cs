@@ -183,6 +183,18 @@ namespace YFAutomation.CargoDrones
             // departure/approach corridor. Returning flights retain the exact
             // recorded trail so a safe corridor is never invented on recall.
             if(state.Phase==CargoPhase.ToTarget&&state.Motion.Trail.Length>0&&state.Motion.Position.Distance(state.Motion.Trail[0])<1e-7)RouteDelivery();
+            else if(state.Phase==CargoPhase.ToTarget&&entrance.HasValue&&state.Motion.Position.Y>entrance.Value.Y&&
+                Math.Abs(state.Motion.Position.X-entrance.Value.X)<.01&&Math.Abs(state.Motion.Position.Z-entrance.Value.Z)<.01&&
+                !state.Motion.Remaining.Any(p=>p.Distance(entrance.Value)<1e-7))
+            {
+                // Repair pre-0.10.6 retries which discarded the descent while
+                // hovering on the entrance column. Validate every new edge;
+                // preserve cargo, battery and the proven return trail.
+                var points=new List<CargoPoint>{entrance.Value};
+                if(Math.Abs(entrance.Value.Y-destination.Y)>1)points.Add(new CargoPoint(entrance.Value.X,destination.Y,entrance.Value.Z));
+                motion.RetargetVia(destination,points);
+                CargoTrace.Emit(airspace,"entrance-repaired","pos="+CargoTrace.Point(state.Motion.Position)+" entrance="+CargoTrace.Point(entrance.Value)+" target="+CargoTrace.Point(destination));
+            }
         }
         void RequestReturn(CargoMissionReturnReason reason)
         {if(Phase==CargoPhase.RecoveryOnly||Phase==CargoPhase.Docked)return;if(ReturnReason==CargoMissionReturnReason.None)ReturnReason=reason;flight.Recall();if(!flight.TransferPending&&!failed)motion.ReturnHome();}

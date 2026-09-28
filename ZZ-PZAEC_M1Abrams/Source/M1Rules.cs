@@ -23,9 +23,18 @@ namespace PZAEC.M1
         public static string AmmoName(bool ap)=>ap?APAmmo:Ammo;
         public static float ShellSpeed(bool ap)=>ap?350:250;
         public static float HEFalloff(float metres)=>metres<=2?1:metres>=8?0:(8-metres)/6;
-        // Region 0 front, 1 side, 2 rear, 3 roof/unknown. Acid halves protection.
+        // Region 0 front, 1 side, 2 rear, 3 bottom/unknown, 4 roof. Acid halves protection.
+        // Inputs are the normalized direction toward the source in body-local space.
+        public static int ArmorRegion(float x,float y,float z)
+        {
+            if(!Finite(x)||!Finite(y)||!Finite(z)||(x*x+y*y+z*z)<.001f)return 3;
+            if(y>=.6f)return 4;
+            if(y<=-.6f)return 3;
+            double angle=Math.Abs(Math.Atan2(x,z)*180/Math.PI);
+            return angle<=60?0:angle>=135?2:1;
+        }
         public static float Armor(int tier,int region,bool acid)
-        {float value=region==0?.70f+tier*.02f:region==1?.50f+tier*.02f:region==2?.25f+tier*.03f:.35f+tier*.03f;return Math.Min(.8f,value)*(acid?.5f:1);}
+        {float value=(region==0||region==4)?.70f+tier*.02f:region==1?.50f+tier*.02f:region==2?.25f+tier*.03f:.35f+tier*.03f;return Math.Min(.8f,value)*(acid?.5f:1);}
         public static int ProtectedDamage(int damage,int tier,int region,bool acid)
         {return damage<=0?0:Math.Max(1,(int)Math.Round(damage*(1.0-Armor(tier,region,acid))));}
         public static bool Finite(float v)=>!float.IsNaN(v)&&!float.IsInfinity(v);

@@ -8,7 +8,8 @@ $clean=Extract '        static bool Clean' '        static bool CraftGuard'
 $update=$src.Substring($src.IndexOf('        public static void Update'))
 $stub=@'
 namespace PZAEC.M1 {
- public class ItemValue{public float UseTimes;public int Meta,type=1;public ItemValue[] Modifications,CosmeticMods;public ItemClass ItemClass=new ItemClass();public int Version;public bool TryGetMetadata(string k,out int v){v=Version;return v>0;}public void SetMetadata(string k,int v){Version=v;}}
+ public static class Secondary{public static bool Empty(ItemValue item)=>!item.HasBelt;}
+ public class ItemValue{public bool HasBelt;public float UseTimes;public int Meta,type=1;public ItemValue[] Modifications,CosmeticMods;public ItemClass ItemClass=new ItemClass();public int Version;public bool TryGetMetadata(string k,out int v){v=Version;return v>0;}public void SetMetadata(string k,int v){Version=v;}}
  public class ItemClass{public string Name="vehicleM1AbramsPlaceable";public string GetItemName()=>Name;public static ItemValue GetItem(string n,bool b)=>new ItemValue();}
  public static class Mathf{public static float Clamp(float v,float min,float max)=>System.Math.Max(min,System.Math.Min(max,v));}
  public class EntityPlayer{}
@@ -27,6 +28,7 @@ $tests=@'
   var item=new ItemValue{UseTimes=750000};Migrate(null,item);Check(item.UseTimes==500000&&item.Version==2,"old half-damaged 1.5m vehicle becomes half-damaged 1m");Migrate(null,item);Check(item.UseTimes==500000,"migration idempotent");
   item=new ItemValue{UseTimes=500000};item.ItemClass.Name="vehicleTruck4x4Placeable";Migrate(null,item);Check(item.UseTimes==500000&&item.Version==0,"other vehicles untouched");
   item=new ItemValue();Check(Clean(item),"empty new vehicle is valid upgrade input");item.UseTimes=10;Check(!Clean(item),"damaged input rejected");item.UseTimes=0;item.Meta=1;Check(!Clean(item),"fuel input rejected");item.Meta=0;item.Modifications=new[]{new ItemValue()};Check(!Clean(item),"installed modification rejected");item.Modifications=null;item.CosmeticMods=new[]{new ItemValue()};Check(!Clean(item),"cosmetic modification rejected");
+  item=new ItemValue{HasBelt=true};Check(!Clean(item),"loaded belt blocks upgrade");
   var w=new World();var s=new Weapons.State();Time.time=7.9f;s.RepairTrigger.Accept(1,1,true,7.9f);Update(w,s);Check(s.Vehicle.Health==100000&&s.Vehicle.bag.Count==3,"no early repair");
   Time.time=8;s.RepairTrigger.Accept(1,2,true,8);Update(w,s);Check(s.Vehicle.Health==1000000&&s.Vehicle.bag.Count==2&&s.Vehicle.Syncs==1,"one kit restores full health");Update(w,s);Check(s.Vehicle.Health==1000000&&s.Vehicle.bag.Count==2,"no same-frame duplicate repair");
   s=new Weapons.State();Time.time=8;s.RepairTrigger.Accept(1,1,true,7);Update(w,s);Check(s.RepairStarted==-1&&s.Vehicle.bag.Count==3,"expired lease cancels without consuming");

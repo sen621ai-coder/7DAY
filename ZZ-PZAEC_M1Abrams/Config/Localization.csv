@@ -17,3 +17,19 @@ pzM1ShellAP,items,Item,,,pzM1ShellAP,M1穿甲弹 AP
 pzM1ShellAPDesc,items,Item,,,放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。,放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。
 pzM1RepairKit,items,Item,,,pzM1RepairKit,M1装甲维修包
 pzM1RepairKitDesc,items,Item,,,放入坦克货仓。车外对准坦克按住G 8秒；停车停火且10秒内未受伤，每包将坦克耐久完全修满。受击或松开中断不扣包；满耐久不消耗。,放入坦克货仓。车外对准坦克按住G 8秒；停车停火且10秒内未受伤，每包将坦克耐久完全修满。受击或松开中断不扣包；满耐久不消耗。
+modPZAECM1Powertrain,items,Item,,,M1 Powertrain,M1动力优化
+modPZAECM1PowertrainDesc,items,Item,,,扭矩+30%，前进/加速/倒车上限+25%，无额外油耗倍率。与M1经济巡航互斥。,M1专用；每种限装1件。扭矩+30%，前进/加速/倒车上限+25%，无额外油耗倍率。与M1经济巡航互斥。
+modPZAECM1Economy,items,Item,,,M1 Economy,M1经济巡航
+modPZAECM1EconomyDesc,items,Item,,,油耗降低40%，不降低动力或速度。与M1动力优化互斥。,M1专用；每种限装1件。油耗降低40%，不降低动力或速度。与M1动力优化互斥。
+modPZAECM1Armor,items,Item,,,M1 Armor,M1附加装甲
+modPZAECM1ArmorDesc,items,Item,,,正面/顶部减伤+4个百分点，侧面+12，后部+10，最高80%。不减速，底部/未知方向不变。,M1专用；每种限装1件。正面/顶部减伤+4个百分点，侧面+12，后部+10，最高80%。不减速，底部/未知方向不变。
+modPZAECM1Corrosion,items,Item,,,M1 Corrosion Liner,M1抗蚀衬层
+modPZAECM1CorrosionDesc,items,Item,,,酸蚀享受完整区域装甲减伤，仍非免疫。不会清除酸蚀或辐射等状态。,M1专用；每种限装1件。酸蚀享受完整区域装甲减伤，仍非免疫。不会清除酸蚀或辐射等状态。
+modPZAECM1Stabilizer,items,Item,,,M1 Stabilizer,M1稳定火控
+modPZAECM1Autoloader,items,Item,,,M1 Autoloader,M1辅助装填
+pzM1MGBelt,items,Item,,,M1机枪弹链,M1机枪弹链
+pzM1AAMissile,items,Item,,,M1防空导弹,M1防空导弹
+pzM1MGBeltDesc,items,Item,,,100发弹链；放入M1货仓。打空自动换链4秒，已装余弹随车辆保存。,100发弹链；放入M1货仓。打空自动换链4秒，已装余弹随车辆保存。
+pzM1AAMissileDesc,items,Item,,,仅锁定40～600米飞行敌人；1.5秒锁定，每管12秒冷却，忽略50%物理护甲。放入M1货仓。,仅锁定40～600米飞行敌人；1.5秒锁定，每管12秒冷却，忽略50%物理护甲。放入M1货仓。
+modPZAECM1StabilizerDesc,items,Item,,,炮塔、炮管、机枪与导弹架追踪速度+50%；机枪散布降低25%；主炮车体反冲降低60%。不提高导弹制导能力。与M1辅助装填互斥。,炮塔、炮管、机枪与导弹架追踪速度+50%；机枪散布降低25%；主炮车体反冲降低60%。不提高导弹制导能力。与M1辅助装填互斥。
+modPZAECM1AutoloaderDesc,items,Item,,,主炮装填/切弹、机枪换链、每管导弹冷却降低25%（机枪3秒、导弹9秒）。不降低热量或锁定时间。与M1稳定火控互斥。,主炮装填/切弹、机枪换链、每管导弹冷却降低25%（机枪3秒、导弹9秒）。不降低热量或锁定时间。与M1稳定火控互斥。
