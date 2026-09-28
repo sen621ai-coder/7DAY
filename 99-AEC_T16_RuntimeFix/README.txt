@@ -1,6 +1,20 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.18 tactical component scrap recovery
+- Completed T16-T19 armor scraps independently have a 50% chance of +1
+  same-rank tactical component; the seven weapon families have 50% for +2.
+- Original scrap outputs are retained. Each consumed item rolls separately,
+  regardless of quality, durability, crafting or loot origin. Earlier ranks
+  are not refunded. Vanilla equipment, attachments and test bundles are excluded.
+- Backpack and workbench queues award only after successful output and queue
+  decrement, including full-inventory retries and unattended workbenches.
+  Native queue serialization retains the consumed items across save/load.
+- Workbench bonuses enter output slots; UI overflow goes to inventory, then
+  drops at the player. Unattended output overflow drops above the workstation.
+- Cancelled/incomplete scraps give no bonus and previews never roll rewards.
+  Restart the game/server and update all clients to load the rebuilt DLL.
+
 Runtime 1.27.16 cooling sink spread control
 - T16-T19 Cooling Sink now reduces hip-fire and aimed spread by 100%,
   matching level-100 AEC Weapon Handling spread bonuses.

@@ -47,6 +47,7 @@ namespace AECT16RuntimeFix
                 EquipmentStatDisplay.Install(harmony, modInstance.Path);
                 WeaponAttachmentCompatibility.Install(harmony);
                 FusionTierUpgrade.Install(harmony);
+                TacticalScrapRewards.Install(harmony);
                 ContractRelayPickup.Install(harmony);
                 RelayHuntPartyCredit.Install(harmony);
                 RelayHuntStageGate.Install(harmony);

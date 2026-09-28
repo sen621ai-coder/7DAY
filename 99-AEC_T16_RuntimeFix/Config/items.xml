@@ -111,7 +111,7 @@
       </property>
     </item>
   </append>
-  <!-- Completion-only components. No quest-use action or quality stat. -->
+  <!-- Quest rewards and completed equipment scrap bonuses. No quest-use action or quality stat. -->
   <append xpath="/items">
     <item name="PZAECBuildPartsR2">
       <property name="Extends" value="resourceLegendaryParts" />
