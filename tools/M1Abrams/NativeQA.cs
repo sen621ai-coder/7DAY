@@ -70,12 +70,56 @@ public sealed class M1NativeQA:IModApi
             int initialHealth=vehicle.Health;vehicle.ApplyDamage(100000);Check(!vehicle.IsDead()&&vehicle.Health==initialHealth-100000,"native six-digit damage does not trigger vehicle instant destruction");
             Check(Combat.CombinedThreshold(123456,null)==123456,"non-M1 threshold preserves prior mod result");
             var main=Weapons.Register(vehicle);var state=Secondary.Get(main);Check(state.Muzzle!=null&&state.Left!=null&&state.Right!=null,"spawned server vehicle secondary rig");
+            Weapons.Update();Physics.SyncTransforms();
+            var probeStart=main.Model.TransformPoint(new Vector3(0,1.8f,-10))+Origin.position;
+            var probeDirection=main.Model.forward;
+            if(Voxel.Raycast(world,new Ray(probeStart,probeDirection),20,-538750997,8,0)){
+                var h=Voxel.voxelRayHitInfo;results.Add("INFO chase hit tag="+h.tag+" transform="+h.transform+" entity="+ItemActionAttack.FindHitEntity(h));
+            }
+            Check(!Weapons.Trace(vehicle,probeStart,probeDirection,20,out var probeHit),"chase sight excludes own tank colliders");
+            float aimYaw=15,aimPitch=4;var aimBefore=Optics.Advance(ref aimYaw,ref aimPitch,0,0,1);
+            var aimAfter=Optics.Advance(ref aimYaw,ref aimPitch,0,0,8);
+            Check(Quaternion.Angle(aimBefore,aimAfter)<.001f,"magnification does not move world sight direction");
+            var fine=Optics.Advance(ref aimYaw,ref aimPitch,8,0,8);
+            Check(Math.Abs(aimYaw-17)<.001f,"8x mouse aiming reduces angular delta eightfold");
+            Optics.Advance(ref aimYaw,ref aimPitch,0,10000,1);Check(aimPitch==85,"sight elevation safely clamps before vertical singularity");
+            foreach(int weapon in new[]{0,1,2}){float last=90;for(int step=0;step<(weapon==0?3:2);step++){float fov=Optics.Fov(65,Optics.Magnification(weapon,step));Check(fov>0&&fov<last,"native optic FOV decreases per step "+weapon+"/"+step);last=fov;}}
+            var opticalObject=new GameObject("M1QAOpticCamera");var opticalCamera=opticalObject.AddComponent<Camera>();opticalCamera.enabled=false;
+            try{
+                opticalCamera.transform.position=new Vector3(3,4,5);opticalCamera.transform.rotation=Quaternion.Euler(10,20,30);opticalCamera.fieldOfView=65;
+                var pose=AccessTools.Method(typeof(Optics),"ApplyPose");
+                for(int i=0;i<5;i++)pose.Invoke(null,new object[]{opticalCamera,new Vector3(10,20,30),Quaternion.Euler(-4,90,0),Optics.Fov(65,8)});
+                Check(Math.Abs(opticalCamera.fieldOfView-Optics.Fov(65,8))<.001f,"repeat camera render does not accumulate magnification");
+                Optics.RestoreCamera();Check(opticalCamera.transform.position==new Vector3(3,4,5)&&Quaternion.Angle(opticalCamera.transform.rotation,Quaternion.Euler(10,20,30))<.01f&&Math.Abs(opticalCamera.fieldOfView-65)<.001f,"optic exit restores position rotation and native FOV");
+                pose.Invoke(null,new object[]{opticalCamera,Vector3.zero,Quaternion.identity,15f});opticalCamera.fieldOfView=75;Optics.RestoreCamera();Check(opticalCamera.fieldOfView==75,"optic restoration preserves another camera system's FOV change");
+            }finally{Optics.Clear();UnityEngine.Object.Destroy(opticalObject);}
+            var opticRenderers=main.Model.GetComponentsInChildren<Renderer>(true);var originallyHidden=opticRenderers[0];originallyHidden.forceRenderingOff=true;
+            AccessTools.Field(typeof(Optics),"model").SetValue(null,main.Model);
+            AccessTools.Method(typeof(Optics),"Visibility").Invoke(null,new object[]{true});
+            Check(opticRenderers.All(r=>r.forceRenderingOff),"optic hides tank model without disabling entity or colliders");
+            Optics.Clear();Check(originallyHidden.forceRenderingOff&&opticRenderers.Skip(1).All(r=>!r.forceRenderingOff),"optic exit preserves originally hidden renderer and restores remaining hull");originallyHidden.forceRenderingOff=false;
             state.Gun.Rounds=37;state.Gun.Heat=66;state.Gun.Overheated=true;state.LeftAt=Time.time+8;state.RightAt=Time.time+3;Secondary.Save(state);
             var item=vehicle.vehicle.GetUpdatedItemValue().Clone();Check(item.TryGetMetadata("m1swRounds",out int rounds)&&rounds==37,"native vehicle ItemValue retains partial belt");
             using(var stream=new MemoryStream()){item.Write(new BinaryWriter(stream));stream.Position=0;var restored=new ItemValue();restored.Read(new BinaryReader(stream));Check(restored.TryGetMetadata("m1swRounds",out int savedRounds)&&savedRounds==37&&restored.TryGetMetadata("m1swHeat",out int heat)&&heat==66000,"native ItemValue binary save/read retains ammunition and heat");Check(restored.TryGetMetadata("m1swLeft",out int left)&&left>=7900&&restored.TryGetMetadata("m1swRight",out int right)&&right>=2900,"native binary save/read retains independent cooldowns");}
             Secondary.States.Remove(vehicle.entityId);state=Secondary.Get(main);Check(state.Gun.Rounds==37&&Math.Abs(state.Gun.Heat-66)<.001f&&state.Gun.Overheated,"reload state restores heat and ammunition");Check(state.LeftAt>Time.time+7.9f&&state.RightAt>Time.time+2.9f,"independent tube cooldown restored");
             for(int tier=1;tier<4;tier++){var other=Spawn<EntityVehicle>(world,"vehicleM1AbramsT"+(16+tier),vehicle.position+Vector3.right*(tier*20));Check(Weapons.Tier(other)==tier,"native lowercase tier "+(16+tier));Check(other.vehicle.GetMaxHealth()==Rules.Specs[tier].Health,"native tier health "+(16+tier));Check(Secondary.Get(Weapons.Register(other)).Left!=null,"native tier AA rig "+(16+tier));}
             var player=Spawn<EntityPlayer>(world,"playerMale",vehicle.position);player.MinEventContext.ItemValue=ItemValue.None;vehicle.AttachEntityToSelf(player,0);Check(Weapons.Seat(vehicle,player.entityId)==0,"native driver attachment");
+            vehicle.bag.AddItem(new ItemStack(ItemClass.GetItem(Rules.Ammo,false),3));
+            var cannonOrigin=SecondaryModel.Find(main.Model,"GunnerSight").position+Origin.position;
+            var cannonTarget=Weapons.Pivot(main)+Weapons.Direction(main)*150;
+            Secondary.Request(world,player.entityId,new NetPackageM1SecondaryIntent{Vehicle=vehicle.entityId,Serial=++serial,Select=0,Flags=2,Origin=cannonOrigin,Direction=(cannonTarget-cannonOrigin).normalized});
+            state.Inputs[0].SwitchUntil=Time.time-1;main.NextFire=0;
+            Secondary.Request(world,player.entityId,new NetPackageM1SecondaryIntent{Vehicle=vehicle.entityId,Serial=++serial,Select=0,Flags=3,Origin=cannonOrigin,Direction=(cannonTarget-cannonOrigin).normalized});
+            AccessTools.Method(typeof(Weapons),"AimGun").Invoke(null,new object[]{main,1f});
+            results.Add("INFO cannon reason="+main.Reason+" trigger="+main.Trigger.Held+" origin="+cannonOrigin);
+            AccessTools.Method(typeof(Weapons),"Shoot").Invoke(null,new object[]{main});
+            Check(main.Shot==1&&vehicle.bag.GetItemCount(ItemClass.GetItem(Rules.Ammo,false))==2,"native cannon optic intent passes aim, authority and fires exactly one shell");
+            var oldBody=vehicle.vehicleRB.rotation;main.LastBody=oldBody;main.BodySeen=true;var worldGun=Weapons.Direction(main);
+            vehicle.vehicleRB.rotation=Quaternion.Euler(3,10,2)*oldBody;Physics.SyncTransforms();Weapons.Stabilize(main);
+            Check(Vector3.Angle(worldGun,Weapons.Direction(main))<.05f,"main gun compensates yaw pitch and roll of moving hull within limits");
+            vehicle.vehicleRB.rotation=oldBody;Physics.SyncTransforms();Weapons.Stabilize(main);
+            // Restore the fixture's neutral rig before independent MG/AA checks.
+            main.Yaw=main.Pitch=0;main.YawNode.localRotation=main.PitchNode.localRotation=Quaternion.identity;main.LastShot=-100;main.Trigger.Stop();Physics.SyncTransforms();
             var targetPoint=state.Muzzle.position+Origin.position+state.Muzzle.forward*100;
             Intent(world,vehicle,player,1,false,false,targetPoint);state.Inputs[0].SwitchUntil=Time.time-1;
             state.Gun.Rounds=10;state.Gun.Heat=0;state.Gun.Overheated=false;state.Gun.NextShot=0;

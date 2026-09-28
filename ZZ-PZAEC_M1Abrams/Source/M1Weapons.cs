@@ -14,7 +14,7 @@ namespace PZAEC.M1
             public readonly Rules.Trigger RepairTrigger=new Rules.Trigger();
             public bool AP;public float LastDamage=-100,RepairStarted=-1,LastWeaponActivity=-100;
             public int Epoch,Sequence,Shot,Actor=-1,Reason;public float Yaw,Pitch,NextFire,NextStatus,LastShot=-100;
-            public Vector3 SightOffset,View=Vector3.forward;public bool HasSight;
+            public Vector3 SightOffset,View=Vector3.forward;public bool HasSight,BodySeen;public Quaternion LastBody;
         }
         sealed class Shell{public EntityVehicle Vehicle;public int Epoch,Id,Actor,Tier;public bool AP;public Vector3 Position,Velocity;public float Age,Distance;}
         public static readonly Dictionary<int,State> States=new Dictionary<int,State>();
@@ -68,6 +68,16 @@ namespace PZAEC.M1
             return s.Model!=null?s.Model.TransformPoint(local)+Origin.position:s.Vehicle.position+Body(s.Vehicle)*local;
         }
         public static Vector3 Direction(State s)=>Body(s.Vehicle)*Quaternion.Euler(0,s.Yaw,0)*Quaternion.Euler(-s.Pitch,0,0)*Vector3.forward;
+        public static void Stabilize(State s)
+        {
+            var body=Body(s.Vehicle);
+            if(s.BodySeen&&s.HasSight&&Secondary.MainControl(s.Vehicle,s.Actor)&&Quaternion.Angle(s.LastBody,body)<45){
+                var old=s.LastBody*Quaternion.Euler(0,s.Yaw,0)*Quaternion.Euler(-s.Pitch,0,0)*Vector3.forward;
+                var local=Quaternion.Inverse(body)*old;s.Yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg;
+                s.Pitch=Mathf.Clamp(Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg,Rules.MinPitch(s.Yaw),20);
+            }
+            s.LastBody=body;s.BodySeen=true;
+        }
         public static bool Trace(EntityVehicle v,Vector3 start,Vector3 direction,float range,out WorldRayHitInfo hit)
         {
             hit=null;float remaining=range;
@@ -143,7 +153,12 @@ namespace PZAEC.M1
                 if(Time.time>=nextDiscovery){nextDiscovery=Time.time+1;foreach(var entity in w.Entities.list)if(entity is EntityVehicle v&&IsTank(v))Register(v);}
                 removed.Clear();foreach(var entry in States){var s=entry.Value;
                     if(w.GetEntity(entry.Key)!=s.Vehicle){removed.Add(entry.Key);continue;}
-                    if(Server){AimGun(s,Time.deltaTime);Shoot(s);Secondary.Update(s,Time.deltaTime);Service.Update(w,s);
+                    if(Server){Stabilize(s);AimGun(s,Time.deltaTime);Shoot(s);
+                        // MG is mounted on the main turret. Its targeting must see
+                        // this frame's parent pose, not yesterday's turret angle.
+                        if(s.YawNode!=null)s.YawNode.localRotation=Quaternion.Euler(0,s.Yaw,0);
+                        if(s.PitchNode!=null)s.PitchNode.localRotation=Quaternion.Euler(-s.Pitch,0,0);
+                        Secondary.Update(s,Time.deltaTime);Service.Update(w,s);
                         // Dedicated servers also need the authoritative turret collider pose.
                         if(s.YawNode!=null)s.YawNode.localRotation=Quaternion.Euler(0,s.Yaw,0);
                         if(s.PitchNode!=null)s.PitchNode.localRotation=Quaternion.Euler(-s.Pitch,0,0);

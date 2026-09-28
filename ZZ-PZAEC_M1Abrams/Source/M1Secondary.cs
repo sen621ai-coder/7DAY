@@ -15,7 +15,8 @@ namespace PZAEC.M1
             public readonly Vector3[] Origins=new Vector3[2],Views={Vector3.forward,Vector3.forward};
             public Transform MGYaw,MGPitch,Muzzle,AAPitch,Left,Right;public SecondaryModel.Geometry Geometry;
             public float Yaw,Pitch,AAP=20,LeftAt,RightAt,GlobalAt,Lock,LostAt=-1,NextStatus,LastTick;
-            public int Target=-1,MGReason,AAReason,Preferred,Sequence,Shot;public bool FireEdge,GoodLock;
+            public int Target=-1,MGReason,AAReason,Preferred,Sequence,Shot;public bool FireEdge,GoodLock,MGStabilized;public Vector3 MGWorldDirection;
+            public float NextDiagnostic;public int DiagnosticCode=-1;
         }
         sealed class Missile{public EntityVehicle Vehicle;public int Epoch,Id,Actor,Tier,Target;public Vector3 Position,Direction;public float Age,Distance,Lost,NextEvent;public bool Guided=true;}
         public static readonly Dictionary<int,State> States=new Dictionary<int,State>();
@@ -89,8 +90,10 @@ namespace PZAEC.M1
             var s=Get(main);float now=Time.time;var v=main.Vehicle;
             for(int seat=0;seat<2;seat++){var i=s.Inputs[seat];if(!Ready(s,seat)){i.Stop();if(seat==0&&v.GetAttached(1)!=null)i.Mode=SecondaryRules.MG;}}
             s.Gun.Tick(now,Mathf.Max(0,now-s.LastTick));s.LastTick=now;
-            if(s.MGYaw!=null){int mg=Ready(s,0)&&s.Inputs[0].Mode==1?0:-1;UpdateMG(s,mg,dt);int aa=Ready(s,1)&&s.Inputs[1].Mode==2?1:Ready(s,0)&&s.Inputs[0].Mode==2?0:-1;UpdateAA(s,aa,dt);}
-            s.FireEdge=false;Save(s);
+            // AA rotates the shared turret; resolve its parent pose before MG
+            // stabilization/clearance, including simultaneous two-seat operation.
+            if(s.MGYaw!=null){int aa=Ready(s,1)&&s.Inputs[1].Mode==2?1:Ready(s,0)&&s.Inputs[0].Mode==2?0:-1;UpdateAA(s,aa,dt);int mg=Ready(s,0)&&s.Inputs[0].Mode==1?0:-1;UpdateMG(s,mg,dt);}
+            Diagnose(s);s.FireEdge=false;Save(s);
             if(now>=s.NextStatus){s.NextStatus=now+(v.hasDriver||v.GetAttached(1)!=null?.1f:1);Status(s);}
         }
         static int Count(State s,string name){var item=ItemClass.GetItem(name,false);return item==null||item.type==0||s.Main.Vehicle.bag==null?0:s.Main.Vehicle.bag.GetItemCount(item);}
@@ -106,12 +109,14 @@ namespace PZAEC.M1
         }
         static void UpdateMG(State s,int seat,float dt)
         {
-            s.MGReason=3;if(seat<0)return;var v=s.Main.Vehicle;var lease=s.Inputs[seat];var target=Aim(s,seat,200);var delta=target-Position(s.MGPitch);var local=s.MGYaw.parent.InverseTransformDirection(delta.normalized);float yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg,pitch=Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg;
+            s.MGReason=3;if(seat<0){s.MGStabilized=false;return;}var v=s.Main.Vehicle;var lease=s.Inputs[seat];var target=Aim(s,seat,200);var delta=target-Position(s.MGPitch);var local=s.MGYaw.parent.InverseTransformDirection(delta.normalized);float yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg,pitch=Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg;
+            if(s.MGStabilized){var stable=s.MGYaw.parent.InverseTransformDirection(s.MGWorldDirection);s.Yaw=Mathf.Atan2(stable.x,stable.z)*Mathf.Rad2Deg;s.Pitch=Mathf.Clamp(Mathf.Asin(Mathf.Clamp(stable.y,-1,1))*Mathf.Rad2Deg,-10,80);}
             float factor=ModuleRules.Tracking(Modules.Get(v));float oldYaw=s.Yaw,oldPitch=s.Pitch;
             float nextYaw=Mathf.MoveTowardsAngle(s.Yaw,yaw,100*factor*dt),nextPitch=Mathf.MoveTowards(s.Pitch,Mathf.Clamp(pitch,-10,80),70*factor*dt);bool clear=true;
             int steps=Mathf.Max(1,Mathf.CeilToInt(Mathf.Max(Mathf.Abs(Mathf.DeltaAngle(oldYaw,nextYaw)),Mathf.Abs(nextPitch-oldPitch))/5));
             for(int j=1;j<=steps;j++){float t=(float)j/steps;s.MGYaw.localRotation=Quaternion.Euler(0,Mathf.LerpAngle(oldYaw,nextYaw,t),0);s.MGPitch.localRotation=Quaternion.Euler(-Mathf.Lerp(oldPitch,nextPitch,t),0,0);if(!Corridor(s,s.MGPitch,s.Muzzle,1,.15f)){clear=false;break;}}
             if(clear){s.Yaw=nextYaw;s.Pitch=nextPitch;}s.MGYaw.localRotation=Quaternion.Euler(0,s.Yaw,0);s.MGPitch.localRotation=Quaternion.Euler(-s.Pitch,0,0);
+            s.MGWorldDirection=s.Muzzle.forward;s.MGStabilized=true;
             s.MGReason=pitch< -10||pitch>80?1:!clear?2:Vector3.Angle(s.Muzzle.forward,delta)>1.5f?4:0;
             var g=s.Gun;if(g.Overheated){s.MGReason=5;lease.Armed=false;}else if(g.Loading)s.MGReason=6;else if(g.Rounds==0)s.MGReason=7;
             if(!lease.Firing(Time.time))return;
@@ -124,6 +129,16 @@ namespace PZAEC.M1
             g.Fired(Time.time);mainShot(s);if(g.Overheated)lease.Armed=false;Send(s,2,origin,end,s.Shot);Save(s);Audio.Manager.SignalAI(v,origin,"pzM1MGNoise",1);
         }
         static void mainShot(State s){s.Main.LastWeaponActivity=Time.time;s.Main.RepairTrigger.Stop();s.Main.RepairStarted=-1;s.Shot++;}
+        static void Diagnose(State s)
+        {
+            foreach(var input in s.Inputs){if(!input.Active(Time.time)||!input.Held)continue;
+                int reason=input.Mode==0?s.Main.Reason:input.Mode==1?s.MGReason:s.AAReason;
+                int code=input.Mode*100+reason+(input.Armed?0:1000);
+                if(Time.time<s.NextDiagnostic)continue;
+                s.NextDiagnostic=Time.time+(code==s.DiagnosticCode?10:2);s.DiagnosticCode=code;
+                Log.Out("[M1-Fire] vehicle="+s.Main.Vehicle.entityId+" actor="+input.Actor+" mode="+input.Mode+" reason="+reason+" armed="+input.Armed+" mainAmmo="+Weapons.Ammo(s.Main)+" belt="+s.Gun.Rounds+" missiles="+Count(s,SecondaryRules.Missile)+" lock="+s.Lock.ToString("0.00")+" reload="+Mathf.Max(0,s.Main.NextFire-Time.time).ToString("0.00"));
+            }
+        }
         static bool Target(EntityAlive e)=>Combat.Hostile(e)&&e is EntityVulture;
         static Vector3 Center(EntityAlive e)=>e.GetPosition()+Vector3.up*.8f;
         static bool Visible(State s,Vector3 origin,EntityAlive target){var delta=Center(target)-origin;return !Weapons.Trace(s.Main.Vehicle,origin,delta.normalized,delta.magnitude,out var hit)||ItemActionAttack.FindHitEntity(hit)==target;}
@@ -177,6 +192,7 @@ namespace PZAEC.M1
         {
             var p=Packet(s,1);float now=Time.time;p.F[0]=s.Yaw;p.F[1]=s.Pitch;p.F[2]=s.AAP;p.F[3]=s.Gun.Heat;p.F[4]=s.Gun.Loading?Mathf.Max(0,s.Gun.ReloadUntil-now):0;p.F[5]=Mathf.Max(0,s.LeftAt-now);p.F[6]=Mathf.Max(0,s.RightAt-now);p.F[7]=Mathf.Max(0,s.GlobalAt-now);p.F[8]=s.Lock/1.5f;p.F[9]=s.GoodLock?1:0;
             p.F[10]=s.Gun.Loading?1:0;p.F[11]=s.Gun.Overheated?1:0;p.F[12]=Mathf.Max(0,s.Gun.NextShot-now);p.F[13]=Mathf.Max(0,s.Gun.LastShot+.5f-now);
+            p.F[14]=s.Inputs[0].Armed?1:0;p.F[15]=s.Inputs[1].Armed?1:0;
             p.I[0]=s.Inputs[0].Mode;p.I[1]=s.Inputs[1].Mode;p.I[2]=s.Gun.Rounds;p.I[3]=s.Target;p.I[4]=s.MGReason;p.I[5]=s.AAReason;p.I[6]=Count(s,SecondaryRules.Belt);p.I[7]=Count(s,SecondaryRules.Missile);Broadcast(p);
         }
         static NetPackageM1SecondaryEvent Packet(State s,byte kind){var p=NetPackageManager.GetPackage<NetPackageM1SecondaryEvent>();p.Vehicle=s.Main.Vehicle.entityId;p.Epoch=s.Main.Epoch;p.Serial=++s.Sequence;p.Kind=kind;p.Time=Time.time;Array.Clear(p.F,0,p.F.Length);Array.Clear(p.I,0,p.I.Length);p.A=p.B=Vector3.zero;return p;}
@@ -185,15 +201,19 @@ namespace PZAEC.M1
         public static void InputUpdate(World w,EntityPlayerLocal p)
         {
             var v=p.AttachedToEntity as EntityVehicle;
-            if(!Weapons.IsTank(v)||!Weapons.UIReady(p)){if(inputVehicle>=0&&w.GetEntity(inputVehicle) is EntityVehicle old)SendInput(p,old,3,false,false,false,true);inputVehicle=-1;localHeld=localZoom=false;return;}
+            if(!Weapons.IsTank(v)||!Weapons.UIReady(p)){if(inputVehicle>=0&&w.GetEntity(inputVehicle) is EntityVehicle old)SendInput(p,old,3,false,false,false,true);inputVehicle=-1;localHeld=localZoom=false;Optics.Clear();return;}
             int seat=Weapons.Seat(v,p.entityId);if(seat<0)return;
             if(inputVehicle!=v.entityId||inputSeat!=seat){inputVehicle=v.entityId;inputSeat=seat;inputMode=SecondaryPresentation.Mode(v,seat);nextInput=0;localHeld=localZoom=false;}
             byte selection=3;bool alt=Input.GetKey(KeyCode.LeftAlt)||Input.GetKey(KeyCode.RightAlt);
             if(alt){for(byte j=0;j<3;j++){var key=(KeyCode)((int)KeyCode.Alpha1+j);if(v.vehicle.Properties.Values.TryGetValue("m1SelectKey"+(j+1),out var text))Enum.TryParse(text,true,out key);if(Input.GetKeyDown(key)){if(SecondaryRules.Allowed(seat,v.GetAttached(1)!=null,j)){inputMode=j;selection=j;}else GameManager.ShowTooltip(p,seat==0?"主炮/导弹由炮手控制":"机枪由驾驶员控制");}}}
             if(!SecondaryRules.Allowed(seat,v.GetAttached(1)!=null,inputMode))inputMode=seat==0?(byte)1:(byte)0;
+            Optics.UpdateInput(p,v,inputMode);
             var fireKey=KeyCode.Mouse0;if(v.vehicle.Properties.Values.TryGetValue("m1FireKey",out var fireText))Enum.TryParse(fireText,true,out fireKey);
             bool fire=Input.GetKey(fireKey),zoom=Input.GetKey(KeyCode.Mouse1),ammo=inputMode==0&&Input.GetKeyDown(KeyCode.R);
-            if(selection!=3||ammo||fire!=localHeld||zoom!=localZoom||Time.time>=nextInput){SendInput(p,v,selection,fire,zoom,ammo);nextInput=Time.time+.1f;localHeld=fire;localZoom=zoom;}
+            if(selection!=3||ammo||fire!=localHeld||zoom!=localZoom||Time.time>=nextInput){
+                if(fire&&!localHeld){var ray=Presentation.SightRay(p);Log.Out("[M1-Input] vehicle="+v.entityId+" seat="+seat+" mode="+inputMode+" zoom="+zoom+" originOffset="+(ray.origin-v.position)+" direction="+ray.direction);}
+                SendInput(p,v,inputMode,fire,zoom,ammo);nextInput=Time.time+.05f;localHeld=fire;localZoom=zoom;
+            }
         }
         static void SendInput(EntityPlayerLocal player,EntityVehicle v,byte selection,bool held,bool zoom,bool ammo,bool stop=false){var ray=Presentation.SightRay(player);var p=NetPackageManager.GetPackage<NetPackageM1SecondaryIntent>();p.Version=SecondaryRules.Protocol;p.Vehicle=v.entityId;p.Serial=unchecked(++inputSerial);p.Select=selection;p.Flags=(byte)((held?1:0)|(zoom?2:0)|(ammo?4:0)|(stop?8:0));p.Origin=ray.origin;p.Direction=ray.direction;if(Weapons.Server)Request(GameManager.Instance.World,player.entityId,p);else ConnectionManager.Instance.SendToServer(p);}
         public static void Clear(){foreach(var s in States.Values)if(Weapons.Server)Save(s);States.Clear();missiles.Clear();inputVehicle=-1;inputSeat=-1;SecondaryPresentation.Clear();}

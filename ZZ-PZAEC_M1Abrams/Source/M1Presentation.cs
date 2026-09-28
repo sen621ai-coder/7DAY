@@ -22,11 +22,10 @@ namespace PZAEC.M1
         static readonly Dictionary<int,View> views=new Dictionary<int,View>();static readonly List<int> remove=new List<int>();
         static readonly List<Puff> puffs=new List<Puff>();static readonly Stack<Puff> pool=new Stack<Puff>();
         static Material smoke,flame;static Texture2D smokeTex,flameTex;static Mesh flameMesh;static AudioClip blastClip,mechanismClip,readyClip,impactAPClip;
-        static Camera camera;static Vector3 basePosition,lastPosition;static Quaternion baseRotation,lastRotation;static float baseFov,lastFov;static bool cameraApplied;
         public static void Install(Harmony h)
         {
             h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"OnGUI"),postfix:new HarmonyMethod(typeof(Presentation),nameof(HUD)));
-            h.Patch(AccessTools.Method(typeof(vp_FPCamera),"LateUpdate"),prefix:new HarmonyMethod(typeof(Presentation),nameof(RestoreCamera)),postfix:new HarmonyMethod(typeof(Presentation),nameof(CameraUpdate)));
+            Optics.Install(h);
         }
         static Transform Find(Transform root,string name){foreach(var t in root.GetComponentsInChildren<Transform>(true))if(t.name==name)return t;return null;}
         static AudioClip ReadWave(string name)
@@ -153,27 +152,16 @@ namespace PZAEC.M1
         }
         public static Ray SightRay(EntityPlayerLocal p)
         {
-            if(p.playerCamera==null)return p.GetLookRay();var t=p.playerCamera.transform;
-            if(cameraApplied&&camera==p.playerCamera)return new Ray(basePosition+Origin.position,baseRotation*Vector3.forward);
-            var r=p.playerCamera.ViewportPointToRay(new Vector3(.5f,.5f,0));r.origin+=Origin.position;return r;
+            if(Optics.TryRay(p,out var sight))return sight;
+            if(p.playerCamera==null)return p.GetLookRay();
+            var ray=p.playerCamera.ViewportPointToRay(new Vector3(.5f,.5f,0));ray.origin+=Origin.position;return ray;
         }
-        public static void RestoreCamera()
+        public static float ShotPulse(EntityVehicle v)
         {
-            if(cameraApplied&&camera!=null){var t=camera.transform;if((t.position-lastPosition).sqrMagnitude<.00001f)t.position=basePosition;if(Quaternion.Angle(t.rotation,lastRotation)<.01f)t.rotation=baseRotation;if(Mathf.Abs(camera.fieldOfView-lastFov)<.01f)camera.fieldOfView=baseFov;}
-            cameraApplied=false;camera=null;
-        }
-        public static void CameraUpdate()
-        {
-            var w=GameManager.Instance?.World;var p=w?.GetPrimaryPlayer();var v=p?.AttachedToEntity as EntityVehicle;
-            if(!Weapons.IsTank(v)||!Weapons.UIReady(p)||!views.TryGetValue(v.entityId,out var view)||p.playerCamera==null)return;
-            camera=p.playerCamera;basePosition=camera.transform.position;baseRotation=camera.transform.rotation;baseFov=camera.fieldOfView;
-            bool gunner=Weapons.Seat(v,p.entityId)>=0,zoom=gunner&&Input.GetKey(KeyCode.Mouse1);float amount=1;float zoomFactor=SecondaryPresentation.Mode(v,Weapons.Seat(v,p.entityId))==2?3:2;
-            if(v.vehicle.Properties.Values.TryGetValue("m1CameraShake",out var text)&&float.TryParse(text,System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var parsed))amount=Mathf.Clamp01(parsed);
-            float age=Time.time-view.ShotAt;float pulse=age>=0&&age<.35f?Mathf.Sin(age/.35f*Mathf.PI)*Mathf.Exp(-age*8):0;
-            float kick=pulse*amount*(Weapons.Seat(v,p.entityId)==1?.6f:gunner?.35f:.2f)*(zoom?.6f:1);
-            lastRotation=baseRotation*Quaternion.Euler(-kick,.13f*kick,0);lastPosition=basePosition-baseRotation*Vector3.forward*(kick*.045f);
-            lastFov=zoom?2*Mathf.Atan(Mathf.Tan(baseFov*Mathf.Deg2Rad/2)/zoomFactor)*Mathf.Rad2Deg:baseFov;
-            camera.transform.SetPositionAndRotation(lastPosition,lastRotation);camera.fieldOfView=lastFov;cameraApplied=true;
+            if(!views.TryGetValue(v.entityId,out var view))return 0;
+            float age=Time.time-view.ShotAt,amount=1;
+            if(v.vehicle.Properties.Values.TryGetValue("m1CameraShake",out var text)&&float.TryParse(text,System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var value))amount=Mathf.Clamp01(value);
+            return age>=0&&age<.35f?Mathf.Sin(age/.35f*Mathf.PI)*Mathf.Exp(-age*8)*amount:0;
         }
         public static void HUD()
         {
@@ -192,15 +180,16 @@ namespace PZAEC.M1
             GUI.Label(new Rect(Screen.width/2-230,Screen.height-122,470,24),"耐久 "+vehicle.vehicle.GetHealth().ToString("N0")+" / "+vehicle.vehicle.GetMaxHealth().ToString("N0")+" · "+Weapons.Spec(vehicle).Horsepower+"马力");
             GUI.Label(new Rect(Screen.width/2-230,Screen.height-98,470,24),(v.AP?"AP穿甲":"HE榴弹")+" ×"+v.Ammo+"  |  "+reason);
             GUI.Label(new Rect(Screen.width/2-230,Screen.height-74,470,24),Modules.Invalid(vehicle)?"M1模组异常：效果已停用，请停车卸下并重新安装":"左键开火 · 右键瞄准 · R切弹 · W/S行驶 · A/D转向");
-            if(control){float x=Screen.width/2,y=Screen.height/2;GUI.Label(new Rect(x-6,y-12,20,25),"+");
+            if(control){
                 var dir=Weapons.Body(vehicle)*Quaternion.Euler(0,v.YawAngle,0)*Quaternion.Euler(-v.PitchAngle,0,0)*Vector3.forward;
-                if(p.playerCamera!=null){var screen=p.playerCamera.WorldToScreenPoint(v.Muzzle.position+dir*200);if(screen.z>0)GUI.Label(new Rect(screen.x-8,Screen.height-screen.y-12,25,25),"○");}
+                Optics.Draw(p,vehicle,v.Muzzle,dir,v.Reason,v.AP);
             }
         }
+
         static void Dispose(View v){foreach(var t in v.Tracks)t.Dispose();if(v.Flame!=null)UnityEngine.Object.Destroy(v.Flame.gameObject);if(v.Tracer!=null)UnityEngine.Object.Destroy(v.Tracer.gameObject);if(v.ImpactAudio!=null)UnityEngine.Object.Destroy(v.ImpactAudio.gameObject);foreach(var a in new[]{v.Blast,v.Mechanism,v.Ready})if(a!=null)UnityEngine.Object.Destroy(a);}
         public static void Clear()
         {
-            CrewVisibility.Clear();RestoreCamera();foreach(var v in views.Values)Dispose(v);views.Clear();foreach(var p in puffs)UnityEngine.Object.Destroy(p.Go);foreach(var p in pool)UnityEngine.Object.Destroy(p.Go);puffs.Clear();pool.Clear();
+            CrewVisibility.Clear();Optics.Clear();foreach(var v in views.Values)Dispose(v);views.Clear();foreach(var p in puffs)UnityEngine.Object.Destroy(p.Go);foreach(var p in pool)UnityEngine.Object.Destroy(p.Go);puffs.Clear();pool.Clear();
             foreach(var resource in new UnityEngine.Object[]{smoke,flame,smokeTex,flameTex,flameMesh,blastClip,mechanismClip,readyClip,impactAPClip})if(resource!=null)UnityEngine.Object.Destroy(resource);
             smoke=flame=null;smokeTex=flameTex=null;flameMesh=null;blastClip=mechanismClip=readyClip=impactAPClip=null;
         }

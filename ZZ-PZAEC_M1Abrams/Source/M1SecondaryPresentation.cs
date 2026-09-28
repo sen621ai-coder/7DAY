@@ -52,19 +52,21 @@ namespace PZAEC.M1
         static string Reason(int n)=>n==0?"就绪":n==1?"超出射界":n==2?"枪口/车体遮挡":n==3?"待命":n==4?"转动对准中":n==5?"过热：松开扳机散热":n==6?"装填/冷却中":n==7?"货仓缺少弹药":n==8?"按住右键搜索":n==9?"无合法飞行目标（40～600米）":n==10?"目标遮挡/离开准星":n==11?"锁定中":"不可发射";
         public static bool HUD(EntityPlayerLocal p,EntityVehicle vehicle)
         {
-            int seat=Weapons.Seat(vehicle,p.entityId);if(seat<0)return false;byte mode=Mode(vehicle,seat);string name=mode==1?"M1车顶机枪":mode==2?"M1双联防空导弹":"M1主炮";
+            int seat=Weapons.Seat(vehicle,p.entityId);if(seat<0)return false;byte mode=Optics.Mode(vehicle,seat);string name=mode==1?"M1车顶机枪":mode==2?"M1双联防空导弹":"M1主炮";
             GUI.Label(new Rect(Screen.width/2-300,Screen.height-183,620,30),name+"  |  Alt+1 主炮 · Alt+2 机枪 · Alt+3 防空导弹");
+            if(views.TryGetValue(vehicle.entityId,out var input)&&Time.time-input.At<1&&input.F[14+seat]<.5f)
+                GUI.Box(new Rect(Screen.width/2-230,Screen.height/2+78,460,30),"切换/暂停后请先松开左键，再按下开火");
             if(mode==0)return false;
-            if(!views.TryGetValue(vehicle.entityId,out var v)||Time.time-v.At>1){GUI.Box(new Rect(Screen.width/2-250,Screen.height-145,500,90),"等待服务器武器状态；请确保客户端/服务器均为 M1 0.4.1");return true;}
+            if(!views.TryGetValue(vehicle.entityId,out var v)||Time.time-v.At>1){GUI.Box(new Rect(Screen.width/2-250,Screen.height-145,500,90),"等待服务器武器状态；请确保客户端/服务器均已更新 M1");return true;}
             int reason=v.I[mode==1?4:5];float age=Time.time-v.At;GUI.Box(new Rect(Screen.width/2-300,Screen.height-145,600,105),name+" · "+Reason(reason));
             string status=mode==1?"弹链 "+v.I[2]+" / 100 · 备用 "+v.I[6]+" · 热量 "+v.F[3].ToString("0")+"% · 换链 "+Mathf.Max(0,v.F[4]-age).ToString("0.0")+"s":"左管 "+Mathf.Max(0,v.F[5]-age).ToString("0.0")+"s · 右管 "+Mathf.Max(0,v.F[6]-age).ToString("0.0")+"s · 货仓 "+v.I[7]+" · 锁定 "+(v.F[8]*100).ToString("0")+"%";
             GUI.Label(new Rect(Screen.width/2-280,Screen.height-117,580,24),status);
             var target=GameManager.Instance.World.GetEntity(v.I[3]) as EntityAlive;
-            string help=mode==1?"按住左键连射 · 右键2倍瞄准 · 打空自动换链":"按住右键锁定 · 左键单发 · 发射后可切回主炮";
+            string help=mode==1?"按住左键连射 · 右键瞄准 · Z变倍 · 打空自动换链":"按住右键锁定 · 左键单发 · 发射后可切回主炮";
             if(mode==2&&target!=null)help=target.EntityClass.entityClassName+" · "+Vector3.Distance(target.position,vehicle.position).ToString("0")+"m · "+help;
             GUI.Label(new Rect(Screen.width/2-280,Screen.height-91,580,45),help);
-            GUI.Label(new Rect(Screen.width/2-6,Screen.height/2-12,20,25),"+");var muzzle=mode==1?v.Muzzle:v.AA;var point=muzzle.position+muzzle.forward*200;var color=GUI.color;GUI.color=reason==0?Color.green:new Color(1,.65f,.1f);
-            if(p.playerCamera!=null){var screen=p.playerCamera.WorldToScreenPoint(point);if(screen.z>0)GUI.Label(new Rect(screen.x-8,Screen.height-screen.y-12,28,25),"○");if(mode==2&&target!=null){screen=p.playerCamera.WorldToScreenPoint(target.position-Origin.position+Vector3.up*.8f);if(screen.z>0)GUI.Box(new Rect(screen.x-24,Screen.height-screen.y-24,48,48),v.F[8]>=1&&v.F[9]>0?"锁定":"…");}}GUI.color=color;return true;
+            var muzzle=mode==1?v.Muzzle:v.AA;Optics.Draw(p,vehicle,muzzle,muzzle.forward,reason);
+            if(p.playerCamera!=null&&mode==2&&target!=null){var screen=p.playerCamera.WorldToScreenPoint(target.position-Origin.position+Vector3.up*.8f);if(screen.z>0)GUI.Box(new Rect(screen.x-24,Screen.height-screen.y-24,48,48),v.F[8]>=1&&v.F[9]>0?"锁定":"…");}return true;
         }
         public static void Clear(){foreach(var v in views.Values){if(v.MGSound!=null)UnityEngine.Object.Destroy(v.MGSound);if(v.AASound!=null)UnityEngine.Object.Destroy(v.AASound);}views.Clear();foreach(var t in trails)UnityEngine.Object.Destroy(t.Line.gameObject);trails.Clear();foreach(var o in new UnityEngine.Object[]{material,mgClip,aaClip})if(o!=null)UnityEngine.Object.Destroy(o);material=null;mgClip=aaClip=null;}
     }
