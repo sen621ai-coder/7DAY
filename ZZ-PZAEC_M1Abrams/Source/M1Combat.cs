@@ -18,12 +18,18 @@ namespace PZAEC.M1
         // Vanilla >=99999 is a destruction sentinel, not normal health damage.
         // Keep its death/backpack/explosion machinery but scope a larger sentinel to M1.
         public static int Threshold(EntityVehicle v)=>Weapons.IsTank(v)?int.MaxValue:99999;
+        public static int CombinedThreshold(int previous,EntityVehicle v)=>Weapons.IsTank(v)?int.MaxValue:previous;
+        [HarmonyAfter("pzaec.apache.armor.v1")]
         static IEnumerable<CodeInstruction> DamageSentinel(IEnumerable<CodeInstruction> input)
         {
             int count=0;
             foreach(var c in input){if(c.opcode==OpCodes.Ldc_I4&&c.operand is int n&&n==99999){
                 var first=new CodeInstruction(OpCodes.Ldarg_0);first.labels.AddRange(c.labels);first.blocks.AddRange(c.blocks);yield return first;
                 yield return new CodeInstruction(OpCodes.Call,AccessTools.Method(typeof(Combat),nameof(Threshold)));count++;
+            }else if(c.opcode==OpCodes.Call&&c.operand is System.Reflection.MethodInfo method&&method.DeclaringType?.FullName=="AECT16RuntimeFix.ApacheArmor"&&method.Name=="KillThreshold"){
+                // Compose with the existing Apache threshold instead of requiring
+                // both mods to replace the same vanilla constant independently.
+                yield return c;yield return new CodeInstruction(OpCodes.Ldarg_0);yield return new CodeInstruction(OpCodes.Call,AccessTools.Method(typeof(Combat),nameof(CombinedThreshold)));count++;
             }else yield return c;}
             if(count!=1)throw new InvalidOperationException("M1 vehicle damage sentinel changed in this game version");
         }

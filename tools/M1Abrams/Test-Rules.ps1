@@ -23,7 +23,7 @@ public static class M1RuleTests {
    Check(Rules.Armor(i,4,false)==Rules.Armor(i,0,false)&&Rules.Armor(i,4,true)==Rules.Armor(i,0,true),"roof matches front for normal and acid");
    Check(Rules.ProtectedDamage(100000,i,4,false)==30000-i*2000,"roof damage by tier");
    Check(Math.Abs(Rules.Armor(i,3,false)-(.35f+i*.03f))<1e-6,"bottom and unknown unchanged");
-   string name="vehicleM1Abrams"+(i==0?"":"T"+(16+i));Check(Rules.Index(name)==i&&Rules.Index(name+"Placeable")==i,"exact tier aliases");
+   string name="vehicleM1Abrams"+(i==0?"":"T"+(16+i));Check(Rules.Index(name)==i&&Rules.Index(name+"Placeable")==i,"exact tier aliases");Check(Rules.Index(name.ToLowerInvariant())==i&&Rules.Index((name+"Placeable").ToLowerInvariant())==i,"native Vehicle constructor lowercases names");
    for(int r=0;r<5;r++){Check(Rules.Armor(i,r,false)<.81f,"armor never immune");Check(Rules.ProtectedDamage(1000000,i,r,true)>Rules.ProtectedDamage(1000000,i,r,false),"acid weakens armor");Check(Rules.ProtectedDamage(0,i,r,false)==0,"zero does not become damage");}
   }
   Check(Rules.Index("vehicleTruck4x4")==-1&&Rules.Index("vehicleM1AbramsT20")==-1,"unrelated vehicle excluded");

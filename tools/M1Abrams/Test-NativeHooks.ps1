@@ -30,5 +30,10 @@ $m=Method EntityVehicle PhysicsFixedUpdate
 foreach($field in @('EffectMotorTorquePer','EffectVelocityMaxPer')){Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match ('Vehicle::'+$field)}).Count -eq 1) ('Native physics reads '+$field)}
 $m=Method Vehicle CalcEffects
 foreach($field in @('EffectMotorTorquePer','EffectVelocityMaxPer','EffectFuelUsePer')){Check (@($m[0].Body.Instructions|Where-Object {$_.OpCode.Code -eq 'Stfld' -and ($_.Operand -as [string]) -match ('Vehicle::'+$field)}).Count -eq 1) ('Native effects reset '+$field+' before module multiplication')}
+foreach($pair in @(@('Vehicle','GetUpdatedItemValue'),@('EntityVehicle','Write'))){Check ((Method $pair[0] $pair[1]).Count -eq 1) ('Secondary persistence hook unambiguous: '+($pair -join '.'))}
+$m=Method EntityVehicle PhysicsFixedUpdate
+Check (@($m[0].Body.Instructions|Where-Object {$_.OpCode.Code -eq 'Ldsfld' -and ($_.Operand -as [string]) -match 'EntityVehicle::isTurnTowardsLook'}).Count -eq 1) 'Secondary aim/steering separation has one native look steering read'
+$m=Method Vehicle GetUpdatedItemValue
+Check (@($m[0].Body.Instructions|Where-Object {$_.OpCode.Code -eq 'Ret'}).Count -eq 1) 'Native pickup returns updated vehicle item'
 $a.Dispose()
 Write-Output "PASS $script:n installed-game hook and large-health compatibility checks"

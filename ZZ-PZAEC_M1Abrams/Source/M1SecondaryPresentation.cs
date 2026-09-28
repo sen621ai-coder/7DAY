@@ -55,7 +55,7 @@ namespace PZAEC.M1
             int seat=Weapons.Seat(vehicle,p.entityId);if(seat<0)return false;byte mode=Mode(vehicle,seat);string name=mode==1?"M1车顶机枪":mode==2?"M1双联防空导弹":"M1主炮";
             GUI.Label(new Rect(Screen.width/2-300,Screen.height-183,620,30),name+"  |  Alt+1 主炮 · Alt+2 机枪 · Alt+3 防空导弹");
             if(mode==0)return false;
-            if(!views.TryGetValue(vehicle.entityId,out var v)||Time.time-v.At>1){GUI.Box(new Rect(Screen.width/2-250,Screen.height-145,500,90),"等待服务器武器状态；请确保客户端/服务器均为 M1 0.4.0");return true;}
+            if(!views.TryGetValue(vehicle.entityId,out var v)||Time.time-v.At>1){GUI.Box(new Rect(Screen.width/2-250,Screen.height-145,500,90),"等待服务器武器状态；请确保客户端/服务器均为 M1 0.4.1");return true;}
             int reason=v.I[mode==1?4:5];float age=Time.time-v.At;GUI.Box(new Rect(Screen.width/2-300,Screen.height-145,600,105),name+" · "+Reason(reason));
             string status=mode==1?"弹链 "+v.I[2]+" / 100 · 备用 "+v.I[6]+" · 热量 "+v.F[3].ToString("0")+"% · 换链 "+Mathf.Max(0,v.F[4]-age).ToString("0.0")+"s":"左管 "+Mathf.Max(0,v.F[5]-age).ToString("0.0")+"s · 右管 "+Mathf.Max(0,v.F[6]-age).ToString("0.0")+"s · 货仓 "+v.I[7]+" · 锁定 "+(v.F[8]*100).ToString("0")+"%";
             GUI.Label(new Rect(Screen.width/2-280,Screen.height-117,580,24),status);

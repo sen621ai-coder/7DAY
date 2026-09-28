@@ -29,7 +29,7 @@ for name,count in [('pzM1MGBelt',1),('pzM1AAMissile',2)]:
  check(len(items.findall(f"./append/item[@name='{name}']"))==1,'unique ammunition item')
  recipe=recipes.find(f"./append/recipe[@name='{name}']");check(recipe.get('count')==str(count) and recipe.get('craft_time')=='30','craft count/time');check(recipe.get('use_ingredient_modifier')=='false','no ingredient discount')
  check(all(i.get('name') in baseitems for i in recipe),'all recipe IDs exist');check(name in progress.find('./append/passive_effect').get('tags').split(','),'unlock at craftingVehicles 100')
-check(E.parse(MOD/'ModInfo.xml').find('Version').get('value')=='0.4.0','runtime release version')
+check(E.parse(MOD/'ModInfo.xml').find('Version').get('value')=='0.4.1','runtime release version')
 stage=ROOT/'.local-tests'/('M1-secondary-config-'+uuid.uuid4().hex);shutil.copytree(MOD/'Config',stage/'ZZ-PZAEC_M1Abrams/Config');shutil.copyfile(MOD/'ModInfo.xml',stage/'ZZ-PZAEC_M1Abrams/ModInfo.xml');apply(stage)
 before={p.name:p.read_bytes() for p in (stage/'ZZ-PZAEC_M1Abrams/Config').iterdir()};apply(stage);check(all((stage/'ZZ-PZAEC_M1Abrams/Config'/p).read_bytes()==data for p,data in before.items()),'config regeneration idempotent')
 print('PASS',checks,'secondary runtime mesh, texture, recipe, ID and regeneration checks')

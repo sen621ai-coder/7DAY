@@ -19,7 +19,7 @@ namespace PZAEC.M1
             new Spec(2200000,1000000,16000000,1800,4.4f,31,14,24,40,52,16),
             new Spec(3200000,1500000,28000000,2000,4.2f,34,15,26,42,54,18)};
         public static int Index(string name)
-        {if(name==Vehicle||name==Vehicle+"Placeable")return 0;for(int i=1;i<4;i++)if(name==Vehicle+"T"+(16+i)||name==Vehicle+"T"+(16+i)+"Placeable")return i;return -1;}
+        {if(string.Equals(name,Vehicle,StringComparison.OrdinalIgnoreCase)||string.Equals(name,Vehicle+"Placeable",StringComparison.OrdinalIgnoreCase))return 0;for(int i=1;i<4;i++)if(string.Equals(name,Vehicle+"T"+(16+i),StringComparison.OrdinalIgnoreCase)||string.Equals(name,Vehicle+"T"+(16+i)+"Placeable",StringComparison.OrdinalIgnoreCase))return i;return -1;}
         public static string AmmoName(bool ap)=>ap?APAmmo:Ammo;
         public static float ShellSpeed(bool ap)=>ap?350:250;
         public static float HEFalloff(float metres)=>metres<=2?1:metres>=8?0:(8-metres)/6;

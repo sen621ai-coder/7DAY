@@ -4,6 +4,10 @@
 
 工具需要 Python 3.12（NumPy、Pillow）及 Blender 4.5。本机便携 Blender 在 `.local-tests/M1Tools/blender-4.5.0-windows-x64/blender.exe`，不属于分发模组。编译器来自 PowerShell 的 Roslyn，引用本机 `7DaysToDie_Data/Managed` 和 `0_TFP_Harmony/0Harmony.dll`。
 
+副武器 0.4.0：`export_secondary_runtime.py` 从已确认的 `Generated/SecondaryWeapons/M1Abrams-SecondaryWeapons.blend` 导出独立 `M1Secondary.meshbin`、挂点和颜色图集；不重写主模型。`secondary_config.py` 幂等生成弹药、配方、解锁和说明。`Test-All.ps1` 包含副武器数值、协议、模型及配置检查。
+
+原生测试用 `pwsh -File tools/M1Abrams/Start-NativeQA.ps1`：没有其他游戏进程时启动隐藏的独立 Navezgane 专服，使用 `.local-tests/M1NativeQA/` 下的新存档和模组副本。安装目录的其他模组用相同 Name 的空清单在测试 UserData 内遮蔽，避免原生游戏继续扫描安装目录而重复/混合加载；缺失的整合材料使用测试占位物品。测试会自行退出，路径与 PID 记录在 session.json，结果在该测试存档的 `m1-native-report.txt`。这不是完整整合包、真实双客户端或视觉实战验收。
+
 ```powershell
 $m1Python = 'C:/Users/nxvan/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
 $m1Blender = '.local-tests/M1Tools/blender-4.5.0-windows-x64/blender.exe'

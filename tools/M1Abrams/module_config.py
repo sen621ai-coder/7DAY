@@ -43,4 +43,7 @@ def apply(root):
     progression=E.parse(cfg/'progression.xml').getroot()
     effect=progression.find('./append/passive_effect');tags=[x for x in effect.get('tags').split(',') if not x.startswith('modPZAECM1')];effect.set('tags',','.join(tags+ids));write('progression.xml',progression)
     with locfile.open('w',encoding='utf-8',newline='') as f:csv.writer(f).writerows(rows)
+    # Keep the implemented secondary effects/localization when regenerating modules alone.
+    from secondary_config import apply as apply_secondary
+    apply_secondary(root)
 if __name__=='__main__':apply(Path(__file__).resolve().parents[2])

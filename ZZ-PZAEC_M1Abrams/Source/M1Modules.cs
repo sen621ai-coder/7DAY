@@ -80,7 +80,7 @@ namespace PZAEC.M1
             var old=__instance.itemValue;bool changed=!Names(old).SequenceEqual(Names(incoming))||Cosmetic(old)!=Cosmetic(incoming);
             if(!changed){incoming.SetMetadata(Quarantine,old!=null&&old.TryGetMetadata(Quarantine,out int q)?q:0);return;}
             var player=GameManager.Instance.World.GetEntity(syncActor.Value) as EntityPlayer;
-            bool valid=incoming.ItemClass?.GetItemName()==__instance.GetName()+"Placeable"&&Parked(__instance.entity)&&Authorized(__instance.entity,player)&&!Cosmetic(incoming)&&ModuleRules.Validate(Rules.Index(incoming.ItemClass?.GetItemName()),Names(incoming),out int mask);
+            bool valid=string.Equals(incoming.ItemClass?.GetItemName(),__instance.GetName()+"Placeable",StringComparison.OrdinalIgnoreCase)&&Parked(__instance.entity)&&Authorized(__instance.entity,player)&&!Cosmetic(incoming)&&ModuleRules.Validate(Rules.Index(incoming.ItemClass?.GetItemName()),Names(incoming),out int mask);
             // A native inventory transaction may already have moved the item on the sender. Keep it removable rather than deleting/rolling it back and risking loss or duplication.
             incoming.SetMetadata(Quarantine,valid?0:1);
             if(!valid)Log.Warning("[M1] Module update quarantined; retained items, disabled all module effects. Park and remove/reinstall modules with permission.");

@@ -1,6 +1,6 @@
 # M1 副武器模型版
 
-这是模型交付，不是游戏功能更新。没有写入 Mods/ZZ-PZAEC_M1Abrams 的 Resources、配置或 DLL。
+此目录保留可编辑模型交付，建模脚本本身不写入游戏资源。后续 0.4.1 已通过独立的 `export_secondary_runtime.py` 将确认后的附件导出到运行时，并接入武器代码；运行时验证记录见 `../secondary-runtime-validation.json`。
 
 ## 文件
 
