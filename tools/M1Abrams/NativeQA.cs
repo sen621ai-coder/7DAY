@@ -35,6 +35,24 @@ public sealed class M1NativeQA:IModApi
             var prefab=(Transform)AccessTools.Method(typeof(Model),"GetPrefab").Invoke(null,null);
             Check(prefab!=null,"native jeep-derived M1 prefab loads");
             var root=SecondaryModel.Find(prefab,"M1Visual");var lod=root.GetComponent<LODGroup>();Check(lod.GetLODs().Length==3,"three native LOD levels");
+            var curb=new GameObject("M1QACurbProbe");var curbBox=curb.AddComponent<BoxCollider>();curbBox.size=new Vector3(4,.2f,.2f);
+            try{
+                foreach(string side in new[]{"L","R"}){
+                    var sourceTrack=SecondaryModel.Find(prefab,"M1TrackContact"+side).GetComponent<MeshCollider>();
+                    Check(sourceTrack.enabled&&sourceTrack.convex&&!sourceTrack.isTrigger,"solid convex track support "+side);
+                    // The cached vehicle is inactive. Cook an active collider
+                    // from its exact mesh before querying native penetration.
+                    var probe=new GameObject("M1QAActiveTrack"+side);probe.transform.SetParent(curb.transform,false);
+                    var track=probe.AddComponent<MeshCollider>();track.sharedMesh=sourceTrack.sharedMesh;track.convex=true;Physics.SyncTransforms();
+                    Vector3 direction;float distance;
+                    Check(Physics.ComputePenetration(track,Vector3.zero,Quaternion.identity,curbBox,new Vector3(0,.1f,0),Quaternion.identity,out direction,out distance)&&distance>.01f,"narrow curb contacts middle of track "+side);
+                    Check(!Physics.ComputePenetration(track,Vector3.zero,Quaternion.identity,curbBox,new Vector3(0,-.1f,0),Quaternion.identity,out direction,out distance),"track support clears level ground "+side);
+                    Check(!Physics.ComputePenetration(track,Vector3.zero,Quaternion.identity,curbBox,new Vector3(0,.1f,3.2f),Quaternion.identity,out direction,out distance),"front track bevel clears low approach "+side);
+                    curbBox.size=new Vector3(.4f,.2f,.2f);
+                    Check(!Physics.ComputePenetration(track,Vector3.zero,Quaternion.identity,curbBox,new Vector3(0,.1f,0),Quaternion.identity,out direction,out distance),"central belly gap remains open "+side);
+                    curbBox.size=new Vector3(4,.2f,.2f);
+                }
+            }finally{UnityEngine.Object.Destroy(curb);}
             foreach(var level in lod.GetLODs())Check(level.renderers.All(r=>r!=null&&r.sharedMaterial!=null&&r.sharedMaterial.mainTexture!=null),"native meshes retain materials and textures");
             var preview=(Transform)AccessTools.Method(typeof(Model),"BuildPreview").Invoke(null,null);
             try{

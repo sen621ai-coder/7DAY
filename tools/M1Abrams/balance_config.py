@@ -31,6 +31,7 @@ def apply(root):
         for k,val in {'recipeName':itemname,'velocityMax_turbo':', '.join(f'{s/3.6:.6f}' for s in ([36,38,40,42][i],[14,15,16,18][i],[48,50,52,54][i],[14,15,16,18][i])),
                       'motorTorque_turbo':', '.join(str(round(t*(1+i*.10))) for t in [18000,12000,24000,15000]),'m1Horsepower':[1500,1650,1800,2000][i]}.items():prop(v,k,val)
         prop(v.find("property[@class='fuelTank']"),'capacity',500+50*i)
+        prop(v,'steerAngleMax',32)
         prop(v.find("property[@class='engine']"),'fuelKmPerL',f'{[18,19,20,21][i]/(500+50*i):.7f}')
         item=copy.deepcopy(base_i);item.set('name',itemname);items.find('append').append(item)
         prop(item,'DescriptionKey',itemname+'Desc');prop(item,'Stacknumber',1)

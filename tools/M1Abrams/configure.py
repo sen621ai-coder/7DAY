@@ -15,7 +15,7 @@ def config(rootname):
     cfg=ET.Element('configs');return cfg,ET.SubElement(cfg,'append',xpath='/'+rootname)
 cfg,a=config('entity_classes');base=ET.parse(ROOT.parent/'Data/Config/entityclasses.xml').find("entity_class[@name='vehicleTruck4x4']");entity=copy.deepcopy(base);entity.set('name','vehicleM1Abrams');prop(entity,'Prefab','M1AbramsRuntime.prefab');a.append(entity);write('entityclasses.xml',cfg)
 cfg,a=config('vehicles');base=ET.parse(ROOT.parent/'Data/Config/vehicles.xml').find("vehicle[@name='vehicleTruck4x4']");v=copy.deepcopy(base);v.set('name','vehicleM1Abrams');a.append(v)
-for name,val in {'cameraDistance':'9, 12','velocityMax_turbo':'8, 4, 11, 5','motorTorque_turbo':'18000, 12000, 24000, 15000','brakeTorque':'50000','steerAngleMax':'25','tiltAngleMax':'35','upAngleMax':'45','recipeName':'vehicleM1AbramsPlaceable','m1FireKey':'Mouse0','m1CameraShake':'1'}.items():prop(v,name,val)
+for name,val in {'cameraDistance':'9, 12','velocityMax_turbo':'8, 4, 11, 5','motorTorque_turbo':'18000, 12000, 24000, 15000','brakeTorque':'50000','steerAngleMax':'32','tiltAngleMax':'35','upAngleMax':'45','recipeName':'vehicleM1AbramsPlaceable','m1FireKey':'Mouse0','m1CameraShake':'1'}.items():prop(v,name,val)
 for p in list(v.findall('property')):
     cls=p.get('class','')
     # Storage is a functional part: removing it makes Vehicle.Update copy the

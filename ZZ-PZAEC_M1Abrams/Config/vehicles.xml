@@ -6,7 +6,7 @@
       <property name="cameraTurnRate" value=".2, .35" />
       <property name="upAngleMax" value="45" />
       <property name="upForce" value="1" />
-      <property name="steerAngleMax" value="25" />
+      <property name="steerAngleMax" value="32" />
       <property name="steerRate" value="130" />
       <property name="steerCenteringRate" value="90" />
       <property name="tiltAngleMax" value="35" />
@@ -111,7 +111,7 @@
       <property name="cameraTurnRate" value=".2, .35" />
       <property name="upAngleMax" value="45" />
       <property name="upForce" value="1" />
-      <property name="steerAngleMax" value="25" />
+      <property name="steerAngleMax" value="32" />
       <property name="steerRate" value="130" />
       <property name="steerCenteringRate" value="90" />
       <property name="tiltAngleMax" value="35" />
@@ -216,7 +216,7 @@
       <property name="cameraTurnRate" value=".2, .35" />
       <property name="upAngleMax" value="45" />
       <property name="upForce" value="1" />
-      <property name="steerAngleMax" value="25" />
+      <property name="steerAngleMax" value="32" />
       <property name="steerRate" value="130" />
       <property name="steerCenteringRate" value="90" />
       <property name="tiltAngleMax" value="35" />
@@ -321,7 +321,7 @@
       <property name="cameraTurnRate" value=".2, .35" />
       <property name="upAngleMax" value="45" />
       <property name="upForce" value="1" />
-      <property name="steerAngleMax" value="25" />
+      <property name="steerAngleMax" value="32" />
       <property name="steerRate" value="130" />
       <property name="steerCenteringRate" value="90" />
       <property name="tiltAngleMax" value="35" />

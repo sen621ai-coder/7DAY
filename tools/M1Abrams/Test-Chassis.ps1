@@ -20,11 +20,22 @@ public static class M1ChassisTests {
   Check(!PZAEC.M1.ChassisRules.Landing(.4f,-1,1),"missing far landing denied");
   Check(!PZAEC.M1.ChassisRules.Landing(.4f,.4f,.6f),"steep landing denied");
   Check(!PZAEC.M1.ChassisRules.Landing(float.NaN,.4f,1),"invalid sample denied");
-  float last=25;for(int k=0;k<=100;k++){
+  float last=32;for(int k=0;k<=100;k++){
    float limit=PZAEC.M1.ChassisRules.SteeringLimit(k/3.6f);
-   Check(limit<=last+.00001f&&limit>=8&&limit<=25,"bounded continuous high speed steering "+k);last=limit;
+   Check(limit<=last+.00001f&&limit>=14&&limit<=32,"bounded continuous high speed steering "+k);last=limit;
   }
-  Check(PZAEC.M1.ChassisRules.SteeringLimit(0)==25&&PZAEC.M1.ChassisRules.SteeringLimit(10)==8,"low/high steering endpoints");
+  Check(PZAEC.M1.ChassisRules.SteeringLimit(0)==32&&PZAEC.M1.ChassisRules.SteeringLimit(15)==14,"low/high steering endpoints");
+  for(int kmh=0;kmh<=80;kmh++){
+   float speed=kmh/3.6f;
+   float yaw=PZAEC.M1.ChassisRules.YawRate(speed,speed,1,1,20,1);
+   Check(yaw>0&&yaw*speed<=4.0001f,"moving steering remains available and laterally bounded "+kmh);
+   Check(System.Math.Abs(PZAEC.M1.ChassisRules.YawRate(speed,speed,1,-1,20,1)+yaw)<.0001f,"left right symmetry "+kmh);
+   Check(PZAEC.M1.ChassisRules.YawRate(speed,speed,1,0,20,1)==0,"neutral input no forced turn "+kmh);
+  }
+  Check(PZAEC.M1.ChassisRules.YawRate(2,-2,-1,1,20,1)<0,"reverse follows native steering direction");
+  Check(PZAEC.M1.ChassisRules.YawRate(0,0,-1,1,20,1)<0,"reverse start has no opposite steering kick");
+  Check(PZAEC.M1.ChassisRules.YawAcceleration(.3f,.3f)==0,"yaw at target adds no angular acceleration");
+  Check(PZAEC.M1.ChassisRules.YawAcceleration(2,0)==.8f&&PZAEC.M1.ChassisRules.YawAcceleration(-2,0)==-.8f,"bounded yaw acceleration");
   foreach(float dt in new[]{.01f,.02f,.04f}){
    var stuck=new PZAEC.M1.ChassisRules.Attempt();
    Check(stuck.Tick(true,dt,0),"start attempt");

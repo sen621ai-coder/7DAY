@@ -15,7 +15,7 @@ namespace PZAEC.M1
             public readonly Collider[] Overlaps=new Collider[32];
             public ChassisRules.Attempt Attempt=new ChassisRules.Attempt();
             public Vector3 Start,Heading,LastPosition;
-            public float LastTime=-100;
+            public float LastTime=-100,YawTarget;
             public int Driver=-1;
             public State(EntityVehicle v){Wheels=v.vehicleRB.GetComponentsInChildren<WheelCollider>(true);Contacts=new WheelHit[Wheels.Length];Grounded=new bool[Wheels.Length];}
         }
@@ -26,14 +26,26 @@ namespace PZAEC.M1
             // Keep the original width, middle belly and upper envelope. Only
             // bevel the overhangs so contact can slide up a curb instead of snagging.
             var contour=new[]{new Vector2(-2.45f,.285f),new Vector2(2.45f,.285f),new Vector2(3.43f,.82f),new Vector2(3.43f,1.035f),new Vector2(-3.47f,1.035f),new Vector2(-3.47f,.82f)};
-            var vertices=new Vector3[12];var triangles=new List<int>();
-            for(int side=0;side<2;side++)for(int i=0;i<6;i++)vertices[side*6+i]=new Vector3(side==0?-1.525f:1.525f,contour[i].y,contour[i].x);
-            for(int i=1;i<5;i++){triangles.AddRange(new[]{0,i,i+1,6,6+i+1,6+i});}
-            for(int i=0;i<6;i++){int j=(i+1)%6;triangles.AddRange(new[]{i,i+6,j,j,i+6,j+6});}
-            var mesh=new Mesh{name="M1LowerBeveled"};mesh.vertices=vertices;mesh.triangles=triangles.ToArray();mesh.RecalculateNormals();mesh.RecalculateBounds();
-            var go=new GameObject("M1Lower");go.layer=layer;go.transform.SetParent(parent,false);
+            var material=new PhysicMaterial("M1BellySlide"){dynamicFriction=.15f,staticFriction=.2f,bounciness=0,frictionCombine=PhysicMaterialCombine.Minimum,bounceCombine=PhysicMaterialCombine.Minimum};
+            Prism(parent,"M1Lower",layer,-1.525f,1.525f,contour,material);
+            // Four native wheel rays leave the middle of each visible track
+            // unsupported by collision. Continuous, bevelled track envelopes
+            // catch narrow crosswise curbs without filling the central belly gap.
+            var track=new[]{new Vector2(-2.45f,.035f),new Vector2(2.35f,.035f),new Vector2(3.36f,.64f),new Vector2(3.36f,1.20f),new Vector2(-3.36f,1.20f),new Vector2(-3.36f,.60f)};
+            Prism(parent,"M1TrackContactL",layer,-1.64f,-1.10f,track,material);
+            Prism(parent,"M1TrackContactR",layer,1.09f,1.63f,track,material);
+        }
+
+        static void Prism(Transform parent,string name,int layer,float left,float right,Vector2[] contour,PhysicMaterial material)
+        {
+            int n=contour.Length;var vertices=new Vector3[n*2];var triangles=new List<int>();
+            for(int side=0;side<2;side++)for(int i=0;i<n;i++)vertices[side*n+i]=new Vector3(side==0?left:right,contour[i].y,contour[i].x);
+            for(int i=1;i<n-1;i++)triangles.AddRange(new[]{0,i,i+1,n,n+i+1,n+i});
+            for(int i=0;i<n;i++){int j=(i+1)%n;triangles.AddRange(new[]{i,i+n,j,j,i+n,j+n});}
+            var mesh=new Mesh{name=name};mesh.vertices=vertices;mesh.triangles=triangles.ToArray();mesh.RecalculateNormals();mesh.RecalculateBounds();
+            var go=new GameObject(name);go.layer=layer;go.transform.SetParent(parent,false);
             var collider=go.AddComponent<MeshCollider>();collider.sharedMesh=mesh;collider.convex=true;
-            collider.sharedMaterial=new PhysicMaterial("M1BellySlide"){dynamicFriction=.15f,staticFriction=.2f,bounciness=0,frictionCombine=PhysicMaterialCombine.Minimum,bounceCombine=PhysicMaterialCombine.Minimum};
+            collider.sharedMaterial=material;
         }
 
         static bool Own(Collider c,EntityVehicle v)
@@ -85,7 +97,7 @@ namespace PZAEC.M1
             int driver=v.GetAttached(0)?.entityId??-1;
             // Owner/driver handoff, origin shift, teleport and sleep invalidate
             // the attempt; samples are rebuilt every eligible physics step.
-            if(!owner||driver!=s.Driver||Time.time-s.LastTime>.15f||(rb.position-s.LastPosition).sqrMagnitude>25){s.Attempt=new ChassisRules.Attempt();s.Start=rb.position;s.Heading=Vector3.zero;}
+            if(!owner||driver!=s.Driver||Time.time-s.LastTime>.15f||(rb.position-s.LastPosition).sqrMagnitude>25){s.Attempt=new ChassisRules.Attempt();s.Start=rb.position;s.Heading=Vector3.zero;s.YawTarget=0;}
             s.Driver=driver;s.LastTime=Time.time;s.LastPosition=rb.position;
             if(!owner)return;
             float speed=rb.velocity.magnitude;
@@ -118,10 +130,13 @@ namespace PZAEC.M1
                     if(horizontal.magnitude>cap){horizontal=horizontal.normalized*cap;rb.velocity=new Vector3(horizontal.x,rb.velocity.y,horizontal.z);}
                 }
                 if(supported&&Mathf.Abs(roll)<12){
-                    float target=v.movementInput.moveStrafe*spec.Turn*Mathf.Deg2Rad*damaged;
-                    rb.AddTorque(Vector3.up*Mathf.Clamp((target-rb.angularVelocity.y)*2,-.8f,.8f)*Mathf.Clamp01(1-speed/4),ForceMode.Acceleration);
+                    float target=ChassisRules.YawRate(speed,Vector3.Dot(rb.velocity,forward),v.movementInput.moveForward,v.movementInput.moveStrafe,spec.Turn,damaged);
+                    s.YawTarget=Mathf.MoveTowards(s.YawTarget,target,60*Mathf.Deg2Rad*Time.fixedDeltaTime);
+                    rb.AddTorque(Vector3.up*ChassisRules.YawAcceleration(s.YawTarget,rb.angularVelocity.y),ForceMode.Acceleration);
                 }
+                else s.YawTarget=0;
             }
+            else s.YawTarget=0;
             bool eligible=running&&ChassisRules.CanAssist(speed,v.movementInput.moveForward,v.movementInput.moveStrafe,pitch,roll,supported,v.wheelBrakes>.01f);
             float height=0;var flat=Vector3.ProjectOnPlane(forward,Vector3.up).normalized;
             eligible=eligible&&Step(s,v,flat,Vector3.Cross(Vector3.up,flat),groundY/Mathf.Max(1,contacts),out height);

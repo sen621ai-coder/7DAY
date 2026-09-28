@@ -63,6 +63,7 @@ for i,hp in enumerate([1000000,1500000,2200000,3200000]):
     check(int(item.find("effect_group/passive_effect[@name='DegradationMax']").get('value'))==hp,f'T{16+i} approved million durability')
     check(item.find("property[@class='Action1']/property[@name='Vehicle']").get('value')==entity,f'T{16+i} placement entity')
     speed=list(map(float,v.find("property[@name='velocityMax_turbo']").get('value').split(',')))
+    check(v.find("property[@name='steerAngleMax']").get('value')=='32',f'T{16+i} moving steering envelope')
     check(abs(speed[2]*3.6-[48,50,52,54][i])<.00001,f'T{16+i} turbo km/h conversion')
     check(len([p for p in v.findall('property') if p.get('class','').startswith('seat')])==2,f'T{16+i} exactly two seats')
     previous='vehicleTruck4x4Placeable' if i==0 else 'vehicleM1Abrams'+('' if i==1 else 'T'+str(15+i))+'Placeable'

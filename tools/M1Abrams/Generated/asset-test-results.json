@@ -1,5 +1,5 @@
 {
-  "passed": 413,
+  "passed": 417,
   "lodTriangles": [
     40167,
     22074,
@@ -366,6 +366,7 @@
     "T16 custom icon decodes and is not empty",
     "T16 approved million durability",
     "T16 placement entity",
+    "T16 moving steering envelope",
     "T16 turbo km/h conversion",
     "T16 exactly two seats",
     "T16 consumes previous vehicle",
@@ -376,6 +377,7 @@
     "T17 custom icon decodes and is not empty",
     "T17 approved million durability",
     "T17 placement entity",
+    "T17 moving steering envelope",
     "T17 turbo km/h conversion",
     "T17 exactly two seats",
     "T17 consumes previous vehicle",
@@ -386,6 +388,7 @@
     "T18 custom icon decodes and is not empty",
     "T18 approved million durability",
     "T18 placement entity",
+    "T18 moving steering envelope",
     "T18 turbo km/h conversion",
     "T18 exactly two seats",
     "T18 consumes previous vehicle",
@@ -396,6 +399,7 @@
     "T19 custom icon decodes and is not empty",
     "T19 approved million durability",
     "T19 placement entity",
+    "T19 moving steering envelope",
     "T19 turbo km/h conversion",
     "T19 exactly two seats",
     "T19 consumes previous vehicle",
