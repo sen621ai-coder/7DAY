@@ -47,21 +47,23 @@ namespace PZAEC.M1 {
   static void Effects(Vehicle v){object[] args={v,null};Call("BeforeEffects",args);v.EffectMotorTorquePer=2;v.EffectVelocityMaxPer=1;v.EffectFuelUsePer=2;Call("AfterEffects",v,args[1]);Call("RestoreEffects",v,args[1],null);}
   public static void Run(){
    for(int tier=0;tier<4;tier++)for(int bits=0;bits<64;bits++){
-    var indexes=Enumerable.Range(0,6).Where(i=>(bits&(1<<i))!=0).ToArray();bool expected=indexes.Length<=(tier<2?2:3)&&(bits&3)!=3&&(bits&48)!=48;
+    var indexes=Enumerable.Range(0,6).Where(i=>(bits&(1<<i))!=0).ToArray();bool expected=indexes.Length<=6;
     bool valid=ModuleRules.Validate(tier,indexes.Select(i=>ModuleRules.Names[i]).ToArray(),out int mask);Check(valid==expected,"combination legality");Check(mask==(valid?bits:0),"invalid combination has zero effects");
     if(valid){for(int r=0;r<5;r++){float armor=ModuleRules.Protection(tier,r,false,mask);Check(armor<=.800001f,"armor cap");Check(ModuleRules.Protection(tier,r,true,mask)<=armor,"acid never stronger than normal");Check(ModuleRules.Damage(0,tier,r,false,mask)==0,"zero damage");}}
    }
    Check(!ModuleRules.Validate(0,new[]{ModuleRules.Names[0],ModuleRules.Names[0]},out int dummy),"duplicate denied");Check(!ModuleRules.Validate(0,new[]{"modVehicleSuperCharger"},out dummy),"generic denied");
+   Check(ModuleRules.Validate(0,ModuleRules.Names,out int all)&&all==63,"all six dedicated modules fit together");
    Near(ModuleRules.Reload(32),.75f,"reload");Near(ModuleRules.Tracking(16),1.5f,"tracking");Near(ModuleRules.Recoil(16),.4f,"recoil");Near(ModuleRules.Fuel(2),.6f,"economy");
    Check(ModuleRules.Damage(100000,3,4,true,12)==20000,"T19 combined roof acid");Near(Rules.Specs[0].Reload*ModuleRules.Reload(32),3.6f,"T16 reload");
    var e=new EntityVehicle();e.vehicle.itemValue.Modifications=Items(0);e.vehicle.itemValue.UseTimes=123;e.vehicle.itemValue.Meta=42;var original=e.vehicle.itemValue;
    Effects(e.vehicle);Check(ReferenceEquals(e.vehicle.itemValue,original),"native item restored");Near(e.vehicle.EffectMotorTorquePer,2.6f,"actual torque hook");Near(e.vehicle.EffectVelocityMaxPer,1.25f,"actual speed hook");Near(e.vehicle.EffectFuelUsePer,2,"power no fuel penalty");
    Effects(e.vehicle);Near(e.vehicle.EffectMotorTorquePer,2.6f,"repeated calc no accumulation");Check(original.UseTimes==123&&original.Meta==42,"health fuel untouched");
    e.vehicle.itemValue.Modifications=Items(1);Effects(e.vehicle);Near(e.vehicle.EffectFuelUsePer,1.2f,"actual fuel multiplier");Near(e.vehicle.EffectMotorTorquePer,2,"economy no torque penalty");
-   e.vehicle.itemValue.Modifications=Items(0,1);Effects(e.vehicle);Check(Modules.Get(e)==0&&Modules.Invalid(e),"invalid modules disabled retained");Check(e.vehicle.itemValue.Modifications.Length==2,"invalid modules not deleted");
+   e.vehicle.itemValue.Modifications=Items(0,1);Effects(e.vehicle);Check(Modules.Get(e)==3&&!Modules.Invalid(e),"power and economy combine");Near(e.vehicle.EffectMotorTorquePer,2.6f,"combined torque");Near(e.vehicle.EffectFuelUsePer,1.2f,"combined fuel saving");
+   e.vehicle.itemValue.Modifications=Items(0,0);Effects(e.vehicle);Check(Modules.Get(e)==0&&Modules.Invalid(e),"duplicate modules disabled retained");Check(e.vehicle.itemValue.Modifications.Length==2,"invalid modules not deleted");
    object[] bare={e.vehicle,null};Call("BeforeEffects",bare);Check(e.vehicle.itemValue.Modifications.Length==0,"native effects cannot import invalid mods");Call("RestoreEffects",e.vehicle,bare[1],new Exception());Check(ReferenceEquals(e.vehicle.itemValue,original),"exception restores item");
-   for(int tier=0;tier<4;tier++){var item=new ItemValue("vehicleM1Abrams"+(tier==0?"":"T"+(16+tier))+"Placeable"){UseTimes=222,Meta=333};Call("ReadItem",item);Check(item.Modifications.Length==(tier<2?2:3),"old item slot expansion");Check(item.UseTimes==222&&item.Meta==333,"migration preserves health/fuel");Call("ReadItem",item);Check(item.Modifications.All(x=>x!=null),"empty slots usable");}
-   e.vehicle.itemValue.Modifications=Items(0,1,2,3);Call("ReadItem",e.vehicle.itemValue);Check(e.vehicle.itemValue.Modifications.Length==4,"legacy overcapacity preserved");
+   for(int tier=0;tier<4;tier++){var item=new ItemValue("vehicleM1Abrams"+(tier==0?"":"T"+(16+tier))+"Placeable"){UseTimes=222,Meta=333};Call("ReadItem",item);Check(item.Modifications.Length==6,"old item slot expansion");Check(item.UseTimes==222&&item.Meta==333,"migration preserves health/fuel");Call("ReadItem",item);Check(item.Modifications.All(x=>x!=null),"empty slots usable");}
+   e.vehicle.itemValue.Modifications=Items(0,1,2,3);Call("ReadItem",e.vehicle.itemValue);Check(e.vehicle.itemValue.Modifications.Length==6&&e.vehicle.itemValue.Modifications[0].ItemClass.Name==ModuleRules.Names[0]&&e.vehicle.itemValue.Modifications[3].ItemClass.Name==ModuleRules.Names[3],"legacy modules preserved while adding slots");
    var other=new EntityVehicle("vehicleTruck4x4");Effects(other.vehicle);Near(other.vehicle.EffectMotorTorquePer,2,"non M1 untouched");
    var v=new EntityVehicle();Effects(v.vehicle);var incoming=new ItemValue("vehicleM1AbramsPlaceable"){Modifications=Items(5)};
    object[] begin={7,null};Call("BeginSync",begin);Call("LoadItems",v.vehicle,new[]{new ItemStack(incoming)});Check(incoming.Q==0,"authorized parked server update");
@@ -70,6 +72,7 @@ namespace PZAEC.M1 {
    Call("EndSync",v,(ushort)4,begin[1],null);Check(v.Syncs==1,"server correction includes original sender");
    v.vehicle.itemValue.Modifications=Items(5);Effects(v.vehicle);Near(Modules.Reload(v),3.6f,"actual reload adapter");Check(Weapons.Register(v).NextFire>=103.6f,"module change resets reload");
    var slot=new XUiC_ItemPartStack{SlotNumber=0,WindowGroup=new Window{Controller=new XUiC_VehicleWindowGroup{CurrentVehicleEntity=v}}};slot.xui.AssembleItem.CurrentItem=new ItemStack(v.vehicle.itemValue);v.hasDriver=true;object[] swap={slot,new ItemStack(new ItemValue(ModuleRules.Names[0])),true};Check(!(bool)Call("CanSwap",swap)&&!(bool)swap[2],"occupied UI blocked before transfer");v.hasDriver=false;
+   var six=Items(0,1,2,3,4);Array.Resize(ref six,6);six[5]=ItemValue.None;v.vehicle.itemValue.Modifications=six;slot.SlotNumber=5;object[] finalSlot={slot,new ItemStack(new ItemValue(ModuleRules.Names[5])),true};Check((bool)Call("CanSwap",finalSlot),"sixth dedicated module accepted in sixth UI slot");
    var cosmetic=new XUiC_ItemCosmeticStack();cosmetic.xui.AssembleItem.CurrentItem=new ItemStack(v.vehicle.itemValue);object[] cosmeticArgs={cosmetic,new ItemStack(new ItemValue(ModuleRules.Names[0])),true};Check(!(bool)Call("CosmeticSwap",cosmeticArgs)&&!(bool)cosmeticArgs[2],"cosmetic slot cannot bypass limits");
    Console.WriteLine("PASS "+n+" actual module rules, hooks, migration and server/UI validation checks");
   }

@@ -34,7 +34,9 @@ namespace PZAEC.M1
         }
         static IEnumerable<CodeInstruction> Steering(IEnumerable<CodeInstruction> codes){int found=0;foreach(var c in codes){yield return c;if(c.opcode==OpCodes.Ldsfld&&Equals(c.operand,AccessTools.Field(typeof(EntityVehicle),"isTurnTowardsLook"))){yield return new CodeInstruction(OpCodes.Ldarg_0);yield return new CodeInstruction(OpCodes.Call,AccessTools.Method(typeof(Secondary),nameof(LookSteering)));found++;}}if(found!=1)throw new InvalidOperationException("M1 look steering hook changed");}
         static bool LookSteering(bool enabled,EntityVehicle vehicle)=>enabled&&!Weapons.IsTank(vehicle);
-        static void BeginSync(out bool __state){__state=remoteSync;remoteSync=true;}
+        // Disk deserialization must retain saved ammunition and cooldowns,
+        // rather than replace them with the newly created entity's defaults.
+        static void BeginSync(int __2,out bool __state){__state=remoteSync;remoteSync=!Modules.ReadingSave&&__2>=0;}
         static Exception EndSync(bool __state,Exception __exception){remoteSync=__state;return __exception;}
         static void ProtectMetadata(Vehicle __instance,ItemStack[] __0)
         {

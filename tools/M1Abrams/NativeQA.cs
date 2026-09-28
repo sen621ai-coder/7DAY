@@ -36,6 +36,12 @@ public sealed class M1NativeQA:IModApi
             Check(prefab!=null,"native jeep-derived M1 prefab loads");
             var root=SecondaryModel.Find(prefab,"M1Visual");var lod=root.GetComponent<LODGroup>();Check(lod.GetLODs().Length==3,"three native LOD levels");
             foreach(var level in lod.GetLODs())Check(level.renderers.All(r=>r!=null&&r.sharedMaterial!=null&&r.sharedMaterial.mainTexture!=null),"native meshes retain materials and textures");
+            var preview=(Transform)AccessTools.Method(typeof(Model),"BuildPreview").Invoke(null,null);
+            try{
+                Check(preview.Find("Physics")==null,"placement preview has no physics subtree for native cleanup");
+                Vehicle.SetupPreview(preview);
+                Check(preview.GetComponentsInChildren<Renderer>(true).Any(r=>r.enabled&&r.sharedMaterial!=null),"native placement preview retains visible M1 geometry");
+            }finally{UnityEngine.Object.Destroy(preview.gameObject);}
             foreach(string name in new[]{"RoofMGBase","RoofMGYaw","RoofMGPitch","RoofMGMuzzle","RoofMGSight","AAMount","AAPitch","AAMuzzleL","AAMuzzleR"})Check(SecondaryModel.Find(root,name)!=null,"native anchor "+name);
             var geometry=new SecondaryModel.Geometry(root);var pivot=SecondaryModel.Find(root,"RoofMGPitch");var muzzle=SecondaryModel.Find(root,"RoofMGMuzzle");
             Check(geometry.Clear(pivot.position+Origin.position,muzzle.position+Origin.position+muzzle.forward*.15f,SecondaryRules.MG),"neutral MG clears original tank triangles");

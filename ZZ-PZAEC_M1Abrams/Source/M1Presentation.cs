@@ -126,6 +126,7 @@ namespace PZAEC.M1
         public static void Update(World w)
         {
             var player=w.GetPrimaryPlayer();if(player==null)return;
+            CrewVisibility.Update(w);
             foreach(var entry in Weapons.States)if((entry.Value.Vehicle.position-player.position).sqrMagnitude<300*300)Get(entry.Value.Vehicle);
             remove.Clear();int lights=0;
             foreach(var pair in views){var v=pair.Value;if(w.GetEntity(pair.Key)!=v.Vehicle||v.Root==null){remove.Add(pair.Key);continue;}
@@ -199,7 +200,7 @@ namespace PZAEC.M1
         static void Dispose(View v){foreach(var t in v.Tracks)t.Dispose();if(v.Flame!=null)UnityEngine.Object.Destroy(v.Flame.gameObject);if(v.Tracer!=null)UnityEngine.Object.Destroy(v.Tracer.gameObject);if(v.ImpactAudio!=null)UnityEngine.Object.Destroy(v.ImpactAudio.gameObject);foreach(var a in new[]{v.Blast,v.Mechanism,v.Ready})if(a!=null)UnityEngine.Object.Destroy(a);}
         public static void Clear()
         {
-            RestoreCamera();foreach(var v in views.Values)Dispose(v);views.Clear();foreach(var p in puffs)UnityEngine.Object.Destroy(p.Go);foreach(var p in pool)UnityEngine.Object.Destroy(p.Go);puffs.Clear();pool.Clear();
+            CrewVisibility.Clear();RestoreCamera();foreach(var v in views.Values)Dispose(v);views.Clear();foreach(var p in puffs)UnityEngine.Object.Destroy(p.Go);foreach(var p in pool)UnityEngine.Object.Destroy(p.Go);puffs.Clear();pool.Clear();
             foreach(var resource in new UnityEngine.Object[]{smoke,flame,smokeTex,flameTex,flameMesh,blastClip,mechanismClip,readyClip,impactAPClip})if(resource!=null)UnityEngine.Object.Destroy(resource);
             smoke=flame=null;smokeTex=flameTex=null;flameMesh=null;blastClip=mechanismClip=readyClip=impactAPClip=null;
         }

@@ -48,9 +48,22 @@ namespace PZAEC.M1
         {
             var player=__0.invData.holdingEntity as EntityPlayerLocal;if(player==null||Rules.Index(player.inventory.holdingItem.GetItemName())<0)return true;
             var data=(ItemActionSpawnVehicle.ItemActionDataSpawnVehicle)__0;if(data.VehiclePreviewT!=null)UnityEngine.Object.DestroyImmediate(data.VehiclePreviewT.gameObject);
-            data.VehiclePreviewT=UnityEngine.Object.Instantiate(GetPrefab().gameObject).transform;
+            // Native SetupPreview removes the Physics subtree. The custom M1 mesh
+            // lives there on the driveable prefab, so give placement its own
+            // visual-only root instead of cloning that subtree for deletion.
+            data.VehiclePreviewT=BuildPreview();
             Vehicle.SetupPreview(data.VehiclePreviewT);data.PreviewRenderers=null;__instance.SetupPreview(data);
             GameManager.Instance.StartCoroutine(__instance.UpdatePreview(data));return false;
+        }
+        internal static Transform BuildPreview()
+        {
+            var source=SecondaryModel.Find(GetPrefab(),"M1Visual");
+            if(source==null)throw new InvalidOperationException("M1 visual preview source missing");
+            var root=new GameObject("M1AbramsPlacementPreview").transform;
+            var visual=UnityEngine.Object.Instantiate(source.gameObject,root,false);
+            visual.SetActive(true);
+            foreach(var collider in visual.GetComponentsInChildren<Collider>(true))collider.enabled=false;
+            return root;
         }
         static Transform Add(Transform parent,string name,Vector3 pos)
         {var t=new GameObject(name).transform;t.SetParent(parent,false);t.localPosition=pos;return t;}

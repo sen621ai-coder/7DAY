@@ -11,9 +11,12 @@ items=E.parse(cfg/'items.xml');mods=E.parse(cfg/'item_modifiers.xml');recipes=E.
 with (cfg/'Localization.csv').open(encoding='utf-8',newline='') as f:loc={r[0]:r for r in csv.reader(f)}
 vanilla=E.parse(root.parent/'Data/Config/item_modifiers.xml');known_icons={x.get('name') for x in vanilla.iter('item_modifier')}
 check(len(list(mods.iter('item_modifier')))==6,'exactly six modules')
+check(len({m.get('modifier_tags') for m in mods.iter('item_modifier')})==6,'native module tags allow all six to coexist')
+vanilla_ui=E.parse(root.parent/'Data/Config/XUi_InGame/windows.xml')
+check(any(int(grid.get('rows'))>=6 for grid in vanilla_ui.iter('grid') if grid.get('controller')=='ItemPartStackGrid'),'native modifier window exposes six rows')
 for i in range(4):
  name='vehicleM1Abrams'+('' if i==0 else f'T{16+i}')+'Placeable';item=items.find(f"./append/item[@name='{name}']")
- check(item.find("effect_group/passive_effect[@name='ModSlots']").get('value')==str(2 if i<2 else 3),'slots')
+ check(item.find("effect_group/passive_effect[@name='ModSlots']").get('value')=='6','slots')
  check(item.find("property[@name='Tags']").get('value')=='vehicle,PZAECM1','no vanilla engine/fuel compatibility tags')
 for suffix,zh,en,icon,group,desc,cost in MODULES:
  name='modPZAECM1'+suffix;m=mods.find(f"./append/item_modifier[@name='{name}']");r=recipes.find(f"./append/recipe[@name='{name}']")
@@ -36,5 +39,5 @@ balance(stage)
 for suffix,*_ in MODULES:
  name='modPZAECM1'+suffix
  check(E.parse(out/'Config/recipes.xml').find(f"./append/recipe[@name='{name}']") is not None,'balance generator retains modules')
-check(E.parse(out/'ModInfo.xml').find('Version').get('value')=='0.4.1','regeneration version')
+check(E.parse(out/'ModInfo.xml').find('Version').get('value')=='0.4.3','regeneration version')
 print('PASS',n,'module config, costs, localization, native tags and regeneration checks')

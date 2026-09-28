@@ -1,0 +1,54 @@
+PASS native server authority
+PASS real Apache and M1 threshold transpilers coexist
+PASS native jeep-derived M1 prefab loads
+PASS three native LOD levels
+PASS native meshes retain materials and textures
+PASS native meshes retain materials and textures
+PASS native meshes retain materials and textures
+PASS placement preview has no physics subtree for native cleanup
+PASS native placement preview retains visible M1 geometry
+PASS native anchor RoofMGBase
+PASS native anchor RoofMGYaw
+PASS native anchor RoofMGPitch
+PASS native anchor RoofMGMuzzle
+PASS native anchor RoofMGSight
+PASS native anchor AAMount
+PASS native anchor AAPitch
+PASS native anchor AAMuzzleL
+PASS native anchor AAMuzzleR
+PASS neutral MG clears original tank triangles
+PASS neutral AA clears original tank triangles
+INFO entity=vehicleM1Abrams vehicle=vehiclem1abrams nativeId=-1604992470
+PASS native vehicle name resolves to an M1 tier: vehiclem1abrams
+PASS native six-digit damage does not trigger vehicle instant destruction
+PASS non-M1 threshold preserves prior mod result
+PASS spawned server vehicle secondary rig
+PASS native vehicle ItemValue retains partial belt
+PASS native ItemValue binary save/read retains ammunition and heat
+PASS native binary save/read retains independent cooldowns
+PASS reload state restores heat and ammunition
+PASS independent tube cooldown restored
+PASS native lowercase tier 17
+PASS native tier health 17
+PASS native tier AA rig 17
+PASS native lowercase tier 18
+PASS native tier health 18
+PASS native tier AA rig 18
+PASS native lowercase tier 19
+PASS native tier health 19
+PASS native tier AA rig 19
+PASS native driver attachment
+INFO MG reason=0 rounds=9
+PASS actual native MG firing consumes exactly one loaded round
+PASS same-time update cannot duplicate MG shot
+PASS MG activity does not animate cannon recoil
+PASS native gunner attachment
+PASS driver cannot steal cannon with gunner present
+PASS gunner cannot steal driver MG
+INFO AA reason=0 target=177 lock=1.5
+PASS native AA acquires live flying enemy
+PASS native AA shot consumes one missile
+PASS only fired tube begins cooldown
+PASS native guided missile still hits after switching to cannon
+PASS secondary damage refuses player target
+FINISHED failures=0

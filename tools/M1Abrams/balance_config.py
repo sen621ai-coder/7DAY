@@ -14,6 +14,12 @@ def apply(root):
     health=[1000000,1500000,2200000,3200000]
     entities=ET.parse(cfg/'entityclasses.xml').getroot();vehicles=ET.parse(cfg/'vehicles.xml').getroot();items=ET.parse(cfg/'items.xml').getroot()
     base_e=copy.deepcopy(entities.find('./append/entity_class'));base_v=copy.deepcopy(vehicles.find('./append/vehicle'));base_i=copy.deepcopy(items.find('./append/item'))
+    # Also repair old input configs when regenerating tiers without configure.py.
+    storage=base_v.find("property[@class='storage']")
+    if storage is None:storage=ET.SubElement(base_v,'property',{'class':'storage'})
+    prop(storage,'class','Storage')
+    for p in list(storage):
+        if p.get('name','').startswith('mod'):storage.remove(p)
     entities.find('append').clear();entities.find('append').set('xpath','/entity_classes')
     vehicles.find('append').clear();vehicles.find('append').set('xpath','/vehicles')
     items.find('append').clear();items.find('append').set('xpath','/items')
@@ -32,10 +38,10 @@ def apply(root):
         if i:prop(item,'UnlockedBy','')
         prop(item.find("property[@class='Action1']"),'Vehicle',n)
         item.find("effect_group/passive_effect[@name='DegradationMax']").set('value',str(health[i]))
-        item.find("effect_group/passive_effect[@name='ModSlots']").set('value',str(2 if i<2 else 3))
+        item.find("effect_group/passive_effect[@name='ModSlots']").set('value','6')
         loc += [[n,'entityclasses','Vehicle','','',f'M1 Abrams T{tier}',f'M1艾布拉姆斯 T{tier}'],[itemname,'items','Vehicle','','',f'M1 Abrams T{tier}',f'M1艾布拉姆斯 T{tier}'],
                 [itemname+'Desc','items','Vehicle','','',f'T{tier} tank. HE/AP in cargo. R switches shell. Hold G outside for cargo repair kit.',f'T{tier}主战坦克，耐久{health[i]//10000}万。货仓装填HE/AP；左键开火，右键瞄准，R切弹。车外对准坦克按住G维修，维修包放货仓。升级前满修、清空燃油、拆下改装并收起车辆。']]
-    for n,title,icon in [('pzM1Shell','M1高爆榴弹 HE','ammoRocketHE'),('pzM1ShellAP','M1穿甲弹 AP','ammoRocketFrag'),('pzM1RepairKit','M1装甲维修包','resourceRepairKit')]:
+    for n,title,icon in [('pzM1Shell','M1高爆榴弹 HE','pzM1Shell'),('pzM1ShellAP','M1穿甲弹 AP','pzM1ShellAP'),('pzM1RepairKit','M1装甲维修包','resourceRepairKit')]:
         item=ET.SubElement(items.find('append'),'item',name=n)
         for k,val in {'Extends':'resourceForgedSteel','CustomIcon':icon,'DescriptionKey':n+'Desc','Stacknumber':20,'EconomicValue':500,'Group':'Ammo/Weapons'}.items():prop(item,k,val)
         desc='放入M1货仓使用。HE范围清群，AP单体穿甲；伤害取决于整车型号。' if n!='pzM1RepairKit' else '放入坦克货仓。车外对准坦克按住G 8秒；停车停火且10秒内未受伤，每包将坦克耐久完全修满。受击或松开中断不扣包；满耐久不消耗。'

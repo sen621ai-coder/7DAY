@@ -14,6 +14,10 @@ Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 
 Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'Stat::set_BaseMax'}).Count -eq 1) 'Vehicle initializes max health from item'
 $m=Method EntityVehicle ReadSyncData
 Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'Vehicle::LoadItems'}).Count -eq 1) 'Network loads native item state'
+$m=Method EntityVehicle Read
+Check ($m.Count -eq 1) 'Disk read hook unambiguous'
+$readCall=@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'EntityVehicle::ReadSyncData'})
+Check ($readCall.Count -eq 1 -and $readCall[0].Previous.OpCode.Code -eq 'Ldc_I4_0') 'Installed native disk reader passes actor zero; disk scope must not be inferred from negative actor IDs'
 $m=Method Equipment CalcDamage
 Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'GetTotalPhysicalArmorRating'}).Count -eq 1) 'Armor interception is on native damage path'
 $m=Method Equipment '.cctor'

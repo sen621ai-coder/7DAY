@@ -6,12 +6,12 @@ namespace PZAEC.M1
         public const int Power=1,Economy=2,Armor=4,Corrosion=8,Stabilizer=16,Autoloader=32;
         public static readonly string[] Names={"modPZAECM1Powertrain","modPZAECM1Economy","modPZAECM1Armor","modPZAECM1Corrosion","modPZAECM1Stabilizer","modPZAECM1Autoloader"};
         public static int Bit(string name){for(int i=0;i<Names.Length;i++)if(Names[i]==name)return 1<<i;return 0;}
-        public static int Slots(int tier)=>tier<0?0:tier<2?2:3;
+        public static int Slots(int tier)=>tier<0||tier>3?0:6;
         public static bool Validate(int tier,string[] names,out int mask)
         {
             mask=0;int count=0;
             foreach(var name in names){if(string.IsNullOrEmpty(name))continue;int bit=Bit(name);if(bit==0||(mask&bit)!=0){mask=0;return false;}mask|=bit;count++;}
-            if(tier<0||count>Slots(tier)||(mask&3)==3||(mask&48)==48){mask=0;return false;}return true;
+            if(tier<0||tier>3||count>Slots(tier)){mask=0;return false;}return true;
         }
         public static float Speed(int mask)=>(mask&Power)!=0?1.25f:1;
         public static float Torque(int mask)=>(mask&Power)!=0?1.30f:1;

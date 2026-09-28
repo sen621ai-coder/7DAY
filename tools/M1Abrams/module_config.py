@@ -2,12 +2,12 @@
 from pathlib import Path
 import csv,xml.etree.ElementTree as E
 MODULES=[
-('Powertrain','动力优化','Powertrain','modVehicleSuperCharger','m1Drive','扭矩+30%，前进/加速/倒车上限+25%，无额外油耗倍率。与M1经济巡航互斥。',[25,2,15,5,5,0]),
-('Economy','经济巡航','Economy','modVehicleFuelSaver','m1Drive','油耗降低40%，不降低动力或速度。与M1动力优化互斥。',[15,1,10,10,0,0]),
+('Powertrain','动力优化','Powertrain','modVehicleSuperCharger','m1Powertrain','扭矩+30%，前进/加速/倒车上限+25%，无额外油耗倍率。可与M1经济巡航同装。',[25,2,15,5,5,0]),
+('Economy','经济巡航','Economy','modVehicleFuelSaver','m1Economy','油耗降低40%，不降低动力或速度。可与M1动力优化同装。',[15,1,10,10,0,0]),
 ('Armor','附加装甲','Armor','modVehicleArmor','m1Armor','正面/顶部减伤+4个百分点，侧面+12，后部+10，最高80%。不减速，底部/未知方向不变。',[40,3,10,0,0,0]),
 ('Corrosion','抗蚀衬层','Corrosion Liner','modArmorPlatingBasic','m1Corrosion','酸蚀享受完整区域装甲减伤，仍非免疫。不会清除酸蚀或辐射等状态。',[15,3,5,5,0,5]),
-('Stabilizer','稳定火控','Stabilizer','modGunBipod','m1FireControl','炮塔及炮管追踪速度+50%，车体开炮反冲降低60%。不自动瞄准。与M1辅助装填互斥。',[15,2,10,20,5,0]),
-('Autoloader','辅助装填','Autoloader','modGunMagazineExtender','m1FireControl','装填与切弹时间降低25%，持续射速约+33.3%。不降低追踪速度。与M1稳定火控互斥。',[25,2,20,10,10,0])]
+('Stabilizer','稳定火控','Stabilizer','modGunBipod','m1Stabilizer','炮塔及炮管追踪速度+50%，车体开炮反冲降低60%。不自动瞄准。可与M1辅助装填同装。',[15,2,10,20,5,0]),
+('Autoloader','辅助装填','Autoloader','modGunMagazineExtender','m1Autoloader','装填与切弹时间降低25%，持续射速约+33.3%。不降低追踪速度。可与M1稳定火控同装。',[25,2,20,10,10,0])]
 def apply(root):
     cfg=root/'ZZ-PZAEC_M1Abrams/Config'
     def write(file,node):
@@ -17,7 +17,7 @@ def apply(root):
     for i in range(4):
         name='vehicleM1Abrams'+('' if i==0 else f'T{16+i}')+'Placeable'
         item=items.find(f"./append/item[@name='{name}']")
-        item.find("effect_group/passive_effect[@name='ModSlots']").set('value',str(2 if i<2 else 3))
+        item.find("effect_group/passive_effect[@name='ModSlots']").set('value','6')
         item.find("property[@name='Tags']").set('value','vehicle,PZAECM1')
     write('items.xml',items)
     mods=E.Element('configs');append=E.SubElement(mods,'append',xpath='/item_modifiers')

@@ -18,7 +18,9 @@ cfg,a=config('vehicles');base=ET.parse(ROOT.parent/'Data/Config/vehicles.xml').f
 for name,val in {'cameraDistance':'9, 12','velocityMax_turbo':'8, 4, 11, 5','motorTorque_turbo':'18000, 12000, 24000, 15000','brakeTorque':'50000','steerAngleMax':'25','tiltAngleMax':'35','upAngleMax':'45','recipeName':'vehicleM1AbramsPlaceable','m1FireKey':'Mouse0','m1CameraShake':'1'}.items():prop(v,name,val)
 for p in list(v.findall('property')):
     cls=p.get('class','')
-    if cls in ['seat2','seat3','seat4','seat5','plow','storage']:v.remove(p);continue
+    # Storage is a functional part: removing it makes Vehicle.Update copy the
+    # entire cargo bag into a new loot entity every update, even while parked.
+    if cls in ['seat2','seat3','seat4','seat5','plow']:v.remove(p);continue
     for child in list(p):
         if child.get('name','').startswith('mod'):p.remove(child)
 prop(v.find("property[@class='engine']"),'fuelKmPerL','.045');prop(v.find("property[@class='fuelTank']"),'capacity','500')
@@ -29,7 +31,7 @@ cfg,a=config('items')
 item=ET.SubElement(a,'item',name='vehicleM1AbramsPlaceable')
 for name,val in {'Extends':'vehicleTruck4x4Placeable','Tags':'vehicle,vengine,vfuel','CustomIcon':'vehicleM1AbramsPlaceable','DescriptionKey':'vehicleM1AbramsPlaceableDesc','Meshfile':'@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab','EconomicValue':'100000','UnlockedBy':'craftingVehicles'}.items():prop(item,name,val)
 act=ET.SubElement(item,'property',{'class':'Action1'});prop(act,'Vehicle','vehicleM1Abrams');prop(act,'VehicleSize','3.5, 2.5, 7.6')
-effect=ET.SubElement(item,'effect_group',name='M1 Base',tiered='false');ET.SubElement(effect,'passive_effect',name='DegradationMax',operation='base_set',value='1500000');ET.SubElement(effect,'passive_effect',name='ModSlots',operation='base_set',value='2')
+effect=ET.SubElement(item,'effect_group',name='M1 Base',tiered='false');ET.SubElement(effect,'passive_effect',name='DegradationMax',operation='base_set',value='1500000');ET.SubElement(effect,'passive_effect',name='ModSlots',operation='base_set',value='6')
 ammo=ET.SubElement(a,'item',name='pzM1Shell')
 for name,val in {'Extends':'resourceForgedSteel','CustomIcon':'ammoRocketHE','DescriptionKey':'pzM1ShellDesc','Stacknumber':'100','EconomicValue':'500','Group':'Ammo/Weapons','UnlockedBy':'craftingVehicles'}.items():prop(ammo,name,val)
 write('items.xml',cfg)

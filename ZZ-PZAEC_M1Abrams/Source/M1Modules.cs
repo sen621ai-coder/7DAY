@@ -11,6 +11,7 @@ namespace PZAEC.M1
         sealed class Cache {public string Signature;public int Mask;}
         static readonly ConditionalWeakTable<Vehicle,Cache> cache=new ConditionalWeakTable<Vehicle,Cache>();
         [ThreadStatic] static int? syncActor;
+        [ThreadStatic] internal static bool ReadingSave;
         public static void Install(Harmony h)
         {
             h.Patch(AccessTools.Method(typeof(Vehicle),"CalcEffects"),prefix:new HarmonyMethod(typeof(Modules),nameof(BeforeEffects)),postfix:new HarmonyMethod(typeof(Modules),nameof(AfterEffects)),finalizer:new HarmonyMethod(typeof(Modules),nameof(RestoreEffects)));
@@ -21,6 +22,7 @@ namespace PZAEC.M1
             h.Patch(AccessTools.Method(typeof(ItemValue),"CalcModSlotCount"),postfix:new HarmonyMethod(typeof(Modules),nameof(SlotCount)));
             h.Patch(AccessTools.Method(typeof(Vehicle),"LoadItems"),prefix:new HarmonyMethod(typeof(Modules),nameof(LoadItems)));
             h.Patch(AccessTools.Method(typeof(EntityVehicle),"ReadSyncData"),prefix:new HarmonyMethod(typeof(Modules),nameof(BeginSync)),finalizer:new HarmonyMethod(typeof(Modules),nameof(EndSync)));
+            h.Patch(AccessTools.Method(typeof(EntityVehicle),"Read"),prefix:new HarmonyMethod(typeof(Modules),nameof(BeginSaveRead)),finalizer:new HarmonyMethod(typeof(Modules),nameof(EndSaveRead)));
             h.Patch(AccessTools.Method(typeof(XUiC_ItemCosmeticStack),"CanRemove"),postfix:new HarmonyMethod(typeof(Modules),nameof(CanRemove)));
             h.Patch(AccessTools.Method(typeof(XUiC_ItemCosmeticStack),"CanSwap"),prefix:new HarmonyMethod(typeof(Modules),nameof(CosmeticSwap)));
             h.Patch(AccessTools.Method(typeof(XUiC_ItemPartStack),"CanSwap"),prefix:new HarmonyMethod(typeof(Modules),nameof(CanSwap)));
@@ -71,13 +73,17 @@ namespace PZAEC.M1
         static bool Parked(EntityVehicle v)
         {var s=Weapons.Register(v);return !v.IsDead()&&v.vehicle.GetHealth()>0&&!v.hasDriver&&v.GetAttached(1)==null&&(v.vehicleRB==null||v.vehicleRB.velocity.sqrMagnitude<.04f)&&Time.time-s.LastShot>=10&&Time.time-s.LastWeaponActivity>=10&&Time.time-s.LastDamage>=10;}
         static bool Authorized(EntityVehicle v,EntityPlayer p)=>p!=null&&!p.IsDead()&&p.AttachedToEntity==null&&(p.position-v.position).sqrMagnitude<=64&&(v.GetOwner()==null||(p.PersistentPlayerData!=null&&v.IsUserAllowed(p.PersistentPlayerData.PrimaryId)));
-        static void BeginSync(int __2,out int? __state){__state=syncActor;syncActor=__2;}
-        static Exception EndSync(EntityVehicle __instance,ushort __1,int? __state,Exception __exception){syncActor=__state;if(__exception==null&&Weapons.Server&&Weapons.IsTank(__instance)&&(__1&EntityVehicle.cSyncItem)!=0)__instance.SendSyncData(EntityVehicle.cSyncItem);return __exception;}
+        // Native Read calls ReadSyncData with actor 0 before PostInit. Track
+        // the actual disk-read scope instead of interpreting an actor ID.
+        static void BeginSaveRead(out bool __state){__state=ReadingSave;ReadingSave=true;}
+        static Exception EndSaveRead(bool __state,Exception __exception){ReadingSave=__state;return __exception;}
+        static void BeginSync(int __2,out int? __state){__state=syncActor;syncActor=!ReadingSave&&__2>=0?(int?)__2:null;}
+        static Exception EndSync(EntityVehicle __instance,ushort __1,int? __state,Exception __exception){bool network=syncActor.HasValue;syncActor=__state;if(network&&__exception==null&&Weapons.Server&&Weapons.IsTank(__instance)&&(__1&EntityVehicle.cSyncItem)!=0)__instance.SendSyncData(EntityVehicle.cSyncItem);return __exception;}
         static void LoadItems(Vehicle __instance,ItemStack[] __0)
         {
             if(!Weapons.Server||!syncActor.HasValue||Rules.Index(__instance.GetName())<0||__0==null||__0.Length==0)return;
             var incoming=__0[0]?.itemValue;if(incoming==null)return;
-            var old=__instance.itemValue;bool changed=!Names(old).SequenceEqual(Names(incoming))||Cosmetic(old)!=Cosmetic(incoming);
+            var old=__instance.itemValue;bool changed=!Names(old).SequenceEqual(Names(incoming),StringComparer.Ordinal)||Cosmetic(old)!=Cosmetic(incoming);
             if(!changed){incoming.SetMetadata(Quarantine,old!=null&&old.TryGetMetadata(Quarantine,out int q)?q:0);return;}
             var player=GameManager.Instance.World.GetEntity(syncActor.Value) as EntityPlayer;
             bool valid=string.Equals(incoming.ItemClass?.GetItemName(),__instance.GetName()+"Placeable",StringComparison.OrdinalIgnoreCase)&&Parked(__instance.entity)&&Authorized(__instance.entity,player)&&!Cosmetic(incoming)&&ModuleRules.Validate(Rules.Index(incoming.ItemClass?.GetItemName()),Names(incoming),out int mask);
@@ -99,7 +105,7 @@ namespace PZAEC.M1
             if(!UIAllowed(__instance)){Tip(__instance,"M1改装：需有权限，停车离座且10秒内未开火或受伤。");return false;}
             var names=Names(item);int slot=__instance.SlotNumber;if(slot<0||slot>=ModuleRules.Slots(tier)||slot>=names.Length)return false;
             names[slot]=__0?.itemValue?.ItemClass?.GetItemName();
-            if(bit==0||!ModuleRules.Validate(tier,names,out int mask)){Tip(__instance,"M1仅接受专用模组；同类不能重复，动力/巡航与火控/装填分别互斥。");return false;}
+            if(bit==0||!ModuleRules.Validate(tier,names,out int mask)){Tip(__instance,"M1仅接受六种专用模组，每种限装一件。");return false;}
             // Native UI owns the actual item transfer, preserving its slot and inventory accounting.
             return true;
         }

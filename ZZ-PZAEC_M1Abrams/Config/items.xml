@@ -15,7 +15,7 @@
       </property>
       <effect_group name="M1 Base" tiered="false">
         <passive_effect name="DegradationMax" operation="base_set" value="1000000" />
-        <passive_effect name="ModSlots" operation="base_set" value="2" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
       </effect_group>
       <property name="Stacknumber" value="1" />
       <property name="RepairTools" value="pzM1RepairKit" />
@@ -34,7 +34,7 @@
       </property>
       <effect_group name="M1 Base" tiered="false">
         <passive_effect name="DegradationMax" operation="base_set" value="1500000" />
-        <passive_effect name="ModSlots" operation="base_set" value="2" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
       </effect_group>
       <property name="Stacknumber" value="1" />
       <property name="RepairTools" value="pzM1RepairKit" />
@@ -53,7 +53,7 @@
       </property>
       <effect_group name="M1 Base" tiered="false">
         <passive_effect name="DegradationMax" operation="base_set" value="2200000" />
-        <passive_effect name="ModSlots" operation="base_set" value="3" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
       </effect_group>
       <property name="Stacknumber" value="1" />
       <property name="RepairTools" value="pzM1RepairKit" />
@@ -72,14 +72,14 @@
       </property>
       <effect_group name="M1 Base" tiered="false">
         <passive_effect name="DegradationMax" operation="base_set" value="3200000" />
-        <passive_effect name="ModSlots" operation="base_set" value="3" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
       </effect_group>
       <property name="Stacknumber" value="1" />
       <property name="RepairTools" value="pzM1RepairKit" />
     </item>
     <item name="pzM1Shell">
       <property name="Extends" value="resourceForgedSteel" />
-      <property name="CustomIcon" value="ammoRocketHE" />
+      <property name="CustomIcon" value="pzM1Shell" />
       <property name="DescriptionKey" value="pzM1ShellDesc" />
       <property name="Stacknumber" value="20" />
       <property name="EconomicValue" value="500" />
@@ -87,7 +87,7 @@
     </item>
     <item name="pzM1ShellAP">
       <property name="Extends" value="resourceForgedSteel" />
-      <property name="CustomIcon" value="ammoRocketFrag" />
+      <property name="CustomIcon" value="pzM1ShellAP" />
       <property name="DescriptionKey" value="pzM1ShellAPDesc" />
       <property name="Stacknumber" value="20" />
       <property name="EconomicValue" value="500" />
@@ -113,7 +113,7 @@
     <item name="pzM1AAMissile">
       <property name="Extends" value="resourceForgedSteel" />
       <property name="Tags" value="PZAECM1Ammo" />
-      <property name="CustomIcon" value="ammoRocketHE" />
+      <property name="CustomIcon" value="pzM1AAMissile" />
       <property name="DescriptionKey" value="pzM1AAMissileDesc" />
       <property name="Stacknumber" value="20" />
       <property name="EconomicValue" value="300" />
