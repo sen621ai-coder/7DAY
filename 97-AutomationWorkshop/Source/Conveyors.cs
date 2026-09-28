@@ -7,12 +7,12 @@ namespace YFAutomation
  public static class ConveyorPath
  {
   public static bool IsBelt(string n)=>n!=null&&n.StartsWith("yfAutoBelt",StringComparison.Ordinal);
-  public static bool IsMerge(string n)=>n=="yfAutoBeltMerge";
-  public static Vector3 LocalExit(string n)=>n.EndsWith("Left")?Vector3.left:n.EndsWith("Right")?Vector3.right:n.EndsWith("Up")?new Vector3(0,1,1):n.EndsWith("Down")?new Vector3(0,-1,1):Vector3.forward;
+  public static bool IsMerge(string n)=>n=="yfAutoBeltMerge"||n=="yfAutoBeltMergeLeft"||n=="yfAutoBeltMergeRight";
+  public static Vector3 LocalMergeInput(string n,int side)=>n=="yfAutoBeltMergeLeft"?(side==0?Vector3.back:Vector3.left):n=="yfAutoBeltMergeRight"?(side==0?Vector3.back:Vector3.right):(side==0?Vector3.left:Vector3.right);
+  public static Vector3 LocalExit(string n)=>IsMerge(n)?Vector3.forward:n.EndsWith("Left")?Vector3.left:n.EndsWith("Right")?Vector3.right:n.EndsWith("Up")?new Vector3(0,1,1):n.EndsWith("Down")?new Vector3(0,-1,1):Vector3.forward;
   public static Vector3i Offset(BlockValue v,Vector3 local){var d=v.Block.shape.GetRotation(v)*local;return new Vector3i(Mathf.RoundToInt(d.x),Mathf.RoundToInt(d.y),Mathf.RoundToInt(d.z));}
   public static Vector3 Point(string n,float t){
-   t=Mathf.Clamp01(t);if(n.EndsWith("Left"))return t<.5f?new Vector3(0,0,t-.5f):new Vector3(.5f-t,0,0);
-   if(IsMerge(n))return new Vector3(0,0,t*.5f);
+   t=Mathf.Clamp01(t);if(IsMerge(n))return new Vector3(0,0,t*.5f);if(n.EndsWith("Left"))return t<.5f?new Vector3(0,0,t-.5f):new Vector3(.5f-t,0,0);
    if(n.EndsWith("Right"))return t<.5f?new Vector3(0,0,t-.5f):new Vector3(t-.5f,0,0);
    return new Vector3(0,n.EndsWith("Up")?t:n.EndsWith("Down")?-t:0,t-.5f);
   }
@@ -42,7 +42,7 @@ namespace YFAutomation
   static Vector3i Add(Vector3i a,Vector3i b)=>Logistics.Add(a,b);
   static Vector3i Exit(TileEntityComposite t)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),ConveyorPath.LocalExit(t.block.GetBlockName())));
   static Vector3i Entry(TileEntityComposite t)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),Vector3.back));
-  static Vector3i MergeEntry(TileEntityComposite t,int side)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),side==0?Vector3.left:Vector3.right));
+  static Vector3i MergeEntry(TileEntityComposite t,int side)=>Add(t.ToWorldPos(),ConveyorPath.Offset(world.GetBlock(t.ToWorldPos()),ConveyorPath.LocalMergeInput(t.block.GetBlockName(),side)));
   static bool OnMergeArm(TileEntityComposite source,TileEntityComposite merge,int side){var p=source.ToWorldPos();var e=MergeEntry(merge,side);return p.x==e.x&&p.z==e.z;}
   static bool Matches(TileEntityComposite a,TileEntityComposite b){var p=a.ToWorldPos();var e=Entry(b);bool input=ConveyorPath.IsMerge(b.block.GetBlockName())?OnMergeArm(a,b,0)||OnMergeArm(a,b,1):p.x==e.x&&p.z==e.z;return Exit(a)==b.ToWorldPos()&&input&&TransferRules.SameOwner(Owner(a),Owner(b));}
   public static void Tick(){

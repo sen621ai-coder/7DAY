@@ -18,7 +18,7 @@ public static class ConveyorAssetBuild
   foreach(string path in Directory.GetFiles("Assets/Conveyor","*.mat"))AssetDatabase.DeleteAsset(path);
   steel=Mat("Frame",new Color(.16f,.23f,.28f));rubber=Mat("Belt",new Color(.055f,.065f,.075f));yellow=Mat("Safety",new Color(1,.68f,.08f));cargo=Mat("Parcel",new Color(.62f,.36f,.13f));
   var paths=new System.Collections.Generic.List<string>();
-  foreach(string kind in new[]{"Straight","Left","Right","Up","Down","Merge","Router"}){
+  foreach(string kind in new[]{"Straight","Left","Right","Up","Down","Merge","MergeLeft","MergeRight","Router"}){
    var root=new GameObject("Conveyor"+kind);var tr=root.transform;
    if(kind=="Router"){
     Box(tr,"Body",new Vector3(0,.43f,0),new Vector3(.76f,.66f,.76f),steel);
@@ -27,6 +27,15 @@ public static class ConveyorAssetBuild
     for(int arm=0;arm<4;arm++){var d=directions[arm];var port=Box(tr,"Port"+arm,d*.43f+Vector3.up*.27f,new Vector3(.42f,.16f,.14f),colors[arm]);port.transform.localRotation=Quaternion.LookRotation(d);
      var rot=Quaternion.LookRotation(arm==3?-d:d);foreach(int sign in new[]{-1,1}){var arrow=Box(tr,"RouteArrow"+arm,d*.24f+Vector3.up*.77f+rot*new Vector3(sign*.045f,0,-.045f),new Vector3(.03f,.014f,.13f),colors[arm]);arrow.transform.localRotation=rot*Quaternion.Euler(0,-sign*45,0);}
     }
+   }else if(kind=="MergeLeft"||kind=="MergeRight"){
+    int side=kind=="MergeLeft"?-1:1;
+    Box(tr,"MainBelt",new Vector3(0,.22f,0),new Vector3(.68f,.08f,1),rubber);
+    Box(tr,"SideBelt",new Vector3(side*.25f,.22f,0),new Vector3(.5f,.08f,.68f),rubber);
+    Box(tr,"ClosedRail",new Vector3(-side*.39f,.25f,0),new Vector3(.085f,.14f,1),steel);
+    foreach(int z in new[]{-1,1})Box(tr,"OpenRailEnd",new Vector3(side*.39f,.25f,z*.43f),new Vector3(.085f,.14f,.14f),steel);
+    var inputRotation=Quaternion.LookRotation(new Vector3(-side,0,0));
+    foreach(int sign in new[]{-1,1}){var head=Box(tr,"SideInputArrow",new Vector3(side*.32f,.29f,0)+inputRotation*new Vector3(sign*.05f,0,-.05f),new Vector3(.035f,.015f,.16f),yellow);head.transform.localRotation=inputRotation*Quaternion.Euler(0,-sign*45,0);}
+    foreach(int sign in new[]{-1,1}){var head=Box(tr,"RearInputArrow",new Vector3(sign*.05f,.29f,-.34f),new Vector3(.035f,.015f,.16f),yellow);head.transform.localRotation=Quaternion.Euler(0,-sign*45,0);}
    }else if(kind=="Merge"){
     Box(tr,"CrossBelt",new Vector3(0,.22f,0),new Vector3(1,.08f,.68f),rubber);
     Box(tr,"OutputBelt",new Vector3(0,.22f,.25f),new Vector3(.68f,.08f,.5f),rubber);
@@ -55,12 +64,12 @@ public static class ConveyorAssetBuild
   if(manifest==null)throw new Exception("bundle build failed");
   var bundle=AssetBundle.LoadFromFile(Path.GetFullPath("Build/Windows/automation-conveyors.unity3d"));
   foreach(var path in paths){var p=bundle.LoadAsset<GameObject>(path);if(p==null||p.transform.Find("Cargo")==null||p.GetComponentsInChildren<Collider>().Length==0)throw new Exception("invalid prefab: "+path);}
-  bundle.Unload(true);File.WriteAllText("Build/Windows/verified.txt","PASS: six conveyor and one sorting-box prefabs, materials, cargo anchors, colliders, bundle reload. Unity "+Application.unityVersion);
+  bundle.Unload(true);File.WriteAllText("Build/Windows/verified.txt","PASS: eight conveyor and one sorting-box prefabs, materials, cargo anchors, colliders, bundle reload. Unity "+Application.unityVersion);
  }
  public static void Preview(){
   Build();var scene=new GameObject("PreviewScene");int i=0;
-  foreach(string kind in new[]{"Straight","Left","Right","Up","Down","Merge","Router"}){var p=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Conveyor/Conveyor"+kind+".prefab");var g=UnityEngine.Object.Instantiate(p,scene.transform);g.transform.position=new Vector3((i-3f)*1.6f,kind=="Down"?1:0,0);var packet=g.transform.Find("Cargo");packet.gameObject.SetActive(true);packet.localPosition=Point(kind,.5f)+Vector3.up*(kind=="Up"||kind=="Down"?.55f:.43f);i++;}
-  var camera=new GameObject("Camera").AddComponent<Camera>();camera.transform.position=new Vector3(5,6,-9);camera.transform.LookAt(new Vector3(0,.3f,0));camera.orthographic=true;camera.orthographicSize=3.7f;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.12f,.15f,.2f);
+  foreach(string kind in new[]{"Straight","Left","Right","Up","Down","Merge","MergeLeft","MergeRight","Router"}){var p=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Conveyor/Conveyor"+kind+".prefab");var g=UnityEngine.Object.Instantiate(p,scene.transform);g.transform.position=new Vector3((i-4f)*1.6f,kind=="Down"?1:0,0);var packet=g.transform.Find("Cargo");packet.gameObject.SetActive(true);packet.localPosition=Point(kind,.5f)+Vector3.up*(kind=="Up"||kind=="Down"?.55f:.43f);i++;}
+  var camera=new GameObject("Camera").AddComponent<Camera>();camera.transform.position=new Vector3(5,6,-9);camera.transform.LookAt(new Vector3(0,.3f,0));camera.orthographic=true;camera.orthographicSize=4.6f;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.12f,.15f,.2f);
   var light=new GameObject("Light").AddComponent<Light>();light.type=LightType.Directional;light.intensity=1.6f;light.transform.rotation=Quaternion.Euler(50,-30,0);RenderSettings.ambientLight=new Color(.6f,.6f,.65f);
   var rt=new RenderTexture(1600,800,24);camera.targetTexture=rt;camera.Render();RenderTexture.active=rt;var image=new Texture2D(1600,800,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,1600,800),0,0);image.Apply();File.WriteAllBytes("Build/Windows/conveyors-preview.png",image.EncodeToPNG());RenderTexture.active=null;camera.targetTexture=null;UnityEngine.Object.DestroyImmediate(rt);UnityEngine.Object.DestroyImmediate(image);UnityEngine.Object.DestroyImmediate(scene);UnityEngine.Object.DestroyImmediate(camera.gameObject);UnityEngine.Object.DestroyImmediate(light.gameObject);
  }

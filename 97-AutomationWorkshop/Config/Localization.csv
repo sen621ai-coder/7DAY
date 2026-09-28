@@ -90,3 +90,8 @@ yfAutoRouterDesc,blocks,Block,,false,"Rear input. Blue left outlet A and green f
 
 yfAutoUnpacker,blocks,Block,,false,Automatic Unpacker,自动拆包机
 yfAutoUnpackerDesc,blocks,Block,,false,"Unpacks fixed-content resource and ammunition bundles into internal output storage. One package per second. Requires room for the entire contents; unsupported items remain untouched.","自动识别资源包、弹药包等固定内容包裹，按实际拆包定义还原散件。每秒最多一包；整包产物放不下时不消耗原包。上18格进料，下18格出料，可接传送带，4格内需通电供电接口。随机奖励包和装备包暂不自动拆。"
+
+yfAutoBeltMergeLeft,blocks,Block,,false,Left-Side T Merger,T字合流传送带（左侧汇入）
+yfAutoBeltMergeLeftDesc,blocks,Block,,false,"Rear and left inputs; forward output. Rotate to change orientation. Alternates input batches.","后方与左侧进料，沿箭头向前输出，可旋转。两路轮流取料；出口堵塞时保留货物。"
+yfAutoBeltMergeRight,blocks,Block,,false,Right-Side T Merger,T字合流传送带（右侧汇入）
+yfAutoBeltMergeRightDesc,blocks,Block,,false,"Rear and right inputs; forward output. Rotate to change orientation. Alternates input batches.","后方与右侧进料，沿箭头向前输出，可旋转。两路轮流取料；出口堵塞时保留货物。"
