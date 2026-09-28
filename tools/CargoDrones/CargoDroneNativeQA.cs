@@ -871,8 +871,31 @@ public sealed class CargoDroneNativeQA : IModApi
         Check(iron.Rows.Any(r=>r.Position.Y==config.Position.Y+64)&&!iron.Rows.Any(r=>r.Position.Y==config.Position.Y+65),"native source picker enforces inclusive 3D 64-block collection radius");
         Check(CargoSourceSearch.Find(world,config,"",CargoSourceKind.All,1).Rows.Length>0,"source picker paginates more than eight discovered producers");
     }
+    static void VerifyRouterUnload(CargoTransaction load)
+    {
+        var chunk=inventoryCollector.GetChunk();var local=new Vector3i(7,245,3);var at=chunk.GetWorldPos()+local;
+        Check(chunk.GetTileEntity(local)==null,"router cargo fixture is unused");
+        var block=Block.GetBlockValue("yfAutoRouter",false);chunk.SetBlockRaw(local.x,local.y,local.z,block);
+        var owner=PlatformUserIdentifierAbs.FromPlatformAndId("Steam","76561198000000001",false);
+        block.Block.OnBlockAdded(world,chunk,at,block,owner);
+        var tile=world.GetTileEntity(at) as TileEntityComposite;var storage=tile.GetFeature<TEFeatureStorage>();
+        Check(storage.bPlayerStorage&&storage.items.Length==36,"placed three-way sorter is a 36-slot cargo target");
+        var marker=CargoNativeMarkers.Read(tile,load.WorldId);CargoNativeAccessSessions.Register(tile,load.WorldId);var cargo=load.Plan.CargoAfter;
+        var item=CargoNativeItems.Decode(cargo.First(i=>i!=null));
+        storage.items[18]=item.Clone();
+        var snapshot=CargoNativeMarkers.Snapshot(tile,marker);var plan=CargoPlanner.Unload(snapshot,cargo,load.Plan.Owner);
+        Check(Enumerable.Range(0,18).All(i=>snapshot.Writable(i))&&Enumerable.Range(18,18).All(i=>!snapshot.Writable(i)),"drone can write only router raw-material slots");
+        Check(plan.Moved==1&&plan.EndpointAfter[0]!=null&&CargoPlanner.Equal(plan.EndpointBefore.Skip(18).ToArray(),plan.EndpointAfter.Skip(18).ToArray()),"router unload cannot merge into matching output stack");
+        for(int i=0;i<18;i++){storage.items[i]=item.Clone();storage.items[i].count=item.itemValue.ItemClass.Stacknumber.Value;}
+        storage.items[18]=ItemStack.Empty.Clone();snapshot=CargoNativeMarkers.Snapshot(tile,marker);plan=CargoPlanner.Unload(snapshot,cargo,load.Plan.Owner);
+        Check(plan.Moved==0&&CargoPlanner.Equal(plan.CargoBefore,plan.CargoAfter)&&plan.EndpointAfter.Skip(18).All(i=>i==null),"full router input retains airborne goods despite empty output slots");
+        storage.items[7]=ItemStack.Empty.Clone();plan=CargoPlanner.Unload(CargoNativeMarkers.Snapshot(tile,marker),cargo,load.Plan.Owner);
+        Check(plan.Moved==1&&plan.EndpointAfter[7]!=null&&plan.EndpointAfter.Skip(18).All(i=>i==null),"freed router input slot resumes unload without changing output");
+        block.Block.OnBlockRemoved(world,chunk,at,block);chunk.SetBlockRaw(local.x,local.y,local.z,BlockValue.Air);
+    }
     static void StartInventoryUnload(CargoTransaction load)
     {
+        VerifyRouterUnload(load);
         var chunk=inventoryCollector.GetChunk();var p=new Vector3i(Environment.GetCommandLineArgs().Contains("-yfCargoWorldScheduler")?13:5,150,1);
         Check(chunk.GetTileEntity(p)==null,"native target fixture is empty");
         var block=Block.GetBlockValue("cntWoodWritableCrate",false);chunk.SetBlockRaw(p.x,p.y,p.z,block);

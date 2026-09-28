@@ -112,7 +112,7 @@ namespace YFAutomation.CargoDrones
             var composite=tile as TileEntityComposite;var storage=composite==null?null:composite.GetFeature<TEFeatureStorage>();
             if(storage==null||!storage.bPlayerStorage)throw new InvalidOperationException("Unsupported target");
             var values=new CargoItem[storage.items.Length];var slotLocks=new bool[values.Length];var writable=new bool[values.Length];
-            for(int i=0;i<values.Length;i++){values[i]=CargoNativeItems.Encode(storage.items[i]);slotLocks[i]=Logistics.Locked(storage,i);writable[i]=true;}
+            for(int i=0;i<values.Length;i++){values[i]=CargoNativeItems.Encode(storage.items[i]);slotLocks[i]=Logistics.Locked(storage,i);writable[i]=!ThreeWaySorter.Is(composite)||MachineInventory.IsInput(i);}
             return new CargoInventory(marker.EndpointId,marker.Incarnation,marker.Revision,marker.Owner,values,slotLocks,writable,Logistics.Busy(composite,includeCargoFence));
         }
     }
