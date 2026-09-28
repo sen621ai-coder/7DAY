@@ -95,3 +95,9 @@ yfAutoBeltMergeLeft,blocks,Block,,false,Left-Side T Merger,T字合流传送带�
 yfAutoBeltMergeLeftDesc,blocks,Block,,false,"Rear and left inputs; forward output. Rotate to change orientation. Alternates input batches.","后方与左侧进料，沿箭头向前输出，可旋转。两路轮流取料；出口堵塞时保留货物。"
 yfAutoBeltMergeRight,blocks,Block,,false,Right-Side T Merger,T字合流传送带（右侧汇入）
 yfAutoBeltMergeRightDesc,blocks,Block,,false,"Rear and right inputs; forward output. Rotate to change orientation. Alternates input batches.","后方与右侧进料，沿箭头向前输出，可旋转。两路轮流取料；出口堵塞时保留货物。"
+yfAutoArm1,blocks,Block,,false,1-Block Robot Arm,1格机械臂
+yfAutoArm1Desc,blocks,Block,,false,"Picks from a belt 1 blocks behind the base and drops onto a belt 1 blocks ahead. Up to 16 items per cycle. Powered port within 4 blocks. Same owner and chunk; clear overhead required.","从底座后方1格的传送带取货，放到前方1格传送带，每次最多16件，可旋转。4格内需通电供电口；取放点须同所有者、同区块，上方留空。堵塞或断电时保留货物。"
+yfAutoArm2,blocks,Block,,false,2-Block Robot Arm,2格机械臂
+yfAutoArm2Desc,blocks,Block,,false,"Picks from a belt 2 blocks behind the base and drops onto a belt 2 blocks ahead. Up to 16 items per cycle. Powered port within 4 blocks. Same owner and chunk; clear overhead required.","从底座后方2格的传送带取货，放到前方2格传送带，每次最多16件，可旋转。4格内需通电供电口；取放点须同所有者、同区块，上方留空。堵塞或断电时保留货物。"
+yfAutoArm3,blocks,Block,,false,3-Block Robot Arm,3格机械臂
+yfAutoArm3Desc,blocks,Block,,false,"Picks from a belt 3 blocks behind the base and drops onto a belt 3 blocks ahead. Up to 16 items per cycle. Powered port within 4 blocks. Same owner and chunk; clear overhead required.","从底座后方3格的传送带取货，放到前方3格传送带，每次最多16件，可旋转。4格内需通电供电口；取放点须同所有者、同区块，上方留空。堵塞或断电时保留货物。"

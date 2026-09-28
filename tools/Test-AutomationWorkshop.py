@@ -20,7 +20,7 @@ assert b.find("property[@class='Workstation']/property[@name='CraftingAreaRecipe
 items=E.parse(c/'items.xml').findall('.//item');assert len(items)==14
 for item in items:assert item.find("property[@name='Extends']").get('value') in baseitems
 names=baseitems|baseblocks|{v.get('name') for v in E.parse(c/'blocks.xml').findall('.//block')}|{i.get('name') for i in items}
-recipes=E.parse(c/'recipes.xml').findall('.//recipe');assert len(recipes)==42
+recipes=E.parse(c/'recipes.xml').findall('.//recipe');assert len(recipes)==45
 assert len([r for r in recipes if r.get('name')=='yfCargoHub'])==1
 for r in recipes:
  assert r.get('name') in names and r.get('always_unlocked')=='true' and int(r.get('count'))==1
@@ -49,13 +49,20 @@ for suffix in ('Straight','Left','Right','Up','Down','Merge','MergeLeft','MergeR
  assert belt.find("property[@class='CompositeFeatures']/property[@class='TEFeatureStorage']/property[@name='LootList']").get('value')=='yfAutoBeltBuffer'
  assert (root/'97-AutomationWorkshop/Resources/automation-conveyors.unity3d').is_file()
 assert E.parse(c/'loot.xml').find(".//lootcontainer[@name='yfAutoBeltBuffer']").get('size')=='1,1'
+for reach in (1,2,3):
+ arm=E.parse(c/'blocks.xml').find(f".//block[@name='yfAutoArm{reach}']")
+ assert arm.find("property[@name='AllowedRotations']").get('value')=='Basic90'
+ assert arm.find("property[@name='MultiBlockDim']") is None
+ assert arm.find("property[@name='Model']").get('value')==f'#@modfolder:Resources/automation-arms.unity3d?Assets/RobotArms/RobotArm{reach}.prefab'
+ assert arm.find("property[@class='CompositeFeatures']/property[@class='TEFeatureAutomationState']") is not None
+ assert arm.find("property[@class='CompositeFeatures']/property[@class='TEFeatureStorage']/property[@name='LootList']").get('value')=='yfAutoBeltBuffer'
 for kind in ('Sorter','Kitchen','Smelter','Forge','Recycler','Farm','Miner','Transfer','WaterPump','WaterTank','AmmoFeed'):
  machine=E.parse(c/'blocks.xml').find(f".//block[@name='yfAuto{kind}']")
  assert machine.find("property[@name='Model']").get('value')==f'#@modfolder:Resources/automation-machines.unity3d?Assets/Machines/Machine{kind}.prefab'
  assert machine.find("property[@name='MultiBlockDim']") is None, 'Keep the saved single-block footprint'
  assert machine.find("property[@class='CompositeFeatures']/property[@class='TEFeatureSignable']") is not None, 'Retain persisted status feature'
 assert (root/'97-AutomationWorkshop/Resources/automation-machines.unity3d').is_file()
-print('PASS: workstation, 14 items, 42 recipes including cargo hub, entrance beacon and three-way sorter, vanilla materials, isolated crafting area, native UI references and localization.')
+print('PASS: workstation, 14 items, 45 recipes including cargo hub, entrance beacon and three-way sorter, vanilla materials, isolated crafting area, native UI references and localization.')
 
 for kind in ('Sorter','Router','Unpacker','Kitchen','Smelter','Forge','Workbench','Chemistry','Recycler','Farm','Miner','Transfer','WaterPump','AmmoFeed'):
  machine=E.parse(c/'blocks.xml').find(f".//block[@name='yfAuto{kind}']")

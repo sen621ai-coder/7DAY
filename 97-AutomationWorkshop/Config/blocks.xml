@@ -58,6 +58,99 @@
       <drop event="Destroy" count="0" />
       <drop event="Fall" name="terrDestroyedWoodDebris" count="1" prob="0.75" stick_chance="1" />
     </block>
+    <block name="yfAutoArm1">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-arms.unity3d?Assets/RobotArms/RobotArm1.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoArm1Desc" />
+      <property name="Path" value="solid" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="yfAutoArm1" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="MaxDamage" value="2500" />
+      <property name="Stacknumber" value="50" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoBeltBuffer" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureAutomationState" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
+    </block>
+    <block name="yfAutoArm2">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-arms.unity3d?Assets/RobotArms/RobotArm2.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoArm2Desc" />
+      <property name="Path" value="solid" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="yfAutoArm2" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="MaxDamage" value="2500" />
+      <property name="Stacknumber" value="50" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoBeltBuffer" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureAutomationState" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
+    </block>
+    <block name="yfAutoArm3">
+      <property name="Class" value="CompositeTileEntity" />
+      <property name="Material" value="Msteel" />
+      <property name="Shape" value="ModelEntity" />
+      <property name="Model" value="#@modfolder:Resources/automation-arms.unity3d?Assets/RobotArms/RobotArm3.prefab" />
+      <property name="CreativeMode" value="Player" />
+      <property name="DescriptionKey" value="yfAutoArm3Desc" />
+      <property name="Path" value="solid" />
+      <property name="WaterFlow" value="permitted" />
+      <property name="Place" value="TowardsPlacerInverted" />
+      <property name="AllowedRotations" value="Basic90" />
+      <property name="CustomIcon" value="yfAutoArm3" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="MaxDamage" value="2500" />
+      <property name="Stacknumber" value="50" />
+      <property name="Group" value="Building,advBuilding" />
+      <property name="FilterTags" value="MC_playerBlocks,SC_electrical" />
+      <property name="SoundPickup" value="cratesteel_grab" />
+      <property name="SoundPlace" value="cratesteel_place" />
+      <property class="CompositeFeatures">
+        <property class="TEFeatureStorage">
+          <property name="LootList" value="yfAutoBeltBuffer" />
+        </property>
+        <property class="TEFeatureLockable" />
+        <property class="TEFeatureAutomationState" />
+      </property>
+      <property class="RepairItems">
+        <property name="resourceForgedIron" value="2" />
+      </property>
+      <drop event="Destroy" name="resourceScrapIron" count="2" />
+    </block>
   </append>
   <append xpath="/blocks">
     <block name="yfAutoInput">

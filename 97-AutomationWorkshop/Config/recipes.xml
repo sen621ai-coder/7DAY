@@ -46,6 +46,21 @@
       <ingredient name="resourceMechanicalParts" count="3" />
       <ingredient name="resourceScrapPolymers" count="8" />
     </recipe>
+    <recipe name="yfAutoArm1" count="1" craft_area="yfAutomationWorkbench" craft_time="15" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="8" />
+      <ingredient name="resourceMechanicalParts" count="4" />
+      <ingredient name="resourceElectricParts" count="2" />
+    </recipe>
+    <recipe name="yfAutoArm2" count="1" craft_area="yfAutomationWorkbench" craft_time="15" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="16" />
+      <ingredient name="resourceMechanicalParts" count="8" />
+      <ingredient name="resourceElectricParts" count="4" />
+    </recipe>
+    <recipe name="yfAutoArm3" count="1" craft_area="yfAutomationWorkbench" craft_time="15" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="resourceForgedIron" count="24" />
+      <ingredient name="resourceMechanicalParts" count="12" />
+      <ingredient name="resourceElectricParts" count="6" />
+    </recipe>
   </append>
   <append xpath="/recipes">
     <recipe name="yfAutoInput" count="1" craft_area="yfAutomationWorkbench" craft_time="30" always_unlocked="true" use_ingredient_modifier="false">
