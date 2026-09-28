@@ -16,15 +16,19 @@ if((Property $camera 'RequiredPower') -ne '5'){throw 'Camera power mismatch'}
 if((Property $screen 'Class') -ne 'PZAEC_SurveillanceScreen,PZAEC.Surveillance'){throw 'Screen runtime class binding mismatch'}
 if((Property $camera 'Class') -ne 'PZAEC_SurveillanceCamera,PZAEC.Surveillance'){throw 'Camera runtime class binding mismatch'}
 if(@($recipes.configs.append.recipe).Count -ne 2){throw 'Recipe count mismatch'}
-if($info.xml.Version.value -ne '1.0.0'){throw 'ModInfo version mismatch'}
+if($info.xml.Version.value -ne '1.0.3'){throw 'ModInfo version mismatch'}
 $dll=Join-Path $mod 'PZAEC.Surveillance.dll';if(!(Test-Path $dll)){throw 'Compiled DLL missing'}
 $source=Get-Content (Join-Path $mod 'Source/SurveillanceState.cs') -Raw
 if($source -notmatch 'WirelessRange=128f'){throw 'Wireless range contract missing'}
 $render=Get-Content (Join-Path $mod 'Source/SurveillanceRenderService.cs') -Raw
-if($render -notmatch 'new RenderTexture\(768,576,16'){throw 'Standard render target contract missing'}
-if($render -notmatch 'admitted\.Count>=2'){throw 'Two-stream client budget missing'}
+if($render -notmatch 'active.Count>=RenderPolicy.MaxActive'){throw 'Client budget gate missing'}
 if($source -notmatch 'writes are disabled for this session'){throw 'Corrupt-save preservation guard missing'}
 if($source -notmatch 'expectedRevision!=s\.Revision'){throw 'Concurrent configuration revision guard missing'}
 $protocol=Get-Content (Join-Path $mod 'Source/SurveillanceProtocol.cs') -Raw
 if($protocol -notmatch 'NetPackagePZSurveillanceResult'){throw 'Server configuration result package missing'}
-Write-Output 'PASS: 4x3 screen, independent power, 128-block wireless binding, persistence, recipes and DLL are present.'
+& (Join-Path $PSScriptRoot 'Test-Policy.ps1')
+& (Join-Path $PSScriptRoot 'Test-Markers.ps1')
+# The state harness uses replacement world/network types; isolate it from the main process.
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-MarkerState.ps1')
+if($LASTEXITCODE -ne 0){throw 'Marker state/network tests failed'}
+Write-Output 'PASS: block/config, render scheduling, marker classification/projection, persistence and wire round-trips.'

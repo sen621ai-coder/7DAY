@@ -11,6 +11,15 @@ namespace PZAEC.Surveillance
         public bool Retiring;
         public Renderer Surface;
         public TextMesh Status;
+        Renderer statusRenderer;
+        Texture shownTexture;
+        string shownText;
+        bool shown;
+        ScreenTargetOverlay targetOverlay;
+        bool overlayFailed;
+        public Renderer MarkerRenderer=>targetOverlay==null?null:targetOverlay.Renderer;
+        public Renderer StatusRenderer
+        {get{if(statusRenderer==null&&Status!=null)statusRenderer=Status.GetComponent<Renderer>();return statusRenderer;}}
         Material instanceMaterial;
         int colliderLayer;
         string colliderTag;
@@ -63,7 +72,7 @@ namespace PZAEC.Surveillance
         }
         public void Bind(WorldBase world,Vector3i position)
         {
-            World=world;Position=position;Retiring=false;cycleChannel=0;cycleAt=0;
+            World=world;Position=position;Retiring=false;cycleChannel=0;cycleAt=0;shown=false;
             var rr=GetComponent<RootTransformRefParent>();if(rr!=null)rr.RootTransform=transform;
             if(Surface!=null)
             {
@@ -85,11 +94,16 @@ namespace PZAEC.Surveillance
                 if(Time.realtimeSinceStartup>=cycleAt){cycleAt=Time.realtimeSinceStartup+5;for(int n=1;n<=4;n++){int c=(cycleChannel+n)%4;if(device.Channels[c]!=Guid.Empty){cycleChannel=c;break;}}}
                 channel=cycleChannel;
             }
-            var id=device.Channels[channel];label="频道 "+(channel+1);return id;
+            var id=device.Channels[channel];label=channelLabels[channel];return id;
         }
+        static readonly string[] channelLabels={"频道 1","频道 2","频道 3","频道 4"};
         public void Show(Texture texture,string text)
         {
-            if(instanceMaterial!=null){instanceMaterial.color=texture==null?Color.black:Color.white;instanceMaterial.mainTexture=texture??Texture2D.blackTexture;}
+            if(texture==null)targetOverlay?.Hide();
+            if(shown&&shownTexture==texture&&shownText==text)return;
+            bool textureChanged=!shown||shownTexture!=texture;
+            shown=true;shownTexture=texture;shownText=text;
+            if(textureChanged&&instanceMaterial!=null){instanceMaterial.color=texture==null?Color.black:Color.white;instanceMaterial.mainTexture=texture??Texture2D.blackTexture;}
             if(Status!=null)
             {
                 Status.text=text??"";Status.characterSize=texture==null?.035f:.022f;
@@ -97,7 +111,18 @@ namespace PZAEC.Surveillance
                 Status.gameObject.SetActive(!string.IsNullOrEmpty(text));
             }
         }
-        void OnDisable(){SurveillanceRenderService.Unregister(this);if(!Retiring)Show(null,"");World=null;}
-        void OnDestroy(){SurveillanceRenderService.Unregister(this);if(instanceMaterial!=null)UnityEngine.Object.Destroy(instanceMaterial);}
+        public void ShowMarkers(TargetMarkerDetector detector,int width,int height)
+        {
+            if(detector==null||detector.Boxes.Count==0){targetOverlay?.Hide();return;}
+            if(overlayFailed||Surface==null)return;
+            try
+            {
+                if(targetOverlay==null)targetOverlay=new ScreenTargetOverlay(Surface);
+                targetOverlay.Show(detector,width,height);
+            }
+            catch(Exception e){overlayFailed=true;targetOverlay?.Hide();Log.Warning("[Surveillance] Target overlay unavailable: "+e.Message);}
+        }
+        void OnDisable(){SurveillanceRenderService.Unregister(this);targetOverlay?.Hide();if(!Retiring)Show(null,"");World=null;}
+        void OnDestroy(){SurveillanceRenderService.Unregister(this);targetOverlay?.Dispose();if(instanceMaterial!=null)UnityEngine.Object.Destroy(instanceMaterial);}
     }
 }

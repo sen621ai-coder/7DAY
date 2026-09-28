@@ -20,6 +20,8 @@ namespace PZAEC.Surveillance
     public static class SurveillanceClient
     {
         static readonly Dictionary<Vector3i,SurveillanceDevice> devices=new Dictionary<Vector3i,SurveillanceDevice>();
+        static readonly Dictionary<Guid,SurveillanceDevice> byId=new Dictionary<Guid,SurveillanceDevice>();
+        static float receivedAt=-1;
         static World world;
         static long revision=-1;
         public static IEnumerable<SurveillanceDevice> Devices
@@ -36,15 +38,23 @@ namespace PZAEC.Surveillance
             var current=GameManager.Instance?.World;if(current!=null&&!current.IsRemote()&&SurveillanceState.World==current)return SurveillanceState.At(p);
             SurveillanceDevice d;return devices.TryGetValue(p,out d)?d:null;
         }
-        public static SurveillanceDevice ById(Guid id)=>Devices.FirstOrDefault(d=>d.Id==id);
+        public static SurveillanceDevice ById(Guid id)
+        {SurveillanceDevice result;return byId.TryGetValue(id,out result)?result:null;}
+        public static bool IsFresh(float now)
+        {
+            var current=GameManager.Instance?.World;
+            return current!=null&&(!current.IsRemote()||(world==current&&receivedAt>=0&&now-receivedAt<=6));
+        }
         public static void Receive(SurveillanceSnapshot snapshot,World current)
         {
             if(current==null||snapshot==null)return;
             if(world!=current){Clear();world=current;}
-            if(snapshot.Revision<=revision)return;revision=snapshot.Revision;devices.Clear();
-            foreach(var d in snapshot.Devices)devices[d.Position]=d;
+            if(snapshot.Revision<=revision)return;revision=snapshot.Revision;devices.Clear();byId.Clear();receivedAt=UnityEngine.Time.realtimeSinceStartup;
+            foreach(var d in snapshot.Devices){devices[d.Position]=d;byId[d.Id]=d;}
+            // The local host has the full registry; the bounded network snapshot must not truncate it.
+            if(!current.IsRemote())foreach(var d in SurveillanceState.Devices)byId[d.Id]=d;
         }
-        public static void Clear(){devices.Clear();world=null;revision=-1;}
+        public static void Clear(){devices.Clear();byId.Clear();world=null;revision=-1;receivedAt=-1;}
     }
 
     public sealed class NetPackagePZSurveillanceSnapshot : NetPackage
@@ -52,7 +62,7 @@ namespace PZAEC.Surveillance
         SurveillanceSnapshot snapshot=new SurveillanceSnapshot();
         public NetPackagePZSurveillanceSnapshot Setup(SurveillanceSnapshot value){snapshot=value??new SurveillanceSnapshot();return this;}
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>32+snapshot.Devices.Length*160;
+        public override int GetLength()=>32+snapshot.Devices.Length*224;
         public override void write(PooledBinaryWriter w)
         {
             base.write(w);w.Write(snapshot.Revision);w.Write((ushort)snapshot.Devices.Length);
@@ -60,7 +70,7 @@ namespace PZAEC.Surveillance
             {
                 w.Write(d.Id.ToByteArray());w.Write((byte)d.Kind);SurveillanceWire.Position(w,d.Position);SurveillanceWire.Text(w,d.Label);
                 w.Write(d.Loaded);w.Write(d.Powered);w.Write((byte)d.Selected);w.Write(d.Cycle);
-                w.Write(d.Revision);
+                w.Write(d.Revision);w.Write(d.TargetMarkers);
                 for(int i=0;i<4;i++)w.Write(d.Channels[i].ToByteArray());
             }
         }
@@ -71,7 +81,7 @@ namespace PZAEC.Surveillance
             snapshot.Devices=new SurveillanceDevice[count];var ids=new HashSet<Guid>();
             for(int i=0;i<count;i++)
             {
-                var d=new SurveillanceDevice{Id=SurveillanceWire.Guid(r),Kind=(SurveillanceDeviceKind)r.ReadByte(),Position=SurveillanceWire.Position(r),Label=SurveillanceWire.Text(r),Loaded=r.ReadBoolean(),Powered=r.ReadBoolean(),Selected=r.ReadByte(),Cycle=r.ReadBoolean(),Revision=r.ReadInt64()};
+                var d=new SurveillanceDevice{Id=SurveillanceWire.Guid(r),Kind=(SurveillanceDeviceKind)r.ReadByte(),Position=SurveillanceWire.Position(r),Label=SurveillanceWire.Text(r),Loaded=r.ReadBoolean(),Powered=r.ReadBoolean(),Selected=r.ReadByte(),Cycle=r.ReadBoolean(),Revision=r.ReadInt64(),TargetMarkers=r.ReadBoolean()};
                 if(d.Id==Guid.Empty||!ids.Add(d.Id)||!Enum.IsDefined(typeof(SurveillanceDeviceKind),d.Kind)||d.Selected>3||d.Revision<0)throw new InvalidDataException("Invalid surveillance device");
                 for(int c=0;c<4;c++)d.Channels[c]=SurveillanceWire.Guid(r);snapshot.Devices[i]=d;
             }
@@ -105,6 +115,29 @@ namespace PZAEC.Surveillance
         }
     }
 
+    public sealed class NetPackagePZSurveillanceMarkers : NetPackage
+    {
+        Vector3i screen;
+        Guid screenId;
+        long revision;
+        bool enabled;
+        public NetPackagePZSurveillanceMarkers Setup(SurveillanceDevice device,bool value)
+        {screen=device.Position;screenId=device.Id;revision=device.Revision;enabled=value;return this;}
+        public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
+        public override int GetLength()=>48;
+        public override void write(PooledBinaryWriter w)
+        {base.write(w);SurveillanceWire.Position(w,screen);w.Write(screenId.ToByteArray());w.Write(revision);w.Write(enabled);}
+        public override void read(PooledBinaryReader r)
+        {screen=SurveillanceWire.Position(r);screenId=SurveillanceWire.Guid(r);revision=r.ReadInt64();enabled=r.ReadBoolean();if(screenId==Guid.Empty||revision<0)throw new InvalidDataException("Invalid marker settings");}
+        public override void ProcessPackage(World world,GameManager callbacks)
+        {
+            if(world==null||world.IsRemote()||Sender==null||!Sender.loginDone||!Sender.bAttachedToEntity)return;
+            string message;bool accepted;
+            if(!SurveillanceState.AllowRequest(Sender.entityId)){accepted=false;message="操作过快，请稍后重试";}
+            else accepted=SurveillanceState.SetTargetMarkers(screen,screenId,enabled,revision,world.GetEntity(Sender.entityId) as EntityPlayer,out message);
+            Sender.SendPackage(NetPackageManager.GetPackage<NetPackagePZSurveillanceResult>().Setup(screen,accepted,message));
+        }
+    }
     public sealed class NetPackagePZSurveillanceResult : NetPackage
     {
         Vector3i screen;

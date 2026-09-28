@@ -20,13 +20,14 @@ namespace PZAEC.Surveillance
         public Guid[] Channels=new Guid[4];
         public int Selected;
         public bool Cycle;
+        public bool TargetMarkers;
         public bool Loaded;
         public bool Powered;
         public long Revision;
         public SurveillanceDevice Clone()
         {
             return new SurveillanceDevice{Id=Id,Kind=Kind,Position=Position,Owner=Owner,Label=Label,
-                Channels=(Guid[])Channels.Clone(),Selected=Selected,Cycle=Cycle,Loaded=Loaded,Powered=Powered,Revision=Revision};
+                Channels=(Guid[])Channels.Clone(),Selected=Selected,Cycle=Cycle,TargetMarkers=TargetMarkers,Loaded=Loaded,Powered=Powered,Revision=Revision};
         }
     }
 
@@ -81,7 +82,7 @@ namespace PZAEC.Surveillance
                 {
                     var d=new SurveillanceDevice{Id=ParseGuid((string)e.Attribute("id")),Kind=(SurveillanceDeviceKind)Int(e,"kind"),
                         Position=new Vector3i(Int(e,"x"),Int(e,"y"),Int(e,"z")),Owner=(string)e.Attribute("owner")??"",
-                        Label=(string)e.Attribute("label")??"",Selected=Mathf.Clamp(Int(e,"selected"),0,3),Cycle=Bool(e,"cycle"),Revision=Math.Max(0,(long?)e.Attribute("revision")??0)};
+                        Label=(string)e.Attribute("label")??"",Selected=Mathf.Clamp(Int(e,"selected"),0,3),Cycle=Bool(e,"cycle"),TargetMarkers=Bool(e,"targetMarkers"),Revision=Math.Max(0,(long?)e.Attribute("revision")??0)};
                     if(d.Id==Guid.Empty||!Enum.IsDefined(typeof(SurveillanceDeviceKind),d.Kind)||Encoding.UTF8.GetByteCount(d.Label)>96)continue;
                     for(int i=0;i<4;i++)d.Channels[i]=ParseGuid((string)e.Attribute("c"+i));
                     devices[d.Position]=d;
@@ -100,7 +101,7 @@ namespace PZAEC.Surveillance
                     var e=new XElement("device",new XAttribute("id",d.Id),new XAttribute("kind",(int)d.Kind),
                         new XAttribute("x",d.Position.x),new XAttribute("y",d.Position.y),new XAttribute("z",d.Position.z),
                         new XAttribute("owner",d.Owner??""),new XAttribute("label",d.Label??""),
-                        new XAttribute("selected",d.Selected),new XAttribute("cycle",d.Cycle),new XAttribute("revision",d.Revision));
+                        new XAttribute("selected",d.Selected),new XAttribute("cycle",d.Cycle),new XAttribute("targetMarkers",d.TargetMarkers),new XAttribute("revision",d.Revision));
                     for(int i=0;i<4;i++)e.Add(new XAttribute("c"+i,d.Channels[i]));root.Add(e);
                 }
                 var document=new XDocument(root);string temporary=path+".new";document.Save(temporary);
@@ -164,6 +165,14 @@ namespace PZAEC.Surveillance
             if(!MayManage(s,player,out message))return false;
             if(expectedRevision!=s.Revision){message="配置已更新，请刷新后重试";Broadcast();return false;}
             s.Selected=selected;s.Cycle=cycle;s.Revision++;Changed();message=cycle?"已开启5秒轮巡":"已选择频道 "+(selected+1);Broadcast();return true;
+        }
+        public static bool SetTargetMarkers(Vector3i position,Guid screenId,bool enabled,long expectedRevision,EntityPlayer player,out string message)
+        {
+            message="监控设备不可用";SurveillanceDevice s;
+            if(world==null||world.IsRemote()||!devices.TryGetValue(position,out s)||s.Kind!=SurveillanceDeviceKind.Screen||s.Id!=screenId)return false;
+            if(!MayManage(s,player,out message))return false;
+            if(expectedRevision!=s.Revision){message="配置已更新，请刷新后重试";Broadcast();return false;}
+            s.TargetMarkers=enabled;s.Revision++;Changed();message=enabled?"已开启丧尸/动物红框":"已关闭目标红框";Broadcast();return true;
         }
         public static void ScanLoaded()
         {

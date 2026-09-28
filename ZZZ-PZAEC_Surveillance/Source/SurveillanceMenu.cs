@@ -48,6 +48,14 @@ namespace PZAEC.Surveillance
             }
             if(world.IsRemote())message="设置已发送，等待服务器确认…";
         }
+        void SetMarkers(bool enabled)
+        {
+            var current=GameManager.Instance?.World;var device=SurveillanceClient.At(screen);
+            if(current==null||device==null)return;
+            if(current.IsRemote())
+            {ConnectionManager.Instance.SendToServer(NetPackageManager.GetPackage<NetPackagePZSurveillanceMarkers>().Setup(device,enabled));message="设置已发送，等待服务器确认…";}
+            else SurveillanceState.SetTargetMarkers(screen,device.Id,enabled,device.Revision,player,out message);
+        }
         void OnGUI()
         {
             if(!enabled)return;float width=Mathf.Min(760,Screen.width-40),height=Mathf.Min(620,Screen.height-40);
@@ -62,6 +70,14 @@ namespace PZAEC.Surveillance
             GUILayout.BeginHorizontal();if(GUILayout.Button("清除此频道",GUILayout.Width(140)))Send(Guid.Empty);
             bool cycling=state!=null&&state.Cycle;if(GUILayout.Button(cycling?"关闭5秒轮巡":"开启5秒轮巡",GUILayout.Width(160)))Send(Guid.Empty,true,!cycling);
             GUILayout.Label(message);GUILayout.EndHorizontal();GUILayout.Space(8);
+            GUILayout.BeginHorizontal();
+            if(GUILayout.Button(state!=null&&state.TargetMarkers?"目标红框：开启":"目标红框：关闭",GUILayout.Width(180)))SetMarkers(state==null||!state.TargetMarkers);
+            GUILayout.Label("仅标记镜头可见的丧尸和动物；此设置属于当前大屏");GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            SurveillanceRenderService.AutomaticDegrade=GUILayout.Toggle(SurveillanceRenderService.AutomaticDegrade,"本机自动保底（试验）",GUILayout.Width(205));
+            SurveillanceRenderService.Diagnostics=GUILayout.Toggle(SurveillanceRenderService.Diagnostics,"记录性能",GUILayout.Width(100));
+            if(GUILayout.Button("导出记录",GUILayout.Width(90))){SurveillanceRenderService.Export();message=string.IsNullOrEmpty(SurveillanceRenderService.LastExport)?"暂无记录":"记录已导出，路径见游戏日志";}
+            GUILayout.EndHorizontal();GUILayout.Label(SurveillanceRenderService.Summary);
             GUILayout.Label("128格内摄像头（墙壁和楼板不会削弱信号）");
             scroll=GUILayout.BeginScrollView(scroll,"box");
             var cameras=SurveillanceClient.Devices.Where(d=>d.Kind==SurveillanceDeviceKind.Camera)
