@@ -17,7 +17,7 @@ if((Property $camera 'RequiredPower') -ne '5'){throw 'Camera power mismatch'}
 if((Property $screen 'Class') -ne 'PZAEC_SurveillanceScreen,PZAEC.Surveillance'){throw 'Screen runtime class binding mismatch'}
 if((Property $camera 'Class') -ne 'PZAEC_SurveillanceCamera,PZAEC.Surveillance'){throw 'Camera runtime class binding mismatch'}
 if(@($recipes.configs.append.recipe).Count -ne 2){throw 'Recipe count mismatch'}
-if($info.xml.Version.value -ne '1.0.12'){throw 'ModInfo version mismatch'}
+if($info.xml.Version.value -ne '1.0.13'){throw 'ModInfo version mismatch'}
 $dll=Join-Path $mod 'PZAEC.Surveillance.dll';if(!(Test-Path $dll)){throw 'Compiled DLL missing'}
 $source=Get-Content (Join-Path $mod 'Source/SurveillanceState.cs') -Raw
 if($source -notmatch 'WirelessRange=128f'){throw 'Wireless range contract missing'}

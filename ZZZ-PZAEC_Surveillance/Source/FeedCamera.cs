@@ -23,16 +23,47 @@ namespace PZAEC.Surveillance
                 var turretEffect=go.GetComponent("ImageEffect_TurretView") as Behaviour;
                 if(turretEffect!=null)turretEffect.enabled=false;
                 foreach(var listener in go.GetComponentsInChildren<AudioListener>(true))listener.enabled=false;
-                camera.nearClipPlane=.05f;camera.farClipPlane=80;camera.fieldOfView=60;camera.aspect=4f/3;
+                camera.nearClipPlane=.05f;camera.fieldOfView=60;camera.aspect=4f/3;
                 camera.depth=-10;
-                // Match XUiC_CameraWindow's supported native world rendering path and layer mask.
+                // The native turret window deliberately excludes its background. A world
+                // monitor needs that background, including layer 9's sky and cloud meshes.
                 camera.renderingPath=RenderingPath.DeferredShading;camera.clearFlags=CameraClearFlags.SolidColor;
-                // XUiC_CameraWindow excludes layer 9 (-513); vp_FPWeapon uses layer 10.
-                // Retain our existing layer 8 exclusion too.
-                camera.backgroundColor=Color.black;camera.cullingMask&=~((1<<8)|(1<<9)|(1<<10));
+                ApplyEnvironment(camera,null);
                 go.SetActive(true);Follow(camera,mount);return camera;
             }
             catch{UnityEngine.Object.Destroy(go);throw;}
+        }
+        public static void ApplyEnvironment(Camera camera,Camera observer)
+        {
+            int mask=observer!=null?observer.cullingMask:~0;
+            mask|=(1<<Constants.cLayerNoShadow)|(1<<Constants.cLayerBackgroundImage);
+            camera.cullingMask=mask&~((1<<Constants.cLayerHoldingItem)|(1<<Constants.cLayerNGUI)|(1<<Constants.cLayerRenderInTexture));
+            camera.farClipPlane=Mathf.Clamp(observer!=null?observer.farClipPlane:1000f,200f,2800f);
+            camera.backgroundColor=SkyManager.SkyColor;
+        }
+        public static void Render(Camera camera)
+        {
+            int skyMask=1<<Constants.cLayerBackgroundImage;
+            if((camera.cullingMask&skyMask)==0){camera.Render();return;}
+            // Native sky spheres are ~45 km in radius. Render only their layer with a
+            // long clip plane, then the world at normal range into the SAME texture.
+            var background=camera.GetComponent<FeedBackground>()??camera.gameObject.AddComponent<FeedBackground>();
+            if(background.Sky==null)
+            {
+                var go=new GameObject("Surveillance sky");go.transform.SetParent(camera.transform,false);
+                background.Sky=go.AddComponent<Camera>();background.Sky.enabled=false;
+            }
+            var sky=background.Sky;int mask=camera.cullingMask;var clear=camera.clearFlags;
+            var previous=RenderTexture.active;
+            try
+            {
+                sky.CopyFrom(camera);sky.enabled=false;sky.targetTexture=camera.targetTexture;sky.cullingMask=skyMask;
+                sky.nearClipPlane=.3f;sky.farClipPlane=100000f;sky.renderingPath=RenderingPath.Forward;
+                sky.clearFlags=CameraClearFlags.SolidColor;sky.Render();
+                camera.cullingMask=mask&~skyMask;camera.clearFlags=CameraClearFlags.Depth;
+                camera.Render();
+            }
+            finally{sky.targetTexture=null;camera.cullingMask=mask;camera.clearFlags=clear;RenderTexture.active=previous;}
         }
         public static void Follow(Camera camera,Transform mount)
         {
@@ -52,5 +83,9 @@ namespace PZAEC.Surveillance
             camera.transform.SetPositionAndRotation(mount.position,Quaternion.LookRotation(forward,up));
             if(!camera.gameObject.activeInHierarchy)throw new InvalidOperationException("Video camera is inactive");
         }
+    }
+    public sealed class FeedBackground : MonoBehaviour
+    {
+        public Camera Sky;
     }
 }

@@ -18,14 +18,14 @@ public sealed class SurveillanceVisualQA : IModApi
     static void Check(bool ok,string message){if(!ok)throw new Exception(message);}
     static Color Pixel(Camera camera,RenderTexture rt)
     {
-        camera.targetTexture=rt;camera.Render();var previous=RenderTexture.active;
+        camera.targetTexture=rt;FeedCamera.Render(camera);var previous=RenderTexture.active;
         var read=new Texture2D(1,1,TextureFormat.RGBA32,false);
         try{RenderTexture.active=rt;read.ReadPixels(new Rect(rt.width/2,rt.height/2,1,1),0,0);read.Apply();return read.GetPixel(0,0);}
         finally{RenderTexture.active=previous;UnityEngine.Object.Destroy(read);}
     }
     static Color32[] Snapshot(Camera camera,RenderTexture rt)
     {
-        camera.targetTexture=rt;camera.Render();var previous=RenderTexture.active;
+        camera.targetTexture=rt;FeedCamera.Render(camera);var previous=RenderTexture.active;
         var read=new Texture2D(rt.width,rt.height,TextureFormat.RGBA32,false);
         try{RenderTexture.active=rt;read.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);read.Apply();return read.GetPixels32();}
         finally{RenderTexture.active=previous;UnityEngine.Object.Destroy(read);}
@@ -102,14 +102,35 @@ public sealed class SurveillanceVisualQA : IModApi
             Check(turretEffect==null||!turretEffect.enabled,"Decorative turret filter still active");
             Check(camera.transform.parent==null&&camera.gameObject.activeInHierarchy&&!camera.enabled,"Feed inherited inactive mount or automatic rendering");
             Check(!mount.activeSelf,"Feed activated native sensor cone");
-            Check((camera.cullingMask&((1<<8)|(1<<9)|(1<<10)))==0,"First-person layers enter surveillance feed");
+            Check((camera.cullingMask&((1<<10)|(1<<12)))==0,"First-person/UI layers enter surveillance feed");
+            Check((camera.cullingMask&((1<<8)|(1<<9)|(1<<28)))==((1<<8)|(1<<9)|(1<<28)),"World/sky layers missing");
+            int environmentMask=camera.cullingMask;
+            camera.transform.rotation=Quaternion.Euler(-25,0,0);camera.backgroundColor=Color.magenta;
+            camera.cullingMask=0;var noSky=Pixel(camera,rt);
+            camera.cullingMask=1<<Constants.cLayerBackgroundImage;var realSky=Pixel(camera,rt);
+            Log.Out("[SurveillanceQA] Native sky background off/on="+noSky+" / "+realSky);
+            Check(Mathf.Abs(noSky.r-realSky.r)+Mathf.Abs(noSky.g-realSky.g)+Mathf.Abs(noSky.b-realSky.b)>.2f,"Native sky spheres missing from feed");
+            Check(camera.clearFlags==CameraClearFlags.SolidColor&&camera.cullingMask==(1<<9)&&camera.GetComponent<FeedBackground>().Sky.targetTexture==null&&!camera.GetComponent<FeedBackground>().Sky.enabled,"Sky pass leaked camera state");
+            FeedCamera.Follow(camera,mount.transform);camera.backgroundColor=Color.black;
+            var distant=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(distant);
+            distant.transform.position=camera.transform.position+camera.transform.forward*250;distant.transform.localScale=Vector3.one*40;
+            var distantMaterial=new Material(Shader.Find("Sprites/Default")){color=Color.green,mainTexture=Texture2D.whiteTexture};objects.Add(distantMaterial);
+            distant.GetComponent<Renderer>().sharedMaterial=distantMaterial;
+            foreach(int layer in new[]{Constants.cLayerNoShadow,Constants.cLayerTerrain})
+            {
+                distant.layer=layer;camera.cullingMask=1<<layer;camera.farClipPlane=80;
+                var clipped=Pixel(camera,rt);camera.farClipPlane=1000;var visible=Pixel(camera,rt);
+                Check(clipped.g<.1f&&visible.g>.8f&&visible.r<.2f,"250m world background missing on layer "+layer);
+            }
+            distant.SetActive(false);camera.cullingMask=environmentMask;
+            Log.Out("[SurveillanceQA] PASS native sky background, 250m no-shadow/terrain layers, sky camera state restoration");
             var weapon=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(weapon);
             weapon.layer=10;weapon.transform.position=mount.transform.position+Vector3.forward*2;
             var weaponMaterial=new Material(Shader.Find("Sprites/Default")){mainTexture=Texture2D.whiteTexture};objects.Add(weaponMaterial);
             weaponMaterial.color=Color.red;weapon.GetComponent<Renderer>().sharedMaterial=weaponMaterial;
             int worldMask=camera.cullingMask;camera.cullingMask=1<<10;
             Check(Pixel(camera,rt).r>.8f,"Weapon-layer test control not visible");
-            camera.cullingMask=worldMask;
+            camera.cullingMask=worldMask&(1<<10);
             Check(Pixel(camera,rt).r<.1f,"Weapon layer visible in world feed");
             weapon.SetActive(false);
             // Exercise the production render path, then read the retained texture without
