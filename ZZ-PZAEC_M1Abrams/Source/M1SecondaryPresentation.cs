@@ -6,7 +6,7 @@ namespace PZAEC.M1
 {
     public static class SecondaryPresentation
     {
-        sealed class View{public EntityVehicle Vehicle;public int Epoch,Serial;public float At,Clock=float.PositiveInfinity;public readonly float[] F=new float[16];public readonly int[] I=new int[8];public Transform Yaw,Pitch,AA,Muzzle;public AudioSource MGSound,AASound;public Transform Flash;public float ShotAt=-100;public readonly MaterialPropertyBlock FlashProperties=new MaterialPropertyBlock();}
+        sealed class View{public EntityVehicle Vehicle;public int Epoch,Serial,MotionSerial;public readonly EffectRules.Events Events=new EffectRules.Events();public float At,Clock=float.PositiveInfinity;public readonly float[] F=new float[16];public readonly int[] I=new int[8];public Transform Yaw,Pitch,AA,Muzzle;public AudioSource MGSound,AASound;public Transform Flash;public float ShotAt=-100,FlashLife=.055f,AAAt=-100;public Transform LeftFlash,RightFlash,ActiveAA;public readonly MaterialPropertyBlock FlashProperties=new MaterialPropertyBlock();}
         sealed class Trail{public int Vehicle,Id;public LineRenderer Line;public Vector3 A,B;public float Until,Start;public bool Missile;}
         static readonly Dictionary<int,View> views=new Dictionary<int,View>();static readonly List<Trail> trails=new List<Trail>();static Material material;static AudioClip mgClip,aaClip;
         static AudioClip Clip(string name,bool missile)
@@ -17,8 +17,10 @@ namespace PZAEC.M1
             if(views.TryGetValue(v.entityId,out var existing)&&existing.Vehicle==v)return existing;
             var root=SecondaryModel.Find(v.PhysicsTransform!=null?v.PhysicsTransform:v.transform,"M1Visual");var yaw=SecondaryModel.Find(root,"RoofMGYaw");if(yaw==null)return null;
             if(material==null){material=new Material(Shader.Find("Sprites/Default"));mgClip=Clip("M1 MG",false);aaClip=Clip("M1 AA",true);}
-            var x=new View{Vehicle=v,Yaw=yaw,Pitch=SecondaryModel.Find(root,"RoofMGPitch"),AA=SecondaryModel.Find(root,"AAPitch"),Muzzle=SecondaryModel.Find(root,"RoofMGMuzzle")};x.Flash=Presentation.CreateMGFlash(x.Muzzle);x.MGSound=Sound(x.Muzzle,mgClip);x.AASound=Sound(x.AA,aaClip);x.I[0]=v.GetAttached(1)!=null?1:0;views[v.entityId]=x;return x;
+            var x=new View{Vehicle=v,Yaw=yaw,Pitch=SecondaryModel.Find(root,"RoofMGPitch"),AA=SecondaryModel.Find(root,"AAPitch"),Muzzle=SecondaryModel.Find(root,"RoofMGMuzzle")};x.Flash=Presentation.CreateMGFlash(x.Muzzle);x.LeftFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleL"));x.RightFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleR"));x.MGSound=Sound(x.Muzzle,mgClip);x.AASound=Sound(x.AA,aaClip);x.I[0]=v.GetAttached(1)!=null?1:0;views[v.entityId]=x;return x;
         }
+        static Transform LaunchFlash(Transform muzzle){var flash=Presentation.CreateMGFlash(muzzle);flash.name="M1AAMuzzleFX";flash.localScale=new Vector3(.35f,.35f,.75f);return flash;}
+        static void DestroyFlashes(View v){foreach(var f in new[]{v.Flash,v.LeftFlash,v.RightFlash})if(f!=null)UnityEngine.Object.Destroy(f.gameObject);}
         public static byte Mode(EntityVehicle v,int seat)=>seat<0?(byte)0:views.TryGetValue(v.entityId,out var s)?(byte)s.I[seat]:(seat==0&&v.GetAttached(1)!=null?(byte)1:(byte)0);
         public static void SaveItem(EntityVehicle vehicle)
         {
@@ -31,11 +33,12 @@ namespace PZAEC.M1
         public static void Receive(World w,NetPackageM1SecondaryEvent p)
         {
             if(p.Version!=SecondaryRules.Protocol||w?.GetPrimaryPlayer()==null)return;var vehicle=w.GetEntity(p.Vehicle) as EntityVehicle;if(!Weapons.IsTank(vehicle))return;var v=Get(vehicle);if(v==null)return;
-            if(v.Epoch!=0&&v.Epoch!=p.Epoch)return;if(v.Epoch==0)v.Epoch=p.Epoch;if(unchecked(p.Serial-v.Serial)<=0)return;v.Serial=p.Serial;v.Clock=Mathf.Min(v.Clock,UnityEngine.Time.time-p.Time);float age=Mathf.Max(0,UnityEngine.Time.time-p.Time-v.Clock);
-            if(p.Kind==1){Array.Copy(p.F,v.F,16);Array.Copy(p.I,v.I,8);v.At=Time.time;return;}
-            if(age>.5f)return;
-            if(p.Kind==2){v.ShotAt=Time.time-age;if(p.I[0]%3==0)Add(p.Vehicle,p.I[0],p.A,p.B,false,age);v.MGSound.PlayOneShot(mgClip);}
-            else if(p.Kind==3){Add(p.Vehicle,p.I[0],p.A,p.A+p.B*2,true);v.AASound.PlayOneShot(aaClip);}
+            if(v.Epoch!=0&&v.Epoch!=p.Epoch)return;if(v.Epoch==0)v.Epoch=p.Epoch;v.Clock=Mathf.Min(v.Clock,UnityEngine.Time.time-p.Time);float age=Mathf.Max(0,UnityEngine.Time.time-p.Time-v.Clock);
+            if(p.Kind==1){if(unchecked(p.Serial-v.Serial)<=0)return;v.Serial=p.Serial;Array.Copy(p.F,v.F,16);Array.Copy(p.I,v.I,8);v.At=Time.time;return;}
+            if(!EffectRules.Fresh(age)||!v.Events.Accept(p.Serial))return;
+            if(p.Kind>=4){if(unchecked(p.Serial-v.MotionSerial)<=0)return;v.MotionSerial=p.Serial;}
+            if(p.Kind==2){v.ShotAt=Time.time;v.FlashLife=EffectRules.FlashLife(Time.unscaledDeltaTime,true);if(p.I[0]%3==0)Add(p.Vehicle,p.I[0],p.A,p.B,false,age);v.MGSound.PlayOneShot(mgClip);}
+            else if(p.Kind==3){if(p.Serial>v.MotionSerial)Add(p.Vehicle,p.I[0],p.A,p.A+p.B*2,true);v.AAAt=Time.time;v.ActiveAA=Vector3.Distance(v.LeftFlash.position+Origin.position,p.A)<Vector3.Distance(v.RightFlash.position+Origin.position,p.A)?v.LeftFlash:v.RightFlash;v.AASound.PlayOneShot(aaClip);}
             else if(p.Kind==4){var t=trails.Find(x=>x.Missile&&x.Vehicle==p.Vehicle&&x.Id==p.I[0]);if(t==null)Add(p.Vehicle,p.I[0],p.A-p.B*2,p.A,true);else{t.A=p.A-p.B*2;t.B=p.A;t.Until=Time.time+.25f;}}
             else if(p.Kind==5){for(int i=trails.Count-1;i>=0;i--)if(trails[i].Missile&&trails[i].Vehicle==p.Vehicle&&trails[i].Id==p.I[0]){UnityEngine.Object.Destroy(trails[i].Line.gameObject);trails.RemoveAt(i);}Add(p.Vehicle,p.I[0],p.A-Vector3.up*.2f,p.A+Vector3.up*.2f,false);}
         }
@@ -46,9 +49,10 @@ namespace PZAEC.M1
         }
         public static void Update(World w)
         {
-            foreach(var v in views.Values)if(v.Flash!=null){float age=Time.time-v.ShotAt;bool active=age>=0&&age<.035f;v.Flash.gameObject.SetActive(active);if(active){v.FlashProperties.SetColor("_Color",new Color(1,1,1,(1-age/.035f)*(Optics.Scoped(v.Vehicle.entityId)?.4f:1)));v.Flash.GetComponent<Renderer>().SetPropertyBlock(v.FlashProperties);}}
+            foreach(var v in views.Values)if(v.Flash!=null){float age=Time.time-v.ShotAt;bool active=age>=0&&age<v.FlashLife;v.Flash.gameObject.SetActive(active);if(active){v.FlashProperties.SetColor("_Color",new Color(1,1,1,(1-age/v.FlashLife)*(Optics.Scoped(v.Vehicle.entityId)?.6f:1)));v.Flash.GetComponent<Renderer>().SetPropertyBlock(v.FlashProperties);}}
+            foreach(var v in views.Values)foreach(var flash in new[]{v.LeftFlash,v.RightFlash})if(flash!=null){float age=Time.time-v.AAAt;bool active=flash==v.ActiveAA&&age>=0&&age<.16f;flash.gameObject.SetActive(active);if(active){v.FlashProperties.SetColor("_Color",new Color(1,1,1,(1-age/.16f)*(Optics.Scoped(v.Vehicle.entityId)?.6f:1)));flash.GetComponent<Renderer>().SetPropertyBlock(v.FlashProperties);}}
             foreach(var v in views.Values)if(v.Yaw!=null&&!Weapons.Server){v.Yaw.localRotation=Quaternion.Euler(0,v.F[0],0);v.Pitch.localRotation=Quaternion.Euler(-v.F[1],0,0);v.AA.localRotation=Quaternion.Euler(-v.F[2],0,0);}
-            foreach(var id in new List<int>(views.Keys))if(w.GetEntity(id)!=views[id].Vehicle){var v=views[id];if(v.Flash!=null)UnityEngine.Object.Destroy(v.Flash.gameObject);if(v.MGSound!=null)UnityEngine.Object.Destroy(v.MGSound);if(v.AASound!=null)UnityEngine.Object.Destroy(v.AASound);views.Remove(id);}
+            foreach(var id in new List<int>(views.Keys))if(w.GetEntity(id)!=views[id].Vehicle){var v=views[id];DestroyFlashes(v);if(v.MGSound!=null)UnityEngine.Object.Destroy(v.MGSound);if(v.AASound!=null)UnityEngine.Object.Destroy(v.AASound);views.Remove(id);}
             for(int i=trails.Count-1;i>=0;i--){var t=trails[i];if(Time.time>=t.Until){UnityEngine.Object.Destroy(t.Line.gameObject);trails.RemoveAt(i);}else{var a=t.A;var b=t.B;if(!t.Missile){var delta=b-a;float length=delta.magnitude;float travel=Mathf.Min(length,Mathf.Max(0,Time.time-t.Start)*850);b=a+delta.normalized*travel;a+=delta.normalized*Mathf.Max(0,travel-2.5f);}t.Line.SetPosition(0,a-Origin.position);t.Line.SetPosition(1,b-Origin.position);}}
         }
         static string Reason(int n)=>n==0?"就绪":n==1?"超出射界":n==2?"枪口/车体遮挡":n==3?"待命":n==4?"转动对准中":n==5?"过热：松开扳机散热":n==6?"装填/冷却中":n==7?"货仓缺少弹药":n==8?"按住右键搜索":n==9?"无合法飞行目标（40～600米）":n==10?"目标遮挡/离开准星":n==11?"锁定中":"不可发射";
@@ -70,6 +74,6 @@ namespace PZAEC.M1
             var muzzle=mode==1?v.Muzzle:v.AA;Optics.Draw(p,vehicle,muzzle,muzzle.forward,reason);
             if(p.playerCamera!=null&&mode==2&&target!=null){var screen=p.playerCamera.WorldToScreenPoint(target.position-Origin.position+Vector3.up*.8f);if(screen.z>0)GUI.Box(new Rect(screen.x-24,Screen.height-screen.y-24,48,48),v.F[8]>=1&&v.F[9]>0?"锁定":"…");}return true;
         }
-        public static void Clear(){foreach(var v in views.Values){if(v.Flash!=null)UnityEngine.Object.Destroy(v.Flash.gameObject);if(v.MGSound!=null)UnityEngine.Object.Destroy(v.MGSound);if(v.AASound!=null)UnityEngine.Object.Destroy(v.AASound);}views.Clear();foreach(var t in trails)UnityEngine.Object.Destroy(t.Line.gameObject);trails.Clear();foreach(var o in new UnityEngine.Object[]{material,mgClip,aaClip})if(o!=null)UnityEngine.Object.Destroy(o);material=null;mgClip=aaClip=null;}
+        public static void Clear(){foreach(var v in views.Values){DestroyFlashes(v);if(v.MGSound!=null)UnityEngine.Object.Destroy(v.MGSound);if(v.AASound!=null)UnityEngine.Object.Destroy(v.AASound);}views.Clear();foreach(var t in trails)UnityEngine.Object.Destroy(t.Line.gameObject);trails.Clear();foreach(var o in new UnityEngine.Object[]{material,mgClip,aaClip})if(o!=null)UnityEngine.Object.Destroy(o);material=null;mgClip=aaClip=null;}
     }
 }

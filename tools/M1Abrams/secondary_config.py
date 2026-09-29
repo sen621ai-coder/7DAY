@@ -35,5 +35,5 @@ def apply(root):
  rows=[r for r in rows if r[0] not in replace]
  for key,value in replace.items():rows.append([key,'items','Item','','',value,value])
  with loc.open('w',encoding='utf-8',newline='') as f:csv.writer(f).writerows(rows)
- info=E.parse(mod/'ModInfo.xml');info.find('Version').set('value','0.4.7');info.find('Description').set('value','M1 cannon, independent roof MG and lock-on AA; dual-seat authority, cargo ammunition and saved weapon state.');info.write(mod/'ModInfo.xml',encoding='utf-8',xml_declaration=True)
+ info=E.parse(mod/'ModInfo.xml');info.find('Version').set('value','0.4.8');info.find('Description').set('value','M1 cannon, independent roof MG and lock-on AA; dual-seat authority, cargo ammunition and saved weapon state.');info.write(mod/'ModInfo.xml',encoding='utf-8',xml_declaration=True)
 if __name__=='__main__':apply(Path(__file__).resolve().parents[2])
