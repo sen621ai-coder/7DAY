@@ -64,3 +64,8 @@
 客户端 `interaction-ready` 表示模型交互脚本已取得平台身份并运行；随后 `interact` 记录未瞄准、距离、界面占用、遮挡或opening，`panel-open/request/reply` 确认开窗和服务端响应。输入读取与游戏原生一致，覆盖普通、永久及载具Activate通道。
 
 服务器 `command action=RedirectShipment` 表示用户明确要求把停靠中的旧货改送新目标；此操作不会改变货物数量、货物版本或电量。普通 `SetTarget` 仍不更改旧货目的地。列表中的机器状态牌不再作为设备名。
+
+
+## 0.11.3 邻近设备取货净空
+
+pickup-clearance 记录来源 endpoint、original 与 selected 取货坐标，或不可用的 hold。pickup-reject 记录候选位置及 model-clearance、child 或实体方块名和坐标。候选高度最多抬升4格；交接通道阻挡和候选机体净空分开检查。未知邻近区块进入受预算限制的预加载，不当作空气。

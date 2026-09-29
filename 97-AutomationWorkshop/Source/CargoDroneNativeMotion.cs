@@ -105,7 +105,7 @@ namespace YFAutomation.CargoDrones
             int minY=Math.Max(0,(int)Math.Floor(Math.Min(from.Y,to.Y)-1.6)),maxY=Math.Min(255,(int)Math.Floor(Math.Max(from.Y,to.Y)+1.6));
             // Registered source models extend beyond their root voxel. Their XML
             // oversized bounds fit this 8-block search margin; use an enclosing
-            // horizontal radius so every supported 90-degree rotation is covered.
+            // rotated model box without inflating it to cover every possible yaw.
             for(int cx=(minX-8)>>4;cx<=((maxX+8)>>4);cx++)for(int cz=(minZ-8)>>4;cz<=((maxZ+8)>>4);cz++)
             {
                 if(!RequireData(cx*16+8,cz*16+8,minY))return CargoSweep.Unavailable;
@@ -116,7 +116,7 @@ namespace YFAutomation.CargoDrones
                     var b=block.oversizedBounds;var p=tile.ToWorldPos();double rx=Math.Abs(b.center.x)+b.extents.x,rz=Math.Abs(b.center.z)+b.extents.z;
                     double radius=Math.Sqrt(rx*rx+rz*rz)+.5;
                     if(radius>8)return CargoSweep.Blocked; // unsupported enlarged model, never silently clip it
-                    var forbidden=new CargoBox(new CargoPoint(p.x+.5-radius,p.y+b.min.y-.2,p.z+.5-radius),new CargoPoint(p.x+.5+radius,p.y+b.max.y+.2,p.z+.5+radius));
+                    var forbidden=CargoSourceGeometry.Bounds(world.GetBlock(p),p);
                     if(Hit(forbidden,from,to,"oversized:"+block.GetBlockName()))return CargoSweep.Blocked;
                 }
             }

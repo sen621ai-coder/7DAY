@@ -51,6 +51,7 @@ namespace YFAutomation.CargoDrones
         readonly Dictionary<Guid,GameObject> decks=new Dictionary<Guid,GameObject>();
         readonly Dictionary<Guid,CargoNativeLease> preflight=new Dictionary<Guid,CargoNativeLease>();
         readonly Dictionary<Guid,float> preflightUsed=new Dictionary<Guid,float>();
+        readonly Dictionary<Guid,CargoNativeAirspace> pickupSpaces=new Dictionary<Guid,CargoNativeAirspace>();
         readonly Dictionary<Guid,CargoNativeLease> recoveryLeases=new Dictionary<Guid,CargoNativeLease>();
         bool disposed;
         bool validationOwnerOnline=true;
@@ -141,10 +142,28 @@ namespace YFAutomation.CargoDrones
                 Diagnostics.Write("endpoint-wait",binding.EndpointId,CargoDiagnostics.ChunkState(world,binding.Position)+" hold="+hold+" lease="+(lease==null?"none":lease.State.ToString())+" budget="+leases.HeldChunks);
                 if(hold==CargoHold.None)hold=CargoHold.ChunkLoading;return false;
             }
-            ReleasePreflight(binding.EndpointId);
             var current=ResolveBinding(binding.Position,binding.Owner,CargoRules.IsSource(binding.BlockName));if(!binding.Matches(current)){Diagnostics.Write("endpoint-invalid",binding.EndpointId,CargoDiagnostics.ChunkState(world,binding.Position)+" expectedBlock="+binding.BlockName);return false;}
             var tile=world.GetTileEntity(new Vector3i(binding.Position.X,binding.Position.Y,binding.Position.Z));
-            if(tile.block.isOversized)approach=new CargoPoint(approach.X,binding.Position.Y+Math.Max(2.2,tile.block.oversizedBounds.max.y+1.5),approach.Z);
+            if(tile.block.isOversized)approach=new CargoPoint(approach.X,Math.Max(approach.Y,CargoSourceGeometry.Bounds(world.GetBlock(tile.ToWorldPos()),tile.ToWorldPos()).Max.Y+1.3),approach.Z);
+            if(CargoRules.IsSource(binding.BlockName))
+            {
+                var original=approach;
+                if(!CargoSourceGeometry.TryApproach(world,tile.ToWorldPos(),original,out approach,out hold,detail=>Diagnostics.Write("pickup-reject",binding.EndpointId,detail)))
+                {
+                    if(hold==CargoHold.ChunkLoading)
+                    {
+                        CargoNativeAirspace space;
+                        if(!pickupSpaces.TryGetValue(binding.EndpointId,out space))
+                        {space=new CargoNativeAirspace(world,leases,binding.EndpointId);pickupSpaces.Add(binding.EndpointId,space);}
+                        hold=space.Prepare(original,original);
+                        preflightUsed[binding.EndpointId]=Time.realtimeSinceStartup;
+                        if(hold==CargoHold.None)hold=CargoHold.ChunkLoading;
+                    }
+                    Diagnostics.Write("pickup-clearance",binding.EndpointId,"result=unavailable hold="+hold+" original="+CargoTrace.Point(original));return false;
+                }
+                Diagnostics.Write("pickup-clearance",binding.EndpointId,"result=ready original="+CargoTrace.Point(original)+" selected="+CargoTrace.Point(approach));
+            }
+            ReleasePreflight(binding.EndpointId);
             if(tile.bUserAccessing||LockManager.Instance.IsLockedServer(tile,0)||tile is TileEntityComposite composite&&Logistics.Busy(composite)){hold=CargoHold.ContainerBusy;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=player-or-machine-access "+CargoDiagnostics.ChunkState(world,binding.Position));return false;}
             try{CargoNativeAccessSessions.Register(tile,worldId);}catch(CargoNativeAccessPendingException){hold=CargoHold.ContainerBusy;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=session-registration");return false;}
             if(!CargoNativeAccessSessions.ReadyForCargo(tile)){hold=CargoHold.ContainerBusy;Diagnostics.Write("endpoint-busy",binding.EndpointId,"reason=session-drain");return false;}
@@ -161,7 +180,7 @@ namespace YFAutomation.CargoDrones
         public void ReleaseAirspace(Guid flight)
         {Space space;if(spaces.TryGetValue(flight,out space)){space.Release();spaces.Remove(flight);}}
         void ReleasePreflight(Guid endpoint)
-        {CargoNativeLease lease;if(preflight.TryGetValue(endpoint,out lease)){leases.Release(lease.Id,endpoint);preflight.Remove(endpoint);}preflightUsed.Remove(endpoint);}
+        {CargoNativeAirspace space;if(pickupSpaces.TryGetValue(endpoint,out space)){space.Dispose();pickupSpaces.Remove(endpoint);}CargoNativeLease lease;if(preflight.TryGetValue(endpoint,out lease)){leases.Release(lease.Id,endpoint);preflight.Remove(endpoint);}preflightUsed.Remove(endpoint);}
         public bool ResolveRecovery(CargoHubConfiguration hub,Guid flight,out ICargoDurableEndpoint endpoint)
         {
             Context();endpoint=null;CargoNativeLease lease;CargoHold hold;
@@ -216,7 +235,7 @@ namespace YFAutomation.CargoDrones
         {
             Diagnostics?.Write("stop",worldId,"heldChunks="+leases.HeldChunks+" spaces="+spaces.Count,0);
             if(disposed)return;disposed=true;foreach(var space in spaces.Values)space.Release();spaces.Clear();leases.Dispose();
-            preflight.Clear();preflightUsed.Clear();recoveryLeases.Clear();
+            foreach(var pickup in pickupSpaces.Values)pickup.Dispose();pickupSpaces.Clear();preflight.Clear();preflightUsed.Clear();recoveryLeases.Clear();
             if(Current==this)Current=null;
             foreach(var drone in drones.Values)if(drone!=null)UnityEngine.Object.Destroy(drone.gameObject);foreach(var deck in decks.Values)if(deck!=null)UnityEngine.Object.Destroy(deck);
             drones.Clear();decks.Clear();

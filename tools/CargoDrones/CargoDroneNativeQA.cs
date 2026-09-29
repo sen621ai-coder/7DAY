@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -24,6 +24,8 @@ public sealed class CargoDroneNativeQA : IModApi
     static CargoNativeValidationEndpoint targetEndpoint;
     static CargoPreparedRecovery preparedRecovery;
     static CargoNativeAirspace airspace;
+    static CargoNativeAirspace pickupSpace;
+    static CargoNativeLeaseService pickupLeases;
     static CargoMotion motion;
     static float motionTime;
     static int maxMotionChunks;
@@ -242,6 +244,9 @@ public sealed class CargoDroneNativeQA : IModApi
             {
                 inventoryTransfer.Poll();if(inventoryTransfer.State==CargoTransferState.RecoveryRequired)throw new Exception("Native inventory transaction requires recovery");
                 if(inventoryTransfer.State!=CargoTransferState.Committed)return;
+                if(pickupSpace==null){pickupLeases=new CargoNativeLeaseService(world,49,128);pickupSpace=new CargoNativeAirspace(world,pickupLeases,Guid.NewGuid());}
+                var pickupProbe=new CargoPoint(8.5,234,4.5);
+                if(pickupSpace.Prepare(pickupProbe,pickupProbe)!=CargoHold.None)return;
                 var after=inventoryEndpoint.Snapshot();var tx=inventoryTransfer.Transaction;
                 Check(CargoPlanner.Equal(after.Items,tx.Plan.EndpointAfter)&&after.Revision==inventoryBefore.Revision+1&&inventoryEndpoint.LastTransaction==tx.Id,"real collector inventory and transaction revision match committed after-image");
                 Check(!CargoNativeValidationEndpoint.IsFenced(inventoryCollector),"native endpoint fence releases only after durable transaction commit");
@@ -448,6 +453,7 @@ public sealed class CargoDroneNativeQA : IModApi
         cargoWorld?.Dispose();cargoWorld=null;worldCheckpoints?.Dispose();worldCheckpoints=null;
         if(inventoryJournal!=null){inventoryJournal.Dispose();inventoryJournal=null;}
         if(airspace!=null)airspace.Dispose();
+        pickupSpace?.Dispose();pickupLeases?.Dispose();
         if(leaseService!=null)leaseService.Dispose();
         if(observer!=null&&GameManager.Instance!=null){GameManager.Instance.RemoveChunkObserver(observer);observer=null;}
         lines.Add(error==null?"FINISHED checks="+checks+" failures=0":"FAIL "+error);
@@ -871,6 +877,43 @@ public sealed class CargoDroneNativeQA : IModApi
         Check(iron.Rows.Any(r=>r.Position.Y==config.Position.Y+64)&&!iron.Rows.Any(r=>r.Position.Y==config.Position.Y+65),"native source picker enforces inclusive 3D 64-block collection radius");
         Check(CargoSourceSearch.Find(world,config,"",CargoSourceKind.All,1).Rows.Length>0,"source picker paginates more than eight discovered producers");
     }
+    static void VerifyForestryPickup()
+    {
+        var chunk=inventoryCollector.GetChunk();var at=chunk.GetWorldPos()+new Vector3i(8,230,8);
+        var tree=Block.GetBlockValue("yfAutoForestry",false);
+        var owner=PlatformUserIdentifierAbs.FromPlatformAndId("Steam","76561198000000001",false);
+        Check(world.GetBlock(at).isair,"forestry pickup fixture is empty");
+        chunk.SetBlockRaw(8,230,8,tree);tree.Block.OnBlockAdded(world,chunk,at,tree,owner);
+        try
+        {
+            var box=CargoSourceGeometry.Bounds(tree,at);
+            var nitrate=new CargoPoint(at.x+.5,234,at.z-7+.5);
+            Check(!box.SweptHit(nitrate,nitrate),"nearby nitrate pickup is outside rotated forestry bounds (incident regression)");
+            Check(pickupSpace.Sweep(new CargoPoint(nitrate.X,246,nitrate.Z),nitrate)==CargoSweep.Clear,"native descent reaches nitrate beside forestry without false oversized collision");
+            var initial=new CargoPoint(at.x+.5,234,at.z-4+.5);CargoPoint selected;CargoHold hold;
+            Check(box.SweptHit(initial,initial),"iron pickup fixture overlaps taller forestry at its original height");
+            Check(CargoSourceGeometry.TryApproach(world,new Vector3i(at.x,230,at.z-4),initial,out selected,out hold,detail=>lines.Add("PICKUP "+detail))&&selected.Y==236,
+                "pickup beside forestry raises two blocks to a clear bounded handoff hold="+hold+" selected="+CargoTrace.Point(selected)+" bounds="+CargoTrace.Point(box.Min)+"/"+CargoTrace.Point(box.Max));
+            Check(pickupSpace.Sweep(new CargoPoint(selected.X,246,selected.Z),selected)==CargoSweep.Clear,"native descent reaches raised pickup without clipping forestry");
+            var roof=new Vector3i(at.x,235,at.z-4);var old=world.GetBlock(roof);
+            var stone=Block.GetBlockValue("terrStone",false);
+            Check(!stone.isair&&stone.Block.IsCollideMovement,"pickup roof fixture is a movement-colliding solid block");
+            ((Chunk)world.GetChunkFromWorldPos(roof.x,roof.z)).SetBlockRaw(roof.x&15,roof.y,roof.z&15,stone);
+            try{Check(!CargoSourceGeometry.TryApproach(world,new Vector3i(at.x,230,at.z-4),initial,out selected,out hold,detail=>lines.Add("PICKUP "+detail))&&hold==CargoHold.PathBlocked,
+                "raised pickup cannot transfer through a solid roof");}
+            finally{((Chunk)world.GetChunkFromWorldPos(roof.x,roof.z)).SetBlockRaw(roof.x&15,roof.y,roof.z&15,old);}
+            for(byte r=0;r<24;r++)if(tree.Block.SupportsRotation(r))
+            {
+                tree.rotation=r;var rotated=CargoSourceGeometry.Bounds(tree,at);var b=tree.Block.oversizedBounds;var q=tree.Block.shape.GetRotation(tree);
+                for(int i=0;i<8;i++)
+                {
+                    var p=q*new Vector3((i&1)==0?b.min.x:b.max.x,(i&2)==0?b.min.y:b.max.y,(i&4)==0?b.min.z:b.max.z)+new Vector3(at.x+.5f,at.y,at.z+.5f);
+                    Check(p.x>=rotated.Min.X&&p.x<=rotated.Max.X&&p.y>=rotated.Min.Y&&p.y<=rotated.Max.Y&&p.z>=rotated.Min.Z&&p.z<=rotated.Max.Z,"rotated forestry corner remains protected "+r+":"+i);
+                }
+            }
+        }
+        finally{tree.Block.OnBlockRemoved(world,chunk,at,tree);chunk.SetBlockRaw(8,230,8,BlockValue.Air);}
+    }
     static void VerifyRouterUnload(CargoTransaction load)
     {
         var chunk=inventoryCollector.GetChunk();var local=new Vector3i(7,245,3);var at=chunk.GetWorldPos()+local;
@@ -898,6 +941,8 @@ public sealed class CargoDroneNativeQA : IModApi
     }
     static void StartInventoryUnload(CargoTransaction load)
     {
+        VerifyForestryPickup();
+        pickupSpace.Dispose();pickupSpace=null;pickupLeases.Dispose();pickupLeases=null;
         VerifyRouterUnload(load);
         var chunk=inventoryCollector.GetChunk();var p=new Vector3i(Environment.GetCommandLineArgs().Contains("-yfCargoWorldScheduler")?13:5,150,1);
         Check(chunk.GetTileEntity(p)==null,"native target fixture is empty");
