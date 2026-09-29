@@ -324,6 +324,28 @@ public sealed class SurveillanceVisualQA : IModApi
                 if(Math.Abs(frontBlank[i].r-frontStatus[i].r)+Math.Abs(frontBlank[i].g-frontStatus[i].g)+Math.Abs(frontBlank[i].b-frontStatus[i].b)>45)changedFront++;
             Check(changedFront>8,"Monitor status text missing from front: changed pixels="+changedFront);
             Log.Out("[SurveillanceQA] PASS monitor front status visible; changedPixels="+changedFront);
+            var occluder=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(occluder);occluder.layer=31;
+            occluder.GetComponent<Renderer>().sharedMaterial=body.sharedMaterial;
+            var textMaterial=view.StatusRenderer.sharedMaterial;
+            foreach(bool floor in new[]{false,true})
+            {
+                var centre=view.Surface.bounds.center;
+                var offset=floor?new Vector3(0,4,4):new Vector3(0,0,4);
+                camera.transform.SetPositionAndRotation(centre+offset,Quaternion.LookRotation(-offset));view.FaceViewer(camera);
+                occluder.transform.position=centre+offset*.5f;
+                occluder.transform.localScale=floor?new Vector3(10,.25f,10):new Vector3(10,10,.25f);
+                foreach(bool legacy in new[]{true,false})
+                {
+                    view.StatusRenderer.sharedMaterial=legacy?view.Status.font.material:textMaterial;
+                    view.Show(null,"");var coveredBlank=Snapshot(camera,rt);
+                    view.Show(null,"监控屏无电或已关闭");var coveredText=Snapshot(camera,rt);int leaked=0;
+                    for(int i=0;i<coveredBlank.Length;i++)
+                        if(Math.Abs(coveredBlank[i].r-coveredText[i].r)+Math.Abs(coveredBlank[i].g-coveredText[i].g)+Math.Abs(coveredBlank[i].b-coveredText[i].b)>45)leaked++;
+                    Check(legacy?leaked>8:leaked==0,"Status occlusion floor="+floor+" legacy="+legacy+" leakedPixels="+leaked);
+                    Log.Out("[SurveillanceQA] PASS status occlusion floor="+floor+" legacy="+legacy+" leakedPixels="+leaked);
+                }
+            }
+            occluder.SetActive(false);
             var collider=screen.GetComponent<BoxCollider>();Check(collider!=null&&collider.size.x>3.9&&collider.size.y>2.9,"Screen root collider missing");
             Log.Out("[SurveillanceQA] PASS screen GPU readback black/red/green and full screen collider; shader="+view.Surface.sharedMaterial.shader.name);
             Log.Out("[SurveillanceQA] VISUAL PASS");

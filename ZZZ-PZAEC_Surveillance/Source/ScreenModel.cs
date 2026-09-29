@@ -29,6 +29,7 @@ namespace PZAEC.Surveillance
         static Mesh displayMesh;
         static Texture2D frameTexture;
         static Font statusFont;
+        static Material statusMaterial;
         const float FaceZ=ScreenLayout.FaceZ,LabelZ=ScreenLayout.LabelZ;
 
         static void Materials()
@@ -53,6 +54,26 @@ namespace PZAEC.Surveillance
         }
         static void SetImage(Material material,Texture texture)
         {material.mainTexture=texture;material.SetTexture("_EmissionMap",texture);}
+        static void RefreshStatusAtlas(Font font)
+        {
+            if(font==statusFont&&statusMaterial!=null)statusMaterial.mainTexture=font.material.mainTexture;
+        }
+        static Material StatusMaterial()
+        {
+            if(statusMaterial==null)
+            {
+                // Font atlases supply glyph coverage in alpha, not coloured RGB.
+                // Clip the atlas alpha and emit the fixed status colour. Standard
+                // performs normal depth testing/writes against world geometry.
+                statusMaterial=new Material(off){name="Surveillance occluded status",renderQueue=2450};
+                statusMaterial.SetFloat("_Mode",1);statusMaterial.SetFloat("_Cutoff",.25f);
+                statusMaterial.EnableKeyword("_ALPHATEST_ON");statusMaterial.SetOverrideTag("RenderType","TransparentCutout");
+                statusMaterial.SetTexture("_EmissionMap",Texture2D.whiteTexture);
+                statusMaterial.SetColor("_EmissionColor",new Color(.68f,.84f,.92f));
+                Font.textureRebuilt+=RefreshStatusAtlas;
+            }
+            RefreshStatusAtlas(statusFont);return statusMaterial;
+        }
         static Mesh DisplayMesh(Mesh original)
         {
             if(displayMesh!=null)return displayMesh;
@@ -99,7 +120,7 @@ namespace PZAEC.Surveillance
             Status.font=statusFont;
             Status.fontSize=64;Status.characterSize=.035f;Status.color=new Color(.68f,.84f,.92f);Status.gameObject.layer=colliderLayer;
             var textRenderer=Status.GetComponent<MeshRenderer>();textRenderer.shadowCastingMode=ShadowCastingMode.Off;textRenderer.receiveShadows=false;
-            if(statusFont!=null)textRenderer.sharedMaterial=statusFont.material;
+            if(statusFont!=null)textRenderer.sharedMaterial=StatusMaterial();
         }
         public void Bind(WorldBase world,Vector3i position)
         {
@@ -142,8 +163,7 @@ namespace PZAEC.Surveillance
                 Status.gameObject.SetActive(!string.IsNullOrEmpty(text));
             }
         }
-        // The game's font shader can draw through world geometry. Keep status text
-        // visible only from the physical front of this wall-mounted monitor.
+        // In addition to material depth testing, keep text hidden from the rear.
         public void FaceViewer(Camera viewer)
         {
             var label=StatusRenderer;
