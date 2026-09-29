@@ -124,6 +124,7 @@ public class BlockPowered
     public virtual void Init(){}public virtual TileEntityPowered CreateTileEntity(Chunk c)=>null;public string GetBlockName()=>"screen";
     public virtual void OnBlockAdded(WorldBase w,Chunk c,Vector3i p,BlockValue v,PlatformUserIdentifierAbs a){}
     public virtual void OnBlockRemoved(WorldBase w,Chunk c,Vector3i p,BlockValue v){}
+    public virtual void OnBlockStartsToFall(WorldBase w,Vector3i p,BlockValue v){}
     public virtual BlockActivationCommand[] GetBlockActivationCommands(WorldBase w,BlockValue v,Vector3i p,EntityAlive e)=>new[]{new BlockActivationCommand("take","hand",true)};
     public virtual string GetActivationText(WorldBase w,BlockValue v,Vector3i p,EntityAlive e)=>"";
     public virtual bool OnBlockActivated(WorldBase w,Vector3i p,BlockValue v,EntityPlayerLocal e)=>false;
@@ -132,6 +133,7 @@ public class BlockPowered
 }
 namespace PZAEC.Surveillance
 {
+    public static class ScreenLifecycle{public static void Placed(WorldBase w,Vector3i p,BlockValue v){}public static void Removed(WorldBase w,Vector3i p,BlockValue v){}public static void Falling(WorldBase w,Vector3i p,BlockValue v){}}
     public static class SurveillanceState{public static void Register(Vector3i p,string n,string a){}public static void Broadcast(){}public static void Remove(Vector3i p,string n){}}
     public static class SurveillanceMenu{public static Vector3i Opened;public static void Open(Vector3i p,EntityPlayerLocal e){Opened=p;}}
     public class ScreenView{public void Bind(WorldBase w,Vector3i p){}}

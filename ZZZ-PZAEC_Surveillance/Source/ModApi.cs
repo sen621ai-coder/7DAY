@@ -18,7 +18,7 @@ namespace PZAEC.Surveillance
             ModEvents.GameUpdate.RegisterHandler(Update);
             ModEvents.WorldShuttingDown.RegisterHandler(Stopping);
             ModEvents.GameShutdown.RegisterHandler(Stopped);
-            Log.Out("[Surveillance] v1.0.5 wireless cameras and 4x3 live monitor loaded.");
+            Log.Out("[Surveillance] v1.0.8 wireless cameras and 4x3 live monitor loaded.");
         }
         public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
         {
@@ -34,8 +34,14 @@ namespace PZAEC.Surveillance
         }
         public static void BeforePoolDestroy(GameObject __0)
         {
-            var view=__0==null?null:__0.GetComponent<ScreenView>();if(view==null)return;view.Retiring=true;
-            foreach(var renderer in __0.GetComponentsInChildren<Renderer>(true))renderer.sharedMaterials=new Material[0];
+            if(__0==null)return;
+            // ItemClassBlock.CreateMesh wraps CloneModel in another GameObject. The pool
+            // receives that wrapper on tool changes, not necessarily the ScreenView root.
+            foreach(var view in __0.GetComponentsInChildren<ScreenView>(true))
+            {
+                view.Retiring=true;
+                foreach(var renderer in view.GetComponentsInChildren<Renderer>(true))renderer.sharedMaterials=new Material[0];
+            }
         }
         static void Start(ref ModEvents.SGameStartDoneData data)
         {
@@ -82,11 +88,18 @@ public sealed class BlockPZAEC_SurveillanceScreen : BlockPowered
     {
         base.OnBlockAdded(world,chunk,position,value,addedBy);
         if(value.ischild)return;
+        PZAEC.Surveillance.ScreenLifecycle.Placed(world,position,value);
         if(!world.IsRemote()){PZAEC.Surveillance.SurveillanceState.Register(position,GetBlockName(),addedBy?.CombinedString??"");PZAEC.Surveillance.SurveillanceState.Broadcast();}
     }
     public override void OnBlockRemoved(WorldBase world,Chunk chunk,Vector3i position,BlockValue value)
     {
+        PZAEC.Surveillance.ScreenLifecycle.Removed(world,position,value);
         Vector3i parent=Parent(position,value);PZAEC.Surveillance.SurveillanceState.Remove(parent,GetBlockName());base.OnBlockRemoved(world,chunk,position,value);
+    }
+    public override void OnBlockStartsToFall(WorldBase world,Vector3i position,BlockValue value)
+    {
+        PZAEC.Surveillance.ScreenLifecycle.Falling(world,position,value);
+        base.OnBlockStartsToFall(world,position,value);
     }
     static Vector3i Parent(Vector3i position,BlockValue value)=>value.ischild?value.Block.multiBlockPos.GetParentPos(position,value):position;
     public override BlockActivationCommand[] GetBlockActivationCommands(WorldBase world,BlockValue value,Vector3i position,EntityAlive focusing)

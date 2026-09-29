@@ -16,7 +16,7 @@ if((Property $camera 'RequiredPower') -ne '5'){throw 'Camera power mismatch'}
 if((Property $screen 'Class') -ne 'PZAEC_SurveillanceScreen,PZAEC.Surveillance'){throw 'Screen runtime class binding mismatch'}
 if((Property $camera 'Class') -ne 'PZAEC_SurveillanceCamera,PZAEC.Surveillance'){throw 'Camera runtime class binding mismatch'}
 if(@($recipes.configs.append.recipe).Count -ne 2){throw 'Recipe count mismatch'}
-if($info.xml.Version.value -ne '1.0.5'){throw 'ModInfo version mismatch'}
+if($info.xml.Version.value -ne '1.0.8'){throw 'ModInfo version mismatch'}
 $dll=Join-Path $mod 'PZAEC.Surveillance.dll';if(!(Test-Path $dll)){throw 'Compiled DLL missing'}
 $source=Get-Content (Join-Path $mod 'Source/SurveillanceState.cs') -Raw
 if($source -notmatch 'WirelessRange=128f'){throw 'Wireless range contract missing'}
@@ -30,6 +30,8 @@ if($protocol -notmatch 'NetPackagePZSurveillanceResult'){throw 'Server configura
 & (Join-Path $PSScriptRoot 'Test-Markers.ps1')
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-ScreenRepair.ps1')
 if($LASTEXITCODE -ne 0){throw 'Screen placement/interaction regression tests failed'}
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-PreviewLifetime.ps1')
+if($LASTEXITCODE -ne 0){throw 'Preview resource lifetime tests failed'}
 # The state harness uses replacement world/network types; isolate it from the main process.
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-MarkerState.ps1')
 if($LASTEXITCODE -ne 0){throw 'Marker state/network tests failed'}

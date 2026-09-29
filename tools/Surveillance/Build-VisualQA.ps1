@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param([Parameter(Mandatory)][string]$OutputDirectory)
+param([Parameter(Mandatory)][string]$OutputDirectory,[string]$SourceFile='VisualGameQA.cs')
 $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path $PSScriptRoot)
 $managed=Join-Path (Split-Path $root) '7DaysToDie_Data/Managed'
@@ -16,5 +16,5 @@ public static class SurveillanceQACompiler {
 '@
 New-Item -ItemType Directory -Force $OutputDirectory|Out-Null
 $refs=@(Get-ChildItem $managed -Filter '*.dll'|ForEach-Object FullName)+(Join-Path $root '0_TFP_Harmony/0Harmony.dll')+(Join-Path $root 'ZZZ-PZAEC_Surveillance/PZAEC.Surveillance.dll')
-[SurveillanceQACompiler]::Build((Join-Path $PSScriptRoot 'VisualGameQA.cs'),$refs,(Join-Path $OutputDirectory 'PZAEC.Surveillance.VisualQA.dll'))
+[SurveillanceQACompiler]::Build((Join-Path $PSScriptRoot $SourceFile),$refs,(Join-Path $OutputDirectory 'PZAEC.Surveillance.VisualQA.dll'))
 [IO.File]::WriteAllText((Join-Path $OutputDirectory 'ModInfo.xml'),'<xml><Name value="Surveillance_VisualQA"/><DisplayName value="Surveillance Visual QA"/><Description value="Isolated rendering regression"/><Author value="PZAEC"/><Version value="1.0.0"/></xml>')

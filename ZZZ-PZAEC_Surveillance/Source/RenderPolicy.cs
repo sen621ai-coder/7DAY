@@ -10,11 +10,17 @@ namespace PZAEC.Surveillance
         public int Failures;
         public void Success(double now,int hz){LastSuccess=now;Due=now+1d/hz;Failures=0;}
         public void Failure(double now){Failures++;Due=now+(Failures==1?.1:Failures==2?.25:.5);}
-        public bool Fresh(double now)=>LastSuccess>=0&&now-LastSuccess<=.5;
+        public bool Fresh(double now,int hz)=>LastSuccess>=0&&now-LastSuccess<=Math.Max(.5,1.5d/Math.Max(1,hz));
     }
     public static class RenderPolicy
     {
         public const int MaxActive=4,MaxIdle=4;
+        public const float NearDistance=12f;
+        public const int DistantHz=2;
+        public static bool IsDistant(float distance)=>distance>NearDistance;
+        public static int TierForDistance(int tier,float distance)=>IsDistant(distance)?0:tier;
+        public static int RateForDistance(int count,bool focused,bool anyFocus,int pressure,bool hasNearViewer)
+        {return hasNearViewer?Rate(count,focused,anyFocus,pressure):DistantHz;}
         public static int Rate(int count,bool focused,bool anyFocus,int pressure)
         {return pressure>=3?5:count<=2?10:anyFocus?(focused?10:5):6;}
         public static int Tier(float height,int previous)
@@ -49,13 +55,15 @@ namespace PZAEC.Surveillance
     }
     public sealed class ViewGate
     {
+        public const double LeaveGraceSeconds=.85;
+        public const float EnterDistance=48f,ExitDistance=52f;
         public bool Watching;
         double seen=-100;
         public bool Update(float distance,bool visible,double now)
         {
-            if(distance>(Watching?10:8)){Watching=false;return false;}
+            if(distance>(Watching?ExitDistance:EnterDistance)){Watching=false;return false;}
             if(visible){seen=now;Watching=true;}
-            if(now-seen>.2)Watching=false;
+            if(now-seen>LeaveGraceSeconds)Watching=false;
             return Watching;
         }
     }

@@ -25,18 +25,34 @@ public static class SurveillancePolicyTests
         }
         Console.WriteLine("PASS schedule "+fps+" FPS focus="+focus+" counts="+string.Join(",",counts));
     }
+    static void RunMixedDistanceSchedule()
+    {
+        var clocks=new[]{new FeedClock(),new FeedClock(),new FeedClock(),new FeedClock()};
+        var counts=new int[4];
+        for(int frame=0;frame<30*30;frame++)
+        {
+            double now=frame/30d;int chosen=RenderPolicy.Pick(clocks,now);
+            if(chosen<0)continue;
+            int hz=RenderPolicy.RateForDistance(4,chosen==0,true,0,chosen==0);
+            clocks[chosen].Success(now,hz);counts[chosen]++;
+        }
+        Assert(counts[0]>=260,"Near focused feed lost responsiveness to distant feeds");
+        for(int i=1;i<4;i++)Assert(counts[i]>=57,"Distant feed stopped updating: "+i);
+        Console.WriteLine("PASS mixed distance schedule counts="+string.Join(",",counts));
+    }
     public static void Run()
     {
         Assert(RenderPolicy.MaxActive==4&&RenderPolicy.MaxIdle==4,"Stream limits");
         Assert(RenderPolicy.Width(2)==768&&RenderPolicy.Width(1)==512&&RenderPolicy.Width(0)==384,"Resolution tiers");
-        RunSchedule(60,true);RunSchedule(30,true);RunSchedule(30,false);RunSchedule(15,false);
+        RunSchedule(60,true);RunSchedule(30,true);RunSchedule(30,false);RunSchedule(15,false);RunMixedDistanceSchedule();
         var early=new FeedClock{Due=10};var late=new FeedClock{Due=1};
         Assert(RenderPolicy.Pick(new[]{early,late},2)==1,"Head-of-line waiting blocks ready feed");
         var broken=new FeedClock();broken.Failure(0);Assert(RenderPolicy.Pick(new[]{broken},.05)<0,"Failure backoff missing");
         broken.Failure(.1);Assert(Math.Abs(broken.Due-.35)<.00001,"Second retry delay");
         broken.Failure(.35);Assert(Math.Abs(broken.Due-.85)<.00001,"Third retry delay");
-        Assert(!broken.Fresh(0),"Uninitialized texture considered valid");broken.Success(1,5);
-        Assert(broken.Fresh(1.49)&&!broken.Fresh(1.501),"Stale frame boundary");
+        Assert(!broken.Fresh(0,5),"Uninitialized texture considered valid");broken.Success(1,5);
+        Assert(broken.Fresh(1.49,5)&&!broken.Fresh(1.501,5),"Stale frame boundary");
+        Assert(broken.Fresh(1.74,2)&&!broken.Fresh(1.751,2),"Low-Hz freshness boundary");
         var mixed=new List<FeedClock>{new FeedClock(),new FeedClock(),new FeedClock(),new FeedClock()};int[] served=new int[4];
         for(int frame=0;frame<1800;frame++)
         {
@@ -46,10 +62,13 @@ public static class SurveillancePolicyTests
             if(i==1)mixed[i].Failure(now);else{mixed[i].Success(now,5);served[i]++;}
         }
         Assert(served[2]>130&&served[3]>130,"Channel churn or failures starve healthy peers");
-        var gate=new ViewGate();Assert(!gate.Update(9,true,0),"9m enters without 8m activation");
-        Assert(gate.Update(7,true,.1)&&gate.Update(9,true,.2),"Distance hysteresis");
-        Assert(gate.Update(9,false,.3)&&!gate.Update(9,false,.401),"Visibility grace");
-        Assert(gate.Update(7,true,.402),"Wake waits unnecessarily");Assert(!gate.Update(11,true,.403),"Range exit");
+        var gate=new ViewGate();Assert(!gate.Update(49,true,0),"49m enters without 48m activation");
+        Assert(gate.Update(32,true,.1)&&gate.Update(50,true,.2),"Far-screen distance hysteresis");
+        Assert(gate.Update(50,false,.3)&&gate.Update(50,false,1.04)&&!gate.Update(50,false,1.06),"Visibility grace");
+        Assert(gate.Update(24,true,1.061),"Far-screen wake waits unnecessarily");Assert(!gate.Update(53,true,1.062),"Range exit");
+        Assert(RenderPolicy.IsDistant(24)&&!RenderPolicy.IsDistant(12),"Near/far split");
+        Assert(RenderPolicy.TierForDistance(2,24)==0&&RenderPolicy.TierForDistance(2,8)==2,"Far-screen resolution");
+        Assert(RenderPolicy.RateForDistance(4,true,true,0,false)==2&&RenderPolicy.RateForDistance(4,true,true,0,true)==10,"Far-screen refresh rate");
         Assert(RenderPolicy.Tier(460,2)==2&&RenderPolicy.Tier(410,1)==1,"Resolution threshold flapping");
         var quality=new QualityGate();Assert(quality.Update(2,0)==2,"Initial quality");
         Assert(quality.Update(0,.1)==2&&quality.Update(0,1)==2,"Immediate downgrade");

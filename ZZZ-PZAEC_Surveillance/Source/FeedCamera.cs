@@ -31,7 +31,18 @@ namespace PZAEC.Surveillance
         public static void Follow(Camera camera,Transform mount)
         {
             if(camera==null||mount==null)throw new InvalidOperationException("Camera mount unloaded");
-            camera.transform.SetPositionAndRotation(mount.position,mount.rotation);
+            // The sensor cone can roll with the block/model hierarchy. Keep its aim,
+            // but level the video horizon against the world's vertical axis.
+            var forward=mount.forward;
+            var up=Vector3.up;
+            if(Mathf.Abs(Vector3.Dot(forward,up))>.995f)
+            {
+                // Looking almost straight up/down has no stable world-up projection.
+                // Retain the mount's local up there, so LookRotation stays defined.
+                up=Vector3.ProjectOnPlane(mount.up,forward);
+                if(up.sqrMagnitude<.0001f)up=Vector3.ProjectOnPlane(mount.right,forward);
+            }
+            camera.transform.SetPositionAndRotation(mount.position,Quaternion.LookRotation(forward,up));
             if(!camera.gameObject.activeInHierarchy)throw new InvalidOperationException("Video camera is inactive");
         }
     }

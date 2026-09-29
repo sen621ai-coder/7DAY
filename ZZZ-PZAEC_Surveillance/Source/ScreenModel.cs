@@ -26,6 +26,7 @@ namespace PZAEC.Surveillance
         int cycleChannel;
         float cycleAt;
         static Material frame,off;
+        static Mesh displayMesh;
         static Texture2D frameTexture;
         static Font statusFont;
         const float FaceZ=ScreenLayout.FaceZ,LabelZ=ScreenLayout.LabelZ;
@@ -54,6 +55,22 @@ namespace PZAEC.Surveillance
             frame=new Material(off){name="Surveillance charcoal frame",mainTexture=frameTexture};
             Log.Out("[Surveillance] Monitor shader="+off.shader.name+"; graphics="+SystemInfo.graphicsDeviceType);
         }
+        static Mesh DisplayMesh(Mesh original)
+        {
+            if(displayMesh!=null)return displayMesh;
+            // Keep Unity's tested cube geometry. The native renderer samples the
+            // cube's -Z triangle set on the visible panel; its V is inverted.
+            displayMesh=UnityEngine.Object.Instantiate(original);displayMesh.name="Surveillance display cube";
+            var positions=displayMesh.vertices;var normals=displayMesh.normals;var uv=displayMesh.uv;
+            bool front=false;
+            for(int i=0;i<positions.Length;i++)
+            {
+                if(normals[i].z>.9f){uv[i]=new Vector2(positions[i].x+.5f,positions[i].y+.5f);front=true;}
+                else if(normals[i].z<-.9f)uv[i].y=1f-uv[i].y;
+            }
+            if(!front)throw new InvalidOperationException("Display cube has no front UVs");
+            displayMesh.uv=uv;return displayMesh;
+        }
         GameObject Box(string name,Vector3 position,Vector3 scale,Material material,bool collider=false)
         {
             var g=GameObject.CreatePrimitive(PrimitiveType.Cube);g.name=name;g.layer=colliderLayer;g.tag=colliderTag;g.transform.SetParent(transform,false);
@@ -75,6 +92,7 @@ namespace PZAEC.Surveillance
             // Back sits 1 cm inside the rear cell boundary; a full-block wall can touch it.
             Box("MonitorBody",hit.center,hit.size,frame);
             var face=Box("LiveDisplay",new Vector3(-.5f,1.5f,FaceZ),new Vector3(3.68f,2.76f,.018f),off);
+            var filter=face.GetComponent<MeshFilter>();filter.sharedMesh=DisplayMesh(filter.sharedMesh);
             Surface=face.GetComponent<Renderer>();Surface.shadowCastingMode=ShadowCastingMode.Off;Surface.receiveShadows=false;
             var label=new GameObject("MonitorStatus");label.transform.SetParent(transform,false);label.transform.localPosition=new Vector3(-.5f,1.5f,LabelZ);
             label.transform.localRotation=Quaternion.Euler(0,180,0);
@@ -125,6 +143,20 @@ namespace PZAEC.Surveillance
                 Status.transform.localPosition=texture==null?new Vector3(-.5f,1.5f,LabelZ):new Vector3(-.5f,2.78f,LabelZ);
                 Status.gameObject.SetActive(!string.IsNullOrEmpty(text));
             }
+        }
+        // The game's font shader can draw through world geometry. Keep status text
+        // visible only from the physical front of this wall-mounted monitor.
+        public void FaceViewer(Camera viewer)
+        {
+            var label=StatusRenderer;
+            if(viewer==null||Surface==null||label==null)return;
+            var face=Surface.transform;
+            label.enabled=Vector3.Dot(face.forward,viewer.transform.position-face.position)>0;
+        }
+        void LateUpdate()
+        {
+            var player=GameManager.Instance?.World?.GetPrimaryPlayer();
+            FaceViewer(player==null?null:player.playerCamera);
         }
         public void ShowMarkers(TargetMarkerDetector detector,int width,int height)
         {
