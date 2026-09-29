@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,14 +49,26 @@ namespace YFAutomation
    if(GameManager.Instance?.World!=world||world==null||world.IsRemote()||world.Players.Count==0||GameManager.Instance.IsPaused()||Time.realtimeSinceStartup<next)return;next=Time.realtimeSinceStartup+1;
    foreach(var p in belts.ToArray())if(world.GetTileEntity(p.Key)!=p.Value||p.Value.IsRemoving){belts.Remove(p.Key);mergeTurns.Remove(p.Value);}
    foreach(var t in mergeTurns.Keys.ToArray())if(world.GetTileEntity(t.ToWorldPos())!=t||t.IsRemoving)mergeTurns.Remove(t);
-   // Same-chunk transactions share the existing native chunk serialization gate.
-   foreach(var group in belts.Values.GroupBy(t=>world.GetChunkFromWorldPos(t.ToWorldPos()) as Chunk)){
-    var chunk=group.Key;if(chunk==null||chunk.IsLocked)continue;
-    try{lock(ChunkTransferLock.For(chunk))Step(group.OrderBy(t=>t.ToWorldPos().x).ThenBy(t=>t.ToWorldPos().y).ThenBy(t=>t.ToWorldPos().z).ToArray());}
-    catch(Exception ex){Log.Error("[YFAutomation] conveyor tick paused: "+ex);}
-   }
+   try{Step(belts.Values.OrderBy(t=>t.ToWorldPos().x).ThenBy(t=>t.ToWorldPos().y).ThenBy(t=>t.ToWorldPos().z).ToArray());}
+   catch(Exception ex){Log.Error("[YFAutomation] conveyor tick paused: "+ex);}
   }
   static void Step(TileEntityComposite[] nodes){
+   // Include machine/box endpoints as well as belts. Take all serialization gates
+   // before reading inventory; TryEnter avoids lock-order deadlocks with native saves.
+   var positions=new HashSet<Vector3i>();
+   foreach(var b in nodes){positions.Add(b.ToWorldPos());positions.Add(Exit(b));positions.Add(Entry(b));
+    if(ConveyorPath.IsMerge(b.block.GetBlockName())){positions.Add(MergeEntry(b,0));positions.Add(MergeEntry(b,1));}}
+   var chunks=positions.OrderBy(p=>p.x>>4).ThenBy(p=>p.z>>4)
+    .Select(p=>world.GetChunkFromWorldPos(p) as Chunk).Where(c=>c!=null).Distinct().ToArray();
+   var gates=new List<object>();
+   try{
+    foreach(var chunk in chunks){if(chunk.IsLocked)return;var gate=ChunkTransferLock.For(chunk);
+     if(!System.Threading.Monitor.TryEnter(gate))return;gates.Add(gate);}
+    if(chunks.Any(c=>c.IsLocked)||nodes.Any(t=>world.GetTileEntity(t.ToWorldPos())!=t||t.IsRemoving))return;
+    StepLocked(nodes,new HashSet<Chunk>(chunks));
+   }finally{for(int i=gates.Count-1;i>=0;i--)System.Threading.Monitor.Exit(gates[i]);}
+  }
+  static void StepLocked(TileEntityComposite[] nodes,HashSet<Chunk> chunks){
    var map=nodes.ToDictionary(t=>t.ToWorldPos());var powered=new HashSet<TileEntityComposite>();var seen=new HashSet<TileEntityComposite>();
    foreach(var root in nodes){if(seen.Contains(root))continue;var members=new List<TileEntityComposite>();var q=new Queue<TileEntityComposite>();q.Enqueue(root);seen.Add(root);bool power=false;
     while(q.Count>0){var b=q.Dequeue();members.Add(b);power|=Logistics.Powered(world,b.ToWorldPos());foreach(var n in nodes)if(!seen.Contains(n)&&(Matches(b,n)||Matches(n,b))){seen.Add(n);q.Enqueue(n);}}
@@ -64,7 +76,7 @@ namespace YFAutomation
    }
    var working=new Dictionary<TileEntityComposite,ItemStack[]>();var changed=new HashSet<TileEntityComposite>();var moved=new HashSet<TileEntityComposite>();
    Func<TileEntityComposite,ItemStack[]> inventory=t=>{ItemStack[] a;if(!working.TryGetValue(t,out a)){a=ProductionInventory.Clone(t.GetFeature<TEFeatureStorage>().items);working[t]=a;}return a;};
-   Func<TileEntityComposite,TileEntityComposite,bool> allowed=(a,b)=>b!=null&&!b.IsRemoving&&TransferRules.SameOwner(Owner(a),Owner(b))&&TransferRules.SameChunk(a.ToWorldPos().x,a.ToWorldPos().z,b.ToWorldPos().x,b.ToWorldPos().z)&&!Logistics.Busy(b)&&b.GetFeature<TEFeatureStorage>()!=null;
+   Func<TileEntityComposite,TileEntityComposite,bool> allowed=(a,b)=>b!=null&&!b.IsRemoving&&TransferRules.SameOwner(Owner(a),Owner(b))&&chunks.Contains(world.GetChunkFromWorldPos(b.ToWorldPos()) as Chunk)&&!Logistics.Busy(b)&&b.GetFeature<TEFeatureStorage>()!=null;
    var budget=nodes.ToDictionary(t=>t,t=>t.GetFeature<TEFeatureStorage>().items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count));
    foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b)||budget[b]==0)continue;var target=world.GetTileEntity(Exit(b)) as TileEntityComposite;if(!allowed(b,target))continue;
     bool belt=ConveyorPath.IsBelt(target.block.GetBlockName());string kind=target.block.GetBlockName();if(belt&&(!map.ContainsKey(target.ToWorldPos())||!Matches(b,target)||!powered.Contains(target)))continue;bool machine=MachineInventory.UsesInternal(target);if(!belt&&!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
@@ -94,7 +106,7 @@ namespace YFAutomation
     if(count>0){changed.Add(source);changed.Add(b);moved.Add(b);}
    }
    // Abort the entire detached batch before publishing either side of any transfer.
-   if(changed.Any(t=>world.GetTileEntity(t.ToWorldPos())!=t||Logistics.Busy(t)))return;
+   if(changed.Any(t=>world.GetTileEntity(t.ToWorldPos())!=t||Logistics.Busy(t)||!(world.GetChunkFromWorldPos(t.ToWorldPos()) is Chunk c)||c.IsLocked||!chunks.Contains(c)))return;
    foreach(var t in changed){var s=t.GetFeature<TEFeatureStorage>();Array.Copy(working[t],s.items,s.items.Length);t.SetChunkModified();}
    foreach(var t in changed)t.SetModified();
    foreach(var b in nodes){if(Logistics.Busy(b))continue;var state=b.GetFeature<TEFeatureAutomationState>();if(state==null)continue;string status=!powered.Contains(b)?"缺电/线路超过32段":moved.Contains(b)?"运输中":"等待物品/出口堵塞";if(state.Job!=status||moved.Contains(b)){state.Job=status;state.Seconds+=1;b.SetChunkModified();b.SetModified();}}

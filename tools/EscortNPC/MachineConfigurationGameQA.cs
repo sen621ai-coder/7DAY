@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -45,6 +45,47 @@ public sealed class MachineConfigurationGameQA : IModApi
         world.SetBlockRPC(new BlockValueRef(p),Block.GetBlockValue(name));var t=world.GetTileEntity(p) as TileEntityComposite;
         Check(t!=null,"place "+name);t.SetOwner(owner);return t;
     }
+    static void CrossChunkConveyors(PlatformUserIdentifierAbs owner)
+    {
+        var step=AccessTools.Method(typeof(Conveyors),"Step");
+        foreach(int edge in new[]{0,16})foreach(bool alongX in new[]{false,true})
+        {
+            Func<int,Vector3i> at=i=>alongX?new Vector3i(edge+i,180,8):new Vector3i(8,180,edge+i);
+            Func<string,int,TileEntityComposite> place=(name,i)=>{
+                var tile=Place(name,at(i),owner);
+                if(ConveyorPath.IsBelt(name)){
+                    var v=world.GetBlock(at(i));var dir=alongX?new Vector3i(1,0,0):new Vector3i(0,0,1);
+                    for(byte r=0;r<24;r++){v.rotation=r;if(v.Block.SupportsRotation(r)&&ConveyorPath.Offset(v,Vector3.forward)==dir)break;}
+                    world.SetBlockRPC(new BlockValueRef(at(i)),v);tile=(TileEntityComposite)world.GetTileEntity(at(i));tile.SetOwner(owner);
+                }
+                var store=tile.GetFeature<TEFeatureStorage>();for(int j=0;j<store.items.Length;j++)store.items[j]=ItemStack.Empty;
+                return tile;
+            };
+            var input=place("yfAutoInput",-2);var a=place("yfAutoBeltStraight",-1);var b=place("yfAutoBeltStraight",0);var output=place("yfAutoOutput",1);
+            var pp=at(-3)+new Vector3i(0,0,alongX?1:0)+(alongX?Vector3i.zero:new Vector3i(1,0,0));
+            world.SetBlockRPC(new BlockValueRef(pp),Block.GetBlockValue("yfAutoPowerPort"));var port=world.GetTileEntity(pp) as TileEntityPowered;
+            if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(pp);port=((BlockPowered)world.GetBlock(pp).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(pp);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
+            Func<TileEntityComposite,TEFeatureStorage> storeOf=t=>t.GetFeature<TEFeatureStorage>();
+            Func<TileEntityComposite,int> count=t=>storeOf(t).items.Sum(v=>v.count);
+            var nodes=new[]{a,b};foreach(var t in nodes)Conveyors.Observe(t,world);
+            Action tick=()=>step.Invoke(null,new object[]{nodes});
+            storeOf(a).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);
+            b.bUserAccessing=true;tick();Check(count(a)==16&&count(b)==0,"cross boundary open receiver preserves cargo");b.bUserAccessing=false;
+            storeOf(b).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);output.bUserAccessing=true;
+            tick();Check(count(a)==16&&count(b)==16,"cross boundary full receiver preserves cargo");
+            storeOf(b).items[0]=ItemStack.Empty;output.bUserAccessing=false;tick();
+            Check(count(a)==0&&count(b)==16&&count(output)==0,"cross boundary advances exactly one segment edge="+edge+" x="+alongX);
+            tick();Check(count(output)==16&&count(a)==0&&count(b)==0,"cross boundary delivers exactly once");
+            // Endpoint on the other side of the boundary, without a receiving belt.
+            output=place("yfAutoOutput",0);nodes=new[]{a};storeOf(a).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),7);tick();
+            Check(count(a)==0&&count(output)==7,"cross boundary direct box endpoint");
+            input=place("yfAutoInput",-1);b=place("yfAutoBeltStraight",0);nodes=new[]{b};Conveyors.Observe(b,world);
+            storeOf(input).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),9);tick();
+            Check(count(input)==0&&count(b)==9,"cross boundary box pickup");
+            foreach(int i in new[]{-2,-1,0,1})world.SetBlockRPC(new BlockValueRef(at(i)),BlockValue.Air);
+            world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
+        }
+    }
     static void Run()
     {
         var wires=WireManager.Instance;
@@ -61,6 +102,7 @@ public sealed class MachineConfigurationGameQA : IModApi
         wires.ReturnToPool(wire);
         Check(!wire.GetGameObject().activeSelf&&!wires.activeWires.Contains(wire),"removed wire stays hidden in native pool");
         var owner=PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000001",false);
+        CrossChunkConveyors(owner);
         world.SetBlockRPC(new BlockValueRef(6,160,8),BlockValue.Air);
         var existing=world.GetTileEntity(new Vector3i(8,160,8)) as TileEntityComposite;
         if(existing!=null){var saved=MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.FirstOrDefault(s=>s.Position=="8,160,8");if(saved!=null)Check(MachineConfiguration.Get(existing).Product==saved.Product,"server reload restores persisted machine configuration");}
