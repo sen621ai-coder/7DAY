@@ -66,12 +66,25 @@ namespace YFAutomation.CargoDrones
         public static void AttachHub(TileEntityComposite __instance,BlockEntityData __0)
         {
             if(GameManager.IsDedicatedServer||__0?.transform==null||__instance.block.GetBlockName()!=CargoRuntime.HubBlock)return;
-            var root=__0.transform;if(root.Find("CargoHub")!=null)return;
-            foreach(var renderer in root.GetComponentsInChildren<Renderer>())renderer.enabled=false;
-            var model=CargoDroneModel.Hub();model.transform.SetParent(root,false);
-            var p=__instance.ToWorldPos();model.transform.position=new Vector3(p.x+.5f,p.y,p.z+.5f)-Origin.position;
-            var collider=model.AddComponent<BoxCollider>();collider.center=new Vector3(0,.5f,0);collider.size=new Vector3(1.94f,1,1.94f);
+            var p=__instance.ToWorldPos();EnsureHubModel(__0.transform,new Vector3(p.x+.5f,p.y,p.z+.5f)-Origin.position);
+        }
+        public static GameObject EnsureHubModel(Transform root,Vector3 position)
+        {
+            var existing=root.Find("CargoHub");
+            var model=existing!=null?existing.gameObject:CargoDroneModel.Hub();
+            if(existing==null)
+            {
+                model.transform.SetParent(root,false);
+                var collider=model.AddComponent<BoxCollider>();collider.center=new Vector3(0,.5f,0);collider.size=new Vector3(1.94f,1,1.94f);
+            }
+            model.transform.position=position;
+            // LOD controllers can re-enable Renderer.enabled. Suppress rendering
+            // independently, including inactive LODs, on every native reattach.
+            // Keep the native hierarchy and colliders for normal interaction.
+            foreach(var renderer in root.GetComponentsInChildren<Renderer>(true))
+                if(!renderer.transform.IsChildOf(model.transform)){renderer.enabled=false;renderer.forceRenderingOff=true;}
             MachineDisplay.BindInteraction(root);
+            return model;
         }
     }
     public sealed class NetPackageYFCargoVisual : NetPackage

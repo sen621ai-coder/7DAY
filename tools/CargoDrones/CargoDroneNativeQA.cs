@@ -63,6 +63,7 @@ public sealed class CargoDroneNativeQA : IModApi
             CargoNativeAccessSessions.InstallForValidation(new HarmonyLib.Harmony("yf.cargo.qa.access"));
             VerifyAccessPackets();
             VerifyCargoModels();
+            VerifyHubSkinReplacement();
             bool resumeCrash=Environment.GetCommandLineArgs().Contains("-yfCargoResumeCrash");
             if(resumeCrash)
             {
@@ -1055,6 +1056,25 @@ public sealed class CargoDroneNativeQA : IModApi
             Check(memory.Length==source.GetLength(),"native cargo protocol packet length matches serialized bytes");memory.Position=0;
             using(var reader=MemoryPools.poolBinaryReader.AllocSync(false)){reader.SetBaseStream(memory);Check(reader.ReadUInt16()==destination.PackageId,"native cargo protocol packet id registered");destination.read(reader);Check(memory.Position==memory.Length,"native cargo protocol decoder consumes entire packet");}
         }
+    }
+    static void VerifyHubSkinReplacement()
+    {
+        var root=new GameObject("CargoHubNativeSkinFixture");
+        var native=GameObject.CreatePrimitive(PrimitiveType.Cube);native.transform.SetParent(root.transform,false);
+        var lod=GameObject.CreatePrimitive(PrimitiveType.Cube);lod.transform.SetParent(root.transform,false);lod.SetActive(false);
+        try
+        {
+            var position=new Vector3(4,90,5);var model=CargoClientWorld.EnsureHubModel(root.transform,position);
+            Check(native.GetComponent<Renderer>().forceRenderingOff&&lod.GetComponent<Renderer>().forceRenderingOff,"hub replacement suppresses native active and inactive LOD renderers");
+            lod.SetActive(true);lod.GetComponent<Renderer>().enabled=true;
+            Check(lod.GetComponent<Renderer>().forceRenderingOff,"native LOD reactivation cannot reveal the old green platform");
+            native.GetComponent<Renderer>().forceRenderingOff=false;native.GetComponent<Renderer>().enabled=true;
+            var again=CargoClientWorld.EnsureHubModel(root.transform,position);
+            Check(again==model&&root.transform.Cast<Transform>().Count(t=>t.name=="CargoHub")==1&&native.GetComponent<Renderer>().forceRenderingOff,"repeated attachment repairs suppression without adding a second platform");
+            Check(model.GetComponentsInChildren<Renderer>(true).All(r=>r.enabled&&!r.forceRenderingOff)&&model.transform.position==position,"replacement grey platform remains visible at the block base");
+            Check(native.GetComponent<Collider>().enabled&&model.GetComponents<BoxCollider>().Length==1,"model replacement preserves native interaction and adds no duplicate collider");
+        }
+        finally{UnityEngine.Object.Destroy(root);}
     }
     static void VerifyCargoModels()
     {
