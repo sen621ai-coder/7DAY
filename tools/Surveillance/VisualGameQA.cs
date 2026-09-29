@@ -62,7 +62,40 @@ public sealed class SurveillanceVisualQA : IModApi
         try
         {
             Check(SystemInfo.graphicsDeviceType!=UnityEngine.Rendering.GraphicsDeviceType.Null,"Graphics device is null");
-            var mount=new GameObject("QA inactive sensor cone");objects.Add(mount);mount.transform.position=new Vector3(0,500,0);mount.SetActive(false);
+            var sensorValue=Block.GetBlockValue(SurveillanceState.CameraBlock);
+            var sensorPrefab=(Transform)AccessTools.Method(typeof(BlockShapeModelEntity),"getPrefab").Invoke(sensorValue.Block.shape,null);
+            var sensor=UnityEngine.Object.Instantiate(sensorPrefab).gameObject;objects.Add(sensor);
+            sensor.transform.position=new Vector3(0,550,0);
+            var controller=sensor.GetComponentInChildren<MotionSensorController>(true);
+            Check(controller!=null,"Real sensor controller missing");
+            controller.Init(sensorValue.Block.Properties);controller.enabled=false;
+            var cone=controller.GetCameraTransform();
+            var coneMesh=cone.GetComponent<MeshFilter>().sharedMesh;
+            Check(coneMesh.bounds.center.z<-.1f,"Native cone geometry no longer aims along negative Z");
+            var actualFeed=FeedCamera.Create(cone,"QA real sensor feed");objects.Add(actualFeed.gameObject);actualFeed.cullingMask=1<<31;
+            var frontTarget=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(frontTarget);frontTarget.layer=31;
+            var rearTarget=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(rearTarget);rearTarget.layer=31;
+            var frontMaterial=new Material(Shader.Find("Sprites/Default")){color=Color.green,mainTexture=Texture2D.whiteTexture};objects.Add(frontMaterial);
+            var rearMaterial=new Material(frontMaterial){color=Color.red};objects.Add(rearMaterial);
+            frontTarget.GetComponent<Renderer>().sharedMaterial=frontMaterial;rearTarget.GetComponent<Renderer>().sharedMaterial=rearMaterial;
+            for(int rotation=0;rotation<4;rotation++)for(int aim=-1;aim<=1;aim++)
+            {
+                sensor.transform.rotation=Quaternion.Euler(0,rotation*90,0);
+                controller.YawController.Yaw=aim*35;controller.YawController.SetYaw();
+                controller.PitchController.Pitch=aim*15;controller.PitchController.SetPitch();
+                // Derive the front independently from the real preview mesh volume.
+                var expected=(cone.TransformPoint(coneMesh.bounds.center)-cone.position).normalized;
+                frontTarget.transform.position=cone.position+expected*3;rearTarget.transform.position=cone.position-expected*3;
+                actualFeed.transform.SetPositionAndRotation(cone.position,Quaternion.LookRotation(cone.forward,Vector3.up));
+                var backwards=Pixel(actualFeed,rt);
+                Check(backwards.r>.8f&&backwards.g<.2f,"Old positive-Z direction did not see rear control");
+                FeedCamera.Follow(actualFeed,cone);var forwards=Pixel(actualFeed,rt);
+                Check(Vector3.Dot(actualFeed.transform.forward,expected)>.999f&&forwards.g>.8f&&forwards.r<.2f,"Real sensor feed looks behind lens at rotation="+rotation+" aim="+aim+" pixel="+forwards);
+            }
+            frontTarget.SetActive(false);rearTarget.SetActive(false);
+            Log.Out("[SurveillanceQA] PASS real sensor front/rear GPU controls: four rotations x three native yaw/pitch settings");
+            sensor.SetActive(false);
+            var mount=new GameObject("QA inactive sensor cone");objects.Add(mount);mount.transform.SetPositionAndRotation(new Vector3(0,500,0),Quaternion.Euler(0,180,0));mount.SetActive(false);
             var camera=FeedCamera.Create(mount.transform,"QA detached camera");objects.Add(camera.gameObject);
             Log.Out("[SurveillanceQA] Feed components="+string.Join(",",camera.GetComponents<Component>().Select(c=>c==null?"missing":c.GetType().FullName)));
             var turretEffect=camera.GetComponent("ImageEffect_TurretView") as Behaviour;
@@ -116,12 +149,12 @@ public sealed class SurveillanceVisualQA : IModApi
             Check(red.r>.7&&red.g<.2&&green.g>.7&&green.r<.2,"Two changing frames did not reach render texture: "+red+" / "+green);
             mount.transform.SetPositionAndRotation(new Vector3(8,501,-7),Quaternion.Euler(5,75,0));FeedCamera.Follow(camera,mount.transform);
             Check(Vector3.Distance(camera.transform.position,mount.transform.position)<.001&&
-                Vector3.Dot(camera.transform.forward,mount.transform.forward)>.999f,"Camera pose did not follow inactive mount");
+                Vector3.Dot(camera.transform.forward,-mount.transform.forward)>.999f,"Camera pose did not follow inactive mount");
             Log.Out("[SurveillanceQA] PASS inactive mount, two changing GPU frames, detached pose tracking");
             // The native sensor cone may be rolled 90 degrees. Gravity must stay up
             // both in the feed camera and after its RenderTexture reaches the panel.
-            mount.transform.SetPositionAndRotation(new Vector3(0,500,0),Quaternion.Euler(0,0,90));FeedCamera.Follow(camera,mount.transform);
-            Check(Vector3.Dot(camera.transform.forward,mount.transform.forward)>.999f&&
+            mount.transform.SetPositionAndRotation(new Vector3(0,500,0),Quaternion.Euler(0,180,90));FeedCamera.Follow(camera,mount.transform);
+            Check(Vector3.Dot(camera.transform.forward,-mount.transform.forward)>.999f&&
                 Vector3.Dot(camera.transform.up,Vector3.up)>.99f,"Rolled sensor mount tilted the camera horizon");
             var landmarkShader=Shader.Find("Sprites/Default");Check(landmarkShader!=null&&landmarkShader.isSupported,"Landmark shader missing");
             var upper=GameObject.CreatePrimitive(PrimitiveType.Cube);var lower=GameObject.CreatePrimitive(PrimitiveType.Cube);
