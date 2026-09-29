@@ -53,6 +53,16 @@ namespace PZAEC.Surveillance
             return Tier;
         }
     }
+    public sealed class NearbyGate
+    {
+        public bool Active;
+        // Relative to the panel centre, in world metres; independent of gaze direction.
+        public bool Update(float horizontal,float vertical)
+        {
+            Active=horizontal<=(Active?36f:32f)&&Math.Abs(vertical)<=(Active?4f:3f);
+            return Active;
+        }
+    }
     public sealed class ViewGate
     {
         public const double LeaveGraceSeconds=.85;

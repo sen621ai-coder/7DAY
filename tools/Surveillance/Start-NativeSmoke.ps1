@@ -34,7 +34,7 @@ try{
     if(Test-Path -LiteralPath $log){
       $text=Get-Content -LiteralPath $log -Raw
       if($text -match 'Crash!!!|EXC Out of memory'){$failure='Native game crashed or ran out of memory';break}
-      if($text -match '\[Surveillance\] v1\.0\.10 wireless cameras'){$initialized=$true}
+      if($text -match '\[Surveillance\] v1\.0\.11 wireless cameras'){$initialized=$true}
       if($text -match 'INF Loaded \(local\): blocks in'){$blocksLoaded=$true}
       if($text -match '\[Surveillance\] 4x3 footprint verified: -2, 0, 0;'){$footprint=$true}
       if($text -match '\[Surveillance\] Wireless device registry attached; block/tile audit passed'){$worldAttached=$true}

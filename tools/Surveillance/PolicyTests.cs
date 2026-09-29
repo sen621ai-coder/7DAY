@@ -43,6 +43,24 @@ public static class SurveillancePolicyTests
     public static void Run()
     {
         Assert(RenderPolicy.MaxActive==4&&RenderPolicy.MaxIdle==4,"Stream limits");
+        var nearby=new NearbyGate();var nearbyView=new ViewGate();
+        Assert(nearby.Update(32,3),"Same-floor boundary must enter");
+        for(int second=0;second<120;second++)
+            Assert(nearbyView.Update(32,nearby.Update(32,0),second),"Turning away paused a nearby screen");
+        Assert(nearby.Update(35,3.9f),"Nearby distance/height hysteresis missing");
+        Assert(!nearby.Update(36.1f,0)&&!nearby.Update(33,0),"Nearby exit/reentry distance");
+        Assert(nearby.Update(20,0)&&!nearby.Update(20,4.1f)&&!nearby.Update(20,3.1f),"Different-floor exit/reentry");
+        Assert(!nearbyView.Update(40,false,122),"Distant offscreen feed never suspends");
+        var lowClocks=new[]{new FeedClock(),new FeedClock(),new FeedClock(),new FeedClock()};
+        var lowCounts=new int[4];
+        for(int frame=0;frame<900;frame++)
+        {
+            double now=frame/30d;int index=RenderPolicy.Pick(lowClocks,now);
+            if(index<0)continue;
+            lowClocks[index].Success(now,RenderPolicy.DistantHz);lowCounts[index]++;
+        }
+        for(int i=0;i<4;i++)Assert(lowCounts[i]>=57,"Nearby offscreen stream starved: "+i);
+        Console.WriteLine("PASS same-floor gaze independence, distance/height hysteresis and four low-rate feeds");
         Assert(RenderPolicy.Width(2)==768&&RenderPolicy.Width(1)==512&&RenderPolicy.Width(0)==384,"Resolution tiers");
         RunSchedule(60,true);RunSchedule(30,true);RunSchedule(30,false);RunSchedule(15,false);RunMixedDistanceSchedule();
         var early=new FeedClock{Due=10};var late=new FeedClock{Due=1};

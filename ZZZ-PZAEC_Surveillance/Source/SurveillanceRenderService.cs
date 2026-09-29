@@ -35,6 +35,7 @@ namespace PZAEC.Surveillance
             public ScreenView View;
             public bool Focused,InView;
             public readonly ViewGate Gate=new ViewGate();
+            public readonly NearbyGate Nearby=new NearbyGate();
             public float Distance,Height,Area,StateAt;
             public Guid Id;
             public Transform Parent;
@@ -116,6 +117,8 @@ namespace PZAEC.Surveillance
             Vector3 nearest=t.TransformPoint(new Vector3(Mathf.Clamp(local.x,bounds.min.x,bounds.max.x),
                 Mathf.Clamp(local.y,bounds.min.y,bounds.max.y),Mathf.Clamp(local.z,bounds.min.z,bounds.max.z)));
             w.Distance=Vector3.Distance(eye,nearest);
+            var offset=eye-surface.bounds.center;
+            w.Nearby.Update(new Vector2(offset.x,offset.z).magnitude,offset.y);
             if(w.Distance>(w.Gate.Watching?ViewGate.ExitDistance:ViewGate.EnterDistance))
                 return w.Gate.Update(w.Distance,false,now);
             bool front=Vector3.Dot(t.forward,eye-t.position)>0;
@@ -132,8 +135,7 @@ namespace PZAEC.Surveillance
                     projected++;
                     minX=Mathf.Min(minX,p.x);maxX=Mathf.Max(maxX,p.x);minY=Mathf.Min(minY,p.y);maxY=Mathf.Max(maxY,p.y);
                 }
-                // Prewarm before the screen re-enters the viewport. One offscreen feed at
-                // most can consume this budget, so a visible feed always wins admission.
+                // Prewarm outside the same-floor neighbourhood; visible feeds win admission.
                 nearView=w.InView||(projected>0&&minX<=1.25f&&maxX>=-.25f&&minY<=1.25f&&maxY>=-.25f);
                 if(w.InView)
                 {
@@ -148,7 +150,7 @@ namespace PZAEC.Surveillance
                     }
                 }
             }
-            return w.Gate.Update(w.Distance,nearView,now);
+            return w.Gate.Update(w.Distance,nearView||w.Nearby.Active,now);
         }
         static void Refresh(Watch w,float now)
         {
@@ -172,6 +174,7 @@ namespace PZAEC.Surveillance
         {
             int result=b.InView.CompareTo(a.InView);if(result!=0)return result;
             result=(b.View==focus).CompareTo(a.View==focus);if(result!=0)return result;
+            result=b.Nearby.Active.CompareTo(a.Nearby.Active);if(result!=0)return result;
             Stream sa,sb;float now=sortNow;
             bool holdA=streams.TryGetValue(a.Id,out sa)&&sa.WasActive&&now-sa.AdmittedAt<.5f;
             bool holdB=streams.TryGetValue(b.Id,out sb)&&sb.WasActive&&now-sb.AdmittedAt<.5f;
@@ -206,7 +209,8 @@ namespace PZAEC.Surveillance
         }
         static void Render(Stream s,float now)
         {
-            RenderTexture replacement=null;hidden.Clear();long started=Stopwatch.GetTimestamp();
+            RenderTexture replacement=null;var previousTarget=RenderTexture.active;
+            hidden.Clear();long started=Stopwatch.GetTimestamp();
             double previous=s.Clock.LastSuccess;bool success=false;
             try
             {
@@ -216,7 +220,9 @@ namespace PZAEC.Surveillance
                 int width=RenderPolicy.Width(s.Near?s.Quality.Tier:0);
                 if(s.Texture==null||s.Texture.width!=width)
                 {
-                    replacement=new RenderTexture(width,width*3/4,16,RenderTextureFormat.ARGB32)
+                    // Match the native camera window's depth/stencil target. Deferred
+                    // rendering needs stencil; a 16-bit depth-only target can retain garbage.
+                    replacement=new RenderTexture(width,width*3/4,24,RenderTextureFormat.ARGB32)
                     {name="Surveillance feed "+s.Id,filterMode=FilterMode.Bilinear,wrapMode=TextureWrapMode.Clamp,antiAliasing=1,useMipMap=false};
                     if(!replacement.Create())throw new InvalidOperationException("Render texture allocation failed");
                 }
@@ -250,10 +256,12 @@ namespace PZAEC.Surveillance
             {
                 s.Errors++;s.Clock.Failure(Time.realtimeSinceStartup);
                 if(now>=s.LogAt){s.LogAt=now+5;Log.Warning("[Surveillance] Render retry: "+e.Message);}
-                if(s.Camera!=null)s.Camera.targetTexture=s.Texture;
+                if(s.Camera!=null)s.Camera.targetTexture=null;
             }
             finally
             {
+                if(s.Camera!=null)s.Camera.targetTexture=null;
+                RenderTexture.active=previousTarget;
                 Release(replacement);foreach(var r in hidden)if(r!=null)r.enabled=true;hidden.Clear();
                 double cpu=(Stopwatch.GetTimestamp()-started)*1000d/Stopwatch.Frequency;s.CpuMs+=cpu;
                 float finished=Time.realtimeSinceStartup;
@@ -339,7 +347,7 @@ namespace PZAEC.Surveillance
                 var w=views[i];w.Feed=null;
                 if(w.View==null||w.View.World!=world){views.RemoveAt(i);continue;}
                 bool wasWatching=w.Gate.Watching;
-                if(observer==null){w.Gate.Update(float.MaxValue,false,now);w.View.Show(null,"待机");continue;}
+                if(observer==null){w.Nearby.Update(float.MaxValue,0);w.Gate.Update(float.MaxValue,false,now);w.View.Show(null,"待机");continue;}
                 if(!Observe(w,observer,now)){paused.Add(w);continue;}
                 if(!wasWatching)w.StateAt=0;
                 Refresh(w,now);
@@ -354,7 +362,7 @@ namespace PZAEC.Surveillance
             foreach(var w in candidates)
             {
                 Stream s;streams.TryGetValue(w.Id,out s);
-                if(!w.InView&&(s==null||!s.Active)&&warm>=1){paused.Add(w);continue;}
+                if(!w.InView&&!w.Nearby.Active&&(s==null||!s.Active)&&warm>=1){paused.Add(w);continue;}
                 if((s==null||!s.Active)&&active.Count>=RenderPolicy.MaxActive)
                 {if(w.InView)w.View.Show(null,"待机：观看名额已满");else paused.Add(w);continue;}
                 s=Acquire(w,now);if(s==null){w.View.Show(null,w.AcquireError.Length>0?w.AcquireError:"正在连接画面");continue;}
@@ -362,7 +370,7 @@ namespace PZAEC.Surveillance
                 {
                     if(!s.WasActive){s.AdmittedAt=s.WakeAt=now;s.Clock.LastSuccess=-1;s.Clock.Due=now;s.WaitingFirstFrame=true;}
                     s.Active=true;active.Add(s);clocks.Add(s.Clock);
-                    if(!w.InView)warm++;
+                    if(!w.InView&&!w.Nearby.Active)warm++;
                 }
                 s.Focused|=w.View==focus;s.InView|=w.InView;
                 s.Near|=w.InView&&!RenderPolicy.IsDistant(w.Distance);
@@ -384,7 +392,6 @@ namespace PZAEC.Surveillance
             foreach(var w in candidates)
             {
                 var s=w.Feed;if(s==null)continue;
-                if(!w.InView){w.View.Show(s.Texture,s.Texture==null?"画面预备中":w.Caption+" · 画面预备中");w.View.ShowMarkers(null,0,0);continue;}
                 if(s.WaitingFirstFrame||!s.Clock.Fresh(now,s.Hz))
                 {
                     bool recentlyLive=s.WaitingFirstFrame?now-s.WakeAt<=1.5f:s.Clock.LastSuccess>=0&&now-s.Clock.LastSuccess<=1.5;
@@ -398,8 +405,9 @@ namespace PZAEC.Surveillance
                     if(now>=s.StatusAt){s.StatusAt=now+.1f;s.Status=" · 画面延迟 "+Mathf.RoundToInt((float)(now-s.Clock.LastSuccess)*1000)+"ms / "+s.ActualHz.ToString("F1")+"Hz";}
                     suffix=s.Status;
                 }
+                if(!w.InView&&suffix.Length==0)suffix=" · 低清实时";
                 w.View.Show(s.Texture,suffix.Length==0?w.Caption:w.Caption+suffix);
-                w.View.ShowMarkers(w.Markers&&s.MarkerFrame==s.Clock.LastSuccess?s.Detector:null,s.Texture.width,s.Texture.height);
+                w.View.ShowMarkers(w.InView&&w.Markers&&s.MarkerFrame==s.Clock.LastSuccess?s.Detector:null,s.Texture.width,s.Texture.height);
             }
             // Update paused panels after rendering and before retiring any old texture.
             foreach(var w in paused)ShowPaused(w,now);

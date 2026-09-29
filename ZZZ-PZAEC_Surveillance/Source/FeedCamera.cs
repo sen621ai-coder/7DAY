@@ -18,12 +18,18 @@ namespace PZAEC.Surveillance
                 var camera=go.GetComponent<Camera>();
                 if(camera==null)throw new InvalidOperationException("Native ElectricityCamera has no root Camera");
                 camera.enabled=false;
+                // The prefab's decorative turret filter alters colours and reads a shared
+                // back-buffer material. Surveillance needs a clean, independently sampled feed.
+                var turretEffect=go.GetComponent("ImageEffect_TurretView") as Behaviour;
+                if(turretEffect!=null)turretEffect.enabled=false;
                 foreach(var listener in go.GetComponentsInChildren<AudioListener>(true))listener.enabled=false;
                 camera.nearClipPlane=.05f;camera.farClipPlane=80;camera.fieldOfView=60;camera.aspect=4f/3;
                 camera.depth=-10;
                 // Match XUiC_CameraWindow's supported native world rendering path and layer mask.
                 camera.renderingPath=RenderingPath.DeferredShading;camera.clearFlags=CameraClearFlags.SolidColor;
-                camera.backgroundColor=Color.black;camera.cullingMask&=~(1<<8);
+                // XUiC_CameraWindow excludes layer 9 (-513); vp_FPWeapon uses layer 10.
+                // Retain our existing layer 8 exclusion too.
+                camera.backgroundColor=Color.black;camera.cullingMask&=~((1<<8)|(1<<9)|(1<<10));
                 go.SetActive(true);Follow(camera,mount);return camera;
             }
             catch{UnityEngine.Object.Destroy(go);throw;}

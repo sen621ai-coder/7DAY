@@ -30,6 +30,12 @@ public sealed class SurveillanceVisualQA : IModApi
         try{RenderTexture.active=rt;read.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);read.Apply();return read.GetPixels32();}
         finally{RenderTexture.active=previous;UnityEngine.Object.Destroy(read);}
     }
+    static Color StoredPixel(RenderTexture rt)
+    {
+        var previous=RenderTexture.active;var read=new Texture2D(1,1,TextureFormat.RGBA32,false);
+        try{RenderTexture.active=rt;read.ReadPixels(new Rect(rt.width/2,rt.height/2,1,1),0,0);read.Apply();return read.GetPixel(0,0);}
+        finally{RenderTexture.active=previous;UnityEngine.Object.Destroy(read);}
+    }
     static void Quadrant(Color32[] pixels,int width,int x,int y,char expected)
     {
         var c=pixels[y*width+x];
@@ -58,8 +64,52 @@ public sealed class SurveillanceVisualQA : IModApi
             Check(SystemInfo.graphicsDeviceType!=UnityEngine.Rendering.GraphicsDeviceType.Null,"Graphics device is null");
             var mount=new GameObject("QA inactive sensor cone");objects.Add(mount);mount.transform.position=new Vector3(0,500,0);mount.SetActive(false);
             var camera=FeedCamera.Create(mount.transform,"QA detached camera");objects.Add(camera.gameObject);
+            Log.Out("[SurveillanceQA] Feed components="+string.Join(",",camera.GetComponents<Component>().Select(c=>c==null?"missing":c.GetType().FullName)));
+            var turretEffect=camera.GetComponent("ImageEffect_TurretView") as Behaviour;
+            Check(turretEffect==null||!turretEffect.enabled,"Decorative turret filter still active");
             Check(camera.transform.parent==null&&camera.gameObject.activeInHierarchy&&!camera.enabled,"Feed inherited inactive mount or automatic rendering");
             Check(!mount.activeSelf,"Feed activated native sensor cone");
+            Check((camera.cullingMask&((1<<8)|(1<<9)|(1<<10)))==0,"First-person layers enter surveillance feed");
+            var weapon=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(weapon);
+            weapon.layer=10;weapon.transform.position=mount.transform.position+Vector3.forward*2;
+            var weaponMaterial=new Material(Shader.Find("Sprites/Default")){mainTexture=Texture2D.whiteTexture};objects.Add(weaponMaterial);
+            weaponMaterial.color=Color.red;weapon.GetComponent<Renderer>().sharedMaterial=weaponMaterial;
+            int worldMask=camera.cullingMask;camera.cullingMask=1<<10;
+            Check(Pixel(camera,rt).r>.8f,"Weapon-layer test control not visible");
+            camera.cullingMask=worldMask;
+            Check(Pixel(camera,rt).r<.1f,"Weapon layer visible in world feed");
+            weapon.SetActive(false);
+            // Exercise the production render path, then read the retained texture without
+            // rendering again. Also ensure subsequent game drawing cannot target this feed.
+            var streamType=typeof(SurveillanceRenderService).GetNestedType("Stream",System.Reflection.BindingFlags.NonPublic);
+            var stream=Activator.CreateInstance(streamType,true);
+            streamType.GetField("Camera").SetValue(stream,camera);streamType.GetField("Parent").SetValue(stream,mount.transform);
+            streamType.GetField("Hz").SetValue(stream,2);
+            var render=typeof(SurveillanceRenderService).GetMethod("Render",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static);
+            camera.cullingMask=0;camera.backgroundColor=Color.red;RenderTexture.active=rt;
+            render.Invoke(null,new[]{stream,(object)Time.realtimeSinceStartup});
+            var stored=(RenderTexture)streamType.GetField("Texture").GetValue(stream);objects.Add(stored);
+            Check(stored!=null,"First production texture missing");
+            var initial=StoredPixel(stored);
+            Log.Out("[SurveillanceQA] Initial pixel="+initial+" background="+camera.backgroundColor+" mask="+camera.cullingMask+" size="+stored.width+"x"+stored.height);
+            camera.backgroundColor=Color.green;render.Invoke(null,new[]{stream,(object)Time.realtimeSinceStartup});
+            camera.backgroundColor=Color.blue;
+            var retained=StoredPixel(stored);
+            Log.Out("[SurveillanceQA] Retained pixel="+retained+" sameTexture="+(stored==(RenderTexture)streamType.GetField("Texture").GetValue(stream))+" frames="+streamType.GetField("Frames").GetValue(stream));
+            bool restored=camera.targetTexture==null&&RenderTexture.active==rt;
+            camera.backgroundColor=Color.red;var directRed=Pixel(camera,rt);
+            camera.backgroundColor=Color.green;var directGreen=Pixel(camera,rt);
+            Log.Out("[SurveillanceQA] Direct reference pixels="+directRed+" / "+directGreen);
+            var depth16=new RenderTexture(384,288,16,RenderTextureFormat.ARGB32);objects.Add(depth16);depth16.Create();
+            if(turretEffect!=null)turretEffect.enabled=true;
+            camera.backgroundColor=Color.red;var depth16Red=Pixel(camera,depth16);
+            camera.backgroundColor=Color.green;var depth16Green=Pixel(camera,depth16);
+            Log.Out("[SurveillanceQA] Legacy depth16/turret-filter control pixels="+depth16Red+" / "+depth16Green);
+            if(turretEffect!=null)turretEffect.enabled=false;
+            camera.targetTexture=null;RenderTexture.active=rt;
+            Check(initial.r>.7f&&initial.g<.2f&&retained.g>.7f&&retained.r<.2f,"Production retained frames invalid: "+initial+" / "+retained);
+            Check(restored,"Production render leaked its target");
+            Log.Out("[SurveillanceQA] PASS weapon-layer exclusion with visible control; retained last frame and render-target restoration");
             // Read back two manually rendered frames; an inactive parent must not suppress either.
             camera.cullingMask=0;camera.backgroundColor=Color.red;
             var red=Pixel(camera,rt);camera.backgroundColor=Color.green;var green=Pixel(camera,rt);
