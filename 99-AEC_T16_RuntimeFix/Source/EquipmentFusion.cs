@@ -20,11 +20,33 @@ namespace AECT16RuntimeFix
         public static bool IsFusionClass(ItemClass item)
         { return item != null && Supported.IsMatch(item.GetItemName()); }
 
-        public static int Rank(ItemValue item)
+        public static double Rank(ItemValue item)
         {
-            int rank;
-            return IsFusionItem(item) && item.TryGetMetadata(RankKey, out rank) && rank > 0 && rank <= MaxRank ? rank : 0;
+            if (!IsFusionItem(item)) return 0;
+            int legacy;
+            if (item.TryGetMetadata(RankKey, out legacy)) return legacy > 0 && legacy <= MaxRank ? legacy : 0;
+            string text; double rank;
+            return item.TryGetMetadata(RankKey, out text) && double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out rank)
+                && rank > 0 && rank <= MaxRank ? rank : 0;
         }
+
+        // Equivalent legacy rank keeps old saves and their exact stat curves.
+        // Store fractional progress as round-trip text supported by native metadata.
+        public static void SetRank(ItemValue item, double rank)
+        { item.SetMetadata(RankKey, Math.Min(MaxRank, Math.Max(0, rank)).ToString("R", CultureInfo.InvariantCulture)); }
+
+        public static double CombinedRank(double a, double b)
+        {
+            double high = Math.Max(a, b), low = Math.Min(a, b);
+            if (high == low) return Math.Min(MaxRank, high + 1);
+            return Math.Min(MaxRank, high + Math.Log(1 + .05 * Math.Pow(1.05, low - high)) / Math.Log(1.05));
+        }
+
+        public static ItemStack Keeper(ItemStack a, ItemStack b)
+        { return Rank(b.itemValue) > Rank(a.itemValue) ? b : a; }
+
+        public static string FormatRank(double rank)
+        { return rank.ToString("0.###", CultureInfo.InvariantCulture); }
 
         public static bool HasAttachments(ItemValue item)
         {
@@ -45,9 +67,11 @@ namespace AECT16RuntimeFix
             if (primary.count != 1 || donor.count != 1) return "每个槽位放入一件装备";
             if (ReferenceEquals(primary, donor) || ReferenceEquals(primary.itemValue, donor.itemValue)) return "需要两件独立装备";
             if (primary.itemValue.type != donor.itemValue.type) return "装备名称和T阶必须相同";
-            if (Rank(primary.itemValue) != Rank(donor.itemValue)) return "两件装备的融合次数必须相同";
-            if (Rank(primary.itemValue) >= MaxRank) return "已达到数值安全上限";
-            if (HasAttachments(donor.itemValue)) return "请先拆下第二件装备的模组和染色";
+            var keeper = Keeper(primary, donor);
+            var consumed = ReferenceEquals(keeper, primary) ? donor : primary;
+            if (Rank(keeper.itemValue) >= MaxRank) return "已达到数值安全上限";
+            if (CombinedRank(Rank(primary.itemValue), Rank(donor.itemValue)) <= Rank(keeper.itemValue)) return "材料强化过低，已低于数值精度";
+            if (HasAttachments(consumed.itemValue)) return "请先拆下被消耗装备的模组和染色（低强化者；相同则第二件）";
             if (primary.itemValue.Meta != 0 || donor.itemValue.Meta != 0) return "请先卸下两件武器中的弹药";
             return null;
         }
@@ -57,20 +81,21 @@ namespace AECT16RuntimeFix
         {
             output = ItemStack.Empty.Clone();
             if (Validate(primary, donor) != null) return false;
-            var value = primary.itemValue.Clone();
-            value.SetMetadata(RankKey, Rank(primary.itemValue) + 1);
+            var keeper = Keeper(primary, donor);
+            var value = keeper.itemValue.Clone();
+            SetRank(value, CombinedRank(Rank(primary.itemValue), Rank(donor.itemValue)));
             // Preserve wear proportion as maximum durability increases; fusion
             // does not silently repair the primary item or discard its mods.
-            float previousMax = primary.itemValue.MaxUseTimes;
-            value.UseTimes = previousMax > 0 ? primary.itemValue.UseTimes * value.MaxUseTimes / previousMax : primary.itemValue.UseTimes;
+            float previousMax = keeper.itemValue.MaxUseTimes;
+            value.UseTimes = previousMax > 0 ? keeper.itemValue.UseTimes * value.MaxUseTimes / previousMax : keeper.itemValue.UseTimes;
             output = new ItemStack(value, 1);
             return true;
         }
 
         public static string Label(ItemValue item)
         {
-            int rank = Rank(item);
-            return rank == 0 ? "" : " [融合+" + rank.ToString(CultureInfo.InvariantCulture) + "]";
+            double rank = Rank(item);
+            return rank == 0 ? "" : " [融合+" + FormatRank(rank) + "]";
         }
     }
 }

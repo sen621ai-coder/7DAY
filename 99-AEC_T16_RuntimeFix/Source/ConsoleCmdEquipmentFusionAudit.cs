@@ -71,7 +71,12 @@ namespace AECT16RuntimeFix
                     var restored = Saved(twice.itemValue);
                     Check(EquipmentFusion.Rank(restored) == 2, name + " saved rank");
                     Near(Value(restored, effect, tags), original * 1.1025f, name + " saved actual stat");
-                    Check(EquipmentFusion.Validate(first, fused) != null, name + " different rank rejected");
+                    ItemStack mixed, reverse;
+                    Check(EquipmentFusion.TryCreate(first, fused, out mixed), name + " different rank accepted");
+                    Check(EquipmentFusion.TryCreate(fused, first, out reverse), name + " reversed different rank accepted");
+                    Near(Value(mixed.itemValue, effect, tags), original * 1.10f, name + " high plus five percent of low");
+                    Near(Value(reverse.itemValue, effect, tags), Value(mixed.itemValue, effect, tags), name + " slot order invariant");
+                    Near(Value(Saved(mixed.itemValue), effect, tags), original * 1.10f, name + " fractional progress survives save");
                 }
                 const string gun = "gunPZAECHorizonNeedleT16";
                 var a = Item(gun); var b = Item(gun); ItemStack output;

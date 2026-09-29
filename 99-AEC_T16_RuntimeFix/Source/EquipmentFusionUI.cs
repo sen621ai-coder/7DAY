@@ -78,8 +78,8 @@ namespace AECT16RuntimeFix
                 var a = First(__instance)?.ItemStack;
                 var b = Second(__instance)?.ItemStack;
                 value = Touched(__instance) ? EquipmentFusion.Validate(a,b) ??
-                    "融合+" + (EquipmentFusion.Rank(a.itemValue)+1) + "：固有数值再提升5%；保留第一件模组与品质" :
-                    "T16–T19同名同阶、同融合次数：两件合一，每次提升5%";
+                    "融合+" + EquipmentFusion.FormatRank(EquipmentFusion.CombinedRank(EquipmentFusion.Rank(a.itemValue), EquipmentFusion.Rank(b.itemValue))) + "：高属性＋低属性×5%；保留强化较高者，同强度保留第一件" :
+                    "T16–T19同名同阶：不限融合等级，高属性＋低属性×5%";
                 __result = true;
             }
             else if (bindingName == "itemstackname1" || bindingName == "itemstackname2")

@@ -23,9 +23,17 @@ try {
     $close = $type.Methods | Where-Object Name -eq 'OnClose'
     $returns = @($close.Body.Instructions | Where-Object { $_.Operand -is [Mono.Cecil.MethodReference] -and $_.Operand.Name -eq 'AddBackItem' })
     if ($returns.Count -ne 2) { throw 'Native close no longer returns both inputs.' }
-    [xml]$windows = Get-Content -Raw -LiteralPath (Join-Path $modRoot '.local-tests/UserData/Saves/Navezgane/AEC_Equipment_Verification_20260905/ConfigsDump/XUi_InGame/windows.xml')
-    $hint = $windows.SelectNodes("/windows/window[@name='windowCombine']/rect[@controller='CombineGrid']/label[@name='aecFusionHint']")
+    $dump = Join-Path $modRoot '.local-tests/UserData/Saves/Navezgane/AEC_Equipment_Verification_20260905/ConfigsDump/XUi_InGame/windows.xml'
+    if (Test-Path -LiteralPath $dump) {
+        [xml]$windows = Get-Content -Raw -LiteralPath $dump
+        $hint = $windows.SelectNodes("/windows/window[@name='windowCombine']/rect[@controller='CombineGrid']/label[@name='aecFusionHint']")
+        $uiScope = 'previous merged UI dump'
+    } else {
+        [xml]$windows = Get-Content -Raw -LiteralPath (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/XUi_InGame/windows.xml')
+        $hint = $windows.SelectNodes('/configs/append[@xpath="/windows/window[@name=''windowCombine'']/rect[@controller=''CombineGrid'']"]/label[@name="aecFusionHint"]')
+        $uiScope = 'source UI patch only; merged dump unavailable'
+    }
     if ($hint.Count -ne 1 -or $hint[0].text -ne '{aecfusionhint}') { throw 'Fusion UI patch missing or duplicated in actual merged windows.' }
-    Write-Output 'PASS: native full-inventory return, exactly two post-insertion input clears, close returns both inputs, merged fusion hint.'
-    Write-Output 'Scope: native IL and merged XML validation, not graphical client or multiplayer simulation.'
+    Write-Output "PASS: native full-inventory return, exactly two post-insertion input clears, close returns both inputs, fusion hint ($uiScope)."
+    Write-Output 'Scope: native IL and XML validation, not graphical client or multiplayer simulation.'
 } finally { $module.Dispose() }

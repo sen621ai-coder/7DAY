@@ -11,9 +11,9 @@ namespace AECT16RuntimeFix
     public static class FusionStatScaling
     {
         [ThreadStatic] private static ItemValue currentItem;
-        [ThreadStatic] private static int currentRank;
+        [ThreadStatic] private static double currentRank;
         [ThreadStatic] private static PassiveEffect currentEffect;
-        private static readonly Dictionary<PassiveEffect, Dictionary<int,float[]>> Cache = new Dictionary<PassiveEffect, Dictionary<int,float[]>>();
+        private static readonly Dictionary<PassiveEffect, Dictionary<double,float[]>> Cache = new Dictionary<PassiveEffect, Dictionary<double,float[]>>();
 
         public static void Install(Harmony harmony)
         {
@@ -38,13 +38,13 @@ namespace AECT16RuntimeFix
         public static void ItemPrefix(ItemValue __instance, out ItemValue __state)
         { __state = currentItem; currentItem = __instance; }
         public static void ItemFinalizer(ItemValue __state) { currentItem = __state; }
-        public static void ControllerPrefix(MinEffectController __instance, out int __state)
+        public static void ControllerPrefix(MinEffectController __instance, out double __state)
         {
             __state = currentRank;
             currentRank = currentItem != null && currentItem.ItemClass != null && ReferenceEquals(currentItem.ItemClass.Effects, __instance)
                 ? EquipmentFusion.Rank(currentItem) : 0;
         }
-        public static void ControllerFinalizer(int __state) { currentRank = __state; }
+        public static void ControllerFinalizer(double __state) { currentRank = __state; }
         public static void EffectPrefix(PassiveEffect __instance, out PassiveEffect __state)
         { __state = currentEffect; currentEffect = __instance; }
         public static void EffectFinalizer(PassiveEffect __state) { currentEffect = __state; }
@@ -65,7 +65,7 @@ namespace AECT16RuntimeFix
                 effect == PassiveEffects.WaterLossPerStaminaPointGained;
         }
 
-        public static float Scale(PassiveEffects effect, PassiveEffect.ValueModifierTypes operation, float value, int rank)
+        public static float Scale(PassiveEffects effect, PassiveEffect.ValueModifierTypes operation, float value, double rank)
         {
             if (rank <= 0 || IsStructural(effect) || value == 0f) return value;
             bool lower = LowerIsBetter(effect);
@@ -94,11 +94,13 @@ namespace AECT16RuntimeFix
             }
             lock (Cache)
             {
-                Dictionary<int,float[]> ranks;
-                if (!Cache.TryGetValue(effect, out ranks)) Cache[effect] = ranks = new Dictionary<int,float[]>();
+                Dictionary<double,float[]> ranks;
+                if (!Cache.TryGetValue(effect, out ranks)) Cache[effect] = ranks = new Dictionary<double,float[]>();
                 float[] scaled;
                 if (!ranks.TryGetValue(currentRank, out scaled))
                 {
+                    // Arbitrary donor strengths create many fractional ranks.
+                    if (ranks.Count >= 256) ranks.Clear();
                     scaled = new float[_values.Length];
                     for (int i = 0; i < scaled.Length; i++) scaled[i] = Scale(effect.Type, effect.Modifier, _values[i], currentRank);
                     ranks[currentRank] = scaled;

@@ -31,7 +31,7 @@ namespace AECT16RuntimeFix
                 source = ingredient.itemValue;
             }
             // Retain half the rank, rounding up so a first fusion is not erased.
-            if (source != null) output.SetMetadata(EquipmentFusion.RankKey, (EquipmentFusion.Rank(source) + 1) / 2);
+            if (source != null) EquipmentFusion.SetRank(output, Math.Ceiling(EquipmentFusion.Rank(source) / 2));
             return output;
         }
 
