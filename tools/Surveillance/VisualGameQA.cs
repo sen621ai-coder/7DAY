@@ -110,7 +110,7 @@ public sealed class SurveillanceVisualQA : IModApi
             camera.cullingMask=1<<Constants.cLayerBackgroundImage;var realSky=Pixel(camera,rt);
             Log.Out("[SurveillanceQA] Native sky background off/on="+noSky+" / "+realSky);
             Check(Mathf.Abs(noSky.r-realSky.r)+Mathf.Abs(noSky.g-realSky.g)+Mathf.Abs(noSky.b-realSky.b)>.2f,"Native sky spheres missing from feed");
-            Check(camera.clearFlags==CameraClearFlags.SolidColor&&camera.cullingMask==(1<<9)&&camera.GetComponent<FeedBackground>().Sky.targetTexture==null&&!camera.GetComponent<FeedBackground>().Sky.enabled,"Sky pass leaked camera state");
+            Check(camera.clearFlags==CameraClearFlags.SolidColor&&camera.cullingMask==(1<<9)&&camera.GetComponentsInChildren<Camera>().Length==1,"Background changed camera state or added another camera");
             FeedCamera.Follow(camera,mount.transform);camera.backgroundColor=Color.black;
             var distant=GameObject.CreatePrimitive(PrimitiveType.Cube);objects.Add(distant);
             distant.transform.position=camera.transform.position+camera.transform.forward*250;distant.transform.localScale=Vector3.one*40;
@@ -236,6 +236,25 @@ public sealed class SurveillanceVisualQA : IModApi
             var displayed=Pixel(camera,rt);Check(displayed.r>.5&&displayed.g<.25&&displayed.b<.25,"Bound video texture not visible on front: "+displayed);
             texture.SetPixel(0,0,Color.green);texture.Apply();var changed=Pixel(camera,rt);
             Check(changed.g>.5&&changed.r<.25&&changed.b<.25,"Screen did not update with source frames: "+changed);
+            var panelCentre=view.Surface.bounds.center;
+            var savedPosition=camera.transform.position;var savedRotation=camera.transform.rotation;
+            var sprite=new Material(Shader.Find("Sprites/Default")){mainTexture=texture,color=Color.white};objects.Add(sprite);
+            var opaque=view.Surface.sharedMaterial;
+            texture.SetPixel(0,0,new Color(0,1,0,0));texture.Apply();
+            view.Surface.sharedMaterial=sprite;var alphaControl=Pixel(camera,rt);view.Surface.sharedMaterial=opaque;
+            Check(alphaControl.g<.3f,"Transparent material negative control unexpectedly preserved alpha-zero video");
+            for(int sample=0;sample<24;sample++)
+            {
+                float angle=(sample%8-3.5f)*15;
+                var offset=Quaternion.Euler(0,angle,0)*Vector3.forward*5;
+                camera.transform.SetPositionAndRotation(panelCentre+offset,Quaternion.LookRotation(-offset));
+                texture.SetPixel(0,0,new Color(0,1,0,sample%2));texture.Apply();
+                var stable=Pixel(camera,rt);
+                Check(stable.g>.8f&&stable.r<.2f&&stable.b<.2f,"Video alpha/angle flicker sample="+sample+" pixel="+stable);
+            }
+            camera.transform.SetPositionAndRotation(savedPosition,savedRotation);
+            texture.SetPixel(0,0,Color.green);texture.Apply();
+            Log.Out("[SurveillanceQA] PASS opaque screen 24 alpha/angle samples; transparent negative control="+alphaControl);
             var corners=new Texture2D(2,2,TextureFormat.RGBA32,false){filterMode=FilterMode.Point};objects.Add(corners);
             corners.SetPixel(0,0,Color.red);corners.SetPixel(1,0,Color.green);
             corners.SetPixel(0,1,Color.blue);corners.SetPixel(1,1,Color.yellow);corners.Apply();

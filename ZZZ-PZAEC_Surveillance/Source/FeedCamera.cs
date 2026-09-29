@@ -38,32 +38,22 @@ namespace PZAEC.Surveillance
             int mask=observer!=null?observer.cullingMask:~0;
             mask|=(1<<Constants.cLayerNoShadow)|(1<<Constants.cLayerBackgroundImage);
             camera.cullingMask=mask&~((1<<Constants.cLayerHoldingItem)|(1<<Constants.cLayerNGUI)|(1<<Constants.cLayerRenderInTexture));
-            camera.farClipPlane=Mathf.Clamp(observer!=null?observer.farClipPlane:1000f,200f,2800f);
+            var range=camera.GetComponent<FeedBackground>()??camera.gameObject.AddComponent<FeedBackground>();
+            float distance=Mathf.Clamp(observer!=null?observer.farClipPlane:1000f,200f,2800f);
+            if(range.WorldDistance!=distance)
+            {
+                for(int i=0;i<32;i++)range.LayerDistances[i]=distance;
+                range.LayerDistances[Constants.cLayerBackgroundImage]=0;
+                camera.layerCullDistances=range.LayerDistances;range.WorldDistance=distance;
+            }
+            // One deferred render keeps colour and depth coherent. Only the native sky
+            // layer can reach this plane; world layers retain their normal cull range.
+            camera.farClipPlane=100000f;
             camera.backgroundColor=SkyManager.SkyColor;
         }
         public static void Render(Camera camera)
         {
-            int skyMask=1<<Constants.cLayerBackgroundImage;
-            if((camera.cullingMask&skyMask)==0){camera.Render();return;}
-            // Native sky spheres are ~45 km in radius. Render only their layer with a
-            // long clip plane, then the world at normal range into the SAME texture.
-            var background=camera.GetComponent<FeedBackground>()??camera.gameObject.AddComponent<FeedBackground>();
-            if(background.Sky==null)
-            {
-                var go=new GameObject("Surveillance sky");go.transform.SetParent(camera.transform,false);
-                background.Sky=go.AddComponent<Camera>();background.Sky.enabled=false;
-            }
-            var sky=background.Sky;int mask=camera.cullingMask;var clear=camera.clearFlags;
-            var previous=RenderTexture.active;
-            try
-            {
-                sky.CopyFrom(camera);sky.enabled=false;sky.targetTexture=camera.targetTexture;sky.cullingMask=skyMask;
-                sky.nearClipPlane=.3f;sky.farClipPlane=100000f;sky.renderingPath=RenderingPath.Forward;
-                sky.clearFlags=CameraClearFlags.SolidColor;sky.Render();
-                camera.cullingMask=mask&~skyMask;camera.clearFlags=CameraClearFlags.Depth;
-                camera.Render();
-            }
-            finally{sky.targetTexture=null;camera.cullingMask=mask;camera.clearFlags=clear;RenderTexture.active=previous;}
+            camera.Render();
         }
         public static void Follow(Camera camera,Transform mount)
         {
@@ -86,6 +76,7 @@ namespace PZAEC.Surveillance
     }
     public sealed class FeedBackground : MonoBehaviour
     {
-        public Camera Sky;
+        public float WorldDistance=-1;
+        public readonly float[] LayerDistances=new float[32];
     }
 }

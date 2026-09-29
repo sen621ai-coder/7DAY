@@ -1,21 +1,27 @@
-# 1.0.13 天空和远景恢复
+# 1.0.14 天空远景与屏幕图层稳定性
 
-## 本机原生证据
+## 证据与修复
 
-Constants 的图层定义：NoShadow=8，BackgroundImage=9，HoldingItem=10，RenderInTexture=11，NGUI=12，Terrain=28。1.0.12 排除了 8/9/10；其中 8/9 不是第一人称层。原生 XUiC_CameraWindow 确实排除 9，但基地大屏需要完整背景，不应照搬该过滤。
+Constants 图层：NoShadow=8、BackgroundImage=9、HoldingItem=10、RenderInTexture=11、NGUI=12、Terrain=28。1.0.12 错误过滤了 8/9，世界 farClipPlane 又固定为 80 米。原生 AtmosphereSphere / CloudsSphere 位于 layer 9，半径约 45000 米。
 
-原生 GPU 诊断显示：活动的 AtmosphereSphere 和 CloudsSphere 位于 layer 9；包围盒半尺寸约 45000 米，使用 Game/SkyboxAtmosphere、Game/SkyboxClouds。此前监控还把世界 farClipPlane 固定为 80 米。
+1.0.13 的天空 Forward + 场景 Deferred 双次绘制没有通过验收：run-c9677e537f96490eb9ece35ca844e810 的天空开关对照均为指定的品红清屏色。不得把该版本视为天空修复验证成功。
 
-## 修复
+1.0.14 改为一次 Deferred 渲染。相机 farClipPlane=100000；世界各层 layerCullDistances 跟随玩家场景相机、限制 200–2800 米；天空层距离为 0（使用远平面）。没有第二相机、额外视频纹理或额外区块加载。手持物品、NGUI、RenderInTexture 继续排除。
 
-FeedCamera.ApplyEnvironment 使用玩家场景掩码，补回 NoShadow/BackgroundImage，排除 HoldingItem/NGUI/RenderInTexture。每次实际绘制更新世界远裁剪与天空背景色，不改游戏全局相机或材质。
+旧屏幕使用 Sprites/Default：透明混合、无深度写入、双面绘制。视频纹理的 alpha 会控制屏幕可见性，透明像素直接露出外壳。原生负对照用 RGB=绿色、alpha=0 的纹理，旧材质显示外壳色 RGBA(0.051,0.067,0.078,1)。这确认了一个可以复现的图层消失原因，但不证明所有客户端闪烁都只有此原因。
 
-FeedCamera.Render 仅在监控需要天空层时使用随该摄像头持有的子相机：天空层 Forward 绘制、far=100000，然后原监控 Deferred 相机在相同 RenderTexture 上清深度绘制场景。长距离仅作用于天空层；finally 恢复场景相机掩码和清屏方式、解绑天空目标并恢复 RenderTexture.active。没有新增常驻天空纹理，没有额外流或区块加载。
+新屏幕和外壳使用 Standard 不透明、自发光材质，关闭高光/反射、开启深度写入，RGB 视频通过 EmissionMap 显示，不使用 alpha 做透明度。正面 UV 和红框映射统一为实际 +Z 面，避免依赖透明立方体背面的旧映射。
 
-## 回归
+## 验收覆盖
 
-- 编译与 Test.ps1 离线测试通过。
-- 新增真实天空层对照：关闭背景时显示指定清屏色，启用后必须被原生天空球画面替代，检查相机状态恢复。
-- 新增 250 米外 NoShadow 和 Terrain 两层目标：旧 80 米裁剪看不到，恢复远裁剪后必须正确回读绿色。
-- 保留真实摄像头 12 组前后对照、UV、最后一帧、手持武器过滤及背面文字回归。
-- 原生图形最终结果待本次运行后补充。测试不代表客户端满负载下的性能基准；场景仍受游戏区块加载及远景设置限制。
+- 真实天空层开关对照：启用后必须替换品红清屏色，并且监控对象只包含一台相机。
+- 250 米外 NoShadow/Terrain 目标：80 米远裁剪看不到，恢复距离后正确读取绿色。
+- 旧透明材质负对照；新材质 24 次绘制，交替 alpha=0/1，覆盖 -52.5° 至 +52.5° 共八个斜看角度，必须保持绿色。
+- 真实摄像头四方向×三组转头/俯仰、上下左右色块、真实 RenderTexture 地标、红框对齐、背面文字隐藏、前面文字、最后一帧回读及手持物品过滤。
+- 离线调度、同层范围、高度迟滞、四路共享、放置生命周期与配置测试。
+
+## 验证边界
+
+运行的是独立存档中的原生 D3D11 图形测试。专服环境的天空着色回读为黑色，天空检查确认真实天空球参与绘制，不能证明客户端的日照、云层动画和天气颜色完全一致。没有进行客户端长时间、多天气、多摄像头满负载录屏验收。远景内容仍受客户端区块加载和游戏远景设置限制。
+
+最终完整回归通过：`.local-tests/Surveillance/NativeSmoke/run-c243b4b1693645f1a40415a539206de1/game.log`，2026-09-30，`VISUAL PASS`。DLL SHA256：`4E3A68DD5A8F12B257C6B453E2B837A2C72B5AB006E1F590C85EB6484BE5EAFB`。

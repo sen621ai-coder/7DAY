@@ -22,21 +22,19 @@ namespace PZAEC.Surveillance
         {
             var shader=Shader.Find("Unlit/Color");if(shader==null||!shader.isSupported)shader=Shader.Find("Sprites/Default");
             if(shader==null||!shader.isSupported)throw new InvalidOperationException("Target marker shader unavailable");
-            // The native sprite path displays the cube's -Z triangle set. Use its
-            // corrected UVs so target rectangles align with the live image.
+            // Use the same outward +Z face as the opaque video material.
             var baseMesh=surface.GetComponent<MeshFilter>().sharedMesh;
             var positions=baseMesh.vertices;var normals=baseMesh.normals;var uv=baseMesh.uv;var indices=baseMesh.triangles;
             bool mapped=false;
             for(int i=0;i<indices.Length;i+=3)
             {
                 int a=indices[i],b=indices[i+1],c=indices[i+2];
-                if(normals[a].z>-.9f||normals[b].z>-.9f||normals[c].z>-.9f)continue;
+                if(normals[a].z<.9f||normals[b].z<.9f||normals[c].z<.9f)continue;
                 var ab=uv[b]-uv[a];var ac=uv[c]-uv[a];float determinant=ab.x*ac.y-ab.y*ac.x;if(Mathf.Abs(determinant)<.00001f)continue;
                 uAxis=((positions[b]-positions[a])*ac.y-(positions[c]-positions[a])*ab.y)/determinant;
                 vAxis=((positions[c]-positions[a])*ab.x-(positions[b]-positions[a])*ac.x)/determinant;
                 origin=positions[a]-uAxis*uv[a].x-vAxis*uv[a].y;
-                // Draw just outside the physical +Z face even though the UVs came
-                // from the -Z triangle set of the cube.
+                // Draw just outside the physical +Z face.
                 origin.z=baseMesh.bounds.max.z+.04f;mapped=true;break;
             }
             if(!mapped)throw new InvalidOperationException("Monitor front-face UV mapping unavailable");
