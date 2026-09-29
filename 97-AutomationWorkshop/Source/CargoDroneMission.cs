@@ -102,6 +102,20 @@ namespace YFAutomation.CargoDrones
             return units/1000.0+36+indoor;
         }
         void RouteDelivery(){RouteTo(destination,deliveryEntrance);}
+        void ReturnFromDelivery()
+        {
+            var points=new List<CargoAnchor>();var from=motion.Position;
+            if(deliveryEntrance.HasValue)
+            {
+                var entrance=deliveryEntrance.Value;
+                points.Add(new CargoAnchor(new CargoPoint(entrance.X,from.Y,entrance.Z),CargoLegKind.Indoor));
+                points.Add(new CargoAnchor(entrance,CargoLegKind.Entrance));from=entrance;
+            }
+            var lift=Cruise(from,motion.Home);
+            points.Add(new CargoAnchor(lift,CargoLegKind.Outdoor));
+            points.Add(new CargoAnchor(new CargoPoint(motion.Home.X,lift.Y,motion.Home.Z),CargoLegKind.Outdoor));
+            motion.ReturnHomeVia(points);
+        }
         public void SetDeliveryEntrance(CargoPoint? entrance)
         {
             if(retired||failed||flight.TransferPending)throw new InvalidOperationException("当前航段不能更改入口航点");
@@ -270,7 +284,12 @@ namespace YFAutomation.CargoDrones
             if(snapshot==null||snapshot.Id!=expected)throw new InvalidOperationException("Unexpected endpoint identity");
             if(snapshot.Busy){busyObserved=true;flight.SetHold(CargoHold.ContainerBusy);return;}
             var plan=Phase==CargoPhase.Loading?CargoPlanner.Load(snapshot,cargo,owner,CargoRules.Slots):CargoPlanner.Unload(snapshot,cargo,owner);
-            if(plan.Moved==0){RequestReturn(Phase==CargoPhase.Loading?CargoMissionReturnReason.SourceEmpty:CargoMissionReturnReason.TargetFull);return;}
+            if(plan.Moved==0)
+            {
+                if(Phase==CargoPhase.Unloading){ReturnReason=CargoMissionReturnReason.TargetFull;flight.Recall();ReturnFromDelivery();}
+                else RequestReturn(CargoMissionReturnReason.SourceEmpty);
+                return;
+            }
             if(CargoRevision==long.MaxValue)throw new InvalidOperationException("Cargo revision exhausted");
             var transaction=new CargoTransaction(Guid.NewGuid(),flight.Id,world,CargoRevision,plan);
             transfer=new CargoTransferCoordinator(journal,endpoint,transaction);flight.BeginTransfer();
@@ -282,12 +301,13 @@ namespace YFAutomation.CargoDrones
         {
             if(transfer.State==CargoTransferState.Saving){flight.SetHold(CargoHold.PersistencePending);return;}
             if(transfer.State==CargoTransferState.RecoveryRequired){failed=true;flight.SetHold(CargoHold.RecoveryRequired);return;}
+            bool delivered=transfer.State==CargoTransferState.Committed&&transfer.Transaction.Plan.Kind==CargoTransferKind.Unload;
             if(transfer.State==CargoTransferState.Committed){cargo=transfer.Transaction.Plan.CargoAfter;CargoRevision++;}
             // Aborted before applying a plan retains committed cargo and returns
             // safely; it cannot be mistaken for a successful load or unload.
             if(transfer.State==CargoTransferState.Aborted)RequestReturn(CargoMissionReturnReason.TransactionAborted);
             flight.CompleteTransfer(CargoPlanner.Count(cargo));transfer=null;flight.SetHold(CargoHold.None);
-            if(Phase==CargoPhase.Returning)motion.ReturnHome();else RouteDelivery();
+            if(Phase==CargoPhase.Returning){if(delivered)ReturnFromDelivery();else motion.ReturnHome();}else RouteDelivery();
         }
     }
 }

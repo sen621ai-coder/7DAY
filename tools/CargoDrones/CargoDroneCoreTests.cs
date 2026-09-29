@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -237,6 +237,7 @@ public static class CargoDroneCoreTests
         RoutingChecks();
         ReturnChecks();
         MissionChecks();
+        DirectDeliveryReturnChecks(directory);
         MissionWaitChecks();
         PreparedRecoveryChecks(directory);
         CheckpointChecks(directory);
@@ -466,6 +467,37 @@ public static class CargoDroneCoreTests
             int entries=journal.Entries.Count;
             Throws(()=>journal.Append(CargoJournalKind.Prepare,stale),"durable journal refuses obsolete cargo revision from another active object");
             Check(journal.Entries.Count==entries&&CargoPlanner.Count(output.Value.Items)==5,"rejected stale shipment leaves journal and native inventory unchanged");
+        }
+    }
+    static void DirectDeliveryReturnChecks(string directory)
+    {
+        foreach(bool indoor in new[]{false,true})
+        foreach(int free in new[]{0,1,6})
+        {
+            var world=Guid.NewGuid();var source=Inventory(new[]{Item(1,6)});var target=Inventory(free==6?new CargoItem[6]:new[]{Item(1,8-free)});
+            var home=new CargoPoint(0,100,0);var pickup=new CargoPoint(60,100,0);var box=new CargoPoint(0,indoor?85:100,30);
+            var entrance=new CargoPoint(0,100,25);var space=new ObstacleAirspace();
+            var mission=new CargoMission(world,Guid.NewGuid(),source.Id,target.Id,"owner",space,home,pickup,box,600000,entrance:indoor?(CargoPoint?)entrance:null);
+            var input=new Endpoint(source){Save=CargoSaveResult.Durable};var output=new Endpoint(target){Save=CargoSaveResult.Durable};
+            string root=Path.Combine(directory,"direct-return-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
+            using(var journal=new CargoFileJournal(Path.Combine(root,"transactions.wal"),world))using(var store=new CargoCheckpointStore(root,world))
+            {
+                for(int i=0;i<3000&&mission.Phase!=CargoPhase.Returning;i++)
+                {if(mission.TransferReady)mission.BeginTransfer(journal,mission.Phase==CargoPhase.Loading?input:output);mission.Tick(100);}
+                Check(mission.Phase==CargoPhase.Returning&&CargoPlanner.Count(mission.Cargo)==6-free,"empty, partial or full warehouse returns directly with exact retained cargo");
+                var route=mission.Capture().Motion.Navigation;
+                Check(route.All(a=>Math.Abs(a.Point.X)<1e-7),"delivery return excludes remote miner and its cruise column");
+                if(indoor)Check(route.Length==5&&route[0].Point.Distance(new CargoPoint(0,85,25))<1e-7&&route[1].Point.Distance(entrance)<1e-7&&route[0].Kind==CargoLegKind.Indoor,"basement return crosses lower entrance then exits before outdoor cruise");
+                store.Save(new[]{mission.Capture()},journal);
+                mission=CargoMission.Restore(store.Load(journal).Single(),space,journal,indoor?(CargoPoint?)entrance:null);
+                Check(mission.Capture().Motion.Navigation.Select(a=>a.Kind).SequenceEqual(route.Select(a=>a.Kind)),"return checkpoint preserves indoor and outdoor routing modes");
+                bool obstructed=!indoor&&free==6;
+                if(obstructed)space.Obstacles.Add(new CargoBox(new CargoPoint(-2,80,14),new CargoPoint(2,114,16)));
+                double nearestMiner=1000,highest=0;
+                for(int i=0;i<2000&&mission.Phase!=CargoPhase.Docking;i++){mission.Tick(100);nearestMiner=Math.Min(nearestMiner,mission.Position.Distance(pickup));highest=Math.Max(highest,mission.Position.Y);}
+                Check(mission.Phase==CargoPhase.Docking&&mission.Position.Distance(home)<1e-7&&nearestMiner>40,"restored return reaches home without visiting source");
+                if(obstructed)Check(highest>114,"direct outdoor return freshly detects wall and climbs over it");
+            }
         }
     }
     static void MissionChecks()

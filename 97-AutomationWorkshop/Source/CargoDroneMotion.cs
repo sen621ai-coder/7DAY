@@ -67,6 +67,7 @@ namespace YFAutomation.CargoDrones
         public CargoNavigationStatus Navigation{get;private set;}
         public bool ReturningHome{get;private set;}
         public bool EnergyRecall{get;private set;}
+        public CargoPoint Home{get{return trail.Home;}}
         public int ReturnWaypointCount{get{return trail.Count;}}
         public long EstimatedReturnUnits{get{return ReturningHome?new CargoReturnTrail(trail.Home).EstimateRemaining(Position,RemainingReturnPoints(),speed,approachSpeed):trail.EstimateReturn(Position,speed,approachSpeed);}}
         IEnumerable<CargoPoint> RemainingReturnPoints(){return ExecutionPoints();}
@@ -153,6 +154,21 @@ namespace YFAutomation.CargoDrones
             foreach(var p in trail.ReverseWaypoints())anchors.Enqueue(new CargoAnchor(p,CargoLegKind.Return));
             blockedWait=fullRetryWait=dynamicWait=0;Arrived=anchors.Count==0;Hold=CargoHold.None;Navigation=CargoNavigationStatus.Ready;
             CargoTrace.Emit(space,"return","pos="+CargoTrace.Point(Position)+" home="+CargoTrace.Point(Target)+" battery="+Battery+" energyRecall="+EnergyRecall);
+        }
+        public void ReturnHomeVia(IEnumerable<CargoAnchor> route)
+        {
+            if(ReturningHome){RetryPath();return;}
+            var points=new List<CargoAnchor>(route);
+            points.Add(new CargoAnchor(trail.Home,CargoLegKind.Outdoor));
+            // Retain the proven corridor for emergency recalls. Only a completed
+            // delivery may request this new route; every edge still gets swept.
+            long cost=new CargoReturnTrail(trail.Home).EstimateRemaining(Position,System.Linq.Enumerable.Select(points,p=>p.Point),speed,approachSpeed);
+            if(cost>Battery){ReturnHome();return;}
+            CancelSearch();hasSegment=false;detour.Clear();anchors.Clear();routeFailed=false;ReturningHome=true;Target=trail.Home;
+            double highest=Math.Max(Position.Y,Target.Y);
+            foreach(var point in points){anchors.Enqueue(point);highest=Math.Max(highest,point.Point.Y);}
+            ceiling=Math.Min(253,highest+24);blockedWait=fullRetryWait=dynamicWait=0;windowChoice=0;Arrived=false;Hold=CargoHold.None;Navigation=CargoNavigationStatus.Ready;
+            CargoTrace.Emit(space,"return-direct","pos="+CargoTrace.Point(Position)+" home="+CargoTrace.Point(Target)+" anchors="+string.Join(";",System.Linq.Enumerable.Select(points,p=>p.Kind+":"+CargoTrace.Point(p.Point))));
         }
         void StartSearch(bool skipQuick=false)
         {

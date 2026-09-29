@@ -25,7 +25,7 @@ namespace YFAutomation.CargoDrones
         {
             CargoReturnTrail.Restore(trail);
             if(generation<0||!Enum.IsDefined(typeof(CargoNavigationStatus),navigationStatus)||navigation!=null&&(navigation.Length>4096||navigation.Any(a=>!Enum.IsDefined(typeof(CargoLegKind),a.Kind))))throw new InvalidDataException("Invalid navigation state");
-            if(navigation!=null&&(!arrived&&(navigation.Length==0||navigation[navigation.Length-1].Point.Distance(target)>1e-7)||navigation.Any(a=>returning&&a.Kind!=CargoLegKind.Return)))throw new InvalidDataException("Navigation anchors disagree with mission");
+            if(navigation!=null&&!arrived&&(navigation.Length==0||navigation[navigation.Length-1].Point.Distance(target)>1e-7))throw new InvalidDataException("Navigation anchors disagree with mission");
             this.navigation=navigation==null?null:(CargoAnchor[])navigation.Clone();Generation=generation;NavigationStatus=navigationStatus;LastFailure=lastFailure;
             if(remaining==null||remaining.Length>4096||!Enum.IsDefined(typeof(CargoHold),hold)||!Finite(speed)||speed<=0||speed>100||!Finite(approachSpeed)||approachSpeed<=0||approachSpeed>speed||reserve<0||movingUnits<0||!Finite(distance)||distance<0)throw new InvalidDataException("Invalid motion checkpoint");
             if(!returning&&trail[trail.Length-1].Distance(position)>1e-7||arrived&&position.Distance(target)>1e-7||returning&&target.Distance(trail[0])>1e-7)throw new InvalidDataException("Motion checkpoint position disagrees with route");
