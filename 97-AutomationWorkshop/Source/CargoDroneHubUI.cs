@@ -141,13 +141,13 @@ namespace YFAutomation.CargoDrones
                 var state=runtime?.Service.Status().SingleOrDefault(s=>FromDrone?s.Configuration.HubId==Hub:s.Configuration.Position.Equals(new CargoPosition(At.x,At.y,At.z)));
                 if(state==null)throw new InvalidOperationException("停机坪尚未就绪；每人最多 4 座，全服最多 16 座，请稍后重试");
                 var controlAt=FromDrone?new Vector3((float)state.Position.X,(float)state.Position.Y,(float)state.Position.Z):new Vector3(At.x+.5f,At.y+.5f,At.z+.5f);
-                if(player==null||player.IsDead()||(player.position-controlAt).sqrMagnitude>64||player.PersistentPlayerData?.PrimaryId?.CombinedString!=state.Configuration.Owner||!runtime.HubExists(state.Configuration))throw new InvalidOperationException(FromDrone?"需要无人机所有者在 8 格内操作":"需要停机坪所有者在 8 格内操作");
+                if(player==null||player.IsDead()||(player.position-controlAt).sqrMagnitude>64||!CargoHubAccess.CanControl(player,state.Configuration.Owner)||!runtime.HubExists(state.Configuration))throw new InvalidOperationException(FromDrone?"需要所有者或同队队友在无人机 8 格内操作":"需要所有者或同队队友在停机坪 8 格内操作");
                 if(FromDrone&&Action!=CargoHubAction.Read&&Action!=CargoHubAction.Recall&&Action!=CargoHubAction.TogglePause)throw new InvalidOperationException("无人机仅支持查看、召回和调度开关；绑定配置请使用停机坪");
                 authorized=state;
                 float until;if(next.TryGetValue(actor,out until)&&Time.realtimeSinceStartup<until)throw new InvalidOperationException("操作过快，请稍后重试");next[actor]=Time.realtimeSinceStartup+.2f;
                 if(!Enum.IsDefined(typeof(CargoHubAction),Action))throw new InvalidOperationException("未知操作");
                 var c=state.Configuration;var changed=c;var rules=new CargoRules();string owner=c.Owner;
-                if(Action!=CargoHubAction.Read)runtime.Diagnostics.Write("command",c.HubId,"flight="+state.Flight+" action="+Action+" fromDrone="+FromDrone+" requestedRevision="+Revision+" actualRevision="+c.Revision+" endpoint="+Endpoint,0);
+                if(Action!=CargoHubAction.Read)runtime.Diagnostics.Write("command",c.HubId,"flight="+state.Flight+" actor="+actor+" actorUser="+player.PersistentPlayerData?.PrimaryId?.CombinedString+" action="+Action+" fromDrone="+FromDrone+" requestedRevision="+Revision+" actualRevision="+c.Revision+" endpoint="+Endpoint,0);
                 if(Action!=CargoHubAction.Read&&(Hub!=c.HubId||Revision!=c.Revision))throw new InvalidOperationException("配置或停机坪已改变，请刷新");
                 var at=new CargoPosition(Endpoint.x,Endpoint.y,Endpoint.z);
                 switch(Action)
