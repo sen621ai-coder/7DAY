@@ -41,20 +41,20 @@ namespace AECT16RuntimeFix
                     Check(targets.Add(target.type), "Duplicate high-tier recipe: " + target.ItemClass.GetItemName());
                     Check(original != null && original.itemValue.ItemClass.GetItemName() == target.ItemClass.GetItemName().Substring(0, target.ItemClass.GetItemName().Length - 2) + (tier-1), "Direct or skip-tier recipe remains");
                     recipes++;
-                    foreach (int rank in new[] { 0, 4, 5, 10, 14, 25 })
+                    foreach (double rank in new[] { 0d, 4d, 5d, 10d, 14d, 25d, 1.953471184, 10.25 })
                     {
                         var recipe = Copy(definition);
                         var ingredient = recipe.ingredients.First(i => FusionTierUpgrade.IsHigherSameFamily(i.itemValue, target));
-                        ingredient.itemValue.SetMetadata(EquipmentFusion.RankKey, rank);
+                        EquipmentFusion.SetRank(ingredient.itemValue, rank);
                         var queue = Saved(new RecipeQueueItem { Recipe = recipe, Multiplier = 1, Quality = 1, CraftingTimeLeft = -.01f, OneItemCraftTime = 100, StartingEntityId = -1 });
                         Check(EquipmentFusion.Rank(queue.Recipe.ingredients.First(i => FusionTierUpgrade.IsHigherSameFamily(i.itemValue, target)).itemValue) == rank, "Queue lost source rank");
                         // Exercise the same helper injected at the client output constructor.
                         var ui = (XUiC_RecipeStack)FormatterServices.GetUninitializedObject(typeof(XUiC_RecipeStack));
                         AccessTools.Field(typeof(XUiC_RecipeStack), "recipe").SetValue(ui, queue.Recipe);
                         var preview = FusionTierUpgrade.ApplyUI(Item(target.ItemClass.GetItemName()), ui);
-                        Check(EquipmentFusion.Rank(preview) == (rank + 1) / 2, "UI inheritance");
+                        Check(EquipmentFusion.Rank(preview) == Math.Ceiling(rank / 2), "UI inheritance");
                         FusionTierUpgrade.ApplyUI(preview, ui);
-                        Check(EquipmentFusion.Rank(preview) == (rank + 1) / 2, "Repeated output retry compounded inheritance");
+                        Check(EquipmentFusion.Rank(preview) == Math.Ceiling(rank / 2), "Repeated output retry compounded inheritance");
                         // Real patched native background crafting, temporary TE only.
                         var station = new TileEntityWorkstation(null);
                         // Detached test TE: suppress only world dirty/network
@@ -65,7 +65,7 @@ namespace AECT16RuntimeFix
                         AccessTools.Method(typeof(TileEntityWorkstation), "HandleRecipeQueue").Invoke(station, new object[] { .1f });
                         var output = (ItemStack[])AccessTools.Field(typeof(TileEntityWorkstation), "output").GetValue(station);
                         var result = output.Single(i => !i.IsEmpty());
-                        Check(result.count == 1 && result.itemValue.type == target.type && EquipmentFusion.Rank(result.itemValue) == (rank + 1) / 2, "Native workstation inheritance");
+                        Check(result.count == 1 && result.itemValue.type == target.type && EquipmentFusion.Rank(result.itemValue) == Math.Ceiling(rank / 2), "Native workstation inheritance");
                         Check(EquipmentFusion.Rank(ingredient.itemValue) == rank && EquipmentFusion.Rank(original.itemValue) == 0, "Input/shared definition mutated");
                     }
                 }
