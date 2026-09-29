@@ -123,6 +123,13 @@ namespace YFAutomation.CargoDrones
         }
         public void SuspendPlanning(){motion.SuspendPlanning();}
         public bool PreflightFailure(ICargoAirspace airspace,double now){return motion.PreflightFailure(airspace,now);}
+        public CargoMission RedirectDockedCargo(Guid newTarget,CargoPoint newDestination,CargoPoint? entrance,ICargoAirspace airspace)
+        {
+            if(retired||failed||!CheckpointReady||Phase!=CargoPhase.Docked||CargoPlanner.Count(cargo)==0)throw new InvalidOperationException("请先召回并停靠，再改送本批货");
+            var next=new CargoMission(world,flight.Id,source,newTarget,owner,airspace,Position,Position,newDestination,Battery,reserve,entrance);
+            next.cargo=Cargo;next.CargoRevision=CargoRevision;next.motion.ReturnHome();next.flight.Restore(CargoPhase.Docked,CargoHold.None,false,0);
+            retired=true;return next;
+        }
         public CargoMission RetryDelivery(ICargoAirspace airspace)
         {
             if(retired||Phase!=CargoPhase.Docked||failed||CargoPlanner.Count(cargo)==0||Battery<reserve)throw new InvalidOperationException("Docked committed cargo required for redelivery");

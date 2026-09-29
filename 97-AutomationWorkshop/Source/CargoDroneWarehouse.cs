@@ -50,6 +50,7 @@ namespace YFAutomation.CargoDrones
             if(name.Contains("crate")||name.Contains("storagebox")||name.Contains("chest"))return CargoWarehouseKind.Crate;
             return CargoWarehouseKind.Other;
         }
+        public static string TypeLabel(string block){return block=="yfAutoRouter"?"三路分拣箱":Label(Kind(block));}
         public static string Label(CargoWarehouseKind kind)
         {switch(kind){case CargoWarehouseKind.All:return "全部类型";case CargoWarehouseKind.Crate:return "普通储物箱";case CargoWarehouseKind.Input:return "自动化输入箱";case CargoWarehouseKind.Output:return "自动化输出箱";case CargoWarehouseKind.Cabinet:return "壁橱 / 柜子";default:return "其他容器";}}
         public static bool Matches(string query,CargoWarehouseKind filter,string name,string sign,string block)

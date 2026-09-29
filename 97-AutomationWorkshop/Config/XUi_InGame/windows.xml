@@ -57,7 +57,10 @@
       <button name="clearEntrance" pos="314,-590" width="292" height="34" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
         <label name="clearEntranceText" text="清除入口航点" pos="8,-4" width="276" height="26" font_size="18" depth="4" color="[white]" />
       </button>
-      <label name="notice" text="" pos="14,-634" width="592" height="36" font_size="17" depth="4" color="[white]" />
+      <button name="redirectShipment" pos="14,-634" width="292" height="34" depth="3" sprite="menu_empty3px" defaultcolor="[mediumGrey]" hovercolor="[lightGrey]" type="sliced">
+        <label name="redirectShipmentText" text="本批货改送新目标（停靠后）" pos="8,-4" width="276" height="26" font_size="17" depth="4" color="[white]" />
+      </button>
+      <label name="notice" text="" pos="314,-634" width="292" height="36" font_size="17" depth="4" color="[white]" />
       <label name="hint" text="把“货运入口航标”放在入口中心，再从右侧列表选择；一个航标自动生成上下通道点。\n停机坪本体不接线：请给三维4格内的“自动化供电接口”接线。" pos="14,-677" width="592" height="42" font_size="16" depth="4" color="[white]" />
       <label name="warehouseTitle" text="选择收货仓库" pos="636,-55" width="408" height="28" font_size="22" depth="4" color="[white]" />
       <label name="warehouseScope" text="已加载区域 · 停机坪 1000 格内" pos="636,-87" width="408" height="23" font_size="17" depth="4" color="[white]" />

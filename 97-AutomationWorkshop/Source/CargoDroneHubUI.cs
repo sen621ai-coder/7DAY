@@ -8,7 +8,7 @@ using UnityEngine.Scripting;
 
 namespace YFAutomation.CargoDrones
 {
-    public enum CargoHubAction : byte{Read,TogglePause,Recall,AddSource,RemoveSource,SetTarget,ClearTarget,SetEntrance,ClearEntrance}
+    public enum CargoHubAction : byte{Read,TogglePause,Recall,AddSource,RemoveSource,SetTarget,ClearTarget,SetEntrance,ClearEntrance,RedirectShipment}
     public static class CargoHubUI
     {
         public const string Group="yfCargoHub",Command="yfCargoConfigure";
@@ -33,9 +33,10 @@ namespace YFAutomation.CargoDrones
         {
             if(binding==null)return "未绑定";
             var world=GameManager.Instance?.World;
-            string name=CargoWarehouseFilter.Label(CargoWarehouseFilter.Kind(binding.BlockName));
+            string name=CargoWarehouseFilter.TypeLabel(binding.BlockName);
             if(!CargoWarehouseSearch.MatchesBinding(world,binding))return name+"（未加载或已失效）";
             var tile=world.GetTileEntity(new Vector3i(binding.Position.X,binding.Position.Y,binding.Position.Z)) as TileEntityComposite;
+            if(MachineDisplay.IsMachine(binding.BlockName))return binding.BlockName=="yfAutoRouter"?"三路分拣箱（原料区）":CargoWarehouseFilter.Clean(tile.block.GetLocalizedBlockName(),22);
             string sign=tile?.GetFeature<TEFeatureSignable>()?.GetAuthoredText().Text;
             return CargoWarehouseFilter.Clean(string.IsNullOrWhiteSpace(sign)?tile?.block.GetLocalizedBlockName()??name:sign,22);
         }
@@ -54,6 +55,11 @@ namespace YFAutomation.CargoDrones
         }
         static string StateText(CargoHubStatus s)
         {
+            if(s.Phase==CargoPhase.Docked&&s.Packages>0)
+            {
+                if(s.Navigation==CargoNavigationStatus.SearchBudgetExceeded)return "旧货路线搜索达上限；可将本批货改送新目标";
+                if(s.Navigation==CargoNavigationStatus.Planning||s.Navigation==CargoNavigationStatus.Queued||s.Navigation==CargoNavigationStatus.WaitingData)return "旧货路线复查中（尚未起飞）";
+            }
             if(s.Hold==CargoHold.PathBlocked)
             {
                 switch(s.Navigation)
@@ -148,6 +154,7 @@ namespace YFAutomation.CargoDrones
                 {
                     case CargoHubAction.TogglePause:changed=c.SetPaused(owner,c.Revision,!c.Paused);break;
                     case CargoHubAction.Recall:runtime.Service.Recall(c.HubId,owner);break;
+                    case CargoHubAction.RedirectShipment:runtime.Service.RedirectShipment(c.HubId,owner,c.Revision);break;
                     case CargoHubAction.AddSource:
                         var source=runtime.ResolveBinding(at,owner,true);if(source==null)throw new InvalidOperationException("未找到支持的采矿机或林场");
                         changed=c.AddSource(owner,c.Revision,source,rules);break;
@@ -164,7 +171,7 @@ namespace YFAutomation.CargoDrones
                 if(changed!=c)runtime.Service.Configure(c.HubId,owner,c.Revision,changed,Action==CargoHubAction.SetEntrance||Action==CargoHubAction.ClearEntrance);
                 if(Action!=CargoHubAction.Read)runtime.Diagnostics.Write("command-applied",c.HubId,"action="+Action+" revision="+changed.Revision,0);
                 state=runtime.Service.Status().Single(s=>s.Configuration.HubId==c.HubId);
-                reply.SetState(state);reply.Message=Action==CargoHubAction.Read?"状态已更新":Action==CargoHubAction.Recall?"已请求返航；返航后仍按调度配置运行":Action==CargoHubAction.ClearTarget?"已清除新货目标；本批货仍送往原箱":Action==CargoHubAction.SetEntrance?"入口航标已用于新货和当前航班":Action==CargoHubAction.ClearEntrance?"入口航标已清除":"操作已保存";
+                reply.SetState(state);reply.Message=Action==CargoHubAction.RedirectShipment?"本批货已改送新目标，等待调度起飞":Action==CargoHubAction.Read?"状态已更新":Action==CargoHubAction.Recall?"已请求返航；返航后仍按调度配置运行":Action==CargoHubAction.ClearTarget?"已清除新货目标；本批货仍送往原箱":Action==CargoHubAction.SetEntrance?"入口航标已用于新货和当前航班":Action==CargoHubAction.ClearEntrance?"入口航标已清除":"操作已保存";
             }
             catch(Exception ex)
             {
@@ -242,7 +249,7 @@ namespace YFAutomation.CargoDrones
             GetChildById("remove").OnPress+=(s,b)=>Pick(true,true);
             GetChildById("target").OnPress+=(s,b)=>Pick(false,false);
             Bind("refresh",CargoHubAction.Read);Bind("pause",CargoHubAction.TogglePause);Bind("recall",CargoHubAction.Recall);Bind("clear",CargoHubAction.ClearTarget);
-            GetChildById("setEntrance").OnPress+=(s,b)=>PickEntrance();Bind("clearEntrance",CargoHubAction.ClearEntrance);
+            GetChildById("setEntrance").OnPress+=(s,b)=>PickEntrance();Bind("clearEntrance",CargoHubAction.ClearEntrance);Bind("redirectShipment",CargoHubAction.RedirectShipment);
             GetChildById("locate").OnPress+=(s,b)=>Locate(false);
             GetChildById("locateShipment").OnPress+=(s,b)=>Locate(true);
             GetChildById("close").OnPress+=(s,b)=>xui.playerUI.windowManager.Close(WindowGroup);
@@ -297,7 +304,7 @@ namespace YFAutomation.CargoDrones
             for(int i=0;i<8;i++)
             {
                 if(i>=warehouses.Rows.Length){Label("warehouseName"+i,"");Label("warehouseInfo"+i,"");continue;}
-                var row=warehouses.Rows[i];string type=entrances?"货运入口航标":sources?CargoSourceFilter.Label(CargoSourceFilter.Kind(row.Block)):CargoWarehouseFilter.Label(row.Kind);
+                var row=warehouses.Rows[i];string type=entrances?"货运入口航标":sources?CargoSourceFilter.Label(CargoSourceFilter.Kind(row.Block)):CargoWarehouseFilter.TypeLabel(row.Block);
                 string name=string.IsNullOrWhiteSpace(row.Sign)?row.Name:row.Sign;if(string.IsNullOrWhiteSpace(name))name=type;
                 Label("warehouseName"+i,(row.Bound?(entrances?"[当前入口] ":sources?"[已绑定] ":"[当前目标] "):"")+CargoWarehouseFilter.Clean(name,row.Bound?15:22));
                 Label("warehouseInfo"+i,CargoHubUI.Coordinates(row.Position)+" · "+Math.Round(row.Distance)+" 格 · "+(sources&&row.Bound?(row.Available?"点击移除":"不可用，点击移除"):type));

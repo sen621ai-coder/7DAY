@@ -4,11 +4,11 @@ using UnityEngine.Scripting;
 
 namespace YFAutomation.CargoDrones
 {
-    [DefaultExecutionOrder(-1000)]
+    [Preserve]
     public sealed class CargoDroneInteraction : MonoBehaviour
     {
         CargoDroneVisual visual;
-        bool focused;
+        bool focused,lastHeld,announced;
         float nextInputLog;
         void InputLog(string reason,bool pressed)
         {
@@ -16,7 +16,7 @@ namespace YFAutomation.CargoDrones
             nextInputLog=Time.realtimeSinceStartup+1;
             Log.Out("[YFCargo][Client] event=interact hub="+visual.Hub+" result="+reason);
         }
-        void Update()
+        void LateUpdate()
         {
             focused=false;
             if(GameManager.IsDedicatedServer||GameManager.Instance?.World==null)return;
@@ -26,9 +26,14 @@ namespace YFAutomation.CargoDrones
             if(player==null||player.IsDead()||!GameManager.Instance.GameIsFocused)return;
             var ui=player.PlayerUI;
             if(ui==null)return;
-            bool pressed=ui.playerInput.Activate.WasPressed;
+            // Match the native interaction dispatcher, including permanent E bindings.
+            var input=ui.playerInput;
+            bool held=input.Activate.IsPressed||input.PermanentActions.Activate.IsPressed||input.VehicleActions.Activate.IsPressed;
+            bool pressed=held&&!lastHeld;lastHeld=held;
+            if(!announced){announced=true;Log.Out("[YFCargo][Client] event=interaction-ready hub="+visual.Hub+" position="+transform.position);}
             var ray=player.playerCamera!=null?player.playerCamera.ViewportPointToRay(new Vector3(.5f,.5f,0)):player.GetLookRay();
             // Log only nearby attempts, not every E press across the world.
+            if(player.playerCamera==null)ray.origin-=Origin.position;
             if((ray.origin-transform.position).sqrMagnitude>256)return;
             if(LocalPlayerUI.AnyModalWindowOpen()||ui.windowManager.IsCursorWindowOpen()||ui.windowManager.IsInputActive())
             {InputLog("ui-busy",pressed);return;}
@@ -36,8 +41,11 @@ namespace YFAutomation.CargoDrones
             if(!new Bounds(transform.position,new Vector3(1.6f,1.2f,1.6f)).IntersectRay(ray,out distance))
             {InputLog("not-aimed",pressed);return;}
             if(distance>4){InputLog("out-of-range distance="+distance.ToString("F2")+" limit=4",pressed);return;}
-            RaycastHit hit;if(Physics.Raycast(ray,out hit,distance,~0,QueryTriggerInteraction.Ignore))
-            {InputLog("occluded collider="+hit.collider.name+" layer="+hit.collider.gameObject.layer+" distance="+hit.distance.ToString("F2"),pressed);return;}
+            foreach(var hit in Physics.RaycastAll(ray,distance,~0,QueryTriggerInteraction.Ignore))
+            {
+                if(hit.transform.IsChildOf(player.transform)||hit.transform.IsChildOf(transform))continue;
+                InputLog("occluded collider="+hit.collider.name+" layer="+hit.collider.gameObject.layer+" distance="+hit.distance.ToString("F2"),pressed);return;
+            }
             focused=true;
             if(pressed)
             {InputLog("opening",true);XUiC_YFCargoDrone.Pending=visual.Hub;ui.windowManager.Open("yfCargoDrone",true);focused=false;}

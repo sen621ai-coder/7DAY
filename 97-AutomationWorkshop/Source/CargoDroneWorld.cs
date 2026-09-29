@@ -145,6 +145,16 @@ namespace YFAutomation.CargoDrones
         }
         public void Recall(Guid id,string actor)
         {Healthy();var h=Find(id);if(actor!=h.Config.Owner)throw new UnauthorizedAccessException();h.Mission?.Recall();if(Ready)Publish();}
+        public void RedirectShipment(Guid id,string actor,long revision)
+        {
+            Healthy();var h=Find(id);
+            if(actor!=h.Config.Owner)throw new UnauthorizedAccessException("Hub owner required");
+            if(!Ready||h.Removed||h.Config.Revision!=revision||h.Mission==null||h.Config.Target==null)throw new InvalidOperationException("请刷新并选择新目标箱");
+            ICargoDurableEndpoint endpoint;CargoPoint approach;CargoHold hold;
+            if(!adapter.Resolve(h.Config.Target,out endpoint,out approach,out hold))throw new InvalidOperationException("新目标箱暂不可用");
+            h.Mission=h.Mission.RedirectDockedCargo(h.Config.Target.EndpointId,approach,EntrancePoint(h.Config.Entrance),adapter.OpenAirspace(h.Mission.Id));
+            h.Target=h.Config.Target;h.ShipmentEntrance=h.Config.Entrance;h.NextEmptyPoll=0;h.Message="本批货已改送新目标";Publish();
+        }
         public void Restore(CargoWorldState state)
         {
             Healthy();if(hubs.Count!=0||state.Hubs.Any(h=>h.Configuration.WorldId!=world))throw new InvalidOperationException("Restore requires an empty matching world");

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -448,7 +448,13 @@ public static class CargoDroneCoreTests
             Check(mission.Battery==battery,"charging freezes when unpowered offline or world paused");
             mission.ChargeDocked(100,true);Check(mission.Battery==Math.Min(600000,battery+1000),"docked charging uses the configured sixty-second full charge rate");
             for(int i=0;i<600;i++)mission.ChargeDocked(100,true);Check(mission.Battery==600000,"docked charge never exceeds battery capacity");
-            output.Value=Inventory(new CargoItem[1],target.Id,target.Incarnation,output.Value.Revision+1);
+            var redirectedId=Guid.NewGuid();var beforeRedirect=mission.Capture();
+            var redirected=mission.RedirectDockedCargo(redirectedId,new CargoPoint(12,100,0),null,new Airspace());
+            Check(redirected.Phase==CargoPhase.Docked&&redirected.Id==mission.Id&&redirected.TargetId==redirectedId&&redirected.CargoRevision==mission.CargoRevision&&redirected.Battery==mission.Battery&&CargoPlanner.Equal(redirected.Cargo,mission.Cargo),"explicit docked redirection preserves committed cargo, identity and battery");
+            Throws(()=>mission.Capture(),"redirected old mission cannot publish stale target");mission=redirected;
+            store.Save(new[]{mission.Capture()},journal);mission=CargoMission.Restore(store.Load(journal).Single(),new Airspace(),journal);
+            Check(mission.TargetId==redirectedId&&CargoPlanner.Equal(mission.Cargo,beforeRedirect.Cargo),"redirected target and cargo survive durable checkpoint reload");
+            output.Value=Inventory(new CargoItem[1],redirectedId,target.Incarnation,output.Value.Revision+1);
             var retry=mission.RetryDelivery(new Airspace());store.Save(new[]{retry.Capture()},journal);
             Throws(()=>mission.RetryDelivery(new Airspace()),"old docked object cannot dispatch the same shipment twice");
             Throws(()=>mission.Capture(),"retired sortie cannot overwrite active redelivery checkpoint");

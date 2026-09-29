@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -880,6 +880,9 @@ public sealed class CargoDroneNativeQA : IModApi
         block.Block.OnBlockAdded(world,chunk,at,block,owner);
         var tile=world.GetTileEntity(at) as TileEntityComposite;var storage=tile.GetFeature<TEFeatureStorage>();
         Check(storage.bPlayerStorage&&storage.items.Length==36,"placed three-way sorter is a 36-slot cargo target");
+        tile.GetFeature<TEFeatureSignable>().SetText("缺电：4格内需通电供电口",true,tile.Owner);
+        var row=CargoWarehouseSearch.Find(world,new CargoPosition(at.x+2,at.y,at.z),"三路分拣箱",CargoWarehouseKind.All,0).Rows.Single(x=>x.Position.Equals(new CargoPosition(at.x,at.y,at.z)));
+        Check(row.Name=="三路分拣箱"&&row.Sign==""&&CargoWarehouseFilter.TypeLabel(row.Block)=="三路分拣箱","router picker keeps equipment identity instead of dynamic power status");
         var marker=CargoNativeMarkers.Read(tile,load.WorldId);CargoNativeAccessSessions.Register(tile,load.WorldId);var cargo=load.Plan.CargoAfter;
         var item=CargoNativeItems.Decode(cargo.First(i=>i!=null));
         storage.items[18]=item.Clone();

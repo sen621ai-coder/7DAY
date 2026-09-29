@@ -50,7 +50,8 @@ namespace YFAutomation.CargoDrones
                     var at=tile.ToWorldPos();var position=new CargoPosition(at.x,at.y,at.z);
                     if(position.Equals(hub)||!rules.CanDeliver(hub,position))continue;
                     string block=tile.block.GetBlockName(),name=tile.block.GetLocalizedBlockName();
-                    string sign=tile.GetFeature<TEFeatureSignable>()?.GetAuthoredText().Text??"";
+                    string sign=MachineDisplay.IsMachine(block)?"":tile.GetFeature<TEFeatureSignable>()?.GetAuthoredText().Text??"";
+                    if(block=="yfAutoRouter")name="三路分拣箱";
                     if(!CargoWarehouseFilter.Matches(query,kind,name,sign,block))continue;
                     if(found.Count>=CargoWarehouseFilter.MaxResults){limited=true;continue;}
                     double dx=(double)position.X-hub.X,dy=(double)position.Y-hub.Y,dz=(double)position.Z-hub.Z;
