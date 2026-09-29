@@ -9,16 +9,19 @@ namespace PZAEC.Surveillance
         static GameObject cache;
         static Transform screenPrefab;
         static float scanAt,broadcastAt;
+        static bool legacyOversizedSkipped;
         public void InitMod(Mod mod)
         {
             var harmony=new Harmony("pzaec.surveillance");
             harmony.Patch(AccessTools.Method(typeof(BlockShapeModelEntity),"getPrefab"),prefix:new HarmonyMethod(typeof(ModApi),nameof(GetPrefab)));
             harmony.Patch(AccessTools.Method(typeof(GameObjectPool),"DestroyObject",new[]{typeof(GameObject)}),prefix:new HarmonyMethod(typeof(ModApi),nameof(BeforePoolDestroy)));
+            harmony.Patch(AccessTools.Method(typeof(MultiBlockManager),"TryRegisterOversizedBlock"),prefix:new HarmonyMethod(typeof(ModApi),nameof(SkipLegacyOversizedRegistration)));
+            harmony.Patch(AccessTools.Method(typeof(MultiBlockManager),"Initialize"),postfix:new HarmonyMethod(typeof(ModApi),nameof(FinishLegacyStructureMigration)));
             ModEvents.GameStartDone.RegisterHandler(Start);
             ModEvents.GameUpdate.RegisterHandler(Update);
             ModEvents.WorldShuttingDown.RegisterHandler(Stopping);
             ModEvents.GameShutdown.RegisterHandler(Stopped);
-            Log.Out("[Surveillance] v1.0.9 wireless cameras and 4x3 live monitor loaded.");
+            Log.Out("[Surveillance] v1.0.10 wireless cameras and 4x3 live monitor loaded.");
         }
         public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
         {
@@ -31,6 +34,22 @@ namespace PZAEC.Surveillance
                 catch{UnityEngine.Object.Destroy(cache);cache=null;screenPrefab=null;throw;}
             }
             __result=screenPrefab;return false;
+        }
+        public static bool SkipLegacyOversizedRegistration(MultiBlockManager __instance,BlockValue __1,ref bool __result)
+        {
+            // Old multiblocks.7dt files remember the oversized flag. The loader
+            // rebuilds each tracking category independently; skip only this obsolete
+            // category, preserving normal cross-chunk tracking and the world blocks.
+            var block=__1.Block;
+            if(!(block is BlockPZAEC_SurveillanceScreen)||block.isOversized)return true;
+            legacyOversizedSkipped=true;__result=false;
+            Log.Out("[Surveillance] Migrated legacy screen oversized tracking to native 4x3 support.");
+            return false;
+        }
+        public static void FinishLegacyStructureMigration(MultiBlockManager __instance)
+        {
+            // Initialize clears isDirty after reading; mark it only after that reset.
+            if(legacyOversizedSkipped){__instance.isDirty=true;legacyOversizedSkipped=false;}
         }
         public static void BeforePoolDestroy(GameObject __0)
         {

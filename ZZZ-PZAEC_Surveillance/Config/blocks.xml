@@ -30,7 +30,8 @@
       <property name="OnlySimpleRotations" value="true"/>
       <property name="StabilitySupport" value="true"/>
       <property name="ImposterDontBlock" value="true"/>
-      <property name="OversizedBounds" value="(-0.5,1.5,-0.4),(4,3,0.2)"/>
+      <!-- MultiBlockDim supplies the occupied volume. OversizedBounds enables a
+           separate bottom-only support test; a thin wall panel cannot use it. -->
       <property name="WireOffset" value="0,0.25,-0.29"/>
       <property name="RequiredPower" value="30"/>
       <property name="TakeDelay" value="6"/>

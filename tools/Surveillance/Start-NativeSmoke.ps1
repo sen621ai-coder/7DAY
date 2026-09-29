@@ -1,6 +1,6 @@
 #Requires -Version 7.0
 [CmdletBinding()]
-param([string]$GameRoot=(Split-Path (Split-Path (Split-Path $PSScriptRoot))),[switch]$VisualQA,[switch]$PlacementQA)
+param([string]$GameRoot=(Split-Path (Split-Path (Split-Path $PSScriptRoot))),[switch]$VisualQA,[switch]$PlacementQA,[string]$SaveSource,[string]$PlacementSource='PlacementGameQA.cs')
 $ErrorActionPreference='Stop'
 if($VisualQA -and $PlacementQA){throw 'Run VisualQA and PlacementQA separately (one QA assembly per run).'}
 $modRoot=Split-Path (Split-Path $PSScriptRoot)
@@ -13,9 +13,14 @@ New-Item -ItemType Directory -Force $mods|Out-Null
 Copy-Item -LiteralPath (Join-Path $modRoot '0_TFP_Harmony') -Destination $mods -Recurse -Force
 Copy-Item -LiteralPath (Join-Path $modRoot 'ZZZ-PZAEC_Surveillance') -Destination $mods -Recurse -Force
 if($VisualQA){& (Join-Path $PSScriptRoot 'Build-VisualQA.ps1') -OutputDirectory (Join-Path $mods 'ZZZZ-SurveillanceVisualQA')}
-if($PlacementQA){& (Join-Path $PSScriptRoot 'Build-VisualQA.ps1') -OutputDirectory (Join-Path $mods 'ZZZZ-SurveillancePlacementQA') -SourceFile 'PlacementGameQA.cs'}
+if($PlacementQA){& (Join-Path $PSScriptRoot 'Build-VisualQA.ps1') -OutputDirectory (Join-Path $mods 'ZZZZ-SurveillancePlacementQA') -SourceFile $PlacementSource}
+if($SaveSource){
+  $save=Join-Path $userData 'Saves/Navezgane/SurveillanceQA_Isolated'
+  New-Item -ItemType Directory -Force $save|Out-Null
+  Get-ChildItem -LiteralPath $SaveSource|Copy-Item -Destination $save -Recurse
+}
 [xml]$config=Get-Content -LiteralPath (Join-Path $GameRoot 'serverconfig.xml')
-$values=@{GameWorld='Navezgane';GameName='SurveillanceQA_Isolated';ServerName='Surveillance Native Smoke';ServerPort='27991';ServerVisibility='0';ServerPassword='SurveillanceQALocalOnly';TelnetEnabled='false';WebDashboardEnabled='false';TerminalWindowEnabled='false';EACEnabled='false';UserDataFolder=$userData;ServerMaxPlayerCount='1'}
+$values=@{GameWorld='Navezgane';GameName='SurveillanceQA_Isolated';ServerName='Surveillance Native Smoke';ServerPort='27991';ServerVisibility='0';ServerPassword='SurveillanceQALocalOnly';TelnetEnabled='false';WebDashboardEnabled='false';TerminalWindowEnabled='false';EACEnabled='false';UserDataFolder=$userData;ServerMaxPlayerCount='1';ServerMaxAllowedViewDistance='4';DynamicMeshEnabled='false'}
 foreach($key in $values.Keys){$node=$config.SelectSingleNode("/ServerSettings/property[@name='$key']");if(!$node){$node=$config.CreateElement('property');$node.SetAttribute('name',$key);$config.DocumentElement.AppendChild($node)|Out-Null};$node.SetAttribute('value',$values[$key])}
 $configPath=Join-Path $qaRoot 'serverconfig.xml';$config.Save($configPath);$log=Join-Path $qaRoot 'game.log'
 $args=@('-batchmode','-dedicated','-crossplatform=None','-serverplatforms=LAN',('-configfile="'+$configPath+'"'),('-UserDataFolder="'+$userData+'"'),'-logfile',('"'+$log+'"'))
@@ -28,7 +33,8 @@ try{
     Start-Sleep -Seconds 2
     if(Test-Path -LiteralPath $log){
       $text=Get-Content -LiteralPath $log -Raw
-      if($text -match '\[Surveillance\] v1\.0\.9 wireless cameras'){$initialized=$true}
+      if($text -match 'Crash!!!|EXC Out of memory'){$failure='Native game crashed or ran out of memory';break}
+      if($text -match '\[Surveillance\] v1\.0\.10 wireless cameras'){$initialized=$true}
       if($text -match 'INF Loaded \(local\): blocks in'){$blocksLoaded=$true}
       if($text -match '\[Surveillance\] 4x3 footprint verified: -2, 0, 0;'){$footprint=$true}
       if($text -match '\[Surveillance\] Wireless device registry attached; block/tile audit passed'){$worldAttached=$true}
