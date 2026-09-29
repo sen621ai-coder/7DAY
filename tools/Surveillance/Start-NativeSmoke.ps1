@@ -28,7 +28,7 @@ try{
     Start-Sleep -Seconds 2
     if(Test-Path -LiteralPath $log){
       $text=Get-Content -LiteralPath $log -Raw
-      if($text -match '\[Surveillance\] v1\.0\.8 wireless cameras'){$initialized=$true}
+      if($text -match '\[Surveillance\] v1\.0\.9 wireless cameras'){$initialized=$true}
       if($text -match 'INF Loaded \(local\): blocks in'){$blocksLoaded=$true}
       if($text -match '\[Surveillance\] 4x3 footprint verified: -2, 0, 0;'){$footprint=$true}
       if($text -match '\[Surveillance\] Wireless device registry attached; block/tile audit passed'){$worldAttached=$true}

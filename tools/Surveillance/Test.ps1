@@ -12,11 +12,12 @@ if(!$screen -or !$camera){throw 'Surveillance blocks missing'}
 if((Property $screen 'MultiBlockDim') -ne '4,3,1'){throw 'Screen is not 4x3x1'}
 if((Property $screen 'OversizedBounds') -ne '(-0.5,1.5,-0.4),(4,3,0.2)'){throw 'Screen bounds do not match the wall-mounted panel'}
 if((Property $screen 'RequiredPower') -ne '30'){throw 'Screen power mismatch'}
+if((Property $screen 'StabilitySupport') -ne 'true'){throw 'Screen must support its upper occupied rows'}
 if((Property $camera 'RequiredPower') -ne '5'){throw 'Camera power mismatch'}
 if((Property $screen 'Class') -ne 'PZAEC_SurveillanceScreen,PZAEC.Surveillance'){throw 'Screen runtime class binding mismatch'}
 if((Property $camera 'Class') -ne 'PZAEC_SurveillanceCamera,PZAEC.Surveillance'){throw 'Camera runtime class binding mismatch'}
 if(@($recipes.configs.append.recipe).Count -ne 2){throw 'Recipe count mismatch'}
-if($info.xml.Version.value -ne '1.0.8'){throw 'ModInfo version mismatch'}
+if($info.xml.Version.value -ne '1.0.9'){throw 'ModInfo version mismatch'}
 $dll=Join-Path $mod 'PZAEC.Surveillance.dll';if(!(Test-Path $dll)){throw 'Compiled DLL missing'}
 $source=Get-Content (Join-Path $mod 'Source/SurveillanceState.cs') -Raw
 if($source -notmatch 'WirelessRange=128f'){throw 'Wireless range contract missing'}
