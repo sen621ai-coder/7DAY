@@ -215,6 +215,8 @@ namespace PZAEC.Surveillance
             try
             {
                 FeedCamera.Follow(s.Camera,s.Parent);
+                var observer=world?.GetPrimaryPlayer()?.playerCamera;
+                if(observer!=null)FeedCamera.ApplyEnvironment(s.Camera,observer);
                 // Distant and offscreen feeds render at the low tier immediately;
                 // QualityGate still delays upgrades when a viewer comes close.
                 int width=RenderPolicy.Width(s.Near?s.Quality.Tier:0);
@@ -235,7 +237,7 @@ namespace PZAEC.Surveillance
                     if(label!=null&&label.enabled){label.enabled=false;hidden.Add(label);}
                     var markers=w.View.MarkerRenderer;if(markers!=null&&markers.enabled){markers.enabled=false;hidden.Add(markers);}
                 }
-                s.Camera.Render();s.Clock.Success(Time.realtimeSinceStartup,s.Hz);s.WaitingFirstFrame=false;s.Frames++;success=true;
+                FeedCamera.Render(s.Camera);s.Clock.Success(Time.realtimeSinceStartup,s.Hz);s.WaitingFirstFrame=false;s.Frames++;success=true;
                 if(replacement!=null){s.Retired=s.Texture;s.Texture=replacement;replacement=null;}
                 s.MarkerFrame=-1;
                 if(s.Markers)
