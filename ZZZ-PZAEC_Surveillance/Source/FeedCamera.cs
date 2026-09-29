@@ -37,9 +37,10 @@ namespace PZAEC.Surveillance
         public static void Follow(Camera camera,Transform mount)
         {
             if(camera==null||mount==null)throw new InvalidOperationException("Camera mount unloaded");
-            // The sensor cone can roll with the block/model hierarchy. Keep its aim,
-            // but level the video horizon against the world's vertical axis.
-            var forward=mount.forward;
+            // Native turret_cone mesh extends along local -Z, towards the lens front.
+            // Transform.forward (+Z) points behind this sensor. Keep the horizon level
+            // while following the actual cone aim through yaw, pitch and block rotation.
+            var forward=-mount.forward;
             var up=Vector3.up;
             if(Mathf.Abs(Vector3.Dot(forward,up))>.995f)
             {

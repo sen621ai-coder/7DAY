@@ -63,6 +63,7 @@ public sealed class CargoDroneNativeQA : IModApi
             CargoNativeAccessSessions.InstallForValidation(new HarmonyLib.Harmony("yf.cargo.qa.access"));
             VerifyAccessPackets();
             VerifyCargoModels();
+            VerifyHubSkinReplacement();
             bool resumeCrash=Environment.GetCommandLineArgs().Contains("-yfCargoResumeCrash");
             if(resumeCrash)
             {
@@ -664,6 +665,7 @@ public sealed class CargoDroneNativeQA : IModApi
         var restored=CargoNativeWorld.Current.Service.Status().Single().Configuration;
         Check(restored.HubId==config.HubId&&restored.Revision==config.Revision&&restored.Paused&&restored.Sources.Single().Matches(config.Sources.Single())&&restored.Target.Matches(config.Target),"normal startup restores source target pause and exact hub revision without duplicate discovery");
         VerifyPlayerCommands(restored);
+        restored=CargoNativeWorld.Current.Service.Status().Single().Configuration;
         var stack=CargoNativeItems.Decode(inventoryBefore.Items[0]);stack.count=3;inventoryCollector.Items[0]=stack;inventoryCollector.SetChunkModified();
         recoveryHub=restored.SetPaused(restored.Owner,restored.Revision,false);
         CargoNativeWorld.Current.Service.Configure(restored.HubId,restored.Owner,restored.Revision,recoveryHub);
@@ -723,9 +725,42 @@ public sealed class CargoDroneNativeQA : IModApi
             CargoNativeValidationEndpoint.SetStartupQuarantine(config.WorldId,new[]{endpointId});
             Check(CargoNativeValidationEndpoint.IsFenced(inventoryCollector)&&endpoint.Snapshot().Busy&&!endpoint.AcquireFence(Guid.NewGuid(),endpoint.Snapshot().Revision),"unresolved startup endpoint remains quarantined even before an active transfer exists");
             CargoNativeValidationEndpoint.SetStartupQuarantine(config.WorldId,new Guid[0]);
+            VerifyPartyCommands(config,player);
         }
         finally{players.EntityToPlayerMap.Remove(id);world.Players.Remove(id);world.Entities.Remove(id);UnityEngine.Object.Destroy(player.gameObject);}
         lines.Add("AUDIT SCOPE native EntityPlayer and persistent-ID fixtures exercise server commands; connected-client transport and mouse interaction remain untested.");
+    }
+    static void VerifyPartyCommands(CargoHubConfiguration config,EntityPlayer owner)
+    {
+        var players=GameManager.Instance.GetPersistentPlayerList();var fixture=new GameObject("CargoTeammateFixture");fixture.SetActive(false);
+        var teammate=fixture.AddComponent<EntityPlayer>();int id=int.MaxValue-11;teammate.entityId=id;teammate.position=owner.position;
+        var user=PlatformUserIdentifierAbs.FromPlatformAndId("Steam","76561198000000003",false);
+        Check(user.CombinedString!=config.Owner,"teammate fixture has a distinct persistent player identity");
+        world.Entities.Add(id,teammate);world.Players.Add(id,teammate);
+        players.EntityToPlayerMap.Add(id,new PersistentPlayerData(user,user,new AuthoredText("Cargo teammate QA",user),(Platform.EPlayGroup)0){EntityId=id});
+        var oldParty=owner.party;var party=new Party();owner.party=party;teammate.party=party;
+        party.MemberList.Add(owner);
+        var at=new Vector3i(config.Position.X,config.Position.Y,config.Position.Z);
+        var request=new NetPackageYFCargoHubRequest{At=at,Hub=config.HubId,Revision=config.Revision,Request=2300,Action=CargoHubAction.TogglePause};
+        try
+        {
+            Check(!CargoHubAccess.CanControl(teammate,config.Owner),"party reference without actual membership cannot control hub");
+            var reply=request.Evaluate(world,id);Check(!reply.Allowed,"unjoined player cannot issue server hub commands");NetPackageManager.FreePackage(reply);
+            party.MemberList.Add(teammate);
+            Check(CargoHubAccess.CanControl(teammate,config.Owner),"same-party teammate passes shared command and picker authorization");
+            reply=request.Evaluate(world,id);
+            var changed=CargoNativeWorld.Current.Service.Status().Single().Configuration;
+            Check(reply.Allowed&&changed.Paused!=config.Paused&&changed.Revision==config.Revision+1&&changed.Owner==config.Owner,"teammate command changes scheduling with revision check and preserves ownership");NetPackageManager.FreePackage(reply);
+            request.Action=CargoHubAction.Read;reply=request.Evaluate(world,id);
+            Check(reply.Allowed&&reply.Hub==config.HubId&&reply.Details.Contains("采集设备"),"teammate can receive authoritative hub information");NetPackageManager.FreePackage(reply);
+            teammate.position+=new Vector3(30,0,0);reply=request.Evaluate(world,id);
+            Check(!reply.Allowed&&reply.Hub==Guid.Empty,"teammate must remain in interaction range");NetPackageManager.FreePackage(reply);teammate.position=owner.position;
+            party.MemberList.Remove(teammate);reply=request.Evaluate(world,id);
+            Check(!reply.Allowed&&reply.Hub==Guid.Empty,"leaving party immediately revokes access even with a stale party reference");NetPackageManager.FreePackage(reply);
+            party.MemberList.Add(teammate);teammate.party=new Party{PartyID=party.PartyID};teammate.party.MemberList.Add(teammate);
+            Check(!CargoHubAccess.CanControl(teammate,config.Owner),"matching numeric party IDs cannot grant unrelated player access");
+        }
+        finally{owner.party=oldParty;teammate.party=null;players.EntityToPlayerMap.Remove(id);world.Players.Remove(id);world.Entities.Remove(id);UnityEngine.Object.Destroy(fixture);}
     }
     static CargoPosition SelectTransportFixture(CargoHubConfiguration config,bool sources,Vector3i expected)
     {
@@ -1021,6 +1056,25 @@ public sealed class CargoDroneNativeQA : IModApi
             Check(memory.Length==source.GetLength(),"native cargo protocol packet length matches serialized bytes");memory.Position=0;
             using(var reader=MemoryPools.poolBinaryReader.AllocSync(false)){reader.SetBaseStream(memory);Check(reader.ReadUInt16()==destination.PackageId,"native cargo protocol packet id registered");destination.read(reader);Check(memory.Position==memory.Length,"native cargo protocol decoder consumes entire packet");}
         }
+    }
+    static void VerifyHubSkinReplacement()
+    {
+        var root=new GameObject("CargoHubNativeSkinFixture");
+        var native=GameObject.CreatePrimitive(PrimitiveType.Cube);native.transform.SetParent(root.transform,false);
+        var lod=GameObject.CreatePrimitive(PrimitiveType.Cube);lod.transform.SetParent(root.transform,false);lod.SetActive(false);
+        try
+        {
+            var position=new Vector3(4,90,5);var model=CargoClientWorld.EnsureHubModel(root.transform,position);
+            Check(native.GetComponent<Renderer>().forceRenderingOff&&lod.GetComponent<Renderer>().forceRenderingOff,"hub replacement suppresses native active and inactive LOD renderers");
+            lod.SetActive(true);lod.GetComponent<Renderer>().enabled=true;
+            Check(lod.GetComponent<Renderer>().forceRenderingOff,"native LOD reactivation cannot reveal the old green platform");
+            native.GetComponent<Renderer>().forceRenderingOff=false;native.GetComponent<Renderer>().enabled=true;
+            var again=CargoClientWorld.EnsureHubModel(root.transform,position);
+            Check(again==model&&root.transform.Cast<Transform>().Count(t=>t.name=="CargoHub")==1&&native.GetComponent<Renderer>().forceRenderingOff,"repeated attachment repairs suppression without adding a second platform");
+            Check(model.GetComponentsInChildren<Renderer>(true).All(r=>r.enabled&&!r.forceRenderingOff)&&model.transform.position==position,"replacement grey platform remains visible at the block base");
+            Check(native.GetComponent<Collider>().enabled&&model.GetComponents<BoxCollider>().Length==1,"model replacement preserves native interaction and adds no duplicate collider");
+        }
+        finally{UnityEngine.Object.Destroy(root);}
     }
     static void VerifyCargoModels()
     {

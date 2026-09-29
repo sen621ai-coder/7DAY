@@ -162,7 +162,7 @@ namespace YFAutomation.CargoDrones
                 float until;if(next.TryGetValue(actor,out until)&&Time.realtimeSinceStartup<until)throw new InvalidOperationException("搜索过快，请稍后再试");next[actor]=Time.realtimeSinceStartup+.5f;
                 var runtime=CargoNativeWorld.Current;
                 var state=runtime?.Service.Status().SingleOrDefault(s=>s.Configuration.HubId==Hub&&s.Configuration.Position.Equals(new CargoPosition(At.x,At.y,At.z)));
-                if(state==null||player==null||player.IsDead()||(player.position-new Vector3(At.x+.5f,At.y+.5f,At.z+.5f)).sqrMagnitude>64||player.PersistentPlayerData?.PrimaryId?.CombinedString!=state.Configuration.Owner||!runtime.HubExists(state.Configuration))throw new InvalidOperationException("需要停机坪所有者在 8 格内搜索");
+                if(state==null||player==null||player.IsDead()||(player.position-new Vector3(At.x+.5f,At.y+.5f,At.z+.5f)).sqrMagnitude>64||!CargoHubAccess.CanControl(player,state.Configuration.Owner)||!runtime.HubExists(state.Configuration))throw new InvalidOperationException("需要所有者或同队队友在停机坪 8 格内搜索");
                 if(Sources&&Entrances)throw new InvalidOperationException("设备搜索模式无效");
                 reply.Result=Sources?CargoSourceSearch.Find(world,state.Configuration,Query,SourceKind,Page,BoundOnly):Entrances?CargoEntranceSearch.Find(world,state.Configuration,Query,Page):CargoWarehouseSearch.Find(world,state.Configuration.Position,Query,Kind,Page);reply.Success=true;
                 if(!Sources&&!Entrances&&CargoWarehouseSearch.MatchesBinding(world,state.Configuration.Target))foreach(var row in reply.Result.Rows)row.Bound=row.Position.Equals(state.Configuration.Target.Position);
