@@ -8,10 +8,11 @@ public static class M1ChassisTests {
   Check(PZAEC.M1.ChassisRules.CanAssist(1,1,0,0,0,true,false),"slow straight grounded approach");
   Check(!PZAEC.M1.ChassisRules.CanAssist(3,1,0,0,0,true,false),"high speed cannot trigger assist");
   Check(!PZAEC.M1.ChassisRules.CanAssist(1,0,0,0,0,true,false),"throttle release");
-  Check(!PZAEC.M1.ChassisRules.CanAssist(1,-1,0,0,0,true,false),"reverse remains native");
+  Check(PZAEC.M1.ChassisRules.CanAssist(1,-1,0,0,0,true,false),"slow reverse assistance");
+  Check(!PZAEC.M1.ChassisRules.CanAssist(1.2f,-1,0,0,0,true,false),"reverse speed cap");
   Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,1,0,0,true,false),"turning into side of obstacle");
-  Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,0,18,0,true,false),"pitch boundary");
-  Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,0,0,-12,true,false),"side tilt boundary");
+  Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,0,28,0,true,false),"pitch boundary");
+  Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,0,0,-15,true,false),"side tilt boundary");
   Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,0,0,0,false,false),"one side missing support");
   Check(!PZAEC.M1.ChassisRules.CanAssist(1,1,0,0,0,true,true),"braking cancels assist");
   Check(PZAEC.M1.ChassisRules.Landing(.6f,.6f,1),"maximum target accepted");
@@ -20,6 +21,11 @@ public static class M1ChassisTests {
   Check(!PZAEC.M1.ChassisRules.Landing(.4f,-1,1),"missing far landing denied");
   Check(!PZAEC.M1.ChassisRules.Landing(.4f,.4f,.6f),"steep landing denied");
   Check(!PZAEC.M1.ChassisRules.Landing(float.NaN,.4f,1),"invalid sample denied");
+  Check(!PZAEC.M1.ChassisRules.CanAssist(float.NaN,1,0,0,0,true,false),"invalid speed denied");
+  Check(PZAEC.M1.ChassisRules.HeightLimit(true)==.3f,"reverse height is separate");
+  Check(PZAEC.M1.ChassisRules.TractionScale(0,0,0,true)==.6f,"reverse force reduction");
+  Check(PZAEC.M1.ChassisRules.CanContinue(2.3f,1,0,0,0,true,false),"small speed overshoot retains obstacle state");
+  Check(PZAEC.M1.ChassisRules.TractionScale(2.3f,0,0,false)==0,"overshoot never extends powered speed range");
   float last=32;for(int k=0;k<=100;k++){
    float limit=PZAEC.M1.ChassisRules.SteeringLimit(k/3.6f);
    Check(limit<=last+.00001f&&limit>=14&&limit<=32,"bounded continuous high speed steering "+k);last=limit;
@@ -45,10 +51,23 @@ public static class M1ChassisTests {
    Check(!stuck.Tick(true,dt,-.49f),"insufficient retreat");
    Check(stuck.Tick(true,dt,-.51f),"retreat rearms attempt");
    var moving=new PZAEC.M1.ChassisRules.Attempt();float distance=0;
-   for(int i=0;i<300;i++){distance+=dt;moving.Tick(true,dt,distance);}
+   for(int i=0;i<800;i++){distance+=dt;moving.Tick(true,dt,distance);}
    Check(moving.Blocked,"even progressing attempts time out");
    var lost=new PZAEC.M1.ChassisRules.Attempt();lost.Tick(true,dt,0);
    Check(!lost.Tick(false,dt,.1f)&&lost.Blocked,"lost support or fuel abort immediately");
+   var complete=new PZAEC.M1.ChassisRules.Attempt();complete.Begin(6);
+   for(int i=0;i<260;i++)complete.Advance(true,true,.02f,i*.03f,3);
+   Check(!complete.Active&&!complete.Blocked&&complete.Phase==PZAEC.M1.ChassisRules.Stage.Complete,"rear clears obstacle and permits next attempt");
+   complete.Begin(6);Check(complete.Advance(true,true,.02f,0,3),"next obstacle requires no retreat");
+   Check(!complete.Advance(true,false,.02f,.1f,3)&&complete.Active,"probe loss stops force immediately but allows short recovery");
+   Check(complete.Advance(true,true,.02f,.12f,3),"fresh geometry resumes attempt");
+   Check(!complete.Advance(false,true,.02f,.14f,3)&&complete.Blocked,"safety exit has no grace period");
+   var jitter=new PZAEC.M1.ChassisRules.Attempt();jitter.Begin(6);
+   for(int i=0;i<50;i++)jitter.Advance(true,true,.02f,i%2==0?0:.02f,3);
+   Check(jitter.Blocked,"rocking without net progress cannot renew attempt");
+   var missed=new PZAEC.M1.ChassisRules.Attempt();missed.Begin(6);
+   for(int i=0;i<10;i++)missed.Advance(true,false,.02f,i*.01f,3);
+   Check(missed.Blocked,"prolonged missing landing aborts");
   }
   System.Console.WriteLine("PASS "+n+" chassis eligibility, landing, steering and finite-attempt checks");
  }

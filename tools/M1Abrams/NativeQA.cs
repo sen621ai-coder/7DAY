@@ -139,6 +139,24 @@ public sealed class M1NativeQA:IModApi
             Check(vehicle.bag.GetItemCount(ItemClass.GetItem(SecondaryRules.Missile,false))==1,"native AA shot consumes one missile");Check(state.LeftAt>Time.time+11.9f&&state.RightAt<=Time.time,"only fired tube begins cooldown");
             Intent(world,vehicle,gunner,0,false,false,bird.position);int hp=bird.Health;for(int i=0;i<100;i++)Secondary.Advance(.01f);
             Check(bird.Health<hp,"native guided missile still hits after switching to cannon");
+            bird.SetPosition(vehicle.position+new Vector3(0,-10,100));Physics.SyncTransforms();
+            state.LeftAt=state.RightAt=state.GlobalAt=0;
+            Intent(world,vehicle,gunner,2,false,true,bird.position+Vector3.up*.8f);state.Inputs[1].SwitchUntil=Time.time-1;
+            Secondary.Update(main,1.5f);
+            results.Add("INFO low AA reason="+state.AAReason+" pitch="+state.AAP+" lock="+state.Lock);
+            Check(state.Target==bird.entityId&&state.AAP<0&&state.AAReason==0,"AA acquires below-horizon flying target with real hull clearance");
+            Intent(world,vehicle,gunner,2,true,true,bird.position+Vector3.up*.8f);Secondary.Update(main,.1f);
+            Check(vehicle.bag.GetItemCount(ItemClass.GetItem(SecondaryRules.Missile,false))==0,"AA launches at low-altitude target and consumes one missile");
+            var flash=Presentation.CreateMGFlash(state.Muzzle);flash.gameObject.SetActive(true);
+            AccessTools.Field(typeof(Optics),"model").SetValue(null,main.Model);AccessTools.Method(typeof(Optics),"Visibility").Invoke(null,new object[]{true});
+            Check(!flash.GetComponent<Renderer>().forceRenderingOff,"scope hides armor but retains separate muzzle flash renderer");
+            Optics.Clear();UnityEngine.Object.Destroy(flash.gameObject);
+            AccessTools.Method(typeof(SecondaryPresentation),"Add").Invoke(null,new object[]{vehicle.entityId,123,vehicle.position,vehicle.position+Vector3.forward*200,false,0f});
+            var visualTrails=(System.Collections.IList)AccessTools.Field(typeof(SecondaryPresentation),"trails").GetValue(null);var shortTrail=visualTrails[visualTrails.Count-1];
+            shortTrail.GetType().GetField("Start").SetValue(shortTrail,Time.time-.05f);SecondaryPresentation.Update(world);
+            var shortLine=(LineRenderer)shortTrail.GetType().GetField("Line").GetValue(shortTrail);
+            Check(Vector3.Distance(shortLine.GetPosition(0),shortLine.GetPosition(1))<2.51f&&Vector3.Distance(shortLine.GetPosition(1)+Origin.position,vehicle.position)>40,"MG tracer is a moving short segment rather than a 200m beam");
+            SecondaryPresentation.Clear();
             int playerHealth=player.Health;Combat.SecondaryHit(player,gunner.entityId,5000000,true,Vector3.forward,player.position);Check(player.Health==playerHealth,"secondary damage refuses player target");
             results.Add("FINISHED failures=0");
         }catch(Exception e){results.Add("FAIL "+e);}

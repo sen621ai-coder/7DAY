@@ -33,3 +33,11 @@ pzM1MGBeltDesc,items,Item,,,100发弹链；放入M1货仓。打空自动换链4�
 pzM1AAMissileDesc,items,Item,,,仅锁定40～600米飞行敌人；1.5秒锁定，每管12秒冷却，忽略50%物理护甲。放入M1货仓。,仅锁定40～600米飞行敌人；1.5秒锁定，每管12秒冷却，忽略50%物理护甲。放入M1货仓。
 modPZAECM1StabilizerDesc,items,Item,,,炮塔、炮管、机枪与导弹架追踪速度+50%；机枪散布降低25%；主炮车体反冲降低60%。不提高导弹制导能力。可与M1辅助装填同装。,炮塔、炮管、机枪与导弹架追踪速度+50%；机枪散布降低25%；主炮车体反冲降低60%。不提高导弹制导能力。可与M1辅助装填同装。
 modPZAECM1AutoloaderDesc,items,Item,,,主炮装填/切弹、机枪换链、每管导弹冷却降低25%（机枪3秒、导弹9秒）。不降低热量或锁定时间。可与M1稳定火控同装。,主炮装填/切弹、机枪换链、每管导弹冷却降低25%（机枪3秒、导弹9秒）。不降低热量或锁定时间。可与M1稳定火控同装。
+PZAECM1AssemblyKitT16,items,Item,,,M1 T16 Assembly Kit,M1 T16整备套件
+PZAECM1AssemblyKitT16Desc,items,Item,,,Workbench materials for M1 T16 assembly. Craft one kit per tank. Not a repair kit.,用于制造或升级至M1 T16，每辆需要1套。先在工作台合成，再与前阶车辆、战术组件、心核和电容组装；T16另需发动机。整合原配方普通材料，总用量不变。不能用于维修。
+PZAECM1AssemblyKitT17,items,Item,,,M1 T17 Assembly Kit,M1 T17整备套件
+PZAECM1AssemblyKitT17Desc,items,Item,,,Workbench materials for M1 T17 assembly. Craft one kit per tank. Not a repair kit.,用于制造或升级至M1 T17，每辆需要1套。先在工作台合成，再与前阶车辆、战术组件、心核和电容组装；T16另需发动机。整合原配方普通材料，总用量不变。不能用于维修。
+PZAECM1AssemblyKitT18,items,Item,,,M1 T18 Assembly Kit,M1 T18整备套件
+PZAECM1AssemblyKitT18Desc,items,Item,,,Workbench materials for M1 T18 assembly. Craft one kit per tank. Not a repair kit.,用于制造或升级至M1 T18，每辆需要1套。先在工作台合成，再与前阶车辆、战术组件、心核和电容组装；T16另需发动机。整合原配方普通材料，总用量不变。不能用于维修。
+PZAECM1AssemblyKitT19,items,Item,,,M1 T19 Assembly Kit,M1 T19整备套件
+PZAECM1AssemblyKitT19Desc,items,Item,,,Workbench materials for M1 T19 assembly. Craft one kit per tank. Not a repair kit.,用于制造或升级至M1 T19，每辆需要1套。先在工作台合成，再与前阶车辆、战术组件、心核和电容组装；T16另需发动机。整合原配方普通材料，总用量不变。不能用于维修。

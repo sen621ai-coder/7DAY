@@ -74,7 +74,7 @@ for name in ['pzM1Shell','pzM1ShellAP']:
     r=recipe_defs.find(f"./append/recipe[@name='{name}']");check(r.get('count')=='10',name+' batch ten')
     check(item_defs.find(f"./append/item[@name='{name}']/property[@name='Stacknumber']").get('value')=='20',name+' stack twenty')
     check(not any('PZAEC' in x.get('name') for x in r.findall('ingredient')),name+' ammo does not consume progression drops')
-check(len(item_defs.findall('./append/item'))==9,'Four tanks and five supply items')
+check(len(item_defs.findall('./append/item'))==13,'Four tanks, five supply items and four assembly kits')
 for file in ['color0.png','color1.png','metal0.png','metal1.png','ao0.png','ao1.png','normalPacked0.png','normalPacked1.png','cannon-blast.wav','cannon-mechanism.wav','cannon-ready.wav']:
     check((MOD/'Resources'/file).stat().st_size>100,file+' exists')
 with (MOD/'Config/Localization.csv').open(encoding='utf8') as f:check(all(len(row)==7 for row in csv.reader(f)),'Localization column counts')

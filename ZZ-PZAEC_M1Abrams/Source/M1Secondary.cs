@@ -144,8 +144,8 @@ namespace PZAEC.M1
         static bool Visible(State s,Vector3 origin,EntityAlive target){var delta=Center(target)-origin;return !Weapons.Trace(s.Main.Vehicle,origin,delta.normalized,delta.magnitude,out var hit)||ItemActionAttack.FindHitEntity(hit)==target;}
         static bool Candidate(State s,int seat,EntityAlive e)
         {
-            if(!Target(e))return false;var origin=s.Main.Vehicle.position+s.Origins[seat];var delta=Center(e)-origin;float distance=Vector3.Distance(Center(e),s.Main.Vehicle.position);var local=Quaternion.Inverse(Weapons.Body(s.Main.Vehicle))*delta.normalized;float pitch=Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg;
-            return distance>=40&&distance<=600&&pitch>=0&&pitch<=85&&Vector3.Angle(delta,s.Views[seat])<=6&&Visible(s,origin,e);
+            if(!Target(e))return false;var origin=s.Main.Vehicle.position+s.Origins[seat];var delta=Center(e)-origin;float distance=Vector3.Distance(Center(e),s.Main.Vehicle.position);var local=Quaternion.Inverse(Weapons.Body(s.Main.Vehicle))*(Center(e)-Position(s.AAPitch)).normalized;float pitch=Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg;
+            return distance>=40&&distance<=600&&SecondaryRules.AASearchPitch(pitch)&&Vector3.Angle(delta,s.Views[seat])<=6&&Visible(s,origin,e);
         }
         static void UpdateAA(State s,int seat,float dt)
         {
@@ -157,12 +157,12 @@ namespace PZAEC.M1
             if(s.Target<0){float best=7,bestDistance=float.MaxValue;foreach(var entity in w.Entities.list){var candidate=entity as EntityAlive;if(!Candidate(s,seat,candidate))continue;var d=Center(candidate)-(v.position+s.Origins[seat]);float a=Vector3.Angle(d,s.Views[seat]);if(a<best||Mathf.Approximately(a,best)&&d.sqrMagnitude<bestDistance){best=a;bestDistance=d.sqrMagnitude;target=candidate;}}if(target!=null)s.Target=target.entityId;}
             Vector3 aim=target!=null?Center(target):v.position+s.Origins[seat]+s.Views[seat]*600;var delta=aim-Position(s.AAPitch);var local=Quaternion.Inverse(Weapons.Body(v))*delta.normalized;float yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg,pitch=Mathf.Asin(Mathf.Clamp(local.y,-1,1))*Mathf.Rad2Deg;float tracking=ModuleRules.Tracking(Modules.Get(v));
             s.Main.Trigger.Stop();s.Main.HasSight=false;s.Main.Yaw=Mathf.MoveTowardsAngle(s.Main.Yaw,yaw,Weapons.Spec(v).Yaw*tracking*(v.vehicle.GetHealthPercent()<.3f?.75f:1)*dt);s.Main.Pitch=Mathf.Max(s.Main.Pitch,Rules.MinPitch(s.Main.Yaw));
-            s.Main.YawNode.localRotation=Quaternion.Euler(0,s.Main.Yaw,0);s.Main.PitchNode.localRotation=Quaternion.Euler(-s.Main.Pitch,0,0);s.AAP=Mathf.MoveTowards(s.AAP,Mathf.Clamp(pitch,15,65),45*tracking*dt);s.AAPitch.localRotation=Quaternion.Euler(-s.AAP,0,0);
+            s.Main.YawNode.localRotation=Quaternion.Euler(0,s.Main.Yaw,0);s.Main.PitchNode.localRotation=Quaternion.Euler(-s.Main.Pitch,0,0);s.AAP=Mathf.MoveTowards(s.AAP,Mathf.Clamp(pitch,SecondaryRules.AAMinPitch,SecondaryRules.AAMaxPitch),45*tracking*dt);s.AAPitch.localRotation=Quaternion.Euler(-s.AAP,0,0);
             if(target==null){s.AAReason=9;return;}
             bool visible=Candidate(s,seat,target);if(!visible){if(s.LostAt<0)s.LostAt=Time.time;if(Time.time-s.LostAt>.3f)ClearLock(s);s.AAReason=10;return;}
             s.LostAt=-1;s.Lock=Mathf.Min(1.5f,s.Lock+dt);s.GoodLock=true;s.AAReason=s.Lock<1.5f?11:0;
             int tube=SecondaryRules.Tube(s.LeftAt,s.RightAt,s.Preferred,Time.time);var muzzle=tube==1?s.Right:s.Left;
-            if(Vector3.Angle(muzzle.forward,Center(target)-Position(muzzle))>25||Mathf.Abs(s.AAP-Mathf.Clamp(pitch,15,65))>2)s.AAReason=4;
+            if(Vector3.Angle(muzzle.forward,Center(target)-Position(muzzle))>25||Mathf.Abs(s.AAP-Mathf.Clamp(pitch,SecondaryRules.AAMinPitch,SecondaryRules.AAMaxPitch))>2)s.AAReason=4;
             else if(!Corridor(s,s.AAPitch,muzzle,2,2))s.AAReason=2;
             else if(tube<0||Time.time<s.GlobalAt)s.AAReason=6;
             else if(Count(s,SecondaryRules.Missile)==0)s.AAReason=7;

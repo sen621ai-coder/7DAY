@@ -1,0 +1,34 @@
+{
+  "version": "0.4.6",
+  "dllSHA256": "ceb4a10d52804730d68d80b6eb6eda15c5746799524d7b06c520d486c205e72b",
+  "fixtureSHA256": "2ef5a301a57530fa7a2d505d3188cf8a4189a8d9b6d1c0026f9e6a24a27084a6",
+  "sourceReport": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\M1NativeQA\\run-ca5e44bbe95240ada0a65f89064e3b83\\UserData\\Saves\\Navezgane\\M1QA_Isolated\\m1-native-report.txt",
+  "sourceLog": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\M1NativeQA\\run-ca5e44bbe95240ada0a65f89064e3b83\\game.log",
+  "measurements": [
+    {
+      "vehicle": "vehicleM1Abrams",
+      "scenario": "guard",
+      "heightOrGap": "0.30",
+      "angle": "0",
+      "reverse": "False",
+      "suspensionOverride": "0.00",
+      "mountOverride": "0.000",
+      "passed": 8,
+      "trials": 8,
+      "maxPitch": 0.9,
+      "maxRoll": 0.1,
+      "maxUpwardVelocity": 0.25
+    }
+  ],
+  "guardChecks": [
+    "PASS immediate native guard after active traction: brake",
+    "PASS immediate native guard after active traction: engine off",
+    "PASS immediate native guard after active traction: driver absent",
+    "PASS immediate native guard after active traction: fuel empty",
+    "PASS immediate native guard after active traction: water",
+    "PASS immediate native guard after active traction: remote owner",
+    "PASS immediate native guard after active traction: kinematic body",
+    "PASS immediate native guard after active traction: throttle release"
+  ],
+  "limitations": "Controlled native physics, scripted wheel torque/speed governor, real vehicle shapes. Not player input, rendering, collision damage, network latency or free-form terrain acceptance."
+}

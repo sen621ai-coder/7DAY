@@ -1,0 +1,18 @@
+CONTROLLED PHYSICS: real vehicle shapes, native WheelCollider, fixed 20ms steps, scripted wheel throttle, no driver/network simulation
+PASS immediate native guard after active traction: brake
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.022 pitch=0.9 roll=0.1 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98751 scenario=guard angle=0 reverse=False trial=0
+PASS immediate native guard after active traction: engine off
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.021 pitch=0.9 roll=0.0 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98972 scenario=guard angle=0 reverse=False trial=1
+PASS immediate native guard after active traction: driver absent
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.022 pitch=0.9 roll=0.1 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98751 scenario=guard angle=0 reverse=False trial=2
+PASS immediate native guard after active traction: fuel empty
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.021 pitch=0.9 roll=0.0 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98972 scenario=guard angle=0 reverse=False trial=3
+PASS immediate native guard after active traction: water
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.022 pitch=0.9 roll=0.1 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98751 scenario=guard angle=0 reverse=False trial=4
+PASS immediate native guard after active traction: remote owner
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.021 pitch=0.9 roll=0.0 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98972 scenario=guard angle=0 reverse=False trial=5
+PASS immediate native guard after active traction: kinematic body
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.022 pitch=0.9 roll=0.1 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98751 scenario=guard angle=0 reverse=False trial=6
+PASS immediate native guard after active traction: throttle release
+MEASURE vehicle=vehicleM1Abrams step=0.30 suspension=0.00 pass=True z=-2.75 bodyY=0.021 pitch=0.9 roll=0.0 up=0.25 wheels=4 trackContacts=8 mount=0.000 standing=0.019 wheelLoad=98972 scenario=guard angle=0 reverse=False trial=7
+FINISHED failures=0 (measurements, not all terrain targets passed)

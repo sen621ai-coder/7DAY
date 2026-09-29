@@ -41,6 +41,7 @@ namespace PZAEC.M1
             return Quaternion.Euler(-pitch,yaw,0);
         }
         public static bool Active(EntityVehicle v)=>vehicle==v&&model!=null;
+        public static bool Scoped(int id)=>vehicle!=null&&vehicle.entityId==id&&zoom;
         public static byte Mode(EntityVehicle v,int s)=>Active(v)&&seat==s?(byte)mode:SecondaryPresentation.Mode(v,s);
         static void Angles(Vector3 direction)
         {yaw=Mathf.Atan2(direction.x,direction.z)*Mathf.Rad2Deg;pitch=Mathf.Asin(Mathf.Clamp(direction.normalized.y,-1,1))*Mathf.Rad2Deg;look=Quaternion.Euler(-pitch,yaw,0);}
@@ -91,7 +92,7 @@ namespace PZAEC.M1
             if(!hide){foreach(var pair in hidden)if(pair.Key!=null)pair.Key.forceRenderingOff=pair.Value;hidden.Clear();return;}
             // CrewVisibility independently owns seated player renderers. Only
             // touch the tank visual subtree here, so restoration cannot unhide crew.
-            foreach(var r in model.GetComponentsInChildren<Renderer>(true)){if(!hidden.ContainsKey(r))hidden.Add(r,r.forceRenderingOff);r.forceRenderingOff=true;}
+            foreach(var r in model.GetComponentsInChildren<Renderer>(true)){if(r.name.EndsWith("MuzzleFX"))continue;if(!hidden.ContainsKey(r))hidden.Add(r,r.forceRenderingOff);r.forceRenderingOff=true;}
         }
         static void BeforeRender(Camera camera)
         {

@@ -73,5 +73,7 @@ def apply(root):
     apply_modules(root)
     from secondary_config import apply as apply_secondary
     apply_secondary(root)
+    from recipe_kits import apply as apply_recipe_kits
+    apply_recipe_kits(root)
 
 if __name__=='__main__':apply(Path(__file__).resolve().parents[2])

@@ -1,5 +1,7 @@
 # M1 简化越野底盘：0.2.3 实现范围
 
+2026-09-29：当前 0.4.6 已进一步优化连续越障、真实履带接触牵引与悬挂站姿；以下内容为历史基线。新方案见 [OFFROAD_OPTIMIZATION_V2.md](OFFROAD_OPTIMIZATION_V2.md)，实际实现说明见 [M1 README](../../ZZ-PZAEC_M1Abrams/README.md)。原完整地形系统仍未整体实施。
+
 2026-09-18：用户确认改用简化方案后，已应用到 `M1Model.cs`、`M1Chassis.cs`、`M1ChassisRules.cs`。以下“原完整设计”仅保留为历史参考，其中地形分档、14 点支撑、复杂涉水、陷车与脱困均不属于当前实现。
 
 ## 当前方案

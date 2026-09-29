@@ -5,6 +5,8 @@ namespace PZAEC.M1
     {
         public const string Belt="pzM1MGBelt",Missile="pzM1AAMissile";
         public const byte Protocol=1,Main=0,MG=1,AA=2;
+        public const float AAMinPitch=-10,AAMaxPitch=75;
+        public static bool AASearchPitch(float pitch)=>!float.IsNaN(pitch)&&!float.IsInfinity(pitch)&&pitch>=AAMinPitch&&pitch<=85;
         public static readonly int[] MGDamage={20000,35000,60000,100000},AADamage={5000000,10000000,20000000,35000000};
         public static float Falloff(float d)=>d<0||d>200?0:d<=120?1:1-(d-120)*.005f;
         public static float Spread(float heat,bool stabilizer)=>(.35f+.85f*Math.Max(0,Math.Min(100,heat))/100)*(stabilizer?.75f:1);

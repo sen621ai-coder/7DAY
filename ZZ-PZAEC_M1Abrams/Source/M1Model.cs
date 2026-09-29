@@ -144,7 +144,9 @@ namespace PZAEC.M1
             Box(nodes["TurretYaw"],"M1TurretHit",new Vector3(0,.4f,-.3f),new Vector3(2.65f,.65f,3.7f),layer);
             rb.mass=12000;rb.centerOfMass=new Vector3(0,.72f,0);
             foreach(var wheel in root.GetComponentsInChildren<WheelCollider>(true)){
-                var at=physics.InverseTransformPoint(wheel.transform.position);wheel.transform.position=physics.TransformPoint(new Vector3(at.x<0?-1.36f:1.36f,.615f,at.z<0?-2.15f:2.15f));
+                // Native sweep: .52 restores wheel load without lifting the visible
+                // track far off the ground. Longer travel alone worsened breakover.
+                var at=physics.InverseTransformPoint(wheel.transform.position);wheel.transform.position=physics.TransformPoint(new Vector3(at.x<0?-1.36f:1.36f,.52f,at.z<0?-2.15f:2.15f));
                 wheel.radius=.4f;wheel.suspensionDistance=.28f;var spring=wheel.suspensionSpring;spring.spring=250000;spring.damper=28000;spring.targetPosition=.5f;wheel.suspensionSpring=spring;
             }
             return root;

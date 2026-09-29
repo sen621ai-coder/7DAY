@@ -7,6 +7,8 @@ public static class SecondaryTests {
  static int n;static void Check(bool ok,string label){n++;if(!ok)throw new System.Exception(label);}
  static void Near(float a,float b,string label)=>Check(System.Math.Abs(a-b)<.002f,label);
  public static void Run(){
+  Check(SecondaryRules.AASearchPitch(-10)&&SecondaryRules.AASearchPitch(0)&&SecondaryRules.AASearchPitch(85),"AA searches low-altitude and high-angle boundary targets");
+  Check(!SecondaryRules.AASearchPitch(-10.01f)&&!SecondaryRules.AASearchPitch(85.01f)&&!SecondaryRules.AASearchPitch(float.NaN),"AA rejects outside search limits and invalid angles");
   float[] distances={0,120,160,200,201};float[] expected={1,1,.8f,.6f,0};for(int i=0;i<5;i++)Near(SecondaryRules.Falloff(distances[i]),expected[i],"range boundary "+distances[i]);
   for(int seat=-1;seat<3;seat++)for(int mode=0;mode<4;mode++)foreach(bool gunner in new[]{false,true})Check(SecondaryRules.Allowed(seat,gunner,(byte)mode)==(seat==0?(mode<3&&(!gunner||mode==1)):seat==1?(mode==0||mode==2):false),"seat permissions");
   var g=new SecondaryRules.Gun{Rounds=100};

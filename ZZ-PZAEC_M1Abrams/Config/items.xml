@@ -119,5 +119,37 @@
       <property name="EconomicValue" value="300" />
       <property name="Group" value="Ammo/Weapons" />
     </item>
+    <item name="PZAECM1AssemblyKitT16">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceRepairKit" />
+      <property name="DescriptionKey" value="PZAECM1AssemblyKitT16Desc" />
+      <property name="Stacknumber" value="10" />
+      <property name="EconomicValue" value="0" />
+      <property name="Group" value="Resources" />
+    </item>
+    <item name="PZAECM1AssemblyKitT17">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceRepairKit" />
+      <property name="DescriptionKey" value="PZAECM1AssemblyKitT17Desc" />
+      <property name="Stacknumber" value="10" />
+      <property name="EconomicValue" value="0" />
+      <property name="Group" value="Resources" />
+    </item>
+    <item name="PZAECM1AssemblyKitT18">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceRepairKit" />
+      <property name="DescriptionKey" value="PZAECM1AssemblyKitT18Desc" />
+      <property name="Stacknumber" value="10" />
+      <property name="EconomicValue" value="0" />
+      <property name="Group" value="Resources" />
+    </item>
+    <item name="PZAECM1AssemblyKitT19">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceRepairKit" />
+      <property name="DescriptionKey" value="PZAECM1AssemblyKitT19Desc" />
+      <property name="Stacknumber" value="10" />
+      <property name="EconomicValue" value="0" />
+      <property name="Group" value="Resources" />
+    </item>
   </append>
 </configs>

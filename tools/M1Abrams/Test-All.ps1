@@ -5,6 +5,8 @@ $ErrorActionPreference='Stop'
 if($LASTEXITCODE -ne 0){throw 'M1 asset checks failed'}
 & $Python "$PSScriptRoot/Test-ModuleConfig.py"
 if($LASTEXITCODE -ne 0){throw 'M1 module config checks failed'}
+& $Python "$PSScriptRoot/Test-RecipeKits.py"
+if($LASTEXITCODE -ne 0){throw 'M1 recipe visibility and material conservation checks failed'}
 & $Python "$PSScriptRoot/Test-SecondaryAssets.py"
 if($LASTEXITCODE -ne 0){throw 'M1 secondary asset/config checks failed'}
 foreach($test in @('Test-Storage.ps1','Test-SaveSync.ps1','Test-Secondary.ps1','Test-Modules.ps1','Test-CrewVisibility.ps1','Test-Rules.ps1','Test-Chassis.ps1','Test-Packets.ps1','Test-ServerFire.ps1','Test-Service.ps1','Test-NativeHooks.ps1')){
