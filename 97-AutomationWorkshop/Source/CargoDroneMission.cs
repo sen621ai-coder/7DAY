@@ -111,7 +111,10 @@ namespace YFAutomation.CargoDrones
                 points.Add(new CargoAnchor(new CargoPoint(entrance.X,from.Y,entrance.Z),CargoLegKind.Indoor));
                 points.Add(new CargoAnchor(entrance,CargoLegKind.Entrance));from=entrance;
             }
-            var lift=Cruise(from,motion.Home);
+            // Reuse the altitude actually flown on this sortie, including any
+            // climb around obstacles. Do not derive a lower cruise from the box.
+            double height=Math.Max(motion.RecordedFlightHeight,Math.Max(from.Y,motion.Home.Y));
+            var lift=new CargoPoint(from.X,height,from.Z);
             points.Add(new CargoAnchor(lift,CargoLegKind.Outdoor));
             points.Add(new CargoAnchor(new CargoPoint(motion.Home.X,lift.Y,motion.Home.Z),CargoLegKind.Outdoor));
             motion.ReturnHomeVia(points);

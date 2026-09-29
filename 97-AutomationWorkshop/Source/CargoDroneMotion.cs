@@ -68,6 +68,7 @@ namespace YFAutomation.CargoDrones
         public bool ReturningHome{get;private set;}
         public bool EnergyRecall{get;private set;}
         public CargoPoint Home{get{return trail.Home;}}
+        public double RecordedFlightHeight{get{return System.Linq.Enumerable.Max(trail.Capture(),p=>p.Y);}}
         public int ReturnWaypointCount{get{return trail.Count;}}
         public long EstimatedReturnUnits{get{return ReturningHome?new CargoReturnTrail(trail.Home).EstimateRemaining(Position,RemainingReturnPoints(),speed,approachSpeed):trail.EstimateReturn(Position,speed,approachSpeed);}}
         IEnumerable<CargoPoint> RemainingReturnPoints(){return ExecutionPoints();}
