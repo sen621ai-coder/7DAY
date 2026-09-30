@@ -27,16 +27,17 @@ namespace PZAEC.Fishing.Runtime
                 }
                 var id=new Guid(bytes);
                 if(id==Guid.Empty||tick>long.MaxValue)throw new InvalidOperationException("Invalid saved catch");
-                return new CatchResult {SessionId=id,SettlementId=id,PlayerPersistentId=playerId,FishDefinitionId=FishingContract.FishDefinition,
+                return new CatchResult {SessionId=id,SettlementId=id,PlayerPersistentId=playerId,FishDefinitionId=FishCatalog.FromSavedIndex(Get("Species")),
                     MassKg=Get("Mass"),TerminalTick=(long)tick};
             }
         }
         public void Write(CatchResult result,bool completed)
         {
+            int species=FishCatalog.Index(result.FishDefinitionId);if(species<0)throw new ArgumentException("Unknown catch species");
             var bytes=result.SessionId.ToByteArray();
             for(int i=0;i<8;i++)Set("Id"+i,bytes[i*2]|bytes[i*2+1]<<8);
             for(int i=0;i<4;i++)Set("Tick"+i,((ulong)result.TerminalTick>>(16*i))&65535);
-            Set("Mass",result.MassKg);Set("State",completed?2:1);
+            Set("Species",species);Set("Mass",result.MassKg);Set("State",completed?2:1);
         }
     }
     public sealed class NativeCatchInventory : ICatchInventory
@@ -45,7 +46,7 @@ namespace PZAEC.Fishing.Runtime
         public NativeCatchInventory(EntityPlayerLocal player){this.player=player;}
         public bool TryAdd(RewardSpec reward,Guid settlementId)
         {
-            if(reward.Count!=1||player.bag==null) return false;
+            if(reward.Count<=0||reward.Count>100||player.bag==null) return false;
             var value=ItemClass.GetItem(reward.ItemId).Clone();
             if(value.type<=0)throw new InvalidOperationException("Fishing reward item missing");
             value.SetMetadata("pzaecFishingMassKg",reward.FishMassKg);
@@ -55,7 +56,7 @@ namespace PZAEC.Fishing.Runtime
             var slots=player.bag.GetSlots();
             for(int i=0;i<slots.Length;i++) {
                 if(slots[i]!=null&&slots[i].count>0)continue;
-                var updated=(ItemStack[])slots.Clone();updated[i]=new ItemStack(value,1);
+                var updated=(ItemStack[])slots.Clone();updated[i]=new ItemStack(value,reward.Count);
                 player.bag.SetSlots(updated);return true;
             }
             return false;

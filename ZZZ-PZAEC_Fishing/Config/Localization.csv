@@ -2,8 +2,52 @@ Key,Source,Context,Changes,English,Schinese
 pzaecFishingRodBasic,items,Item,,Starter Fishing Pole,入门台钓手竿
 pzaecFishingRodBasicDesc,items,Description,,A 4.5 m hand pole with fixed line and float. Left click to cast and strike at the bite. Pull the mouse back to raise the pole and move sideways to fight the fish. No reel.,4.5 米台钓手竿，配等长固定鱼线和浮漂。左键抛投，咬实时点击左键提竿。中鱼后后拉鼠标抬竿、左右侧压，配合走位遛鱼；前推鼠标可放低竿身。没有线轮和收线操作。
 pzaecFishingBaitWorm,items,Item,,Worm Bait,虫饵
-pzaecFishingBaitWormDesc,items,Description,,Worm bait prepared from rotten flesh. Each accepted cast uses one bait. Not edible.,从腐肉中挑选并整理的鲤鱼虫饵。每次有效抛投消耗一份，不能食用。
+pzaecFishingBaitWormDesc,items,Description,,Worm bait prepared from rotten flesh. Each accepted cast uses one bait. Not edible.,从腐肉中挑选并整理的虫饵。每次有效抛投消耗一份，不能食用。
 pzaecFishingFishCarp,items,Item,,Carp,鲤鱼
-pzaecFishingFishCarpDesc,items,Description,,A whole carp. Cook one fish on a campfire grill to make one meal. Cannot be eaten raw.,完整的鲤鱼。使用篝火和烤架，将一条鱼烹饪为一份烤鲤鱼。不能直接生吃。
+pzaecFishingFishCarpDesc,items,Description,,A whole carp. An older whole catch kept for save compatibility. Cannot be eaten raw.,完整的鲤鱼。旧版完整鱼获，可制作转为 12 份鲤鱼肉；新鱼获按重量结算鱼肉。不能直接生吃。
 pzaecFishingMealGrilled,items,Item,,Grilled Carp,烤鲤鱼
 pzaecFishingMealGrilledDesc,items,Description,,Freshly grilled carp. A simple meal after a successful fishing trip.,新鲜烤制的鲤鱼。一顿犒劳垂钓收获的简单餐食。
+pzaecFishingFishCrucian,items,Item,,Crucian Carp,鲫鱼
+pzaecFishingFishCrucianDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的鲫鱼。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealCrucian,items,Item,,Grilled Crucian Carp,烤鲫鱼
+pzaecFishingMealCrucianDesc,items,Description,,Freshly grilled fish.,新鲜烤制的鲫鱼。
+pzaecFishingFishGrassCarp,items,Item,,Grass Carp,草鱼
+pzaecFishingFishGrassCarpDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的草鱼。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealGrassCarp,items,Item,,Grilled Grass Carp,烤草鱼
+pzaecFishingMealGrassCarpDesc,items,Description,,Freshly grilled fish.,新鲜烤制的草鱼。
+pzaecFishingFishSilverCarp,items,Item,,Silver Carp,鲢鱼
+pzaecFishingFishSilverCarpDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的鲢鱼。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealSilverCarp,items,Item,,Grilled Silver Carp,烤鲢鱼
+pzaecFishingMealSilverCarpDesc,items,Description,,Freshly grilled fish.,新鲜烤制的鲢鱼。
+pzaecFishingFishBigheadCarp,items,Item,,Bighead Carp,鳙鱼
+pzaecFishingFishBigheadCarpDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的鳙鱼。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealBigheadCarp,items,Item,,Grilled Bighead Carp,烤鳙鱼
+pzaecFishingMealBigheadCarpDesc,items,Description,,Freshly grilled fish.,新鲜烤制的鳙鱼。
+pzaecFishingFishWhiteStrip,items,Item,,White Strip,白条
+pzaecFishingFishWhiteStripDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的白条。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealWhiteStrip,items,Item,,Grilled White Strip,烤白条
+pzaecFishingMealWhiteStripDesc,items,Description,,Freshly grilled fish.,新鲜烤制的白条。
+pzaecFishingFishBitterling,items,Item,,Bitterling,鳑鲏
+pzaecFishingFishBitterlingDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的鳑鲏。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealBitterling,items,Item,,Grilled Bitterling,烤鳑鲏
+pzaecFishingMealBitterlingDesc,items,Description,,Freshly grilled fish.,新鲜烤制的鳑鲏。
+pzaecFishingFishSunfish,items,Item,,Sunfish,太阳鱼
+pzaecFishingFishSunfishDesc,items,Description,,A whole fish. Cook on a campfire grill. Cannot be eaten raw.,完整的太阳鱼。用篝火和烤架烹饪，不能直接生吃。
+pzaecFishingMealSunfish,items,Item,,Grilled Sunfish,烤太阳鱼
+pzaecFishingMealSunfishDesc,items,Description,,Freshly grilled fish.,新鲜烤制的太阳鱼。
+pzaecFishingMeatCarp,items,Item,,Carp Meat,鲤鱼鱼肉
+pzaecFishingMeatCarpDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的鲤鱼鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatCrucian,items,Item,,Crucian Carp Meat,鲫鱼鱼肉
+pzaecFishingMeatCrucianDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的鲫鱼鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatGrassCarp,items,Item,,Grass Carp Meat,草鱼鱼肉
+pzaecFishingMeatGrassCarpDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的草鱼鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatSilverCarp,items,Item,,Silver Carp Meat,鲢鱼鱼肉
+pzaecFishingMeatSilverCarpDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的鲢鱼鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatBigheadCarp,items,Item,,Bighead Carp Meat,鳙鱼鱼肉
+pzaecFishingMeatBigheadCarpDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的鳙鱼鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatWhiteStrip,items,Item,,White Strip Meat,白条鱼肉
+pzaecFishingMeatWhiteStripDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的白条鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatBitterling,items,Item,,Bitterling Meat,鳑鲏鱼肉
+pzaecFishingMeatBitterlingDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的鳑鲏鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。
+pzaecFishingMeatSunfish,items,Item,,Sunfish Meat,太阳鱼鱼肉
+pzaecFishingMeatSunfishDesc,items,Description,,Fish meat from the catch. Bigger fish yield more portions. Grill one portion for a meal.,上岸后按重量获得的太阳鱼鱼肉，大鱼产出更多。用篝火和烤架烹饪一份鱼肉，不能直接生吃。

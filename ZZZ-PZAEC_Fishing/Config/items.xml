@@ -84,5 +84,109 @@
         <display_value name="dSmellUse" value="25"/>
       </effect_group>
     </item>
+    <item name="pzaecFishingFishCrucian">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishCrucianDesc"/>
+    </item>
+    <item name="pzaecFishingMealCrucian">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealCrucianDesc"/>
+    </item>
+    <item name="pzaecFishingFishGrassCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishGrassCarpDesc"/>
+    </item>
+    <item name="pzaecFishingMealGrassCarp">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealGrassCarpDesc"/>
+    </item>
+    <item name="pzaecFishingFishSilverCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishSilverCarpDesc"/>
+    </item>
+    <item name="pzaecFishingMealSilverCarp">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealSilverCarpDesc"/>
+    </item>
+    <item name="pzaecFishingFishBigheadCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishBigheadCarpDesc"/>
+    </item>
+    <item name="pzaecFishingMealBigheadCarp">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealBigheadCarpDesc"/>
+    </item>
+    <item name="pzaecFishingFishWhiteStrip">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishWhiteStripDesc"/>
+    </item>
+    <item name="pzaecFishingMealWhiteStrip">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealWhiteStripDesc"/>
+    </item>
+    <item name="pzaecFishingFishBitterling">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishBitterlingDesc"/>
+    </item>
+    <item name="pzaecFishingMealBitterling">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealBitterlingDesc"/>
+    </item>
+    <item name="pzaecFishingFishSunfish">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingFishSunfishDesc"/>
+    </item>
+    <item name="pzaecFishingMealSunfish">
+      <property name="Extends" value="pzaecFishingMealGrilled"/>
+      <property name="DescriptionKey" value="pzaecFishingMealSunfishDesc"/>
+    </item>
+    <item name="pzaecFishingMeatCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatCarpDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatCrucian">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatCrucianDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatGrassCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatGrassCarpDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatSilverCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatSilverCarpDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatBigheadCarp">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatBigheadCarpDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatWhiteStrip">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatWhiteStripDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatBitterling">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatBitterlingDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
+    <item name="pzaecFishingMeatSunfish">
+      <property name="Extends" value="pzaecFishingFishCarp"/>
+      <property name="DescriptionKey" value="pzaecFishingMeatSunfishDesc"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="2"/>
+    </item>
   </append>
 </configs>

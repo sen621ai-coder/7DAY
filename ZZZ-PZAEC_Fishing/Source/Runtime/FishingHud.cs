@@ -5,6 +5,8 @@ namespace PZAEC.Fishing.Runtime
     public struct FightReadout
     {
         public float Tension,BreakForce,Stamina,LandStamina;
+        public float PlayerEffort,PlayerStamina;
+        public bool ShowEffort;
     }
     public static class FishingHud
     {
@@ -21,46 +23,56 @@ namespace PZAEC.Fishing.Runtime
             var matrix=GUI.matrix;var color=GUI.color;
             try {
                 GUI.matrix=Matrix4x4.TRS(Vector3.zero,Quaternion.identity,new Vector3(scale,scale,1));
-                bool compact=Screen.height<700;
-                float width=Mathf.Min(550,Screen.width/scale-(floatView.HasValue?308:40)),height=string.IsNullOrEmpty(message)||compact?225:305;
+                float width=Mathf.Min(420,Screen.width/scale-(floatView.HasValue?308:40)),height=string.IsNullOrEmpty(message)?125:185;
                 var box=new Rect(floatView.HasValue?Screen.width/scale-width-24:24,floatView.HasValue?24:Screen.height<600?24:110,width,height);GUI.color=new Color(1,1,1,.95f);GUI.Box(box,GUIContent.none);GUI.color=Color.white;
-                bool bite=heading.StartsWith("鱼已咬实")||heading.StartsWith("鱼有口");
-                GUI.color=bite?new Color(1,.85f,.25f):Color.white;
                 GUI.Label(new Rect(box.x+18,box.y+12,width-36,40),heading,title);GUI.color=Color.white;
-                if(bite&&!floatView.HasValue) {
-                    var cue=new Rect(Screen.width/scale/2-220,Screen.height/scale*.60f,440,48);
-                    GUI.Box(cue,GUIContent.none);GUI.color=new Color(1,.85f,.25f);
-                    GUI.Label(new Rect(cue.x+12,cue.y+6,416,38),heading,title);GUI.color=Color.white;
-                }
-                GUI.Label(new Rect(box.x+18,box.y+57,width-36,70),stats,body);
-                GUI.Label(new Rect(box.x+18,box.y+130,width-36,85),compact&&!string.IsNullOrEmpty(message)?message:help,note);
-                if(!compact&&!string.IsNullOrEmpty(message))GUI.Label(new Rect(box.x+18,box.y+218,width-36,80),message,body);
+                GUI.Label(new Rect(box.x+18,box.y+54,width-36,30),stats,body);
+                GUI.Label(new Rect(box.x+18,box.y+88,width-36,30),help,note);
+                if(!string.IsNullOrEmpty(message))GUI.Label(new Rect(box.x+18,box.y+126,width-36,55),message,note);
                 if(floatView.HasValue)DrawFloat(floatView.Value,scale);
                 if(fightView.HasValue)DrawFight(fightView.Value,scale);
             } finally {GUI.matrix=matrix;GUI.color=color;}
         }
         static void Fill(Rect rect,Color color)
         {GUI.color=color;GUI.DrawTexture(rect,Texture2D.whiteTexture);GUI.color=Color.white;}
+        static float SidePanelX(float canvasWidth,float panelWidth,bool left)
+        {
+            // Bring both readouts inward while leaving the central water view open.
+            // On narrow screens retain the outer margin instead of overlapping the two panels.
+            float desired=left?canvasWidth*.32f-panelWidth:canvasWidth*.68f;
+            return Mathf.Clamp(desired,24,Mathf.Max(24,canvasWidth-panelWidth-24));
+        }
         static void DrawFight(FightReadout state,float scale)
         {
             float canvasHeight=Screen.height/scale;
             bool compact=canvasHeight<600;
-            var box=new Rect(Screen.width/scale-324,Mathf.Max(compact?255:340,canvasHeight*.5f-100),300,compact?176:210);
+            float height=state.ShowEffort?(compact?235:305):(compact?176:210);
+            float top=state.ShowEffort&&compact?canvasHeight-height-12:Mathf.Max(340,canvasHeight*.5f-100);
+            var box=new Rect(SidePanelX(Screen.width/scale,300,false),top,300,height);
             Fill(box,new Color(.025f,.055f,.065f,.96f));
             float force=Mathf.Clamp01(state.Tension/Mathf.Max(1,state.BreakForce));
             var forceColor=force>=.8f?new Color(1,.22f,.14f):force>=.55f?new Color(1,.75f,.10f):new Color(.15f,.85f,1);
             GUI.Label(new Rect(box.x+16,box.y+10,268,32),"拉力  "+state.Tension.ToString("F0")+" / "+state.BreakForce.ToString("F0")+" N",title);
-            var forceBar=new Rect(box.x+16,box.y+(compact?42:48),268,compact?24:30);
+            var forceBar=new Rect(box.x+16,box.y+(compact?38:48),268,compact?18:30);
             Fill(forceBar,new Color(.15f,.2f,.24f));Fill(new Rect(forceBar.x,forceBar.y,forceBar.width*force,forceBar.height),forceColor);
             Fill(new Rect(forceBar.x+forceBar.width*.8f,forceBar.y,2,forceBar.height),Color.white);
             bool tired=state.Stamina<=state.LandStamina;
-            GUI.Label(new Rect(box.x+16,box.y+(compact?77:91),268,32),"鱼体力  "+(Mathf.Clamp01(state.Stamina)*100).ToString("F0")+"%",title);
-            var staminaBar=new Rect(box.x+16,box.y+(compact?110:129),268,compact?24:30);
+            GUI.Label(new Rect(box.x+16,box.y+(compact?65:91),268,compact?28:32),"鱼体力  "+(Mathf.Clamp01(state.Stamina)*100).ToString("F0")+"%",title);
+            var staminaBar=new Rect(box.x+16,box.y+(compact?95:129),268,compact?18:30);
             Fill(staminaBar,new Color(.15f,.2f,.24f));Fill(new Rect(staminaBar.x,staminaBar.y,staminaBar.width*Mathf.Clamp01(state.Stamina),staminaBar.height),tired?new Color(1,.8f,.18f):new Color(.25f,.95f,.4f));
             Fill(new Rect(staminaBar.x+staminaBar.width*state.LandStamina,staminaBar.y,2,staminaBar.height),Color.white);
             GUI.color=force>=.8f?forceColor:Color.white;
-            GUI.Label(new Rect(box.x+16,box.y+(compact?142:172),268,30),force>=.8f?"拉力危险：前推鼠标放低竿":tired?"鱼已疲劳：引到近岸上鱼":"后拉抬竿 · 左右侧压遛鱼",note);
+            GUI.Label(new Rect(box.x+16,box.y+(compact?121:172),268,compact?25:30),force>=.8f?"拉力危险：前推鼠标放低竿":tired?"鱼已疲劳：引到近岸上鱼":"后拉抬竿 · 左右侧压遛鱼",note);
             GUI.color=Color.white;
+            if(state.ShowEffort) {
+                float y=box.y+(compact?153:212);
+                GUI.Label(new Rect(box.x+16,y,268,28),"你的用力  "+(state.PlayerEffort*100).ToString("F0")+"%",body);
+                var effortBar=new Rect(box.x+16,y+(compact?27:30),268,compact?12:20);
+                Fill(effortBar,new Color(.15f,.2f,.24f));Fill(new Rect(effortBar.x,effortBar.y,effortBar.width*Mathf.Clamp01(state.PlayerEffort),effortBar.height),new Color(1,.55f,.16f));
+                GUI.color=state.PlayerStamina<.25f?new Color(1,.4f,.2f):Color.white;
+                GUI.Label(new Rect(box.x+16,y+(compact?45:55),268,33),"体力 "+(state.PlayerStamina*100).ToString("F0")+"% · "+(state.PlayerStamina<.25f?"放低竿恢复":"前推休息"),note);
+                GUI.color=Color.white;
+            }
         }
         public static void DrawFishBearing(Vector3 viewport)
         {
@@ -75,9 +87,9 @@ namespace PZAEC.Fishing.Runtime
         }
         static void DrawFloat(FloatReadoutState state,float scale)
         {
-            var box=new Rect(24,Screen.height/scale*.5f-175,220,350);
+            var box=new Rect(SidePanelX(Screen.width/scale,220,true),Screen.height/scale*.5f-175,220,350);
             Fill(box,new Color(.025f,.055f,.065f,.94f));
-            Fill(new Rect(box.x,box.y,3,350),state.CanStrike?new Color(1,.68f,.16f):new Color(.25f,.65f,.72f));
+            Fill(new Rect(box.x,box.y,3,350),new Color(.25f,.65f,.72f));
             GUI.Label(new Rect(box.x+16,box.y+10,188,30),"漂目放大",body);
             GUI.Label(new Rect(box.x+16,box.y+40,188,27),"露 "+state.VisibleMarks.ToString("F1")+" 目",note);
             GUI.BeginGroup(new Rect(box.x+16,box.y+68,188,218));
@@ -100,18 +112,18 @@ namespace PZAEC.Fishing.Runtime
             switch(state.Signal) {
                 case FloatSignal.Casting:signal="抛竿中";break;
                 case FloatSignal.Settling:signal="浮漂站立";break;
-                case FloatSignal.Tapping:signal="试饵 · 轻点";break;
+                case FloatSignal.Tapping:signal="轻晃";break;
                 case FloatSignal.Downstroke:signal="顿口";break;
                 case FloatSignal.Submerged:signal="黑漂";break;
                 case FloatSignal.Rising:signal="顶漂";break;
                 case FloatSignal.Traveling:signal="走漂";break;
                 case FloatSignal.Fighting:signal="中鱼 · 遛鱼";break;
-                default:signal="等口";break;
+                default:signal="平稳";break;
             }
-            GUI.color=state.CanStrike?new Color(1,.8f,.3f):Color.white;
+            GUI.color=Color.white;
             GUI.Label(new Rect(box.x+16,box.y+289,188,29),signal,title);
             GUI.color=Color.white;
-            GUI.Label(new Rect(box.x+16,box.y+320,188,25),state.CanStrike?"左键提竿":state.Signal==FloatSignal.Fighting?"后拉鼠标遛鱼":"看漂等口",note);
+            GUI.Label(new Rect(box.x+16,box.y+320,188,25),state.Signal==FloatSignal.Fighting?"后拉鼠标遛鱼":"观察漂相",note);
         }
     }
 }

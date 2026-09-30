@@ -12,7 +12,7 @@ namespace PZAEC.Fishing.Runtime
     }
     public interface ICatchInventory
     {
-        // Exactly one item. False means no mutation; exceptions must not trigger blind retry.
+        // One complete reward batch. False means no mutation; exceptions must not trigger blind retry.
         bool TryAdd(RewardSpec reward,Guid settlementId);
     }
     public sealed class CatchSettlement : ICatchSettlement
@@ -38,7 +38,7 @@ namespace PZAEC.Fishing.Runtime
             if(HasPending||activeSession!=state.SessionId)return false;
             var result=new CatchResult {SessionId=state.SessionId,SettlementId=state.SessionId,PlayerPersistentId=playerId,
                 FishDefinitionId=fishId,MassKg=state.FishMassKg,TerminalTick=state.Tick};
-            RewardSpec reward;if(!content.TryGetReward(result,out reward)||reward.Count!=1)return false;
+            RewardSpec reward;if(!content.TryGetReward(result,out reward)||reward.Count<=0||reward.Count>100)return false;
             record.Write(result,false);activeSession=Guid.Empty;return true;
         }
         public SettlementStatus TrySettle(CatchResult result)
@@ -49,7 +49,7 @@ namespace PZAEC.Fishing.Runtime
                 result.PlayerPersistentId!=playerId||result.FishDefinitionId!=accepted.FishDefinitionId||
                 result.MassKg!=accepted.MassKg||result.TerminalTick!=accepted.TerminalTick)return SettlementStatus.Invalid;
             if(record.Completed)return SettlementStatus.AlreadyGranted;
-            RewardSpec reward;if(!content.TryGetReward(accepted,out reward)||reward.Count!=1)return SettlementStatus.Invalid;
+            RewardSpec reward;if(!content.TryGetReward(accepted,out reward)||reward.Count<=0||reward.Count>100)return SettlementStatus.Invalid;
             try {
                 if(!inventory.TryAdd(reward,result.SettlementId))return SettlementStatus.InventoryFull;
                 record.Write(accepted,true);return SettlementStatus.Granted;

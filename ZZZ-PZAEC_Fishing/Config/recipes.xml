@@ -11,6 +11,31 @@
       <ingredient name="foodRottingFlesh" count="1"/>
     </recipe>
     <recipe name="pzaecFishingMealGrilled" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatCarp" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealCrucian" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatCrucian" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealGrassCarp" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatGrassCarp" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealSilverCarp" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatSilverCarp" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealBigheadCarp" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatBigheadCarp" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealWhiteStrip" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatWhiteStrip" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealBitterling" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatBitterling" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealSunfish" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingMeatSunfish" count="1"/>
+    </recipe>
+    <!-- Convert saved whole carp from earlier versions into the new meat ingredient. -->
+    <recipe name="pzaecFishingMeatCarp" count="12" craft_time="5">
       <ingredient name="pzaecFishingFishCarp" count="1"/>
     </recipe>
   </append>

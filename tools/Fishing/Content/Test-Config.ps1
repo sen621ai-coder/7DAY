@@ -70,11 +70,31 @@ foreach($recipe in $merged.recipes.SelectNodes('/recipes/recipe')) {
 $definitions=[xml][IO.File]::ReadAllText((Join-Path $fishingRoot 'Config/items.xml'))
 $recipes=[xml][IO.File]::ReadAllText((Join-Path $fishingRoot 'Config/recipes.xml'))
 $loc=Import-Csv (Join-Path $fishingRoot 'Config/Localization.csv')
-$expected=@('pzaecFishingRodBasic','pzaecFishingBaitWorm','pzaecFishingFishCarp','pzaecFishingMealGrilled')
+$expected=@($definitions.SelectNodes('/configs/append/item') | ForEach-Object { $_.GetAttribute('name') })
+# Resolve only fishing definitions for checks; the native loader is separately probed.
+function Resolve-FishingItem([System.Xml.XmlElement]$node,[int]$depth=0){
+    if($depth -gt 16){throw 'Item inheritance cycle'}
+    $extends=$node.SelectSingleNode("property[@name='Extends']")
+    if(!$extends){return $node.CloneNode($true)}
+    $baseName=$extends.GetAttribute('value')
+    $parent=$merged.items.SelectSingleNode("/items/item[@name='$baseName']")
+    Need ($null -ne $parent) "Missing item base $baseName"
+    $resolved=Resolve-FishingItem $parent ($depth+1)
+    $resolved.SetAttribute('name',$node.GetAttribute('name'))
+    foreach($child in $node.ChildNodes){
+        if($child.NodeType -ne 'Element' -or $child -eq $extends){continue}
+        if($child.HasAttribute('name')){
+            $key=$child.GetAttribute('name');$old=$resolved.SelectSingleNode("property[@name='$key']")
+            if($old){$resolved.RemoveChild($old)|Out-Null}
+        }
+        $resolved.AppendChild($resolved.OwnerDocument.ImportNode($child,$true))|Out-Null
+    }
+    return $resolved
+}
 foreach($id in $expected){
     $nodes=@($merged.items.SelectNodes("/items/item[@name='$id']"))
     Need ($nodes.Count -eq 1) "Missing or duplicate item $id"
-    $item=$nodes[0]
+    $item=Resolve-FishingItem $nodes[0]
     foreach($key in @($id,($id+'Desc'))){
         $rows=@($loc | Where-Object Key -eq $key)
         Need ($rows.Count -eq 1 -and $rows[0].English -and $rows[0].Schinese) "Missing bilingual localization $key"
@@ -84,7 +104,7 @@ foreach($id in $expected){
     $icon=$item.SelectSingleNode("property[@name='CustomIcon']").GetAttribute('value')
     Need ($null -ne $merged.items.SelectSingleNode("/items/item[@name='$icon']")) "Unknown native icon item $icon"
     Need ($item.SelectSingleNode("property[@name='SellableToTrader']").GetAttribute('value') -eq 'false') "Unexpected trader money loop $id"
-    if($id -ne 'pzaecFishingMealGrilled'){Need ($null -eq $item.SelectSingleNode("property[@class='Action0']")) "Unexpected native attack/eat action $id"}
+    if(!$id.StartsWith('pzaecFishingMeal')){Need ($null -eq $item.SelectSingleNode("property[@class='Action0']")) "Unexpected native attack/eat action $id"}
     foreach($buff in $item.SelectNodes('.//*[@buff]')){
         $name=$buff.GetAttribute('buff')
         Need ($null -ne $merged.buffs.SelectSingleNode("/buffs/buff[@name='$name']")) "Unknown food buff $name"
@@ -114,12 +134,12 @@ $meal=$merged.items.SelectSingleNode("/items/item[@name='pzaecFishingMealGrilled
 Need ($meal.SelectSingleNode("property[@class='Action0']/property[@name='Class']").GetAttribute('value') -eq 'Eat') 'Meal is not edible.'
 $report=[ordered]@{
     scope='Offline XPath patch simulation; not the native game XML loader or live gameplay.'
-    mods=$modDirs.Name; operations=$operationCount; itemCount=$expected.Count; recipeCount=3
+    mods=$modDirs.Name; operations=$operationCount; itemCount=$expected.Count; recipeCount=$recipes.SelectNodes('/configs/append/recipe').Count
     preexistingUnmatchedPatchTargets=$misses.Count
     verified='Unique definitions; ingredient/material/buff/crafting references; bilingual localization; no native attack/eat on rod/bait/catch; no trader loop.'
     unverified='Native resource atlas/prefab load; crafting UI; consumed food effects; active fishing; loaded user-directory mods; actual native load order.'
 }
 $report | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $artifactPath 'config-check.json') -Encoding utf8
 $misses | Set-Content (Join-Path $artifactPath 'preexisting-unmatched-targets.txt') -Encoding utf8
-Write-Output "PASS: 4 items / 3 recipes; $operationCount patch operations simulated across $($modDirs.Count) workspace mods."
+Write-Output "PASS: $($report.itemCount) items / $($report.recipeCount) recipes; $operationCount patch operations simulated across $($modDirs.Count) workspace mods."
 Write-Output "NOTE: $($misses.Count) pre-existing unmatched patch targets logged; native game validation remains separate."

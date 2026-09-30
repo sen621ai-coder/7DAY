@@ -2,27 +2,27 @@
 <!-- Initial M1 tuning. Every contract field is explicit; no silent fallback to probe defaults.
      Force=N, distance=m, time=s, angle=rad. Float buoyancy is a spring coefficient (N/m).
      Line damage accrues above DamageStartFraction; DamagePerSecond is fraction/s.
-     A consumes exactly one bait per accepted cast and settles exactly one fish per landed session. -->
+     A consumes exactly one bait per accepted cast and settles one weight-based species meat batch per landed session. Fish is the carp tuning basis. -->
 <fishingConfig version="1">
   <Rod LengthMeters="4.5" StiffnessNewtonsPerMeter="45" DampingNewtonSecondsPerMeter="8"
        MaxDeflectionMeters="1.5" MinPitchRadians="-0.35" MaxPitchRadians="1.3" MaxYawRadians="1.2"
        AngularSpeedRadiansPerSecond="2.5"/>
   <Line FixedLengthMeters="4.5" MaxLengthMeters="35" StiffnessNewtonsPerMeter="100" DampingNewtonSecondsPerMeter="3"
-        BreakForceNewtons="90" DamageStartFraction="0.8" DamagePerSecond="0.4"
+        BreakForceNewtons="110" DamageStartFraction="0.8" DamagePerSecond="0.4"
         DragMinNewtons="5" DragMaxNewtons="65" ReelSpeedMetersPerSecond="0.8" MaxPayoutMetersPerSecond="6"/>
   <Float MassKg="0.012" BuoyancyNewtonsPerMeter="2.5" DampingNewtonSecondsPerMeter="0.3"
          HeightMeters="0.18" RestSubmerged01="0.73"/>
-  <Hook BiteWindowSeconds="1.2" SlackLossSeconds="2.5" MinimumStrikeSpeedRadiansPerSecond="0.6"
+  <Hook NaturalBites="true" BiteWindowSeconds="1.2" SlackLossSeconds="2.5" MinimumStrikeSpeedRadiansPerSecond="0.6"
         MaxSafeStrikeSpeedRadiansPerSecond="4" InitialQuality01="0.8"/>
-  <Fish Id="carp" MassKg="3" CruiseForceNewtons="9" BurstForceNewtons="50" DragCoefficient="3"
-        StaminaJoules="450" RecoveryWatts="0.2" BurstSeconds="2" RecoverySeconds="4"
-        CruiseSpeedMetersPerSecond="0.5" BurstSpeedMetersPerSecond="3"
+  <Fish Id="carp" MassKg="3" CruiseForceNewtons="18" BurstForceNewtons="85" DragCoefficient="3"
+        StaminaJoules="1200" RecoveryWatts="0.2" BurstSeconds="2.6" RecoverySeconds="3.2"
+        CruiseSpeedMetersPerSecond="0.9" BurstSpeedMetersPerSecond="3.8"
         NibbleMinSeconds="1" NibbleMaxSeconds="3" BiteWaitMinSeconds="3" BiteWaitMaxSeconds="12"
         NearShoreSurgeMeters="3" LandingStamina01="0.12" LandingDistanceMeters="1.8"/>
-  <Controls RadiansPerMouseUnit="0.04" LoadedResponseFloor01="0.25" AutoBackThreshold01="0.85"
+  <Controls RadiansPerMouseUnit="0.04" LoadedResponseFloor01="0.18" AutoBackThreshold01="0.85"
             AutoBackGain="0.15" AutoBackDecaySeconds="0.08" MaxAutoBack01="0.6"
-            PlayerResistanceNewtons="110" MinAgainstPullScale="0.1" InitialDrag01="0.5" FeedbackIntensity01="0.3"
-            AutoBackEnabled="false" ClickStrike="true" CastKey="Mouse0" StrikeKey="Mouse0" ReelKey="Mouse1"
+            PlayerResistanceNewtons="70" MinAgainstPullScale="0.1" InitialDrag01="0.5" FeedbackIntensity01="0.3"
+            AutoBackEnabled="false" ClickStrike="true" EffortEnabled="true" CastKey="Mouse0" StrikeKey="Mouse0" ReelKey="Mouse1"
             FreeLookKey="LeftAlt" RecenterKey="LeftControl" CancelKey="Escape"
             DragIncreaseKey="Equals" DragDecreaseKey="Minus"/>
   <Session MinDepthMeters="0.6" MaxCastMeters="6.5" MaxPlayerDistanceMeters="40" TimeoutSeconds="300" MaxCatchUpTicks="8"/>

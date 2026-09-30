@@ -23,6 +23,8 @@ namespace PZAEC.Fishing.Simulation
         private long tick, eventSequence;
         private int bursts;
         private BiteMotion biteMotion;
+        private bool baitTaken=true;
+        private double falseHoldSeconds,waterPhase;
         private SimVector baitOrigin, baitDisplacement;
         private double recoveryDuration, escapeSide, burstStrength, burstEnvelope, headShake, payoutSpeed, muscleForce, dragReleaseTime;
 
@@ -64,6 +66,7 @@ namespace PZAEC.Fishing.Simulation
             pattern = (BitePattern)Math.Min(3, (int)(Next()*4));
             nibbleDuration = p.NibbleSeconds+Next()*(p.NibbleMaxSeconds-p.NibbleSeconds);
             biteMotion=new BiteMotion(Next,nibbleDuration);baitOrigin=fish;
+            if(p.NaturalBites)ChooseMouthContact();
             SetPhase(FishingPhase.Casting); Emit(FishingEventKind.Cast);
         }
 
@@ -105,11 +108,13 @@ namespace PZAEC.Fishing.Simulation
                 return;
             }
 
-            // For a hand pole, visible bait inspection is already a valid strike.
-            // Empty-water clicks do not destroy the cast or consume another bait.
+            // Natural bites separate float motion/contact from bait actually held in the mouth.
+            // The outcome is chosen before the stroke, not a dice roll when the player clicks.
             if (input.Strike && (p.FixedLineLength<=0 || phase==FishingPhase.Nibbling || phase==FishingPhase.BiteWindow))
             {
                 bool poleNibble=p.FixedLineLength>0 && phase==FishingPhase.Nibbling;
+                if(p.NaturalBites && (!baitTaken || phase!=FishingPhase.BiteWindow || timeInPhase<.12 || baitDisplacement.Length<.006))
+                { Finish(FailureReason.EarlyStrike);return; }
                 if (phase != FishingPhase.BiteWindow && !poleNibble) { Finish(FailureReason.EarlyStrike); return; }
                 if (!poleNibble && timeInPhase > p.BiteWindowSeconds) { Finish(FailureReason.MissedBite); return; }
                 if (input.StrikeStrength < .15) { Finish(FailureReason.WeakStrike); return; }
@@ -123,9 +128,17 @@ namespace PZAEC.Fishing.Simulation
             else if (phase == FishingPhase.Waiting && timeInPhase >= waitDuration)
             { SetPhase(FishingPhase.Nibbling); behaviour = FishBehaviour.Sampling; Emit(FishingEventKind.Nibble); }
             else if (phase == FishingPhase.Nibbling && timeInPhase >= nibbleDuration)
-            { SetPhase(FishingPhase.BiteWindow); behaviour = FishBehaviour.HoldingBait; Emit(FishingEventKind.Bite); }
+            { SetPhase(FishingPhase.BiteWindow); behaviour = FishBehaviour.HoldingBait; if(!p.NaturalBites||baitTaken)Emit(FishingEventKind.Bite); }
             else if (phase == FishingPhase.BiteWindow && timeInPhase >= p.BiteWindowSeconds)
-            { Finish(FailureReason.MissedBite); return; }
+            {
+                if(!p.NaturalBites){Finish(FailureReason.MissedBite); return;}
+                // A released bait settles back; waiting does not reveal a missed mouthful via failure UI.
+                waitDuration=p.WaitMinSeconds+Next()*(p.WaitMaxSeconds-p.WaitMinSeconds);
+                pattern=(BitePattern)Math.Min(3,(int)(Next()*4));
+                nibbleDuration=p.NibbleSeconds+Next()*(p.NibbleMaxSeconds-p.NibbleSeconds);
+                biteMotion=new BiteMotion(Next,nibbleDuration);ChooseMouthContact();
+                SetPhase(FishingPhase.Waiting);behaviour=FishBehaviour.Sampling;
+            }
             UpdateBobber(sample, false);
         }
 
@@ -282,6 +295,10 @@ namespace PZAEC.Fishing.Simulation
             else if (phase == FishingPhase.Nibbling || phase == FishingPhase.BiteWindow)
             {
                 double pulse=biteMotion.Sample(timeInPhase,phase==FishingPhase.BiteWindow);
+                if(p.NaturalBites) {
+                    pulse*=.9+.1*Math.Sin(timeInPhase*13+waterPhase);
+                    if(!baitTaken&&phase==FishingPhase.BiteWindow)pulse*=Math.Exp(-timeInPhase/falseHoldSeconds);
+                }
                 double vertical=pattern==BitePattern.Lift ? .65 : -(pattern==BitePattern.Dive ? 1.6 : .7);
                 SimVector mouthTarget=baitOrigin+new SimVector(pattern==BitePattern.Travel ? .12*pulse : 0,
                     .12*pulse*vertical,pattern==BitePattern.Travel ? .06*pulse : 0);
@@ -293,6 +310,17 @@ namespace PZAEC.Fishing.Simulation
                 // to the float; shallows/solid obstacles can therefore weaken a visible bite.
                 SimVector leaderForce=baitDisplacement*(p.BobberPull/.12);
                 pullY=leaderForce.Y;pullXZ=leaderForce.Horizontal;
+            }
+            else if(p.NaturalBites&&phase==FishingPhase.Waiting) {
+                SimVector oldFish=fish;
+                ConstrainFish(SimVector.Lerp(fish,baitOrigin,1-Math.Exp(-h/.25)));
+                velocity=(fish-oldFish)/h;
+                baitDisplacement=fish-baitOrigin;
+            }
+            if(p.NaturalBites&&!fighting) {
+                double elapsed=tick*p.FixedStep;
+                pullY+=.008*Math.Sin(elapsed*1.7+waterPhase);
+                pullXZ+=new SimVector(.004*Math.Sin(elapsed*1.1+waterPhase),0,.003*Math.Cos(elapsed*1.4+waterPhase));
             }
             SimVector target = (fighting ? new SimVector(fish.X,sample.SurfaceY,fish.Z) : castTarget)+new SimVector(0,p.FloatRestOffset,0);
             // Implicit spring and damping remain stable with very light floats.
@@ -316,6 +344,12 @@ namespace PZAEC.Fishing.Simulation
             escapeSide=2*Next()-1;
             burstStrength=.85+.3*Next();
             Emit(FishingEventKind.Sprint);
+        }
+        private void ChooseMouthContact()
+        {
+            baitTaken=Next()>=.35;
+            falseHoldSeconds=.12+.28*Next();
+            waterPhase=Next()*2*Math.PI;
         }
         private bool Sample(SimVector position, out WaterSample sample)
         { return water.TrySample(position,out sample) && sample.IsValid && sample.SurfaceY-sample.BottomY >= p.WaterClearance*2; }

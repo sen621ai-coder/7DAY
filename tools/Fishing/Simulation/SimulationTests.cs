@@ -299,6 +299,47 @@ internal static class SimulationTests
             Assert(s.Snapshot().FishPosition.Z>start+.3,"fish failed to swim farther away from player");
             Assert(s.Snapshot().FishHeading.Z>.8,"long pole reversed escape towards shore");
         });
+        Test("natural float contacts include both empty strikes and successful hooks",()=>{
+            int hooked=0,empty=0;double peakMovement=0;
+            for(uint seed=1;seed<=64;seed++) {
+                var p=Durable();p.NaturalBites=true;p.FixedLineLength=4.5;p.MaxRodReach=6;
+                var input=Input();input.UnloadedRodTip=new SimVector(0,1.3,4.5);
+                var s=new FishingSimulation("mouth-"+seed,p,new Pool(),seed);s.BeginCast(input,new SimVector(0,0,3.5));
+                for(int i=0;i<10000&&s.Snapshot().Phase!=FishingPhase.BiteWindow;i++)s.Step(input);
+                double start=s.Snapshot().BobberPosition.Y;
+                Run(s,input,.3);peakMovement=Math.Max(peakMovement,Math.Abs(s.Snapshot().BobberPosition.Y-start));
+                input.Strike=true;s.Step(input);
+                if(s.Snapshot().Phase==FishingPhase.Hooked)hooked++;
+                else {Assert(s.Snapshot().Failure==FailureReason.EarlyStrike,"unexpected natural strike result");empty++;}
+            }
+            Console.WriteLine("NATURAL MOUTHS hooked="+hooked+" empty="+empty+" visibleMove="+peakMovement);
+            Assert(hooked>10&&empty>10&&peakMovement>.01,"natural contact never changes float or always hooks");
+        });
+        Test("natural tentative taps cannot guarantee a hook",()=>{
+            var p=Durable();p.NaturalBites=true;var s=Cast(p);var input=Input();
+            for(int i=0;i<10000&&s.Snapshot().Phase!=FishingPhase.Nibbling;i++)s.Step(input);
+            input.Strike=true;s.Step(input);
+            Assert(s.Snapshot().Failure==FailureReason.EarlyStrike,"tentative tap incorrectly guaranteed hook");
+        });
+        Test("unstruck false contact relaxes float and returns to waiting without a bite failure",()=>{
+            var p=Durable();p.NaturalBites=true;var input=Input();
+            var s=new FishingSimulation("false-release",p,new Pool(),new FixedRandom(.1));s.BeginCast(input,new SimVector(0,0,8));
+            for(int i=0;i<10000&&s.Snapshot().Phase!=FishingPhase.BiteWindow;i++)s.Step(input);
+            double peak=0;
+            for(int i=0;i<1000&&s.Snapshot().Phase!=FishingPhase.Waiting;i++) {
+                s.Step(input);peak=Math.Max(peak,Math.Abs(s.Snapshot().BobberPosition.Y));
+            }
+            Assert(!s.IsTerminal&&s.Snapshot().Phase==FishingPhase.Waiting,"unstruck contact revealed missed-bite termination");
+            Assert(peak>.01&&Math.Abs(s.Snapshot().BobberPosition.Y)<peak*.5,"false float motion cannot settle back");
+        });
+        Test("natural round replay is deterministic across pauses and renewed contacts",()=>{
+            var p=Durable();p.NaturalBites=true;var a=Cast(p,seed:71);var b=Cast(p,seed:71);var input=Input();
+            for(int i=0;i<2400;i++) {
+                a.Step(input);b.Step(input);
+                Near((a.Snapshot().BobberPosition-b.Snapshot().BobberPosition).Length,0,1e-10,"natural float replay");
+                Assert(a.Snapshot().Phase==b.Snapshot().Phase&&!a.IsTerminal,"natural replay terminated or changed hidden phase");
+            }
+        });
         ContractTests.Run(Test);
         Test("export seeded 30-second physical trace",()=>{
             var s=Hook(Durable());var input=Input();var rows=new List<string>{"tick,phase,behaviour,fishX,fishY,fishZ,tensionN,lineM,stamina,bursts,bobberY,burstEnvelope,headShake01,payoutMps"};

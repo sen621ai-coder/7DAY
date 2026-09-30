@@ -76,6 +76,7 @@ namespace PZAEC.Fishing.Presentation
         }
         public void OnEvent(FishingEvent value)
         {
+            if(config!=null&&config.Hook.NaturalBites&&(value.Kind==FishingEventKind.Nibble||value.Kind==FishingEventKind.BaitTaken))return;
             if(disposed||dedicated||!gate.Accept(value))return;
             // The driver clears a resolved session in the same tick. Let a bounded terminal
             // one-shot finish outside the gameplay root; Dispose always removes it immediately.
@@ -129,7 +130,9 @@ namespace PZAEC.Fishing.Presentation
                 bobber.transform.localScale=Vector3.one*(Safe(config.Float.HeightMeters,.18f,.04f,.5f)/.27f);
                 // FloatPosition is authoritative: do not add a second sine-wave "bite" animation.
                 fish.transform.position=Scene(fishPos);fish.transform.rotation=Look(U(Vec3.Lerp(a.FishForward,b.FishForward,t)),Vector3.up);
-                float mass=Safe(b.FishMassKg,3,.02f,80);fish.transform.localScale=Vector3.one*Mathf.Clamp(Mathf.Pow(mass/3,1f/3f),.3f,3);
+                float mass=Safe(b.FishMassKg,3,.02f,80);var shape=Vector3.one;
+                switch(config.Fish.Id){case "crucian":shape=new Vector3(.85f,1.2f,1);break;case "grassCarp":shape=new Vector3(1.2f,.85f,.85f);break;case "silverCarp":case "bigheadCarp":shape=new Vector3(1.05f,1.15f,1.1f);break;case "whiteStrip":shape=new Vector3(1.25f,.65f,.65f);break;case "bitterling":case "sunfish":shape=new Vector3(.75f,1.35f,.85f);break;}
+                fish.transform.localScale=shape*Mathf.Clamp(Mathf.Pow(mass/3,1f/3f),.15f,3);
                 float amplitude=motion.SwimAmplitudeDegrees,phase=motion.SwimPhase;
                 for(int i=1;i<fishBones.Length;i++)fishBones[i].localRotation=Quaternion.Euler(0,Mathf.Sin(phase-i*.7f)*amplitude*(i/5f),0);
                 for(int i=0;i<2;i++)

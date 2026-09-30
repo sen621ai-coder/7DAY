@@ -245,7 +245,7 @@ namespace PZAEC.Fishing.Simulation
                 MaxLineLength=c.Line.MaxLengthMeters,ReelSpeed=c.Line.ReelSpeedMetersPerSecond,ReelStallForce=c.Line.BreakForceNewtons,
                 DragMinForce=c.Line.DragMinNewtons,DragMaxForce=c.Line.DragMaxNewtons,MaxPayoutSpeed=c.Line.MaxPayoutMetersPerSecond,
                 WaitMinSeconds=c.Fish.BiteWaitMinSeconds,WaitMaxSeconds=c.Fish.BiteWaitMaxSeconds,NibbleSeconds=c.Fish.NibbleMinSeconds,NibbleMaxSeconds=c.Fish.NibbleMaxSeconds,
-                BiteWindowSeconds=c.Hook.BiteWindowSeconds,BobberMass=c.Float.MassKg,BobberBuoyancy=c.Float.BuoyancyNewtonsPerMeter,BobberDamping=c.Float.DampingNewtonSecondsPerMeter,
+                NaturalBites=c.Hook.NaturalBites,BiteWindowSeconds=c.Hook.BiteWindowSeconds,BobberMass=c.Float.MassKg,BobberBuoyancy=c.Float.BuoyancyNewtonsPerMeter,BobberDamping=c.Float.DampingNewtonSecondsPerMeter,
                 FloatRestOffset=(.5-c.Float.RestSubmerged01)*c.Float.HeightMeters,LandingRadius=c.Fish.LandingDistanceMeters,LandingStamina=c.Fish.LandingStamina01,
                 MaxRodReach=c.Rod.LengthMeters+3,SessionTimeoutSeconds=c.Session.TimeoutSeconds
             };

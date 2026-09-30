@@ -64,9 +64,12 @@ namespace PZAEC.Fishing.Controls
                 double loadRatio = LoadRatio(load);
                 // Large forces require longer strokes; lowering the rod still releases load freely.
                 double response = settings.MinimumLoadedResponse + (1-settings.MinimumLoadedResponse)*Math.Pow(1-loadRatio,2);
+                double strength=1-.65*ControlMath.Clamp(ControlMath.Clean(load.Fatigue01),0,1);
+                bool yieldingSide=load.DirectionalSideResistance&&horizontal*load.PullRight>0;
+                double sideResponse=yieldingSide?1:response*strength;
                 double oldPitch = pitch;
-                pitch = ControlMath.Clamp(pitch + pull * settings.RadiansPerMouseUnit * (pull > 0 ? response : 1), settings.MinPitch, settings.MaxPitch);
-                side = ControlMath.Clamp(side + horizontal * settings.RadiansPerMouseUnit * response, -settings.MaxSideAngle, settings.MaxSideAngle);
+                pitch = ControlMath.Clamp(pitch + pull * settings.RadiansPerMouseUnit * (pull > 0 ? response*strength : 1) - (justResumed?0:ControlMath.Clean(load.PitchDropRadians)), settings.MinPitch, settings.MaxPitch);
+                side = ControlMath.Clamp(side + horizontal * settings.RadiansPerMouseUnit * sideResponse + (justResumed?0:ControlMath.Clean(load.SideDriftRadians)), -settings.MaxSideAngle, settings.MaxSideAngle);
 
                 // Only the portion of this mouse stroke above the threshold drives feet.
                 // This makes crossing the threshold consistent across frame rates.

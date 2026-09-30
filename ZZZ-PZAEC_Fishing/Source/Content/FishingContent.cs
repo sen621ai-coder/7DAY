@@ -14,9 +14,9 @@ namespace PZAEC.Fishing.Content
     public sealed class FishingContent : IFishingContent
     {
         public const int BaitPerAcceptedCast = 1;
-        public const int CatchPerLanding = 1;
+        // One settlement per landing; quantity is derived from the saved fish weight.
         private bool loaded;
-        private float loadedMassKg;
+        private FishConfig loadedFish;
 
         private static readonly Dictionary<string, float[]> Ranges = new Dictionary<string, float[]>(StringComparer.Ordinal)
         {
@@ -122,7 +122,7 @@ namespace PZAEC.Fishing.Content
             }
             string error;
             Need(Validate(config, out error), error);
-            loadedMassKg = config.Fish.MassKg;
+            loadedFish = FishCatalog.Profile(config.Fish, FishingContract.FishDefinition);
             loaded = true;
             return config;
         }
@@ -187,9 +187,11 @@ namespace PZAEC.Fishing.Content
             reward = default(RewardSpec);
             // This is definition validation only. Authority, landed state and idempotency belong to A.
             if (!loaded || result.SessionId == Guid.Empty || result.SettlementId == Guid.Empty || result.TerminalTick < 0
-                || string.IsNullOrWhiteSpace(result.PlayerPersistentId) || result.FishDefinitionId != FishingContract.FishDefinition
-                || !Scalar.IsFinite(result.MassKg) || Math.Abs(result.MassKg - loadedMassKg) > .001f) return false;
-            reward = new RewardSpec { ItemId = FishingContract.FishItem, Count = CatchPerLanding, FishMassKg = result.MassKg };
+                || string.IsNullOrWhiteSpace(result.PlayerPersistentId) || FishCatalog.Index(result.FishDefinitionId) < 0
+                || !Scalar.IsFinite(result.MassKg)) return false;
+            float typicalMass=FishCatalog.Profile(loadedFish,result.FishDefinitionId).MassKg;
+            if(result.MassKg<typicalMass*.5f-.00001f || result.MassKg>typicalMass*1.75f+.00001f) return false;
+            reward = new RewardSpec { ItemId = FishCatalog.MeatItem(result.FishDefinitionId), Count = FishCatalog.MeatCount(result.MassKg), FishMassKg = result.MassKg };
             return true;
         }
 

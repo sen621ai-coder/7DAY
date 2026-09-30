@@ -54,6 +54,8 @@ namespace PZAEC.Fishing.Controls
         public double TensionNewtons;
         // Horizontal direction from player to fish, in player-local coordinates.
         public double PullRight, PullForward;
+        public bool DirectionalSideResistance;
+        public double Fatigue01,PitchDropRadians,SideDriftRadians;
     }
 
     public struct ControlIntent

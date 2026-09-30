@@ -15,6 +15,43 @@ internal static class ContractAdapterTests
     static IFishingControls Create(ControlConfig c=null, RodConfig r=null) { var a=new FishingControlsAdapter(); a.Reset(c??new ControlConfig(),r??new RodConfig()); return a; }
     public static void Run()
     {
+        Test("Effort lowers unsupported rod, continued pulling holds it up",()=>{
+            var idle=Create(new ControlConfig {EffortEnabled=true});var pulling=Create(new ControlConfig {EffortEnabled=true});
+            var i=Input();PZAEC.Fishing.Contracts.ControlIntent a=default(PZAEC.Fishing.Contracts.ControlIntent),b=a;
+            for(int n=0;n<60;n++) {a=idle.Step(1f/60,i,Snapshot(35),Environment());i.MouseBackDelta=.5f;b=pulling.Step(1f/60,i,Snapshot(35),Environment());i.MouseBackDelta=0;}
+            Check(a.RodPitchRadians<.33f&&b.RodPitchRadians>.5f,"fish cannot press down unsupported pole or active pull cannot resist");
+            Check(b.PlayerStaminaCost>a.PlayerStaminaCost&&b.PlayerEffort01>a.PlayerEffort01,"active pulling must cost more than holding");
+        });
+        Test("Low native stamina slows hard pulls but lowering remains freely available",()=>{
+            var e=Environment();e.HasPlayerStamina=true;e.PlayerStaminaMaximum=100;e.PlayerStamina01=1;
+            var i=Input();i.MouseBackDelta=.5f;var fresh=Create(new ControlConfig {EffortEnabled=true}).Step(1f/60,i,Snapshot(35),e);
+            e.PlayerStamina01=0;var tired=Create(new ControlConfig {EffortEnabled=true}).Step(1f/60,i,Snapshot(35),e);
+            Check(fresh.RodPitchRadians>tired.RodPitchRadians,"fatigue failed to reduce lifting");
+            i.MouseBackDelta=-.5f;var lowering=Create(new ControlConfig {EffortEnabled=true}).Step(1f/60,i,Snapshot(35),e);
+            Check(lowering.RodPitchRadians<.35f&&lowering.PlayerStaminaCost==0,"exhausted player cannot lower freely to recover");
+        });
+        Test("Opposing fish sideways costs more, yielding side moves more freely",()=>{
+            var s=Snapshot(50);s.FishPosition=new Vec3(5,0,5);var i=Input();i.MouseRightDelta=-.5f;
+            var opposing=Create(new ControlConfig {EffortEnabled=true}).Step(1f/60,i,s,Environment());
+            i.MouseRightDelta=.5f;var yielding=Create(new ControlConfig {EffortEnabled=true}).Step(1f/60,i,s,Environment());
+            Check(opposing.PlayerStaminaCost>yielding.PlayerStaminaCost,"opposing side pressure not more tiring");
+            Check(Math.Abs(opposing.RodYawRadians)<yielding.RodYawRadians,"yielding does not ease sideways load");
+        });
+        Test("Effort does not drain while waiting and clutch cannot inject pose motion",()=>{
+            var a=Create(new ControlConfig {EffortEnabled=true});var i=Input();var s=Snapshot(70);s.Phase=FishingPhase.Waiting;
+            var result=a.Step(1f/60,i,s,Environment());Near(result.RodPitchRadians,.35f);Near(result.PlayerStaminaCost,0);
+            s.Phase=FishingPhase.Fighting;i.RecenterHeld=true;result=a.Step(1f/60,i,s,Environment());
+            Near(result.RodPitchRadians,.35f);Near(result.RodYawRadians,0);
+            Check(result.PlayerStaminaCost>0,"clutch wrongly grants free holding against fish");
+        });
+        Test("Equal strokes have consistent effort cost at different tick rates",()=>{
+            double baseline=0;
+            foreach(int hz in new[]{60,120,240}) {
+                var a=Create(new ControlConfig {EffortEnabled=true});var i=Input();i.MouseBackDelta=15f/hz;double spent=0;
+                for(int n=0;n<hz;n++)spent+=a.Step(1f/hz,i,Snapshot(35),Environment()).PlayerStaminaCost;
+                if(hz==60)baseline=spent;else Check(Math.Abs(spent-baseline)<baseline*.015,"effort changed with tick rate");
+            }
+        });
         Test("Subtick free look/recenter cannot leak motion or actions after release",()=>{
             foreach(bool free in new[]{true,false}) {
                 var accum=new InputAccumulator();var controls=Create(new ControlConfig{AutoBackThreshold01=0});

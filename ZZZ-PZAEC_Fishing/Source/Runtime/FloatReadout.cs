@@ -34,22 +34,23 @@ namespace PZAEC.Fishing.Runtime
             float marks=Marks(snapshot.FloatSubmerged01,snapshot.FloatUp.Y);
             float rest=Marks(config.RestSubmerged01);
             double dt=snapshot.TimeSeconds-time;
-            bool eating=snapshot.Phase==FishingPhase.Nibbling||snapshot.Phase==FishingPhase.BiteWindow;
+            bool watching=snapshot.Phase==FishingPhase.Waiting||snapshot.Phase==FishingPhase.Nibbling||snapshot.Phase==FishingPhase.BiteWindow;
             var travel=snapshot.FloatPosition-restPosition;
-            if(eating&&dt>0&&dt<=.25&&lastMarks-marks>.025f&&(lastMarks-marks)/dt>2)downUntil=snapshot.TimeSeconds+.32;
+            if(watching&&dt>0&&dt<=.25&&lastMarks-marks>.025f&&(lastMarks-marks)/dt>2)downUntil=snapshot.TimeSeconds+.32;
             var signal=FloatSignal.Waiting;
             if(snapshot.Phase==FishingPhase.Casting)signal=FloatSignal.Casting;
             else if(snapshot.Phase==FishingPhase.Settling)signal=FloatSignal.Settling;
             else if(snapshot.Phase==FishingPhase.Hooked||snapshot.Phase==FishingPhase.Fighting||snapshot.Phase==FishingPhase.Landing)signal=FloatSignal.Fighting;
-            else if(eating) {
+            else if(watching) {
                 if(marks<=.15f)signal=FloatSignal.Submerged;
                 else if(marks>=rest+.65f)signal=FloatSignal.Rising;
                 else if(snapshot.TimeSeconds<downUntil)signal=FloatSignal.Downstroke;
                 else if(travel.X*travel.X+travel.Z*travel.Z>.0036f)signal=FloatSignal.Traveling;
-                else signal=FloatSignal.Tapping;
+                else if(Math.Abs(marks-rest)>.12f)signal=FloatSignal.Tapping;
             }
-            if(snapshot.Phase==FishingPhase.Waiting)restPosition=snapshot.FloatPosition;
-            Current=new FloatReadoutState {VisibleMarks=marks,RestMarks=rest,Signal=signal,CanStrike=eating};
+            if(snapshot.Phase==FishingPhase.Settling)restPosition=snapshot.FloatPosition;
+            // No hidden bite eligibility escapes into the readout or its accent colour.
+            Current=new FloatReadoutState {VisibleMarks=marks,RestMarks=rest,Signal=signal,CanStrike=false};
             lastMarks=marks;time=snapshot.TimeSeconds;tick=snapshot.Tick;
         }
     }

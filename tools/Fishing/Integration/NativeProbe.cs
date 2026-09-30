@@ -81,6 +81,16 @@ public sealed class FishingNativeProbe : IModApi
                 lease.Release();Check(lease.RodYawDeltaRadians==0,"release discards queued rod yaw");
 
                 player.Buffs=new EntityBuffs(player);player.bag=new Bag(1);
+                player.world=world;player.entityId=int.MaxValue;
+                player.entityStats=new EntityStats {Health=new Stat(Stat.StatTypes.Health,player,100,100),Stamina=new Stat(Stat.StatTypes.Stamina,player,60,100)};
+                NativeFishingEffort.Spend(player,7);
+                Check(Math.Abs(player.Stamina-53)<.0001f,"fishing effort subtracts from native player stamina");
+                NativeFishingEffort.Spend(player,0);NativeFishingEffort.Spend(player,float.NaN);
+                Check(Math.Abs(player.Stamina-53)<.0001f,"zero or invalid effort cannot alter native stamina");
+                NativeFishingEffort.Spend(player,500);
+                Check(player.Stamina>=0&&player.Stamina<.0001f,"fishing effort cannot overdraw native stamina");
+                player.AddStamina(10);
+                Check(Math.Abs(player.Stamina-10)<.0001f,"native recovery remains available after fishing exhaustion");
                 var saved=new NativeCatchRecord(player,"isolated");
                 var catchId=Guid.NewGuid();
                 var result=new CatchResult {SessionId=catchId,SettlementId=catchId,PlayerPersistentId="isolated",
@@ -92,12 +102,23 @@ public sealed class FishingNativeProbe : IModApi
                     player.Buffs=new EntityBuffs(player);player.Buffs.Read(new System.IO.BinaryReader(bytes));
                 }
                 Check(saved.Result.SessionId==catchId&&saved.Result.MassKg==3&&!saved.Completed,"pending catch survives native buff binary serialization");
+                foreach(var species in FishCatalog.Ids){
+                    result.FishDefinitionId=species;result.MassKg=1.2345f;saved.Write(result,false);
+                    using(var bytes=new System.IO.MemoryStream()){
+                        var writer=new System.IO.BinaryWriter(bytes);player.Buffs.Write(writer,false);writer.Flush();bytes.Position=0;
+                        player.Buffs=new EntityBuffs(player);player.Buffs.Read(new System.IO.BinaryReader(bytes));
+                    }
+                    Check(saved.Result.FishDefinitionId==species&&saved.Result.MassKg==1.2345f,"native save retains species and variable mass: "+species);
+                    Check(ItemClass.GetItem(FishCatalog.MeatItem(species)).type>0,"native species meat definition: "+species);
+                }
+                result.FishDefinitionId="carp";result.MassKg=3;saved.Write(result,false);
                 player.bag.AddItem(new ItemStack(ItemClass.GetItem(FishingContract.BaitItem),1));
                 Check(NativeCatchInventory.ConsumeBait(player)&&player.bag.GetItemCount(ItemClass.GetItem(FishingContract.BaitItem))==0,"accepted bait removal uses native bag");
                 Check(!NativeCatchInventory.ConsumeBait(player),"empty inventory does not consume phantom bait");
-                var reward=new RewardSpec {ItemId=FishingContract.FishItem,Count=1,FishMassKg=3};
+                var reward=new RewardSpec {ItemId=FishCatalog.MeatItem("carp"),Count=12,FishMassKg=3};
                 var rewards=new NativeCatchInventory(player);
-                Check(rewards.TryAdd(reward,catchId),"native fish reward enters isolated bag");
+                Check(rewards.TryAdd(reward,catchId),"native meat reward enters isolated bag");
+                Check(player.bag.items[0].count==12,"native reward preserves complete weight-based meat count");
                 string receivedId;float receivedMass;
                 Check(player.bag.items[0].itemValue.TryGetMetadata("pzaecFishingSettlement",out receivedId)&&receivedId==catchId.ToString("N")&&
                     player.bag.items[0].itemValue.TryGetMetadata("pzaecFishingMassKg",out receivedMass)&&receivedMass==3,"fish carries settlement identity and mass");
@@ -139,6 +160,23 @@ public sealed class FishingNativeProbe : IModApi
                 var rigBones=nativeRig.Asset.GetComponentsInChildren<Transform>(true);
                 Log.Out("[FishingM0] SDCS FP bones="+string.Join(",",rigBones.Select(t=>t.name).ToArray()));
                 Check(NativeArmPose.FindLowerArm(rigBones,true)!=null&&NativeArmPose.FindLowerArm(rigBones,false)!=null,"actual SDCS first-person lower arms resolve");
+                string[] gripNames={"RightHandIndex2","RightHandMiddle2","RightHandRing2","RightHandThumb2"};
+                Check(gripNames.All(name=>rigBones.Any(t=>t.name==name)),"actual SDCS curled finger and thumb bones resolve for palm grip");
+                var palmFixture=new GameObject("FishingPalmFixture");
+                try {
+                    foreach(var name in gripNames) {
+                        var bone=new GameObject(name).transform;bone.SetParent(palmFixture.transform,false);
+                        bone.localPosition=nativeRig.Asset.transform.InverseTransformPoint(rigBones.First(t=>t.name==name).position);
+                    }
+                    var palm=new NativePalmGrip();palm.Resolve(palmFixture.transform);
+                    Vector3 centre;Check(palm.TryGet(out centre),"palm grip resolves finger centre without weapon socket");
+                    var local=centre;
+                    foreach(var angles in new[] {new Vector3(30,0,0),new Vector3(0,65,0),new Vector3(65,-50,10)}) {
+                        palmFixture.transform.SetPositionAndRotation(new Vector3(12,7,-9),Quaternion.Euler(angles));
+                        Check(palm.TryGet(out centre)&&Vector3.Distance(centre,palmFixture.transform.TransformPoint(local))<.00001f,"palm grip follows raised and sideways hand pose "+angles);
+                    }
+                    palm.Reset();Check(!palm.TryGet(out centre),"released palm cannot retain old hand position");
+                } finally {UnityEngine.Object.Destroy(palmFixture);}
             } finally {nativeRig.Release();}
             var projectionFixture=new GameObject("FishingHandProjectionFixture");
             try {

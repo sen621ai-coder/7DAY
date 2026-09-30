@@ -34,6 +34,7 @@ namespace PZAEC.Fishing.Contracts
     }
     public sealed class HookConfig
     {
+        public bool NaturalBites=false;
         public float BiteWindowSeconds=1.2f, SlackLossSeconds=2.5f, MinimumStrikeSpeedRadiansPerSecond=0.6f;
         public float MaxSafeStrikeSpeedRadiansPerSecond=4, InitialQuality01=0.8f;
     }
@@ -46,6 +47,53 @@ namespace PZAEC.Fishing.Contracts
         public float NibbleMinSeconds=1, NibbleMaxSeconds=3, BiteWaitMinSeconds=3, BiteWaitMaxSeconds=12;
         public float NearShoreSurgeMeters=3, LandingStamina01=0.12f, LandingDistanceMeters=1.8f;
     }
+    // Stable indices are persisted in catch CVars. Append only; index zero preserves old carp saves.
+    public static class FishCatalog
+    {
+        public static readonly string[] Ids={"carp","crucian","grassCarp","silverCarp","bigheadCarp","whiteStrip","bitterling","sunfish"};
+        static readonly string[] Names={"鲤鱼","鲫鱼","草鱼","鲢鱼","鳙鱼","白条","鳑鲏","太阳鱼"};
+        static readonly string[] Suffixes={"Carp","Crucian","GrassCarp","SilverCarp","BigheadCarp","WhiteStrip","Bitterling","Sunfish"};
+        static readonly float[] MassScale={1,.2f,1.5f,1.2f,1.6f,.035f,.02f,.1f};
+        static readonly float[] ForceScale={1,.32f,1.18f,1.08f,1.15f,.12f,.08f,.22f};
+        static readonly float[] EnergyScale={1,.22f,1.5f,1.2f,1.4f,.025f,.012f,.1f};
+        static readonly int[] Weights={20,25,10,8,7,15,8,7};
+        public static int Index(string id){return Array.IndexOf(Ids,id);}
+        public static string FromSavedIndex(float index)
+        {
+            if(!Scalar.IsFinite(index)||index<0||index>=Ids.Length||index!=(int)index)throw new ArgumentException("Invalid saved fish species");
+            return Ids[(int)index];
+        }
+        public static string Name(string id){int i=Index(id);return i<0?"鱼":Names[i];}
+        public static string MeatItem(string id){int i=Index(id);return i<0?null:"pzaecFishingMeat"+Suffixes[i];}
+        public static int MeatCount(float mass){return Math.Max(1,(int)Math.Ceiling(mass/.25f));}
+        public static string Item(string id){int i=Index(id);return i<0?null:"pzaecFishingFish"+Suffixes[i];}
+        public static FishConfig Profile(FishConfig basis,string id)
+        {
+            int i=Index(id);if(i<0)throw new ArgumentException("Unknown fish species");
+            var fish=new FishConfig();foreach(var field in typeof(FishConfig).GetFields())field.SetValue(fish,field.GetValue(basis));
+            fish.Id=id;fish.MassKg*=MassScale[i];fish.CruiseForceNewtons*=ForceScale[i];fish.BurstForceNewtons*=ForceScale[i];
+            fish.StaminaJoules*=EnergyScale[i];fish.RecoveryWatts*=EnergyScale[i];
+            if(i!=0){fish.DragCoefficient*=Math.Max(.15f,(float)Math.Pow(MassScale[i],.67));
+                fish.BurstSeconds*=i>=5?.55f:1.1f;fish.RecoverySeconds*=i>=5?.7f:1;
+                fish.NibbleMinSeconds*=i>=5?.45f:.8f;fish.NibbleMaxSeconds*=i>=5?.6f:.9f;}
+            return fish;
+        }
+        public static FishConfig Size(FishConfig fish,float relativeMass)
+        {
+            if(!Scalar.IsFinite(relativeMass)||relativeMass<.5f||relativeMass>1.75f)throw new ArgumentException("Fish size outside supported range");
+            fish.MassKg*=relativeMass;float strength=(float)Math.Sqrt(relativeMass);
+            fish.CruiseForceNewtons*=strength;fish.BurstForceNewtons*=strength;
+            fish.StaminaJoules*=relativeMass;fish.RecoveryWatts*=relativeMass;
+            fish.DragCoefficient*=(float)Math.Pow(relativeMass,.67);return fish;
+        }
+        public static FishConfig Select(FishConfig basis,uint seed)
+        {
+            // Independent mixing prevents species order from correlating with the bite random stream.
+            uint mixed=seed; mixed^=mixed>>16;mixed*=0x7feb352d;mixed^=mixed>>15;mixed*=0x846ca68b;mixed^=mixed>>16;
+            int roll=(int)(mixed%100);for(int i=0;i<Ids.Length;i++){roll-=Weights[i];if(roll<0)return Size(Profile(basis,Ids[i]),.5f+1.25f*((mixed>>8)%10001)/10000f);}
+            return Profile(basis,Ids[0]);
+        }
+    }
     public sealed class ControlConfig
     {
         public float RadiansPerMouseUnit=0.04f, LoadedResponseFloor01=0.25f, AutoBackThreshold01=0.85f;
@@ -53,6 +101,7 @@ namespace PZAEC.Fishing.Contracts
         public float PlayerResistanceNewtons=110, MinAgainstPullScale=0.1f, InitialDrag01=0.5f, FeedbackIntensity01=0.3f;
         public bool AutoBackEnabled=true;
         public bool ClickStrike=false;
+        public bool EffortEnabled=false;
         public string CastKey="Mouse0", StrikeKey="Mouse0", ReelKey="Mouse1", FreeLookKey="LeftAlt", RecenterKey="LeftControl", CancelKey="Escape";
         public string DragIncreaseKey="Equals", DragDecreaseKey="Minus";
     }

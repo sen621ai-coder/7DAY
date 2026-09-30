@@ -11,18 +11,33 @@ namespace PZAEC.Fishing.Runtime
     public sealed class NativeHeldRod : IDisposable
     {
         Transform mount,rod,grip;
+        readonly NativePalmGrip palm=new NativePalmGrip();
         Renderer[] originals=new Renderer[0];bool[] visibility=new bool[0];
         PresentationAssets assets;
         CameraMatrixOverride projection;
         Transform diagnosed;
-        public Vector3? HandScene => mount!=null&&mount.gameObject.activeInHierarchy?
-            (Vector3?)(projection!=null&&projection.enabled?NativeHandProjection.ToWorld(projection.referenceCamera,projection.fov,mount.position):mount.position):null;
+        Vector3? RawHandScene {
+            get {
+                if(mount==null||!mount.gameObject.activeInHierarchy)return null;
+                Vector3 centre;
+                return palm.TryGet(out centre)?centre:mount.position;
+            }
+        }
+        public Vector3? HandScene {
+            get {
+                var hand=RawHandScene;
+                return hand.HasValue&&projection!=null&&projection.enabled?
+                    (Vector3?)NativeHandProjection.ToWorld(projection.referenceCamera,projection.fov,hand.Value):hand;
+            }
+        }
         public Vector3? VisibleGripScene => grip!=null&&rod.gameObject.activeInHierarchy?(Vector3?)grip.position:null;
         public void Update(EntityPlayerLocal player,FishingConfig config,bool fishing)
         {
             var next=player?.inventory?.GetHoldingItemTransform();
             Vector3 aim=player!=null&&player.playerCamera!=null?player.playerCamera.transform.forward:next!=null?next.forward:Vector3.forward;
             Update(next,aim,config,fishing);
+            var avatar=player?.emodel?.avatarController as AvatarLocalPlayerController;
+            palm.Resolve(avatar!=null&&avatar.isFPV?avatar.fpsArms?.Parts?.BodyObj?.transform:null);
             projection=next!=null&&player.emodel!=null&&player.emodel.IsFPV?
                 (next.GetComponentInParent<CameraMatrixOverride>()??player.m_vp_FPWeapon?.CameraMatrixOverride):null;
             if(next!=null&&next!=diagnosed) {
@@ -30,7 +45,7 @@ namespace PZAEC.Fishing.Runtime
                 Log.Out("[PZAEC.Fishing] Grip mount="+next.name+" parent="+next.parent?.name+
                     " fpProjection="+(projection!=null)+" handFov="+(projection!=null?projection.fov:0)+
                     " worldFov="+(projection!=null&&projection.referenceCamera!=null?projection.referenceCamera.fieldOfView:0)+
-                    " holdType="+player.inventory.holdingItem.HoldType.Value);
+                    " holdType="+player.inventory.holdingItem.HoldType.Value+" palmGrip="+palm.TryGet(out var palmCentre));
             }
             if(!fishing&&grip!=null&&HandScene.HasValue)rod.position+=HandScene.Value-grip.position;
         }
@@ -63,7 +78,7 @@ namespace PZAEC.Fishing.Runtime
         public string ModDirectory {get;set;}
         public Vec3 Root(RodPose pose,float length)
         {
-            var hand=mount!=null&&mount.gameObject.activeInHierarchy?(Vector3?)mount.position:null;
+            var hand=RawHandScene;
             if(!hand.HasValue)throw new InvalidOperationException("Fishing hand mount unavailable");
             return NativeCoordinates.ToAbsolute(hand.Value)-PresentationMath.RodAim(pose)*(.23f*length/2.7f);
         }
@@ -72,6 +87,7 @@ namespace PZAEC.Fishing.Runtime
             for(int i=0;i<originals.Length;i++)if(originals[i]!=null)originals[i].enabled=visibility[i];
             originals=new Renderer[0];visibility=new bool[0];
             if(rod!=null)Object.Destroy(rod.gameObject);rod=null;grip=null;mount=null;projection=null;diagnosed=null;
+            palm.Reset();
             assets?.Dispose();assets=null;
         }
     }

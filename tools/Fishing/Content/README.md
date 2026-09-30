@@ -48,3 +48,5 @@
 Test-Config.ps1 离线按工作区模组目录排序，模拟 items/recipes/materials/buffs/blocks 的 XPath 补丁，验证物品唯一性、配方材料、烤架/篝火、材质、食物 buff 和中英文本。报告位于 artifacts/config-check.json。这不等同原生 XML loader；不覆盖用户目录其他模组，不验证 prefab/图标资源加载。
 
 待集成实测：原生 XML 日志、制作列表、烤架制作、食用加成与 ProjectZ 饥饿系统、物品外观、扣饵、背包满和重复结算、多人同步。
+
+0.2.7：生产入口使用 FishCatalog 按种子选择八种鱼及基准重量的 0.5–1.75 倍。TryGetReward 验证对应鱼种重量范围，返回该鱼种鱼肉，每 0.25 kg 向上取整，至少一份。旧版一条鱼的说明仅适用于历史版本。鱼种与重量保存由原生宿主负责。

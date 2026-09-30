@@ -18,6 +18,7 @@ namespace PZAEC.Fishing.Runtime
         readonly string directory;
         readonly FishingContent content=new FishingContent();
         readonly FishingConfig config;
+        readonly FishConfig baseFish;
         readonly NativeBindings bindings;
         readonly NativeControlLease lease=new NativeControlLease();
         readonly NativeInputHooks hooks;
@@ -43,7 +44,7 @@ namespace PZAEC.Fishing.Runtime
         double biteStartedAt;
         public LocalFishingRuntime(string directory)
         {
-            this.directory=directory;config=content.Load(directory);
+            this.directory=directory;config=content.Load(directory);baseFish=FishCatalog.Profile(config.Fish,FishingContract.FishDefinition);
             heldRod=new NativeHeldRod {ModDirectory=directory};
             string error;if(!content.Validate(config,out error))throw new InvalidOperationException(error);
             bindings=new NativeBindings(config.Controls);
@@ -106,6 +107,7 @@ namespace PZAEC.Fishing.Runtime
             presentation=new FishingPresentation(directory,options:new PresentationOptions {RightHandScene=()=>heldRod.HandScene},diagnosticLog:s=>Log.Out("[PZAEC.Fishing] "+s));
             session=new SessionDriver(new ContractFishingSimulation(),new FishingControlsAdapter(),presentation);
             var id=Guid.NewGuid();
+            config.Fish=FishCatalog.Select(baseFish,BitConverter.ToUInt32(id.ToByteArray(),0));
             try {
                 session.Begin(new SessionStart {SessionId=id,PlayerPersistentId=player.PersistentPlayerData.PrimaryId.CombinedString,
                     PlayerEntityId=player.entityId,Seed=BitConverter.ToUInt32(id.ToByteArray(),0),CastTarget=target,
@@ -117,7 +119,7 @@ namespace PZAEC.Fishing.Runtime
                 session.Event+=OnEvent;startFrame=Time.frameCount;
                 diagnosticSession=id;loggedPhase=session.Current.Phase;diagnosticAt=0;
                 Log.Out("[PZAEC.Fishing] Session "+id.ToString("N")+" accepted target="+target+" depth="+water.SampleColumn(target,1,16).DepthMeters.ToString("F2")+"m bait=1");
-                Message(Pole?"已抛投。浮漂有口时点击左键提竿；中鱼后后拉鼠标遛鱼。":"已抛投。观察浮漂，咬实后左键配合向后移动鼠标抬竿。");
+                Message("已抛竿，观察漂相。");
             } catch {ClearSession(FailureReason.ModuleError);throw;}
         }
         FailureReason Eligibility()
@@ -141,6 +143,7 @@ namespace PZAEC.Fishing.Runtime
             var result=new EnvironmentFrame {CanFish=true,IsGrounded=player.onGround,PlayerEntityId=player.entityId,
                 PlayerPosition=position,PlayerVelocity=dt>0?(position-lastPosition)/dt:Vec3.Zero,ViewForward=forward,ViewRight=right,
                 Rod=new RodPose {Root=root,Forward=forward,Right=right,PitchRadians=.35f},
+                HasPlayerStamina=true,PlayerStamina01=Mathf.Clamp01(player.Stamina/Math.Max(1,player.GetMaxStamina())),PlayerStaminaMaximum=Math.Max(1,player.GetMaxStamina()),
                 Water=water.SampleColumn(session!=null?session.Current.FloatPosition:position,4,16)};
             lastPosition=position;return result;
         }
@@ -154,6 +157,7 @@ namespace PZAEC.Fishing.Runtime
             if(frame.StrikePressed)Log.Out("[PZAEC.Fishing] Strike session="+diagnosticSession.ToString("N")+" phase="+session.Current.Phase+" pitch="+session.Current.Rod.PitchRadians.ToString("F3")+" mouseBack="+frame.MouseBackDelta.ToString("F3"));
             float previousYaw=session.Current.Rod.YawRadians;
             session.Advance(Time.deltaTime,frame,Environment(Time.deltaTime));lease.Request=session.Movement;
+            NativeFishingEffort.Spend(player,session.FrameStaminaCost);
             lease.RodYawDeltaRadians=frame.FreeLookHeld||frame.RecenterHeld?0:session.Current.Rod.YawRadians-previousYaw;
             floatReadout.Observe(session.Current,config.Float);
             Diagnostic();
@@ -166,11 +170,10 @@ namespace PZAEC.Fishing.Runtime
         void OnEvent(FishingEvent e)
         {
             Log.Out("[PZAEC.Fishing] Event session="+e.SessionId.ToString("N")+" tick="+e.Tick+" kind="+e.Kind+" reason="+e.Reason);
-            if(Pole&&e.Kind==FishingEventKind.Nibble)Message("鱼有口，现在点击左键提竿。");
             if(Pole&&e.Kind==FishingEventKind.Hooked)Message("中鱼了！后拉鼠标抬竿、左右侧压，开始遛鱼。");
             if(e.Kind!=FishingEventKind.Landed||session==null||e.SessionId!=session.Current.SessionId)return;
             if(!settlement.RecordLanding(session.Current,config.Fish.Id))throw new InvalidOperationException("Landing rejected by settlement guard");
-            Message("鱼已上岸，正在收取鱼获。");retryAt=0;
+            Message(FishCatalog.Name(config.Fish.Id)+"已上岸（"+session.Current.FishMassKg.ToString("F2")+" kg），获得 "+FishCatalog.MeatCount(session.Current.FishMassKg)+" 份鱼肉。");retryAt=0;
         }
         public void Render()
         {
@@ -204,9 +207,9 @@ namespace PZAEC.Fishing.Runtime
             switch(reason) {
                 case FailureReason.Overload:return "鱼线承受不住拉力，断线了。";
                 case FailureReason.SlackLine:return "松线太久，鱼脱钩了。";
-                case FailureReason.EarlyStrike:return "提竿过早或力度不足。";
+                case FailureReason.EarlyStrike:return "空竿，请重新抛竿。";
                 case FailureReason.LateStrike:return "错过了提竿时机。";
-                case FailureReason.InvalidInput:return "提竿动作未达到要求，或输入状态异常。咬实时点击左键，并向后拉鼠标。";
+                case FailureReason.InvalidInput:return "未能完成提竿，请重新抛竿。";
                 case FailureReason.ItemChanged:return "已切换装备。";
                 case FailureReason.Damaged:return "受到伤害。";
                 case FailureReason.MenuOpened:return "打开菜单或失去焦点。";
@@ -217,29 +220,25 @@ namespace PZAEC.Fishing.Runtime
         public void Draw()
         {
             if(player==null||(!Equipped&&Time.realtimeSinceStartup>messageUntil))return;
-            string heading="台钓 · 准备抛投",stats="瞄准 6.5 米内足够深的水面，左键抛投。\n每次消耗 1 份蚯蚓。";
-            string help="中鱼：左键配合鼠标后拉\n右键收线 · - / = 调泄力\n左 Alt 观察 · 左 Ctrl 挪鼠标 · Esc 取消";
-            if(Pole)help="浮漂有口时左键提竿 · 中鱼后后拉鼠标遛鱼\n鼠标左右侧压 · WASD 走位 · 前推鼠标放低竿\n左 Alt 观察 · 左 Ctrl 挪鼠标 · Esc 取消";
+            string heading="台钓 · 左键抛竿",stats="瞄准近处水面 · 需要蚯蚓";
+            string help="Alt 观察 · Ctrl 挪鼠标 · Esc 取消";
             if(session!=null) {
                 var s=session.Current;
                 switch(s.Phase) {
-                    case FishingPhase.Casting:heading="钓鱼 · 正在抛投";break;
-                    case FishingPhase.Settling:heading="钓鱼 · 浮漂落水";break;
-                    case FishingPhase.Nibbling:heading=Pole?"鱼有口！点击左键提竿":"钓鱼 · 鱼在试饵，先别提竿";break;
-                    case FishingPhase.BiteWindow:heading=Pole?"鱼已咬实！点击左键提竿":"鱼已咬实！左键 + 鼠标后拉";break;
-                    case FishingPhase.Hooked:heading="中鱼！开始遛鱼";break;
-                    case FishingPhase.Fighting:heading="钓鱼 · 遛鱼";break;
-                    case FishingPhase.Landing:heading="钓鱼 · 收到近岸即可上鱼";break;
-                    default:heading="钓鱼 · 等待咬钩";break;
+                    case FishingPhase.Casting:heading="正在抛竿";stats="等浮漂落水";break;
+                    case FishingPhase.Settling:heading="浮漂落水";stats="等漂站稳";break;
+                    case FishingPhase.Waiting:
+                    case FishingPhase.Nibbling:
+                    case FishingPhase.BiteWindow:heading="台钓 · 看漂";stats="观察漂相 · 自行判断提竿";break;
+                    case FishingPhase.Hooked:
+                    case FishingPhase.Fighting:heading="中鱼 · 遛鱼";stats="后拉顶住 · 前推休息";help="左右侧压 · Ctrl 挪鼠标 · Esc 取消";break;
+                    case FishingPhase.Landing:heading="鱼已疲劳";stats="抬竿引到近岸";break;
+                    default:heading="等待吃饵";stats="看漂等口";break;
                 }
-                stats="拉力 "+s.LineTensionNewtons.ToString("F0")+" N    泄力 "+(s.Drag01*100).ToString("F0")+"%\n线长 "+s.LineLengthMeters.ToString("F1")+" m    鱼剩余体力 "+(s.FishStamina01*100).ToString("F0")+"%";
-                if(Pole)stats="拉力 "+s.LineTensionNewtons.ToString("F0")+" N    固定线长 "+s.LineLengthMeters.ToString("F1")+" m\n鱼剩余体力 "+(s.FishStamina01*100).ToString("F0")+"% · 疲劳后抬竿引到近岸";
-                if(s.Phase==FishingPhase.BiteWindow)stats="提竿剩余 "+System.Math.Max(0,config.Hook.BiteWindowSeconds-(s.TimeSeconds-biteStartedAt)).ToString("F1")+" 秒\n点击左键并向后移动鼠标；竿举得太高时先稍放低。";
-                if(Pole&&s.Phase==FishingPhase.BiteWindow)stats="提竿剩余 "+Math.Max(0,config.Hook.BiteWindowSeconds-(s.TimeSeconds-biteStartedAt)).ToString("F1")+" 秒\n点击左键提竿刺鱼，中鱼后再后拉鼠标遛鱼。";
-                if(Pole&&s.Phase==FishingPhase.Nibbling)stats="鱼正在吃饵，现在点击左键即可提竿。\n中鱼后后拉鼠标抬竿，左右侧压遛鱼。";
             }
-            FishingHud.Draw(heading,stats,help,Time.realtimeSinceStartup<messageUntil?message:"",Pole&&session!=null?(FloatReadoutState?)floatReadout.Current:null,
-                session!=null?(FightReadout?)new FightReadout {Tension=session.Current.LineTensionNewtons,BreakForce=config.Line.BreakForceNewtons,Stamina=session.Current.FishStamina01,LandStamina=config.Fish.LandingStamina01}:null);
+            FishingHud.Draw(heading,stats,help,session==null&&Time.realtimeSinceStartup<messageUntil?message:"",Pole&&session!=null?(FloatReadoutState?)floatReadout.Current:null,
+                session!=null&&(session.Current.Phase==FishingPhase.Hooked||session.Current.Phase==FishingPhase.Fighting||session.Current.Phase==FishingPhase.Landing)?(FightReadout?)new FightReadout {Tension=session.Current.LineTensionNewtons,BreakForce=config.Line.BreakForceNewtons,Stamina=session.Current.FishStamina01,LandStamina=config.Fish.LandingStamina01,
+                    PlayerEffort=session.PlayerEffort01,PlayerStamina=Mathf.Clamp01(player.Stamina/Math.Max(1,player.GetMaxStamina())),ShowEffort=config.Controls.EffortEnabled}:null);
             if(session!=null&&player.playerCamera!=null&&(session.Current.Phase==FishingPhase.Hooked||session.Current.Phase==FishingPhase.Fighting||session.Current.Phase==FishingPhase.Landing))
                 FishingHud.DrawFishBearing(player.playerCamera.WorldToViewportPoint(NativeCoordinates.ToScene(session.Current.FishPosition)));
         }

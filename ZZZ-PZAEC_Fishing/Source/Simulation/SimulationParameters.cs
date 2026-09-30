@@ -7,6 +7,7 @@ namespace PZAEC.Fishing.Simulation
     {
         public double FixedStep = 1.0 / 120;
         public double FixedLineLength=0;
+        public bool NaturalBites=false;
         public double FishMass = 2.5, CruiseForce = 4, BurstForce = 22, WaterResistance = 5;
         public double MaxFishSpeed = 7, BurstSeconds = 1.8, RecoverySeconds = 2.4;
         public double CruiseSwimSpeed = 30, BurstSwimSpeed = 30, NearBankSurgeDistance = 3.96;
@@ -32,7 +33,7 @@ namespace PZAEC.Fishing.Simulation
         {
             Numbers.Range(FixedStep, 1.0/240, 1.0/30, "FixedStep");
             Numbers.Range(FixedLineLength,0,MaxLineLength,"FixedLineLength");
-            Numbers.Range(FishMass, .05, 100, "FishMass");
+            Numbers.Range(FishMass, .005, 100, "FishMass");
             Numbers.Range(CruiseForce, 0, 1000, "CruiseForce");
             Numbers.Range(BurstForce, 0, 2000, "BurstForce");
             Numbers.Range(WaterResistance, .1, 1000, "WaterResistance");

@@ -14,6 +14,8 @@ namespace PZAEC.Fishing.Controls
         bool autoBack, released = true;
         double previousPitch;
         bool clickStrike;
+        bool effortEnabled;
+        double minPitch,maxPitch;
         double liftRemaining;
 
         public void Reset(ControlConfig config, RodConfig rod)
@@ -30,6 +32,7 @@ namespace PZAEC.Fishing.Controls
                 throw new ArgumentException("Invalid shared control or rod configuration.");
             radians = config.RadiansPerMouseUnit;
             clickStrike=config.ClickStrike;liftRemaining=0;
+            effortEnabled=config.EffortEnabled;minPitch=rod.MinPitchRadians;maxPitch=rod.MaxPitchRadians;
             resistance = config.PlayerResistanceNewtons; minScale = config.MinAgainstPullScale;
             angularSpeed = rod.AngularSpeedRadiansPerSecond;
             threshold = rod.MinPitchRadians + (rod.MaxPitchRadians - (double)rod.MinPitchRadians) * config.AutoBackThreshold01;
@@ -60,6 +63,15 @@ namespace PZAEC.Fishing.Controls
             // Cap requested motion before load response; excess displacement is discarded,
             // never queued as movement that could continue after the mouse stops.
             double limit = angularSpeed * dt / radians;
+            bool fighting=previous.Phase==FishingPhase.Fighting||previous.Phase==FishingPhase.Landing;
+            bool clutch = input.FreeLookHeld || input.RecenterHeld;
+            bool blocked = clutch || resumePending;
+            var direction = HorizontalDirection(environment.PlayerPosition, previous.FishPosition);
+            double fishSide=Vec3.Dot(direction,environment.Rod.Right);
+            double stamina=environment.HasPlayerStamina?ControlMath.Clamp(environment.PlayerStamina01,0,1):1;
+            if(environment.HasPlayerStamina&&!Scalar.IsFinite(environment.PlayerStamina01)){Release();return Neutral(input.Sequence,true);}
+            double drop=effortEnabled&&fighting&&!blocked?(.025+.12*load)*load*dt:0;
+            double drift=effortEnabled&&fighting&&!blocked?.06*load*fishSide*dt:0;
             if(clickStrike && previous.Phase!=FishingPhase.Nibbling && previous.Phase!=FishingPhase.BiteWindow &&
                 previous.Phase!=FishingPhase.Hooked && previous.Phase!=FishingPhase.Fighting && previous.Phase!=FishingPhase.Landing)
                 input.StrikePressed=false;
@@ -73,11 +85,11 @@ namespace PZAEC.Fishing.Controls
                 MouseSide = ControlMath.Clamp(input.MouseRightDelta, -limit, limit),
                 FreeLook = input.FreeLookHeld, Recenter = input.RecenterHeld,
                 ReelHeld = input.ReelHeld, StrikePressed = input.StrikePressed
-            }, new ControlLoad { LineTaut = previous.LineTensionNewtons > 0, TensionNewtons = previous.LineTensionNewtons });
+            }, new ControlLoad { LineTaut = previous.LineTensionNewtons > 0, TensionNewtons = previous.LineTensionNewtons,
+                DirectionalSideResistance=effortEnabled&&fighting,PullRight=fishSide,
+                Fatigue01=effortEnabled&&fighting?1-stamina:0,PitchDropRadians=drop,SideDriftRadians=drift });
 
-            bool clutch = input.FreeLookHeld || input.RecenterHeld;
             // The mapper drops the first resumed frame. Do the same for auto feet/drag/cast.
-            bool blocked = clutch || resumePending;
             resumePending = clutch;
             if (!blocked) drag = ControlMath.Clamp(drag + input.DragAdjustDelta, 0, 1);
             if (!autoBack || blocked || !environment.IsGrounded || input.MoveForward > 0 || input.MouseBackDelta < 0)
@@ -91,7 +103,13 @@ namespace PZAEC.Fishing.Controls
             else backstep = Math.Max(0, backstep - maxBack * dt / decay);
             previousPitch = local.PitchRadians;
 
-            var direction = HorizontalDirection(environment.PlayerPosition, previous.FishPosition);
+            double effort=0;
+            if(effortEnabled&&fighting&&(blocked||input.MouseBackDelta>=0)) {
+                double raised=ControlMath.Clamp((local.PitchRadians-minPitch)/(maxPitch-minPitch),0,1);
+                double pull=blocked?0:ControlMath.Clamp(input.MouseBackDelta/limit,0,1);
+                double opposeSide=blocked||input.MouseRightDelta*fishSide>=0?0:ControlMath.Clamp(Math.Abs(input.MouseRightDelta)/limit,0,1);
+                effort=load*ControlMath.Clamp(.5*raised+.55*pull+.45*opposeSide,0,1);
+            }
             // Native S already supplies its own retreat; only fill any missing amount.
             double nativeBack = Math.Max(0, -ControlMath.Clamp(input.MoveForward, -1, 1));
             var movement = new MovementRequest {
@@ -103,7 +121,8 @@ namespace PZAEC.Fishing.Controls
             return new SharedIntent {
                 InputSequence = input.Sequence, RodPitchRadians = (float)local.PitchRadians, RodYawRadians = (float)local.SideRadians,
                 Reel01 = local.ReelHeld ? 1 : 0, Drag01 = (float)drag, Strike = local.StrikePressed,
-                Cast = !blocked && input.CastPressed, FreeLook = input.FreeLookHeld, Movement = movement
+                Cast = !blocked && input.CastPressed, FreeLook = input.FreeLookHeld, Movement = movement,
+                PlayerEffort01=(float)effort,PlayerStaminaCost=(float)(32*effort*dt)
             };
         }
 

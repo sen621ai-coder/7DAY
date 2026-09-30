@@ -20,6 +20,7 @@ namespace PZAEC.Fishing.Contracts
         public float Reel01, Drag01;
         public bool Cast, Strike, Cancel, FreeLook;
         public MovementRequest Movement;
+        public float PlayerEffort01,PlayerStaminaCost;
     }
     public struct MovementRequest
     {
@@ -60,6 +61,9 @@ namespace PZAEC.Fishing.Contracts
         public RodPose Rod;
         public WaterSample Water;
         public bool CanFish, IsGrounded;
+        public bool HasPlayerStamina;
+        public float PlayerStamina01;
+        public float PlayerStaminaMaximum;
         public FailureReason UnavailableReason;
     }
     public struct SessionStart

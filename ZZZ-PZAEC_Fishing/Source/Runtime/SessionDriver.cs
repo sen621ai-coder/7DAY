@@ -71,6 +71,8 @@ namespace PZAEC.Fishing.Runtime
         public bool Active {get;private set;}
         public MovementRequest Movement {get;private set;} = MovementRequest.None;
         public FishingSnapshot Current => current;
+        public float PlayerEffort01 {get;private set;}
+        public float FrameStaminaCost {get;private set;}
         public event Action<FishingEvent> Event;
         public SessionDriver(IFishingSimulation simulation,IFishingControls controls,IFishingPresentation presentation)
         {this.simulation=simulation??throw new ArgumentNullException(nameof(simulation));this.controls=controls??throw new ArgumentNullException(nameof(controls));this.presentation=presentation??throw new ArgumentNullException(nameof(presentation));}
@@ -79,6 +81,7 @@ namespace PZAEC.Fishing.Runtime
             if(Active)throw new InvalidOperationException("Session already active");
             if(start.SessionId==Guid.Empty || config==null || config.Session==null || config.Controls==null || config.Rod==null || config.Version!=FishingContract.Version || water==null || !environment.CanFish)throw new ArgumentException("Invalid session start");
             input.Clear(); events.Clear(); lastEventSequence=0; accumulator=0; sessionId=start.SessionId;
+            PlayerEffort01=FrameStaminaCost=0;
             maxTicks=Math.Max(1,Math.Min(16,config.Session.MaxCatchUpTicks));
             lastSimulatedEnvironment=environment;
             try
@@ -93,6 +96,7 @@ namespace PZAEC.Fishing.Runtime
         }
         public int Advance(float dt,RawInputFrame frame,EnvironmentFrame environment)
         {
+            FrameStaminaCost=0;
             if(!Active)return 0;
             if(!environment.CanFish){Cancel(environment.UnavailableReason);return 0;}
             if(!frame.InputAllowed){Cancel(FailureReason.MenuOpened);return 0;}
@@ -116,6 +120,13 @@ namespace PZAEC.Fishing.Runtime
                     if(intent.Cancel){Cancel(FailureReason.CancelledByPlayer);break;}
                     // B owns angular limits and the physical tip; A supplies the observed root/basis.
                     current=simulation.Step(FishingContract.FixedStepSeconds,intent,environment,this);
+                    PlayerEffort01=intent.PlayerEffort01;
+                    FrameStaminaCost+=intent.PlayerStaminaCost;
+                    // Each substep sees the remaining resource, not the same full frame budget.
+                    if(environment.HasPlayerStamina) {
+                        float spent=intent.PlayerStaminaCost/Math.Max(1,environment.PlayerStaminaMaximum);
+                        sampledEnvironment.PlayerStamina01=Math.Max(0,sampledEnvironment.PlayerStamina01-spent);
+                    }
                     executed++;
                     lastSimulatedEnvironment=environment;
                     Movement=intent.Movement;
@@ -168,6 +179,7 @@ namespace PZAEC.Fishing.Runtime
         }
         void Release()
         {
+            PlayerEffort01=0;
             Active=false;Movement=MovementRequest.None;input.Clear();events.Clear();accumulator=0;
             try{controls.Release();}finally{presentation.Clear();}
         }

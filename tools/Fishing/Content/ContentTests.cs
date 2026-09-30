@@ -43,7 +43,7 @@ internal static class ContentTests
         var config = content.Load(mod);
         string error;
         Check(content.Validate(config, out error), "Shipped config: " + error);
-        Check(content.TryGetReward(valid, out reward) && reward.ItemId == FishingContract.FishItem && reward.Count == 1 && reward.FishMassKg == 3, "One fish reward");
+        Check(content.TryGetReward(valid, out reward) && reward.ItemId == FishCatalog.MeatItem("carp") && reward.Count == 12 && reward.FishMassKg == 3, "One fish reward");
         Check(content.TryGetReward(valid, out reward), "Lookup is stateless; A owns deduplication");
         Check(!content.Validate(null, out error), "Null config");
 
@@ -100,7 +100,26 @@ internal static class ContentTests
         invalid = valid; invalid.MassKg = float.NaN; Check(!content.TryGetReward(invalid, out reward), "Invalid mass");
         invalid = valid; invalid.MassKg = 99; Check(!content.TryGetReward(invalid, out reward), "Unconfigured mass");
         invalid = valid; invalid.TerminalTick = -1; Check(!content.TryGetReward(invalid, out reward), "Invalid terminal tick");
-        Check(content.TryGetReward(valid, out reward) && reward.Count == 1, "Valid reward still available");
+        Check(content.TryGetReward(valid, out reward) && reward.Count == 12, "Valid reward still available");
+        var seen=new System.Collections.Generic.HashSet<string>();
+        var basis=content.Load(mod).Fish;
+        for(uint seed=0;seed<1000;seed++){
+            var fish=FishCatalog.Select(basis,seed);seen.Add(fish.Id);
+            var again=FishCatalog.Select(basis,seed);
+            Check(fish.Id==again.Id&&fish.MassKg==again.MassKg,"Deterministic species and size");
+            var catchValue=valid;catchValue.FishDefinitionId=fish.Id;catchValue.MassKg=fish.MassKg;
+            Check(content.TryGetReward(catchValue,out reward)&&reward.ItemId==FishCatalog.MeatItem(fish.Id)&&reward.Count==FishCatalog.MeatCount(fish.MassKg),"Species and weight reward");
+        }
+        Check(seen.Count==8,"All eight species reachable");
+        foreach(var id in FishCatalog.Ids){
+            var small=FishCatalog.Size(FishCatalog.Profile(basis,id),.5f);
+            var large=FishCatalog.Size(FishCatalog.Profile(basis,id),1.75f);
+            Check(large.MassKg>small.MassKg&&large.BurstForceNewtons>small.BurstForceNewtons&&large.StaminaJoules>small.StaminaJoules,"Large fish require more effort");
+            var sample=valid;sample.FishDefinitionId=id;sample.MassKg=large.MassKg;
+            Check(content.TryGetReward(sample,out reward),"Large fish reward accepted");
+            sample.MassKg=large.MassKg+.1f;Check(!content.TryGetReward(sample,out reward),"Out of range species mass rejected");
+            Check(FishCatalog.FromSavedIndex(FishCatalog.Index(id))==id,"Persisted species roundtrip");
+        }
         Console.WriteLine("PASS: " + checks + " content checks; no game or inventory side effects. Runtime=" + Environment.Version);
         return 0;
     }

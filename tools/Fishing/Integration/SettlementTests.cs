@@ -51,14 +51,25 @@ internal static class SettlementTests
         var next=state;next.SessionId=Guid.NewGuid();
         Check(!settlement.RecordLanding(next,config.Fish.Id),"pending catch cannot be overwritten by new landing");
         settlement=new CatchSettlement(content,record,bag,"local");bag.Full=false;
-        Check(settlement.TrySettle(settlement.Pending)==SettlementStatus.Granted&&bag.Added==1&&!settlement.HasPending,"reconstructed runtime delivers retained catch");
-        Check(settlement.RecordLanding(state,config.Fish.Id)&&settlement.TrySettle(valid)==SettlementStatus.AlreadyGranted&&bag.Added==1,"replayed landing does not duplicate reward");
+        Check(settlement.TrySettle(settlement.Pending)==SettlementStatus.Granted&&bag.Added==FishCatalog.MeatCount(state.FishMassKg)&&!settlement.HasPending,"reconstructed runtime delivers retained catch");
+        Check(settlement.RecordLanding(state,config.Fish.Id)&&settlement.TrySettle(valid)==SettlementStatus.AlreadyGranted&&bag.Added==FishCatalog.MeatCount(state.FishMassKg),"replayed landing does not duplicate reward");
         settlement=new CatchSettlement(content,record,bag,"local");
-        Check(settlement.TrySettle(valid)==SettlementStatus.AlreadyGranted&&bag.Added==1,"completed record survives runtime reconstruction");
+        Check(settlement.TrySettle(valid)==SettlementStatus.AlreadyGranted&&bag.Added==FishCatalog.MeatCount(state.FishMassKg),"completed record survives runtime reconstruction");
         Check(!settlement.RecordLanding(next,config.Fish.Id),"unknown session cannot fabricate a landing");
         Check(settlement.OpenSession(next.SessionId)&&settlement.RecordLanding(next,config.Fish.Id)&&settlement.TrySettle(valid)==SettlementStatus.Invalid,"old catch rejected after next authorized landing");
         bag.Throw=true;try{settlement.TrySettle(settlement.Pending);}catch(Exception){}
-        bag.Throw=false;Check(settlement.TrySettle(settlement.Pending)==SettlementStatus.Deferred&&bag.Added==1,"uncertain inventory failure prevents automatic retry");
+        bag.Throw=false;Check(settlement.TrySettle(settlement.Pending)==SettlementStatus.Deferred&&bag.Added==FishCatalog.MeatCount(state.FishMassKg),"uncertain inventory failure prevents automatic retry");
+        foreach(var species in FishCatalog.Ids){
+            var sized=FishCatalog.Size(FishCatalog.Profile(config.Fish,species),1.75f);
+            var speciesRecord=new Record();var speciesBag=new Inventory{Full=true};
+            var speciesSettlement=new CatchSettlement(content,speciesRecord,speciesBag,"local");
+            var terminal=new FishingSnapshot{SessionId=Guid.NewGuid(),Tick=123,Authority=AuthorityMode.Standalone,Phase=FishingPhase.Resolved,FishMassKg=sized.MassKg};
+            Check(speciesSettlement.OpenSession(terminal.SessionId)&&speciesSettlement.RecordLanding(terminal,species),"weighted species landing recorded");
+            Check(speciesSettlement.TrySettle(speciesSettlement.Pending)==SettlementStatus.InventoryFull,"weighted meat batch retained when full");
+            speciesBag.Full=false;speciesSettlement=new CatchSettlement(content,speciesRecord,speciesBag,"local");
+            Check(speciesSettlement.TrySettle(speciesSettlement.Pending)==SettlementStatus.Granted&&speciesBag.Added==FishCatalog.MeatCount(sized.MassKg),"reconstructed species reward preserves full meat quantity");
+            Check(speciesSettlement.TrySettle(speciesSettlement.Pending)==SettlementStatus.AlreadyGranted,"weighted meat batch cannot be duplicated");
+        }
         var water=new Water();Vec3 target;
         Check(CastTargeting.TryFind(water,new Vec3(0,2,0),new Vec3(0,-.25f,1),Vec3.Zero,25,.6f,out target)&&Math.Abs(target.Z-8)<.001f,"cast intersects aimed water surface");
         water.Blocked=true;Check(!CastTargeting.TryFind(water,new Vec3(0,2,0),new Vec3(0,-.25f,1),Vec3.Zero,25,.6f,out target),"cast cannot cross solid obstacle");
