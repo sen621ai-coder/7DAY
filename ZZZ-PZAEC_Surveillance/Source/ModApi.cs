@@ -10,6 +10,7 @@ namespace PZAEC.Surveillance
         static Transform screenPrefab;
         static float scanAt,broadcastAt;
         static bool legacyOversizedSkipped;
+        static int legacyUnresolvableSkipped;
         public void InitMod(Mod mod)
         {
             var harmony=new Harmony("pzaec.surveillance");
@@ -35,12 +36,22 @@ namespace PZAEC.Surveillance
             }
             __result=screenPrefab;return false;
         }
-        public static bool SkipLegacyOversizedRegistration(MultiBlockManager __instance,BlockValue __1,ref bool __result)
+        public static bool SkipLegacyOversizedRegistration(MultiBlockManager __instance,Vector3i __0,BlockValue __1,ref bool __result)
         {
             // Old multiblocks.7dt files remember the oversized flag. The loader
             // rebuilds each tracking category independently; skip only this obsolete
             // category, preserving normal cross-chunk tracking and the world blocks.
             var block=__1.Block;
+            if(block==null||__1.type==0)
+            {
+                // multiblocks.7dt stores raw block ids without blockmappings remap,
+                // so entries from saves made with an older mod set can resolve to a
+                // missing or air block. The vanilla registration dereferences the
+                // block and would crash the whole world load; such entries track nothing.
+                legacyUnresolvableSkipped++;legacyOversizedSkipped=true;__result=false;
+                if(legacyUnresolvableSkipped<=3)Log.Out("[Surveillance] Skipped legacy oversized entry with unresolvable block at "+__0+".");
+                return false;
+            }
             if(!(block is BlockPZAEC_SurveillanceScreen)||block.isOversized)return true;
             legacyOversizedSkipped=true;__result=false;
             Log.Out("[Surveillance] Migrated legacy screen oversized tracking to native 4x3 support.");
@@ -49,6 +60,8 @@ namespace PZAEC.Surveillance
         public static void FinishLegacyStructureMigration(MultiBlockManager __instance)
         {
             // Initialize clears isDirty after reading; mark it only after that reset.
+            if(legacyUnresolvableSkipped>0)Log.Out("[Surveillance] Legacy oversized migration skipped "+legacyUnresolvableSkipped+" unresolvable entries.");
+            legacyUnresolvableSkipped=0;
             if(legacyOversizedSkipped){__instance.isDirty=true;legacyOversizedSkipped=false;}
         }
         public static void BeforePoolDestroy(GameObject __0)
