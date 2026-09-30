@@ -12,7 +12,7 @@ public sealed class M1NativeQA:IModApi
     static readonly List<string> results=new List<string>();
     static readonly List<Entity> entities=new List<Entity>();static int serial;
     static void Check(bool ok,string label){if(!ok)throw new Exception(label);results.Add("PASS "+label);}
-    static void CheckFlashPixels(Transform flash)
+    static void CheckFlashPixels(Transform flash,bool billboard=false)
     {
         var cameraObject=new GameObject("M1 flash render QA");var camera=cameraObject.AddComponent<Camera>();
         var target=new RenderTexture(256,256,24);var pixels=new Texture2D(256,256,TextureFormat.RGB24,false);var previous=RenderTexture.active;
@@ -20,11 +20,11 @@ public sealed class M1NativeQA:IModApi
         try{
             flash.position=new Vector3(0,300,0);flash.rotation=Quaternion.identity;flash.gameObject.layer=30;
             camera.enabled=false;camera.targetTexture=target;camera.cullingMask=1<<30;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.black;camera.fieldOfView=30;camera.nearClipPlane=.01f;camera.farClipPlane=3;
-            Check(flash.GetComponent<Renderer>().sharedMaterial.shader.isSupported,"muzzle shader supported by native graphics device");
-            foreach(var offset in new[]{Vector3.back,Vector3.right}){
+            Check(flash.GetComponent<Renderer>().sharedMaterial.shader.isSupported,"effect shader supported by native graphics device");
+            foreach(var offset in billboard?new[]{Vector3.back}:new[]{Vector3.back,Vector3.right}){
                 camera.transform.position=flash.position+offset;camera.transform.LookAt(flash.position);camera.Render();RenderTexture.active=target;
                 pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();int lit=pixels.GetPixels32().Count(c=>c.r>20||c.g>20||c.b>20);
-                Check(lit>5,"muzzle flame renders visible pixels from "+offset+" pixels="+lit);
+                Check(lit>5,"effect renders visible pixels from "+offset+" pixels="+lit);
             }
         }finally{flash.localPosition=position;flash.localRotation=rotation;flash.gameObject.layer=layer;RenderTexture.active=previous;camera.targetTexture=null;target.Release();UnityEngine.Object.Destroy(cameraObject);UnityEngine.Object.Destroy(target);UnityEngine.Object.Destroy(pixels);}
     }
@@ -167,6 +167,23 @@ public sealed class M1NativeQA:IModApi
             AccessTools.Field(typeof(Optics),"model").SetValue(null,main.Model);AccessTools.Method(typeof(Optics),"Visibility").Invoke(null,new object[]{true});
             Check(!flash.GetComponent<Renderer>().forceRenderingOff,"scope hides armor but retains separate muzzle flash renderer");
             CheckFlashPixels(flash);
+
+            var impactPuffs=(System.Collections.IList)AccessTools.Field(typeof(Presentation),"puffs").GetValue(null);
+            Check(GameManager.Instance.ExplosionClient(vehicle.position+Vector3.forward*20,Quaternion.identity,0,0,2,0,player.entityId,new List<BlockChangeInfo>())==null,"zero native particle index creates no duplicate explosion prefab");
+            var effectAudio=flash.gameObject.AddComponent<AudioSource>();
+            foreach(ImpactSurface surface in Enum.GetValues(typeof(ImpactSurface)))foreach(bool ap in new[]{true,false}){
+                AccessTools.Method(typeof(Presentation),"ImpactFX").Invoke(null,new object[]{new Presentation.View{ImpactAudio=effectAudio},new NetPackageM1Event{A=vehicle.position+Vector3.forward*20,B=Vector3.back,X=ImpactRules.Encode(surface),Y=ap?1:0,Shot=987}});
+                int fires=0,sparks=0;foreach(var puff in impactPuffs){if((bool)puff.GetType().GetField("Fire").GetValue(puff))fires++;if((bool)puff.GetType().GetField("Debris").GetValue(puff))sparks++;}
+                Check(fires==ImpactRules.FireCount(ap,surface)&&sparks==ImpactRules.Sparks(ap,surface),"material fire/spark policy "+surface+" AP="+ap);
+                if(ap){for(int layer=0;layer<2;layer++){var puff=impactPuffs[layer];var type=puff.GetType();float life=(float)type.GetField("Life").GetValue(puff),hold=(float)type.GetField("Hold").GetValue(puff);Check(Mathf.Abs(life-(layer==0?.45f:.15f))<.00001f&&Mathf.Abs(hold-(layer==0?.12f:.06f))<.00001f,"AP fixed lifetime and brightness hold "+surface+" layer="+layer);}}
+                Check(effectAudio.clip!=null,"impact audio assigned "+surface+" AP="+ap);
+                if(impactPuffs.Count>0){var puff=impactPuffs[0];var ft=puff.GetType();ft.GetField("Start").SetValue(puff,Time.time-.05f);AccessTools.Method(typeof(Presentation),"UpdatePuffs").Invoke(null,new object[]{null,0f});CheckFlashPixels(((GameObject)ft.GetField("Go").GetValue(puff)).transform,true);}
+                foreach(var puff in impactPuffs)puff.GetType().GetField("Start").SetValue(puff,Time.time-10);
+                AccessTools.Method(typeof(Presentation),"UpdatePuffs").Invoke(null,new object[]{null,0f});Check(impactPuffs.Count==0,"material effect pool cleanup "+surface+" AP="+ap);
+            }
+            var materials=new[]{"Mmetal","Mstone","Mdirt","Msand","Msnow","Mwood","Mglass","Mwater","Morganic","Mcloth"};
+            var surfaces=new[]{ImpactSurface.Metal,ImpactSurface.Stone,ImpactSurface.Earth,ImpactSurface.Sand,ImpactSurface.Snow,ImpactSurface.Wood,ImpactSurface.Glass,ImpactSurface.Water,ImpactSurface.Organic,ImpactSurface.Cloth};
+            for(int mi=0;mi<materials.Length;mi++){var mat=MaterialBlock.materials[materials[mi]];Check(ImpactRules.Classify(mat.SurfaceCategory,mat.DamageCategory,mat.id,mat.IsLiquid)==surfaces[mi],"loaded native material mapping "+materials[mi]);}
             Optics.Clear();UnityEngine.Object.Destroy(flash.gameObject);
             AccessTools.Method(typeof(SecondaryPresentation),"Add").Invoke(null,new object[]{vehicle.entityId,123,vehicle.position,vehicle.position+Vector3.forward*200,false,0f});
             var visualTrails=(System.Collections.IList)AccessTools.Field(typeof(SecondaryPresentation),"trails").GetValue(null);var shortTrail=visualTrails[visualTrails.Count-1];

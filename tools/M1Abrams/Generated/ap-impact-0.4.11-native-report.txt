@@ -1,0 +1,213 @@
+PASS native server authority
+PASS real Apache and M1 threshold transpilers coexist
+PASS native jeep-derived M1 prefab loads
+PASS three native LOD levels
+PASS solid convex track support L
+PASS narrow curb contacts middle of track L
+PASS track support clears level ground L
+PASS front track bevel clears low approach L
+PASS central belly gap remains open L
+PASS solid convex track support R
+PASS narrow curb contacts middle of track R
+PASS track support clears level ground R
+PASS front track bevel clears low approach R
+PASS central belly gap remains open R
+PASS native meshes retain materials and textures
+PASS native meshes retain materials and textures
+PASS native meshes retain materials and textures
+PASS placement preview has no physics subtree for native cleanup
+PASS native placement preview retains visible M1 geometry
+PASS native anchor RoofMGBase
+PASS native anchor RoofMGYaw
+PASS native anchor RoofMGPitch
+PASS native anchor RoofMGMuzzle
+PASS native anchor RoofMGSight
+PASS native anchor AAMount
+PASS native anchor AAPitch
+PASS native anchor AAMuzzleL
+PASS native anchor AAMuzzleR
+PASS neutral MG clears original tank triangles
+PASS neutral AA clears original tank triangles
+INFO entity=vehicleM1Abrams vehicle=vehiclem1abrams nativeId=-1604992470
+PASS native vehicle name resolves to an M1 tier: vehiclem1abrams
+PASS native six-digit damage does not trigger vehicle instant destruction
+PASS non-M1 threshold preserves prior mod result
+PASS spawned server vehicle secondary rig
+INFO chase hit tag=E_Vehicle transform=M1TurretHit (UnityEngine.Transform) entity=[type=EntityVJeep, name=vehicleM1Abrams, id=171]
+PASS chase sight excludes own tank colliders
+PASS magnification does not move world sight direction
+PASS 8x mouse aiming reduces angular delta eightfold
+PASS sight elevation safely clamps before vertical singularity
+PASS native optic FOV decreases per step 0/0
+PASS native optic FOV decreases per step 0/1
+PASS native optic FOV decreases per step 0/2
+PASS native optic FOV decreases per step 1/0
+PASS native optic FOV decreases per step 1/1
+PASS native optic FOV decreases per step 2/0
+PASS native optic FOV decreases per step 2/1
+PASS repeat camera render does not accumulate magnification
+PASS optic exit restores position rotation and native FOV
+PASS optic restoration preserves another camera system's FOV change
+PASS optic hides tank model without disabling entity or colliders
+PASS optic exit preserves originally hidden renderer and restores remaining hull
+PASS native vehicle ItemValue retains partial belt
+PASS native ItemValue binary save/read retains ammunition and heat
+PASS native binary save/read retains independent cooldowns
+PASS reload state restores heat and ammunition
+PASS independent tube cooldown restored
+PASS native lowercase tier 17
+PASS native tier health 17
+PASS native tier AA rig 17
+PASS native lowercase tier 18
+PASS native tier health 18
+PASS native tier AA rig 18
+PASS native lowercase tier 19
+PASS native tier health 19
+PASS native tier AA rig 19
+PASS native driver attachment
+INFO cannon reason=0 trigger=True origin=(8.45, 152.32, 8.65)
+PASS native cannon optic intent passes aim, authority and fires exactly one shell
+PASS main gun compensates yaw pitch and roll of moving hull within limits
+INFO MG reason=0 rounds=9
+PASS actual native MG firing consumes exactly one loaded round
+PASS same-time update cannot duplicate MG shot
+PASS MG activity does not animate cannon recoil
+PASS native gunner attachment
+PASS driver cannot steal cannon with gunner present
+PASS gunner cannot steal driver MG
+INFO AA reason=0 target=177 lock=1.5
+PASS native AA acquires live flying enemy
+PASS native AA shot consumes one missile
+PASS only fired tube begins cooldown
+PASS native guided missile still hits after switching to cannon
+INFO low AA reason=0 pitch=-6.638209 lock=1.5
+PASS AA acquires below-horizon flying target with real hull clearance
+PASS AA launches at low-altitude target and consumes one missile
+PASS scope hides armor but retains separate muzzle flash renderer
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=870
+PASS effect renders visible pixels from (1.00, 0.00, 0.00) pixels=2432
+PASS zero native particle index creates no duplicate explosion prefab
+PASS material fire/spark policy Unknown AP=True
+PASS impact audio assigned Unknown AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Unknown AP=True
+PASS material fire/spark policy Unknown AP=False
+PASS impact audio assigned Unknown AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Unknown AP=False
+PASS material fire/spark policy Metal AP=True
+PASS impact audio assigned Metal AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Metal AP=True
+PASS material fire/spark policy Metal AP=False
+PASS impact audio assigned Metal AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Metal AP=False
+PASS material fire/spark policy Stone AP=True
+PASS impact audio assigned Stone AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Stone AP=True
+PASS material fire/spark policy Stone AP=False
+PASS impact audio assigned Stone AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Stone AP=False
+PASS material fire/spark policy Earth AP=True
+PASS impact audio assigned Earth AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Earth AP=True
+PASS material fire/spark policy Earth AP=False
+PASS impact audio assigned Earth AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Earth AP=False
+PASS material fire/spark policy Sand AP=True
+PASS impact audio assigned Sand AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Sand AP=True
+PASS material fire/spark policy Sand AP=False
+PASS impact audio assigned Sand AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Sand AP=False
+PASS material fire/spark policy Snow AP=True
+PASS impact audio assigned Snow AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Snow AP=True
+PASS material fire/spark policy Snow AP=False
+PASS impact audio assigned Snow AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Snow AP=False
+PASS material fire/spark policy Wood AP=True
+PASS impact audio assigned Wood AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Wood AP=True
+PASS material fire/spark policy Wood AP=False
+PASS impact audio assigned Wood AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Wood AP=False
+PASS material fire/spark policy Glass AP=True
+PASS impact audio assigned Glass AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Glass AP=True
+PASS material fire/spark policy Glass AP=False
+PASS impact audio assigned Glass AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Glass AP=False
+PASS material fire/spark policy Water AP=True
+PASS impact audio assigned Water AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Water AP=True
+PASS material fire/spark policy Water AP=False
+PASS impact audio assigned Water AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=61006
+PASS material effect pool cleanup Water AP=False
+PASS material fire/spark policy Organic AP=True
+PASS impact audio assigned Organic AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Organic AP=True
+PASS material fire/spark policy Organic AP=False
+PASS impact audio assigned Organic AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Organic AP=False
+PASS material fire/spark policy Cloth AP=True
+PASS impact audio assigned Cloth AP=True
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Cloth AP=True
+PASS material fire/spark policy Cloth AP=False
+PASS impact audio assigned Cloth AP=False
+PASS effect shader supported by native graphics device
+PASS effect renders visible pixels from (0.00, 0.00, -1.00) pixels=65536
+PASS material effect pool cleanup Cloth AP=False
+PASS loaded native material mapping Mmetal
+PASS loaded native material mapping Mstone
+PASS loaded native material mapping Mdirt
+PASS loaded native material mapping Msand
+PASS loaded native material mapping Msnow
+PASS loaded native material mapping Mwood
+PASS loaded native material mapping Mglass
+PASS loaded native material mapping Mwater
+PASS loaded native material mapping Morganic
+PASS loaded native material mapping Mcloth
+PASS MG tracer is a moving short segment rather than a 200m beam
+PASS secondary damage refuses player target
+FINISHED failures=0

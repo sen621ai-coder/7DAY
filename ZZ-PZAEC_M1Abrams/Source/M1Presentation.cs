@@ -19,7 +19,7 @@ namespace PZAEC.M1
             public LineRenderer Tracer;public Vector3 ShellOrigin,ShellVelocity;public float ShellAt;public int ShellId;
             public readonly MaterialPropertyBlock Properties=new MaterialPropertyBlock();
         }
-        sealed class Puff{public GameObject Go;public Renderer Renderer;public Vector3 World,Velocity;public float Start,Life,Size;public bool Debris;public int SourceVehicle;public Color Color;public MaterialPropertyBlock Properties=new MaterialPropertyBlock();}
+        sealed class Puff{public GameObject Go;public Renderer Renderer;public Vector3 World,Velocity;public float Start,Life,Size,Hold;public bool Debris,Fire;public int SourceVehicle;public Color Color;public MaterialPropertyBlock Properties=new MaterialPropertyBlock();}
         static readonly Dictionary<int,View> views=new Dictionary<int,View>();static readonly List<int> remove=new List<int>();
         static readonly List<Puff> puffs=new List<Puff>();static readonly Stack<Puff> pool=new Stack<Puff>();
         static Material smoke,flame;static Texture2D smokeTex,flameTex;static Mesh flameMesh;static AudioClip blastClip,mechanismClip,readyClip,impactAPClip;
@@ -99,7 +99,7 @@ namespace PZAEC.M1
                 if(p.Shot>v.Shot){v.Shot=p.Shot;v.ShotAt=Time.time-p.B.x-age;v.ReadyPlayed=true;}return;
             }
             if(p.Kind==Weapons.ImpactEvent){if(p.Shot==v.ShellId)v.Tracer.enabled=false;
-                if(p.X==0&&p.Shot>v.ImpactShot&&age<.5f){v.ImpactShot=p.Shot;ImpactFX(v,p);}return;}
+                if(p.X<=0&&p.Shot>v.ImpactShot&&age<.5f){v.ImpactShot=p.Shot;ImpactFX(v,p);}return;}
             if(p.Kind!=Weapons.ShotEvent||p.Shot<=v.VisualShot)return;
             v.VisualShot=p.Shot;v.Shot=Math.Max(v.Shot,p.Shot);v.ShotAt=Time.time-age;v.ReadyPlayed=false;v.NextReady=Time.time+Mathf.Max(0,p.X-age);v.ShellLife=Rules.Range/Rules.ShellSpeed(p.Y>.5f);
             Vector3 direction=p.B.normalized;
@@ -122,17 +122,38 @@ namespace PZAEC.M1
         }
         static void ImpactFX(View v,NetPackageM1Event p)
         {
-            bool ap=p.Y>.5f;var origin=p.A+p.B*.08f;
-            Emit(origin,p.B*(ap?1.2f:2)+Vector3.up*.6f,new Color(.43f,.42f,.39f,.48f),ap?7:20,ap?.22f:.8f,ap?.8f:2.8f,p.Shot+101);
-            Emit(origin,p.B*(ap?5:3)+Vector3.up*2,ap?new Color(1,.83f,.38f,1):new Color(.27f,.23f,.18f,.95f),ap?14:18,ap?.045f:.10f,.5f,p.Shot+202,true);
-            if(ap){v.ImpactPosition=p.A;v.ImpactAudio.transform.position=p.A-Origin.position;v.ImpactAudio.Play();}
+            Resources();bool ap=p.Y>.5f;var surface=ImpactRules.Decode(p.X);var normal=p.B.sqrMagnitude>.001f?p.B.normalized:Vector3.up;var origin=p.A+normal*.15f;
+            int fire=ImpactRules.FireCount(ap,surface),sparks=ImpactRules.Sparks(ap,surface),dust=ImpactRules.Dust(ap,surface),burn=ImpactRules.Smoke(ap,surface);
+            int needed=fire+sparks+dust+burn;
+            while(puffs.Count>160-needed){var old=puffs[0];old.Go.SetActive(false);pool.Push(old);puffs.RemoveAt(0);}
+            if(ap){
+                Emit(origin,normal*.2f+Vector3.up*.15f,new Color(1,.6f,.18f,.8f),1,.55f,.45f,p.Shot+303,false,-1,true,.12f);
+                Emit(origin,Vector3.zero,new Color(1,.95f,.7f,.9f),1,.24f,.15f,p.Shot+304,false,-1,true,.06f);
+            }else Emit(origin,normal*.3f+Vector3.up*.2f,new Color(1,.85f,.35f,1),fire,1.3f,.42f,p.Shot+303,false,-1,true);
+            // Dust describes the struck surface; it never pretends a block broke.
+            Color tint;switch(surface){
+                case ImpactSurface.Earth:tint=new Color(.42f,.32f,.22f,.4f);break;
+                case ImpactSurface.Sand:tint=new Color(.7f,.59f,.4f,.35f);break;
+                case ImpactSurface.Snow:tint=new Color(.9f,.95f,1,.35f);break;
+                case ImpactSurface.Water:tint=new Color(.65f,.8f,.9f,.25f);break;
+                case ImpactSurface.Wood:tint=new Color(.45f,.34f,.22f,.25f);break;
+                case ImpactSurface.Glass:tint=new Color(.7f,.8f,.85f,.2f);break;
+                case ImpactSurface.Cloth:tint=new Color(.5f,.48f,.44f,.2f);break;
+                default:tint=new Color(.5f,.49f,.46f,.35f);break;
+            }
+            Emit(origin,normal*(ap?.8f:1.2f)+Vector3.up*.6f,tint,dust,ap?.25f:.6f,surface==ImpactSurface.Water?.65f:ap?.6f:1.5f,p.Shot+101);
+            Emit(origin,Vector3.up*.8f,new Color(.24f,.23f,.22f,.28f),burn,.55f,1.2f,p.Shot+404);
+            Emit(origin,normal*3+Vector3.up*1.5f,new Color(1,.75f,.28f,1),sparks,.025f,.22f,p.Shot+202,true);
+            v.ImpactPosition=p.A;v.ImpactAudio.transform.position=p.A-Origin.position;v.ImpactAudio.clip=ap?impactAPClip:blastClip;v.ImpactAudio.volume=ap?.65f:.8f;v.ImpactAudio.maxDistance=ap?180:300;v.ImpactAudio.pitch=ap?1:.75f;v.ImpactAudio.Play();
         }
-        static void Emit(Vector3 origin,Vector3 velocity,Color color,int count,float size,float life,int seed,bool debris=false,int sourceVehicle=-1)
+
+        static void Emit(Vector3 origin,Vector3 velocity,Color color,int count,float size,float life,int seed,bool debris=false,int sourceVehicle=-1,bool fire=false,float hold=0)
         {
             var rng=new System.Random(seed);for(int i=0;i<count;i++){
                 if(puffs.Count>=160)break;Puff p;
                 if(pool.Count>0)p=pool.Pop();else{var go=GameObject.CreatePrimitive(PrimitiveType.Quad);go.name="M1WorldSmoke";var c=go.GetComponent<Collider>();c.enabled=false;UnityEngine.Object.Destroy(c);var r=go.GetComponent<Renderer>();r.sharedMaterial=smoke;r.shadowCastingMode=ShadowCastingMode.Off;r.receiveShadows=false;p=new Puff{Go=go,Renderer=r};}
-                p.Go.SetActive(true);p.SourceVehicle=sourceVehicle;p.Debris=debris;p.World=origin;p.Velocity=velocity+new Vector3((float)rng.NextDouble()-.5f,(float)rng.NextDouble()*.5f,(float)rng.NextDouble()-.5f)*(debris?6:1);p.Start=Time.time;p.Life=life*(.7f+(float)rng.NextDouble()*.5f);p.Size=size*(.6f+(float)rng.NextDouble());p.Color=color;puffs.Add(p);
+                p.Go.SetActive(true);p.SourceVehicle=sourceVehicle;p.Debris=debris;p.Fire=fire;p.World=origin;p.Velocity=velocity+new Vector3((float)rng.NextDouble()-.5f,(float)rng.NextDouble()*.5f,(float)rng.NextDouble()-.5f)*(debris?6:1);p.Start=Time.time;p.Hold=hold;float variation=.7f+(float)rng.NextDouble()*.5f;p.Life=hold>0?life:life*variation;p.Size=size*(.6f+(float)rng.NextDouble());p.Color=color;
+                p.Go.transform.position=origin-Origin.position;p.Go.transform.localScale=Vector3.one*p.Size;p.Properties.SetColor("_Color",fire?color:Color.clear);p.Renderer.SetPropertyBlock(p.Properties);puffs.Add(p);
             }
         }
         public static void Update(World w)
@@ -155,12 +176,19 @@ namespace PZAEC.M1
                 if(!v.ReadyPlayed&&Time.time>=v.NextReady){v.ReadyPlayed=true;if(player.AttachedToEntity==v.Vehicle)v.Ready.Play();}
             }
             foreach(int id in remove){Dispose(views[id]);views.Remove(id);}
-            var cam=player.playerCamera;
+            UpdatePuffs(player.playerCamera,Time.deltaTime);
+        }
+        static void UpdatePuffs(Camera cam,float delta)
+        {
             for(int i=puffs.Count-1;i>=0;i--){var p=puffs[i];float t=(Time.time-p.Start)/p.Life;
                 if(t>=1){p.Go.SetActive(false);pool.Push(p);puffs.RemoveAt(i);continue;}
-                if(p.Debris)p.Velocity+=Vector3.down*(9.81f*Time.deltaTime);
-                p.World+=p.Velocity*Time.deltaTime;p.Go.transform.position=p.World-Origin.position;p.Go.transform.localScale=Vector3.one*p.Size*(p.Debris?1:1+2.5f*t);if(cam!=null)p.Go.transform.rotation=cam.transform.rotation;
-                var color=p.Color;color.a*=Mathf.Clamp01(t*15)*(1-t)*(1-t)*(Optics.Scoped(p.SourceVehicle)?.2f:1);p.Properties.SetColor("_Color",color);p.Renderer.SetPropertyBlock(p.Properties);
+                if(p.Debris)p.Velocity+=Vector3.down*(9.81f*delta);
+                var movement=p.Velocity*delta;
+                if(p.Debris&&movement.sqrMagnitude>.000001f&&Physics.Raycast(p.World-Origin.position,movement.normalized,movement.magnitude,Physics.DefaultRaycastLayers,QueryTriggerInteraction.Ignore)){p.Go.SetActive(false);pool.Push(p);puffs.RemoveAt(i);continue;}
+                p.World+=movement;p.Go.transform.position=p.World-Origin.position;p.Go.transform.localScale=Vector3.one*p.Size*(p.Debris?1:1+2.5f*t);if(cam!=null)p.Go.transform.rotation=cam.transform.rotation;
+                float fade=p.Hold>0?EffectRules.Fade(Time.time-p.Start,p.Life,p.Hold):t;
+                var color=p.Fire?Color.Lerp(p.Color,new Color(1,.16f,.015f,0),fade):p.Color;
+                color.a*=p.Fire?(p.Hold>0?1:1-t):Mathf.Clamp01(t*15)*(1-t)*(1-t)*(Optics.Scoped(p.SourceVehicle)?.2f:1);p.Properties.SetColor("_Color",color);p.Renderer.SetPropertyBlock(p.Properties);
             }
         }
         public static Ray SightRay(EntityPlayerLocal p)

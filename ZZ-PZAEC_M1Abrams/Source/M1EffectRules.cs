@@ -13,6 +13,7 @@ namespace PZAEC.M1
         }
         public static float FlashLife(float frame,bool machineGun)
         {return Math.Min(machineGun?.085f:.16f,Math.Max(machineGun?.055f:.09f,frame*2));}
+        public static float Fade(float age,float life,float hold)=>Math.Max(0,Math.Min(1,(age-hold)/Math.Max(.001f,life-hold)));
         public static bool Fresh(float age)=>age>=0&&age<.35f;
     }
 }

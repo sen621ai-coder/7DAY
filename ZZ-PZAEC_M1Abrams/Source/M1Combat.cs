@@ -71,6 +71,15 @@ namespace PZAEC.M1
                 AttackingItem=ItemClass.GetItem(Rules.AmmoName(ap),false),hitTransformPosition=point,canHitSpecialBodyParts=false,DismemberChance=0};
             e.DamageEntity(source,damage,false,0);
         }
+        public static ImpactSurface Surface(WorldRayHitInfo hit)
+        {
+            var entity=ItemActionAttack.FindHitEntity(hit);
+            if(entity is EntityVehicle)return ImpactSurface.Metal;
+            if(entity is EntityAlive)return ImpactSurface.Organic;
+            var value=hit.hit.blockValue;var block=value.Block;
+            var material=block.GetMaterialForSide(value,hit.hit.blockFace)??block.blockMaterial;
+            return material==null?ImpactSurface.Unknown:ImpactRules.Classify(material.SurfaceCategory,material.DamageCategory,material.id,material.IsLiquid);
+        }
         public static void Impact(World w,EntityVehicle tank,int actor,int tier,bool ap,WorldRayHitInfo hit,Vector3 direction)
         {
             if(!Weapons.Server)return;var point=hit.hit.pos;var direct=ItemActionAttack.FindHitEntity(hit) as EntityAlive;
@@ -85,9 +94,10 @@ namespace PZAEC.M1
                     Hit(target,actor,Mathf.RoundToInt(Rules.Specs[tier].HE*factor),false,delta.normalized,center);
                 }
             }
-            // Native protected-world block damage and visual explosion only; never duplicate entity damage.
+            // Keep native protected-world damage/block changes. The M1 impact
+            // event owns fire/sound; index zero skips the duplicate prefab only.
             var properties=new DynamicProperties();properties.Classes.Add("Explosion",new DynamicProperties());
-            var blast=new ExplosionData(properties,null){ParticleIndex=ap?0:5,BlockRadius=ap?1:2,EntityRadius=0,EntityDamage=0,BlockDamage=ap?150:80,BlastPower=0};
+            var blast=new ExplosionData(properties,null){ParticleIndex=0,BlockRadius=ap?1:2,EntityRadius=0,EntityDamage=0,BlockDamage=ap?150:80,BlastPower=0};
             GameManager.Instance.ExplosionServer(point,new Vector3i(Mathf.FloorToInt(point.x),Mathf.FloorToInt(point.y),Mathf.FloorToInt(point.z)),Quaternion.identity,blast,actor,0,false,ItemClass.GetItem(Rules.AmmoName(ap),false));
         }
     }

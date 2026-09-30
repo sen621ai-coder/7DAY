@@ -131,7 +131,7 @@ namespace PZAEC.M1
                     float dt=Mathf.Min(.025f,left);left-=dt;var step=Vector3.ClampMagnitude(shell.Velocity*dt+Vector3.down*(4.905f*dt*dt),Mathf.Max(0,Rules.Range-shell.Distance));
                     if(Trace(shell.Vehicle,shell.Position,step.normalized,step.magnitude,out var impact)){
                         shells.RemoveAt(i);finished=true;var point=impact.hit.pos;
-                        if(States.TryGetValue(shell.Vehicle.entityId,out var s)&&s.Epoch==shell.Epoch)Broadcast(s,ImpactEvent,shell.Id,point,-shell.Velocity.normalized,0,shell.AP?1:0);
+                        if(States.TryGetValue(shell.Vehicle.entityId,out var s)&&s.Epoch==shell.Epoch)Broadcast(s,ImpactEvent,shell.Id,point,-shell.Velocity.normalized,ImpactRules.Encode(Combat.Surface(impact)),shell.AP?1:0);
                         Combat.Impact(world,shell.Vehicle,shell.Actor,shell.Tier,shell.AP,impact,shell.Velocity.normalized);
                     }else{shell.Position+=step;shell.Distance+=step.magnitude;shell.Velocity+=Vector3.down*(9.81f*dt);shell.Age+=dt;if(shell.Distance>=Rules.Range-.001f){shell.Age=lifetime;break;}}
                 }
