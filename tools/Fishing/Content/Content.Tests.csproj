@@ -8,8 +8,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Contracts/*.cs"/>
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Content/*.cs"/>
+    <Compile Include="$(FishingModRoot)/Source/Contracts/*.cs"/>
+    <Compile Include="$(FishingModRoot)/Source/Content/*.cs"/>
     <Compile Include="ContentTests.cs"/>
   </ItemGroup>
 </Project>

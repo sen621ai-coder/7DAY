@@ -2,10 +2,14 @@ using UnityEngine;
 
 namespace PZAEC.Fishing.Runtime
 {
+    public struct FightReadout
+    {
+        public float Tension,BreakForce,Stamina,LandStamina;
+    }
     public static class FishingHud
     {
         static GUIStyle title,body,note;
-        public static void Draw(string heading,string stats,string help,string message,FloatReadoutState? floatView=null)
+        public static void Draw(string heading,string stats,string help,string message,FloatReadoutState? floatView=null,FightReadout? fightView=null)
         {
             if(title==null) {
                 title=new GUIStyle(GUI.skin.label){fontSize=25,fontStyle=FontStyle.Bold,wordWrap=true};
@@ -32,10 +36,43 @@ namespace PZAEC.Fishing.Runtime
                 GUI.Label(new Rect(box.x+18,box.y+130,width-36,85),compact&&!string.IsNullOrEmpty(message)?message:help,note);
                 if(!compact&&!string.IsNullOrEmpty(message))GUI.Label(new Rect(box.x+18,box.y+218,width-36,80),message,body);
                 if(floatView.HasValue)DrawFloat(floatView.Value,scale);
+                if(fightView.HasValue)DrawFight(fightView.Value,scale);
             } finally {GUI.matrix=matrix;GUI.color=color;}
         }
         static void Fill(Rect rect,Color color)
         {GUI.color=color;GUI.DrawTexture(rect,Texture2D.whiteTexture);GUI.color=Color.white;}
+        static void DrawFight(FightReadout state,float scale)
+        {
+            float canvasHeight=Screen.height/scale;
+            bool compact=canvasHeight<600;
+            var box=new Rect(Screen.width/scale-324,Mathf.Max(compact?255:340,canvasHeight*.5f-100),300,compact?176:210);
+            Fill(box,new Color(.025f,.055f,.065f,.96f));
+            float force=Mathf.Clamp01(state.Tension/Mathf.Max(1,state.BreakForce));
+            var forceColor=force>=.8f?new Color(1,.22f,.14f):force>=.55f?new Color(1,.75f,.10f):new Color(.15f,.85f,1);
+            GUI.Label(new Rect(box.x+16,box.y+10,268,32),"拉力  "+state.Tension.ToString("F0")+" / "+state.BreakForce.ToString("F0")+" N",title);
+            var forceBar=new Rect(box.x+16,box.y+(compact?42:48),268,compact?24:30);
+            Fill(forceBar,new Color(.15f,.2f,.24f));Fill(new Rect(forceBar.x,forceBar.y,forceBar.width*force,forceBar.height),forceColor);
+            Fill(new Rect(forceBar.x+forceBar.width*.8f,forceBar.y,2,forceBar.height),Color.white);
+            bool tired=state.Stamina<=state.LandStamina;
+            GUI.Label(new Rect(box.x+16,box.y+(compact?77:91),268,32),"鱼体力  "+(Mathf.Clamp01(state.Stamina)*100).ToString("F0")+"%",title);
+            var staminaBar=new Rect(box.x+16,box.y+(compact?110:129),268,compact?24:30);
+            Fill(staminaBar,new Color(.15f,.2f,.24f));Fill(new Rect(staminaBar.x,staminaBar.y,staminaBar.width*Mathf.Clamp01(state.Stamina),staminaBar.height),tired?new Color(1,.8f,.18f):new Color(.25f,.95f,.4f));
+            Fill(new Rect(staminaBar.x+staminaBar.width*state.LandStamina,staminaBar.y,2,staminaBar.height),Color.white);
+            GUI.color=force>=.8f?forceColor:Color.white;
+            GUI.Label(new Rect(box.x+16,box.y+(compact?142:172),268,30),force>=.8f?"拉力危险：前推鼠标放低竿":tired?"鱼已疲劳：引到近岸上鱼":"后拉抬竿 · 左右侧压遛鱼",note);
+            GUI.color=Color.white;
+        }
+        public static void DrawFishBearing(Vector3 viewport)
+        {
+            if(viewport.z>0&&viewport.x>=.05f&&viewport.x<=.95f&&viewport.y>=.05f&&viewport.y<=.95f)return;
+            var oldColor=GUI.color;
+            try {
+                bool left=viewport.z>0?viewport.x<.5f:viewport.x>=.5f;
+                var rect=new Rect(left?20:Screen.width-170,Screen.height*.5f+160,150,38);
+                Fill(rect,new Color(.02f,.04f,.05f,.9f));GUI.color=new Color(1,.85f,.2f);
+                GUI.Label(rect,left?"◀ 鱼在左侧":"鱼在右侧 ▶",body);
+            } finally {GUI.color=oldColor;}
+        }
         static void DrawFloat(FloatReadoutState state,float scale)
         {
             var box=new Rect(24,Screen.height/scale*.5f-175,220,350);

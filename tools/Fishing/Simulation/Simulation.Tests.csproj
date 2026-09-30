@@ -9,8 +9,8 @@
     <OutputPath>artifacts/bin/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Simulation/*.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Contracts/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Simulation/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Contracts/*.cs" />
     <Compile Include="SimulationTests.cs" />
     <Compile Include="ContractTests.cs" />
   </ItemGroup>

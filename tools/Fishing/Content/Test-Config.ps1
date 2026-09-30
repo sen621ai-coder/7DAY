@@ -3,7 +3,7 @@
 param()
 $ErrorActionPreference='Stop'
 $modsRoot=Split-Path (Split-Path (Split-Path $PSScriptRoot))
-$fishingRoot=Join-Path $modsRoot 'ZZZ-PZAEC_Fishing'
+$fishingRoot=(& (Join-Path $PSScriptRoot '../Resolve-ModPath.ps1'))
 $gameConfig=Join-Path (Split-Path $modsRoot) 'Data/Config'
 $artifactPath=Join-Path $PSScriptRoot 'artifacts'
 New-Item -ItemType Directory -Path $artifactPath -Force | Out-Null
@@ -45,7 +45,7 @@ function Apply-Patch([xml]$document, [System.Xml.XmlElement]$operation, [string]
     $script:operationCount++
 }
 $merged=@{}
-foreach($file in 'items','recipes','materials','buffs','blocks'){
+foreach($file in 'items','item_modifiers','recipes','materials','buffs','blocks'){
     $document=[xml][IO.File]::ReadAllText((Join-Path $gameConfig "$file.xml"))
     foreach($mod in $modDirs){
         $path=Join-Path $mod.FullName "Config/$file.xml"
@@ -57,6 +57,16 @@ foreach($file in 'items','recipes','materials','buffs','blocks'){
     $merged[$file]=$document
 }
 function Need([bool]$condition,[string]$message){if(!$condition){throw $message}}
+foreach($recipe in $merged.recipes.SelectNodes('/recipes/recipe')) {
+    foreach($ingredient in $recipe.SelectNodes('ingredient')) {
+        $name=$ingredient.GetAttribute('name')
+        $blockName=$name -replace ':VariantHelper$',''
+        Need ($null -ne $merged.items.SelectSingleNode("/items/item[@name='$name']") -or
+              $null -ne $merged.blocks.SelectSingleNode("/blocks/block[@name='$blockName']") -or
+              $null -ne $merged.materials.SelectSingleNode("/materials/material[@id='$name']") -or
+              $null -ne $merged.item_modifiers.SelectSingleNode("/item_modifiers/item_modifier[@name='$name']")) "Unknown ingredient $name in recipe $($recipe.GetAttribute('name')) (aborts native recipe loading)"
+    }
+}
 $definitions=[xml][IO.File]::ReadAllText((Join-Path $fishingRoot 'Config/items.xml'))
 $recipes=[xml][IO.File]::ReadAllText((Join-Path $fishingRoot 'Config/recipes.xml'))
 $loc=Import-Csv (Join-Path $fishingRoot 'Config/Localization.csv')

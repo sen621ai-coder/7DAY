@@ -74,6 +74,7 @@ namespace PZAEC.Fishing.Runtime
         public EntityPlayerLocal Player {get;private set;}
         public bool Active => Player!=null;
         public bool FreeLook {get;set;}
+        public float RodYawDeltaRadians {get;set;}
         public MovementRequest Request {get;set;} = MovementRequest.None;
         Vector3 rotation,cameraRotation;
         bool frameCaptured;
@@ -112,7 +113,13 @@ namespace PZAEC.Fishing.Runtime
         {
             if(!Active||player!=Player||!frameCaptured)return;
             var move=player.movementInput;
-            if(!FreeLook){move.rotation=rotation;move.cameraRotation=cameraRotation;}
+            if(!FreeLook){
+                // Native MoveByInput forwards this rotation to the first-person look handler.
+                // Follow the actual, load-limited rod motion, not the raw mouse displacement.
+                rotation.y+=RodYawDeltaRadians*Mathf.Rad2Deg;
+                move.rotation=rotation;move.cameraRotation=cameraRotation;
+            }
+            RodYawDeltaRadians=0;
             float yaw=move.rotation.y*Mathf.Deg2Rad;
             var forward=new Vec3(Mathf.Sin(yaw),0,Mathf.Cos(yaw));var right=new Vec3(forward.Z,0,-forward.X);
             oldRight=move.moveStrafe;oldForward=move.moveForward;
@@ -132,6 +139,6 @@ namespace PZAEC.Fishing.Runtime
             }
             axesApplied=false;
         }
-        public void Release(){RestoreAfterMove();Player=null;Request=MovementRequest.None;FreeLook=false;frameCaptured=false;}
+        public void Release(){RestoreAfterMove();Player=null;Request=MovementRequest.None;FreeLook=false;RodYawDeltaRadians=0;frameCaptured=false;}
     }
 }

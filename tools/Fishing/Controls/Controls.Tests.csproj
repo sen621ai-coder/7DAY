@@ -6,11 +6,11 @@
     <BaseOutputPath>artifacts/bin/</BaseOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Controls/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Controls/*.cs" />
     <Compile Include="ControlTests.cs" />
     <Compile Include="ContractAdapterTests.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Contracts/*.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/SessionDriver.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/MovementBridge.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Contracts/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Runtime/SessionDriver.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Runtime/MovementBridge.cs" />
   </ItemGroup>
 </Project>

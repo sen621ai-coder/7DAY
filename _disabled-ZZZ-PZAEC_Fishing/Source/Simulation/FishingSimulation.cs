@@ -147,10 +147,12 @@ namespace PZAEC.Fishing.Simulation
                 behaviour = FishBehaviour.SideRun;
 
             bool burst = behaviour == FishBehaviour.Sprinting || behaviour == FishBehaviour.NearBankSurge;
-            SimVector away = (fish-tip).Horizontal.Normalized;
+            // A long pole tip can be farther offshore than the fish. Escaping from that tip
+            // incorrectly makes the fish swim towards the angler; escape from the angler instead.
+            SimVector away = (fish-input.PlayerPosition).Horizontal.Normalized;
             if (away.LengthSquared < .01) away = new SimVector(0, 0, 1);
             SimVector side = new SimVector(-away.Z, 0, away.X);
-            SimVector desired = (away + side*(escapeSide*(burst ? .65 : 1.5))).Normalized;
+            SimVector desired = (away*(burst?1:.25) + side*(escapeSide*(burst ? .65 : 2))).Normalized;
             // A fish turns through an arc; it cannot instantly reverse at the start of each run.
             double angle=Math.Atan2(heading.X,heading.Z), targetAngle=Math.Atan2(desired.X,desired.Z);
             double turn=Math.Atan2(Math.Sin(targetAngle-angle),Math.Cos(targetAngle-angle));

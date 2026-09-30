@@ -152,7 +152,9 @@ namespace PZAEC.Fishing.Runtime
             if(startFrame==Time.frameCount) {frame.CastPressed=false;frame.StrikePressed=false;frame.MouseBackDelta=frame.MouseRightDelta=0;}
             lease.FreeLook=frame.FreeLookHeld;
             if(frame.StrikePressed)Log.Out("[PZAEC.Fishing] Strike session="+diagnosticSession.ToString("N")+" phase="+session.Current.Phase+" pitch="+session.Current.Rod.PitchRadians.ToString("F3")+" mouseBack="+frame.MouseBackDelta.ToString("F3"));
+            float previousYaw=session.Current.Rod.YawRadians;
             session.Advance(Time.deltaTime,frame,Environment(Time.deltaTime));lease.Request=session.Movement;
+            lease.RodYawDeltaRadians=frame.FreeLookHeld||frame.RecenterHeld?0:session.Current.Rod.YawRadians-previousYaw;
             floatReadout.Observe(session.Current,config.Float);
             Diagnostic();
             if(!session.Active) {
@@ -236,7 +238,10 @@ namespace PZAEC.Fishing.Runtime
                 if(Pole&&s.Phase==FishingPhase.BiteWindow)stats="提竿剩余 "+Math.Max(0,config.Hook.BiteWindowSeconds-(s.TimeSeconds-biteStartedAt)).ToString("F1")+" 秒\n点击左键提竿刺鱼，中鱼后再后拉鼠标遛鱼。";
                 if(Pole&&s.Phase==FishingPhase.Nibbling)stats="鱼正在吃饵，现在点击左键即可提竿。\n中鱼后后拉鼠标抬竿，左右侧压遛鱼。";
             }
-            FishingHud.Draw(heading,stats,help,Time.realtimeSinceStartup<messageUntil?message:"",Pole&&session!=null?(FloatReadoutState?)floatReadout.Current:null);
+            FishingHud.Draw(heading,stats,help,Time.realtimeSinceStartup<messageUntil?message:"",Pole&&session!=null?(FloatReadoutState?)floatReadout.Current:null,
+                session!=null?(FightReadout?)new FightReadout {Tension=session.Current.LineTensionNewtons,BreakForce=config.Line.BreakForceNewtons,Stamina=session.Current.FishStamina01,LandStamina=config.Fish.LandingStamina01}:null);
+            if(session!=null&&player.playerCamera!=null&&(session.Current.Phase==FishingPhase.Hooked||session.Current.Phase==FishingPhase.Fighting||session.Current.Phase==FishingPhase.Landing))
+                FishingHud.DrawFishBearing(player.playerCamera.WorldToViewportPoint(NativeCoordinates.ToScene(session.Current.FishPosition)));
         }
         void Diagnostic()
         {

@@ -1,4 +1,5 @@
 <Project>
+  <Import Project="../Directory.Build.props" />
   <PropertyGroup>
     <BaseIntermediateOutputPath>artifacts/obj/</BaseIntermediateOutputPath>
     <MSBuildProjectExtensionsPath>artifacts/obj/</MSBuildProjectExtensionsPath>

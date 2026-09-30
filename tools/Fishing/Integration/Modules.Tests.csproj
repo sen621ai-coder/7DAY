@@ -7,14 +7,14 @@
     <BaseOutputPath>artifacts/modules/bin/</BaseOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Contracts/*.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Simulation/*.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Controls/*.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Content/*.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/SessionDriver.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/FloatReadout.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/CatchSettlement.cs" />
-    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/CastTargeting.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Contracts/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Simulation/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Controls/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Content/*.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Runtime/SessionDriver.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Runtime/FloatReadout.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Runtime/CatchSettlement.cs" />
+    <Compile Include="$(FishingModRoot)/Source/Runtime/CastTargeting.cs" />
     <Compile Include="SettlementTests.cs" />
     <Compile Include="ModulesHarness.cs" />
   </ItemGroup>

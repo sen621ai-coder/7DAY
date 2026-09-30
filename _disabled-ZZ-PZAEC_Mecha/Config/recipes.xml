@@ -3,7 +3,7 @@
   <append xpath="/recipes">
     <recipe name="ammoPZAECMechaCell" count="20" craft_time="60" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
       <ingredient name="resourceElectricParts" count="4"/>
-      <ingredient name="resourcePolymers" count="4"/>
+      <ingredient name="resourceScrapPolymers" count="4"/>
       <ingredient name="resourceForgedSteel" count="2"/>
     </recipe>
     <recipe name="ammoPZAECMechaMissile" count="1" craft_time="120" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
@@ -15,8 +15,7 @@
     <recipe name="vehicleBusterDroneChassis" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
       <ingredient name="resourceForgedSteel" count="26"/>
       <ingredient name="resourceMechanicalParts" count="35"/>
-      <ingredient name="resourceElectricParts" count="25"/>
-      <ingredient name="resourceMilitaryCircuits" count="4"/>
+      <ingredient name="resourceElectricParts" count="29"/>
     </recipe>
     <recipe name="vehicleBusterDronePlaceable" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
       <ingredient name="vehicleBusterDroneChassis" count="1"/>

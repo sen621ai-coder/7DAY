@@ -6,7 +6,7 @@ $modsRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..'))
 if(!$GameRoot){$GameRoot=Split-Path $modsRoot}
 if(!$OutputDirectory){$OutputDirectory=Join-Path $PSScriptRoot 'artifacts/build'}
 $OutputDirectory=[IO.Path]::GetFullPath($OutputDirectory)
-$liveMod=[IO.Path]::GetFullPath((Join-Path $modsRoot 'ZZZ-PZAEC_Fishing'))+[IO.Path]::DirectorySeparatorChar
+$liveMod=(& (Join-Path $PSScriptRoot '../Resolve-ModPath.ps1'))+[IO.Path]::DirectorySeparatorChar
 if(($OutputDirectory+[IO.Path]::DirectorySeparatorChar).StartsWith($liveMod,[StringComparison]::OrdinalIgnoreCase)){throw 'M0 builds must remain staged outside the live mod directory.'}
 $managed=Join-Path $GameRoot '7DaysToDie_Data/Managed'
 $compilerRefs=@('Microsoft.CodeAnalysis.dll','Microsoft.CodeAnalysis.CSharp.dll')|ForEach-Object {Join-Path $PSHOME $_}
@@ -24,7 +24,7 @@ public static class FishingStageCompiler {
 }
 '@
 }
-$sourceRoot=Join-Path $modsRoot 'ZZZ-PZAEC_Fishing/Source'
+$sourceRoot=Join-Path (& (Join-Path $PSScriptRoot '../Resolve-ModPath.ps1')) 'Source'
 $sources=@(Get-ChildItem $sourceRoot -Recurse -Filter '*.cs' | Where-Object { $_.FullName -notmatch '[\\/](obj|bin)[\\/]' } | Sort-Object FullName | ForEach-Object FullName)
 if($CoreOnly){$sources=@($sources|Where-Object {$_ -match '[\\/]Contracts[\\/]' -or [IO.Path]::GetFileName($_) -in @('SessionDriver.cs','MovementBridge.cs')})}
 if($ProbeOnly){$sources=@($sources|Where-Object {

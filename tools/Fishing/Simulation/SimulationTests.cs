@@ -286,6 +286,19 @@ internal static class SimulationTests
             }
             Assert(payout>0 && transitions>0 && transitions<60,"Drag chatters every tick: "+transitions);
         });
+        Test("long pole beyond fish still lets hooked fish escape offshore",()=>{
+            var p=Durable();p.FixedLineLength=4.5;p.MaxRodReach=6;p.CruiseSwimSpeed=.5;p.BurstSwimSpeed=3;
+            var input=Input();input.UnloadedRodTip=new SimVector(0,1.3,4.5);
+            var s=new FishingSimulation("offshore",p,new Pool(),new FixedRandom(.5));
+            s.BeginCast(input,new SimVector(0,0,3.5));
+            for(int i=0;i<10000&&s.Snapshot().Phase!=FishingPhase.BiteWindow;i++)s.Step(input);
+            input.Strike=true;s.Step(input);input.Strike=false;
+            double start=s.Snapshot().FishPosition.Z;
+            Run(s,input,1);
+            Assert(!s.IsTerminal,"offshore swim ended session: "+s.Snapshot().Failure);
+            Assert(s.Snapshot().FishPosition.Z>start+.3,"fish failed to swim farther away from player");
+            Assert(s.Snapshot().FishHeading.Z>.8,"long pole reversed escape towards shore");
+        });
         ContractTests.Run(Test);
         Test("export seeded 30-second physical trace",()=>{
             var s=Hook(Durable());var input=Input();var rows=new List<string>{"tick,phase,behaviour,fishX,fishY,fishZ,tensionN,lineM,stamina,bursts,bobberY,burstEnvelope,headShake01,payoutMps"};

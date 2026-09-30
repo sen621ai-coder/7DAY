@@ -1,7 +1,7 @@
 #Requires -Version 7.0
 $ErrorActionPreference='Stop'
 if(Get-Process -Name '7DaysToDie','7DaysToDieServer' -ErrorAction SilentlyContinue){throw 'Close the game and isolated probe before installing the test DLL.'}
-$modPath=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../../ZZZ-PZAEC_Fishing'))
+$modPath=(& (Join-Path $PSScriptRoot '../Resolve-ModPath.ps1'))
 $source=Join-Path $PSScriptRoot 'artifacts/build/PZAEC.Fishing.dll'
 $target=Join-Path $modPath 'PZAEC.Fishing.dll'
 if(!(Test-Path -LiteralPath $source)){throw 'Build the production PZAEC.Fishing assembly first.'}

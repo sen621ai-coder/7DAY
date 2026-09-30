@@ -62,7 +62,8 @@ namespace PZAEC.Fishing.Controls
                 double pull = justResumed ? 0 : ControlMath.Clean(input.MousePull) * settings.Sensitivity;
                 double horizontal = justResumed ? 0 : ControlMath.Clean(input.MouseSide) * settings.Sensitivity;
                 double loadRatio = LoadRatio(load);
-                double response = 1 - loadRatio * (1 - settings.MinimumLoadedResponse);
+                // Large forces require longer strokes; lowering the rod still releases load freely.
+                double response = settings.MinimumLoadedResponse + (1-settings.MinimumLoadedResponse)*Math.Pow(1-loadRatio,2);
                 double oldPitch = pitch;
                 pitch = ControlMath.Clamp(pitch + pull * settings.RadiansPerMouseUnit * (pull > 0 ? response : 1), settings.MinPitch, settings.MaxPitch);
                 side = ControlMath.Clamp(side + horizontal * settings.RadiansPerMouseUnit * response, -settings.MaxSideAngle, settings.MaxSideAngle);

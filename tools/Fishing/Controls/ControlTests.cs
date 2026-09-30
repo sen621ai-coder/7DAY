@@ -43,6 +43,17 @@ internal static class ControlTests
     }
     static int Main()
     {
+        Test("Increasing force requires longer strokes for equal pitch and yaw", () => {
+            double priorPitch=double.MaxValue,priorYaw=double.MaxValue;
+            foreach(double force in new[] {0d,30d,60d,90d,110d}) {
+                var mapper=new FishingControlMapper(new ControlSettings {RadiansPerMouseUnit=.04,ReferencePullNewtons=110,MinimumLoadedResponse=.25});
+                var f=Frame();f.MousePull=1;f.MouseSide=1;
+                var pose=mapper.Sample(f,new ControlLoad {LineTaut=force>0,TensionNewtons=force});
+                Assert(pose.PitchRadians<priorPitch&&pose.SideRadians<priorYaw,"load did not progressively resist both axes");
+                priorPitch=pose.PitchRadians;priorYaw=pose.SideRadians;
+            }
+            Near(priorYaw,.01,"full load needs four times the mouse travel");
+        });
         Test("Mouse displacement independent of frame rate", () => {
             var baseline = Stroke(30);
             foreach (int hz in new[] { 60, 144, 240 }) {

@@ -70,6 +70,15 @@ public sealed class FishingNativeProbe : IModApi
                 lease.ApplyBeforeMove(player);Check(Math.Abs(player.movementInput.moveForward+.2f)<.0001,"backstep applied only once per native frame");
                 lease.Release();Check(!lease.Active&&!lease.Request.Active,"native lease releases without global input lock");
                 Check(Math.Abs(player.movementInput.moveForward)<.0001,"lease release restores native movement axes");
+                lease.Acquire(player);lease.BeginFrame();lease.RodYawDeltaRadians=.2f;
+                player.movementInput.rotation=new Vector3(50,70,0);lease.ApplyBeforeMove(player);
+                Check(Math.Abs(player.movementInput.rotation.y-.2f*Mathf.Rad2Deg)<.0001f&&player.movementInput.rotation.x==10,"native look follows actual rod yaw while retaining pitch");
+                lease.ApplyBeforeMove(player);
+                Check(Math.Abs(player.movementInput.rotation.y-.2f*Mathf.Rad2Deg)<.0001f,"rod yaw applies once per native input frame");
+                lease.BeginFrame();lease.FreeLook=true;lease.RodYawDeltaRadians=.3f;
+                player.movementInput.rotation=new Vector3(20,40,0);lease.ApplyBeforeMove(player);
+                Check(player.movementInput.rotation==new Vector3(20,40,0),"free look retains native camera movement");
+                lease.Release();Check(lease.RodYawDeltaRadians==0,"release discards queued rod yaw");
 
                 player.Buffs=new EntityBuffs(player);player.bag=new Bag(1);
                 var saved=new NativeCatchRecord(player,"isolated");
@@ -111,6 +120,8 @@ public sealed class FishingNativeProbe : IModApi
             }
             finally{UnityEngine.Object.Destroy(visual);}
             var directory=System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,"../Mods/ZZZ-PZAEC_Fishing"));
+            if(!System.IO.File.Exists(System.IO.Path.Combine(directory,"ModInfo.xml")))
+                directory=System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,"../Mods/_disabled-ZZZ-PZAEC_Fishing"));
             var localPrefab=LoadManager.LoadAsset<GameObject>("Prefabs/prefabEntityPlayerLocal",null,null,false,true,false);
             try {
                 Check(localPrefab.Asset!=null,"native first-person player prefab loads for arm inspection");

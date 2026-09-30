@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <FishingModRoot>$(MSBuildThisFileDirectory)../../ZZZ-PZAEC_Fishing</FishingModRoot>
+    <FishingModRoot Condition="!Exists('$(FishingModRoot)/ModInfo.xml')">$(MSBuildThisFileDirectory)../../_disabled-ZZZ-PZAEC_Fishing</FishingModRoot>
+  </PropertyGroup>
+</Project>

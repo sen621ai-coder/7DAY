@@ -1,1 +1,1 @@
-<Project><PropertyGroup><BaseIntermediateOutputPath>artifacts/obj/</BaseIntermediateOutputPath></PropertyGroup></Project>
+<Project><Import Project="../Directory.Build.props" /><PropertyGroup><BaseIntermediateOutputPath>artifacts/obj/</BaseIntermediateOutputPath></PropertyGroup></Project>
