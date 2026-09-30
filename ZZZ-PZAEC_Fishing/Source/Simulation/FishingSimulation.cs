@@ -54,6 +54,9 @@ namespace PZAEC.Fishing.Simulation
             fish = new SimVector(target.X, Math.Max(sample.BottomY+p.WaterClearance, sample.SurfaceY-p.LeaderDepth), target.Z);
             if (!water.IsFishPathClear(castTarget,fish)) { Finish(FailureReason.WaterUnavailable); return; }
             length = initialLineLength > 0 ? initialLineLength : (fish-tip).Length + .08;
+            if(p.FixedLineLength>0)length=p.FixedLineLength;
+            if(p.FixedLineLength>0 && (fish-tip).Length>length+.08)
+            { Finish(FailureReason.OutOfRange); return; }
             if (length > p.MaxLineLength || length < p.MinLineLength || !water.IsLineClear(tip, castTarget))
             { Finish(length > p.MaxLineLength || length < p.MinLineLength ? FailureReason.OutOfRange : FailureReason.LineObstructed); return; }
             bobber = castOrigin;
@@ -102,12 +105,15 @@ namespace PZAEC.Fishing.Simulation
                 return;
             }
 
-            if (input.Strike)
+            // For a hand pole, visible bait inspection is already a valid strike.
+            // Empty-water clicks do not destroy the cast or consume another bait.
+            if (input.Strike && (p.FixedLineLength<=0 || phase==FishingPhase.Nibbling || phase==FishingPhase.BiteWindow))
             {
-                if (phase != FishingPhase.BiteWindow) { Finish(FailureReason.EarlyStrike); return; }
-                if (timeInPhase > p.BiteWindowSeconds) { Finish(FailureReason.MissedBite); return; }
+                bool poleNibble=p.FixedLineLength>0 && phase==FishingPhase.Nibbling;
+                if (phase != FishingPhase.BiteWindow && !poleNibble) { Finish(FailureReason.EarlyStrike); return; }
+                if (!poleNibble && timeInPhase > p.BiteWindowSeconds) { Finish(FailureReason.MissedBite); return; }
                 if (input.StrikeStrength < .15) { Finish(FailureReason.WeakStrike); return; }
-                double timing = 1-Math.Abs(2*timeInPhase/p.BiteWindowSeconds-1);
+                double timing = poleNibble?.65:1-Math.Abs(2*timeInPhase/p.BiteWindowSeconds-1);
                 double strength = 1-Math.Abs(input.StrikeStrength-.6);
                 hookQuality = Numbers.Clamp((.2 + .45*timing + .35*strength)*p.InitialHookQuality, .01, 1);
                 SetPhase(FishingPhase.Hooked); behaviour = FishBehaviour.Startled; Emit(FishingEventKind.Hooked);
@@ -172,7 +178,7 @@ namespace PZAEC.Fishing.Simulation
             double distance = radial.Length;
             SimVector axis = radial.Normalized;
             double separationSpeed = SimVector.Dot(freeVelocity-tipVelocity, axis);
-            if (input.Reel && !slipping)
+            if (p.FixedLineLength<=0 && input.Reel && !slipping)
                 length = Math.Max(p.MinLineLength, length-p.ReelSpeed*(input.ReelFraction>0 ? input.ReelFraction : 1)*h*Numbers.Clamp(1-tension/p.ReelStallForce,0,1));
 
             double k = p.LineStiffness*p.RodStiffness/(p.LineStiffness+p.RodStiffness);
@@ -190,7 +196,7 @@ namespace PZAEC.Fishing.Simulation
             dragReleaseTime=raw<dragLimit*p.DragStopRatio ? dragReleaseTime+h : 0;
             // The drag clutch stays released through sub-stroke troughs; stop only after a sustained
             // load reduction. This prevents repeated slip sounds and reel/drag fighting at tick rate.
-            bool dragEngaged=raw>dragLimit*p.DragStartRatio || (slipping && dragReleaseTime<.15);
+            bool dragEngaged=p.FixedLineLength<=0 && (raw>dragLimit*p.DragStartRatio || (slipping && dragReleaseTime<.15));
             double payout = dragEngaged ? Math.Min(Math.Min(p.MaxPayoutSpeed*h,p.MaxLineLength-length),Math.Max(0,(raw-dragLimit)*denominator/activeK)) : 0;
             bool newSlip = dragEngaged && length<p.MaxLineLength-1e-8;
             if (newSlip && !slipping) Emit(FishingEventKind.DragReleased);

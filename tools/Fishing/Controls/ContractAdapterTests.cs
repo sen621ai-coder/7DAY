@@ -15,6 +15,24 @@ internal static class ContractAdapterTests
     static IFishingControls Create(ControlConfig c=null, RodConfig r=null) { var a=new FishingControlsAdapter(); a.Reset(c??new ControlConfig(),r??new RodConfig()); return a; }
     public static void Run()
     {
+        Test("Subtick free look/recenter cannot leak motion or actions after release",()=>{
+            foreach(bool free in new[]{true,false}) {
+                var accum=new InputAccumulator();var controls=Create(new ControlConfig{AutoBackThreshold01=0});
+                var i=Input();i.FreeLookHeld=free;i.RecenterHeld=!free;i.MouseBackDelta=100;
+                i.MouseRightDelta=100;i.DragAdjustDelta=.2f;i.StrikePressed=true;i.ReelHeld=true;
+                accum.Push(i);
+                i.Sequence++;i.FreeLookHeld=i.RecenterHeld=false;i.MouseBackDelta=i.MouseRightDelta=0;
+                i.DragAdjustDelta=0;i.StrikePressed=false;accum.Push(i);
+                var result=controls.Step(1f/60,accum.Consume(1,1f/60),Snapshot(),Environment());
+                Near(result.RodPitchRadians,.35f);Near(result.RodYawRadians,0);Near(result.Drag01,.5f);
+                Near(result.Movement.ExtraForward,0);Check(!result.Strike&&result.Reel01==0,"suspended action leaked");
+                i.Sequence++;i.ReelHeld=false;accum.Push(i);
+                controls.Step(1f/60,accum.Consume(1,1f/60),Snapshot(),Environment());
+                i.Sequence++;i.MouseBackDelta=.1f;i.StrikePressed=true;i.ReelHeld=true;accum.Push(i);
+                result=controls.Step(1f/60,accum.Consume(1,1f/60),Snapshot(),Environment());
+                Check(result.RodPitchRadians>.35f&&result.Strike&&result.Reel01==1,"control failed to resume");
+            }
+        });
         Test("Implements shared interface, same sequence allowed across substeps",()=>{
             var a=Create(); var i=Input(); i.MouseBackDelta=.1f;
             var first=a.Step(1f/60,i,Snapshot(),Environment()); var second=a.Step(1f/60,i,Snapshot(),Environment());

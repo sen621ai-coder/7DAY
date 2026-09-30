@@ -20,6 +20,7 @@ namespace PZAEC.Fishing.Content
 
         private static readonly Dictionary<string, float[]> Ranges = new Dictionary<string, float[]>(StringComparer.Ordinal)
         {
+            {"Line.FixedLengthMeters", R(0,20)},
             {"Rod.LengthMeters", R(.5f,10)}, {"Rod.StiffnessNewtonsPerMeter", R(1,2000)},
             {"Rod.DampingNewtonSecondsPerMeter", R(0,100)}, {"Rod.MaxDeflectionMeters", R(.01f,3)},
             {"Rod.MinPitchRadians", R(-1.5f,0)}, {"Rod.MaxPitchRadians", R(.1f,1.55f)},
@@ -156,6 +157,7 @@ namespace PZAEC.Fishing.Content
                 }
             }
             if (config.Rod.MaxDeflectionMeters >= config.Rod.LengthMeters) return Fail("Rod deflection must be shorter than rod.", out error);
+            if (config.Line.FixedLengthMeters>0 && (config.Line.FixedLengthMeters<.7f || config.Line.FixedLengthMeters>config.Line.MaxLengthMeters)) return Fail("Fixed pole line is outside line limits.",out error);
             if (config.Line.DragMinNewtons >= config.Line.DragMaxNewtons || config.Line.DragMaxNewtons >= config.Line.BreakForceNewtons)
                 return Fail("Drag range must be ordered and below break force.", out error);
             if (config.Fish.CruiseForceNewtons > config.Fish.BurstForceNewtons || config.Fish.CruiseSpeedMetersPerSecond > config.Fish.BurstSpeedMetersPerSecond)

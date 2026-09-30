@@ -1,6 +1,6 @@
 Key,Source,Context,Changes,English,Schinese
-pzaecFishingRodBasic,items,Item,,Starter Bank Rod,入门岸钓竿
-pzaecFishingRodBasicDesc,items,Description,,A starter rod with line hook and float. Bring worm bait and fish from the bank. Pump the rod and give line during strong runs.,配有鱼线、鱼钩和浮漂的入门鱼竿。携带虫饵在岸边使用。交替抬竿和送竿收线；鱼猛冲时适当放线，避免硬拉断线。
+pzaecFishingRodBasic,items,Item,,Starter Fishing Pole,入门台钓手竿
+pzaecFishingRodBasicDesc,items,Description,,A 4.5 m hand pole with fixed line and float. Left click to cast and strike at the bite. Pull the mouse back to raise the pole and move sideways to fight the fish. No reel.,4.5 米台钓手竿，配等长固定鱼线和浮漂。左键抛投，咬实时点击左键提竿。中鱼后后拉鼠标抬竿、左右侧压，配合走位遛鱼；前推鼠标可放低竿身。没有线轮和收线操作。
 pzaecFishingBaitWorm,items,Item,,Worm Bait,虫饵
 pzaecFishingBaitWormDesc,items,Description,,Worm bait prepared from rotten flesh. Each accepted cast uses one bait. Not edible.,从腐肉中挑选并整理的鲤鱼虫饵。每次有效抛投消耗一份，不能食用。
 pzaecFishingFishCarp,items,Item,,Carp,鲤鱼
