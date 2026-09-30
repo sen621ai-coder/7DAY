@@ -14,8 +14,8 @@ public static class MechaCompiler {
   }
 }
 '@
-$sources=Get-ChildItem (Join-Path $root '_disabled-ZZ-PZAEC_Mecha/Source') -Filter '*.cs'|Sort-Object Name|ForEach-Object FullName
+$sources=Get-ChildItem (Join-Path $root 'ZZ-PZAEC_Mecha/Source') -Filter '*.cs'|Sort-Object Name|ForEach-Object FullName
 $refs=@(Get-ChildItem $managed -Filter '*.dll'|ForEach-Object FullName)+(Join-Path $root '0_TFP_Harmony/0Harmony.dll')
-if(!$OutputPath){$OutputPath=Join-Path $root '_disabled-ZZ-PZAEC_Mecha/PZAEC.Mecha.dll'}
+if(!$OutputPath){$OutputPath=Join-Path $root 'ZZ-PZAEC_Mecha/PZAEC.Mecha.dll'}
 [MechaCompiler]::Build($sources,$refs,$OutputPath)
 Write-Output 'Mecha compiled against installed V3.2 Mono/Unity references.'

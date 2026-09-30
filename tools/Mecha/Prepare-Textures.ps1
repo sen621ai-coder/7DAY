@@ -3,8 +3,8 @@
 # embedded in the 77 MB GLB, keeping VRAM close to 2K-era budgets.
 # Works on Windows PowerShell 5.1 (System.Drawing) and pwsh 7.
 param(
-    [string]$Glb = "F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\_disabled-ZZ-PZAEC_Mecha\Resources\buster_drone.glb",
-    [string]$OutDir = "F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\_disabled-ZZ-PZAEC_Mecha\Resources\MechaTextures",
+    [string]$Glb = "F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\ZZ-PZAEC_Mecha\Resources\buster_drone.glb",
+    [string]$OutDir = "F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\ZZ-PZAEC_Mecha\Resources\MechaTextures",
     [int]$MaxSize = 1024
 )
 $ErrorActionPreference = 'Stop'

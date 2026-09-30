@@ -16,13 +16,13 @@ Copy-Item -LiteralPath (Join-Path $root '0_TFP_Harmony') -Destination $mods -Rec
 # Shadow every other installed mod with an empty manifest so the game, which
 # also scans its installation Mods folder, cannot double-load anything.
 foreach ($dir in Get-ChildItem -LiteralPath $root -Directory) {
-    if ($dir.Name -in @('0_TFP_Harmony', '_disabled-ZZ-PZAEC_Mecha')) { continue }
+    if ($dir.Name -in @('0_TFP_Harmony', 'ZZ-PZAEC_Mecha')) { continue }
     if (!(Test-Path -LiteralPath (Join-Path $dir.FullName 'ModInfo.xml'))) { continue }
     $shadow = Join-Path $mods $dir.Name; New-Item -ItemType Directory -Force $shadow | Out-Null
     Copy-Item -LiteralPath (Join-Path $dir.FullName 'ModInfo.xml') -Destination $shadow
 }
 $target = Join-Path $mods 'ZZ-PZAEC_Mecha'
-Copy-Item -LiteralPath (Join-Path $root '_disabled-ZZ-PZAEC_Mecha') -Destination $target -Recurse
+Copy-Item -LiteralPath (Join-Path $root 'ZZ-PZAEC_Mecha') -Destination $target -Recurse
 # The isolated world lacks AEC endgame items; stub missing recipe ingredients
 # (M1 NativeQA pattern). Live recipes stay exactly as shipped.
 [xml]$base = Get-Content -LiteralPath (Join-Path $game 'Data/Config/items.xml')
