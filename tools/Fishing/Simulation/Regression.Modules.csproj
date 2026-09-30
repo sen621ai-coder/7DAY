@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputPath>artifacts/modules/bin/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Contracts/*.cs" />
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Simulation/*.cs" />
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Controls/*.cs" />
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Content/*.cs" />
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/SessionDriver.cs" />
+    <Compile Include="../Integration/ModulesHarness.cs" />
+  </ItemGroup>
+</Project>
