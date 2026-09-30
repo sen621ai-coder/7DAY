@@ -15,6 +15,7 @@ namespace SakuraPreview
         static float nextTick,lastTick,nextRescueAttempt;
         static bool blocked;
         static readonly System.Random random=new System.Random();
+        const string MarkBuff="buffSakuraAmbushMark";
         static readonly XmlSerializer serializer=new XmlSerializer(typeof(SakuraMissionJournal));
         static readonly Dictionary<int,float> requests=new Dictionary<int,float>();
         static readonly HashSet<string> noSafeSite=new HashSet<string>();
@@ -98,11 +99,19 @@ namespace SakuraPreview
                         if(npc==null && mission.Active)mission.Fail("任务人物所在区域卸载");
                         if(mission.Active && mission.Phase==EscortPhase.Ambush)
                         {
+                            // Late-wave stragglers spawn 24-42m out and may still be walking in or stuck;
+                            // mark the last few on map/compass so players can find them (buff carries the
+                            // vanilla SetNavObject effect and networks to all clients).
+                            bool mark=mission.ShouldMarkRemaining;
                             foreach(int id in mission.Enemies.ToArray())
                             {
                                 var enemy=world.GetEntity(id) as EntityAlive;
                                 mission.EnemyObserved(id,enemy!=null,enemy!=null&&enemy.IsDead());
-                                if(enemy!=null&&!enemy.IsDead())enemy.SetAttackTarget(id%3==0?(EntityAlive)npc:leader,200);
+                                if(enemy!=null&&!enemy.IsDead())
+                                {
+                                    enemy.SetAttackTarget(id%3==0?(EntityAlive)npc:leader,200);
+                                    if(mark&&!enemy.Buffs.HasBuff(MarkBuff))enemy.Buffs.AddBuff(MarkBuff,enemy.entityId,true);
+                                }
                             }
                         }
                         if(mission.Active && npc!=null && mission.WantWave(distance,near))SpawnWave(mission,npc,leader);

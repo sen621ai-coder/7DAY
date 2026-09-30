@@ -27,6 +27,9 @@ namespace SakuraPreview
         public List<EscortMember> Members=new List<EscortMember>();
         public int WaveCount => Tier-14;
         public int WaveSize => 6+2*(Tier-16);
+        // Once this few enemies remain in the active wave, the server marks them on map/compass.
+        public const int MarkThreshold=2;
+        public bool ShouldMarkRemaining => Phase==EscortPhase.Ambush && Enemies.Count>0 && Enemies.Count<=MarkThreshold;
         public int Coins => 4000*(Tier-15);
         public int XP => 10000+5000*(Tier-16);
         public string RewardBox => "itemPZAECBossLootBundleT"+Tier;

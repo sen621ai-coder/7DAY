@@ -1,0 +1,14 @@
+<configs>
+  <!-- Marks the last remaining ambush enemies on map/compass via the vanilla
+       SetNavObject action (same channel Twitch uses for vote bosses). -->
+  <append xpath="/buffs">
+    <buff name="buffSakuraAmbushMark" hidden="true">
+      <duration value="0"/>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffStart" action="SetNavObject" nav_object="zombie" add="true"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="SetNavObject" nav_object="zombie" add="false"/>
+        <triggered_effect trigger="onSelfBuffFinish" action="SetNavObject" nav_object="zombie" add="false"/>
+      </effect_group>
+    </buff>
+  </append>
+</configs>

@@ -93,7 +93,19 @@ public static class SakuraMissionRegression
         var missing=New(16);missing.WaveDelay=12;missing.CommitWave(new System.Collections.Generic.List<int>{1,2,3,4,5,6});missing.EnemyObserved(1,false,false);Check(missing.Phase==SakuraPreview.EscortPhase.Failed,"unloaded enemy never counts as dead");
         var paused=New(16);paused.Paused=true;paused.WaveDelay=12;Check(!paused.WantWave(0,true),"pause prevents next wave");
         var partial=New(16);bool threw=false;try{partial.CommitWave(new System.Collections.Generic.List<int>{1});}catch(System.InvalidOperationException){threw=true;}Check(threw&&partial.Waves==0,"partial spawns cannot commit");
-        return "PASS: "+checks+" mission checks (all tiers, wave gates, failure, participants and durable reward deduplication).";
+        Check(SakuraPreview.SakuraMissionState.MarkThreshold==2,"mark threshold constant");
+        var marking=New(16);marking.CommitWave(new System.Collections.Generic.List<int>{1,2,3,4,5,6});
+        Check(!marking.ShouldMarkRemaining,"full wave unmarked");
+        marking.EnemyDied(1);marking.EnemyDied(2);Check(!marking.ShouldMarkRemaining,"half-full wave unmarked");
+        marking.EnemyDied(3);marking.EnemyDied(4);Check(marking.ShouldMarkRemaining,"last two enemies marked");
+        marking.EnemyDied(5);Check(marking.ShouldMarkRemaining,"single straggler marked");
+        marking.EnemyDied(6);Check(!marking.ShouldMarkRemaining&&marking.Phase==SakuraPreview.EscortPhase.Following,"cleared wave stops marking");
+        var failedMark=New(16);failedMark.CommitWave(new System.Collections.Generic.List<int>{1,2,3,4,5,6});failedMark.Fail("cancelled");
+        for(int id=1;id<=4;id++)failedMark.EnemyDied(id);
+        Check(!failedMark.ShouldMarkRemaining,"failed mission never marks");
+        var searchMark=New(17);searchMark.Phase=SakuraPreview.EscortPhase.Searching;searchMark.Enemies.Add(1);
+        Check(!searchMark.ShouldMarkRemaining,"search phase never marks");
+        return "PASS: "+checks+" mission checks (all tiers, wave gates, failure, participants, durable reward deduplication and straggler marking).";
     }
 }
 '@
