@@ -39,5 +39,5 @@ balance(stage)
 for suffix,*_ in MODULES:
  name='modPZAECM1'+suffix
  check(E.parse(out/'Config/recipes.xml').find(f"./append/recipe[@name='{name}']") is not None,'balance generator retains modules')
-check(E.parse(out/'ModInfo.xml').find('Version').get('value')=='0.4.7','regeneration version')
+check(E.parse(out/'ModInfo.xml').find('Version').get('value')=='0.4.8','regeneration version')
 print('PASS',n,'module config, costs, localization, native tags and regeneration checks')

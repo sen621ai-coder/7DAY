@@ -21,6 +21,9 @@ public sealed class CargoDroneNativeQA : IModApi
     static CargoInventory inventoryBefore;
     static TileEntityCollector inventoryCollector;
     static TileEntityComposite inventoryTarget;
+    static string targetOwnerBefore;
+    static string[] targetUsersBefore;
+    static bool targetLockedBefore,targetJammedBefore;
     static CargoNativeValidationEndpoint targetEndpoint;
     static CargoPreparedRecovery preparedRecovery;
     static CargoNativeAirspace airspace;
@@ -261,6 +264,13 @@ public sealed class CargoDroneNativeQA : IModApi
                 Check(CargoPlanner.Equal(targetAfter.Items,tx.Plan.EndpointAfter)&&targetAfter.Revision==1&&targetEndpoint.LastTransaction==tx.Id,"real player-storage target durably receives exact item metadata and transaction marker");
                 Check(CargoPlanner.Count(inventoryEndpoint.Snapshot().Items)+CargoPlanner.Count(targetAfter.Items)==CargoPlanner.Count(inventoryBefore.Items),"real source and target inventories conserve total quantity after both commits");
                 Check(!CargoNativeValidationEndpoint.IsFenced(inventoryTarget),"native target fence releases after unload commit");
+                Check(CargoNativeAccessSessions.ReadyForCargo(inventoryTarget)&&!targetAfter.Busy,"committed target has no lingering native access lock or cargo session");
+                bool canLock=true;
+                Check(CargoNativeWriteGuards.BeforeFeatureLock(inventoryTarget.GetFeature<TEFeatureStorage>(),ref canLock)&&canLock,"committed target storage is no longer blocked by cargo interaction guard");
+                var targetLock=inventoryTarget.GetFeature<TEFeatureLockable>();
+                Check(targetLock.GetOwner().CombinedString==targetOwnerBefore&&targetLock.IsLocked()==targetLockedBefore,"unload preserves target owner and permission lock");
+                Check(targetLock.GetUsers().Select(u=>u.CombinedString).SequenceEqual(targetUsersBefore)&&inventoryTarget.GetFeature<TEFeatureStorage>().isJammed==targetJammedBefore,"unload preserves authorized users and jammed state");
+                Check(targetLock.IsUserAllowed(PlatformUserIdentifierAbs.FromCombinedString(targetOwnerBefore,false)),"target owner remains authorized after durable unload");
                 string journalPath=Path.Combine(GameIO.GetSaveGameDir(),"cargo-native-inventory.wal");inventoryJournal.Dispose();inventoryJournal=null;
                 using(var read=new CargoFileJournal(journalPath,tx.WorldId))
                 {
@@ -981,12 +991,17 @@ public sealed class CargoDroneNativeQA : IModApi
         VerifyRouterUnload(load);
         var chunk=inventoryCollector.GetChunk();var p=new Vector3i(Environment.GetCommandLineArgs().Contains("-yfCargoWorldScheduler")?13:5,150,1);
         Check(chunk.GetTileEntity(p)==null,"native target fixture is empty");
-        var block=Block.GetBlockValue("cntWoodWritableCrate",false);chunk.SetBlockRaw(p.x,p.y,p.z,block);
+        // Exercise the actual durable router transaction, not only its planner.
+        // World scheduler keeps the ordinary crate fixture for authored-name tests.
+        var block=Block.GetBlockValue(Environment.GetCommandLineArgs().Contains("-yfCargoWorldScheduler")?"cntWoodWritableCrate":"yfAutoRouter",false);chunk.SetBlockRaw(p.x,p.y,p.z,block);
         var targetPosition=chunk.GetWorldPos()+p;
         var targetPlacer=PlatformUserIdentifierAbs.FromPlatformAndId("Steam","76561198000000001",false);
         block.Block.OnBlockAdded(world,chunk,targetPosition,block,targetPlacer);
         inventoryTarget=world.GetTileEntity(targetPosition) as TileEntityComposite;
         var storage=inventoryTarget.GetFeature<TEFeatureStorage>();Check(storage!=null&&storage.bPlayerStorage,"native target has player storage feature");
+        var targetLock=inventoryTarget.GetFeature<TEFeatureLockable>();
+        targetOwnerBefore=targetLock.GetOwner().CombinedString;targetLockedBefore=targetLock.IsLocked();
+        targetUsersBefore=targetLock.GetUsers().Select(u=>u.CombinedString).ToArray();targetJammedBefore=storage.isJammed;
         var marker=CargoNativeMarkers.Read(inventoryTarget,load.WorldId);
         Check(marker!=null&&marker.Owner==targetPlacer.CombinedString,"scheduled delivery target identity comes from native placement hook");
         CargoNativeAccessSessions.Register(inventoryTarget,load.WorldId);

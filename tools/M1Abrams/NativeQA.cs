@@ -12,6 +12,22 @@ public sealed class M1NativeQA:IModApi
     static readonly List<string> results=new List<string>();
     static readonly List<Entity> entities=new List<Entity>();static int serial;
     static void Check(bool ok,string label){if(!ok)throw new Exception(label);results.Add("PASS "+label);}
+    static void CheckFlashPixels(Transform flash)
+    {
+        var cameraObject=new GameObject("M1 flash render QA");var camera=cameraObject.AddComponent<Camera>();
+        var target=new RenderTexture(256,256,24);var pixels=new Texture2D(256,256,TextureFormat.RGB24,false);var previous=RenderTexture.active;
+        var position=flash.localPosition;var rotation=flash.localRotation;var layer=flash.gameObject.layer;
+        try{
+            flash.position=new Vector3(0,300,0);flash.rotation=Quaternion.identity;flash.gameObject.layer=30;
+            camera.enabled=false;camera.targetTexture=target;camera.cullingMask=1<<30;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.black;camera.fieldOfView=30;camera.nearClipPlane=.01f;camera.farClipPlane=3;
+            Check(flash.GetComponent<Renderer>().sharedMaterial.shader.isSupported,"muzzle shader supported by native graphics device");
+            foreach(var offset in new[]{Vector3.back,Vector3.right}){
+                camera.transform.position=flash.position+offset;camera.transform.LookAt(flash.position);camera.Render();RenderTexture.active=target;
+                pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();int lit=pixels.GetPixels32().Count(c=>c.r>20||c.g>20||c.b>20);
+                Check(lit>5,"muzzle flame renders visible pixels from "+offset+" pixels="+lit);
+            }
+        }finally{flash.localPosition=position;flash.localRotation=rotation;flash.gameObject.layer=layer;RenderTexture.active=previous;camera.targetTexture=null;target.Release();UnityEngine.Object.Destroy(cameraObject);UnityEngine.Object.Destroy(target);UnityEngine.Object.Destroy(pixels);}
+    }
     public void InitMod(Mod mod){if(Environment.GetCommandLineArgs().Contains("-m1NativeQA"))ModEvents.GameStartDone.RegisterHandler(Run);}
     static T Spawn<T>(World world,string name,Vector3 position) where T:Entity
     {var e=EntityFactory.CreateEntity(EntityClass.FromString(name),position) as T;if(e==null)throw new Exception("factory "+name);entities.Add(e);world.SpawnEntityInWorld(e);return e;}
@@ -150,6 +166,7 @@ public sealed class M1NativeQA:IModApi
             var flash=Presentation.CreateMGFlash(state.Muzzle);flash.gameObject.SetActive(true);
             AccessTools.Field(typeof(Optics),"model").SetValue(null,main.Model);AccessTools.Method(typeof(Optics),"Visibility").Invoke(null,new object[]{true});
             Check(!flash.GetComponent<Renderer>().forceRenderingOff,"scope hides armor but retains separate muzzle flash renderer");
+            CheckFlashPixels(flash);
             Optics.Clear();UnityEngine.Object.Destroy(flash.gameObject);
             AccessTools.Method(typeof(SecondaryPresentation),"Add").Invoke(null,new object[]{vehicle.entityId,123,vehicle.position,vehicle.position+Vector3.forward*200,false,0f});
             var visualTrails=(System.Collections.IList)AccessTools.Field(typeof(SecondaryPresentation),"trails").GetValue(null);var shortTrail=visualTrails[visualTrails.Count-1];

@@ -29,43 +29,62 @@ namespace PZAEC.Surveillance
         static Mesh displayMesh;
         static Texture2D frameTexture;
         static Font statusFont;
+        static Material statusMaterial;
         const float FaceZ=ScreenLayout.FaceZ,LabelZ=ScreenLayout.LabelZ;
 
-        static Material NativeMaterial(string name,Color color)
-        {
-            var prefab=DataLoader.LoadAsset<Transform>("@:Entities/Crafting/woodWorkBenchPrefab.prefab",false);
-            foreach(var renderer in prefab.GetComponentsInChildren<Renderer>(true))foreach(var source in renderer.sharedMaterials)
-            {
-                if(source==null||source.shader==null||!source.shader.isSupported||source.renderQueue>=3000||!source.HasProperty("_MainTex")||!source.HasProperty("_Color"))continue;
-                var material=new Material(source){name=name,color=color};material.mainTexture=Texture2D.whiteTexture;
-                if(material.HasProperty("_Glossiness"))material.SetFloat("_Glossiness",.16f);
-                if(material.HasProperty("_EmissionColor"))material.SetColor("_EmissionColor",Color.black);return material;
-            }
-            throw new InvalidOperationException("Supported native monitor material unavailable");
-        }
         static void Materials()
         {
             if(frame!=null&&off!=null)return;
-            Shader shader=Shader.Find("Unlit/Texture");if(shader==null||!shader.isSupported)shader=Shader.Find("Sprites/Default");
-            off=shader!=null&&shader.isSupported?new Material(shader){name="Surveillance display"}:NativeMaterial("Surveillance display",Color.black);
-            if(off.HasProperty("_Color"))off.color=Color.white;off.mainTexture=Texture2D.blackTexture;
+            // RenderTexture alpha is scene data, not panel transparency. The sprite
+            // fallback blended it and rendered both sides without depth writes.
+            // Standard's opaque emission displays RGB while writing normal depth.
+            var shader=Shader.Find("Standard");
+            if(shader==null||!shader.isSupported)throw new InvalidOperationException("Opaque monitor shader unavailable");
+            off=new Material(shader){name="Surveillance display",color=Color.black,renderQueue=2000};
+            off.SetFloat("_Mode",0);off.SetInt("_SrcBlend",(int)BlendMode.One);off.SetInt("_DstBlend",(int)BlendMode.Zero);
+            off.SetInt("_ZWrite",1);off.SetFloat("_Glossiness",0);off.SetFloat("_SpecularHighlights",0);off.SetFloat("_GlossyReflections",0);
+            off.EnableKeyword("_EMISSION");off.SetColor("_EmissionColor",Color.white);
+            off.globalIlluminationFlags=MaterialGlobalIlluminationFlags.None;
+            SetImage(off,Texture2D.blackTexture);
             // Encode charcoal in the texture: native block tint updates must never whiten the cabinet.
             frameTexture=new Texture2D(1,1,TextureFormat.RGBA32,false){name="Surveillance charcoal"};
             frameTexture.SetPixel(0,0,new Color(.055f,.065f,.075f));frameTexture.Apply(false,true);
-            frame=new Material(off){name="Surveillance charcoal frame",mainTexture=frameTexture};
+            frame=new Material(off){name="Surveillance charcoal frame"};SetImage(frame,frameTexture);
             Log.Out("[Surveillance] Monitor shader="+off.shader.name+"; graphics="+SystemInfo.graphicsDeviceType);
+        }
+        static void SetImage(Material material,Texture texture)
+        {material.mainTexture=texture;material.SetTexture("_EmissionMap",texture);}
+        static void RefreshStatusAtlas(Font font)
+        {
+            if(font==statusFont&&statusMaterial!=null)statusMaterial.mainTexture=font.material.mainTexture;
+        }
+        static Material StatusMaterial()
+        {
+            if(statusMaterial==null)
+            {
+                // Font atlases supply glyph coverage in alpha, not coloured RGB.
+                // Clip the atlas alpha and emit the fixed status colour. Standard
+                // performs normal depth testing/writes against world geometry.
+                statusMaterial=new Material(off){name="Surveillance occluded status",renderQueue=2450};
+                statusMaterial.SetFloat("_Mode",1);statusMaterial.SetFloat("_Cutoff",.25f);
+                statusMaterial.EnableKeyword("_ALPHATEST_ON");statusMaterial.SetOverrideTag("RenderType","TransparentCutout");
+                statusMaterial.SetTexture("_EmissionMap",Texture2D.whiteTexture);
+                statusMaterial.SetColor("_EmissionColor",new Color(.68f,.84f,.92f));
+                Font.textureRebuilt+=RefreshStatusAtlas;
+            }
+            RefreshStatusAtlas(statusFont);return statusMaterial;
         }
         static Mesh DisplayMesh(Mesh original)
         {
             if(displayMesh!=null)return displayMesh;
-            // Keep Unity's tested cube geometry. The native renderer samples the
-            // cube's -Z triangle set on the visible panel; its V is inverted.
+            // The opaque material renders the outward +Z face. Viewed from that
+            // side, local -X is the viewer's right, so map U in the other direction.
             displayMesh=UnityEngine.Object.Instantiate(original);displayMesh.name="Surveillance display cube";
             var positions=displayMesh.vertices;var normals=displayMesh.normals;var uv=displayMesh.uv;
             bool front=false;
             for(int i=0;i<positions.Length;i++)
             {
-                if(normals[i].z>.9f){uv[i]=new Vector2(positions[i].x+.5f,positions[i].y+.5f);front=true;}
+                if(normals[i].z>.9f){uv[i]=new Vector2(.5f-positions[i].x,positions[i].y+.5f);front=true;}
                 else if(normals[i].z<-.9f)uv[i].y=1f-uv[i].y;
             }
             if(!front)throw new InvalidOperationException("Display cube has no front UVs");
@@ -101,7 +120,7 @@ namespace PZAEC.Surveillance
             Status.font=statusFont;
             Status.fontSize=64;Status.characterSize=.035f;Status.color=new Color(.68f,.84f,.92f);Status.gameObject.layer=colliderLayer;
             var textRenderer=Status.GetComponent<MeshRenderer>();textRenderer.shadowCastingMode=ShadowCastingMode.Off;textRenderer.receiveShadows=false;
-            if(statusFont!=null)textRenderer.sharedMaterial=statusFont.material;
+            if(statusFont!=null)textRenderer.sharedMaterial=StatusMaterial();
         }
         public void Bind(WorldBase world,Vector3i position)
         {
@@ -136,7 +155,7 @@ namespace PZAEC.Surveillance
             if(shown&&shownTexture==texture&&shownText==text)return;
             bool textureChanged=!shown||shownTexture!=texture;
             shown=true;shownTexture=texture;shownText=text;
-            if(textureChanged&&instanceMaterial!=null){if(instanceMaterial.HasProperty("_Color"))instanceMaterial.color=Color.white;instanceMaterial.mainTexture=texture??Texture2D.blackTexture;}
+            if(textureChanged&&instanceMaterial!=null)SetImage(instanceMaterial,texture??Texture2D.blackTexture);
             if(Status!=null)
             {
                 Status.text=text??"";Status.characterSize=texture==null?.035f:.022f;
@@ -144,8 +163,7 @@ namespace PZAEC.Surveillance
                 Status.gameObject.SetActive(!string.IsNullOrEmpty(text));
             }
         }
-        // The game's font shader can draw through world geometry. Keep status text
-        // visible only from the physical front of this wall-mounted monitor.
+        // In addition to material depth testing, keep text hidden from the rear.
         public void FaceViewer(Camera viewer)
         {
             var label=StatusRenderer;

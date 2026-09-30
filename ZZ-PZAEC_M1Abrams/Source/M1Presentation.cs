@@ -12,6 +12,7 @@ namespace PZAEC.M1
         {
             public EntityVehicle Vehicle;public Transform Root,Yaw,Pitch,Recoil,Muzzle;public int Epoch,Sequence,Shot,Reason,Ammo;public bool AP;public float RepairRemaining,ShellLife,FlashLife=.09f;public int ImpactShot;public Vector3 ImpactPosition;public AudioSource ImpactAudio;
             public float ShotAt=-100,NextReady,LastStatus=-100,YawAngle,PitchAngle,ClockOffset=float.PositiveInfinity,LastMove;
+            public int VisualShot;public float FlashAt=-100;
             public Vector3 LastPosition;public Quaternion LastBody;public double LeftDistance,RightDistance;
             public readonly List<Transform> Wheels=new List<Transform>();public readonly List<TrackMotion> Tracks=new List<TrackMotion>();
             public Transform Flame;public Light Flash;public AudioSource Blast,Mechanism,Ready;public bool ReadyPlayed=true;
@@ -49,7 +50,13 @@ namespace PZAEC.M1
             for(int q=0;q<3;q++){
                 var rot=Quaternion.Euler(0,0,q*60);int k=vv.Count;vv.Add(rot*new Vector3(-.4f,0,0));vv.Add(rot*new Vector3(.4f,0,0));vv.Add(rot*new Vector3(.4f,0,1.4f));vv.Add(rot*new Vector3(-.4f,0,1.4f));
                 uv.AddRange(new[]{new Vector2(0,0),new Vector2(1,0),new Vector2(1,1),new Vector2(0,1)});foreach(int t in new[]{0,1,2,0,2,3,2,1,0,3,2,0})tt.Add(k+t);
-            }flameMesh=new Mesh{name="M1 crossed cannon flash"};flameMesh.SetVertices(vv);flameMesh.SetUVs(0,uv);flameMesh.SetTriangles(tt,0);flameMesh.RecalculateBounds();
+            }
+            // The longitudinal ribbons collapse to thin edges when viewed along
+            // the bore. A small transverse core remains visible from the optic.
+            int core=vv.Count;vv.AddRange(new[]{new Vector3(-.24f,-.24f,.12f),new Vector3(.24f,-.24f,.12f),new Vector3(.24f,.24f,.12f),new Vector3(-.24f,.24f,.12f)});
+            uv.AddRange(new[]{new Vector2(.25f,.12f),new Vector2(.75f,.12f),new Vector2(.75f,.55f),new Vector2(.25f,.55f)});
+            foreach(int t in new[]{0,1,2,0,2,3,2,1,0,3,2,0})tt.Add(core+t);
+            flameMesh=new Mesh{name="M1 crossed cannon flash"};flameMesh.SetVertices(vv);flameMesh.SetUVs(0,uv);var colors=new Color[vv.Count];for(int i=0;i<colors.Length;i++)colors[i]=Color.white;flameMesh.colors=colors;flameMesh.SetTriangles(tt,0);flameMesh.RecalculateBounds();
             blastClip=ReadWave("cannon-blast");mechanismClip=ReadWave("cannon-mechanism");readyClip=ReadWave("cannon-ready");impactAPClip=ReadWave("impact-ap");
         }
         static AudioSource Audio(Transform t,AudioClip clip,float volume,float distance)
@@ -86,20 +93,20 @@ namespace PZAEC.M1
             if(w.GetPrimaryPlayer()==null)return;
             var v=Get(vehicle);if(v==null)return;
             if(v.Epoch!=0&&v.Epoch!=p.Epoch)return;if(v.Epoch==0)v.Epoch=p.Epoch;
-            if(p.Sequence<=v.Sequence)return;v.Sequence=p.Sequence;
+            if(p.Kind==Weapons.StateEvent){if(p.Sequence<=v.Sequence)return;v.Sequence=p.Sequence;}
             float sample=Time.time-p.Time;v.ClockOffset=Mathf.Min(v.ClockOffset,sample);float age=Mathf.Max(0,Time.time-(p.Time+v.ClockOffset));
             if(p.Kind==Weapons.StateEvent){v.LastStatus=Time.time;v.YawAngle=p.A.x;v.PitchAngle=p.A.y;v.Reason=Mathf.RoundToInt(p.A.z);v.Ammo=Mathf.RoundToInt(p.Y);v.AP=p.B.y>.5f;v.RepairRemaining=p.B.z;v.NextReady=Time.time+Mathf.Max(0,p.X-age);
                 if(p.Shot>v.Shot){v.Shot=p.Shot;v.ShotAt=Time.time-p.B.x-age;v.ReadyPlayed=true;}return;
             }
             if(p.Kind==Weapons.ImpactEvent){if(p.Shot==v.ShellId)v.Tracer.enabled=false;
                 if(p.X==0&&p.Shot>v.ImpactShot&&age<.5f){v.ImpactShot=p.Shot;ImpactFX(v,p);}return;}
-            if(p.Kind!=Weapons.ShotEvent||p.Shot<=v.Shot)return;
-            v.Shot=p.Shot;v.ShotAt=Time.time-age;v.ReadyPlayed=false;v.NextReady=Time.time+Mathf.Max(0,p.X-age);v.ShellLife=Rules.Range/Rules.ShellSpeed(p.Y>.5f);
+            if(p.Kind!=Weapons.ShotEvent||p.Shot<=v.VisualShot)return;
+            v.VisualShot=p.Shot;v.Shot=Math.Max(v.Shot,p.Shot);v.ShotAt=Time.time-age;v.ReadyPlayed=false;v.NextReady=Time.time+Mathf.Max(0,p.X-age);v.ShellLife=Rules.Range/Rules.ShellSpeed(p.Y>.5f);
             Vector3 direction=p.B.normalized;
-            bool ap=p.Y>.5f;v.FlashLife=ap?.035f:.055f;
+            bool ap=p.Y>.5f;v.FlashLife=EffectRules.FlashLife(Time.unscaledDeltaTime,false);
             v.Tracer.startColor=ap?new Color(1,.95f,.72f,.85f):new Color(1,.55f,.18f,.75f);v.Tracer.startWidth=ap?.014f:.022f;v.Tracer.endWidth=.006f;
             v.ShellId=p.Shot;v.ShellOrigin=p.A;v.ShellVelocity=p.B;v.ShellAt=Time.time-age;v.Tracer.enabled=age<v.ShellLife;
-            if(age<v.FlashLife){v.Flame.localRotation=Quaternion.Euler(0,0,(p.Shot*137)%360);float size=(ap?.45f:.65f)*(.88f+(p.Shot%5)*.06f);v.Flame.localScale=Vector3.one*size;v.Flame.gameObject.SetActive(true);}
+            if(EffectRules.Fresh(age)){v.FlashAt=Time.time;v.Flame.localRotation=Quaternion.Euler(0,0,(p.Shot*137)%360);float size=(ap?.45f:.65f)*(.88f+(p.Shot%5)*.06f);v.Flame.localScale=Vector3.one*size;v.Flame.gameObject.SetActive(true);}
             if(age<.35f){
                 bool crew=w.GetPrimaryPlayer().AttachedToEntity==vehicle;v.Blast.volume=crew?.55f:1;v.Blast.pitch=(crew?.82f:1)*(ap?1.12f:.9f);v.Blast.Play();v.Mechanism.Play();
                 var inherited=vehicle.vehicleRB!=null?Vector3.ClampMagnitude(vehicle.vehicleRB.velocity,20)*.25f:Vector3.zero;
@@ -144,7 +151,7 @@ namespace PZAEC.M1
                 float age=Time.time-v.ShotAt;if(!Weapons.Server)v.Recoil.localPosition=Vector3.back*Rules.Recoil(age);
                 if(v.Tracer.enabled){float t=Time.time-v.ShellAt;if(t>=v.ShellLife)v.Tracer.enabled=false;else{var end=v.ShellOrigin+v.ShellVelocity*t+Vector3.down*(4.905f*t*t)-Origin.position;v.Tracer.SetPosition(0,end);v.Tracer.SetPosition(1,end-v.ShellVelocity.normalized*1.5f);}}
                 if(v.ImpactAudio.isPlaying)v.ImpactAudio.transform.position=v.ImpactPosition-Origin.position;
-                if(v.Flame.gameObject.activeSelf){float alpha=Mathf.Clamp01(1-age/v.FlashLife);v.Properties.SetColor("_Color",new Color(1,1,1,alpha*(Optics.Scoped(v.Vehicle.entityId)?.35f:1)));v.Flame.GetComponent<Renderer>().SetPropertyBlock(v.Properties);v.Flash.intensity=lights++<2?1.4f*alpha*(Optics.Scoped(v.Vehicle.entityId)?.25f:1):0;if(alpha<=0)v.Flame.gameObject.SetActive(false);}
+                if(v.Flame.gameObject.activeSelf){float alpha=Mathf.Clamp01(1-(Time.time-v.FlashAt)/v.FlashLife);v.Properties.SetColor("_Color",new Color(1,1,1,alpha*(Optics.Scoped(v.Vehicle.entityId)?.6f:1)));v.Flame.GetComponent<Renderer>().SetPropertyBlock(v.Properties);v.Flash.intensity=lights++<2?1.4f*alpha*(Optics.Scoped(v.Vehicle.entityId)?.4f:1):0;if(alpha<=0)v.Flame.gameObject.SetActive(false);}
                 if(!v.ReadyPlayed&&Time.time>=v.NextReady){v.ReadyPlayed=true;if(player.AttachedToEntity==v.Vehicle)v.Ready.Play();}
             }
             foreach(int id in remove){Dispose(views[id]);views.Remove(id);}

@@ -39,7 +39,7 @@ for name in ('pzM1Shell','pzM1ShellAP','pzM1AAMissile'):
   image.load();check(image.format=='PNG' and image.size==(256,256) and image.getbbox() is not None,'icon decodes: '+name)
   icons.append(image.tobytes())
 check(len(set(icons))==3,'all three ammunition icons differ')
-check(E.parse(MOD/'ModInfo.xml').find('Version').get('value')=='0.4.7','runtime release version')
+check(E.parse(MOD/'ModInfo.xml').find('Version').get('value')=='0.4.8','runtime release version')
 stage=ROOT/'.local-tests'/('M1-secondary-config-'+uuid.uuid4().hex);shutil.copytree(MOD/'Config',stage/'ZZ-PZAEC_M1Abrams/Config');shutil.copyfile(MOD/'ModInfo.xml',stage/'ZZ-PZAEC_M1Abrams/ModInfo.xml');apply(stage)
 before={p.name:p.read_bytes() for p in (stage/'ZZ-PZAEC_M1Abrams/Config').iterdir()};apply(stage);check(all((stage/'ZZ-PZAEC_M1Abrams/Config'/p).read_bytes()==data for p,data in before.items()),'config regeneration idempotent')
 print('PASS',checks,'secondary runtime mesh, texture, recipe, ID and regeneration checks')

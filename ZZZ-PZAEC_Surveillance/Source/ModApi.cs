@@ -21,7 +21,7 @@ namespace PZAEC.Surveillance
             ModEvents.GameUpdate.RegisterHandler(Update);
             ModEvents.WorldShuttingDown.RegisterHandler(Stopping);
             ModEvents.GameShutdown.RegisterHandler(Stopped);
-            Log.Out("[Surveillance] v1.0.13 wireless cameras and 4x3 live monitor loaded.");
+            Log.Out("[Surveillance] v1.0.15 wireless cameras and 4x3 live monitor loaded.");
         }
         public static bool GetPrefab(BlockShapeModelEntity __instance,ref Transform __result)
         {
