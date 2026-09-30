@@ -1,0 +1,5 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
+vehicleBusterDronePlaceableDesc,items,item,,,Place the Buster Drone combat walker. FPV eye optics, beam cannon and guided missiles. Model CC-BY-4.0 LaVADraGoN.,放置 Buster 战斗步行机。眼部第一视角、光束主炮与制导导弹。模型 CC-BY-4.0 LaVADraGoN。
+vehicleBusterDroneChassisDesc,items,item,,,Reinforced walker chassis with articulated leg mounts.,带关节腿座的强化步行机骨架。
+ammoPZAECMechaCellDesc,items,item,,,High-density energy cell for the walker's eye beam.,步行机眼部光束炮用高密度能量电池。
+ammoPZAECMechaMissileDesc,items,item,,,Guided missile for the walker's shoulder pod. Lock a zombie for 2 seconds, then release.,步行机肩部发射巢用制导导弹。锁定僵尸 2 秒后发射。

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <append xpath="/items">
+    <item name="vehicleBusterDronePlaceable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic,PZAECMecha" />
+      <property name="CustomIcon" value="vehicleGyrocopterPlaceable" />
+      <property name="DescriptionKey" value="vehicleBusterDronePlaceableDesc" />
+      <property name="Meshfile" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab" />
+      <property name="EconomicValue" value="150000" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehicleBusterDrone" />
+        <property name="VehicleSize" value="3.0, 3.2, 3.4" />
+      </property>
+      <effect_group name="Buster Base" tiered="false">
+        <passive_effect name="DegradationMax" operation="base_set" value="2000000" />
+        <passive_effect name="ModSlots" operation="base_set" value="4" />
+      </effect_group>
+      <property name="Stacknumber" value="1" />
+      <property name="RepairTools" value="resourceRepairKit" />
+    </item>
+    <item name="vehicleBusterDroneChassis">
+      <property name="Extends" value="vehicleWheels" />
+      <property name="CustomIcon" value="vehicleGyrocopterChassis" />
+      <property name="DescriptionKey" value="vehicleBusterDroneChassisDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="Group" value="AECvehicleFinalAssembly" />
+      <property name="EconomicValue" value="25000" />
+    </item>
+    <item name="ammoPZAECMechaCell">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceElectricParts" />
+      <property name="DescriptionKey" value="ammoPZAECMechaCellDesc" />
+      <property name="Stacknumber" value="200" />
+      <property name="EconomicValue" value="240" />
+      <property name="Group" value="Ammo/Weapons" />
+    </item>
+    <item name="ammoPZAECMechaMissile">
+      <property name="Extends" value="ammoRocketHE" />
+      <property name="CustomIcon" value="ammoRocketHE" />
+      <property name="DescriptionKey" value="ammoPZAECMechaMissileDesc" />
+      <property name="Stacknumber" value="20" />
+      <property name="EconomicValue" value="500" />
+      <property name="Group" value="Ammo/Weapons" />
+    </item>
+  </append>
+</configs>

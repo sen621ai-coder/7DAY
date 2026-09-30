@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="PZAEC_Mecha"/>
+  <DisplayName value="PZAEC Buster Drone | 战斗步行机"/>
+  <Description value="Rideable Buster Drone combat walker with a runtime GLB model, FPV eye optics, eye beam cannon and guided shoulder missiles. Model: Buster Drone by LaVADraGoN (CC-BY-4.0)."/>
+  <Author value="PZAEC"/>
+  <Version value="0.3.0"/>
+  <Website value=""/>
+  <ServerSideOnly value="false"/>
+  <SkipWithAntiCheat value="true"/>
+</xml>
