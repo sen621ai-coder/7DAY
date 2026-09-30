@@ -1,0 +1,9 @@
+Key,Source,Context,Changes,English,Schinese
+pzaecFishingRodBasic,items,Item,,Starter Bank Rod,入门岸钓竿
+pzaecFishingRodBasicDesc,items,Description,,A starter rod with line hook and float. Bring worm bait and fish from the bank. Pump the rod and give line during strong runs.,配有鱼线、鱼钩和浮漂的入门鱼竿。携带虫饵在岸边使用。交替抬竿和送竿收线；鱼猛冲时适当放线，避免硬拉断线。
+pzaecFishingBaitWorm,items,Item,,Worm Bait,虫饵
+pzaecFishingBaitWormDesc,items,Description,,Worm bait prepared from rotten flesh. Each accepted cast uses one bait. Not edible.,从腐肉中挑选并整理的鲤鱼虫饵。每次有效抛投消耗一份，不能食用。
+pzaecFishingFishCarp,items,Item,,Carp,鲤鱼
+pzaecFishingFishCarpDesc,items,Description,,A whole carp. Cook one fish on a campfire grill to make one meal. Cannot be eaten raw.,完整的鲤鱼。使用篝火和烤架，将一条鱼烹饪为一份烤鲤鱼。不能直接生吃。
+pzaecFishingMealGrilled,items,Item,,Grilled Carp,烤鲤鱼
+pzaecFishingMealGrilledDesc,items,Description,,Freshly grilled carp. A simple meal after a successful fishing trip.,新鲜烤制的鲤鱼。一顿犒劳垂钓收获的简单餐食。

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="pzaecFishingRodBasic" count="1" craft_time="30">
+      <ingredient name="resourceWood" count="20"/>
+      <ingredient name="resourceForgedIron" count="2"/>
+      <ingredient name="resourceScrapPolymers" count="10"/>
+      <ingredient name="resourceCloth" count="5"/>
+    </recipe>
+    <recipe name="pzaecFishingBaitWorm" count="5" craft_time="5">
+      <ingredient name="foodRottingFlesh" count="1"/>
+    </recipe>
+    <recipe name="pzaecFishingMealGrilled" count="1" craft_time="20" craft_area="campfire" craft_tool="toolCookingGrill" tags="grill">
+      <ingredient name="pzaecFishingFishCarp" count="1"/>
+    </recipe>
+  </append>
+</configs>

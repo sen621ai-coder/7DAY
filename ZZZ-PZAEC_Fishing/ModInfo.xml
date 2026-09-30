@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <Name value="PZAEC_Fishing" />
+  <DisplayName value="PZAEC Fishing (single-player test)" />
+  <Description value="Single-player fishing integration test: mouse rod control, float bites, fish fighting and inventory rewards. Multiplayer is not enabled." />
+  <Author value="PZAEC" />
+  <Version value="0.1.2" />
+</xml>

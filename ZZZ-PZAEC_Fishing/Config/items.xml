@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+  <append xpath="/items">
+    <!-- Temporary native spear mesh only. No inherited melee actions; D supplies the final rod presentation. -->
+    <item name="pzaecFishingRodBasic">
+      <property name="Tags" value="tool,noMods,pzaecFishingRod"/>
+      <property name="DisplayType" value="simpleTool"/>
+      <property name="DescriptionKey" value="pzaecFishingRodBasicDesc"/>
+      <property name="CustomIcon" value="meleeWpnSpearT0StoneSpear"/>
+      <!-- Use the native stone-axe closed grip while the fishing renderer supplies the rod. -->
+      <property name="HoldType" value="32"/>
+      <property name="Meshfile" value="@:Other/Items/Weapons/Melee/Spear/spear_stone_Prefab.prefab"/>
+      <property name="Material" value="MresourceWood"/>
+      <property name="Weight" value="10"/>
+      <property name="Stacknumber" value="1"/>
+      <property name="EconomicValue" value="40"/>
+      <property name="SellableToTrader" value="false"/>
+      <property name="Group" value="Tools/Traps"/>
+      <property name="SoundUnholster" value="weapon_unholster"/>
+      <property name="SoundHolster" value="weapon_holster"/>
+      <effect_group tiered="false">
+        <passive_effect name="ModSlots" operation="base_set" value="0"/>
+      </effect_group>
+    </item>
+    <item name="pzaecFishingBaitWorm">
+      <property name="Tags" value="pzaecFishingBait"/>
+      <property name="DescriptionKey" value="pzaecFishingBaitWormDesc"/>
+      <property name="CustomIcon" value="foodRottingFlesh"/>
+      <property name="HoldType" value="45"/>
+      <property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+      <property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+      <property name="Material" value="Morganic"/>
+      <property name="Stacknumber" value="100"/>
+      <property name="EconomicValue" value="1"/>
+      <property name="SellableToTrader" value="false"/>
+      <property name="Group" value="Resources"/>
+    </item>
+    <!-- A whole fish is a cooking ingredient. No raw-food action or scrap-to-meat reward loop. -->
+    <item name="pzaecFishingFishCarp">
+      <property name="Tags" value="pzaecFishingCatch"/>
+      <property name="DescriptionKey" value="pzaecFishingFishCarpDesc"/>
+      <property name="CustomIcon" value="foodRawMeat"/>
+      <property name="HoldType" value="45"/>
+      <property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+      <property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+      <property name="Material" value="Morganic"/>
+      <property name="Stacknumber" value="20"/>
+      <property name="EconomicValue" value="12"/>
+      <property name="SellableToTrader" value="false"/>
+      <property name="Group" value="Food/Cooking,CFFood/Cooking"/>
+    </item>
+    <item name="pzaecFishingMealGrilled">
+      <property name="Tags" value="food,foodSkill,fitness,farmerFoodBonus"/>
+      <property name="DescriptionKey" value="pzaecFishingMealGrilledDesc"/>
+      <property name="CustomIcon" value="foodGrilledMeat"/>
+      <property name="HoldType" value="31"/>
+      <property name="DisplayType" value="food"/>
+      <property name="Meshfile" value="@:Other/Items/Food/parcelGenericPrefab.prefab"/>
+      <property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+      <property name="Material" value="Morganic"/>
+      <property name="Stacknumber" value="20"/>
+      <property name="EconomicValue" value="24"/>
+      <property name="SellableToTrader" value="false"/>
+      <property name="SoundPickup" value="meat_grilled_grab"/>
+      <property name="SoundPlace" value="meat_grilled_place"/>
+      <property name="Group" value="Food/Cooking,CFFood/Cooking"/>
+      <property class="Action0">
+        <property name="Class" value="Eat"/>
+        <property name="Delay" value="2.1"/>
+        <property name="Sound_start" value="player_eating"/>
+        <property name="SmellUse" value="25"/>
+      </property>
+      <effect_group tiered="false" name="Fishing food">
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="$foodAmountAdd" operation="add" value="10"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="foodHealthAmount" operation="add" value="5"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="foodHealthFarmer" operation="set" value="5">
+          <requirement name="HasBuff" buff="buffFarmerSetBonus"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar=".foodStaminaBonusAdd" operation="add" value="10"/>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar="foodStaminaFarmer" operation="set" value="10">
+          <requirement name="HasBuff" buff="buffFarmerSetBonus"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfPrimaryActionEnd" action="AddBuff" buff="buffProcessConsumables"/>
+        <display_value name="dSmellUse" value="25"/>
+      </effect_group>
+    </item>
+  </append>
+</configs>

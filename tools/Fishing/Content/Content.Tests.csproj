@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net48</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputPath>artifacts/bin/</OutputPath>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Contracts/*.cs"/>
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Content/*.cs"/>
+    <Compile Include="ContentTests.cs"/>
+  </ItemGroup>
+</Project>
