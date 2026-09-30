@@ -16,7 +16,8 @@ namespace PZAEC.Fishing.Runtime
     {
         RawInputFrame pending;
         long lastSequence = -1;
-        public void Clear() { pending=default(RawInputFrame); lastSequence=-1; }
+        bool suspensionPending;
+        public void Clear() { pending=default(RawInputFrame); lastSequence=-1; suspensionPending=false; }
         public bool Push(RawInputFrame value)
         {
             if (value.Sequence<=lastSequence || !Scalar.IsFinite(value.MouseRightDelta) || !Scalar.IsFinite(value.MouseBackDelta)
@@ -28,12 +29,22 @@ namespace PZAEC.Fishing.Runtime
             pending.MouseRightDelta+=old.MouseRightDelta; pending.MouseBackDelta+=old.MouseBackDelta;
             pending.DragAdjustDelta+=old.DragAdjustDelta;
             pending.CastPressed|=old.CastPressed; pending.StrikePressed|=old.StrikePressed; pending.CancelPressed|=old.CancelPressed;
+            suspensionPending|=value.FreeLookHeld||value.RecenterHeld;
+            if(suspensionPending) {
+                // Never merge observation/recentering strokes into subsequent rod input.
+                pending.MouseRightDelta=pending.MouseBackDelta=pending.DragAdjustDelta=0;
+                pending.CastPressed=pending.StrikePressed=false;
+            }
             return true;
         }
         public RawInputFrame Consume(int remainingTicks,float dt)
         {
             if(remainingTicks<1)throw new ArgumentOutOfRangeException(nameof(remainingTicks));
             var value=pending;
+            // A press and release may both occur between physics ticks. Deliver one
+            // suspended tick so the controls still apply their normal resume/rearm rules.
+            if(suspensionPending&&!value.FreeLookHeld&&!value.RecenterHeld)value.RecenterHeld=true;
+            suspensionPending=false;
             value.DurationSeconds=dt;
             value.MouseRightDelta/=remainingTicks; value.MouseBackDelta/=remainingTicks; value.DragAdjustDelta/=remainingTicks;
             pending.MouseRightDelta-=value.MouseRightDelta; pending.MouseBackDelta-=value.MouseBackDelta; pending.DragAdjustDelta-=value.DragAdjustDelta;

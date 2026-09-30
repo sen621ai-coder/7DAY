@@ -43,7 +43,8 @@ namespace PZAEC.Fishing.Runtime
                 originals=mount.GetComponentsInChildren<Renderer>(true).Where(r=>!(r is SkinnedMeshRenderer)).ToArray();visibility=originals.Select(r=>r.enabled).ToArray();
                 try {
                     assets=new PresentationAssets(ModDirectory);
-                    string name=assets.Bundle.GetAllAssetNames().First(n=>n.EndsWith("/fishingrod.prefab",StringComparison.OrdinalIgnoreCase));
+                    string prefab=config.Line.FixedLengthMeters>0?"/fishingpole.prefab":"/fishingrod.prefab";
+                    string name=assets.Bundle.GetAllAssetNames().First(n=>n.EndsWith(prefab,StringComparison.OrdinalIgnoreCase));
                     rod=Object.Instantiate(assets.Bundle.LoadAsset<GameObject>(name)).transform;
                     rod.name="FishingHeldRod";
                     grip=rod.GetComponentsInChildren<Transform>(true).First(t=>t.name=="GripRight");

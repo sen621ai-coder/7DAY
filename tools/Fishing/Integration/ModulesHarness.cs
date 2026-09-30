@@ -45,7 +45,7 @@ internal static class ModulesHarness
                 Water=World.SampleColumn(new Vec3(0,0,8),4,16)};
             Host=new SessionDriver(new ContractFishingSimulation(),new FishingControlsAdapter(),View);
             Host.Begin(new SessionStart {SessionId=Guid.NewGuid(),PlayerPersistentId="integration",PlayerEntityId=1,
-                Seed=seed,FishDefinitionId=config.Fish.Id,CastTarget=new Vec3(0,0,8),Authority=AuthorityMode.Standalone},config,Env,World);
+                Seed=seed,FishDefinitionId=config.Fish.Id,CastTarget=new Vec3(0,0,config.Line.FixedLengthMeters>0?5.5f:8),Authority=AuthorityMode.Standalone},config,Env,World);
         }
         public void Step(float dt=1f/60,float back=0,bool strike=false,bool allowed=true,bool reel=false)
         { Host.Advance(dt,new RawInputFrame {Sequence=++sequence,DurationSeconds=dt,InputAllowed=allowed,MouseBackDelta=back,StrikePressed=strike,ReelHeld=reel},Env); }
@@ -61,6 +61,30 @@ internal static class ModulesHarness
         try {
             var content=new FishingContent();var config=content.Load(args[0]);
             string error;Check(content.Validate(config,out error),"shipped configuration validates: "+error);
+            Check(Math.Abs(FloatReadout.Marks(config.Float.RestSubmerged01)-4)<.1f,"shipped float rests near four visible antenna marks");
+            var floatReadout=new FloatReadout();var floatState=new FishingSnapshot {SessionId=Guid.NewGuid(),Tick=1,TimeSeconds=1,
+                Phase=FishingPhase.Waiting,FloatSubmerged01=config.Float.RestSubmerged01,FloatUp=Vec3.Up};
+            floatReadout.Observe(floatState,config.Float);
+            Check(floatReadout.Current.Signal==FloatSignal.Waiting&&!floatReadout.Current.CanStrike,"resting float does not claim a bite");
+            floatState.Tick++;floatState.TimeSeconds+=1f/60;floatState.Phase=FishingPhase.Nibbling;floatState.FloatSubmerged01+=.04f;
+            floatReadout.Observe(floatState,config.Float);
+            Check(floatReadout.Current.Signal==FloatSignal.Downstroke&&floatReadout.Current.CanStrike,"physical quick sink reads as downstroke and allows strike");
+            var beforeRepaint=floatReadout.Current;floatState.FloatSubmerged01=1;floatReadout.Observe(floatState,config.Float);
+            Check(floatReadout.Current.VisibleMarks==beforeRepaint.VisibleMarks,"duplicate GUI/frame observation does not advance readout");
+            floatState.Tick++;floatState.TimeSeconds+=1f/60;floatReadout.Observe(floatState,config.Float);
+            Check(floatReadout.Current.Signal==FloatSignal.Submerged&&floatReadout.Current.VisibleMarks==0,"fully submerged tail reads black float with zero visible marks");
+            floatState.Tick++;floatState.TimeSeconds+=1f/60;floatState.FloatSubmerged01=.55f;floatReadout.Observe(floatState,config.Float);
+            Check(floatReadout.Current.Signal==FloatSignal.Rising&&floatReadout.Current.VisibleMarks>5,"physical rise reads as raised float with additional marks");
+            floatReadout.Reset();Check(!floatReadout.Current.CanStrike,"world/session cleanup clears readout and strike hint");
+            bool sawBlack=false,sawRise=false,sawDown=false;
+            for(uint seed=1;seed<=32;seed++)using(var r=new Run(config,seed:seed)) {
+                var actual=new FloatReadout();
+                for(int i=0;i<1600&&r.Host.Active;i++) {
+                    r.Step();actual.Observe(r.Host.Current,config.Float);
+                    sawBlack|=actual.Current.Signal==FloatSignal.Submerged;sawRise|=actual.Current.Signal==FloatSignal.Rising;sawDown|=actual.Current.Signal==FloatSignal.Downstroke;
+                }
+            }
+            Check(sawBlack&&sawRise&&sawDown,"shipped simulation produces black float, raised float and downstrokes across seeded bites");
             using(var r=new Run(config)) {
                 WaitBite(r);
                 r.Step(back:1,strike:true);
@@ -77,7 +101,28 @@ internal static class ModulesHarness
             }
             using(var r=new Run(config)) {
                 WaitBite(r);r.Step(strike:true);
-                Check(r.Host.Current.Phase!=FishingPhase.Hooked && r.Host.Current.Phase!=FishingPhase.Fighting,"button without rod raise cannot hook");
+                Check(r.Host.Current.Phase==FishingPhase.Hooked,"pole left click hooks without simultaneous mouse raise");
+                for(int i=0;i<18&&r.Host.Active;i++)r.Step();
+                float pitch=r.Host.Current.Rod.PitchRadians;
+                r.Step(back:.3f,reel:true);
+                Check(r.Host.Active&&r.Host.Current.Rod.PitchRadians>pitch,"mouse pull continues to raise pole after click animation");
+                Check(Math.Abs(r.Host.Current.LineLengthMeters-config.Line.FixedLengthMeters)<.0001f,"reel input cannot shorten pole line");
+            }
+            using(var r=new Run(config)) {
+                for(int i=0;i<1000&&r.Host.Current.Phase!=FishingPhase.Waiting;i++)r.Step();
+                r.Step(strike:true);
+                Check(r.Host.Active&&r.Host.Current.Phase==FishingPhase.Waiting,"premature pole click keeps session waiting without hooking");
+                for(int i=0;i<1000&&r.Host.Current.Phase!=FishingPhase.Nibbling;i++)r.Step();
+                r.Step(strike:true);
+                Check(r.Host.Active&&r.Host.Current.Phase==FishingPhase.Hooked,"pole strike during visible nibble starts fish fight");
+                var before=r.Host.Current.FishPosition;
+                for(int i=0;i<30&&r.Host.Active;i++)r.Step();
+                Check(r.Host.Active&&(r.Host.Current.FishPosition-before).Length>.05f&&r.Host.Current.FishVelocity.Length>.01f,"fish swims after nibble strike rather than ending session");
+            }
+            using(var r=new Run(config)) {
+                WaitBite(r);
+                for(int i=0;i<100&&r.Host.Active;i++)r.Step();
+                Check(!r.Host.Active&&r.Host.Current.Failure==FailureReason.LateStrike,"pole still requires clicking within bite window");
             }
             using(var r=new Run(config,true))
                 Check(r.Host.Current.IsTerminal && !r.Host.Active && r.View.Cleared && !r.Host.Movement.Active,"rejected cast releases host during Begin");
@@ -98,7 +143,8 @@ internal static class ModulesHarness
                 WaitBite(defaults);defaults.Step(back:1,strike:true);
                 float minimumStamina=1;
                 for(int i=0;i<18100&&defaults.Host.Active;i++) {
-                    defaults.Step(back:defaults.Host.Current.FishStamina01<.25f?.5f:0,reel:true);
+                    defaults.Step(back:defaults.Host.Current.FishStamina01<.25f?.5f:0,reel:false);
+                    if(Math.Abs(defaults.Host.Current.LineLengthMeters-config.Line.FixedLengthMeters)>.0001f)throw new Exception("Pole line reeled or paid out");
                     minimumStamina=Math.Min(minimumStamina,defaults.Host.Current.FishStamina01);
                 }
                 Console.WriteLine("DEFAULT LANDING seed="+seed+" phase="+defaults.Host.Current.Phase+" failure="+defaults.Host.Current.Failure+" seconds="+defaults.Host.Current.TimeSeconds+" minimumStamina="+minimumStamina+" line="+defaults.Host.Current.LineLengthMeters);
@@ -107,7 +153,7 @@ internal static class ModulesHarness
             var landingConfig=content.Load(args[0]);landingConfig.Fish.StaminaJoules=70;landingConfig.Fish.RecoveryWatts=0;
             using(var r=new Run(landingConfig)) {
                 WaitBite(r);r.Step(back:1,strike:true);
-                for(int i=0;i<17000&&r.Host.Active;i++)r.Step(back:r.Host.Current.FishStamina01<.25f?.5f:0,reel:true);
+                for(int i=0;i<17000&&r.Host.Active;i++)r.Step(back:r.Host.Current.FishStamina01<.25f?.5f:0,reel:false);
                 Check(r.Host.Current.Phase==FishingPhase.Resolved,"real controls and simulation complete assisted landing: "+r.Host.Current.Failure);
                 Check(r.View.Events.FindAll(e=>e.Kind==FishingEventKind.Landed).Count==1&&!r.Host.Active,"successful landing emits once and releases host");
                 RewardSpec reward;

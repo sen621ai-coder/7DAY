@@ -61,6 +61,16 @@ public static class FishingUnityVerification
         frame.IsDedicatedServer=true;p.Render(frame);Check(!p.IsReady,"dedicated render clears existing scene");
         p.Begin(new SessionStart{SessionId=Guid.NewGuid()},config);p.Render(frame);Check(!p.IsReady,"old session frame cannot recreate scene");p.Dispose();p.Dispose();
         Check(GameObject.Find("PZAEC.Fishing.Presentation")==null,"clear immediately disables all session roots");
+        using(var pole=new FishingPresentation(path,false,new PresentationOptions{AudioEnabled=false})) {
+            var poleConfig=new FishingConfig();poleConfig.Rod.LengthMeters=4.5f;poleConfig.Line.FixedLengthMeters=4.5f;
+            pole.Begin(start,poleConfig);var poleFrame=Frame(id);var poleState=poleFrame.Current;
+            poleState.Rod.Tip=poleState.Rod.Root+V(0,1.2f,4.15f);poleState.Rod.PitchRadians=.28f;
+            poleState.LineLengthMeters=4.5f;poleFrame.Previous=poleFrame.Current=poleState;
+            pole.Render(poleFrame);Check(pole.IsReady&&pole.LastError==null,"hand pole prefab renders without reel rig");
+            Check(pole.RightGrip.root.GetComponentsInChildren<Transform>(true).All(t=>t.name!="Spool"&&t.name!="Crank"),"hand pole has no reel geometry");
+            camera.transform.position=new Vector3(4,3,-3);camera.transform.LookAt(new Vector3(0,1,2));
+            light.intensity=1.2f;RenderSettings.ambientLight=new Color(.5f,.55f,.6f);Capture(camera,"hand-pole");
+        }
         Object.DestroyImmediate(camera.gameObject);Object.DestroyImmediate(light.gameObject);Object.DestroyImmediate(water);Object.DestroyImmediate(waterMat);
         MotionPreview(path);
         File.WriteAllText("Build/presentation-verified.txt","PASS: "+tests+" Unity renderer/lifecycle checks. Production sources + Contracts v1. Renders are editor simulations, not in-game acceptance.\n1000 Render calls (editor, no camera draws): "+timer.Elapsed.TotalMilliseconds.ToString("F2")+" ms total. Not game performance measurement.\n");

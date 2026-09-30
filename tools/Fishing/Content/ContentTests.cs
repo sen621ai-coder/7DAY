@@ -48,7 +48,7 @@ internal static class ContentTests
         Check(!content.Validate(null, out error), "Null config");
 
         var oldCulture = CultureInfo.CurrentCulture;
-        try { CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("fr-FR"); Check(Read(content, xml).Rod.LengthMeters == 2.4f, "Invariant numeric parsing"); }
+        try { CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("fr-FR"); Check(Read(content, Change(xml,"Rod","LengthMeters","4.5")).Rod.LengthMeters == 4.5f, "Invariant numeric parsing"); }
         finally { CultureInfo.CurrentCulture = oldCulture; }
         var another = content.Load(mod);
         another.Fish.MassKg = 10;

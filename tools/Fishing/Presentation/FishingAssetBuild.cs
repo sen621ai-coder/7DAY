@@ -98,6 +98,21 @@ public static partial class FishingAssetBuild
         foreach(var c in children)c.SetParent(pivot.transform,false);pivot.transform.localRotation=Quaternion.Euler(-90,0,0);
         Node("Waterline",root.transform,Vector3.zero);Node("LineAttachment",root.transform,new Vector3(0,-.132f,0));Save(root,"FishingFloat");
     }
+    static void Pole()
+    {
+        var root=new GameObject("FishingPole");
+        var z=new float[34];var r=new float[34];
+        for(int i=0;i<34;i++){z[i]=.24f+i*2.46f/33;r[i]=Mathf.Lerp(.009f,.0012f,i/33f);}r[0]=r[33]=0;
+        var bones=Rig(root.transform,"RodBone",.24f,2.7f,13);
+        Skin(root,"PoleBlank",Lathe("PoleBlankMesh",z,r,r,16,false),carbon,bones,.24f,2.7f);
+        Tube("PoleGrip",root.transform,0,.30f,.012f,black);
+        Tube("ButtCap",root.transform,0,.018f,.013f,steel);
+        for(int i=2;i<12;i+=3)Tube("PoleJoint"+i,bones[i],-.018f,0,Mathf.Lerp(.01f,.002f,i/12f),steel);
+        Node("LineExit",bones[12],Vector3.zero);
+        Node("GripRight",root.transform,new Vector3(0,0,.23f));
+        Node("GripLeft",root.transform,new Vector3(0,0,.10f));
+        Save(root,"FishingPole");
+    }
     static void Fin(string name,Transform parent,Vector3[] points)
     {
         // Separate front/back vertices: shared reversed triangles cancel normals to black.
@@ -168,7 +183,7 @@ ENDCG
         fish=Mat("FishScales",Color.white,.3f,.7f);fin=Mat("FishFin",new Color(.43f,.34f,.17f),0,.45f);eye=Mat("Eye",new Color(.75f,.58f,.15f),.1f,.8f);pupil=Mat("Pupil",new Color(.008f,.012f,.015f),0,.95f);
         fish.mainTexture=Texture("ScaleAlbedo",(x,y)=>{float a=x/255f*2*Mathf.PI,top=Mathf.Sin(a);var c=top>0?Color.Lerp(new Color(.56f,.55f,.34f),new Color(.16f,.24f,.17f),top):Color.Lerp(new Color(.56f,.55f,.34f),new Color(.83f,.80f,.64f),-top);float sx=(x+(y/12%2)*6)%12/12f,sy=y%12/12f;float edge=Mathf.Abs(Mathf.Sqrt((sx-.5f)*(sx-.5f)+sy*sy)-.6f)<.075f?.72f:1;return c*edge;});
         cork.mainTexture=Texture("CorkGrain",(x,y)=>{int hash=(x*73856093)^(y*19349663);float p=(hash&255)/255f;return Color.white*(p<.035f?.4f:.83f+p*.17f);});
-        DetailedMaterials();Rod();Float();DetailedFish();
+        DetailedMaterials();Rod();Pole();Float();DetailedFish();
         Audio("ReelDrag",1,(t,r)=>(float)((r.NextDouble()-.5)*.12+Math.Sin(t*2*Math.PI*85)*Math.Pow(Math.Max(0,Math.Sin(t*2*Math.PI*27)),12)*.35));
         Audio("WaterSplash",.65f,(t,r)=>(float)((r.NextDouble()-.5)*Math.Exp(-t*6)*.6+Math.Sin(2*Math.PI*(280*t-130*t*t))*Math.Exp(-t*12)*.1));
         Audio("LineSnap",.13f,(t,r)=>(float)((r.NextDouble()-.5)*Math.Exp(-t*55)*.7));
@@ -177,6 +192,6 @@ ENDCG
         if(manifest==null)throw new Exception("Bundle build failed");var bundle=AssetBundle.LoadFromFile(Path.GetFullPath("Build/fishing-presentation.unity3d"));
         int verts=0;foreach(string path in assets){var asset=bundle.LoadAsset(path);if(asset==null)throw new Exception("Missing "+path);var p=asset as GameObject;if(p!=null){if(p.GetComponentsInChildren<Collider>().Length!=0)throw new Exception("Unexpected collider "+path);foreach(var r in p.GetComponentsInChildren<Renderer>())if(r.sharedMaterial==null||r.sharedMaterial.shader==null)throw new Exception("Missing material "+path);foreach(var m in p.GetComponentsInChildren<SkinnedMeshRenderer>()){if(m.bones.Length<6||m.sharedMesh.boneWeights.Length!=m.sharedMesh.vertexCount)throw new Exception("Invalid rig "+path);verts+=m.sharedMesh.vertexCount;}}}
         bundle.Unload(true);Preview("assets-day",false);Preview("assets-low-light",true);DetailPreview();
-        File.WriteAllText("Build/verified.txt","PASS: bundle reload, 3 prefabs, 3 original synthetic audio clips, materials and rigs. Skinned vertices: "+verts+". Unity "+Application.unityVersion+". Studio renders only; NOT game or hand-animation acceptance.");
+        File.WriteAllText("Build/verified.txt","PASS: bundle reload, 4 prefabs including hand pole, 3 original synthetic audio clips, materials and rigs. Skinned vertices: "+verts+". Unity "+Application.unityVersion+". Studio renders only; NOT game or hand-animation acceptance.");
     }
 }

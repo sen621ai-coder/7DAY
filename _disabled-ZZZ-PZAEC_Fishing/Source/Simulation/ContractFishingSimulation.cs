@@ -17,6 +17,7 @@ namespace PZAEC.Fishing.Simulation
         private long sequence, inputSequence;
         private double pitch, yaw, drag, maxPlayerDistance, floatHeight, fishMass, minDepth;
         private double pendingStrikeSeconds,recentRaiseAge=1,recentRaiseSpeed;
+        private float kernelFixedLine;
 
         public C.FishingSnapshot Current { get { return current; } }
 
@@ -35,6 +36,7 @@ namespace PZAEC.Fishing.Simulation
             maxPlayerDistance=config.Session.MaxPlayerDistanceMeters;
             floatHeight=config.Float.HeightMeters;fishMass=config.Fish.MassKg;
             minDepth=config.Session.MinDepthMeters;drag=config.Controls.InitialDrag01;
+            kernelFixedLine=config.Line.FixedLengthMeters;
             this.water=new WaterBridge(water,minDepth);
             var p=MapParameters(config);
             kernel=new FishingSimulation(start.SessionId.ToString("D"),p,this.water,new RandomBridge(random));
@@ -69,7 +71,7 @@ namespace PZAEC.Fishing.Simulation
             else recentRaiseAge+=dt;
             // A physical mouse stroke and button edge often arrive on neighbouring render frames.
             // Accept a short measured raise around the edge, still entirely inside the bite window.
-            if(current.Phase==C.FishingPhase.BiteWindow) {
+            if(current.Phase==C.FishingPhase.BiteWindow && kernelFixedLine<=0) {
                 if(intent.Strike)pendingStrikeSeconds=.2;
                 if(pendingStrikeSeconds>0) {
                     strikeSpeed=Math.Max(strikeSpeed,recentRaiseAge<=.12?recentRaiseSpeed:0);
@@ -81,10 +83,11 @@ namespace PZAEC.Fishing.Simulation
             input.StrikeStrength=strikeSpeed<hook.MinimumStrikeSpeedRadiansPerSecond ? 0 :
                 Numbers.Clamp(.15+.6*(strikeSpeed-hook.MinimumStrikeSpeedRadiansPerSecond)/
                     Math.Max(.001,hook.MaxSafeStrikeSpeedRadiansPerSecond-hook.MinimumStrikeSpeedRadiansPerSecond),.15,1);
+            if(kernelFixedLine>0 && intent.Strike)input.StrikeStrength=.6;
             input.Reel=intent.Reel01>0;
             input.ReelFraction=intent.Reel01;
             // Contract v1 has no separate landing button: reeling near a tired fish requests landing.
-            input.RequestLanding=intent.Reel01>0;
+            input.RequestLanding=kernelFixedLine>0 || intent.Reel01>0;
             kernel.Step(input);UpdateSnapshot();Flush(events);return current;
         }
 
@@ -229,6 +232,7 @@ namespace PZAEC.Fishing.Simulation
             // Effective damping for series compliances; neither damping parameter is discarded.
             double lineShare=c.Rod.StiffnessNewtonsPerMeter/sum,rodShare=c.Line.StiffnessNewtonsPerMeter/sum;
             return new SimulationParameters {
+                FixedLineLength=c.Line.FixedLengthMeters,
                 FixedStep=C.FishingContract.FixedStepSeconds,FishMass=c.Fish.MassKg,CruiseForce=c.Fish.CruiseForceNewtons,BurstForce=c.Fish.BurstForceNewtons,
                 WaterResistance=c.Fish.DragCoefficient,MaxFishSpeed=Math.Min(30,Math.Max(7,c.Fish.BurstSpeedMetersPerSecond+3)),
                 CruiseSwimSpeed=c.Fish.CruiseSpeedMetersPerSecond,BurstSwimSpeed=c.Fish.BurstSpeedMetersPerSecond,

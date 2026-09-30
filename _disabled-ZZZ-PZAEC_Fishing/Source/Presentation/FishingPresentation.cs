@@ -62,6 +62,7 @@ namespace PZAEC.Fishing.Presentation
         public float LineRouteExcessMeters {get;private set;}
         public float RodChordExcessMeters {get;private set;}
         bool routeWarning;
+        bool Pole => config.Line.FixedLengthMeters>0;
         sealed class Ripple {public LineRenderer Line;public LineRenderer[] Drops=new LineRenderer[6];public Vec3 Absolute;public double Start;public float Strength;public bool Active,Spray;public Vector3[] Points=new Vector3[25];}
 
         public FishingPresentation(string modDirectory,bool dedicatedServer=false,PresentationOptions options=null,Action<Vector3> cameraFeedback=null,Action<string> diagnosticLog=null)
@@ -150,12 +151,14 @@ namespace PZAEC.Fishing.Presentation
                 for(int i=0;i<leaderPoints.Length;i++)leaderPositions[i]=U(leaderPoints[i]);leader.SetPositions(leaderPositions);
                 line.enabled=b.Phase!=FishingPhase.LineBroken&&b.Phase!=FishingPhase.HookLost&&b.Phase!=FishingPhase.Resolved;
                 leader.enabled=line.enabled;
+                if(!Pole) {
                 crank.localRotation=Quaternion.Euler(motion.HandleDegrees,0,0);
                 spool.localRotation=Quaternion.Euler(0,0,motion.SpoolDegrees);
                 bail.localRotation=Quaternion.Euler(0,0,-motion.HandleDegrees*5.2f);
                 guidePositions[0]=spool.TransformPoint(new Vector3(0,0,.043f));
                 for(int i=0;i<6;i++)guidePositions[i+1]=guides[i].position;guidePositions[7]=lineExit.position;
                 guideLine.SetPositions(guidePositions);guideLine.enabled=true;
+                }
                 while(pending.Count>0)HandleEvent(pending.Dequeue());
                 if(fighting&&b.LineLengthMeters>a.LineLengthMeters+.0005f)slipUntil=visualTime+.15;
                 DrawRipples();UpdateAudio(b);UpdateCamera(frame.IsLocalPlayer,b,dt);
@@ -188,13 +191,16 @@ namespace PZAEC.Fishing.Presentation
         {
             if(assetLease==null)assetLease=new PresentationAssets(modDirectory);
             root=new GameObject("PZAEC.Fishing.Presentation");
-            rod=Model("fishingrod.prefab");bobber=Model("fishingfloat.prefab");fish=Model("fishingfish.prefab");
+            rod=Model(Pole?"fishingpole.prefab":"fishingrod.prefab");bobber=Model("fishingfloat.prefab");fish=Model("fishingfish.prefab");
             for(int i=0;i<13;i++)rodBones[i]=Find(rod.transform,"RodBone"+i.ToString("00"));
             for(int i=0;i<6;i++)fishBones[i]=Find(fish.transform,"FishBone"+i.ToString("00"));
-            lineExit=Find(rod.transform,"LineExit");crank=Find(rod.transform,"Crank");grips[0]=Find(rod.transform,"GripRight");grips[1]=Find(rod.transform,"GripLeft");
+            lineExit=Find(rod.transform,"LineExit");grips[0]=Find(rod.transform,"GripRight");grips[1]=Find(rod.transform,"GripLeft");
             fishMouth=Find(fish.transform,"Mouth");
-            floatEye=Find(bobber.transform,"LineAttachment");spool=Find(rod.transform,"Spool");bail=Find(rod.transform,"Bail");reelHand=Find(rod.transform,"ReelHandTarget");mouthVisual=Find(fish.transform,"MouthVisual");
-            for(int i=0;i<6;i++)guides[i]=Find(rod.transform,"GuideLine"+(2+i*2));
+            floatEye=Find(bobber.transform,"LineAttachment");mouthVisual=Find(fish.transform,"MouthVisual");
+            if(!Pole) {
+                crank=Find(rod.transform,"Crank");spool=Find(rod.transform,"Spool");bail=Find(rod.transform,"Bail");reelHand=Find(rod.transform,"ReelHandTarget");
+                for(int i=0;i<6;i++)guides[i]=Find(rod.transform,"GuideLine"+(2+i*2));
+            }
             pectoral[0]=Find(fish.transform,"PectoralPivotL");pectoral[1]=Find(fish.transform,"PectoralPivotR");gills[0]=Find(fish.transform,"GillPivotL");gills[1]=Find(fish.transform,"GillPivotR");
             lineMaterial=Object.Instantiate(Asset<Material>("line.mat"));rippleMaterial=Object.Instantiate(Asset<Material>("foam.mat"));
             line=MakeLine("FishingLine",linePoints.Length,lineMaterial,Safe(options.LineWidthMeters,.0012f,.0005f,.003f));

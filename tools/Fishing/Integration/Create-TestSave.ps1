@@ -4,7 +4,14 @@ $modsRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..'))
 $gameRoot=Split-Path $modsRoot
 $target=Join-Path $env:APPDATA '7DaysToDie/Saves/Navezgane/FishingTest'
 if(Test-Path -LiteralPath $target){throw 'FishingTest already exists; will not overwrite it.'}
-if(Get-Process -Name 7DaysToDie,7DaysToDieServer -ErrorAction SilentlyContinue){throw 'Close the game before creating the test save.'}
+# The bootstrap uses its own user-data directory, save and LAN port; a normal
+# client can remain open. Only prevent a duplicate instance of this bootstrap.
+$seedState=Join-Path $PSScriptRoot 'artifacts/seed-session.json'
+if(Test-Path -LiteralPath $seedState){
+    $previous=Get-Content -LiteralPath $seedState -Raw|ConvertFrom-Json
+    $existing=Get-Process -Id $previous.ProcessId -ErrorAction SilentlyContinue
+    if($existing -and $existing.ProcessName -eq '7DaysToDie' -and [Math]::Abs(($existing.StartTime-[datetime]$previous.StartTime).TotalSeconds) -lt 1){throw 'A save bootstrap is already running.'}
+}
 $stage=Join-Path $PSScriptRoot ('artifacts/seed-'+[guid]::NewGuid().ToString('N'))
 $userData=Join-Path $stage 'UserData';$bootstrap=Join-Path $userData 'Mods/FishingTestSeed'
 New-Item -ItemType Directory -Force $bootstrap|Out-Null

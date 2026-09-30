@@ -13,6 +13,8 @@ namespace PZAEC.Fishing.Controls
         double drag, backstep, threshold, gain, decay, maxBack, resistance, minScale, angularSpeed, radians;
         bool autoBack, released = true;
         double previousPitch;
+        bool clickStrike;
+        double liftRemaining;
 
         public void Reset(ControlConfig config, RodConfig rod)
         {
@@ -27,6 +29,7 @@ namespace PZAEC.Fishing.Controls
                 rod.MinPitchRadians >= rod.MaxPitchRadians || rod.MaxYawRadians <= 0 || rod.AngularSpeedRadiansPerSecond <= 0)
                 throw new ArgumentException("Invalid shared control or rod configuration.");
             radians = config.RadiansPerMouseUnit;
+            clickStrike=config.ClickStrike;liftRemaining=0;
             resistance = config.PlayerResistanceNewtons; minScale = config.MinAgainstPullScale;
             angularSpeed = rod.AngularSpeedRadiansPerSecond;
             threshold = rod.MinPitchRadians + (rod.MaxPitchRadians - (double)rod.MinPitchRadians) * config.AutoBackThreshold01;
@@ -57,9 +60,16 @@ namespace PZAEC.Fishing.Controls
             // Cap requested motion before load response; excess displacement is discarded,
             // never queued as movement that could continue after the mouse stops.
             double limit = angularSpeed * dt / radians;
+            if(clickStrike && previous.Phase!=FishingPhase.Nibbling && previous.Phase!=FishingPhase.BiteWindow &&
+                previous.Phase!=FishingPhase.Hooked && previous.Phase!=FishingPhase.Fighting && previous.Phase!=FishingPhase.Landing)
+                input.StrikePressed=false;
+            if(input.FreeLookHeld||input.RecenterHeld)liftRemaining=0;
+            else if(clickStrike&&input.StrikePressed)liftRemaining=.24;
+            double lift=liftRemaining>0?limit:0;
+            liftRemaining=Math.Max(0,liftRemaining-dt);
             var local = mapper.Sample(new ControlFrame {
                 Sequence = ++stepSequence, Seconds = dt, SessionActive = true, CanControl = true, HasFocus = true,
-                MousePull = ControlMath.Clamp(input.MouseBackDelta, -limit, limit),
+                MousePull = ControlMath.Clamp(input.MouseBackDelta+lift, -limit, limit),
                 MouseSide = ControlMath.Clamp(input.MouseRightDelta, -limit, limit),
                 FreeLook = input.FreeLookHeld, Recenter = input.RecenterHeld,
                 ReelHeld = input.ReelHeld, StrikePressed = input.StrikePressed
@@ -102,6 +112,7 @@ namespace PZAEC.Fishing.Controls
         {
             if (mapper != null) mapper.Reset();
             mapper = null; released = true; backstep = 0; resumePending = false; stepSequence = 0;
+            liftRemaining=0;
         }
         SharedIntent Neutral(long sequence, bool cancel)
         {

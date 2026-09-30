@@ -12,6 +12,7 @@
     <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Controls/*.cs" />
     <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Content/*.cs" />
     <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/SessionDriver.cs" />
+    <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/FloatReadout.cs" />
     <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/CatchSettlement.cs" />
     <Compile Include="../../../ZZZ-PZAEC_Fishing/Source/Runtime/CastTargeting.cs" />
     <Compile Include="SettlementTests.cs" />

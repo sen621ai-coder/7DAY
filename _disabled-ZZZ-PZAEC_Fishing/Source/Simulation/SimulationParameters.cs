@@ -6,6 +6,7 @@ namespace PZAEC.Fishing.Simulation
     public sealed class SimulationParameters
     {
         public double FixedStep = 1.0 / 120;
+        public double FixedLineLength=0;
         public double FishMass = 2.5, CruiseForce = 4, BurstForce = 22, WaterResistance = 5;
         public double MaxFishSpeed = 7, BurstSeconds = 1.8, RecoverySeconds = 2.4;
         public double CruiseSwimSpeed = 30, BurstSwimSpeed = 30, NearBankSurgeDistance = 3.96;
@@ -30,6 +31,7 @@ namespace PZAEC.Fishing.Simulation
         public void Validate()
         {
             Numbers.Range(FixedStep, 1.0/240, 1.0/30, "FixedStep");
+            Numbers.Range(FixedLineLength,0,MaxLineLength,"FixedLineLength");
             Numbers.Range(FishMass, .05, 100, "FishMass");
             Numbers.Range(CruiseForce, 0, 1000, "CruiseForce");
             Numbers.Range(BurstForce, 0, 2000, "BurstForce");

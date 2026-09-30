@@ -22,6 +22,7 @@ namespace PZAEC.Fishing.Contracts
     }
     public sealed class LineConfig
     {
+        public float FixedLengthMeters=0; // Positive: hand pole, no reel or drag payout.
         public float MaxLengthMeters=35, StiffnessNewtonsPerMeter=180, DampingNewtonSecondsPerMeter=3;
         public float BreakForceNewtons=90, DamageStartFraction=0.8f, DamagePerSecond=0.4f;
         public float DragMinNewtons=5, DragMaxNewtons=65, ReelSpeedMetersPerSecond=0.8f, MaxPayoutMetersPerSecond=6;
@@ -51,6 +52,7 @@ namespace PZAEC.Fishing.Contracts
         public float AutoBackGain=0.15f, AutoBackDecaySeconds=0.08f, MaxAutoBack01=0.6f;
         public float PlayerResistanceNewtons=110, MinAgainstPullScale=0.1f, InitialDrag01=0.5f, FeedbackIntensity01=0.3f;
         public bool AutoBackEnabled=true;
+        public bool ClickStrike=false;
         public string CastKey="Mouse0", StrikeKey="Mouse0", ReelKey="Mouse1", FreeLookKey="LeftAlt", RecenterKey="LeftControl", CancelKey="Escape";
         public string DragIncreaseKey="Equals", DragDecreaseKey="Minus";
     }

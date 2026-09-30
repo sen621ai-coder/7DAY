@@ -111,6 +111,24 @@ public sealed class FishingNativeProbe : IModApi
             }
             finally{UnityEngine.Object.Destroy(visual);}
             var directory=System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath,"../Mods/ZZZ-PZAEC_Fishing"));
+            var localPrefab=LoadManager.LoadAsset<GameObject>("Prefabs/prefabEntityPlayerLocal",null,null,false,true,false);
+            try {
+                Check(localPrefab.Asset!=null,"native first-person player prefab loads for arm inspection");
+                var prefabBones=localPrefab.Asset.GetComponentsInChildren<Transform>(true);
+                Log.Out("[FishingM0] Local prefab hierarchy="+string.Join(",",prefabBones.Select(t=>t.name).ToArray()));
+                foreach(var rig in prefabBones.Where(t=>t.name.ToLowerInvariant().Contains("arms")||t.name=="baseRigFP")) {
+                    var candidates=rig.GetComponentsInChildren<Transform>(true);
+                    Log.Out("[FishingM0] Native rig "+rig.name+" bones="+string.Join(",",candidates.Select(t=>t.name).ToArray()));
+                    Check(NativeArmPose.FindLowerArm(candidates,true)!=null&&NativeArmPose.FindLowerArm(candidates,false)!=null,"actual "+rig.name+" lower arms resolve");
+                }
+            } finally {localPrefab.Release();}
+            var nativeRig=LoadManager.LoadAsset<GameObject>("@:Entities/Player/Common/BaseRigs/baseRigFPPrefab.prefab",null,null,false,true,false);
+            try {
+                Check(nativeRig.Asset!=null,"actual SDCS first-person base rig loads");
+                var rigBones=nativeRig.Asset.GetComponentsInChildren<Transform>(true);
+                Log.Out("[FishingM0] SDCS FP bones="+string.Join(",",rigBones.Select(t=>t.name).ToArray()));
+                Check(NativeArmPose.FindLowerArm(rigBones,true)!=null&&NativeArmPose.FindLowerArm(rigBones,false)!=null,"actual SDCS first-person lower arms resolve");
+            } finally {nativeRig.Release();}
             var projectionFixture=new GameObject("FishingHandProjectionFixture");
             try {
                 var camera=projectionFixture.AddComponent<Camera>();camera.enabled=false;
@@ -131,6 +149,17 @@ public sealed class FishingNativeProbe : IModApi
                 UnityEngine.Object.Destroy(spear.gameObject);
             }
             var handMount=GameObject.CreatePrimitive(PrimitiveType.Cube);handMount.name="FishingNativeHandFixture";handMount.transform.position=new Vector3(1,3,4);
+            var armFixture=new GameObject("FishingArmFixture");
+            var wristFixture=new GameObject("FishingWristFixture");wristFixture.transform.SetParent(armFixture.transform,false);wristFixture.transform.localPosition=Vector3.forward*.3f;
+            using(var pose=new NativeArmPose()) {
+                pose.Apply(armFixture.transform,null,Vector3.forward,new Vector3(0,1,1));
+                Check(wristFixture.transform.position.y>.1f,"pole pose rotates actual arm hierarchy including hand");
+                var firstPose=armFixture.transform.rotation;
+                pose.Apply(armFixture.transform,null,Vector3.forward,new Vector3(0,1,1));
+                Check(Quaternion.Angle(firstPose,armFixture.transform.rotation)<.001f,"arm pose does not accumulate across frames");
+                pose.Restore();Check(Quaternion.Angle(armFixture.transform.rotation,Quaternion.identity)<.001f,"arm pose restores native animation on release");
+            }
+            UnityEngine.Object.Destroy(armFixture);
             var mountRenderer=handMount.GetComponent<Renderer>();
             using(var held=new NativeHeldRod {ModDirectory=directory}) {
                 var config=new PZAEC.Fishing.Content.FishingContent().Load(directory);
@@ -151,6 +180,7 @@ public sealed class FishingNativeProbe : IModApi
                     FloatPosition=new Vec3(8,203,15),FloatUp=Vec3.Up,FishPosition=new Vec3(8,202,15),FishForward=new Vec3(0,0,1)};
                 view.Render(new RenderFrame {Previous=state,Current=state,Alpha=1,RenderOrigin=NativeCoordinates.FromUnity(Origin.position),IsLocalPlayer=true});
                 Check(view.IsReady&&view.LastError==null,"shipped presentation bundle instantiates in native game engine");
+                Check(view.RightGrip.root.GetComponentsInChildren<Transform>(true).All(t=>t.name!="Crank"&&t.name!="Spool"),"pole presentation has no reel or crank");
                 Check(Vector3.Distance(view.RightGrip.position,handMount.transform.position)<.0001f,"fishing rod grip matches native mount instead of estimated body position");
                 view.Clear();Check(!view.IsReady,"native presentation clears its objects");
             }
