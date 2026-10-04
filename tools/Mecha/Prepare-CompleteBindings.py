@@ -117,7 +117,7 @@ for side in ('L','R'):
     blob.extend(unique.tobytes());blob.extend(newix.astype('<u4').tobytes())
     parts.append(dict(node=min(nodes),nodeName='Complete_KneeHub'+side,primitive=0,
         joint='Torso',role='Leg'+side,material=0,offset=offset,vertices=len(unique),
-        indices=len(newix),generatedRepair='closed-knee-hinge-v1'))
+        indices=len(newix),generatedRepair='armoured-knee-joint-v2'))
     count=len(newix)//3;knee_faces+=count;audit['Leg'+side]+=count
 doc.update(parts=parts,sourceNodes=sorted(nodes),renderRoles=audit,geometryTupleSha256=identity,
     triangles=before+repair_faces+knee_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,kneeRepairTriangles=knee_faces,

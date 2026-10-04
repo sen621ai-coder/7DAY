@@ -27,7 +27,7 @@ assert sum(new_faces.values()) == 207192
 assert new['sourceNodes'] == sorted({p['node'] for p in old['parts']})
 assert len([p for p in new['parts'] if not p.get('generatedRepair')]) <= len(old['parts'])
 assert sum(p['indices']//3 for p in new['parts'] if p.get('generatedRepair') and p['role']=='SwordBlade') == new['bladeRepairTriangles'] == 44
-assert sum(p['indices']//3 for p in new['parts'] if p.get('generatedRepair')=='closed-knee-hinge-v1') == new['kneeRepairTriangles'] == 376
+assert sum(p['indices']//3 for p in new['parts'] if p.get('generatedRepair')=='armoured-knee-joint-v2') == new['kneeRepairTriangles'] == 832
 assert all(p['role'] in new['renderRoles'] for p in new['parts'])
 assert {'ArmL', 'ArmR', 'SwordBlade', 'SwordHilt', 'Head', 'Torso', 'Backpack', 'Shield'} <= set(new['renderRoles'])
 assert sum(new['renderRoles'].values()) == new['triangles']

@@ -60,7 +60,10 @@ public static class EquipmentOwnershipQA
                     // The axle must stay centred on the actual animated hinge.
                     var local=hubPoints[h].Select(p=>bone.InverseTransformPoint(p)).ToArray();
                     var min=local.Aggregate(Vector3.Min);var max=local.Aggregate(Vector3.Max);
-                    error=Mathf.Max(error,((min+max)*.5f).magnitude);
+                    int b=hubs[h].sharedMesh.boneWeights[0].boneIndex0;
+                    var rest=hubs[h].sharedMesh.vertices.Select(p=>hubs[h].sharedMesh.bindposes[b].MultiplyPoint3x4(p)).ToArray();
+                    var expected=(rest.Aggregate(Vector3.Min)+rest.Aggregate(Vector3.Max))*.5f;
+                    error=Mathf.Max(error,((min+max)*.5f-expected).magnitude);
                 }
                 check("knee hubs remain centred through bilateral IK drop="+drop+" error="+error,error<.001f);
                 Capture(camera,rig,skins,"knees-front-"+drop.ToString("F2",System.Globalization.CultureInfo.InvariantCulture),new Vector3(0,.1f,3.4f),false,"Leg");

@@ -2,7 +2,7 @@
   "equipmentBinding": "rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves",
   "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
   "sourceParts": 17,
-  "triangles": 207612,
+  "triangles": 208068,
   "sourceTriangles": 2000000,
   "height": 3.2,
   "skinned": true,
@@ -410,9 +410,9 @@
       "role": "LegL",
       "material": 0,
       "offset": 11410512,
-      "vertices": 342,
-      "indices": 564,
-      "generatedRepair": "closed-knee-hinge-v1"
+      "vertices": 345,
+      "indices": 1248,
+      "generatedRepair": "armoured-knee-joint-v2"
     },
     {
       "node": 6,
@@ -421,10 +421,10 @@
       "joint": "Torso",
       "role": "LegR",
       "material": 0,
-      "offset": 11429184,
-      "vertices": 342,
-      "indices": 564,
-      "generatedRepair": "closed-knee-hinge-v1"
+      "offset": 11432064,
+      "vertices": 345,
+      "indices": 1248,
+      "generatedRepair": "armoured-knee-joint-v2"
     }
   ],
   "wingBinding": "complete rigid rear fins and tapered necks; WingL/WingR under Backpack",
@@ -459,8 +459,8 @@
     "ChestL": 2062,
     "ChestR": 4115,
     "Head": 16081,
-    "LegL": 39775,
-    "LegR": 28200,
+    "LegL": 40003,
+    "LegR": 28428,
     "Shield": 16091,
     "SwordBlade": 12041,
     "SwordHilt": 6765,
@@ -506,5 +506,5 @@
   },
   "sourceRigTriangles": 207192,
   "bladeRepairTriangles": 44,
-  "kneeRepairTriangles": 376
+  "kneeRepairTriangles": 832
 }
