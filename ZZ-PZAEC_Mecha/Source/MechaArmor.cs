@@ -19,12 +19,30 @@ namespace PZAEC.Mecha
         [ThreadStatic] static EntityVehicle responseVehicle;
         [ThreadStatic] static bool explicitSuicide;
         public struct ResponseScope { public EntityVehicle Vehicle; public bool Suicide; }
+        static readonly Dictionary<EntityAlive,float> safeExit=new Dictionary<EntityAlive,float>();
+        public static void ClearTravelProtection(){safeExit.Clear();}
+        public static void SafeDismount(EntityAlive actor,EntityVehicle v)
+        {if(actor!=null&&v!=null&&v.GetWheelsOnGround()>0&&v.vehicleRB!=null&&v.vehicleRB.velocity.sqrMagnitude<.16f)safeExit[actor]=Time.time+1.5f;}
+        public static bool ProtectTravel(EntityAlive actor,EnumDamageTypes type)
+        {
+            if(actor==null||actor.IsDead()||(type!=EnumDamageTypes.Falling&&type!=EnumDamageTypes.VehicleInside))return false;
+            var v=actor.AttachedToEntity as EntityVehicle;
+            if(Weapons.IsMecha(v)&&!v.IsDead()&&v.GetAttached(0)==actor)return true;
+            float until;if(safeExit.TryGetValue(actor,out until)){if(Time.time<=until&&type==EnumDamageTypes.Falling)return true;safeExit.Remove(actor);}
+            return false;
+        }
+        static bool TravelDamage(EntityPlayer __instance,DamageSource __0,ref int __result)
+        {if(__0==null||!ProtectTravel(__instance,__0.damageType))return true;__result=0;return false;}
+        static bool TravelFall(EntityPlayerLocal __instance){return !ProtectTravel(__instance,EnumDamageTypes.Falling);}
 
         public static void Install(Harmony h)
         {
             try
             {
                 var signature = new[] { typeof(DamageSource), typeof(int), typeof(bool), typeof(float) };
+                h.Patch(AccessTools.Method(typeof(EntityPlayer),"DamageEntity",signature),prefix:new HarmonyMethod(typeof(MechaArmor),nameof(TravelDamage)));
+                h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"DamageEntity",signature),prefix:new HarmonyMethod(typeof(MechaArmor),nameof(TravelDamage)));
+                h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"FallImpact"),prefix:new HarmonyMethod(typeof(MechaArmor),nameof(TravelFall)));
                 h.Patch(AccessTools.Method(typeof(EntityAlive), "damageEntityLocal", signature),
                     transpiler: new HarmonyMethod(typeof(MechaArmor), nameof(ResponseTranspiler)));
                 h.Patch(AccessTools.Method(typeof(EntityVehicle), "damageEntityLocal", signature),
@@ -75,6 +93,8 @@ namespace PZAEC.Mecha
 
         public static void ProtectResponse(ref DamageResponse response, EntityAlive entity)
         {
+            if(response.Source!=null&&entity is EntityPlayer&&ProtectTravel(entity,response.Source.damageType))
+            {response.Strength=response.ModStrength=0;response.Fatal=false;return;}
             if (!enabled || response.Strength <= 0 || response.Source == null || response.Source.damageType == EnumDamageTypes.Suicide) return;
             int max; double fraction, cap;
             var hull = entity as EntityVehicle;

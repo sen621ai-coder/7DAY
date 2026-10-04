@@ -25,13 +25,15 @@ namespace PZAEC.M1
         public static ImpactSurface Decode(float value)=>value<=0&&value>=-10&&(int)value==value?(ImpactSurface)(-(int)value):ImpactSurface.Unknown;
         // AP always has a brief core flash plus a small fireball, including
         // organic/water impacts. These are cosmetic and never ignite targets.
-        public static int FireCount(bool ap,ImpactSurface s)=>ap?2:s==ImpactSurface.Water?0:4;
+        public static int FireCount(bool ap,ImpactSurface s)=>ap?2:0;
+        public static int BlastParticle(bool ap)=>ap?0:5;
+        public static string MuzzleParticle=>"gunfire_MG_M60";
         public static int Sparks(bool ap,ImpactSurface s)=>s==ImpactSurface.Metal?(ap?10:6):s==ImpactSurface.Stone?(ap?3:2):0;
         public static int Dust(bool ap,ImpactSurface s)
         {
             switch(s){case ImpactSurface.Earth:case ImpactSurface.Sand:case ImpactSurface.Snow:case ImpactSurface.Stone:case ImpactSurface.Water:return ap?5:10;
                 case ImpactSurface.Wood:case ImpactSurface.Glass:case ImpactSurface.Cloth:return ap?2:4;default:return 0;}
         }
-        public static int Smoke(bool ap,ImpactSurface s)=>ap||s==ImpactSurface.Water?0:4;
+        public static int Smoke(bool ap,ImpactSurface s)=>0;
     }
 }

@@ -1,152 +1,125 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using HarmonyLib;
 using UnityEngine;
 
 namespace PZAEC.Mecha
 {
-    // Hover cruise (Q toggle), descent (C hold) and charged jump (Space hold,
-    // release to leap). All forces apply on the physics-authority client like
-    // the MD500/Apache flight adapters; trample damage is requested through
-    // the weapon intent channel and resolved on the server.
     public static class Locomotion
     {
-        sealed class MoveState
+        public sealed class MoveState
         {
-            public bool HoverOn, JumpWasHeld;
-            public float AirborneSince = -1, NextTrampleTick, LastTime, NextJumpReady;
-            public float ChargeStart = -1, PendingJump;
+            public EntityVehicle Vehicle;
+            public bool HoverOn, Boost, JumpWasHeld, Grounded=true, Toggle, Descend, Jump, InputReady;
+            public float ChargeStart=-1, Charge, NextJump, AirSince=-1, LastInput=-100, LastSync=-100, LastPacket=-100, LandingAt=-100, JumpAt=-100, LastTime, Blend;
+            public int Sequence, Actor=-1;
+            public WheelCollider[] Wheels;
         }
-        static bool enabled;
-        static readonly ConditionalWeakTable<EntityVehicle, MoveState> moves = new ConditionalWeakTable<EntityVehicle, MoveState>();
-
-        // Update-side input cache from the local driver (consumed in FixedUpdate).
-        static bool hoverToggle, descendHeld, jumpHeld;
-
-        public static bool HoverOn { get; private set; }
-        public static float JumpCooldownRemaining { get; private set; }
-        public static float JumpCharge { get; private set; }
-
-        public static void Install(Harmony harmony)
+        static readonly Dictionary<int,MoveState> moves=new Dictionary<int,MoveState>();
+        public static MoveState Get(EntityVehicle v)
+        { MoveState s; if(!moves.TryGetValue(v.entityId,out s)||s.Vehicle!=v) {s=new MoveState{Vehicle=v,Wheels=(v.vehicleRB!=null?v.vehicleRB.transform:v.transform).GetComponentsInChildren<WheelCollider>(true)}; moves[v.entityId]=s;} return s; }
+        static MoveState Local { get { var w=GameManager.Instance!=null?GameManager.Instance.World:null;var p=w!=null?w.GetPrimaryPlayer():null;var v=p!=null?p.AttachedToEntity as EntityVehicle:null;return Weapons.IsMecha(v)?Get(v):null; } }
+        public static bool HoverOn { get {return Local!=null&&Local.HoverOn;} }
+        public static float JumpCooldownRemaining { get {return Local!=null?Mathf.Max(0,Local.NextJump-Time.time):0;} }
+        public static float JumpCharge { get {return Local!=null?Local.Charge:0;} }
+        public static void Install(Harmony h)
+        { h.Patch(AccessTools.Method(typeof(EntityVehicle),"FixedUpdateForces"),postfix:new HarmonyMethod(typeof(Locomotion),nameof(AfterForces))); }
+        public static void FeedInput(bool toggle,bool descend,bool jump)
+        { var s=Local;if(s==null)return;s.Toggle|=toggle;s.Descend=descend;s.Jump=Boarding.FilterJump(jump);s.InputReady=true;s.LastInput=Time.time; }
+        public static void ReleaseInput() {var s=Local;if(s==null)return;s.Toggle=s.Descend=s.Jump=s.JumpWasHeld=s.InputReady=false;s.ChargeStart=-1;s.Charge=0;}
+        public static bool Powered(EntityVehicle v)
+        {return v!=null&&v.hasDriver&&!v.IsDead()&&v.IsEngineRunning&&v.vehicle.GetHealth()>0&&(v.vehicle.GetFuelLevel()>0||EntityVehicle.VehicleFuelUsageModifier==0);}
+        public static bool Receive(EntityVehicle v,int actor,int sequence,Vector3 state)
         {
-            try
-            {
-                harmony.Patch(AccessTools.Method(typeof(EntityVehicle), "FixedUpdateForces"),
-                    postfix: new HarmonyMethod(typeof(Locomotion), nameof(AfterForces)));
-                enabled = true;
+            if(!Weapons.IsMecha(v)||!Weapons.Finite(state.x)||!Weapons.Finite(state.y)||state.x<0||state.x>7)return false;
+            var s=Get(v); if(s.Actor==actor&&sequence<=s.Sequence)return false;
+            s.Actor=actor;s.Sequence=sequence;s.LastPacket=Time.time;
+            // A local physics owner already has more recent input than its echo.
+            if(!v.isEntityRemote&&!Weapons.Server)return true;
+            int flags=(int)state.x;bool ground=(flags&4)!=0;
+            if(!s.Grounded&&ground)s.LandingAt=Time.time;
+            if(s.Grounded&&!ground)s.JumpAt=Time.time;
+            s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=Mathf.Clamp01(state.y);return true;
+        }
+        public static void Tick(World world)
+        {
+            var remove=new List<int>();
+            foreach(var pair in moves){var s=pair.Value;if(s.Vehicle==null||world.GetEntity(pair.Key)!=s.Vehicle){remove.Add(pair.Key);continue;}
+                if(s.Vehicle.isEntityRemote&&Time.time-s.LastPacket>1f){s.HoverOn=s.Boost=false;s.Charge=0;}
+                s.Blend=Mathf.MoveTowards(s.Blend,(s.HoverOn||s.Boost)?1:0,Time.deltaTime/.35f);
             }
-            catch (Exception ex) { Log.Warning("[Mecha] Hover/jump disabled: " + ex.GetBaseException().Message); }
+            foreach(int id in remove){var old=moves[id].Vehicle;if(old!=null){Gait.Forget(old);Model.Forget(old);}moves.Remove(id);}
         }
-
-        public static void FeedInput(bool toggle, bool descend, bool jump)
-        { hoverToggle = toggle; descendHeld = descend; jumpHeld = jump; }
-
-        static bool Powered(EntityVehicle v)
-        {
-            return v.hasDriver && v.IsEngineRunning && v.vehicle.GetHealth() > 0 &&
-                (v.vehicle.GetFuelLevel() > 0f || EntityVehicle.VehicleFuelUsageModifier == 0f);
-        }
-
-        // Ground/support height directly under the hull (blocks only).
-        static bool SupportHeight(EntityVehicle v, out float height)
-        {
-            var start = v.position + Vector3.up * .2f;
-            if (Weapons.Trace(v, start, Vector3.down, 6f, out var hit))
-            { height = hit.hit.pos.y; return true; }
-            height = 0f; return false;
-        }
-
         public static void AfterForces(EntityVehicle __instance)
         {
-            HoverOn = false; JumpCooldownRemaining = Mathf.Max(0, JumpCooldownRemaining - Time.fixedDeltaTime);
-            if (!enabled || !Weapons.IsMecha(__instance) || __instance.isEntityRemote) return;
-            var rb = __instance.vehicleRB;
-            var input = __instance.movementInput;
-            if (rb == null || rb.isKinematic || input == null || !__instance.RBActive) return;
-            var state = moves.GetValue(__instance, key => new MoveState());
-            float now = Time.fixedTime, dt = Time.fixedDeltaTime;
-            if (now - state.LastTime > .5f) { state.HoverOn = false; state.AirborneSince = -1; state.ChargeStart = -1; }
-            state.LastTime = now;
-            bool grounded = __instance.GetWheelsOnGround() > 0;
-            bool powered = Powered(__instance);
-
-            // Airborne tracking feeds the landing stomp intent.
-            if (!grounded)
+            var v=__instance;if(!Weapons.IsMecha(v)||v.isEntityRemote)return;
+            var rb=v.vehicleRB;if(rb==null||rb.isKinematic||!v.RBActive)return;
+            var s=Get(v);float dt=Time.fixedDeltaTime;bool grounded=v.GetWheelsOnGround()>0;
+            var world=GameManager.Instance.World;var driver=v.GetAttached(0) as EntityPlayerLocal;
+            bool input=s.InputReady&&Time.time-s.LastInput<.25f&&driver!=null&&Weapons.UIReady(driver)&&!Boarding.Active(v);
+            bool powered=Powered(v)&&input&&v.timeInWater<=0;
+            var movement=v.movementInput;float throttle=powered&&movement!=null?movement.moveForward:0,steer=powered&&movement!=null?movement.moveStrafe:0;
+            // XML disables native drive/steer. Colliders provide support only.
+            PrepareSupport(s.Wheels,Mathf.Abs(throttle)>.01f||Mathf.Abs(steer)>.01f||rb.velocity.sqrMagnitude>.01f);
+            if(!powered){s.HoverOn=false;s.Charge=0;s.ChargeStart=-1;s.Jump=false;s.Toggle=false;}
+            if(s.Toggle){s.HoverOn=powered&&!s.HoverOn;s.Toggle=false;}
+            if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;}
+            if(grounded&&!s.Grounded){s.LandingAt=Time.time;if(s.AirSince>=0&&Time.time-s.AirSince>=Rules.StompAirborneSeconds)Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down,v.position);s.AirSince=-1;}
+            s.Grounded=grounded;
+            var forward=Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized;
+            var planar=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);float speed=planar.magnitude;
+            bool boost=powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
+            s.Boost=boost||(s.Boost&&powered&&grounded&&speed>4.2f&&!s.HoverOn);
+            float target=throttle>=0?throttle*(boost?13.5f:4f):throttle*2f;
+            if(s.HoverOn)target=throttle*Rules.HoverSpeed;
+            if(grounded||s.HoverOn)
             {
-                if (state.AirborneSince < 0) state.AirborneSince = now;
+                var normal=Vector3.up;
+                if(grounded){var sum=Vector3.zero;int count=0;foreach(var wheel in s.Wheels)if(wheel!=null&&wheel.GetGroundHit(out var contact)){sum+=contact.normal;count++;}if(count>0)normal=sum.normalized;}
+                ApplyDrive(rb,forward,target,steer,s.Boost,normal,dt);
             }
-            else if (state.AirborneSince >= 0)
+            if(s.HoverOn)
             {
-                if (now - state.AirborneSince >= Rules.StompAirborneSeconds)
-                    Weapons.SendLocalIntent(__instance, Weapons.Stomp, Vector3.down, __instance.position);
-                state.AirborneSince = -1;
+                float targetY=rb.position.y-dt;
+                if(Weapons.Trace(v,v.position+Vector3.up*.2f,Vector3.down,6f,out var hit))targetY=hit.hit.pos.y-Origin.position.y+Rules.HoverHeight;
+                if(Weapons.Trace(v,v.position+Vector3.up*2.6f,Vector3.up,3f,out var ceiling))targetY=Mathf.Min(targetY,ceiling.hit.pos.y-Origin.position.y-3.2f);
+                float a=9.81f+Mathf.Clamp((targetY-rb.position.y)*4f-rb.velocity.y*1.5f,-6f,6f)-(s.Descend?5:0);
+                rb.AddForce(Vector3.up*a*rb.mass,ForceMode.Force);
             }
-
-            if (hoverToggle)
+            if((s.HoverOn||boost)&&EntityVehicle.VehicleFuelUsageModifier!=0)v.vehicle.SetFuelLevel(Mathf.Max(0,v.vehicle.GetFuelLevel()-Rules.HoverFuelPerSecond*dt));
+            if(s.Jump&&!s.JumpWasHeld&&powered&&grounded)s.ChargeStart=Time.time;
+            s.Charge=s.Jump&&s.ChargeStart>=0?Mathf.Clamp01((Time.time-s.ChargeStart)/Rules.JumpChargeSeconds):0;
+            if(!s.Jump&&s.JumpWasHeld&&s.ChargeStart>=0&&powered&&grounded&&Time.time>=s.NextJump)
             {
-                hoverToggle = false;
-                state.HoverOn = !state.HoverOn;
-                if (state.HoverOn && !powered) state.HoverOn = false;
-                Audio.Manager.Play(__instance, state.HoverOn ? "electric_fence_on" : "electric_fence_off", 1, false);
+                float charge=Mathf.Clamp((Time.time-s.ChargeStart)/Rules.JumpChargeSeconds,Rules.JumpMinCharge,1);
+                rb.AddForce(Vector3.up*(charge*Rules.JumpMaxSpeed),ForceMode.VelocityChange);s.NextJump=Time.time+Rules.JumpCooldown;s.ChargeStart=-1;
             }
-            // Auto-off conditions keep the skimmer from fighting the world.
-            if (state.HoverOn && (!powered || __instance.timeInWater > 0f || (rb.rotation * Vector3.up).y < .35f))
-            { state.HoverOn = false; Audio.Manager.Play(__instance, "electric_fence_off", 1, false); }
-
-            if (state.HoverOn)
-            {
-                HoverOn = true;
-                float target;
-                if (SupportHeight(__instance, out var support)) target = support + Rules.HoverHeight;
-                else target = rb.position.y - dt * 1.5f; // no floor within reach: sink gently
-                // Ceiling clamp: never press the hull into overhead blocks.
-                var up = __instance.position + Vector3.up * 2.6f;
-                if (Weapons.Trace(__instance, up, Vector3.up, Rules.HoverCeiling, out var ceiling))
-                    target = Mathf.Min(target, ceiling.hit.pos.y - 1.6f);
-                float vertical = 9.81f + Mathf.Clamp((target - rb.position.y) * 4f - rb.velocity.y * 1.5f, -Rules.HoverThrust, Rules.HoverThrust);
-                if (descendHeld) vertical -= 5f;
-                rb.AddForce(Vector3.up * vertical, ForceMode.Acceleration);
-                var euler = __instance.rotation; // Vector3 yaw/pitch/roll
-                var heading = Quaternion.Euler(0, euler.y, 0);
-                var forward = heading * Vector3.forward;
-                // Car-style skimming: W/S thrust, A/D yaw torque (native wheel
-                // steering is dead with the wheels off the ground).
-                rb.AddForce(forward * (input.moveForward * 6f), ForceMode.Acceleration);
-                rb.AddTorque(Vector3.up * (input.moveStrafe * 2.5f), ForceMode.Acceleration);
-                var planar = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                if (planar.sqrMagnitude > Rules.HoverSpeed * Rules.HoverSpeed)
-                    rb.AddForce(-planar.normalized * Mathf.Min(6f, (planar.magnitude - Rules.HoverSpeed) * 2f), ForceMode.Acceleration);
-                // Direct fuel draw: skimming is cheap per second but never free.
-                __instance.vehicle.SetFuelLevel(Mathf.Max(0f, __instance.vehicle.GetFuelLevel() - Rules.HoverFuelPerSecond * dt));
-            }
-
-            // Charged jump: hold Space to charge, release to leap.
-            if (jumpHeld && !state.JumpWasHeld) state.ChargeStart = Time.time;
-            if (!jumpHeld && state.JumpWasHeld && state.ChargeStart > 0 && Time.fixedTime >= state.NextJumpReady && grounded && powered)
-            {
-                float level = Mathf.Clamp((Time.time - state.ChargeStart) / Rules.JumpChargeSeconds, Rules.JumpMinCharge, 1f);
-                state.PendingJump = level;
-            }
-            state.JumpWasHeld = jumpHeld;
-            JumpCharge = state.ChargeStart > 0 && jumpHeld
-                ? Mathf.Clamp01((Time.time - state.ChargeStart) / Rules.JumpChargeSeconds) : 0f;
-            if (state.PendingJump > 0 && grounded)
-            {
-                rb.AddForce(Vector3.up * (state.PendingJump * Rules.JumpMaxSpeed), ForceMode.VelocityChange);
-                state.NextJumpReady = Time.fixedTime + Rules.JumpCooldown;
-                JumpCooldownRemaining = Rules.JumpCooldown;
-                state.PendingJump = 0; state.ChargeStart = -1;
-            }
-
-            // Moving trample intent: the physics client knows wheels+speed.
-            if (grounded && now >= state.NextTrampleTick)
-            {
-                state.NextTrampleTick = now + Rules.TrampleTickSeconds;
-                var planarSpeed = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
-                if (powered && planarSpeed >= Rules.TrampleSpeedThreshold)
-                    Weapons.SendLocalIntent(__instance, Weapons.Trample, Vector3.down, __instance.position);
-            }
+            s.JumpWasHeld=s.Jump;
+            if(Time.time-s.LastSync>=.2f){s.LastSync=Time.time;Weapons.SendLocalIntent(v,Weapons.Motion,new Vector3((s.HoverOn?1:0)|(s.Boost?2:0)|(grounded?4:0),s.Charge,0),Vector3.zero);}
+            if(powered&&grounded&&speed>=Rules.TrampleSpeedThreshold&&Time.time-s.LastTime>=Rules.TrampleTickSeconds){s.LastTime=Time.time;Weapons.SendLocalIntent(v,Weapons.Trample,Vector3.down,v.position);}
         }
+        // PhysX vehicle sticky-tire constraints can lock a stationary wheel even
+        // with zero tire friction. A negligible 1Nm wake torque releases that
+        // constraint; propulsion/braking/turning are still provided by ApplyDrive.
+        public static void PrepareSupport(WheelCollider[] wheels,bool moving)
+        {foreach(var wheel in wheels)if(wheel!=null){wheel.motorTorque=moving?1f:0;wheel.brakeTorque=0;wheel.steerAngle=0;}}
+        // Shared native-physics controller, also exercised by the isolated QA fixture.
+        public static void ApplyDrive(Rigidbody rb,Vector3 forward,float target,float steer,bool boost,Vector3 groundNormal,float dt)
+        {
+            var tangent=Vector3.ProjectOnPlane(forward,groundNormal).normalized;
+            var velocity=Vector3.ProjectOnPlane(rb.velocity,groundNormal);
+            float cap=Mathf.Abs(target)>Mathf.Abs(Vector3.Dot(velocity,tangent))?2f:4f;
+            var acceleration=Vector3.ClampMagnitude((tangent*target-velocity)/Mathf.Max(dt,.001f),cap);
+            // Cancel slope gravity only on walkable supports; collisions still block obstacles.
+            if(groundNormal.y>=.7f)acceleration-=Vector3.ProjectOnPlane(Physics.gravity,groundNormal);
+            rb.AddForce(acceleration*rb.mass,ForceMode.Force);
+            float turn=boost?25f:velocity.magnitude>.3f?40f:60f;
+            AngularAcceleration(rb,Vector3.up*Mathf.Clamp((steer*turn*Mathf.Deg2Rad-rb.angularVelocity.y)*6f,-4f,4f));
+            var tilt=Vector3.Cross(rb.rotation*Vector3.up,Vector3.up);var rock=rb.angularVelocity-Vector3.up*rb.angularVelocity.y;
+            AngularAcceleration(rb,Vector3.ClampMagnitude(tilt*10f-rock*3f,5f));
+        }
+        static void AngularAcceleration(Rigidbody rb,Vector3 acceleration)
+        {var axes=rb.rotation*rb.inertiaTensorRotation;rb.AddTorque(axes*Vector3.Scale(Quaternion.Inverse(axes)*acceleration,rb.inertiaTensor),ForceMode.Force);}
+        public static void Clear(){moves.Clear();}
     }
 }

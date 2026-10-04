@@ -12,13 +12,18 @@ namespace PZAEC.Mecha
     {
         public static string Path;
         static GlbFile glb;
-        static Transform prefab; static GameObject cache;
+        static Transform prefab,completePrefab; static GameObject cache;
+        static Transform Prefab(bool full){if(full){if(completePrefab==null)completePrefab=Build(true);return completePrefab;}if(prefab==null)prefab=Build();return prefab;}
 
         public sealed class Rig
         {
             public Transform Root, Visual, Mount, Torso, Head, HandL, HandR, ShoulderL, ShoulderR, Backpack;
-            public Transform HipL, HipR, KneeL, KneeR;
+            public Transform HipL, HipR, KneeL, KneeR, AnkleL, AnkleR, FootL, FootR, ElbowL, ElbowR;
+            public readonly Dictionary<Transform, Quaternion> RestRot = new Dictionary<Transform, Quaternion>();
+            public readonly Dictionary<Transform, Vector3> RestPos = new Dictionary<Transform, Vector3>();
+            public void ResetPose() { foreach(var p in RestRot) if(p.Key!=null) p.Key.localRotation=p.Value; foreach(var p in RestPos) if(p.Key!=null) p.Key.localPosition=p.Value; }
             public float LegUpper, LegLower, GroundY;
+            public Vector3 TorsoBasePosition;
         }
         static readonly Dictionary<EntityVehicle, Rig> rigs = new Dictionary<EntityVehicle, Rig>();
 
@@ -42,22 +47,22 @@ namespace PZAEC.Mecha
 
         static bool LoadEntity(EntityInstanceAssets __instance, EntityClass __1)
         {
-            if (__1 == null || __1.entityClassName != Rules.VehicleName) return true;
-            if (prefab == null) prefab = Build();
-            __instance.PrefabT = prefab;
-            __instance.prefabHandle = new ReadyAsset(prefab.gameObject);
+            if (__1 == null || !Rules.VehicleNameMatches(__1.entityClassName)) return true;
+            var selected=Prefab(string.Equals(__1.entityClassName,Rules.CompleteVehicle,StringComparison.OrdinalIgnoreCase));
+            __instance.PrefabT = selected;
+            __instance.prefabHandle = new ReadyAsset(selected.gameObject);
             return false;
         }
 
         static bool Preview(ItemActionSpawnVehicle __instance, ItemActionData __0)
         {
             var player = __0.invData.holdingEntity as EntityPlayerLocal;
-            if (player == null || player.inventory.holdingItem.GetItemName() != Rules.PlaceableItem) return true;
+            if (player == null || !Rules.ItemNameMatches(player.inventory.holdingItem.GetItemName())) return true;
             var data = (ItemActionSpawnVehicle.ItemActionDataSpawnVehicle)__0;
             if (data.VehiclePreviewT != null) UnityEngine.Object.DestroyImmediate(data.VehiclePreviewT.gameObject);
-            if (prefab == null) prefab = Build();
+            var selected=Prefab(string.Equals(player.inventory.holdingItem.GetItemName(),Rules.CompleteItem,StringComparison.OrdinalIgnoreCase));
             var root = new GameObject("MechaPlacementPreview").transform;
-            var visual = UnityEngine.Object.Instantiate(Find(prefab.transform, "MechaVisual").gameObject, root, false);
+            var visual = UnityEngine.Object.Instantiate(Find(selected.transform, "MechaVisual").gameObject, root, false);
             visual.SetActive(true);
             foreach (var collider in visual.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
             data.VehiclePreviewT = root;
@@ -89,9 +94,15 @@ namespace PZAEC.Mecha
             rig.Backpack = Find(root, "MechaBackpack");
             rig.HipL = Find(root, "MechaHipL"); rig.HipR = Find(root, "MechaHipR");
             rig.KneeL = Find(root, "MechaKneeL"); rig.KneeR = Find(root, "MechaKneeR");
-            // Leg links are proportional to the QA-tuned target height.
-            rig.LegUpper = Rules.TargetHeight * .48f;
-            rig.LegLower = Rules.TargetHeight * .48f;
+            // Gait/Boarding animate Torso relative to its rigged rest pose.
+            if (rig.Torso != null) rig.TorsoBasePosition = rig.Torso.localPosition;
+            rig.AnkleL=Find(root,"MechaAnkleL"); rig.AnkleR=Find(root,"MechaAnkleR");
+            rig.FootL=Find(root,"MechaFootL"); rig.FootR=Find(root,"MechaFootR");
+            rig.ElbowL=Find(root,"MechaElbowL"); rig.ElbowR=Find(root,"MechaElbowR");
+            rig.LegUpper = rig.HipL!=null && rig.KneeL!=null ? Vector3.Distance(rig.HipL.position,rig.KneeL.position) : 0;
+            rig.LegLower = rig.KneeL!=null && rig.AnkleL!=null ? Vector3.Distance(rig.KneeL.position,rig.AnkleL.position) : 0;
+            foreach(var t in new[]{rig.Torso,rig.Head,rig.HipL,rig.HipR,rig.KneeL,rig.KneeR,rig.AnkleL,rig.AnkleR,rig.ShoulderL,rig.ShoulderR,rig.ElbowL,rig.ElbowR,rig.HandL,rig.HandR})
+                if(t!=null) { rig.RestRot[t]=t.localRotation; rig.RestPos[t]=t.localPosition; }
             rigs[v] = rig;
             return rig;
         }
@@ -155,150 +166,14 @@ namespace PZAEC.Mecha
         static Transform Add(Transform parent, string name)
         { var t = new GameObject(name).transform; t.SetParent(parent, false); return t; }
 
-        // glTF is right-handed; Unity is left-handed. Mirror X for points,
-        // quaternions and triangle winding so the robot is not inside out.
-        static Vector3 Vec3(float[] values, int offset)
-        { return new Vector3(-values[offset], values[offset + 1], values[offset + 2]); }
-
-        static Mesh BuildMesh(GlbFile.GlbMesh glbMesh, int primitiveIndex)
+        static Material CompleteMaterial()
         {
-            var primitive = glbMesh.primitives[primitiveIndex];
-            var position = glb.ReadFloats(primitive.attributes.POSITION);
-            var mesh = new Mesh { name = glbMesh.name != null ? glbMesh.name : "MechaPart", indexFormat = IndexFormat.UInt32 };
-            var vertices = new Vector3[position.Length / 3];
-            for (int i = 0; i < vertices.Length; i++) vertices[i] = Vec3(position, i * 3);
-            mesh.SetVertices(vertices);
-            if (primitive.attributes.NORMAL != 0)
-            {
-                var normal = glb.ReadFloats(primitive.attributes.NORMAL);
-                var normals = new Vector3[normal.Length / 3];
-                for (int i = 0; i < normals.Length; i++) normals[i] = Vec3(normal, i * 3);
-                mesh.SetNormals(normals);
-            }
-            if (primitive.attributes.TEXCOORD_0 != 0)
-            {
-                var uv = glb.ReadFloats(primitive.attributes.TEXCOORD_0);
-                var uvs = new Vector2[uv.Length / 2];
-                for (int i = 0; i < uvs.Length; i++) uvs[i] = new Vector2(uv[i * 2], uv[i * 2 + 1]);
-                mesh.SetUVs(0, uvs);
-            }
-            int[] triangles;
-            if (primitive.indices != null)
-            {
-                var index = glb.ReadIndices(primitive.indices.Value);
-                triangles = new int[index.Length];
-                for (int i = 0; i + 2 < index.Length; i += 3)
-                { triangles[i] = index[i]; triangles[i + 1] = index[i + 2]; triangles[i + 2] = index[i + 1]; }
-            }
-            else
-            {
-                triangles = new int[vertices.Length];
-                for (int i = 0; i + 2 < triangles.Length; i += 3)
-                { triangles[i] = i; triangles[i + 1] = i + 2; triangles[i + 2] = i + 1; }
-            }
-            mesh.SetTriangles(triangles, 0);
-            if (primitive.attributes.NORMAL == 0) mesh.RecalculateNormals();
-            mesh.RecalculateTangents(); mesh.RecalculateBounds();
-            return mesh;
+            var m=new Material(Shader.Find("Standard")){name="Mecha_Complete",color=Color.white};
+            m.mainTexture=Tex("../CompleteTextures/base.png",false);
+            m.SetTexture("_MetallicGlossMap",Tex("../CompleteTextures/metallic.png",true));m.EnableKeyword("_METALLICGLOSSMAP");m.SetFloat("_GlossMapScale",1f);
+            return m;
         }
-
-        static int BuildNode(int nodeIndex, Transform parent, Material[] materials, int layer, List<MeshRenderer> parts)
-        {
-            var node = glb.nodes[nodeIndex];
-            var transform = Add(parent, node.name != null ? node.name : "node" + nodeIndex);
-            if (node.translation != null && node.translation.Length == 3) transform.localPosition = Vec3(node.translation, 0);
-            if (node.scale != null && node.scale.Length == 3)
-                transform.localScale = new Vector3(node.scale[0], node.scale[1], node.scale[2]);
-            if (node.rotation != null && node.rotation.Length == 4)
-                transform.localRotation = new Quaternion(-node.rotation[0], node.rotation[1], node.rotation[2], node.rotation[3]).normalized;
-            if (node.mesh != null)
-            {
-                var glbMesh = glb.meshes[node.mesh.Value];
-                for (int p = 0; p < glbMesh.primitives.Length; p++)
-                {
-                    var primitive = glbMesh.primitives[p];
-                    if (p > 0) continue; // Sketchfab exports one primitive per mesh here.
-                    var holder = Add(transform, glbMesh.name != null ? glbMesh.name + "_mesh" : "mesh");
-                    holder.gameObject.layer = layer;
-                    holder.gameObject.AddComponent<MeshFilter>().sharedMesh = BuildMesh(glbMesh, p);
-                    var renderer = holder.gameObject.AddComponent<MeshRenderer>();
-                    renderer.sharedMaterial = materials[primitive.material != null ? primitive.material.Value : 0];
-                    renderer.shadowCastingMode = ShadowCastingMode.On;
-                    parts.Add(renderer);
-                }
-            }
-            if (node.children != null)
-                foreach (int child in node.children) BuildNode(child, transform, materials, layer, parts);
-            return 0;
-        }
-
-        // The Sketchfab export is a flat sculpture: ~154 mesh nodes parented to
-        // one root with no joint hierarchy. This rebuilds a biped rig at load
-        // time by classifying every mesh part by world position and material
-        // suffix (_Hands_0/_Torse_0/_Legs_0), then re-parenting parts under
-        // runtime-created Hip/Knee/Shoulder joints with world positions kept.
-        static void RebuildBipedRig(Transform mount, List<MeshRenderer> parts)
-        {
-            Bounds all = default(Bounds);
-            bool first = true;
-            foreach (var part in parts)
-            {
-                var b = part.bounds;
-                if (first) { all = b; first = false; }
-                else all.Encapsulate(b);
-            }
-            float height = all.size.y;
-            float hipY = all.min.y + height * .5f;
-            float kneeY = all.min.y + height * .27f;
-            float torsoHalfWidth = Mathf.Max(.04f, all.size.x * .16f);
-
-            Transform hipL = Add(mount, "MechaHipL"); hipL.position = new Vector3(-all.size.x * .12f, hipY, 0);
-            Transform hipR = Add(mount, "MechaHipR"); hipR.position = new Vector3(all.size.x * .12f, hipY, 0);
-            Transform kneeL = Add(hipL, "MechaKneeL"); kneeL.position = new Vector3(-all.size.x * .12f, kneeY, 0);
-            Transform kneeR = Add(hipR, "MechaKneeR"); kneeR.position = new Vector3(all.size.x * .12f, kneeY, 0);
-            Transform torso = Add(mount, "MechaTorso"); torso.position = new Vector3(0, hipY, 0);
-            float shoulderY = all.max.y - height * .22f;
-            Transform shoulderL = Add(torso, "MechaShoulderL"); shoulderL.position = new Vector3(-torsoHalfWidth * 1.1f, shoulderY, 0);
-            Transform shoulderR = Add(torso, "MechaShoulderR"); shoulderR.position = new Vector3(torsoHalfWidth * 1.1f, shoulderY, 0);
-            Transform head = Add(torso, "MechaHead"); head.position = new Vector3(0, all.max.y - height * .08f, all.center.z);
-            float armLength = height * .3f;
-            Transform handL = Add(shoulderL, "MechaHandL"); handL.position = shoulderL.position + Vector3.down * armLength;
-            Transform handR = Add(shoulderR, "MechaHandR"); handR.position = shoulderR.position + Vector3.down * armLength;
-            Transform backpack = Add(torso, "MechaBackpack"); backpack.position = new Vector3(0, hipY + height * .3f, all.min.z);
-
-            foreach (var part in parts)
-            {
-                var name = RigSuffix(part.transform);
-                var center = part.bounds.center;
-                bool arm = name.IndexOf("Hands", StringComparison.OrdinalIgnoreCase) >= 0;
-                bool leg = name.IndexOf("Legs", StringComparison.OrdinalIgnoreCase) >= 0;
-                Transform target;
-                if (arm && center.y > hipY)
-                    target = center.x < 0 ? shoulderL : shoulderR;
-                else if (leg || (!arm && center.y < hipY))
-                {
-                    bool left = center.x < 0;
-                    bool upper = center.y >= kneeY;
-                    target = upper ? (left ? hipL : hipR) : (left ? kneeL : kneeR);
-                }
-                else target = torso;
-                part.transform.SetParent(target, true);
-            }
-        }
-
-        static string RigSuffix(Transform part)
-        {
-            for (var node = part; node != null; node = node.parent)
-            {
-                if (node.name.IndexOf("_Hands_0", StringComparison.OrdinalIgnoreCase) >= 0) return "Hands";
-                if (node.name.IndexOf("_Torse_0", StringComparison.OrdinalIgnoreCase) >= 0) return "Torse";
-                if (node.name.IndexOf("_Legs_0", StringComparison.OrdinalIgnoreCase) >= 0) return "Legs";
-                if (node.parent != null && node.parent.name == "MechaVisual") break;
-            }
-            return "Torse";
-        }
-
-        static Transform Build()
+        static Transform Build(bool full=false)
         {
             var native = DataLoader.LoadAsset<Transform>("@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab", false);
             if (native == null) throw new InvalidOperationException("Native jeep prefab missing");
@@ -317,44 +192,12 @@ namespace PZAEC.Mecha
             var physics = rb.transform;
             var visual = Add(physics, "MechaVisual");
 
-            var materials = new Material[glb.materials.Length];
-            for (int i = 0; i < glb.materials.Length; i++) materials[i] = BuildMaterial(glb.materials[i]);
+            var materials = full?new[]{CompleteMaterial()}:new Material[glb.materials.Length];
+            if(!full)for (int i = 0; i < glb.materials.Length; i++) materials[i] = BuildMaterial(glb.materials[i]);
 
             var mount = Add(visual, "MechaMount");
-            var parts = new List<MeshRenderer>();
-            foreach (int sceneNode in glb.scenes[glb.scene != null ? glb.scene.Value : 0].nodes)
-            {
-                var node = glb.nodes[sceneNode];
-                // Skip Sketchfab wrapper layers and the display floor.
-                if (node.name == "Sketchfab_model" || node.name.IndexOf(".fbx", StringComparison.OrdinalIgnoreCase) >= 0 || node.name == "RootNode")
-                {
-                    foreach (int child in node.children ?? new int[0]) BuildNode(child, mount, materials, layer, parts);
-                    continue;
-                }
-                if (node.name != null && node.name.StartsWith("Floor", StringComparison.OrdinalIgnoreCase)) continue;
-                BuildNode(sceneNode, mount, materials, layer, parts);
-            }
-            // Drop meshes that mapped to the Floor material and rebuild bounds.
-            for (int i = parts.Count - 1; i >= 0; i--)
-                if (parts[i].sharedMaterial == null)
-                { UnityEngine.Object.Destroy(parts[i].gameObject); parts.RemoveAt(i); }
-            if (parts.Count == 0) throw new InvalidOperationException("Combat robot produced no renderable parts");
-
-            RebuildBipedRig(mount, parts);
-
-            // Auto-fit the mount to the target height, then rotate for facing.
-            Bounds all = default(Bounds); bool firstB = true;
-            foreach (var part in parts)
-            { if (firstB) { all = part.bounds; firstB = false; } else all.Encapsulate(part.bounds); }
-            float scale = Rules.TargetHeight / Mathf.Max(.01f, all.size.y);
-            var fit = Find(visual, "MechaMount");
-            if (fit != null)
-            {
-                Vector3 bottom = fit.position;
-                fit.localScale = Vector3.one * scale;
-                fit.position = bottom + Vector3.up * (all.min.y * (scale - 1f));
-                fit.localRotation = Rules.MountRotation;
-            }
+            RobotRig.Build(mount, materials, layer,full?"samurai_style_gundam_mecha":"combat_robot");
+            mount.localRotation = Rules.MountRotation;
 
             Box(physics, "MechaBodyHit", new Vector3(0, 1.5f, 0), new Vector3(2.2f, 2.6f, 1.8f), layer);
             // Low-friction belly pad: crater rims slide under the hull instead
@@ -366,11 +209,16 @@ namespace PZAEC.Mecha
             bellyCollider.size = new Vector3(2f, .1f, 3.2f);
             var bellyMaterial = new PhysicMaterial("MechaBelly") { dynamicFriction = .05f, staticFriction = .05f, frictionCombine = PhysicMaterialCombine.Minimum };
             bellyCollider.material = bellyMaterial;
-            rb.mass = 8000; rb.centerOfMass = new Vector3(0, 1f, 0);
+            rb.mass = 8000; rb.centerOfMass = new Vector3(0, .7f, 0);
             foreach (var wheel in root.GetComponentsInChildren<WheelCollider>(true))
             {
                 var at = physics.InverseTransformPoint(wheel.transform.position);
-                wheel.transform.position = physics.TransformPoint(new Vector3(at.x < 0 ? -.85f : .85f, .52f, at.z < 0 ? -1.5f : 1.5f));
+                // Wide stance: the narrow biped track flipped the hull over
+                // on spawn; keep the tripod-era footprint while the rig math
+                // is being rebuilt.
+                wheel.transform.position = physics.TransformPoint(new Vector3(at.x < 0 ? -1.2f : 1.2f, .52f, at.z < 0 ? -1.8f : 1.8f));
+                var forwardFriction=wheel.forwardFriction;forwardFriction.stiffness=0f;wheel.forwardFriction=forwardFriction;
+                var sideFriction=wheel.sidewaysFriction;sideFriction.stiffness=0f;wheel.sidewaysFriction=sideFriction;
                 wheel.radius = .5f; wheel.suspensionDistance = .4f;
                 var spring = wheel.suspensionSpring; spring.spring = 220000; spring.damper = 26000; spring.targetPosition = .5f;
                 wheel.suspensionSpring = spring;

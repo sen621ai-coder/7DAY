@@ -13,6 +13,7 @@ namespace PZAEC.Mecha
         {
             public string name; public int[] children;
             public float[] translation, scale, rotation;
+            public float[] matrix;   // column-major 4x4; overrides TRS when present
             public int? mesh;
         }
         public sealed class GlbMesh

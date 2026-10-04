@@ -20,6 +20,16 @@ namespace PZAEC.M1
             var x=new View{Vehicle=v,Yaw=yaw,Pitch=SecondaryModel.Find(root,"RoofMGPitch"),AA=SecondaryModel.Find(root,"AAPitch"),Muzzle=SecondaryModel.Find(root,"RoofMGMuzzle")};x.Flash=Presentation.CreateMGFlash(x.Muzzle);x.LeftFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleL"));x.RightFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleR"));x.MGSound=Sound(x.Muzzle,mgClip);x.AASound=Sound(x.AA,aaClip);x.I[0]=v.GetAttached(1)!=null?1:0;views[v.entityId]=x;return x;
         }
         static Transform LaunchFlash(Transform muzzle){var flash=Presentation.CreateMGFlash(muzzle);flash.name="M1AAMuzzleFX";flash.localScale=new Vector3(.35f,.35f,.75f);return flash;}
+        static bool NativeFlash(Transform muzzle)
+        {
+            if(muzzle==null||GameManager.Instance==null)return false;
+            try{
+                var effect=new ParticleEffect(ImpactRules.MuzzleParticle,muzzle.position+Origin.position,muzzle.rotation,1f,Color.white,null,null,0f,null);
+                var spawned=ParticleEffect.SpawnParticleEffect(effect,-1,true,true);
+                if(spawned==null)return false;
+                spawned.localScale*=2f;return true;
+            }catch{return false;}
+        }
         static void DestroyFlashes(View v){foreach(var f in new[]{v.Flash,v.LeftFlash,v.RightFlash})if(f!=null)UnityEngine.Object.Destroy(f.gameObject);}
         public static byte Mode(EntityVehicle v,int seat)=>seat<0?(byte)0:views.TryGetValue(v.entityId,out var s)?(byte)s.I[seat]:(seat==0&&v.GetAttached(1)!=null?(byte)1:(byte)0);
         public static void SaveItem(EntityVehicle vehicle)
@@ -37,7 +47,7 @@ namespace PZAEC.M1
             if(p.Kind==1){if(unchecked(p.Serial-v.Serial)<=0)return;v.Serial=p.Serial;Array.Copy(p.F,v.F,16);Array.Copy(p.I,v.I,8);v.At=Time.time;return;}
             if(!EffectRules.Fresh(age)||!v.Events.Accept(p.Serial))return;
             if(p.Kind>=4){if(unchecked(p.Serial-v.MotionSerial)<=0)return;v.MotionSerial=p.Serial;}
-            if(p.Kind==2){v.ShotAt=Time.time;v.FlashLife=EffectRules.FlashLife(Time.unscaledDeltaTime,true);if(p.I[0]%3==0)Add(p.Vehicle,p.I[0],p.A,p.B,false,age);v.MGSound.PlayOneShot(mgClip);}
+            if(p.Kind==2){if(!NativeFlash(v.Muzzle))v.ShotAt=Time.time;v.FlashLife=EffectRules.FlashLife(Time.unscaledDeltaTime,true);if(p.I[0]%3==0)Add(p.Vehicle,p.I[0],p.A,p.B,false,age);v.MGSound.PlayOneShot(mgClip);}
             else if(p.Kind==3){if(p.Serial>v.MotionSerial)Add(p.Vehicle,p.I[0],p.A,p.A+p.B*2,true);v.AAAt=Time.time;v.ActiveAA=Vector3.Distance(v.LeftFlash.position+Origin.position,p.A)<Vector3.Distance(v.RightFlash.position+Origin.position,p.A)?v.LeftFlash:v.RightFlash;v.AASound.PlayOneShot(aaClip);}
             else if(p.Kind==4){var t=trails.Find(x=>x.Missile&&x.Vehicle==p.Vehicle&&x.Id==p.I[0]);if(t==null)Add(p.Vehicle,p.I[0],p.A-p.B*2,p.A,true);else{t.A=p.A-p.B*2;t.B=p.A;t.Until=Time.time+.25f;}}
             else if(p.Kind==5){for(int i=trails.Count-1;i>=0;i--)if(trails[i].Missile&&trails[i].Vehicle==p.Vehicle&&trails[i].Id==p.I[0]){UnityEngine.Object.Destroy(trails[i].Line.gameObject);trails.RemoveAt(i);}Add(p.Vehicle,p.I[0],p.A-Vector3.up*.2f,p.A+Vector3.up*.2f,false);}

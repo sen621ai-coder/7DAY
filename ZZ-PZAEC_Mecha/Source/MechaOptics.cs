@@ -30,6 +30,7 @@ namespace PZAEC.Mecha
             // The player's own LateUpdate can rewrite FOV after vp_FPCamera;
             // applying on pre-cull is the only slot that always sticks.
             Camera.onPreCull += BeforeRender;
+            Camera.onPostRender += AfterRender;
         }
 
         static float Magnification() { return zoom ? (zoomStep == 0 ? 2f : 4f) : 1f; }
@@ -91,11 +92,10 @@ namespace PZAEC.Mecha
                 foreach (var pair in hidden) if (pair.Key != null) pair.Key.forceRenderingOff = pair.Value;
                 hidden.Clear(); return;
             }
-            // Keep the lens housing from filling the near plane; the rest of the
-            // walker (legs, panels) stays visible from the eye mount.
-            if (lens == null && eye == null) return;
-            Hide(lens);
-            Hide(eye);
+            // Electronic cockpit feed: hide only this pilot's own visual model.
+            // Restore after this camera so observers and other cameras retain it.
+            var rig=vehicle!=null?Model.GetRig(vehicle):null;
+            if(rig!=null)Hide(rig.Visual);
         }
 
         static void Hide(Transform root)
@@ -117,10 +117,11 @@ namespace PZAEC.Mecha
             Vector3 ride; Quaternion rideRot; float rideFov;
             if (Boarding.CameraRide(out ride, out rideRot, out rideFov))
             {
-                Visibility(false);
+                Visibility(Boarding.CockpitCamera(vehicle));
                 RestoreCamera();
                 applied = camera;
                 savedPosition = camera.transform.position; savedRotation = camera.transform.rotation; savedFov = camera.fieldOfView;
+                lastPosition=ride; lastRotation=rideRot; lastFov=rideFov;
                 camera.transform.SetPositionAndRotation(ride, rideRot);
                 camera.fieldOfView = rideFov;
                 return;
@@ -139,6 +140,8 @@ namespace PZAEC.Mecha
             camera.transform.SetPositionAndRotation(position, StoredLook);
             camera.fieldOfView = lastFov;
         }
+
+        static void AfterRender(Camera camera){if(camera==applied)Visibility(false);}
 
         public static void Clear()
         {

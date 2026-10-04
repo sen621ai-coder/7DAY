@@ -1,0 +1,5 @@
+Samurai Style Gundam Mecha
+Author: lawlietrecluze
+Source: https://sketchfab.com/3d-models/samurai-style-gundam-mecha-298b529104e84c92a58a850c14d00525
+License: CC-BY-4.0
+Original GLB retained. Runtime derivative: texture-aware mesh reduction, texture channel conversion, procedural skin weights.

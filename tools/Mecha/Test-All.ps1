@@ -1,4 +1,4 @@
-﻿# Offline assertions for the PZAEC Buster Drone walker.
+# Offline assertions for the PZAEC Buster Drone walker.
 # GLB structure, external textures, XML wiring, recipe/progression hooks,
 # network damage ceiling and build freshness. No game process required.
 # Works on Windows PowerShell 5.1 and pwsh 7.
@@ -111,10 +111,10 @@ Check "items.xml placeable exposes vehicle mod tags" {
     $tags = ($item.property | Where-Object { $_.name -eq 'Tags' }).value
     $tags -match 'varmor' -and $tags -match 'vengine' -and $tags -match 'vfuel' -and $tags -match 'vlight' -and $tags -match 'vstorage' -and $tags -match 'canHaveCosmetic'
 }
-Check "vehicles.xml repair key is F, mode key is X, battle repair R" {
+Check "vehicles.xml repair keys retained and melee key removed" {
     $props = $vehicles.configs.append.vehicle | Where-Object { $_.name -eq 'vehicleCombatRobot' }
     ($props.property | Where-Object { $_.name -eq 'pzMechaRepairKey' }).value -eq 'F' -and
-    ($props.property | Where-Object { $_.name -eq 'pzMechaModeKey' }).value -eq 'X' -and
+    @($props.property | Where-Object { $_.name -eq 'pzMechaModeKey' }).Count -eq 0 -and
     ($props.property | Where-Object { $_.name -eq 'pzMechaBattleRepairKey' }).value -eq 'R'
 }
 Check "rules define vanilla repair kit + 8s channel + blade constants" {
@@ -146,9 +146,9 @@ Check "main-battle hull 2,000,000 and cell stack 200" {
     $stack = ($cell.property | Where-Object { $_.name -eq 'Stacknumber' }).value
     $degradation -eq '2000000' -and $stack -eq '200'
 }
-Check "melee mode gates beam fire server-side" {
+Check "retired melee commands rejected server-side" {
     $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
-    $weapons -match 'op\s*==\s*Fire\s*&&\s*state\.MeleeMode'
+    $weapons -match 'if\(op==SwitchMelee\|\|op==MeleeSweep\|\|op==MeleeHeavy\)return;'
 }
 
 # ---------- v0.4.0 all-terrain mobility ----------
@@ -179,18 +179,20 @@ Check "weapons define trample ops 11/12 with server rate limits" {
 
 # ---------- v0.5.0 biped rig + IK gait ----------
 $modelSrc = Get-Content (Join-Path $ModRoot "Source\MechaModel.cs") -Raw
-$gaitSrc = Get-Content (Join-Path $ModRoot "Source\MechaDeploy.cs") -Raw
+$gaitSrc = (Get-Content (Join-Path $ModRoot "Source\MechaDeploy.cs") -Raw) + (Get-Content (Join-Path $ModRoot "Source\MechaGait.cs") -Raw)
 Check "old trike GLB removed" { !(Test-Path (Join-Path $ModRoot "Resources\buster_drone.glb")) }
-Check "rig rebuild classifies parts into biped joints" {
-    $modelSrc -match 'RebuildBipedRig' -and $modelSrc -match 'MechaHipL' -and $modelSrc -match 'MechaKneeR' -and
-    $modelSrc -match 'MechaHandL' -and $modelSrc -match 'MechaHead' -and $modelSrc -match 'MechaBackpack'
+Check "rig manifest covers source nodes and articulated joints" {
+    $rig = Get-Content (Join-Path $ModRoot 'Resources/combat_robot_rig.json') -Raw | ConvertFrom-Json
+    @($rig.parts.node | Sort-Object -Unique).Count -eq 153 -and
+    @($rig.joints.name).Contains('AnkleL') -and @($rig.joints.name).Contains('ElbowR')
 }
-Check "floor material meshes skipped at load" {
-    $modelSrc -match 'IndexOf\("Floor"' -and $modelSrc -match 'StartsWith\("Floor"'
+Check "rig manifest excludes display floor" {
+    $rig = Get-Content (Join-Path $ModRoot 'Resources/combat_robot_rig.json') -Raw | ConvertFrom-Json
+    @($rig.parts | Where-Object {$_.material -eq 3}).Count -eq 0
 }
-Check "gait implements analytic two-bone IK" {
-    $gaitSrc -match 'SolveLeg' -and $gaitSrc -match 'Mathf\.Acos' -and $gaitSrc -match 'StepTriggerDistance' -and
-    $gaitSrc -match 'HipSwayMeters' -and $gaitSrc -match 'ArmSwingDegrees'
+Check "native gait source and QA harness present" {
+    (Test-Path (Join-Path $ModRoot 'Source/MechaGait.cs')) -and
+    (Test-Path (Join-Path $ModsRoot 'tools/Mecha/MotionNativeQA.cs'))
 }
 Check "deploy rise is procedural (no GLB animation dependency)" {
     $gaitSrc -match 'DeployRiseSeconds' -and $rules -match 'TargetHeight\s*=\s*3\.2f'
@@ -198,19 +200,30 @@ Check "deploy rise is procedural (no GLB animation dependency)" {
 
 # ---------- v0.6.0 boarding ceremony ----------
 $boarding = Get-Content (Join-Path $ModRoot "Source\MechaBoarding.cs") -Raw
-Check "boarding gates intercept Enter/Detach with pass-through" {
-    $boarding -match 'typeof\(Boarding\),\s*nameof\(EnterGate\)' -and
-    $boarding -match 'typeof\(Boarding\),\s*nameof\(ExitGate\)' -and
-    $boarding -match 'passThrough\s*=\s*true'
+Check "boarding gates native entry and detach request" {
+    $boarding -match 'typeof\(Boarding\),\s*nameof\(EnterObserve\)' -and
+    $boarding -match 'typeof\(Boarding\),\s*nameof\(ExitObserve\)'
 }
 Check "boarding four-phase timing constants" {
-    $rules -match 'BoardingEnabled\s*=\s*true' -and
     $rules -match 'BoardExpandSeconds\s*=\s*1\.2f' -and $rules -match 'BoardLiftSeconds\s*=\s*\.8f' -and
     $rules -match 'BoardCloseSeconds\s*=\s*1\.5f'
 }
-Check "weapons locked during ceremony except skip op 13" {
+Check "0.7.0 articulated presentation enabled" {
+    $rules -match 'BoardingEnabled = true' -and $rules -match 'GaitIkEnabled = true'
+}
+Check "vehicles.xml carries full seat/handle IK anchors" {
+    $props = $vehicles.configs.append.vehicle | Where-Object { $_.name -eq 'vehicleCombatRobot' }
+    $seat = ($props.property | Where-Object { $_.class -eq 'seat0' }).property | ForEach-Object { $_.name }
+    $bars = ($props.property | Where-Object { $_.class -eq 'handlebars' }).property | ForEach-Object { $_.name }
+    ($seat -contains 'IKFootLPosition') -and ($seat -contains 'IKHandRPosition') -and
+    ($seat -contains 'IKFootRRotation') -and ($bars -contains 'IKHandLPosition') -and
+    ($bars -contains 'IKHandRRotation')
+}
+Check "baked geometry is shipped" {
+    (Get-Item (Join-Path $ModRoot 'Resources/combat_robot_rig.bin')).Length -gt 1000000
+}
+Check "weapons locked during ceremony" {
     $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
-    $weapons -match 'op\s*==\s*13\)\s*\{\s*Boarding\.SkipRequest' -and
     $weapons -match 'if\s*\(Boarding\.Active\(vehicle\)\)\s*return;'
 }
 Check "boarding event routes through FX to remote spectators" {
@@ -218,14 +231,80 @@ Check "boarding event routes through FX to remote spectators" {
     $fx -match 'Boarding\.BoardEvent' -and $fx -match 'Boarding\.Receive' -and
     $boarding -match 'CameraRide' -and $boarding -match 'Describe'
 }
-Check "gait yields joints to the ceremony" {
-    $gaitSrc -match 'Boarding\.ApplyPose\(rig,\s*vehicle\)'
+Check "four second boarding and per-vehicle pose API present" {
+    $boarding -match 'ApplyPose' -and $boarding -match 'ReceiveSnapshot' -and $boarding -match 'full\?4f'
 }
 Check "HUD ceremony overlay (letterbox + typewriter)" {
     $hud = Get-Content (Join-Path $ModRoot "Source\MechaHUD.cs") -Raw
     $hud -match 'DrawBoardingOverlay' -and $hud -match '战斗系统联机'
 }
 
+# ---------- v0.6.1 hotfix ----------
+Check "pose stores and restores bind transforms" {
+    $modelSrc -match 'RestRot' -and $modelSrc -match 'RestPos' -and $gaitSrc -match 'ResetPose'
+}
+Check "boarding transfers after kneeling with recursion guard" {
+    $boarding -match 'static bool EnterObserve' -and $boarding -match 'static bool ExitObserve' -and
+    $boarding -match 'TransferAt' -and $boarding -match 'committing=false'
+}
+Check "intent op guard includes motion and boarding skip" {
+    (Get-Content (Join-Path $ModRoot 'Source/MechaWeapons.cs') -Raw) -match 'op > BoardControl'
+}
+Check "dedicated silhouette icon generated and referenced" {
+    $icon = Join-Path $ModRoot "ItemIcons\vehicleCombatRobotPlaceable.png"
+    $atlas = Join-Path $ModRoot "UIAtlases\ItemIconAtlas\vehicleCombatRobotPlaceable.png"
+    if (!(Test-Path $icon) -or !(Test-Path $atlas)) { return $false }
+    Add-Type -AssemblyName System.Drawing
+    $bmp = [System.Drawing.Bitmap]::FromFile($icon); $ok = $bmp.Width -eq 256 -and $bmp.Height -eq 256
+    $bmp.Dispose()
+    $item = $items.configs.append.item | Where-Object { $_.name -eq 'vehicleCombatRobotPlaceable' }
+    $iconRef = ($item.property | Where-Object { $_.name -eq 'CustomIcon' }).value
+    return $ok -and $iconRef -eq 'vehicleCombatRobotPlaceable'
+}
+Check "chinese naming: Youth Edition with shared ammunition" {
+    $loc = Get-Content (Join-Path $ModRoot "Config\Localization.csv") -Raw -Encoding UTF8
+    $loc.Contains('vehicleCombatRobotPlaceable,items,item,,,Unit-01 (Youth Edition),初号机（青春版）') -and
+    $loc -match 'ammoPZAECMechaCell,items,item,,,Energy Cell,能量电池'
+}
+
+Check "rig importer wired and fuel HUD retained" {
+    $modelSrc -match 'RobotRig.Build' -and
+    (Get-Content (Join-Path $ModRoot 'Source/MechaHUD.cs') -Raw) -match '燃料耗尽'
+}
+Check "v0.6.5: wide wheelbase + low center of mass + F9 dump + sound gate" {
+    $modelSrc -match '-1\.2f\s*:\s*1\.2f' -and $modelSrc -match 'centerOfMass\s*=\s*new Vector3\(0,\s*\.7f' -and
+    (Test-Path (Join-Path $ModRoot "Source\MechaDebug.cs")) -and
+    (Get-Content (Join-Path $ModRoot "Source\MechaFX.cs") -Raw) -match 'soundGate'
+}
+
+# ---------- v0.6.8 trigger discipline ----------
+Check "aim messages cannot fire: trigger state is separate" {
+    $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
+    $weapons -match 'TriggerHeld\s*=\s*op\s*==\s*Fire' -and
+    $weapons -match 'state\.TriggerHeld\s*&&\s*state\.Aiming\)\s*FireBeam' -and
+    $weapons -match 'state\.MissileTrigger\s*&&\s*state\.MissileAiming\)\s*FireMissile'
+}
+Check "stale sequences drop without extending the session" {
+    $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
+    $weapons -match 'if\s*\(sequence\s*<=\s*LastSequence\)\s*return\s*false;'
+}
+Check "stop clears trigger + aim + lock together" {
+    $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
+    $weapons -match 'state\.TriggerHeld\s*=\s*false;\s*state\.MissileTrigger\s*=\s*false;'
+}
+Check "beam events dedup by vehicle+serial; melee has its own sound" {
+    $fx = Get-Content (Join-Path $ModRoot "Source\MechaFX.cs") -Raw
+    $fx -match 'seenBeamSerials' -and $fx -match 'electric_fence_impact'
+}
+
+Check "robot has no automotive engine audio" {
+    (Get-Content (Join-Path $ModRoot 'Config/vehicles.xml') -Raw) -notmatch 'Vehicles/Suv|Vehicles/Motorbike|batterybank_start|batterybank_stop'
+}
+Check "native wheel drive disabled" {
+    $v = $vehicles.configs.append.vehicle | Where-Object {$_.name -eq 'vehicleCombatRobot'}
+    ($v.property | Where-Object {$_.name -eq 'motorTorque_turbo'}).value -eq '0, 0, 0, 0' -and
+    ($v.property | Where-Object {$_.name -eq 'steerAngleMax'}).value -eq '0'
+}
 # ---------- Build freshness ----------
 $dll = Get-Item (Join-Path $ModRoot "PZAEC.Mecha.dll") -ErrorAction SilentlyContinue
 Check "PZAEC.Mecha.dll exists" { $dll -ne $null }

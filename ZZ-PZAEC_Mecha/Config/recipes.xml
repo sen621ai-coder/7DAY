@@ -24,5 +24,17 @@
       <ingredient name="resourceLegendaryParts" count="1"/>
       <ingredient name="resourceMechanicalParts" count="20"/>
     </recipe>
+    <recipe name="vehicleCombatRobotCompleteChassis" count="1" craft_time="1350" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
+      <ingredient name="resourceForgedSteel" count="39" />
+      <ingredient name="resourceMechanicalParts" count="53" />
+      <ingredient name="resourceElectricParts" count="44" />
+    </recipe>
+    <recipe name="vehicleCombatRobotCompletePlaceable" count="1" craft_time="1800" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
+      <ingredient name="vehicleCombatRobotCompleteChassis" count="1" />
+      <ingredient name="smallEngine" count="1" />
+      <ingredient name="carBattery" count="1" />
+      <ingredient name="resourceLegendaryParts" count="2" />
+      <ingredient name="resourceMechanicalParts" count="30" />
+    </recipe>
   </append>
 </configs>

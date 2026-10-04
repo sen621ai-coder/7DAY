@@ -26,7 +26,7 @@ namespace PZAEC.Mecha
         }
         public override void ProcessPackage(World world, GameManager callbacks)
         {
-            if (world != null && Weapons.Server && Sender != null && Sender.bAttachedToEntity)
+            if (world != null && Weapons.Server && Sender != null && (Sender.bAttachedToEntity || Op==Weapons.BoardControl || Op==Weapons.SkipBoard))
                 Weapons.Request(world, Sender.entityId, Vehicle, Op, Direction, Origin, Sequence);
         }
     }

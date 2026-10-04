@@ -10,7 +10,7 @@ namespace PZAEC.M1
     {
         public sealed class View
         {
-            public EntityVehicle Vehicle;public Transform Root,Yaw,Pitch,Recoil,Muzzle;public int Epoch,Sequence,Shot,Reason,Ammo;public bool AP;public float RepairRemaining,ShellLife,FlashLife=.09f;public int ImpactShot;public Vector3 ImpactPosition;public AudioSource ImpactAudio;
+            public EntityVehicle Vehicle;public Transform Root,Yaw,Pitch,Recoil,Muzzle;public int Epoch,Sequence,Shot,Reason,Ammo;public bool AP;public float RepairRemaining,ShellLife,FlashLife=.09f;public int ImpactShot;public Vector3 ImpactPosition;public AudioSource ImpactAudio;public Light ImpactLight;public float ImpactLightAt=-100;
             public float ShotAt=-100,NextReady,LastStatus=-100,YawAngle,PitchAngle,ClockOffset=float.PositiveInfinity,LastMove;
             public int VisualShot;public float FlashAt=-100;
             public Vector3 LastPosition;public Quaternion LastBody;public double LeftDistance,RightDistance;
@@ -76,6 +76,7 @@ namespace PZAEC.M1
             x.Flash=x.Flame.gameObject.AddComponent<Light>();x.Flash.type=LightType.Point;x.Flash.range=5;x.Flash.color=new Color(1,.68f,.28f);x.Flash.shadows=LightShadows.None;x.Flash.intensity=0;x.Flame.gameObject.SetActive(false);
             x.Blast=Audio(x.Muzzle,blastClip,1,350);x.Mechanism=Audio(x.Pitch,mechanismClip,.4f,35);x.Ready=Audio(x.Pitch,readyClip,.13f,12);
             x.ImpactAudio=Audio(new GameObject("M1APImpactAudio").transform,impactAPClip,.8f,180);
+            x.ImpactLight=x.ImpactAudio.gameObject.AddComponent<Light>();x.ImpactLight.type=LightType.Point;x.ImpactLight.range=9;x.ImpactLight.color=new Color(1,.6f,.25f);x.ImpactLight.shadows=LightShadows.None;x.ImpactLight.intensity=0;
             var tracer=new GameObject("M1ShellTracer");x.Tracer=tracer.AddComponent<LineRenderer>();x.Tracer.sharedMaterial=smoke;x.Tracer.positionCount=2;x.Tracer.useWorldSpace=true;x.Tracer.startWidth=.045f;x.Tracer.endWidth=.025f;x.Tracer.startColor=new Color(1,.8f,.4f,.7f);x.Tracer.endColor=new Color(1,.5f,.1f,0);x.Tracer.shadowCastingMode=ShadowCastingMode.Off;x.Tracer.enabled=false;
             views[v.entityId]=x;return x;
         }
@@ -126,10 +127,11 @@ namespace PZAEC.M1
             int fire=ImpactRules.FireCount(ap,surface),sparks=ImpactRules.Sparks(ap,surface),dust=ImpactRules.Dust(ap,surface),burn=ImpactRules.Smoke(ap,surface);
             int needed=fire+sparks+dust+burn;
             while(puffs.Count>160-needed){var old=puffs[0];old.Go.SetActive(false);pool.Push(old);puffs.RemoveAt(0);}
+            GameObject native=null;
             if(ap){
                 Emit(origin,normal*.2f+Vector3.up*.15f,new Color(1,.6f,.18f,.8f),1,.55f,.45f,p.Shot+303,false,-1,true,.12f);
                 Emit(origin,Vector3.zero,new Color(1,.95f,.7f,.9f),1,.24f,.15f,p.Shot+304,false,-1,true,.06f);
-            }else Emit(origin,normal*.3f+Vector3.up*.2f,new Color(1,.85f,.35f,1),fire,1.3f,.42f,p.Shot+303,false,-1,true);
+            }else{native=GameManager.Instance.ExplosionClient(p.A,Quaternion.identity,ImpactRules.BlastParticle(false),0,5,2500,-1,new List<BlockChangeInfo>());if(native!=null)native.transform.localScale*=2f;}
             // Dust describes the struck surface; it never pretends a block broke.
             Color tint;switch(surface){
                 case ImpactSurface.Earth:tint=new Color(.42f,.32f,.22f,.4f);break;
@@ -141,10 +143,11 @@ namespace PZAEC.M1
                 case ImpactSurface.Cloth:tint=new Color(.5f,.48f,.44f,.2f);break;
                 default:tint=new Color(.5f,.49f,.46f,.35f);break;
             }
-            Emit(origin,normal*(ap?.8f:1.2f)+Vector3.up*.6f,tint,dust,ap?.25f:.6f,surface==ImpactSurface.Water?.65f:ap?.6f:1.5f,p.Shot+101);
-            Emit(origin,Vector3.up*.8f,new Color(.24f,.23f,.22f,.28f),burn,.55f,1.2f,p.Shot+404);
+            Emit(origin,normal*(ap?.8f:1.6f)+Vector3.up*(ap?.6f:1.1f),tint,dust,ap?.25f:.85f,surface==ImpactSurface.Water?.65f:ap?.6f:1.8f,p.Shot+101);
+            Emit(origin,Vector3.up*1.2f,new Color(.24f,.23f,.22f,.28f),burn,.85f,2f,p.Shot+404);
             Emit(origin,normal*3+Vector3.up*1.5f,new Color(1,.75f,.28f,1),sparks,.025f,.22f,p.Shot+202,true);
-            v.ImpactPosition=p.A;v.ImpactAudio.transform.position=p.A-Origin.position;v.ImpactAudio.clip=ap?impactAPClip:blastClip;v.ImpactAudio.volume=ap?.65f:.8f;v.ImpactAudio.maxDistance=ap?180:300;v.ImpactAudio.pitch=ap?1:.75f;v.ImpactAudio.Play();
+            v.ImpactPosition=p.A;v.ImpactAudio.transform.position=p.A-Origin.position;v.ImpactAudio.clip=ap?impactAPClip:blastClip;v.ImpactAudio.volume=ap?.65f:.8f;v.ImpactAudio.maxDistance=ap?180:300;v.ImpactAudio.pitch=ap?1:.75f;if(ap||native==null)v.ImpactAudio.Play();
+            if(v.ImpactLight!=null)v.ImpactLightAt=Time.time;
         }
 
         static void Emit(Vector3 origin,Vector3 velocity,Color color,int count,float size,float life,int seed,bool debris=false,int sourceVehicle=-1,bool fire=false,float hold=0)
@@ -173,6 +176,7 @@ namespace PZAEC.M1
                 if(v.Tracer.enabled){float t=Time.time-v.ShellAt;if(t>=v.ShellLife)v.Tracer.enabled=false;else{var end=v.ShellOrigin+v.ShellVelocity*t+Vector3.down*(4.905f*t*t)-Origin.position;v.Tracer.SetPosition(0,end);v.Tracer.SetPosition(1,end-v.ShellVelocity.normalized*1.5f);}}
                 if(v.ImpactAudio.isPlaying)v.ImpactAudio.transform.position=v.ImpactPosition-Origin.position;
                 if(v.Flame.gameObject.activeSelf){float alpha=Mathf.Clamp01(1-(Time.time-v.FlashAt)/v.FlashLife);v.Properties.SetColor("_Color",new Color(1,1,1,alpha*(Optics.Scoped(v.Vehicle.entityId)?.6f:1)));v.Flame.GetComponent<Renderer>().SetPropertyBlock(v.Properties);v.Flash.intensity=lights++<2?1.4f*alpha*(Optics.Scoped(v.Vehicle.entityId)?.4f:1):0;if(alpha<=0)v.Flame.gameObject.SetActive(false);}
+                if(v.ImpactLight!=null){float lamp=Time.time-v.ImpactLightAt;v.ImpactLight.intensity=lamp<.3f&&lights++<2?1.6f*(1-lamp/.3f):0;}
                 if(!v.ReadyPlayed&&Time.time>=v.NextReady){v.ReadyPlayed=true;if(player.AttachedToEntity==v.Vehicle)v.Ready.Play();}
             }
             foreach(int id in remove){Dispose(views[id]);views.Remove(id);}

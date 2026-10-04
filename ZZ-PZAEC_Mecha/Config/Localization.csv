@@ -1,5 +1,15 @@
 ﻿Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
-vehicleCombatRobotPlaceableDesc,items,item,,,Place the Combat Robot combat walker. FPV eye optics, beam cannon and guided missiles. Model CC-BY-4.0 LaVADraGoN.,放置 Combat Robot 战斗机甲。眼部第一视角、光束主炮与制导导弹。模型 CC-BY-4.0 LaVADraGoN。
-vehicleCombatRobotChassisDesc,items,item,,,Reinforced walker chassis with articulated leg mounts.,带关节腿座的强化步行机骨架。
-ammoPZAECMechaCellDesc,items,item,,,High-density energy cell for the walker's eye beam.,步行机眼部光束炮用高密度能量电池。
-ammoPZAECMechaMissileDesc,items,item,,,Guided missile for the walker's shoulder pod. Lock a zombie for 2 seconds, then release.,步行机肩部发射巢用制导导弹。锁定僵尸 2 秒后发射。
+vehicleCombatRobot,entityclasses,entity,,,Unit-01 (Youth Edition),初号机（青春版）
+vehicleCombatRobotPlaceable,items,item,,,Unit-01 (Youth Edition),初号机（青春版）
+vehicleCombatRobotChassis,items,item,,,Unit-01 (Youth Edition) Frame,初号机（青春版）骨架
+ammoPZAECMechaCell,items,item,,,Energy Cell,能量电池
+ammoPZAECMechaMissile,items,item,,,Guided Missile,制导导弹
+vehicleCombatRobotPlaceableDesc,items,item,,,Place the Unit-01 (Youth Edition) combat robot. FPV optics, palm beam cannon and guided missiles. Model CC-BY-4.0 ILUSHANDRO.,放置初号机（青春版）。第一视角、掌心光束炮与背部制导导弹。模型 CC-BY-4.0 ILUSHANDRO。
+vehicleCombatRobotChassisDesc,items,item,,,Reinforced biped frame for Unit-01 (Youth Edition).,初号机（青春版）专用的强化双足骨架，带关节安装座。
+ammoPZAECMechaCellDesc,items,item,,,High-density energy cell for the palm beam.,掌心光束炮用高密度能量电池。
+ammoPZAECMechaMissileDesc,items,item,,,Guided missile for the back pod. Hold G on a hostile target for 2 seconds to fire.,背部发射巢用制导导弹。按住 G 锁定敌对目标 2 秒后自动发射。
+vehicleCombatRobotComplete,entityclasses,entity,,,Unit-01 (Complete Form),初号机（完全体）
+vehicleCombatRobotCompletePlaceable,items,item,,,Unit-01 (Complete Form),初号机（完全体）
+vehicleCombatRobotCompleteChassis,items,item,,,Unit-01 (Complete Form) Frame,初号机（完全体）骨架
+vehicleCombatRobotCompletePlaceableDesc,items,item,,,Samurai-style complete form. 50% more hull durability and weapon damage and fuel capacity. Uses shared mecha ammunition.,武士外形的初号机（完全体）。血量、武器伤害与储油量较青春版提升50%。共用机甲能量电池与制导导弹。
+vehicleCombatRobotCompleteChassisDesc,items,item,,,Reinforced frame for Unit-01 Complete Form.,初号机（完全体）专用强化骨架。

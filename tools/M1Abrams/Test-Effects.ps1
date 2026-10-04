@@ -32,4 +32,6 @@ foreach($surface in [Enum]::GetValues([PZAEC.M1.ImpactSurface])){if([PZAEC.M1.Im
 if([PZAEC.M1.ImpactRules]::Dust($true,'Organic') -ne 0 -or [PZAEC.M1.ImpactRules]::Dust($false,'Organic') -ne 0){throw 'Organic impacts have no soil dust'}
 foreach($ap in @($true,$false)){if([PZAEC.M1.ImpactRules]::Smoke($ap,'Water') -ne 0){throw 'Water has no lingering combustion smoke'}}
 if([PZAEC.M1.ImpactRules]::FireCount($false,'Water') -ne 0){throw 'HE water policy unchanged'}
+if([PZAEC.M1.ImpactRules]::BlastParticle($true) -ne 0 -or [PZAEC.M1.ImpactRules]::BlastParticle($false) -ne 5){throw 'HE borrows the native rocket particle 5; AP stays quiet'}
+if([PZAEC.M1.ImpactRules]::MuzzleParticle -ne 'gunfire_MG_M60'){throw 'MG borrows the native M60 muzzle fire'}
 Write-Output 'PASS surface classification, wire encoding and material effect policy'

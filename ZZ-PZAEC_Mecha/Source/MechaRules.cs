@@ -6,12 +6,20 @@ namespace PZAEC.Mecha
     {
         public const string VehicleName = "vehicleCombatRobot";
         public const string PlaceableItem = "vehicleCombatRobotPlaceable";
+        public const string CompleteVehicle = "vehicleCombatRobotComplete", CompleteItem = "vehicleCombatRobotCompletePlaceable";
+        static bool Same(string a,string b){return string.Equals(a,b,System.StringComparison.OrdinalIgnoreCase);}
+        public static bool VehicleNameMatches(string name){return Same(name,VehicleName)||Same(name,CompleteVehicle);}
+        public static bool ItemNameMatches(string name){return Same(name,PlaceableItem)||Same(name,CompleteItem);}
+        public static bool Complete(EntityVehicle v){return v!=null&&v.vehicle!=null&&Same(v.vehicle.GetName(),CompleteVehicle);}
+        public static float AttributeScale(EntityVehicle v){return Complete(v)?1.5f:1f;}
+        public static string DisplayName(EntityVehicle v){return Complete(v)?"初号机（完全体）":"初号机（青春版）";}
         public const string BeamAmmo = "ammoPZAECMechaCell";
         public const string MissileAmmo = "ammoPZAECMechaMissile";
 
         // Beam cannon (palm emitter). Direct hit + impact splash; every damage
         // event stays under the 16-bit network limit (no Damage32 dependency).
-        public const float BeamInterval = .5f, BeamHeatPerShot = 8f, BeamCooling = 20f, BeamResumeHeat = 30f;
+        public const float BeamInterval = .5f, BeamHeatPerShot = 18f, BeamCooling = 12f, BeamResumeHeat = 30f;
+        public const bool MeleeEnabled = false;
         public const float BeamRange = 250f, BeamEntityDamage = 60000f, BeamBlockDamage = 15f;
         public const float BeamSplashDamage = 45000f, BeamSplashRadius = 3f;
         public const float BeamRadiusBlocks = 1f;
@@ -19,7 +27,7 @@ namespace PZAEC.Mecha
         // Shoulder missiles: 2 s lock, guided, one per trigger pull.
         public const float MissileLockSeconds = 2f, MissileCooldown = 8f, MissileRange = 350f;
         public const float MissileDamage = 60000f, MissileBlockDamage = 40f, MissileSpeed = 55f;
-        public const float MissileLifetime = 6f, MissileTurnRate = 45f, MissileMinDistance = 10f;
+        public const float MissileLifetime = 8f, MissileTurnRate = 45f, MissileMinDistance = 10f;
         public const float MissileEntityRadius = 5f, MissileBlockRadius = 3f;
 
         public const float HoldTimeout = .5f, MuzzleOffset = .6f;
@@ -55,15 +63,16 @@ namespace PZAEC.Mecha
         public const float TorsoLeanDegrees = 8f, HipSwayMeters = .08f, ArmSwingDegrees = 15f;
         public const float DeployRiseSeconds = 2.5f;
 
-        // Boarding ceremony: intercept Enter/Detach, play a four-phase show.
-        // Flip to false for the safe two-phase variant (no entry delay).
+        // Articulated rigid rig, world-planted gait and boarding timeline (0.7.0).
         public const bool BoardingEnabled = true;
+        public const bool GaitIkEnabled = true;
+        public const bool RigRebuildEnabled = true;
         public const float BoardExpandSeconds = 1.2f, BoardGreetSeconds = .7f, BoardLiftSeconds = .8f, BoardCloseSeconds = 1.5f;
         public const float DismountExpandSeconds = .8f, DismountPlaceSeconds = .8f, DismountRiseSeconds = .6f;
 
         // GLB mount tuning (auto-scaled to TargetHeight; orientation QA-tuned).
         public const float MountScale = 1f;
-        public static readonly Quaternion MountRotation = Quaternion.Euler(0, 180, 0);
+        public static readonly Quaternion MountRotation = Quaternion.identity;
 
         public const float DeploySeconds = 2.5f, DeployBlendSeconds = 1.2f;
         public const float TurbineSpinDegreesPerSecond = 720f;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -10,7 +10,7 @@ namespace PZAEC.Mecha
     // all resolve on the server exactly like the Apache/T16 weapon stack.
     public static class Weapons
     {
-        public const byte Aim = 0, Fire = 1, Stop = 2, MissileAim = 3, MissileFire = 4, Repair = 5, RepairStop = 6, BattleRepair = 7, SwitchMelee = 8, MeleeSweep = 9, MeleeHeavy = 10, Trample = 11, Stomp = 12;
+        public const byte Aim = 0, Fire = 1, Stop = 2, MissileAim = 3, MissileFire = 4, Repair = 5, RepairStop = 6, BattleRepair = 7, SwitchMelee = 8, MeleeSweep = 9, MeleeHeavy = 10, Trample = 11, Stomp = 12, Motion = 13, SkipBoard = 14, BoardControl = 15;
         public const byte BeamEvent = 0, MissileSpawnEvent = 1, MissileMoveEvent = 2, ImpactEvent = 3, StatusEvent = 4, MeleeSweepEvent = 5, MeleeHeavyEvent = 6, MeleeModeEvent = 7;
 
         public sealed class State
@@ -24,6 +24,7 @@ namespace PZAEC.Mecha
             public float LockStarted, LockProgress;
             public float LastDamage = -100, LastWeaponUse = -100, RepairStarted = -100, NextBattleRepair;
             public bool MeleeMode;
+            public bool TriggerHeld, MissileTrigger;
             public float NextMelee = -100, NextModeSwitch;
             public float NextStomp = -100, NextTrampleTick;
             public readonly Dictionary<int, float> TrampleUntil = new Dictionary<int, float>();
@@ -44,9 +45,13 @@ namespace PZAEC.Mecha
             public bool Accept(int actor, int sequence, bool firing, float now)
             {
                 if (Actor != actor) { Actor = actor; LastSequence = 0; Until = 0; }
-                if (sequence <= LastSequence) { if (firing) Until = now + Rules.HoldTimeout; return false; }
+                // Stale sequences are dropped without touching any state: an
+                // old replayed message must never extend the session.
+                if (sequence <= LastSequence) return false;
                 LastSequence = sequence;
-                if (firing) Until = now + Rules.HoldTimeout;
+                // Any live message (aim or trigger) keeps the aim session up;
+                // whether the weapon actually fires is the separate Trigger fields.
+                Until = now + Rules.HoldTimeout;
                 return true;
             }
             public void Stop() { Until = 0; }
@@ -64,32 +69,16 @@ namespace PZAEC.Mecha
         static bool inputHeld, inputMissileHeld;
         static float nextInput, nextAim, nextError;
         static int inputVehicle = -1;
-        static bool meleeModeLocal;
-        static float lastLocalSwitch = -10, meleePressStart = -1;
-
-        public static bool MeleeModeLocal { get { return meleeModeLocal; } }
-        public static float MeleeCharge { get; private set; }
-
-        // Pull the authoritative mode flag from fresh status snapshots, except
-        // during the optimistic window right after a local X press.
-        static void SyncMeleeMode(EntityVehicle vehicle)
-        {
-            if (Time.time - lastLocalSwitch < .6f) return;
-            var status = MechaFX.GetStatus(vehicle.entityId);
-            if (Time.time - status.Time > 1f) return;
-            bool server = status.MeleeMode;
-            if (server != meleeModeLocal) { meleeModeLocal = server; meleePressStart = -1; MeleeCharge = 0; }
-        }
-
+        static float nextFireAudit;
         public static bool Server { get { return ConnectionManager.Instance != null && ConnectionManager.Instance.IsServer; } }
         public static bool IsMecha(EntityVehicle v)
-        { return v != null && v.vehicle != null && string.Equals(v.vehicle.GetName(), Rules.VehicleName, StringComparison.OrdinalIgnoreCase); }
+        { return v != null && v.vehicle != null && Rules.VehicleNameMatches(v.vehicle.GetName()); }
 
         public static bool IsMecha(Vehicle v)
-        { return v != null && string.Equals(v.GetName(), Rules.VehicleName, StringComparison.OrdinalIgnoreCase); }
+        { return v != null && Rules.VehicleNameMatches(v.GetName()); }
 
         public static bool IsMecha(string placeableItemName)
-        { return string.Equals(placeableItemName, Rules.PlaceableItem, StringComparison.OrdinalIgnoreCase); }
+        { return Rules.ItemNameMatches(placeableItemName); }
 
         public static bool UIReady(EntityPlayerLocal player)
         {
@@ -118,7 +107,7 @@ namespace PZAEC.Mecha
         {
             states.Clear(); missiles.Clear(); leases.Clear(); currentWorld = null;
             nextInput = nextAim = 0; inputVehicle = -1; inputHeld = inputMissileHeld = false;
-            MechaFX.Clear(); Gait.Clear(); Deploy.Clear(); Optics.Clear(); CrewVisibility.Clear(); Boarding.Clear();
+            MechaFX.Clear(); Gait.Clear(); Deploy.Clear(); Optics.Clear(); CrewVisibility.Clear(); Boarding.Clear(); Locomotion.Clear(); RobotAudio.Clear(); Model.ClearRuntime(); MechaArmor.ClearTravelProtection();
         }
 
         static void EnsureWorld(World world) { if (world != currentWorld) { Clear(); currentWorld = world; } }
@@ -149,13 +138,16 @@ namespace PZAEC.Mecha
                 v.position + BodyRotation(v) * new Vector3(0, 2.6f, .8f);
         }
 
+        public static Vector3 MuzzleWorld(Model.Rig rig,EntityVehicle v)
+        { return rig!=null&&rig.HandR!=null ? rig.HandR.position+rig.HandR.forward*.65f+Origin.position : EyeWorld(rig,v); }
+
         static bool ReadyOperator(State state, int actor)
         {
             var player = currentWorld != null ? currentWorld.GetEntity(actor) as EntityPlayer : null;
             var attached = state.Vehicle.GetAttached(0);
             return attached != null && attached.entityId == actor &&
                 (player == null || !player.IsDead()) &&
-                !state.Vehicle.IsDead() && state.Vehicle.vehicle.GetHealth() > 0;
+                !state.Vehicle.IsDead() && !Boarding.Active(state.Vehicle) && state.Vehicle.vehicle.GetHealth() > 0;
         }
 
         static bool Consume(State state, string name)
@@ -196,7 +188,7 @@ namespace PZAEC.Mecha
         {
             return direction.sqrMagnitude > .0001f && Finite(direction.x) && Finite(direction.y) && Finite(direction.z) &&
                 Finite(origin.x) && Finite(origin.y) && Finite(origin.z) &&
-                (origin - vehicle.position).sqrMagnitude <= 40 * 40;
+                (origin - vehicle.position).sqrMagnitude <= 6 * 6;
         }
 
         public static bool InArc(EntityVehicle v, Vector3 direction, float maxYaw)
@@ -212,23 +204,39 @@ namespace PZAEC.Mecha
         {
             direction = view;
             var rig = Model.GetRig(state.Vehicle);
-            var pivot = EyeWorld(rig, state.Vehicle);
+            var pivot = MuzzleWorld(rig, state.Vehicle);
             if (currentWorld == null || !ValidSight(state.Vehicle, origin, view)) return 1;
             view.Normalize();
-            direction = view;
+            var aimPoint=origin+view*Rules.BeamRange;
+            if(Trace(state.Vehicle,origin,view,Rules.BeamRange,out var aimHit))aimPoint=aimHit.hit.pos;
+            direction = AimFromMuzzle(pivot,aimPoint,view);
             if (!InArc(state.Vehicle, direction, 90f)) return 1;
             var muzzle = pivot + direction * Rules.MuzzleOffset;
             if (Trace(state.Vehicle, pivot, direction, Rules.MuzzleOffset, out var obstruction)) return 2;
             return 0;
         }
+        public static Vector3 AimFromMuzzle(Vector3 muzzle,Vector3 target,Vector3 fallback)
+        {var delta=target-muzzle;return delta.sqrMagnitude>.0001f?delta.normalized:fallback.normalized;}
+        public static Vector3 MissileAimPoint(EntityAlive target){return target.GetPosition()+Vector3.up*.8f;}
 
         public static void Request(World world, int actor, int vehicleId, byte op, Vector3 direction, Vector3 origin, int sequence)
         {
-            if (!enabled || !Server || world == null || op > RepairStop) return;
+            if (!enabled || !Server || world == null || op > BoardControl) return;
             EnsureWorld(world);
             var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
             if (!IsMecha(vehicle)) return;
-            if (op == 13) { Boarding.SkipRequest(world, actor, vehicleId); return; }
+            if(op==SwitchMelee||op==MeleeSweep||op==MeleeHeavy)return; // Reserved old protocol IDs, disabled server-side.
+            if(op==BoardControl){if(Finite(direction.x))Boarding.Request(world,vehicle,actor,(int)direction.x);return;}
+            if(op==SkipBoard&&Boarding.Owned(vehicle,actor)){Boarding.Skip(vehicle);return;}
+            if(op==Motion || op==SkipBoard)
+            {
+                var driver=vehicle.GetAttached(0);
+                if(driver==null || driver.entityId!=actor) return;
+                if(op==SkipBoard) { Boarding.Skip(vehicle); return; }
+                if(!Locomotion.Receive(vehicle,actor,sequence,direction)) return;
+                Broadcast(vehicleId,sequence,9,direction,Vector3.zero,actor,0);
+                return;
+            }
             // Weapons, repairs and mode flips stay locked during the ceremony.
             if (Boarding.Active(vehicle)) return;
             var state = GetState(vehicle);
@@ -270,12 +278,26 @@ namespace PZAEC.Mecha
             bool firing = op == Fire || op == MissileFire;
             if (!lease.Accept(actor, sequence, firing, Time.time)) return;
             if (!ReadyOperator(state, actor))
-            { lease.Stop(); state.Aiming = false; state.MissileAiming = false; return; }
-            if (op == Stop) { state.Aiming = false; state.MissileAiming = false; state.LockTarget = null; state.LockProgress = 0; return; }
-            if (!ValidSight(vehicle, origin, direction)) { state.Aiming = false; state.MissileAiming = false; return; }
+            { lease.Stop(); state.Aiming = false; state.MissileAiming = false; state.TriggerHeld = false; state.MissileTrigger = false; return; }
+            if (op == Stop)
+            {
+                state.Aiming = false; state.MissileAiming = false;
+                state.TriggerHeld = false; state.MissileTrigger = false;
+                state.LockTarget = null; state.LockProgress = 0; return;
+            }
+            if (!ValidSight(vehicle, origin, direction))
+            {
+                state.Aiming = false; state.MissileAiming = false;
+                state.TriggerHeld = false; state.MissileTrigger = false; return;
+            }
             state.AimOrigin = origin; state.AimDirection = direction.normalized;
+            // Aim messages only keep the sight session alive; only Fire/MissileFire
+            // ever press a trigger. Idle aim spam can no longer shoot.
             state.Aiming = op == Aim || op == Fire;
             state.MissileAiming = op == MissileAim || op == MissileFire;
+            state.TriggerHeld = op == Fire;
+            state.MissileTrigger = op == MissileFire;
+            if(state.Aiming)state.AimReason=ResolveBeam(state,origin,direction,out var corrected);
             if (!state.MissileAiming) { state.LockTarget = null; state.LockProgress = 0; }
         }
 
@@ -316,7 +338,7 @@ namespace PZAEC.Mecha
                 var action = new DynamicProperties(); var explosion = new DynamicProperties();
                 action.Classes.Add("Explosion", explosion);
                 var blast = new ExplosionData(action, null) { ParticleIndex = 5, BlockRadius = 0,
-                    EntityRadius = (byte)Rules.StompRadius, EntityDamage = Rules.StompDamage, BlockDamage = 0,
+                    EntityRadius = (byte)Rules.StompRadius, EntityDamage = Rules.StompDamage*Rules.AttributeScale(state.Vehicle), BlockDamage = 0,
                     BlastPower = (int)Rules.StompKnockback };
                 GameManager.Instance.ExplosionServer(position, new Vector3i(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), Mathf.FloorToInt(position.z)),
                     Quaternion.identity, blast, actor, 0, false, ItemClass.GetItem(Rules.BeamAmmo, false));
@@ -340,7 +362,7 @@ namespace PZAEC.Mecha
                 state.TrampleUntil[alive.entityId] = now + Rules.TrampleEntityInterval;
                 var source = new DamageSourceEntity(EnumDamageSource.External, EnumDamageTypes.Bashing, actor, Vector3.up)
                 { AttackingItem = ItemClass.GetItem(Rules.BeamAmmo, false), canHitSpecialBodyParts = false, DismemberChance = 0 };
-                alive.DamageEntity(source, (int)Rules.TrampleDamage, false, 0);
+                alive.DamageEntity(source, (int)(Rules.TrampleDamage*Rules.AttributeScale(state.Vehicle)), false, 0);
             }
         }
 
@@ -427,41 +449,59 @@ namespace PZAEC.Mecha
             if (!Consume(state, Rules.BeamAmmo)) { state.NextBeam = now + .5f; return; }
             state.NextBeam = now + Rules.BeamInterval;
             state.LastWeaponUse = now;
-            state.Heat += Rules.BeamHeatPerShot;
-            if (state.Heat >= 100f) { state.Overheated = true; state.Heat = 100f; }
+            AddBeamHeat(state);
             var rig = Model.GetRig(state.Vehicle);
-            var start = EyeWorld(rig, state.Vehicle) + direction * Rules.MuzzleOffset;
+            var start = MuzzleWorld(rig, state.Vehicle) + direction * Rules.MuzzleOffset;
             var end = start + direction * Rules.BeamRange;
             if (Trace(state.Vehicle, start, direction, Rules.BeamRange, out var hit))
             {
                 end = hit.hit.pos;
                 var ammo = ItemClass.GetItem(Rules.BeamAmmo, false);
-                ItemActionAttack.Hit(hit, actor, EnumDamageTypes.Electrical, Rules.BeamBlockDamage,
-                    Rules.BeamEntityDamage, 1, 1, 0, .05f, "metal", new DamageMultiplier(), null,
+                float factor=Rules.AttributeScale(state.Vehicle);int packets=DamagePackets(Rules.BeamEntityDamage*factor);
+                for(int part=0;part<packets;part++)
+                ItemActionAttack.Hit(hit, actor, EnumDamageTypes.Electrical, Rules.BeamBlockDamage*factor/packets,
+                    Rules.BeamEntityDamage*factor/packets, 1, 1, 0, .05f, "metal", new DamageMultiplier(), null,
                     new ItemActionAttack.AttackHitInfo(), 0, 1, 1, null, null, ItemActionAttack.EnumAttackMode.RealNoHarvesting,
                     null, -1, ammo);
-                GameManager.Instance.ExplosionServer(end, new Vector3i(Mathf.FloorToInt(end.x), Mathf.FloorToInt(end.y), Mathf.FloorToInt(end.z)),
-                    Quaternion.identity, BeamExplosion(), actor, 0, false, ItemClass.GetItem(Rules.BeamAmmo, false));
+                for(int part=0;part<DamagePackets(Rules.BeamSplashDamage*factor);part++)
+                    GameManager.Instance.ExplosionServer(end, new Vector3i(Mathf.FloorToInt(end.x), Mathf.FloorToInt(end.y), Mathf.FloorToInt(end.z)),
+                        Quaternion.identity, BeamExplosion(state.Vehicle,part), actor, 0, false, ItemClass.GetItem(Rules.BeamAmmo, false));
+            }
+            // Throttled fire audit: matches in-game gunfire against real ammo
+            // consumption (10 s cadence, safe to keep enabled).
+            if (Time.time >= nextFireAudit)
+            {
+                nextFireAudit = Time.time + 10f;
+                Log.Out("[Mecha] beam v=" + state.Vehicle.entityId + " ammo=" + Ammo(state, Rules.BeamAmmo) + " heat=" + Mathf.RoundToInt(state.Heat));
             }
             Broadcast(state.Vehicle.entityId, unchecked(++serial), BeamEvent, start, end, state.Heat, 0);
         }
 
-        static ExplosionData BeamExplosion()
+        // Native damage messages contain 16-bit fields. Split only damage delivery,
+        // while ammo, heat, cooldown and the authored beam event remain once per shot.
+        public static int DamagePackets(float total){return Mathf.Max(1,Mathf.CeilToInt(total/60000f));}
+        static ExplosionData BeamExplosion(EntityVehicle vehicle,int part)
         {
             var action = new DynamicProperties(); var explosion = new DynamicProperties();
             action.Classes.Add("Explosion", explosion);
             // Horde-clear splash around the impact; zero block damage keeps the
             // walker safe to fire from inside a player-built kill corridor.
-            return new ExplosionData(action, null) { ParticleIndex = 5, BlockRadius = 0, EntityRadius = (byte)Rules.BeamSplashRadius,
-                EntityDamage = Rules.BeamSplashDamage, BlockDamage = 0, BlastPower = 20 };
+            float damage=Rules.BeamSplashDamage*Rules.AttributeScale(vehicle);
+            return new ExplosionData(action, null) { ParticleIndex = part==0?5:0, BlockRadius = 0, EntityRadius = (byte)Rules.BeamSplashRadius,
+                EntityDamage = damage/DamagePackets(damage), BlockDamage = 0, BlastPower = part==0?20:0 };
         }
+        public static void AddBeamHeat(State state)
+        {state.Heat=Mathf.Min(100,state.Heat+Rules.BeamHeatPerShot);if(state.Heat>=100)state.Overheated=true;}
+        public static void CoolBeam(State state,float dt)
+        {state.Heat=Mathf.Max(0,state.Heat-Rules.BeamCooling*Mathf.Max(0,dt));if(state.Overheated&&state.Heat<=Rules.BeamResumeHeat)state.Overheated=false;}
 
-        static ExplosionData BuildMissileExplosion()
+        static ExplosionData BuildMissileExplosion(EntityVehicle vehicle,int part)
         {
             var action = new DynamicProperties(); var explosion = new DynamicProperties();
             action.Classes.Add("Explosion", explosion);
-            return new ExplosionData(action, null) { ParticleIndex = 5, BlockRadius = (byte)Rules.MissileBlockRadius, EntityRadius = (byte)Rules.MissileEntityRadius,
-                EntityDamage = Rules.MissileDamage, BlockDamage = Rules.MissileBlockDamage, BlastPower = 200 };
+            float factor=Rules.AttributeScale(vehicle),damage=Rules.MissileDamage*factor;int packets=DamagePackets(damage);
+            return new ExplosionData(action, null) { ParticleIndex = part==0?5:0, BlockRadius = (byte)Rules.MissileBlockRadius, EntityRadius = (byte)Rules.MissileEntityRadius,
+                EntityDamage = damage/packets, BlockDamage = Rules.MissileBlockDamage*factor/packets, BlastPower = part==0?200:0 };
         }
 
         // Missile lock resolves against whatever living zombie the sight ray hits,
@@ -469,13 +509,17 @@ namespace PZAEC.Mecha
         static byte ResolveMissile(State state, out EntityAlive target)
         {
             target = null;
-            var reason = ResolveBeam(state, state.AimOrigin, state.AimDirection, out var direction);
-            if (reason != 0) return 1;
+            if(!ValidSight(state.Vehicle,state.AimOrigin,state.AimDirection)||!InArc(state.Vehicle,state.AimDirection,90f))return 1;
+            var direction=state.AimDirection.normalized;
             var origin = state.AimOrigin;
             if (Trace(state.Vehicle, origin, direction, Rules.MissileRange, out var hit))
             {
                 var entity = ItemActionAttack.FindHitEntity(hit) as EntityAlive;
-                if (entity is EntityZombie && !entity.IsDead()) target = entity;
+                if (Hostile(entity))
+                {
+                    if(Vector3.Distance(state.Vehicle.position,entity.position)<Rules.MissileMinDistance)return 7;
+                    target=entity;
+                }
             }
             return target == null ? (byte)4 : (byte)0;
         }
@@ -494,19 +538,21 @@ namespace PZAEC.Mecha
         {
             if (state.GuidedSpent || now < state.NextMissile) return;
             if (state.LockTarget == null || state.LockTarget.IsDead() || state.LockProgress < 1) return;
-            var reason = ResolveBeam(state, state.AimOrigin, state.AimDirection, out var direction);
-            if (reason != 0) { state.AimReason = reason; return; }
+            var reason=ResolveMissile(state,out var target);
+            if(reason!=0||target!=state.LockTarget){state.AimReason=reason;return;}
+            var rig = Model.GetRig(state.Vehicle);
+            var mount = rig != null && rig.Backpack != null ? rig.Backpack : null;
+            var start = mount != null ? mount.position + Origin.position : state.Vehicle.position + BodyRotation(state.Vehicle) * new Vector3(0, 2.6f, 0);
+            var direction=AimFromMuzzle(start,MissileAimPoint(target),state.AimDirection);
+            if(Trace(state.Vehicle,start,direction,1f,out var blocked)){state.AimReason=2;return;}
             if (!Consume(state, Rules.MissileAmmo)) return;
             state.NextMissile = now + Rules.MissileCooldown;
             state.GuidedSpent = true;
             state.LastWeaponUse = now;
-            var rig = Model.GetRig(state.Vehicle);
-            var mount = rig != null && rig.Backpack != null ? rig.Backpack : null;
-            var start = mount != null ? mount.position + Origin.position : state.Vehicle.position + BodyRotation(state.Vehicle) * new Vector3(0, 2.6f, 0);
             var inherited = state.Vehicle.vehicleRB != null ? Vector3.ClampMagnitude(state.Vehicle.vehicleRB.velocity, 40) : Vector3.zero;
             var velocity = direction * Rules.MissileSpeed + inherited;
             var missile = new Missile { Id = unchecked(++serial), VehicleId = state.Vehicle.entityId, Vehicle = state.Vehicle, ShooterId = actor,
-                Position = start, Velocity = velocity, Target = state.LockTarget, TargetOffset = state.AimOrigin + direction * Mathf.Min(60f, Rules.MissileRange) - state.LockTarget.position };
+                Position = start, Velocity = velocity, Target = state.LockTarget, TargetOffset = MissileAimPoint(target)-target.position };
             missiles.Add(missile);
             Broadcast(state.Vehicle.entityId, missile.Id, MissileSpawnEvent, start, velocity, 0, 0);
         }
@@ -537,8 +583,9 @@ namespace PZAEC.Mecha
                     missiles.RemoveAt(i);
                     var point = impact.hit.pos;
                     Broadcast(missile.VehicleId, missile.Id, ImpactEvent, point, Vector3.zero, 0, 0);
-                    GameManager.Instance.ExplosionServer(point, new Vector3i(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), Mathf.FloorToInt(point.z)),
-                        Quaternion.identity, BuildMissileExplosion(), missile.ShooterId, 0, false, ItemClass.GetItem(Rules.MissileAmmo, false));
+                    for(int part=0;part<DamagePackets(Rules.MissileDamage*Rules.AttributeScale(missile.Vehicle));part++)
+                        GameManager.Instance.ExplosionServer(point, new Vector3i(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), Mathf.FloorToInt(point.z)),
+                            Quaternion.identity, BuildMissileExplosion(missile.Vehicle,part), missile.ShooterId, 0, false, ItemClass.GetItem(Rules.MissileAmmo, false));
                 }
                 else if (missile.Age >= Rules.MissileLifetime)
                 { missiles.RemoveAt(i); Broadcast(missile.VehicleId, missile.Id, ImpactEvent, missile.Position, Vector3.zero, 0, 0); }
@@ -557,7 +604,7 @@ namespace PZAEC.Mecha
             bool hurt = now - state.LastDamage < Rules.RepairIdleSeconds;
             float repair = state.RepairStarted >= 0 ? Mathf.Clamp01((now - state.RepairStarted) / Rules.RepairSeconds) : 0f;
             int flags = (state.Overheated ? 1 : 0) | (state.AimReason == 1 ? 4 : 0) | (state.AimReason == 2 ? 8 : 0) |
-                (state.GuidedSpent ? 16 : 0) | (hurt ? 32 : 0) | (state.MeleeMode ? 64 : 0);
+                (state.GuidedSpent ? 16 : 0) | (hurt ? 32 : 0) | (state.AimReason==7?128:0) | (state.AimReason==4?256:0);
             Broadcast(state.Vehicle.entityId, flags, StatusEvent,
                 new Vector3(Ammo(state, Rules.BeamAmmo), Ammo(state, Rules.MissileAmmo), Mathf.Max(0, state.NextMissile - now)),
                 new Vector3(state.Heat, hull, repair), state.LockProgress, Mathf.Max(0, state.NextBattleRepair - now));
@@ -579,25 +626,27 @@ namespace PZAEC.Mecha
                     if (state.Vehicle == null || world.GetEntity(pair.Key) != state.Vehicle) { remove.Add(pair.Key); continue; }
                     if (Server)
                     {
-                        state.Heat = Mathf.Max(0, state.Heat - Rules.BeamCooling * Time.deltaTime);
-                        if (state.Overheated && state.Heat <= Rules.BeamResumeHeat) state.Overheated = false;
+                        CoolBeam(state,Time.deltaTime);
                         // Repair runs whether or not anyone is seated; its state
                         // machine owns its own trigger lease and eligibility.
                         MechaArmor.UpdateRepair(world, state, Time.time);
                         var lease = GetLease(pair.Key);
                         int actor = state.Vehicle.GetAttached(0) != null ? state.Vehicle.GetAttached(0).entityId : -1;
-                        bool firing = state.Aiming || state.MissileAiming;
-                        if (!firing || actor != lease.Actor || Time.time >= lease.Until || !ReadyOperator(state, actor))
+                        bool session = state.Aiming || state.MissileAiming;
+                        if (!session || actor != lease.Actor || Time.time >= lease.Until || !ReadyOperator(state, actor))
                         {
                             state.Aiming = false; state.MissileAiming = false;
+                            state.TriggerHeld = false; state.MissileTrigger = false;
                             state.LockTarget = null; state.LockProgress = 0;
                         }
                         else
                         {
-                            UpdateMissile(state, Time.time);
-                            if (state.Aiming) FireBeam(state, actor, Time.time);
-                            else if (state.MissileAiming) FireMissile(state, actor, Time.time);
-                            if (!state.MissileAiming) state.GuidedSpent = false;
+                            // Lock accumulation follows the sight session; only a
+                            // pressed trigger ever consumes ammo or emits events.
+                            if (state.MissileAiming) UpdateMissile(state, Time.time);
+                            if (state.TriggerHeld && state.Aiming) FireBeam(state, actor, Time.time);
+                            else if (state.MissileTrigger && state.MissileAiming) FireMissile(state, actor, Time.time);
+                            if (!state.MissileTrigger) state.GuidedSpent = false;
                         }
                         bool occupied = state.Vehicle.GetAttached(0) != null;
                         if ((occupied || state.RepairStarted >= 0) && Time.time >= state.NextStatus)
@@ -608,7 +657,8 @@ namespace PZAEC.Mecha
                 if (Server) AdvanceMissiles(Time.deltaTime);
                 Deploy.Update(world);
                 Boarding.Update(world);
-                Boarding.ClientSkipCheck(world);
+                Locomotion.Tick(world);
+                RobotAudio.Cleanup(world);
                 CrewVisibility.Update(world);
                 VisualTick(world, Time.deltaTime);
                 MechaFX.Update(Time.deltaTime);
@@ -638,55 +688,49 @@ namespace PZAEC.Mecha
             var previous = world.GetEntity(inputVehicle) as EntityVehicle;
             if (player != null && IsMecha(previous)) SendIntent(player, previous, Stop, Vector3.forward, previous.position);
             inputHeld = inputMissileHeld = false;
+            Locomotion.ReleaseInput();
         }
 
         static void LocalInput(World world)
         {
             var player = world.GetPrimaryPlayer();
+            if (player != null && Input.GetKeyDown(KeyCode.F9))
+            {
+                EntityVehicle closest = null; float best = 25f;
+                foreach (var entity in world.Entities.list)
+                {
+                    var candidate = entity as EntityVehicle;
+                    if (!IsMecha(candidate)) continue;
+                    float distance = (candidate.position - player.position).sqrMagnitude;
+                    if (distance < best) { best = distance; closest = candidate; }
+                }
+                if (closest != null) MechaDebug.Dump(world, closest);
+            }
             var vehicle = player != null ? player.AttachedToEntity as EntityVehicle : null;
             if (!IsMecha(vehicle) || player.IsDead())
-            { ReleaseInput(world, player); inputVehicle = -1; Optics.Clear(); meleeModeLocal = false; meleePressStart = -1; MeleeCharge = 0; RepairInput(world, player); return; }
+            { ReleaseInput(world, player); inputVehicle = -1; Optics.Clear(); RepairInput(world, player); return; }
             var attached = vehicle.GetAttached(0);
             if (attached == null || attached.entityId != player.entityId) { ReleaseInput(world, player); Optics.Clear(); return; }
             if (inputVehicle != vehicle.entityId)
             { ReleaseInput(world, player); inputVehicle = vehicle.entityId; nextInput = Time.time + .25f; nextAim = 0; }
             if (!UIReady(player))
-            { ReleaseInput(world, player); nextInput = Time.time + .25f; MeleeCharge = 0; return; }
+            { ReleaseInput(world, player); nextInput = Time.time + .25f; return; }
             Optics.UpdateInput(player, vehicle);
+            if(Boarding.Active(vehicle))
+            {
+                ReleaseInput(world,player);
+                if(Input.GetKeyDown(KeyCode.Space)) { SendIntent(player,vehicle,SkipBoard,Vector3.zero,Vector3.zero); Boarding.SkipLocal(vehicle); }
+                return;
+            }
+
             Locomotion.FeedInput(
                 Input.GetKeyDown(Rules.Key(vehicle, "pzMechaHoverKey", KeyCode.Q)),
                 Input.GetKey(Rules.Key(vehicle, "pzMechaDescendKey", KeyCode.C)),
                 Input.GetKey(Rules.Key(vehicle, "pzMechaJumpKey", KeyCode.Space)));
             if (Time.time >= nextInput && Input.GetKeyDown(Rules.Key(vehicle, "pzMechaBattleRepairKey", KeyCode.R)))
                 SendIntent(player, vehicle, BattleRepair, Vector3.forward, vehicle.position);
-            SyncMeleeMode(vehicle);
-            if (Time.time >= nextInput && Input.GetKeyDown(Rules.Key(vehicle, "pzMechaModeKey", KeyCode.X)))
-            {
-                // Optimistic local flip; the server flag re-syncs via status.
-                meleeModeLocal = !meleeModeLocal;
-                lastLocalSwitch = Time.time;
-                SendIntent(player, vehicle, SwitchMelee, Vector3.forward, vehicle.position);
-            }
             var beamKey = Rules.Key(vehicle, "pzMechaBeamKey", KeyCode.Mouse0);
-            if (meleeModeLocal)
-            {
-                float cooldown = MechaFX.MeleeCooldownRemaining(vehicle.entityId);
-                if (Input.GetKeyDown(beamKey) && cooldown <= 0) meleePressStart = Time.time;
-                if (meleePressStart > 0 && Input.GetKey(beamKey))
-                    MeleeCharge = Mathf.Clamp01((Time.time - meleePressStart) / Rules.HeavyChargeSeconds);
-                else MeleeCharge = 0;
-                MechaFX.SetCharge(vehicle.entityId, MeleeCharge);
-                if (Input.GetKeyUp(beamKey) && meleePressStart > 0)
-                {
-                    bool heavy = Time.time - meleePressStart >= Rules.HeavyChargeSeconds;
-                    meleePressStart = -1; MeleeCharge = 0;
-                    Ray meleeSight;
-                    if (!Optics.TryRay(out meleeSight)) meleeSight = new Ray(vehicle.position, BodyRotation(vehicle) * Vector3.forward);
-                    SendIntent(player, vehicle, heavy ? MeleeHeavy : MeleeSweep, meleeSight.direction, meleeSight.origin);
-                }
-            }
-            else { MeleeCharge = 0; meleePressStart = -1; }
-            bool beamHeld = !meleeModeLocal && Time.time >= nextInput && Input.GetKey(beamKey);
+            bool beamHeld = Time.time >= nextInput && Input.GetKey(beamKey);
             bool missileHeld = Time.time >= nextInput && Input.GetKey(Rules.Key(vehicle, "pzMechaMissileKey", KeyCode.G));
             Ray sight;
             if (!Optics.TryRay(out sight)) sight = new Ray(vehicle.position, BodyRotation(vehicle) * Vector3.forward);
@@ -748,7 +792,7 @@ namespace PZAEC.Mecha
         {
             var package = NetPackageManager.GetPackage<NetPackagePZAECMechaEvent>().Setup(vehicle, id, kind, a, b, value, c);
             ConnectionManager.Instance.SendPackage(package, false, -1, -1, vehicle, null, 512);
-            try { if (!Server) MechaFX.Receive(currentWorld, vehicle, id, kind, a, b, value, c); }
+            try { if (currentWorld != null && currentWorld.GetPrimaryPlayer() != null) MechaFX.Receive(currentWorld, vehicle, id, kind, a, b, value, c); }
             catch (Exception ex) { if (Time.time >= nextError) { nextError = Time.time + 10; Log.Warning("[Mecha] FX: " + ex.Message); } }
         }
     }

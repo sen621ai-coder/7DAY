@@ -4,7 +4,8 @@
 # marker and Mecha-related errors. Gameplay tuning still needs a real client.
 param(
     [int]$TimeoutSeconds = 300,
-    [switch]$KeepRunning
+    [switch]$KeepRunning,
+    [switch]$MotionProbe
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path (Split-Path $PSScriptRoot); $game = Split-Path $root
@@ -23,6 +24,9 @@ foreach ($dir in Get-ChildItem -LiteralPath $root -Directory) {
 }
 $target = Join-Path $mods 'ZZ-PZAEC_Mecha'
 Copy-Item -LiteralPath (Join-Path $root 'ZZ-PZAEC_Mecha') -Destination $target -Recurse
+if($MotionProbe) {
+    & (Join-Path $PSScriptRoot 'Build.ps1') -OutputPath (Join-Path $target 'PZAEC.Mecha.dll') -ExtraSources (Join-Path $PSScriptRoot 'MotionNativeQA.cs')
+}
 # The isolated world lacks AEC endgame items; stub missing recipe ingredients
 # (M1 NativeQA pattern). Live recipes stay exactly as shipped.
 [xml]$base = Get-Content -LiteralPath (Join-Path $game 'Data/Config/items.xml')
@@ -49,6 +53,7 @@ foreach ($key in $values.Keys) {
 $cfg = Join-Path $qa 'serverconfig.xml'; $config.Save($cfg)
 $log = Join-Path $qa 'game.log'
 $arguments = @('-batchmode', '-dedicated', '-crossplatform=None', '-serverplatforms=Steam,LAN', ('-configfile="' + $cfg + '"'), ('-UserDataFolder="' + $data + '"'), '-logfile', ('"' + $log + '"'))
+if($MotionProbe){$arguments += '-mechaMotionQA'}
 $process = Start-Process -FilePath (Join-Path $game '7DaysToDie.exe') -WorkingDirectory $game -WindowStyle Hidden -PassThru -ArgumentList $arguments
 [pscustomobject]@{ ProcessId = $process.Id; Log = $log; QaRoot = $qa } | ConvertTo-Json | Set-Content (Join-Path $root '.local-tests/MechaNativeQA/session.json')
 
@@ -58,8 +63,8 @@ while ((Get-Date) -lt $deadline -and -not $process.HasExited) {
     if (Test-Path $log) {
         $text = Get-Content $log -Raw -ErrorAction SilentlyContinue
         if ($text -match 'Loaded Mod: PZAEC_Mecha') { $loaded = $true }
-        if ($text -match '\[Mecha\] Buster drone walker installed') { $installed = $true }
-        if ($loaded -and $installed) { break }
+        if ($text -match '\[Mecha\] Combat Robot biped installed') { $installed = $true }
+        if ($loaded -and $installed -and (!$MotionProbe -or $text -match '\[MechaMotionQA\] COMPLETE')) { break }
     }
 }
 
@@ -71,6 +76,6 @@ if (Test-Path $log) {
 if (-not $KeepRunning) {
     if (-not $process.HasExited) { Stop-Process -Id $process.Id -Force }
     Write-Output 'QA server stopped.'
-    if ($loaded -and $installed) { Write-Output 'MECHA NATIVE SMOKE PASSED'; exit 0 }
+    if ($loaded -and $installed -and (!$MotionProbe -or (Get-Content $log -Raw) -match '\[MechaMotionQA\] COMPLETE failures=0')) { Write-Output 'MECHA NATIVE SMOKE PASSED'; exit 0 }
     Write-Output 'MECHA NATIVE SMOKE FAILED'; exit 1
 }

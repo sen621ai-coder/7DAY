@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
   <Name value="PZAEC_Mecha"/>
-  <DisplayName value="PZAEC Combat Robot | 战斗机甲"/>
-  <Description value="Rideable biped Combat Robot with a runtime-rigged GLB model, procedural IK walk, FPV optics, palm beam cannon and hand-held energy blades. Model: Combat Robot by ILUSHANDRO (CC-BY-4.0)."/>
+  <DisplayName value="PZAEC 初号机系列 | 青春版与完全体"/>
+  <Description value="Rideable Unit-01 Youth Edition and Complete Form, with procedural IK, FPV optics, beam cannon and guided missiles. Models: Combat Robot by ILUSHANDRO; Samurai Style Gundam Mecha by lawlietrecluze (CC-BY-4.0)."/>
   <Author value="PZAEC"/>
-  <Version value="0.6.0"/>
+  <Version value="0.8.0"/>
   <Website value=""/>
   <ServerSideOnly value="false"/>
   <SkipWithAntiCheat value="true"/>

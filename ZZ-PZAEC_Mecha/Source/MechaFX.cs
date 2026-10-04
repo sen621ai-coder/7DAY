@@ -23,6 +23,21 @@ namespace PZAEC.Mecha
             public Vector3 Direction;
         }
         static readonly Dictionary<int, float> meleeCooldownUntil = new Dictionary<int, float>();
+        static readonly Dictionary<string, float> soundGate = new Dictionary<string, float>();
+        // Beam events dedup by (vehicle, serial): replays can never double the
+        // tracer or the sound, whatever the transport does.
+        static readonly HashSet<long> seenBeamSerials = new HashSet<long>();
+        static readonly Queue<long> seenBeamOrder = new Queue<long>();
+
+        // Same-name sounds cannot retrigger faster than this; a stuck event
+        // stream must not turn into a continuous buzz.
+        public static void Play(EntityVehicle vehicle, string name)
+        {
+            float last;
+            if (soundGate.TryGetValue(name, out last) && Time.time - last < .12f) return;
+            soundGate[name] = Time.time;
+            Audio.Manager.Play(vehicle, name, 1, false);
+        }
 
         public static float MeleeCooldownRemaining(int vehicleId)
         {
@@ -59,6 +74,8 @@ namespace PZAEC.Mecha
         public static void Receive(World world, int vehicleId, int id, byte kind, Vector3 a, Vector3 b, float value, float c)
         {
             if (world == null || world.GetPrimaryPlayer() == null) return;
+            if(kind==9) { var v=world.GetEntity(vehicleId) as EntityVehicle; if(v!=null && v.isEntityRemote) Locomotion.Receive(v,(int)value,id,a); return; }
+            if(kind==Boarding.BoardEvent) { Boarding.ReceiveSnapshot(world,vehicleId,id,a,b,value,c); return; }
             if (kind == Weapons.StatusEvent)
             {
                 var status = GetStatus(vehicleId);
@@ -69,17 +86,18 @@ namespace PZAEC.Mecha
                 status.BeamAmmo = Mathf.Max(0, Mathf.RoundToInt(a.x));
                 status.MissileAmmo = Mathf.Max(0, Mathf.RoundToInt(a.y));
                 status.MissileWait = Mathf.Max(0, a.z);
-                status.MeleeMode = (id & 64) != 0;
+                status.MeleeMode = false;
                 status.Direction = Vector3.zero;
                 status.LockProgress = Mathf.Clamp01(value);
                 return;
             }
+            if (kind == Weapons.MeleeModeEvent || kind == Weapons.MeleeSweepEvent || kind == Weapons.MeleeHeavyEvent) return; // Retired protocol events.
             if (kind == Weapons.MeleeModeEvent)
             {
                 // id carries the new mode; animate the blade deploy/stow.
                 SetBladeMode(world, vehicleId, id != 0);
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                if (vehicle != null) Audio.Manager.Play(vehicle, id != 0 ? "electric_fence_on" : "electric_fence_off", 1, false);
+                if (vehicle != null) Play(vehicle, id != 0 ? "electric_fence_on" : "electric_fence_off");
                 return;
             }
             if (kind == Weapons.MeleeSweepEvent || kind == Weapons.MeleeHeavyEvent)
@@ -87,16 +105,18 @@ namespace PZAEC.Mecha
                 meleeCooldownUntil[vehicleId] = Time.time + Mathf.Max(0, c);
                 PlaySwing(world, vehicleId, kind == Weapons.MeleeHeavyEvent, a, b);
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                if (vehicle != null) Audio.Manager.Play(vehicle, "turret_fire", 1, false);
-                return;
-            }
-            if (kind == Boarding.BoardEvent)
-            {
-                Boarding.Receive(world, vehicleId, id, a.x);
+                // Blade swings use their own arc sound; beam gunfire stays turret_fire.
+                if (vehicle != null) Play(vehicle, "electric_fence_impact");
                 return;
             }
             if (kind == Weapons.BeamEvent)
             {
+                long key = (long)vehicleId << 32 | (uint)id;
+                if (seenBeamSerials.Contains(key)) return;
+                seenBeamSerials.Add(key);
+                Gait.Recoil(vehicleId);
+                seenBeamOrder.Enqueue(key);
+                while (seenBeamOrder.Count > 64) seenBeamSerials.Remove(seenBeamOrder.Dequeue());
                 var tracer = pool.Count > 0 ? pool.Pop() : new Tracer();
                 if (tracer.Line == null) tracer.Line = new GameObject("MechaBeam").AddComponent<LineRenderer>();
                 tracer.Line.gameObject.SetActive(true);
@@ -107,7 +127,7 @@ namespace PZAEC.Mecha
                 tracer.Line.shadowCastingMode = ShadowCastingMode.Off;
                 tracer.A = a; tracer.B = b; tracer.Life = .09f; tracers.Add(tracer);
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                if (vehicle != null) Audio.Manager.Play(vehicle, "turret_fire", 1, false);
+                if (vehicle != null) Play(vehicle, "turret_fire");
                 return;
             }
             if (kind == Weapons.MissileSpawnEvent)
@@ -129,7 +149,7 @@ namespace PZAEC.Mecha
                 trail.startColor = new Color(.4f, .9f, 1f); trail.endColor = new Color(.5f, .5f, .5f, 0);
                 projectiles[id] = new Projectile { Object = obj, Position = a, Velocity = b, Life = Rules.MissileLifetime + .5f };
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                if (vehicle != null) Audio.Manager.Play(vehicle, "m136_fire", 1, false);
+                if (vehicle != null) Play(vehicle, "m136_fire");
                 return;
             }
             if (kind == Weapons.MissileMoveEvent)
@@ -341,6 +361,7 @@ namespace PZAEC.Mecha
             foreach (var pair in blades.Values) foreach (var blade in pair)
                 if (blade.Root != null) UnityEngine.Object.Destroy(blade.Root.gameObject);
             projectiles.Clear(); tracers.Clear(); pool.Clear(); statuses.Clear(); blades.Clear(); meleeCooldownUntil.Clear();
+            seenBeamSerials.Clear(); seenBeamOrder.Clear();
             if (beamMaterial != null) UnityEngine.Object.Destroy(beamMaterial);
             if (bodyMaterial != null) UnityEngine.Object.Destroy(bodyMaterial);
             if (bladeMaterial != null) UnityEngine.Object.Destroy(bladeMaterial);

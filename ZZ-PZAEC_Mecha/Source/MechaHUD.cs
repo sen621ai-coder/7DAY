@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -18,6 +18,7 @@ namespace PZAEC.Mecha
             var ui = LocalPlayerUI.GetUIForPlayer(player);
             if (ui != null && (LocalPlayerUI.AnyModalWindowOpen() || ui.windowManager.IsCursorWindowOpen() || ui.windowManager.IsInputActive())) return;
             var vehicle = player.AttachedToEntity as EntityVehicle;
+            if(label==null){label=new GUIStyle(GUI.skin.label){fontSize=13};bold=new GUIStyle(GUI.skin.label){fontSize=15,fontStyle=FontStyle.Bold};}
             DrawBoardingOverlay(player);
             if (!Weapons.IsMecha(vehicle)) { DrawOutside(player); return; }
             var attached = vehicle.GetAttached(0);
@@ -33,6 +34,16 @@ namespace PZAEC.Mecha
                 try
                 {
                 float cx = Screen.width * .5f, cy = Screen.height * .5f;
+                if(!Boarding.Active(vehicle))
+                {
+                    GUI.color=new Color(.04f,.09f,.11f,.7f);Rect(cx-200,70,400,48);
+                    GUI.color=new Color(.5f,1f,.9f,.95f);
+                    GUI.Label(new Rect(cx-188,72,380,22),Rules.DisplayName(vehicle)+" / 全景驾驶视野",bold);
+                    float speed=vehicle.vehicleRB!=null?Vector3.ProjectOnPlane(vehicle.vehicleRB.velocity,Vector3.up).magnitude:0;
+                    GUI.Label(new Rect(cx-188,96,380,20),string.Format("速度 {0:0.0} m/s    {1}    舱内冲击防护在线",speed,Locomotion.HoverOn?"悬浮":"地面 / 推进"),label);
+                    GUI.color=new Color(.35f,.9f,.85f,.6f);
+                    Rect(32,130,45,2);Rect(32,130,2,45);Rect(Screen.width-77,130,45,2);Rect(Screen.width-34,130,2,45);
+                }
                 bool overheated = (status.Flags & 1) != 0;
                 var reticle = overheated ? new Color(1f, .45f, .2f, .95f) : fresh && status.BeamAmmo <= 0 ? new Color(1f, .8f, .3f, .95f) : new Color(.45f, 1f, .9f, .95f);
                 GUI.color = reticle;
@@ -40,12 +51,11 @@ namespace PZAEC.Mecha
                 Rect(cx - 3, cy - 3, 2, 2);
                 float left = Screen.width - 236, top = Screen.height * .5f - 130;
                 GUI.color = new Color(.1f, .14f, .16f, .78f);
-                Rect(left - 10, top - 8, 250, 288);
+                Rect(left - 10, top - 8, 250, 366);
                 GUI.color = new Color(.55f, 1f, .95f, .95f);
-                GUI.Label(new Rect(left, top, 210, 24), "Combat Robot 战斗机甲", bold);
-                bool melee = Weapons.MeleeModeLocal;
-                GUI.color = melee ? new Color(1f, .8f, .3f) : new Color(.6f, .85f, 1f);
-                GUI.Label(new Rect(left, top + 16, 210, 20), melee ? "近战模式 · 能量刃展开" : "远程模式 · 光束/导弹");
+                GUI.Label(new Rect(left, top, 210, 24), Rules.DisplayName(vehicle), bold);
+                GUI.color = new Color(.6f, .85f, 1f);
+                GUI.Label(new Rect(left, top + 16, 210, 20), "远程火控 · 光束 / 制导导弹");
                 // Hull integrity bar: server snapshot, red while recently hit.
                 bool hurt = (status.Flags & 32) != 0;
                 float hull = fresh ? status.HullFraction : 1f;
@@ -70,33 +80,25 @@ namespace PZAEC.Mecha
                 }
                 else if (fresh && (status.Flags & 16) != 0)
                 { GUI.color = new Color(.5f, 1f, .6f); GUI.Label(new Rect(left, top + 146, 210, 20), "已发射，松开后可再次锁定"); }
+                else if(fresh)GUI.Label(new Rect(left,top+146,210,20),status.MissileAmmo<=0?"导弹缺弹 · 请补充货箱":"导弹就绪 · 按住 G 锁定");
+                GUI.color=new Color(1f,.75f,.3f);
+                string reason=!fresh?"等待火控同步":(status.Flags&8)!=0?"发射口被遮挡":(status.Flags&4)!=0?"超出射界 · 请转动机体":(status.Flags&128)!=0?"目标过近 · 至少 10 米":(status.Flags&256)!=0?"未锁定敌对目标":overheated?"过热冷却 · 降至 30 后恢复":status.BeamAmmo<=0?"光束缺弹 · 请补充货箱":"火控正常";
+                GUI.Label(new Rect(left,top+170,230,20),reason);
+                GUI.color = new Color(.75f, .9f, .95f);
+                float fuel = vehicle.vehicle.GetFuelLevel();
+                bool fueled = fuel > 0 || EntityVehicle.VehicleFuelUsageModifier == 0f;
+                GUI.color = fueled ? new Color(.5f, 1f, .6f) : new Color(1f, .35f, .3f);
+                GUI.Label(new Rect(left, top + 210, 210, 20),
+                    fueled ? "燃料 " + Mathf.RoundToInt(fuel) + "L" : "⚠ 燃料耗尽——加油后才能驱动/悬浮/跳跃");
                 GUI.color = new Color(.75f, .9f, .95f);
                 string hoverText = Locomotion.HoverOn ? "悬浮巡航中 · 耗油 0.5L/s" : "[Q]悬浮 关";
-                GUI.Label(new Rect(left, top + 168, 210, 20), hoverText);
+                GUI.Label(new Rect(left, top + 232, 210, 20), hoverText);
                 bool jumpReady = Locomotion.JumpCooldownRemaining <= 0;
                 GUI.color = jumpReady ? new Color(.5f, 1f, .6f) : new Color(.85f, .7f, .55f);
                 GUI.Label(new Rect(left, top + 188, 210, 20), jumpReady ? "[空格]蓄力跳 就绪（按住蓄力）" : "跳跃 充能 " + Mathf.CeilToInt(Locomotion.JumpCooldownRemaining) + "s");
-                if (melee)
-                {
-                    float meleeWait = MechaFX.MeleeCooldownRemaining(vehicle.entityId);
-                    GUI.color = meleeWait <= 0 ? new Color(.5f, 1f, .6f) : new Color(.85f, .7f, .55f);
-                    GUI.Label(new Rect(left, top + 188, 210, 20), meleeWait <= 0 ? "能量刃 就绪（左键横扫/长按重斩）" : "能量刃 冷却 " + meleeWait.ToString("0.0") + "s");
-                }
-                else
-                {
-                    bool repairReady = status.BattleRepairWait <= 0;
-                    GUI.color = repairReady ? new Color(.5f, 1f, .6f) : new Color(.85f, .7f, .55f);
-                    GUI.Label(new Rect(left, top + 188, 210, 20), repairReady ? "紧急维修 就绪（货箱维修包）" : "紧急维修 充能 " + Mathf.CeilToInt(status.BattleRepairWait) + "s");
-                }
-                if (Weapons.MeleeCharge > 0)
-                {
-                    float cy0 = Screen.height * .5f + 70;
-                    GUI.color = new Color(.15f, .18f, .2f); Rect(Screen.width * .5f - 90, cy0, 180, 8);
-                    GUI.color = Weapons.MeleeCharge >= 1f ? new Color(1f, .5f, .25f) : new Color(.35f, .9f, 1f);
-                    Rect(Screen.width * .5f - 90, cy0, 180 * Weapons.MeleeCharge, 8);
-                    if (Weapons.MeleeCharge >= 1f)
-                    { GUI.color = new Color(1f, .8f, .4f); GUI.Label(new Rect(Screen.width * .5f - 90, cy0 + 10, 180, 20), "重斩蓄力完成 · 松开发射", label); }
-                }
+                bool repairReady = status.BattleRepairWait <= 0;
+                GUI.color = repairReady ? new Color(.5f, 1f, .6f) : new Color(.85f, .7f, .55f);
+                GUI.Label(new Rect(left, top + 254, 210, 20), repairReady ? "紧急维修 就绪（货箱维修包）" : "紧急维修 充能 " + Mathf.CeilToInt(status.BattleRepairWait) + "s");
                 if (Locomotion.JumpCharge > 0)
                 {
                     float cy1 = Screen.height * .5f + 96;
@@ -107,7 +109,7 @@ namespace PZAEC.Mecha
                     { GUI.color = new Color(.6f, 1f, .7f); GUI.Label(new Rect(Screen.width * .5f - 90, cy1 + 10, 180, 20), "满蓄力 · 松开跳跃", label); }
                 }
                 GUI.color = new Color(.75f, .9f, .95f);
-                GUI.Label(new Rect(left, top + 210, 250, 60), (melee ? "[左键]横扫/长按重斩  [X]收刃" : "[左键]光束  [X]拔刃  [R]紧急维修") + "\n[Q]悬浮  [空格]蓄力跳  悬浮中[C]下降\n[G]导弹  [右键]瞄准镜  停机维修:车外按住F");
+                GUI.Label(new Rect(left, top + 278, 250, 75), "[左键]光束  [G按住]锁定并发射\n[右键]瞄准镜  [Z]切换倍率\n[Q]悬浮  [空格]蓄力跳  [C]下降\n[R]紧急维修  车外按住[F]维修");
             }
             finally { GUI.color = old; }
         }
@@ -133,7 +135,7 @@ namespace PZAEC.Mecha
                 // Typewriter runs across the second half (after the lift).
                 if (progress >= .45f && progress <= .98f)
                 {
-                    string full = dismount ? "系统离线 · 弹射准备" : "战斗系统联机";
+                    string full = dismount ? "停机开舱 · 安全离舱" : "战斗系统联机 · [空格] 跳过";
                     float t = Mathf.Clamp01((progress - .45f) / .5f);
                     int chars = Mathf.Clamp(Mathf.FloorToInt(full.Length * t) + 1, 1, full.Length);
                     GUI.color = new Color(.55f, 1f, .95f, .95f);
@@ -178,7 +180,7 @@ namespace PZAEC.Mecha
                 GUI.color = new Color(.1f, .14f, .16f, .78f);
                 Rect(cx - 110, cy + 36, 230, fresh && status.RepairProgress > 0 ? 104 : 86);
                 GUI.color = new Color(.55f, 1f, .95f, .95f);
-                GUI.Label(new Rect(cx - 98, cy + 42, 210, 22), "Combat Robot 战斗机甲", bold);
+                GUI.Label(new Rect(cx - 98, cy + 42, 210, 22), Rules.DisplayName(target), bold);
                 GUI.color = new Color(.15f, .18f, .2f); Rect(cx - 98, cy + 66, 196, 8);
                 GUI.color = hurt ? new Color(1f, .35f, .3f) : Color.Lerp(new Color(1f, .5f, .3f), new Color(.4f, .95f, .6f), hull);
                 Rect(cx - 98, cy + 66, 196 * hull, 8);

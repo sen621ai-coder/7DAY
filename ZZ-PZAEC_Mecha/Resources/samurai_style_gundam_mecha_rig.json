@@ -1,0 +1,335 @@
+{
+  "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
+  "sourceParts": 17,
+  "triangles": 207192,
+  "sourceTriangles": 2000000,
+  "height": 3.2,
+  "skinned": true,
+  "joints": [
+    {
+      "name": "Torso",
+      "parent": "",
+      "position": [
+        0.0,
+        1.4579999942756454,
+        0.2560000076324807
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Torso",
+      "position": [
+        0.0,
+        2.6420000295758683,
+        0.38400001144872103
+      ]
+    },
+    {
+      "name": "Backpack",
+      "parent": "Torso",
+      "position": [
+        0.0,
+        2.2900000190812073,
+        -0.4160000124027811
+      ]
+    },
+    {
+      "name": "HipL",
+      "parent": "Torso",
+      "position": [
+        -0.32000000954060087,
+        1.4419999937986152,
+        0.22400000667842063
+      ]
+    },
+    {
+      "name": "KneeL",
+      "parent": "HipL",
+      "position": [
+        -0.5120000152649614,
+        0.7859999742403835,
+        0.35200001049466095
+      ]
+    },
+    {
+      "name": "AnkleL",
+      "parent": "KneeL",
+      "position": [
+        -0.6880000205122918,
+        0.1939999565902718,
+        0.38400001144872103
+      ]
+    },
+    {
+      "name": "FootL",
+      "parent": "AnkleL",
+      "position": [
+        -0.6880000205122918,
+        0.05,
+        0.5120000152649614
+      ]
+    },
+    {
+      "name": "ShoulderL",
+      "parent": "Torso",
+      "position": [
+        -0.6400000190812017,
+        2.2900000190812073,
+        0.2880000085865408
+      ]
+    },
+    {
+      "name": "ElbowL",
+      "parent": "ShoulderL",
+      "position": [
+        -0.736000021943382,
+        1.8260000052473364,
+        0.4160000124027811
+      ]
+    },
+    {
+      "name": "HandL",
+      "parent": "ElbowL",
+      "position": [
+        -0.784000023374472,
+        1.297999989505345,
+        0.5440000162190215
+      ]
+    },
+    {
+      "name": "HipR",
+      "parent": "Torso",
+      "position": [
+        0.32000000954060087,
+        1.4419999937986152,
+        0.22400000667842063
+      ]
+    },
+    {
+      "name": "KneeR",
+      "parent": "HipR",
+      "position": [
+        0.5120000152649614,
+        0.7859999742403835,
+        0.35200001049466095
+      ]
+    },
+    {
+      "name": "AnkleR",
+      "parent": "KneeR",
+      "position": [
+        0.6880000205122918,
+        0.1939999565902718,
+        0.38400001144872103
+      ]
+    },
+    {
+      "name": "FootR",
+      "parent": "AnkleR",
+      "position": [
+        0.6880000205122918,
+        0.05,
+        0.5120000152649614
+      ]
+    },
+    {
+      "name": "ShoulderR",
+      "parent": "Torso",
+      "position": [
+        0.6400000190812017,
+        2.2900000190812073,
+        0.2880000085865408
+      ]
+    },
+    {
+      "name": "ElbowR",
+      "parent": "ShoulderR",
+      "position": [
+        0.736000021943382,
+        1.8260000052473364,
+        0.4160000124027811
+      ]
+    },
+    {
+      "name": "HandR",
+      "parent": "ElbowR",
+      "position": [
+        0.784000023374472,
+        1.297999989505345,
+        0.5440000162190215
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node": 6,
+      "nodeName": "Object_6",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 0,
+      "vertices": 9048,
+      "indices": 37650
+    },
+    {
+      "node": 7,
+      "nodeName": "Object_7",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 584904,
+      "vertices": 10808,
+      "indices": 36480
+    },
+    {
+      "node": 8,
+      "nodeName": "Object_8",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 1249608,
+      "vertices": 10325,
+      "indices": 36801
+    },
+    {
+      "node": 9,
+      "nodeName": "Object_9",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 1892412,
+      "vertices": 9191,
+      "indices": 37557
+    },
+    {
+      "node": 10,
+      "nodeName": "Object_10",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 2483808,
+      "vertices": 11566,
+      "indices": 40230
+    },
+    {
+      "node": 11,
+      "nodeName": "Object_11",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 3199896,
+      "vertices": 13648,
+      "indices": 42435
+    },
+    {
+      "node": 12,
+      "nodeName": "Object_12",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 4024740,
+      "vertices": 12590,
+      "indices": 39606
+    },
+    {
+      "node": 13,
+      "nodeName": "Object_13",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 4787484,
+      "vertices": 11974,
+      "indices": 36009
+    },
+    {
+      "node": 14,
+      "nodeName": "Object_14",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 5506272,
+      "vertices": 11552,
+      "indices": 38433
+    },
+    {
+      "node": 15,
+      "nodeName": "Object_15",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 6214500,
+      "vertices": 11719,
+      "indices": 35871
+    },
+    {
+      "node": 16,
+      "nodeName": "Object_16",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 6920496,
+      "vertices": 13900,
+      "indices": 39279
+    },
+    {
+      "node": 17,
+      "nodeName": "Object_17",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 7744812,
+      "vertices": 11031,
+      "indices": 36333
+    },
+    {
+      "node": 18,
+      "nodeName": "Object_18",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 8419632,
+      "vertices": 10520,
+      "indices": 36672
+    },
+    {
+      "node": 19,
+      "nodeName": "Object_19",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 9071280,
+      "vertices": 9471,
+      "indices": 37368
+    },
+    {
+      "node": 20,
+      "nodeName": "Object_20",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 9675360,
+      "vertices": 9819,
+      "indices": 37137
+    },
+    {
+      "node": 21,
+      "nodeName": "Object_21",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 10295220,
+      "vertices": 10371,
+      "indices": 36771
+    },
+    {
+      "node": 22,
+      "nodeName": "Object_22",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 0,
+      "offset": 10940112,
+      "vertices": 4873,
+      "indices": 16944
+    }
+  ]
+}

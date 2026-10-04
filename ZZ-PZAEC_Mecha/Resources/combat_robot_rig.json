@@ -1,0 +1,2583 @@
+{
+  "sourceSha256": "37d6d8c0bd4eb265d45eac4e083de83aa46b0c57b4bf334eb509e75d5cebe9b9",
+  "height": 3.2,
+  "sourceParts": 153,
+  "triangles": 87806,
+  "joints": [
+    {
+      "name": "Torso",
+      "parent": "",
+      "position": [
+        0.0,
+        1.7556684372238172,
+        -0.19662245598055716
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Torso",
+      "position": [
+        0.0,
+        2.9354031731071597,
+        0.12288903498784823
+      ]
+    },
+    {
+      "name": "Backpack",
+      "parent": "Torso",
+      "position": [
+        0.0,
+        2.5667360681436153,
+        -0.5652895609441018
+      ]
+    },
+    {
+      "name": "HipL",
+      "parent": "Torso",
+      "position": [
+        -0.6144451749392411,
+        1.7556684372238172,
+        -0.19662245598055716
+      ]
+    },
+    {
+      "name": "KneeL",
+      "parent": "HipL",
+      "position": [
+        -0.6144451749392411,
+        1.0920676482894367,
+        0.20153801738007107
+      ]
+    },
+    {
+      "name": "AnkleL",
+      "parent": "KneeL",
+      "position": [
+        -0.6144451749392411,
+        0.374395683960403,
+        0.12927926480721635
+      ]
+    },
+    {
+      "name": "FootL",
+      "parent": "AnkleL",
+      "position": [
+        -0.6144451749392411,
+        0.05,
+        0.12927926480721635
+      ]
+    },
+    {
+      "name": "ShoulderL",
+      "parent": "Torso",
+      "position": [
+        -0.7766587011232008,
+        2.8125141381193117,
+        -0.1523824033849318
+      ]
+    },
+    {
+      "name": "ElbowL",
+      "parent": "ShoulderL",
+      "position": [
+        -1.1993969814813987,
+        2.178406717582015,
+        -0.12780459638736216
+      ]
+    },
+    {
+      "name": "HandL",
+      "parent": "ElbowL",
+      "position": [
+        -1.1993969814813987,
+        2.1833222789815285,
+        0.5308806311475044
+      ]
+    },
+    {
+      "name": "HipR",
+      "parent": "Torso",
+      "position": [
+        0.6144451749392411,
+        1.7556684372238172,
+        -0.19662245598055716
+      ]
+    },
+    {
+      "name": "KneeR",
+      "parent": "HipR",
+      "position": [
+        0.6144451749392411,
+        1.0920676482894367,
+        0.20153801738007107
+      ]
+    },
+    {
+      "name": "AnkleR",
+      "parent": "KneeR",
+      "position": [
+        0.6144451749392411,
+        0.374395683960403,
+        0.12927926480721635
+      ]
+    },
+    {
+      "name": "FootR",
+      "parent": "AnkleR",
+      "position": [
+        0.6144451749392411,
+        0.05,
+        0.12927926480721635
+      ]
+    },
+    {
+      "name": "ShoulderR",
+      "parent": "Torso",
+      "position": [
+        0.7766587011232008,
+        2.8125141381193117,
+        -0.1523824033849318
+      ]
+    },
+    {
+      "name": "ElbowR",
+      "parent": "ShoulderR",
+      "position": [
+        1.1993969814813987,
+        2.178406717582015,
+        -0.12780459638736216
+      ]
+    },
+    {
+      "name": "HandR",
+      "parent": "ElbowR",
+      "position": [
+        1.1993969814813987,
+        2.1833222789815285,
+        0.5308806311475044
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "node": 4,
+      "nodeName": "Cylinder_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 0,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 4,
+      "nodeName": "Cylinder_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 13672,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 6,
+      "nodeName": "Cylinder.001_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 27344,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 6,
+      "nodeName": "Cylinder.001_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 41016,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 8,
+      "nodeName": "Cylinder.002_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 54688,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 8,
+      "nodeName": "Cylinder.002_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 68360,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 10,
+      "nodeName": "Cylinder.003_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 82032,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 10,
+      "nodeName": "Cylinder.003_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 95704,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 12,
+      "nodeName": "Cylinder.004_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 109376,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 12,
+      "nodeName": "Cylinder.004_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 123048,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 14,
+      "nodeName": "Cylinder.005_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 136720,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 14,
+      "nodeName": "Cylinder.005_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 150392,
+      "vertices": 314,
+      "indices": 906
+    },
+    {
+      "node": 16,
+      "nodeName": "Cylinder.006_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 164064,
+      "vertices": 494,
+      "indices": 1500
+    },
+    {
+      "node": 16,
+      "nodeName": "Cylinder.006_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 185872,
+      "vertices": 494,
+      "indices": 1500
+    },
+    {
+      "node": 18,
+      "nodeName": "Cylinder.007_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 207680,
+      "vertices": 196,
+      "indices": 552
+    },
+    {
+      "node": 18,
+      "nodeName": "Cylinder.007_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 216160,
+      "vertices": 196,
+      "indices": 552
+    },
+    {
+      "node": 20,
+      "nodeName": "Cylinder.008_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 224640,
+      "vertices": 196,
+      "indices": 552
+    },
+    {
+      "node": 20,
+      "nodeName": "Cylinder.008_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 233120,
+      "vertices": 196,
+      "indices": 552
+    },
+    {
+      "node": 22,
+      "nodeName": "Cylinder.009_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandL",
+      "material": 0,
+      "offset": 241600,
+      "vertices": 334,
+      "indices": 912
+    },
+    {
+      "node": 22,
+      "nodeName": "Cylinder.009_low_Hands_0",
+      "primitive": 0,
+      "joint": "HandR",
+      "material": 0,
+      "offset": 255936,
+      "vertices": 334,
+      "indices": 912
+    },
+    {
+      "node": 24,
+      "nodeName": "1_H_Base2_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 270272,
+      "vertices": 1064,
+      "indices": 3036
+    },
+    {
+      "node": 24,
+      "nodeName": "1_H_Base2_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 316464,
+      "vertices": 1064,
+      "indices": 3036
+    },
+    {
+      "node": 26,
+      "nodeName": "Cylinder.011_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 362656,
+      "vertices": 176,
+      "indices": 492
+    },
+    {
+      "node": 26,
+      "nodeName": "Cylinder.011_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 370256,
+      "vertices": 176,
+      "indices": 492
+    },
+    {
+      "node": 28,
+      "nodeName": "Cube_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 377856,
+      "vertices": 320,
+      "indices": 888
+    },
+    {
+      "node": 28,
+      "nodeName": "Cube_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 391648,
+      "vertices": 320,
+      "indices": 888
+    },
+    {
+      "node": 30,
+      "nodeName": "Cylinder.012_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 405440,
+      "vertices": 3322,
+      "indices": 10164
+    },
+    {
+      "node": 30,
+      "nodeName": "Cylinder.012_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 552400,
+      "vertices": 3322,
+      "indices": 10164
+    },
+    {
+      "node": 32,
+      "nodeName": "Cube.001_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 699360,
+      "vertices": 52,
+      "indices": 96
+    },
+    {
+      "node": 32,
+      "nodeName": "Cube.001_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 701408,
+      "vertices": 52,
+      "indices": 96
+    },
+    {
+      "node": 34,
+      "nodeName": "Cube.002_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 703456,
+      "vertices": 22,
+      "indices": 36
+    },
+    {
+      "node": 34,
+      "nodeName": "Cube.002_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 704304,
+      "vertices": 22,
+      "indices": 36
+    },
+    {
+      "node": 36,
+      "nodeName": "Cube.003_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 705152,
+      "vertices": 42,
+      "indices": 90
+    },
+    {
+      "node": 36,
+      "nodeName": "Cube.003_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 706856,
+      "vertices": 42,
+      "indices": 90
+    },
+    {
+      "node": 38,
+      "nodeName": "Cylinder.014_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 708560,
+      "vertices": 1906,
+      "indices": 5622
+    },
+    {
+      "node": 38,
+      "nodeName": "Cylinder.014_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 792040,
+      "vertices": 1906,
+      "indices": 5622
+    },
+    {
+      "node": 40,
+      "nodeName": "Cube.005_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 875520,
+      "vertices": 3615,
+      "indices": 3900
+    },
+    {
+      "node": 40,
+      "nodeName": "Cube.005_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 1006800,
+      "vertices": 3606,
+      "indices": 3900
+    },
+    {
+      "node": 42,
+      "nodeName": "1_H_Base_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1137792,
+      "vertices": 1310,
+      "indices": 2796
+    },
+    {
+      "node": 42,
+      "nodeName": "1_H_Base_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1190896,
+      "vertices": 1310,
+      "indices": 2796
+    },
+    {
+      "node": 44,
+      "nodeName": "Cube.010_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1244000,
+      "vertices": 82,
+      "indices": 168
+    },
+    {
+      "node": 44,
+      "nodeName": "Cube.010_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1247296,
+      "vertices": 82,
+      "indices": 168
+    },
+    {
+      "node": 46,
+      "nodeName": "Cube.006_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1250592,
+      "vertices": 94,
+      "indices": 204
+    },
+    {
+      "node": 46,
+      "nodeName": "Cube.006_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1254416,
+      "vertices": 94,
+      "indices": 204
+    },
+    {
+      "node": 48,
+      "nodeName": "BezierCurve_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1258240,
+      "vertices": 91,
+      "indices": 432
+    },
+    {
+      "node": 48,
+      "nodeName": "BezierCurve_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1262880,
+      "vertices": 91,
+      "indices": 432
+    },
+    {
+      "node": 50,
+      "nodeName": "BezierCurve.001_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1267520,
+      "vertices": 91,
+      "indices": 432
+    },
+    {
+      "node": 50,
+      "nodeName": "BezierCurve.001_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1272160,
+      "vertices": 91,
+      "indices": 432
+    },
+    {
+      "node": 52,
+      "nodeName": "Cube.007_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1276800,
+      "vertices": 583,
+      "indices": 1305
+    },
+    {
+      "node": 52,
+      "nodeName": "Cube.007_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1300676,
+      "vertices": 583,
+      "indices": 1305
+    },
+    {
+      "node": 54,
+      "nodeName": "Cube.009_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 1324552,
+      "vertices": 1066,
+      "indices": 2814
+    },
+    {
+      "node": 54,
+      "nodeName": "Cube.009_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 1369920,
+      "vertices": 1066,
+      "indices": 2814
+    },
+    {
+      "node": 56,
+      "nodeName": "Cylinder.013_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 1415288,
+      "vertices": 296,
+      "indices": 852
+    },
+    {
+      "node": 56,
+      "nodeName": "Cylinder.013_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 1428168,
+      "vertices": 296,
+      "indices": 852
+    },
+    {
+      "node": 58,
+      "nodeName": "Cylinder.015_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 1441048,
+      "vertices": 112,
+      "indices": 318
+    },
+    {
+      "node": 58,
+      "nodeName": "Cylinder.015_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 1445904,
+      "vertices": 112,
+      "indices": 318
+    },
+    {
+      "node": 60,
+      "nodeName": "Cylinder.016_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 1450760,
+      "vertices": 448,
+      "indices": 1272
+    },
+    {
+      "node": 60,
+      "nodeName": "Cylinder.016_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 1470184,
+      "vertices": 448,
+      "indices": 1272
+    },
+    {
+      "node": 62,
+      "nodeName": "Cylinder.017_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 1489608,
+      "vertices": 420,
+      "indices": 1212
+    },
+    {
+      "node": 62,
+      "nodeName": "Cylinder.017_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 1507896,
+      "vertices": 420,
+      "indices": 1212
+    },
+    {
+      "node": 64,
+      "nodeName": "Cylinder.018_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 1526184,
+      "vertices": 214,
+      "indices": 618
+    },
+    {
+      "node": 64,
+      "nodeName": "Cylinder.018_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 1535504,
+      "vertices": 214,
+      "indices": 618
+    },
+    {
+      "node": 66,
+      "nodeName": "Cube.011_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1544824,
+      "vertices": 704,
+      "indices": 1440
+    },
+    {
+      "node": 68,
+      "nodeName": "Cube.013_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1573112,
+      "vertices": 236,
+      "indices": 432
+    },
+    {
+      "node": 70,
+      "nodeName": "Cylinder.019_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1582392,
+      "vertices": 392,
+      "indices": 1152
+    },
+    {
+      "node": 72,
+      "nodeName": "Cylinder.020_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1599544,
+      "vertices": 724,
+      "indices": 2088
+    },
+    {
+      "node": 74,
+      "nodeName": "Cylinder.022_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1631064,
+      "vertices": 436,
+      "indices": 1284
+    },
+    {
+      "node": 76,
+      "nodeName": "Cylinder.023_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1650152,
+      "vertices": 212,
+      "indices": 618
+    },
+    {
+      "node": 78,
+      "nodeName": "Cube.015_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1659408,
+      "vertices": 84,
+      "indices": 168
+    },
+    {
+      "node": 80,
+      "nodeName": "Cylinder.024_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1662768,
+      "vertices": 212,
+      "indices": 618
+    },
+    {
+      "node": 82,
+      "nodeName": "Cylinder.025_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1672024,
+      "vertices": 364,
+      "indices": 1026
+    },
+    {
+      "node": 84,
+      "nodeName": "Cube.016_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1687776,
+      "vertices": 50,
+      "indices": 96
+    },
+    {
+      "node": 86,
+      "nodeName": "Cylinder.026_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1689760,
+      "vertices": 336,
+      "indices": 1212
+    },
+    {
+      "node": 88,
+      "nodeName": "Cylinder.027_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1705360,
+      "vertices": 336,
+      "indices": 1212
+    },
+    {
+      "node": 90,
+      "nodeName": "Cylinder.028_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1720960,
+      "vertices": 336,
+      "indices": 1212
+    },
+    {
+      "node": 92,
+      "nodeName": "Cylinder.029_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1736560,
+      "vertices": 908,
+      "indices": 2160
+    },
+    {
+      "node": 94,
+      "nodeName": "Cylinder.030_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1774256,
+      "vertices": 352,
+      "indices": 1860
+    },
+    {
+      "node": 96,
+      "nodeName": "Cube.018_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1792960,
+      "vertices": 164,
+      "indices": 240
+    },
+    {
+      "node": 98,
+      "nodeName": "Cube.019_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1799168,
+      "vertices": 1008,
+      "indices": 2202
+    },
+    {
+      "node": 100,
+      "nodeName": "Cube.020_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1840232,
+      "vertices": 372,
+      "indices": 864
+    },
+    {
+      "node": 102,
+      "nodeName": "Sphere_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1855592,
+      "vertices": 416,
+      "indices": 1362
+    },
+    {
+      "node": 104,
+      "nodeName": "Cube.022_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1874352,
+      "vertices": 228,
+      "indices": 432
+    },
+    {
+      "node": 106,
+      "nodeName": "Cube.023_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1883376,
+      "vertices": 884,
+      "indices": 2568
+    },
+    {
+      "node": 108,
+      "nodeName": "Cube.024_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1921936,
+      "vertices": 112,
+      "indices": 168
+    },
+    {
+      "node": 110,
+      "nodeName": "Plane_low_Torse_0",
+      "primitive": 0,
+      "joint": "Head",
+      "material": 1,
+      "offset": 1926192,
+      "vertices": 96,
+      "indices": 168
+    },
+    {
+      "node": 112,
+      "nodeName": "Cube.025_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1929936,
+      "vertices": 176,
+      "indices": 336
+    },
+    {
+      "node": 114,
+      "nodeName": "NurbsPath.001_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1936912,
+      "vertices": 468,
+      "indices": 2400
+    },
+    {
+      "node": 116,
+      "nodeName": "NurbsPath.002_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1961488,
+      "vertices": 432,
+      "indices": 2208
+    },
+    {
+      "node": 118,
+      "nodeName": "Cylinder.031_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 1984144,
+      "vertices": 870,
+      "indices": 3732
+    },
+    {
+      "node": 120,
+      "nodeName": "Cube.027_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2026912,
+      "vertices": 226,
+      "indices": 600
+    },
+    {
+      "node": 122,
+      "nodeName": "Cube.028_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2036544,
+      "vertices": 132,
+      "indices": 240
+    },
+    {
+      "node": 124,
+      "nodeName": "Cylinder.032_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2041728,
+      "vertices": 124,
+      "indices": 348
+    },
+    {
+      "node": 126,
+      "nodeName": "Cube.029_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2047088,
+      "vertices": 72,
+      "indices": 120
+    },
+    {
+      "node": 128,
+      "nodeName": "Cube.030_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2049872,
+      "vertices": 72,
+      "indices": 120
+    },
+    {
+      "node": 130,
+      "nodeName": "Cube.031_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2052656,
+      "vertices": 176,
+      "indices": 456
+    },
+    {
+      "node": 132,
+      "nodeName": "Cube.032_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2060112,
+      "vertices": 256,
+      "indices": 720
+    },
+    {
+      "node": 134,
+      "nodeName": "Cylinder.033_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2071184,
+      "vertices": 100,
+      "indices": 168
+    },
+    {
+      "node": 136,
+      "nodeName": "Cube.033_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2075056,
+      "vertices": 176,
+      "indices": 432
+    },
+    {
+      "node": 138,
+      "nodeName": "Cube.021_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2082416,
+      "vertices": 76,
+      "indices": 132
+    },
+    {
+      "node": 140,
+      "nodeName": "Cube.034_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2085376,
+      "vertices": 92,
+      "indices": 180
+    },
+    {
+      "node": 142,
+      "nodeName": "Cube.035_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2089040,
+      "vertices": 176,
+      "indices": 336
+    },
+    {
+      "node": 144,
+      "nodeName": "Cube.036_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2096016,
+      "vertices": 232,
+      "indices": 660
+    },
+    {
+      "node": 146,
+      "nodeName": "Cylinder.021_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2106080,
+      "vertices": 168,
+      "indices": 384
+    },
+    {
+      "node": 148,
+      "nodeName": "Cube.037_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2112992,
+      "vertices": 98,
+      "indices": 240
+    },
+    {
+      "node": 150,
+      "nodeName": "Cube.038_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2117088,
+      "vertices": 348,
+      "indices": 1212
+    },
+    {
+      "node": 152,
+      "nodeName": "Cube.039_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2133072,
+      "vertices": 82,
+      "indices": 240
+    },
+    {
+      "node": 154,
+      "nodeName": "Cube.014_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2136656,
+      "vertices": 298,
+      "indices": 684
+    },
+    {
+      "node": 156,
+      "nodeName": "Cube.026_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2148928,
+      "vertices": 704,
+      "indices": 1608
+    },
+    {
+      "node": 158,
+      "nodeName": "Cylinder.034_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2177888,
+      "vertices": 1080,
+      "indices": 4440
+    },
+    {
+      "node": 160,
+      "nodeName": "Cylinder.035_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2230208,
+      "vertices": 164,
+      "indices": 468
+    },
+    {
+      "node": 162,
+      "nodeName": "Cylinder.036_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2237328,
+      "vertices": 164,
+      "indices": 468
+    },
+    {
+      "node": 164,
+      "nodeName": "Cylinder.037_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2244448,
+      "vertices": 230,
+      "indices": 672
+    },
+    {
+      "node": 166,
+      "nodeName": "Cylinder.038_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2254496,
+      "vertices": 288,
+      "indices": 720
+    },
+    {
+      "node": 168,
+      "nodeName": "Cube.041_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2266592,
+      "vertices": 340,
+      "indices": 888
+    },
+    {
+      "node": 170,
+      "nodeName": "Cylinder.039_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2281024,
+      "vertices": 5720,
+      "indices": 16896
+    },
+    {
+      "node": 172,
+      "nodeName": "Cylinder.040_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2531648,
+      "vertices": 454,
+      "indices": 1980
+    },
+    {
+      "node": 174,
+      "nodeName": "Cube.044_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2554096,
+      "vertices": 148,
+      "indices": 384
+    },
+    {
+      "node": 176,
+      "nodeName": "Cube.046_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2560368,
+      "vertices": 256,
+      "indices": 720
+    },
+    {
+      "node": 178,
+      "nodeName": "Plane.001_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2571440,
+      "vertices": 148,
+      "indices": 240
+    },
+    {
+      "node": 180,
+      "nodeName": "Cube.047_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2577136,
+      "vertices": 256,
+      "indices": 486
+    },
+    {
+      "node": 182,
+      "nodeName": "Cylinder.041_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2587272,
+      "vertices": 772,
+      "indices": 2460
+    },
+    {
+      "node": 184,
+      "nodeName": "Cylinder.042_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2621816,
+      "vertices": 528,
+      "indices": 1476
+    },
+    {
+      "node": 186,
+      "nodeName": "Cylinder.045_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2644616,
+      "vertices": 528,
+      "indices": 1368
+    },
+    {
+      "node": 188,
+      "nodeName": "Cylinder.046_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2666984,
+      "vertices": 46,
+      "indices": 60
+    },
+    {
+      "node": 190,
+      "nodeName": "NurbsPath.003_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2668696,
+      "vertices": 275,
+      "indices": 1248
+    },
+    {
+      "node": 192,
+      "nodeName": "Cube.048_low_Torse_0",
+      "primitive": 0,
+      "joint": "Torso",
+      "material": 1,
+      "offset": 2682488,
+      "vertices": 680,
+      "indices": 1476
+    },
+    {
+      "node": 194,
+      "nodeName": "Cube.017_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2710152,
+      "vertices": 622,
+      "indices": 1476
+    },
+    {
+      "node": 194,
+      "nodeName": "Cube.017_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2735960,
+      "vertices": 622,
+      "indices": 1476
+    },
+    {
+      "node": 196,
+      "nodeName": "1_TL_Base_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2761768,
+      "vertices": 368,
+      "indices": 864
+    },
+    {
+      "node": 196,
+      "nodeName": "1_TL_Base_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2777000,
+      "vertices": 368,
+      "indices": 864
+    },
+    {
+      "node": 198,
+      "nodeName": "Cylinder.044_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2792232,
+      "vertices": 294,
+      "indices": 1074
+    },
+    {
+      "node": 198,
+      "nodeName": "Cylinder.044_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2805936,
+      "vertices": 294,
+      "indices": 1074
+    },
+    {
+      "node": 200,
+      "nodeName": "Cube.042_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2819640,
+      "vertices": 234,
+      "indices": 456
+    },
+    {
+      "node": 200,
+      "nodeName": "Cube.042_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2828952,
+      "vertices": 234,
+      "indices": 456
+    },
+    {
+      "node": 202,
+      "nodeName": "Cube.043_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2838264,
+      "vertices": 246,
+      "indices": 516
+    },
+    {
+      "node": 202,
+      "nodeName": "Cube.043_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2848200,
+      "vertices": 246,
+      "indices": 516
+    },
+    {
+      "node": 204,
+      "nodeName": "Cylinder.048_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2858136,
+      "vertices": 18,
+      "indices": 48
+    },
+    {
+      "node": 204,
+      "nodeName": "Cylinder.048_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2858904,
+      "vertices": 18,
+      "indices": 48
+    },
+    {
+      "node": 206,
+      "nodeName": "Cylinder.049_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2859672,
+      "vertices": 1174,
+      "indices": 3432
+    },
+    {
+      "node": 206,
+      "nodeName": "Cylinder.049_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2910968,
+      "vertices": 1174,
+      "indices": 3432
+    },
+    {
+      "node": 208,
+      "nodeName": "Cube.045_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2962264,
+      "vertices": 96,
+      "indices": 264
+    },
+    {
+      "node": 208,
+      "nodeName": "Cube.045_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2966392,
+      "vertices": 96,
+      "indices": 264
+    },
+    {
+      "node": 210,
+      "nodeName": "Cylinder.050_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2970520,
+      "vertices": 268,
+      "indices": 804
+    },
+    {
+      "node": 210,
+      "nodeName": "Cylinder.050_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 2982312,
+      "vertices": 268,
+      "indices": 804
+    },
+    {
+      "node": 212,
+      "nodeName": "Cube.049_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 2994104,
+      "vertices": 172,
+      "indices": 432
+    },
+    {
+      "node": 212,
+      "nodeName": "Cube.049_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3001336,
+      "vertices": 172,
+      "indices": 432
+    },
+    {
+      "node": 214,
+      "nodeName": "Cube.050_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 3008568,
+      "vertices": 84,
+      "indices": 162
+    },
+    {
+      "node": 214,
+      "nodeName": "Cube.050_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3011904,
+      "vertices": 84,
+      "indices": 162
+    },
+    {
+      "node": 216,
+      "nodeName": "Cube.051_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 3015240,
+      "vertices": 112,
+      "indices": 312
+    },
+    {
+      "node": 216,
+      "nodeName": "Cube.051_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3020072,
+      "vertices": 112,
+      "indices": 312
+    },
+    {
+      "node": 218,
+      "nodeName": "Cube.052_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 3024904,
+      "vertices": 172,
+      "indices": 468
+    },
+    {
+      "node": 218,
+      "nodeName": "Cube.052_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3032280,
+      "vertices": 172,
+      "indices": 468
+    },
+    {
+      "node": 220,
+      "nodeName": "Cube.053_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 3039656,
+      "vertices": 298,
+      "indices": 564
+    },
+    {
+      "node": 220,
+      "nodeName": "Cube.053_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3051448,
+      "vertices": 298,
+      "indices": 564
+    },
+    {
+      "node": 222,
+      "nodeName": "Cylinder.043_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 3063240,
+      "vertices": 176,
+      "indices": 456
+    },
+    {
+      "node": 222,
+      "nodeName": "Cylinder.043_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3070696,
+      "vertices": 176,
+      "indices": 456
+    },
+    {
+      "node": 224,
+      "nodeName": "Cylinder.051_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipL",
+      "material": 2,
+      "offset": 3078152,
+      "vertices": 580,
+      "indices": 1656
+    },
+    {
+      "node": 224,
+      "nodeName": "Cylinder.051_low_Legs_0",
+      "primitive": 0,
+      "joint": "HipR",
+      "material": 2,
+      "offset": 3103336,
+      "vertices": 580,
+      "indices": 1656
+    },
+    {
+      "node": 226,
+      "nodeName": "Cylinder.052_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3128520,
+      "vertices": 488,
+      "indices": 1380
+    },
+    {
+      "node": 226,
+      "nodeName": "Cylinder.052_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3149656,
+      "vertices": 488,
+      "indices": 1380
+    },
+    {
+      "node": 228,
+      "nodeName": "Cube.056_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3170792,
+      "vertices": 96,
+      "indices": 168
+    },
+    {
+      "node": 228,
+      "nodeName": "Cube.056_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3174536,
+      "vertices": 96,
+      "indices": 168
+    },
+    {
+      "node": 230,
+      "nodeName": "Cylinder.053_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3178280,
+      "vertices": 142,
+      "indices": 360
+    },
+    {
+      "node": 230,
+      "nodeName": "Cylinder.053_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3184264,
+      "vertices": 142,
+      "indices": 360
+    },
+    {
+      "node": 232,
+      "nodeName": "Cube.058_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3190248,
+      "vertices": 132,
+      "indices": 246
+    },
+    {
+      "node": 232,
+      "nodeName": "Cube.058_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3195456,
+      "vertices": 132,
+      "indices": 246
+    },
+    {
+      "node": 234,
+      "nodeName": "1_LL_Base_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3200664,
+      "vertices": 500,
+      "indices": 984
+    },
+    {
+      "node": 234,
+      "nodeName": "1_LL_Base_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3220600,
+      "vertices": 500,
+      "indices": 984
+    },
+    {
+      "node": 236,
+      "nodeName": "Cube.060_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3240536,
+      "vertices": 188,
+      "indices": 468
+    },
+    {
+      "node": 236,
+      "nodeName": "Cube.060_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3248424,
+      "vertices": 188,
+      "indices": 468
+    },
+    {
+      "node": 238,
+      "nodeName": "Cylinder.054_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3256312,
+      "vertices": 1024,
+      "indices": 4668
+    },
+    {
+      "node": 238,
+      "nodeName": "Cylinder.054_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3307752,
+      "vertices": 1024,
+      "indices": 4668
+    },
+    {
+      "node": 240,
+      "nodeName": "Cylinder.055_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3359192,
+      "vertices": 748,
+      "indices": 2316
+    },
+    {
+      "node": 240,
+      "nodeName": "Cylinder.055_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3392392,
+      "vertices": 748,
+      "indices": 2316
+    },
+    {
+      "node": 242,
+      "nodeName": "Cylinder.056_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3425592,
+      "vertices": 148,
+      "indices": 396
+    },
+    {
+      "node": 242,
+      "nodeName": "Cylinder.056_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3431912,
+      "vertices": 148,
+      "indices": 396
+    },
+    {
+      "node": 244,
+      "nodeName": "NurbsPath.005_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3438232,
+      "vertices": 288,
+      "indices": 1488
+    },
+    {
+      "node": 244,
+      "nodeName": "NurbsPath.005_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3453400,
+      "vertices": 288,
+      "indices": 1488
+    },
+    {
+      "node": 246,
+      "nodeName": "NurbsPath.006_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3468568,
+      "vertices": 288,
+      "indices": 1488
+    },
+    {
+      "node": 246,
+      "nodeName": "NurbsPath.006_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3483736,
+      "vertices": 288,
+      "indices": 1488
+    },
+    {
+      "node": 248,
+      "nodeName": "Plane.002_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3498904,
+      "vertices": 48,
+      "indices": 84
+    },
+    {
+      "node": 248,
+      "nodeName": "Plane.002_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3500776,
+      "vertices": 48,
+      "indices": 84
+    },
+    {
+      "node": 250,
+      "nodeName": "Plane.003_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3502648,
+      "vertices": 48,
+      "indices": 84
+    },
+    {
+      "node": 250,
+      "nodeName": "Plane.003_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3504520,
+      "vertices": 48,
+      "indices": 84
+    },
+    {
+      "node": 252,
+      "nodeName": "Plane.004_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3506392,
+      "vertices": 322,
+      "indices": 864
+    },
+    {
+      "node": 252,
+      "nodeName": "Plane.004_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3520152,
+      "vertices": 322,
+      "indices": 864
+    },
+    {
+      "node": 254,
+      "nodeName": "Cube.061_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeL",
+      "material": 2,
+      "offset": 3533912,
+      "vertices": 288,
+      "indices": 480
+    },
+    {
+      "node": 254,
+      "nodeName": "Cube.061_low_Legs_0",
+      "primitive": 0,
+      "joint": "KneeR",
+      "material": 2,
+      "offset": 3545048,
+      "vertices": 288,
+      "indices": 480
+    },
+    {
+      "node": 256,
+      "nodeName": "1_FB_Base_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3556184,
+      "vertices": 520,
+      "indices": 1524
+    },
+    {
+      "node": 256,
+      "nodeName": "1_FB_Base_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3578920,
+      "vertices": 520,
+      "indices": 1524
+    },
+    {
+      "node": 258,
+      "nodeName": "Cylinder.057_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3601656,
+      "vertices": 284,
+      "indices": 720
+    },
+    {
+      "node": 258,
+      "nodeName": "Cylinder.057_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3613624,
+      "vertices": 284,
+      "indices": 720
+    },
+    {
+      "node": 260,
+      "nodeName": "Cylinder.058_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3625592,
+      "vertices": 116,
+      "indices": 276
+    },
+    {
+      "node": 260,
+      "nodeName": "Cylinder.058_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3630408,
+      "vertices": 116,
+      "indices": 276
+    },
+    {
+      "node": 262,
+      "nodeName": "Cylinder.060_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3635224,
+      "vertices": 342,
+      "indices": 960
+    },
+    {
+      "node": 262,
+      "nodeName": "Cylinder.060_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3650008,
+      "vertices": 342,
+      "indices": 960
+    },
+    {
+      "node": 264,
+      "nodeName": "Cube.054_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3664792,
+      "vertices": 184,
+      "indices": 492
+    },
+    {
+      "node": 264,
+      "nodeName": "Cube.054_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3672648,
+      "vertices": 184,
+      "indices": 492
+    },
+    {
+      "node": 266,
+      "nodeName": "Cube.055_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3680504,
+      "vertices": 96,
+      "indices": 252
+    },
+    {
+      "node": 266,
+      "nodeName": "Cube.055_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3684584,
+      "vertices": 96,
+      "indices": 252
+    },
+    {
+      "node": 268,
+      "nodeName": "Cube.062_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3688664,
+      "vertices": 424,
+      "indices": 1032
+    },
+    {
+      "node": 268,
+      "nodeName": "Cube.062_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3706360,
+      "vertices": 424,
+      "indices": 1032
+    },
+    {
+      "node": 270,
+      "nodeName": "Cylinder.061_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3724056,
+      "vertices": 124,
+      "indices": 348
+    },
+    {
+      "node": 270,
+      "nodeName": "Cylinder.061_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3729416,
+      "vertices": 124,
+      "indices": 348
+    },
+    {
+      "node": 272,
+      "nodeName": "Cube.057_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3734776,
+      "vertices": 204,
+      "indices": 456
+    },
+    {
+      "node": 272,
+      "nodeName": "Cube.057_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3743128,
+      "vertices": 204,
+      "indices": 456
+    },
+    {
+      "node": 274,
+      "nodeName": "Cube.064_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3751480,
+      "vertices": 144,
+      "indices": 276
+    },
+    {
+      "node": 274,
+      "nodeName": "Cube.064_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3757192,
+      "vertices": 144,
+      "indices": 276
+    },
+    {
+      "node": 276,
+      "nodeName": "Cylinder.059_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3762904,
+      "vertices": 126,
+      "indices": 360
+    },
+    {
+      "node": 276,
+      "nodeName": "Cylinder.059_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3768376,
+      "vertices": 126,
+      "indices": 360
+    },
+    {
+      "node": 278,
+      "nodeName": "Cylinder.062_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3773848,
+      "vertices": 126,
+      "indices": 360
+    },
+    {
+      "node": 278,
+      "nodeName": "Cylinder.062_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3779320,
+      "vertices": 126,
+      "indices": 360
+    },
+    {
+      "node": 280,
+      "nodeName": "Cube.065_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3784792,
+      "vertices": 32,
+      "indices": 54
+    },
+    {
+      "node": 280,
+      "nodeName": "Cube.065_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3786032,
+      "vertices": 32,
+      "indices": 54
+    },
+    {
+      "node": 282,
+      "nodeName": "Cube.066_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3787272,
+      "vertices": 84,
+      "indices": 174
+    },
+    {
+      "node": 282,
+      "nodeName": "Cube.066_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3790656,
+      "vertices": 84,
+      "indices": 174
+    },
+    {
+      "node": 284,
+      "nodeName": "Plane.005_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3794040,
+      "vertices": 180,
+      "indices": 462
+    },
+    {
+      "node": 284,
+      "nodeName": "Plane.005_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3801648,
+      "vertices": 180,
+      "indices": 462
+    },
+    {
+      "node": 286,
+      "nodeName": "Cube.067_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3809256,
+      "vertices": 430,
+      "indices": 1140
+    },
+    {
+      "node": 286,
+      "nodeName": "Cube.067_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3827576,
+      "vertices": 430,
+      "indices": 1140
+    },
+    {
+      "node": 288,
+      "nodeName": "Cube.068_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3845896,
+      "vertices": 424,
+      "indices": 816
+    },
+    {
+      "node": 288,
+      "nodeName": "Cube.068_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3862728,
+      "vertices": 424,
+      "indices": 816
+    },
+    {
+      "node": 290,
+      "nodeName": "Cylinder.066_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3879560,
+      "vertices": 260,
+      "indices": 744
+    },
+    {
+      "node": 290,
+      "nodeName": "Cylinder.066_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3890856,
+      "vertices": 260,
+      "indices": 744
+    },
+    {
+      "node": 292,
+      "nodeName": "Cube.069_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3902152,
+      "vertices": 394,
+      "indices": 960
+    },
+    {
+      "node": 292,
+      "nodeName": "Cube.069_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3918600,
+      "vertices": 394,
+      "indices": 960
+    },
+    {
+      "node": 294,
+      "nodeName": "Cylinder.067_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3935048,
+      "vertices": 126,
+      "indices": 360
+    },
+    {
+      "node": 294,
+      "nodeName": "Cylinder.067_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3940520,
+      "vertices": 126,
+      "indices": 360
+    },
+    {
+      "node": 296,
+      "nodeName": "Cylinder.063_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3945992,
+      "vertices": 300,
+      "indices": 840
+    },
+    {
+      "node": 296,
+      "nodeName": "Cylinder.063_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3958952,
+      "vertices": 300,
+      "indices": 840
+    },
+    {
+      "node": 298,
+      "nodeName": "Cube.071_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3971912,
+      "vertices": 216,
+      "indices": 456
+    },
+    {
+      "node": 298,
+      "nodeName": "Cube.071_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3980648,
+      "vertices": 216,
+      "indices": 456
+    },
+    {
+      "node": 300,
+      "nodeName": "Cube.072_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleL",
+      "material": 2,
+      "offset": 3989384,
+      "vertices": 88,
+      "indices": 228
+    },
+    {
+      "node": 300,
+      "nodeName": "Cube.072_low_Legs_0",
+      "primitive": 0,
+      "joint": "AnkleR",
+      "material": 2,
+      "offset": 3993112,
+      "vertices": 88,
+      "indices": 228
+    },
+    {
+      "node": 302,
+      "nodeName": "Cylinder.064_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 3996840,
+      "vertices": 214,
+      "indices": 618
+    },
+    {
+      "node": 302,
+      "nodeName": "Cylinder.064_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 4006160,
+      "vertices": 214,
+      "indices": 618
+    },
+    {
+      "node": 304,
+      "nodeName": "Cylinder.065_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 4015480,
+      "vertices": 214,
+      "indices": 618
+    },
+    {
+      "node": 304,
+      "nodeName": "Cylinder.065_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 4024800,
+      "vertices": 214,
+      "indices": 618
+    },
+    {
+      "node": 306,
+      "nodeName": "Cube.012_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderL",
+      "material": 0,
+      "offset": 4034120,
+      "vertices": 1628,
+      "indices": 3132
+    },
+    {
+      "node": 306,
+      "nodeName": "Cube.012_low_Hands_0",
+      "primitive": 0,
+      "joint": "ShoulderR",
+      "material": 0,
+      "offset": 4098744,
+      "vertices": 1628,
+      "indices": 3132
+    },
+    {
+      "node": 308,
+      "nodeName": "Cube.004_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowL",
+      "material": 0,
+      "offset": 4163368,
+      "vertices": 208,
+      "indices": 600
+    },
+    {
+      "node": 308,
+      "nodeName": "Cube.004_low_Hands_0",
+      "primitive": 0,
+      "joint": "ElbowR",
+      "material": 0,
+      "offset": 4172424,
+      "vertices": 208,
+      "indices": 600
+    }
+  ]
+}
