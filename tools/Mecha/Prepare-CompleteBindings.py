@@ -42,6 +42,11 @@ cross_normal=blade_normal-blade_axis*np.dot(blade_normal,blade_axis);cross_norma
 blade_across=np.cross(cross_normal,blade_axis)
 blade_along=(center-a)@blade_axis;blade_width=(center-a)@blade_across
 lower_fin_overlap=sword&(blade_along>.72)&(blade_along<1.80)&(blade_width<.075)
+blade_depth=(center-a)@cross_normal
+# Residual gold fin tips point out of the broad face. Width-only ownership
+# missed these on both sides; retain only the thin blade envelope in this span.
+side_fin_overlap=sword&(blade_along>.90)&(blade_along<1.68)&((blade_depth>.005)|(blade_depth<-.10))
+lower_fin_overlap|=side_fin_overlap
 sword&=~lower_fin_overlap
 # Only near-coincident reflected body surfaces are removed. The source is
 # fused, so a wider mirror test would also catch a distinct but nearby blade.
@@ -104,13 +109,23 @@ parts.append(dict(node=min(nodes),nodeName='Complete_SwordSurfaceRestore',primit
     joint='Torso',role='SwordBlade',material=0,offset=offset,vertices=len(unique),
     indices=len(newix),generatedRepair='closed-blade-overlap-surface-v1'))
 repair_faces=len(newix)//3;audit['SwordBlade']+=repair_faces
+from CompleteKneeHubs import build as build_knee
+knee_faces=0
+for side in ('L','R'):
+    k=ids['Knee'+side];repair=build_knee(dtype,k,doc['joints'][k]['position']).reshape(-1)
+    unique,newix=np.unique(repair,return_inverse=True);offset=len(blob)
+    blob.extend(unique.tobytes());blob.extend(newix.astype('<u4').tobytes())
+    parts.append(dict(node=min(nodes),nodeName='Complete_KneeHub'+side,primitive=0,
+        joint='Torso',role='Leg'+side,material=0,offset=offset,vertices=len(unique),
+        indices=len(newix),generatedRepair='closed-knee-hinge-v1'))
+    count=len(newix)//3;knee_faces+=count;audit['Leg'+side]+=count
 doc.update(parts=parts,sourceNodes=sorted(nodes),renderRoles=audit,geometryTupleSha256=identity,
-    triangles=before+repair_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,
+    triangles=before+repair_faces+knee_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,kneeRepairTriangles=knee_faces,
     equipmentBinding='rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves',
     wingBinding='complete rigid rear fins and tapered necks; WingL/WingR under Backpack',
     wingVertices=[sum(p['vertices'] for p in parts if p['role']==name) for name in ['WingL','WingR']],
     swordAnchors=dict(grip=grip.tolist(),bladeRoot=[.73,1.57,.30],bladeTip=a.tolist(),hiltTip=[.9407,2.1757,1.3423],bladeNormal=blade_normal.tolist()),
     roleBinding='rigid complete faces; thin sword plane and conservative mirrored body rejection; tapered rear fins; rigid Backpack and Shield',
-    bindingAudit=dict(mirroredBodyFaces=int(mirrored.sum()),swordCapsuleRejectedFaces=int((capsule&~sword).sum()),lowerFinOverlapFaces=int(lower_fin_overlap.sum()),rigidArmour=True))
+    bindingAudit=dict(mirroredBodyFaces=int(mirrored.sum()),swordCapsuleRejectedFaces=int((capsule&~sword).sum()),lowerFinOverlapFaces=int(lower_fin_overlap.sum()),sideFinOverlapFaces=int(side_fin_overlap.sum()),rigidArmour=True))
 (res/(stem+'_rig.json')).write_text(json.dumps(doc,indent=2),encoding='utf-8');(res/(stem+'_rig.bin')).write_bytes(blob)
 print('PASS rigid semantic face partition:',audit,'source triangles unchanged',before,'closed blade repair',repair_faces,'source nodes',len(nodes),'audit',doc['bindingAudit'])

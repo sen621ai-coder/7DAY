@@ -13,6 +13,7 @@ namespace PZAEC.Mecha
                 Model.Path = Path.Combine(modInstance.Path, "Resources");
                 var harmony = new Harmony("pzaec.mecha.buster");
                 Model.Install(harmony);
+                EngineSilence.Install(harmony);
                 Weapons.Install(harmony);
                 Optics.Install(harmony);
                 Locomotion.Install(harmony);

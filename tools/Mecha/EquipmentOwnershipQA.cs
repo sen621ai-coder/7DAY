@@ -26,7 +26,7 @@ public static class EquipmentOwnershipQA
                 else material=new Material(skin.sharedMaterial);
                 materials.Add(material);go.AddComponent<MeshRenderer>().sharedMaterial=material;
             }
-            var focus=rig.Mount.position+Vector3.up*1.5f;camera.transform.position=focus+rig.Mount.rotation*view;camera.transform.LookAt(focus);camera.Render();
+            var focus=rig.Mount.position+Vector3.up*(only=="Leg"?.70f:1.5f);camera.transform.position=focus+rig.Mount.rotation*view;camera.transform.LookAt(focus);camera.Render();
             var rt=camera.targetTexture;var old=RenderTexture.active;RenderTexture.active=rt;var png=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);png.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);png.Apply();File.WriteAllBytes(Path.Combine(folder,name+".png"),png.EncodeToPNG());UnityEngine.Object.DestroyImmediate(png);RenderTexture.active=old;
         }finally{for(int i=0;i<helpers.Length;i++)helpers[i].enabled=helperEnabled[i];for(int i=0;i<skins.Length;i++)skins[i].enabled=enabled[i];foreach(var go in objects){UnityEngine.Object.DestroyImmediate(go.GetComponent<MeshFilter>().sharedMesh);UnityEngine.Object.DestroyImmediate(go);}foreach(var mat in materials)UnityEngine.Object.DestroyImmediate(mat);}
     }
@@ -48,6 +48,25 @@ public static class EquipmentOwnershipQA
                 check("source-reviewed lower fin face is bound to WingR at "+point+" actual="+actual,nearest<.00001f&&actual=="WingR");
             }
             rig.ResetPose();var baseline=Bake(skins);
+            var hubs=skins.Where(s=>s.name.StartsWith("Complete_KneeHub")).ToArray();
+            check("two closed knee mechanisms loaded",hubs.Length==2);
+            var soleL=rig.FootL.position;var soleR=rig.FootR.position;
+            foreach(float drop in new[]{0f,.20f,.40f,.55f}){
+                rig.ResetPose();rig.Torso.position-=rig.Mount.up*drop;
+                Gait.Solve(rig,0,soleL,rig.Mount.up);Gait.Solve(rig,1,soleR,rig.Mount.up);
+                var hubPoints=Bake(hubs);float error=0;
+                for(int h=0;h<hubs.Length;h++){
+                    var bone=hubs[h].bones[hubs[h].sharedMesh.boneWeights[0].boneIndex0];
+                    // The axle must stay centred on the actual animated hinge.
+                    var local=hubPoints[h].Select(p=>bone.InverseTransformPoint(p)).ToArray();
+                    var min=local.Aggregate(Vector3.Min);var max=local.Aggregate(Vector3.Max);
+                    error=Mathf.Max(error,((min+max)*.5f).magnitude);
+                }
+                check("knee hubs remain centred through bilateral IK drop="+drop+" error="+error,error<.001f);
+                Capture(camera,rig,skins,"knees-front-"+drop.ToString("F2",System.Globalization.CultureInfo.InvariantCulture),new Vector3(0,.1f,3.4f),false,"Leg");
+                Capture(camera,rig,skins,"knees-side-"+drop.ToString("F2",System.Globalization.CultureInfo.InvariantCulture),new Vector3(2.4f,.1f,2.6f),false,"Leg");
+            }
+            rig.ResetPose();
             var changes=new List<object>();
             foreach(string part in new[]{"Sword","WingL","WingR","HipL","HipR"}){
                 rig.ResetPose();var joint=part=="Sword"?rig.Sword:part=="WingL"?rig.WingL:part=="WingR"?rig.WingR:part=="HipL"?rig.HipL:rig.HipR;

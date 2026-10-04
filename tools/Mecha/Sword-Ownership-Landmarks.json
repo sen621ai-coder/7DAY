@@ -80,6 +80,26 @@
         0.3532908260822296
       ],
       "faceSha256": "47714c984baf78be7112b2acc7e183e79e0c477c039e3a764a10bec0b45cc2e6"
+    },
+    {
+      "name": "side-gold-fin-front",
+      "expectedRole": "WingR",
+      "centroid": [
+        0.619887113571167,
+        0.9439466595649719,
+        -0.3099871575832367
+      ],
+      "faceSha256": "4136761f25e8dcda1d6fe84977e8f35d524d2ad20f6ce5c37695d7bce832b9c9"
+    },
+    {
+      "name": "side-gold-fin-back",
+      "expectedRole": "WingR",
+      "centroid": [
+        0.5162450671195984,
+        1.3182344436645508,
+        0.12746958434581757
+      ],
+      "faceSha256": "2c861e3168688bb0aee1784add14eb1fc3948bc569d808a14955ef7219de5801"
     }
   ]
 }

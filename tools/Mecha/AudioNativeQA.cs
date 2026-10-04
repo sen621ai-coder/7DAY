@@ -64,6 +64,17 @@ public static class MechaAudioQA
         var slots=AccessTools.Field(typeof(Entity),"attachedEntities");var originalSlots=slots.GetValue(v);
         try
         {
+            var nativeEngine=v.vehicle.vehicleParts.OfType<VPEngine>().First();
+            int blocked=EngineSilence.Blocked;
+            AccessTools.Method(typeof(VPEngine),"playSound").Invoke(nativeEngine,new object[]{"Vehicles/Suv/suv_start"});
+            var loopArgs=new object[]{"Vehicles/Suv/suv_idle",null};
+            AccessTools.Method(typeof(VPEngine),"playSoundLoop").Invoke(nativeEngine,loopArgs);
+            AccessTools.Method(typeof(VPEngine),"playAccelDecelSound").Invoke(nativeEngine,new object[]{"Vehicles/Suv/suv_accel"});
+            AccessTools.Method(typeof(VPEngine),"updateEngineSounds").Invoke(nativeEngine,new object[]{1f});
+            Check(variant+" native engine start/loop/accel/update entry points blocked delta="+(EngineSilence.Blocked-blocked),EngineSilence.Blocked==blocked+4&&loopArgs[1]==null);
+            Check(variant+" native engine stop still clears acceleration state",nativeEngine.accelDecelSoundName==null);
+            var inherited=v.GetComponentsInChildren<AudioSource>(true).Where(a=>!a.transform.name.StartsWith("Mecha")).ToArray();
+            Check(variant+" inherited vehicle prefab sources silent",inherited.All(a=>!a.enabled&&a.mute&&a.clip==null));
             harmony.Patch(AccessTools.PropertyGetter(typeof(RobotAudio),"Audible"),prefix:new HarmonyMethod(typeof(MechaAudioQA),nameof(Audible)));
             harmony.Patch(AccessTools.Method(typeof(Weapons),"Broadcast"),prefix:new HarmonyMethod(typeof(MechaAudioQA),nameof(NoBroadcast)));
             shows.Clear();samurai.Clear();if(Rules.Complete(v))samurai.Add(v.entityId,combat);

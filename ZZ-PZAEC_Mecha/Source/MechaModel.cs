@@ -202,6 +202,7 @@ namespace PZAEC.Mecha
             if (native == null) throw new InvalidOperationException("Native jeep prefab missing");
             cache = new GameObject("MechaPrefabCache"); cache.SetActive(false); UnityEngine.Object.DontDestroyOnLoad(cache);
             var root = UnityEngine.Object.Instantiate(native, cache.transform, false); root.name = "CombatRobot";
+            EngineSilence.SilenceInheritedSources(root);
             foreach (var lod in root.GetComponentsInChildren<LODGroup>(true)) lod.enabled = false;
             foreach (var r in root.GetComponentsInChildren<Renderer>(true)) r.enabled = false;
             foreach (var particles in root.GetComponentsInChildren<ParticleSystem>(true))
