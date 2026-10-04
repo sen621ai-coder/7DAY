@@ -99,7 +99,7 @@ public sealed class MechaMotionQA : IModApi
             RobotAudio.Clear();Boarding.Clear();Gait.Clear();Locomotion.Clear();
         }
         catch(Exception ex){failures++;report.Add("FAIL "+ex);}
-        finally{report.AddRange(MechaLandingQA.Results());report.AddRange(MechaAudioQA.Results());failures+=MechaLandingQA.Failures+MechaAudioQA.Failures;report.Add("COMPLETE failures="+failures);File.WriteAllLines(Path.Combine(output,"report.txt"),report);foreach(var line in report)Log.Out("[MechaMotionQA] "+line);Application.Quit();}
+        finally{report.AddRange(MechaLandingQA.Results());report.AddRange(MechaAudioQA.Results());failures+=MechaLandingQA.Failures+MechaAudioQA.Failures;new GameObject("Mecha Frame Timing QA").AddComponent<MechaTimingQA>().Begin(report,failures,output);}
     }
     static int entered,exited;
     static void CompleteTrial(World world,Camera camera,RenderTexture texture)

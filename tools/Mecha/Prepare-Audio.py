@@ -8,8 +8,8 @@ import argparse, array, json, math, pathlib, random, sys, wave
 RATE=22050
 OUT=pathlib.Path(__file__).resolve().parents[2]/'ZZ-PZAEC_Mecha/Resources/Audio'
 LOOPS={'servo':4.,'thruster':4.,'laser-charge':4.}
-DURATIONS={'power-on':.78,'power-off':.62,'step-left':.52,'step-right':.54,'land':.95,'jump':.48,'entry-brace':.36,'kneel-lock':.42,'hatch-open':.65,'hatch-close':.65,'stand-lock':.38,'ready':.32,'sword-prepare':.32,'sword-swing':.44,'sword-heavy':.62,'sword-brake':.29,'shield':.30,'palm-laser':.24,'head-laser':.34,'missile-release':.75,'laser-impact':.28,'sword-impact':.38}
-DESIGN={'servo':'irregular geared hydraulic motion, no bass oscillator','thruster':'broadband pressure exhaust, no firing-order rhythm','laser-charge':'quiet high electrical texture; runtime charge raises pitch','power-on':'relay pair, capacitor rise, final contactor; then silence','power-off':'contactor release, falling capacitor, pressure release','step-left':'sole contact, delayed structural load, inharmonic metal tail','step-right':'alternate sole resonance / brace timing','land':'load-bearing contact / frame settling, not explosion','jump':'pressure valve and piston impulse','entry-brace':'short brake / load brace','kneel-lock':'two knee ratchet / lock contacts','hatch-open':'unlatch, hydraulic slide, end stop','hatch-close':'slide, panel contact, locking bolt','stand-lock':'support latch / final lock; dwell silent','ready':'restrained electrical confirmation','sword-prepare':'grip actuator / blade preload','sword-swing':'air cutting sweep / short metal tension','sword-heavy':'longer lower air sweep / stronger preload','sword-brake':'joint brake / damped blade flex','shield':'electrical snap / tight metal response','palm-laser':'compact bright coil discharge / fast electrical pulse','head-laser':'deeper capacitor punch / paired arc discharge','missile-release':'pod latch / pneumatic ejector / short exhaust, no explosion','laser-impact':'localized conductive crackle','sword-impact':'inharmonic steel contact / short frame resonance'}
+DURATIONS={'power-on':.78,'power-off':.62,'step-left':.52,'step-right':.54,'land':.95,'jump':.48,'entry-brace':.36,'kneel-lock':.42,'hatch-open':.65,'hatch-close':.40,'hatch-open-stop':.25,'hatch-close-lock':.32,'stand-lock':.38,'ready':.32,'sword-prepare':.32,'sword-swing':.44,'sword-heavy':.62,'sword-brake':.29,'shield':.30,'palm-laser':.24,'head-laser':.34,'missile-release':.75,'laser-impact':.28,'sword-impact':.38}
+DESIGN={'servo':'irregular geared hydraulic motion, no bass oscillator','thruster':'broadband pressure exhaust, no firing-order rhythm','laser-charge':'quiet high electrical texture; runtime charge raises pitch','power-on':'relay pair, capacitor rise, final contactor; then silence','power-off':'contactor release, falling capacitor, pressure release','step-left':'sole contact, delayed structural load, inharmonic metal tail','step-right':'alternate sole resonance / brace timing','land':'load-bearing contact / frame settling, not explosion','jump':'pressure valve and piston impulse','entry-brace':'short brake / load brace','kneel-lock':'two knee ratchet / lock contacts','hatch-open':'unlatch and hydraulic slide; end stop is a separate phase','hatch-close':'hydraulic slide only; locking contact is a separate phase','hatch-open-stop':'open travel end stop at actual hatch arrival','hatch-close-lock':'panel contact and locking bolt at actual hatch closure','stand-lock':'support latch / final lock; dwell silent','ready':'restrained electrical confirmation','sword-prepare':'grip actuator / blade preload','sword-swing':'air cutting sweep / short metal tension','sword-heavy':'longer lower air sweep / stronger preload','sword-brake':'joint brake / damped blade flex','shield':'electrical snap / tight metal response','palm-laser':'compact bright coil discharge / fast electrical pulse','head-laser':'deeper capacitor punch / paired arc discharge','missile-release':'pod latch / pneumatic ejector / short exhaust, no explosion','laser-impact':'localized conductive crackle','sword-impact':'inharmonic steel contact / short frame resonance'}
 
 def smooth(x):
     x=max(0.,min(1.,x));return x*x*(3-2*x)
@@ -24,7 +24,8 @@ def layers(name,count):
 
 def make(cue,complete):
     mass=1. if complete else .76;seconds=LOOPS.get(cue,DURATIONS.get(cue,.35))
-    if complete and cue in ('step-left','step-right','land','hatch-close','kneel-lock'):seconds*=1.18
+    if complete and cue in ('step-left','step-right','land','kneel-lock'):seconds*=1.18
+    if complete and cue=='hatch-close':seconds=.65
     count=round(seconds*RATE);seed=('complete-' if complete else 'prototype-')+cue
     raw,low,mid,fast=layers(seed,count);rng=random.Random(seed+'/modulation');knots=[rng.uniform(.55,1.) for _ in range(24)];samples=[]
     def contact(t,at,strength=1.,frequency=75.,decay=.14,metal=.20):
@@ -48,8 +49,9 @@ def make(cue,complete):
             value=contact(t,.008,.55,125,.075,.7)+contact(t,.11 if cue=='kneel-lock' else .065,.28,190,.055,.9)+hydraulics*.22*math.sin(math.pi*x)**2
         elif cue in ('hatch-open','hatch-close'):
             slide=smooth(t/.09)*(1-smooth((t-seconds*.58)/.13));value=hydraulics*.38*slide+band*.075*slide
-            if cue=='hatch-open':value+=contact(t,.012,.35,180,.07,.9)+contact(t,seconds*.70,.25,135,.075,.5)
-            else:value+=contact(t,seconds*.56,.68,95,.10,.6)+contact(t,seconds*.73,.30,205,.045,.9)
+            if cue=='hatch-open':value+=contact(t,.012,.35,180,.07,.9)
+        elif cue=='hatch-open-stop':value=contact(t,.008,.25,135,.075,.5)
+        elif cue=='hatch-close-lock':value=contact(t,.008,.68,95,.10,.6)+contact(t,.075,.30,205,.045,.9)
         elif cue in ('power-on','power-off','ready'):
             value=contact(t,.012,.26,260,.03,1.)+contact(t,.14 if cue!='ready' else .10,.16,380,.024,1.)
             env=math.sin(math.pi*x)**2;frequency=(480+880*x) if cue!='power-off' else (1200-870*x)

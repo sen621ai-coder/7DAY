@@ -410,6 +410,12 @@ namespace PZAEC.Mecha
             }
         }
 
+        public static void CancelTrigger(EntityVehicle v,int actor,int sequence,float now)
+        {
+            var lease=GetLease(v.entityId);
+            if(!lease.Accept(actor,sequence,false,now))return;
+            lease.Stop();var s=GetState(v);s.TriggerHeld=s.MissileTrigger=s.Aiming=s.MissileAiming=false;s.LockTarget=null;s.LockProgress=0;
+        }
         // Public intent entry for the local movement adapter (trample/stomp).
         public static void SendLocalIntent(EntityVehicle vehicle, byte op, Vector3 direction, Vector3 origin)
         {

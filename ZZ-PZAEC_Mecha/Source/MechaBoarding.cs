@@ -114,8 +114,10 @@ namespace PZAEC.Mecha
             {
                 if(complete){Cue(s,age,s.Exit?.75f:1.05f,1,"step-left",.72f,silent,0);Cue(s,age,s.Exit?1.05f:1.5f,2,"step-right",.78f,silent,1);}
                 Cue(s,age,complete?Ceremony.KneelEnd(s.Exit):.9f,3,"kneel-lock",.62f,silent);
-                Cue(s,age,complete?Ceremony.OpenAt(s.Exit)+(s.Exit?.7f:.75f):s.Exit?1.2f:1.6f,4,"hatch-open",.52f,silent);
-                Cue(s,age,complete?Ceremony.CloseAt(s.Exit)+.65f:s.Exit?2:2.5f,5,"hatch-close",.68f,silent);
+                Cue(s,age,complete?Ceremony.OpenAt(s.Exit):s.Exit?.6f:.9f,4,"hatch-open",.52f,silent);
+                Cue(s,age,complete?Ceremony.CloseAt(s.Exit):s.Exit?1.4f:2.1f,5,"hatch-close",.48f,silent);
+                Cue(s,age,complete?Ceremony.OpenAt(s.Exit)+(s.Exit?.7f:.75f):s.Exit?1.2f:1.6f,8,"hatch-open-stop",.52f,silent);
+                Cue(s,age,complete?Ceremony.CloseAt(s.Exit)+.65f:s.Exit?2:2.5f,9,"hatch-close-lock",.68f,silent);
                 Cue(s,age,complete?(s.Exit?5.75f:6.6f):s.Duration-.1f,6,"stand-lock",.7f,silent);
             }
             if(!s.Exit)Cue(s,age,s.Duration-.08f,7,"ready",.46f,silent);

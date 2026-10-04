@@ -6,7 +6,7 @@ folder=root/'ZZ-PZAEC_Mecha/Resources/Audio'
 manifest=json.loads((folder/'mecha-audio-manifest.json').read_text(encoding='utf-8'))
 assert manifest['rate']==22050 and manifest['format']=='mono PCM16'
 assets={x['name']:x for x in manifest['assets']}
-assert len(assets)==44
+assert len(assets)==48
 total=0
 for name,meta in assets.items():
     path=folder/(name+'.wav');total+=path.stat().st_size

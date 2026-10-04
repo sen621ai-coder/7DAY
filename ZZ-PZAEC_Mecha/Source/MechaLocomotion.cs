@@ -10,7 +10,7 @@ namespace PZAEC.Mecha
         public sealed class MoveState
         {
             public EntityVehicle Vehicle;
-            public bool HoverOn, Boost, JumpWasHeld, Grounded=true, Toggle, Descend, Jump, InputReady;
+            public bool HoverOn, Boost, JumpWasHeld, Grounded=true, LastSentGrounded=true, Toggle, Descend, Jump, InputReady;
             public float ChargeStart=-1, Charge, NextJump, AirSince=-1, LastInput=-100, LastSync=-100, LastPacket=-100, LandingAt=-100, JumpAt=-100, LastTime, Blend;
             public float AirPeakDownSpeed,LandingStrength=.7f,LandingPendingUntil=-100;public bool LandingEventExpected;
             public Flight.Phase FlightMode;
@@ -122,7 +122,9 @@ namespace PZAEC.Mecha
             return new Vector3(flags,s.Charge,Flight.Active(s)?s.VerticalInput:0);
         }
         public static void Sync(EntityVehicle v,MoveState s)
-        {if(Time.time-s.LastSync>=.2f){s.LastSync=Time.time;Weapons.SendLocalIntent(v,Weapons.Motion,Snapshot(s),Vector3.zero);}}
+        // Airborne duration starts at the contact edge on both peers, not at
+        // the next throttled heartbeat (which can erase 0.2s from a short jump).
+        {if(s.Grounded!=s.LastSentGrounded||Time.time-s.LastSync>=.2f){s.LastSync=Time.time;s.LastSentGrounded=s.Grounded;Weapons.SendLocalIntent(v,Weapons.Motion,Snapshot(s),Vector3.zero);}}
         // One airborne interval grants at most one damaging landing. The
         // owner sends the grounded snapshot before its stomp intent so the
         // server can consume the same contact without creating an explosion.

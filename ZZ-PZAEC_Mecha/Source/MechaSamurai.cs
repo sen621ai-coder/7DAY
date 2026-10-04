@@ -8,7 +8,7 @@ namespace PZAEC.Mecha
     // The server owns charge time, swing contacts, shield energy and action snapshots.
     public static class Samurai
     {
-        public const byte InputIdle=16, InputSword=17, InputGuard=18, InputBoth=19, Cancel=20, Snapshot=16;
+        public const byte InputIdle=16, InputSword=17, InputGuard=18, InputBoth=19, Cancel=20, Snapshot=16, CancelAck=20;
         public const float HeavyCharge=.8f, AlertDelay=6f, NormalDuration=1.6f, HeavyDuration=1.9f;
         public static readonly Vector3 Grip=new Vector3(.78f,1.81f,.76f);
         public static readonly Vector3 BladeRoot=new Vector3(.73f,1.57f,.30f), BladeTip=new Vector3(.23f,.50f,-1.10f);
@@ -21,11 +21,11 @@ namespace PZAEC.Mecha
             public float InputAt=-100, PressedAt, Started=-100, LastCombat=-100, LastHit=-100, BrokenUntil, Energy=100, LastSync=-100;
             public float BeamStarted=-1, LaserCharge, LaserWait, ReceivedAt=-100, Alert, GuardBlend, AimYaw, AimPitch, HeadYaw, HeadPitch;
             public float LastShieldSound=-100; public int SoundSequence,SoundAttack=-1,SoundMask,ReceivedAttack=-1; public float LastSweep=-1; public Vector3 PreviousRoot,PreviousTip,PreviousPosition;
-            public bool LocalPresentationSuppressed;public int LocalPresentationActor=-1,CancelledAttack=-1;
+            public bool LocalPresentationSuppressed;public int LocalPresentationActor=-1,CancelledAttack=-1,PendingCancelToken;
             public readonly HashSet<int> Hit=new HashSet<int>();
         }
         static readonly Dictionary<int,State> states=new Dictionary<int,State>();
-        static byte input=255;static float nextInput;
+        static byte input=255;static float nextInput;static int cancelToken;
         public static State Get(EntityVehicle v)
         { State s;if(!states.TryGetValue(v.entityId,out s)||s.Vehicle!=v){s=new State{Vehicle=v};states[v.entityId]=s;}return s; }
         public static bool Busy(EntityVehicle v){if(!Rules.Complete(v))return false;var s=Get(v);return s.Swing||s.Charging;}
@@ -41,7 +41,23 @@ namespace PZAEC.Mecha
             RobotAudio.StopCharge(v);
         }
         public static void ReleaseLocal(EntityVehicle v)
-        {if(Rules.Complete(v)){if(!Weapons.Server)CancelPresentation(Get(v));Weapons.SendLocalIntent(v,Cancel,Vector3.zero,Vector3.zero);}input=255;nextInput=0;}
+        {if(Rules.Complete(v)){if(!Weapons.Server)BeginCancel(Get(v));else Weapons.SendLocalIntent(v,Cancel,Vector3.zero,Vector3.zero);}input=255;nextInput=0;}
+        static void BeginCancel(State s)
+        {
+            if(s.LocalPresentationSuppressed)return;
+            CancelPresentation(s);cancelToken=cancelToken>=0xffffff?1:cancelToken+1;s.PendingCancelToken=cancelToken;
+            Weapons.SendLocalIntent(s.Vehicle,Cancel,new Vector3(cancelToken,0,0),Vector3.zero);
+        }
+        public static void ReceiveCancelAck(EntityVehicle v,int serial,Vector3 data)
+        {
+            if(Weapons.Server||!Rules.Complete(v))return;var s=Get(v);
+            // Token and actor bind this acknowledgement to our cancellation.
+            // Its serial shares the snapshot stream, so every pre-cancel pose
+            // stays stale even after input resumes. Laser has no sword identity.
+            int actor=(int)data.y|((int)data.z<<16);
+            if(s.PendingCancelToken==0||data.x!=s.PendingCancelToken||actor!=s.LocalPresentationActor)return;
+            s.PendingCancelToken=0;s.Received=Math.Max(s.Received,serial);s.ReceivedAt=Time.time;s.SoundAttack=-1;s.SoundMask=0;Stop(v);
+        }
         static void CancelPresentation(State s)
         {
             var world=GameManager.Instance!=null?GameManager.Instance.World:null;var player=world!=null?world.GetPrimaryPlayer():null;var driver=s.Vehicle.GetAttached(0);
@@ -53,14 +69,14 @@ namespace PZAEC.Mecha
             // A former driver's local cancellation must not mute the next
             // operator when this vehicle becomes a remote actor to them.
             var driver=s.Vehicle.GetAttached(0);
-            if(s.LocalPresentationSuppressed&&driver!=null&&s.LocalPresentationActor>=0&&driver.entityId!=s.LocalPresentationActor)
-            {s.LocalPresentationSuppressed=false;s.CancelledAttack=-1;}
-            return s.LocalPresentationSuppressed;
+            if(driver!=null&&s.LocalPresentationActor>=0&&driver.entityId!=s.LocalPresentationActor)
+            {s.LocalPresentationSuppressed=false;s.CancelledAttack=-1;s.PendingCancelToken=0;s.LocalPresentationActor=-1;}
+            return s.LocalPresentationSuppressed||s.PendingCancelToken!=0;
         }
         public static void LocalInput(EntityVehicle v,Ray ray,bool ready)
         {
             byte op=!ready?InputIdle:Input.GetKey(KeyCode.Mouse0)?(Input.GetKey(KeyCode.Mouse1)?InputBoth:InputSword):Input.GetKey(KeyCode.Mouse1)?InputGuard:InputIdle;
-            if(!Weapons.Server){var s=Get(v);if(!ready)CancelPresentation(s);else{s.LocalPresentationSuppressed=false;s.GuardHeld=op==InputGuard||op==InputBoth;s.SwordHeld=op==InputSword||op==InputBoth;}}
+            if(!Weapons.Server){var s=Get(v);if(!ready){if(!s.LocalPresentationSuppressed)BeginCancel(s);}else{s.LocalPresentationSuppressed=false;s.GuardHeld=op==InputGuard||op==InputBoth;s.SwordHeld=op==InputSword||op==InputBoth;}}
             if(op!=input||Time.time>=nextInput){Weapons.SendLocalIntent(v,op,ray.direction,ray.origin);input=op;nextInput=Time.time+.1f;}
         }
         public static void Request(EntityVehicle v,int actor,int sequence,byte op,Vector3 direction,Vector3 origin,float now)
@@ -68,7 +84,13 @@ namespace PZAEC.Mecha
             if(!Rules.Complete(v)||op<InputIdle||op>Cancel||v.GetAttached(0)==null||v.GetAttached(0).entityId!=actor)return;
             var s=Get(v);if(s.Actor==actor&&sequence<=s.Sequence)return;
             if(s.Actor!=actor){Stop(v);s.Actor=actor;}s.Sequence=sequence;
-            if(op==Cancel){Stop(v);s.InputAt=-100;return;}
+            if(op==Cancel){
+                Stop(v);s.InputAt=-100;Weapons.CancelTrigger(v,actor,sequence,now);
+                // Two 16-bit halves preserve the full actor ID in float fields.
+                if(Weapons.Finite(direction.x)&&direction.x>=1&&direction.x<=0xffffff&&direction.x==(int)direction.x)
+                    Weapons.Broadcast(v.entityId,++s.Serial,CancelAck,new Vector3(direction.x,actor&65535,(uint)actor>>16),Vector3.zero,0,0);
+                return;
+            }
             if(!Operator(s)||!Weapons.Finite(direction.x)||!Weapons.Finite(direction.y)||!Weapons.Finite(direction.z)||!Weapons.Finite(origin.x)||!Weapons.Finite(origin.y)||!Weapons.Finite(origin.z)||(origin-v.position).sqrMagnitude>36||direction.sqrMagnitude<.001f)return;
             s.InputAt=now;SetAim(s,direction);
             bool sword=op==InputSword||op==InputBoth,guard=op==InputGuard||op==InputBoth;
@@ -194,7 +216,7 @@ namespace PZAEC.Mecha
             s.Guarding=(f&1)!=0;s.GuardHeld=s.Guarding;s.Charging=(f&2)!=0;s.Heavy=(f&4)!=0;s.Swing=(f&8)!=0;s.Combo=(f&16)!=0?1:0;s.StartCharge=((f>>8)&255)/255f;s.BrokenUntil=(f&32)!=0?Time.time+.2f:0;
             int attack=(f>>16)&255;if(s.ReceivedAttack<0)s.AttackSerial=attack;else if(attack!=s.ReceivedAttack){s.AttackSerial=(s.AttackSerial&~255)|attack;if(attack<s.ReceivedAttack)s.AttackSerial+=256;}s.ReceivedAttack=attack;
             s.AimYaw=Mathf.Clamp(b.x,-45,45);s.AimPitch=Mathf.Clamp(b.y,-25,30);s.LaserCharge=Mathf.Clamp01(b.z);s.LaserWait=Mathf.Clamp(wait,0,3);
-            if(suppressed){s.CancelledAttack=s.AttackSerial;s.SoundAttack=s.AttackSerial;s.SoundMask=7;Stop(v);return;}
+            if(suppressed){s.SoundAttack=s.AttackSerial;s.SoundMask=7;Stop(v);return;}
             // After input returns, an old in-flight snapshot of the cancelled
             // swing cannot resurrect its pose or its remaining sound stages.
             if(s.Swing&&s.AttackSerial==s.CancelledAttack){Stop(v);return;}

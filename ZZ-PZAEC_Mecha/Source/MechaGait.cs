@@ -112,12 +112,11 @@ namespace PZAEC.Mecha
                 Solve(rig,i,leg.Foot-Origin.position,leg.Normal);
             }
             w.WasAir=airborne||state.Blend>.05f;
-            if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;w.PendingLanding=state.LandingEventExpected?-100:Time.time;}
-            // Heavy landings are sounded only by accepted network event 19,
-            // even if it arrives after a long round trip. A
-            // quiet controlled landing has no damage event, so give the
-            // authority time to arrive before its small contact fallback.
-            if(w.PendingLanding>=0&&Time.time-w.PendingLanding>=.25f)
+            if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;w.PendingLanding=Time.time+(state.LandingEventExpected?.8f:.25f);}
+            // Wait longer for an authoritative heavy event, but never leave a
+            // rejected/lost event completely silent. Fallback is light contact
+            // only: it cannot apply damage or create an explosion.
+            if(w.PendingLanding>=0&&Time.time>=w.PendingLanding)
             {if(!MechaFX.LandingRecently(v.entityId,.8f))RobotAudio.LandCue(v,v.position,.25f);w.PendingLanding=-100;}
             if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.Event(v,"jump",RobotAudio.NextPresentationSerial(),.6f);}
             if(Rules.Complete(v)){SwordMotion.CacheFeet(rig,w.Legs[0].Foot-Origin.position,w.Legs[1].Foot-Origin.position,w.Legs[0].Normal,w.Legs[1].Normal);SwordMotion.SafePose(v,rig);}

@@ -89,19 +89,19 @@
       "variant": "prototype",
       "loop": false,
       "seconds": 0.6499773242630386,
-      "peak": 0.32580940322343604,
-      "rms": 0.06547889124774339,
-      "design": "unlatch, hydraulic slide, end stop"
+      "peak": 0.3259178954425332,
+      "rms": 0.059980632965938196,
+      "design": "unlatch and hydraulic slide; end stop is a separate phase"
     },
     {
       "name": "prototype-hatch-close",
       "cue": "hatch-close",
       "variant": "prototype",
       "loop": false,
-      "seconds": 0.6499773242630386,
-      "peak": 0.5511909320142373,
-      "rms": 0.09976230271659038,
-      "design": "slide, panel contact, locking bolt"
+      "seconds": 0.4,
+      "peak": 0.1973590590094043,
+      "rms": 0.04704185302285079,
+      "design": "hydraulic slide only; locking contact is a separate phase"
     },
     {
       "name": "prototype-stand-lock",
@@ -279,19 +279,19 @@
       "variant": "complete",
       "loop": false,
       "seconds": 0.6499773242630386,
-      "peak": 0.3120490193453364,
-      "rms": 0.06171869442170307,
-      "design": "unlatch, hydraulic slide, end stop"
+      "peak": 0.3118648865745941,
+      "rms": 0.055858926092838226,
+      "design": "unlatch and hydraulic slide; end stop is a separate phase"
     },
     {
       "name": "complete-hatch-close",
       "cue": "hatch-close",
       "variant": "complete",
       "loop": false,
-      "seconds": 0.766984126984127,
-      "peak": 0.5996041564419397,
-      "rms": 0.0917327560690024,
-      "design": "slide, panel contact, locking bolt"
+      "seconds": 0.6499773242630386,
+      "peak": 0.177214163055215,
+      "rms": 0.04198737810727357,
+      "design": "hydraulic slide only; locking contact is a separate phase"
     },
     {
       "name": "complete-stand-lock",
@@ -442,6 +442,46 @@
       "peak": 0.14,
       "rms": 0.04036723867976646,
       "design": "quiet high electrical texture; runtime charge raises pitch"
+    },
+    {
+      "name": "prototype-hatch-open-stop",
+      "cue": "hatch-open-stop",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.24997732426303854,
+      "peak": 0.17790948457102995,
+      "rms": 0.04233637669449642,
+      "design": "open travel end stop at actual hatch arrival"
+    },
+    {
+      "name": "prototype-hatch-close-lock",
+      "cue": "hatch-close-lock",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.32,
+      "peak": 0.5180142140918059,
+      "rms": 0.12553904384276446,
+      "design": "panel contact and locking bolt at actual hatch closure"
+    },
+    {
+      "name": "complete-hatch-open-stop",
+      "cue": "hatch-open-stop",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.24997732426303854,
+      "peak": 0.17452697454669003,
+      "rms": 0.0423675623373285,
+      "design": "open travel end stop at actual hatch arrival"
+    },
+    {
+      "name": "complete-hatch-close-lock",
+      "cue": "hatch-close-lock",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.32,
+      "peak": 0.5013334339934142,
+      "rms": 0.12501038404301495,
+      "design": "panel contact and locking bolt at actual hatch closure"
     }
   ]
 }

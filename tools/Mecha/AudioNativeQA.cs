@@ -69,7 +69,7 @@ public static class MechaAudioQA
             shows.Clear();samurai.Clear();if(Rules.Complete(v))samurai.Add(v.entityId,combat);
             var folder=Path.Combine(Model.Path,"Audio");var names=Directory.GetFiles(folder,variant+"-*.wav");int loaded=0;
             foreach(var path in names){var clip=(AudioClip)AccessTools.Method(typeof(RobotAudio),"Clip").Invoke(null,new object[]{Path.GetFileNameWithoutExtension(path)});if(clip.channels==1&&clip.frequency==22050&&clip.samples>0)loaded++;}
-            Check(variant+" native PCM loads all available designed assets count="+loaded,loaded==names.Length&&loaded==(Rules.Complete(v)?25:19));
+            Check(variant+" native PCM loads all available designed assets count="+loaded,loaded==names.Length&&loaded==(Rules.Complete(v)?27:21));
             Check(variant+" six mechanical / weapon / touch / loop sources are distinct",sources.Distinct().Count()==6&&sources.All(a=>a!=null));
             Check(variant+" motion loops use variant texture assets",sources[0].clip.name=="Mecha_"+variant+"-servo"&&sources[1].clip.name=="Mecha_"+variant+"-thruster");
             Check(variant+" voice has no idle / reactor bed",!((GameObject)Get(voice,"Root")).GetComponentsInChildren<AudioSource>().Any(a=>a.clip!=null&&a.clip.name.Contains("idle")));
@@ -114,6 +114,21 @@ public static class MechaAudioQA
     static void BoardTrial(World world,EntityVehicle v,IDictionary shows,EntityAlive pilot)
     {
         var start=AccessTools.Method(typeof(Boarding),"Start");string variant=Rules.Complete(v)?"complete":"prototype";
+        foreach(bool exit in new[]{false,true}){
+            start.Invoke(null,new object[]{v,pilot.entityId,exit,true});var phaseShow=shows[v.entityId];int serial=(int)Get(phaseShow,"AudioSequence");
+            var sounds=AccessTools.Method(typeof(Boarding),"Sounds");
+            float open=Rules.Complete(v)?Ceremony.OpenAt(exit):exit?.6f:.9f;
+            float opened=Rules.Complete(v)?open+(exit?.7f:.75f):exit?1.2f:1.6f;
+            float close=Rules.Complete(v)?Ceremony.CloseAt(exit):exit?1.4f:2.1f;
+            float closed=Rules.Complete(v)?close+.65f:exit?2:2.5f;
+            foreach(var phase in new[]{Tuple.Create(open,"hatch-open"),Tuple.Create(opened,"hatch-open-stop"),Tuple.Create(close,"hatch-close"),Tuple.Create(closed,"hatch-close-lock")}){
+                sounds.Invoke(null,new object[]{phaseShow,phase.Item1-.001f,false});
+                bool absent=!RobotAudio.RecentCues().Any(c=>c.Serial==serial&&c.Cue==phase.Item2);
+                sounds.Invoke(null,new object[]{phaseShow,phase.Item1,false});sounds.Invoke(null,new object[]{phaseShow,phase.Item1,false});
+                Check(variant+" exact hatch boundary exit="+exit+" cue="+phase.Item2,absent&&RobotAudio.RecentCues().Count(c=>c.Serial==serial&&c.Cue==phase.Item2)==1);
+            }
+            shows.Remove(v.entityId);
+        }
         for(int run=0;run<2;run++){
             int before=RobotAudio.PlayedCueCount;start.Invoke(null,new object[]{v,pilot.entityId,false,true});var show=shows[v.entityId];Set(show,"NextSync",Time.time+100);
             float duration=(float)Get(show,"Duration");Set(show,"Started",Time.time-(duration-.09f));Boarding.Update(world);int crossed=RobotAudio.PlayedCueCount;Boarding.Update(world);
@@ -131,6 +146,7 @@ public static class MechaAudioQA
             s.Started=Time.time-Samurai.Duration(s)-.1f;s.InputAt=Time.time;Samurai.Tick(world,.4f);Check("complete sword final slow frame ends swing without replay heavy="+heavy,!s.Swing&&RobotAudio.RecentCues().Count(c=>c.Vehicle==v.entityId&&c.Serial==serial)==3);
         }
     }
+    static Vector3 Ack(Samurai.State s,int token){int actor=s.LocalPresentationActor;return new Vector3(token,actor&65535,(uint)actor>>16);}
     static void CancelTrial(EntityVehicle v,Samurai.State s,object voice)
     {
         var client=new Harmony("mecha.audio.cancel.native.qa."+v.entityId);
@@ -139,17 +155,31 @@ public static class MechaAudioQA
             client.Patch(AccessTools.PropertyGetter(typeof(Weapons),"Server"),prefix:new HarmonyMethod(typeof(MechaAudioQA),nameof(Client)));
             client.Patch(AccessTools.Method(typeof(Weapons),"SendLocalIntent"),prefix:new HarmonyMethod(typeof(MechaAudioQA),nameof(NoBroadcast)));
             Samurai.Stop(v);s.Received=-1;s.ReceivedAttack=-1;s.SoundAttack=-1;s.SoundMask=0;Set(s,"LocalPresentationSuppressed",false);Set(s,"CancelledAttack",-1);
-            var charge=(AudioSource)Get(voice,"Charge");var a=new Vector3(100,Samurai.AlertDelay,.01f);var b=new Vector3(0,0,.75f);int oldFlags=8|(50<<16);
+            var charge=(AudioSource)Get(voice,"Charge");var a=new Vector3(100,Samurai.AlertDelay,.01f);var b=new Vector3(0,0,.75f);int oldFlags=50<<16;
             Samurai.Receive(v,9001,a,b,oldFlags,0);RobotAudio.Update(v,0,false);
-            Check("complete client fixture starts real charge before menu cancel",s.Swing&&charge.isPlaying&&(float)Get(voice,"ChargeTarget")>0);
-            Samurai.ReleaseLocal(v);
-            Check("complete local release immediately stops sword and real charge source",!s.Swing&&!s.Charging&&s.LaserCharge==0&&Quiet(charge)&&(bool)Get(s,"LocalPresentationSuppressed"));
+            Check("real laser-only snapshot starts charge without impossible sword overlap",!s.Swing&&charge.isPlaying&&(float)Get(voice,"ChargeTarget")>0);
+            Samurai.ReleaseLocal(v);int token=s.PendingCancelToken;
+            Check("local release immediately stops real laser and waits for cancel acknowledgement",token>0&&s.LaserCharge==0&&Quiet(charge)&&s.LocalPresentationSuppressed);
             int before=RobotAudio.PlayedCueCount;a.z=.60f;Samurai.Receive(v,9002,a,b,oldFlags,0);RobotAudio.Update(v,0,false);
-            Check("complete delayed old snapshot is consumed but cannot revive cancelled action / sound",s.Received==9002&&!s.Swing&&s.LaserCharge==0&&Quiet(charge)&&RobotAudio.PlayedCueCount==before);
+            Check("delayed laser-only snapshot cannot revive charge in menu",s.Received==9002&&s.LaserCharge==0&&Quiet(charge));
             Samurai.LocalInput(v,new Ray(v.position+Vector3.up*2,Vector3.forward),true);Samurai.Receive(v,9003,a,b,oldFlags,0);RobotAudio.Update(v,0,false);
-            Check("complete input restored still rejects same cancelled attack snapshot",!(bool)Get(s,"LocalPresentationSuppressed")&&!s.Swing&&s.LaserCharge==0&&Quiet(charge)&&RobotAudio.PlayedCueCount==before);
-            a.z=.01f;Samurai.Receive(v,9004,a,b,8|(51<<16),0);RobotAudio.Update(v,0,false);
-            Check("complete input restored permits new attack and new charge normally",s.Swing&&s.AttackSerial==51&&RobotAudio.PlayedCueCount>before&&charge.isPlaying&&(float)Get(voice,"ChargeTarget")>0);
+            Check("restored input still rejects old laser-only snapshot before acknowledgement",!s.LocalPresentationSuppressed&&s.LaserCharge==0&&Quiet(charge)&&RobotAudio.PlayedCueCount==before);
+            Samurai.ReceiveCancelAck(v,9004,Ack(s,token+1));
+            Check("unrelated cancellation acknowledgement cannot release barrier",s.PendingCancelToken==token);
+            Samurai.ReceiveCancelAck(v,9005,Ack(s,token));
+            Samurai.Receive(v,9004,a,b,oldFlags,0);RobotAudio.Update(v,0,false);
+            Check("matching acknowledgement consumes snapshot ordering barrier",s.PendingCancelToken==0&&s.Received==9005&&s.LaserCharge==0&&Quiet(charge));
+            Samurai.Receive(v,9006,a,b,oldFlags,0);RobotAudio.Update(v,0,false);
+            Check("fresh laser can charge with unchanged sword attack identity",!s.Swing&&s.AttackSerial==50&&s.LaserCharge>.7f&&charge.isPlaying);
+            b.z=0;a.z=.01f;Samurai.Receive(v,9007,a,b,8|(51<<16),0);
+            Check("independent sword action remains available",s.Swing&&s.AttackSerial==51);
+            Samurai.ReleaseLocal(v);int prior=s.PendingCancelToken;Samurai.LocalInput(v,new Ray(v.position,Vector3.forward),true);Samurai.ReleaseLocal(v);token=s.PendingCancelToken;
+            Samurai.ReceiveCancelAck(v,9008,Ack(s,prior));
+            Check("older acknowledgement cannot release a newer cancellation",s.PendingCancelToken==token&&token!=prior);
+            Samurai.LocalInput(v,new Ray(v.position,Vector3.forward),true);Samurai.Receive(v,9010,a,b,8|(52<<16),0);
+            Samurai.ReceiveCancelAck(v,9009,Ack(s,token));Samurai.Receive(v,9011,a,b,8|(52<<16),0);
+            Check("post-cancel new sword snapshot reordered ahead of ack recovers normally",s.PendingCancelToken==0&&s.Swing&&s.AttackSerial==52);
+
         }
         finally{client.UnpatchSelf();Samurai.Stop(v);}
     }
