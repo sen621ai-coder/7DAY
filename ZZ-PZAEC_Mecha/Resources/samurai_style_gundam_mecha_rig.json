@@ -2,7 +2,7 @@
   "equipmentBinding": "rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves",
   "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
   "sourceParts": 17,
-  "triangles": 207192,
+  "triangles": 207236,
   "sourceTriangles": 2000000,
   "height": 3.2,
   "skinned": true,
@@ -389,6 +389,18 @@
       "offset": 10733460,
       "vertices": 11115,
       "indices": 34599
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_SwordSurfaceRestore",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "SwordBlade",
+      "material": 0,
+      "offset": 11405376,
+      "vertices": 84,
+      "indices": 132,
+      "generatedRepair": "closed-blade-overlap-surface-v1"
     }
   ],
   "wingBinding": "complete rigid rear fins and tapered necks; WingL/WingR under Backpack",
@@ -426,7 +438,7 @@
     "LegL": 39587,
     "LegR": 28013,
     "Shield": 16091,
-    "SwordBlade": 12295,
+    "SwordBlade": 12339,
     "SwordHilt": 6765,
     "Torso": 41492,
     "WingL": 2352,
@@ -466,5 +478,7 @@
     "swordCapsuleRejectedFaces": 3074,
     "lowerFinOverlapFaces": 2213,
     "rigidArmour": true
-  }
+  },
+  "sourceRigTriangles": 207192,
+  "bladeRepairTriangles": 44
 }

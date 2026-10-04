@@ -11,6 +11,7 @@ def faces(folder):
     raw = (folder / (stem + '_rig.bin')).read_bytes()
     result = collections.Counter()
     for part in doc['parts']:
+        if part.get('generatedRepair'):continue
         start = part['offset']
         indices = struct.unpack_from('<' + 'I' * part['indices'], raw, start + part['vertices'] * 48)
         for i in range(0, len(indices), 3):
@@ -24,7 +25,8 @@ new, new_faces = faces(mod / 'Resources')
 assert old_faces == new_faces, 'face / winding / vertex attribute changed'
 assert sum(new_faces.values()) == 207192
 assert new['sourceNodes'] == sorted({p['node'] for p in old['parts']})
-assert len(new['parts']) <= len(old['parts'])
+assert len([p for p in new['parts'] if not p.get('generatedRepair')]) <= len(old['parts'])
+assert sum(p['indices']//3 for p in new['parts'] if p.get('generatedRepair')) == new['bladeRepairTriangles'] == 44
 assert all(p['role'] in new['renderRoles'] for p in new['parts'])
 assert {'ArmL', 'ArmR', 'SwordBlade', 'SwordHilt', 'Head', 'Torso', 'Backpack', 'Shield'} <= set(new['renderRoles'])
 assert sum(new['renderRoles'].values()) == new['triangles']

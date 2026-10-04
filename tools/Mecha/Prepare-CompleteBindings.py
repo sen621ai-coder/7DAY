@@ -1,7 +1,7 @@
 """Rigid semantic ownership for the fused Complete sculpture; fitted metres.
 
 Object_* and material IDs are spatial chunks, not separate equipment meshes.
-Keep every position / UV / normal / triangle tuple; change face ownership only.
+Keep every source face tuple. Add a tagged closed surface at the blade overlap.
 """
 from pathlib import Path
 import hashlib,json,itertools,numpy as np
@@ -13,6 +13,7 @@ ids={j['name']:i for i,j in enumerate(doc['joints'])};names={i:n for n,i in ids.
 dtype=np.dtype([('vertex','<f4',8),('bones','<i4',2),('weights','<f4',2)])
 allfaces=[];materials=[];nodes=set(doc.get('sourceNodes',[]))
 for part in doc['parts']:
+    if part.get('generatedRepair'):continue
     nodes.add(part['node']);v=np.frombuffer(raw,dtype=dtype,count=part['vertices'],offset=part['offset'])
     ix=np.frombuffer(raw,dtype='<u4',count=part['indices'],offset=part['offset']+48*part['vertices']).reshape(-1,3)
     allfaces.append(v[ix].copy());materials.extend([part['material']]*len(ix))
@@ -89,12 +90,22 @@ for material in np.unique(materials):
 for (material,role),chunks in sorted(groups.items()):
     flat=np.concatenate(chunks);unique,newix=np.unique(flat,return_inverse=True);offset=len(blob);blob.extend(unique.tobytes());blob.extend(newix.astype('<u4').tobytes())
     parts.append(dict(node=min(nodes),nodeName='Complete_'+role,primitive=0,joint='Torso',role=role,material=material,offset=offset,vertices=len(unique),indices=len(newix)));audit[role]=len(newix)//3
-assert sum(audit.values())==before==doc['triangles']
+assert sum(audit.values())==before==207192
 after=[]
 for part in parts:
     v=np.frombuffer(blob,dtype=dtype,count=part['vertices'],offset=part['offset']);ix=np.frombuffer(blob,dtype='<u4',count=part['indices'],offset=part['offset']+48*part['vertices']).reshape(-1,3);after.append(v[ix])
 assert geometry_hash(np.concatenate(after))==identity,'Geometry/UV/normal face tuple changed'
+del v,ix
+from CompleteBladeSurface import build
+repair=build(dtype,ids['Sword']).reshape(-1)
+unique,newix=np.unique(repair,return_inverse=True);offset=len(blob)
+blob.extend(unique.tobytes());blob.extend(newix.astype('<u4').tobytes())
+parts.append(dict(node=min(nodes),nodeName='Complete_SwordSurfaceRestore',primitive=0,
+    joint='Torso',role='SwordBlade',material=0,offset=offset,vertices=len(unique),
+    indices=len(newix),generatedRepair='closed-blade-overlap-surface-v1'))
+repair_faces=len(newix)//3;audit['SwordBlade']+=repair_faces
 doc.update(parts=parts,sourceNodes=sorted(nodes),renderRoles=audit,geometryTupleSha256=identity,
+    triangles=before+repair_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,
     equipmentBinding='rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves',
     wingBinding='complete rigid rear fins and tapered necks; WingL/WingR under Backpack',
     wingVertices=[sum(p['vertices'] for p in parts if p['role']==name) for name in ['WingL','WingR']],
@@ -102,4 +113,4 @@ doc.update(parts=parts,sourceNodes=sorted(nodes),renderRoles=audit,geometryTuple
     roleBinding='rigid complete faces; thin sword plane and conservative mirrored body rejection; tapered rear fins; rigid Backpack and Shield',
     bindingAudit=dict(mirroredBodyFaces=int(mirrored.sum()),swordCapsuleRejectedFaces=int((capsule&~sword).sum()),lowerFinOverlapFaces=int(lower_fin_overlap.sum()),rigidArmour=True))
 (res/(stem+'_rig.json')).write_text(json.dumps(doc,indent=2),encoding='utf-8');(res/(stem+'_rig.bin')).write_bytes(blob)
-print('PASS rigid semantic face partition:',audit,'triangles unchanged',before,'source nodes',len(nodes),'audit',doc['bindingAudit'])
+print('PASS rigid semantic face partition:',audit,'source triangles unchanged',before,'closed blade repair',repair_faces,'source nodes',len(nodes),'audit',doc['bindingAudit'])
