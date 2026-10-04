@@ -19,6 +19,17 @@ namespace PZAEC.Mecha
             public int BornFrame,PresentedFrames,LastPresentedFrame=-1;
             public void Presented(int frame){if(frame==LastPresentedFrame)return;LastPresentedFrame=frame;PresentedFrames++;}
         }
+        sealed class Landing
+        {
+            public GameObject Root;public LineRenderer Ring;public Mesh Dust;
+            public Vector3 Point,Normal;public float Age,Radius,Strength;public int BornFrame;public bool Active;
+            public readonly Vector3[] Vertices=new Vector3[40];public readonly Color[] Colors=new Color[40];
+        }
+        static readonly Landing[] landings=new Landing[8];
+        static readonly HashSet<long> seenLandingSerials=new HashSet<long>();static readonly Queue<long> seenLandingOrder=new Queue<long>();
+        static readonly Dictionary<int,float> lastLanding=new Dictionary<int,float>();
+        static Material dustMaterial;static Texture2D dustTexture;
+        public static bool LandingRecently(int vehicle,float seconds=.8f){float at;return lastLanding.TryGetValue(vehicle,out at)&&Time.time-at<seconds;}
         public sealed class Status
         {
             public float Time = -100, Heat, LockProgress;
@@ -96,6 +107,7 @@ namespace PZAEC.Mecha
             if(kind==Samurai.Snapshot){var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)Samurai.Receive(v,id,a,b,value,c);return;}
             if(kind==9) { var v=world.GetEntity(vehicleId) as EntityVehicle; if(v!=null && v.isEntityRemote) Locomotion.Receive(v,(int)value,id,a); return; }
             if(kind==Boarding.BoardEvent) { Boarding.ReceiveSnapshot(world,vehicleId,id,a,b,value,c); return; }
+            if(kind==Weapons.LandingEvent){LandingContact(world,vehicleId,id,a,b,value,c);return;}
             if (kind == Weapons.StatusEvent)
             {
                 var status = GetStatus(vehicleId);
@@ -153,7 +165,7 @@ namespace PZAEC.Mecha
                 trail.startColor = new Color(1f, .45f, .12f); trail.endColor = new Color(.35f, .3f, .25f, 0);
                 projectiles[id] = new Projectile { Object = obj, Position = a, Velocity = b, Life = Rules.MissileLifetime + .5f };
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                if (vehicle != null) Play(vehicle, "m136_fire");
+                if (vehicle != null) RobotAudio.Event(vehicle,"missile-release",id,.62f);
                 return;
             }
             if (kind == Weapons.MissileMoveEvent)
@@ -176,7 +188,7 @@ namespace PZAEC.Mecha
         static void BeamTrace(World world,int vehicleId,int id,Vector3 a,Vector3 b)
         {
             long key=(long)vehicleId<<32|(uint)id;if(!seenBeamSerials.Add(key))return;Gait.Recoil(vehicleId);seenBeamOrder.Enqueue(key);while(seenBeamOrder.Count>64)seenBeamSerials.Remove(seenBeamOrder.Dequeue());
-            var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)RobotAudio.OneShot(v,Rules.Complete(v)?"head-laser":"palm-laser",Rules.Complete(v)?.55f:.45f);
+            var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)RobotAudio.Event(v,Rules.Complete(v)?"head-laser":"palm-laser",id,Rules.Complete(v)?.55f:.45f);
             var material=Material(true);if(material==null)return;
             var tracer=pool.Count>0?pool.Pop():new Tracer();
             if(tracer.Line==null||tracer.Glow==null)
@@ -216,8 +228,51 @@ namespace PZAEC.Mecha
             return result;
         }
 
+        static void LandingContact(World world,int vehicle,int serial,Vector3 point,Vector3 normal,float strength,float radius)
+        {
+            if(!Weapons.Finite(point.x)||!Weapons.Finite(point.y)||!Weapons.Finite(point.z)||!Weapons.Finite(normal.x)||!Weapons.Finite(normal.y)||!Weapons.Finite(normal.z)||!Weapons.Finite(strength)||!Weapons.Finite(radius))return;
+            var v=world.GetEntity(vehicle) as EntityVehicle;if(!Weapons.IsMecha(v))return;
+            long key=(long)vehicle<<32|(uint)serial;if(!seenLandingSerials.Add(key))return;seenLandingOrder.Enqueue(key);while(seenLandingOrder.Count>512)seenLandingSerials.Remove(seenLandingOrder.Dequeue());
+            lastLanding[vehicle]=Time.time;RobotAudio.LandCue(v,point,strength,serial);
+            var material=Material(true);if(material==null)return;
+            int index=0;float oldest=-1;for(int i=0;i<landings.Length;i++){if(landings[i]==null||!landings[i].Active){index=i;break;}if(landings[i].Age>oldest){oldest=landings[i].Age;index=i;}}
+            var p=landings[index];if(p==null)
+            {
+                p=new Landing();landings[index]=p;p.Ring=BeamLine("MechaLandingMechanicalWave",null,material);p.Root=p.Ring.gameObject;p.Ring.positionCount=33;p.Dust=new Mesh{name="Mecha landing dust batch"};p.Dust.MarkDynamic();
+                var dust=new GameObject("MechaGroundDust");dust.hideFlags=HideFlags.DontSave;dust.transform.SetParent(p.Root.transform,false);dust.AddComponent<MeshFilter>().sharedMesh=p.Dust;
+                var renderer=dust.AddComponent<MeshRenderer>();renderer.sharedMaterial=DustMaterial();renderer.shadowCastingMode=ShadowCastingMode.Off;renderer.receiveShadows=false;
+                var uv=new Vector2[40];var triangles=new int[60];for(int i=0;i<10;i++){int q=i*4,t=i*6;uv[q]=Vector2.zero;uv[q+1]=Vector2.right;uv[q+2]=Vector2.up;uv[q+3]=Vector2.one;triangles[t]=q;triangles[t+1]=q+2;triangles[t+2]=q+1;triangles[t+3]=q+1;triangles[t+4]=q+2;triangles[t+5]=q+3;}p.Dust.vertices=p.Vertices;p.Dust.uv=uv;p.Dust.triangles=triangles;
+            }
+            p.Point=point;p.Normal=normal.sqrMagnitude>.001f?normal.normalized:Vector3.up;p.Strength=Mathf.Clamp01(strength);p.Radius=Mathf.Clamp(radius*Mathf.Lerp(.2f,1,p.Strength),.5f,8);p.Age=0;p.BornFrame=Time.frameCount;p.Active=true;p.Root.SetActive(true);SetLanding(p);
+        }
+        static Material DustMaterial()
+        {
+            if(dustMaterial!=null)return dustMaterial;
+            dustTexture=new Texture2D(32,32,TextureFormat.RGBA32,false);dustTexture.name="Mecha gray ground dust mask";dustTexture.wrapMode=TextureWrapMode.Clamp;
+            var pixels=new Color[32*32];for(int y=0;y<32;y++)for(int x=0;x<32;x++){float dx=(x-15.5f)/15.5f,dy=(y-15.5f)/15.5f,r=dx*dx+dy*dy;pixels[y*32+x]=new Color(1,1,1,Mathf.Pow(Mathf.Clamp01(1-r),2));}dustTexture.SetPixels(pixels);dustTexture.Apply();
+            dustMaterial=new Material(Material(true));dustMaterial.name="Mecha gray ground dust";dustMaterial.SetTexture("_MainTex",dustTexture);return dustMaterial;
+        }
+        static void SetLanding(Landing p)
+        {
+            float t=Mathf.Clamp01(p.Age/.72f),fade=(1-t)*(1-t);var side=Vector3.Cross(p.Normal,Mathf.Abs(p.Normal.y)>.9f?Vector3.forward:Vector3.up).normalized;var across=Vector3.Cross(p.Normal,side);
+            var origin=p.Point-Origin.position+p.Normal*.045f;float radius=Mathf.Lerp(.25f,p.Radius,1-Mathf.Pow(1-t,2));
+            p.Ring.startWidth=p.Ring.endWidth=Mathf.Lerp(.09f,.025f,t);p.Ring.startColor=p.Ring.endColor=new Color(.43f,.41f,.38f,fade*.55f*Mathf.Lerp(.45f,1,p.Strength));
+            for(int i=0;i<=32;i++){float a=i*Mathf.PI/16;p.Ring.SetPosition(i,origin+(side*Mathf.Cos(a)+across*Mathf.Sin(a))*radius);}
+            var camera=Camera.main;var right=camera!=null?camera.transform.right:side;var up=camera!=null?camera.transform.up:Vector3.up;
+            for(int i=0;i<10;i++)
+            {
+                float angle=(i+.25f)*Mathf.PI*.2f;var radial=side*Mathf.Cos(angle)+across*Mathf.Sin(angle);
+                var center=origin+radial*Mathf.Lerp(.25f,p.Radius*.55f,t)+p.Normal*(.08f+t*(.35f+(i%3)*.1f));float size=(.20f+t*.50f)*(.7f+p.Strength*.3f);var r=right*size;var u=up*size;
+                int q=i*4;p.Vertices[q]=center-r-u;p.Vertices[q+1]=center+r-u;p.Vertices[q+2]=center-r+u;p.Vertices[q+3]=center+r+u;
+                var color=new Color(.42f,.40f,.37f,fade*.46f*Mathf.Lerp(.45f,1,p.Strength));for(int j=0;j<4;j++)p.Colors[q+j]=color;
+            }
+            p.Dust.vertices=p.Vertices;p.Dust.colors=p.Colors;p.Dust.RecalculateBounds();
+        }
+        public static string LandingDiagnostics(){int active=0;foreach(var p in landings)if(p!=null&&p.Active)active++;return "accepted="+seenLandingOrder.Count+" active="+active+" grayDust="+(dustMaterial!=null)+" bounded=8";}
+
         public static void Update(float dt)
         {
+            foreach(var p in landings)if(p!=null&&p.Active){if(Time.frameCount!=p.BornFrame)p.Age+=Mathf.Max(0,dt);if(p.Age>=.72f){p.Active=false;p.Root.SetActive(false);}else SetLanding(p);}
             remove.Clear();
             foreach (var pair in projectiles)
             {
@@ -411,6 +466,8 @@ namespace PZAEC.Mecha
 
         public static void Clear()
         {
+            foreach(var p in landings)if(p!=null){Release(p.Root);if(p.Dust!=null)UnityEngine.Object.Destroy(p.Dust);}Array.Clear(landings,0,landings.Length);seenLandingSerials.Clear();seenLandingOrder.Clear();lastLanding.Clear();
+            if(dustMaterial!=null)UnityEngine.Object.Destroy(dustMaterial);if(dustTexture!=null)UnityEngine.Object.Destroy(dustTexture);dustMaterial=null;dustTexture=null;
             foreach (var projectile in projectiles.Values) Release(projectile.Object);
             foreach (var tracer in tracers) if (tracer.Line != null) Release(tracer.Line.gameObject);
             foreach (var tracer in pool) if (tracer.Line != null) Release(tracer.Line.gameObject);

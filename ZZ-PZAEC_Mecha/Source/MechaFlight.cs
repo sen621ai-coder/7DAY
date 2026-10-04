@@ -47,10 +47,10 @@ namespace PZAEC.Mecha
             float vertical=input?((s.Jump?1:0)-(s.Descend?1:0)):0;
             bool wasActive=Active(s);
             Advance(s,powered,input&&s.Toggle,grounded,vertical,v.position.y,dt);s.Toggle=false;s.HoverOn=false;
-            if(grounded&&!s.Grounded&&wasActive&&s.ControlledLanding){s.LandingAt=Time.time;s.AirSince=-1;}
+            if(grounded&&!s.Grounded&&wasActive&&s.ControlledLanding){s.LandingAt=Time.time;s.AirSince=-1;s.LandingEventExpected=false;}
             if(!Active(s))return false;
             Locomotion.PrepareSupport(s.Wheels,true);
-            if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;}
+            if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;s.LandingEventExpected=false;}
             s.Grounded=grounded;s.Charge=0;s.ChargeStart=-1;s.JumpWasHeld=s.Jump;
             var movement=v.movementInput;
             float throttle=input&&movement!=null?movement.moveForward:0,steer=input&&movement!=null?movement.moveStrafe:0;

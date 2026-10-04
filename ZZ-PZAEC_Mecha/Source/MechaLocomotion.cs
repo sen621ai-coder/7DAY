@@ -12,6 +12,7 @@ namespace PZAEC.Mecha
             public EntityVehicle Vehicle;
             public bool HoverOn, Boost, JumpWasHeld, Grounded=true, Toggle, Descend, Jump, InputReady;
             public float ChargeStart=-1, Charge, NextJump, AirSince=-1, LastInput=-100, LastSync=-100, LastPacket=-100, LandingAt=-100, JumpAt=-100, LastTime, Blend;
+            public float AirPeakDownSpeed,LandingStrength=.7f,LandingPendingUntil=-100;public bool LandingEventExpected;
             public Flight.Phase FlightMode;
             public float HoldY, FlightAge, ContactTime, VerticalInput, WingBlend, FlightHeight=-1, VisualForward, VisualTurn, FlightLean, FlightBank, FlightSweep, LastHeightAt=-100;
             public bool ControlledLanding;
@@ -44,8 +45,8 @@ namespace PZAEC.Mecha
             // A local physics owner already has more recent input than its echo.
             if(!v.isEntityRemote&&!Weapons.Server)return true;
             int flags=(int)state.x;bool ground=(flags&4)!=0;
-            if(!s.Grounded&&ground)s.LandingAt=Time.time;
-            if(s.Grounded&&!ground)s.JumpAt=Time.time;
+            if(!s.Grounded&&ground)MarkLanding(s,Time.time,!landing&&!takeoff&&!flight&&!Flight.Active(s));
+            if(s.Grounded&&!ground){s.JumpAt=Time.time;s.AirSince=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
             s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=state.y;
             s.FlightMode=fault?Flight.Phase.PowerLost:landing?Flight.Phase.Landing:takeoff?Flight.Phase.Takeoff:flight?Flight.Phase.Cruise:Flight.Phase.Ground;
             s.VerticalInput=state.z;return true;
@@ -66,6 +67,7 @@ namespace PZAEC.Mecha
             var rb=v.vehicleRB;if(rb==null||rb.isKinematic||!v.RBActive)return;
             var s=Get(v);float dt=Time.fixedDeltaTime;bool grounded=v.GetWheelsOnGround()>0;
             if(Rules.Complete(v))grounded|=Flight.HullSupported(rb);
+            if(!grounded)s.AirPeakDownSpeed=Mathf.Max(s.AirPeakDownSpeed,-rb.velocity.y);
             var world=GameManager.Instance.World;var driver=v.GetAttached(0) as EntityPlayerLocal;
             bool input=s.InputReady&&Time.time-s.LastInput<.5f&&driver!=null&&Weapons.UIReady(driver)&&!Boarding.Active(v);
             if(Rules.Complete(v)){if(Flight.Step(v,s,grounded,input,dt))return;input&=s.InputReady;}
@@ -77,9 +79,10 @@ namespace PZAEC.Mecha
             PrepareSupport(s.Wheels,Mathf.Abs(throttle)>.01f||Mathf.Abs(steer)>.01f||rb.velocity.sqrMagnitude>.01f);
             if(!sustain){s.HoverOn=false;s.Charge=0;s.ChargeStart=-1;s.Jump=false;s.Toggle=false;}
             if(s.Toggle){s.HoverOn=powered&&!s.HoverOn;s.Toggle=false;}
-            if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;}
-            if(grounded&&!s.Grounded){s.LandingAt=Time.time;if(s.AirSince>=0&&Time.time-s.AirSince>=Rules.StompAirborneSeconds)Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down,v.position);s.AirSince=-1;}
+            if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
+            bool stomp=grounded&&!s.Grounded&&MarkLanding(s,Time.time,true);
             s.Grounded=grounded;
+            if(stomp){s.LastSync=-100;Sync(v,s);Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down*s.LandingStrength,v.position);}
             var forward=Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized;
             var planar=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);float speed=planar.magnitude;
             bool boost=!Samurai.Braced(v)&&powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
@@ -120,6 +123,15 @@ namespace PZAEC.Mecha
         }
         public static void Sync(EntityVehicle v,MoveState s)
         {if(Time.time-s.LastSync>=.2f){s.LastSync=Time.time;Weapons.SendLocalIntent(v,Weapons.Motion,Snapshot(s),Vector3.zero);}}
+        // One airborne interval grants at most one damaging landing. The
+        // owner sends the grounded snapshot before its stomp intent so the
+        // server can consume the same contact without creating an explosion.
+        public static bool MarkLanding(MoveState s,float now,bool allowStomp)
+        {
+            bool stomp=allowStomp&&s.AirSince>=0&&now-s.AirSince>=Rules.StompAirborneSeconds;
+            s.LandingAt=now;s.LandingStrength=Mathf.Clamp(.7f+s.AirPeakDownSpeed/60f,.7f,1f);
+            s.LandingPendingUntil=stomp?now+.75f:-100;s.LandingEventExpected=stomp;s.AirSince=-1;s.AirPeakDownSpeed=0;return stomp;
+        }
         // PhysX vehicle sticky-tire constraints can lock a stationary wheel even
         // with zero tire friction. A negligible 1Nm wake torque releases that
         // constraint; propulsion/braking/turning are still provided by ApplyDrive.

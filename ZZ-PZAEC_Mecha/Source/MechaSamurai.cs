@@ -20,7 +20,8 @@ namespace PZAEC.Mecha
             public bool SwordHeld, GuardHeld, SuppressSword, Charging, Guarding, Heavy, Swing, Queued, QueuedHeavy, BeamSpent;
             public float InputAt=-100, PressedAt, Started=-100, LastCombat=-100, LastHit=-100, BrokenUntil, Energy=100, LastSync=-100;
             public float BeamStarted=-1, LaserCharge, LaserWait, ReceivedAt=-100, Alert, GuardBlend, AimYaw, AimPitch, HeadYaw, HeadPitch;
-            public float LastSound=-100,LastShieldSound=-100; public float LastSweep=-1; public Vector3 PreviousRoot,PreviousTip,PreviousPosition;
+            public float LastShieldSound=-100; public int SoundSequence,SoundAttack=-1,SoundMask,ReceivedAttack=-1; public float LastSweep=-1; public Vector3 PreviousRoot,PreviousTip,PreviousPosition;
+            public bool LocalPresentationSuppressed;public int LocalPresentationActor=-1,CancelledAttack=-1;
             public readonly HashSet<int> Hit=new HashSet<int>();
         }
         static readonly Dictionary<int,State> states=new Dictionary<int,State>();
@@ -37,13 +38,29 @@ namespace PZAEC.Mecha
         {
             if(!Rules.Complete(v))return;var s=Get(v);s.SwordHeld=s.GuardHeld=s.Charging=s.Guarding=s.Swing=s.Queued=false;
             s.Blocked=false;s.StartCharge=0;s.SuppressSword=true;s.BeamStarted=-1;s.LaserCharge=0;s.BeamSpent=false;s.LastSweep=-1;
+            RobotAudio.StopCharge(v);
         }
         public static void ReleaseLocal(EntityVehicle v)
-        {if(Rules.Complete(v))Weapons.SendLocalIntent(v,Cancel,Vector3.zero,Vector3.zero);input=255;nextInput=0;}
+        {if(Rules.Complete(v)){if(!Weapons.Server)CancelPresentation(Get(v));Weapons.SendLocalIntent(v,Cancel,Vector3.zero,Vector3.zero);}input=255;nextInput=0;}
+        static void CancelPresentation(State s)
+        {
+            var world=GameManager.Instance!=null?GameManager.Instance.World:null;var player=world!=null?world.GetPrimaryPlayer():null;var driver=s.Vehicle.GetAttached(0);
+            s.LocalPresentationActor=player!=null?player.entityId:driver!=null?driver.entityId:-1;
+            s.LocalPresentationSuppressed=true;s.CancelledAttack=s.AttackSerial;s.SoundAttack=s.AttackSerial;s.SoundMask=7;Stop(s.Vehicle);
+        }
+        static bool Suppressed(State s)
+        {
+            // A former driver's local cancellation must not mute the next
+            // operator when this vehicle becomes a remote actor to them.
+            var driver=s.Vehicle.GetAttached(0);
+            if(s.LocalPresentationSuppressed&&driver!=null&&s.LocalPresentationActor>=0&&driver.entityId!=s.LocalPresentationActor)
+            {s.LocalPresentationSuppressed=false;s.CancelledAttack=-1;}
+            return s.LocalPresentationSuppressed;
+        }
         public static void LocalInput(EntityVehicle v,Ray ray,bool ready)
         {
             byte op=!ready?InputIdle:Input.GetKey(KeyCode.Mouse0)?(Input.GetKey(KeyCode.Mouse1)?InputBoth:InputSword):Input.GetKey(KeyCode.Mouse1)?InputGuard:InputIdle;
-            if(!Weapons.Server){var s=Get(v);s.GuardHeld=op==InputGuard||op==InputBoth;s.SwordHeld=op==InputSword||op==InputBoth;}
+            if(!Weapons.Server){var s=Get(v);if(!ready)CancelPresentation(s);else{s.LocalPresentationSuppressed=false;s.GuardHeld=op==InputGuard||op==InputBoth;s.SwordHeld=op==InputSword||op==InputBoth;}}
             if(op!=input||Time.time>=nextInput){Weapons.SendLocalIntent(v,op,ray.direction,ray.origin);input=op;nextInput=Time.time+.1f;}
         }
         public static void Request(EntityVehicle v,int actor,int sequence,byte op,Vector3 direction,Vector3 origin,float now)
@@ -83,7 +100,19 @@ namespace PZAEC.Mecha
             s.AttackSerial++;s.Blocked=false;s.Swing=true;s.Heavy=heavy;s.Started=now;s.LastCombat=now;s.Guarding=false;s.Charging=false;s.LastSweep=-1;s.Hit.Clear();
             s.Combo=heavy?0:1-s.Combo;s.BeamStarted=-1;s.LaserCharge=0;
             Weapons.GetState(s.Vehicle).LastWeaponUse=now;
+            Sounds(s,now,false);
         }
+        static void Sounds(State s,float now,bool silent)
+        {
+            if(!s.Swing||Suppressed(s)||!Weapons.Server&&s.AttackSerial==s.CancelledAttack)return;
+            if(s.SoundAttack!=s.AttackSerial){s.SoundAttack=s.AttackSerial;s.SoundSequence=RobotAudio.NextPresentationSerial();s.SoundMask=0;}
+            float phase=Mathf.Max(0,(now-s.Started)/Duration(s));
+            SwordCue(s,0,"sword-prepare",.42f,silent);
+            if(!s.Blocked&&phase>=SwordMotion.WindEnd)SwordCue(s,1,s.Heavy?"sword-heavy":"sword-swing",s.Heavy?.74f:.57f,silent);
+            if(s.Blocked||phase>=SwordMotion.CutEnd)SwordCue(s,2,"sword-brake",s.Heavy?.63f:.48f,silent);
+        }
+        static void SwordCue(State s,int bit,string cue,float volume,bool silent)
+        {int flag=1<<bit;if((s.SoundMask&flag)!=0)return;s.SoundMask|=flag;if(!silent)RobotAudio.Event(s.Vehicle,cue,s.SoundSequence,volume);}
         public static float Duration(State s){return s.Heavy?HeavyDuration:NormalDuration;}
         public static bool Arc(Vector3 local)
         {float yaw=Mathf.Atan2(local.x,local.z)*Mathf.Rad2Deg,pitch=Mathf.Atan2(local.y,new Vector2(local.x,local.z).magnitude)*Mathf.Rad2Deg;return Mathf.Abs(yaw)<=45&&pitch>=-25&&pitch<=30;}
@@ -118,7 +147,7 @@ namespace PZAEC.Mecha
             if(incoming.sqrMagnitude<.0001f||Vector3.Dot(incoming.normalized,Weapons.BodyRotation(v)*Vector3.forward)<Mathf.Cos(50*Mathf.Deg2Rad))return 1;
             float cost=Mathf.Clamp(damage/3000f,4,40),available=Mathf.Min(1,s.Energy/cost);
             s.Energy=Mathf.Max(0,s.Energy-cost);
-            if(Time.time-s.LastShieldSound>.15f){s.LastShieldSound=Time.time;RobotAudio.OneShot(v,"shield",.4f);}
+            if(Time.time-s.LastShieldSound>.15f){s.LastShieldSound=Time.time;RobotAudio.Event(v,"shield",-1,.4f);}
             if(s.Energy<=0){s.BrokenUntil=Time.time+2.5f;s.Guarding=false;}
             return 1-(explosion?.35f:.70f)*available;
         }
@@ -128,10 +157,13 @@ namespace PZAEC.Mecha
             foreach(var pair in states)
             {
                 var s=pair.Value;var v=s.Vehicle;if(v==null||world.GetEntity(pair.Key)!=v){gone.Add(pair.Key);continue;}
-                if(!Weapons.Server){if(Time.time-s.ReceivedAt>1){Stop(v);s.LastCombat=-100;}continue;}
+                if(!Weapons.Server){if(Time.time-s.ReceivedAt>1){Stop(v);s.LastCombat=-100;}else Sounds(s,Time.time,false);continue;}
                 float now=Time.time;
                 if(!Operator(s)||now-s.InputAt>Rules.HoldTimeout)Stop(v);
                 if(!GroundReady(v)){s.Charging=s.Swing=s.Queued=false;s.LastSweep=-1;}
+                // Presentation consumes every crossed phase once before the
+                // simulation clears a completed swing on a slow frame.
+                Sounds(s,now,false);
                 if(s.Blocked&&now-s.BlockedAt>=.38f){s.Swing=s.Blocked=s.Queued=false;s.SuppressSword=true;}
                 if(s.Swing&&!s.Blocked&&now-s.Started>=Duration(s))
                 {s.Swing=false;if(s.SwordHeld&&!s.GuardHeld)s.Charging=true;if(s.Queued&&!s.GuardHeld){bool heavy=s.QueuedHeavy;s.Queued=false;Start(s,heavy,now);}else s.Queued=false;}
@@ -147,17 +179,27 @@ namespace PZAEC.Mecha
         }
         static void Broadcast(State s,float now)
         {
-            int flags=(s.Guarding?1:0)|(s.Charging?2:0)|(s.Heavy?4:0)|(s.Swing?8:0)|(s.Combo==1?16:0)|(now<s.BrokenUntil?32:0)|(s.Blocked?64:0)|(Mathf.RoundToInt(Mathf.Clamp01(s.StartCharge)*255)<<8);
+            // The top byte is an action identity for presentation. All 24
+            // flag bits remain exactly representable in the protocol float.
+            int flags=(s.Guarding?1:0)|(s.Charging?2:0)|(s.Heavy?4:0)|(s.Swing?8:0)|(s.Combo==1?16:0)|(now<s.BrokenUntil?32:0)|(s.Blocked?64:0)|(Mathf.RoundToInt(Mathf.Clamp01(s.StartCharge)*255)<<8)|((s.AttackSerial&255)<<16);
             Weapons.Broadcast(s.Vehicle.entityId,++s.Serial,Snapshot,new Vector3(s.Energy,Mathf.Max(0,AlertDelay-(now-s.LastCombat)),s.Swing?now-s.Started:s.Charging?now-s.PressedAt:0),new Vector3(s.AimYaw,s.AimPitch,s.LaserCharge),flags,s.LaserWait);
         }
         public static void Receive(EntityVehicle v,int serial,Vector3 a,Vector3 b,float flags,float wait)
         {
-            if(Weapons.Server||!Rules.Complete(v))return;var s=Get(v);if(serial<=s.Received)return;s.Received=serial;s.ReceivedAt=Time.time;
-            if(a.x<s.Energy&&Time.time-s.LastShieldSound>.15f){s.LastShieldSound=Time.time;RobotAudio.OneShot(v,"shield",.4f);}
+            if(Weapons.Server||!Rules.Complete(v))return;var s=Get(v);if(serial<=s.Received)return;bool first=s.Received<0||Time.time-s.ReceivedAt>1;
+            bool suppressed=Suppressed(s);
+            if(!first&&!suppressed)Sounds(s,Time.time,false);s.Received=serial;s.ReceivedAt=Time.time;
+            if(!first&&!suppressed&&a.x<s.Energy&&Time.time-s.LastShieldSound>.15f){s.LastShieldSound=Time.time;RobotAudio.Event(v,"shield",-1,.4f);}
             int f=(int)flags;s.Energy=Mathf.Clamp(a.x,0,100);s.LastCombat=Time.time-AlertDelay+Mathf.Clamp(a.y,0,AlertDelay);s.Started=s.PressedAt=Time.time-Mathf.Clamp(a.z,0,5);
             s.Guarding=(f&1)!=0;s.GuardHeld=s.Guarding;s.Charging=(f&2)!=0;s.Heavy=(f&4)!=0;s.Swing=(f&8)!=0;s.Combo=(f&16)!=0?1:0;s.StartCharge=((f>>8)&255)/255f;s.BrokenUntil=(f&32)!=0?Time.time+.2f:0;
-            if((f&64)!=0&&!s.Blocked)Interrupt(v,Time.time);else if((f&64)==0)s.Blocked=false;
+            int attack=(f>>16)&255;if(s.ReceivedAttack<0)s.AttackSerial=attack;else if(attack!=s.ReceivedAttack){s.AttackSerial=(s.AttackSerial&~255)|attack;if(attack<s.ReceivedAttack)s.AttackSerial+=256;}s.ReceivedAttack=attack;
             s.AimYaw=Mathf.Clamp(b.x,-45,45);s.AimPitch=Mathf.Clamp(b.y,-25,30);s.LaserCharge=Mathf.Clamp01(b.z);s.LaserWait=Mathf.Clamp(wait,0,3);
+            if(suppressed){s.CancelledAttack=s.AttackSerial;s.SoundAttack=s.AttackSerial;s.SoundMask=7;Stop(v);return;}
+            // After input returns, an old in-flight snapshot of the cancelled
+            // swing cannot resurrect its pose or its remaining sound stages.
+            if(s.Swing&&s.AttackSerial==s.CancelledAttack){Stop(v);return;}
+            else if((f&64)!=0&&!s.Blocked)Interrupt(v,Time.time);else if((f&64)==0)s.Blocked=false;
+            Sounds(s,Time.time,first&&a.z>.3f);
         }
         static void ShieldArm(Model.Rig r,float blend)
         {
@@ -184,7 +226,6 @@ namespace PZAEC.Mecha
         public static void Pose(EntityVehicle v,Model.Rig r,float dt,float now,bool applySword=true)
         {
             if(!Rules.Complete(v))return;var s=Get(v);var move=Locomotion.Get(v);
-            if(s.Swing&&now-s.Started>=Duration(s)*SwordMotion.WindEnd&&Mathf.Abs(s.Started-s.LastSound)>.2f){s.LastSound=s.Started;RobotAudio.OneShot(v,"sword",s.Heavy?.65f:.45f);}
             float want=now-s.LastCombat<AlertDelay?1:0;
             s.Alert=Mathf.MoveTowards(s.Alert,want,dt/(want>s.Alert?.5f:1f));
             s.GuardBlend=Mathf.MoveTowards(s.GuardBlend,s.Guarding?1:0,dt/.22f);
@@ -245,6 +286,6 @@ namespace PZAEC.Mecha
                 s.PreviousRoot=previousRoot+Origin.position;s.PreviousTip=previousTip+Origin.position;s.PreviousPosition=v.position;s.LastSweep=now;
             }finally{for(int i=0;i<joints.Length;i++){joints[i].localRotation=rotations[i];joints[i].localPosition=positions[i];}r.ActionBaseReady=hadBase;}
         }
-        public static void Clear(){states.Clear();contactSerial=0;input=255;nextInput=0;}
+        public static void Clear(){foreach(var s in states.Values)RobotAudio.StopCharge(s.Vehicle);states.Clear();contactSerial=0;input=255;nextInput=0;}
     }
 }

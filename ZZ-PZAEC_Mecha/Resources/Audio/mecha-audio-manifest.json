@@ -1,0 +1,447 @@
+{
+  "rate": 22050,
+  "format": "mono PCM16",
+  "copyright": "Original procedural synthesis; no external samples",
+  "assets": [
+    {
+      "name": "prototype-power-on",
+      "cue": "power-on",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.78,
+      "peak": 0.25608631509979285,
+      "rms": 0.0626894267390489,
+      "design": "relay pair, capacitor rise, final contactor; then silence"
+    },
+    {
+      "name": "prototype-power-off",
+      "cue": "power-off",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.62,
+      "peak": 0.20770506686145007,
+      "rms": 0.05429955249396274,
+      "design": "contactor release, falling capacitor, pressure release"
+    },
+    {
+      "name": "prototype-step-left",
+      "cue": "step-left",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.52,
+      "peak": 0.5784561443322501,
+      "rms": 0.13642060940291,
+      "design": "sole contact, delayed structural load, inharmonic metal tail"
+    },
+    {
+      "name": "prototype-step-right",
+      "cue": "step-right",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.54,
+      "peak": 0.5996540158562762,
+      "rms": 0.13393320392929325,
+      "design": "alternate sole resonance / brace timing"
+    },
+    {
+      "name": "prototype-land",
+      "cue": "land",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.9500226757369614,
+      "peak": 0.7217811960731192,
+      "rms": 0.12882617420410125,
+      "design": "load-bearing contact / frame settling, not explosion"
+    },
+    {
+      "name": "prototype-jump",
+      "cue": "jump",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.48,
+      "peak": 0.42378556568814324,
+      "rms": 0.10433773008447414,
+      "design": "pressure valve and piston impulse"
+    },
+    {
+      "name": "prototype-entry-brace",
+      "cue": "entry-brace",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.36,
+      "peak": 0.4372273719514789,
+      "rms": 0.08950552965265393,
+      "design": "short brake / load brace"
+    },
+    {
+      "name": "prototype-kneel-lock",
+      "cue": "kneel-lock",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.42,
+      "peak": 0.43670109723997774,
+      "rms": 0.08173632181633744,
+      "design": "two knee ratchet / lock contacts"
+    },
+    {
+      "name": "prototype-hatch-open",
+      "cue": "hatch-open",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.6499773242630386,
+      "peak": 0.32580940322343604,
+      "rms": 0.06547889124774339,
+      "design": "unlatch, hydraulic slide, end stop"
+    },
+    {
+      "name": "prototype-hatch-close",
+      "cue": "hatch-close",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.6499773242630386,
+      "peak": 0.5511909320142373,
+      "rms": 0.09976230271659038,
+      "design": "slide, panel contact, locking bolt"
+    },
+    {
+      "name": "prototype-stand-lock",
+      "cue": "stand-lock",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.38,
+      "peak": 0.43710497029849743,
+      "rms": 0.08697371547396228,
+      "design": "support latch / final lock; dwell silent"
+    },
+    {
+      "name": "prototype-ready",
+      "cue": "ready",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.32,
+      "peak": 0.20902066833266014,
+      "rms": 0.05864684180894138,
+      "design": "restrained electrical confirmation"
+    },
+    {
+      "name": "prototype-shield",
+      "cue": "shield",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.3,
+      "peak": 0.5949916187887571,
+      "rms": 0.08829389361792801,
+      "design": "electrical snap / tight metal response"
+    },
+    {
+      "name": "prototype-palm-laser",
+      "cue": "palm-laser",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.24,
+      "peak": 0.5754277072915704,
+      "rms": 0.08457768259716249,
+      "design": "compact bright coil discharge / fast electrical pulse"
+    },
+    {
+      "name": "prototype-missile-release",
+      "cue": "missile-release",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.7500226757369615,
+      "peak": 0.5268739385870349,
+      "rms": 0.1148565168699746,
+      "design": "pod latch / pneumatic ejector / short exhaust, no explosion"
+    },
+    {
+      "name": "prototype-laser-impact",
+      "cue": "laser-impact",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.28,
+      "peak": 0.6201392742535379,
+      "rms": 0.08064630737619612,
+      "design": "localized conductive crackle"
+    },
+    {
+      "name": "prototype-sword-impact",
+      "cue": "sword-impact",
+      "variant": "prototype",
+      "loop": false,
+      "seconds": 0.38,
+      "peak": 0.76,
+      "rms": 0.1330523841130227,
+      "design": "inharmonic steel contact / short frame resonance"
+    },
+    {
+      "name": "prototype-servo",
+      "cue": "servo",
+      "variant": "prototype",
+      "loop": true,
+      "seconds": 4.0,
+      "peak": 0.27,
+      "rms": 0.07656237096616819,
+      "design": "irregular geared hydraulic motion, no bass oscillator"
+    },
+    {
+      "name": "prototype-thruster",
+      "cue": "thruster",
+      "variant": "prototype",
+      "loop": true,
+      "seconds": 4.0,
+      "peak": 0.36,
+      "rms": 0.08797218649492348,
+      "design": "broadband pressure exhaust, no firing-order rhythm"
+    },
+    {
+      "name": "complete-power-on",
+      "cue": "power-on",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.78,
+      "peak": 0.26116285658267246,
+      "rms": 0.061186635102261064,
+      "design": "relay pair, capacitor rise, final contactor; then silence"
+    },
+    {
+      "name": "complete-power-off",
+      "cue": "power-off",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.62,
+      "peak": 0.20952682712504808,
+      "rms": 0.053137804594660054,
+      "design": "contactor release, falling capacitor, pressure release"
+    },
+    {
+      "name": "complete-step-left",
+      "cue": "step-left",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.6136054421768707,
+      "peak": 0.5651453155767381,
+      "rms": 0.14381083084943605,
+      "design": "sole contact, delayed structural load, inharmonic metal tail"
+    },
+    {
+      "name": "complete-step-right",
+      "cue": "step-right",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.63718820861678,
+      "peak": 0.5715690396933307,
+      "rms": 0.1398551158974642,
+      "design": "alternate sole resonance / brace timing"
+    },
+    {
+      "name": "complete-land",
+      "cue": "land",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 1.1209977324263039,
+      "peak": 0.7205063093827886,
+      "rms": 0.1372792719349673,
+      "design": "load-bearing contact / frame settling, not explosion"
+    },
+    {
+      "name": "complete-jump",
+      "cue": "jump",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.48,
+      "peak": 0.3614429472356336,
+      "rms": 0.09581547969957027,
+      "design": "pressure valve and piston impulse"
+    },
+    {
+      "name": "complete-entry-brace",
+      "cue": "entry-brace",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.36,
+      "peak": 0.42449212638452505,
+      "rms": 0.08845740040706791,
+      "design": "short brake / load brace"
+    },
+    {
+      "name": "complete-kneel-lock",
+      "cue": "kneel-lock",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.49560090702947845,
+      "peak": 0.4243309626339378,
+      "rms": 0.07565768179537896,
+      "design": "two knee ratchet / lock contacts"
+    },
+    {
+      "name": "complete-hatch-open",
+      "cue": "hatch-open",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.6499773242630386,
+      "peak": 0.3120490193453364,
+      "rms": 0.06171869442170307,
+      "design": "unlatch, hydraulic slide, end stop"
+    },
+    {
+      "name": "complete-hatch-close",
+      "cue": "hatch-close",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.766984126984127,
+      "peak": 0.5996041564419397,
+      "rms": 0.0917327560690024,
+      "design": "slide, panel contact, locking bolt"
+    },
+    {
+      "name": "complete-stand-lock",
+      "cue": "stand-lock",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.38,
+      "peak": 0.4255063953601315,
+      "rms": 0.0864490802241433,
+      "design": "support latch / final lock; dwell silent"
+    },
+    {
+      "name": "complete-ready",
+      "cue": "ready",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.32,
+      "peak": 0.2113129794315214,
+      "rms": 0.057729646380169274,
+      "design": "restrained electrical confirmation"
+    },
+    {
+      "name": "complete-sword-prepare",
+      "cue": "sword-prepare",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.32,
+      "peak": 0.42407617135127507,
+      "rms": 0.09389183308634465,
+      "design": "grip actuator / blade preload"
+    },
+    {
+      "name": "complete-sword-swing",
+      "cue": "sword-swing",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.44,
+      "peak": 0.7152181676405165,
+      "rms": 0.16516641627729853,
+      "design": "air cutting sweep / short metal tension"
+    },
+    {
+      "name": "complete-sword-heavy",
+      "cue": "sword-heavy",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.62,
+      "peak": 0.6679361547542041,
+      "rms": 0.17690684972490123,
+      "design": "longer lower air sweep / stronger preload"
+    },
+    {
+      "name": "complete-sword-brake",
+      "cue": "sword-brake",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.28997732426303857,
+      "peak": 0.425586725580096,
+      "rms": 0.09935198867852267,
+      "design": "joint brake / damped blade flex"
+    },
+    {
+      "name": "complete-shield",
+      "cue": "shield",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.3,
+      "peak": 0.5684219478237569,
+      "rms": 0.08441719235275723,
+      "design": "electrical snap / tight metal response"
+    },
+    {
+      "name": "complete-palm-laser",
+      "cue": "palm-laser",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.24,
+      "peak": 0.48191712497381434,
+      "rms": 0.07632586138813989,
+      "design": "compact bright coil discharge / fast electrical pulse"
+    },
+    {
+      "name": "complete-head-laser",
+      "cue": "head-laser",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.34,
+      "peak": 0.6973952353326454,
+      "rms": 0.10347527687180158,
+      "design": "deeper capacitor punch / paired arc discharge"
+    },
+    {
+      "name": "complete-missile-release",
+      "cue": "missile-release",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.7500226757369615,
+      "peak": 0.5083566419307916,
+      "rms": 0.1057150083985223,
+      "design": "pod latch / pneumatic ejector / short exhaust, no explosion"
+    },
+    {
+      "name": "complete-laser-impact",
+      "cue": "laser-impact",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.28,
+      "peak": 0.5492492855836894,
+      "rms": 0.07635262579489006,
+      "design": "localized conductive crackle"
+    },
+    {
+      "name": "complete-sword-impact",
+      "cue": "sword-impact",
+      "variant": "complete",
+      "loop": false,
+      "seconds": 0.38,
+      "peak": 0.76,
+      "rms": 0.13767111638928453,
+      "design": "inharmonic steel contact / short frame resonance"
+    },
+    {
+      "name": "complete-servo",
+      "cue": "servo",
+      "variant": "complete",
+      "loop": true,
+      "seconds": 4.0,
+      "peak": 0.27,
+      "rms": 0.07096162097866962,
+      "design": "irregular geared hydraulic motion, no bass oscillator"
+    },
+    {
+      "name": "complete-thruster",
+      "cue": "thruster",
+      "variant": "complete",
+      "loop": true,
+      "seconds": 4.0,
+      "peak": 0.34364265481272677,
+      "rms": 0.08967935069982054,
+      "design": "broadband pressure exhaust, no firing-order rhythm"
+    },
+    {
+      "name": "complete-laser-charge",
+      "cue": "laser-charge",
+      "variant": "complete",
+      "loop": true,
+      "seconds": 4.0,
+      "peak": 0.14,
+      "rms": 0.04036723867976646,
+      "design": "quiet high electrical texture; runtime charge raises pitch"
+    }
+  ]
+}

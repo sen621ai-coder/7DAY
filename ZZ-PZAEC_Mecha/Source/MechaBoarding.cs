@@ -7,7 +7,7 @@ namespace PZAEC.Mecha
     public static class Boarding
     {
         public const byte BoardEvent=8;
-        sealed class Show {public EntityVehicle Vehicle;public int Actor,Sequence;public float Started,Duration,NextSync;public bool Exit,Full,Opened,Closed,Ready,Planted,Deferred,Committed,AttachedSeen;}
+        sealed class Show {public EntityVehicle Vehicle;public int Actor,Sequence,AudioSequence,AudioMask;public float Started,Duration,NextSync;public bool Exit,Full,Deferred,Committed,AttachedSeen;}
         static readonly Dictionary<int,Show> shows=new Dictionary<int,Show>();
         static readonly Dictionary<int,int> completed=new Dictionary<int,int>();
         public static string Notice;static float noticeUntil;
@@ -81,8 +81,8 @@ namespace PZAEC.Mecha
         }
         static void Start(EntityVehicle v,int actor,bool exit,bool full)
         {
-            var s=new Show{Vehicle=v,Actor=actor,Exit=exit,Full=full,Duration=Rules.Complete(v)?(full?(exit?Ceremony.ExitSeconds:Ceremony.EnterSeconds):.5f):exit?2f:full?4f:.35f,Started=Time.time,Sequence=Weapons.Server?++sequence:0};
-            shows[v.entityId]=s;if(Rules.Complete(v)){Samurai.Stop(v);RobotAudio.OneShot(v,"ready",.35f);}if(Weapons.Server)Publish(s,false);
+            var s=new Show{Vehicle=v,Actor=actor,Exit=exit,Full=full,Duration=Rules.Complete(v)?(full?(exit?Ceremony.ExitSeconds:Ceremony.EnterSeconds):.5f):exit?2f:full?4f:.35f,Started=Time.time,Sequence=Weapons.Server?++sequence:0,AudioSequence=RobotAudio.NextPresentationSerial()};
+            shows[v.entityId]=s;if(Rules.Complete(v))Samurai.Stop(v);Sounds(s,0,false);if(Weapons.Server)Publish(s,false);
         }
         static void Publish(Show s,bool done)
         {Weapons.Broadcast(s.Vehicle.entityId,s.Sequence,BoardEvent,new Vector3(s.Actor,s.Exit?1:0,s.Full?1:0),Vector3.zero,Time.time-s.Started,done?0:s.Duration);}
@@ -92,9 +92,33 @@ namespace PZAEC.Mecha
             var v=world.GetEntity(id) as EntityVehicle;if(!Weapons.IsMecha(v))return;
             int old;if(completed.TryGetValue(id,out old)&&seq<=old)return;
             Show s;if(shows.TryGetValue(id,out s)&&seq<s.Sequence)return;
-            if(duration==0){completed[id]=seq;Finish(v,false);return;}
-            if(s==null||s.Sequence!=seq){var predicted=s!=null&&s.Deferred&&s.Actor==(int)a.x&&s.Exit==(a.y>.5f)?s:null;s=predicted??new Show{Vehicle=v};s.Actor=(int)a.x;s.Exit=a.y>.5f;s.Full=a.z>.5f;s.Sequence=seq;shows[id]=s;}
+            if(duration==0){if(s!=null&&s.Sequence==seq&&age>=s.Duration-.02f)Sounds(s,s.Duration,false);completed[id]=seq;Finish(v,false);return;}
+            bool fresh=false;
+            if(s==null||s.Sequence!=seq){var predicted=s!=null&&s.Deferred&&s.Actor==(int)a.x&&s.Exit==(a.y>.5f)?s:null;s=predicted??new Show{Vehicle=v,AudioSequence=RobotAudio.NextPresentationSerial()};fresh=predicted==null;s.Actor=(int)a.x;s.Exit=a.y>.5f;s.Full=a.z>.5f;s.Sequence=seq;shows[id]=s;}
             s.Started=Time.time-age;s.Duration=duration;
+            // A late observer begins at the current physical pose. Its first
+            // snapshot consumes past cues silently rather than replaying them.
+            if(fresh)Sounds(s,age,age>.3f);
+        }
+        static void Cue(Show s,float age,float at,int bit,string cue,float volume,bool silent,int foot=-1)
+        {
+            int flag=1<<bit;if(age<at||(s.AudioMask&flag)!=0)return;s.AudioMask|=flag;if(silent)return;
+            if(foot>=0){var rig=Model.GetRig(s.Vehicle);var joint=rig!=null?(foot==0?rig.FootL:rig.FootR):null;RobotAudio.ContactEvent(s.Vehicle,cue,s.AudioSequence,joint!=null?joint.position+Origin.position:s.Vehicle.position,volume);}
+            else RobotAudio.Event(s.Vehicle,cue,s.AudioSequence,volume);
+        }
+        static void Sounds(Show s,float age,bool silent)
+        {
+            bool complete=Rules.Complete(s.Vehicle);
+            Cue(s,age,s.Full&&complete?.45f:0,0,"entry-brace",.48f,silent);
+            if(s.Full)
+            {
+                if(complete){Cue(s,age,s.Exit?.75f:1.05f,1,"step-left",.72f,silent,0);Cue(s,age,s.Exit?1.05f:1.5f,2,"step-right",.78f,silent,1);}
+                Cue(s,age,complete?Ceremony.KneelEnd(s.Exit):.9f,3,"kneel-lock",.62f,silent);
+                Cue(s,age,complete?Ceremony.OpenAt(s.Exit)+(s.Exit?.7f:.75f):s.Exit?1.2f:1.6f,4,"hatch-open",.52f,silent);
+                Cue(s,age,complete?Ceremony.CloseAt(s.Exit)+.65f:s.Exit?2:2.5f,5,"hatch-close",.68f,silent);
+                Cue(s,age,complete?(s.Exit?5.75f:6.6f):s.Duration-.1f,6,"stand-lock",.7f,silent);
+            }
+            if(!s.Exit)Cue(s,age,s.Duration-.08f,7,"ready",.46f,silent);
         }
         public static bool Active(EntityVehicle v){return v!=null&&shows.ContainsKey(v.entityId);}
         public static bool SwordTarget(EntityVehicle v,out Vector3 grip,out Vector3 direction,out Vector3 normal)
@@ -137,11 +161,10 @@ namespace PZAEC.Mecha
                 }
                 if(!Active(s.Vehicle))continue;
                 if(Rules.Complete(s.Vehicle)&&s.Exit&&s.Full&&age>=Ceremony.ExitHold&&Ceremony.NearDoor(s.Vehicle,actor)){s.Started=Time.time-Ceremony.ExitHold;age=Ceremony.ExitHold;}
+                // Consume all crossed stages before finishing, including a
+                // last frame that jumps beyond the ceremony's duration.
+                Sounds(s,age,false);
                 if(age>=s.Duration){finish.Add(s.Vehicle);continue;}
-                if(s.Full&&Rules.Complete(s.Vehicle)&&age>=Ceremony.KneelEnd(s.Exit)&&!s.Planted){s.Planted=true;RobotAudio.OneShot(s.Vehicle,"land",.6f);}
-                if(s.Full&&age>=(Rules.Complete(s.Vehicle)?Ceremony.OpenAt(s.Exit):.9f)&&!s.Opened){s.Opened=true;RobotAudio.OneShot(s.Vehicle,"hatch-open",.7f);}
-                if(s.Full&&age>(Rules.Complete(s.Vehicle)?Ceremony.CloseAt(s.Exit):2.1f)&&!s.Closed){s.Closed=true;RobotAudio.OneShot(s.Vehicle,"hatch-close",.7f);}
-                if(!s.Exit&&age>=s.Duration-.3f&&!s.Ready){s.Ready=true;RobotAudio.OneShot(s.Vehicle,"ready",.6f);}
                 if(Weapons.Server&&Time.time>=s.NextSync){s.NextSync=Time.time+.2f;Publish(s,false);}
             }
             foreach(var v in finish){Show s;if(v!=null&&shows.TryGetValue(v.entityId,out s)&&s.Deferred&&!s.Committed&&!Weapons.Server)Weapons.SendLocalIntent(v,Weapons.BoardControl,new Vector3(2,0,0),Vector3.zero);Finish(v,true);}
@@ -149,6 +172,7 @@ namespace PZAEC.Mecha
         static void Finish(EntityVehicle v,bool publish)
         {if(v==null)return;Show s;if(!shows.TryGetValue(v.entityId,out s))return;
             shows.Remove(v.entityId);completed[v.entityId]=s.Sequence;
+            RobotAudio.StopChannels(v);
             var rig=Model.GetRig(v);if(rig!=null)rig.ResetPose();
             if(publish&&Weapons.Server)Publish(s,true);}
         public static void Skip(EntityVehicle v){CompletePending(v);Finish(v,true);}
@@ -178,6 +202,6 @@ namespace PZAEC.Mecha
             return false;
         }
         public static bool CockpitCamera(EntityVehicle v){Show s;return v!=null&&shows.TryGetValue(v.entityId,out s)&&(cameraCockpit==v.entityId||!s.Exit&&Time.time-s.Started>=(Rules.Complete(v)?Ceremony.EnterTransfer+.65f:2.3f));}
-        public static void Clear(){shows.Clear();completed.Clear();suppressJump=committing=false;exitActor=null;cameraCockpit=-1;Notice=null;noticeUntil=0;}
+        public static void Clear(){foreach(var s in shows.Values)RobotAudio.StopChannels(s.Vehicle);shows.Clear();completed.Clear();suppressJump=committing=false;exitActor=null;cameraCockpit=-1;Notice=null;noticeUntil=0;}
     }
 }

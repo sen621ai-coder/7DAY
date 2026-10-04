@@ -12,6 +12,7 @@ namespace PZAEC.Mecha
     {
         public const byte Aim = 0, Fire = 1, Stop = 2, MissileAim = 3, MissileFire = 4, Repair = 5, RepairStop = 6, BattleRepair = 7, SwitchMelee = 8, MeleeSweep = 9, MeleeHeavy = 10, Trample = 11, Stomp = 12, Motion = 13, SkipBoard = 14, BoardControl = 15;
         public const byte BeamEvent = 0, MissileSpawnEvent = 1, MissileMoveEvent = 2, ImpactEvent = 3, StatusEvent = 4, MeleeSweepEvent = 5, MeleeHeavyEvent = 6, MeleeModeEvent = 7;
+        public const byte LandingEvent=19;
 
         public sealed class State
         {
@@ -270,7 +271,8 @@ namespace PZAEC.Mecha
             if (op == Trample || op == Stomp)
             {
                 // Movement-channel damage intents from the physics client.
-                TrampleRequest(state, actor, op, Time.time);
+                if(op==Stomp&&(!Finite(direction.x)||!Finite(direction.y)||!Finite(direction.z)||direction.y>0||direction.sqrMagnitude>1.001f))return;
+                TrampleRequest(state, actor, op, Time.time,op==Stomp?Mathf.Clamp01(-direction.y):0);
                 return;
             }
             if (op >= MeleeSweep)
@@ -334,21 +336,19 @@ namespace PZAEC.Mecha
         // Local physics client asks the server to resolve movement damage:
         // the driver's machine knows wheels/ground/velocity, the server owns
         // every hit point. Rate limits keep a forged client from spamming.
-        static void TrampleRequest(State state, int actor, byte op, float now)
+        static void TrampleRequest(State state, int actor, byte op, float now,float strength=1)
         {
             if (!ReadyOperator(state, actor)) return;
             var position = state.Vehicle.position;
             if (op == Stomp)
             {
-                if (now < state.NextStomp) return;
-                state.NextStomp = now + Rules.StompCooldown;
-                var action = new DynamicProperties(); var explosion = new DynamicProperties();
-                action.Classes.Add("Explosion", explosion);
-                var blast = new ExplosionData(action, null) { ParticleIndex = 5, BlockRadius = 0,
-                    EntityRadius = (byte)Rules.StompRadius, EntityDamage = Rules.StompDamage*Rules.AttributeScale(state.Vehicle), BlockDamage = 0,
-                    BlastPower = (int)Rules.StompKnockback };
-                GameManager.Instance.ExplosionServer(position, new Vector3i(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), Mathf.FloorToInt(position.z)),
-                    Quaternion.identity, blast, actor, 0, false, ItemClass.GetItem(Rules.BeamAmmo, false));
+                var move=Locomotion.Get(state.Vehicle);
+                if(!move.Grounded||now>move.LandingPendingUntil||Flight.Active(move))return;
+                move.LandingPendingUntil=-100;
+                bool damaging=now>=state.NextStomp;
+                if(damaging){state.NextStomp=now+Rules.StompCooldown;LandingStrike(state,actor,position);}
+                if(Trace(state.Vehicle,position+Vector3.up*.2f,Vector3.down,1.5f,out var floor))position=floor.hit.pos;
+                Broadcast(state.Vehicle.entityId,++serial,LandingEvent,position,Vector3.up,damaging?Mathf.Clamp(strength,.7f,1):.25f,Rules.StompRadius);
                 return;
             }
             if (now < state.NextTrampleTick) return;
@@ -370,6 +370,43 @@ namespace PZAEC.Mecha
                 var source = new DamageSourceEntity(EnumDamageSource.External, EnumDamageTypes.Bashing, actor, Vector3.up)
                 { AttackingItem = ItemClass.GetItem(Rules.BeamAmmo, false), canHitSpecialBodyParts = false, DismemberChance = 0 };
                 alive.DamageEntity(source, (int)(Rules.TrampleDamage*Rules.AttributeScale(state.Vehicle)), false, 0);
+            }
+        }
+
+        public static bool LandingTarget(EntityVehicle vehicle,int actor,EntityAlive alive)
+        {
+            if(vehicle==null||!Hostile(alive)||alive==vehicle||alive.entityId==actor||alive==vehicle.GetAttached(0)||alive.AttachedToEntity!=null)return false;
+            var pilot=vehicle.GetAttached(0) as EntityAlive;
+            var factions=FactionManager.Instance;
+            // Explicit alliance checks also protect friendly entities whose
+            // class still carries a generic hostile tag.
+            return pilot==null||factions==null||
+                ((int)factions.GetRelationshipTier(pilot,alive)<(int)FactionManager.Relationship.Like&&(int)factions.GetRelationshipTier(alive,pilot)<(int)FactionManager.Relationship.Like);
+        }
+        static void LandingStrike(State state,int actor,Vector3 position)
+        {
+            var targets=new List<EntityAlive>();
+            foreach(var entity in currentWorld.Entities.list)
+            {
+                var alive=entity as EntityAlive;if(!LandingTarget(state.Vehicle,actor,alive))continue;
+                var delta=alive.GetPosition()-position;
+                if(new Vector2(delta.x,delta.z).sqrMagnitude<=Rules.StompRadius*Rules.StompRadius&&delta.y>=-1&&delta.y<=2.5f)targets.Add(alive);
+            }
+            foreach(var alive in targets)
+            {
+                var center=alive.GetPosition()+Vector3.up*.8f;var from=position+Vector3.up*.45f;var delta=center-from;
+                if(delta.sqrMagnitude>1&&Trace(state.Vehicle,from,delta.normalized,Mathf.Max(.1f,delta.magnitude-.35f),out var barrier)&&ItemActionAttack.FindHitEntity(barrier)!=alive)continue;
+                var outward=Vector3.ProjectOnPlane(alive.GetPosition()-position,Vector3.up);float distance=outward.magnitude;
+                if(outward.sqrMagnitude<.0001f)outward=BodyRotation(state.Vehicle)*Vector3.forward;
+                var direction=(outward.normalized+Vector3.up*.4f).normalized;
+                int damage=(int)(Rules.StompDamage*Rules.AttributeScale(state.Vehicle)),packets=DamagePackets(damage);
+                var source=new DamageSourceEntity(EnumDamageSource.External,EnumDamageTypes.Bashing,actor,direction)
+                {AttackingItem=ItemClass.GetItem(Rules.BeamAmmo,false),canHitSpecialBodyParts=false,DismemberChance=0};
+                source.SetIgnoreConsecutiveDamages(false);
+                for(int i=0;i<packets&&!alive.IsDead();i++)alive.DamageEntity(source,damage/packets,false,0);
+                // Native entity motion is per tick. A bounded upward/outward
+                // impulse replaces BlastPower and only reaches filtered foes.
+                if(!alive.IsDead())alive.AddVelocity(direction*Rules.StompKnockback*.002f*Mathf.Lerp(1,.35f,Mathf.Clamp01(distance/Rules.StompRadius)));
             }
         }
 

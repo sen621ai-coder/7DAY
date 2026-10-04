@@ -22,7 +22,7 @@ namespace PZAEC.Mecha
         static readonly Dictionary<EntityAlive,float> safeExit=new Dictionary<EntityAlive,float>();
         public static void ClearTravelProtection(){safeExit.Clear();}
         public static void SafeDismount(EntityAlive actor,EntityVehicle v)
-        {if(actor!=null&&v!=null&&v.GetWheelsOnGround()>0&&v.vehicleRB!=null&&v.vehicleRB.velocity.sqrMagnitude<.16f)safeExit[actor]=Time.time+1.5f;}
+        {if(actor!=null&&v!=null&&v.vehicleRB!=null&&v.vehicleRB.velocity.sqrMagnitude<.16f&&(v.GetWheelsOnGround()>0||(Rules.Complete(v)&&Flight.HullSupported(v.vehicleRB))))safeExit[actor]=Time.time+1.5f;}
         public static bool ProtectTravel(EntityAlive actor,EnumDamageTypes type)
         {
             if(actor==null||actor.IsDead()||(type!=EnumDamageTypes.Falling&&type!=EnumDamageTypes.VehicleInside))return false;
@@ -34,6 +34,8 @@ namespace PZAEC.Mecha
         static bool TravelDamage(EntityPlayer __instance,DamageSource __0,ref int __result)
         {if(__0==null||!ProtectTravel(__instance,__0.damageType))return true;__result=0;return false;}
         static bool TravelFall(EntityPlayerLocal __instance){return !ProtectTravel(__instance,EnumDamageTypes.Falling);}
+        static bool TravelResponse(EntityAlive __instance,DamageResponse __0)
+        {return !(__instance is EntityPlayer&&__0.Source!=null&&ProtectTravel(__instance,__0.Source.damageType));}
 
         public static void Install(Harmony h)
         {
@@ -43,6 +45,13 @@ namespace PZAEC.Mecha
                 h.Patch(AccessTools.Method(typeof(EntityPlayer),"DamageEntity",signature),prefix:new HarmonyMethod(typeof(MechaArmor),nameof(TravelDamage)));
                 h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"DamageEntity",signature),prefix:new HarmonyMethod(typeof(MechaArmor),nameof(TravelDamage)));
                 h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"FallImpact"),prefix:new HarmonyMethod(typeof(MechaArmor),nameof(TravelFall)));
+                // Received damage packets enter response application directly,
+                // bypassing both DamageEntity and local response construction.
+                var responseSignature=new[]{typeof(DamageResponse)};
+                var travelResponse=new HarmonyMethod(typeof(MechaArmor),nameof(TravelResponse));
+                h.Patch(AccessTools.Method(typeof(EntityAlive),"ProcessDamageResponse",responseSignature),prefix:travelResponse);
+                h.Patch(AccessTools.Method(typeof(EntityAlive),"ProcessDamageResponseLocal",responseSignature),prefix:travelResponse);
+                h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"ProcessDamageResponseLocal",responseSignature),prefix:travelResponse);
                 h.Patch(AccessTools.Method(typeof(EntityAlive), "damageEntityLocal", signature),
                     transpiler: new HarmonyMethod(typeof(MechaArmor), nameof(ResponseTranspiler)));
                 h.Patch(AccessTools.Method(typeof(EntityVehicle), "damageEntityLocal", signature),

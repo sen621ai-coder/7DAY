@@ -95,10 +95,11 @@ public sealed class MechaMotionQA : IModApi
             ViewTrial(v,rig,camera,texture,"prototype");
             PrototypeViews(world,v,rig,camera,texture);
             LowFrameBeamTrial(world,v,rig,camera,texture);
+            SoundLandingTrial(world,v,camera,texture);
             RobotAudio.Clear();Boarding.Clear();Gait.Clear();Locomotion.Clear();
         }
         catch(Exception ex){failures++;report.Add("FAIL "+ex);}
-        finally{report.Add("COMPLETE failures="+failures);File.WriteAllLines(Path.Combine(output,"report.txt"),report);foreach(var line in report)Log.Out("[MechaMotionQA] "+line);Application.Quit();}
+        finally{report.AddRange(MechaLandingQA.Results());report.AddRange(MechaAudioQA.Results());failures+=MechaLandingQA.Failures+MechaAudioQA.Failures;report.Add("COMPLETE failures="+failures);File.WriteAllLines(Path.Combine(output,"report.txt"),report);foreach(var line in report)Log.Out("[MechaMotionQA] "+line);Application.Quit();}
     }
     static int entered,exited;
     static void CompleteTrial(World world,Camera camera,RenderTexture texture)
@@ -137,7 +138,38 @@ public sealed class MechaMotionQA : IModApi
         LowFrameBeamTrial(world,v,rig,camera,texture);
         WeaponEffectTrial(world,v,rig,camera,texture);
         FlightTrial(world,v,rig,camera,texture);
+        SoundLandingTrial(world,v,camera,texture);
         v.vehicleRB.gameObject.SetActive(false);
+    }
+    static void SoundLandingTrial(World world,EntityVehicle v,Camera camera,RenderTexture texture)
+    {
+        MechaLandingQA.Run(world,v);MechaAudioQA.Run(world,v);
+        LandingVisualTrial(world,v,camera,texture);
+    }
+    static void LandingVisualTrial(World world,EntityVehicle v,Camera camera,RenderTexture texture)
+    {
+        string label=Rules.Complete(v)?"complete":"prototype";MechaFX.Clear();
+        var receive=AccessTools.Method(typeof(MechaFX),"LandingContact");
+        var array=(Array)AccessTools.Field(typeof(MechaFX),"landings").GetValue(null);
+        var rig=Model.GetRig(v);rig.ResetPose();
+        try
+        {
+            receive.Invoke(null,new object[]{world,v.entityId,200000014,v.position,Vector3.up,.8f,Rules.StompRadius});
+            string initial=MechaFX.LandingDiagnostics();receive.Invoke(null,new object[]{world,v.entityId,200000014,v.position,Vector3.up,.8f,Rules.StompRadius});
+            Check(label+" landing presentation serial duplicate suppressed",initial==MechaFX.LandingDiagnostics());
+            var p=array.GetValue(0);var type=p.GetType();var root=(GameObject)AccessTools.Field(type,"Root").GetValue(p);
+            Check(label+" landing contains no collider, light or explosion particles",root.GetComponentsInChildren<Collider>(true).Length==0&&root.GetComponentsInChildren<Light>(true).Length==0&&root.GetComponentsInChildren<ParticleSystem>(true).Length==0);
+            AccessTools.Field(type,"Age").SetValue(p,.16f);AccessTools.Field(type,"BornFrame").SetValue(p,Time.frameCount-1);MechaFX.Update(0);
+            var ring=(LineRenderer)AccessTools.Field(type,"Ring").GetValue(p);var dust=(Mesh)AccessTools.Field(type,"Dust").GetValue(p);
+            var c=ring.startColor;Check(label+" landing gray 33-point mechanical wave and 10 dust quads",ring.positionCount==33&&dust.vertexCount==40&&Mathf.Abs(c.r-c.g)<.05f&&Mathf.Abs(c.g-c.b)<.05f);
+            camera.transform.position=rig.Mount.position+new Vector3(6,3.2f,7);camera.transform.LookAt(rig.Mount.position+Vector3.up*1.1f);camera.Render();
+            var previous=RenderTexture.active;RenderTexture.active=texture;var png=new Texture2D(texture.width,texture.height,TextureFormat.RGB24,false);png.ReadPixels(new Rect(0,0,texture.width,texture.height),0,0);png.Apply();File.WriteAllBytes(Path.Combine(output,label+"-mechanical-landing.png"),png.EncodeToPNG());RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(png);
+            for(int i=1;i<=12;i++)receive.Invoke(null,new object[]{world,v.entityId,200000014+i,v.position,Vector3.up,.8f,Rules.StompRadius});
+            Check(label+" landing presentation bounded at eight waves",MechaFX.LandingDiagnostics().Contains("active=8"));
+            foreach(var item in array)if(item!=null){AccessTools.Field(item.GetType(),"Age").SetValue(item,1f);AccessTools.Field(item.GetType(),"BornFrame").SetValue(item,Time.frameCount-1);}
+            MechaFX.Update(0);Check(label+" landing waves expire without retained visible effect",MechaFX.LandingDiagnostics().Contains("active=0"));
+        }
+        finally{MechaFX.Clear();Check(label+" landing effect cleanup releases all batches",array.Cast<object>().All(x=>x==null));}
     }
     static bool exitAvailable=true;
     static void FlightTrial(World world,EntityVehicle v,Model.Rig rig,Camera camera,RenderTexture texture)

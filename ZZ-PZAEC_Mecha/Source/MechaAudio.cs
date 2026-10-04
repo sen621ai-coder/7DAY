@@ -8,12 +8,22 @@ namespace PZAEC.Mecha
     {
         sealed class Voice
         {
-            public EntityVehicle Vehicle; public GameObject Root;public AudioSource Servo,Boost,Shot,Touch;
+            public EntityVehicle Vehicle; public GameObject Root;public AudioSource Servo,Boost,Charge,Shot,Weapon,Touch;
             public Model.Rig Rig;public Transform[] Joints;public Quaternion[] Rotations;public Vector3[] Positions;
-            public float ServoTarget,BoostTarget,JointActivity;
+            public float ServoTarget,BoostTarget,ChargeTarget,JointActivity,LastLandAt=-100;public bool PowerKnown,WasPowered;
         }
+        public sealed class CueAudit {public int Vehicle,Serial;public string Cue,Clip;public float At,Volume;public bool Contact;public Vector3 Point;}
+        struct CueKey:IEquatable<CueKey>
+        {public int Vehicle,Serial;public string Cue;public bool Equals(CueKey o){return Vehicle==o.Vehicle&&Serial==o.Serial&&Cue==o.Cue;}public override bool Equals(object o){return o is CueKey&&Equals((CueKey)o);}public override int GetHashCode(){return unchecked((Vehicle*397^Serial)*397^Cue.GetHashCode());}}
         static readonly Dictionary<int,Voice> voices=new Dictionary<int,Voice>();
         static readonly Dictionary<string,AudioClip> clips=new Dictionary<string,AudioClip>();
+        static readonly HashSet<CueKey> seen=new HashSet<CueKey>();static readonly Queue<CueKey> order=new Queue<CueKey>();
+        static readonly Dictionary<string,float> gates=new Dictionary<string,float>();static readonly List<CueAudit> recent=new List<CueAudit>(64);
+        public static int PlayedCueCount {get;private set;}public static int SuppressedCueCount {get;private set;}
+        static int presentationSerial=0x40000000;
+        public static int NextPresentationSerial(){if(presentationSerial==int.MaxValue)presentationSerial=0x40000000;return ++presentationSerial;}
+        public static CueAudit[] RecentCues(){return recent.ToArray();}
+        public static string ClipName(EntityVehicle v,string cue){if(cue=="sword")cue="sword-swing";return (Rules.Complete(v)?"complete-":"prototype-")+cue;}
         static AudioClip Clip(string name)
         {
             AudioClip c;if(clips.TryGetValue(name,out c))return c;
@@ -34,12 +44,44 @@ namespace PZAEC.Mecha
         static Voice Get(EntityVehicle v)
         {Voice a;if(voices.TryGetValue(v.entityId,out a)&&a.Vehicle==v&&a.Root!=null)return a;
             var root=new GameObject("MechaMechanicalAudio");root.transform.SetParent(v.transform,false);root.transform.localPosition=Vector3.up*1.5f;
-            if(a!=null&&a.Root!=null)UnityEngine.Object.Destroy(a.Root);
-            a=new Voice{Vehicle=v,Root=root};a.Servo=Source(root,"servo",true);a.Boost=Source(root,"boost",true);a.Shot=Source(root,null,false);var contact=new GameObject("MechaContactAudio");contact.transform.SetParent(root.transform,false);a.Touch=Source(contact,null,false);voices[v.entityId]=a;return a;}
+            if(a!=null&&a.Root!=null){a.Root.SetActive(false);UnityEngine.Object.Destroy(a.Root);}
+            a=new Voice{Vehicle=v,Root=root};a.Servo=Source(root,ClipName(v,"servo"),true);a.Boost=Source(root,ClipName(v,"thruster"),true);a.Charge=Source(root,Rules.Complete(v)?ClipName(v,"laser-charge"):null,true);a.Shot=Source(root,null,false);a.Weapon=Source(root,null,false);var contact=new GameObject("MechaContactAudio");contact.transform.SetParent(root.transform,false);a.Touch=Source(contact,null,false);voices[v.entityId]=a;return a;}
         static bool Audible {get {return GameManager.Instance!=null&&GameManager.Instance.World!=null&&GameManager.Instance.World.GetPrimaryPlayer()!=null;}}
         public static void OneShot(EntityVehicle v,string name,float volume)
-        {if(v!=null&&Audible)PlayShot(Get(v).Shot,name,volume);}
-        public static void Contact(EntityVehicle v,string name,Vector3 point,float volume){if(v==null||!Audible)return;var source=Get(v).Touch;source.transform.position=point-Origin.position;PlayShot(source,name,volume);}
+        {Event(v,name,-1,volume);}
+        public static void Contact(EntityVehicle v,string name,Vector3 point,float volume){ContactEvent(v,name,-1,point,volume);}
+        // Event serials deduplicate replayed snapshots without silencing different
+        // stages of the same action. Negative serials use only a short retrigger gate.
+        public static void Event(EntityVehicle v,string cue,int serial=-1,float volume=1f)
+        {Emit(v,cue,serial,Vector3.zero,false,volume);}
+        public static void ContactEvent(EntityVehicle v,string cue,int serial,Vector3 point,float volume=1f)
+        {Emit(v,cue,serial,point,true,volume);}
+        public static void LandCue(EntityVehicle v,Vector3 point,float strength,int serial=-1)
+        {
+            if(v==null||!Audible)return;var voice=Get(v);
+            // Physics event and delayed visual fallback can describe one landing.
+            if(Time.time-voice.LastLandAt<.7f){SuppressedCueCount++;return;}voice.LastLandAt=Time.time;
+            ContactEvent(v,"land",serial,point,Mathf.Lerp(.45f,.90f,Mathf.Clamp01(strength)));
+        }
+        public static void StopCharge(EntityVehicle v)
+        {Voice a;if(v==null||!voices.TryGetValue(v.entityId,out a))return;a.ChargeTarget=0;a.Charge.volume=0;a.Charge.Stop();}
+        public static void StopChannels(EntityVehicle v)
+        {
+            Voice a;if(v==null||!voices.TryGetValue(v.entityId,out a))return;
+            a.ServoTarget=a.BoostTarget=a.ChargeTarget=a.JointActivity=0;
+            foreach(var source in new[]{a.Servo,a.Boost,a.Charge}){source.volume=0;source.Stop();}
+            a.Joints=null; // A cancelled ceremony may snap to rest; that is not a new actuator movement.
+        }
+        static void Emit(EntityVehicle v,string cue,int serial,Vector3 point,bool contact,float volume)
+        {
+            if(v==null||!Audible||string.IsNullOrEmpty(cue)||volume<=0)return;if(cue=="sword")cue="sword-swing";
+            if(serial>=0){var key=new CueKey{Vehicle=v.entityId,Serial=serial,Cue=cue};if(!seen.Add(key)){SuppressedCueCount++;return;}order.Enqueue(key);while(order.Count>512)seen.Remove(order.Dequeue());}
+            else{string key=v.entityId+"/"+cue;float at;if(gates.TryGetValue(key,out at)&&Time.time-at<.055f){SuppressedCueCount++;return;}gates[key]=Time.time;}
+            var voice=Get(v);bool weapon=cue=="head-laser"||cue=="palm-laser"||cue=="missile-release"||cue=="shield";
+            var source=contact?voice.Touch:weapon?voice.Weapon:voice.Shot;if(contact)source.transform.position=point-Origin.position;
+            string asset=ClipName(v,cue);PlayShot(source,asset,Mathf.Clamp01(volume));PlayedCueCount++;
+            if(recent.Count==64)recent.RemoveAt(0);recent.Add(new CueAudit{Vehicle=v.entityId,Serial=serial,Cue=cue,Clip=asset,At=Time.time,Volume=Mathf.Clamp01(volume),Contact=contact,Point=point});
+        }
         static void PlayShot(AudioSource a,string name,float volume){a.volume=1;a.PlayOneShot(Clip(name),volume);}
         static void Loop(AudioSource a,float target)
         {a.volume=Mathf.MoveTowards(a.volume,target,Time.deltaTime*(target<=0?8:2));if(target>0&&!a.isPlaying)a.Play();if(target<=0&&a.volume<=.001f){a.volume=0;a.Stop();}}
@@ -66,19 +108,23 @@ namespace PZAEC.Mecha
         }
         public static void Update(EntityVehicle v,float moving,bool ceremony)
         {if(!Audible)return;var a=Get(v);var s=Locomotion.Get(v);bool powered=Locomotion.Powered(v);
+            if(a.PowerKnown&&a.WasPowered!=powered)Event(v,powered?"power-on":"power-off",-1,powered?.55f:.40f);a.PowerKnown=true;a.WasPowered=powered;
             a.JointActivity=JointMotion(v,a);a.ServoTarget=(powered||ceremony)?Mathf.Max(Mathf.Clamp01(moving),a.JointActivity)*.35f:0;
             float speed=Mathf.Abs(s.VisualForward);if(v.vehicleRB!=null)speed=Mathf.Max(speed,Vector3.ProjectOnPlane(v.vehicleRB.velocity,Vector3.up).magnitude);
             a.BoostTarget=powered?(Flight.Active(s)?(s.Boost?.85f:.45f):s.HoverOn?.35f:s.Boost&&speed>.25f?.55f:0):0;
-            Loop(a.Servo,a.ServoTarget);Loop(a.Boost,a.BoostTarget);}
+            var combat=Rules.Complete(v)?Samurai.Get(v):null;
+            a.ChargeTarget=powered&&!ceremony&&combat!=null&&!combat.BeamSpent?Mathf.Clamp01(combat.LaserCharge)*.40f:0;
+            a.Charge.pitch=.9f+(combat!=null?Mathf.Clamp01(combat.LaserCharge)*.35f:0);
+            Loop(a.Servo,a.ServoTarget);Loop(a.Boost,a.BoostTarget);Loop(a.Charge,a.ChargeTarget);}
         public static string Diagnostics(EntityVehicle v)
         {
             Voice a;if(v==null||!voices.TryGetValue(v.entityId,out a))return "mechanical audio not created";
-            return "servoTarget="+a.ServoTarget+" servoPlaying="+a.Servo.isPlaying+" servoVolume="+a.Servo.volume+" jointActivity="+a.JointActivity+" boostTarget="+a.BoostTarget+" boostPlaying="+a.Boost.isPlaying+" boostVolume="+a.Boost.volume;
+            return "servoTarget="+a.ServoTarget+" servoPlaying="+a.Servo.isPlaying+" servoVolume="+a.Servo.volume+" jointActivity="+a.JointActivity+" boostTarget="+a.BoostTarget+" boostPlaying="+a.Boost.isPlaying+" boostVolume="+a.Boost.volume+" chargeTarget="+a.ChargeTarget+" chargePlaying="+a.Charge.isPlaying+" cues="+PlayedCueCount+" replaySuppressed="+SuppressedCueCount;
         }
         public static void Cleanup(World world)
-        {var ids=new List<int>();foreach(var p in voices)if(p.Value.Vehicle==null||world.GetEntity(p.Key)!=p.Value.Vehicle){if(p.Value.Root!=null)UnityEngine.Object.Destroy(p.Value.Root);ids.Add(p.Key);}foreach(int id in ids)voices.Remove(id);RobotPresentation.Cleanup(world);}
+        {var ids=new List<int>();foreach(var p in voices)if(p.Value.Vehicle==null||world.GetEntity(p.Key)!=p.Value.Vehicle){if(p.Value.Root!=null){p.Value.Root.SetActive(false);UnityEngine.Object.Destroy(p.Value.Root);}ids.Add(p.Key);}foreach(int id in ids)voices.Remove(id);RobotPresentation.Cleanup(world);}
         public static void Clear()
-        {foreach(var a in voices.Values)if(a.Root!=null)UnityEngine.Object.Destroy(a.Root);voices.Clear();foreach(var c in clips.Values)UnityEngine.Object.Destroy(c);clips.Clear();RobotPresentation.Clear();}
+        {foreach(var a in voices.Values)if(a.Root!=null){a.Root.SetActive(false);UnityEngine.Object.Destroy(a.Root);}voices.Clear();foreach(var c in clips.Values)UnityEngine.Object.Destroy(c);clips.Clear();seen.Clear();order.Clear();gates.Clear();recent.Clear();PlayedCueCount=SuppressedCueCount=0;RobotPresentation.Clear();}
     }
     public static class RobotPresentation
     {

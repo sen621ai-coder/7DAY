@@ -6,7 +6,7 @@ namespace PZAEC.Mecha
     public static class Gait
     {
         sealed class Leg { public Vector3 Home, Foot, From, To, Normal=Vector3.up; public float Age,Duration; public bool Swing; }
-        sealed class Walker { public EntityVehicle Vehicle; public Leg[] Legs={new Leg(),new Leg()}; public Vector3 LastPosition,Velocity;public float LastYaw,Lean,RecoilAt=-100,LastLanding=-100,LastJump=-100,Travel;public int Next;public bool WasAir; }
+        sealed class Walker { public EntityVehicle Vehicle; public Leg[] Legs={new Leg(),new Leg()}; public Vector3 LastPosition,Velocity;public float LastYaw,Lean,RecoilAt=-100,LastLanding=-100,LastJump=-100,Travel,PendingLanding=-100;public int Next;public bool WasAir; }
         static readonly Dictionary<int,Walker> walkers=new Dictionary<int,Walker>();
         public static void Recoil(int id) { Walker w;if(walkers.TryGetValue(id,out w))w.RecoilAt=Time.time; }
         public static bool Ground(EntityVehicle v,Vector3 at,out Vector3 p)
@@ -37,7 +37,10 @@ namespace PZAEC.Mecha
             rig.ResetPose();
             Walker w;if(!walkers.TryGetValue(v.entityId,out w)||w.Vehicle!=v)
             {
-                w=new Walker{Vehicle=v,LastPosition=v.position,LastYaw=Weapons.BodyRotation(v).eulerAngles.y};
+                // A renderer created halfway through an action does not replay
+                // the actor's old jump / landing timestamps.
+                var initial=Locomotion.Get(v);
+                w=new Walker{Vehicle=v,LastPosition=v.position,LastYaw=Weapons.BodyRotation(v).eulerAngles.y,LastLanding=initial.LandingAt,LastJump=initial.JumpAt};
                 for(int i=0;i<2;i++){var foot=i==0?rig.FootL:rig.FootR;w.Legs[i].Home=rig.Mount.InverseTransformPoint(foot.position);w.Legs[i].Foot=foot.position+Origin.position;}
                 walkers[v.entityId]=w;
             }
@@ -92,7 +95,7 @@ namespace PZAEC.Mecha
                     leg.Age+=dt;float t=Mathf.Clamp01(leg.Age/leg.Duration);float ease=t*t*(3-2*t);
                     leg.Foot=Vector3.Lerp(leg.From,leg.To,ease)+Vector3.up*(Mathf.Sin(t*Mathf.PI)*.2f);
                     activity=1;
-                    if(t>=1){leg.Swing=false;leg.Foot=leg.To;leg.Normal=GroundNormal(v,leg.Foot);w.Next=1-i;RobotAudio.OneShot(v,i==0?"step-left":"step-right",.85f);}
+                    if(t>=1){leg.Swing=false;leg.Foot=leg.To;leg.Normal=GroundNormal(v,leg.Foot);w.Next=1-i;RobotAudio.ContactEvent(v,i==0?"step-left":"step-right",RobotAudio.NextPresentationSerial(),leg.Foot,.85f);}
                 }
                 else if(!w.Legs[1-i].Swing)
                 {
@@ -109,13 +112,19 @@ namespace PZAEC.Mecha
                 Solve(rig,i,leg.Foot-Origin.position,leg.Normal);
             }
             w.WasAir=airborne||state.Blend>.05f;
-            if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;RobotAudio.OneShot(v,"land",.9f);}
-            if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.OneShot(v,"jump",.6f);}
+            if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;w.PendingLanding=state.LandingEventExpected?-100:Time.time;}
+            // Heavy landings are sounded only by accepted network event 19,
+            // even if it arrives after a long round trip. A
+            // quiet controlled landing has no damage event, so give the
+            // authority time to arrive before its small contact fallback.
+            if(w.PendingLanding>=0&&Time.time-w.PendingLanding>=.25f)
+            {if(!MechaFX.LandingRecently(v.entityId,.8f))RobotAudio.LandCue(v,v.position,.25f);w.PendingLanding=-100;}
+            if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.Event(v,"jump",RobotAudio.NextPresentationSerial(),.6f);}
             if(Rules.Complete(v)){SwordMotion.CacheFeet(rig,w.Legs[0].Foot-Origin.position,w.Legs[1].Foot-Origin.position,w.Legs[0].Normal,w.Legs[1].Normal);SwordMotion.SafePose(v,rig);}
             CombatFeedback.Blade(v,rig);RobotAudio.Update(v,activity,show);
             RobotPresentation.Update(v,rig,state.Blend,Boarding.Hatch(v));
         }
-        public static void Forget(EntityVehicle v){walkers.Remove(v.entityId);}
-        public static void Clear(){walkers.Clear();}
+        public static void Forget(EntityVehicle v){RobotAudio.StopChannels(v);walkers.Remove(v.entityId);}
+        public static void Clear(){foreach(var w in walkers.Values)RobotAudio.StopChannels(w.Vehicle);walkers.Clear();}
     }
 }

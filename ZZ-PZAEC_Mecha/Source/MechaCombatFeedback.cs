@@ -43,7 +43,7 @@ namespace PZAEC.Mecha
             int index=0;float oldest=float.MaxValue;for(int i=0;i<impacts.Length;i++){if(impacts[i]==null||impacts[i].Until<Time.time){index=i;break;}if(impacts[i].Until<oldest){oldest=impacts[i].Until;index=i;}}
             var p=impacts[index];if(p==null){p=new Impact();impacts[index]=p;}
             p.Point=point;p.Normal=normal.sqrMagnitude>.001f?normal.normalized:Vector3.up;p.Kind=kind;p.Vehicle=vehicle;p.Until=Time.time+(kind==BeamImpact?.28f:.18f);
-            if(v!=null)RobotAudio.Contact(v,kind==BeamImpact?"laser-impact":"sword-impact",point,damage>0?.4f:.25f);
+            if(v!=null)RobotAudio.ContactEvent(v,kind==BeamImpact?"laser-impact":"sword-impact",serial,point,damage>0?.4f:.25f);
         }
         public static void Blade(EntityVehicle v,Model.Rig r)
         {
