@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -12,6 +12,10 @@ namespace PZAEC.Mecha
             public EntityVehicle Vehicle;
             public bool HoverOn, Boost, JumpWasHeld, Grounded=true, Toggle, Descend, Jump, InputReady;
             public float ChargeStart=-1, Charge, NextJump, AirSince=-1, LastInput=-100, LastSync=-100, LastPacket=-100, LandingAt=-100, JumpAt=-100, LastTime, Blend;
+            public Flight.Phase FlightMode;
+            public float HoldY, FlightAge, ContactTime, VerticalInput, WingBlend, FlightHeight=-1, VisualForward, VisualTurn, FlightLean, FlightBank, FlightSweep, LastHeightAt=-100;
+            public bool ControlledLanding;
+            public int FlightActor=-1;
             public int Sequence, Actor=-1;
             public WheelCollider[] Wheels;
         }
@@ -31,7 +35,10 @@ namespace PZAEC.Mecha
         {return v!=null&&v.hasDriver&&!v.IsDead()&&v.IsEngineRunning&&v.vehicle.GetHealth()>0&&(v.vehicle.GetFuelLevel()>0||EntityVehicle.VehicleFuelUsageModifier==0);}
         public static bool Receive(EntityVehicle v,int actor,int sequence,Vector3 state)
         {
-            if(!Weapons.IsMecha(v)||!Weapons.Finite(state.x)||!Weapons.Finite(state.y)||state.x<0||state.x>7)return false;
+            if(!Weapons.IsMecha(v)||!Weapons.Finite(state.x)||!Weapons.Finite(state.y)||!Weapons.Finite(state.z)||state.x<0||state.x>127||state.x!=(int)state.x||state.y<0||state.y>1||Mathf.Abs(state.z)>1)return false;
+            int bits=(int)state.x;
+            bool flight=(bits&8)!=0,landing=(bits&16)!=0,takeoff=(bits&32)!=0,fault=(bits&64)!=0;
+            if((!Rules.Complete(v)&&bits>7)||(landing&&!flight)||(takeoff&&!flight)||(landing&&takeoff)||(flight&&fault)||((flight||fault)&&(bits&1)!=0)||(!flight&&state.z!=0)||((flight||fault)&&state.y!=0)||((landing||takeoff||fault)&&(bits&2)!=0))return false;
             var s=Get(v); if(s.Actor==actor&&sequence<=s.Sequence)return false;
             s.Actor=actor;s.Sequence=sequence;s.LastPacket=Time.time;
             // A local physics owner already has more recent input than its echo.
@@ -39,14 +46,17 @@ namespace PZAEC.Mecha
             int flags=(int)state.x;bool ground=(flags&4)!=0;
             if(!s.Grounded&&ground)s.LandingAt=Time.time;
             if(s.Grounded&&!ground)s.JumpAt=Time.time;
-            s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=Mathf.Clamp01(state.y);return true;
+            s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=state.y;
+            s.FlightMode=fault?Flight.Phase.PowerLost:landing?Flight.Phase.Landing:takeoff?Flight.Phase.Takeoff:flight?Flight.Phase.Cruise:Flight.Phase.Ground;
+            s.VerticalInput=state.z;return true;
         }
         public static void Tick(World world)
         {
             var remove=new List<int>();
             foreach(var pair in moves){var s=pair.Value;if(s.Vehicle==null||world.GetEntity(pair.Key)!=s.Vehicle){remove.Add(pair.Key);continue;}
-                if(s.Vehicle.isEntityRemote&&Time.time-s.LastPacket>1f){s.HoverOn=s.Boost=false;s.Charge=0;}
-                s.Blend=Mathf.MoveTowards(s.Blend,(s.HoverOn||s.Boost)?1:0,Time.deltaTime/.35f);
+                if(s.Vehicle.isEntityRemote&&Time.time-s.LastPacket>1f){bool flying=Flight.AirPose(s);s.HoverOn=s.Boost=false;s.Charge=0;s.FlightMode=!s.Grounded&&flying?Flight.Phase.PowerLost:Flight.Phase.Ground;s.VerticalInput=0;}
+                s.WingBlend=Mathf.MoveTowards(s.WingBlend,Flight.AirPose(s)?1:0,Time.deltaTime/(Flight.AirPose(s)?Rules.FlightDeploySeconds:1f));
+                s.Blend=Mathf.MoveTowards(s.Blend,(s.HoverOn||s.Boost||Flight.Active(s))?1:0,Time.deltaTime/.35f);
             }
             foreach(int id in remove){var old=moves[id].Vehicle;if(old!=null){Gait.Forget(old);Model.Forget(old);}moves.Remove(id);}
         }
@@ -55,23 +65,28 @@ namespace PZAEC.Mecha
             var v=__instance;if(!Weapons.IsMecha(v)||v.isEntityRemote)return;
             var rb=v.vehicleRB;if(rb==null||rb.isKinematic||!v.RBActive)return;
             var s=Get(v);float dt=Time.fixedDeltaTime;bool grounded=v.GetWheelsOnGround()>0;
+            if(Rules.Complete(v))grounded|=Flight.HullSupported(rb);
             var world=GameManager.Instance.World;var driver=v.GetAttached(0) as EntityPlayerLocal;
-            bool input=s.InputReady&&Time.time-s.LastInput<.25f&&driver!=null&&Weapons.UIReady(driver)&&!Boarding.Active(v);
-            bool powered=Powered(v)&&input&&v.timeInWater<=0;
+            bool input=s.InputReady&&Time.time-s.LastInput<.5f&&driver!=null&&Weapons.UIReady(driver)&&!Boarding.Active(v);
+            if(Rules.Complete(v)){if(Flight.Step(v,s,grounded,input,dt))return;input&=s.InputReady;}
+            bool sustain=Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0;
+            bool powered=sustain&&input;
+            if(!input){s.Toggle=s.Descend=s.Jump=s.JumpWasHeld=false;s.Charge=0;s.ChargeStart=-1;}
             var movement=v.movementInput;float throttle=powered&&movement!=null?movement.moveForward:0,steer=powered&&movement!=null?movement.moveStrafe:0;
             // XML disables native drive/steer. Colliders provide support only.
             PrepareSupport(s.Wheels,Mathf.Abs(throttle)>.01f||Mathf.Abs(steer)>.01f||rb.velocity.sqrMagnitude>.01f);
-            if(!powered){s.HoverOn=false;s.Charge=0;s.ChargeStart=-1;s.Jump=false;s.Toggle=false;}
+            if(!sustain){s.HoverOn=false;s.Charge=0;s.ChargeStart=-1;s.Jump=false;s.Toggle=false;}
             if(s.Toggle){s.HoverOn=powered&&!s.HoverOn;s.Toggle=false;}
             if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;}
             if(grounded&&!s.Grounded){s.LandingAt=Time.time;if(s.AirSince>=0&&Time.time-s.AirSince>=Rules.StompAirborneSeconds)Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down,v.position);s.AirSince=-1;}
             s.Grounded=grounded;
             var forward=Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized;
             var planar=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);float speed=planar.magnitude;
-            bool boost=powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
+            bool boost=!Samurai.Braced(v)&&powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
             s.Boost=boost||(s.Boost&&powered&&grounded&&speed>4.2f&&!s.HoverOn);
             float target=throttle>=0?throttle*(boost?13.5f:4f):throttle*2f;
             if(s.HoverOn)target=throttle*Rules.HoverSpeed;
+            if(Samurai.Braced(v)){target=Mathf.Clamp(target,-1.2f,1.2f);steer*=.55f;s.Boost=false;}
             if(grounded||s.HoverOn)
             {
                 var normal=Vector3.up;
@@ -95,9 +110,16 @@ namespace PZAEC.Mecha
                 rb.AddForce(Vector3.up*(charge*Rules.JumpMaxSpeed),ForceMode.VelocityChange);s.NextJump=Time.time+Rules.JumpCooldown;s.ChargeStart=-1;
             }
             s.JumpWasHeld=s.Jump;
-            if(Time.time-s.LastSync>=.2f){s.LastSync=Time.time;Weapons.SendLocalIntent(v,Weapons.Motion,new Vector3((s.HoverOn?1:0)|(s.Boost?2:0)|(grounded?4:0),s.Charge,0),Vector3.zero);}
+            Sync(v,s);
             if(powered&&grounded&&speed>=Rules.TrampleSpeedThreshold&&Time.time-s.LastTime>=Rules.TrampleTickSeconds){s.LastTime=Time.time;Weapons.SendLocalIntent(v,Weapons.Trample,Vector3.down,v.position);}
         }
+        public static Vector3 Snapshot(MoveState s)
+        {
+            int flags=(s.HoverOn?1:0)|(s.Boost?2:0)|(s.Grounded?4:0)|(Flight.Active(s)?8:0)|(s.FlightMode==Flight.Phase.Landing?16:0)|(s.FlightMode==Flight.Phase.Takeoff?32:0)|(s.FlightMode==Flight.Phase.PowerLost?64:0);
+            return new Vector3(flags,s.Charge,Flight.Active(s)?s.VerticalInput:0);
+        }
+        public static void Sync(EntityVehicle v,MoveState s)
+        {if(Time.time-s.LastSync>=.2f){s.LastSync=Time.time;Weapons.SendLocalIntent(v,Weapons.Motion,Snapshot(s),Vector3.zero);}}
         // PhysX vehicle sticky-tire constraints can lock a stationary wheel even
         // with zero tire friction. A negligible 1Nm wake torque releases that
         // constraint; propulsion/braking/turning are still provided by ApplyDrive.
@@ -118,7 +140,7 @@ namespace PZAEC.Mecha
             var tilt=Vector3.Cross(rb.rotation*Vector3.up,Vector3.up);var rock=rb.angularVelocity-Vector3.up*rb.angularVelocity.y;
             AngularAcceleration(rb,Vector3.ClampMagnitude(tilt*10f-rock*3f,5f));
         }
-        static void AngularAcceleration(Rigidbody rb,Vector3 acceleration)
+        public static void AngularAcceleration(Rigidbody rb,Vector3 acceleration)
         {var axes=rb.rotation*rb.inertiaTensorRotation;rb.AddTorque(axes*Vector3.Scale(Quaternion.Inverse(axes)*acceleration,rb.inertiaTensor),ForceMode.Force);}
         public static void Clear(){moves.Clear();}
     }

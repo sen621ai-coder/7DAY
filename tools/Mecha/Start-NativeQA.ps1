@@ -5,7 +5,9 @@
 param(
     [int]$TimeoutSeconds = 300,
     [switch]$KeepRunning,
-    [switch]$MotionProbe
+    [switch]$MotionProbe,
+    [string]$ModRoot,
+    [string]$ProbeSource
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path (Split-Path $PSScriptRoot); $game = Split-Path $root
@@ -23,9 +25,11 @@ foreach ($dir in Get-ChildItem -LiteralPath $root -Directory) {
     Copy-Item -LiteralPath (Join-Path $dir.FullName 'ModInfo.xml') -Destination $shadow
 }
 $target = Join-Path $mods 'ZZ-PZAEC_Mecha'
-Copy-Item -LiteralPath (Join-Path $root 'ZZ-PZAEC_Mecha') -Destination $target -Recurse
+if(!$ModRoot){$ModRoot=Join-Path $root 'ZZ-PZAEC_Mecha'}
+Copy-Item -LiteralPath $ModRoot -Destination $target -Recurse
 if($MotionProbe) {
-    & (Join-Path $PSScriptRoot 'Build.ps1') -OutputPath (Join-Path $target 'PZAEC.Mecha.dll') -ExtraSources (Join-Path $PSScriptRoot 'MotionNativeQA.cs')
+    if(!$ProbeSource){$ProbeSource=Join-Path $PSScriptRoot 'MotionNativeQA.cs'}
+    & (Join-Path $PSScriptRoot 'Build.ps1') -OutputPath (Join-Path $target 'PZAEC.Mecha.dll') -SourceRoot (Join-Path $target 'Source') -ExtraSources $ProbeSource
 }
 # The isolated world lacks AEC endgame items; stub missing recipe ingredients
 # (M1 NativeQA pattern). Live recipes stay exactly as shipped.
@@ -57,12 +61,14 @@ if($MotionProbe){$arguments += '-mechaMotionQA'}
 $process = Start-Process -FilePath (Join-Path $game '7DaysToDie.exe') -WorkingDirectory $game -WindowStyle Hidden -PassThru -ArgumentList $arguments
 [pscustomobject]@{ ProcessId = $process.Id; Log = $log; QaRoot = $qa } | ConvertTo-Json | Set-Content (Join-Path $root '.local-tests/MechaNativeQA/session.json')
 
+[xml]$expectedInfo = Get-Content (Join-Path $target 'ModInfo.xml')
+$expectedLoader = 'Loaded Mod: ' + $expectedInfo.xml.Name.value + ' (' + $expectedInfo.xml.Version.value + ')'
 $loaded = $false; $installed = $false; $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
 while ((Get-Date) -lt $deadline -and -not $process.HasExited) {
     Start-Sleep -Seconds 5
     if (Test-Path $log) {
         $text = Get-Content $log -Raw -ErrorAction SilentlyContinue
-        if ($text -match 'Loaded Mod: PZAEC_Mecha') { $loaded = $true }
+        if ($text.Contains($expectedLoader)) { $loaded = $true }
         if ($text -match '\[Mecha\] Combat Robot biped installed') { $installed = $true }
         if ($loaded -and $installed -and (!$MotionProbe -or $text -match '\[MechaMotionQA\] COMPLETE')) { break }
     }

@@ -5,7 +5,7 @@ stem='samurai_style_gundam_mecha';doc=json.loads((RES/(stem+'_rig.json')).read_t
 assert hashlib.sha256((RES/(stem+'.glb')).read_bytes()).hexdigest()==doc['sourceSha256']
 assert doc['skinned'] and doc['sourceParts']==17 and doc['sourceTriangles']==2000000
 assert 150000<doc['triangles']<250000
-assert len({p['node'] for p in doc['parts']})==17
+assert len(doc.get('sourceNodes',list({p['node'] for p in doc['parts']})))==17
 count=0
 for p in doc['parts']:
     assert p['offset']+p['vertices']*48+p['indices']*4<=len(blob)
@@ -19,6 +19,25 @@ for p in doc['parts']:
     assert max(indices)<p['vertices'];count+=len(indices)//3
 assert count==doc['triangles']
 print('PASS full source identity, 17 chunks, skin weights, normals, optimized geometry and indices')
+joints={j['name']:i for i,j in enumerate(doc['joints'])}
+for name in ['WingL','WingR']:
+    joint=doc['joints'][joints[name]]
+    assert joint['parent']=='Backpack'
+    assert joint['position'][0]*(-1 if name=='WingL' else 1)>0
+counts={joints['WingL']:0,joints['WingR']:0}
+for p in doc['parts']:
+    records=list(struct.iter_unpack('<8f2i2f',blob[p['offset']:p['offset']+p['vertices']*48]))
+    ix=struct.unpack_from('<'+'I'*p['indices'],blob,p['offset']+p['vertices']*48)
+    for record in records:
+        if record[8] in counts:
+            assert record[8]==record[9] and record[10:]==(1.0,0.0)
+            counts[record[8]]+=1
+    for i in range(0,len(ix),3):
+        bones=[records[ix[i+k]][8] for k in range(3)]
+        if any(b in counts for b in bones):assert bones[0]==bones[1]==bones[2],('split wing triangle',p['nodeName'],bones)
+assert min(counts.values())>500,counts
+print('PASS independent rigid wing roots, complete face binding and real wing geometry',counts)
+
 items=E.parse(MOD/'Config/items.xml').getroot().find('append');items={x.get('name'):x for x in items}
 assert items['vehicleCombatRobotCompletePlaceable'].find(".//passive_effect[@name='DegradationMax']").get('value')=='3000000'
 vehicles=E.parse(MOD/'Config/vehicles.xml').getroot().find('append');vehicles={x.get('name'):x for x in vehicles}
@@ -27,7 +46,8 @@ recipes=E.parse(MOD/'Config/recipes.xml').getroot().find('append');recipes={x.ge
 for key in ['vehicleCombatRobotCompleteChassis','vehicleCombatRobotCompletePlaceable']:
     assert key in recipes and key in items
 print('PASS independent recipes, 3M hull and 450L tank')
-backup=ROOT/'.local-tests/Mecha-0.7.3-before-complete/ZZ-PZAEC_Mecha'
+baselines=sorted((ROOT/'.local-tests').glob('Mecha-before-0.12.0-*/ZZ-PZAEC_Mecha'))
+backup=baselines[-1] if baselines else ROOT/'.local-tests/Mecha-0.7.3-before-complete/ZZ-PZAEC_Mecha'
 def normalized(e):return e.tag,sorted(e.attrib.items()),(e.text or '').strip(),[normalized(c) for c in e]
 if backup.exists():
     for name in ['items.xml','recipes.xml','vehicles.xml','entityclasses.xml']:

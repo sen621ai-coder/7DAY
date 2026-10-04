@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -12,8 +12,9 @@ namespace PZAEC.Mecha
     public static class RobotRig
     {
         sealed class Joint { public string name, parent; public float[] position; }
-        sealed class Part { public int node, primitive, material, offset, vertices, indices; public string nodeName, joint; }
-        sealed class Document { public string sourceSha256; public int sourceParts, triangles; public bool skinned; public Joint[] joints; public Part[] parts; }
+        sealed class Part { public int node, primitive, material, offset, vertices, indices; public string nodeName, joint,role; }
+        sealed class Document { public string sourceSha256; public int sourceParts, triangles; public bool skinned; public int[] sourceNodes; public Joint[] joints; public Part[] parts; }
+        static string Role(string joint){return joint.StartsWith("Shoulder")||joint.StartsWith("Elbow")||joint.StartsWith("Hand")?"Arm"+joint[joint.Length-1]:joint;}
         static Vector3 V(float[] p) { return new Vector3(p[0],p[1],p[2]); }
         public static void Build(Transform mount, Material[] materials, int layer,string stem="combat_robot")
         {
@@ -50,10 +51,11 @@ namespace PZAEC.Mecha
                 if(doc.skinned){var bones=new Transform[doc.joints.Length];var bind=new Matrix4x4[bones.Length];for(int j=0;j<bones.Length;j++){bones[j]=joints[doc.joints[j].name];bind[j]=bones[j].worldToLocalMatrix*mount.localToWorldMatrix;}mesh.boneWeights=weights;mesh.bindposes=bind;var skin=go.AddComponent<SkinnedMeshRenderer>();skin.sharedMesh=mesh;skin.bones=bones;skin.rootBone=mount;skin.localBounds=new Bounds(new Vector3(0,1.6f,0),new Vector3(6,6,6));skin.quality=SkinQuality.Bone2;renderer=skin;}
                 else{go.AddComponent<MeshFilter>().sharedMesh=mesh;renderer=go.AddComponent<MeshRenderer>();}
                 renderer.sharedMaterial=materials[p.material]; renderer.shadowCastingMode=ShadowCastingMode.On;
+                go.AddComponent<MechaRenderPart>().Role=p.role??Role(p.joint);
                 triangles+=ix.Length/3; sourceNodes.Add(p.node);
             }
-            if(sourceNodes.Count!=doc.sourceParts || triangles!=doc.triangles) throw new InvalidDataException("Incomplete mecha rig");
-            Log.Out("[MechaRig] sourceParts="+sourceNodes.Count+" rigidParts="+doc.parts.Length+" triangles="+triangles);
+            if((doc.sourceNodes!=null?doc.sourceNodes.Length:sourceNodes.Count)!=doc.sourceParts || triangles!=doc.triangles) throw new InvalidDataException("Incomplete mecha rig");
+            Log.Out("[MechaRig] sourceParts="+doc.sourceParts+" rigidParts="+doc.parts.Length+" triangles="+triangles);
         }
     }
 }

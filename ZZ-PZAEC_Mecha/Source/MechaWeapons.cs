@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -107,7 +107,7 @@ namespace PZAEC.Mecha
         {
             states.Clear(); missiles.Clear(); leases.Clear(); currentWorld = null;
             nextInput = nextAim = 0; inputVehicle = -1; inputHeld = inputMissileHeld = false;
-            MechaFX.Clear(); Gait.Clear(); Deploy.Clear(); Optics.Clear(); CrewVisibility.Clear(); Boarding.Clear(); Locomotion.Clear(); RobotAudio.Clear(); Model.ClearRuntime(); MechaArmor.ClearTravelProtection();
+            Samurai.Clear(); CombatFeedback.Clear(); MechaFX.Clear(); Gait.Clear(); Deploy.Clear(); Optics.Clear(); CrewVisibility.Clear(); Boarding.Clear(); Locomotion.Clear(); RobotAudio.Clear(); Model.ClearRuntime(); MechaArmor.ClearTravelProtection();
         }
 
         static void EnsureWorld(World world) { if (world != currentWorld) { Clear(); currentWorld = world; } }
@@ -139,7 +139,7 @@ namespace PZAEC.Mecha
         }
 
         public static Vector3 MuzzleWorld(Model.Rig rig,EntityVehicle v)
-        { return rig!=null&&rig.HandR!=null ? rig.HandR.position+rig.HandR.forward*.65f+Origin.position : EyeWorld(rig,v); }
+        { return Rules.Complete(v)?Samurai.Muzzle(rig,v):rig!=null&&rig.HandR!=null ? rig.HandR.position+rig.HandR.forward*.65f+Origin.position : EyeWorld(rig,v); }
 
         static bool ReadyOperator(State state, int actor)
         {
@@ -210,7 +210,13 @@ namespace PZAEC.Mecha
             var aimPoint=origin+view*Rules.BeamRange;
             if(Trace(state.Vehicle,origin,view,Rules.BeamRange,out var aimHit))aimPoint=aimHit.hit.pos;
             direction = AimFromMuzzle(pivot,aimPoint,view);
-            if (!InArc(state.Vehicle, direction, 90f)) return 1;
+            if(Rules.Complete(state.Vehicle))
+            {
+                if(!Samurai.Arc(Quaternion.Inverse(BodyRotation(state.Vehicle))*direction))return 1;
+                if(rig!=null&&rig.Head!=null&&Vector3.Angle(rig.Head.forward,direction)>5)return 1;
+                if(Samurai.ShieldObstructs(rig,pivot,direction))return 2;
+            }
+            else if (!InArc(state.Vehicle, direction, 90f)) return 1;
             var muzzle = pivot + direction * Rules.MuzzleOffset;
             if (Trace(state.Vehicle, pivot, direction, Rules.MuzzleOffset, out var obstruction)) return 2;
             return 0;
@@ -221,10 +227,11 @@ namespace PZAEC.Mecha
 
         public static void Request(World world, int actor, int vehicleId, byte op, Vector3 direction, Vector3 origin, int sequence)
         {
-            if (!enabled || !Server || world == null || op > BoardControl) return;
+            if (!enabled || !Server || world == null || op > Samurai.Cancel) return;
             EnsureWorld(world);
             var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
             if (!IsMecha(vehicle)) return;
+            if(op>=Samurai.InputIdle){Samurai.Request(vehicle,actor,sequence,op,direction,origin,Time.time);return;}
             if(op==SwitchMelee||op==MeleeSweep||op==MeleeHeavy)return; // Reserved old protocol IDs, disabled server-side.
             if(op==BoardControl){if(Finite(direction.x))Boarding.Request(world,vehicle,actor,(int)direction.x);return;}
             if(op==SkipBoard&&Boarding.Owned(vehicle,actor)){Boarding.Skip(vehicle);return;}
@@ -442,20 +449,23 @@ namespace PZAEC.Mecha
         static void FireBeam(State state, int actor, float now)
         {
             if (now < state.NextBeam) return;
+            if(Rules.Complete(state.Vehicle)&&!Samurai.LaserReady(state,now))return;
             if (state.Overheated) return;
             var reason = ResolveBeam(state, state.AimOrigin, state.AimDirection, out var direction);
             if (reason != 0) { state.AimReason = reason; return; }
             state.AimReason = 0;
             if (!Consume(state, Rules.BeamAmmo)) { state.NextBeam = now + .5f; return; }
-            state.NextBeam = now + Rules.BeamInterval;
+            state.NextBeam = now + (Rules.Complete(state.Vehicle)?3f:Rules.BeamInterval);
+            if(Rules.Complete(state.Vehicle))Samurai.LaserFired(state.Vehicle);
             state.LastWeaponUse = now;
             AddBeamHeat(state);
             var rig = Model.GetRig(state.Vehicle);
             var start = MuzzleWorld(rig, state.Vehicle) + direction * Rules.MuzzleOffset;
-            var end = start + direction * Rules.BeamRange;
+            var end = start + direction * Rules.BeamRange;int shot=unchecked(++serial);
             if (Trace(state.Vehicle, start, direction, Rules.BeamRange, out var hit))
             {
                 end = hit.hit.pos;
+                var victim=ItemActionAttack.FindHitEntity(hit) as EntityAlive;int before=victim!=null?victim.Health:0;
                 var ammo = ItemClass.GetItem(Rules.BeamAmmo, false);
                 float factor=Rules.AttributeScale(state.Vehicle);int packets=DamagePackets(Rules.BeamEntityDamage*factor);
                 for(int part=0;part<packets;part++)
@@ -463,9 +473,10 @@ namespace PZAEC.Mecha
                     Rules.BeamEntityDamage*factor/packets, 1, 1, 0, .05f, "metal", new DamageMultiplier(), null,
                     new ItemActionAttack.AttackHitInfo(), 0, 1, 1, null, null, ItemActionAttack.EnumAttackMode.RealNoHarvesting,
                     null, -1, ammo);
-                for(int part=0;part<DamagePackets(Rules.BeamSplashDamage*factor);part++)
+                for(int part=0;!Rules.Complete(state.Vehicle)&&part<DamagePackets(Rules.BeamSplashDamage*factor);part++)
                     GameManager.Instance.ExplosionServer(end, new Vector3i(Mathf.FloorToInt(end.x), Mathf.FloorToInt(end.y), Mathf.FloorToInt(end.z)),
                         Quaternion.identity, BeamExplosion(state.Vehicle,part), actor, 0, false, ItemClass.GetItem(Rules.BeamAmmo, false));
+                Weapons.Broadcast(state.Vehicle.entityId,shot,CombatFeedback.BeamImpact,end,-direction,victim!=null?Mathf.Max(0,before-victim.Health):0,victim!=null?1:0);
             }
             // Throttled fire audit: matches in-game gunfire against real ammo
             // consumption (10 s cadence, safe to keep enabled).
@@ -474,7 +485,7 @@ namespace PZAEC.Mecha
                 nextFireAudit = Time.time + 10f;
                 Log.Out("[Mecha] beam v=" + state.Vehicle.entityId + " ammo=" + Ammo(state, Rules.BeamAmmo) + " heat=" + Mathf.RoundToInt(state.Heat));
             }
-            Broadcast(state.Vehicle.entityId, unchecked(++serial), BeamEvent, start, end, state.Heat, 0);
+            Broadcast(state.Vehicle.entityId, shot, BeamEvent, start, end, state.Heat, 0);
         }
 
         // Native damage messages contain 16-bit fields. Split only damage delivery,
@@ -487,7 +498,7 @@ namespace PZAEC.Mecha
             // Horde-clear splash around the impact; zero block damage keeps the
             // walker safe to fire from inside a player-built kill corridor.
             float damage=Rules.BeamSplashDamage*Rules.AttributeScale(vehicle);
-            return new ExplosionData(action, null) { ParticleIndex = part==0?5:0, BlockRadius = 0, EntityRadius = (byte)Rules.BeamSplashRadius,
+            return new ExplosionData(action, null) { ParticleIndex = 0, BlockRadius = 0, EntityRadius = (byte)Rules.BeamSplashRadius,
                 EntityDamage = damage/DamagePackets(damage), BlockDamage = 0, BlastPower = part==0?20:0 };
         }
         public static void AddBeamHeat(State state)
@@ -645,7 +656,7 @@ namespace PZAEC.Mecha
                             // pressed trigger ever consumes ammo or emits events.
                             if (state.MissileAiming) UpdateMissile(state, Time.time);
                             if (state.TriggerHeld && state.Aiming) FireBeam(state, actor, Time.time);
-                            else if (state.MissileTrigger && state.MissileAiming) FireMissile(state, actor, Time.time);
+                            else if (state.MissileTrigger && state.MissileAiming && !Samurai.Busy(state.Vehicle)) FireMissile(state, actor, Time.time);
                             if (!state.MissileTrigger) state.GuidedSpent = false;
                         }
                         bool occupied = state.Vehicle.GetAttached(0) != null;
@@ -658,10 +669,11 @@ namespace PZAEC.Mecha
                 Deploy.Update(world);
                 Boarding.Update(world);
                 Locomotion.Tick(world);
+                Samurai.Tick(world,Time.deltaTime);
                 RobotAudio.Cleanup(world);
                 CrewVisibility.Update(world);
                 VisualTick(world, Time.deltaTime);
-                MechaFX.Update(Time.deltaTime);
+                MechaFX.Update(Time.deltaTime);CombatFeedback.Update(world);
                 LocalInput(world);
             }
             catch (Exception ex)
@@ -680,6 +692,7 @@ namespace PZAEC.Mecha
                 if (rig == null) continue;
                 // Gait owns the deploy crouch internally via Deploy.Progress.
                 Gait.Update(world, vehicle, rig, dt);
+                Samurai.Contacts(world,vehicle,rig,Time.time);
             }
         }
 
@@ -687,6 +700,7 @@ namespace PZAEC.Mecha
         {
             var previous = world.GetEntity(inputVehicle) as EntityVehicle;
             if (player != null && IsMecha(previous)) SendIntent(player, previous, Stop, Vector3.forward, previous.position);
+            Samurai.ReleaseLocal(previous);
             inputHeld = inputMissileHeld = false;
             Locomotion.ReleaseInput();
         }
@@ -729,11 +743,12 @@ namespace PZAEC.Mecha
                 Input.GetKey(Rules.Key(vehicle, "pzMechaJumpKey", KeyCode.Space)));
             if (Time.time >= nextInput && Input.GetKeyDown(Rules.Key(vehicle, "pzMechaBattleRepairKey", KeyCode.R)))
                 SendIntent(player, vehicle, BattleRepair, Vector3.forward, vehicle.position);
-            var beamKey = Rules.Key(vehicle, "pzMechaBeamKey", KeyCode.Mouse0);
+            var beamKey = Rules.Key(vehicle, "pzMechaBeamKey", Rules.Complete(vehicle)?KeyCode.F:KeyCode.Mouse0);
             bool beamHeld = Time.time >= nextInput && Input.GetKey(beamKey);
             bool missileHeld = Time.time >= nextInput && Input.GetKey(Rules.Key(vehicle, "pzMechaMissileKey", KeyCode.G));
             Ray sight;
             if (!Optics.TryRay(out sight)) sight = new Ray(vehicle.position, BodyRotation(vehicle) * Vector3.forward);
+            if(Rules.Complete(vehicle))Samurai.LocalInput(vehicle,sight,Time.time>=nextInput);
             // The beam claims the trigger while held; the missile pod is the
             // alternate hold and never fires in the same packet as the beam.
             byte op = beamHeld ? Fire : missileHeld ? MissileFire : inputHeld || inputMissileHeld ? Stop : Aim;

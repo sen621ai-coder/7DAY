@@ -1,4 +1,4 @@
-# Offline assertions for the PZAEC Buster Drone walker.
+﻿# Offline assertions for the PZAEC Buster Drone walker.
 # GLB structure, external textures, XML wiring, recipe/progression hooks,
 # network damage ceiling and build freshness. No game process required.
 # Works on Windows PowerShell 5.1 and pwsh 7.
@@ -248,7 +248,7 @@ Check "boarding transfers after kneeling with recursion guard" {
     $boarding -match 'TransferAt' -and $boarding -match 'committing=false'
 }
 Check "intent op guard includes motion and boarding skip" {
-    (Get-Content (Join-Path $ModRoot 'Source/MechaWeapons.cs') -Raw) -match 'op > BoardControl'
+    (Get-Content (Join-Path $ModRoot 'Source/MechaWeapons.cs') -Raw) -match 'op > Samurai.Cancel'
 }
 Check "dedicated silhouette icon generated and referenced" {
     $icon = Join-Path $ModRoot "ItemIcons\vehicleCombatRobotPlaceable.png"
@@ -261,9 +261,9 @@ Check "dedicated silhouette icon generated and referenced" {
     $iconRef = ($item.property | Where-Object { $_.name -eq 'CustomIcon' }).value
     return $ok -and $iconRef -eq 'vehicleCombatRobotPlaceable'
 }
-Check "chinese naming: Youth Edition with shared ammunition" {
+Check "chinese naming: Prototype with shared ammunition" {
     $loc = Get-Content (Join-Path $ModRoot "Config\Localization.csv") -Raw -Encoding UTF8
-    $loc.Contains('vehicleCombatRobotPlaceable,items,item,,,Unit-01 (Youth Edition),初号机（青春版）') -and
+    $loc.Contains('vehicleCombatRobotPlaceable,items,item,,,Unit-01 (Prototype),初号机（试验体）') -and
     $loc -match 'ammoPZAECMechaCell,items,item,,,Energy Cell,能量电池'
 }
 
@@ -282,7 +282,7 @@ Check "aim messages cannot fire: trigger state is separate" {
     $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
     $weapons -match 'TriggerHeld\s*=\s*op\s*==\s*Fire' -and
     $weapons -match 'state\.TriggerHeld\s*&&\s*state\.Aiming\)\s*FireBeam' -and
-    $weapons -match 'state\.MissileTrigger\s*&&\s*state\.MissileAiming\)\s*FireMissile'
+    $weapons -match 'state\.MissileTrigger\s*&&\s*state\.MissileAiming\s*&&\s*!Samurai.Busy\(state.Vehicle\)\)\s*FireMissile'
 }
 Check "stale sequences drop without extending the session" {
     $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw

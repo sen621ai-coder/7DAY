@@ -1,154 +1,79 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
-
 namespace PZAEC.Mecha
 {
-    // First-person walker view: the camera rides the drone eye mount while the
-    // local pilot is seated. Mouse axes accumulate an independent yaw/pitch in
-    // world space, so hull rotation never shakes the aim. Rendering never
-    // supplies fire authority; the server re-validates every intent ray.
     public static class Optics
     {
-        static EntityVehicle vehicle;
-        static Transform eye, lens;
-        static float yaw, pitch;
-        static bool zoom;
-        static int zoomStep;
-        static readonly Dictionary<Renderer, bool> hidden = new Dictionary<Renderer, bool>();
-        static Camera applied;
-        static Vector3 savedPosition, lastPosition;
-        static Quaternion savedRotation, lastRotation;
-        static float savedFov, lastFov;
-
-        public static bool Active(EntityVehicle v) { return vehicle == v && eye != null; }
-
-        public static void Install(Harmony h)
+        static EntityVehicle vehicle;static Transform eye,lens;
+        static float yaw,pitch;static bool zoom;static int zoomStep;
+        static bool third=true;static float switched=-100;static Vector3 transitionPosition;static Quaternion transitionRotation;
+        static readonly Dictionary<Renderer,bool> hidden=new Dictionary<Renderer,bool>();
+        static readonly RaycastHit[] cameraHits=new RaycastHit[64];
+        static Camera applied;static Vector3 savedPosition,lastPosition;static Quaternion savedRotation,lastRotation;static float savedFov,lastFov;
+        static Quaternion StoredLook=Quaternion.identity;
+        static Vector3 aimTarget;static bool hasAimTarget;
+        public static bool ThirdPerson {get{return third;}}
+        public static Quaternion Look {get{return StoredLook;}}
+        public static bool Active(EntityVehicle v){return vehicle==v&&eye!=null;}
+        public static void Install(Harmony h){h.Patch(AccessTools.Method(typeof(GameManager),"Update"),prefix:new HarmonyMethod(typeof(Optics),nameof(RestoreCamera)));Camera.onPreCull+=BeforeRender;Camera.onPostRender+=AfterRender;}
+        static float Magnification(){return zoom?(zoomStep==0?2f:4f):1f;}
+        public static float Fov(float normal,float magnification){return 2*Mathf.Atan(Mathf.Tan(normal*Mathf.Deg2Rad*.5f)/magnification)*Mathf.Rad2Deg;}
+        public static Quaternion Advance(ref float y,ref float p,float dx,float dy,float magnification){y=Mathf.Repeat(y+dx*2/magnification,360);p=Mathf.Clamp(p+dy*2/magnification,-85,85);return Quaternion.Euler(-p,y,0);}
+        public static void SetView(bool value){third=value;PlayerPrefs.SetInt("PZAEC.Mecha.ThirdPerson",third?1:0);PlayerPrefs.Save();switched=Time.time;transitionPosition=lastPosition;transitionRotation=lastRotation;}
+        public static void UpdateInput(EntityPlayerLocal player,EntityVehicle v)
         {
-            h.Patch(AccessTools.Method(typeof(GameManager), "Update"), prefix: new HarmonyMethod(typeof(Optics), nameof(RestoreCamera)));
-            // The player's own LateUpdate can rewrite FOV after vp_FPCamera;
-            // applying on pre-cull is the only slot that always sticks.
-            Camera.onPreCull += BeforeRender;
-            Camera.onPostRender += AfterRender;
+            var rig=Model.GetRig(v);if(rig==null||rig.Head==null)return;
+            if(vehicle!=v||eye==null){Clear();vehicle=v;eye=lens=rig.Head;var forward=Weapons.BodyRotation(v)*Vector3.forward;yaw=Mathf.Atan2(forward.x,forward.z)*Mathf.Rad2Deg;pitch=8;third=PlayerPrefs.GetInt("PZAEC.Mecha.ThirdPerson",1)!=0;switched=-100;}
+            if(!Boarding.Active(v)&&Weapons.UIReady(player)&&Input.GetKeyDown(KeyCode.BackQuote))SetView(!third);
+            zoom=Input.GetKey(Rules.Complete(v)?KeyCode.V:KeyCode.Mouse1);if(zoom&&Input.GetKeyDown(KeyCode.Z))zoomStep=(zoomStep+1)%2;
+            StoredLook=Advance(ref yaw,ref pitch,Input.GetAxisRaw("Mouse X"),Input.GetAxisRaw("Mouse Y"),Magnification());
         }
-
-        static float Magnification() { return zoom ? (zoomStep == 0 ? 2f : 4f) : 1f; }
-
-        public static float Fov(float normal, float magnification)
-        { return 2 * Mathf.Atan(Mathf.Tan(normal * Mathf.Deg2Rad * .5f) / magnification) * Mathf.Rad2Deg; }
-
-        public static Quaternion Advance(ref float yawAngle, ref float pitchAngle, float dx, float dy, float magnification)
+        public static Vector3 CollideCamera(EntityVehicle v,Vector3 pivot,Vector3 desired)
         {
-            yawAngle = Mathf.Repeat(yawAngle + dx * 2f / magnification, 360f);
-            pitchAngle = Mathf.Clamp(pitchAngle + dy * 2f / magnification, -85f, 85f);
-            return Quaternion.Euler(-pitchAngle, yawAngle, 0);
+            var d=desired-pivot;float length=d.magnitude;if(length<.001f)return desired;float safe=length;
+            int n=Physics.SphereCastNonAlloc(pivot,.2f,d/length,cameraHits,length,~0,QueryTriggerInteraction.Ignore);
+            for(int i=0;i<n;i++){var hit=cameraHits[i];var t=hit.collider.transform;var crew=v.GetAttached(0);var entity=GameUtils.GetHitRootEntity(hit.collider.tag,t);
+                // Character body-part colliders may live under the pooled Players
+                // hierarchy, outside the rider transform. They are not walls.
+                if(hit.collider.tag.StartsWith("E_BP_")||entity==v||(crew!=null&&entity==crew)||t.IsChildOf(v.transform)||(v.vehicleRB!=null&&t.IsChildOf(v.vehicleRB.transform))||(crew!=null&&t.IsChildOf(crew.transform)))continue;safe=Mathf.Min(safe,Mathf.Max(.05f,hit.distance-.1f));}
+            return pivot+d/length*safe;
         }
-
-        public static void UpdateInput(EntityPlayerLocal player, EntityVehicle v)
+        public static Vector3 CameraPosition(EntityVehicle v,Model.Rig r,Quaternion look,bool external)
         {
-            var rig = Model.GetRig(v);
-            if (rig == null || rig.Head == null) return;
-            if (vehicle != v || eye == null)
-            {
-                Clear();
-                vehicle = v; eye = rig.Head; lens = rig.Head;
-                var forward = Weapons.BodyRotation(v) * Vector3.forward;
-                yaw = Mathf.Atan2(forward.x, forward.z) * Mathf.Rad2Deg;
-                pitch = 8f;
-            }
-            zoom = Input.GetKey(KeyCode.Mouse1);
-            if (zoom && Input.GetKeyDown(KeyCode.Z)) zoomStep = (zoomStep + 1) % 2;
-            var look = Advance(ref yaw, ref pitch, Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"), Magnification());
-            StoredLook = look;
+            // A recessed cockpit lens leaves the real forearms in the lower view.
+            // The firing origin remains the physical head / palm, not this lens.
+            if(!external)return r.Head.position-Vector3.up*.15f-look*Vector3.forward*.70f;
+            var pivot=r.Torso.position+Vector3.up*.25f;return CollideCamera(v,pivot,pivot+look*new Vector3(.6f,.85f,-4.8f));
         }
-
-        static Quaternion StoredLook = Quaternion.identity;
-
+        static Vector3 Position(Model.Rig r){var end=CameraPosition(vehicle,r,StoredLook,third);float t=Mathf.SmoothStep(0,1,Mathf.Clamp01((Time.time-switched)/.2f));return CollideCamera(vehicle,r.Torso.position+Vector3.up*.25f,Vector3.Lerp(transitionPosition,end,t));}
+        public static bool ProjectWorld(Vector3 world,out Vector2 screen){screen=Vector2.zero;var p=Quaternion.Inverse(lastRotation)*(world-Origin.position-lastPosition);if(p.z<=.05f)return false;float scale=Screen.height*.5f/Mathf.Tan(Mathf.Max(1,lastFov)*Mathf.Deg2Rad*.5f);screen=new Vector2(Screen.width*.5f+p.x/p.z*scale,Screen.height*.5f-p.y/p.z*scale);return screen.x>=0&&screen.x<=Screen.width&&screen.y>=0&&screen.y<=Screen.height;}
         public static bool TryRay(out Ray ray)
         {
-            ray = default(Ray);
-            if (vehicle == null || eye == null) return false;
-            ray = new Ray(eye.position + Origin.position, StoredLook * Vector3.forward);
-            return true;
+            ray=default(Ray);if(vehicle==null||eye==null)return false;var rig=Model.GetRig(vehicle);if(rig==null)return false;
+            var camera=Position(rig)+Origin.position;var forward=StoredLook*Vector3.forward;var target=camera+forward*Rules.BeamRange;
+            if(Weapons.Trace(vehicle,camera,forward,Rules.BeamRange,out var hit))target=hit.hit.pos;
+            aimTarget=target;hasAimTarget=true;var origin=eye.position+Origin.position;ray=new Ray(origin,Weapons.AimFromMuzzle(origin,target,forward));return true;
         }
-
-        public static void RestoreCamera()
-        {
-            if (applied != null)
-            {
-                var t = applied.transform;
-                if ((t.position - lastPosition).sqrMagnitude < .00001f) t.position = savedPosition;
-                if (Quaternion.Angle(t.rotation, lastRotation) < .01f) t.rotation = savedRotation;
-                if (Mathf.Abs(applied.fieldOfView - lastFov) < .01f) applied.fieldOfView = savedFov;
-            }
-            applied = null;
-        }
-
-        static void Visibility(bool hide)
-        {
-            if (!hide)
-            {
-                foreach (var pair in hidden) if (pair.Key != null) pair.Key.forceRenderingOff = pair.Value;
-                hidden.Clear(); return;
-            }
-            // Electronic cockpit feed: hide only this pilot's own visual model.
-            // Restore after this camera so observers and other cameras retain it.
-            var rig=vehicle!=null?Model.GetRig(vehicle):null;
-            if(rig!=null)Hide(rig.Visual);
-        }
-
-        static void Hide(Transform root)
-        {
-            if (root == null) return;
-            foreach (var renderer in root.GetComponentsInChildren<Renderer>(true))
-            {
-                if (renderer == null || hidden.ContainsKey(renderer)) continue;
-                hidden.Add(renderer, renderer.forceRenderingOff);
-                renderer.forceRenderingOff = true;
-            }
-        }
-
+        public static Vector3 WeaponDirection(EntityVehicle v,Model.Rig rig){if(Rules.Complete(v))return rig.Head.forward;return vehicle==v&&hasAimTarget?Weapons.AimFromMuzzle(Weapons.MuzzleWorld(rig,v),aimTarget,rig.HandR.forward):rig.HandR.forward;}
+        public static void RestoreCamera(){if(applied!=null){var t=applied.transform;if((t.position-lastPosition).sqrMagnitude<.00001f)t.position=savedPosition;if(Quaternion.Angle(t.rotation,lastRotation)<.01f)t.rotation=savedRotation;if(Mathf.Abs(applied.fieldOfView-lastFov)<.01f)applied.fieldOfView=savedFov;}applied=null;}
+        static void HideRenderer(Renderer r){if(r==null||hidden.ContainsKey(r))return;hidden.Add(r,r.forceRenderingOff);r.forceRenderingOff=true;}
+        static void Visibility(bool hide){if(!hide){foreach(var p in hidden)if(p.Key!=null)p.Key.forceRenderingOff=p.Value;hidden.Clear();return;}var rig=vehicle!=null?Model.GetRig(vehicle):null;if(rig!=null)foreach(var r in rig.Visual.GetComponentsInChildren<Renderer>(true))HideRenderer(r);}
+        public static void FirstPersonVisibility(EntityVehicle v){var rig=Model.GetRig(v);if(rig==null)return;foreach(var r in rig.FirstPersonHidden)HideRenderer(r);}
+        static void Apply(Camera c,Vector3 p,Quaternion q,float f){RestoreCamera();applied=c;savedPosition=c.transform.position;savedRotation=c.transform.rotation;savedFov=c.fieldOfView;lastPosition=p;lastRotation=q;lastFov=f;c.transform.SetPositionAndRotation(p,q);c.fieldOfView=f;}
         static void BeforeRender(Camera camera)
         {
-            var player = GameManager.Instance != null && GameManager.Instance.World != null ? GameManager.Instance.World.GetPrimaryPlayer() : null;
-            if (player == null || camera != player.playerCamera) return;
-            // The boarding camera ride takes precedence over the seated FPV pose.
-            Vector3 ride; Quaternion rideRot; float rideFov;
-            if (Boarding.CameraRide(out ride, out rideRot, out rideFov))
-            {
-                Visibility(Boarding.CockpitCamera(vehicle));
-                RestoreCamera();
-                applied = camera;
-                savedPosition = camera.transform.position; savedRotation = camera.transform.rotation; savedFov = camera.fieldOfView;
-                lastPosition=ride; lastRotation=rideRot; lastFov=rideFov;
-                camera.transform.SetPositionAndRotation(ride, rideRot);
-                camera.fieldOfView = rideFov;
-                return;
-            }
-            if (vehicle == null || player.AttachedToEntity != vehicle || eye == null ||
-                !Weapons.UIReady(player) || GameManager.Instance.IsPaused())
-            { RestoreCamera(); Visibility(false); return; }
-            Visibility(true);
-            RestoreCamera();
-            applied = camera;
-            savedPosition = camera.transform.position; savedRotation = camera.transform.rotation; savedFov = camera.fieldOfView;
-            // eye.position is Unity-space; the camera lives under the same
-            // world root, so no Origin offset is applied to camera placement.
-            var position = eye.position + StoredLook * Vector3.forward * .18f;
-            lastPosition = position; lastRotation = StoredLook; lastFov = Fov(player.GetCameraFOV(), Magnification());
-            camera.transform.SetPositionAndRotation(position, StoredLook);
-            camera.fieldOfView = lastFov;
+            var player=GameManager.Instance!=null&&GameManager.Instance.World!=null?GameManager.Instance.World.GetPrimaryPlayer():null;if(player==null||camera!=player.playerCamera)return;
+            if(Boarding.CameraRide(out var ride,out var rot,out var fov)){Visibility(false);Visibility(Boarding.CockpitCamera(vehicle));Apply(camera,ride,rot,fov);return;}
+            // Menus freeze input, not the selected driving view. Restoring the
+            // native seat lens on a menu frame would put it inside the armour.
+            if(vehicle==null||player.AttachedToEntity!=vehicle||eye==null||player.IsDead()||vehicle.IsDead()){RestoreCamera();Visibility(false);return;}
+            Visibility(false);var rig=Model.GetRig(vehicle);var position=Position(rig);bool close=!third||Vector3.Distance(position,rig.Torso.position+Vector3.up*.25f)<1.2f;if(close)FirstPersonVisibility(vehicle);
+            var shake=CombatFeedback.Kick(vehicle.entityId);Apply(camera,position+StoredLook*new Vector3(0,shake*.012f,0),StoredLook*Quaternion.Euler(shake*.45f,0,0),Fov(close?Mathf.Max(80,player.GetCameraFOV()):player.GetCameraFOV(),Magnification()));
         }
-
         static void AfterRender(Camera camera){if(camera==applied)Visibility(false);}
-
-        public static void Clear()
-        {
-            RestoreCamera();
-            Visibility(false);
-            vehicle = null; eye = lens = null; zoom = false; zoomStep = 0;
-        }
+        public static void Clear(){RestoreCamera();Visibility(false);vehicle=null;eye=lens=null;zoom=false;zoomStep=0;switched=-100;hasAimTarget=false;}
     }
 
     // Seated pilots ride inside the walker shell; suppress their presentation

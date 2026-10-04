@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param([string]$OutputPath, [string[]]$ExtraSources = @())
+param([string]$OutputPath, [string[]]$ExtraSources = @(), [string]$SourceRoot)
 $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path $PSScriptRoot)
 $managed=Join-Path (Split-Path $root) '7DaysToDie_Data/Managed'
@@ -14,7 +14,8 @@ public static class MechaCompiler {
   }
 }
 '@
-$sources=Get-ChildItem (Join-Path $root 'ZZ-PZAEC_Mecha/Source') -Filter '*.cs'|Sort-Object Name|ForEach-Object FullName
+if(!$SourceRoot){$SourceRoot=Join-Path $root 'ZZ-PZAEC_Mecha/Source'}
+$sources=Get-ChildItem -LiteralPath $SourceRoot -Filter '*.cs'|Sort-Object Name|ForEach-Object FullName
 $sources = @($sources) + $ExtraSources
 $refs=@(Get-ChildItem $managed -Filter '*.dll'|ForEach-Object FullName)+(Join-Path $root '0_TFP_Harmony/0Harmony.dll')
 if(!$OutputPath){$OutputPath=Join-Path $root 'ZZ-PZAEC_Mecha/PZAEC.Mecha.dll'}

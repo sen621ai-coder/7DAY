@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +18,10 @@ namespace PZAEC.Mecha
         public sealed class Rig
         {
             public Transform Root, Visual, Mount, Torso, Head, HandL, HandR, ShoulderL, ShoulderR, Backpack;
+            public Transform ChestL, ChestR, ChestDoor, WingL, WingR, Sword;
+            public Renderer[] FirstPersonHidden; public float ArmUpper,ArmLower;
+            public float ShoulderLimit=115,ElbowLimit=140,WristLimit=175,BladeRadius=.065f;
+            public Vector3 SwordRootAnchor=Samurai.BladeRoot-Samurai.Grip,SwordTipAnchor=Samurai.BladeTip-Samurai.Grip,HiltAnchor=new Vector3(.14f,.37f,.58f);
             public Transform HipL, HipR, KneeL, KneeR, AnkleL, AnkleR, FootL, FootR, ElbowL, ElbowR;
             public readonly Dictionary<Transform, Quaternion> RestRot = new Dictionary<Transform, Quaternion>();
             public readonly Dictionary<Transform, Vector3> RestPos = new Dictionary<Transform, Vector3>();
@@ -92,6 +96,9 @@ namespace PZAEC.Mecha
             rig.HandL = Find(root, "MechaHandL"); rig.HandR = Find(root, "MechaHandR");
             rig.ShoulderL = Find(root, "MechaShoulderL"); rig.ShoulderR = Find(root, "MechaShoulderR");
             rig.Backpack = Find(root, "MechaBackpack");
+            rig.Sword=Find(root,"MechaSword");
+            rig.WingL=Find(root,"MechaWingL");rig.WingR=Find(root,"MechaWingR");
+            rig.ChestL=Find(root,"MechaChestL");rig.ChestR=Find(root,"MechaChestR");rig.ChestDoor=Find(root,"MechaChestDoor");
             rig.HipL = Find(root, "MechaHipL"); rig.HipR = Find(root, "MechaHipR");
             rig.KneeL = Find(root, "MechaKneeL"); rig.KneeR = Find(root, "MechaKneeR");
             // Gait/Boarding animate Torso relative to its rigged rest pose.
@@ -101,10 +108,19 @@ namespace PZAEC.Mecha
             rig.ElbowL=Find(root,"MechaElbowL"); rig.ElbowR=Find(root,"MechaElbowR");
             rig.LegUpper = rig.HipL!=null && rig.KneeL!=null ? Vector3.Distance(rig.HipL.position,rig.KneeL.position) : 0;
             rig.LegLower = rig.KneeL!=null && rig.AnkleL!=null ? Vector3.Distance(rig.KneeL.position,rig.AnkleL.position) : 0;
-            foreach(var t in new[]{rig.Torso,rig.Head,rig.HipL,rig.HipR,rig.KneeL,rig.KneeR,rig.AnkleL,rig.AnkleR,rig.ShoulderL,rig.ShoulderR,rig.ElbowL,rig.ElbowR,rig.HandL,rig.HandR})
+            foreach(var t in new[]{rig.Torso,rig.Head,rig.HipL,rig.HipR,rig.KneeL,rig.KneeR,rig.AnkleL,rig.AnkleR,rig.ShoulderL,rig.ShoulderR,rig.ElbowL,rig.ElbowR,rig.HandL,rig.HandR,rig.ChestL,rig.ChestR,rig.ChestDoor,rig.WingL,rig.WingR,rig.Sword})
                 if(t!=null) { rig.RestRot[t]=t.localRotation; rig.RestPos[t]=t.localPosition; }
-            rigs[v] = rig;
+            rig.ArmUpper=Vector3.Distance(rig.ShoulderR.position,rig.ElbowR.position);rig.ArmLower=Vector3.Distance(rig.ElbowR.position,rig.HandR.position);
+            CacheFirstPersonDisplay(rig);rigs[v] = rig;
             return rig;
+        }
+
+        public static void CacheFirstPersonDisplay(Rig rig)
+        {
+            var hidden=new List<Renderer>();foreach(var part in rig.Visual.GetComponentsInChildren<MechaRenderPart>(true))if(!part.FirstPersonVisible){var renderer=part.GetComponent<Renderer>();if(renderer!=null)hidden.Add(renderer);}
+            foreach(var renderer in rig.Visual.GetComponentsInChildren<Renderer>(true))
+                if(!hidden.Contains(renderer)&&(renderer.transform.IsChildOf(rig.Head)||renderer.GetComponentInParent<MechaRenderPart>()==null))hidden.Add(renderer);
+            rig.FirstPersonHidden=hidden.ToArray();
         }
 
         public static void Forget(EntityVehicle v)

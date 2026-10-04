@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -12,7 +12,7 @@ namespace PZAEC.Mecha
         public static bool ItemNameMatches(string name){return Same(name,PlaceableItem)||Same(name,CompleteItem);}
         public static bool Complete(EntityVehicle v){return v!=null&&v.vehicle!=null&&Same(v.vehicle.GetName(),CompleteVehicle);}
         public static float AttributeScale(EntityVehicle v){return Complete(v)?1.5f:1f;}
-        public static string DisplayName(EntityVehicle v){return Complete(v)?"初号机（完全体）":"初号机（青春版）";}
+        public static string DisplayName(EntityVehicle v){return Complete(v)?"初号机（完全体）":"初号机（试验体）";}
         public const string BeamAmmo = "ammoPZAECMechaCell";
         public const string MissileAmmo = "ammoPZAECMechaMissile";
 
@@ -48,6 +48,9 @@ namespace PZAEC.Mecha
         // Hover cruise: Q toggles a PD-controlled skimming mode over craters.
         public const float HoverHeight = 1.2f, HoverCeiling = 3f, HoverSpeed = 6f, HoverThrust = 6f;
         public const float HoverFuelPerSecond = .5f;
+        public const float FlightSpeed=12f, FlightBoostSpeed=20f, FlightReverseSpeed=6f;
+        public const float FlightRiseSpeed=5f, FlightDescendSpeed=4f, FlightAcceleration=4f, FlightBraking=8f, FlightVerticalAcceleration=6f;
+        public const float FlightFuel=.75f, FlightBoostFuel=1.5f, FlightTakeoffHeight=2f, FlightDeploySeconds=.8f, FlightContactSeconds=.3f;
         // Charged jump: hold Space, release to leap 2.5-5 m.
         public const float JumpMaxSpeed = 9.9f, JumpChargeSeconds = .5f, JumpMinCharge = .3f, JumpCooldown = 4f;
         // Trample: moving crush plus the landing stomp.

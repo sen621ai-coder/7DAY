@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -34,8 +34,9 @@ namespace PZAEC.Mecha
         public static void Play(EntityVehicle vehicle, string name)
         {
             float last;
-            if (soundGate.TryGetValue(name, out last) && Time.time - last < .12f) return;
-            soundGate[name] = Time.time;
+            var key=vehicle.entityId+"/"+name;
+            if (soundGate.TryGetValue(key, out last) && Time.time - last < .12f) return;
+            soundGate[key] = Time.time;
             Audio.Manager.Play(vehicle, name, 1, false);
         }
 
@@ -74,6 +75,8 @@ namespace PZAEC.Mecha
         public static void Receive(World world, int vehicleId, int id, byte kind, Vector3 a, Vector3 b, float value, float c)
         {
             if (world == null || world.GetPrimaryPlayer() == null) return;
+            if(kind==CombatFeedback.BeamImpact||kind==CombatFeedback.SwordContact){CombatFeedback.Receive(world,vehicleId,id,kind,a,b,value,c);return;}
+            if(kind==Samurai.Snapshot){var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)Samurai.Receive(v,id,a,b,value,c);return;}
             if(kind==9) { var v=world.GetEntity(vehicleId) as EntityVehicle; if(v!=null && v.isEntityRemote) Locomotion.Receive(v,(int)value,id,a); return; }
             if(kind==Boarding.BoardEvent) { Boarding.ReceiveSnapshot(world,vehicleId,id,a,b,value,c); return; }
             if (kind == Weapons.StatusEvent)
@@ -105,29 +108,13 @@ namespace PZAEC.Mecha
                 meleeCooldownUntil[vehicleId] = Time.time + Mathf.Max(0, c);
                 PlaySwing(world, vehicleId, kind == Weapons.MeleeHeavyEvent, a, b);
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                // Blade swings use their own arc sound; beam gunfire stays turret_fire.
+                // Retired melee path is retained only for protocol compatibility.
                 if (vehicle != null) Play(vehicle, "electric_fence_impact");
                 return;
             }
             if (kind == Weapons.BeamEvent)
             {
-                long key = (long)vehicleId << 32 | (uint)id;
-                if (seenBeamSerials.Contains(key)) return;
-                seenBeamSerials.Add(key);
-                Gait.Recoil(vehicleId);
-                seenBeamOrder.Enqueue(key);
-                while (seenBeamOrder.Count > 64) seenBeamSerials.Remove(seenBeamOrder.Dequeue());
-                var tracer = pool.Count > 0 ? pool.Pop() : new Tracer();
-                if (tracer.Line == null) tracer.Line = new GameObject("MechaBeam").AddComponent<LineRenderer>();
-                tracer.Line.gameObject.SetActive(true);
-                tracer.Line.sharedMaterial = Material(true);
-                tracer.Line.startColor = new Color(.5f, 1f, 1f, .95f); tracer.Line.endColor = new Color(.1f, .6f, 1f, .2f);
-                tracer.Line.startWidth = .12f; tracer.Line.endWidth = .03f; tracer.Line.positionCount = 2; tracer.Line.useWorldSpace = true;
-                tracer.Line.SetPosition(0, a - Origin.position); tracer.Line.SetPosition(1, b - Origin.position);
-                tracer.Line.shadowCastingMode = ShadowCastingMode.Off;
-                tracer.A = a; tracer.B = b; tracer.Life = .09f; tracers.Add(tracer);
-                var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
-                if (vehicle != null) Play(vehicle, "turret_fire");
+                BeamTrace(world,vehicleId,id,a,b);
                 return;
             }
             if (kind == Weapons.MissileSpawnEvent)
@@ -146,7 +133,7 @@ namespace PZAEC.Mecha
                 var trail = obj.AddComponent<TrailRenderer>();
                 trail.sharedMaterial = Material(true);
                 trail.time = .5f; trail.startWidth = .1f; trail.endWidth = .015f;
-                trail.startColor = new Color(.4f, .9f, 1f); trail.endColor = new Color(.5f, .5f, .5f, 0);
+                trail.startColor = new Color(1f, .45f, .12f); trail.endColor = new Color(.35f, .3f, .25f, 0);
                 projectiles[id] = new Projectile { Object = obj, Position = a, Velocity = b, Life = Rules.MissileLifetime + .5f };
                 var vehicle = world.GetEntity(vehicleId) as EntityVehicle;
                 if (vehicle != null) Play(vehicle, "m136_fire");
@@ -167,6 +154,14 @@ namespace PZAEC.Mecha
                     projectiles.Remove(id);
                 }
             }
+        }
+
+        static void BeamTrace(World world,int vehicleId,int id,Vector3 a,Vector3 b)
+        {
+            long key=(long)vehicleId<<32|(uint)id;if(!seenBeamSerials.Add(key))return;Gait.Recoil(vehicleId);seenBeamOrder.Enqueue(key);while(seenBeamOrder.Count>64)seenBeamSerials.Remove(seenBeamOrder.Dequeue());
+            var tracer=pool.Count>0?pool.Pop():new Tracer();if(tracer.Line==null)tracer.Line=new GameObject("MechaBeam").AddComponent<LineRenderer>();tracer.Line.gameObject.SetActive(true);tracer.Line.sharedMaterial=Material(true);
+            tracer.Line.startColor=new Color(.8f,1f,1f,.95f);tracer.Line.endColor=new Color(.35f,.9f,1f,.2f);tracer.Line.startWidth=.12f;tracer.Line.endWidth=.03f;tracer.Line.positionCount=2;tracer.Line.useWorldSpace=true;tracer.Line.SetPosition(0,a-Origin.position);tracer.Line.SetPosition(1,b-Origin.position);tracer.Line.shadowCastingMode=ShadowCastingMode.Off;tracer.A=a;tracer.B=b;tracer.Life=.09f;tracers.Add(tracer);
+            var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)RobotAudio.OneShot(v,Rules.Complete(v)?"head-laser":"palm-laser",Rules.Complete(v)?.55f:.45f);
         }
 
         public static void Update(float dt)
@@ -355,17 +350,19 @@ namespace PZAEC.Mecha
 
         public static void Clear()
         {
-            foreach (var projectile in projectiles.Values) if (projectile.Object != null) UnityEngine.Object.Destroy(projectile.Object);
-            foreach (var tracer in tracers) if (tracer.Line != null) UnityEngine.Object.Destroy(tracer.Line.gameObject);
-            foreach (var tracer in pool) if (tracer.Line != null) UnityEngine.Object.Destroy(tracer.Line.gameObject);
+            foreach (var projectile in projectiles.Values) Release(projectile.Object);
+            foreach (var tracer in tracers) if (tracer.Line != null) Release(tracer.Line.gameObject);
+            foreach (var tracer in pool) if (tracer.Line != null) Release(tracer.Line.gameObject);
             foreach (var pair in blades.Values) foreach (var blade in pair)
-                if (blade.Root != null) UnityEngine.Object.Destroy(blade.Root.gameObject);
+                if (blade.Root != null) Release(blade.Root.gameObject);
             projectiles.Clear(); tracers.Clear(); pool.Clear(); statuses.Clear(); blades.Clear(); meleeCooldownUntil.Clear();
             seenBeamSerials.Clear(); seenBeamOrder.Clear();
+            soundGate.Clear();
             if (beamMaterial != null) UnityEngine.Object.Destroy(beamMaterial);
             if (bodyMaterial != null) UnityEngine.Object.Destroy(bodyMaterial);
             if (bladeMaterial != null) UnityEngine.Object.Destroy(bladeMaterial);
             beamMaterial = bodyMaterial = bladeMaterial = null;
         }
+        static void Release(GameObject go){if(go!=null){go.SetActive(false);UnityEngine.Object.Destroy(go);}}
     }
 }

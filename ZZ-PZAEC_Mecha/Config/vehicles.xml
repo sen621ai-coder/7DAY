@@ -120,7 +120,7 @@
       <property name="wheelPtlScale" value="0" />
       <property name="hornSound" value="electric_fence_on" />
       <property name="recipeName" value="vehicleCombatRobotCompletePlaceable" />
-      <property name="pzMechaBeamKey" value="Mouse0" />
+      <property name="pzMechaBeamKey" value="F" />
       <property name="pzMechaMissileKey" value="G" />
       <property name="pzMechaRepairKey" value="F" />
       <property name="pzMechaBattleRepairKey" value="R" />

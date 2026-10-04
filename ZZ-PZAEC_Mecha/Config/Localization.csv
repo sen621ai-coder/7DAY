@@ -1,15 +1,15 @@
 ﻿Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
-vehicleCombatRobot,entityclasses,entity,,,Unit-01 (Youth Edition),初号机（青春版）
-vehicleCombatRobotPlaceable,items,item,,,Unit-01 (Youth Edition),初号机（青春版）
-vehicleCombatRobotChassis,items,item,,,Unit-01 (Youth Edition) Frame,初号机（青春版）骨架
+vehicleCombatRobot,entityclasses,entity,,,Unit-01 (Prototype),初号机（试验体）
+vehicleCombatRobotPlaceable,items,item,,,Unit-01 (Prototype),初号机（试验体）
+vehicleCombatRobotChassis,items,item,,,Unit-01 (Prototype) Frame,初号机（试验体）骨架
 ammoPZAECMechaCell,items,item,,,Energy Cell,能量电池
 ammoPZAECMechaMissile,items,item,,,Guided Missile,制导导弹
-vehicleCombatRobotPlaceableDesc,items,item,,,Place the Unit-01 (Youth Edition) combat robot. FPV optics, palm beam cannon and guided missiles. Model CC-BY-4.0 ILUSHANDRO.,放置初号机（青春版）。第一视角、掌心光束炮与背部制导导弹。模型 CC-BY-4.0 ILUSHANDRO。
-vehicleCombatRobotChassisDesc,items,item,,,Reinforced biped frame for Unit-01 (Youth Edition).,初号机（青春版）专用的强化双足骨架，带关节安装座。
+vehicleCombatRobotPlaceableDesc,items,item,,,Place the Unit-01 (Prototype) combat robot. FPV optics, palm beam cannon and guided missiles. Model CC-BY-4.0 ILUSHANDRO.,放置初号机（试验体）。第一视角、掌心光束炮与背部制导导弹。模型 CC-BY-4.0 ILUSHANDRO。
+vehicleCombatRobotChassisDesc,items,item,,,Reinforced biped frame for Unit-01 (Prototype).,初号机（试验体）专用的强化双足骨架，带关节安装座。
 ammoPZAECMechaCellDesc,items,item,,,High-density energy cell for the palm beam.,掌心光束炮用高密度能量电池。
 ammoPZAECMechaMissileDesc,items,item,,,Guided missile for the back pod. Hold G on a hostile target for 2 seconds to fire.,背部发射巢用制导导弹。按住 G 锁定敌对目标 2 秒后自动发射。
 vehicleCombatRobotComplete,entityclasses,entity,,,Unit-01 (Complete Form),初号机（完全体）
 vehicleCombatRobotCompletePlaceable,items,item,,,Unit-01 (Complete Form),初号机（完全体）
 vehicleCombatRobotCompleteChassis,items,item,,,Unit-01 (Complete Form) Frame,初号机（完全体）骨架
-vehicleCombatRobotCompletePlaceableDesc,items,item,,,Samurai-style complete form. 50% more hull durability and weapon damage and fuel capacity. Uses shared mecha ammunition.,武士外形的初号机（完全体）。血量、武器伤害与储油量较青春版提升50%。共用机甲能量电池与制导导弹。
+vehicleCombatRobotCompletePlaceableDesc,items,item,,,Sword and shield Complete Form. Tap/hold left mouse for sword/heavy strike; right mouse guards; F charges forehead laser; G launches missiles; V scopes. Q toggles winged flight/landing; Space ascends; C descends; Shift accelerates. Sword/shield require landing. Uses shared ammunition.,剑盾近战型完全体。左键点按剑击／按住蓄力重劈；右键举盾；F蓄能头炮；G导弹；V瞄准镜。Q展翼飞行/降落，空格上升、C下降、Shift加速；空中使用头炮与导弹，落地后使用剑盾。耐久300万、储油450L，共用机甲弹药。
 vehicleCombatRobotCompleteChassisDesc,items,item,,,Reinforced frame for Unit-01 Complete Form.,初号机（完全体）专用强化骨架。

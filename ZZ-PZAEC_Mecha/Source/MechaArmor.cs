@@ -106,6 +106,8 @@ namespace PZAEC.Mecha
                 max = hull.vehicle.GetMaxHealth();
                 fraction = explosionDepth > 0 ? .3 : collision ? .5 : .15;
                 cap = .1;
+                if(!collision && response.Source.damageSource==EnumDamageSource.External)
+                    fraction = Math.Round(fraction * Samurai.ShieldFactor(hull,response.Source,response.Strength,explosionDepth>0),6);
             }
             else
             {

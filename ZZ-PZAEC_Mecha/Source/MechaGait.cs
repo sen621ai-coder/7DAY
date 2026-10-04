@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace PZAEC.Mecha
@@ -47,6 +47,8 @@ namespace PZAEC.Mecha
             var velocity=Vector3.ProjectOnPlane(displacement/Mathf.Max(dt,.001f),Vector3.up);
             w.Velocity=Vector3.Lerp(w.Velocity,velocity,Mathf.Min(1,dt*12));float speed=w.Velocity.magnitude;
             var state=Locomotion.Get(v);bool airborne=!state.Grounded&&!state.HoverOn;
+            state.VisualForward=Vector3.Dot(w.Velocity,rig.Mount.forward);state.VisualTurn=turn;
+            if(Rules.Complete(v)&&v.isEntityRemote&&Flight.AirPose(state)&&Time.time-state.LastHeightAt>=.2f){state.LastHeightAt=Time.time;float clearance;state.FlightHeight=Flight.Clearance(v,out clearance)?clearance:-1;}
             float mountY=0;
             if(state.Grounded&&!state.HoverOn&&Ground(v,v.position,out var support))mountY=Mathf.Clamp(support.y-v.position.y-.05f,-.4f,.25f);
             rig.Mount.localPosition=new Vector3(0,Mathf.MoveTowards(rig.Mount.localPosition.y,mountY,dt*2),0);
@@ -55,7 +57,7 @@ namespace PZAEC.Mecha
             {
                 float along=Vector3.Dot(w.Velocity,rig.Mount.forward);w.Lean=Mathf.MoveTowards(w.Lean,along*.9f,dt*18);
                 float land=Mathf.Clamp01(1-(Time.time-state.LandingAt)/.5f);
-                float drop=state.Charge*.22f+Mathf.Sin(land*Mathf.PI)*.2f+(speed>.2f?.20f:0);
+                float drop=state.Charge*.22f+Mathf.Sin(land*Mathf.PI)*.2f+(speed>.2f&&!Flight.AirPose(state)?.20f:0);
                 rig.Torso.localPosition=rig.TorsoBasePosition+Vector3.down*drop+Vector3.up*(Mathf.Sin(Time.time*1.4f)*.006f);
                 rig.Torso.localRotation=rig.RestRot[rig.Torso]*Quaternion.Euler(state.Blend*12+w.Lean,0,-Mathf.Clamp(turn*.04f,-4,4));
                 w.Travel+=speed*dt;float swing=Mathf.Sin(w.Travel*5)*Mathf.Clamp(speed*2,0,9)*(1-state.Blend);
@@ -64,12 +66,16 @@ namespace PZAEC.Mecha
                 float recoil=Mathf.Clamp01(1-(Time.time-w.RecoilAt)/.22f);
                 rig.ElbowR.localRotation=rig.RestRot[rig.ElbowR]*Quaternion.Euler(-recoil*8,0,0);
             }
+            if(!show){Samurai.Pose(v,rig,dt,Time.time);Flight.Pose(v,rig,dt);}
+
             for(int i=0;i<2;i++)
             {
                 var leg=w.Legs[i];var home=rig.Mount.TransformPoint(leg.Home)+Origin.position;
-                if(state.Blend>.05f||airborne)
+                if(state.Blend>.05f||airborne||state.WingBlend>.05f)
                 {
-                    leg.Swing=false;leg.Foot=home+rig.Mount.up*.32f-rig.Mount.forward*.22f;
+                    leg.Swing=false;float tuck=Rules.Complete(v)&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0)&&state.FlightHeight>=0?Mathf.Clamp01((state.FlightHeight-.5f)/3):1;
+                    if(Rules.Complete(v)&&!Flight.AirPose(state)&&state.Grounded)tuck=0;
+                    leg.Foot=home+(rig.Mount.up*.32f-rig.Mount.forward*.22f)*tuck;
                     Solve(rig,i,leg.Foot-Origin.position,rig.Mount.up);continue;
                 }
                 if(w.WasAir){leg.Foot=home;Ground(v,home,out leg.Foot);leg.Swing=false;}
@@ -104,7 +110,8 @@ namespace PZAEC.Mecha
             w.WasAir=airborne||state.Blend>.05f;
             if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;RobotAudio.OneShot(v,"land",.9f);}
             if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.OneShot(v,"jump",.6f);}
-            RobotAudio.Update(v,activity,show);
+            if(Rules.Complete(v))SwordMotion.SafePose(v,rig);
+            CombatFeedback.Blade(v,rig);RobotAudio.Update(v,activity,show);
             RobotPresentation.Update(v,rig,state.Blend,Boarding.Hatch(v));
         }
         public static void Forget(EntityVehicle v){walkers.Remove(v.entityId);}
