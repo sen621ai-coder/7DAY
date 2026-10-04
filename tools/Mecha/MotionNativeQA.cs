@@ -135,6 +135,7 @@ public sealed class MechaMotionQA : IModApi
         CeremonyTrial(world,v,rig,camera,texture);
         PresentationTrial(world,v,rig,camera,texture);
         WeightPresentationTrial(world,v,rig,camera,texture);
+        foreach(var result in EquipmentOwnershipQA.Run(world,v,rig,camera,output)){report.Add(result);if(result.StartsWith("FAIL "))failures++;}
         LowFrameBeamTrial(world,v,rig,camera,texture);
         WeaponEffectTrial(world,v,rig,camera,texture);
         FlightTrial(world,v,rig,camera,texture);

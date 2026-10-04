@@ -29,7 +29,7 @@ if(!$ModRoot){$ModRoot=Join-Path $root 'ZZ-PZAEC_Mecha'}
 Copy-Item -LiteralPath $ModRoot -Destination $target -Recurse
 if($MotionProbe) {
     $probeSources=@($ProbeSource)
-    if(!$ProbeSource){$probeSources=@('MotionNativeQA.cs','LandingNativeQA.cs','AudioNativeQA.cs','TimingNativeQA.cs') | ForEach-Object {Join-Path $PSScriptRoot $_}}
+    if(!$ProbeSource){$probeSources=@('MotionNativeQA.cs','LandingNativeQA.cs','AudioNativeQA.cs','TimingNativeQA.cs','EquipmentOwnershipQA.cs') | ForEach-Object {Join-Path $PSScriptRoot $_}}
     & (Join-Path $PSScriptRoot 'Build.ps1') -OutputPath (Join-Path $target 'PZAEC.Mecha.dll') -SourceRoot (Join-Path $target 'Source') -ExtraSources $probeSources
 }
 # The isolated world lacks AEC endgame items; stub missing recipe ingredients

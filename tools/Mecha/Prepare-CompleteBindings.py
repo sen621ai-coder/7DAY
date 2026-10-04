@@ -31,6 +31,17 @@ t=np.clip((center-a)@delta/(delta@delta),0,1);distance=np.linalg.norm(center-(a+
 capsule=(distance<.225)&(x>.16)&(y<2.23)
 blade_normal=np.array([.96168816,-.0582994,-.267875]);blade_center=np.array([.3950305,.820023,-.5686091])
 plane=(center-blade_center)@blade_normal;sword=capsule&(abs(plane)<np.where(y>1.55,.16,.14))
+# The lower rear fin crosses the sword's broad capsule in the source sculpture.
+# Its red/white plate is ABOVE the blade spine, not an ornament on the blade.
+# Calibrate this overlap in a blade-local frame from the original GLB side views;
+# normal distance alone cannot distinguish these two nearly touching surfaces.
+# Limit the correction to the crossed middle span, preserving tip and collar.
+blade_axis=np.array([.73,1.57,.30])-a;blade_axis/=np.linalg.norm(blade_axis)
+cross_normal=blade_normal-blade_axis*np.dot(blade_normal,blade_axis);cross_normal/=np.linalg.norm(cross_normal)
+blade_across=np.cross(cross_normal,blade_axis)
+blade_along=(center-a)@blade_axis;blade_width=(center-a)@blade_across
+lower_fin_overlap=sword&(blade_along>.72)&(blade_along<1.80)&(blade_width<.075)
+sword&=~lower_fin_overlap
 # Only near-coincident reflected body surfaces are removed. The source is
 # fused, so a wider mirror test would also catch a distinct but nearby blade.
 normal=np.cross(points[:,1]-points[:,0],points[:,2]-points[:,0]);normal/=np.maximum(np.linalg.norm(normal,axis=1)[:,None],1e-12)
@@ -57,7 +68,7 @@ bone[former&(x>.58)&(y>1.63)&(z>.35)]=ids['HandR'];bone[mirrored]=mirror_owner[m
 # constant Z threshold left sections of a plate on animated leg bones.
 folded=(abs(x)>.08)&(y>.35)&(y<2.08)&((z<-.48)|((abs(x)>.30)&(y>1.55)&(z<-.24)))
 neck=(abs(x)>.30)&(y>.35)&(y<2.08)&(z<(.55*(y-1.8)-.18))
-wing=(folded|neck)&~sword
+wing=(folded|neck|lower_fin_overlap)&~sword
 shield=(x<-.76)&(y>.85)&(y<2.85)&(z>-.20)&(z<.85);wing&=~shield
 head_top=(abs(x)<.52)&(y>2.63)&~sword&~wing&~shield&np.isin(bone,[ids['Torso'],ids['Backpack'],ids['Head']])
 bone[head_top]=ids['Head']
@@ -89,6 +100,6 @@ doc.update(parts=parts,sourceNodes=sorted(nodes),renderRoles=audit,geometryTuple
     wingVertices=[sum(p['vertices'] for p in parts if p['role']==name) for name in ['WingL','WingR']],
     swordAnchors=dict(grip=grip.tolist(),bladeRoot=[.73,1.57,.30],bladeTip=a.tolist(),hiltTip=[.9407,2.1757,1.3423],bladeNormal=blade_normal.tolist()),
     roleBinding='rigid complete faces; thin sword plane and conservative mirrored body rejection; tapered rear fins; rigid Backpack and Shield',
-    bindingAudit=dict(mirroredBodyFaces=int(mirrored.sum()),swordCapsuleRejectedFaces=int((capsule&~sword).sum()),rigidArmour=True))
+    bindingAudit=dict(mirroredBodyFaces=int(mirrored.sum()),swordCapsuleRejectedFaces=int((capsule&~sword).sum()),lowerFinOverlapFaces=int(lower_fin_overlap.sum()),rigidArmour=True))
 (res/(stem+'_rig.json')).write_text(json.dumps(doc,indent=2),encoding='utf-8');(res/(stem+'_rig.bin')).write_bytes(blob)
 print('PASS rigid semantic face partition:',audit,'triangles unchanged',before,'source nodes',len(nodes),'audit',doc['bindingAudit'])

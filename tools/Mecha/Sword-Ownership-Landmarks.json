@@ -1,0 +1,85 @@
+{
+  "description": "Source-GLB reviewed plate and blade surface landmarks. Independent exact face identities; UV/normal/position data remains unchanged by ownership correction.",
+  "landmarks": [
+    {
+      "name": "lower-fin-red-upper",
+      "expectedRole": "WingR",
+      "centroid": [
+        0.5578824877738953,
+        1.4157172441482544,
+        0.05812766030430794
+      ],
+      "faceSha256": "9054e761a2a3df862a7de8f540ef558ac9eaa7467c9af8c14bebbc1812c280e8"
+    },
+    {
+      "name": "lower-fin-white-middle",
+      "expectedRole": "WingR",
+      "centroid": [
+        0.5312497615814209,
+        1.2509880065917969,
+        -0.14413680136203766
+      ],
+      "faceSha256": "0c027ff32ff5ef8c6a5d3792bf35df4efcccc13e77ca776a50a0496cc7eac26e"
+    },
+    {
+      "name": "lower-fin-red-lower",
+      "expectedRole": "WingR",
+      "centroid": [
+        0.45465099811553955,
+        1.053063988685608,
+        -0.338737815618515
+      ],
+      "faceSha256": "0f496a477bac4968d97fb48a758a0c59f74e22a8df8dacb21d59ef6981286c49"
+    },
+    {
+      "name": "lower-fin-gold-border",
+      "expectedRole": "WingR",
+      "centroid": [
+        0.38982340693473816,
+        0.9103600978851318,
+        -0.43064919114112854
+      ],
+      "faceSha256": "d457c6fbd46949619dc9c0faaa0000a29b2de2c9c9414511db211c1d4b43ab08"
+    },
+    {
+      "name": "blade-tip",
+      "expectedRole": "SwordBlade",
+      "centroid": [
+        0.22378748655319214,
+        0.5255066752433777,
+        -1.006132960319519
+      ],
+      "faceSha256": "b139bab9fa0eba6eaa77008bc188645f2c1660c7534de22049019df87deb08f9"
+    },
+    {
+      "name": "blade-lower",
+      "expectedRole": "SwordBlade",
+      "centroid": [
+        0.39171114563941956,
+        0.6803309321403503,
+        -0.7066497802734375
+      ],
+      "faceSha256": "a6d34dea4268252965c4ceff944379a0dd37c6087f3d8e97541361ec13e212b7"
+    },
+    {
+      "name": "blade-middle",
+      "expectedRole": "SwordBlade",
+      "centroid": [
+        0.49941039085388184,
+        1.05698823928833,
+        -0.0787762925028801
+      ],
+      "faceSha256": "8884d786764c8edcacbbb494c5a7676e4268dfd469552a4227c0ec301bccedeb"
+    },
+    {
+      "name": "blade-root",
+      "expectedRole": "SwordBlade",
+      "centroid": [
+        0.633200466632843,
+        1.3422017097473145,
+        0.3532908260822296
+      ],
+      "faceSha256": "47714c984baf78be7112b2acc7e183e79e0c477c039e3a764a10bec0b45cc2e6"
+    }
+  ]
+}

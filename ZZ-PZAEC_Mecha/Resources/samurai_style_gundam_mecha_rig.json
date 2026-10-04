@@ -343,8 +343,8 @@
       "role": "SwordBlade",
       "material": 0,
       "offset": 7273908,
-      "vertices": 13600,
-      "indices": 43524
+      "vertices": 11629,
+      "indices": 36885
     },
     {
       "node": 6,
@@ -353,7 +353,7 @@
       "joint": "Torso",
       "role": "SwordHilt",
       "material": 0,
-      "offset": 8100804,
+      "offset": 7979640,
       "vertices": 6613,
       "indices": 20295
     },
@@ -364,7 +364,7 @@
       "joint": "Torso",
       "role": "Torso",
       "material": 0,
-      "offset": 8499408,
+      "offset": 8378244,
       "vertices": 36670,
       "indices": 124476
     },
@@ -375,7 +375,7 @@
       "joint": "Torso",
       "role": "WingL",
       "material": 0,
-      "offset": 10757472,
+      "offset": 10636308,
       "vertices": 1436,
       "indices": 7056
     },
@@ -386,15 +386,15 @@
       "joint": "Torso",
       "role": "WingR",
       "material": 0,
-      "offset": 10854624,
-      "vertices": 9010,
-      "indices": 27960
+      "offset": 10733460,
+      "vertices": 11115,
+      "indices": 34599
     }
   ],
   "wingBinding": "complete rigid rear fins and tapered necks; WingL/WingR under Backpack",
   "wingVertices": [
     1436,
-    9010
+    11115
   ],
   "sourceNodes": [
     6,
@@ -426,11 +426,11 @@
     "LegL": 39587,
     "LegR": 28013,
     "Shield": 16091,
-    "SwordBlade": 14508,
+    "SwordBlade": 12295,
     "SwordHilt": 6765,
     "Torso": 41492,
     "WingL": 2352,
-    "WingR": 9320
+    "WingR": 11533
   },
   "swordAnchors": {
     "grip": [
@@ -463,7 +463,8 @@
   "geometryTupleSha256": "3f6567a4684ce7dae80ef520c9818784ff7d277d7198b945ccfa21ccdefe2236",
   "bindingAudit": {
     "mirroredBodyFaces": 3,
-    "swordCapsuleRejectedFaces": 861,
+    "swordCapsuleRejectedFaces": 3074,
+    "lowerFinOverlapFaces": 2213,
     "rigidArmour": true
   }
 }
