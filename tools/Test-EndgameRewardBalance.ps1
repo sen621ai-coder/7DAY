@@ -98,7 +98,13 @@ foreach($tier in 16..19) {
     $newWeapon=$bundle.SelectSingleNode("item[@group='PZAECExpansionWeaponT$tier']")
     Assert-Balance ([double]$newWeapon.prob -eq @(.02,.04,.06,.08)[$tier-16] -and $newWeapon.force_prob -eq 'true' -and $newWeapon.count -eq '1') "Wrong new weapon probability T$tier"
     Assert-Balance ([double]$bundle.SelectSingleNode("item[@group='groupSkillBook']").prob -eq @(.20,.25,.30,.40)[$tier-16]) "Separate skill-point book reward changed T$tier"
-    $expectedBreadth=if($tier -eq 19){23}else{22}
+    $expectedBreadth=if($tier -eq 19){18}else{17}
+    foreach($pool in @('groupUnique_Weapon','groupLegend_Weapon','groupLegend_MeleeWeapon','groupRareMods','groupUniqModsAll','PZAECBossLoot_UniqueMods_ByFamily')) {
+        Assert-Balance ($fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']/item[@group='$pool']").Count -eq 0) "Removed boss pool still active: $pool/T$tier"
+        Assert-Balance ($fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='$pool']").Count -eq 1) "Shared pool removed: $pool"
+    }
+    $food=$fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']/item[@name='itemPZAECAdvancedFoodSupplyCrate']")
+    Assert-Balance ($food.Count -eq 1 -and $food[0].count -eq '1' -and $food[0].force_prob -eq 'true' -and [double]$food[0].prob -eq @(.5,.6,.7,.8)[$tier-16]) "Wrong food crate reward T$tier"
     $capacitor=@($bundle.item | Where-Object name -eq "resourcePZAECSiegeCapacitorT$tier")
     $capacitorCount=if($tier -lt 18){'1'}else{'1,2'}
     Assert-Balance ($capacitor.Count -eq 1 -and $capacitor[0].count -eq $capacitorCount -and $capacitor[0].prob -eq '1' -and $capacitor[0].force_prob -eq 'true') "Wrong guaranteed capacitor reward T$tier"
@@ -109,13 +115,26 @@ foreach($tier in 16..19) {
     $box=$loot.SelectSingleNode("/lootcontainers/lootcontainer[@name='PZAECBossLootBundleT$tier']")
     Assert-Balance ($box.unmodified_lootstage -eq 'true' -and $box.ignore_loot_abundance -eq 'true') "Bundle affected by world loot multipliers T$tier"
 }
-foreach($groupName in @('groupUnique_Weapon','groupLegend_Weapon','groupLegend_MeleeWeapon','groupUniqModsAll','groupUniqueParts')) {
+foreach($groupName in @('groupUniqueParts')) {
     $last=0.0
     foreach($tier in 16..19) {
         $p=[double]$loot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']/item[@group='$groupName']").prob
         Assert-Balance ($p -gt $last) "Boss rarity chance not increasing: $groupName/T$tier"; $last=$p
     }
 }
+[xml]$runtimeItems=Get-Content (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/items.xml') -Raw
+[xml]$nativeItems=Get-Content (Join-Path $modRoot '../Data/Config/items.xml') -Raw
+$foodCrates=$runtimeItems.SelectNodes("//item[@name='itemPZAECAdvancedFoodSupplyCrate']")
+Assert-Balance ($foodCrates.Count -eq 1) 'Duplicate or missing food crate item'
+$action=$foodCrates[0].SelectSingleNode("property[@class='Action0']")
+Assert-Balance ($action.SelectSingleNode("property[@name='Class']").value -eq 'OpenBundle' -and $action.SelectSingleNode("property[@name='Consume']").value -eq 'true') 'Food crate must be consumed on opening'
+Assert-Balance ($action.SelectSingleNode("property[@name='Create_item']").value -eq 'foodSpaghetti,foodGumboStew,foodShepardsPie' -and $action.SelectSingleNode("property[@name='Create_item_count']").value -eq '2,2,2') 'Food crate must contain exactly six prepared meals'
+foreach($foodId in @('foodSpaghetti','foodGumboStew','foodShepardsPie')) {
+    Assert-Balance ($nativeItems.SelectNodes("/items/item[@name='$foodId']").Count -eq 1) "Unknown prepared food: $foodId"
+}
+$foodText=@(Import-Csv (Join-Path $modRoot '99-AEC_T16_RuntimeFix/Config/Localization.csv') | Where-Object Key -like 'itemPZAECAdvancedFoodSupplyCrate*')
+Assert-Balance ($foodText.Count -eq 2 -and @($foodText | Where-Object { -not $_.english -or -not $_.schinese }).Count -eq 0) 'Missing food crate localization'
+'PASS: six direct boss pools removed; shared pools preserved; food crate chances 50/60/70/80%; six prepared meals per crate.'
 $bookPool=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossSkillMagazinesOnly']")
 Assert-Balance ($bookPool.count -eq '1' -and $bookPool.item.Count -eq 2 -and $bookPool.SelectNodes("item[@group='skillMagazines' or @group='groupChallengeRewardSkillMagazinesAll']").Count -eq 2) 'Boss pool must contain only the two crafting-magazine branches'
 $sharedBooks=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='groupZpackBoss02']")

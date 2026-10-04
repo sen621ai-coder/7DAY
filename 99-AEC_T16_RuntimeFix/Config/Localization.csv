@@ -1562,3 +1562,6 @@ aecDisplay_StaminaLoss_Percent_primary_secondary,ui_display,AECEquipmentDisplay,
 aecDisplay_StaminaMax_Base_,ui_display,AECEquipmentDisplay,,,,耐力上限,,,,,,,,,,,,耐力上限,耐力上限
 aecDisplay_WeaponHandling_Percent_,ui_display,AECEquipmentDisplay,,,,武器操控,,,,,,,,,,,,武器操控,武器操控
 aecDisplay_SpreadMultiplierHip_Percent_,ui_display,AECEquipmentDisplay,,,,腰射散布,,,,,,,,,,,,腰射散布,腰射散布
+
+itemPZAECAdvancedFoodSupplyCrate,items,Food,,,,Advanced Food Supply Crate,,,,,,,,,,,,高级食物补给箱,高級食物補給箱
+itemPZAECAdvancedFoodSupplyCrateDesc,items,Food,,,,Open to receive 2 Spaghetti + 2 Gumbo Stew + 2 Shepherd pies. Six prepared advanced meals in total. Consumed on use.,,,,,,,,,,,,打开获得意大利面×2、秋葵浓汤×2、牧羊人派×2，共6份高级成品食物。使用后消耗补给箱。,打開獲得義大利細麵×2、秋葵濃湯×2、牧羊人派×2，共6份高級成品食物。使用後消耗補給箱。

@@ -6362,4 +6362,23 @@
       <property name="SellableToTrader" value="false" />
     </item>
   </append>
+  <append xpath="/items">
+    <item name="itemPZAECAdvancedFoodSupplyCrate">
+      <property name="Extends" value="questRewardBundleMaster" />
+      <property name="CreativeMode" value="Player" />
+      <property name="CustomIcon" value="bundleFood" />
+      <property name="CustomIconTint" value="FFCC66" />
+      <property name="ItemTypeIcon" value="bundle" />
+      <property name="Stacknumber" value="1" />
+      <property name="DescriptionKey" value="itemPZAECAdvancedFoodSupplyCrateDesc" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action0">
+        <property name="Class" value="OpenBundle" />
+        <property name="Delay" value="0" />
+        <property name="Consume" value="true" />
+        <property name="Create_item" value="foodSpaghetti,foodGumboStew,foodShepardsPie" />
+        <property name="Create_item_count" value="2,2,2" />
+      </property>
+    </item>
+  </append>
 </configs>

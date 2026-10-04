@@ -1575,4 +1575,41 @@
   <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
     <item name="resourcePZAECSiegeCapacitorT19" count="1,2" prob="1" force_prob="true" />
   </append>
+  <!-- Boss-box-only pool cleanup and prepared advanced food supplies. -->
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUnique_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupLegend_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupLegend_MeleeWeapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupRareMods']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupUniqModsAll']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='PZAECBossLoot_UniqueMods_ByFamily']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+    <item name="itemPZAECAdvancedFoodSupplyCrate" count="1" prob="0.50" force_prob="true" />
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupUnique_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupLegend_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupLegend_MeleeWeapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupRareMods']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupUniqModsAll']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='PZAECBossLoot_UniqueMods_ByFamily']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']">
+    <item name="itemPZAECAdvancedFoodSupplyCrate" count="1" prob="0.60" force_prob="true" />
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupUnique_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupLegend_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupLegend_MeleeWeapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupRareMods']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupUniqModsAll']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='PZAECBossLoot_UniqueMods_ByFamily']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']">
+    <item name="itemPZAECAdvancedFoodSupplyCrate" count="1" prob="0.70" force_prob="true" />
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupUnique_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupLegend_Weapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupLegend_MeleeWeapon']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupRareMods']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupUniqModsAll']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='PZAECBossLoot_UniqueMods_ByFamily']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
+    <item name="itemPZAECAdvancedFoodSupplyCrate" count="1" prob="0.80" force_prob="true" />
+  </append>
 </configs>

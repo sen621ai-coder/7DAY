@@ -1,6 +1,14 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.20 boss food supplies and pool cleanup
+- T16-T19 portable boss boxes no longer directly roll Project Z unique,
+  legendary ranged or legendary melee weapons, rare mods, unique mods,
+  or the family-based unique mod pool. Shared pools remain available elsewhere.
+- Advanced Food Supply Crate: 50/60/70/80% per box by tier; one crate gives
+  2 Spaghetti, 2 Gumbo Stew and 2 Shepherd pies. Other rewards are unchanged.
+- XML/localization update only; restart server and clients to reload configs.
+
 Runtime 1.27.19 Apache belly cannon finish
 
 - The gun receiver and mounting fairing now use muted greys closer to the
