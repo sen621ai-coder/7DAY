@@ -13,7 +13,12 @@ namespace PZAEC.Mecha
         {
             public GameObject Object; public Vector3 Position, Velocity; public float Life;
         }
-        sealed class Tracer { public LineRenderer Line; public Vector3 A, B; public float Life; }
+        sealed class Tracer
+        {
+            public LineRenderer Line,Glow;public Vector3 A,B;public float Age,Life;
+            public int BornFrame,PresentedFrames,LastPresentedFrame=-1;
+            public void Presented(int frame){if(frame==LastPresentedFrame)return;LastPresentedFrame=frame;PresentedFrames++;}
+        }
         public sealed class Status
         {
             public float Time = -100, Heat, LockProgress;
@@ -50,16 +55,28 @@ namespace PZAEC.Mecha
         static readonly List<Tracer> tracers = new List<Tracer>();
         static readonly Stack<Tracer> pool = new Stack<Tracer>();
         static readonly List<int> remove = new List<int>();
-        static Material beamMaterial, bodyMaterial;
+        static Material beamMaterial, bodyMaterial;static bool missingBeamShader;
 
         static Material Material(bool beam)
         {
             var current = beam ? beamMaterial : bodyMaterial;
             if (current != null) return current;
-            var shader = Shader.Find(beam ? "Sprites/Default" : "Standard");
-            if (shader == null) shader = Shader.Find("Unlit/Color");
-            if (shader == null) return null;
-            var material = new Material(shader) { color = beam ? new Color(.35f, .95f, 1f) : new Color(.2f, .24f, .28f) };
+            Shader shader=null;
+            foreach(var name in beam?new[]{"Sprites/Default","Legacy Shaders/Particles/Additive","Hidden/Internal-Colored"}:new[]{"Standard","Unlit/Color"})
+            {var candidate=Shader.Find(name);if(candidate!=null&&candidate.isSupported){shader=candidate;break;}}
+            if (shader == null)
+            {if(beam&&!missingBeamShader){missingBeamShader=true;Log.Warning("[Mecha] No supported vertex-color beam shader; beam presentation unavailable.");}return null;}
+            var material = new Material(shader) { name=beam?"Mecha beam vertex color":"Mecha missile body",color = beam ? Color.white : new Color(.2f, .24f, .28f) };
+            if(beam)
+            {
+                if(material.HasProperty("_MainTex"))material.SetTexture("_MainTex",Texture2D.whiteTexture);
+                if(material.HasProperty("_SrcBlend"))material.SetInt("_SrcBlend",(int)BlendMode.SrcAlpha);
+                if(material.HasProperty("_DstBlend"))material.SetInt("_DstBlend",(int)BlendMode.OneMinusSrcAlpha);
+                if(material.HasProperty("_Cull"))material.SetInt("_Cull",(int)CullMode.Off);
+                if(material.HasProperty("_ZWrite"))material.SetInt("_ZWrite",0);
+                if(material.HasProperty("_ZTest"))material.SetInt("_ZTest",(int)CompareFunction.LessEqual);
+                material.renderQueue=3000;
+            }
             if (!beam && material.HasProperty("_Metallic")) material.SetFloat("_Metallic", .6f);
             if (beam) beamMaterial = material; else bodyMaterial = material;
             return material;
@@ -159,9 +176,44 @@ namespace PZAEC.Mecha
         static void BeamTrace(World world,int vehicleId,int id,Vector3 a,Vector3 b)
         {
             long key=(long)vehicleId<<32|(uint)id;if(!seenBeamSerials.Add(key))return;Gait.Recoil(vehicleId);seenBeamOrder.Enqueue(key);while(seenBeamOrder.Count>64)seenBeamSerials.Remove(seenBeamOrder.Dequeue());
-            var tracer=pool.Count>0?pool.Pop():new Tracer();if(tracer.Line==null)tracer.Line=new GameObject("MechaBeam").AddComponent<LineRenderer>();tracer.Line.gameObject.SetActive(true);tracer.Line.sharedMaterial=Material(true);
-            tracer.Line.startColor=new Color(.8f,1f,1f,.95f);tracer.Line.endColor=new Color(.35f,.9f,1f,.2f);tracer.Line.startWidth=.12f;tracer.Line.endWidth=.03f;tracer.Line.positionCount=2;tracer.Line.useWorldSpace=true;tracer.Line.SetPosition(0,a-Origin.position);tracer.Line.SetPosition(1,b-Origin.position);tracer.Line.shadowCastingMode=ShadowCastingMode.Off;tracer.A=a;tracer.B=b;tracer.Life=.09f;tracers.Add(tracer);
             var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)RobotAudio.OneShot(v,Rules.Complete(v)?"head-laser":"palm-laser",Rules.Complete(v)?.55f:.45f);
+            var material=Material(true);if(material==null)return;
+            var tracer=pool.Count>0?pool.Pop():new Tracer();
+            if(tracer.Line==null||tracer.Glow==null)
+            {
+                if(tracer.Line!=null)Release(tracer.Line.gameObject);
+                tracer.Line=BeamLine("MechaBeam",null,material);
+                tracer.Glow=BeamLine("MechaBeamGlow",tracer.Line.transform,material);
+                tracer.Line.gameObject.AddComponent<MechaBeamPresentation>().Presented=tracer.Presented;
+            }
+            tracer.Line.gameObject.SetActive(true);tracer.A=a;tracer.B=b;tracer.Age=0;tracer.Life=Rules.Complete(v)?.32f:.22f;
+            tracer.BornFrame=Time.frameCount;tracer.PresentedFrames=0;tracer.LastPresentedFrame=-1;
+            SetBeam(tracer,1);tracers.Add(tracer);
+        }
+        static LineRenderer BeamLine(string name,Transform parent,Material material)
+        {
+            var go=new GameObject(name);go.hideFlags=HideFlags.DontSave;go.layer=0;if(parent!=null)go.transform.SetParent(parent,false);
+            var line=go.AddComponent<LineRenderer>();line.sharedMaterial=material;line.positionCount=2;line.useWorldSpace=true;
+            line.alignment=LineAlignment.View;line.textureMode=LineTextureMode.Stretch;line.numCapVertices=2;line.numCornerVertices=2;
+            line.shadowCastingMode=ShadowCastingMode.Off;line.receiveShadows=false;line.lightProbeUsage=LightProbeUsage.Off;line.reflectionProbeUsage=ReflectionProbeUsage.Off;
+            return line;
+        }
+        static void SetBeam(Tracer tracer,float alpha)
+        {
+            tracer.Line.startWidth=.055f;tracer.Line.endWidth=.04f;tracer.Line.startColor=new Color(.92f,1,1,alpha);tracer.Line.endColor=new Color(.8f,1,1,alpha*.9f);
+            tracer.Glow.startWidth=.18f;tracer.Glow.endWidth=.12f;tracer.Glow.startColor=new Color(.15f,.8f,1,alpha*.35f);tracer.Glow.endColor=new Color(.15f,.8f,1,alpha*.25f);
+            var a=tracer.A-Origin.position;var b=tracer.B-Origin.position;
+            tracer.Line.SetPosition(0,a);tracer.Line.SetPosition(1,b);tracer.Glow.SetPosition(0,a);tracer.Glow.SetPosition(1,b);
+        }
+        // Two actual camera presentation frames, with a bounded off-screen lease.
+        // This policy is shared with native QA's low-frame-rate probes.
+        public static bool BeamExpired(float age,float lifetime,int presentedFrames)
+        {return age>=lifetime&&presentedFrames>=2||age>=Mathf.Max(.8f,lifetime*3);}
+        public static string BeamDiagnostics()
+        {
+            string result="active="+tracers.Count+" pooled="+pool.Count+" shader="+(beamMaterial!=null?beamMaterial.shader.name:"not created");
+            foreach(var t in tracers)result+=" | age="+t.Age+" life="+t.Life+" bornFrame="+t.BornFrame+" presented="+t.PresentedFrames+" layer="+t.Line.gameObject.layer+" enabled="+t.Line.enabled+" a="+t.A+" b="+t.B;
+            return result;
         }
 
         public static void Update(float dt)
@@ -184,17 +236,26 @@ namespace PZAEC.Mecha
             foreach (int id in remove) projectiles.Remove(id);
             for (int i = tracers.Count - 1; i >= 0; i--)
             {
-                var tracer = tracers[i]; tracer.Life -= dt;
-                if (tracer.Life <= 0 || tracer.Line == null)
+                var tracer = tracers[i];
+                // Broadcast may create this tracer earlier in this same Update.
+                // Spending the already-elapsed frame time made 90ms beams vanish
+                // before their very first render at the user's 9–13 FPS.
+                if(Time.frameCount!=tracer.BornFrame)tracer.Age+=Mathf.Max(0,dt);
+                if (BeamExpired(tracer.Age,tracer.Life,tracer.PresentedFrames) || tracer.Line == null || tracer.Glow == null)
                 {
                     if (tracer.Line != null)
                     {
-                        if (pool.Count < 32) { tracer.Line.gameObject.SetActive(false); pool.Push(tracer); }
+                        if (tracer.Glow!=null&&pool.Count < 32) { tracer.Line.gameObject.SetActive(false); pool.Push(tracer); }
                         else UnityEngine.Object.Destroy(tracer.Line.gameObject);
                     }
                     tracers.RemoveAt(i);
                 }
-                else { tracer.Line.SetPosition(0, tracer.A - Origin.position); tracer.Line.SetPosition(1, tracer.B - Origin.position); }
+                else
+                {
+                    float alpha=Mathf.Clamp01((tracer.Life-tracer.Age)/(tracer.Life*.4f));
+                    if(tracer.PresentedFrames<2)alpha=Mathf.Max(.65f,alpha);
+                    SetBeam(tracer,alpha);
+                }
             }
             var world = GameManager.Instance != null ? GameManager.Instance.World : null;
             if (world != null) UpdateBlades(world, dt);
@@ -361,8 +422,21 @@ namespace PZAEC.Mecha
             if (beamMaterial != null) UnityEngine.Object.Destroy(beamMaterial);
             if (bodyMaterial != null) UnityEngine.Object.Destroy(bodyMaterial);
             if (bladeMaterial != null) UnityEngine.Object.Destroy(bladeMaterial);
-            beamMaterial = bodyMaterial = bladeMaterial = null;
+            beamMaterial = bodyMaterial = bladeMaterial = null;missingBeamShader=false;
         }
         static void Release(GameObject go){if(go!=null){go.SetActive(false);UnityEngine.Object.Destroy(go);}}
+    }
+    // LineRenderer invokes this only when a game camera actually presents it.
+    // Reflection cameras and repeated draws in one game frame cannot burn the lease.
+    public sealed class MechaBeamPresentation:MonoBehaviour
+    {
+        public Action<int> Presented;
+        void OnWillRenderObject()
+        {
+            var camera=Camera.current;if(camera==null||camera.cameraType!=CameraType.Game)return;
+            var world=GameManager.Instance!=null?GameManager.Instance.World:null;var player=world!=null?world.GetPrimaryPlayer():null;
+            if(player!=null&&camera!=player.playerCamera)return;
+            if(Presented!=null)Presented(Time.frameCount);
+        }
     }
 }

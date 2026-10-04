@@ -37,8 +37,9 @@ def capsule_distance(a,b,tri):
     return best
 
 fail=[];minimum=100.;radius=.065;hand=next(i for i,j in enumerate(doc['joints']) if j['name']=='HandR')
+hiltLocal=np.array(doc['swordAnchors']['hiltTip'])-np.array(doc['swordAnchors']['grip'])
 for pose in poses:
-    mats=np.array(pose['bones'],dtype=np.float32).reshape(-1,3,4);a=np.array(pose['root']);b=np.array(pose['tip']);hiltA=mats[hand,:,3];hiltB=mats[hand,:,:3]@np.array([.14,.37,.58])+hiltA
+    mats=np.array(pose['bones'],dtype=np.float32).reshape(-1,3,4);a=np.array(pose['root']);b=np.array(pose['tip']);hiltA=mats[hand,:,3];hiltB=mats[hand,:,:3]@hiltLocal+hiltA
     for role,v,ix,local,boundBones,bounds in parts:
         box=np.einsum('ijk,ilk->ilj',mats[boundBones,:,:3],bounds)+mats[boundBones,:,3][:,None,:];lo=box.min((0,1))-.001;hi=box.max((0,1))+.001
         near=False

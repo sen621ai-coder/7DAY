@@ -4,17 +4,40 @@ namespace PZAEC.Mecha
     // Complete Form choreography and geometric safety, independent of player transfer.
     public static class Ceremony
     {
-        public const float EnterSeconds=5, ExitSeconds=3.6f, EnterTransfer=2.9f, ExitTransfer=2.2f, ExitHold=2.8f;
+        public const float EnterSeconds=7, ExitSeconds=6, EnterTransfer=4.2f, ExitTransfer=3.65f, ExitHold=4.1f;
+        public const float EnterKneelStart=1.65f,EnterKneelEnd=2.55f,ExitKneelStart=1.1f,ExitKneelEnd=2;
+        public const float EnterOpen=3.1f,ExitOpen=2.65f,EnterClose=4.3f,ExitClose=4.1f;
+        public static float KneelEnd(bool exit){return exit?ExitKneelEnd:EnterKneelEnd;}
+        public static float OpenAt(bool exit){return exit?ExitOpen:EnterOpen;}
+        public static float CloseAt(bool exit){return exit?ExitClose:EnterClose;}
         public static float Ease(float t){t=Mathf.Clamp01(t);return t*t*(3-2*t);}
         public static float Kneel(bool exit,float t)
-        {return exit?t<.5f?0:t<1.5f?Ease((t-.5f)/1f):t<2.8f?1:1-Ease((t-2.8f)/.8f):t<1.3f?0:t<2.2f?Ease((t-1.3f)/.9f):t<3.7f?1:1-Ease((t-3.7f)/1.3f);}
+        {
+            float start=exit?ExitKneelStart:EnterKneelStart,end=KneelEnd(exit),rise=exit?4.95f:5.25f,stand=exit?5.75f:6.6f;
+            if(t<start)return 0;if(t<end)return Ease((t-start)/(end-start));
+            if(t<end+.28f)return 1+.045f*Mathf.Sin((t-end)/.28f*Mathf.PI);
+            if(t<rise)return 1;return 1-Ease((t-rise)/(stand-rise));
+        }
         public static float Hatch(bool exit,bool full,float t)
         {
             if(!full)return t<.35f?Ease(t/.35f):1-Ease((t-.35f)/.15f);
-            return exit?t<1.5f?0:t<2.2f?Ease((t-1.5f)/.7f):t<2.8f?1:1-Ease((t-2.8f)/.55f):t<2.2f?0:t<2.9f?Ease((t-2.2f)/.7f):t<3.15f?1:1-Ease((t-3.15f)/.55f);
+            float open=OpenAt(exit),close=CloseAt(exit),openDuration=exit?.7f:.75f;
+            return t<open?0:t<open+openDuration?Ease((t-open)/openDuration):t<close?1:1-Ease((t-close)/.65f);
         }
         public static float Equipment(bool exit,float t)
-        {return exit?t<.5f?Ease(t/.5f):t<2.8f?1:1-Ease((t-2.8f)/.8f):t<.6f?0:t<1.3f?Ease((t-.6f)/.7f):t<3.7f?1:1-Ease((t-3.7f)/1.3f);}
+        {float rise=exit?4.95f:5.25f,stand=exit?5.75f:6.6f;return t<.45f?0:t<1.1f?Ease((t-.45f)/.65f):t<rise?1:1-Ease((t-rise)/(stand-rise));}
+        public static Vector3 FootTarget(Model.Rig r,bool exit,float t,int side,Vector3 home)
+        {
+            // Place one foot while the other supports the body, then lower on planted soles.
+            float a=exit?.45f:.65f,b=exit?.75f:1.05f,c=exit?1.05f:1.5f;
+            float progress=side==0?Mathf.Clamp01((t-a)/(b-a)):Mathf.Clamp01((t-b)/(c-b));
+            return home+r.Mount.forward*(side==0?-.40f:.20f)*Ease(progress)+r.Mount.right*(side==0?-.04f:.04f)*Ease(progress)+r.Mount.up*(Mathf.Sin(progress*Mathf.PI)*.09f);
+        }
+        public static void SwordTarget(bool exit,float t,out Vector3 grip,out Vector3 direction,out Vector3 normal)
+        {
+            float e=Equipment(exit,t);grip=Vector3.Lerp(new Vector3(1.22f,2.12f,.60f),new Vector3(1.25f,2.30f,.60f),e);
+            direction=Vector3.Slerp(new Vector3(.08f,-.79f,.60f),new Vector3(.10f,-.15f,.98f),e).normalized;normal=Vector3.right;
+        }
         public static bool Stable(EntityVehicle v)
         {var rb=v.vehicleRB;return rb!=null&&rb.velocity.sqrMagnitude<=.16f&&Vector3.Dot(rb.rotation*Vector3.up,Vector3.up)>.95f&&!Locomotion.Get(v).HoverOn&&!Locomotion.Get(v).Boost&&(v.GetWheelsOnGround()>0||Weapons.Trace(v,v.position+Vector3.up*.2f,Vector3.down,.9f,out var ground));}
         public static bool ClearCapsule(EntityVehicle v,Entity actor,Vector3 feet)
@@ -65,8 +88,9 @@ namespace PZAEC.Mecha
         public static void Pose(EntityVehicle v,Model.Rig r,bool exit,bool full,float t,Vector3 observer)
         {
             float k=full?Kneel(exit,t):0,e=full?Equipment(exit,t):0;
-            r.Torso.localPosition=r.TorsoBasePosition+Vector3.down*(k*.78f);
-            r.Torso.localRotation=r.RestRot[r.Torso]*Quaternion.Euler(k*4,0,0);
+            float brace=Ease((t-(exit?.45f:.8f))/.7f)*(1-Ease((t-(exit?5.75f:6.6f))/.4f));
+            r.Torso.localPosition=r.TorsoBasePosition+new Vector3(.055f*brace,-k*.72f-.045f*brace,.055f*brace);
+            r.Torso.localRotation=r.RestRot[r.Torso]*Quaternion.Euler(k*10,0,-brace*2);
             var look=Quaternion.Inverse(Weapons.BodyRotation(v))*(observer-v.position);
             float yaw=Mathf.Clamp(Mathf.Atan2(look.x,look.z)*Mathf.Rad2Deg,-35,35);
             float greet=full?Ease(t/.4f)*(1-Ease((t-(exit?.5f:.6f))/.7f)):0;
@@ -74,8 +98,7 @@ namespace PZAEC.Mecha
             r.ShoulderL.localRotation=r.RestRot[r.ShoulderL]*Quaternion.Euler(-8*e,exit?-15*e:0,-18*e);
             r.ShoulderR.localRotation=r.RestRot[r.ShoulderR]*Quaternion.Euler(8*e,0,12*e);
             r.ElbowL.localRotation=r.RestRot[r.ElbowL]*Quaternion.Euler(-8*e,0,0);
-            var blade=Vector3.Lerp(new Vector3(.60f,-.67f,.35f),new Vector3(.82f,.08f,-.35f),e).normalized;
-            r.HandR.rotation=Quaternion.FromToRotation(r.HandR.TransformDirection(Samurai.BladeTip-Samurai.Grip),r.Mount.TransformDirection(blade))*r.HandR.rotation;
+            // The final sword target is resolved after the planted foot IK.
             r.HandL.localRotation=r.RestRot[r.HandL]*Quaternion.Euler(0,-10-(exit?15:0)*e,0);
         }
     }

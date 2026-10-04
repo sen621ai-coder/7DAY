@@ -47,7 +47,7 @@ namespace PZAEC.Mecha
         }
         public static void Blade(EntityVehicle v,Model.Rig r)
         {
-            if(!Rules.Complete(v))return;var s=Samurai.Get(v);float phase=(Time.time-s.Started)/Samurai.Duration(s);bool active=s.Swing&&!s.Blocked&&phase>=.18f&&phase<=.70f;
+            if(!Rules.Complete(v))return;var s=Samurai.Get(v);float phase=(Time.time-s.Started)/Samurai.Duration(s);bool active=s.Swing&&!s.Blocked&&SwordMotion.DamagePhase(phase);
             Trail t=null;for(int i=0;i<trails.Length;i++)if(trails[i]!=null&&trails[i].Vehicle==v.entityId){t=trails[i];break;}
             if(!active){if(t!=null){t.Root.gameObject.SetActive(false);t.Tip.gameObject.SetActive(false);t.Count=0;}return;}
             if(t==null){int index=0;float oldest=float.MaxValue;for(int i=0;i<trails.Length;i++){if(trails[i]==null){index=i;break;}if(trails[i].At<oldest){oldest=trails[i].At;index=i;}}t=trails[index];if(t==null){t=new Trail{Root=Line("MechaSwordRootTrail"),Tip=Line("MechaSwordTipTrail")};trails[index]=t;}t.Vehicle=v.entityId;t.Count=0;}

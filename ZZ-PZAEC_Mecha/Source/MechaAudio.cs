@@ -6,7 +6,12 @@ namespace PZAEC.Mecha
 {
     public static class RobotAudio
     {
-        sealed class Voice { public EntityVehicle Vehicle; public GameObject Root;public AudioSource Idle,Servo,Boost,Shot,Touch; }
+        sealed class Voice
+        {
+            public EntityVehicle Vehicle; public GameObject Root;public AudioSource Servo,Boost,Shot,Touch;
+            public Model.Rig Rig;public Transform[] Joints;public Quaternion[] Rotations;public Vector3[] Positions;
+            public float ServoTarget,BoostTarget,JointActivity;
+        }
         static readonly Dictionary<int,Voice> voices=new Dictionary<int,Voice>();
         static readonly Dictionary<string,AudioClip> clips=new Dictionary<string,AudioClip>();
         static AudioClip Clip(string name)
@@ -29,17 +34,47 @@ namespace PZAEC.Mecha
         static Voice Get(EntityVehicle v)
         {Voice a;if(voices.TryGetValue(v.entityId,out a)&&a.Vehicle==v&&a.Root!=null)return a;
             var root=new GameObject("MechaMechanicalAudio");root.transform.SetParent(v.transform,false);root.transform.localPosition=Vector3.up*1.5f;
-            a=new Voice{Vehicle=v,Root=root};a.Idle=Source(root,"reactor-idle",true);a.Servo=Source(root,"servo",true);a.Boost=Source(root,"boost",true);a.Shot=Source(root,null,false);var contact=new GameObject("MechaContactAudio");contact.transform.SetParent(root.transform,false);a.Touch=Source(contact,null,false);voices[v.entityId]=a;return a;}
+            if(a!=null&&a.Root!=null)UnityEngine.Object.Destroy(a.Root);
+            a=new Voice{Vehicle=v,Root=root};a.Servo=Source(root,"servo",true);a.Boost=Source(root,"boost",true);a.Shot=Source(root,null,false);var contact=new GameObject("MechaContactAudio");contact.transform.SetParent(root.transform,false);a.Touch=Source(contact,null,false);voices[v.entityId]=a;return a;}
         static bool Audible {get {return GameManager.Instance!=null&&GameManager.Instance.World!=null&&GameManager.Instance.World.GetPrimaryPlayer()!=null;}}
         public static void OneShot(EntityVehicle v,string name,float volume)
         {if(v!=null&&Audible)PlayShot(Get(v).Shot,name,volume);}
         public static void Contact(EntityVehicle v,string name,Vector3 point,float volume){if(v==null||!Audible)return;var source=Get(v).Touch;source.transform.position=point-Origin.position;PlayShot(source,name,volume);}
         static void PlayShot(AudioSource a,string name,float volume){a.volume=1;a.PlayOneShot(Clip(name),volume);}
         static void Loop(AudioSource a,float target)
-        {a.volume=Mathf.MoveTowards(a.volume,target,Time.deltaTime*2);if(target>0&&!a.isPlaying)a.Play();if(target<=0&&a.volume<=.001f)a.Stop();}
+        {a.volume=Mathf.MoveTowards(a.volume,target,Time.deltaTime*(target<=0?8:2));if(target>0&&!a.isPlaying)a.Play();if(target<=0&&a.volume<=.001f){a.volume=0;a.Stop();}}
+        // Sample the final local pose, after gait / sword / flight have applied.
+        // The idle torso breathing (about .008 m/s) is below the motion floor.
+        static float JointMotion(EntityVehicle v,Voice voice)
+        {
+            var rig=Model.GetRig(v);if(rig==null)return 0;
+            bool first=voice.Rig!=rig||voice.Joints==null;
+            if(first)
+            {
+                voice.Rig=rig;
+                voice.Joints=new[]{rig.Torso,rig.Head,rig.ShoulderL,rig.ShoulderR,rig.ElbowL,rig.ElbowR,rig.HipL,rig.HipR,rig.KneeL,rig.KneeR,rig.FootL,rig.FootR,rig.WingL,rig.WingR,rig.ChestL,rig.ChestR,rig.ChestDoor};
+                voice.Rotations=new Quaternion[voice.Joints.Length];voice.Positions=new Vector3[voice.Joints.Length];
+            }
+            float angular=0,linear=0,dt=Mathf.Max(.001f,Time.deltaTime);
+            for(int i=0;i<voice.Joints.Length;i++)
+            {
+                var joint=voice.Joints[i];if(joint==null)continue;
+                if(!first){angular=Mathf.Max(angular,Quaternion.Angle(voice.Rotations[i],joint.localRotation)/dt);linear=Mathf.Max(linear,Vector3.Distance(voice.Positions[i],joint.localPosition)/dt);}
+                voice.Rotations[i]=joint.localRotation;voice.Positions[i]=joint.localPosition;
+            }
+            return Mathf.Clamp01(Mathf.Max((angular-6)/90,(linear-.025f)/.35f));
+        }
         public static void Update(EntityVehicle v,float moving,bool ceremony)
         {if(!Audible)return;var a=Get(v);var s=Locomotion.Get(v);bool powered=Locomotion.Powered(v);
-            Loop(a.Idle,powered?.10f:0);Loop(a.Servo,(powered||ceremony)?Mathf.Max(moving,ceremony?.7f:0)*.35f:0);Loop(a.Boost,powered?(Flight.Active(s)?(s.Boost?.85f:.55f):s.Blend*.6f):0);}
+            a.JointActivity=JointMotion(v,a);a.ServoTarget=(powered||ceremony)?Mathf.Max(Mathf.Clamp01(moving),a.JointActivity)*.35f:0;
+            float speed=Mathf.Abs(s.VisualForward);if(v.vehicleRB!=null)speed=Mathf.Max(speed,Vector3.ProjectOnPlane(v.vehicleRB.velocity,Vector3.up).magnitude);
+            a.BoostTarget=powered?(Flight.Active(s)?(s.Boost?.85f:.45f):s.HoverOn?.35f:s.Boost&&speed>.25f?.55f:0):0;
+            Loop(a.Servo,a.ServoTarget);Loop(a.Boost,a.BoostTarget);}
+        public static string Diagnostics(EntityVehicle v)
+        {
+            Voice a;if(v==null||!voices.TryGetValue(v.entityId,out a))return "mechanical audio not created";
+            return "servoTarget="+a.ServoTarget+" servoPlaying="+a.Servo.isPlaying+" servoVolume="+a.Servo.volume+" jointActivity="+a.JointActivity+" boostTarget="+a.BoostTarget+" boostPlaying="+a.Boost.isPlaying+" boostVolume="+a.Boost.volume;
+        }
         public static void Cleanup(World world)
         {var ids=new List<int>();foreach(var p in voices)if(p.Value.Vehicle==null||world.GetEntity(p.Key)!=p.Value.Vehicle){if(p.Value.Root!=null)UnityEngine.Object.Destroy(p.Value.Root);ids.Add(p.Key);}foreach(int id in ids)voices.Remove(id);RobotPresentation.Cleanup(world);}
         public static void Clear()

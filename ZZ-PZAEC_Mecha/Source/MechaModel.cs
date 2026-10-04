@@ -21,11 +21,18 @@ namespace PZAEC.Mecha
             public Transform ChestL, ChestR, ChestDoor, WingL, WingR, Sword;
             public Renderer[] FirstPersonHidden; public float ArmUpper,ArmLower;
             public float ShoulderLimit=115,ElbowLimit=140,WristLimit=175,BladeRadius=.065f;
-            public Vector3 SwordRootAnchor=Samurai.BladeRoot-Samurai.Grip,SwordTipAnchor=Samurai.BladeTip-Samurai.Grip,HiltAnchor=new Vector3(.14f,.37f,.58f);
+            public Vector3 SwordRootAnchor=Samurai.BladeRoot-Samurai.Grip,SwordTipAnchor=Samurai.BladeTip-Samurai.Grip,HiltAnchor=new Vector3(.1607f,.3657f,.5823f);
+            public Vector3 SwordRestNormal=new Vector3(.9664597f,-.0473823f,-.2524097f);
             public Transform HipL, HipR, KneeL, KneeR, AnkleL, AnkleR, FootL, FootR, ElbowL, ElbowR;
             public readonly Dictionary<Transform, Quaternion> RestRot = new Dictionary<Transform, Quaternion>();
             public readonly Dictionary<Transform, Vector3> RestPos = new Dictionary<Transform, Vector3>();
-            public void ResetPose() { foreach(var p in RestRot) if(p.Key!=null) p.Key.localRotation=p.Value; foreach(var p in RestPos) if(p.Key!=null) p.Key.localPosition=p.Value; }
+            public bool ActionBaseReady;
+            public Vector3 ActionBaseTorsoPosition,ActionSoleL,ActionSoleR,ActionNormalL=Vector3.up,ActionNormalR=Vector3.up;
+            public Quaternion ActionBaseTorsoRotation=Quaternion.identity;
+            public Transform[] ContactJoints;
+            public Quaternion[] ContactRotations;
+            public Vector3[] ContactPositions;
+            public void ResetPose() { ActionBaseReady=false;foreach(var p in RestRot) if(p.Key!=null) p.Key.localRotation=p.Value; foreach(var p in RestPos) if(p.Key!=null) p.Key.localPosition=p.Value; }
             public float LegUpper, LegLower, GroundY;
             public Vector3 TorsoBasePosition;
         }

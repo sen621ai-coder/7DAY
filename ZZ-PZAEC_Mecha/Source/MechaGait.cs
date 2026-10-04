@@ -66,7 +66,8 @@ namespace PZAEC.Mecha
                 float recoil=Mathf.Clamp01(1-(Time.time-w.RecoilAt)/.22f);
                 rig.ElbowR.localRotation=rig.RestRot[rig.ElbowR]*Quaternion.Euler(-recoil*8,0,0);
             }
-            if(!show){Samurai.Pose(v,rig,dt,Time.time);Flight.Pose(v,rig,dt);}
+            if(Rules.Complete(v))SwordMotion.CaptureBase(rig);
+            if(!show){Samurai.Pose(v,rig,dt,Time.time,false);Flight.Pose(v,rig,dt);}
 
             for(int i=0;i<2;i++)
             {
@@ -82,8 +83,8 @@ namespace PZAEC.Mecha
                 if(show)
                 {
                     // Feet remain on the ground while the torso lowers and the hatch opens.
-                    var poseTarget=home+(i==0?-rig.Mount.forward*.85f:rig.Mount.forward*.3f)*Boarding.Kneel(v);
-                    if(Ground(v,poseTarget,out var onGround))poseTarget=onGround;
+                    var poseTarget=Boarding.FootTarget(v,rig,i,home);
+                    if(Ground(v,poseTarget,out var onGround)){float lift=Mathf.Max(0,poseTarget.y-home.y);poseTarget=onGround+Vector3.up*lift;leg.Normal=GroundNormal(v,onGround);}
                     leg.Foot=poseTarget;leg.Swing=false;
                 }
                 else if(leg.Swing)
@@ -110,7 +111,7 @@ namespace PZAEC.Mecha
             w.WasAir=airborne||state.Blend>.05f;
             if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;RobotAudio.OneShot(v,"land",.9f);}
             if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.OneShot(v,"jump",.6f);}
-            if(Rules.Complete(v))SwordMotion.SafePose(v,rig);
+            if(Rules.Complete(v)){SwordMotion.CacheFeet(rig,w.Legs[0].Foot-Origin.position,w.Legs[1].Foot-Origin.position,w.Legs[0].Normal,w.Legs[1].Normal);SwordMotion.SafePose(v,rig);}
             CombatFeedback.Blade(v,rig);RobotAudio.Update(v,activity,show);
             RobotPresentation.Update(v,rig,state.Blend,Boarding.Hatch(v));
         }

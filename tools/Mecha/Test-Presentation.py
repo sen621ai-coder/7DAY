@@ -26,10 +26,11 @@ assert sum(new_faces.values()) == 207192
 assert new['sourceNodes'] == sorted({p['node'] for p in old['parts']})
 assert len(new['parts']) <= len(old['parts'])
 assert all(p['role'] in new['renderRoles'] for p in new['parts'])
-assert {'ArmL', 'ArmR', 'SwordBlade', 'SwordHilt', 'Head', 'Torso'} <= set(new['renderRoles'])
+assert {'ArmL', 'ArmR', 'SwordBlade', 'SwordHilt', 'Head', 'Torso', 'Backpack', 'Shield'} <= set(new['renderRoles'])
 assert sum(new['renderRoles'].values()) == new['triangles']
-assert new['joints'][:-1] == old['joints'] and new['joints'][-1]['parent'] == 'HandR'
-print('PASS exact 207192 faces, winding, normals, UVs, original joints and 17 source nodes; 13 render groups')
+assert new['joints'][:len(old['joints'])] == old['joints']
+assert {j['name']:j['parent'] for j in new['joints'][len(old['joints']):]} == {'Sword':'HandR','Shield':'HandL'}
+print('PASS exact 207192 faces, winding, normals, UVs, original joints and 17 source nodes;',len(new['parts']),'render groups')
 
 for name in ('combat_robot.glb', stem + '.glb', 'combat_robot_rig.json', 'combat_robot_rig.bin'):
     assert (mod / 'Resources' / name).read_bytes() == (baseline / 'Resources' / name).read_bytes(), name

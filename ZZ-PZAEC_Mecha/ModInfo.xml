@@ -4,7 +4,7 @@
   <DisplayName value="PZAEC 初号机系列 | 试验体与完全体"/>
   <Description value="Rideable Unit-01 Prototype and Complete Form, with procedural IK, FPV optics, beam cannon and guided missiles. Models: Combat Robot by ILUSHANDRO; Samurai Style Gundam Mecha by lawlietrecluze (CC-BY-4.0)."/>
   <Author value="PZAEC"/>
-  <Version value="0.12.0"/>
+  <Version value="0.12.1"/>
   <Website value=""/>
   <ServerSideOnly value="false"/>
   <SkipWithAntiCheat value="true"/>

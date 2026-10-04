@@ -38,6 +38,25 @@ for p in doc['parts']:
 assert min(counts.values())>500,counts
 print('PASS independent rigid wing roots, complete face binding and real wing geometry',counts)
 
+assert doc['bindingAudit']['rigidArmour'] and doc['renderRoles']['Backpack']>500
+assert doc['renderRoles']['Shield']>500 and doc['bindingAudit']['swordCapsuleRejectedFaces']>500
+for p in doc['parts']:
+    records=list(struct.iter_unpack('<8f2i2f',blob[p['offset']:p['offset']+p['vertices']*48]))
+    ix=struct.unpack_from('<'+'I'*p['indices'],blob,p['offset']+p['vertices']*48)
+    for i in range(0,len(ix),3):
+        corners=[records[ix[i+k]] for k in range(3)]
+        assert all(v[8]==v[9] and v[10:]==(1.,0.) for v in corners),('blended mechanical face',p['role'],i//3)
+        assert len({v[8] for v in corners})==1,('split mechanical face',p['role'],i//3)
+        if p['role']=='Backpack':
+            assert corners[0][8]==joints['Backpack']
+            assert sum(v[1] for v in corners)/3<2.63,('head antenna attached to backpack',i//3)
+        if p['role'].startswith('Sword'):
+            center=[sum(v[k] for v in corners)/3 for k in range(3)]
+            normal=doc['swordAnchors']['bladeNormal'];origin=(.3950305,.820023,-.5686091)
+            plane=sum((center[k]-origin[k])*normal[k] for k in range(3))
+            assert abs(plane)<(.16 if center[1]>1.55 else .14)+1e-6,('body spur inside sword',i//3,plane)
+print('PASS complete rigid armour faces, independent back/shield roles and calibrated sword plane')
+
 items=E.parse(MOD/'Config/items.xml').getroot().find('append');items={x.get('name'):x for x in items}
 assert items['vehicleCombatRobotCompletePlaceable'].find(".//passive_effect[@name='DegradationMax']").get('value')=='3000000'
 vehicles=E.parse(MOD/'Config/vehicles.xml').getroot().find('append');vehicles={x.get('name'):x for x in vehicles}

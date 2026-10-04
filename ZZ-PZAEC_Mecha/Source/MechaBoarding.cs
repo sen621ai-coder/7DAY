@@ -7,7 +7,7 @@ namespace PZAEC.Mecha
     public static class Boarding
     {
         public const byte BoardEvent=8;
-        sealed class Show {public EntityVehicle Vehicle;public int Actor,Sequence;public float Started,Duration,NextSync;public bool Exit,Full,Opened,Closed,Ready,Deferred,Committed,AttachedSeen;}
+        sealed class Show {public EntityVehicle Vehicle;public int Actor,Sequence;public float Started,Duration,NextSync;public bool Exit,Full,Opened,Closed,Ready,Planted,Deferred,Committed,AttachedSeen;}
         static readonly Dictionary<int,Show> shows=new Dictionary<int,Show>();
         static readonly Dictionary<int,int> completed=new Dictionary<int,int>();
         public static string Notice;static float noticeUntil;
@@ -88,7 +88,7 @@ namespace PZAEC.Mecha
         {Weapons.Broadcast(s.Vehicle.entityId,s.Sequence,BoardEvent,new Vector3(s.Actor,s.Exit?1:0,s.Full?1:0),Vector3.zero,Time.time-s.Started,done?0:s.Duration);}
         public static void ReceiveSnapshot(World world,int id,int seq,Vector3 a,Vector3 b,float age,float duration)
         {
-            if(Weapons.Server||!Weapons.Finite(age)||!Weapons.Finite(duration)||age<0||duration<0||duration>5)return;
+            if(Weapons.Server||!Weapons.Finite(age)||!Weapons.Finite(duration)||age<0||duration<0||duration>8)return;
             var v=world.GetEntity(id) as EntityVehicle;if(!Weapons.IsMecha(v))return;
             int old;if(completed.TryGetValue(id,out old)&&seq<=old)return;
             Show s;if(shows.TryGetValue(id,out s)&&seq<s.Sequence)return;
@@ -97,6 +97,10 @@ namespace PZAEC.Mecha
             s.Started=Time.time-age;s.Duration=duration;
         }
         public static bool Active(EntityVehicle v){return v!=null&&shows.ContainsKey(v.entityId);}
+        public static bool SwordTarget(EntityVehicle v,out Vector3 grip,out Vector3 direction,out Vector3 normal)
+        {grip=direction=normal=Vector3.zero;Show s;if(v==null||!Rules.Complete(v)||!shows.TryGetValue(v.entityId,out s))return false;Ceremony.SwordTarget(s.Exit,s.Full?Time.time-s.Started:0,out grip,out direction,out normal);return true;}
+        public static Vector3 FootTarget(EntityVehicle v,Model.Rig rig,int side,Vector3 home)
+        {Show s;return v!=null&&Rules.Complete(v)&&shows.TryGetValue(v.entityId,out s)&&s.Full?Ceremony.FootTarget(rig,s.Exit,Time.time-s.Started,side,home):home+(side==0?-rig.Mount.forward*.85f:rig.Mount.forward*.3f)*Kneel(v);}
         public static float Total(bool exit){return exit?2:4;}
         static float Ease(float t){t=Mathf.Clamp01(t);return t*t*(3-2*t);}
         public static float Kneel(EntityVehicle v)
@@ -134,8 +138,9 @@ namespace PZAEC.Mecha
                 if(!Active(s.Vehicle))continue;
                 if(Rules.Complete(s.Vehicle)&&s.Exit&&s.Full&&age>=Ceremony.ExitHold&&Ceremony.NearDoor(s.Vehicle,actor)){s.Started=Time.time-Ceremony.ExitHold;age=Ceremony.ExitHold;}
                 if(age>=s.Duration){finish.Add(s.Vehicle);continue;}
-                if(s.Full&&age>=(Rules.Complete(s.Vehicle)?(s.Exit?1.5f:2.2f):.9f)&&!s.Opened){s.Opened=true;RobotAudio.OneShot(s.Vehicle,"hatch-open",.7f);}
-                if(s.Full&&age>(Rules.Complete(s.Vehicle)?(s.Exit?2.8f:3.15f):2.1f)&&!s.Closed){s.Closed=true;RobotAudio.OneShot(s.Vehicle,"hatch-close",.7f);}
+                if(s.Full&&Rules.Complete(s.Vehicle)&&age>=Ceremony.KneelEnd(s.Exit)&&!s.Planted){s.Planted=true;RobotAudio.OneShot(s.Vehicle,"land",.6f);}
+                if(s.Full&&age>=(Rules.Complete(s.Vehicle)?Ceremony.OpenAt(s.Exit):.9f)&&!s.Opened){s.Opened=true;RobotAudio.OneShot(s.Vehicle,"hatch-open",.7f);}
+                if(s.Full&&age>(Rules.Complete(s.Vehicle)?Ceremony.CloseAt(s.Exit):2.1f)&&!s.Closed){s.Closed=true;RobotAudio.OneShot(s.Vehicle,"hatch-close",.7f);}
                 if(!s.Exit&&age>=s.Duration-.3f&&!s.Ready){s.Ready=true;RobotAudio.OneShot(s.Vehicle,"ready",.6f);}
                 if(Weapons.Server&&Time.time>=s.NextSync){s.NextSync=Time.time+.2f;Publish(s,false);}
             }
@@ -162,7 +167,7 @@ namespace PZAEC.Mecha
                 if(s.Actor!=player.entityId||(s.Exit&&player.AttachedToEntity!=s.Vehicle))continue;
                 var rig=Model.GetRig(s.Vehicle);if(rig==null)return false;
                 float age=Time.time-s.Started;if(Rules.Complete(s.Vehicle)&&s.Full&&!s.Exit&&age<.6f)return false;var target=rig.Torso.position+Vector3.up*.5f;var eye=rig.Head.position+rig.Mount.forward*.18f;
-                var outside=rig.Mount.TransformPoint(new Vector3(Rules.Complete(s.Vehicle)?-2.6f:2.6f,2.4f,3.6f));float t=s.Exit?0:s.Full?Rules.Complete(s.Vehicle)?Ease((age-2.9f)/.8f):Ease((age-1.6f)/.9f):1;
+                var outside=rig.Mount.TransformPoint(new Vector3(Rules.Complete(s.Vehicle)?-2.6f:2.6f,2.4f,3.6f));float t=s.Exit?0:s.Full?Rules.Complete(s.Vehicle)?Ease((age-Ceremony.EnterTransfer)/.9f):Ease((age-1.6f)/.9f):1;
                 position=Vector3.Lerp(outside,eye,t);rotation=Quaternion.Slerp(Quaternion.LookRotation(target-outside,Vector3.up),rig.Mount.rotation,t);fov=Mathf.Lerp(55,player.GetCameraFOV(),t);
                 var from=target+Origin.position;var delta=position-target;
                 if(Weapons.Trace(s.Vehicle,from,delta.normalized,delta.magnitude,out var obstruction)){if(player.AttachedToEntity!=s.Vehicle)return false;cameraCockpit=s.Vehicle.entityId;position=eye;rotation=rig.Mount.rotation;}
@@ -172,7 +177,7 @@ namespace PZAEC.Mecha
             }
             return false;
         }
-        public static bool CockpitCamera(EntityVehicle v){Show s;return v!=null&&shows.TryGetValue(v.entityId,out s)&&(cameraCockpit==v.entityId||!s.Exit&&Time.time-s.Started>=(Rules.Complete(v)?3.5f:2.3f));}
+        public static bool CockpitCamera(EntityVehicle v){Show s;return v!=null&&shows.TryGetValue(v.entityId,out s)&&(cameraCockpit==v.entityId||!s.Exit&&Time.time-s.Started>=(Rules.Complete(v)?Ceremony.EnterTransfer+.65f:2.3f));}
         public static void Clear(){shows.Clear();completed.Clear();suppressJump=committing=false;exitActor=null;cameraCockpit=-1;Notice=null;noticeUntil=0;}
     }
 }

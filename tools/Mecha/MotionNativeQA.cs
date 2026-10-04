@@ -94,6 +94,7 @@ public sealed class MechaMotionQA : IModApi
             HotfixTrial(world,v,v2,rig);
             ViewTrial(v,rig,camera,texture,"prototype");
             PrototypeViews(world,v,rig,camera,texture);
+            LowFrameBeamTrial(world,v,rig,camera,texture);
             RobotAudio.Clear();Boarding.Clear();Gait.Clear();Locomotion.Clear();
         }
         catch(Exception ex){failures++;report.Add("FAIL "+ex);}
@@ -128,10 +129,12 @@ public sealed class MechaMotionQA : IModApi
         rig.ResetPose();rb.position=new Vector3(8,300,0);v.SetPosition(rb.position+Origin.position);
         var iconRT=new RenderTexture(256,256,24,RenderTextureFormat.ARGB32);camera.targetTexture=iconRT;camera.backgroundColor=Color.clear;
         foreach(var plane in UnityEngine.Object.FindObjectsOfType<MeshRenderer>())if(plane.gameObject.name=="Plane")plane.enabled=false;
-        var focus=rig.Mount.position+Vector3.up*1.6f;camera.transform.position=focus+new Vector3(-3,1.1f,5);camera.transform.LookAt(focus);camera.Render();var previous=RenderTexture.active;RenderTexture.active=iconRT;var icon=new Texture2D(256,256,TextureFormat.RGBA32,false);icon.ReadPixels(new Rect(0,0,256,256),0,0);icon.Apply();File.WriteAllBytes(Path.Combine(output,"complete-icon.png"),icon.EncodeToPNG());RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(icon);camera.targetTexture=texture;iconRT.Release();UnityEngine.Object.DestroyImmediate(iconRT);
+        var focus=rig.Mount.position+Vector3.up*1.6f;camera.transform.position=focus+new Vector3(-3,1.1f,5);camera.transform.LookAt(focus);camera.Render();var previous=RenderTexture.active;RenderTexture.active=iconRT;var icon=new Texture2D(256,256,TextureFormat.RGBA32,false);icon.ReadPixels(new Rect(0,0,256,256),0,0);icon.Apply();File.WriteAllBytes(Path.Combine(output,"complete-icon.png"),icon.EncodeToPNG());RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(icon);camera.targetTexture=texture;camera.backgroundColor=new Color(.08f,.1f,.13f);iconRT.Release();UnityEngine.Object.DestroyImmediate(iconRT);
         SamuraiTrial(world,v,rig,camera,texture);
         CeremonyTrial(world,v,rig,camera,texture);
         PresentationTrial(world,v,rig,camera,texture);
+        WeightPresentationTrial(world,v,rig,camera,texture);
+        LowFrameBeamTrial(world,v,rig,camera,texture);
         WeaponEffectTrial(world,v,rig,camera,texture);
         FlightTrial(world,v,rig,camera,texture);
         v.vehicleRB.gameObject.SetActive(false);
@@ -289,10 +292,10 @@ public sealed class MechaMotionQA : IModApi
     static void CeremonyTrial(World world,EntityVehicle v,Model.Rig rig,Camera camera,RenderTexture texture)
     {
         Check("complete original chest has three independent joints",rig.ChestL!=null&&rig.ChestR!=null&&rig.ChestDoor!=null);
-        Check("complete entry opens before transfer",Ceremony.Kneel(false,2.9f)==1&&Ceremony.Hatch(false,true,2.9f)>.999f);
-        Check("complete exit opens before transfer",Ceremony.Kneel(true,2.2f)==1&&Ceremony.Hatch(true,true,2.2f)>.999f);
-        Check("complete entry starts standing and ends standing",Ceremony.Kneel(false,0)==0&&Ceremony.Kneel(false,5)==0);
-        Check("complete exit closes and recovers",Ceremony.Hatch(true,true,3.6f)==0&&Ceremony.Kneel(true,3.6f)<.001f);
+        Check("complete entry opens before transfer",Ceremony.Kneel(false,Ceremony.EnterTransfer)==1&&Ceremony.Hatch(false,true,Ceremony.EnterTransfer)>.999f);
+        Check("complete exit opens before transfer",Ceremony.Kneel(true,Ceremony.ExitTransfer)==1&&Ceremony.Hatch(true,true,Ceremony.ExitTransfer)>.999f);
+        Check("complete entry starts standing and ends standing",Ceremony.Kneel(false,0)==0&&Ceremony.Kneel(false,Ceremony.EnterSeconds)==0);
+        Check("complete exit closes and recovers",Ceremony.Hatch(true,true,Ceremony.ExitSeconds)==0&&Ceremony.Kneel(true,Ceremony.ExitSeconds)<.001f);
         var p=EntityFactory.CreateEntity(EntityClass.FromString("playerMale"),v.position) as EntityPlayer;world.SpawnEntityInWorld(p);p.Health=p.GetMaxHealth();
         var h=new Harmony("mecha.ceremony.qa");
         h.Patch(AccessTools.Method(typeof(Weapons),"UIReady"),prefix:new HarmonyMethod(typeof(MechaMotionQA),nameof(Ready)));
@@ -301,15 +304,15 @@ public sealed class MechaMotionQA : IModApi
         var start=AccessTools.Method(typeof(Boarding),"Start");var shows=(System.Collections.IDictionary)AccessTools.Field(typeof(Boarding),"shows").GetValue(null);
         entered=exited=0;
         start.Invoke(null,new object[]{v,p.entityId,false,true});var show=shows[v.entityId];AccessTools.Field(show.GetType(),"Deferred").SetValue(show,true);
-        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-2.8f);Boarding.Update(world);
-        Check("complete no native entry at 2.8 seconds",entered==0);
-        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-3f);Boarding.Update(world);Boarding.Update(world);
-        Check("complete native entry once after 2.9 seconds",entered==1);
+        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.EnterTransfer+.1f);Boarding.Update(world);
+        Check("complete no native entry before transfer",entered==0);
+        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.EnterTransfer-.1f);Boarding.Update(world);Boarding.Update(world);
+        Check("complete native entry once after transfer",entered==1);
         Boarding.Clear();
         foreach(bool exit in new[]{false,true}){
             start.Invoke(null,new object[]{v,p.entityId,exit,true});show=shows[v.entityId];
-            foreach(float t in new[]{0f,.7f,1.7f,2.25f,2.9f,3.4f,4.9f}){
-                if(exit&&t>3.6f)continue;AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-t);
+            foreach(float t in new[]{0f,.7f,1.7f,2.55f,3.10f,3.85f,4.2f,4.95f,5.8f,6.6f,7f}){
+                if(exit&&t>Ceremony.ExitSeconds)continue;AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-t);
                 Gait.Update(world,v,rig,.02f);Capture(camera,texture,rig,exit?"samurai-exit":"samurai-entry",(int)(t*100));
             }
             Boarding.Clear();
@@ -326,12 +329,12 @@ public sealed class MechaMotionQA : IModApi
         h.Patch(AccessTools.Method(typeof(Ceremony),"FindExit"),prefix:new HarmonyMethod(typeof(MechaMotionQA),nameof(TestExit)));
         var slots=AccessTools.Field(typeof(Entity),"attachedEntities");var saved=slots.GetValue(v);slots.SetValue(v,new Entity[]{p});p.AttachedToEntity=v;
         start.Invoke(null,new object[]{v,p.entityId,true,true});show=shows[v.entityId];AccessTools.Field(show.GetType(),"Deferred").SetValue(show,true);
-        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-2.1f);Boarding.Update(world);Check("complete no detach at 2.1 seconds",exited==0);
-        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-2.3f);Boarding.Update(world);Boarding.Update(world);Check("complete detach once after 2.2 seconds",exited==1);
+        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.ExitTransfer+.1f);Boarding.Update(world);Check("complete no detach before transfer",exited==0);
+        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.ExitTransfer-.1f);Boarding.Update(world);Boarding.Update(world);Check("complete detach once after transfer",exited==1);
         p.AttachedToEntity=null;p.SetPosition(v.position+Vector3.forward*1.9f);
-        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-4f);Boarding.Update(world);Check("complete waits kneeling for player to clear door",Boarding.Active(v)&&Boarding.Kneel(v)>.999f&&Boarding.Hatch(v)>.999f);
-        p.SetPosition(v.position+Vector3.forward*4);AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-4f);Boarding.Update(world);Check("complete finishes after door cleared",!Boarding.Active(v));
-        p.AttachedToEntity=v;exitAvailable=false;start.Invoke(null,new object[]{v,p.entityId,true,true});show=shows[v.entityId];AccessTools.Field(show.GetType(),"Deferred").SetValue(show,true);AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-2.3f);Boarding.Update(world);
+        AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.ExitSeconds-.4f);Boarding.Update(world);Check("complete waits kneeling for player to clear door",Boarding.Active(v)&&Boarding.Kneel(v)>.999f&&Boarding.Hatch(v)>.999f);
+        p.SetPosition(v.position+Vector3.forward*4);AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.ExitSeconds-.4f);Boarding.Update(world);Check("complete finishes after door cleared",!Boarding.Active(v));
+        p.AttachedToEntity=v;exitAvailable=false;start.Invoke(null,new object[]{v,p.entityId,true,true});show=shows[v.entityId];AccessTools.Field(show.GetType(),"Deferred").SetValue(show,true);AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-Ceremony.ExitTransfer-.1f);Boarding.Update(world);
         Check("unsafe exit cancels without sending detach",exited==1&&!Boarding.Active(v));
         p.AttachedToEntity=null;slots.SetValue(v,saved);Boarding.Clear();rig.ResetPose();h.UnpatchSelf();entered=exited=0;world.RemoveEntity(p.entityId,EnumRemoveEntityReason.Despawned);
         report.Add("CEREMONY LIMITATION: transfer spies and fixture exit planner validate ordering; real player camera, terrain and multiplayer still require client acceptance.");
@@ -379,10 +382,21 @@ public sealed class MechaMotionQA : IModApi
             if(pose=="daily")Check("daily sword tip stays above ground",rig.HandR.TransformPoint(Samurai.BladeTip-Samurai.Grip).y>=v.position.y-Origin.position.y+.1f);
         }
         m.Blend=0;s.Guarding=s.GuardHeld=s.Charging=false;s.Actor=p.entityId;s.InputAt=now;
+        foreach(float held in new[]{.05f,.35f,.75f,.90f})foreach(int priorCombo in new[]{0,1}){
+            Samurai.Stop(v);s.Combo=priorCombo;s.Heavy=false;s.Alert=1;s.LastCombat=now;int sequence=s.Sequence+1;
+            Samurai.Request(v,p.entityId,sequence++,Samurai.InputIdle,Vector3.forward,v.position,now);
+            Samurai.Request(v,p.entityId,sequence++,Samurai.InputSword,Vector3.forward,v.position,now);
+            rig.ResetPose();Samurai.Pose(v,rig,1f/60,now+held);var gripBefore=rig.HandR.position;var elbowBefore=rig.ElbowR.position;var tipBefore=SwordMotion.Tip(rig);var rotationBefore=rig.HandR.rotation;
+            Samurai.Request(v,p.entityId,sequence++,Samurai.InputIdle,Vector3.forward,v.position,now+held);rig.ResetPose();Samurai.Pose(v,rig,1f/60,now+held);
+            Check("held release uses server timed normal/heavy held="+held+" priorCombo="+priorCombo,s.Swing&&s.Heavy==(held>=Samurai.HeavyCharge));
+            float gripJump=Vector3.Distance(gripBefore,rig.HandR.position),elbowJump=Vector3.Distance(elbowBefore,rig.ElbowR.position),tipJump=Vector3.Distance(tipBefore,SwordMotion.Tip(rig)),bladeTurn=Quaternion.Angle(rotationBefore,rig.HandR.rotation);
+            Check("charge release joins sword path held="+held+" priorCombo="+priorCombo+" grip="+gripJump+" elbow="+elbowJump+" tip="+tipJump+" roll="+bladeTurn,gripJump<.025f&&elbowJump<.05f&&tipJump<.075f&&bladeTurn<3);
+        }
+        Samurai.Stop(v);s.Actor=p.entityId;s.InputAt=now;
         var z=EntityFactory.CreateEntity(EntityClass.FromString("zombieBoe"),v.position+Vector3.forward*2) as EntityAlive;world.SpawnEntityInWorld(z);z.Stats.Health.BaseMax=1000000;z.Health=1000000;
         foreach(bool heavy in new[]{false,true})
         {
-            Samurai.Start(s,heavy,now-.45f*(heavy?Samurai.HeavyDuration:Samurai.NormalDuration));rig.ResetPose();Samurai.Pose(v,rig,.1f,now);
+            Samurai.Start(s,heavy,now-.33f*(heavy?Samurai.HeavyDuration:Samurai.NormalDuration));rig.ResetPose();Samurai.Pose(v,rig,.1f,now);
             var center=rig.HandR.TransformPoint((Samurai.BladeRoot+Samurai.BladeTip)*.5f-Samurai.Grip)+Origin.position;z.SetPosition(center-Vector3.up*.8f);Physics.SyncTransforms();int before=z.Health;
             s.LastSweep=now-.02f;s.PreviousPosition=v.position;Samurai.Contacts(world,v,rig,now);report.Add("SWORD actual="+(before-z.Health)+" before="+before+" contacts="+s.Hit.Count+" center="+center);Check(heavy?"heavy sword delivers 135000 native damage":"normal sword delivers 90000 native damage",before-z.Health==(heavy?135000:90000));
             int after=z.Health;Samurai.Contacts(world,v,rig,now+.001f);Check("one contact per target per swing heavy="+heavy,z.Health==after);
@@ -422,8 +436,8 @@ public sealed class MechaMotionQA : IModApi
         float length=Vector3.Distance(Samurai.BladeRoot,Samurai.BladeTip),maxLengthError=0,maxArmError=0,minGround=100,maxTipStep=0;int collisions=0,samples=0;float shoulder=0,elbow=0,wrist=0;var poseFrames=new List<object>();var bones=rig.Mount.GetComponentInChildren<SkinnedMeshRenderer>().bones;
         foreach(string pose in new[]{"daily","alert","guard","charge","left-cut","right-cut","heavy","boost","flight"})
         {
-            int frameCount=pose=="heavy"?81:72;
-            var previousTip=Vector3.zero;
+            int frameCount=Mathf.RoundToInt((pose=="heavy"?Samurai.HeavyDuration:pose=="left-cut"||pose=="right-cut"?Samurai.NormalDuration:1.2f)*60);
+            var previousTip=Vector3.zero;var previousElbow=Vector3.zero;float elbowStep=0;int extremeWrist=0;
             for(int frame=0;frame<=frameCount;frame++)
             {
                 float t=frame/(float)frameCount;rig.ResetPose();Samurai.Stop(v);state.Alert=pose=="daily"?0:1;state.LastCombat=now;state.Guarding=pose=="guard";state.GuardBlend=state.Guarding?1:0;state.Charging=pose=="charge";state.PressedAt=now-t;
@@ -436,6 +450,7 @@ public sealed class MechaMotionQA : IModApi
                 maxArmError=Mathf.Max(maxArmError,Mathf.Abs(Vector3.Distance(rig.ShoulderR.position,rig.ElbowR.position)-rig.ArmUpper),Mathf.Abs(Vector3.Distance(rig.ElbowR.position,rig.HandR.position)-rig.ArmLower));
                 minGround=Mathf.Min(minGround,SwordMotion.Root(rig).y-300.02f,SwordMotion.Tip(rig).y-300.02f);
                 shoulder=Mathf.Max(shoulder,Quaternion.Angle(rig.RestRot[rig.ShoulderR],rig.ShoulderR.localRotation));elbow=Mathf.Max(elbow,Quaternion.Angle(rig.RestRot[rig.ElbowR],rig.ElbowR.localRotation));wrist=Mathf.Max(wrist,Quaternion.Angle(rig.RestRot[rig.HandR],rig.HandR.localRotation));samples++;
+                if(Quaternion.Angle(rig.RestRot[rig.HandR],rig.HandR.localRotation)>=150)extremeWrist++;var elbowLocal=rig.Torso.InverseTransformPoint(rig.ElbowR.position);if(frame>0)elbowStep=Mathf.Max(elbowStep,Vector3.Distance(previousElbow,elbowLocal));previousElbow=elbowLocal;
                 poseFrames.Add(new{action=pose,frame=frame,root=Point(rig.Mount.InverseTransformPoint(SwordMotion.Root(rig))),tip=Point(rig.Mount.InverseTransformPoint(SwordMotion.Tip(rig))),ground=300.02f-rig.Mount.position.y,bones=bones.Select(b=>Matrix(rig.Mount.worldToLocalMatrix*b.localToWorldMatrix)).ToArray()});
                 if(pose=="left-cut"||pose=="right-cut"||pose=="heavy")
                 {
@@ -444,6 +459,9 @@ public sealed class MechaMotionQA : IModApi
                     Optics.FirstPersonVisibility(v);camera.fieldOfView=80;camera.transform.SetPositionAndRotation(Optics.CameraPosition(v,rig,look,false),look);Capture(camera,texture,rig,"view-sequence-"+pose+"-first",frame);AccessTools.Method(typeof(Optics),"Visibility").Invoke(null,new object[]{false});camera.fieldOfView=38;
                 }
             }
+            report.Add("POSE QUALITY "+pose+" wrist>=150 frames="+extremeWrist+"/"+(frameCount+1)+" elbow max step="+elbowStep);
+            Check("pose "+pose+" elbow remains continuous relative to torso at 60Hz, step="+elbowStep,elbowStep<.20f);
+            if(pose=="daily"||pose=="alert"||pose=="flight")Check("pose "+pose+" avoids extreme wrist twist",extremeWrist==0);
         }
         Check("all action phases self proxy clearance samples="+samples+" collisions="+collisions,collisions==0);
         Check("continuous sword trajectory at 60 Hz max tip step="+maxTipStep,maxTipStep<.60f);
@@ -451,6 +469,7 @@ public sealed class MechaMotionQA : IModApi
         Check("shoulder/elbow/wrist bounds="+shoulder+","+elbow+","+wrist,shoulder<=115.01f&&elbow<=140.01f&&wrist<=175.01f);
         Check("all action blade ground clearance="+minGround,minGround>=.08f);
         AuxiliaryPresentation(world,v,rig,poseFrames,bones);
+        ReleasePresentation(world,v,rig,poseFrames,bones);
         File.WriteAllText(Path.Combine(output,"sword-poses.json"),Newtonsoft.Json.JsonConvert.SerializeObject(poseFrames));
         motion.Blend=motion.WingBlend=0;motion.FlightMode=Flight.Phase.Ground;Samurai.Stop(v);rig.ResetPose();
         ViewTrial(v,rig,camera,texture,"complete");
@@ -484,10 +503,10 @@ public sealed class MechaMotionQA : IModApi
     }
     static void AuxiliaryPresentation(World world,EntityVehicle v,Model.Rig rig,List<object> poses,Transform[] bones)
     {
-        var m=Locomotion.Get(v);var s=Samurai.Get(v);var rb=v.vehicleRB;var initial=rb.position;var rotation=rb.rotation;float maxStep=0,minFloor=100;int contacts=0,samples=0;
+        var m=Locomotion.Get(v);var s=Samurai.Get(v);var rb=v.vehicleRB;var initial=rb.position;var rotation=rb.rotation;float maxStep=0,maxElbowStep=0,minFloor=100;int contacts=0,samples=0;
         foreach(var action in new[]{"entry","exit","jump","landing","slope-left","slope-right","slope-heavy"}){
             Boarding.Clear();Gait.Clear();Samurai.Stop(v);m.Charge=m.Blend=m.WingBlend=0;m.HoverOn=false;m.FlightMode=Flight.Phase.Ground;m.LandingAt=-100;rb.position=initial;rb.rotation=rotation;v.SetPosition(initial+Origin.position);rig.ResetPose();
-            bool ceremony=action=="entry"||action=="exit";float duration=ceremony?(action=="exit"?Ceremony.ExitSeconds:Ceremony.EnterSeconds):action=="jump"?1.5f:action=="landing"?.5f:action=="slope-heavy"?Samurai.HeavyDuration:Samurai.NormalDuration;int count=Mathf.RoundToInt(duration*60);Vector3 previous=Vector3.zero;
+            bool ceremony=action=="entry"||action=="exit";float duration=ceremony?(action=="exit"?Ceremony.ExitSeconds:Ceremony.EnterSeconds):action=="jump"?1.5f:action=="landing"?.5f:action=="slope-heavy"?Samurai.HeavyDuration:Samurai.NormalDuration;int count=Mathf.RoundToInt(duration*60);Vector3 previous=Vector3.zero,previousElbow=Vector3.zero;
             if(ceremony)AccessTools.Method(typeof(Boarding),"Start").Invoke(null,new object[]{v,123,action=="exit",true});
             for(int frame=0;frame<=count;frame++){
                 float t=frame/60f;m.Grounded=true;s.Alert=1;s.LastCombat=Time.time;
@@ -495,7 +514,7 @@ public sealed class MechaMotionQA : IModApi
                 if(action=="jump"){m.Grounded=t<.35f||t>=1.4f;m.Charge=t<.35f?t/.35f:0;rb.position=initial+Vector3.up*(m.Grounded?0:Mathf.Sin((t-.35f)/1.05f*Mathf.PI)*2);v.SetPosition(rb.position+Origin.position);}
                 if(action=="landing")m.LandingAt=Time.time-t;
                 if(action.StartsWith("slope")){rb.rotation=rotation*Quaternion.Euler(0,0,12);s.Swing=true;s.Heavy=action=="slope-heavy";s.Combo=action=="slope-right"?2:1;s.Started=Time.time-t;}
-                Gait.Update(world,v,rig,1f/60);var tip=SwordMotion.Tip(rig);if(frame>0)maxStep=Mathf.Max(maxStep,Vector3.Distance(previous,tip));previous=tip;if(!SwordMotion.SelfClear(rig))contacts++;samples++;
+                Gait.Update(world,v,rig,1f/60);var tip=SwordMotion.Tip(rig);var elbowLocal=rig.Torso.InverseTransformPoint(rig.ElbowR.position);if(frame>0){maxStep=Mathf.Max(maxStep,Vector3.Distance(previous,tip));maxElbowStep=Mathf.Max(maxElbowStep,Vector3.Distance(previousElbow,elbowLocal));}previous=tip;previousElbow=elbowLocal;if(!SwordMotion.SelfClear(rig))contacts++;samples++;
                 minFloor=Mathf.Min(minFloor,tip.y-300.02f,SwordMotion.Root(rig).y-300.02f);
                 poses.Add(new{action=action,frame=frame,root=Point(rig.Mount.InverseTransformPoint(SwordMotion.Root(rig))),tip=Point(rig.Mount.InverseTransformPoint(tip)),ground=300.02f-rig.Mount.position.y,bones=bones.Select(b=>Matrix(rig.Mount.worldToLocalMatrix*b.localToWorldMatrix)).ToArray()});
             }
@@ -503,9 +522,142 @@ public sealed class MechaMotionQA : IModApi
         Check("entry / exit / jump / landing / 12deg attacks self clearance samples="+samples+" contacts="+contacts,contacts==0);
         Check("auxiliary blade remains above native support, minimum="+minFloor,minFloor>=.07f);
         Check("entry / exit / jump / landing / slope continuous sword max tip step="+maxStep,maxStep<.60f);
+        Check("auxiliary elbow remains continuous relative to torso at 60Hz, step="+maxElbowStep,maxElbowStep<.20f);
         report.Add("AUXILIARY trajectory max step="+maxStep+"; synthetic Gait/ceremony paths, not human navigation acceptance.");
         Boarding.Clear();Gait.Clear();Samurai.Stop(v);m.Charge=m.Blend=m.WingBlend=0;m.Grounded=true;m.LandingAt=-100;rb.position=initial;rb.rotation=rotation;v.SetPosition(initial+Origin.position);rig.ResetPose();
     }
+    static Vector3 snapshotA,snapshotB;static float snapshotFlags,snapshotWait;static int snapshotSerial;static bool capturedSnapshot;
+    static bool SnapshotSpy(int vehicle,int id,byte kind,Vector3 a,Vector3 b,float value,float c)
+    {if(kind==Samurai.Snapshot){snapshotA=a;snapshotB=b;snapshotFlags=value;snapshotWait=c;snapshotSerial=id;capturedSnapshot=true;}return false;}
+    static bool RemoteAuthority(ref bool __result){__result=false;return false;}
+    static void ReleasePresentation(World world,EntityVehicle v,Model.Rig rig,List<object> poses,Transform[] bones)
+    {
+        var slots=AccessTools.Field(typeof(Entity),"attachedEntities");var saved=slots.GetValue(v);var pilot=EntityFactory.CreateEntity(EntityClass.FromString("playerMale"),v.position) as EntityPlayer;world.SpawnEntityInWorld(pilot);slots.SetValue(v,new Entity[]{pilot});pilot.AttachedToEntity=v;
+        var s=Samurai.Get(v);var m=Locomotion.Get(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.Blend=m.WingBlend=0;m.FlightMode=Flight.Phase.Ground;float now=Time.time;int samples=0,contacts=0;float maxTipStep=0,maxElbowStep=0;
+        try{
+            foreach(float held in new[]{.05f,.35f,.75f,.90f})foreach(int priorCombo in new[]{0,1}){
+                Samurai.Stop(v);s.Combo=priorCombo;s.Heavy=false;s.Alert=1;s.LastCombat=now;int sequence=s.Sequence+1;
+                Samurai.Request(v,pilot.entityId,sequence++,Samurai.InputIdle,Vector3.forward,v.position,now);Samurai.Request(v,pilot.entityId,sequence++,Samurai.InputSword,Vector3.forward,v.position,now);
+                rig.ResetPose();Samurai.Pose(v,rig,1f/60,now+held);Samurai.Request(v,pilot.entityId,sequence++,Samurai.InputIdle,Vector3.forward,v.position,now+held);
+                rig.ResetPose();Samurai.Pose(v,rig,1f/60,now+held);float expectedCharge=s.StartCharge;var expectedGrip=rig.Mount.InverseTransformPoint(rig.HandR.position);var expectedTip=rig.Mount.InverseTransformPoint(SwordMotion.Tip(rig));
+                var h=new Harmony("mecha.release.snapshot.qa");capturedSnapshot=false;
+                try{
+                    h.Patch(AccessTools.Method(typeof(Weapons),"Broadcast"),prefix:new HarmonyMethod(typeof(MechaMotionQA),nameof(SnapshotSpy)));
+                    AccessTools.Method(typeof(Samurai),"Broadcast").Invoke(null,new object[]{s,now+held});
+                    h.Patch(AccessTools.PropertyGetter(typeof(Weapons),"Server"),prefix:new HarmonyMethod(typeof(MechaMotionQA),nameof(RemoteAuthority)));
+                    s.StartCharge=0;Samurai.Receive(v,snapshotSerial,snapshotA,snapshotB,snapshotFlags,snapshotWait);rig.ResetPose();Samurai.Pose(v,rig,1f/60,Time.time);
+                    Check("release snapshot preserves authority pose held="+held+" priorCombo="+priorCombo,capturedSnapshot&&Mathf.Abs(s.StartCharge-expectedCharge)<.0001f&&Vector3.Distance(expectedGrip,rig.Mount.InverseTransformPoint(rig.HandR.position))<.001f&&Vector3.Distance(expectedTip,rig.Mount.InverseTransformPoint(SwordMotion.Tip(rig)))<.001f);
+                }finally{h.UnpatchSelf();}
+                s.Started=now+held;string action="release-"+Mathf.RoundToInt(held*100)+"-combo"+priorCombo;int count=Mathf.RoundToInt(Samurai.Duration(s)*60);Vector3 previousTip=Vector3.zero,previousElbow=Vector3.zero;
+                for(int frame=0;frame<=count;frame++){
+                    rig.ResetPose();Samurai.Pose(v,rig,1f/60,now+held+frame/60f);var tip=SwordMotion.Tip(rig);var elbow=rig.Torso.InverseTransformPoint(rig.ElbowR.position);if(frame>0){maxTipStep=Mathf.Max(maxTipStep,Vector3.Distance(previousTip,tip));maxElbowStep=Mathf.Max(maxElbowStep,Vector3.Distance(previousElbow,elbow));}previousTip=tip;previousElbow=elbow;if(!SwordMotion.SelfClear(rig))contacts++;samples++;
+                    poses.Add(new{action=action,frame=frame,root=Point(rig.Mount.InverseTransformPoint(SwordMotion.Root(rig))),tip=Point(rig.Mount.InverseTransformPoint(tip)),ground=300.02f-rig.Mount.position.y,bones=bones.Select(b=>Matrix(rig.Mount.worldToLocalMatrix*b.localToWorldMatrix)).ToArray()});
+                }
+            }
+            Check("real held release paths self clearance samples="+samples+" contacts="+contacts,contacts==0);Check("real held release continuous sword tip step="+maxTipStep,maxTipStep<.60f);Check("real held release continuous elbow step="+maxElbowStep,maxElbowStep<.20f);
+        }finally{Samurai.Stop(v);pilot.AttachedToEntity=null;slots.SetValue(v,saved);rig.ResetPose();world.RemoveEntity(pilot.entityId,EnumRemoveEntityReason.Despawned);}
+        report.Add("RELEASE LIMITATION: actual Request / Broadcast / Receive with a captured snapshot and local authority switch; not a two-machine network session.");
+    }
+    static Color32[] CameraPixels(Camera camera,RenderTexture rt)
+    {
+        camera.Render();var previous=RenderTexture.active;RenderTexture.active=rt;var t=new Texture2D(rt.width,rt.height,TextureFormat.RGBA32,false);t.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);t.Apply();var pixels=t.GetPixels32();UnityEngine.Object.DestroyImmediate(t);RenderTexture.active=previous;return pixels;
+    }
+    static void LowFrameBeamTrial(World world,EntityVehicle v,Model.Rig rig,Camera camera,RenderTexture texture)
+    {
+        MechaFX.Clear();var method=AccessTools.Method(typeof(MechaFX),"BeamTrace");var list=(System.Collections.IList)AccessTools.Field(typeof(MechaFX),"tracers").GetValue(null);string variant=Rules.Complete(v)?"complete":"prototype";float life=Rules.Complete(v)?.32f:.22f;
+        var savedBackground=camera.backgroundColor;camera.backgroundColor=new Color(.65f,.79f,.90f);
+        // The game's render callbacks can replace the clear colour on a QA
+        // camera. A real opaque surface verifies visibility on a bright scene.
+        var backdrop=GameObject.CreatePrimitive(PrimitiveType.Quad);UnityEngine.Object.DestroyImmediate(backdrop.GetComponent<Collider>());backdrop.name="QA bright laser backdrop";
+        var backdropMaterial=new Material(Shader.Find("Sprites/Default")??Shader.Find("Standard")){color=new Color(.65f,.79f,.90f)};backdrop.GetComponent<Renderer>().sharedMaterial=backdropMaterial;
+        backdrop.transform.SetParent(camera.transform,false);backdrop.transform.localPosition=new Vector3(0,0,50);backdrop.transform.localRotation=Quaternion.identity;backdrop.transform.localScale=new Vector3(200,200,1);
+        foreach(float fps in new[]{5f,8f,10f,15f})foreach(bool firstPerson in new[]{false,true}){
+            MechaFX.Clear();var origin=Weapons.MuzzleWorld(rig,v);var forward=Weapons.BodyRotation(v)*Vector3.forward;var look=Quaternion.Euler(8,Weapons.BodyRotation(v).eulerAngles.y,0);camera.fieldOfView=firstPerson?80:65;
+            camera.transform.SetPositionAndRotation(Optics.CameraPosition(v,rig,look,!firstPerson),look);if(firstPerson)Optics.FirstPersonVisibility(v);
+            var before=CameraPixels(camera,texture);var corner=before[texture.width*texture.height-1];Check(variant+" bright background pixels fps="+fps+" first="+firstPerson+" rgb="+corner.r+","+corner.g+","+corner.b,corner.r>100&&corner.g>100&&corner.b>100);method.Invoke(null,new object[]{world,v.entityId,7200+(firstPerson?1:0),origin,origin+forward*24});MechaFX.Update(1/fps);
+            Check(variant+" birth update preserves laser fps="+fps+" first="+firstPerson,list.Count==1);
+            var tracer=list.Count>0?list[0]:null;if(tracer==null)continue;var type=tracer.GetType();var line=(LineRenderer)AccessTools.Field(type,"Line").GetValue(tracer);var glow=(LineRenderer)AccessTools.Field(type,"Glow").GetValue(tracer);
+            Check(variant+" beam uses supported material and two view aligned lines",line.sharedMaterial!=null&&line.sharedMaterial.shader.isSupported&&glow!=null&&line.alignment==LineAlignment.View&&glow.alignment==LineAlignment.View);
+            var after=CameraPixels(camera,texture);int changed=0;for(int i=0;i<before.Length;i++)if(Math.Abs(after[i].r-before[i].r)>15||Math.Abs(after[i].g-before[i].g)>15||Math.Abs(after[i].b-before[i].b)>15)changed++;
+            Check(variant+" actual laser rendered pixels fps="+fps+" first="+firstPerson+" changed="+changed,changed>=20);
+            Capture(camera,texture,rig,"view-laser-"+(int)fps+"fps-"+variant+(firstPerson?"-first":"-third"),0);
+            int presented=(int)AccessTools.Field(type,"PresentedFrames").GetValue(tracer);Check(variant+" line callback records actual camera presentation",presented>=1);
+            CameraPixels(camera,texture);Check(variant+" repeat render in one frame counted once",(int)AccessTools.Field(type,"PresentedFrames").GetValue(tracer)==presented);
+            AccessTools.Field(type,"BornFrame").SetValue(tracer,Time.frameCount-1);MechaFX.Update(1/fps);Check(variant+" fps="+fps+" survives for second presentation",list.Count==1);
+            AccessTools.Field(type,"LastPresentedFrame").SetValue(tracer,-1);CameraPixels(camera,texture);Check(variant+" actual second render callback",(int)AccessTools.Field(type,"PresentedFrames").GetValue(tracer)>=2);
+            for(int step=0;step<16&&list.Count>0;step++){MechaFX.Update(1/fps);if(list.Count>0){AccessTools.Field(type,"LastPresentedFrame").SetValue(tracer,-1);CameraPixels(camera,texture);}}
+            Check(variant+" laser returns to pool fps="+fps,list.Count==0);
+            AccessTools.Method(typeof(Optics),"Visibility").Invoke(null,new object[]{false});
+        }
+        MechaFX.Clear();method.Invoke(null,new object[]{world,v.entityId,7400,v.position+Vector3.up*1000,v.position+Vector3.up*1000+Vector3.forward*20});var unseen=list[0];AccessTools.Field(unseen.GetType(),"BornFrame").SetValue(unseen,Time.frameCount-1);MechaFX.Update(Mathf.Max(.8f,life*3)+.01f);Check(variant+" off-screen beam lease is bounded",list.Count==0);
+        MechaFX.Clear();UnityEngine.Object.DestroyImmediate(backdrop);UnityEngine.Object.DestroyImmediate(backdropMaterial);camera.fieldOfView=38;camera.backgroundColor=savedBackground;
+        report.Add("LASER LIMITATION: actual shaders, pixels and render callbacks; 5/8/10/15FPS deltas injected synchronously, new frame tokens simulated between native camera renders.");
+    }
+    static void WeightPresentationTrial(World world,EntityVehicle v,Model.Rig rig,Camera camera,RenderTexture texture)
+    {
+        var s=Samurai.Get(v);var m=Locomotion.Get(v);var rb=v.vehicleRB;var initial=rb.position;var rotation=rb.rotation;float now=Time.time;
+        Boarding.Clear();Gait.Clear();Samurai.Stop(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.Blend=m.WingBlend=0;m.FlightMode=Flight.Phase.Ground;
+        foreach(string cut in new[]{"left","right","heavy"}){
+            Vector3 lo=Vector3.one*100,hi=-lo;Quaternion firstShoulder=Quaternion.identity;float shoulderSweep=0,bodySweep=0;
+            s.Swing=true;s.Heavy=cut=="heavy";s.Combo=cut=="right"?2:1;s.Alert=1;s.LastCombat=now;
+            for(int frame=0;frame<=120;frame++){
+                rig.ResetPose();s.Started=now-frame/120f*Samurai.Duration(s);Samurai.Pose(v,rig,1f/60,now);
+                var grip=rig.Mount.InverseTransformPoint(rig.HandR.position);lo=Vector3.Min(lo,grip);hi=Vector3.Max(hi,grip);
+                if(frame==0)firstShoulder=rig.ShoulderR.rotation;else shoulderSweep=Mathf.Max(shoulderSweep,Quaternion.Angle(firstShoulder,rig.ShoulderR.rotation));
+                bodySweep=Mathf.Max(bodySweep,Quaternion.Angle(rig.RestRot[rig.Torso],rig.Torso.localRotation));
+            }
+            Check("weight "+cut+" real grip travels >=.30m, span="+(hi-lo).magnitude,(hi-lo).magnitude>=.30f);
+            Check("weight "+cut+" shoulder participates >=30deg, sweep="+shoulderSweep,shoulderSweep>=30);
+            Check("weight "+cut+" torso participates >=12deg, sweep="+bodySweep,bodySweep>=12);
+        }
+        Check("weight attack window excludes anticipation and recovery",!SwordMotion.DamagePhase(.10f)&&SwordMotion.DamagePhase(.33f)&&!SwordMotion.DamagePhase(.80f));
+        Check("weight complete ceremony durations 7 / 6 seconds",Mathf.Abs(Ceremony.EnterSeconds-7)<.01f&&Mathf.Abs(Ceremony.ExitSeconds-6)<.01f);
+        Check("weight entry support dwell while hatch still closed",Ceremony.Kneel(false,2.65f)>.99f&&Ceremony.Kneel(false,3.05f)>.99f&&Ceremony.Hatch(false,true,3.05f)<.01f);
+        Check("weight exit support dwell before hatch",Ceremony.Kneel(true,2.15f)>.99f&&Ceremony.Kneel(true,2.55f)>.99f&&Ceremony.Hatch(true,true,2.55f)<.01f);
+        Check("weight cabin fully open at transfer",Ceremony.Hatch(false,true,Ceremony.EnterTransfer)>.99f&&Ceremony.Hatch(true,true,Ceremony.ExitTransfer)>.99f);
+        var start=AccessTools.Method(typeof(Boarding),"Start");var shows=(System.Collections.IDictionary)AccessTools.Field(typeof(Boarding),"shows").GetValue(null);
+        foreach(bool exit in new[]{false,true}){
+            Gait.Clear();Samurai.Stop(v);start.Invoke(null,new object[]{v,123,exit,true});var show=shows[v.entityId];int frames=Mathf.RoundToInt((exit?Ceremony.ExitSeconds:Ceremony.EnterSeconds)*30);
+            for(int frame=0;frame<=frames;frame++){
+                AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-frame/30f);Gait.Update(world,v,rig,1f/30);
+                Capture(camera,texture,rig,exit?"weight-exit":"weight-entry",frame);
+            }
+            Boarding.Clear();
+        }
+        rig.ResetPose();Gait.Clear();Samurai.Stop(v);
+        var skins=rig.Mount.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(x=>x.GetComponent<MechaRenderPart>().Role=="Backpack"||x.GetComponent<MechaRenderPart>().Role.StartsWith("Wing")).ToArray();
+        Check("weight back and wings have independent semantic batches",skins.Any(x=>x.GetComponent<MechaRenderPart>().Role=="Backpack")&&skins.Any(x=>x.GetComponent<MechaRenderPart>().Role=="WingL")&&skins.Any(x=>x.GetComponent<MechaRenderPart>().Role=="WingR"));
+        float edgeError=0;int edgeSamples=0;var baked=new Mesh();
+        for(int frame=0;frame<=120;frame++){
+            rb.position=initial+new Vector3(Mathf.Sin(frame/30f)*1.5f,0,frame/60f);rb.rotation=Quaternion.Euler(0,Mathf.Sin(frame/25f)*70,0);v.SetPosition(rb.position+Origin.position);Gait.Update(world,v,rig,1f/30);
+            if(frame%5==0){foreach(var skin in skins){skin.BakeMesh(baked);var points=baked.vertices;var rest=skin.sharedMesh.vertices;var ix=skin.sharedMesh.triangles;
+                for(int i=0;i<ix.Length;i+=33){int a=ix[i],b=ix[i+1];edgeError=Mathf.Max(edgeError,Mathf.Abs(Vector3.Distance(points[a],points[b])-Vector3.Distance(rest[a],rest[b])));edgeSamples++;}
+            }}
+            camera.transform.position=rig.Mount.position+Vector3.up*1.6f+rig.Mount.rotation*new Vector3(0,1,-6);camera.transform.LookAt(rig.Mount.position+Vector3.up*1.6f);
+            Capture(camera,texture,rig,"view-weight-turn-rear",frame);
+        }
+        Check("weight back plates preserve every sampled edge through steering, error="+edgeError+" samples="+edgeSamples,edgeSamples>100&&edgeError<.001f);
+        UnityEngine.Object.DestroyImmediate(baked);rb.position=initial;rb.rotation=rotation;v.SetPosition(initial+Origin.position);Gait.Clear();Samurai.Stop(v);rig.ResetPose();
+        var voice=AccessTools.Method(typeof(RobotAudio),"Get").Invoke(null,new object[]{v});var audioRoot=(GameObject)AccessTools.Field(voice.GetType(),"Root").GetValue(voice);
+        Check("weight no continuous reactor idle source",!audioRoot.GetComponentsInChildren<AudioSource>().Any(x=>x.loop&&x.clip!=null&&x.clip.name.Contains("reactor-idle")));
+        var ah=new Harmony("mecha.weight.audio.qa");ah.Patch(AccessTools.PropertyGetter(typeof(RobotAudio),"Audible"),prefix:new HarmonyMethod(typeof(MechaMotionQA),nameof(AudioReady)));
+        bool hadDriver=v.hasDriver,hadEngine=v.IsEngineRunning;float fuelModifier=EntityVehicle.VehicleFuelUsageModifier;
+        try{
+            v.hasDriver=v.IsEngineRunning=true;EntityVehicle.VehicleFuelUsageModifier=0;m.VisualForward=0;m.HoverOn=m.Boost=false;m.FlightMode=Flight.Phase.Ground;rig.ResetPose();
+            RobotAudio.Update(v,0,false);RobotAudio.Update(v,0,false);
+            Check("weight powered stationary pilot has zero servo and boost target",(float)AccessTools.Field(voice.GetType(),"ServoTarget").GetValue(voice)==0&&(float)AccessTools.Field(voice.GetType(),"BoostTarget").GetValue(voice)==0);
+            RobotAudio.Update(v,0,true);Check("weight ceremony dwell is silent",(float)AccessTools.Field(voice.GetType(),"ServoTarget").GetValue(voice)==0);
+            rig.ElbowR.localRotation=rig.RestRot[rig.ElbowR]*Quaternion.Euler(90,0,0);RobotAudio.Update(v,0,true);
+            Check("weight actual moving elbow requests servo",(float)AccessTools.Field(voice.GetType(),"ServoTarget").GetValue(voice)>0);
+            RobotAudio.Update(v,0,true);Check("weight stopped elbow immediately clears servo target",(float)AccessTools.Field(voice.GetType(),"ServoTarget").GetValue(voice)==0);
+            for(int i=0;i<30;i++)RobotAudio.Update(v,0,true);var servo=(AudioSource)AccessTools.Field(voice.GetType(),"Servo").GetValue(voice);Check("weight stationary servo fades to zero and stops",servo.volume==0&&!servo.isPlaying);
+            m.Boost=true;RobotAudio.Update(v,0,false);Check("weight stationary shift cannot run boost loop",(float)AccessTools.Field(voice.GetType(),"BoostTarget").GetValue(voice)==0);
+            m.Boost=false;m.FlightMode=Flight.Phase.Cruise;RobotAudio.Update(v,0,false);Check("weight valid powered flight has thrust sound",(float)AccessTools.Field(voice.GetType(),"BoostTarget").GetValue(voice)>0);
+            v.IsEngineRunning=false;RobotAudio.Update(v,0,false);Check("weight power loss clears thrust sound target",(float)AccessTools.Field(voice.GetType(),"BoostTarget").GetValue(voice)==0);
+        }finally{v.hasDriver=hadDriver;v.IsEngineRunning=hadEngine;EntityVehicle.VehicleFuelUsageModifier=fuelModifier;m.Boost=false;m.FlightMode=Flight.Phase.Ground;rig.ResetPose();ah.UnpatchSelf();}
+        report.Add("WEIGHT LIMITATION: scripted engine joints and frames prove paths, rigidity and dwell; human sound impression and load-bearing feel require client play.");
+    }
+    static bool AudioReady(ref bool __result){__result=true;return false;}
     static void WeaponEffectTrial(World world,EntityVehicle v,Model.Rig rig,Camera camera,RenderTexture texture)
     {
         CombatFeedback.Clear();MechaFX.Clear();var point=new Vector3(25,301,8)+Origin.position;var origin=point+new Vector3(-1.5f,.5f,-2);
@@ -543,14 +695,14 @@ public sealed class MechaMotionQA : IModApi
         var s=Samurai.Get(v);float now=Time.time;var m=Locomotion.Get(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.Blend=m.WingBlend=0;m.FlightMode=Flight.Phase.Ground;s.Actor=pilot.entityId;
         foreach(float dt in new[]{1f/15,1f/10,.25f,.4f})
         {
-            target.Health=1000000;Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.45f);target.SetPosition((SwordMotion.Root(rig)+SwordMotion.Tip(rig))*.5f+Origin.position-Vector3.up*.8f);Physics.SyncTransforms();
-            for(float time=0;time<1.19f;time+=dt)Samurai.Contacts(world,v,rig,now+time);
+            target.Health=1000000;Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.33f);target.SetPosition((SwordMotion.Root(rig)+SwordMotion.Tip(rig))*.5f+Origin.position-Vector3.up*.8f);Physics.SyncTransforms();
+            for(float time=0;time<Samurai.NormalDuration-.01f;time+=dt)Samurai.Contacts(world,v,rig,now+time);
             Check("native low FPS/catchup sword dt="+dt+" damage="+(1000000-target.Health),1000000-target.Health==90000);
         }
         target.Health=1000000;Samurai.Start(s,false,now);Samurai.Contacts(world,v,rig,now+.401f);Check("interruption longer than .4s cancels without deferred damage",s.Blocked&&target.Health==1000000);
-        Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.45f);var root=SwordMotion.Root(rig);var tip=SwordMotion.Tip(rig);target.SetPosition((root+tip)*.5f+Origin.position-Vector3.up*.8f);
-        var wall=new GameObject("QA Sword Obstacle");wall.AddComponent<BoxCollider>().size=new Vector3(.2f,.5f,.5f);wall.transform.position=(root+tip)*.5f;Physics.SyncTransforms();target.Health=1000000;s.LastSweep=now+Samurai.NormalDuration*.45f-.02f;s.PreviousPosition=v.position;
-        Samurai.Contacts(world,v,rig,now+Samurai.NormalDuration*.45f);Check("environment obstruction cancels sword before target damage",s.Blocked&&target.Health==1000000);UnityEngine.Object.DestroyImmediate(wall);
+        Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.33f);var root=SwordMotion.Root(rig);var tip=SwordMotion.Tip(rig);target.SetPosition((root+tip)*.5f+Origin.position-Vector3.up*.8f);
+        var wall=new GameObject("QA Sword Obstacle");wall.AddComponent<BoxCollider>().size=new Vector3(.2f,.5f,.5f);wall.transform.position=(root+tip)*.5f;Physics.SyncTransforms();target.Health=1000000;s.LastSweep=now+Samurai.NormalDuration*.33f-.02f;s.PreviousPosition=v.position;
+        Samurai.Contacts(world,v,rig,now+Samurai.NormalDuration*.33f);Check("environment obstruction cancels sword before target damage",s.Blocked&&target.Health==1000000);UnityEngine.Object.DestroyImmediate(wall);
         Samurai.Stop(v);pilot.AttachedToEntity=null;slots.SetValue(v,saved);rig.ResetPose();world.RemoveEntity(pilot.entityId,EnumRemoveEntityReason.Despawned);world.RemoveEntity(target.entityId,EnumRemoveEntityReason.Despawned);
     }
     static bool RecordEnter(EntityVehicle __instance,EntityAlive _entity){entered++;return false;}

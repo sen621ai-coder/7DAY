@@ -39,7 +39,11 @@ if '--rebind-wings' in sys.argv:
     doc['wingBinding']='rigid rear fin faces; WingL/WingR under Backpack; fitted-metre roots'
     doc['wingVertices']=counts
     (res/(stem+'_rig.json')).write_text(json.dumps(doc,indent=2),encoding='utf-8');(res/(stem+'_rig.bin')).write_bytes(blob)
-    print('WINGS',counts,'vertices; topology, textures, original GLB and other bindings preserved');sys.exit(0)
+    print('WINGS',counts,'vertices; topology, textures, original GLB and other bindings preserved')
+    # The authoritative semantic pass also restores complete plate ownership;
+    # a wing-only rebind must not leave old hand / leg blend weights behind.
+    import runpy
+    runpy.run_path(str(ROOT/'tools/Mecha/Prepare-RenderRoles.py'));sys.exit(0)
 sys.path.insert(0,str(ROOT/'.local-tests/mecha-asset-tools'))
 import pymeshlab
 RES=ROOT/'ZZ-PZAEC_Mecha/Resources'
