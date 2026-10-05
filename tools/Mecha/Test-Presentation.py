@@ -10,7 +10,7 @@ def faces(folder):
     doc = json.loads((folder / (stem + '_rig.json')).read_text())
     raw = (folder / (stem + '_rig.bin')).read_bytes()
     result = collections.Counter()
-    for part in doc['parts']:
+    for part in doc['parts'] + doc.get('sourceOnlyParts', []):
         if part.get('generatedRepair'):continue
         start = part['offset']
         indices = struct.unpack_from('<' + 'I' * part['indices'], raw, start + part['vertices'] * 48)
@@ -33,7 +33,7 @@ assert {'ArmL', 'ArmR', 'SwordBlade', 'SwordHilt', 'Head', 'Torso', 'Backpack', 
 assert sum(new['renderRoles'].values()) == new['triangles']
 assert new['joints'][:len(old['joints'])] == old['joints']
 assert {j['name']:j['parent'] for j in new['joints'][len(old['joints']):]} == {'Sword':'HandR','Shield':'HandL'}
-print('PASS exact 207192 faces, winding, normals, UVs, original joints and 17 source nodes;',len(new['parts']),'render groups')
+print('PASS exact 207192 source faces retained (including retired right wing), original joints and 17 source nodes;',len(new['parts']),'render groups')
 
 for name in ('combat_robot.glb', stem + '.glb', 'combat_robot_rig.json', 'combat_robot_rig.bin'):
     assert (mod / 'Resources' / name).read_bytes() == (baseline / 'Resources' / name).read_bytes(), name

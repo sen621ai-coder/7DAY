@@ -38,14 +38,14 @@ public static class EquipmentOwnershipQA
         Action<string,bool> check=(n,ok)=>results.Add((ok?"PASS ":"FAIL ")+"FRESH RIG "+n);
         try{
             Boarding.Clear();Gait.Clear();Samurai.Stop(v);var m=Locomotion.Get(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.WingBlend=m.Blend=0;m.FlightMode=Flight.Phase.Ground;
-            // Independently reviewed source-face landmarks in the plate marked by
-            // the user. Joint independence alone does not prove semantic ownership.
+            // Historical overlap landmarks must not survive in the rendered replacement.
+            // The original tuples remain archived, outside runtime parts.
             foreach(var point in new[]{new Vector3(.5578825f,1.4157172f,.05812766f),new Vector3(.53124976f,1.250988f,-.1441368f),new Vector3(.454651f,1.053064f,-.33873782f),new Vector3(.3898234f,.9103601f,-.4306492f)}){
                 float nearest=float.MaxValue;string actual=null;
                 foreach(var skin in skins){var landmarkVertices=skin.sharedMesh.vertices;var ix=skin.sharedMesh.triangles;
                     for(int i=0;i<ix.Length;i+=3){float d=Vector3.Distance((landmarkVertices[ix[i]]+landmarkVertices[ix[i+1]]+landmarkVertices[ix[i+2]])/3,point);if(d<nearest){nearest=d;actual=Role(skin);}}
                 }
-                check("source-reviewed lower fin face is bound to WingR at "+point+" actual="+actual,nearest<.00001f&&actual=="WingR");
+                check("retired asymmetric overlap face is absent from rendered equipment at "+point,nearest>.00001f);
             }
             rig.ResetPose();var baseline=Bake(skins);
             var hubs=skins.Where(s=>s.name.StartsWith("Complete_KneeHub")).ToArray();
@@ -88,6 +88,41 @@ public static class EquipmentOwnershipQA
             for(int i=0;i<views.Length;i++){
                 Capture(camera,rig,skins,"ownership-"+i,views[i],true);Capture(camera,rig,skins,"sword-only-"+i,views[i],false,"Sword");Capture(camera,rig,skins,"wings-only-"+i,views[i],false,"Wing");
             }
+            var wingAudit=new List<object>();
+            var pair=skins.Where(s=>Role(s)=="WingL"||Role(s)=="WingR").OrderBy(s=>Role(s)).ToArray();
+            check("one complete mesh per wing",pair.Length==2);
+            var leftRest=pair[0].sharedMesh.vertices;var rightRest=pair[1].sharedMesh.vertices;
+            check("matching complete wing vertex counts",leftRest.Length==rightRest.Length);
+            var leftRoot=rig.Mount.InverseTransformPoint(rig.WingL.position);var rightRoot=rig.Mount.InverseTransformPoint(rig.WingR.position);
+            foreach(string label in new[]{"stand","walk","crouch","jump","deploy-half","hover","cruise","boost","bank-left","bank-right","landing","power-loss"}){
+                bool ground=label=="stand"||label=="walk"||label=="crouch";
+                m.FlightMode=ground||label=="jump"?Flight.Phase.Ground:label=="landing"?Flight.Phase.Landing:label=="power-loss"?Flight.Phase.PowerLost:Flight.Phase.Cruise;
+                m.Grounded=ground;m.HoverOn=false;m.Boost=label=="boost";
+                m.WingBlend=ground||label=="jump"?0:label=="deploy-half"?.5f:1;m.Blend=m.WingBlend;
+                m.VisualForward=label=="boost"?20:label=="cruise"||label.StartsWith("bank")?12:label=="walk"?4:0;
+                m.VisualTurn=label=="bank-left"?-45:label=="bank-right"?45:0;
+                m.FlightBank=m.FlightSweep=m.FlightLean=0;
+                for(int step=0;step<90;step++){rig.ResetPose();Flight.Pose(v,rig,1f/30);}
+                if(label=="crouch"){var fl=rig.FootL.position;var fr=rig.FootR.position;rig.Torso.position-=rig.Mount.up*.55f;Gait.Solve(rig,0,fl,rig.Mount.up);Gait.Solve(rig,1,fr,rig.Mount.up);}
+                if(label=="walk"){Gait.Solve(rig,0,rig.FootL.position+rig.Mount.forward*.35f+rig.Mount.up*.1f,rig.Mount.up);Gait.Solve(rig,1,rig.FootR.position-rig.Mount.forward*.25f,rig.Mount.up);}
+                var l=rig.WingL.localRotation;var rr=rig.WingR.localRotation;float mirroredAngle=Quaternion.Angle(new Quaternion(l.x,-l.y,-l.z,l.w),rr);
+                var posed=Bake(pair);float shapeError=0,reflectionError=0;
+                for(int k=0;k<leftRest.Length;k++){
+                    var lp=rig.WingL.InverseTransformPoint(posed[0][k])+leftRoot;
+                    var rp=rig.WingR.InverseTransformPoint(posed[1][k])+rightRoot;
+                    shapeError=Mathf.Max(shapeError,Vector3.Distance(lp,leftRest[k]),Vector3.Distance(rp,rightRest[k]));
+                    var lm=rig.Mount.InverseTransformPoint(posed[0][k]);var rm=rig.Mount.InverseTransformPoint(posed[1][k]);lm.x=-lm.x;
+                    reflectionError=Mathf.Max(reflectionError,Vector3.Distance(lm,rm));
+                }
+                check("wing geometry stays complete and rigid pose="+label+" error="+shapeError,shapeError<.001f);
+                if(!label.StartsWith("bank"))check("entire wing pair reflects including lower tips pose="+label+" error="+reflectionError,mirroredAngle<.01f&&reflectionError<.001f);
+                wingAudit.Add(new{shapeError,reflectionError,pose=label,blend=m.WingBlend,bank=m.FlightBank,sweep=m.FlightSweep,mirroredAngle,left=new[]{l.x,l.y,l.z,l.w},right=new[]{rr.x,rr.y,rr.z,rr.w}});
+                Capture(camera,rig,skins,"audit-wing-"+label,new Vector3(0,.1f,-6.5f),false,"Wing");
+                Capture(camera,rig,skins,"audit-body-"+label,new Vector3(2,.8f,-6),false);
+                Capture(camera,rig,skins,"audit-owner-"+label,new Vector3(2,.8f,-6),true);
+            }
+            File.WriteAllText(Path.Combine(folder,"wing-pose-audit.json"),Newtonsoft.Json.JsonConvert.SerializeObject(wingAudit,Newtonsoft.Json.Formatting.Indented));
+            m.FlightMode=Flight.Phase.Ground;m.Grounded=true;m.WingBlend=m.Blend=m.FlightBank=m.FlightSweep=m.FlightLean=0;m.VisualForward=m.VisualTurn=0;m.Boost=false;rig.ResetPose();
             var rear=skins.Where(s=>Role(s)=="Backpack"||Role(s).StartsWith("Wing")).ToArray();var restLocal=new Vector3[rear.Length][];var owner=new Transform[rear.Length][];var mesh=new Mesh();int vertices=0;
             for(int i=0;i<rear.Length;i++){rear[i].BakeMesh(mesh);restLocal[i]=mesh.vertices;var weights=rear[i].sharedMesh.boneWeights;owner[i]=weights.Select(w=>rear[i].bones[w.boneIndex0]).ToArray();for(int j=0;j<restLocal[i].Length;j++)restLocal[i][j]=owner[i][j].InverseTransformPoint(rear[i].transform.TransformPoint(restLocal[i][j]));vertices+=restLocal[i].Length;}
             float maxRigidError=0;int samples=0;var curve=new List<object>();

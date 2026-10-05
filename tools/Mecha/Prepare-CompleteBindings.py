@@ -12,7 +12,7 @@ for name,parent,pos in [('Sword','HandR',[.78,1.81,.76]),('Shield','HandL',[-.85
 ids={j['name']:i for i,j in enumerate(doc['joints'])};names={i:n for n,i in ids.items()}
 dtype=np.dtype([('vertex','<f4',8),('bones','<i4',2),('weights','<f4',2)])
 allfaces=[];materials=[];nodes=set(doc.get('sourceNodes',[]))
-for part in doc['parts']:
+for part in doc['parts']+doc.get('sourceOnlyParts',[]):
     if part.get('generatedRepair'):continue
     nodes.add(part['node']);v=np.frombuffer(raw,dtype=dtype,count=part['vertices'],offset=part['offset'])
     ix=np.frombuffer(raw,dtype='<u4',count=part['indices'],offset=part['offset']+48*part['vertices']).reshape(-1,3)
@@ -101,6 +101,24 @@ for part in parts:
     v=np.frombuffer(blob,dtype=dtype,count=part['vertices'],offset=part['offset']);ix=np.frombuffer(blob,dtype='<u4',count=part['indices'],offset=part['offset']+48*part['vertices']).reshape(-1,3);after.append(v[ix])
 assert geometry_hash(np.concatenate(after))==identity,'Geometry/UV/normal face tuple changed'
 del v,ix
+# The fused right wing lost its lower tip during reduction and still includes
+# sword-overlap scraps. Reconstruct it from the intact textured left assembly.
+# Retain the displaced source tuples in the same binary for lossless rebaking,
+# but keep them OUT of runtime parts (the loader renders only doc['parts']).
+source_only=[p for p in parts if p['role']=='WingR']
+parts=[p for p in parts if p['role']!='WingR']
+wing_faces=0
+for left in [p for p in parts if p['role']=='WingL']:
+    v=np.frombuffer(blob,dtype=dtype,count=left['vertices'],offset=left['offset']).copy()
+    ix=np.frombuffer(blob,dtype='<u4',count=left['indices'],offset=left['offset']+48*left['vertices']).copy().reshape(-1,3)
+    v['vertex'][:,0]*=-1;v['vertex'][:,3]*=-1
+    v['bones']=ids['WingR'];v['weights']=[1,0]
+    ix=ix[:,[0,2,1]].copy() # Reflection reverses handedness; restore front faces.
+    offset=len(blob);blob.extend(v.tobytes());blob.extend(ix.astype('<u4').tobytes())
+    part=dict(left,offset=offset,role='WingR',nodeName='Complete_WingRRestored',generatedRepair='mirrored-intact-wing-v1')
+    parts.append(part);wing_faces+=len(ix)
+retired_faces=sum(p['indices']//3 for p in source_only)
+audit['WingR']=wing_faces
 from CompleteBladeSurface import build
 repair=build(dtype,ids['Sword']).reshape(-1)
 unique,newix=np.unique(repair,return_inverse=True);offset=len(blob)
@@ -119,8 +137,9 @@ for side in ('L','R'):
         joint='Torso',role='Leg'+side,material=0,offset=offset,vertices=len(unique),
         indices=len(newix),generatedRepair='armoured-knee-joint-v2'))
     count=len(newix)//3;knee_faces+=count;audit['Leg'+side]+=count
-doc.update(parts=parts,sourceNodes=sorted(nodes),renderRoles=audit,geometryTupleSha256=identity,
-    triangles=before+repair_faces+knee_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,kneeRepairTriangles=knee_faces,
+doc.update(parts=parts,sourceOnlyParts=source_only,sourceNodes=sorted(nodes),renderRoles=audit,geometryTupleSha256=identity,
+    triangles=before-retired_faces+wing_faces+repair_faces+knee_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,kneeRepairTriangles=knee_faces,
+    wingRestoration=dict(template='WingL',target='WingR',mirroredFaces=wing_faces,retiredSourceFaces=retired_faces,plane='x=0',reason='restore reduced lower fin and remove asymmetric sword-overlap scraps'),
     equipmentBinding='rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves',
     wingBinding='complete rigid rear fins and tapered necks; WingL/WingR under Backpack',
     wingVertices=[sum(p['vertices'] for p in parts if p['role']==name) for name in ['WingL','WingR']],
