@@ -44,13 +44,15 @@ namespace PZAEC.Mecha
                 for(int i=0;i<v.Length;i++) { v[i]=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle())-origin; n[i]=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle()); uv[i]=new Vector2(r.ReadSingle(),r.ReadSingle());
                     if(doc.skinned){int a=r.ReadInt32(),b=r.ReadInt32();float x=r.ReadSingle(),y=r.ReadSingle();if(a<0||b<0||a>=doc.joints.Length||b>=doc.joints.Length||Mathf.Abs(x+y-1)>.001f)throw new InvalidDataException("Invalid skin weights");weights[i]=new BoneWeight{boneIndex0=a,boneIndex1=b,weight0=x,weight1=y};}}
                 for(int i=0;i<ix.Length;i++) { ix[i]=r.ReadInt32(); if(ix[i]<0 || ix[i]>=v.Length) throw new InvalidDataException("Rig index out of range"); }
+                bool bladeFinish=stem=="samurai_style_gundam_mecha"&&p.role=="SwordBlade";
+                if(bladeFinish)for(int i=0;i<v.Length;i++)uv[i]=BladeFinish.UV(v[i]+origin);
                 var mesh=new Mesh { name=p.nodeName+"_"+p.joint,indexFormat=IndexFormat.UInt32 };
                 mesh.vertices=v; mesh.normals=n; mesh.uv=uv; mesh.triangles=ix; mesh.RecalculateBounds(); mesh.RecalculateTangents();
                 var go=new GameObject(mesh.name); go.layer=layer; go.transform.SetParent(parent,false);
                 Renderer renderer;
                 if(doc.skinned){var bones=new Transform[doc.joints.Length];var bind=new Matrix4x4[bones.Length];for(int j=0;j<bones.Length;j++){bones[j]=joints[doc.joints[j].name];bind[j]=bones[j].worldToLocalMatrix*mount.localToWorldMatrix;}mesh.boneWeights=weights;mesh.bindposes=bind;var skin=go.AddComponent<SkinnedMeshRenderer>();skin.sharedMesh=mesh;skin.bones=bones;skin.rootBone=mount;skin.localBounds=new Bounds(new Vector3(0,1.6f,0),new Vector3(6,6,6));skin.quality=SkinQuality.Bone2;renderer=skin;}
                 else{go.AddComponent<MeshFilter>().sharedMesh=mesh;renderer=go.AddComponent<MeshRenderer>();}
-                renderer.sharedMaterial=materials[p.material]; renderer.shadowCastingMode=ShadowCastingMode.On;
+                renderer.sharedMaterial=bladeFinish?BladeFinish.Material():materials[p.material]; renderer.shadowCastingMode=ShadowCastingMode.On;
                 go.AddComponent<MechaRenderPart>().Role=p.role??Role(p.joint);
                 triangles+=ix.Length/3; sourceNodes.Add(p.node);
             }

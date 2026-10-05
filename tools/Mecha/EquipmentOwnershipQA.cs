@@ -38,6 +38,17 @@ public static class EquipmentOwnershipQA
         Action<string,bool> check=(n,ok)=>results.Add((ok?"PASS ":"FAIL ")+"FRESH RIG "+n);
         try{
             Boarding.Clear();Gait.Clear();Samurai.Stop(v);var m=Locomotion.Get(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.WingBlend=m.Blend=0;m.FlightMode=Flight.Phase.Ground;
+            var bladeSkins=skins.Where(s=>Role(s)=="SwordBlade").ToArray();
+            var finish=bladeSkins[0].sharedMaterial;
+            check("all original and repaired blade surfaces share one finish",bladeSkins.Length>=2&&bladeSkins.All(s=>s.sharedMaterial==finish)&&finish.name=="Mecha_Complete_BladeFinish");
+            check("blade finish does not leak to hilt or wings",skins.Where(s=>Role(s)!="SwordBlade").All(s=>s.sharedMaterial!=finish));
+            float uvError=0;
+            foreach(var skin in bladeSkins){var bladeVertices=skin.sharedMesh.vertices;var uv=skin.sharedMesh.uv;for(int i=0;i<bladeVertices.Length;i++)uvError=Mathf.Max(uvError,Vector2.Distance(uv[i],BladeFinish.UV(bladeVertices[i])));}
+            check("source blade and core have continuous blade-local UVs",uvError<.00001f);
+            var bladeAxis=(new Vector3(.73f,1.57f,.30f)-new Vector3(.23f,.50f,-1.10f)).normalized;
+            var bladeNormal=new Vector3(.96168816f,-.0582994f,-.267875f);bladeNormal=(bladeNormal-bladeAxis*Vector3.Dot(bladeAxis,bladeNormal)).normalized;
+            float pairError=0;foreach(float along in new[]{.2f,.7f,1.2f,1.7f}){var point=new Vector3(.23f,.50f,-1.10f)+bladeAxis*along;pairError=Mathf.Max(pairError,Vector2.Distance(BladeFinish.UV(point+bladeNormal*.09f),BladeFinish.UV(point-bladeNormal*.09f)));}
+            check("front and back use matching finish coordinates",pairError<.00001f);
             // Historical overlap landmarks must not survive in the rendered replacement.
             // The original tuples remain archived, outside runtime parts.
             foreach(var point in new[]{new Vector3(.5578825f,1.4157172f,.05812766f),new Vector3(.53124976f,1.250988f,-.1441368f),new Vector3(.454651f,1.053064f,-.33873782f),new Vector3(.3898234f,.9103601f,-.4306492f)}){
