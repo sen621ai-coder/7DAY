@@ -1,6 +1,14 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.22 medical supply probability
+- Basic boss supplies now select medical items at 40% per draw.
+- Remaining categories share 60% in their previous proportions: crafting
+  23.333333%, armor 10%, tool/weapon parts 13.333333%, vehicle 6.666667%,
+  coins 6.666667%. Category weights sum to one.
+- Retains 3/4/5/6 draws and all item amounts and internal category weights.
+  XML-only update; restart server and clients to reload configurations.
+
 Runtime 1.27.21 basic boss material supplies
 - Portable T16-T19 boss boxes replace groupZpackBoss03, groupZpackBoss04
   and groupSkillBook with one dedicated basic supply pool; shared pools stay.

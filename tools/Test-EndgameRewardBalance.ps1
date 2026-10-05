@@ -167,7 +167,7 @@ Assert-Balance ($magazineNames.Count -eq 23 -and @($magazineNames | Where-Object
 # supplies. Fixed weights bypass loot-stage gates and must select just one branch.
 $basicPool=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossBasicMaterialSupplies']")
 Assert-Balance ($basicPool.count -eq '1' -and $basicPool.item.Count -eq 6) 'Basic supplies must select one of six categories'
-$categoryWeights=@{PZAECBossBasicCraftingMaterials=.35;PZAECBossBasicArmorMaterials=.15;PZAECBossBasicToolWeaponParts=.20;PZAECBossBasicVehicleParts=.10;casinoCoin=.10;PZAECBossBasicMedicalSupplies=.10}
+$categoryWeights=@{PZAECBossBasicCraftingMaterials=.23333333;PZAECBossBasicArmorMaterials=.10;PZAECBossBasicToolWeaponParts=.13333333;PZAECBossBasicVehicleParts=.06666667;casinoCoin=.06666667;PZAECBossBasicMedicalSupplies=.40}
 foreach($entry in $basicPool.item){
     $key=if($entry.group){[string]$entry.group}else{[string]$entry.name}
     Assert-Balance ($categoryWeights.ContainsKey($key) -and [double]$entry.prob -eq $categoryWeights[$key]) "Wrong basic category weight: $key"

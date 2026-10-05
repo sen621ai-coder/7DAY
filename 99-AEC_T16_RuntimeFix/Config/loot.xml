@@ -1666,12 +1666,12 @@
       <item name="drinkCanMegaCrush" count="1" prob="0.15" />
     </lootgroup>
     <lootgroup name="PZAECBossBasicMaterialSupplies" count="1">
-      <item group="PZAECBossBasicCraftingMaterials" prob="0.35" />
-      <item group="PZAECBossBasicArmorMaterials" prob="0.15" />
-      <item group="PZAECBossBasicToolWeaponParts" prob="0.20" />
-      <item group="PZAECBossBasicVehicleParts" prob="0.10" />
-      <item name="casinoCoin" count="600,800" prob="0.10" />
-      <item group="PZAECBossBasicMedicalSupplies" prob="0.10" />
+      <item group="PZAECBossBasicCraftingMaterials" prob="0.23333333" />
+      <item group="PZAECBossBasicArmorMaterials" prob="0.10" />
+      <item group="PZAECBossBasicToolWeaponParts" prob="0.13333333" />
+      <item group="PZAECBossBasicVehicleParts" prob="0.06666667" />
+      <item name="casinoCoin" count="600,800" prob="0.06666667" />
+      <item group="PZAECBossBasicMedicalSupplies" prob="0.40" />
     </lootgroup>
   </insertBefore>
   <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss03']" />
