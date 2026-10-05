@@ -15,11 +15,14 @@ def build(dtype, sword_bone):
     rings = [(.54, .30), (.64, 1.), (1.68, 1.), (1.83, .30)]
     points = []
     for along, taper in rings:
-        depth = -.035 - .018 * (along - .65)
+        # Recess behind the recovered original gold faces on BOTH sides.
+        # Their complete triangles lie below -.061 or above -.039 in this
+        # frame, so the core cannot hide them or create coplanar flicker.
+        depth = -.050
         low, high = .006 + .012 * along, .183 + .018 * along
         middle = (low + high) / 2
         low, high = middle + (low-middle)*taper, middle + (high-middle)*taper
-        thick, bevel = .035 * taper, .025 * taper
+        thick, bevel = .009 * taper, .025 * taper
         for d, w in [(depth, low), (depth+thick, low+bevel),
                      (depth+thick, high-bevel), (depth, high),
                      (depth-thick, high-bevel), (depth-thick, low+bevel)]:

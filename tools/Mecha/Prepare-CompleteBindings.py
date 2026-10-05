@@ -80,6 +80,9 @@ head_top=(abs(x)<.52)&(y>2.63)&~sword&~wing&~shield&np.isin(bone,[ids['Torso'],i
 bone[head_top]=ids['Head']
 back=(z<.10)&(y>1.45)&(y<2.63)&~sword&~wing&~shield&np.isin(bone,[ids['Torso'],ids['Backpack'],ids['WingL'],ids['WingR']])
 bone[back]=ids['Backpack'];bone[wing&(x<0)]=ids['WingL'];bone[wing&(x>0)]=ids['WingR'];bone[shield]=ids['Shield'];bone[sword]=ids['Sword']
+from CompleteSwordTrim import select as select_trim
+restored_trim=select_trim(face,bone==ids['WingR'],res/'CompleteTextures/base.png')
+bone[restored_trim]=ids['Sword']
 # Rigid complete faces, with duplicated vertices at mechanical seams, avoid
 # interpolating across thigh/wing, back/arm and finger/blade ownership.
 groups={};audit={};parts=[];blob=bytearray()
@@ -140,6 +143,7 @@ for side in ('L','R'):
 doc.update(parts=parts,sourceOnlyParts=source_only,sourceNodes=sorted(nodes),renderRoles=audit,geometryTupleSha256=identity,
     triangles=before-retired_faces+wing_faces+repair_faces+knee_faces,sourceRigTriangles=before,bladeRepairTriangles=repair_faces,kneeRepairTriangles=knee_faces,
     wingRestoration=dict(template='WingL',target='WingR',mirroredFaces=wing_faces,retiredSourceFaces=retired_faces,plane='x=0',reason='restore reduced lower fin and remove asymmetric sword-overlap scraps'),
+    swordTrimRestoration=dict(sourceFaces=int(restored_trim.sum()),coreDepth=[-.059,-.041],minimumSeparation=.002),
     equipmentBinding='rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves',
     wingBinding='complete rigid rear fins and tapered necks; WingL/WingR under Backpack',
     wingVertices=[sum(p['vertices'] for p in parts if p['role']==name) for name in ['WingL','WingR']],

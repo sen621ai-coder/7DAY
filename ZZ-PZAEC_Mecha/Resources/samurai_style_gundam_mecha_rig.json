@@ -2,7 +2,7 @@
   "equipmentBinding": "rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves",
   "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
   "sourceParts": 17,
-  "triangles": 198588,
+  "triangles": 198684,
   "sourceTriangles": 2000000,
   "height": 3.2,
   "skinned": true,
@@ -343,8 +343,8 @@
       "role": "SwordBlade",
       "material": 0,
       "offset": 7273752,
-      "vertices": 11379,
-      "indices": 35991
+      "vertices": 11497,
+      "indices": 36279
     },
     {
       "node": 6,
@@ -353,7 +353,7 @@
       "joint": "Torso",
       "role": "SwordHilt",
       "material": 0,
-      "offset": 7963908,
+      "offset": 7970724,
       "vertices": 6613,
       "indices": 20295
     },
@@ -364,7 +364,7 @@
       "joint": "Torso",
       "role": "Torso",
       "material": 0,
-      "offset": 8362512,
+      "offset": 8369328,
       "vertices": 36670,
       "indices": 124476
     },
@@ -375,7 +375,7 @@
       "joint": "Torso",
       "role": "WingL",
       "material": 0,
-      "offset": 10620576,
+      "offset": 10627392,
       "vertices": 1436,
       "indices": 7056
     },
@@ -386,7 +386,7 @@
       "joint": "Torso",
       "role": "WingR",
       "material": 0,
-      "offset": 11405952,
+      "offset": 11408736,
       "vertices": 1436,
       "indices": 7056,
       "generatedRepair": "mirrored-intact-wing-v1"
@@ -398,7 +398,7 @@
       "joint": "Torso",
       "role": "SwordBlade",
       "material": 0,
-      "offset": 11503104,
+      "offset": 11505888,
       "vertices": 84,
       "indices": 132,
       "generatedRepair": "closed-blade-overlap-surface-v1"
@@ -410,7 +410,7 @@
       "joint": "Torso",
       "role": "LegL",
       "material": 0,
-      "offset": 11507664,
+      "offset": 11510448,
       "vertices": 345,
       "indices": 1248,
       "generatedRepair": "armoured-knee-joint-v2"
@@ -422,7 +422,7 @@
       "joint": "Torso",
       "role": "LegR",
       "material": 0,
-      "offset": 11529216,
+      "offset": 11532000,
       "vertices": 345,
       "indices": 1248,
       "generatedRepair": "armoured-knee-joint-v2"
@@ -463,7 +463,7 @@
     "LegL": 40003,
     "LegR": 28428,
     "Shield": 16091,
-    "SwordBlade": 12041,
+    "SwordBlade": 12137,
     "SwordHilt": 6765,
     "Torso": 41492,
     "WingL": 2352,
@@ -516,17 +516,25 @@
       "joint": "Torso",
       "role": "WingR",
       "material": 0,
-      "offset": 10717728,
-      "vertices": 11380,
-      "indices": 35496
+      "offset": 10724544,
+      "vertices": 11320,
+      "indices": 35208
     }
   ],
   "wingRestoration": {
     "template": "WingL",
     "target": "WingR",
     "mirroredFaces": 2352,
-    "retiredSourceFaces": 11832,
+    "retiredSourceFaces": 11736,
     "plane": "x=0",
     "reason": "restore reduced lower fin and remove asymmetric sword-overlap scraps"
+  },
+  "swordTrimRestoration": {
+    "sourceFaces": 96,
+    "coreDepth": [
+      -0.059,
+      -0.041
+    ],
+    "minimumSeparation": 0.002
   }
 }

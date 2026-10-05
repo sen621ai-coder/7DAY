@@ -47,6 +47,13 @@ public static class EquipmentOwnershipQA
                 }
                 check("retired asymmetric overlap face is absent from rendered equipment at "+point,nearest>.00001f);
             }
+            // Reviewed original gold blade faces must render on Sword, not on either wing.
+            foreach(var point in new[]{new Vector3(0.408674628f,1.00086105f,-0.394926637f),new Vector3(0.459749609f,1.13522172f,-0.219879672f),new Vector3(0.496249765f,1.05969858f,-0.289886087f),new Vector3(0.506689489f,1.06029117f,-0.255140096f)}){
+                float nearest=float.MaxValue;string role=null;
+                foreach(var skin in skins){var verts=skin.sharedMesh.vertices;var ix=skin.sharedMesh.triangles;
+                    for(int i=0;i<ix.Length;i+=3){float dist=Vector3.Distance((verts[ix[i]]+verts[ix[i+1]]+verts[ix[i+2]])/3,point);if(dist<nearest){nearest=dist;role=Role(skin);}}}
+                check("restored original gold surface follows Sword at "+point,nearest<.00001f&&role=="SwordBlade");
+            }
             rig.ResetPose();var baseline=Bake(skins);
             var hubs=skins.Where(s=>s.name.StartsWith("Complete_KneeHub")).ToArray();
             check("two closed knee mechanisms loaded",hubs.Length==2);
