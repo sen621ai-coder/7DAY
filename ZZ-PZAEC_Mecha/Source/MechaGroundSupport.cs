@@ -279,8 +279,11 @@ namespace PZAEC.Mecha
                 }
                 if(!enabled||s.Recovering||s.Feet[1-i].Swing||!s.Feet[1-i].Planted||i!=s.Next)continue;
                 var home=root+rb.rotation*s.Shape.Home[i];float duration=s.Cautious?Rules.RoughStepSeconds:Mathf.Clamp(.16f/(1+speed*1.1f),.008f,.20f);
+                bool attack=Rules.Complete(v)&&Samurai.Get(v).Swing&&!Samurai.Get(v).Blocked&&SwordMotion.Phase(Samurai.Get(v),Time.time)<SwordMotion.WindEnd;
+                if(attack)duration=Mathf.Max(duration,.20f);
                 var ahead=home+Vector3.ClampMagnitude(planar*(duration+.035f),s.Cautious?.28f:.45f);
                 if(speed<.30f&&s.DesiredVelocity.sqrMagnitude>.01f)ahead+=Vector3.ClampMagnitude(s.DesiredVelocity,.8f)*(duration+.035f);
+                if(attack&&Vector3.Dot(s.DesiredVelocity,rb.rotation*Vector3.forward)>0)ahead+=rb.rotation*Vector3.forward*.15f;
                 float error=Vector3.ProjectOnPlane(ahead-f.Position,Vector3.up).magnitude;
                 if(error<(speed>.10f?.10f:.18f)&&Mathf.Abs(rb.angularVelocity.y)<.06f)continue;
                 // Retry a refused candidate at 10 Hz, not twelve expensive searches per frame.

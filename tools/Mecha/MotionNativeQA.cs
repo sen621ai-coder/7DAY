@@ -132,6 +132,7 @@ public sealed class MechaMotionQA : IModApi
         foreach(var plane in UnityEngine.Object.FindObjectsOfType<MeshRenderer>())if(plane.gameObject.name=="Plane")plane.enabled=false;
         var focus=rig.Mount.position+Vector3.up*1.6f;camera.transform.position=focus+new Vector3(-3,1.1f,5);camera.transform.LookAt(focus);camera.Render();var previous=RenderTexture.active;RenderTexture.active=iconRT;var icon=new Texture2D(256,256,TextureFormat.RGBA32,false);icon.ReadPixels(new Rect(0,0,256,256),0,0);icon.Apply();File.WriteAllBytes(Path.Combine(output,"complete-icon.png"),icon.EncodeToPNG());RenderTexture.active=previous;UnityEngine.Object.DestroyImmediate(icon);camera.targetTexture=texture;camera.backgroundColor=new Color(.08f,.1f,.13f);iconRT.Release();UnityEngine.Object.DestroyImmediate(iconRT);
         SamuraiTrial(world,v,rig,camera,texture);
+        foreach(var result in MeleeNativeQA.Run(world,v,rig,camera,output)){report.Add(result);if(result.StartsWith("FAIL "))failures++;}
         CeremonyTrial(world,v,rig,camera,texture);
         PresentationTrial(world,v,rig,camera,texture);
         WeightPresentationTrial(world,v,rig,camera,texture);
@@ -430,7 +431,7 @@ public sealed class MechaMotionQA : IModApi
         foreach(bool heavy in new[]{false,true})
         {
             Samurai.Start(s,heavy,now-.33f*(heavy?Samurai.HeavyDuration:Samurai.NormalDuration));rig.ResetPose();Samurai.Pose(v,rig,.1f,now);
-            var center=rig.HandR.TransformPoint((Samurai.BladeRoot+Samurai.BladeTip)*.5f-Samurai.Grip)+Origin.position;z.SetPosition(center-Vector3.up*.8f);Physics.SyncTransforms();int before=z.Health;
+            var center=(SwordMotion.Root(rig)+SwordMotion.Tip(rig))*.5f+Origin.position;MeleeNativeQA.PlaceTarget(z,center);int before=z.Health;
             s.LastSweep=now-.02f;s.PreviousPosition=v.position;Samurai.Contacts(world,v,rig,now);report.Add("SWORD actual="+(before-z.Health)+" before="+before+" contacts="+s.Hit.Count+" center="+center);Check(heavy?"heavy sword delivers 135000 native damage":"normal sword delivers 90000 native damage",before-z.Health==(heavy?135000:90000));
             int after=z.Health;Samurai.Contacts(world,v,rig,now+.001f);Check("one contact per target per swing heavy="+heavy,z.Health==after);
         }
@@ -728,12 +729,12 @@ public sealed class MechaMotionQA : IModApi
         var s=Samurai.Get(v);float now=Time.time;var m=Locomotion.Get(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.Blend=m.WingBlend=0;m.FlightMode=Flight.Phase.Ground;s.Actor=pilot.entityId;
         foreach(float dt in new[]{1f/15,1f/10,.25f,.4f})
         {
-            target.Health=1000000;Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.33f);target.SetPosition((SwordMotion.Root(rig)+SwordMotion.Tip(rig))*.5f+Origin.position-Vector3.up*.8f);Physics.SyncTransforms();
+            target.Health=1000000;Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.33f);MeleeNativeQA.PlaceTarget(target,(SwordMotion.Root(rig)+SwordMotion.Tip(rig))*.5f+Origin.position);
             for(float time=0;time<Samurai.NormalDuration-.01f;time+=dt)Samurai.Contacts(world,v,rig,now+time);
             Check("native low FPS/catchup sword dt="+dt+" damage="+(1000000-target.Health),1000000-target.Health==90000);
         }
         target.Health=1000000;Samurai.Start(s,false,now);Samurai.Contacts(world,v,rig,now+.401f);Check("interruption longer than .4s cancels without deferred damage",s.Blocked&&target.Health==1000000);
-        Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.33f);var root=SwordMotion.Root(rig);var tip=SwordMotion.Tip(rig);target.SetPosition((root+tip)*.5f+Origin.position-Vector3.up*.8f);
+        Samurai.Start(s,false,now);rig.ResetPose();SwordMotion.Pose(v,rig,s,now+Samurai.NormalDuration*.33f);var root=SwordMotion.Root(rig);var tip=SwordMotion.Tip(rig);MeleeNativeQA.PlaceTarget(target,(root+tip)*.5f+Origin.position);
         var wall=new GameObject("QA Sword Obstacle");wall.AddComponent<BoxCollider>().size=new Vector3(.2f,.5f,.5f);wall.transform.position=(root+tip)*.5f;Physics.SyncTransforms();target.Health=1000000;s.LastSweep=now+Samurai.NormalDuration*.33f-.02f;s.PreviousPosition=v.position;
         Samurai.Contacts(world,v,rig,now+Samurai.NormalDuration*.33f);Check("environment obstruction cancels sword before target damage",s.Blocked&&target.Health==1000000);UnityEngine.Object.DestroyImmediate(wall);
         Samurai.Stop(v);pilot.AttachedToEntity=null;slots.SetValue(v,saved);rig.ResetPose();world.RemoveEntity(pilot.entityId,EnumRemoveEntityReason.Despawned);world.RemoveEntity(target.entityId,EnumRemoveEntityReason.Despawned);

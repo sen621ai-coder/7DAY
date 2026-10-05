@@ -8,37 +8,60 @@ namespace PZAEC.Mecha
         public static Vector3 Root(Model.Rig r){return r.Sword!=null?r.Sword.TransformPoint(r.SwordRootAnchor):r.HandR.TransformPoint(r.SwordRootAnchor);}
         public static Vector3 Tip(Model.Rig r){return r.Sword!=null?r.Sword.TransformPoint(r.SwordTipAnchor):r.HandR.TransformPoint(r.SwordTipAnchor);}
         public const float WindEnd=.22f,CutEnd=.44f,BrakeEnd=.56f;
+        // Keep one canonical pose phase for rendering, damage, audio and trails.
+        // A held heavy attack is already wound up: its release takes only 140ms.
+        public static float Phase(Samurai.State s,float now)
+        {
+            float age=Mathf.Max(0,now-s.Started);if(!s.Heavy)return age/Samurai.NormalDuration;
+            float wind=s.Chained?(s.Combo==1?.32f:.60f):.14f,cut=.34f,brake=.22f;
+            if(age<wind)return age/wind*WindEnd;
+            if(age<wind+cut)return WindEnd+(age-wind)/cut*(CutEnd-WindEnd);
+            if(age<wind+cut+brake)return CutEnd+(age-wind-cut)/brake*(BrakeEnd-CutEnd);
+            return BrakeEnd+(age-wind-cut-brake)/(Samurai.HeavyDuration-wind-cut-brake)*(1-BrakeEnd);
+        }
         public static bool DamagePhase(float phase){return phase>=WindEnd&&phase<=CutEnd+.035f;}
-        public static string Stage(Samurai.State s,float now){if(s.Blocked)return "受阻收招";if(!s.Swing)return s.Charging?"重劈蓄力":s.Guarding?"正面举盾":"待机";float t=(now-s.Started)/Samurai.Duration(s);return t<WindEnd?"承重起手":t<=CutEnd?"发力挥砍":t<=BrakeEnd?"制动停剑":"回收";}
+        public static string Stage(Samurai.State s,float now){if(s.Blocked)return "受阻收招";if(!s.Swing)return s.Charging?"重劈蓄力":s.Guarding?"正面举盾":"待机";float t=Phase(s,now);return t<WindEnd?"承重起手":t<=CutEnd?"发力挥砍":t<=BrakeEnd?"制动停剑":s.Guarding?"回盾防守":"回收 / 可接招";}
         static float Ease(float t){return Mathf.SmoothStep(0,1,Mathf.Clamp01(t));}
         struct Frame {public Vector3 Grip,Direction,Normal,Shift,Euler;public float PoleAngle;}
         static Frame Blend(Frame a,Frame b,float t)
         {t=Mathf.Clamp01(t);return new Frame{Grip=Vector3.Lerp(a.Grip,b.Grip,t),Direction=Vector3.Slerp(a.Direction,b.Direction,t).normalized,Normal=Vector3.Slerp(a.Normal,b.Normal,t).normalized,Shift=Vector3.Lerp(a.Shift,b.Shift,t),Euler=Vector3.Lerp(a.Euler,b.Euler,t),PoleAngle=Mathf.Lerp(a.PoleAngle,b.PoleAngle,t)};}
-        static Frame FrameAt(Samurai.State s,Locomotion.MoveState m,float now)
+        static Frame ActionFrame(bool heavy,int combo,float alert,float t,float startCharge,bool chained)
         {
-            var ready=new Frame{Grip=Vector3.Lerp(new Vector3(1.22f,2.12f,.60f),new Vector3(1.24f,2.22f,.61f),s.Alert),Direction=new Vector3(.08f,-.79f,.60f).normalized,Normal=Vector3.right};
-            bool other=s.Combo!=1;float sign=other?-1:1;
-            bool lifting=s.Heavy||s.Charging;
+            var ready=new Frame{Grip=Vector3.Lerp(new Vector3(1.22f,2.12f,.60f),new Vector3(1.24f,2.22f,.61f),alert),Direction=new Vector3(.08f,-.79f,.60f).normalized,Normal=Vector3.right};
+            bool other=combo!=1;float sign=heavy?-1:other?-1:1;
+            bool lifting=heavy;
             var wind=ready;wind.Grip=lifting?new Vector3(1.00f,2.73f,.64f):other?new Vector3(.90f,2.47f,.79f):new Vector3(1.08f,2.38f,.62f);
             wind.Direction=(lifting?new Vector3(.18f,.94f,.29f):other?new Vector3(-.75f,.55f,.36f):new Vector3(.12f,.90f,.42f)).normalized;
             wind.Shift=new Vector3(sign*.055f,-.045f,-.045f);wind.Euler=new Vector3(lifting?-7:-3,-sign*18,sign*2);wind.PoleAngle=60;
-            var cut=ready;cut.Grip=s.Heavy?new Vector3(1.28f,2.36f,.60f):other?new Vector3(1.28f,2.65f,.57f):new Vector3(.90f,2.10f,.91f);
-            cut.Direction=(s.Heavy?new Vector3(.08f,-.79f,.60f):other?new Vector3(.80f,-.35f,.48f):new Vector3(-.70f,-.45f,.55f)).normalized;
-            cut.Shift=new Vector3(-sign*.035f,s.Heavy?-.10f:-.07f,.08f);cut.Euler=new Vector3(s.Heavy?13:5,sign*(s.Heavy?10:22),-sign*2);cut.PoleAngle=s.Heavy||!other?0:60;
+            var cut=ready;cut.Grip=heavy?new Vector3(1.28f,2.36f,.60f):other?new Vector3(1.28f,2.65f,.57f):new Vector3(.90f,2.10f,.91f);
+            cut.Direction=(heavy?new Vector3(.08f,-.79f,.60f):other?new Vector3(.80f,-.35f,.48f):new Vector3(-.70f,-.45f,.55f)).normalized;
+            cut.Shift=new Vector3(-sign*.035f,heavy?-.10f:-.07f,.08f);cut.Euler=new Vector3(heavy?13:5,sign*(heavy?10:22),-sign*2);cut.PoleAngle=heavy||!other?0:60;
             var cuttingNormal=Vector3.Cross(wind.Direction,cut.Direction).normalized;if(cuttingNormal.x<0)cuttingNormal=-cuttingNormal;wind.Normal=cut.Normal=cuttingNormal;
-            var brake=cut;brake.Grip=s.Heavy?new Vector3(1.30f,2.25f,.58f):other?new Vector3(1.30f,2.68f,.53f):new Vector3(.84f,1.98f,.84f);brake.Euler.y+=sign*3;brake.Shift.y-=.015f;
+            var brake=cut;brake.Grip=heavy?new Vector3(1.30f,2.25f,.58f):other?new Vector3(1.30f,2.68f,.53f):new Vector3(.84f,1.98f,.84f);brake.Euler.y+=sign*3;brake.Shift.y-=.015f;
             var charged=ready;charged.Grip=new Vector3(1.00f,2.73f,.64f);charged.Direction=new Vector3(.18f,.94f,.29f).normalized;charged.Normal=Vector3.Cross(charged.Direction,new Vector3(.08f,-.79f,.60f).normalized).normalized;
             charged.Shift=new Vector3(-.055f,-.045f,-.045f);charged.Euler=new Vector3(-7,18,-2);charged.PoleAngle=60;
-            var result=ready;
-            if(s.Charging)result=Blend(ready,charged,Ease((now-s.PressedAt)/Samurai.HeavyCharge));
-            if(s.Swing)
-            {
-                float t=Mathf.Clamp01((now-s.Started)/Samurai.Duration(s));
-                if(t<WindEnd)result=Blend(s.StartCharge>0?Blend(ready,charged,Ease(s.StartCharge)):s.Heavy?wind:ready,wind,Ease(t/WindEnd));
-                else if(t<CutEnd){float q=(t-WindEnd)/(CutEnd-WindEnd);result=Blend(wind,cut,q*q);}
-                else if(t<BrakeEnd){float q=(t-CutEnd)/(BrakeEnd-CutEnd);result=Blend(cut,brake,1-(1-q)*(1-q));}
-                else result=Blend(brake,ready,Ease((t-BrakeEnd)/(1-BrakeEnd)));
+            if(t<0)return Blend(ready,charged,Ease(startCharge));
+            var start=chained?ActionFrame(false,heavy?combo:combo==1?0:1,alert,startCharge,0,false):startCharge>0?Blend(ready,charged,Ease(startCharge)):heavy?wind:ready;
+            // A return cut winds from the preceding endpoint rather than lifting
+            // the sword through the head/forearm to the standalone first-cut pose.
+            if(chained&&!heavy){wind=start;wind.Shift.y-=.015f;wind.Euler.y-=sign*4;}
+            Frame result;
+            if(t<WindEnd){float q=t/WindEnd;
+                // From the high right finish, lower the counterweight clear of
+                // the forearm before raising a heavy cut. Both endpoints remain
+                // authored; no discrete IK plane swap is used as an escape.
+                if(chained&&heavy&&combo!=1)result=q<.5f?Blend(start,ready,Ease(q*2)):Blend(ready,wind,Ease(q*2-1));
+                else result=Blend(start,wind,Ease(q));
             }
+            else if(t<CutEnd){float q=(t-WindEnd)/(CutEnd-WindEnd);result=Blend(wind,cut,q*q);float lead=Mathf.Clamp01(q+.12f*Mathf.Sin(q*Mathf.PI));result.Shift=Vector3.Lerp(wind.Shift,cut.Shift,lead*lead);result.Euler=Vector3.Lerp(wind.Euler,cut.Euler,lead*lead);}
+            else if(t<BrakeEnd){float q=(t-CutEnd)/(BrakeEnd-CutEnd);result=Blend(cut,brake,1-(1-q)*(1-q));}
+            else result=Blend(brake,ready,Ease((t-BrakeEnd)/(1-BrakeEnd)));
+            return result;
+        }
+        static Frame FrameAt(Samurai.State s,Locomotion.MoveState m,float now)
+        {
+            var ready=ActionFrame(false,1,s.Alert,1,0,false);
+            var result=s.Swing?ActionFrame(s.Heavy,s.Combo,s.Alert,Phase(s,now),s.StartCharge,s.Chained):s.Charging?ActionFrame(true,s.Combo,s.Alert,-1,(now-s.PressedAt)/Samurai.HeavyCharge,false):ready;
             if(s.Blocked){float q=Ease((now-s.BlockedAt)/.38f);result.Grip=Vector3.Lerp(s.RecoveryGrip,ready.Grip,q);result.Direction=Vector3.Slerp(s.RecoveryDirection,ready.Direction,q).normalized;result.Normal=Vector3.Slerp(s.RecoveryNormal,ready.Normal,q).normalized;result.Shift=Vector3.Lerp(s.RecoveryShift,Vector3.zero,q);result.Euler=Vector3.Lerp(s.RecoveryEuler,Vector3.zero,q);result.PoleAngle=Mathf.Lerp(s.RecoveryPoleAngle,0,q);}
             float flight=Flight.AirPose(m)||m.WingBlend>.01f?m.WingBlend:m.Blend;
             if(flight>0){var carry=ready;carry.Grip=new Vector3(1.30f,2.10f,.55f);carry.Direction=new Vector3(.65f,-.40f,-.64f).normalized;result=Blend(result,carry,flight);result.Shift=result.Euler=Vector3.zero;}
@@ -49,6 +72,8 @@ namespace PZAEC.Mecha
             var frame=FrameAt(s,m,now);grip=frame.Grip;direction=frame.Direction;
         }
         public static float PoleAt(Samurai.State s,Locomotion.MoveState m,float now){return FrameAt(s,m,now).PoleAngle;}
+        public static Vector3 ShieldMotion(Samurai.State s,Locomotion.MoveState m,float now)
+        {var f=FrameAt(s,m,now);return new Vector3(-Mathf.Abs(f.Euler.y)*.18f-Mathf.Max(0,f.Euler.x)*.25f,-f.Euler.y*.22f,-Mathf.Abs(f.Euler.y)*.12f);}
         public static void Arm(Model.Rig r,Vector3 target,Vector3 poleDirection,float poleAngle=0)
         {
             r.ShoulderR.localRotation=r.RestRot[r.ShoulderR];r.ElbowR.localRotation=r.RestRot[r.ElbowR];r.HandR.localRotation=r.RestRot[r.HandR];

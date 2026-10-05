@@ -1,0 +1,53 @@
+初号机完全体 0.14.0 剑盾近战优化与验证
+2026-10-05，Asia/Shanghai
+
+实现
+普通斩击总时长 1.60 -> 1.35 秒；在 56% 制动完成点（约 0.756 秒）接续，600 ms 缓存只保留下一刀。反斩沿上一刀结束姿态发力，不重复回到待机再抬手。衔接起点相位量化为 8 位，使用原快照保留字段；新增 bit 7 表示衔接，仍在 24 位精确浮点整数范围内。只有权威端推进连招，切换前完成旧刀接触补算。
+
+独立重劈保持 0.8 秒蓄力，释放后 0.14 秒进入有效发力；释放动作总时长 1.45 秒。连段重劈按前招终点用 0.32 / 0.60 秒过渡，高位终点需要先避开剑柄与右前臂。动作、命中、拖尾、声音统一使用 SwordMotion.Phase。普通/重劈制动完成后可以举盾，攻击伤害窗口内不能格挡；举盾清除下一刀缓存。
+
+腰部在挥砍阶段稍早于握点转动，左臂按剑路做小幅反向配重和收盾。起手通过现有足底规划与刚体驱动做最高 0.85 m/s 短步；倒退输入优先，不直接修改根 Transform。攻击期间减小转向，保留支撑恢复、台阶、墙壁及坑沿限制。
+
+命中优先扫描原生 E_BP 身体碰撞体，再回退到原生主碰撞体或 Entity.SetPosition 维护的世界包围盒；不再用所有目标脚上方 0.8 米的单一点。每刀缓存目标碰撞体列表，先粗略包围盒剔除，再扫描实际胶囊/盒。原生碰撞体检测使用 Unity 浮动原点坐标，包围盒回退使用世界坐标。接触火花和音效定位到接触点。重劈增加接触音量、火花尺度和较低频镜头反馈，对存活且 CanBePushed 的目标施加一次有限物理推动；基础伤害仍为 90,000 / 135,000，不引入全局时间暂停。
+
+验证结果
+1. 正式 DLL 通过 tools/Mecha/Build.ps1，引用已安装游戏 Mono/Unity；确认不包含 QA 类。
+2. Test-All.ps1：63 项通过，包含源码/DLL 新鲜度及 README/ModInfo 版本匹配。
+3. 完整隔离原生检查：678 PASS，0 FAIL。
+   .local-tests/MechaNativeQA/run-444eac38850148e5ac83501c551d7b73/
+   报告副本：tools/Mecha/Generated/melee-0.14.0-native-report.txt
+   包含原有动作/音效/取消/延迟消息回归，新增两种普通攻击终点在 57%/70%/87% 位置衔接轻/重攻击、快照重建、缓存过期、制动后格挡、低矮与高大碰撞体、真实敌人胸部接触。
+   普攻实际扣血 90,000，重劈 135,000；15/10 FPS 及 250/400 ms 补算各扣一次 90,000；超过 400 ms 中断与撞墙取消通过。
+   连招切换剑尖跳变量最大约 12.2 mm；60 Hz 剑尖步长最大约 0.506 m，肘部约 0.108 m。
+4. 原生地形/物理回归：66 PASS，0 FAIL。
+   .local-tests/MechaNativeQA/run-ab19b5d3cba441c1ac70bb7f6e749cc5/
+   报告副本：tools/Mecha/Generated/melee-ground-0.14.0-native-report.txt
+   平地攻击前移约 0.237 m，速度峰值约 0.752 m/s，存在真实摆脚；墙壁/坑沿拒绝前移并保留支撑。承重脚最大误差约 0.042 mm。试验体/完全体原有支撑恢复、高速步行和地面消息回归通过。
+5. 实际加权装甲/盾/翼表面与剑刃、剑柄代理扫描：常规 2514 + 连招 1020 = 3534 姿态，0 接触失败。代理半径 65 mm，最小表面距离分别约 76.6 / 92.1 mm。
+   导出来源 run-a17de403df324b73b2bebc8a88dd666a，与最终生产动作源码相同，之后仅修正测试敌人摆放方式。
+   .local-tests/Mecha-0.14.0-review/standard-clearance.json
+   .local-tests/Mecha-0.14.0-review/chain-clearance.json
+6. 对本次修改前 0.13.1 备份逐文件 SHA256 比较：104 个配置、模型、贴图、音频、图标文件未变。
+
+测试修正与已知历史基线差异
+旧伤害探针仅调用 SetPosition，未推进独立命中骨架；旧单点判定不依赖骨架所以可通过。新版探针同步将原生胸部碰撞体放到剑刃上，保留真实 DamageEntity 扣血和补算入口，没有扩大生产命中容差以迎合旧摆放。
+
+Test-Presentation.py 和 Test-Complete.py 的模型/资源部分通过，但与 0.12.0 / 更早备份逐字比较 vehicles.xml 的断言失败。在本次修改前 0.13.1 的完整备份上重跑同样失败，确认是既存历史基线差异；本次未修改配置，也未放宽这些断言。不能将这两个脚本记为整体通过。
+
+范围与限制
+原生检查是隔离存档的脚本驱动。网络重放为同进程权威角色切换，不替代双机联机；真人键盘操作、完整敌群帧时间与客户端实听仍未验收。碰撞净空是剑刃/剑柄胶囊代理对真实装甲表面的扫描，不等于完整剑网格精确碰撞。未增加空中近战、盾击、突刺或新的音频素材；这些属于后续独立动作扩展。攻击节奏加快会提高连续攻击输出，基础伤害不变不代表 DPS 不变。
+
+交付与回退
+正式 DLL SHA256：0179272a23786486d19877627c12ae0a465584d1f32ec9ad0d691cd9d7bafffc
+预修改完整备份：.local-tests/Mecha-before-0.14.0-20261005-224215/ZZ-PZAEC_Mecha/
+重启游戏加载 0.14.0；联机所有端必须统一更新。
+
+复跑
+pwsh -File tools/Mecha/Build.ps1
+pwsh -File tools/Mecha/Test-All.ps1
+pwsh -File tools/Mecha/Start-NativeQA.ps1 -MotionProbe -TimeoutSeconds 420
+pwsh -File tools/Mecha/Start-NativeQA.ps1 -MotionProbe -ProbeSource tools/Mecha/RoughSupportNativeQA.cs -TimeoutSeconds 240
+pwsh -File tools/Mecha/Start-NativeQA.ps1 -MotionProbe -ProbeSource tools/Mecha/MeleeNativeQA.cs -TimeoutSeconds 240
+python tools/Mecha/Test-SwordClearance.py <mecha-motion-qa/sword-poses.json>
+python tools/Mecha/Test-SwordClearance.py <mecha-motion-qa/melee-poses.json>
+每次只启动一个原生 QA 进程；不得与玩家游戏或其他原生 QA 同时运行。

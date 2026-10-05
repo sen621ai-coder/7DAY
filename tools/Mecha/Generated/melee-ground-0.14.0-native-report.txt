@@ -1,0 +1,67 @@
+PASS double support before collapse
+PASS one bearing foot can recover to a nearby full sole ground=True normal=(0.00, 1.00, 0.00) targetY=399.7932 left=(-0.61, 400.02, 0.49) planted=True right=(0.61, 400.02, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=6080 walking=waiting for constrained pelvis recovery=False cautious=True speedCap=0 stop= lastFailure= swingAge=0.24/0
+PASS bearing foot remains fixed during recovery 3.163004E-05
+PASS both destroyed pads fall under gravity
+PASS real landing rebuilds support without stale recovery ground=True normal=(0.00, 1.00, 0.00) targetY=396.9355 left=(-0.61, 397.02, 0.13) planted=True right=(0.61, 397.02, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=14200 walking=waiting for constrained pelvis recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.24/0
+PASS flat boost retains speed and support peak=13.4865
+PASS ground packet length 77
+PASS server accepts real planted soles
+PASS duplicate foot frame rejected
+PASS ground packet length 77
+PASS foreign pilot rejected
+PASS ground packet length 77
+PASS nonfinite sole rejected
+PASS ground packet length 77
+PASS ground flag without bearing sole rejected
+PASS ground packet length 77
+PASS unsupported planted sole rejected
+PASS takeoff waits during a committed recovery swing
+PASS failed recovery preparation can be cancelled by takeoff
+PASS remote foot frame accepted
+PASS remote replay does not apply forces
+PASS late foot frame rejected
+PASS single-foot recovery frame accepted
+PASS recovery has no damaging landing authorization
+PASS takeoff clears stale ground recovery pose
+PASS late ground frame cannot overwrite flight
+PASS pilot change clears recovery replay
+PASS double support before collapse
+PASS one bearing foot can recover to a nearby full sole ground=True normal=(0.00, 1.00, 0.00) targetY=399.7553 left=(-0.69, 400.02, 0.87) planted=True right=(0.69, 400.02, 0.51) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=5880 walking=waiting for constrained pelvis recovery=False cautious=True speedCap=0 stop= lastFailure= swingAge=0.24/0
+PASS bearing foot remains fixed during recovery 3.079628E-05
+PASS both destroyed pads fall under gravity
+PASS real landing rebuilds support without stale recovery ground=True normal=(0.00, 1.00, 0.00) targetY=396.8406 left=(-0.69, 397.02, 0.51) planted=True right=(0.69, 397.02, 0.51) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=14000 walking=waiting for constrained pelvis recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.24/0
+PASS flat boost retains speed and support peak=13.4865
+PASS ground packet length 77
+PASS server accepts real planted soles
+PASS duplicate foot frame rejected
+PASS ground packet length 77
+PASS foreign pilot rejected
+PASS ground packet length 77
+PASS nonfinite sole rejected
+PASS ground packet length 77
+PASS ground flag without bearing sole rejected
+PASS ground packet length 77
+PASS unsupported planted sole rejected
+PASS takeoff waits during a committed recovery swing
+PASS failed recovery preparation can be cancelled by takeoff
+PASS remote foot frame accepted
+PASS remote replay does not apply forces
+PASS late foot frame rejected
+PASS single-foot recovery frame accepted
+PASS recovery has no damaging landing authorization
+PASS takeoff clears stale ground recovery pose
+PASS late ground frame cannot overwrite flight
+PASS pilot change clears recovery replay
+PASS melee flat starts on two valid soles
+PASS melee flat planted foot error=4.143033E-05
+PASS melee flat retains support
+PASS melee physical short step distance=0.2365493 swinging samples=22 speed=0.7524456
+PASS melee wall starts on two valid soles
+PASS melee wall planted foot error=3.625331E-05
+PASS melee wall retains support
+PASS melee wall refuses unsafe approach distance=0
+PASS melee edge starts on two valid soles
+PASS melee edge planted foot error=3.587492E-05
+PASS melee edge retains support
+PASS melee edge refuses unsafe approach distance=0
+LIMIT: native same-process protocol and PhysX tests, not two-client networking.

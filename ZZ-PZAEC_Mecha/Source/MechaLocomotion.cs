@@ -93,10 +93,10 @@ namespace PZAEC.Mecha
             bool boost=!Samurai.Braced(v)&&powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
             s.Boost=boost||(s.Boost&&powered&&grounded&&speed>4.2f&&!s.HoverOn);
             float target=throttle>=0?throttle*(boost?13.5f:4f):throttle*2f;
-            if(support!=null)support.DesiredVelocity=forward*target;
             if(s.HoverOn)target=throttle*Rules.HoverSpeed;
-            else target=Traversal.LimitSpeed(v,support,target,dt);
-            if(Samurai.Braced(v)){target=Mathf.Clamp(target,-1.2f,1.2f);steer*=.55f;s.Boost=false;}
+            if(Samurai.Braced(v)){target=Mathf.Clamp(target,-1.2f,1.2f);if(powered&&throttle>=0)target=Mathf.Max(target,Samurai.AttackDrive(v,Time.time));steer*=Samurai.Busy(v)?.2f:.55f;s.Boost=false;}
+            if(support!=null)support.DesiredVelocity=forward*target;
+            if(!s.HoverOn)target=Traversal.LimitSpeed(v,support,target,dt);
             if(grounded&&!s.HoverOn){GroundSupport.Walking(support,dt,powered&&!Boarding.Active(v));if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);target=0;}GroundSupport.Apply(support,dt);target=Mathf.Clamp(target,-support.DriveCap,support.DriveCap);if(support.Recovering){s.AirSince=-1;s.LandingEventExpected=false;s.LandingPendingUntil=-100;}if(support.Recovering||Mathf.Abs(target)<4.2f)s.Boost=false;}
             if(support!=null&&support.Recovering)steer=0;
             if(grounded||s.HoverOn)
