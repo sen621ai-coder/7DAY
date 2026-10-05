@@ -8,7 +8,7 @@ namespace PZAEC.Mecha
     {
         public int Vehicle,Actor,Action,Tick;public byte Mode;public Traversal.Stage Phase;public float Age;
         public Traversal.Plan Plan;
-        public const int Bytes=160;
+        public const int Bytes=168;
         public TraverseWire Setup(EntityVehicle v,Traversal.State s,byte mode)
         {Vehicle=v.entityId;Actor=s.Actor;Action=s.Current!=null?s.Current.Id:s.NextId;Tick=++s.Tick;Mode=mode;Phase=s.Phase;Age=s.Age;Plan=s.Current;return this;}
         static void Vector(PooledBinaryWriter w,Vector3 p){w.Write(p.x);w.Write(p.y);w.Write(p.z);}
@@ -16,17 +16,17 @@ namespace PZAEC.Mecha
         public void Write(PooledBinaryWriter w)
         {
             w.Write(Vehicle);w.Write(Actor);w.Write(Action);w.Write(Tick);w.Write(Mode);w.Write((byte)Phase);w.Write(Age);
-            var p=Plan??new Traversal.Plan();w.Write((byte)p.Type);w.Write((byte)p.Front);w.Write(p.Rotation.eulerAngles.y);
+            var p=Plan??new Traversal.Plan();w.Write((byte)((byte)p.Type|(p.Adaptive?128:0)));w.Write((byte)p.Front);w.Write(p.Rotation.eulerAngles.y);
             Vector(w,p.Root);Vector(w,p.End);for(int i=0;i<2;i++){Vector(w,p.Start[i]);Vector(w,p.StartNormal[i]);Vector(w,p.Land[i].Point);Vector(w,p.Land[i].Normal);}
-            w.Write(p.Duration);w.Write(p.Height);w.Write(p.Width);
+            w.Write(p.Duration);w.Write(p.Height);w.Write(p.Width);w.Write(p.Lift[0]);w.Write(p.Lift[1]);
         }
         public void Read(PooledBinaryReader r)
         {
             Vehicle=r.ReadInt32();Actor=r.ReadInt32();Action=r.ReadInt32();Tick=r.ReadInt32();Mode=r.ReadByte();Phase=(Traversal.Stage)r.ReadByte();Age=r.ReadSingle();
-            var p=new Traversal.Plan{Id=Action,Actor=Actor,Type=(Traversal.Kind)r.ReadByte(),Front=r.ReadByte()};
+            byte kind=r.ReadByte();var p=new Traversal.Plan{Id=Action,Actor=Actor,Type=(Traversal.Kind)(kind&127),Adaptive=(kind&128)!=0,Front=r.ReadByte()};
             p.Rotation=Quaternion.Euler(0,r.ReadSingle(),0);p.Root=Vector(r);p.End=Vector(r);
             for(int i=0;i<2;i++){p.Start[i]=Vector(r);p.StartNormal[i]=Vector(r);p.Land[i]=new GroundSupport.Pad{Point=Vector(r),Normal=Vector(r)};}
-            p.Duration=r.ReadSingle();p.Height=r.ReadSingle();p.Width=r.ReadSingle();Plan=p;
+            p.Duration=r.ReadSingle();p.Height=r.ReadSingle();p.Width=r.ReadSingle();p.Lift[0]=r.ReadSingle();p.Lift[1]=r.ReadSingle();Plan=p;
         }
         static bool Finite(Vector3 p){return Weapons.Finite(p.x)&&Weapons.Finite(p.y)&&Weapons.Finite(p.z);}
         public bool Valid()
@@ -35,7 +35,7 @@ namespace PZAEC.Mecha
             if(Mode>=2)return true;
             if(p==null||p.Front>1||p.Type>Traversal.Kind.Gap||!Finite(p.Root)||!Finite(p.End)||!Weapons.Finite(p.Rotation.eulerAngles.y)||!Weapons.Finite(p.Duration)||p.Duration<.75f||p.Duration>1.1f||Age>p.Duration+.02f||!Weapons.Finite(p.Height)||Mathf.Abs(p.Height)>Rules.ActiveStepHeight+.02f||!Weapons.Finite(p.Width)||p.Width<0||p.Width>Rules.ActiveGapWidth+.02f)return false;
             if(!Weapons.Finite(p.Rotation.x)||!Weapons.Finite(p.Rotation.y)||!Weapons.Finite(p.Rotation.z)||!Weapons.Finite(p.Rotation.w)||Vector3.Distance(p.Root,p.End)>2.5f)return false;
-            for(int i=0;i<2;i++)if(!Finite(p.StartNormal[i])||Mathf.Abs(p.StartNormal[i].magnitude-1)>.02f||p.StartNormal[i].y<.707f||p.Land[i].Normal.y<.707f||!Finite(p.Start[i])||!Finite(p.Land[i].Point)||!Finite(p.Land[i].Normal)||(p.Start[i]-p.Root).sqrMagnitude>6||(p.Land[i].Point-p.End).sqrMagnitude>6||Mathf.Abs(p.Land[i].Normal.magnitude-1)>.02f)return false;
+            for(int i=0;i<2;i++)if(!Weapons.Finite(p.Lift[i])||p.Lift[i]<Rules.TraverseToeClearance||p.Lift[i]>1.25f||!Finite(p.StartNormal[i])||Mathf.Abs(p.StartNormal[i].magnitude-1)>.02f||p.StartNormal[i].y<.707f||p.Land[i].Normal.y<.707f||!Finite(p.Start[i])||!Finite(p.Land[i].Point)||!Finite(p.Land[i].Normal)||(p.Start[i]-p.Root).sqrMagnitude>6||(p.Land[i].Point-p.End).sqrMagnitude>6||Mathf.Abs(p.Land[i].Normal.magnitude-1)>.02f)return false;
             return Phase==p.Phase(Age)||(Phase==Traversal.Stage.Settle&&Age>=p.Duration);
         }
     }
@@ -79,8 +79,8 @@ namespace PZAEC.Mecha
         }
         static bool Matches(Traversal.Plan a,Traversal.Plan b)
         {
-            if(a==null||b==null||a.Type!=b.Type||a.Front!=b.Front||Mathf.Abs(a.Duration-b.Duration)>.001f||Mathf.Abs(a.Height-b.Height)>.001f||Mathf.Abs(a.Width-b.Width)>.001f||Quaternion.Angle(a.Rotation,b.Rotation)>.01f||Vector3.Distance(a.Root,b.Root)>.001f||Vector3.Distance(a.End,b.End)>.001f)return false;
-            for(int i=0;i<2;i++)if(Vector3.Distance(a.StartNormal[i],b.StartNormal[i])>.001f||Vector3.Distance(a.Start[i],b.Start[i])>.001f||Vector3.Distance(a.Land[i].Point,b.Land[i].Point)>.001f||Vector3.Distance(a.Land[i].Normal,b.Land[i].Normal)>.001f)return false;
+            if(a==null||b==null||a.Adaptive!=b.Adaptive||a.Type!=b.Type||a.Front!=b.Front||Mathf.Abs(a.Duration-b.Duration)>.001f||Mathf.Abs(a.Height-b.Height)>.001f||Mathf.Abs(a.Width-b.Width)>.001f||Quaternion.Angle(a.Rotation,b.Rotation)>.01f||Vector3.Distance(a.Root,b.Root)>.001f||Vector3.Distance(a.End,b.End)>.001f)return false;
+            for(int i=0;i<2;i++)if(Mathf.Abs(a.Lift[i]-b.Lift[i])>.001f||Vector3.Distance(a.StartNormal[i],b.StartNormal[i])>.001f||Vector3.Distance(a.Start[i],b.Start[i])>.001f||Vector3.Distance(a.Land[i].Point,b.Land[i].Point)>.001f||Vector3.Distance(a.Land[i].Normal,b.Land[i].Normal)>.001f)return false;
             return true;
         }
         public static bool ServerReceive(World world,int actor,TraverseWire data)
@@ -102,11 +102,12 @@ namespace PZAEC.Mecha
                         GroundSupport.Plant(support,i,pad,false);
                     }support.Grounded=true;
                 }
+                if(support!=null){float blocked;bool rough;FootPlanner.Preview(support,1,out blocked,out rough);support.Cautious=rough;}
                 var plan=support!=null?Traversal.Search(v,support,data.Plan.Front,out reason):null;
                 bool ok=plan!=null&&!Traversal.Charging(v)&&!Flight.AirPose(Locomotion.Get(v))&&!Locomotion.Get(v).HoverOn&&Vector3.ProjectOnPlane(v.vehicleRB.velocity,Vector3.up).magnitude<=Rules.TraverseSafeSpeed+.2f;
                 if(ok){
-                    ok=Vector3.Distance(plan.Root,data.Plan.Root)<=.15f&&Vector3.Distance(plan.End,data.Plan.End)<=.15f&&plan.Type==data.Plan.Type&&Mathf.Abs(plan.Duration-data.Plan.Duration)<.001f&&Mathf.Abs(plan.Height-data.Plan.Height)<.02f&&Mathf.Abs(plan.Width-data.Plan.Width)<.025f;
-                    for(int i=0;i<2;i++)ok&=Vector3.Distance(plan.Start[i],data.Plan.Start[i])<=.08f&&Vector3.Distance(plan.Land[i].Point,data.Plan.Land[i].Point)<=.05f&&Vector3.Distance(plan.StartNormal[i],data.Plan.StartNormal[i])<=.02f&&Vector3.Distance(plan.Land[i].Normal,data.Plan.Land[i].Normal)<=.02f;
+                    ok=Vector3.Distance(plan.Root,data.Plan.Root)<=.15f&&Vector3.Distance(plan.End,data.Plan.End)<=.15f&&plan.Adaptive==data.Plan.Adaptive&&plan.Type==data.Plan.Type&&Mathf.Abs(plan.Duration-data.Plan.Duration)<.001f&&Mathf.Abs(plan.Height-data.Plan.Height)<.02f&&Mathf.Abs(plan.Width-data.Plan.Width)<.025f;
+                    for(int i=0;i<2;i++)ok&=Mathf.Abs(plan.Lift[i]-data.Plan.Lift[i])<.01f&&Vector3.Distance(plan.Start[i],data.Plan.Start[i])<=.08f&&Vector3.Distance(plan.Land[i].Point,data.Plan.Land[i].Point)<=.05f&&Vector3.Distance(plan.StartNormal[i],data.Plan.StartNormal[i])<=.02f&&Vector3.Distance(plan.Land[i].Normal,data.Plan.Land[i].Normal)<=.02f;
                     if(ok)ok=Traversal.ValidatePath(v,support,data.Plan,out reason);
                 }
                 if(!ok){data.Mode=3;Broadcast(data);if(!v.isEntityRemote)Traversal.Cancel(v,string.IsNullOrEmpty(reason)?"服务器拒绝越障":reason);return false;}
@@ -142,7 +143,7 @@ namespace PZAEC.Mecha
             s.Actor=data.Actor;s.Remote=true;s.LastPacket=Time.time;s.Accepted=true;
             s.NextId=Math.Max(s.NextId,data.Action);s.Tick=Math.Max(s.Tick,data.Tick);s.DeliveredPhase=data.Phase;
             if(data.Mode>=2){s.Current=null;s.Phase=Traversal.Stage.Exit;return;}
-            s.Current=data.Plan;s.Age=data.Age;s.Phase=data.Phase;s.Current.FrameInto(s.Age,s.FrameFeet,out s.TargetRoot);
+            s.Current=data.Plan;s.Current.Shape=GroundSupport.Get(v).Shape;s.Age=data.Age;s.Phase=data.Phase;s.Current.FrameInto(s.Age,s.FrameFeet,out s.TargetRoot);
             Locomotion.Get(v).Grounded=true;
             // A mid-action join is silent; only newly observed transitions emit contacts.
             if(same&&previous<data.Phase){

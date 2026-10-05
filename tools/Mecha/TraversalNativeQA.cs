@@ -27,8 +27,9 @@ public sealed class MechaTraversalQA : IModApi
     static void Tick(EntityVehicle v,float dt,float speed=0,float steer=0)
     {
         var support=GroundSupport.Observe(v);var state=Traversal.Get(v);
+        bool enabled=speed!=0||steer!=0;support.DesiredVelocity=v.vehicleRB.rotation*Vector3.forward*speed;
         if(state.Current!=null)Traversal.Advance(v,support,state,dt);
-        else{if(speed!=0){Traversal.Get(v).SearchAt=-100;speed=Traversal.LimitSpeed(v,support,speed,dt);}GroundSupport.Walking(support,dt,speed!=0||steer!=0);if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);speed=0;}GroundSupport.Apply(support,dt);Locomotion.ApplyDrive(v.vehicleRB,v.vehicleRB.rotation*Vector3.forward,speed,steer,false,support.Normal,dt);}
+        else{if(speed!=0){Traversal.Get(v).SearchAt=-100;speed=Traversal.LimitSpeed(v,support,speed,dt);}GroundSupport.Walking(support,dt,enabled);if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);speed=0;}GroundSupport.Apply(support,dt);speed=Mathf.Clamp(speed,-support.DriveCap,support.DriveCap);if(support.Grounded)Locomotion.ApplyDrive(v.vehicleRB,v.vehicleRB.rotation*Vector3.forward,speed,steer,false,support.Normal,dt);}
         Physics.Simulate(dt);v.SetPosition(v.vehicleRB.position+Origin.position);Physics.SyncTransforms();
     }
     static void Capture(Model.Rig rig,string name)
@@ -137,7 +138,7 @@ public sealed class MechaTraversalQA : IModApi
         var objects=new List<GameObject>();objects.Add(Box("Stairs floor",new Vector3(0,399.5f,0),new Vector3(30,1,120)));
         for(int i=0;i<8;i++){float height=.15f*(i+1);objects.Add(Box("Stair "+i,new Vector3(0,400+height*.5f,3+i*.85f+15),new Vector3(30,height,30)));}
         Reset(v);for(int i=0;i<550;i++)Tick(v,.02f,2);
-        Check(Rules.DisplayName(v)+" continuous static stairs",GroundSupport.IsGrounded(v)&&v.vehicleRB.position.z>10&&v.vehicleRB.position.y>400.8f);
+        Check(Rules.DisplayName(v)+" continuous static stairs pos="+v.vehicleRB.position+" "+GroundSupport.Diagnostics(v)+" "+Traversal.Diagnostics(v),GroundSupport.IsGrounded(v)&&v.vehicleRB.position.z>10&&v.vehicleRB.position.y>400.8f);
         foreach(var go in objects)UnityEngine.Object.DestroyImmediate(go);objects.Clear();
         objects.Add(Box("Edge near bank",new Vector3(0,399.5f,2-15),new Vector3(30,1,30)));
         objects.Add(Box("Edge far bank",new Vector3(0,399.5f,3+15),new Vector3(30,1,30)));

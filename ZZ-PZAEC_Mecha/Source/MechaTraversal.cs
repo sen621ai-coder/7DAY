@@ -13,7 +13,8 @@ namespace PZAEC.Mecha
             public int Id,Actor,Front;public Kind Type;public Quaternion Rotation;
             public Vector3 Root,End;public Vector3[] Start=new Vector3[2],StartNormal={Vector3.up,Vector3.up};
             public GroundSupport.Pad[] Land=new GroundSupport.Pad[2];
-            public float Duration,Height,Width;public bool Major=true;
+            public float[] Lift={Rules.TraverseToeClearance,Rules.TraverseToeClearance};
+            public float Duration,Height,Width;public bool Major=true,Adaptive;public GroundSupport.Profile Shape;
             public Stage Phase(float age)
             {float t=age/Duration;return t<.12f?Stage.Prepare:t<.37f?Stage.FrontStep:t<.60f?Stage.Transfer:t<.85f?Stage.RearStep:t<1?Stage.Settle:Stage.Exit;}
             static float Ease(float t){t=Mathf.Clamp01(t);return t*t*(3-2*t);}
@@ -40,7 +41,7 @@ namespace PZAEC.Mecha
                 if(Type==Kind.Gap)root.y-=Mathf.Lerp(.22f,.55f,Mathf.Clamp01((Width-.40f)/.35f))*front*(1-follow);
                 root+=WeightShift(t);
                 var feet=new Vector3[2]; // Render/network callers only; fixed simulation uses FrameInto below.
-                FrameFeet(t,feet);left=feet[0];right=feet[1];
+                FrameFeet(t,feet);FitRoot(age,feet,ref root);left=feet[0];right=feet[1];
             }
             public void FrameInto(float age,Vector3[] feet,out Vector3 root)
             {
@@ -50,13 +51,15 @@ namespace PZAEC.Mecha
                 if(Type==Kind.Gap)root.y-=Mathf.Lerp(.22f,.55f,Mathf.Clamp01((Width-.40f)/.35f))*front*(1-follow);
                 root+=WeightShift(t);
                 FrameFeet(t,feet);
+                FitRoot(age,feet,ref root);
             }
+            void FitRoot(float age,Vector3[] feet,ref Vector3 root){if(!Adaptive||Shape==null)return;float height;FootPlanner.Pelvis(Shape,Rotation,root,feet[0],feet[1],FootNormal(age,0),FootNormal(age,1),root.y,out height);root.y=height;}
             public Vector3 FootNormal(float age,int side)
             {float t=age/Duration;float blend=Mathf.SmoothStep(0,1,Mathf.Clamp01((t-(side==Front?.12f:.37f))/(side==Front?.25f:.48f)));return Vector3.Slerp(StartNormal[side],Land[side].Normal,blend).normalized;}
             void FrameFeet(float t,Vector3[] feet)
             {
-                feet[Front]=Swing(Start[Front],Land[Front].Point,Mathf.Clamp01((t-.12f)/.25f),Type==Kind.Gap?.15f:Rules.TraverseToeClearance);
-                feet[1-Front]=Swing(Start[1-Front],Land[1-Front].Point,Mathf.Clamp01((t-.37f)/.48f),Rules.TraverseToeClearance);
+                feet[Front]=Swing(Start[Front],Land[Front].Point,Mathf.Clamp01((t-.12f)/.25f),Type==Kind.Gap?Mathf.Max(.15f,Lift[Front]):Lift[Front]);
+                feet[1-Front]=Swing(Start[1-Front],Land[1-Front].Point,Mathf.Clamp01((t-.37f)/.48f),Lift[1-Front]);
             }
         }
         public sealed class State
@@ -73,7 +76,7 @@ namespace PZAEC.Mecha
         public static State Get(EntityVehicle v)
         {State s;if(!states.TryGetValue(v.entityId,out s)||s.Vehicle!=v){s=new State{Vehicle=v};states[v.entityId]=s;}return s;}
         public static bool Active(EntityVehicle v){State s;return v!=null&&states.TryGetValue(v.entityId,out s)&&s.Vehicle==v&&s.Current!=null;}
-        public static bool Major(EntityVehicle v){State s;return v!=null&&states.TryGetValue(v.entityId,out s)&&s.Current!=null&&s.Current.Major;}
+        public static bool Major(EntityVehicle v){State s;var ground=GroundSupport.Find(v);return ground!=null&&ground.Recovering||v!=null&&states.TryGetValue(v.entityId,out s)&&s.Current!=null&&s.Current.Major;}
         public static bool Charging(EntityVehicle v){return Samurai.Busy(v)||(Rules.Complete(v)&&Samurai.Get(v).LaserCharge>0)||Locomotion.Get(v).Charge>0;}
         public static void Press(EntityVehicle v){var s=Get(v);s.Pressed=true;}
         public static Vector3 Swing(Vector3 a,Vector3 b,float t,float extra)
@@ -87,6 +90,7 @@ namespace PZAEC.Mecha
             return p;
         }
         static string pathFailure;
+        public static string PathFailure {get{return pathFailure;}}
         public static bool FootPath(EntityVehicle v,GroundSupport.Profile shape,Vector3 root,Quaternion yaw,int side,Vector3 foot,Vector3 previous,float poleAngle=0,Vector3? surfaceNormal=null)
         {
             var normal=surfaceNormal??Vector3.up;var soleRotation=Quaternion.FromToRotation(Vector3.up,normal)*yaw;
@@ -131,7 +135,7 @@ namespace PZAEC.Mecha
         }
         public static bool ValidatePath(EntityVehicle v,GroundSupport.State support,Plan p,out string reason)
         {
-            reason="";var feet=new Vector3[2];var previous=(Vector3[])p.Start.Clone();var last=p.Root;
+            p.Shape=support.Shape;reason="";var feet=new Vector3[2];var previous=(Vector3[])p.Start.Clone();var last=p.Root;
             // Also sample by time so curved toe trajectories never skip a thin obstruction.
             int count=Mathf.Max(100,Mathf.CeilToInt((Vector3.Distance(p.Root,p.End)+Mathf.Abs(p.Height)+2)/.05f));
             for(int i=0;i<=count;i++){
@@ -195,12 +199,13 @@ namespace PZAEC.Mecha
                 landing=distance;break;
             }
             width=Mathf.Min(width,Rules.ActiveGapWidth);
-            if(landing<0){reason=gapStart>=0?"缺少可靠落脚点":reason;return null;}
+            if(landing<0){if(gapStart>=0)reason="缺少可靠落脚点";return SearchContour(v,support,front,ref reason);}
             var p=new Plan{Front=front,Type=kind,Root=root,Rotation=yaw,Height=height,Width=width,Duration=Rules.Complete(v)?Rules.CompleteTraverseSeconds:Rules.PrototypeTraverseSeconds};
             p.Start[0]=support.Feet[0].Position;p.Start[1]=support.Feet[1].Position;p.StartNormal[0]=support.Feet[0].Normal;p.StartNormal[1]=support.Feet[1].Normal;
             // Finish with the original stance spread, on pads wholly inside the top/opposite bank.
             float distanceRoot=landing-homeZ;
-            for(float extension=0;extension<=.35f;extension+=.05f){
+            for(float extension=0;extension<=.70f;extension+=.05f){
+                p.Adaptive=extension>.35f;
                 p.End=root+forward*(distanceRoot+extension);p.End.y=floor+height+support.Shape.NeutralY;
                 bool pads=true;
                 for(int side=0;side<2;side++){
@@ -213,6 +218,30 @@ namespace PZAEC.Mecha
                     if(ValidatePath(v,support,p,out reason))return p;
                 }
             }
+            return SearchContour(v,support,front,ref reason);
+        }
+        static Plan SearchContour(EntityVehicle v,GroundSupport.State support,int front,ref string reason)
+        {
+            // A crater may change height smoothly at every ray sample. Compare
+            // usable whole soles to the planted stance, rather than requiring a wall edge.
+            if(!support.Cautious&&support.StopReason=="")return null;
+            var rb=v.vehicleRB;var yaw=Quaternion.Euler(0,rb.rotation.eulerAngles.y,0);var root=rb.position+Origin.position;var forward=yaw*Vector3.forward;
+            float floor=(support.Feet[0].Position.y+support.Feet[1].Position.y)*.5f;
+            for(float distance=.20f;distance<=1.05f;distance+=.05f){
+                var p=new Plan{Front=front,Root=root,Rotation=yaw,Adaptive=true,Duration=Rules.Complete(v)?Rules.CompleteTraverseSeconds:Rules.PrototypeTraverseSeconds};
+                p.End=root+forward*distance;bool found=true;
+                for(int i=0;i<2;i++){
+                    p.Start[i]=support.Feet[i].Position;p.StartNormal[i]=support.Feet[i].Normal;
+                    var at=p.End+yaw*support.Shape.Home[i];at.y=floor;
+                    if(!GroundSupport.PadAt(v,at,yaw,Rules.ActiveStepHeight+.15f,Rules.ActiveStepHeight+.15f,out p.Land[i])){found=false;break;}
+                    if(Mathf.Abs(p.Land[i].Point.y-p.Start[i].y)>Rules.ActiveStepHeight+.001f){found=false;break;}
+                }
+                if(!found)continue;p.Height=(p.Land[0].Point.y+p.Land[1].Point.y)*.5f-floor;
+                if(Mathf.Abs(p.Height)<.08f)continue;p.Type=p.Height>=0?Kind.Up:Kind.Down;
+                for(int i=0;i<2;i++)p.Lift[i]=FootPlanner.RequiredLift(support,p.Start[i],p.Land[i].Point);
+                float height;if(!FootPlanner.Pelvis(support,p.End,p.Land[0].Point,p.Land[1].Point,p.Land[0].Normal,p.Land[1].Normal,FootPlanner.Preferred(support,p.Land[0].Point,p.Land[1].Point,p.Land[0].Normal,p.Land[1].Normal),out height))continue;
+                p.End.y=height;string why;if(ValidatePath(v,support,p,out why))return p;reason=why;
+            }
             return null;
         }
         static void Feedback(State s,string reason){s.Feedback=reason.StartsWith("腿部路径受阻")?"腿部路径受阻或落点超出腿长":reason;s.FeedbackUntil=Time.time+2.5f;s.Reason=reason;}
@@ -220,6 +249,8 @@ namespace PZAEC.Mecha
         {
             var s=Get(v);if(s.Current!=null)return "越障 · "+StageName(s.Phase);
             if(Time.time<s.FeedbackUntil)return s.Feedback;
+            var ground=GroundSupport.Find(v);if(ground!=null&&ground.StopReason!="")return ground.StopReason;
+            if(s.Candidate==null&&s.BrakeDistance>0)return "前方缺少可靠落脚点 · 左 Alt 尝试主动迈步";
             if(s.Candidate==null)return "";
             string key=Rules.Key(v,"pzMechaTraverseKey",KeyCode.LeftAlt)==KeyCode.LeftAlt?"左 Alt":Rules.Key(v,"pzMechaTraverseKey",KeyCode.LeftAlt).ToString();
             return "["+key+"] "+(s.Candidate.Type==Kind.Up?"跨上台阶":s.Candidate.Type==Kind.Down?"走下台阶":"跨过短沟");
@@ -233,18 +264,12 @@ namespace PZAEC.Mecha
             var rb=v.vehicleRB;float along=Vector3.Dot(rb.velocity,rb.rotation*Vector3.forward);
             if(Time.time-s.SearchAt>=.1f){
                 s.SearchAt=Time.time;s.Candidate=Search(v,support,support.Next,out s.Reason);s.BrakeDistance=0;s.SmallDistance=0;
-                var forward=rb.rotation*Vector3.forward*(requested<0?-1:1);
-                float ahead=Mathf.Max(.8f,along*along/8+.8f);
-                var reference=(support.Feet[0].Position+support.Feet[1].Position)*.5f;var plane=support.Normal;
-                for(float distance=.15f;distance<=ahead;distance+=.15f){
-                    var at=rb.position+Origin.position+forward*distance;at.y=reference.y-(plane.x*(at.x-reference.x)+plane.z*(at.z-reference.z))/Mathf.Max(.01f,plane.y);Vector3 point;
-                    if(!GroundSupport.PointAt(v,at,Rules.ActiveStepHeight+.35f,Rules.ActiveStepHeight+.35f,out point)||Mathf.Abs(point.y+Rules.SoleClearance-at.y)>Rules.AutoStepHeight+.02f){s.BrakeDistance=distance;break;}
-                    float difference=point.y+Rules.SoleClearance-at.y;
-                    if(Mathf.Abs(difference)>.08f&&s.SmallDistance==0)s.SmallDistance=distance;
-                    reference=point+Vector3.up*Rules.SoleClearance;plane=GroundSupport.LastSurfaceNormal;
-                }
+                float blocked;bool rough;FootPlanner.Preview(support,requested,out blocked,out rough);
+                support.Cautious=rough;if(blocked>0&&(s.BrakeDistance==0||blocked<s.BrakeDistance))s.BrakeDistance=blocked;
             }
-            if(s.BrakeDistance>0||s.Candidate!=null||s.Pending)return 0;
+            if(requested>=0&&s.Candidate!=null&&(!s.Candidate.Adaptive||Mathf.Abs(s.Candidate.Height)>Rules.AutoStepHeight+.02f)||s.Pending||support.Recovering)return 0;
+            if(s.BrakeDistance>0){float distance=Mathf.Max(0,s.BrakeDistance-.60f-Mathf.Abs(along)*.12f);float safe=Mathf.Sqrt(8*distance);requested=Mathf.Clamp(requested,-safe,safe);}
+            if(support.Cautious)requested=Mathf.Clamp(requested,-Rules.RoughWalkSpeed,Rules.RoughWalkSpeed);
             if(s.SmallDistance>0)requested=Mathf.Clamp(requested,-1.5f,1.5f);
             return requested;
         }
@@ -361,15 +386,17 @@ namespace PZAEC.Mecha
         {
             var s=Get(v);var support=GroundSupport.Find(v);
             if(s.Remote&&s.Current!=null){for(int i=0;i<2;i++)Gait.Solve(rig,i,s.FrameFeet[i]-Origin.position,s.Current.FootNormal(s.Age,i),s.Current.PoleAngle(s.Age,i));return true;}
+            if(GroundNet.Pose(v,rig))return true;
             if(v.isEntityRemote||support==null||!support.Initialized)return false;
             for(int i=0;i<2;i++)Gait.Solve(rig,i,support.Feet[i].Position-Origin.position,support.Feet[i].Normal,s.Current!=null?s.Current.PoleAngle(s.Age,i):0);
             return true;
         }
         public static void EquipmentPose(EntityVehicle v,Model.Rig r)
         {
-            if(!Rules.Complete(v))return;var s=Get(v);bool active=Major(v);float swordBlend=0;
+            if(!Rules.Complete(v))return;var s=Get(v);var ground=GroundSupport.Find(v);bool recovery=ground!=null&&ground.Recovering;bool active=Major(v)||recovery;float swordBlend=0;
             if(!active&&(Flight.AirPose(Locomotion.Get(v))||Boarding.Active(v))){s.EquipmentBlend=0;return;}
-            if(active){float t=s.Age/s.Current.Duration;s.EquipmentBlend=Mathf.Clamp01(t/.12f);swordBlend=Mathf.Min(s.EquipmentBlend,Mathf.Clamp01((1-t)/.15f));}
+            if(recovery){s.EquipmentBlend=Mathf.MoveTowards(s.EquipmentBlend,1,Time.deltaTime/.12f);swordBlend=s.EquipmentBlend;}
+            else if(active){float t=s.Age/s.Current.Duration;s.EquipmentBlend=Mathf.Clamp01(t/.12f);swordBlend=Mathf.Min(s.EquipmentBlend,Mathf.Clamp01((1-t)/.15f));}
             else if(s.EquipmentBlend>0){
                 float proposed=Mathf.MoveTowards(s.EquipmentBlend,0,Time.deltaTime/.35f);var shape=GroundSupport.Find(v);bool clear=shape!=null;
                 if(clear){var root=v.vehicleRB.position+Origin.position;var yaw=v.vehicleRB.rotation;
@@ -389,7 +416,7 @@ namespace PZAEC.Mecha
             r.ShoulderR.localRotation=Quaternion.Slerp(shoulder,r.ShoulderR.localRotation,swordBlend);r.ElbowR.localRotation=Quaternion.Slerp(elbow,r.ElbowR.localRotation,swordBlend);r.HandR.localRotation=Quaternion.Slerp(wrist,r.HandR.localRotation,swordBlend);
             Pose(v,r);
         }
-        public static string Diagnostics(EntityVehicle v){var s=Get(v);return "action="+(s.Current!=null?s.Current.Id:0)+" phase="+s.Phase+" age="+s.Age+" reason="+s.Reason+" accepted="+s.Accepted+" remote="+s.Remote+" target="+s.TargetRoot;}
+        public static string Diagnostics(EntityVehicle v){var s=Get(v);return "action="+(s.Current!=null?s.Current.Id:0)+" phase="+s.Phase+" age="+s.Age+" reason="+s.Reason+" accepted="+s.Accepted+" remote="+s.Remote+" target="+s.TargetRoot+" brakeDistance="+s.BrakeDistance+" padFailure="+GroundSupport.PadFailure;}
         public static void Forget(EntityVehicle v){states.Remove(v.entityId);TraversalNet.Forget(v);}
         public static void Clear(){states.Clear();TraversalNet.Clear();}
     }

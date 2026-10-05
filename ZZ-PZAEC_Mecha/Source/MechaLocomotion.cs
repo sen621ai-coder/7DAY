@@ -45,7 +45,7 @@ namespace PZAEC.Mecha
             // A local physics owner already has more recent input than its echo.
             if(!v.isEntityRemote&&!Weapons.Server)return true;
             int flags=(int)state.x;bool ground=(flags&4)!=0;
-            if(!s.Grounded&&ground)MarkLanding(s,Time.time,!Traversal.Active(v)&&!landing&&!takeoff&&!flight&&!Flight.Active(s));
+            if(!s.Grounded&&ground)MarkLanding(s,Time.time,!Traversal.Active(v)&&!Traversal.Major(v)&&!landing&&!takeoff&&!flight&&!Flight.Active(s));
             if(s.Grounded&&!ground){s.JumpAt=Time.time;s.AirSince=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
             s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=state.y;
             s.FlightMode=fault?Flight.Phase.PowerLost:landing?Flight.Phase.Landing:takeoff?Flight.Phase.Takeoff:flight?Flight.Phase.Cruise:Flight.Phase.Ground;
@@ -59,7 +59,7 @@ namespace PZAEC.Mecha
                 s.WingBlend=Mathf.MoveTowards(s.WingBlend,Flight.AirPose(s)?1:0,Time.deltaTime/(Flight.AirPose(s)?Rules.FlightDeploySeconds:1f));
                 s.Blend=Mathf.MoveTowards(s.Blend,(s.HoverOn||s.Boost||Flight.Active(s))?1:0,Time.deltaTime/.35f);
             }
-            Traversal.Tick(world,Time.deltaTime);TraversalNet.Tick(world);
+            Traversal.Tick(world,Time.deltaTime);TraversalNet.Tick(world);GroundNet.Tick(world);
             foreach(int id in remove){var old=moves[id].Vehicle;if(old!=null){Gait.Forget(old);Model.Forget(old);}moves.Remove(id);}
         }
         public static void AfterForces(EntityVehicle __instance)
@@ -74,6 +74,7 @@ namespace PZAEC.Mecha
             float rawThrottle=input&&movement!=null?movement.moveForward:0;
             bool traversal=Traversal.Step(v,support,s,rawThrottle,Powered(v)&&input,dt);
             if(traversal){s.Grounded=support!=null&&support.Grounded;s.Boost=false;s.AirSince=-1;s.LandingEventExpected=false;Sync(v,s);return;}
+            RecoveryInputs(v,support,s);
             if(Rules.Complete(v)){if(Flight.Step(v,s,grounded,input,dt)){GroundSupport.Suspend(v);return;}input&=s.InputReady;}
             bool sustain=Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0;
             bool powered=sustain&&input;
@@ -84,7 +85,7 @@ namespace PZAEC.Mecha
             if(!sustain){s.HoverOn=false;s.Charge=0;s.ChargeStart=-1;s.Jump=false;s.Toggle=false;}
             if(s.Toggle){s.HoverOn=powered&&!s.HoverOn;s.Toggle=false;}
             if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
-            bool stomp=grounded&&!s.Grounded&&MarkLanding(s,Time.time,!Traversal.Active(v));
+            bool stomp=grounded&&!s.Grounded&&MarkLanding(s,Time.time,!Traversal.Active(v)&&(support==null||!support.Recovering));
             s.Grounded=grounded;
             if(stomp){s.LastSync=-100;Sync(v,s);Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down*s.LandingStrength,v.position);}
             var forward=Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized;
@@ -92,10 +93,12 @@ namespace PZAEC.Mecha
             bool boost=!Samurai.Braced(v)&&powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
             s.Boost=boost||(s.Boost&&powered&&grounded&&speed>4.2f&&!s.HoverOn);
             float target=throttle>=0?throttle*(boost?13.5f:4f):throttle*2f;
+            if(support!=null)support.DesiredVelocity=forward*target;
             if(s.HoverOn)target=throttle*Rules.HoverSpeed;
             else target=Traversal.LimitSpeed(v,support,target,dt);
             if(Samurai.Braced(v)){target=Mathf.Clamp(target,-1.2f,1.2f);steer*=.55f;s.Boost=false;}
-            if(grounded&&!s.HoverOn){GroundSupport.Walking(support,dt,powered&&!Boarding.Active(v));if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);target=0;}GroundSupport.Apply(support,dt);}
+            if(grounded&&!s.HoverOn){GroundSupport.Walking(support,dt,powered&&!Boarding.Active(v));if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);target=0;}GroundSupport.Apply(support,dt);target=Mathf.Clamp(target,-support.DriveCap,support.DriveCap);if(support.Recovering){s.AirSince=-1;s.LandingEventExpected=false;s.LandingPendingUntil=-100;}if(support.Recovering||Mathf.Abs(target)<4.2f)s.Boost=false;}
+            if(support!=null&&support.Recovering)steer=0;
             if(grounded||s.HoverOn)
             {
                 var normal=support!=null?support.Normal:Vector3.up;
@@ -110,7 +113,7 @@ namespace PZAEC.Mecha
                 float a=9.81f+Mathf.Clamp((targetY-rb.position.y)*4f-rb.velocity.y*1.5f,-6f,6f)-(s.Descend?5:0);
                 rb.AddForce(Vector3.up*a*rb.mass,ForceMode.Force);
             }
-            if((s.HoverOn||boost)&&EntityVehicle.VehicleFuelUsageModifier!=0)v.vehicle.SetFuelLevel(Mathf.Max(0,v.vehicle.GetFuelLevel()-Rules.HoverFuelPerSecond*dt));
+            if((s.HoverOn||s.Boost)&&EntityVehicle.VehicleFuelUsageModifier!=0)v.vehicle.SetFuelLevel(Mathf.Max(0,v.vehicle.GetFuelLevel()-Rules.HoverFuelPerSecond*dt));
             if(s.Jump&&!s.JumpWasHeld&&powered&&grounded)s.ChargeStart=Time.time;
             s.Charge=s.Jump&&s.ChargeStart>=0?Mathf.Clamp01((Time.time-s.ChargeStart)/Rules.JumpChargeSeconds):0;
             if(!s.Jump&&s.JumpWasHeld&&s.ChargeStart>=0&&powered&&grounded&&Time.time>=s.NextJump)
@@ -119,6 +122,7 @@ namespace PZAEC.Mecha
                 GroundSupport.Suspend(v);rb.AddForce(Vector3.up*(charge*Rules.JumpMaxSpeed),ForceMode.VelocityChange);s.NextJump=Time.time+Rules.JumpCooldown;s.ChargeStart=-1;
             }
             s.JumpWasHeld=s.Jump;
+            GroundNet.Publish(support);
             Sync(v,s);
             if(powered&&grounded&&speed>=Rules.TrampleSpeedThreshold&&Time.time-s.LastTime>=Rules.TrampleTickSeconds){s.LastTime=Time.time;Weapons.SendLocalIntent(v,Weapons.Trample,Vector3.down,v.position);}
         }
@@ -126,6 +130,17 @@ namespace PZAEC.Mecha
         {
             int flags=(s.HoverOn?1:0)|(s.Boost?2:0)|(s.Grounded?4:0)|(Flight.Active(s)?8:0)|(s.FlightMode==Flight.Phase.Landing?16:0)|(s.FlightMode==Flight.Phase.Takeoff?32:0)|(s.FlightMode==Flight.Phase.PowerLost?64:0);
             return new Vector3(flags,s.Charge,Flight.Active(s)?s.VerticalInput:0);
+        }
+        public static void RecoveryInputs(EntityVehicle v,GroundSupport.State support,MoveState s)
+        {
+            if(support==null)return;
+            if(support.Recovering){
+                if(support.Feet[0].Swing||support.Feet[1].Swing){support.QueuedToggle^=s.Toggle;s.Toggle=false;s.Jump=false;s.Charge=0;s.ChargeStart=-1;}
+                // No safe swing has started: this is preparation, which may be
+                // cancelled by takeoff rather than trapping the pilot on one pad.
+                else if(s.Toggle||s.Jump||support.QueuedToggle){s.Toggle^=support.QueuedToggle;support.QueuedToggle=false;GroundSupport.Suspend(v);}
+            }
+            else if(support.QueuedToggle){s.Toggle^=support.QueuedToggle;support.QueuedToggle=false;}
         }
         public static void Sync(EntityVehicle v,MoveState s)
         // Airborne duration starts at the contact edge on both peers, not at

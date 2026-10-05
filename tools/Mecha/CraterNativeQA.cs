@@ -59,7 +59,7 @@ public sealed class MechaCraterQA : IModApi
         Reset(v,start,yaw);var support=GroundSupport.Get(v);var rig=Model.GetRig(v);var forward=v.vehicleRB.rotation*Vector3.forward;
         int steps=0,attempts=0,falls=0,air=0,maxAir=0,groundFrames=0,drops=0;float stall=0,peakSlip=0,peakPen=0,lowest=9999;
         string reason="",status="TIMEOUT";float previousDistance=0;bool wasAir=false;
-        const float dt=.02f;int count=Mathf.CeilToInt((length/Mathf.Max(1,speed)+12)/dt);
+        const float dt=.02f;int count=Mathf.CeilToInt((length/Mathf.Min(1,Mathf.Max(.8f,speed))+12)/dt);
         for(int tick=0;tick<count;tick++){
             bool leftPlanted=support.Feet[0].Planted,rightPlanted=support.Feet[1].Planted;
             support=GroundSupport.Observe(v);var state=Traversal.Get(v);
@@ -72,13 +72,13 @@ public sealed class MechaCraterQA : IModApi
                 if(p!=null&&v.vehicleRB.position.y+Origin.position.y>=Mathf.Min(support.Feet[0].Position.y,support.Feet[1].Position.y)+support.Shape.NeutralY-.025f){attempts++;if(Traversal.Begin(v,support,p,false))steps++;}
             }
             if(state.Current!=null)Traversal.Advance(v,support,state,dt);
-            else{float target=Traversal.LimitSpeed(v,support,speed,dt);GroundSupport.Walking(support,dt,true);if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);target=0;}GroundSupport.Apply(support,dt);if(support.Grounded)Locomotion.ApplyDrive(v.vehicleRB,forward,target,0,speed>4,support.Normal,dt);}
+            else{support.DesiredVelocity=forward*speed;float target=Traversal.LimitSpeed(v,support,speed,dt);GroundSupport.Walking(support,dt,true);if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);target=0;}GroundSupport.Apply(support,dt);target=Mathf.Clamp(target,-support.DriveCap,support.DriveCap);if(support.Grounded)Locomotion.ApplyDrive(v.vehicleRB,forward,target,0,speed>4&&!support.Recovering,support.Normal,dt);}
             Physics.Simulate(dt);v.SetPosition(v.vehicleRB.position+Origin.position);Physics.SyncTransforms();Locomotion.Get(v).Grounded=support.Grounded;Gait.Update(world,v,rig,dt);
             var root=v.vehicleRB.position+Origin.position;float distance=Vector3.Dot(root-start,forward);lowest=Mathf.Min(lowest,root.y);
             if(support.Grounded){groundFrames++;if(wasAir)falls++;air=0;}else{air++;maxAir=Mathf.Max(maxAir,air);}wasAir=!support.Grounded;
             for(int i=0;i<2;i++)if(support.Feet[i].Planted){var foot=(i==0?rig.FootL:rig.FootR).position+Origin.position;peakSlip=Mathf.Max(peakSlip,Vector3.Distance(foot,support.Feet[i].Position));peakPen=Mathf.Max(peakPen,support.Feet[i].Position.y-foot.y);}
             stall=distance-previousDistance<.0005f&&!Traversal.Active(v)?stall+dt:0;previousDistance=distance;
-            if(tick%50==0)Line("TRACE scene="+scene+" mech="+Rules.DisplayName(v)+" speed="+speed+" active="+active+" tick="+tick+" pos="+root+" vel="+v.vehicleRB.velocity+" "+GroundSupport.Diagnostics(v)+" "+Traversal.Diagnostics(v));
+            if(tick%50==0||(Environment.GetEnvironmentVariable("MECHA_CRATER_TRACE")=="1"&&tick<200))Line("TRACE scene="+scene+" mech="+Rules.DisplayName(v)+" speed="+speed+" active="+active+" tick="+tick+" pos="+root+" vel="+v.vehicleRB.velocity+" "+GroundSupport.Diagnostics(v)+" "+Traversal.Diagnostics(v));
             if(distance>=length){status="CROSSED";break;}
             if(root.y<start.y-5){status="FELL";break;}
             if(stall>2.5f){status=support.Grounded?"STOPPED":"LOST_SUPPORT";break;}
@@ -98,7 +98,7 @@ public sealed class MechaCraterQA : IModApi
             new Case("broken-rim-0.30m",.20f,.10f,new Pit(-.3f,5,1.2f,.3f),new Pit(.35f,7,1.2f,.3f),new Pit(-.25f,9,1.2f,.3f),new Pit(.4f,11,1.2f,.3f),new Pit(-.2f,13,1.2f,.3f),new Pit(.2f,15,1.2f,.3f))
         };
         bool old=Physics.autoSimulation;Physics.autoSimulation=false;
-        try{foreach(var c in cases){Terrain(c);foreach(var name in new[]{Rules.VehicleName,Rules.CompleteVehicle}){var v=Spawn(name);try{foreach(var speed in new[]{2f,4f,13.5f})foreach(var active in new[]{false,true})Route(v,c.Name,new Vector3(speed==2?-.25f:speed==4?0:.25f,400,0)+Origin.position,0,speed,active,20);}finally{Remove(v);}}DestroyTerrain();}}
+        try{foreach(var c in cases){var filter=Environment.GetEnvironmentVariable("MECHA_CRATER_SCENE");if(!string.IsNullOrEmpty(filter)&&c.Name!=filter)continue;Terrain(c);foreach(var name in new[]{Rules.VehicleName,Rules.CompleteVehicle}){var v=Spawn(name);try{foreach(var speed in new[]{2f,4f,13.5f})foreach(var active in new[]{false,true})Route(v,c.Name,new Vector3(speed==2?-.25f:speed==4?0:.25f,400,0)+Origin.position,0,speed,active,20);}finally{Remove(v);}}DestroyTerrain();}}
         finally{Physics.autoSimulation=old;DestroyTerrain();}
         Line("LIMIT: controlled meshes reproduce concave overlapping pits; scripted controllers/PhysX, not human keys, combat AI or two-client networking.");
     }
@@ -137,7 +137,7 @@ public sealed class MechaCraterQA : IModApi
     }
     static void Ready(ref ModEvents.SGameStartDoneData data){if(GamePrefs.GetString(EnumGamePrefs.GameName)!="MechaQA_Isolated")return;world=GameManager.Instance.World;
         new Harmony("mecha.crater.qa").Patch(AccessTools.Method(typeof(Weapons),"Update"),prefix:new HarmonyMethod(typeof(MechaCraterQA),nameof(Pause)));
-        try{if(Environment.GetEnvironmentVariable("MECHA_CRATER_NATIVE_ONLY")!="1")Controlled();
+        try{if(Environment.GetEnvironmentVariable("MECHA_CRATER_NATIVE_ONLY")!="1")Controlled();if(Environment.GetEnvironmentVariable("MECHA_CRATER_CONTROLLED_ONLY")=="1"){Finish();return;}
             // Native terrain meshing/lighting gets Players.Count * 2 chunks per tick.
             // An observer without a player leaves the collision chunks uninitialized.
             observer=EntityFactory.CreateEntity(EntityClass.FromString("playerMale"),mapCenter) as EntityPlayer;observer.MinEventContext.ItemValue=ItemValue.None;world.SpawnEntityInWorld(observer);

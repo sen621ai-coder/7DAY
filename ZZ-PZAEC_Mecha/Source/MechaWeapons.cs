@@ -343,7 +343,7 @@ namespace PZAEC.Mecha
             if (op == Stomp)
             {
                 var move=Locomotion.Get(state.Vehicle);
-                if(!move.Grounded||now>move.LandingPendingUntil||Flight.Active(move)||Traversal.Active(state.Vehicle))return;
+                if(!move.Grounded||now>move.LandingPendingUntil||Flight.Active(move)||Traversal.Active(state.Vehicle)||Traversal.Major(state.Vehicle))return;
                 move.LandingPendingUntil=-100;
                 bool damaging=now>=state.NextStomp;
                 if(damaging){state.NextStomp=now+Rules.StompCooldown;LandingStrike(state,actor,position);}

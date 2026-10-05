@@ -69,6 +69,7 @@ namespace PZAEC.Mecha
         public const float FootWidth=.45f,FootDepth=.65f,FootResidual=.08f,SoleClearance=.015f;
         public const float TraverseToeClearance=.12f,TraverseSafeSpeed=.45f;
         public const float PrototypeTraverseSeconds=1f,CompleteTraverseSeconds=.8f;
+        public const float SupportHeightMargin=.03f,RoughWalkSpeed=1.2f,RoughStepSeconds=.18f,RecoveryStepSeconds=.24f;
         public const float TorsoLeanDegrees = 8f, HipSwayMeters = .08f, ArmSwingDegrees = 15f;
         public const float DeployRiseSeconds = 2.5f;
 
