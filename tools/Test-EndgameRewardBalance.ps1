@@ -97,8 +97,13 @@ foreach($tier in 16..19) {
     Assert-Balance ($bundle.SelectNodes("item[@group='groupZpackBoss02' or @group='PZAECBossBooksOnly' or @group='booksAllScaled']").Count -eq 0) "Ordinary boss book/schematic pool still active T$tier"
     $newWeapon=$bundle.SelectSingleNode("item[@group='PZAECExpansionWeaponT$tier']")
     Assert-Balance ([double]$newWeapon.prob -eq @(.02,.04,.06,.08)[$tier-16] -and $newWeapon.force_prob -eq 'true' -and $newWeapon.count -eq '1') "Wrong new weapon probability T$tier"
-    Assert-Balance ([double]$bundle.SelectSingleNode("item[@group='groupSkillBook']").prob -eq @(.20,.25,.30,.40)[$tier-16]) "Separate skill-point book reward changed T$tier"
-    $expectedBreadth=if($tier -eq 19){18}else{17}
+    foreach($pool in @('groupZpackBoss03','groupZpackBoss04','groupSkillBook')) {
+        Assert-Balance ($fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']/item[@group='$pool']").Count -eq 0) "Old general reward still active: $pool/T$tier"
+        Assert-Balance ($fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='$pool']").Count -eq 1) "Global reward pool removed: $pool"
+    }
+    $basic=$fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']/item[@group='PZAECBossBasicMaterialSupplies']")
+    Assert-Balance ($basic.Count -eq 1 -and $basic[0].count -eq [string]($tier-13) -and $basic[0].prob -eq '1' -and $basic[0].force_prob -eq 'true') "Wrong basic supplies reward T$tier"
+    $expectedBreadth=if($tier -eq 19){16}else{15}
     foreach($pool in @('groupUnique_Weapon','groupLegend_Weapon','groupLegend_MeleeWeapon','groupRareMods','groupUniqModsAll','PZAECBossLoot_UniqueMods_ByFamily')) {
         Assert-Balance ($fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='PZAECBossLootBundleT${tier}_Content']/item[@group='$pool']").Count -eq 0) "Removed boss pool still active: $pool/T$tier"
         Assert-Balance ($fullLoot.SelectNodes("/lootcontainers/lootgroup[@name='$pool']").Count -eq 1) "Shared pool removed: $pool"
@@ -156,7 +161,42 @@ while($pendingBookGroups.Count) {
     }
 }
 Assert-Balance ($magazineNames.Count -eq 23 -and @($magazineNames | Where-Object {$_ -notlike '*SkillMagazine'}).Count -eq 0) 'Boss magazine pool contains unexpected leaf items'
-'PASS: four boss boxes trigger crafting magazines at 100%; all 23 magazines reachable; ordinary books/schematics excluded; separate skill-point book and global pools unchanged; new weapons use 2/4/6/8%.'
+'PASS: four boss boxes trigger crafting magazines at 100%; all 23 magazines reachable; ordinary books/schematics and skill-point book excluded; global book pools unchanged; new weapons use 2/4/6/8%.'
+
+# Walk the final supply tree: all leaves must be parts/materials, coins or medical
+# supplies. Fixed weights bypass loot-stage gates and must select just one branch.
+$basicPool=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossBasicMaterialSupplies']")
+Assert-Balance ($basicPool.count -eq '1' -and $basicPool.item.Count -eq 6) 'Basic supplies must select one of six categories'
+$categoryWeights=@{PZAECBossBasicCraftingMaterials=.35;PZAECBossBasicArmorMaterials=.15;PZAECBossBasicToolWeaponParts=.20;PZAECBossBasicVehicleParts=.10;casinoCoin=.10;PZAECBossBasicMedicalSupplies=.10}
+foreach($entry in $basicPool.item){
+    $key=if($entry.group){[string]$entry.group}else{[string]$entry.name}
+    Assert-Balance ($categoryWeights.ContainsKey($key) -and [double]$entry.prob -eq $categoryWeights[$key]) "Wrong basic category weight: $key"
+}
+$suppliesQueue=[Collections.Generic.Queue[string]]::new()
+$suppliesSeen=[Collections.Generic.HashSet[string]]::new()
+$suppliesLeaves=[Collections.Generic.HashSet[string]]::new()
+$suppliesQueue.Enqueue('PZAECBossBasicMaterialSupplies')
+while($suppliesQueue.Count){
+    $name=$suppliesQueue.Dequeue()
+    Assert-Balance ($suppliesSeen.Add($name)) "Repeated/cyclic supplies branch: $name"
+    $node=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='$name']")
+    Assert-Balance ($null -ne $node -and $node.count -eq '1') "Invalid supplies group: $name"
+    Assert-Balance ($node.SelectNodes('item[@force_prob or @loot_prob_template or @loot_stage_count_mod]').Count -eq 0) "Supplies must use fixed weights: $name"
+    $weights=@($node.item | Where-Object prob)
+    if($weights.Count){Assert-Balance ($weights.Count -eq $node.item.Count -and [math]::Abs(($weights | ForEach-Object {[double]$_.prob} | Measure-Object -Sum).Sum-1) -lt .000001) "Unnormalized supplies weights: $name"}
+    foreach($entry in $node.item){
+        if($entry.group){$suppliesQueue.Enqueue([string]$entry.group)}
+        else{
+            $id=[string]$entry.name
+            Assert-Balance ($id -match 'Parts$|^vehicle.*(?:Chassis|Handlebars|Accessories)$|^vehicleMD500(?:chassis|accessories)$' -or $id -in @('resourceForgedIron','resourceForgedSteel','resourceSewingKit','resourceArmorCraftingKit','carBattery','smallEngine','vehicleWheels','casinoCoin','medicalFirstAidKit','drugFortBites','drugRecog','drugAntibiotics','drinkCanMegaCrush')) "Non-supply item reachable: $id"
+            [void]$suppliesLeaves.Add($id)
+        }
+    }
+}
+Assert-Balance ($suppliesLeaves.Count -eq 42) "Wrong basic supply leaf count: $($suppliesLeaves.Count)"
+$legendary=$fullLoot.SelectSingleNode("/lootcontainers/lootgroup[@name='PZAECBossBasicArmorMaterials']/item[@name='resourceLegendaryParts']")
+Assert-Balance ($legendary.count -eq '1' -and [double]$legendary.prob -eq .05) 'Legendary material must remain scarce'
+'PASS: old general pools removed; basic supplies trigger 100% with 3/4/5/6 draws; 42 material/part/coin/medical leaves; fixed normalized weights; no finished equipment, mods or books.'
 
 # Every original T16 family is preserved at T17-T19 with its own bag/table.
 [xml]$tweaksEntities=Get-Content (Join-Path $modRoot '98-AECxProjectZ_Tweaks/Config/entityclasses.xml') -Raw

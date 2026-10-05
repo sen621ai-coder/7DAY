@@ -1,6 +1,17 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.21 basic boss material supplies
+- Portable T16-T19 boss boxes replace groupZpackBoss03, groupZpackBoss04
+  and groupSkillBook with one dedicated basic supply pool; shared pools stay.
+- Guaranteed 3/4/5/6 draws by tier. Each draw selects crafting materials 35%,
+  armor materials 15%, tool/weapon parts 20%, vehicle parts 10%, coins 10%,
+  or medical supplies 10%. Forty-two supply items; no finished gear/mods/books.
+- Forged iron/steel 5-10; tool/weapon parts 1-3; vehicle parts 1;
+  coins 600-800; medical item 1. Legendary parts 0.75% per draw, one only.
+- Other boss rewards retain their previous probabilities and counts.
+  XML-only update: restart server and clients to reload configurations.
+
 Runtime 1.27.20 boss food supplies and pool cleanup
 - T16-T19 portable boss boxes no longer directly roll Project Z unique,
   legendary ranged or legendary melee weapons, rare mods, unique mods,

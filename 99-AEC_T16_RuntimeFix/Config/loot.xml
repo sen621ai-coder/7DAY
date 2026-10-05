@@ -1612,4 +1612,90 @@
   <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
     <item name="itemPZAECAdvancedFoodSupplyCrate" count="1" prob="0.80" force_prob="true" />
   </append>
+  <!-- Boss-only basic supplies: fixed weighted categories; no finished gear/mods/books. -->
+  <insertBefore xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+    <lootgroup name="PZAECBossBasicCraftingMaterials" count="1">
+      <item name="resourceForgedIron" count="5,10" prob="0.50" />
+      <item name="resourceForgedSteel" count="5,10" prob="0.50" />
+    </lootgroup>
+    <lootgroup name="PZAECBossBasicArmorMaterials" count="1">
+      <item name="resourceSewingKit" count="1,3" prob="0.50" />
+      <item name="armorParts" count="1,3" prob="0.35" />
+      <item name="resourceArmorCraftingKit" count="1,2" prob="0.10" />
+      <item name="resourceLegendaryParts" count="1" prob="0.05" />
+    </lootgroup>
+    <lootgroup name="PZAECBossBasicToolWeaponParts" count="1">
+      <item name="gunBotRoboticsParts" count="1,3" />
+      <item name="gunBowT1WoodenBowParts" count="1,3" />
+      <item name="gunExplosivesT3RocketLauncherParts" count="1,3" />
+      <item name="gunHandgunT1PistolParts" count="1,3" />
+      <item name="gunMGT1AK47Parts" count="1,3" />
+      <item name="gunRifleT1HuntingRifleParts" count="1,3" />
+      <item name="gunShotgunT1DoubleBarrelParts" count="1,3" />
+      <item name="meleeToolAllSteelParts" count="1,3" />
+      <item name="meleeToolAxeT3ChainsawParts" count="1,3" />
+      <item name="meleeWpnBatonT2StunBatonParts" count="1,3" />
+      <item name="meleeWpnBladeT3MacheteParts" count="1,3" />
+      <item name="meleeWpnClubT3SteelClubParts" count="1,3" />
+      <item name="meleeWpnKnucklesT3SteelKnucklesParts" count="1,3" />
+      <item name="meleeWpnSledgeT3SteelSledgehammerParts" count="1,3" />
+      <item name="meleeWpnSpearT3SteelSpearParts" count="1,3" />
+    </lootgroup>
+    <lootgroup name="PZAECBossBasicVehicleParts" count="1">
+      <item name="carBattery" count="1" />
+      <item name="smallEngine" count="1" />
+      <item name="vehicleBicycleChassis" count="1" />
+      <item name="vehicleBicycleHandlebars" count="1" />
+      <item name="vehicleGyroCopterAccessories" count="1" />
+      <item name="vehicleGyroCopterChassis" count="1" />
+      <item name="vehicleMD500accessories" count="1" />
+      <item name="vehicleMD500chassis" count="1" />
+      <item name="vehicleMinibikeChassis" count="1" />
+      <item name="vehicleMinibikeHandlebars" count="1" />
+      <item name="vehicleMotorcycleChassis" count="1" />
+      <item name="vehicleMotorcycleHandlebars" count="1" />
+      <item name="vehicleTruck4x4Accessories" count="1" />
+      <item name="vehicleTruck4x4Chassis" count="1" />
+      <item name="vehicleWheels" count="1" />
+    </lootgroup>
+    <lootgroup name="PZAECBossBasicMedicalSupplies" count="1">
+      <item name="medicalFirstAidKit" count="1" prob="0.40" />
+      <item name="drugFortBites" count="1" prob="0.20" />
+      <item name="drugRecog" count="1" prob="0.20" />
+      <item name="drugAntibiotics" count="1" prob="0.05" />
+      <item name="drinkCanMegaCrush" count="1" prob="0.15" />
+    </lootgroup>
+    <lootgroup name="PZAECBossBasicMaterialSupplies" count="1">
+      <item group="PZAECBossBasicCraftingMaterials" prob="0.35" />
+      <item group="PZAECBossBasicArmorMaterials" prob="0.15" />
+      <item group="PZAECBossBasicToolWeaponParts" prob="0.20" />
+      <item group="PZAECBossBasicVehicleParts" prob="0.10" />
+      <item name="casinoCoin" count="600,800" prob="0.10" />
+      <item group="PZAECBossBasicMedicalSupplies" prob="0.10" />
+    </lootgroup>
+  </insertBefore>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss03']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupZpackBoss04']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']/item[@group='groupSkillBook']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT16_Content']">
+    <item group="PZAECBossBasicMaterialSupplies" count="3" prob="1" force_prob="true" />
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupZpackBoss03']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupZpackBoss04']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']/item[@group='groupSkillBook']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT17_Content']">
+    <item group="PZAECBossBasicMaterialSupplies" count="4" prob="1" force_prob="true" />
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupZpackBoss03']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupZpackBoss04']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']/item[@group='groupSkillBook']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT18_Content']">
+    <item group="PZAECBossBasicMaterialSupplies" count="5" prob="1" force_prob="true" />
+  </append>
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupZpackBoss03']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupZpackBoss04']" />
+  <remove xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']/item[@group='groupSkillBook']" />
+  <append xpath="/lootcontainers/lootgroup[@name='PZAECBossLootBundleT19_Content']">
+    <item group="PZAECBossBasicMaterialSupplies" count="6" prob="1" force_prob="true" />
+  </append>
 </configs>
