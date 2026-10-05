@@ -100,7 +100,7 @@ public sealed class MechaMotionQA : IModApi
             RobotAudio.Clear();Boarding.Clear();Gait.Clear();Locomotion.Clear();
         }
         catch(Exception ex){failures++;report.Add("FAIL "+ex);}
-        finally{report.AddRange(MechaLandingQA.Results());report.AddRange(MechaAudioQA.Results());failures+=MechaLandingQA.Failures+MechaAudioQA.Failures;new GameObject("Mecha Frame Timing QA").AddComponent<MechaTimingQA>().Begin(report,failures,output);}
+        finally{ArticulationAudit.Save(output);report.AddRange(MechaLandingQA.Results());report.AddRange(MechaAudioQA.Results());failures+=MechaLandingQA.Failures+MechaAudioQA.Failures;new GameObject("Mecha Frame Timing QA").AddComponent<MechaTimingQA>().Begin(report,failures,output);}
     }
     static int entered,exited;
     static void CompleteTrial(World world,Camera camera,RenderTexture texture)
@@ -878,6 +878,7 @@ rb.isKinematic=false;rb.useGravity=true;rb.detectCollisions=true;v.RBActive=true
     }
     static void Capture(Camera camera,RenderTexture rt,Model.Rig rig,string prefix,int frame)
     {
+        ArticulationAudit.Sample(rig,prefix,frame);
         var focus=rig.Mount.position+Vector3.up*1.6f;var view=prefix.StartsWith("flight-rear-")?new Vector3(0,1.6f,-7):prefix.StartsWith("flight-side-")?new Vector3(7,1.6f,0):new Vector3(-4,1.8f,7);if(!prefix.StartsWith("view-")){camera.transform.position=focus+(prefix.StartsWith("flight-")?rig.Mount.rotation*view:view);camera.transform.LookAt(focus);}
         var flat=prefix.StartsWith("samurai-")||prefix.StartsWith("view-")?new Material(Shader.Find("Sprites/Default") ?? Shader.Find("Standard")):null;
         var baked=new List<GameObject>();var skins=rig.Mount.GetComponentsInChildren<SkinnedMeshRenderer>();

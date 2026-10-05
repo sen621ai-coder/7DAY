@@ -1,0 +1,1127 @@
+{
+  "sourceGLBAnimations": 0,
+  "sourceGLBSkins": 0,
+  "derivedJoints": 24,
+  "renderedTriangles": 198684,
+  "boneVertices": {
+    "ShoulderL": 2821,
+    "ElbowL": 596,
+    "HandL": 313,
+    "ShoulderR": 5712,
+    "ElbowR": 4569,
+    "HandR": 166,
+    "Backpack": 8381,
+    "ChestDoor": 1866,
+    "ChestL": 1745,
+    "ChestR": 4065,
+    "Head": 14928,
+    "HipL": 14517,
+    "KneeL": 15426,
+    "AnkleL": 4660,
+    "HipR": 11422,
+    "KneeR": 11008,
+    "AnkleR": 4520,
+    "Shield": 12323,
+    "Sword": 18194,
+    "Torso": 36670,
+    "WingL": 1436,
+    "WingR": 1436
+  },
+  "poses": 5433,
+  "actions": [
+    "alert",
+    "boost",
+    "chain-0-False-0.57",
+    "chain-0-False-0.7",
+    "chain-0-False-0.87",
+    "chain-0-True-0.57",
+    "chain-0-True-0.7",
+    "chain-0-True-0.87",
+    "chain-1-False-0.57",
+    "chain-1-False-0.7",
+    "chain-1-False-0.87",
+    "chain-1-True-0.57",
+    "chain-1-True-0.7",
+    "chain-1-True-0.87",
+    "charge",
+    "complete-daily",
+    "complete-guard",
+    "complete-rest",
+    "complete-walk",
+    "daily",
+    "entry",
+    "exit",
+    "flight",
+    "flight-boost",
+    "flight-cruise",
+    "flight-folded",
+    "flight-hover",
+    "flight-landing",
+    "flight-power-loss",
+    "flight-rear-boost",
+    "flight-rear-cruise",
+    "flight-rear-folded",
+    "flight-rear-hover",
+    "flight-rear-landing",
+    "flight-rear-power-loss",
+    "flight-rear-takeoff",
+    "flight-rear-turn-left",
+    "flight-rear-turn-right",
+    "flight-side-boost",
+    "flight-side-cruise",
+    "flight-side-folded",
+    "flight-side-hover",
+    "flight-side-landing",
+    "flight-side-power-loss",
+    "flight-side-takeoff",
+    "flight-side-turn-left",
+    "flight-side-turn-right",
+    "flight-takeoff",
+    "flight-turn-left",
+    "flight-turn-right",
+    "guard",
+    "heavy",
+    "jump",
+    "landing",
+    "left-cut",
+    "release-35-combo0",
+    "release-35-combo1",
+    "release-5-combo0",
+    "release-5-combo1",
+    "release-75-combo0",
+    "release-75-combo1",
+    "release-90-combo0",
+    "release-90-combo1",
+    "right-cut",
+    "samurai-alert",
+    "samurai-boost",
+    "samurai-charge",
+    "samurai-daily",
+    "samurai-energy-contact",
+    "samurai-entry",
+    "samurai-exit",
+    "samurai-guard",
+    "samurai-heavy",
+    "samurai-sequence-heavy",
+    "samurai-sequence-left-cut",
+    "samurai-sequence-right-cut",
+    "samurai-swing",
+    "slope-heavy",
+    "slope-left",
+    "slope-right",
+    "traversal-down-yaw-15-side0",
+    "traversal-down-yaw-15-side1",
+    "traversal-down-yaw0-side0",
+    "traversal-down-yaw0-side1",
+    "traversal-down-yaw15-side0",
+    "traversal-down-yaw15-side1",
+    "traversal-gap-yaw-15-side0",
+    "traversal-gap-yaw-15-side1",
+    "traversal-gap-yaw0-side0",
+    "traversal-gap-yaw0-side1",
+    "traversal-gap-yaw15-side0",
+    "traversal-gap-yaw15-side1",
+    "traversal-up-yaw-15-side0",
+    "traversal-up-yaw-15-side1",
+    "traversal-up-yaw0-side0",
+    "traversal-up-yaw0-side1",
+    "traversal-up-yaw15-side0",
+    "traversal-up-yaw15-side1",
+    "view-boarding-complete-entry",
+    "view-boarding-complete-exit",
+    "view-complete-first",
+    "view-complete-third",
+    "view-energy-impact",
+    "view-laser-10fps-complete-first",
+    "view-laser-10fps-complete-third",
+    "view-laser-15fps-complete-first",
+    "view-laser-15fps-complete-third",
+    "view-laser-5fps-complete-first",
+    "view-laser-5fps-complete-third",
+    "view-laser-8fps-complete-first",
+    "view-laser-8fps-complete-third",
+    "view-missile-impact",
+    "view-sequence-heavy-first",
+    "view-sequence-heavy-third",
+    "view-sequence-left-cut-first",
+    "view-sequence-left-cut-third",
+    "view-sequence-right-cut-first",
+    "view-sequence-right-cut-third",
+    "view-weight-turn-rear",
+    "weight-entry",
+    "weight-exit"
+  ],
+  "matrixOrthonormalError": 1.2000003970502604e-06,
+  "splitFaces": 0,
+  "seams": [
+    {
+      "pair": [
+        "HipR",
+        "Sword"
+      ],
+      "sharedSeamPoints": 4,
+      "p95Separation": 3.003338206963915,
+      "maxSeparation": 3.0066757801445148,
+      "action": "chain-0-True-0.57",
+      "frame": 39,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\melee-poses.json",
+      "pointA": [
+        0.40091442443600755,
+        0.9467851443720332,
+        -0.17563691013460556
+      ],
+      "pointB": [
+        1.3254886672311401,
+        3.778352901308632,
+        0.23361332425075543
+      ]
+    },
+    {
+      "pair": [
+        "KneeL",
+        "WingL"
+      ],
+      "sharedSeamPoints": 5,
+      "p95Separation": 2.56028083995053,
+      "maxSeparation": 2.575688239407604,
+      "action": "traversal-up-yaw0-side0",
+      "frame": 6,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.43442326761151073,
+        0.5972348708826903,
+        0.7960014491114797
+      ],
+      "pointB": [
+        -1.1964158822025008,
+        1.9756349259998098,
+        -1.2420246670078774
+      ]
+    },
+    {
+      "pair": [
+        "HipL",
+        "WingL"
+      ],
+      "sharedSeamPoints": 38,
+      "p95Separation": 2.447448430267077,
+      "maxSeparation": 2.661983323464305,
+      "action": "traversal-up-yaw0-side0",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.46150027250057085,
+        0.6599452676903531,
+        1.0086769605908352
+      ],
+      "pointB": [
+        -1.204552776421298,
+        2.0471203972048686,
+        -1.1383613136082045
+      ]
+    },
+    {
+      "pair": [
+        "HipL",
+        "KneeL"
+      ],
+      "sharedSeamPoints": 118,
+      "p95Separation": 1.2718934250578513,
+      "maxSeparation": 1.4882265733399573,
+      "action": "traversal-up-yaw15-side1",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -1.1664795462485125,
+        1.3020691977575116,
+        -0.3416873532730278
+      ],
+      "pointB": [
+        -0.360264369450065,
+        1.5251960590362887,
+        0.8891862495274065
+      ]
+    },
+    {
+      "pair": [
+        "Backpack",
+        "HipR"
+      ],
+      "sharedSeamPoints": 1,
+      "p95Separation": 0.9540617522456998,
+      "maxSeparation": 0.9540617522456998,
+      "action": "traversal-up-yaw0-side1",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        0.5532500141476584,
+        1.4094385479268494,
+        -0.40737018867487085
+      ],
+      "pointB": [
+        0.5414415112726252,
+        0.816147531483618,
+        0.3396908236699996
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "HipL"
+      ],
+      "sharedSeamPoints": 141,
+      "p95Separation": 0.9119791484419705,
+      "maxSeparation": 0.9851642801525561,
+      "action": "traversal-up-yaw0-side0",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.5016800158833457,
+        1.3510478214082535,
+        -0.4338900225193367
+      ],
+      "pointB": [
+        -0.4721375212832308,
+        0.7873059349554546,
+        0.3734952543837944
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "HandR"
+      ],
+      "sharedSeamPoints": 1,
+      "p95Separation": 0.9055143773230175,
+      "maxSeparation": 0.9055143773230175,
+      "action": "samurai-sequence-right-cut",
+      "frame": 45,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.40011604095903824,
+        1.9370746375256247,
+        0.9077921086751586
+      ],
+      "pointB": [
+        1.1884189527102937,
+        2.3564467934207247,
+        1.0583304816007366
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "Sword"
+      ],
+      "sharedSeamPoints": 1,
+      "p95Separation": 0.9055143773230175,
+      "maxSeparation": 0.9055143773230175,
+      "action": "samurai-sequence-right-cut",
+      "frame": 45,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.40011604095903824,
+        1.9370746375256247,
+        0.9077921086751586
+      ],
+      "pointB": [
+        1.1884189527102937,
+        2.3564467934207247,
+        1.0583304816007366
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "HipR"
+      ],
+      "sharedSeamPoints": 151,
+      "p95Separation": 0.8471938165404462,
+      "maxSeparation": 1.1191903507611303,
+      "action": "traversal-up-yaw0-side1",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        0.5616599911068869,
+        1.2983978465852555,
+        -0.5081499891311989
+      ],
+      "pointB": [
+        0.5094408632894609,
+        0.7136535963753724,
+        0.44470591066335585
+      ]
+    },
+    {
+      "pair": [
+        "ShoulderL",
+        "Shield"
+      ],
+      "sharedSeamPoints": 150,
+      "p95Separation": 0.780194785468462,
+      "maxSeparation": 0.8613243739725437,
+      "action": "samurai-guard",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -1.052857314987322,
+        2.21243772668378,
+        -0.11990758638364413
+      ],
+      "pointB": [
+        -1.2095256103800454,
+        2.6584091877685845,
+        0.6001230923487396
+      ]
+    },
+    {
+      "pair": [
+        "ShoulderR",
+        "HandR"
+      ],
+      "sharedSeamPoints": 1,
+      "p95Separation": 0.7465270431858988,
+      "maxSeparation": 0.7465270431858988,
+      "action": "release-5-combo1",
+      "frame": 24,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\sword-poses.json",
+      "pointA": [
+        0.4364779054420502,
+        2.2915470416174113,
+        0.551634571925086
+      ],
+      "pointB": [
+        1.1211491855720512,
+        2.3099645527880575,
+        0.8486003269462765
+      ]
+    },
+    {
+      "pair": [
+        "ShoulderR",
+        "Sword"
+      ],
+      "sharedSeamPoints": 1,
+      "p95Separation": 0.7465270431858988,
+      "maxSeparation": 0.7465270431858988,
+      "action": "release-5-combo1",
+      "frame": 24,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\sword-poses.json",
+      "pointA": [
+        0.4364779054420502,
+        2.2915470416174113,
+        0.551634571925086
+      ],
+      "pointB": [
+        1.1211491855720512,
+        2.3099645527880575,
+        0.8486003269462765
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ElbowR"
+      ],
+      "sharedSeamPoints": 13,
+      "p95Separation": 0.7333821804589054,
+      "maxSeparation": 0.7631151183092115,
+      "action": "samurai-charge",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.6028960031371372,
+        1.9993219796089494,
+        0.2535534240604446
+      ],
+      "pointB": [
+        0.7097804191171795,
+        2.754745233328598,
+        0.26955695967938537
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "Shield"
+      ],
+      "sharedSeamPoints": 11,
+      "p95Separation": 0.7254542401293038,
+      "maxSeparation": 0.7567877893565335,
+      "action": "traversal-up-yaw0-side0",
+      "frame": 18,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.7601199747104475,
+        1.5493277982530411,
+        0.4780999941795005
+      ],
+      "pointB": [
+        -0.8880724295027187,
+        2.1152621652719676,
+        0.9639746896089574
+      ]
+    },
+    {
+      "pair": [
+        "Head",
+        "ChestDoor"
+      ],
+      "sharedSeamPoints": 38,
+      "p95Separation": 0.7198373448870463,
+      "maxSeparation": 0.7357561603325841,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.2025176595860831,
+        1.7788527744465354,
+        0.9373470431550718
+      ],
+      "pointB": [
+        0.2152610196966822,
+        1.1867694082995384,
+        1.3739384101934955
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "WingL"
+      ],
+      "sharedSeamPoints": 8,
+      "p95Separation": 0.705831775351928,
+      "maxSeparation": 0.7141959695807263,
+      "action": "traversal-gap-yaw0-side1",
+      "frame": 18,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.5016800164203814,
+        1.3510478214082535,
+        -0.43388998051933675
+      ],
+      "pointB": [
+        -0.7267446347424036,
+        1.9712207248443268,
+        -0.7073993412157984
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ShoulderR"
+      ],
+      "sharedSeamPoints": 124,
+      "p95Separation": 0.6599180180775828,
+      "maxSeparation": 0.7025040587922223,
+      "action": "release-90-combo0",
+      "frame": 1,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\sword-poses.json",
+      "pointA": [
+        0.653362025461234,
+        2.7489422382294437,
+        0.06025821353728503
+      ],
+      "pointB": [
+        0.39380930491207833,
+        2.4453718289848227,
+        -0.5176598987469134
+      ]
+    },
+    {
+      "pair": [
+        "KneeR",
+        "AnkleR"
+      ],
+      "sharedSeamPoints": 193,
+      "p95Separation": 0.6485828080685233,
+      "maxSeparation": 0.6671222088710235,
+      "action": "traversal-down-yaw0-side0",
+      "frame": 15,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        0.7828914391968433,
+        1.5686713582740799,
+        -0.0693495066060551
+      ],
+      "pointB": [
+        0.7894692666089471,
+        1.5059456875318011,
+        0.5947847147569321
+      ]
+    },
+    {
+      "pair": [
+        "Head",
+        "ShoulderR"
+      ],
+      "sharedSeamPoints": 2,
+      "p95Separation": 0.6425066842156494,
+      "maxSeparation": 0.6553269913702255,
+      "action": "release-90-combo0",
+      "frame": 1,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\sword-poses.json",
+      "pointA": [
+        0.5659316872309231,
+        2.697139954915926,
+        0.10523891939751412
+      ],
+      "pointB": [
+        0.3185432034730341,
+        2.4267581355278267,
+        -0.43803456188673345
+      ]
+    },
+    {
+      "pair": [
+        "ElbowR",
+        "HandR"
+      ],
+      "sharedSeamPoints": 51,
+      "p95Separation": 0.6337293700555837,
+      "maxSeparation": 0.72595881287724,
+      "action": "traversal-down-yaw-15-side1",
+      "frame": 9,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        0.5992356503155263,
+        2.1393665805774043,
+        0.6200050111194179
+      ],
+      "pointB": [
+        0.6155735929386149,
+        2.1902848454575863,
+        1.3439916131546819
+      ]
+    },
+    {
+      "pair": [
+        "ChestR",
+        "ChestDoor"
+      ],
+      "sharedSeamPoints": 29,
+      "p95Separation": 0.6324227437916101,
+      "maxSeparation": 0.6650501972380377,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.51204560692809,
+        1.6578463619419788,
+        1.087826362884695
+      ],
+      "pointB": [
+        0.2763248381220651,
+        1.0860100391508032,
+        1.3322250206889388
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "HandL"
+      ],
+      "sharedSeamPoints": 52,
+      "p95Separation": 0.5967261951817958,
+      "maxSeparation": 0.6327179645353846,
+      "action": "samurai-guard",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.7528899908065796,
+        1.7037678436097916,
+        0.40988000464130775
+      ],
+      "pointB": [
+        -0.2697182936891712,
+        2.0446317450822877,
+        0.6350220363089465
+      ]
+    },
+    {
+      "pair": [
+        "HipR",
+        "KneeR"
+      ],
+      "sharedSeamPoints": 120,
+      "p95Separation": 0.594146354890927,
+      "maxSeparation": 0.710180883579089,
+      "action": "traversal-down-yaw0-side0",
+      "frame": 6,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        1.1697630828311523,
+        1.5160072523817805,
+        0.39917722215231743
+      ],
+      "pointB": [
+        1.081909983578803,
+        1.5062235669839188,
+        -0.305480850853994
+      ]
+    },
+    {
+      "pair": [
+        "ChestL",
+        "ChestDoor"
+      ],
+      "sharedSeamPoints": 39,
+      "p95Separation": 0.5849345107089082,
+      "maxSeparation": 0.5953526011727742,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.24404664585515615,
+        1.6447281296046925,
+        1.095568300231936
+      ],
+      "pointB": [
+        -0.03790004602480068,
+        1.1278103787604579,
+        1.3070968750479866
+      ]
+    },
+    {
+      "pair": [
+        "KneeL",
+        "AnkleL"
+      ],
+      "sharedSeamPoints": 199,
+      "p95Separation": 0.5797816716534285,
+      "maxSeparation": 0.6053887961670591,
+      "action": "traversal-down-yaw0-side1",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.8296073444933035,
+        1.3973589422524209,
+        0.03363071190222519
+      ],
+      "pointB": [
+        -0.7067508588478059,
+        1.5010156112091988,
+        -0.5500277271185976
+      ]
+    },
+    {
+      "pair": [
+        "Backpack",
+        "HipL"
+      ],
+      "sharedSeamPoints": 3,
+      "p95Separation": 0.5761620592542467,
+      "maxSeparation": 0.5923325623499902,
+      "action": "traversal-up-yaw0-side0",
+      "frame": 12,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.4762200110768271,
+        1.454318580466217,
+        -0.16727019234651697
+      ],
+      "pointB": [
+        -0.4804873955361879,
+        1.0550011383979363,
+        0.2702057890627786
+      ]
+    },
+    {
+      "pair": [
+        "ElbowR",
+        "Sword"
+      ],
+      "sharedSeamPoints": 72,
+      "p95Separation": 0.5083385445664642,
+      "maxSeparation": 0.6261286386276204,
+      "action": "traversal-down-yaw-15-side1",
+      "frame": 9,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        0.5054606418735449,
+        2.2566055265695684,
+        0.7020308178400686
+      ],
+      "pointB": [
+        0.5106111062386024,
+        2.063413040338351,
+        1.297587035245531
+      ]
+    },
+    {
+      "pair": [
+        "Backpack",
+        "WingL"
+      ],
+      "sharedSeamPoints": 101,
+      "p95Separation": 0.48799342111409205,
+      "maxSeparation": 0.5463887781617285,
+      "action": "traversal-gap-yaw15-side1",
+      "frame": 15,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.4418000198671261,
+        1.4665785406407776,
+        -0.36716018054300026
+      ],
+      "pointB": [
+        -0.6195354016309182,
+        1.9135086218398365,
+        -0.626398166744383
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ElbowL"
+      ],
+      "sharedSeamPoints": 42,
+      "p95Separation": 0.41357028173062765,
+      "maxSeparation": 0.48601273619463964,
+      "action": "samurai-guard",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.5717599987983704,
+        1.8865777925309952,
+        0.4299800021617545
+      ],
+      "pointB": [
+        -0.34847548478067814,
+        2.3078162846637005,
+        0.5243756497788358
+      ]
+    },
+    {
+      "pair": [
+        "ShoulderR",
+        "ElbowR"
+      ],
+      "sharedSeamPoints": 223,
+      "p95Separation": 0.38258282479416583,
+      "maxSeparation": 0.5307123307709442,
+      "action": "chain-1-True-0.57",
+      "frame": 11,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\melee-poses.json",
+      "pointA": [
+        0.6192091875212644,
+        2.29006936068776,
+        0.06914539980264499
+      ],
+      "pointB": [
+        0.31879119120557176,
+        2.4374128975969054,
+        0.48108530762063706
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ShoulderL"
+      ],
+      "sharedSeamPoints": 125,
+      "p95Separation": 0.290876279738659,
+      "maxSeparation": 0.30146061650571865,
+      "action": "samurai-guard",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.6346200108528137,
+        2.7861778215226947,
+        0.42530997824360267
+      ],
+      "pointB": [
+        -0.7977487357187834,
+        2.79610532667719,
+        0.1719940350639082
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ChestDoor"
+      ],
+      "sharedSeamPoints": 77,
+      "p95Separation": 0.2852358174806048,
+      "maxSeparation": 0.7152612528602096,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.07137119877361231,
+        1.7548098429021017,
+        0.7846336832298508
+      ],
+      "pointB": [
+        0.092647197545041,
+        1.3233196782341001,
+        1.3546882679094372
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ChestL"
+      ],
+      "sharedSeamPoints": 209,
+      "p95Separation": 0.261607391695761,
+      "maxSeparation": 0.3064640518205269,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.032409406836711015,
+        1.1489433808057408,
+        0.9259392024758515
+      ],
+      "pointB": [
+        -0.3168563922498621,
+        1.1297712275635954,
+        1.0383783241714823
+      ]
+    },
+    {
+      "pair": [
+        "ElbowL",
+        "Shield"
+      ],
+      "sharedSeamPoints": 29,
+      "p95Separation": 0.24022059555984301,
+      "maxSeparation": 0.2596325454162044,
+      "action": "samurai-guard",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.5812212167013452,
+        2.0628380287686428,
+        0.43737009621288514
+      ],
+      "pointB": [
+        -0.6004914996413302,
+        2.272007433541325,
+        0.5899671962566022
+      ]
+    },
+    {
+      "pair": [
+        "Head",
+        "ChestR"
+      ],
+      "sharedSeamPoints": 72,
+      "p95Separation": 0.2206615028951794,
+      "maxSeparation": 0.2616648799250388,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.26976879007258436,
+        1.7420527795126055,
+        1.0360602287768634
+      ],
+      "pointB": [
+        0.51204560692809,
+        1.6578463619419788,
+        1.087826362884695
+      ]
+    },
+    {
+      "pair": [
+        "ShoulderL",
+        "ElbowL"
+      ],
+      "sharedSeamPoints": 39,
+      "p95Separation": 0.20727035750607375,
+      "maxSeparation": 0.20985423292066924,
+      "action": "traversal-down-yaw-15-side0",
+      "frame": 9,
+      "source": ".local-tests\\MechaNativeQA\\run-f2f6ad4115f643d296c610e4b0e63c48\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\articulation-poses.json",
+      "pointA": [
+        -0.7457586221226172,
+        2.1358212080405745,
+        0.2263047475258002
+      ],
+      "pointB": [
+        -0.7893812000589967,
+        1.9419747876287043,
+        0.2938283364589388
+      ]
+    },
+    {
+      "pair": [
+        "Head",
+        "ChestL"
+      ],
+      "sharedSeamPoints": 23,
+      "p95Separation": 0.19607046249445081,
+      "maxSeparation": 0.2332124050302117,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.017708338270618088,
+        1.7410350420800025,
+        0.9342478989477427
+      ],
+      "pointB": [
+        -0.14452660296537237,
+        1.6761765061749019,
+        1.0887186729549219
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "ChestR"
+      ],
+      "sharedSeamPoints": 231,
+      "p95Separation": 0.1890949419197842,
+      "maxSeparation": 0.271392510738415,
+      "action": "samurai-entry",
+      "frame": 384,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.2171499531767074,
+        1.1441166496724264,
+        0.8280627625504458
+      ],
+      "pointB": [
+        0.46072667493779973,
+        1.0978505116367354,
+        0.9384426518975659
+      ]
+    },
+    {
+      "pair": [
+        "ElbowL",
+        "HandL"
+      ],
+      "sharedSeamPoints": 31,
+      "p95Separation": 0.1323794013798293,
+      "maxSeparation": 0.13364122908536855,
+      "action": "samurai-guard",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.4628088128410872,
+        2.0739993303412505,
+        0.5175203318503142
+      ],
+      "pointB": [
+        -0.49397516102035277,
+        2.1762752457120045,
+        0.5976968495328072
+      ]
+    },
+    {
+      "pair": [
+        "Head",
+        "Backpack"
+      ],
+      "sharedSeamPoints": 89,
+      "p95Separation": 0.09950874624693416,
+      "maxSeparation": 0.10419061749689816,
+      "action": "weight-exit",
+      "frame": 64,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.008466707947093366,
+        1.748343325593238,
+        0.33249731130426186
+      ],
+      "pointB": [
+        -0.016858977840180867,
+        1.8493575735952097,
+        0.3292699107426122
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "Head"
+      ],
+      "sharedSeamPoints": 327,
+      "p95Separation": 0.056226520361769075,
+      "maxSeparation": 0.0704951084610285,
+      "action": "weight-exit",
+      "frame": 64,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.16290360159586878,
+        1.8315178133076795,
+        0.5164956108556872
+      ],
+      "pointB": [
+        -0.14653577694251296,
+        1.7630565072004263,
+        0.5126610053820897
+      ]
+    },
+    {
+      "pair": [
+        "Torso",
+        "Backpack"
+      ],
+      "sharedSeamPoints": 299,
+      "p95Separation": 2.9815348698140076e-05,
+      "maxSeparation": 2.9815348698140076e-05,
+      "action": "jump",
+      "frame": 15,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\sword-poses.json",
+      "pointA": [
+        -0.5284299850463867,
+        1.3090375170649917,
+        -0.374460019353138
+      ],
+      "pointB": [
+        -0.5284299850463867,
+        1.30900770225943,
+        -0.3744601993178762
+      ]
+    },
+    {
+      "pair": [
+        "HandL",
+        "Shield"
+      ],
+      "sharedSeamPoints": 36,
+      "p95Separation": 0.0,
+      "maxSeparation": 0.0,
+      "action": "complete-rest",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        -0.7633205287818909,
+        1.9206612389208986,
+        0.4060801415531006
+      ],
+      "pointB": [
+        -0.7633205287818909,
+        1.9206612389208986,
+        0.4060801415531006
+      ]
+    },
+    {
+      "pair": [
+        "HandR",
+        "Sword"
+      ],
+      "sharedSeamPoints": 24,
+      "p95Separation": 0.0,
+      "maxSeparation": 0.0,
+      "action": "complete-rest",
+      "frame": 0,
+      "source": ".local-tests\\MechaNativeQA\\run-16c2076aec6f4d6ca6bac51c40f3761e\\UserData\\Saves\\Navezgane\\MechaQA_Isolated\\mecha-motion-qa\\articulation-poses.json",
+      "pointA": [
+        0.5929003781608582,
+        2.031287614321289,
+        0.5694104260734558
+      ],
+      "pointB": [
+        0.5929003781608582,
+        2.031287614321289,
+        0.5694104260734558
+      ]
+    }
+  ],
+  "verdict": "REVIEW REQUIRED: seam distances are not exposed-hole widths; inspect native solid renders. This audit does not certify absence of all collisions."
+}

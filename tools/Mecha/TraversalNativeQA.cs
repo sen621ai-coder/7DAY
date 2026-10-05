@@ -69,6 +69,7 @@ public sealed class MechaTraversalQA : IModApi
                 int frames=Mathf.CeilToInt(2.0f/dt);float error=0;int stretch=0;
                 for(int frame=0;frame<frames;frame++){
                     Tick(v,dt);Locomotion.Get(v).Grounded=support.Grounded;Gait.Update(world,v,rig,dt);
+                    if(frame%3==0)ArticulationAudit.Sample(rig,"traversal-"+mode+"-yaw"+yaw+"-side"+side,frame);
                     for(int i=0;i<2;i++){
                         var f=support.Feet[i];var foot=i==0?rig.FootL:rig.FootR;
                         error=Mathf.Max(error,Vector3.Distance(foot.position+Origin.position,f.Position));
@@ -298,6 +299,7 @@ public sealed class MechaTraversalQA : IModApi
             Physics.autoSimulation=simulation;
             var path=Path.Combine(GameIO.GetSaveGameDir(),"mecha-traversal-qa.txt");File.WriteAllLines(path,report);
             foreach(var line in report.Where(s=>!s.StartsWith("TRACE")))Log.Out("[MechaTraversalQA] "+line);
+            ArticulationAudit.Save(GameIO.GetSaveGameDir());
             Log.Out("[MechaMotionQA] COMPLETE failures="+failures+" report="+path);
         }
     }
