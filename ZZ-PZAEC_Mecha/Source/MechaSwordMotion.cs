@@ -49,7 +49,7 @@ namespace PZAEC.Mecha
             var frame=FrameAt(s,m,now);grip=frame.Grip;direction=frame.Direction;
         }
         public static float PoleAt(Samurai.State s,Locomotion.MoveState m,float now){return FrameAt(s,m,now).PoleAngle;}
-        static void Arm(Model.Rig r,Vector3 target,Vector3 poleDirection,float poleAngle=0)
+        public static void Arm(Model.Rig r,Vector3 target,Vector3 poleDirection,float poleAngle=0)
         {
             r.ShoulderR.localRotation=r.RestRot[r.ShoulderR];r.ElbowR.localRotation=r.RestRot[r.ElbowR];r.HandR.localRotation=r.RestRot[r.HandR];
             var shoulder=r.ShoulderR;var elbow=r.ElbowR;var hand=r.HandR;float a=r.ArmUpper,b=r.ArmLower;var delta=target-shoulder.position;float d=Mathf.Clamp(delta.magnitude,Mathf.Abs(a-b)+.015f,a+b-.015f);var axis=delta.normalized;
@@ -60,7 +60,7 @@ namespace PZAEC.Mecha
             var q=Quaternion.FromToRotation(elbow.position-shoulder.position,bend-shoulder.position)*shoulder.rotation;shoulder.rotation=q;shoulder.localRotation=Quaternion.RotateTowards(r.RestRot[shoulder],shoulder.localRotation,r.ShoulderLimit);
             elbow.rotation=Quaternion.FromToRotation(hand.position-elbow.position,shoulder.position+axis*d-elbow.position)*elbow.rotation;elbow.localRotation=Quaternion.RotateTowards(r.RestRot[elbow],elbow.localRotation,r.ElbowLimit);
         }
-        static void Blade(Model.Rig r,Vector3 direction,Vector3 normal)
+        public static void Blade(Model.Rig r,Vector3 direction,Vector3 normal)
         {
             var axis=r.SwordTipAnchor.normalized;var restNormal=Vector3.ProjectOnPlane(r.SwordRestNormal,axis).normalized;
             var targetNormal=Vector3.ProjectOnPlane(normal,direction).normalized;if(targetNormal.sqrMagnitude<.01f)targetNormal=Vector3.ProjectOnPlane(r.Mount.up,direction).normalized;

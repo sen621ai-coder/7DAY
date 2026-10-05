@@ -45,7 +45,7 @@ namespace PZAEC.Mecha
             // A local physics owner already has more recent input than its echo.
             if(!v.isEntityRemote&&!Weapons.Server)return true;
             int flags=(int)state.x;bool ground=(flags&4)!=0;
-            if(!s.Grounded&&ground)MarkLanding(s,Time.time,!landing&&!takeoff&&!flight&&!Flight.Active(s));
+            if(!s.Grounded&&ground)MarkLanding(s,Time.time,!Traversal.Active(v)&&!landing&&!takeoff&&!flight&&!Flight.Active(s));
             if(s.Grounded&&!ground){s.JumpAt=Time.time;s.AirSince=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
             s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=state.y;
             s.FlightMode=fault?Flight.Phase.PowerLost:landing?Flight.Phase.Landing:takeoff?Flight.Phase.Takeoff:flight?Flight.Phase.Cruise:Flight.Phase.Ground;
@@ -53,34 +53,38 @@ namespace PZAEC.Mecha
         }
         public static void Tick(World world)
         {
-            var remove=new List<int>();
+            GroundSupport.Cleanup(world);var remove=new List<int>();
             foreach(var pair in moves){var s=pair.Value;if(s.Vehicle==null||world.GetEntity(pair.Key)!=s.Vehicle){remove.Add(pair.Key);continue;}
                 if(s.Vehicle.isEntityRemote&&Time.time-s.LastPacket>1f){bool flying=Flight.AirPose(s);s.HoverOn=s.Boost=false;s.Charge=0;s.FlightMode=!s.Grounded&&flying?Flight.Phase.PowerLost:Flight.Phase.Ground;s.VerticalInput=0;}
                 s.WingBlend=Mathf.MoveTowards(s.WingBlend,Flight.AirPose(s)?1:0,Time.deltaTime/(Flight.AirPose(s)?Rules.FlightDeploySeconds:1f));
                 s.Blend=Mathf.MoveTowards(s.Blend,(s.HoverOn||s.Boost||Flight.Active(s))?1:0,Time.deltaTime/.35f);
             }
+            Traversal.Tick(world,Time.deltaTime);TraversalNet.Tick(world);
             foreach(int id in remove){var old=moves[id].Vehicle;if(old!=null){Gait.Forget(old);Model.Forget(old);}moves.Remove(id);}
         }
         public static void AfterForces(EntityVehicle __instance)
         {
             var v=__instance;if(!Weapons.IsMecha(v)||v.isEntityRemote)return;
             var rb=v.vehicleRB;if(rb==null||rb.isKinematic||!v.RBActive)return;
-            var s=Get(v);float dt=Time.fixedDeltaTime;bool grounded=v.GetWheelsOnGround()>0;
-            if(Rules.Complete(v))grounded|=Flight.HullSupported(rb);
+            var s=Get(v);float dt=Time.fixedDeltaTime;var support=GroundSupport.Observe(v);bool grounded=support!=null&&support.Grounded;if(support!=null)support.SteppedAt=Time.fixedTimeAsDouble;
             if(!grounded)s.AirPeakDownSpeed=Mathf.Max(s.AirPeakDownSpeed,-rb.velocity.y);
             var world=GameManager.Instance.World;var driver=v.GetAttached(0) as EntityPlayerLocal;
             bool input=s.InputReady&&Time.time-s.LastInput<.5f&&driver!=null&&Weapons.UIReady(driver)&&!Boarding.Active(v);
-            if(Rules.Complete(v)){if(Flight.Step(v,s,grounded,input,dt))return;input&=s.InputReady;}
+            var movement=v.movementInput;
+            float rawThrottle=input&&movement!=null?movement.moveForward:0;
+            bool traversal=Traversal.Step(v,support,s,rawThrottle,Powered(v)&&input,dt);
+            if(traversal){s.Grounded=support!=null&&support.Grounded;s.Boost=false;s.AirSince=-1;s.LandingEventExpected=false;Sync(v,s);return;}
+            if(Rules.Complete(v)){if(Flight.Step(v,s,grounded,input,dt)){GroundSupport.Suspend(v);return;}input&=s.InputReady;}
             bool sustain=Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0;
             bool powered=sustain&&input;
             if(!input){s.Toggle=s.Descend=s.Jump=s.JumpWasHeld=false;s.Charge=0;s.ChargeStart=-1;}
-            var movement=v.movementInput;float throttle=powered&&movement!=null?movement.moveForward:0,steer=powered&&movement!=null?movement.moveStrafe:0;
-            // XML disables native drive/steer. Colliders provide support only.
+            float throttle=powered&&movement!=null?movement.moveForward:0,steer=powered&&movement!=null?movement.moveStrafe:0;
+            // Wheel components remain for native vehicle bookkeeping, never bearing weight.
             PrepareSupport(s.Wheels,Mathf.Abs(throttle)>.01f||Mathf.Abs(steer)>.01f||rb.velocity.sqrMagnitude>.01f);
             if(!sustain){s.HoverOn=false;s.Charge=0;s.ChargeStart=-1;s.Jump=false;s.Toggle=false;}
             if(s.Toggle){s.HoverOn=powered&&!s.HoverOn;s.Toggle=false;}
             if(!grounded&&s.Grounded){s.AirSince=Time.time;s.JumpAt=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
-            bool stomp=grounded&&!s.Grounded&&MarkLanding(s,Time.time,true);
+            bool stomp=grounded&&!s.Grounded&&MarkLanding(s,Time.time,!Traversal.Active(v));
             s.Grounded=grounded;
             if(stomp){s.LastSync=-100;Sync(v,s);Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down*s.LandingStrength,v.position);}
             var forward=Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized;
@@ -89,15 +93,17 @@ namespace PZAEC.Mecha
             s.Boost=boost||(s.Boost&&powered&&grounded&&speed>4.2f&&!s.HoverOn);
             float target=throttle>=0?throttle*(boost?13.5f:4f):throttle*2f;
             if(s.HoverOn)target=throttle*Rules.HoverSpeed;
+            else target=Traversal.LimitSpeed(v,support,target,dt);
             if(Samurai.Braced(v)){target=Mathf.Clamp(target,-1.2f,1.2f);steer*=.55f;s.Boost=false;}
+            if(grounded&&!s.HoverOn){GroundSupport.Walking(support,dt,powered&&!Boarding.Active(v));if(!GroundSupport.MotionClear(support,dt)){GroundSupport.StopHorizontal(support);target=0;}GroundSupport.Apply(support,dt);}
             if(grounded||s.HoverOn)
             {
-                var normal=Vector3.up;
-                if(grounded){var sum=Vector3.zero;int count=0;foreach(var wheel in s.Wheels)if(wheel!=null&&wheel.GetGroundHit(out var contact)){sum+=contact.normal;count++;}if(count>0)normal=sum.normalized;}
+                var normal=support!=null?support.Normal:Vector3.up;
                 ApplyDrive(rb,forward,target,steer,s.Boost,normal,dt);
             }
             if(s.HoverOn)
             {
+                GroundSupport.Suspend(v);
                 float targetY=rb.position.y-dt;
                 if(Weapons.Trace(v,v.position+Vector3.up*.2f,Vector3.down,6f,out var hit))targetY=hit.hit.pos.y-Origin.position.y+Rules.HoverHeight;
                 if(Weapons.Trace(v,v.position+Vector3.up*2.6f,Vector3.up,3f,out var ceiling))targetY=Mathf.Min(targetY,ceiling.hit.pos.y-Origin.position.y-3.2f);
@@ -110,7 +116,7 @@ namespace PZAEC.Mecha
             if(!s.Jump&&s.JumpWasHeld&&s.ChargeStart>=0&&powered&&grounded&&Time.time>=s.NextJump)
             {
                 float charge=Mathf.Clamp((Time.time-s.ChargeStart)/Rules.JumpChargeSeconds,Rules.JumpMinCharge,1);
-                rb.AddForce(Vector3.up*(charge*Rules.JumpMaxSpeed),ForceMode.VelocityChange);s.NextJump=Time.time+Rules.JumpCooldown;s.ChargeStart=-1;
+                GroundSupport.Suspend(v);rb.AddForce(Vector3.up*(charge*Rules.JumpMaxSpeed),ForceMode.VelocityChange);s.NextJump=Time.time+Rules.JumpCooldown;s.ChargeStart=-1;
             }
             s.JumpWasHeld=s.Jump;
             Sync(v,s);
@@ -134,20 +140,18 @@ namespace PZAEC.Mecha
             s.LandingAt=now;s.LandingStrength=Mathf.Clamp(.7f+s.AirPeakDownSpeed/60f,.7f,1f);
             s.LandingPendingUntil=stomp?now+.75f:-100;s.LandingEventExpected=stomp;s.AirSince=-1;s.AirPeakDownSpeed=0;return stomp;
         }
-        // PhysX vehicle sticky-tire constraints can lock a stationary wheel even
-        // with zero tire friction. A negligible 1Nm wake torque releases that
-        // constraint; propulsion/braking/turning are still provided by ApplyDrive.
+        // Native vehicle bookkeeping retains these components. They never bear load.
         public static void PrepareSupport(WheelCollider[] wheels,bool moving)
-        {foreach(var wheel in wheels)if(wheel!=null){wheel.motorTorque=moving?1f:0;wheel.brakeTorque=0;wheel.steerAngle=0;}}
+        {foreach(var wheel in wheels)if(wheel!=null){wheel.motorTorque=0;wheel.brakeTorque=0;wheel.steerAngle=0;wheel.enabled=false;}}
         // Shared native-physics controller, also exercised by the isolated QA fixture.
         public static void ApplyDrive(Rigidbody rb,Vector3 forward,float target,float steer,bool boost,Vector3 groundNormal,float dt)
         {
             var tangent=Vector3.ProjectOnPlane(forward,groundNormal).normalized;
-            var velocity=Vector3.ProjectOnPlane(rb.velocity,groundNormal);
+            var velocity=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);
             float cap=Mathf.Abs(target)>Mathf.Abs(Vector3.Dot(velocity,tangent))?2f:4f;
-            var acceleration=Vector3.ClampMagnitude((tangent*target-velocity)/Mathf.Max(dt,.001f),cap);
-            // Cancel slope gravity only on walkable supports; collisions still block obstacles.
-            if(groundNormal.y>=.7f)acceleration-=Vector3.ProjectOnPlane(Physics.gravity,groundNormal);
+            var acceleration=Vector3.ClampMagnitude((Vector3.ProjectOnPlane(tangent*target,Vector3.up)-velocity)/Mathf.Max(dt,.001f),cap);
+            // Foot reactions already cancel vertical gravity. Adding wheel-style slope
+            // compensation here would push a passively standing robot uphill.
             rb.AddForce(acceleration*rb.mass,ForceMode.Force);
             float turn=boost?25f:velocity.magnitude>.3f?40f:60f;
             AngularAcceleration(rb,Vector3.up*Mathf.Clamp((steer*turn*Mathf.Deg2Rad-rb.angularVelocity.y)*6f,-4f,4f));
@@ -156,6 +160,6 @@ namespace PZAEC.Mecha
         }
         public static void AngularAcceleration(Rigidbody rb,Vector3 acceleration)
         {var axes=rb.rotation*rb.inertiaTensorRotation;rb.AddTorque(axes*Vector3.Scale(Quaternion.Inverse(axes)*acceleration,rb.inertiaTensor),ForceMode.Force);}
-        public static void Clear(){moves.Clear();}
+        public static void Clear(){moves.Clear();GroundSupport.Clear();}
     }
 }

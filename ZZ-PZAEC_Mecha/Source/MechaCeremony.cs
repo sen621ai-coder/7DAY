@@ -39,7 +39,7 @@ namespace PZAEC.Mecha
             direction=Vector3.Slerp(new Vector3(.08f,-.79f,.60f),new Vector3(.10f,-.15f,.98f),e).normalized;normal=Vector3.right;
         }
         public static bool Stable(EntityVehicle v)
-        {var rb=v.vehicleRB;return rb!=null&&rb.velocity.sqrMagnitude<=.16f&&Vector3.Dot(rb.rotation*Vector3.up,Vector3.up)>.95f&&!Locomotion.Get(v).HoverOn&&!Locomotion.Get(v).Boost&&(v.GetWheelsOnGround()>0||Weapons.Trace(v,v.position+Vector3.up*.2f,Vector3.down,.9f,out var ground));}
+        {var rb=v.vehicleRB;return rb!=null&&rb.velocity.sqrMagnitude<=.16f&&Vector3.Dot(rb.rotation*Vector3.up,Vector3.up)>.95f&&!Locomotion.Get(v).HoverOn&&!Locomotion.Get(v).Boost&&GroundSupport.IsGrounded(v)&&!Traversal.Active(v);}
         public static bool ClearCapsule(EntityVehicle v,Entity actor,Vector3 feet)
         {
             var a=feet-Origin.position+Vector3.up*.38f;var b=feet-Origin.position+Vector3.up*1.5f;

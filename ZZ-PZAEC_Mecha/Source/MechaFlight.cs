@@ -73,12 +73,8 @@ namespace PZAEC.Mecha
         public static float LandingSpeed(float clearance){return clearance>=0&&clearance<3?-.8f:-2f;}
         public static bool HullSupported(Rigidbody rb)
         {
-            if(rb==null||Mathf.Abs(rb.velocity.y)>.5f)return false;
-            // The belly/body can touch before native wheels report contact, especially on flat pads.
-            // Ignore our own body and triggers; never infer landing merely from a distant terrain ray.
-            foreach(var hit in Physics.RaycastAll(rb.position+Vector3.up*.4f,Vector3.down,.75f,~0,QueryTriggerInteraction.Ignore))
-                if(hit.collider!=null&&hit.collider.attachedRigidbody!=rb&&hit.normal.y>=.7f)return true;
-            return false;
+            var support=GroundSupport.Find(rb);
+            return support!=null&&GroundSupport.Observe(support.Vehicle).Grounded;
         }
         public static float VerticalTarget(Locomotion.MoveState s,float worldY,float command,float roofY)
         {

@@ -166,10 +166,10 @@ Check "rules define hover/charge-jump/trample constants" {
     $rules -match 'StompKnockback\s*=\s*120f'
 }
 $model = Get-Content (Join-Path $ModRoot "Source\MechaModel.cs") -Raw
-Check "upgraded wheels 0.5/0.4/220k and belly slider" {
-    $model -match 'wheel\.radius\s*=\s*\.5f' -and $model -match 'suspensiondistance\s*=\s*\.4f' -or $model -match 'suspensionDistance\s*=\s*\.4f' -and
-    $model -match 'spring\.spring\s*=\s*220000' -and $model -match 'MechaBellySlider' -and
-    $model -match 'dynamicFriction\s*=\s*\.05f'
+Check "foot support replaces hidden wheels and low belly hull" {
+    $support = Get-Content (Join-Path $ModRoot 'Source/MechaGroundSupport.cs') -Raw
+    $model -match 'wheel.enabled\s*=\s*false' -and $model -notmatch 'new GameObject\("MechaBellySlider"' -and
+    $support -match 'count<4' -and $support -match 'GroundSupport' -and $support -match 'ForceMode.Force'
 }
 Check "weapons define trample ops 11/12 with server rate limits" {
     $weapons = Get-Content (Join-Path $ModRoot "Source\MechaWeapons.cs") -Raw
@@ -271,10 +271,10 @@ Check "rig importer wired and fuel HUD retained" {
     $modelSrc -match 'RobotRig.Build' -and
     (Get-Content (Join-Path $ModRoot 'Source/MechaHUD.cs') -Raw) -match '燃料耗尽'
 }
-Check "v0.6.5: wide wheelbase + low center of mass + F9 dump + sound gate" {
-    $modelSrc -match '-1\.2f\s*:\s*1\.2f' -and $modelSrc -match 'centerOfMass\s*=\s*new Vector3\(0,\s*\.7f' -and
-    (Test-Path (Join-Path $ModRoot "Source\MechaDebug.cs")) -and
-    (Get-Content (Join-Path $ModRoot "Source\MechaFX.cs") -Raw) -match 'soundGate'
+Check "ground support has torso hull, current COM, F9 diagnostics and sound gate" {
+    $modelSrc -match 'centerOfMass\s*=\s*new Vector3\(0,\s*1.3f' -and
+    (Get-Content (Join-Path $ModRoot 'Source/MechaDebug.cs') -Raw) -match 'GroundSupport.Diagnostics' -and
+    (Get-Content (Join-Path $ModRoot 'Source/MechaFX.cs') -Raw) -match 'soundGate'
 }
 
 # ---------- v0.6.8 trigger discipline ----------

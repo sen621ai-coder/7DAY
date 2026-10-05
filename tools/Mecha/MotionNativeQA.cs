@@ -304,15 +304,15 @@ public sealed class MechaMotionQA : IModApi
             // Entity.SetPosition queues a native MovePosition. Flush it before setting fixture height.
             Physics.SyncTransforms();Physics.Simulate(.02f);
             foreach(float slope in new[]{0f,12f}){
-                floor.transform.rotation=Quaternion.Euler(0,0,slope);rb.position=new Vector3(8,323,0);rb.rotation=Quaternion.identity;rb.velocity=rb.angularVelocity=Vector3.zero;
-                foreach(var wheel in wheels){wheel.gameObject.SetActive(true);wheel.enabled=true;}Physics.SyncTransforms();
+                floor.transform.rotation=Quaternion.Euler(0,0,slope);GroundSupport.Suspend(v);rb.position=new Vector3(8,323,0);rb.rotation=Quaternion.identity;rb.velocity=rb.angularVelocity=Vector3.zero;
+                foreach(var wheel in wheels){wheel.gameObject.SetActive(true);wheel.enabled=false;}Physics.SyncTransforms();
                 Check("flight support does not classify three metre air gap as landed on "+slope+" degree slope",!Flight.HullSupported(rb));
                 var s=new Locomotion.MoveState{FlightMode=Flight.Phase.Landing,ControlledLanding=true};int contacts=0;
                 for(int tick=0;tick<500&&Flight.Active(s);tick++){
-                    bool ground=wheels.Any(w=>w.GetGroundHit(out var hit))||Flight.HullSupported(rb);if(ground)contacts++;
+                    var support=GroundSupport.Observe(v);bool ground=support.Grounded;if(ground)GroundSupport.Apply(support,.02f);if(ground)contacts++;
                     Flight.Advance(s,true,false,ground,0,rb.position.y,.02f);
                     if(Flight.Active(s)){Locomotion.PrepareSupport(wheels,true);Flight.ApplyControl(rb,0,0,false,Flight.LandingSpeed(rb.position.y-319.85f),.02f);}
-                    Physics.Simulate(.02f);
+                    Physics.Simulate(.02f);v.SetPosition(rb.position+Origin.position);Physics.SyncTransforms();
                 }
                 report.Add("FLIGHT LAND slope="+slope+" body="+rb.position+" velocity="+rb.velocity+" support="+Flight.HullSupported(rb));
                 foreach(var c in rb.GetComponentsInChildren<Collider>(true))if(c.enabled&&!(c is WheelCollider))report.Add("FLIGHT LAND collider="+c.name+" bounds="+c.bounds);
@@ -792,44 +792,51 @@ public sealed class MechaMotionQA : IModApi
         p.AttachedToEntity=null;slots.SetValue(v,saved);Boarding.Clear();MechaArmor.ClearTravelProtection();
         report.Add("HOTFIX LIMITATION: native entry/detach intercepted by recording spies; validates ordering, not player UI or network handshakes.");
     }
+    static void FootPhysicsTick(EntityVehicle v,float speed,float steer)
+    {
+        var rb=v.vehicleRB;var support=GroundSupport.Observe(v);GroundSupport.Walking(support,.02f,true);
+        if(!GroundSupport.MotionClear(support,.02f)){GroundSupport.StopHorizontal(support);speed=0;}
+        GroundSupport.Apply(support,.02f);Locomotion.ApplyDrive(rb,rb.rotation*Vector3.forward,speed,steer,speed>4,support.Normal,.02f);
+        Physics.Simulate(.02f);v.SetPosition(rb.position+Origin.position);Physics.SyncTransforms();
+    }
     static void PhysicsTrial(EntityVehicle v)
     {
         bool auto=Physics.autoSimulation;var rb=v.vehicleRB;var floor=new GameObject("QA Support");floor.layer=16;floor.transform.position=new Vector3(0,299.5f,20);floor.AddComponent<BoxCollider>().size=new Vector3(50,1,300);
         try{
             Physics.autoSimulation=false;
             var free=new GameObject("Force probe").AddComponent<Rigidbody>();free.mass=8000;free.useGravity=false;free.position=new Vector3(0,350,0);free.AddForce(Vector3.forward*2,ForceMode.Acceleration);Physics.Simulate(.02f);report.Add("FREE acceleration mode velocity="+free.velocity);UnityEngine.Object.DestroyImmediate(free.gameObject);
-rb.isKinematic=false;rb.useGravity=true;rb.detectCollisions=true;v.RBActive=true;v.hasDriver=true;v.IsEngineRunning=true;v.isEntityRemote=false;v.movementInput=new MovementInput();v.wheelBrakes=0;rb.position=new Vector3(0,300.5f,0);rb.rotation=Quaternion.identity;rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;
+rb.isKinematic=false;rb.useGravity=true;rb.detectCollisions=true;v.RBActive=true;v.hasDriver=false;v.IsEngineRunning=false;v.isEntityRemote=false;v.movementInput=new MovementInput();v.wheelBrakes=0;GroundSupport.Suspend(v);rb.position=new Vector3(0,300+GroundSupport.Get(v).Shape.NeutralY+Rules.SoleClearance,0);rb.rotation=Quaternion.identity;rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;
             var wheels=rb.GetComponentsInChildren<WheelCollider>(true);foreach(var c in rb.GetComponentsInChildren<Collider>(true))Physics.IgnoreLayerCollision(16,c.gameObject.layer,false);
-            foreach(var wheel in wheels){wheel.gameObject.SetActive(true);wheel.enabled=true;wheel.motorTorque=0;wheel.brakeTorque=0;wheel.steerAngle=0;}
-            report.Add("BODY mass="+rb.mass+" constraints="+rb.constraints+" drag="+rb.drag+" wheels="+wheels.Length+" maxLinear="+rb.maxLinearVelocity+" maxAngular="+rb.maxAngularVelocity+" kinematic="+rb.isKinematic);foreach(var wheel in wheels)report.Add("WHEEL friction="+wheel.forwardFriction.stiffness+","+wheel.sidewaysFriction.stiffness+" brake="+wheel.brakeTorque+" damping="+wheel.wheelDampingRate+" body="+wheel.attachedRigidbody.name);
-            Physics.SyncTransforms();int contacts=0;float speed=0,stop=0,yaw=0;
+            foreach(var wheel in wheels){wheel.gameObject.SetActive(true);wheel.enabled=false;wheel.motorTorque=0;wheel.brakeTorque=0;wheel.steerAngle=0;}
+            report.Add("BODY mass="+rb.mass+" constraints="+rb.constraints+" drag="+rb.drag+" wheels="+wheels.Length+" maxLinear="+rb.maxLinearVelocity+" maxAngular="+rb.maxAngularVelocity+" kinematic="+rb.isKinematic);foreach(var wheel in wheels)report.Add("WHEEL friction="+wheel.forwardFriction.stiffness+","+wheel.sidewaysFriction.stiffness+" brake="+wheel.brakeTorque+" damping="+wheel.wheelDampingRate+" body="+(wheel.attachedRigidbody!=null?wheel.attachedRigidbody.name:"disabled"));
+            Physics.SyncTransforms();int contacts=0;float speed=0,stop=0,yaw=0,turnTravel=0;
             for(int tick=0;tick<650;tick++){
-                foreach(var wheel in wheels)if(wheel.GetGroundHit(out var contact))contacts++;
+                if(GroundSupport.IsGrounded(v))contacts++;
                 float target=tick<100?0:tick<350?4:0;float steer=tick>=500?1:0;
                 Locomotion.PrepareSupport(wheels,target!=0||steer!=0||rb.velocity.sqrMagnitude>.01f);
-                Locomotion.ApplyDrive(rb,rb.rotation*Vector3.forward,target,steer,false,Vector3.up,.02f);Physics.Simulate(.02f);
+                float priorYaw=rb.rotation.eulerAngles.y;FootPhysicsTick(v,target,steer);if(tick>=500)turnTravel+=Mathf.Abs(Mathf.DeltaAngle(priorYaw,rb.rotation.eulerAngles.y));
                 if(tick==349)speed=Vector3.ProjectOnPlane(rb.velocity,Vector3.up).magnitude;
                 if(tick==499){stop=Vector3.ProjectOnPlane(rb.velocity,Vector3.up).magnitude;yaw=rb.rotation.eulerAngles.y;}
             }
-            float rotation=Mathf.Abs(Mathf.DeltaAngle(yaw,rb.rotation.eulerAngles.y));
+            float rotation=turnTravel;
             foreach(var c in rb.GetComponentsInChildren<Component>(true))if(!(c is Transform)&&!(c is MeshRenderer)&&!(c is MeshFilter))report.Add("COMPONENT "+c.GetType().FullName+" on "+c.name);
             report.Add("BODY final="+rb.position+" velocity="+rb.velocity+" sleeping="+rb.IsSleeping());
             foreach(var collider in rb.GetComponentsInChildren<Collider>(true))if(collider.enabled)report.Add("COLLIDER "+collider.name+" "+collider.GetType().Name+" trigger="+collider.isTrigger+" bounds="+collider.bounds+" layer="+collider.gameObject.layer);
-            Check("real WheelCollider support",contacts>0);
+            Check("real planted-foot support, hidden wheels disabled",contacts>0&&wheels.All(w=>!w.enabled));
             Check("native drive reaches 4m/s, measured="+speed,Mathf.Abs(speed-4)<.3f);
             Check("native braking settles, measured="+stop,stop<.15f);
-            Check("native stationary turn, degrees="+rotation,rotation>45);
-            rb.position=new Vector3(0,300.18f,0);rb.rotation=Quaternion.identity;rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;
-            for(int tick=0;tick<180;tick++){Locomotion.PrepareSupport(wheels,true);Locomotion.ApplyDrive(rb,Vector3.forward,-2,0,false,Vector3.up,.02f);Physics.Simulate(.02f);}
+            Check("native stationary turn actual accumulated degrees="+rotation,rotation>45);
+            GroundSupport.Suspend(v);rb.position=new Vector3(0,300+GroundSupport.Get(v).Shape.NeutralY+Rules.SoleClearance,0);rb.rotation=Quaternion.identity;rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;
+            for(int tick=0;tick<180;tick++){Locomotion.PrepareSupport(wheels,true);FootPhysicsTick(v,-2,0);}
             Check("native reverse reaches -2m/s, measured="+rb.velocity.z,Mathf.Abs(rb.velocity.z+2)<.15f);
-            rb.position=new Vector3(0,300.18f,0);rb.rotation=Quaternion.identity;rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;
-            for(int tick=0;tick<500;tick++){Locomotion.PrepareSupport(wheels,true);Locomotion.ApplyDrive(rb,Vector3.forward,13.5f,0,true,Vector3.up,.02f);Physics.Simulate(.02f);}
+            GroundSupport.Suspend(v);rb.position=new Vector3(0,300+GroundSupport.Get(v).Shape.NeutralY+Rules.SoleClearance,0);rb.rotation=Quaternion.identity;rb.velocity=Vector3.zero;rb.angularVelocity=Vector3.zero;
+            for(int tick=0;tick<500;tick++){Locomotion.PrepareSupport(wheels,true);FootPhysicsTick(v,13.5f,0);}
             Check("native forward boost reaches 13.5m/s, measured="+rb.velocity.z,Mathf.Abs(rb.velocity.z-13.5f)<.3f);
             foreach(var wheel in wheels)wheel.enabled=false;rb.useGravity=false;rb.position=new Vector3(0,320,0);rb.velocity=Vector3.zero;
             for(int i=0;i<150;i++){Locomotion.ApplyDrive(rb,Vector3.forward,4,0,false,Vector3.up,.02f);Physics.Simulate(.02f);}
             report.Add("NO WHEELS speed="+rb.velocity);
-            report.Add("PHYSICS fixture exercises production force controller on native vehicle/wheels; does not simulate driver UI.");
-        }finally{Physics.autoSimulation=auto;rb.isKinematic=true;UnityEngine.Object.DestroyImmediate(floor);}
+            report.Add("PHYSICS fixture exercises production planted support and force controller on native rigidbody; does not simulate driver UI.");
+        }finally{GroundSupport.Suspend(v);Physics.autoSimulation=auto;rb.isKinematic=true;UnityEngine.Object.DestroyImmediate(floor);}
     }
     static void Capture(Camera camera,RenderTexture rt,Model.Rig rig,string prefix,int frame)
     {

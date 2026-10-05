@@ -30,7 +30,7 @@ namespace PZAEC.Mecha
         static bool Safe(EntityVehicle v)
         {
             var rb=v.vehicleRB;if(rb==null||rb.velocity.sqrMagnitude>.16f||Vector3.Dot(rb.rotation*Vector3.up,Vector3.up)<.95f)return false;
-            if(v.GetWheelsOnGround()==0&&!(Rules.Complete(v)&&Flight.HullSupported(rb))&&!Weapons.Trace(v,v.position+Vector3.up*.2f,Vector3.down,.9f,out var ground))return false;
+            if(!GroundSupport.IsGrounded(v)||Traversal.Active(v))return false;
             var rig=Model.GetRig(v);if(rig==null)return false;
             var origin=v.position+Vector3.up*.3f;
             return !Weapons.Trace(v,origin,Vector3.up,3.6f,out var hit)&&!Locomotion.Get(v).HoverOn&&!Locomotion.Get(v).Boost&&!Flight.AirPose(Locomotion.Get(v))&&Locomotion.Get(v).WingBlend<.1f;
@@ -39,6 +39,7 @@ namespace PZAEC.Mecha
         {
             if(committing||!Rules.BoardingEnabled||!Weapons.IsMecha(__instance)||!(_entity is EntityPlayerLocal)||_entity.IsDead())return true;
             if(Active(__instance))return false;
+            if(Traversal.Active(__instance))return false;
             if(_entity.AttachedToEntity!=null||__instance.GetAttached(0)!=null)return true;
             BeginDeferred(__instance,_entity,false);return false;
         }
@@ -46,6 +47,7 @@ namespace PZAEC.Mecha
         {
             var v=__instance.AttachedToEntity as EntityVehicle;
             if(committing||!(__instance is EntityPlayerLocal)||!Weapons.IsMecha(v))return true;
+            if(Traversal.Active(v))return false;
             if(__instance.IsDead()||v.IsDead()||(Rules.Complete(v)?!Ceremony.Stable(v)||Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift):!Safe(v))){Finish(v,true);return true;}
             if(Active(v))return false;
             BeginDeferred(v,(EntityAlive)__instance,true);return false;

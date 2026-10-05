@@ -15,7 +15,7 @@ namespace PZAEC.Mecha
         { Vector3 a,b;if(!Ground(v,p+Vector3.right*.12f,out a)||!Ground(v,p+Vector3.forward*.12f,out b))return Vector3.up;
           var n=Vector3.Cross(b-p,a-p).normalized;return n.y>.6f?n:Vector3.up; }
         // All lengths measured in world metres; never mix pre-fit GLB units and rig units.
-        public static void Solve(Model.Rig rig,int side,Vector3 sole,Vector3 normal)
+        public static void Solve(Model.Rig rig,int side,Vector3 sole,Vector3 normal,float poleAngle=0)
         {
             var hip=side==0?rig.HipL:rig.HipR;var knee=side==0?rig.KneeL:rig.KneeR;var ankle=side==0?rig.AnkleL:rig.AnkleR;var foot=side==0?rig.FootL:rig.FootR;
             var soleRotation=Quaternion.FromToRotation(rig.Mount.up,normal)*rig.Mount.rotation;
@@ -25,6 +25,7 @@ namespace PZAEC.Mecha
             var axis=delta.sqrMagnitude>.00001f?delta.normalized:Vector3.down;
             var pole=Vector3.ProjectOnPlane(rig.Mount.forward,axis).normalized;
             if(pole.sqrMagnitude<.01f)pole=rig.Mount.up;
+            pole=Quaternion.AngleAxis(poleAngle,axis)*pole;
             float along=(a*a-b*b+dist*dist)/(2*dist),height=Mathf.Sqrt(Mathf.Max(0,a*a-along*along));
             var desiredKnee=hip.position+axis*along+pole*height;
             hip.rotation=Quaternion.FromToRotation(knee.position-hip.position,desiredKnee-hip.position)*hip.rotation;
@@ -53,7 +54,7 @@ namespace PZAEC.Mecha
             state.VisualForward=Vector3.Dot(w.Velocity,rig.Mount.forward);state.VisualTurn=turn;
             if(Rules.Complete(v)&&v.isEntityRemote&&Flight.AirPose(state)&&Time.time-state.LastHeightAt>=.2f){state.LastHeightAt=Time.time;float clearance;state.FlightHeight=Flight.Clearance(v,out clearance)?clearance:-1;}
             float mountY=0;
-            if(state.Grounded&&!state.HoverOn&&Ground(v,v.position,out var support))mountY=Mathf.Clamp(support.y-v.position.y-.05f,-.4f,.25f);
+            if(GroundSupport.Find(v)==null&&state.Grounded&&!state.HoverOn&&Ground(v,v.position,out var support))mountY=Mathf.Clamp(support.y-v.position.y-.05f,-.4f,.25f);
             rig.Mount.localPosition=new Vector3(0,Mathf.MoveTowards(rig.Mount.localPosition.y,mountY,dt*2),0);
             bool show=Boarding.ApplyPose(rig,v);float activity=0;
             if(!show)
@@ -72,7 +73,11 @@ namespace PZAEC.Mecha
             if(Rules.Complete(v))SwordMotion.CaptureBase(rig);
             if(!show){Samurai.Pose(v,rig,dt,Time.time,false);Flight.Pose(v,rig,dt);}
 
-            for(int i=0;i<2;i++)
+            bool supportPose=!show&&!state.HoverOn&&(!airborne||Traversal.Active(v))&&(!Flight.AirPose(state)||state.Grounded&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0))&&Traversal.Pose(v,rig);
+            if(supportPose){var ground=GroundSupport.Find(v);var traversal=Traversal.Get(v);
+                if(v.isEntityRemote&&traversal.Current!=null){for(int i=0;i<2;i++){w.Legs[i].Foot=traversal.FrameFeet[i];w.Legs[i].Normal=Vector3.up;}activity=1;}
+                else if(ground!=null){for(int i=0;i<2;i++){w.Legs[i].Foot=ground.Feet[i].Position;w.Legs[i].Normal=ground.Feet[i].Normal;w.Legs[i].Swing=ground.Feet[i].Swing;}activity=(ground.Feet[0].Swing||ground.Feet[1].Swing)?1:0;}}
+            for(int i=0;!supportPose&&i<2;i++)
             {
                 var leg=w.Legs[i];var home=rig.Mount.TransformPoint(leg.Home)+Origin.position;
                 if(state.Blend>.05f||airborne||state.WingBlend>.05f)
@@ -120,6 +125,7 @@ namespace PZAEC.Mecha
             {if(!MechaFX.LandingRecently(v.entityId,.8f))RobotAudio.LandCue(v,v.position,.25f);w.PendingLanding=-100;}
             if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.Event(v,"jump",RobotAudio.NextPresentationSerial(),.6f);}
             if(Rules.Complete(v)){SwordMotion.CacheFeet(rig,w.Legs[0].Foot-Origin.position,w.Legs[1].Foot-Origin.position,w.Legs[0].Normal,w.Legs[1].Normal);SwordMotion.SafePose(v,rig);}
+            Traversal.EquipmentPose(v,rig);
             CombatFeedback.Blade(v,rig);RobotAudio.Update(v,activity,show);
             RobotPresentation.Update(v,rig,state.Blend,Boarding.Hatch(v));
         }

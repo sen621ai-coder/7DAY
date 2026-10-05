@@ -22,7 +22,7 @@ namespace PZAEC.Mecha
         static readonly Dictionary<EntityAlive,float> safeExit=new Dictionary<EntityAlive,float>();
         public static void ClearTravelProtection(){safeExit.Clear();}
         public static void SafeDismount(EntityAlive actor,EntityVehicle v)
-        {if(actor!=null&&v!=null&&v.vehicleRB!=null&&v.vehicleRB.velocity.sqrMagnitude<.16f&&(v.GetWheelsOnGround()>0||(Rules.Complete(v)&&Flight.HullSupported(v.vehicleRB))))safeExit[actor]=Time.time+1.5f;}
+        {if(actor!=null&&v!=null&&v.vehicleRB!=null&&v.vehicleRB.velocity.sqrMagnitude<.16f&&GroundSupport.IsGrounded(v))safeExit[actor]=Time.time+1.5f;}
         public static bool ProtectTravel(EntityAlive actor,EnumDamageTypes type)
         {
             if(actor==null||actor.IsDead()||(type!=EnumDamageTypes.Falling&&type!=EnumDamageTypes.VehicleInside))return false;

@@ -17,6 +17,7 @@ namespace PZAEC.Mecha
                 Weapons.Install(harmony);
                 Optics.Install(harmony);
                 Locomotion.Install(harmony);
+                GroundSupport.Install(harmony);
                 MechaArmor.Install(harmony);
                 Boarding.Install(harmony);
                 Log.Out("[Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).");

@@ -24,7 +24,10 @@ namespace PZAEC.Mecha
             var motion=Locomotion.Get(vehicle);var sword=Rules.Complete(vehicle)?Samurai.Get(vehicle):null;var feedback=CombatFeedback.Get(vehicle.entityId);
             sb.AppendLine("[MechaAudioState] "+RobotAudio.Diagnostics(vehicle));
             sb.AppendLine("[MechaBeamState] "+MechaFX.BeamDiagnostics());
-            sb.AppendLine("[MechaDrive] version=0.12.2 view="+(Optics.ThirdPerson?"third":"first")+" body="+Weapons.BodyRotation(vehicle).eulerAngles+" look="+Optics.Look.eulerAngles+" inputAge="+(Time.time-motion.LastInput)+" inputReady="+motion.InputReady+" action="+(sword!=null?SwordMotion.Stage(sword,Time.time):"ranged")+" contactAge="+(Time.time-feedback.At)+" damage="+feedback.Damage+" blocked="+feedback.Blocked);
+            sb.AppendLine("[MechaDrive] version=0.13.0 view="+(Optics.ThirdPerson?"third":"first")+" body="+Weapons.BodyRotation(vehicle).eulerAngles+" look="+Optics.Look.eulerAngles+" inputAge="+(Time.time-motion.LastInput)+" inputReady="+motion.InputReady+" action="+(sword!=null?SwordMotion.Stage(sword,Time.time):"ranged")+" contactAge="+(Time.time-feedback.At)+" damage="+feedback.Damage+" blocked="+feedback.Blocked);
+            GroundSupport.DrawProbes=!GroundSupport.DrawProbes;
+            sb.AppendLine("[MechaSupport] "+GroundSupport.Diagnostics(vehicle)+" probes="+GroundSupport.DrawProbes);
+            sb.AppendLine("[MechaTraversal] "+Traversal.Diagnostics(vehicle));
             var rb = vehicle.vehicleRB;
             if (rb != null) sb.AppendLine("[MechaDebug] rb pos=" + rb.position + " rot=" + rb.rotation.eulerAngles +
                 " vel=" + rb.velocity + " kinematic=" + rb.isKinematic + " mass=" + rb.mass);

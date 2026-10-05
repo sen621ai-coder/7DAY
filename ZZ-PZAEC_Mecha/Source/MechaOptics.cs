@@ -14,6 +14,7 @@ namespace PZAEC.Mecha
         static Camera applied;static Vector3 savedPosition,lastPosition;static Quaternion savedRotation,lastRotation;static float savedFov,lastFov;
         static Quaternion StoredLook=Quaternion.identity;
         static Vector3 aimTarget;static bool hasAimTarget;
+        static float eyeY,eyeVelocity;static int eyeFrame=-1;static bool eyeReady;
         public static bool ThirdPerson {get{return third;}}
         public static Quaternion Look {get{return StoredLook;}}
         public static bool Active(EntityVehicle v){return vehicle==v&&eye!=null;}
@@ -47,7 +48,9 @@ namespace PZAEC.Mecha
             if(!external)return r.Head.position-Vector3.up*.15f-look*Vector3.forward*.70f;
             var pivot=r.Torso.position+Vector3.up*.25f;return CollideCamera(v,pivot,pivot+look*new Vector3(.6f,.85f,-4.8f));
         }
-        static Vector3 Position(Model.Rig r){var end=CameraPosition(vehicle,r,StoredLook,third);float t=Mathf.SmoothStep(0,1,Mathf.Clamp01((Time.time-switched)/.2f));return CollideCamera(vehicle,r.Torso.position+Vector3.up*.25f,Vector3.Lerp(transitionPosition,end,t));}
+        static Vector3 Position(Model.Rig r){var end=CameraPosition(vehicle,r,StoredLook,third);
+            if(!third){float absolute=end.y+Origin.position.y;if(!eyeReady){eyeY=absolute;eyeVelocity=0;eyeReady=true;}if(eyeFrame!=Time.frameCount){eyeFrame=Time.frameCount;eyeY=Mathf.SmoothDamp(eyeY,absolute,ref eyeVelocity,.10f,20,Time.deltaTime);}end.y=eyeY-Origin.position.y;}else eyeReady=false;
+            float t=Mathf.SmoothStep(0,1,Mathf.Clamp01((Time.time-switched)/.2f));return CollideCamera(vehicle,r.Torso.position+Vector3.up*.25f,Vector3.Lerp(transitionPosition,end,t));}
         public static bool ProjectWorld(Vector3 world,out Vector2 screen){screen=Vector2.zero;var p=Quaternion.Inverse(lastRotation)*(world-Origin.position-lastPosition);if(p.z<=.05f)return false;float scale=Screen.height*.5f/Mathf.Tan(Mathf.Max(1,lastFov)*Mathf.Deg2Rad*.5f);screen=new Vector2(Screen.width*.5f+p.x/p.z*scale,Screen.height*.5f-p.y/p.z*scale);return screen.x>=0&&screen.x<=Screen.width&&screen.y>=0&&screen.y<=Screen.height;}
         public static bool TryRay(out Ray ray)
         {
@@ -73,7 +76,7 @@ namespace PZAEC.Mecha
             var shake=CombatFeedback.Kick(vehicle.entityId);Apply(camera,position+StoredLook*new Vector3(0,shake*.012f,0),StoredLook*Quaternion.Euler(shake*.45f,0,0),Fov(close?Mathf.Max(80,player.GetCameraFOV()):player.GetCameraFOV(),Magnification()));
         }
         static void AfterRender(Camera camera){if(camera==applied)Visibility(false);}
-        public static void Clear(){RestoreCamera();Visibility(false);vehicle=null;eye=lens=null;zoom=false;zoomStep=0;switched=-100;hasAimTarget=false;}
+        public static void Clear(){eyeReady=false;eyeVelocity=0;RestoreCamera();Visibility(false);vehicle=null;eye=lens=null;zoom=false;zoomStep=0;switched=-100;hasAimTarget=false;}
     }
 
     // Seated pilots ride inside the walker shell; suppress their presentation

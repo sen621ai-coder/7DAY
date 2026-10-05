@@ -343,7 +343,7 @@ namespace PZAEC.Mecha
             if (op == Stomp)
             {
                 var move=Locomotion.Get(state.Vehicle);
-                if(!move.Grounded||now>move.LandingPendingUntil||Flight.Active(move))return;
+                if(!move.Grounded||now>move.LandingPendingUntil||Flight.Active(move)||Traversal.Active(state.Vehicle))return;
                 move.LandingPendingUntil=-100;
                 bool damaging=now>=state.NextStomp;
                 if(damaging){state.NextStomp=now+Rules.StompCooldown;LandingStrike(state,actor,position);}
@@ -784,6 +784,7 @@ namespace PZAEC.Mecha
                 Input.GetKeyDown(Rules.Key(vehicle, "pzMechaHoverKey", KeyCode.Q)),
                 Input.GetKey(Rules.Key(vehicle, "pzMechaDescendKey", KeyCode.C)),
                 Input.GetKey(Rules.Key(vehicle, "pzMechaJumpKey", KeyCode.Space)));
+            if(Input.GetKeyDown(Rules.Key(vehicle,"pzMechaTraverseKey",KeyCode.LeftAlt)))Traversal.Press(vehicle);
             if (Time.time >= nextInput && Input.GetKeyDown(Rules.Key(vehicle, "pzMechaBattleRepairKey", KeyCode.R)))
                 SendIntent(player, vehicle, BattleRepair, Vector3.forward, vehicle.position);
             var beamKey = Rules.Key(vehicle, "pzMechaBeamKey", Rules.Complete(vehicle)?KeyCode.F:KeyCode.Mouse0);

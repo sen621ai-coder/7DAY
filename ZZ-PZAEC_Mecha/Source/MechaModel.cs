@@ -86,6 +86,7 @@ namespace PZAEC.Mecha
         {
             if (!Weapons.IsMecha(__instance)) return;
             GetRig(__instance);
+            GroundSupport.Get(__instance);
             Deploy.Begin(__instance);
         }
 
@@ -132,6 +133,7 @@ namespace PZAEC.Mecha
 
         public static void Forget(EntityVehicle v)
         {
+            GroundSupport.Forget(v);
             rigs.Remove(v);
             Deploy.Forget(v);
         }
@@ -223,29 +225,13 @@ namespace PZAEC.Mecha
             RobotRig.Build(mount, materials, layer,full?"samurai_style_gundam_mecha":"combat_robot");
             mount.localRotation = Rules.MountRotation;
 
-            Box(physics, "MechaBodyHit", new Vector3(0, 1.5f, 0), new Vector3(2.2f, 2.6f, 1.8f), layer);
-            // Low-friction belly pad: crater rims slide under the hull instead
-            // of perching the robot on its keel with all wheels airborne.
-            var belly = Add(physics, "MechaBellySlider");
-            belly.localPosition = new Vector3(0, .35f, 0);
-            belly.gameObject.layer = layer;
-            var bellyCollider = belly.gameObject.AddComponent<BoxCollider>();
-            bellyCollider.size = new Vector3(2f, .1f, 3.2f);
-            var bellyMaterial = new PhysicMaterial("MechaBelly") { dynamicFriction = .05f, staticFriction = .05f, frictionCombine = PhysicMaterialCombine.Minimum };
-            bellyCollider.material = bellyMaterial;
-            rb.mass = 8000; rb.centerOfMass = new Vector3(0, .7f, 0);
+            // Torso, pelvis and head only. Feet/legs have swept support volumes.
+            Box(physics, "MechaBodyHit", new Vector3(0, 2.18f, 0), new Vector3(1.50f, 1.90f, 1.00f), layer);
+            rb.mass = 8000; rb.centerOfMass = new Vector3(0, 1.3f, 0);
             foreach (var wheel in root.GetComponentsInChildren<WheelCollider>(true))
             {
-                var at = physics.InverseTransformPoint(wheel.transform.position);
-                // Wide stance: the narrow biped track flipped the hull over
-                // on spawn; keep the tripod-era footprint while the rig math
-                // is being rebuilt.
-                wheel.transform.position = physics.TransformPoint(new Vector3(at.x < 0 ? -1.2f : 1.2f, .52f, at.z < 0 ? -1.8f : 1.8f));
-                var forwardFriction=wheel.forwardFriction;forwardFriction.stiffness=0f;wheel.forwardFriction=forwardFriction;
-                var sideFriction=wheel.sidewaysFriction;sideFriction.stiffness=0f;wheel.sidewaysFriction=sideFriction;
-                wheel.radius = .5f; wheel.suspensionDistance = .4f;
-                var spring = wheel.suspensionSpring; spring.spring = 220000; spring.damper = 26000; spring.targetPosition = .5f;
-                wheel.suspensionSpring = spring;
+                wheel.motorTorque = wheel.brakeTorque = 0;
+                wheel.enabled = false;
             }
             return root;
         }

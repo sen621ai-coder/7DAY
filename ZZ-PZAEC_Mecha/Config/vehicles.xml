@@ -27,6 +27,7 @@
       <property name="pzMechaRepairKey" value="F" />
       <property name="pzMechaBattleRepairKey" value="R" />
       <property name="pzMechaHoverKey" value="Q" />
+      <property name="pzMechaTraverseKey" value="LeftAlt" />
       <property name="pzMechaJumpKey" value="Space" />
       <property name="pzMechaDescendKey" value="C" />
       <property class="storage">
@@ -125,6 +126,7 @@
       <property name="pzMechaRepairKey" value="F" />
       <property name="pzMechaBattleRepairKey" value="R" />
       <property name="pzMechaHoverKey" value="Q" />
+      <property name="pzMechaTraverseKey" value="LeftAlt" />
       <property name="pzMechaJumpKey" value="Space" />
       <property name="pzMechaDescendKey" value="C" />
       <property class="storage">

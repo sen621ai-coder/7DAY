@@ -31,7 +31,7 @@ namespace PZAEC.Mecha
         public static bool Busy(EntityVehicle v){if(!Rules.Complete(v))return false;var s=Get(v);return s.Swing||s.Charging;}
         public static bool Braced(EntityVehicle v){return Rules.Complete(v)&&!Flight.AirPose(Locomotion.Get(v))&&(Get(v).GuardHeld||Get(v).SwordHeld||Busy(v));}
         public static bool GroundReady(EntityVehicle v)
-        {var m=Locomotion.Get(v);return m.Grounded&&!Flight.AirPose(m)&&m.WingBlend<.1f&&!m.HoverOn&&!m.Boost&&m.Blend<.1f&&(v.vehicleRB==null||Vector3.ProjectOnPlane(v.vehicleRB.velocity,Vector3.up).magnitude<=4.2f);}
+        {var m=Locomotion.Get(v);return !Traversal.Major(v)&&m.Grounded&&!Flight.AirPose(m)&&m.WingBlend<.1f&&!m.HoverOn&&!m.Boost&&m.Blend<.1f&&(v.vehicleRB==null||Vector3.ProjectOnPlane(v.vehicleRB.velocity,Vector3.up).magnitude<=4.2f);}
         static bool Operator(State s)
         {var p=s.Vehicle.GetAttached(0) as EntityAlive;return p!=null&&!p.IsDead()&&!s.Vehicle.IsDead()&&!Boarding.Active(s.Vehicle)&&s.Vehicle.vehicle.GetHealth()>0;}
         public static void Stop(EntityVehicle v)
@@ -142,7 +142,7 @@ namespace PZAEC.Mecha
         {
             var s=Get(w.Vehicle);
             if(!w.TriggerHeld){s.BeamSpent=false;s.BeamStarted=-1;s.LaserCharge=0;return false;}
-            if(s.Swing||s.Charging||now-Locomotion.Get(w.Vehicle).LandingAt<.45f||now<w.NextBeam||s.BeamSpent)
+            if(Traversal.Major(w.Vehicle)||s.Swing||s.Charging||now-Locomotion.Get(w.Vehicle).LandingAt<.45f||now<w.NextBeam||s.BeamSpent)
             {s.BeamStarted=-1;s.LaserCharge=0;return false;}
             s.LastCombat=now;SetAim(s,w.AimDirection);
             if(s.BeamStarted<0)s.BeamStarted=now;

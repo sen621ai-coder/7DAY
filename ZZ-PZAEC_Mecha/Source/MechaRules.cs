@@ -63,6 +63,12 @@ namespace PZAEC.Mecha
         public const float TargetHeight = 3.2f;
         public const float StepTriggerDistance = .4f, StepSeconds = .42f, StepLiftHeight = .4f;
         public const float StrideLookahead = .45f;
+        // Ground support / traversal rules, shared by both chassis and native QA.
+        public const float AutoStepHeight=.30f,ActiveStepHeight=1.00f,ActiveGapWidth=.75f;
+        public const float NormalWalkSlope=35f,MaxWalkSlope=45f;
+        public const float FootWidth=.45f,FootDepth=.65f,FootResidual=.08f,SoleClearance=.015f;
+        public const float TraverseToeClearance=.12f,TraverseSafeSpeed=.45f;
+        public const float PrototypeTraverseSeconds=1f,CompleteTraverseSeconds=.8f;
         public const float TorsoLeanDegrees = 8f, HipSwayMeters = .08f, ArmSwingDegrees = 15f;
         public const float DeployRiseSeconds = 2.5f;
 
