@@ -12,7 +12,7 @@ namespace PZAEC.Mecha
     public static class RobotRig
     {
         sealed class Joint { public string name, parent; public float[] position; }
-        sealed class Part { public int node, primitive, material, offset, vertices, indices; public string nodeName, joint,role; }
+        sealed class Part { public int node, primitive, material, offset, vertices, indices; public string nodeName, joint,role,generatedRepair; }
         sealed class Document { public string sourceSha256; public int sourceParts, triangles; public bool skinned; public int[] sourceNodes; public Joint[] joints; public Part[] parts; }
         static string Role(string joint){return joint.StartsWith("Shoulder")||joint.StartsWith("Elbow")||joint.StartsWith("Hand")?"Arm"+joint[joint.Length-1]:joint;}
         static Vector3 V(float[] p) { return new Vector3(p[0],p[1],p[2]); }
@@ -52,8 +52,16 @@ namespace PZAEC.Mecha
                 Renderer renderer;
                 if(doc.skinned){var bones=new Transform[doc.joints.Length];var bind=new Matrix4x4[bones.Length];for(int j=0;j<bones.Length;j++){bones[j]=joints[doc.joints[j].name];bind[j]=bones[j].worldToLocalMatrix*mount.localToWorldMatrix;}mesh.boneWeights=weights;mesh.bindposes=bind;var skin=go.AddComponent<SkinnedMeshRenderer>();skin.sharedMesh=mesh;skin.bones=bones;skin.rootBone=mount;skin.localBounds=new Bounds(new Vector3(0,1.6f,0),new Vector3(6,6,6));skin.quality=SkinQuality.Bone2;renderer=skin;}
                 else{go.AddComponent<MeshFilter>().sharedMesh=mesh;renderer=go.AddComponent<MeshRenderer>();}
-                renderer.sharedMaterial=bladeFinish?BladeFinish.Material():materials[p.material]; renderer.shadowCastingMode=ShadowCastingMode.On;
-                go.AddComponent<MechaRenderPart>().Role=p.role??Role(p.joint);
+                renderer.sharedMaterial=bladeFinish?BladeFinish.Material():materials[p.material];
+                if(p.generatedRepair=="recessed-joint-interior-v1"){
+                    var liner=new Material(materials[p.material]){name="Mecha_RecessedGraphite",color=new Color(.20f,.22f,.24f)};
+                    // The source metallic map otherwise overrides these scalar controls.
+                    liner.DisableKeyword("_METALLICGLOSSMAP");liner.SetTexture("_MetallicGlossMap",null);
+                    liner.SetFloat("_Metallic",.25f);liner.SetFloat("_Glossiness",.15f);renderer.sharedMaterial=liner;
+                }
+                renderer.shadowCastingMode=ShadowCastingMode.On;
+                var renderPart=go.AddComponent<MechaRenderPart>();renderPart.Role=p.role??Role(p.joint);
+                if(p.generatedRepair=="recessed-joint-interior-v1")renderPart.OwnedMaterial=renderer.sharedMaterial;
                 triangles+=ix.Length/3; sourceNodes.Add(p.node);
             }
             if((doc.sourceNodes!=null?doc.sourceNodes.Length:sourceNodes.Count)!=doc.sourceParts || triangles!=doc.triangles) throw new InvalidDataException("Incomplete mecha rig");

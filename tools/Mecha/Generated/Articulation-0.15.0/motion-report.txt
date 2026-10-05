@@ -1,0 +1,1020 @@
+PASS rig exists
+PASS 242 split render pieces
+PASS measured leg lengths
+PASS native IK reachable target error < 0.001m, measured=0.0004290534
+FREE acceleration mode velocity=(0.00, 0.00, 0.04)
+BODY mass=8000 constraints=None drag=0.05 wheels=4 maxLinear=1E+16 maxAngular=7 kinematic=False
+WHEEL friction=1.8,1.8 brake=0 damping=0.7 body=disabled
+WHEEL friction=1.8,1.8 brake=0 damping=0.7 body=disabled
+WHEEL friction=1.8,1.7 brake=0 damping=0.7 body=disabled
+WHEEL friction=1.8,1.7 brake=0 damping=0.7 body=disabled
+COMPONENT UnityEngine.Rigidbody on Physics
+COMPONENT CollisionCallForward on Physics
+COMPONENT UnityEngine.WheelCollider on Wheel0
+COMPONENT UnityEngine.MeshCollider on Collider
+COMPONENT UnityEngine.WheelCollider on Wheel1
+COMPONENT UnityEngine.MeshCollider on Collider
+COMPONENT UnityEngine.WheelCollider on Wheel2
+COMPONENT UnityEngine.MeshCollider on Collider
+COMPONENT UnityEngine.WheelCollider on Wheel3
+COMPONENT UnityEngine.MeshCollider on Collider
+COMPONENT UnityEngine.BoxCollider on BLow
+COMPONENT UnityEngine.CapsuleCollider on CFront
+COMPONENT UnityEngine.CapsuleCollider on CFrontLow
+COMPONENT UnityEngine.BoxCollider on BFront
+COMPONENT UnityEngine.BoxCollider on BCab
+COMPONENT UnityEngine.BoxCollider on BSideEx
+COMPONENT UnityEngine.BoxCollider on BL
+COMPONENT UnityEngine.BoxCollider on BR
+COMPONENT UnityEngine.BoxCollider on BAxelBack
+COMPONENT UnityEngine.CapsuleCollider on Plow
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.018_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.020_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on Sphere_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.022_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.023_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.024_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane_low_Torse_0_Head
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_FB_Base_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.057_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.058_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.060_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.054_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.055_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.062_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.061_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.057_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.064_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.059_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.062_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.065_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.066_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.005_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.067_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.068_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.066_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.069_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.067_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.063_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.071_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.072_low_Legs_0_AnkleL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.052_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.056_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.053_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.058_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_LL_Base_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.060_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.054_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.055_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.056_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.005_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.006_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.002_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.003_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.004_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.061_low_Legs_0_KneeL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.017_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_TL_Base_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.044_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.042_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.043_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.048_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.049_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.045_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.050_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.049_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.050_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.051_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.052_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.053_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.043_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.051_low_Legs_0_HipL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.001_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.002_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.003_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.004_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.005_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.006_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.007_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.008_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.009_low_Hands_0_HandL
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_H_Base2_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.011_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.012_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.001_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.002_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.003_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.014_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_H_Base_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.010_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.006_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on BezierCurve_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on BezierCurve.001_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.007_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.009_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.004_low_Hands_0_ElbowL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.005_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.013_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.015_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.016_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.017_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.018_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.064_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.065_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.012_low_Hands_0_ShoulderL
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_FB_Base_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.057_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.058_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.060_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.054_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.055_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.062_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.061_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.057_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.064_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.059_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.062_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.065_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.066_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.005_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.067_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.068_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.066_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.069_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.067_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.063_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.071_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.072_low_Legs_0_AnkleR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.052_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.056_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.053_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.058_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_LL_Base_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.060_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.054_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.055_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.056_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.005_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.006_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.002_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.003_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.004_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.061_low_Legs_0_KneeR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.017_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_TL_Base_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.044_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.042_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.043_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.048_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.049_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.045_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.050_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.049_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.050_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.051_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.052_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.053_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.043_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.051_low_Legs_0_HipR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.001_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.002_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.003_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.004_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.005_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.006_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.007_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.008_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.009_low_Hands_0_HandR
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_H_Base2_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.011_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.012_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.001_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.002_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.003_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.014_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on 1_H_Base_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.010_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.006_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on BezierCurve_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on BezierCurve.001_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.007_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.009_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.004_low_Hands_0_ElbowR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.005_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.013_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.015_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.016_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.017_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.018_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.064_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.065_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.012_low_Hands_0_ShoulderR
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.011_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.013_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.019_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.020_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.022_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.023_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.015_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.024_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.025_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.016_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.026_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.027_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.028_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.029_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.030_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.019_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.025_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.001_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.002_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.031_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.027_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.028_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.032_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.029_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.030_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.031_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.032_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.033_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.033_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.021_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.034_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.035_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.036_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.021_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.037_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.038_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.039_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.014_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.026_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.034_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.035_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.036_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.037_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.038_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.041_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.039_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.040_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.044_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.046_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Plane.001_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.047_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.041_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.042_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.045_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cylinder.046_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on NurbsPath.003_low_Torse_0_Torso
+COMPONENT PZAEC.Mecha.MechaRenderPart on Cube.048_low_Torse_0_Torso
+COMPONENT UnityEngine.BoxCollider on MechaBodyHit
+BODY final=(0.00, 299.80, 17.78) velocity=(0.00, 0.00, 0.00) sleeping=False
+COLLIDER MechaBodyHit BoxCollider trigger=False bounds=Center: (0.00, 301.98, 17.78), Extents: (0.83, 0.95, 0.64) layer=21
+PASS real planted-foot support, hidden wheels disabled
+PASS native drive reaches 4m/s, measured=3.996
+PASS native braking settles, measured=0
+PASS native stationary turn actual accumulated degrees=168.6011
+PASS native reverse reaches -2m/s, measured=-1.998
+PASS native forward boost reaches 13.5m/s, measured=13.4865
+NO WHEELS speed=(0.00, 0.00, 4.00)
+PHYSICS fixture exercises production planted support and force controller on native rigidbody; does not simulate driver UI.
+PASS flat planted horizontal drift <= .05m, measured=0.008260727 samples=406
+PASS flat penetration <= .03m, measured=0
+LIMITATION: scripted rig trajectory, not driver/physics/network acceptance; images are isolated Unity renders.
+PASS two vehicles do not share hover
+PASS motion new sequence accepted
+PASS motion duplicate rejected
+PASS motion stale rejected
+PASS skip clears boarding lock
+PASS skip Space cannot charge jump
+PASS skip restores torso
+PASS prototype boarding wins over ground recovery False
+PASS prototype boarding torso >=15 degrees False measured=15.99997
+PASS prototype boarding elbow >=17 degrees False measured=17.99998
+PASS prototype boarding neck counter-motion >=9 degrees False measured=11
+PASS prototype boarding upper body restores at end False
+PASS prototype boarding wins over ground recovery True
+PASS prototype boarding torso >=15 degrees True measured=15.99997
+PASS prototype boarding elbow >=17 degrees True measured=17.99998
+PASS prototype boarding neck counter-motion >=9 degrees True measured=11
+PASS prototype boarding upper body restores at end True
+PASS old fire cannot renew stopped lease
+PASS complete variant identified independently
+PASS complete hull 3M, measured=3000000
+PASS complete semantic textured skin batches match authored manifest (including recessed liners)
+PASS complete bind pose preserved, error=1.227335E-06
+PASS complete skin follows animated joints, shift=0.1499939
+PASS complete optimized geometry under 250K triangles, measured=220491
+PASS safe complete damage delivery total=90000
+PASS safe complete damage delivery total=67500
+PASS safe complete damage delivery total=90000
+PASS native two-packet damage reaches full 90000, measured=90000
+PASS complete measured leg segments
+PASS samurai press prepares without immediate hit
+PASS samurai tap starts normal sword swing
+PASS samurai stale cancel cannot override newer input
+PASS samurai UI cancel clears attack and guard
+PASS samurai server timed hold starts heavy
+PASS shield frontal hit reduces by 70 percent
+PASS shield rear hit bypasses without draining energy
+PASS native hull pipeline composes shield with armor, measured=1350
+PASS shield blast mitigation limited to 35 percent
+PASS shield depletion only grants proportional final protection
+PASS head laser restricted to authored forward arc
+PASS head laser needs 0.6s warmup
+PASS head laser cannot repeat while held
+PASS head laser release rearms trigger
+PASS physical sword sweep detects crossed blade
+PASS physical sword sweep excludes distant target
+PASS daily sword tip stays above ground
+PASS held release uses server timed normal/heavy held=0.05 priorCombo=0
+PASS charge release joins sword path held=0.05 priorCombo=0 grip=5.460569E-05 elbow=2.372821E-05 tip=0.0004665905 roll=0
+PASS held release uses server timed normal/heavy held=0.05 priorCombo=1
+PASS charge release joins sword path held=0.05 priorCombo=1 grip=5.460569E-05 elbow=2.372821E-05 tip=0.0004665905 roll=0
+PASS held release uses server timed normal/heavy held=0.35 priorCombo=0
+PASS charge release joins sword path held=0.35 priorCombo=0 grip=0.001820815 elbow=0.001369053 tip=0.01504106 roll=0.3426403
+PASS held release uses server timed normal/heavy held=0.35 priorCombo=1
+PASS charge release joins sword path held=0.35 priorCombo=1 grip=0.001820815 elbow=0.001369053 tip=0.01504106 roll=0.3426403
+PASS held release uses server timed normal/heavy held=0.75 priorCombo=0
+PASS charge release joins sword path held=0.75 priorCombo=0 grip=7.79273E-05 elbow=8.13962E-05 tip=0.0005278202 roll=0
+PASS held release uses server timed normal/heavy held=0.75 priorCombo=1
+PASS charge release joins sword path held=0.75 priorCombo=1 grip=7.79273E-05 elbow=8.13962E-05 tip=0.0005278202 roll=0
+PASS held release uses server timed normal/heavy held=0.9 priorCombo=0
+PASS charge release joins sword path held=0.9 priorCombo=0 grip=0 elbow=0 tip=0 roll=0
+PASS held release uses server timed normal/heavy held=0.9 priorCombo=1
+PASS charge release joins sword path held=0.9 priorCombo=1 grip=0 elbow=0 tip=0 roll=0
+SWORD actual=90000 before=1000000 contacts=1 center=(8.52, 303.14, 1.85)
+PASS normal sword delivers 90000 native damage
+PASS one contact per target per swing heavy=False
+SWORD actual=135000 before=910000 contacts=1 center=(9.26, 300.93, 1.72)
+PASS heavy sword delivers 135000 native damage
+PASS one contact per target per swing heavy=True
+PASS expired combat lease clears shield and sword
+PASS quiet combat state returns to daily stance
+PASS unseated actor cannot raise shield
+PASS melee heavy release active at 140ms
+PASS melee heavy recovery outside damage
+PASS melee chain identity and branch first=0 heavy=False join=0.57
+PASS melee chain grip continuous first=0 heavy=False join=0.57
+PASS melee chain snapshot reconstructs exact release first=0 heavy=False join=0.57
+PASS melee chain identity and branch first=0 heavy=False join=0.7
+PASS melee chain grip continuous first=0 heavy=False join=0.7
+PASS melee chain snapshot reconstructs exact release first=0 heavy=False join=0.7
+PASS melee chain identity and branch first=0 heavy=False join=0.87
+PASS melee chain grip continuous first=0 heavy=False join=0.87
+PASS melee chain snapshot reconstructs exact release first=0 heavy=False join=0.87
+PASS melee chain identity and branch first=0 heavy=True join=0.57
+PASS melee chain grip continuous first=0 heavy=True join=0.57
+PASS melee chain snapshot reconstructs exact release first=0 heavy=True join=0.57
+PASS melee chain identity and branch first=0 heavy=True join=0.7
+PASS melee chain grip continuous first=0 heavy=True join=0.7
+PASS melee chain snapshot reconstructs exact release first=0 heavy=True join=0.7
+PASS melee chain identity and branch first=0 heavy=True join=0.87
+PASS melee chain grip continuous first=0 heavy=True join=0.87
+PASS melee chain snapshot reconstructs exact release first=0 heavy=True join=0.87
+PASS melee chain identity and branch first=1 heavy=False join=0.57
+PASS melee chain grip continuous first=1 heavy=False join=0.57
+PASS melee chain snapshot reconstructs exact release first=1 heavy=False join=0.57
+PASS melee chain identity and branch first=1 heavy=False join=0.7
+PASS melee chain grip continuous first=1 heavy=False join=0.7
+PASS melee chain snapshot reconstructs exact release first=1 heavy=False join=0.7
+PASS melee chain identity and branch first=1 heavy=False join=0.87
+PASS melee chain grip continuous first=1 heavy=False join=0.87
+PASS melee chain snapshot reconstructs exact release first=1 heavy=False join=0.87
+PASS melee chain identity and branch first=1 heavy=True join=0.57
+PASS melee chain grip continuous first=1 heavy=True join=0.57
+PASS melee chain snapshot reconstructs exact release first=1 heavy=True join=0.57
+PASS melee chain identity and branch first=1 heavy=True join=0.7
+PASS melee chain grip continuous first=1 heavy=True join=0.7
+PASS melee chain snapshot reconstructs exact release first=1 heavy=True join=0.7
+PASS melee chain identity and branch first=1 heavy=True join=0.87
+PASS melee chain grip continuous first=1 heavy=True join=0.87
+PASS melee chain snapshot reconstructs exact release first=1 heavy=True join=0.87
+PASS melee chain release tip jump <75mm measured=0.0121847
+PASS melee chain native self clearance samples=1020 collisions=0
+PASS melee chain tip steps <.60m at 60Hz measured=0.5057552
+PASS melee chain elbow steps <.20m at 60Hz measured=0.1080238
+PASS melee expired queue cannot execute
+PASS melee guard discards queued attack
+PASS melee guard available after braking
+PASS melee guard unavailable during cut
+PASS melee approach fades at cut end
+PASS melee blocked sword stops approach
+PASS melee low target hit by low sweep
+PASS melee low target missed by overhead sweep
+PASS melee native tall capsule hit at actual blade height
+PASS melee real chest collider contact heavy=False
+PASS melee real chest receives once heavy=False damage=90000
+PASS melee real chest collider contact heavy=True
+PASS melee real chest receives once heavy=True damage=135000
+LIMIT: scripted native action / collision fixtures, not two-machine networking or human driving.
+PASS complete original chest has three independent joints
+PASS complete entry opens before transfer
+PASS complete exit opens before transfer
+PASS complete entry starts standing and ends standing
+PASS complete exit closes and recovers
+PASS complete no native entry before transfer
+PASS complete native entry once after transfer
+PASS complete chest panels slide apart
+PASS complete chest returns exactly to rest
+PASS exit capsule detects native blocking geometry
+PASS no floating exit without supporting ground
+PASS exit planner finds real supported native terrain
+PASS complete no detach before transfer
+PASS complete detach once after transfer
+PASS complete waits kneeling for player to clear door
+PASS complete finishes after door cleared
+PASS unsafe exit cancels without sending detach
+CEREMONY LIMITATION: transfer spies and fixture exit planner validate ordering; real player camera, terrain and multiplayer still require client acceptance.
+PASS complete boarding wins over ground recovery False
+PASS complete boarding torso >=15 degrees False measured=17.95364
+PASS complete boarding elbow >=17 degrees False measured=23.99998
+PASS complete boarding neck counter-motion >=9 degrees False measured=11.78012
+PASS complete boarding rigid armour edge error <.001m False measured=1.072884E-06
+PASS complete boarding upper body restores at end False
+PASS complete boarding wins over ground recovery True
+PASS complete boarding torso >=15 degrees True measured=17.90275
+PASS complete boarding elbow >=17 degrees True measured=23.99998
+PASS complete boarding neck counter-motion >=9 degrees True measured=11.7554
+PASS complete boarding rigid armour edge error <.001m True measured=9.536743E-07
+PASS complete boarding upper body restores at end True
+PASS explicit sword root and measured arm lengths
+POSE QUALITY daily wrist>=150 frames=0/73 elbow max step=0
+PASS pose daily elbow remains continuous relative to torso at 60Hz, step=0
+PASS pose daily avoids extreme wrist twist
+POSE QUALITY alert wrist>=150 frames=0/73 elbow max step=0
+PASS pose alert elbow remains continuous relative to torso at 60Hz, step=0
+PASS pose alert avoids extreme wrist twist
+POSE QUALITY guard wrist>=150 frames=0/73 elbow max step=0
+PASS pose guard elbow remains continuous relative to torso at 60Hz, step=0
+POSE QUALITY charge wrist>=150 frames=0/73 elbow max step=0.02484119
+PASS pose charge elbow remains continuous relative to torso at 60Hz, step=0.02484119
+POSE QUALITY left-cut wrist>=150 frames=18/82 elbow max step=0.04576885
+PASS pose left-cut elbow remains continuous relative to torso at 60Hz, step=0.04576885
+POSE QUALITY right-cut wrist>=150 frames=18/82 elbow max step=0.1810236
+PASS pose right-cut elbow remains continuous relative to torso at 60Hz, step=0.1810236
+POSE QUALITY heavy wrist>=150 frames=0/88 elbow max step=0.06106596
+PASS pose heavy elbow remains continuous relative to torso at 60Hz, step=0.06106596
+POSE QUALITY boost wrist>=150 frames=0/73 elbow max step=0.104704
+PASS pose boost elbow remains continuous relative to torso at 60Hz, step=0.104704
+POSE QUALITY flight wrist>=150 frames=0/73 elbow max step=0.104704
+PASS pose flight elbow remains continuous relative to torso at 60Hz, step=0.104704
+PASS pose flight avoids extreme wrist twist
+PASS all action phases self proxy clearance samples=690 collisions=0
+PASS continuous sword trajectory at 60 Hz max tip step=0.5019121
+PASS rigid sword length error=2.300739E-05
+PASS IK arm lengths unchanged error=2.777576E-05
+PASS shoulder/elbow/wrist bounds=100.8028,106.5286,175
+PASS all action blade ground clearance=0.1199951
+PASS entry / exit / jump / landing / 12deg attacks self clearance samples=1156 contacts=0
+PASS auxiliary blade remains above native support, minimum=0.1199951
+PASS entry / exit / jump / landing / slope continuous sword max tip step=0.5018917
+PASS auxiliary elbow remains continuous relative to torso at 60Hz, step=0.1810243
+AUXILIARY trajectory max step=0.5018917; synthetic Gait/ceremony paths, not human navigation acceptance.
+PASS release snapshot preserves authority pose held=0.05 priorCombo=0
+PASS release snapshot preserves authority pose held=0.05 priorCombo=1
+PASS release snapshot preserves authority pose held=0.35 priorCombo=0
+PASS release snapshot preserves authority pose held=0.35 priorCombo=1
+PASS release snapshot preserves authority pose held=0.75 priorCombo=0
+PASS release snapshot preserves authority pose held=0.75 priorCombo=1
+PASS release snapshot preserves authority pose held=0.9 priorCombo=0
+PASS release snapshot preserves authority pose held=0.9 priorCombo=1
+PASS real held release paths self clearance samples=668 contacts=0
+PASS real held release continuous sword tip step=0.5019121
+PASS real held release continuous elbow step=0.1810237
+RELEASE LIMITATION: actual Request / Broadcast / Receive with a captured snapshot and local authority switch; not a two-machine network session.
+PASS complete first view preference stored independently
+PASS complete third view preference stored independently
+PASS complete FP real arms and weapons remain visible
+PASS complete FP obstructive roles hidden
+PASS complete camera-only visibility fully restored
+PASS complete .2m camera radius stops before wall distance=1.125
+CAMERA HIT complete QA Camera Wall distance=1.225 root=QA Camera Wall ownRB=False
+CAMERA HIT complete GameObject distance=0 root=vehicleCombatRobotComplete_173 ownRB=False
+CAMERA HIT complete MechaBodyHit distance=0 root=vehicleCombatRobotComplete_173 ownRB=True
+CAMERA HIT complete Head distance=0 root=Players ownRB=False
+CAMERA HIT complete Head distance=0 root=Players ownRB=False
+CAMERA HIT complete Head distance=0 root=Players ownRB=False
+CAMERA HIT complete Head distance=0 root=Players ownRB=False
+PASS complete camera position / rotation / FOV fully restored
+PASS laser splash has no native explosion particle and retains damage/radius
+PASS missile retains explosion particle and combat values
+PASS native low FPS/catchup sword dt=0.06666667 damage=90000
+PASS native low FPS/catchup sword dt=0.1 damage=90000
+PASS native low FPS/catchup sword dt=0.25 damage=90000
+PASS native low FPS/catchup sword dt=0.4 damage=90000
+PASS interruption longer than .4s cancels without deferred damage
+PASS environment obstruction cancels sword before target damage
+PASS duplicate contact cannot replace real result
+PASS feedback remains independent per vehicle
+PASS environment contact is blocked without hit confirmation
+PASS heavy feedback retains cut type with mitigated damage
+PASS impact pool capped at 16
+PASS 16 impacts share one bounded drawing batch
+PASS feedback pools cleared on world exit
+PASS weight left real grip travels >=.30m, span=0.7076378
+PASS weight left shoulder participates >=30deg, sweep=73.43127
+PASS weight left torso participates >=12deg, sweep=25.64898
+PASS weight right real grip travels >=.30m, span=0.9881658
+PASS weight right shoulder participates >=30deg, sweep=52.21955
+PASS weight right torso participates >=12deg, sweep=25.64898
+PASS weight heavy real grip travels >=.30m, span=1.194138
+PASS weight heavy shoulder participates >=30deg, sweep=99.90929
+PASS weight heavy torso participates >=12deg, sweep=19.29147
+PASS weight attack window excludes anticipation and recovery
+PASS weight complete ceremony durations 7 / 6 seconds
+PASS weight entry support dwell while hatch still closed
+PASS weight exit support dwell before hatch
+PASS weight cabin fully open at transfer
+PASS weight back and wings have independent semantic batches
+PASS weight back plates preserve every sampled edge through steering, error=5.331822E-07 samples=31775
+PASS weight no continuous reactor idle source
+PASS weight powered stationary pilot has zero servo and boost target
+PASS weight ceremony dwell is silent
+PASS weight actual moving elbow requests servo
+PASS weight stopped elbow immediately clears servo target
+PASS weight stationary servo fades to zero and stops
+PASS weight stationary shift cannot run boost loop
+PASS weight valid powered flight has thrust sound
+PASS weight power loss clears thrust sound target
+WEIGHT LIMITATION: scripted engine joints and frames prove paths, rigidity and dwell; human sound impression and load-bearing feel require client play.
+PASS FRESH RIG all original and repaired blade surfaces share one finish
+PASS FRESH RIG blade finish does not leak to hilt or wings
+PASS FRESH RIG source blade and core have continuous blade-local UVs
+PASS FRESH RIG front and back use matching finish coordinates
+PASS FRESH RIG retired asymmetric overlap face is absent from rendered equipment at (0.56, 1.42, 0.06)
+PASS FRESH RIG retired asymmetric overlap face is absent from rendered equipment at (0.53, 1.25, -0.14)
+PASS FRESH RIG retired asymmetric overlap face is absent from rendered equipment at (0.45, 1.05, -0.34)
+PASS FRESH RIG retired asymmetric overlap face is absent from rendered equipment at (0.39, 0.91, -0.43)
+PASS FRESH RIG restored original gold surface follows Sword at (0.41, 1.00, -0.39)
+PASS FRESH RIG restored original gold surface follows Sword at (0.46, 1.14, -0.22)
+PASS FRESH RIG restored original gold surface follows Sword at (0.50, 1.06, -0.29)
+PASS FRESH RIG restored original gold surface follows Sword at (0.51, 1.06, -0.26)
+PASS FRESH RIG two closed knee mechanisms loaded
+PASS FRESH RIG knee hubs remain centred through bilateral IK drop=0 error=7.995782E-06
+PASS FRESH RIG knee hubs remain centred through bilateral IK drop=0.2 error=1.814155E-06
+PASS FRESH RIG knee hubs remain centred through bilateral IK drop=0.4 error=9.256759E-06
+PASS FRESH RIG knee hubs remain centred through bilateral IK drop=0.55 error=2.486462E-05
+PASS FRESH RIG Sword isolated motion cannot drag other equipment, leak=0 moved=1.352577 vertices=15610
+PASS FRESH RIG Shield isolated motion cannot drag other equipment, leak=0 moved=1.167132 vertices=10846
+PASS FRESH RIG WingL isolated motion cannot drag other equipment, leak=0 moved=1.044199 vertices=1436
+PASS FRESH RIG WingR isolated motion cannot drag other equipment, leak=0 moved=1.704203 vertices=1436
+PASS FRESH RIG HipL isolated motion cannot drag other equipment, leak=0 moved=1.258546 vertices=49695
+PASS FRESH RIG HipR isolated motion cannot drag other equipment, leak=0 moved=1.851197 vertices=42969
+PASS FRESH RIG one complete mesh per wing
+PASS FRESH RIG matching complete wing vertex counts
+PASS FRESH RIG wing geometry stays complete and rigid pose=stand error=2.016041E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=stand error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=walk error=2.016041E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=walk error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=crouch error=1.826092E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=crouch error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=jump error=2.016041E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=jump error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=deploy-half error=2.804891E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=deploy-half error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=hover error=3.798088E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=hover error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=cruise error=2.012034E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=cruise error=9.536743E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=boost error=2.961799E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=boost error=9.536743E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=bank-left error=3.190007E-05
+PASS FRESH RIG wing geometry stays complete and rigid pose=bank-right error=3.190007E-05
+PASS FRESH RIG wing geometry stays complete and rigid pose=landing error=3.798088E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=landing error=4.768372E-07
+PASS FRESH RIG wing geometry stays complete and rigid pose=power-loss error=3.798088E-05
+PASS FRESH RIG entire wing pair reflects including lower tips pose=power-loss error=4.768372E-07
+PASS FRESH RIG all back/wing vertices retain bone-local positions during repeated forward/reverse steering; max=5.610717E-05 samples=450120
+PASS complete bright background pixels fps=5 first=False rgb=166,201,230
+PASS complete birth update preserves laser fps=5 first=False
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=5 first=False changed=211
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=5 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=5
+PASS complete bright background pixels fps=5 first=True rgb=166,201,230
+PASS complete birth update preserves laser fps=5 first=True
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=5 first=True changed=2660
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=5 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=5
+PASS complete bright background pixels fps=8 first=False rgb=166,201,230
+PASS complete birth update preserves laser fps=8 first=False
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=8 first=False changed=211
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=8 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=8
+PASS complete bright background pixels fps=8 first=True rgb=166,201,230
+PASS complete birth update preserves laser fps=8 first=True
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=8 first=True changed=2660
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=8 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=8
+PASS complete bright background pixels fps=10 first=False rgb=166,201,230
+PASS complete birth update preserves laser fps=10 first=False
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=10 first=False changed=211
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=10 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=10
+PASS complete bright background pixels fps=10 first=True rgb=166,201,230
+PASS complete birth update preserves laser fps=10 first=True
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=10 first=True changed=2660
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=10 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=10
+PASS complete bright background pixels fps=15 first=False rgb=166,201,230
+PASS complete birth update preserves laser fps=15 first=False
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=15 first=False changed=211
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=15 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=15
+PASS complete bright background pixels fps=15 first=True rgb=166,201,230
+PASS complete birth update preserves laser fps=15 first=True
+PASS complete beam uses supported material and two view aligned lines
+PASS complete actual laser rendered pixels fps=15 first=True changed=2660
+PASS complete line callback records actual camera presentation
+PASS complete repeat render in one frame counted once
+PASS complete fps=15 survives for second presentation
+PASS complete actual second render callback
+PASS complete laser returns to pool fps=15
+PASS complete off-screen beam lease is bounded
+LASER LIMITATION: actual shaders, pixels and render callbacks; 5/8/10/15FPS deltas injected synchronously, new frame tokens simulated between native camera renders.
+PASS duplicate beam cannot duplicate tracer / fire presentation
+PASS native laser particle zero creates no fireball
+PASS native missile explosion prefab remains available
+FX LIMITATION: native energy tracer/contact and missile particle rendering; not a human fired weapon recording.
+PASS flight independent wing joints under backpack
+PASS flight Q starts deploy with two metre target
+PASS flight deployment holds before lift
+PASS flight deploy then climbs
+PASS flight Space becomes climb without jump charge
+PASS flight UI/no input retains powered altitude hold
+PASS flight Q requests controlled landing
+PASS flight landing can resume at current altitude
+PASS flight roof blocks climb and clears altitude windup
+PASS flight clearance slows landing
+PASS flight brief wheel touch is not a landing
+PASS flight lost contact resets landing timer
+PASS flight C contact finishes without leap
+PASS flight fuel/engine loss removes active lift and stomp suppression
+PASS flight powerless touch returns folded ground
+PASS flight remote ordinary jump timeout does not unfold wings
+PASS flight remote lost snapshot retains airborne fault pose
+PASS flight network accepts climb state
+PASS flight network duplicate does not change stage
+PASS flight network rejects illegal flags/scalars (8.50, 0.00, 0.00)
+PASS flight network rejects illegal flags/scalars (16.00, 0.00, 0.00)
+PASS flight network rejects illegal flags/scalars (56.00, 0.00, 0.00)
+PASS flight network rejects illegal flags/scalars (72.00, 0.00, 0.00)
+PASS flight network rejects illegal flags/scalars (9.00, 0.00, 0.00)
+PASS flight network rejects illegal flags/scalars (8.00, 0.00, 2.00)
+PASS flight network rejects illegal flags/scalars (8.00, 0.00, NaN)
+PASS flight network rejects illegal flags/scalars (8.00, 1.00, 0.00)
+PASS flight network rejects illegal flags/scalars (26.00, 0.00, -1.00)
+PASS flight prototype rejects Complete flight snapshot
+PASS flight ground sword/shield unavailable
+PASS flight held sword/shield does not brace cruise
+PASS flight production Step starts airborne hold
+PASS flight production Step consumes selected cruise fuel
+PASS flight production Step reads Space as ascent
+PASS flight production Step expired input brakes and keeps power
+PASS flight production Step Q enters descent
+PASS flight production Step Q cancels descent
+PASS flight production Step engine off removes lift
+PASS flight production ownership handoff cannot reuse remote altitude/input
+PASS flight production Step leaving seat clears flight and input
+PASS flight native ten second hold drift <= .2m, measured=6.103516E-05
+PASS flight native held absolute altitude survives 64m origin relocation
+PASS flight native low roof prevents accumulated climb
+PASS flight native horizontal speed 12, measured=11.99999
+PASS flight native horizontal speed 20, measured=19.99998
+PASS flight native horizontal speed -6, measured=-5.999994
+PASS flight native release brakes to hold
+PASS flight native vertical speed 5, measured=4.999958
+PASS flight native vertical speed -4, measured=-3.999943
+PASS flight native yaw turns with upright hull
+PASS flight native no lift falls under gravity
+PASS flight support does not classify three metre air gap as landed on 0 degree slope
+FLIGHT LAND slope=0 body=(8.00, 319.70, 0.00) velocity=(0.00, -0.08, 0.00) support=True
+FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 321.88, 0.00), Extents: (0.75, 0.95, 0.50)
+FLIGHT LAND ray=GameObject point=(8.00, 321.55, 0.00) normal=(0.00, 1.00, 0.00) own=False
+FLIGHT LAND ray=Flight QA landing slope point=(8.00, 319.85, 0.00) normal=(0.00, 1.00, 0.00) own=False
+PASS flight native controlled landing on 0 degree support, contacts=16
+PASS flight support does not classify three metre air gap as landed on 12 degree slope
+FLIGHT LAND slope=12 body=(8.00, 319.85, 0.00) velocity=(0.00, -0.12, 0.00) support=True
+FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 322.03, 0.00), Extents: (0.75, 0.95, 0.50)
+FLIGHT LAND ray=GameObject point=(8.00, 321.70, 0.00) normal=(0.00, 1.00, 0.00) own=False
+FLIGHT LAND ray=Flight QA landing slope point=(8.00, 319.85, 0.00) normal=(-0.21, 0.98, 0.00) own=False
+PASS flight native controlled landing on 12 degree support, contacts=16
+PASS flight deploy really moves weighted wing geometry, measured=1.65208
+PASS flight wing hinge leaves sword/shield/chest/backpack geometry fixed, measured=1.227335E-06
+FLIGHT LIMITATION: production state/controller and native PhysX verified; real human driving and multiplayer observations remain manual acceptance.
+PASS complete landing presentation serial duplicate suppressed
+PASS complete landing contains no collider, light or explosion particles
+PASS complete landing gray 33-point mechanical wave and 10 dust quads
+PASS complete landing presentation bounded at eight waves
+PASS complete landing waves expire without retained visible effect
+PASS complete landing effect cleanup releases all batches
+PASS unseated non-host Repair/RepairStop reach server validation
+PASS unseated network weapon intent remains rejected
+PACKET LIMITATION: native ClientInfo/package gate with request spy; not two-machine inventory / connection acceptance.
+PASS sustained beam reaches overheat
+PASS overheat does not unlock above 30
+PASS cooldown unlocks at 30 or lower
+PASS palm beam converges on crosshair target
+PASS missile guidance stays on target body
+PASS missile lifetime covers lock range with flight margin
+PASS retired melee toggle rejected by server
+PASS seated falling damage does not reduce pilot HP
+PASS seated collision protected
+PASS combat damage not made immune
+PASS outside falling damage remains enabled
+PASS cockpit hides entire own model
+PASS other mecha remains visible
+PASS cockpit visibility restores
+PASS no native entry before kneel and hatch
+PASS native entry requested once after open hatch
+PASS no detach packet before kneeling
+PASS native detach requested once after opening
+HOTFIX LIMITATION: native entry/detach intercepted by recording spies; validates ordering, not player UI or network handshakes.
+PASS prototype first view preference stored independently
+PASS prototype third view preference stored independently
+PASS prototype FP real arms and weapons remain visible
+PASS prototype FP obstructive roles hidden
+PASS prototype camera-only visibility fully restored
+PASS prototype .2m camera radius stops before wall distance=1.125
+CAMERA HIT prototype GameObject distance=0 root=vehicleCombatRobot_171 ownRB=False
+CAMERA HIT prototype QA Camera Wall distance=1.225 root=QA Camera Wall ownRB=False
+CAMERA HIT prototype MechaBodyHit distance=0 root=vehicleCombatRobot_171 ownRB=True
+PASS prototype camera position / rotation / FOV fully restored
+PROTOTYPE VIDEO: production gait / recoil / beam presentation with scripted positions and timestamps; no driver input, hit or ammunition claim.
+PASS prototype bright background pixels fps=5 first=False rgb=166,201,230
+PASS prototype birth update preserves laser fps=5 first=False
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=5 first=False changed=219
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=5 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=5
+PASS prototype bright background pixels fps=5 first=True rgb=166,201,230
+PASS prototype birth update preserves laser fps=5 first=True
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=5 first=True changed=1869
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=5 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=5
+PASS prototype bright background pixels fps=8 first=False rgb=166,201,230
+PASS prototype birth update preserves laser fps=8 first=False
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=8 first=False changed=219
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=8 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=8
+PASS prototype bright background pixels fps=8 first=True rgb=166,201,230
+PASS prototype birth update preserves laser fps=8 first=True
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=8 first=True changed=1869
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=8 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=8
+PASS prototype bright background pixels fps=10 first=False rgb=166,201,230
+PASS prototype birth update preserves laser fps=10 first=False
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=10 first=False changed=219
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=10 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=10
+PASS prototype bright background pixels fps=10 first=True rgb=166,201,230
+PASS prototype birth update preserves laser fps=10 first=True
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=10 first=True changed=1869
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=10 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=10
+PASS prototype bright background pixels fps=15 first=False rgb=166,201,230
+PASS prototype birth update preserves laser fps=15 first=False
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=15 first=False changed=219
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=15 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=15
+PASS prototype bright background pixels fps=15 first=True rgb=166,201,230
+PASS prototype birth update preserves laser fps=15 first=True
+PASS prototype beam uses supported material and two view aligned lines
+PASS prototype actual laser rendered pixels fps=15 first=True changed=1869
+PASS prototype line callback records actual camera presentation
+PASS prototype repeat render in one frame counted once
+PASS prototype fps=15 survives for second presentation
+PASS prototype actual second render callback
+PASS prototype laser returns to pool fps=15
+PASS prototype off-screen beam lease is bounded
+LASER LIMITATION: actual shaders, pixels and render callbacks; 5/8/10/15FPS deltas injected synchronously, new frame tokens simulated between native camera renders.
+PASS prototype landing presentation serial duplicate suppressed
+PASS prototype landing contains no collider, light or explosion particles
+PASS prototype landing gray 33-point mechanical wave and 10 dust quads
+PASS prototype landing presentation bounded at eight waves
+PASS prototype landing waves expire without retained visible effect
+PASS prototype landing effect cleanup releases all batches
+PASS complete landing: fixture is outside boarding ceremony
+PASS complete landing: nearby native zombie is eligible
+PASS complete landing: same-faction hostile-class ally is excluded
+PASS complete landing: driver / player / animal / other mecha are excluded
+PASS complete landing: actual Motion Receive air-to-ground grants one event
+PASS complete landing: authorized landing delivers native Bashing damage amount=45000
+PASS complete landing: authorized landing broadcasts exactly once and consumes permission
+PASS complete landing: landing preserves hull / driver / bystander / ally / animal / other mecha
+PASS complete landing: surviving enemy receives outward/upward mechanical impulse
+PASS complete landing: duplicate landing request is rejected
+PASS complete landing: cooldown contact broadcasts one light cue without damage or cooldown extension
+PASS complete landing: cooldown contact duplicate is rejected
+PASS complete landing: short airborne interval has no damaging/event permission
+PASS complete landing: expired landing permission is rejected
+PASS complete landing: grounded request without landing is rejected
+PASS complete landing: invalid landing scalar is rejected
+PASS complete landing: request without seated operator is rejected
+PASS complete landing: controlled flight landing does not authorize enemy shock
+PASS complete landing: production Flight.Step controlled contact clears event expectation
+PASS complete landing: EntityPlayer DamageEntity Falling returns zero and preserves HP
+PASS complete landing: EntityPlayer ProcessDamageResponse Falling preserves HP
+PASS complete landing: EntityPlayer ProcessDamageResponseLocal Falling preserves HP
+PASS complete landing: EntityPlayer DamageEntity VehicleInside returns zero and preserves HP
+PASS complete landing: EntityPlayer ProcessDamageResponse VehicleInside preserves HP
+PASS complete landing: EntityPlayer ProcessDamageResponseLocal VehicleInside preserves HP
+PASS complete landing: EntityPlayerLocal DamageEntity Falling returns zero and preserves HP
+PASS complete landing: EntityPlayerLocal ProcessDamageResponse Falling preserves HP
+PASS complete landing: EntityPlayerLocal ProcessDamageResponseLocal Falling preserves HP
+PASS complete landing: EntityPlayerLocal DamageEntity VehicleInside returns zero and preserves HP
+PASS complete landing: EntityPlayerLocal ProcessDamageResponse VehicleInside preserves HP
+PASS complete landing: EntityPlayerLocal ProcessDamageResponseLocal VehicleInside preserves HP
+PASS complete landing: seated external Bashing combat still loses HP
+PASS complete landing: seated external Heat combat still loses HP
+PASS complete landing: outside DamageEntity Falling still loses HP
+PASS complete landing: outside ProcessDamageResponse Falling still loses HP
+PASS complete landing: outside ProcessDamageResponseLocal Falling still loses HP
+PASS complete landing: outside DamageEntity VehicleInside still loses HP
+PASS complete landing: outside ProcessDamageResponse VehicleInside still loses HP
+PASS complete landing: outside ProcessDamageResponseLocal VehicleInside still loses HP
+PASS complete landing: all landing and safety paths call ExplosionServer zero times
+PASS prototype landing: fixture is outside boarding ceremony
+PASS prototype landing: nearby native zombie is eligible
+PASS prototype landing: same-faction hostile-class ally is excluded
+PASS prototype landing: driver / player / animal / other mecha are excluded
+PASS prototype landing: actual Motion Receive air-to-ground grants one event
+PASS prototype landing: authorized landing delivers native Bashing damage amount=30000
+PASS prototype landing: authorized landing broadcasts exactly once and consumes permission
+PASS prototype landing: landing preserves hull / driver / bystander / ally / animal / other mecha
+PASS prototype landing: surviving enemy receives outward/upward mechanical impulse
+PASS prototype landing: duplicate landing request is rejected
+PASS prototype landing: cooldown contact broadcasts one light cue without damage or cooldown extension
+PASS prototype landing: cooldown contact duplicate is rejected
+PASS prototype landing: short airborne interval has no damaging/event permission
+PASS prototype landing: expired landing permission is rejected
+PASS prototype landing: grounded request without landing is rejected
+PASS prototype landing: invalid landing scalar is rejected
+PASS prototype landing: request without seated operator is rejected
+PASS prototype landing: EntityPlayer DamageEntity Falling returns zero and preserves HP
+PASS prototype landing: EntityPlayer ProcessDamageResponse Falling preserves HP
+PASS prototype landing: EntityPlayer ProcessDamageResponseLocal Falling preserves HP
+PASS prototype landing: EntityPlayer DamageEntity VehicleInside returns zero and preserves HP
+PASS prototype landing: EntityPlayer ProcessDamageResponse VehicleInside preserves HP
+PASS prototype landing: EntityPlayer ProcessDamageResponseLocal VehicleInside preserves HP
+PASS prototype landing: EntityPlayerLocal DamageEntity Falling returns zero and preserves HP
+PASS prototype landing: EntityPlayerLocal ProcessDamageResponse Falling preserves HP
+PASS prototype landing: EntityPlayerLocal ProcessDamageResponseLocal Falling preserves HP
+PASS prototype landing: EntityPlayerLocal DamageEntity VehicleInside returns zero and preserves HP
+PASS prototype landing: EntityPlayerLocal ProcessDamageResponse VehicleInside preserves HP
+PASS prototype landing: EntityPlayerLocal ProcessDamageResponseLocal VehicleInside preserves HP
+PASS prototype landing: seated external Bashing combat still loses HP
+PASS prototype landing: seated external Heat combat still loses HP
+PASS prototype landing: outside DamageEntity Falling still loses HP
+PASS prototype landing: outside ProcessDamageResponse Falling still loses HP
+PASS prototype landing: outside ProcessDamageResponseLocal Falling still loses HP
+PASS prototype landing: outside DamageEntity VehicleInside still loses HP
+PASS prototype landing: outside ProcessDamageResponse VehicleInside still loses HP
+PASS prototype landing: outside ProcessDamageResponseLocal VehicleInside still loses HP
+PASS prototype landing: all landing and safety paths call ExplosionServer zero times
+PASS complete native engine start/loop/accel/update entry points blocked delta=4
+PASS complete native engine stop still clears acceleration state
+PASS complete inherited vehicle prefab sources silent
+PASS complete native PCM loads all available designed assets count=27
+PASS complete six mechanical / weapon / touch / loop sources are distinct
+PASS complete motion loops use variant texture assets
+PASS complete voice has no idle / reactor bed
+PASS complete replay event suppressed, distinct cue same serial independent
+PASS complete replay contact suppressed and positioned at world-Origin
+PASS complete audited cue reflects actual loaded variant clip
+PASS complete equal serial / cue on another vehicle remains independent
+PASS complete power false-true-false edges each cue exactly once
+PASS complete powered stationary pilot has silent motion loops
+PASS complete cancellation immediately stops motion / charge loops
+PASS complete charge uses own playing source / positive target
+PASS complete explicit weapon cancel stops charge immediately
+PASS complete authoritative and fallback landing sound deduplicate across serial sources
+PASS complete same id entity replacement immediately disables old sound root
+PASS complete orphan replaced voice cleaned without active sound root
+PASS complete exact hatch boundary exit=False cue=hatch-open
+PASS complete exact hatch boundary exit=False cue=hatch-open-stop
+PASS complete exact hatch boundary exit=False cue=hatch-close
+PASS complete exact hatch boundary exit=False cue=hatch-close-lock
+PASS complete exact hatch boundary exit=True cue=hatch-open
+PASS complete exact hatch boundary exit=True cue=hatch-open-stop
+PASS complete exact hatch boundary exit=True cue=hatch-close
+PASS complete exact hatch boundary exit=True cue=hatch-close-lock
+PASS complete boarding crossed phases emit once per show run=0
+PASS complete boarding final slow frame emits ready and removes show run=0
+PASS complete boarding crossed phases emit once per show run=1
+PASS complete boarding final slow frame emits ready and removes show run=1
+PASS complete sword crossed prepare / release / brake once heavy=False
+PASS complete sword final slow frame ends swing without replay heavy=False
+PASS complete sword crossed prepare / release / brake once heavy=True
+PASS complete sword final slow frame ends swing without replay heavy=True
+PASS real laser-only snapshot starts charge without impossible sword overlap
+PASS local release immediately stops real laser and waits for cancel acknowledgement
+PASS delayed laser-only snapshot cannot revive charge in menu
+PASS restored input still rejects old laser-only snapshot before acknowledgement
+PASS unrelated cancellation acknowledgement cannot release barrier
+PASS matching acknowledgement consumes snapshot ordering barrier
+PASS fresh laser can charge with unchanged sword attack identity
+PASS independent sword action remains available
+PASS older acknowledgement cannot release a newer cancellation
+PASS post-cancel new sword snapshot reordered ahead of ack recovers normally
+AUDIO LIMITATION complete: native PCM / source / phase trigger paths verified; server probe does not judge perceived timbre or client mixer loudness.
+PASS prototype native engine start/loop/accel/update entry points blocked delta=4
+PASS prototype native engine stop still clears acceleration state
+PASS prototype inherited vehicle prefab sources silent
+PASS prototype native PCM loads all available designed assets count=21
+PASS prototype six mechanical / weapon / touch / loop sources are distinct
+PASS prototype motion loops use variant texture assets
+PASS prototype voice has no idle / reactor bed
+PASS prototype replay event suppressed, distinct cue same serial independent
+PASS prototype replay contact suppressed and positioned at world-Origin
+PASS prototype audited cue reflects actual loaded variant clip
+PASS prototype equal serial / cue on another vehicle remains independent
+PASS prototype power false-true-false edges each cue exactly once
+PASS prototype powered stationary pilot has silent motion loops
+PASS prototype cancellation immediately stops motion / charge loops
+PASS prototype authoritative and fallback landing sound deduplicate across serial sources
+PASS prototype same id entity replacement immediately disables old sound root
+PASS prototype orphan replaced voice cleaned without active sound root
+PASS prototype exact hatch boundary exit=False cue=hatch-open
+PASS prototype exact hatch boundary exit=False cue=hatch-open-stop
+PASS prototype exact hatch boundary exit=False cue=hatch-close
+PASS prototype exact hatch boundary exit=False cue=hatch-close-lock
+PASS prototype exact hatch boundary exit=True cue=hatch-open
+PASS prototype exact hatch boundary exit=True cue=hatch-open-stop
+PASS prototype exact hatch boundary exit=True cue=hatch-close
+PASS prototype exact hatch boundary exit=True cue=hatch-close-lock
+PASS prototype boarding crossed phases emit once per show run=0
+PASS prototype boarding final slow frame emits ready and removes show run=0
+PASS prototype boarding crossed phases emit once per show run=1
+PASS prototype boarding final slow frame emits ready and removes show run=1
+AUDIO LIMITATION prototype: native PCM / source / phase trigger paths verified; server probe does not judge perceived timbre or client mixer loudness.
+PASS frame timing: vehicleCombatRobot takeoff snapshot bypasses fresh 0.2s throttle
+PASS frame timing: vehicleCombatRobot short jump survives delayed Motion / Stomp path owner=0.6000061 server=0.6131897
+PASS frame timing: vehicleCombatRobot duplicate delayed stomp remains rejected
+PASS frame timing: vehicleCombatRobot absent authority event gets exactly one timed light fallback
+PASS frame timing: vehicleCombatRobotComplete takeoff snapshot bypasses fresh 0.2s throttle
+PASS frame timing: vehicleCombatRobotComplete short jump survives delayed Motion / Stomp path owner=0.6001148 server=0.6001129
+PASS frame timing: vehicleCombatRobotComplete duplicate delayed stomp remains rejected
+PASS frame timing: server cancellation stops laser and rejects pre-cancel fire lease
+PASS frame timing: server acknowledges exact token and actor in snapshot serial stream
+PASS frame timing: vehicleCombatRobotComplete absent authority event gets exactly one timed light fallback
+LIMITATION: delayed packets run in one native process using real frame time; not a two-computer network test.
+COMPLETE failures=0

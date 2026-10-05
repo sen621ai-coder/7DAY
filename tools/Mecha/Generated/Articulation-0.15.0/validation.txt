@@ -1,0 +1,11 @@
+Source-surface validation: PASS; max cut-point position error 1.0137427730704852e-07 m.
+Knee mechanisms: PASS both closed rigid mechanisms.
+Wing completeness: PASS symmetry, normals, UVs, winding and lower tips.
+Sword ownership: PASS original reviewed blade/retired fin landmarks.
+Sword clearance: PASS 2514 poses, radius 0.065 m, minimum 0.07658433624202579 m.
+Melee clearance: PASS 1020 poses, radius 0.065 m, minimum 0.09209772155556555 m.
+Main offline suite: PASS 63 checks.
+Test-Complete.py: first four asset/profile groups PASS; existing historical vehicles.xml / vehicleCombatRobot snapshot assertion FAIL (0.12 baseline).
+Visual completeness: NOT fully accepted; residual thin source fragments remain around inner elbow and hand/guard. See before/after images.
+Rebuild reproducibility: PASS identical binary and manifest rebuilt from shipped source archive.
+Final native function suite: PASS 701 checks, including isolated Shield movement with leak=0.

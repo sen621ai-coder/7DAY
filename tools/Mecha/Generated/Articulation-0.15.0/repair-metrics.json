@@ -1,0 +1,11 @@
+{
+  "version": 5,
+  "method": "original surface joint-plane subdivision; recessed source-palette cut liners",
+  "sourceBinarySha256": "4d84deacb11562226777620ab330d4a2dae180ae7f587e5c40e1c40c3ee33150",
+  "sourceArea": 28.987340927124023,
+  "preservedSurfaceArea": 28.987338759551054,
+  "linerTriangles": 16756,
+  "restoredShoulderFaces": 1672,
+  "restoredGripFaces": 2747,
+  "skin": "rigid"
+}

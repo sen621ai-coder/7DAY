@@ -2,8 +2,9 @@
 Consumes poses exported by MotionNativeQA; does not reproduce the pose solver.
 """
 import argparse, json, pathlib, numpy as np
-p=argparse.ArgumentParser();p.add_argument('poses',type=pathlib.Path);args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('poses',type=pathlib.Path);p.add_argument('--resources',type=pathlib.Path);args=p.parse_args()
 root=pathlib.Path(__file__).resolve().parents[2];res=root/'ZZ-PZAEC_Mecha/Resources';stem='samurai_style_gundam_mecha'
+if args.resources:res=args.resources
 doc=json.loads((res/(stem+'_rig.json')).read_text());raw=(res/(stem+'_rig.bin')).read_bytes();poses=json.loads(args.poses.read_text())
 dtype=np.dtype([('data','<f4',8),('bones','<i4',2),('weights','<f4',2)])
 rest=np.array([j['position'] for j in doc['joints']],dtype=np.float32);parts=[]

@@ -2,7 +2,7 @@
   "equipmentBinding": "rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves",
   "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
   "sourceParts": 17,
-  "triangles": 198684,
+  "triangles": 220491,
   "sourceTriangles": 2000000,
   "height": 3.2,
   "skinned": true,
@@ -227,6 +227,386 @@
   "parts": [
     {
       "node": 6,
+      "nodeName": "Complete_Backpack",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Backpack",
+      "material": 0,
+      "offset": 865008,
+      "vertices": 8381,
+      "indices": 27804
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_ChestDoor",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ChestDoor",
+      "material": 0,
+      "offset": 1378512,
+      "vertices": 1866,
+      "indices": 6486
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_ChestL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ChestL",
+      "material": 0,
+      "offset": 1494024,
+      "vertices": 1745,
+      "indices": 6186
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_ChestR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ChestR",
+      "material": 0,
+      "offset": 1602528,
+      "vertices": 4065,
+      "indices": 12345
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Head",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Head",
+      "material": 0,
+      "offset": 1847028,
+      "vertices": 14928,
+      "indices": 48243
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_SwordBlade",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "SwordBlade",
+      "material": 0,
+      "offset": 7273752,
+      "vertices": 11497,
+      "indices": 36279
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_WingL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "WingL",
+      "material": 0,
+      "offset": 10627392,
+      "vertices": 1436,
+      "indices": 7056
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_WingRRestored",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "WingR",
+      "material": 0,
+      "offset": 11408736,
+      "vertices": 1436,
+      "indices": 7056,
+      "generatedRepair": "mirrored-intact-wing-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_SwordSurfaceRestore",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "SwordBlade",
+      "material": 0,
+      "offset": 11505888,
+      "vertices": 84,
+      "indices": 132,
+      "generatedRepair": "closed-blade-overlap-surface-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_KneeHubL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegL",
+      "material": 0,
+      "offset": 11510448,
+      "vertices": 345,
+      "indices": 1248,
+      "generatedRepair": "armoured-knee-joint-v2"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_KneeHubR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegR",
+      "material": 0,
+      "offset": 11532000,
+      "vertices": 345,
+      "indices": 1248,
+      "generatedRepair": "armoured-knee-joint-v2"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_ArmL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ArmL",
+      "material": 0,
+      "offset": 11553552,
+      "vertices": 8464,
+      "indices": 31179,
+      "generatedRepair": null
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_ArmR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ArmR",
+      "material": 0,
+      "offset": 12084540,
+      "vertices": 16161,
+      "indices": 48138,
+      "generatedRepair": null
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_LegL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegL",
+      "material": 0,
+      "offset": 13052820,
+      "vertices": 37683,
+      "indices": 128376,
+      "generatedRepair": null
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_LegR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegR",
+      "material": 0,
+      "offset": 15375108,
+      "vertices": 29867,
+      "indices": 92082,
+      "generatedRepair": null
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Liner_ArmL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ArmL",
+      "material": 0,
+      "offset": 17177052,
+      "vertices": 1478,
+      "indices": 3024,
+      "generatedRepair": "recessed-joint-interior-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Liner_ArmR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ArmR",
+      "material": 0,
+      "offset": 17260092,
+      "vertices": 4740,
+      "indices": 7218,
+      "generatedRepair": "recessed-joint-interior-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Liner_LegL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegL",
+      "material": 0,
+      "offset": 17516484,
+      "vertices": 11667,
+      "indices": 15747,
+      "generatedRepair": "recessed-joint-interior-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Liner_LegR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegR",
+      "material": 0,
+      "offset": 18139488,
+      "vertices": 12757,
+      "indices": 17169,
+      "generatedRepair": "recessed-joint-interior-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Liner_Torso",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Torso",
+      "material": 0,
+      "offset": 18820500,
+      "vertices": 5530,
+      "indices": 7110,
+      "generatedRepair": "recessed-joint-interior-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Shield",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Shield",
+      "material": 0,
+      "offset": 19114380,
+      "vertices": 10846,
+      "indices": 43257,
+      "generatedRepair": null
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_SwordHilt",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "SwordHilt",
+      "material": 0,
+      "offset": 19808016,
+      "vertices": 4029,
+      "indices": 12054,
+      "generatedRepair": null
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_Torso",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Torso",
+      "material": 0,
+      "offset": 20049624,
+      "vertices": 30463,
+      "indices": 102036,
+      "generatedRepair": null
+    }
+  ],
+  "wingBinding": "complete rigid rear fins and tapered necks; WingL/WingR under Backpack",
+  "wingVertices": [
+    1436,
+    1436
+  ],
+  "sourceNodes": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "renderRoles": {
+    "Shield": 14419,
+    "WingL": 2352,
+    "Torso": 36382,
+    "WingR": 2352,
+    "LegR": 36833,
+    "Backpack": 9268,
+    "SwordBlade": 12137,
+    "SwordHilt": 4018,
+    "ChestL": 2062,
+    "ChestR": 4115,
+    "ArmR": 18452,
+    "Head": 16081,
+    "LegL": 48457,
+    "ArmL": 11401,
+    "ChestDoor": 2162
+  },
+  "swordAnchors": {
+    "grip": [
+      0.78,
+      1.81,
+      0.76
+    ],
+    "bladeRoot": [
+      0.73,
+      1.57,
+      0.3
+    ],
+    "bladeTip": [
+      0.23,
+      0.5,
+      -1.1
+    ],
+    "hiltTip": [
+      0.9407,
+      2.1757,
+      1.3423
+    ],
+    "bladeNormal": [
+      0.96168816,
+      -0.0582994,
+      -0.267875
+    ]
+  },
+  "roleBinding": "rigid complete faces; thin sword plane and conservative mirrored body rejection; tapered rear fins; rigid Backpack and Shield",
+  "geometryTupleSha256": "3f6567a4684ce7dae80ef520c9818784ff7d277d7198b945ccfa21ccdefe2236",
+  "bindingAudit": {
+    "mirroredBodyFaces": 3,
+    "swordCapsuleRejectedFaces": 3372,
+    "lowerFinOverlapFaces": 2512,
+    "sideFinOverlapFaces": 957,
+    "rigidArmour": true
+  },
+  "sourceRigTriangles": 207192,
+  "bladeRepairTriangles": 44,
+  "kneeRepairTriangles": 832,
+  "sourceOnlyParts": [
+    {
+      "node": 6,
+      "nodeName": "Complete_WingR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "WingR",
+      "material": 0,
+      "offset": 10724544,
+      "vertices": 11320,
+      "indices": 35208
+    }
+  ],
+  "wingRestoration": {
+    "template": "WingL",
+    "target": "WingR",
+    "mirroredFaces": 2352,
+    "retiredSourceFaces": 11736,
+    "plane": "x=0",
+    "reason": "restore reduced lower fin and remove asymmetric sword-overlap scraps"
+  },
+  "swordTrimRestoration": {
+    "sourceFaces": 96,
+    "coreDepth": [
+      -0.059,
+      -0.041
+    ],
+    "minimumSeparation": 0.002
+  },
+  "articulationSourceParts": [
+    {
+      "node": 6,
       "nodeName": "Complete_ArmL",
       "primitive": 0,
       "joint": "Torso",
@@ -428,113 +808,15 @@
       "generatedRepair": "armoured-knee-joint-v2"
     }
   ],
-  "wingBinding": "complete rigid rear fins and tapered necks; WingL/WingR under Backpack",
-  "wingVertices": [
-    1436,
-    1436
-  ],
-  "sourceNodes": [
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22
-  ],
-  "renderRoles": {
-    "ArmL": 4841,
-    "ArmR": 10535,
-    "Backpack": 9268,
-    "ChestDoor": 2162,
-    "ChestL": 2062,
-    "ChestR": 4115,
-    "Head": 16081,
-    "LegL": 40003,
-    "LegR": 28428,
-    "Shield": 16091,
-    "SwordBlade": 12137,
-    "SwordHilt": 6765,
-    "Torso": 41492,
-    "WingL": 2352,
-    "WingR": 2352
-  },
-  "swordAnchors": {
-    "grip": [
-      0.78,
-      1.81,
-      0.76
-    ],
-    "bladeRoot": [
-      0.73,
-      1.57,
-      0.3
-    ],
-    "bladeTip": [
-      0.23,
-      0.5,
-      -1.1
-    ],
-    "hiltTip": [
-      0.9407,
-      2.1757,
-      1.3423
-    ],
-    "bladeNormal": [
-      0.96168816,
-      -0.0582994,
-      -0.267875
-    ]
-  },
-  "roleBinding": "rigid complete faces; thin sword plane and conservative mirrored body rejection; tapered rear fins; rigid Backpack and Shield",
-  "geometryTupleSha256": "3f6567a4684ce7dae80ef520c9818784ff7d277d7198b945ccfa21ccdefe2236",
-  "bindingAudit": {
-    "mirroredBodyFaces": 3,
-    "swordCapsuleRejectedFaces": 3372,
-    "lowerFinOverlapFaces": 2512,
-    "sideFinOverlapFaces": 957,
-    "rigidArmour": true
-  },
-  "sourceRigTriangles": 207192,
-  "bladeRepairTriangles": 44,
-  "kneeRepairTriangles": 832,
-  "sourceOnlyParts": [
-    {
-      "node": 6,
-      "nodeName": "Complete_WingR",
-      "primitive": 0,
-      "joint": "Torso",
-      "role": "WingR",
-      "material": 0,
-      "offset": 10724544,
-      "vertices": 11320,
-      "indices": 35208
-    }
-  ],
-  "wingRestoration": {
-    "template": "WingL",
-    "target": "WingR",
-    "mirroredFaces": 2352,
-    "retiredSourceFaces": 11736,
-    "plane": "x=0",
-    "reason": "restore reduced lower fin and remove asymmetric sword-overlap scraps"
-  },
-  "swordTrimRestoration": {
-    "sourceFaces": 96,
-    "coreDepth": [
-      -0.059,
-      -0.041
-    ],
-    "minimumSeparation": 0.002
+  "articulationRepair": {
+    "version": 5,
+    "method": "original surface joint-plane subdivision; recessed source-palette cut liners",
+    "sourceBinarySha256": "4d84deacb11562226777620ab330d4a2dae180ae7f587e5c40e1c40c3ee33150",
+    "sourceArea": 28.987340927124023,
+    "preservedSurfaceArea": 28.987338759551054,
+    "linerTriangles": 16756,
+    "restoredShoulderFaces": 1672,
+    "restoredGripFaces": 2747,
+    "skin": "rigid"
   }
 }

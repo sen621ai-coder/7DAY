@@ -89,17 +89,20 @@ public static class EquipmentOwnershipQA
             }
             rig.ResetPose();
             var changes=new List<object>();
-            foreach(string part in new[]{"Sword","WingL","WingR","HipL","HipR"}){
-                rig.ResetPose();var joint=part=="Sword"?rig.Sword:part=="WingL"?rig.WingL:part=="WingR"?rig.WingR:part=="HipL"?rig.HipL:rig.HipR;
-                joint.localRotation=rig.RestRot[joint]*Quaternion.Euler(31,67,43);if(part=="Sword")joint.localPosition+=Vector3.right*.8f;
+            foreach(string part in new[]{"Sword","Shield","WingL","WingR","HipL","HipR"}){
+                rig.ResetPose();var joint=part=="Sword"?rig.Sword:part=="Shield"?skins[0].bones.First(b=>b.name=="MechaShield"):part=="WingL"?rig.WingL:part=="WingR"?rig.WingR:part=="HipL"?rig.HipL:rig.HipR;
+                // Shield normally follows the hand and is not in the pose-reset map.
+                var jointRotation=joint.localRotation;var jointPosition=joint.localPosition;
+                joint.localRotation=jointRotation*Quaternion.Euler(31,67,43);if(part=="Sword")joint.localPosition+=Vector3.right*.8f;
                 var changed=Bake(skins);float leaked=0,moved=0;int affected=0;
                 for(int i=0;i<skins.Length;i++){
-                    string role=Role(skins[i]);bool expected=part=="Sword"?role.StartsWith("Sword"):part.StartsWith("Wing")?role==part:role=="Leg"+part.Substring(3);
+                    string role=Role(skins[i]);bool expected=part=="Sword"?role.StartsWith("Sword"):part=="Shield"?role=="Shield":part.StartsWith("Wing")?role==part:role=="Leg"+part.Substring(3);
                     float delta=0;for(int j=0;j<changed[i].Length;j++)delta=Mathf.Max(delta,Vector3.Distance(changed[i][j],baseline[i][j]));
                     changes.Add(new {perturb=part,role=role,maxVertexMotion=delta});if(expected){moved=Mathf.Max(moved,delta);affected+=changed[i].Length;}else leaked=Mathf.Max(leaked,delta);
                 }
                 check(part+" isolated motion cannot drag other equipment, leak="+leaked+" moved="+moved+" vertices="+affected,leaked<.001f&&moved>.1f);
                 if(part=="Sword"){Capture(camera,rig,skins,"isolated-sword-moved",new Vector3(-4,1,6),true);Capture(camera,rig,skins,"isolated-sword-moved-rear",new Vector3(4,1,-6),true);}
+                joint.localRotation=jointRotation;joint.localPosition=jointPosition;
             }
             rig.ResetPose();
             var views=new[]{new Vector3(0,.2f,6),new Vector3(6,.2f,0),new Vector3(0,.2f,-6),new Vector3(-6,.2f,0)};

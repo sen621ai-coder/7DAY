@@ -111,7 +111,8 @@ public sealed class MechaMotionQA : IModApi
         var rig=Model.GetRig(v);rig.ResetPose();var skins=rig.Mount.GetComponentsInChildren<SkinnedMeshRenderer>(true);
         Check("complete variant identified independently",Weapons.IsMecha(v)&&Rules.Complete(v)&&Rules.AttributeScale(v)==1.5f);
         Check("complete hull 3M, measured="+v.vehicle.GetMaxHealth(),v.vehicle.GetMaxHealth()==3000000);
-        Check("complete semantic textured skin batches with closed blade/knee surfaces",skins.Length>=10&&skins.Length<=20&&skins.All(s=>s.sharedMaterial.mainTexture!=null));
+        int expectedParts=Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(Path.Combine(Model.Path,"samurai_style_gundam_mecha_rig.json")))["parts"].Count();
+        Check("complete semantic textured skin batches match authored manifest (including recessed liners)",skins.Length==expectedParts&&skins.Length<=25&&skins.All(s=>s.sharedMaterial.mainTexture!=null));
         float error=0;int triangles=0;
         foreach(var skin in skins){var mesh=new Mesh();skin.BakeMesh(mesh);var a=mesh.vertices;var b=skin.sharedMesh.vertices;for(int i=0;i<a.Length;i++)error=Mathf.Max(error,Vector3.Distance(a[i],b[i]));triangles+=skin.sharedMesh.triangles.Length/3;UnityEngine.Object.DestroyImmediate(mesh);}
         Check("complete bind pose preserved, error="+error,error<.001f);
