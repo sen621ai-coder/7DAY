@@ -25,6 +25,7 @@ namespace AECT16RuntimeFix
                 ApacheFlightVisuals.Install(harmony);
                 ApacheWeapons.Install(harmony);
                 ApacheArmor.Install();
+                VehicleDismountSafety.Install();
                 AutoMinerAudit.Install();
                 CollectorBatchStorage.Install(harmony);
                 try { AutoForestryModel.Install(harmony, modInstance.Path); }

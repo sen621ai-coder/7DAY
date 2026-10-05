@@ -1,6 +1,26 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.23 vehicle dismount collision safety
+- MD-500, Apache and M1 T16-T19 now use eight lateral exit candidates;
+  remove the overhead/roof candidate and keep native obstacle checks.
+  Apply at runtime to every seat without editing the base vehicle mods.
+- After a confirmed live-player detach, ignore physical contacts only between
+  that player and the departed vehicle for 4 seconds. If their collider bounds
+  still overlap, extend up to 8 seconds; then restore normal collision.
+  Suppress queued native collision callbacks for that exact pair as well.
+- Re-entry, death, disable and destruction clean up owned collision pairs.
+  Existing ignored pairs are left alone. Other vehicles, bystanders, weapons,
+  status damage and real falling damage retain their normal behavior.
+- [Vehicle-Dismount] records suppressed queued contacts, timeout overlap and
+  up to four incoming damage events during the first 10 seconds after exit.
+  This diagnoses residual failures; it does not make the player invulnerable.
+- Validation: real game/Mono build; 88 Harmony fixture/lifecycle assertions;
+  native IL detach/controller/collision contract checks; 28 Apache armor
+  regression assertions. Physics fixtures are not a native gameplay test.
+  Actual moving exits, rotor/turret clearance and multiplayer handoff still
+  require in-game acceptance. Restart server and all clients with this DLL.
+
 Runtime 1.27.22 medical supply probability
 - Basic boss supplies now select medical items at 40% per draw.
 - Remaining categories share 60% in their previous proportions: crafting
