@@ -142,9 +142,19 @@ namespace PZAEC.Mecha
         public static bool ApplyPose(Model.Rig rig,EntityVehicle v)
         {Show s;if(!shows.TryGetValue(v.entityId,out s))return false;
             if(Rules.Complete(v)){var actor=GameManager.Instance.World.GetEntity(s.Actor);Ceremony.Pose(v,rig,s.Exit,s.Full,Time.time-s.Started,actor!=null?actor.position:v.position+Weapons.BodyRotation(v)*Vector3.forward);return true;}
-            float k=Kneel(v);rig.Torso.localPosition=rig.TorsoBasePosition+new Vector3(0,-k*.9f,0);
-            rig.Torso.localRotation=rig.RestRot[rig.Torso]*Quaternion.Euler(k*8,0,0);rig.Head.localRotation=rig.RestRot[rig.Head]*Quaternion.Euler(k*12,0,0);
-            rig.ShoulderL.localRotation=rig.RestRot[rig.ShoulderL]*Quaternion.Euler(0,0,-k*8);rig.ShoulderR.localRotation=rig.RestRot[rig.ShoulderR]*Quaternion.Euler(0,0,k*8);
+            float k=Kneel(v),t=Time.time-s.Started;
+            float brace=s.Full?Ease(t/.35f)*(1-Ease((t-(s.Exit?1.65f:3.4f))/(s.Exit?.35f:.6f))):0;
+            float lean=5*brace+11*k;
+            rig.Torso.localPosition=rig.TorsoBasePosition+new Vector3(0,-k*.72f,.09f*k);
+            rig.Torso.localRotation=rig.RestRot[rig.Torso]*Quaternion.Euler(lean,0,0);
+            rig.Head.localRotation=rig.RestRot[rig.Head]*Quaternion.Euler(-lean+5*k,0,0);
+            // Lift and spread the gun arms before opening, then recover after closure.
+            rig.ShoulderL.localRotation=rig.RestRot[rig.ShoulderL]*Quaternion.Euler(-12*brace,0,-14*brace);
+            rig.ShoulderR.localRotation=rig.RestRot[rig.ShoulderR]*Quaternion.Euler(-12*brace,0,14*brace);
+            rig.ElbowL.localRotation=rig.RestRot[rig.ElbowL]*Quaternion.Euler(-18*brace,0,0);
+            rig.ElbowR.localRotation=rig.RestRot[rig.ElbowR]*Quaternion.Euler(-18*brace,0,0);
+            rig.HandL.localRotation=rig.RestRot[rig.HandL]*Quaternion.Euler(0,-8*brace,0);
+            rig.HandR.localRotation=rig.RestRot[rig.HandR]*Quaternion.Euler(0,8*brace,0);
             return true;}
         public static void Update(World world)
         {

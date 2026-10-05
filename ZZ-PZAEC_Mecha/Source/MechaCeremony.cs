@@ -88,18 +88,21 @@ namespace PZAEC.Mecha
         public static void Pose(EntityVehicle v,Model.Rig r,bool exit,bool full,float t,Vector3 observer)
         {
             float k=full?Kneel(exit,t):0,e=full?Equipment(exit,t):0;
-            float brace=Ease((t-(exit?.45f:.8f))/.7f)*(1-Ease((t-(exit?5.75f:6.6f))/.4f));
-            r.Torso.localPosition=r.TorsoBasePosition+new Vector3(.055f*brace,-k*.72f-.045f*brace,.055f*brace);
-            r.Torso.localRotation=r.RestRot[r.Torso]*Quaternion.Euler(k*10,0,-brace*2);
+            float brace=full?Ease((t-.15f)/.65f)*(1-Ease((t-(exit?5.65f:6.5f))/.35f)):0;
+            // Prepare the upper body before lowering; keep some hip clearance at full compression.
+            float lean=5*brace+12*k;
+            r.Torso.localPosition=r.TorsoBasePosition+new Vector3(.055f*brace,-k*.62f-.025f*brace,.10f*k);
+            r.Torso.localRotation=r.RestRot[r.Torso]*Quaternion.Euler(lean,3*e,-brace*2);
             var look=Quaternion.Inverse(Weapons.BodyRotation(v))*(observer-v.position);
             float yaw=Mathf.Clamp(Mathf.Atan2(look.x,look.z)*Mathf.Rad2Deg,-35,35);
-            float greet=full?Ease(t/.4f)*(1-Ease((t-(exit?.5f:.6f))/.7f)):0;
-            r.Head.localRotation=r.RestRot[r.Head]*Quaternion.Euler(k*8,yaw*greet,0);
-            r.ShoulderL.localRotation=r.RestRot[r.ShoulderL]*Quaternion.Euler(-8*e,exit?-15*e:0,-18*e);
+            float greet=brace;
+            // Counter-rotate the neck to watch the access route instead of staring at the knees.
+            r.Head.localRotation=r.RestRot[r.Head]*Quaternion.Euler(-lean+6*k,yaw*greet-3*e,brace*2);
+            r.ShoulderL.localRotation=r.RestRot[r.ShoulderL]*Quaternion.Euler(-18*e,exit?-15*e:-8*e,-22*e);
             r.ShoulderR.localRotation=r.RestRot[r.ShoulderR]*Quaternion.Euler(8*e,0,12*e);
-            r.ElbowL.localRotation=r.RestRot[r.ElbowL]*Quaternion.Euler(-8*e,0,0);
+            r.ElbowL.localRotation=r.RestRot[r.ElbowL]*Quaternion.Euler(-24*e,0,0);
             // The final sword target is resolved after the planted foot IK.
-            r.HandL.localRotation=r.RestRot[r.HandL]*Quaternion.Euler(0,-10-(exit?15:0)*e,0);
+            r.HandL.localRotation=r.RestRot[r.HandL]*Quaternion.Euler(0,-(exit?25:10)*e,6*e);
         }
     }
 }

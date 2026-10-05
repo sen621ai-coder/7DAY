@@ -89,6 +89,7 @@ public sealed class MechaMotionQA : IModApi
             }
             Boarding.SkipLocal(v);Check("skip clears boarding lock",!Boarding.Active(v));Check("skip Space cannot charge jump",!Boarding.FilterJump(true));
             var rest=rig.TorsoBasePosition;Check("skip restores torso",Vector3.Distance(rig.Torso.localPosition,rest)<.001f);
+            BoardingPoseTrial(world,v,rig,camera,texture);
             var lease=new Weapons.TriggerLease();lease.Accept(123,1,true,0);lease.Stop();lease.Accept(123,1,true,1);Check("old fire cannot renew stopped lease",!lease.Active(1));
             v.vehicleRB.gameObject.SetActive(false);CompleteTrial(world,camera,texture);v.vehicleRB.gameObject.SetActive(true);
             HotfixTrial(world,v,v2,rig);
@@ -134,6 +135,7 @@ public sealed class MechaMotionQA : IModApi
         SamuraiTrial(world,v,rig,camera,texture);
         foreach(var result in MeleeNativeQA.Run(world,v,rig,camera,output)){report.Add(result);if(result.StartsWith("FAIL "))failures++;}
         CeremonyTrial(world,v,rig,camera,texture);
+        BoardingPoseTrial(world,v,rig,camera,texture);
         PresentationTrial(world,v,rig,camera,texture);
         WeightPresentationTrial(world,v,rig,camera,texture);
         foreach(var result in EquipmentOwnershipQA.Run(world,v,rig,camera,output)){report.Add(result);if(result.StartsWith("FAIL "))failures++;}
@@ -839,13 +841,48 @@ rb.isKinematic=false;rb.useGravity=true;rb.detectCollisions=true;v.RBActive=true
             report.Add("PHYSICS fixture exercises production planted support and force controller on native rigidbody; does not simulate driver UI.");
         }finally{GroundSupport.Suspend(v);Physics.autoSimulation=auto;rb.isKinematic=true;UnityEngine.Object.DestroyImmediate(floor);}
     }
+    static void BoardingPoseTrial(World world,EntityVehicle v,Model.Rig r,Camera camera,RenderTexture texture)
+    {
+        bool complete=Rules.Complete(v);string name=complete?"complete":"prototype";
+        var m=Locomotion.Get(v);m.Grounded=true;m.HoverOn=m.Boost=false;m.Blend=m.WingBlend=0;m.FlightMode=Flight.Phase.Ground;
+        var start=AccessTools.Method(typeof(Boarding),"Start");var shows=(System.Collections.IDictionary)AccessTools.Field(typeof(Boarding),"shows").GetValue(null);
+        foreach(bool exit in new[]{false,true}){
+            Boarding.Clear();Gait.Clear();r.ResetPose();start.Invoke(null,new object[]{v,123,exit,true});var show=shows[v.entityId];
+            float duration=complete?(exit?6:7):(exit?2:4),body=0,elbow=0,head=0,stretch=0;
+            var skins=r.Mount.GetComponentsInChildren<SkinnedMeshRenderer>(true);var mesh=new Mesh();
+            for(int frame=0;frame<=60;frame++){
+                float t=duration*frame/60;AccessTools.Field(show.GetType(),"Started").SetValue(show,Time.time-t);Gait.Update(world,v,r,duration/60);
+                body=Mathf.Max(body,Quaternion.Angle(r.Torso.localRotation,r.RestRot[r.Torso]));
+                elbow=Mathf.Max(elbow,Quaternion.Angle(r.ElbowL.localRotation,r.RestRot[r.ElbowL]));head=Mathf.Max(head,Quaternion.Angle(r.Head.localRotation,r.RestRot[r.Head]));
+                if(frame%10==0)foreach(var skin in skins){skin.BakeMesh(mesh);var points=mesh.vertices;var rest=skin.sharedMesh.vertices;var ix=skin.sharedMesh.triangles;var weights=skin.sharedMesh.boneWeights;
+                    for(int j=0;j<ix.Length;j+=3)for(int q=0;q<3;q++){int a=ix[j+q],b=ix[j+(q+1)%3];
+                        if(weights[a].weight0>.9999f&&weights[b].weight0>.9999f&&weights[a].boneIndex0==weights[b].boneIndex0)
+                            stretch=Mathf.Max(stretch,Mathf.Abs(Vector3.Distance(points[a],points[b])-Vector3.Distance(rest[a],rest[b])));
+                    }
+                }
+                if(frame==30){int i=0;foreach(var view in new[]{new Vector3(0,.6f,6.5f),new Vector3(6.5f,.6f,0),new Vector3(0,.6f,-6.5f)}){
+                    var focus=r.Mount.position+Vector3.up*1.2f;camera.transform.position=focus+view;camera.transform.LookAt(focus);Capture(camera,texture,r,"view-boarding-"+name+(exit?"-exit":"-entry"),i++);}
+                    var before=r.Torso.localRotation;var support=GroundSupport.Get(v);bool recovery=support.Recovering;support.Recovering=true;Traversal.EquipmentPose(v,r);support.Recovering=recovery;
+                    Check(name+" boarding wins over ground recovery "+exit,Quaternion.Angle(before,r.Torso.localRotation)<.01f);
+                }
+            }
+            UnityEngine.Object.DestroyImmediate(mesh);
+            Check(name+" boarding torso >=15 degrees "+exit+" measured="+body,body>=15);
+            Check(name+" boarding elbow >=17 degrees "+exit+" measured="+elbow,elbow>=17);
+            Check(name+" boarding neck counter-motion >=9 degrees "+exit+" measured="+head,head>=9);
+            if(complete)Check(name+" boarding rigid armour edge error <.001m "+exit+" measured="+stretch,stretch<.001f);
+            Check(name+" boarding upper body restores at end "+exit,Quaternion.Angle(r.Torso.localRotation,r.RestRot[r.Torso])<.1f&&Quaternion.Angle(r.ElbowL.localRotation,r.RestRot[r.ElbowL])<.1f);
+            Boarding.Clear();
+        }
+        r.ResetPose();Gait.Clear();
+    }
     static void Capture(Camera camera,RenderTexture rt,Model.Rig rig,string prefix,int frame)
     {
         var focus=rig.Mount.position+Vector3.up*1.6f;var view=prefix.StartsWith("flight-rear-")?new Vector3(0,1.6f,-7):prefix.StartsWith("flight-side-")?new Vector3(7,1.6f,0):new Vector3(-4,1.8f,7);if(!prefix.StartsWith("view-")){camera.transform.position=focus+(prefix.StartsWith("flight-")?rig.Mount.rotation*view:view);camera.transform.LookAt(focus);}
         var flat=prefix.StartsWith("samurai-")||prefix.StartsWith("view-")?new Material(Shader.Find("Sprites/Default") ?? Shader.Find("Standard")):null;
         var baked=new List<GameObject>();var skins=rig.Mount.GetComponentsInChildren<SkinnedMeshRenderer>();
-        foreach(var skin in skins){var mesh=new Mesh();skin.BakeMesh(mesh);var go=new GameObject("QA baked pose");go.transform.SetPositionAndRotation(skin.transform.position,skin.transform.rotation);go.transform.localScale=skin.transform.lossyScale;go.AddComponent<MeshFilter>().sharedMesh=mesh;if(flat!=null)flat.mainTexture=skin.sharedMaterial.mainTexture;var renderer=go.AddComponent<MeshRenderer>();renderer.sharedMaterial=flat!=null?flat:skin.sharedMaterial;renderer.forceRenderingOff=skin.forceRenderingOff;skin.enabled=false;baked.Add(go);}
+        foreach(var skin in skins){var mesh=new Mesh();skin.BakeMesh(mesh);var go=new GameObject("QA baked pose");go.transform.SetPositionAndRotation(skin.transform.position,skin.transform.rotation);go.transform.localScale=skin.transform.lossyScale;go.AddComponent<MeshFilter>().sharedMesh=mesh;var renderer=go.AddComponent<MeshRenderer>();if(flat!=null){var material=new Material(flat);material.mainTexture=skin.sharedMaterial.mainTexture;renderer.sharedMaterial=material;}else renderer.sharedMaterial=skin.sharedMaterial;renderer.forceRenderingOff=skin.forceRenderingOff;skin.enabled=false;baked.Add(go);}
         camera.Render();
-        if(flat!=null)UnityEngine.Object.DestroyImmediate(flat);foreach(var skin in skins)skin.enabled=true;foreach(var go in baked){UnityEngine.Object.DestroyImmediate(go.GetComponent<MeshFilter>().sharedMesh);UnityEngine.Object.DestroyImmediate(go);}var old=RenderTexture.active;RenderTexture.active=rt;var image=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);image.Apply();File.WriteAllBytes(Path.Combine(output,prefix+"-"+frame.ToString("D3")+".png"),image.EncodeToPNG());UnityEngine.Object.DestroyImmediate(image);RenderTexture.active=old;
+        foreach(var skin in skins)skin.enabled=true;foreach(var go in baked){if(flat!=null)UnityEngine.Object.DestroyImmediate(go.GetComponent<MeshRenderer>().sharedMaterial);UnityEngine.Object.DestroyImmediate(go.GetComponent<MeshFilter>().sharedMesh);UnityEngine.Object.DestroyImmediate(go);}if(flat!=null)UnityEngine.Object.DestroyImmediate(flat);var old=RenderTexture.active;RenderTexture.active=rt;var image=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);image.Apply();File.WriteAllBytes(Path.Combine(output,prefix+"-"+frame.ToString("D3")+".png"),image.EncodeToPNG());UnityEngine.Object.DestroyImmediate(image);RenderTexture.active=old;
     }
 }

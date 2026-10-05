@@ -393,6 +393,8 @@ namespace PZAEC.Mecha
         }
         public static void EquipmentPose(EntityVehicle v,Model.Rig r)
         {
+            // Boarding owns the full pose, including while ground recovery is still settling.
+            if(Boarding.Active(v)){if(Rules.Complete(v))Get(v).EquipmentBlend=0;return;}
             if(!Rules.Complete(v))return;var s=Get(v);var ground=GroundSupport.Find(v);bool recovery=ground!=null&&ground.Recovering;bool active=Major(v)||recovery;float swordBlend=0;
             if(!active&&(Flight.AirPose(Locomotion.Get(v))||Boarding.Active(v))){s.EquipmentBlend=0;return;}
             if(recovery){s.EquipmentBlend=Mathf.MoveTowards(s.EquipmentBlend,1,Time.deltaTime/.12f);swordBlend=s.EquipmentBlend;}
