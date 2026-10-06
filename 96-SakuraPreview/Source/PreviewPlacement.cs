@@ -23,7 +23,7 @@ namespace SakuraPreview
             SakuraVoucherRewards.Install(new Harmony("yf.sakura.voucher.rewards"));
             new Harmony("yf.sakura.escort.missions").Patch(AccessTools.Method(typeof(GameManager),"Update"),
                 postfix:new HarmonyMethod(typeof(SakuraMissionServer),nameof(SakuraMissionServer.Tick)));
-            Log.Out("[SakuraPreview] 0.8.4 dispatch reconciliation and case-insensitive mission dialogue gates enabled for Sakura and Mint T16-T19.");
+            Log.Out("[SakuraPreview] 0.8.6 mission retirement and durable single-claim rewards enabled for Sakura and Mint T16-T19.");
         }
         static void Tick()
         {
@@ -78,5 +78,4 @@ namespace SakuraPreview
         }
     }
 }
-
 

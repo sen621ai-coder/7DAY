@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -9,7 +9,13 @@ namespace PZAEC.Mecha
         public override NetPackageDirection PackageDirection { get { return NetPackageDirection.ToServer; } }
         public NetPackagePZAECMechaIntent Setup(int vehicle, byte op, Vector3 direction, Vector3 origin, int sequence)
         { Vehicle = vehicle; Op = op; Direction = direction; Origin = origin; Sequence = sequence; return this; }
-        public override int GetLength() { return 33; }
+        
+#if MECHA_LEGACY_PACKAGE_LENGTH
+        public override int
+#else
+        public int
+#endif
+        GetLength() { return 33; }
         public override void read(PooledBinaryReader r)
         {
             Vehicle = r.ReadInt32(); Op = r.ReadByte();
@@ -37,7 +43,13 @@ namespace PZAEC.Mecha
         public override NetPackageDirection PackageDirection { get { return NetPackageDirection.ToClient; } }
         public NetPackagePZAECMechaEvent Setup(int vehicle, int id, byte kind, Vector3 a, Vector3 b, float value, float c)
         { Vehicle = vehicle; Id = id; Kind = kind; A = a; B = b; Value = value; C = c; return this; }
-        public override int GetLength() { return 41; }
+        
+#if MECHA_LEGACY_PACKAGE_LENGTH
+        public override int
+#else
+        public int
+#endif
+        GetLength() { return 41; }
         public override void read(PooledBinaryReader r)
         {
             Vehicle = r.ReadInt32(); Id = r.ReadInt32(); Kind = r.ReadByte();

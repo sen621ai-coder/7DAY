@@ -27,7 +27,15 @@ namespace PZAEC.M1
         {
             h.Patch(AccessTools.Method(typeof(EntityPlayerLocal),"OnGUI"),postfix:new HarmonyMethod(typeof(Presentation),nameof(HUD)));
             Optics.Install(h);
+            // Optics changes the camera pose in its earlier pre-cull callback.
+            Camera.onPreCull+=BeforeRender;
         }
+        static void BeforeRender(Camera camera)
+        {
+            if(camera!=GameManager.Instance?.World?.GetPrimaryPlayer()?.playerCamera)return;
+            FacePuffs(camera);
+        }
+        static void FacePuffs(Camera camera){if(camera==null)return;foreach(var puff in puffs)puff.Go.transform.rotation=camera.transform.rotation;}
         static Transform Find(Transform root,string name){foreach(var t in root.GetComponentsInChildren<Transform>(true))if(t.name==name)return t;return null;}
         static AudioClip ReadWave(string name)
         {
@@ -125,13 +133,20 @@ namespace PZAEC.M1
         {
             Resources();bool ap=p.Y>.5f;var surface=ImpactRules.Decode(p.X);var normal=p.B.sqrMagnitude>.001f?p.B.normalized:Vector3.up;var origin=p.A+normal*.15f;
             int fire=ImpactRules.FireCount(ap,surface),sparks=ImpactRules.Sparks(ap,surface),dust=ImpactRules.Dust(ap,surface),burn=ImpactRules.Smoke(ap,surface);
-            int needed=fire+sparks+dust+burn;
+            int needed=(ap?fire:6)+sparks+dust+burn;
             while(puffs.Count>160-needed){var old=puffs[0];old.Go.SetActive(false);pool.Push(old);puffs.RemoveAt(0);}
             GameObject native=null;
             if(ap){
                 Emit(origin,normal*.2f+Vector3.up*.15f,new Color(1,.6f,.18f,.8f),1,.55f,.45f,p.Shot+303,false,-1,true,.12f);
                 Emit(origin,Vector3.zero,new Color(1,.95f,.7f,.9f),1,.24f,.15f,p.Shot+304,false,-1,true,.06f);
-            }else{native=GameManager.Instance.ExplosionClient(p.A,Quaternion.identity,ImpactRules.BlastParticle(false),0,5,2500,-1,new List<BlockChangeInfo>());if(native!=null)native.transform.localScale*=2f;}
+            }else{
+                try{native=GameManager.Instance.ExplosionClient(origin,Quaternion.identity,ImpactRules.BlastParticle(false),0,5,2500,-1,new List<BlockChangeInfo>());if(native!=null)native.transform.localScale*=2f;}
+                catch(Exception e){Log.Warning("[M1] Native impact particle fallback: "+e.Message);}
+                if(native==null){
+                    Emit(origin,normal*.6f+Vector3.up*.5f,new Color(1,.65f,.2f,.95f),4,2.6f,.85f,p.Shot+303,false,-1,true,.18f);
+                    Emit(origin,Vector3.zero,new Color(1,.95f,.7f,1),2,1.15f,.16f,p.Shot+304,false,-1,true,.06f);
+                }
+            }
             // Dust describes the struck surface; it never pretends a block broke.
             Color tint;switch(surface){
                 case ImpactSurface.Earth:tint=new Color(.42f,.32f,.22f,.4f);break;
@@ -150,6 +165,17 @@ namespace PZAEC.M1
             if(v.ImpactLight!=null)v.ImpactLightAt=Time.time;
         }
 
+        public static AudioSource CreateMissileImpactSound()
+        {Resources();var sound=Audio(new GameObject("M1AAImpactSound").transform,blastClip,.75f,300);sound.pitch=.9f;return sound;}
+        public static void MissileImpact(Vector3 point,Vector3 direction,int seed,AudioSource sound)
+        {
+            Resources();var normal=direction.sqrMagnitude>.001f?-direction.normalized:Vector3.up;var origin=point+normal*.15f;
+            while(puffs.Count>153){var old=puffs[0];old.Go.SetActive(false);pool.Push(old);puffs.RemoveAt(0);}
+            Emit(origin,normal*.5f+Vector3.up*.3f,new Color(1,.65f,.2f,.9f),3,1.4f,.65f,seed+505,false,-1,true,.12f);
+            Emit(origin,Vector3.zero,new Color(1,.95f,.7f,1),1,.65f,.15f,seed+506,false,-1,true,.06f);
+            Emit(origin,Vector3.up*.8f,new Color(.3f,.29f,.27f,.3f),3,.6f,1.2f,seed+507);
+            if(sound!=null){sound.transform.position=point-Origin.position;sound.Play();}
+        }
         static void Emit(Vector3 origin,Vector3 velocity,Color color,int count,float size,float life,int seed,bool debris=false,int sourceVehicle=-1,bool fire=false,float hold=0)
         {
             var rng=new System.Random(seed);for(int i=0;i<count;i++){

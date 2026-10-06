@@ -22,14 +22,26 @@ namespace PZAEC.Mecha
     public sealed class NetPackagePZAECMechaGroundIntent:NetPackage
     {
         public GroundWire Data=new GroundWire();public override NetPackageDirection PackageDirection{get{return NetPackageDirection.ToServer;}}
-        public NetPackagePZAECMechaGroundIntent Setup(GroundWire d){Data=d;return this;}public override int GetLength(){return GroundWire.Bytes;}
+        public NetPackagePZAECMechaGroundIntent Setup(GroundWire d){Data=d;return this;}
+#if MECHA_LEGACY_PACKAGE_LENGTH
+        public override int
+#else
+        public int
+#endif
+        GetLength(){return GroundWire.Bytes;}
         public override void read(PooledBinaryReader r){Data=new GroundWire();Data.Read(r);}public override void write(PooledBinaryWriter w){base.write(w);Data.Write(w);}
         public override void ProcessPackage(World world,GameManager callbacks){if(Weapons.Server&&world!=null&&Sender!=null&&Sender.entityId==Data.Actor)GroundNet.ServerReceive(world,Sender.entityId,Data);}
     }
     public sealed class NetPackagePZAECMechaGroundEvent:NetPackage
     {
         public GroundWire Data=new GroundWire();public override NetPackageDirection PackageDirection{get{return NetPackageDirection.ToClient;}}
-        public NetPackagePZAECMechaGroundEvent Setup(GroundWire d){Data=d;return this;}public override int GetLength(){return GroundWire.Bytes;}
+        public NetPackagePZAECMechaGroundEvent Setup(GroundWire d){Data=d;return this;}
+#if MECHA_LEGACY_PACKAGE_LENGTH
+        public override int
+#else
+        public int
+#endif
+        GetLength(){return GroundWire.Bytes;}
         public override void read(PooledBinaryReader r){Data=new GroundWire();Data.Read(r);}public override void write(PooledBinaryWriter w){base.write(w);Data.Write(w);}
         public override void ProcessPackage(World world,GameManager callbacks){if(!Weapons.Server&&world!=null)GroundNet.ClientReceive(world,Data);}
     }

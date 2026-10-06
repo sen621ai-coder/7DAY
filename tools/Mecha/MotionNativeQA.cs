@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -112,7 +112,7 @@ public sealed class MechaMotionQA : IModApi
         Check("complete variant identified independently",Weapons.IsMecha(v)&&Rules.Complete(v)&&Rules.AttributeScale(v)==1.5f);
         Check("complete hull 3M, measured="+v.vehicle.GetMaxHealth(),v.vehicle.GetMaxHealth()==3000000);
         int expectedParts=Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(Path.Combine(Model.Path,"samurai_style_gundam_mecha_rig.json")))["parts"].Count();
-        Check("complete semantic textured skin batches match authored manifest (including recessed liners)",skins.Length==expectedParts&&skins.Length<=25&&skins.All(s=>s.sharedMaterial.mainTexture!=null));
+        Check("complete semantic textured skin batches match authored manifest (including recessed liners)",skins.Length==expectedParts&&skins.Length<=38&&skins.All(s=>s.sharedMaterial.mainTexture!=null));
         float error=0;int triangles=0;
         foreach(var skin in skins){var mesh=new Mesh();skin.BakeMesh(mesh);var a=mesh.vertices;var b=skin.sharedMesh.vertices;for(int i=0;i<a.Length;i++)error=Mathf.Max(error,Vector3.Distance(a[i],b[i]));triangles+=skin.sharedMesh.triangles.Length/3;UnityEngine.Object.DestroyImmediate(mesh);}
         Check("complete bind pose preserved, error="+error,error<.001f);
@@ -355,8 +355,13 @@ public sealed class MechaMotionQA : IModApi
             Boarding.Clear();
         }
         rig.ResetPose();RobotPresentation.Update(v,rig,0,1);
-        Check("complete chest panels slide apart",rig.ChestL.localPosition.x<rig.RestPos[rig.ChestL].x-.15f&&rig.ChestR.localPosition.x>rig.RestPos[rig.ChestR].x+.15f);
-        RobotPresentation.Update(v,rig,0,0);Check("complete chest returns exactly to rest",Vector3.Distance(rig.ChestL.localPosition,rig.RestPos[rig.ChestL])<.00001f&&Quaternion.Angle(rig.ChestDoor.localRotation,rig.RestRot[rig.ChestDoor])<.01f);
+        var cabin=rig.Torso.Find("MechaCockpit");
+        Check("complete symbolic hatch has no oversized room or seat",cabin!=null&&cabin.Find("CockpitBack")==null&&cabin.Find("Seat")==null&&cabin.Find("CockpitSideL")==null&&cabin.Find("CockpitRoof")==null);
+        Check("complete small hatch armour rotates twelve degrees",Mathf.Abs(Quaternion.Angle(rig.ChestL.localRotation,rig.RestRot[rig.ChestL])-12)<.01f&&Mathf.Abs(Quaternion.Angle(rig.ChestR.localRotation,rig.RestRot[rig.ChestR])-12)<.01f);
+        Check("complete small hatch travel remains under two centimetres",Vector3.Distance(rig.ChestL.localPosition,rig.RestPos[rig.ChestL])>.015f&&Vector3.Distance(rig.ChestL.localPosition,rig.RestPos[rig.ChestL])<.02f&&Vector3.Distance(rig.ChestR.localPosition,rig.RestPos[rig.ChestR])<.02f);
+        Check("complete central breastplate stays fixed when fully open",Vector3.Distance(rig.ChestDoor.localPosition,rig.RestPos[rig.ChestDoor])<.00001f&&Quaternion.Angle(rig.ChestDoor.localRotation,rig.RestRot[rig.ChestDoor])<.01f);
+        RobotPresentation.Update(v,rig,0,0);
+        Check("complete both small panels return exactly to rest",Vector3.Distance(rig.ChestL.localPosition,rig.RestPos[rig.ChestL])<.00001f&&Vector3.Distance(rig.ChestR.localPosition,rig.RestPos[rig.ChestR])<.00001f&&Quaternion.Angle(rig.ChestL.localRotation,rig.RestRot[rig.ChestL])<.01f&&Quaternion.Angle(rig.ChestR.localRotation,rig.RestRot[rig.ChestR])<.01f&&Quaternion.Angle(rig.ChestDoor.localRotation,rig.RestRot[rig.ChestDoor])<.01f);
         var obstacle=GameObject.CreatePrimitive(PrimitiveType.Cube);obstacle.transform.position=v.position-Origin.position+Vector3.forward*5+Vector3.up;Physics.SyncTransforms();
         Check("exit capsule detects native blocking geometry",!Ceremony.ClearCapsule(v,p,v.position+Vector3.forward*5));UnityEngine.Object.DestroyImmediate(obstacle);
         Check("no floating exit without supporting ground",!Ceremony.FindExit(v,p,out var unused));

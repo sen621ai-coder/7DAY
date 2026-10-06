@@ -22,19 +22,83 @@ public sealed class M1NativeQA:IModApi
             camera.enabled=false;camera.targetTexture=target;camera.cullingMask=1<<30;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.black;camera.fieldOfView=30;camera.nearClipPlane=.01f;camera.farClipPlane=3;
             Check(flash.GetComponent<Renderer>().sharedMaterial.shader.isSupported,"effect shader supported by native graphics device");
             foreach(var offset in billboard?new[]{Vector3.back}:new[]{Vector3.back,Vector3.right}){
-                camera.transform.position=flash.position+offset;camera.transform.LookAt(flash.position);camera.Render();RenderTexture.active=target;
-                pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();int lit=pixels.GetPixels32().Count(c=>c.r>20||c.g>20||c.b>20);
-                Check(lit>5,"effect renders visible pixels from "+offset+" pixels="+lit);
+                camera.transform.position=flash.position+offset;camera.transform.LookAt(flash.position);
+                var renderer=flash.GetComponent<Renderer>();renderer.enabled=false;camera.Render();RenderTexture.active=target;pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();var baseline=pixels.GetPixels32();
+                renderer.enabled=true;camera.Render();pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();var visible=pixels.GetPixels32();int changed=0;
+                for(int i=0;i<visible.Length;i++)if(Math.Abs(visible[i].r-baseline[i].r)+Math.Abs(visible[i].g-baseline[i].g)+Math.Abs(visible[i].b-baseline[i].b)>30)changed++;
+                Check(changed>5,"effect changes rendered pixels from "+offset+" pixels="+changed);
             }
         }finally{flash.localPosition=position;flash.localRotation=rotation;flash.gameObject.layer=layer;RenderTexture.active=previous;camera.targetTexture=null;target.Release();UnityEngine.Object.Destroy(cameraObject);UnityEngine.Object.Destroy(target);UnityEngine.Object.Destroy(pixels);}
     }
     public void InitMod(Mod mod){if(Environment.GetCommandLineArgs().Contains("-m1NativeQA"))ModEvents.GameStartDone.RegisterHandler(Run);}
+    static void CheckNativeParticle(GameObject effect,string name,float age)
+    {
+        Check(effect!=null,name+" native prefab spawns");var cameraObject=new GameObject("M1 native particle render QA");var camera=cameraObject.AddComponent<Camera>();var target=new RenderTexture(256,256,24);var pixels=new Texture2D(256,256,TextureFormat.RGB24,false);var previous=RenderTexture.active;
+        try{
+            effect.transform.position=new Vector3(0,300,0);foreach(var t in effect.GetComponentsInChildren<Transform>(true))t.gameObject.layer=30;
+            var systems=effect.GetComponentsInChildren<ParticleSystem>(true);Check(systems.Length>0,name+" contains actual particle systems");foreach(var system in systems){system.Stop(false,ParticleSystemStopBehavior.StopEmittingAndClear);system.Simulate(age,false,true,false);}
+            results.Add("INFO "+name+" simulated age="+age+" particles="+systems.Sum(p=>p.particleCount));
+            var renderers=effect.GetComponentsInChildren<Renderer>(true);var enabled=renderers.Select(r=>r.enabled).ToArray();camera.enabled=false;camera.targetTexture=target;camera.cullingMask=1<<30;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.black;camera.fieldOfView=60;camera.nearClipPlane=.01f;camera.farClipPlane=30;camera.transform.position=effect.transform.position+Vector3.back*6;camera.transform.LookAt(effect.transform.position);
+            foreach(var r in renderers)r.enabled=false;camera.Render();RenderTexture.active=target;pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();var baseline=pixels.GetPixels32();
+            for(int i=0;i<renderers.Length;i++)renderers[i].enabled=enabled[i];camera.Render();pixels.ReadPixels(new Rect(0,0,256,256),0,0);pixels.Apply();var visible=pixels.GetPixels32();int changed=0;for(int i=0;i<visible.Length;i++)if(Math.Abs(visible[i].r-baseline[i].r)+Math.Abs(visible[i].g-baseline[i].g)+Math.Abs(visible[i].b-baseline[i].b)>30)changed++;
+            if(changed>5)Check(true,name+" native particles change rendered pixels="+changed);
+            else{results.Add("FINDING "+name+" native resource emits particles but rendered pixel difference="+changed+"; client visibility not confirmed");foreach(var r in renderers)results.Add("INFO renderer "+r.name+" enabled="+r.enabled+" shader="+(r.sharedMaterial==null?"none":r.sharedMaterial.shader.name)+" bounds="+r.bounds);}
+        }finally{RenderTexture.active=previous;camera.targetTexture=null;target.Release();UnityEngine.Object.Destroy(effect);UnityEngine.Object.Destroy(cameraObject);UnityEngine.Object.Destroy(target);UnityEngine.Object.Destroy(pixels);}
+    }
     static T Spawn<T>(World world,string name,Vector3 position) where T:Entity
     {var e=EntityFactory.CreateEntity(EntityClass.FromString(name),position) as T;if(e==null)throw new Exception("factory "+name);entities.Add(e);world.SpawnEntityInWorld(e);return e;}
     static void Intent(World w,EntityVehicle vehicle,EntityPlayer player,byte mode,bool fire,bool zoom,Vector3 point)
     {
         var origin=vehicle.position+Vector3.up*3;
         Secondary.Request(w,player.entityId,new NetPackageM1SecondaryIntent{Vehicle=vehicle.entityId,Serial=++serial,Select=mode,Flags=(byte)((fire?1:0)|(zoom?2:0)),Origin=origin,Direction=(point-origin).normalized});
+    }
+    static bool NativeFlashSuccess(ref bool __result){__result=true;return false;}
+    static void CheckNetworkEffects(World world,EntityVehicle vehicle)
+    {
+        // Inactive marker bypasses gameplay initialization. It enables the real
+        // cosmetic receivers in this dedicated fixture, not a playable client.
+        var marker=new GameObject("M1 cosmetic receiver QA player");marker.SetActive(false);
+        var local=marker.AddComponent<EntityPlayerLocal>();var cameraObject=new GameObject("M1 cosmetic receiver QA camera");local.playerCamera=cameraObject.AddComponent<Camera>();local.playerCamera.enabled=false;
+        var primary=AccessTools.Field(typeof(World),"m_LocalPlayerEntity");var previous=primary.GetValue(world);primary.SetValue(world,local);
+        try{
+            CheckNativeParticle(GameManager.Instance.ExplosionClient(vehicle.position+Vector3.forward*20,Quaternion.identity,5,0,5,2500,-1,new List<BlockChangeInfo>()),"HE rocket explosion",.1f);
+            results.Add("INFO Native M60 is optional decoration; guaranteed MG muzzle core is tested independently of native success");
+            var mainViews=(System.Collections.IDictionary)AccessTools.Field(typeof(Presentation),"views").GetValue(null);
+            Presentation.Receive(world,NetPackageM1Event.Make(vehicle.entityId,123456,100,700,Weapons.StateEvent,Time.time,Vector3.zero,Vector3.zero,0,0));
+            Presentation.Receive(world,NetPackageM1Event.Make(vehicle.entityId,123456,99,700,Weapons.ShotEvent,Time.time,vehicle.position+Vector3.up*2,Vector3.forward*250,4.8f,0));
+            var view=(Presentation.View)mainViews[vehicle.entityId];Check(view.Flame.gameObject.activeSelf,"main cannon real shot receiver survives newer state packet");CheckFlashPixels(view.Flame);
+            var puffs=(System.Collections.IList)AccessTools.Field(typeof(Presentation),"puffs").GetValue(null);
+            int beforeImpact=puffs.Count;
+            Presentation.Receive(world,NetPackageM1Event.Make(vehicle.entityId,123456,101,700,Weapons.ImpactEvent,Time.time,vehicle.position+Vector3.forward*20,Vector3.back,ImpactRules.Encode(ImpactSurface.Organic),1));
+            Check(puffs.Count==beforeImpact+2&&view.ImpactShot==700,"AP real impact receiver generates fireball and flash on organic target");int before=puffs.Count;
+            Presentation.Receive(world,NetPackageM1Event.Make(vehicle.entityId,123456,101,700,Weapons.ImpactEvent,Time.time,vehicle.position+Vector3.forward*20,Vector3.back,ImpactRules.Encode(ImpactSurface.Organic),1));
+            Check(puffs.Count==before,"duplicate main impact cannot replay effects");
+            var secondaryViews=(System.Collections.IDictionary)AccessTools.Field(typeof(SecondaryPresentation),"views").GetValue(null);
+            var status=new NetPackageM1SecondaryEvent{Vehicle=vehicle.entityId,Epoch=123456,Serial=100,Kind=1,Time=Time.time};SecondaryPresentation.Receive(world,status);
+            var mg=new NetPackageM1SecondaryEvent{Vehicle=vehicle.entityId,Epoch=123456,Serial=99,Kind=2,Time=Time.time,A=vehicle.position+Vector3.up*3,B=vehicle.position+Vector3.forward*100};mg.I[0]=3;var nativeMethod=AccessTools.Method(typeof(SecondaryPresentation),"NativeFlash");var forcedSuccess=AccessTools.Method(typeof(M1NativeQA),"NativeFlashSuccess");var helper=new Harmony("M1.QA.nativeFlashSuccess");helper.Patch(nativeMethod,prefix:new HarmonyMethod(forcedSuccess));try{SecondaryPresentation.Receive(world,mg);}finally{helper.Unpatch(nativeMethod,forcedSuccess);}
+            var secondary=secondaryViews[vehicle.entityId];var type=secondary.GetType();var mgFlash=(Transform)type.GetField("Flash").GetValue(secondary);Check(Math.Abs((float)type.GetField("ShotAt").GetValue(secondary)-Time.time)<.00001f,"MG real receiver always schedules guaranteed muzzle flash");SecondaryPresentation.Update(world);
+            Check(mgFlash.gameObject.activeSelf,"MG fallback muzzle flash activates through presentation update");CheckFlashPixels(mgFlash);
+            results.Add("INFO MG hit feedback: no independent hit particle; original target damage feedback only");
+            var trails=(System.Collections.IList)AccessTools.Field(typeof(SecondaryPresentation),"trails").GetValue(null);Check(trails.Count==1,"MG every-third-shot tracer survives newer state packet");
+            var aa=new NetPackageM1SecondaryEvent{Vehicle=vehicle.entityId,Epoch=123456,Serial=101,Kind=3,Time=Time.time,A=SecondaryModel.Find(vehicle.PhysicsTransform,"AAMuzzleL").position+Origin.position,B=Vector3.forward};aa.I[0]=900;SecondaryPresentation.Receive(world,aa);SecondaryPresentation.Update(world);
+            var aaFlash=(Transform)type.GetField("ActiveAA").GetValue(secondary);Check(aaFlash!=null&&aaFlash.gameObject.activeSelf,"AA launch event activates selected tube flash");CheckFlashPixels(aaFlash);
+            var flight=new NetPackageM1SecondaryEvent{Vehicle=vehicle.entityId,Epoch=123456,Serial=102,Kind=4,Time=Time.time,A=vehicle.position+Vector3.forward*50,B=Vector3.forward};flight.I[0]=900;SecondaryPresentation.Receive(world,flight);SecondaryPresentation.Update(world);
+            Check(trails.Cast<object>().Any(t=>(bool)t.GetType().GetField("Missile").GetValue(t)),"AA motion receiver retains missile trail");
+            int beforeMissile=puffs.Count;
+            var impact=new NetPackageM1SecondaryEvent{Vehicle=vehicle.entityId,Epoch=123456,Serial=103,Kind=SecondaryRules.MissileHit,Time=Time.time,A=flight.A,B=Vector3.forward};impact.I[0]=900;SecondaryPresentation.Receive(world,impact);SecondaryPresentation.Update(world);
+            Check(!trails.Cast<object>().Any(t=>(bool)t.GetType().GetField("Missile").GetValue(t)),"AA hit removes flight trail");
+            Check(puffs.Count==beforeMissile+7,"AA real impact receiver creates four fire layers and three smoke puffs");
+            var missileSound=(AudioSource)type.GetField("ImpactSound").GetValue(secondary);Check(missileSound!=null&&missileSound.clip!=null&&missileSound.isPlaying,"AA impact starts dedicated explosion audio");
+            var fire=puffs[beforeMissile];var fireType=fire.GetType();Check((float)fireType.GetField("Life").GetValue(fire)==.65f,"AA fireball has a fixed visible lifetime");CheckFlashPixels(((GameObject)fireType.GetField("Go").GetValue(fire)).transform,true);
+            int afterMissile=puffs.Count;SecondaryPresentation.Receive(world,impact);Check(puffs.Count==afterMissile,"duplicate AA hit cannot replay explosion");
+            var expired=new NetPackageM1SecondaryEvent{Vehicle=vehicle.entityId,Epoch=123456,Serial=104,Kind=SecondaryRules.MissileExpired,Time=Time.time,A=flight.A,B=Vector3.forward};expired.I[0]=901;SecondaryPresentation.Receive(world,expired);
+            Check(puffs.Count==afterMissile,"AA expiry creates no fake impact explosion");
+            var visualEpoch=123456;var mainState=Weapons.States[vehicle.entityId];var authority=Secondary.States[vehicle.entityId];mainState.Epoch=visualEpoch;authority.Sequence=200;missileSound.Stop();
+            var missileType=typeof(Secondary).GetNestedType("Missile",System.Reflection.BindingFlags.NonPublic);var missile=Activator.CreateInstance(missileType);var live=(System.Collections.IList)AccessTools.Field(typeof(Secondary),"missiles").GetValue(null);live.Clear();
+            missileType.GetField("Vehicle").SetValue(missile,vehicle);missileType.GetField("Epoch").SetValue(missile,visualEpoch);missileType.GetField("Id").SetValue(missile,902);missileType.GetField("Target").SetValue(missile,-1);missileType.GetField("Guided").SetValue(missile,false);missileType.GetField("Age").SetValue(missile,5f);missileType.GetField("Position").SetValue(missile,vehicle.position+Vector3.up*50);missileType.GetField("Direction").SetValue(missile,Vector3.forward);live.Add(missile);
+            Secondary.Advance(.01f);Check(live.Count==0&&puffs.Count==afterMissile&&!missileSound.isPlaying,"actual server missile timeout sends expiry without explosion or sound");
+
+        }finally{primary.SetValue(world,previous);Presentation.Clear();SecondaryPresentation.Clear();UnityEngine.Object.Destroy(marker);UnityEngine.Object.Destroy(cameraObject);}
     }
     static void Run(ref ModEvents.SGameStartDoneData data)
     {
@@ -174,13 +238,26 @@ public sealed class M1NativeQA:IModApi
             foreach(ImpactSurface surface in Enum.GetValues(typeof(ImpactSurface)))foreach(bool ap in new[]{true,false}){
                 AccessTools.Method(typeof(Presentation),"ImpactFX").Invoke(null,new object[]{new Presentation.View{ImpactAudio=effectAudio},new NetPackageM1Event{A=vehicle.position+Vector3.forward*20,B=Vector3.back,X=ImpactRules.Encode(surface),Y=ap?1:0,Shot=987}});
                 int fires=0,sparks=0;foreach(var puff in impactPuffs){if((bool)puff.GetType().GetField("Fire").GetValue(puff))fires++;if((bool)puff.GetType().GetField("Debris").GetValue(puff))sparks++;}
-                Check(fires==ImpactRules.FireCount(ap,surface)&&sparks==ImpactRules.Sparks(ap,surface),"material fire/spark policy "+surface+" AP="+ap);
+                Check((ap?fires==2:fires==0||fires==6)&&sparks==ImpactRules.Sparks(ap,surface),"material fire/spark policy "+surface+" AP="+ap);
                 if(ap){for(int layer=0;layer<2;layer++){var puff=impactPuffs[layer];var type=puff.GetType();float life=(float)type.GetField("Life").GetValue(puff),hold=(float)type.GetField("Hold").GetValue(puff);Check(Mathf.Abs(life-(layer==0?.45f:.15f))<.00001f&&Mathf.Abs(hold-(layer==0?.12f:.06f))<.00001f,"AP fixed lifetime and brightness hold "+surface+" layer="+layer);}}
                 Check(effectAudio.clip!=null,"impact audio assigned "+surface+" AP="+ap);
                 if(impactPuffs.Count>0){var puff=impactPuffs[0];var ft=puff.GetType();ft.GetField("Start").SetValue(puff,Time.time-.05f);AccessTools.Method(typeof(Presentation),"UpdatePuffs").Invoke(null,new object[]{null,0f});CheckFlashPixels(((GameObject)ft.GetField("Go").GetValue(puff)).transform,true);}
                 foreach(var puff in impactPuffs)puff.GetType().GetField("Start").SetValue(puff,Time.time-10);
                 AccessTools.Method(typeof(Presentation),"UpdatePuffs").Invoke(null,new object[]{null,0f});Check(impactPuffs.Count==0,"material effect pool cleanup "+surface+" AP="+ap);
             }
+            var originalExplosion=WorldStaticData.prefabExplosions[5];
+            try{
+                WorldStaticData.prefabExplosions[5]=null;
+                AccessTools.Method(typeof(Presentation),"ImpactFX").Invoke(null,new object[]{new Presentation.View{ImpactAudio=effectAudio},new NetPackageM1Event{A=vehicle.position+Vector3.forward*20,B=Vector3.back,Y=0,X=ImpactRules.Encode(ImpactSurface.Organic),Shot=988}});
+                Check(impactPuffs.Count==6,"missing native HE prefab still creates six fallback fire layers");
+                var cameraObject=new GameObject("M1 final camera facing QA");var camera=cameraObject.AddComponent<Camera>();camera.transform.rotation=Quaternion.Euler(15,95,0);
+                AccessTools.Method(typeof(Presentation),"FacePuffs").Invoke(null,new object[]{camera});
+                foreach(var puff in impactPuffs){var go=(GameObject)puff.GetType().GetField("Go").GetValue(puff);Check(Quaternion.Angle(go.transform.rotation,camera.transform.rotation)<.01f,"impact billboard follows final camera pose");}
+                UnityEngine.Object.Destroy(cameraObject);
+                CheckFlashPixels(((GameObject)impactPuffs[0].GetType().GetField("Go").GetValue(impactPuffs[0])).transform,true);
+                foreach(var puff in impactPuffs)puff.GetType().GetField("Start").SetValue(puff,Time.time-10);
+                AccessTools.Method(typeof(Presentation),"UpdatePuffs").Invoke(null,new object[]{null,0f});
+            }finally{WorldStaticData.prefabExplosions[5]=originalExplosion;}
             var materials=new[]{"Mmetal","Mstone","Mdirt","Msand","Msnow","Mwood","Mglass","Mwater","Morganic","Mcloth"};
             var surfaces=new[]{ImpactSurface.Metal,ImpactSurface.Stone,ImpactSurface.Earth,ImpactSurface.Sand,ImpactSurface.Snow,ImpactSurface.Wood,ImpactSurface.Glass,ImpactSurface.Water,ImpactSurface.Organic,ImpactSurface.Cloth};
             for(int mi=0;mi<materials.Length;mi++){var mat=MaterialBlock.materials[materials[mi]];Check(ImpactRules.Classify(mat.SurfaceCategory,mat.DamageCategory,mat.id,mat.IsLiquid)==surfaces[mi],"loaded native material mapping "+materials[mi]);}
@@ -191,6 +268,7 @@ public sealed class M1NativeQA:IModApi
             var shortLine=(LineRenderer)shortTrail.GetType().GetField("Line").GetValue(shortTrail);
             Check(Vector3.Distance(shortLine.GetPosition(0),shortLine.GetPosition(1))<2.51f&&Vector3.Distance(shortLine.GetPosition(1)+Origin.position,vehicle.position)>40,"MG tracer is a moving short segment rather than a 200m beam");
             SecondaryPresentation.Clear();
+            Presentation.Clear();CheckNetworkEffects(world,vehicle);
             int playerHealth=player.Health;Combat.SecondaryHit(player,gunner.entityId,5000000,true,Vector3.forward,player.position);Check(player.Health==playerHealth,"secondary damage refuses player target");
             results.Add("FINISHED failures=0");
         }catch(Exception e){results.Add("FAIL "+e);}

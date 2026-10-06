@@ -9,7 +9,12 @@ Add-Type -CompilerOptions '/nowarn:1701' -ReferencedAssemblies ($compilerRefs+$f
 using System;using System.IO;using System.Linq;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.CSharp;
 public static class MechaCompiler {
   public static void Build(string[] sources,string[] references,string output){
-   var c=CSharpCompilation.Create("PZAEC.Mecha",sources.Select(p=>CSharpSyntaxTree.ParseText(File.ReadAllText(p),path:p)),references.Select(p=>MetadataReference.CreateFromFile(p)),new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithOptimizationLevel(OptimizationLevel.Release).WithDeterministic(true));
+   var refs=references.Select(p=>MetadataReference.CreateFromFile(p)).ToArray();
+   var probe=CSharpCompilation.Create("MechaApiProbe",references:refs);
+   var package=probe.GetTypeByMetadataName("NetPackage");
+   bool legacyLength=package!=null&&package.GetMembers("GetLength").OfType<IMethodSymbol>().Any(m=>m.IsVirtual||m.IsAbstract);
+   var parse=new CSharpParseOptions(preprocessorSymbols:legacyLength?new[]{"MECHA_LEGACY_PACKAGE_LENGTH"}:new string[0]);
+   var c=CSharpCompilation.Create("PZAEC.Mecha",sources.Select(p=>CSharpSyntaxTree.ParseText(File.ReadAllText(p),options:parse,path:p)),refs,new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithOptimizationLevel(OptimizationLevel.Release).WithDeterministic(true));
    using(var s=new MemoryStream()){var result=c.Emit(s);foreach(var d in result.Diagnostics.Where(d=>d.Severity>=DiagnosticSeverity.Warning))Console.WriteLine(d);if(!result.Success)throw new Exception("Mecha compile failed; installed DLL not changed");var temporary=output+".building";File.WriteAllBytes(temporary,s.ToArray());if(File.Exists(output))File.Replace(temporary,output,null);else File.Move(temporary,output);}
   }
 }

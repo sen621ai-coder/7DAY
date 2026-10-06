@@ -127,9 +127,7 @@ namespace SakuraPreview
                             Log.Out("[SakuraEscort] Mission ended: id="+mission.Id+" phase="+mission.Phase+" reason="+mission.Failure);
                         }
                         Cleanup(mission);
-                        // Failed encounters retire immediately, including fixed test NPCs. Successful wilderness encounters retain their claim window.
-                        if(npc!=null&&mission.ShouldDespawnNpc(journal.EncounterIds.Contains(npc.entityId),Utc()))
-                        {npc.Leader=-1;Save();Log.Out("[SakuraEscort] Retiring NPC: entity="+npc.entityId+" mission="+mission.Id+" phase="+mission.Phase);current.RemoveEntity(npc.entityId,EnumRemoveEntityReason.Despawned);npc=null;}
+                        if(mission.ShouldDespawnNpc(Utc())){RetireNpc(mission,npc);npc=null;}
                     }
                     foreach(var member in mission.Members){var player=Player(member.Key);if(player!=null)SendStatus(mission,npc,player);}
                 }
@@ -160,7 +158,7 @@ namespace SakuraPreview
             {
                 if(action>=16&&action<=19)
                 {
-                    if(mission==null || mission.Phase!=EscortPhase.Searching || mission.Tier!=action || !mission.Members.Any(m=>m.Key==key))return 39;
+                    if(mission==null || !mission.CanStart(action,key) || mission.Guard!=npc.IsGuardian)return 39;
                     var target=npc.IsGuardian?(Vector3?)npc.position:NearestTrader(npc.position);
                     if(target==null)return 32;
                     mission.TargetX=target.Value.x;mission.TargetZ=target.Value.z;
@@ -177,6 +175,9 @@ namespace SakuraPreview
                 if(action==21 && mission.Active && mission.Leader==key){mission.Fail("带领者放弃任务");npc.Leader=-1;Cleanup(mission);Save();foreach(var member in mission.Members){var participant=Player(member.Key);if(participant!=null)SendStatus(mission,npc,participant);}return 21;}
                 if(action==22)
                 {
+                    // Enforce retirement/deadline before the next server tick as well.
+                    if(mission.ShouldDespawnNpc(Utc())){RetireNpc(mission,npc);SendStatus(mission,null,player);return 35;}
+                    if(!mission.CanClaim(key))return 35;
                     var box=ItemClass.GetItem(mission.RewardBox);
                     if(box==null || box.type==0){Log.Error("[SakuraEscort] Missing reward item: "+mission.RewardBox);return 36;}
                     if(!mission.BeginClaim(key))return 35;
@@ -186,7 +187,10 @@ namespace SakuraPreview
                     GameManager.Instance.ItemDropServer(new ItemStack(box,1),player.position+Vector3.up+new Vector3(.4f,0,0),Vector3.zero,player.entityId,600);
                     if(player is EntityPlayerLocal)localXP((EntityPlayerLocal)player,mission.XP);
                     else ConnectionManager.Instance.SendPackage(NetPackageManager.GetPackage<NetPackageEntityAddExpClient>().Setup(player.entityId,mission.XP,Progression.XPTypes.Quest,null),_attachedToEntityId:player.entityId);
-                    member.Receipt=2;Save();SendStatus(mission,npc,player);return 22;
+                    member.Receipt=2;Save();
+                    Log.Out("[SakuraEscort] Reward issued: mission="+mission.Id+" npc="+mission.NpcId+" player="+player.entityId);
+                    if(mission.ShouldDespawnNpc(Utc())){RetireNpc(mission,npc);npc=null;}
+                    SendStatus(mission,npc,player);return 22;
                 }
                 if(action==23 && mission.Active && mission.MissingSeconds>=10){mission.Leader=key;mission.Paused=false;mission.MissingSeconds=0;Save();return 23;}
                 if((action==2||action==3)&&mission.Active&&mission.Phase!=EscortPhase.Searching&&mission.Leader==key){mission.Paused=action==3;Save();return action;}
@@ -293,6 +297,16 @@ namespace SakuraPreview
                 if(EntityClass.GetEntityClassName(entity.entityClass).StartsWith("sakuraAmbushT"+mission.Tier,StringComparison.Ordinal))current.RemoveEntity(id,EnumRemoveEntityReason.Despawned);
                 mission.Enemies.Remove(id);
             }
+        }
+        static void RetireNpc(SakuraMissionState mission,EntitySakura npc)
+        {
+            if(!mission.NpcRetired){mission.NpcRetired=true;Save();}
+            // The journal retains the terminal mission and receipts after despawning.
+            // Retry removal if a saved entity reloads or the first removal was interrupted.
+            if(npc==null)return;
+            npc.Leader=-1;
+            Log.Out("[SakuraEscort] Retiring NPC: entity="+npc.entityId+" mission="+mission.Id+" phase="+mission.Phase);
+            current.RemoveEntity(npc.entityId,EnumRemoveEntityReason.Despawned);
         }
         public static byte GrantRescueStatus(EntityPlayer player,string questId,int code,int traderId)
         {

@@ -110,10 +110,16 @@ public static class EquipmentOwnershipQA
                 Capture(camera,rig,skins,"ownership-"+i,views[i],true);Capture(camera,rig,skins,"sword-only-"+i,views[i],false,"Sword");Capture(camera,rig,skins,"wings-only-"+i,views[i],false,"Wing");
             }
             var wingAudit=new List<object>();
-            var pair=skins.Where(s=>Role(s)=="WingL"||Role(s)=="WingR").OrderBy(s=>Role(s)).ToArray();
-            check("one complete mesh per wing",pair.Length==2);
+            var pair=skins.Where(s=>(Role(s)=="WingL"||Role(s)=="WingR")&&!s.name.StartsWith("Complete_Liner_")&&!s.name.StartsWith("Complete_InnerShell_")).OrderBy(s=>Role(s)).ToArray();
+            check("one complete exterior mesh per wing; backing checked in all-vertex rigidity",pair.Length==2);
             var leftRest=pair[0].sharedMesh.vertices;var rightRest=pair[1].sharedMesh.vertices;
             check("matching complete wing vertex counts",leftRest.Length==rightRest.Length);
+            // Vertex storage order is not a geometry contract. Match reflected
+            // rest positions; UV seam duplicates share the same rigid motion.
+            var rightLookup=new Dictionary<Vector3,int>();for(int k=0;k<rightRest.Length;k++)rightLookup[rightRest[k]]=k;
+            var rightMap=new int[leftRest.Length];bool reflected=true;
+            for(int k=0;k<leftRest.Length;k++){var point=leftRest[k];point.x=-point.x;int match;if(!rightLookup.TryGetValue(point,out match)){reflected=false;match=0;}rightMap[k]=match;}
+            check("every exterior wing vertex has its reflected counterpart",reflected);
             var leftRoot=rig.Mount.InverseTransformPoint(rig.WingL.position);var rightRoot=rig.Mount.InverseTransformPoint(rig.WingR.position);
             foreach(string label in new[]{"stand","walk","crouch","jump","deploy-half","hover","cruise","boost","bank-left","bank-right","landing","power-loss"}){
                 bool ground=label=="stand"||label=="walk"||label=="crouch";
@@ -130,9 +136,9 @@ public static class EquipmentOwnershipQA
                 var posed=Bake(pair);float shapeError=0,reflectionError=0;
                 for(int k=0;k<leftRest.Length;k++){
                     var lp=rig.WingL.InverseTransformPoint(posed[0][k])+leftRoot;
-                    var rp=rig.WingR.InverseTransformPoint(posed[1][k])+rightRoot;
-                    shapeError=Mathf.Max(shapeError,Vector3.Distance(lp,leftRest[k]),Vector3.Distance(rp,rightRest[k]));
-                    var lm=rig.Mount.InverseTransformPoint(posed[0][k]);var rm=rig.Mount.InverseTransformPoint(posed[1][k]);lm.x=-lm.x;
+                    var rp=rig.WingR.InverseTransformPoint(posed[1][rightMap[k]])+rightRoot;
+                    shapeError=Mathf.Max(shapeError,Vector3.Distance(lp,leftRest[k]),Vector3.Distance(rp,rightRest[rightMap[k]]));
+                    var lm=rig.Mount.InverseTransformPoint(posed[0][k]);var rm=rig.Mount.InverseTransformPoint(posed[1][rightMap[k]]);lm.x=-lm.x;
                     reflectionError=Mathf.Max(reflectionError,Vector3.Distance(lm,rm));
                 }
                 check("wing geometry stays complete and rigid pose="+label+" error="+shapeError,shapeError<.001f);

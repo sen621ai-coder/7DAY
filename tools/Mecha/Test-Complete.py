@@ -1,6 +1,7 @@
 """Asset/profile checks for Complete Form; Python standard library only."""
-import csv,hashlib,json,pathlib,struct,math,xml.etree.ElementTree as E
-ROOT=pathlib.Path(__file__).resolve().parents[2];MOD=ROOT/'ZZ-PZAEC_Mecha';RES=MOD/'Resources'
+import argparse,csv,hashlib,json,pathlib,struct,math,xml.etree.ElementTree as E
+ROOT=pathlib.Path(__file__).resolve().parents[2]
+p=argparse.ArgumentParser();p.add_argument('--mod-root',type=pathlib.Path,default=ROOT/'ZZ-PZAEC_Mecha');p.add_argument('--baseline',type=pathlib.Path);args=p.parse_args();MOD=args.mod_root;RES=MOD/'Resources'
 stem='samurai_style_gundam_mecha';doc=json.loads((RES/(stem+'_rig.json')).read_text());blob=(RES/(stem+'_rig.bin')).read_bytes()
 assert hashlib.sha256((RES/(stem+'.glb')).read_bytes()).hexdigest()==doc['sourceSha256']
 assert doc['skinned'] and doc['sourceParts']==17 and doc['sourceTriangles']==2000000
@@ -38,14 +39,19 @@ for p in doc['parts']:
 assert min(counts.values())>500,counts
 print('PASS independent rigid wing roots, complete face binding and real wing geometry',counts)
 
-assert doc['bindingAudit']['rigidArmour'] and doc['renderRoles']['Backpack']>500
+assert (doc['bindingAudit']['rigidArmour'] or doc['bindingAudit'].get('rigidPlateCentresWithFlexibleArmSeams')) and doc['renderRoles']['Backpack']>500
 assert doc['renderRoles']['Shield']>500 and doc['bindingAudit']['swordCapsuleRejectedFaces']>500
 for p in doc['parts']:
     records=list(struct.iter_unpack('<8f2i2f',blob[p['offset']:p['offset']+p['vertices']*48]))
     ix=struct.unpack_from('<'+'I'*p['indices'],blob,p['offset']+p['vertices']*48)
     for i in range(0,len(ix),3):
         corners=[records[ix[i+k]] for k in range(3)]
-        assert all(v[8]==v[9] and v[10:]==(1.,0.) for v in corners),('blended mechanical face',p['role'],i//3)
+        for v in corners:
+            if v[11]>0:
+                allowed={frozenset([joints[a],joints[b]]) for side in ['L','R'] for a,b in [('Torso','Shoulder'+side),('Shoulder'+side,'Elbow'+side),('Elbow'+side,'Hand'+side)]}
+                grip_pair=frozenset(v[8:10])==frozenset([joints['ElbowR'],joints['HandR']])
+                assert doc.get('panelRepair',{}).get('armSeamBlendWidths') and frozenset(v[8:10]) in allowed and (v[11]<=.50001 or grip_pair),('unapproved flexible face',p['role'],i//3)
+            else: assert v[8]==v[9] and v[10:]==(1.,0.)
         assert len({v[8] for v in corners})==1,('split mechanical face',p['role'],i//3)
         if p['role']=='Backpack':
             assert corners[0][8]==joints['Backpack']
@@ -55,7 +61,7 @@ for p in doc['parts']:
             normal=doc['swordAnchors']['bladeNormal'];origin=(.3950305,.820023,-.5686091)
             plane=sum((center[k]-origin[k])*normal[k] for k in range(3))
             assert abs(plane)<(.16 if center[1]>1.55 else .14)+1e-6,('body spur inside sword',i//3,plane)
-print('PASS complete rigid armour faces, independent back/shield roles and calibrated sword plane')
+print('PASS rigid plate owners with bounded arm seam transitions, independent back/shield roles and calibrated sword plane')
 
 items=E.parse(MOD/'Config/items.xml').getroot().find('append');items={x.get('name'):x for x in items}
 assert items['vehicleCombatRobotCompletePlaceable'].find(".//passive_effect[@name='DegradationMax']").get('value')=='3000000'
@@ -65,10 +71,12 @@ recipes=E.parse(MOD/'Config/recipes.xml').getroot().find('append');recipes={x.ge
 for key in ['vehicleCombatRobotCompleteChassis','vehicleCombatRobotCompletePlaceable']:
     assert key in recipes and key in items
 print('PASS independent recipes, 3M hull and 450L tank')
-baselines=sorted((ROOT/'.local-tests').glob('Mecha-before-0.12.0-*/ZZ-PZAEC_Mecha'))
-backup=baselines[-1] if baselines else ROOT/'.local-tests/Mecha-0.7.3-before-complete/ZZ-PZAEC_Mecha'
+# A pre-change baseline must be explicit: an automatically selected 0.12
+# snapshot falsely rejects deliberate later gameplay revisions.
+backup=args.baseline
 def normalized(e):return e.tag,sorted(e.attrib.items()),(e.text or '').strip(),[normalized(c) for c in e]
-if backup.exists():
+if backup is not None:
+    assert backup.is_dir(), backup
     for name in ['items.xml','recipes.xml','vehicles.xml','entityclasses.xml']:
         a={e.get('name'):e for e in E.parse(MOD/'Config'/name).getroot().find('append')}
         for b in E.parse(backup/'Config'/name).getroot().find('append'):assert normalized(a[b.get('name')])==normalized(b),(name,b.get('name'))

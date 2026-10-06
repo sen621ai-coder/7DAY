@@ -39,13 +39,16 @@ public static class NativeConfigSmoke
       var action=DialogFromXml.ParseAction(a);
       if(!(action is DialogActionSakura)||!(action.Clone() is DialogActionSakura))throw new Exception("Action resolution/clone failed");actions++;
     }
-    int gateCount=0;
+    int gateCount=0,claimGateCount=0;
     foreach(var node in d.Descendants("requirement")){
       var gate=DialogFromXml.ParseRequirement(node);
-      if(!(gate is DialogRequirementSakuraTier)||gate.RequirementVisibilityType!=BaseDialogRequirement.RequirementVisibilityTypes.Hide||gate.Clone().ID!=gate.ID)throw new Exception("Tier gate resolution/visibility/clone failed");
-      gateCount++;
+      if(gate.RequirementVisibilityType!=BaseDialogRequirement.RequirementVisibilityTypes.Hide||gate.Clone().ID!=gate.ID)throw new Exception("Gate visibility/clone failed");
+      if(gate is DialogRequirementSakuraTier)gateCount++;
+      else if(gate is DialogRequirementSakuraClaim)claimGateCount++;
+      else throw new Exception("Unknown dialogue requirement");
     }
     if(gateCount!=5)throw new Exception("Expected four gated tiers and one gated locked notice");
+    if(claimGateCount!=1)throw new Exception("Expected one server-authorized claim gate");
     dialogs++;
    }
    foreach(var q in XDocument.Load(args[0]+"/quests.xml").Descendants("quest")){
@@ -82,7 +85,6 @@ public static class NativeConfigSmoke
   }catch(Exception ex){Console.WriteLine(ex);return 1;}
  }
 }
-
 
 
 

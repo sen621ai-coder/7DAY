@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "sourceBinarySha256": "4d84deacb11562226777620ab330d4a2dae180ae7f587e5c40e1c40c3ee33150",
+  "reassignedFaces": 29752,
+  "regularizedFaces": 6698,
+  "islandFaces": 5788,
+  "wingFaces": 6041,
+  "interiorTriangles": 16881,
+  "texturedBackTriangles": 15579,
+  "sourceExterior": "original surfaces and UVs retained/interpolated at mechanical seams; complete left wing mirrored after recovery",
+  "armSeamBlendWidths": {
+    "shoulder": 0.075,
+    "elbow": 0.055,
+    "wrist": 0.035
+  },
+  "hatchLayout": "two-small-original-chest-panels",
+  "smallHatchOutlines": {
+    "ChestL": [
+      [
+        -0.04,
+        2.205
+      ],
+      [
+        -0.185,
+        2.205
+      ],
+      [
+        -0.213,
+        2.245
+      ],
+      [
+        -0.218,
+        2.317
+      ],
+      [
+        -0.13,
+        2.343
+      ],
+      [
+        -0.067,
+        2.32
+      ],
+      [
+        -0.032,
+        2.265
+      ]
+    ],
+    "ChestR": [
+      [
+        0.127,
+        2.208
+      ],
+      [
+        0.24,
+        2.215
+      ],
+      [
+        0.279,
+        2.252
+      ],
+      [
+        0.269,
+        2.318
+      ],
+      [
+        0.207,
+        2.343
+      ],
+      [
+        0.167,
+        2.327
+      ],
+      [
+        0.125,
+        2.296
+      ]
+    ]
+  },
+  "cockpitWalls": "small source-conforming recessed backing; main breastplate fixed",
+  "seamRefinementFaces": 2276,
+  "shieldPartition": "surface graph with archived ornament anchors",
+  "gripContactLockWidth": 0.045
+}

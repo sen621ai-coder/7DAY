@@ -30,6 +30,7 @@ foreach($kind in 'sakura','mint'){
     $gate=if($id -eq 'locked'){0}else{[int]$id.Substring(1)}
     [void]$dialogs.Append("<requirement type=`"SakuraTier, Sakura.Preview`" id=`"$gate`"/>")
   }
+  if($id -eq 'claim'){[void]$dialogs.Append('<requirement type="SakuraClaim, Sakura.Preview"/>')}
   if($r[2] -ge 0){[void]$dialogs.Append("<action type=`"Sakura, Sakura.Preview`" id=`"$($r[2])`"/>")};[void]$dialogs.Append('</response>')
  };[void]$dialogs.Append('</dialog>')
 }

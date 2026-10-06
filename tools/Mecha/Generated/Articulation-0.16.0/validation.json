@@ -1,0 +1,95 @@
+{
+  "status": "installed_partial_visual_repair",
+  "candidate_changed_sources": [
+    "Source/MechaAudio.cs",
+    "Source/MechaGroundNet.cs",
+    "Source/MechaNet.cs",
+    "Source/MechaRig.cs",
+    "Source/MechaTraversalNet.cs"
+  ],
+  "native_functional_passes": 705,
+  "native_functional_failures": 0,
+  "main_offline_checks": "63 passed",
+  "pose_replay_count": 52,
+  "views_per_pose": {
+    "body": 5,
+    "small_hatch_closeup": 3
+  },
+  "shared_arm_seam_pairs": 1848,
+  "seam_max_gap_m": 4.269891005925982e-08,
+  "sword_clearance": "2514 + 1020 poses passed; minimum distances 0.076584349 / 0.092097722 m, capsule radius 0.065 m",
+  "sword_clearance_pose_counts": [
+    2514,
+    1020
+  ],
+  "sword_min_clearances_m": [
+    0.07658434882299545,
+    0.09209772155556555
+  ],
+  "source_glb_sha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
+  "candidate_binary_sha256": "97fe304d3de8df18179eecd24b88c7cdbc51787f9748c43bee9e9a51b8b1082d",
+  "candidate_manifest_sha256": "afd3ec0af80d116a18bbf332feceb44ac7bd9f654ac96a5c7cef4c6ced359fd8",
+  "candidate_dll_sha256": "7a750c3cca147b88bb7ba6872e92ae5b59a8c93358f96a5e052b296bb734d787",
+  "replay_run": "run-bbc655c4babf4c18b4d60de35c09917a",
+  "motion_run": "run-f3b5cfb387ea4f94aba377e5083ddb45",
+  "remaining_visual_failures": [
+    "upper-chest LOD geometry fragments",
+    "shoulder / arm junctions and left forearm back",
+    "hand and guard source slivers"
+  ],
+  "rejected_experiments": [
+    "flat projected chest backing changes open silhouette",
+    "screened-Poisson right forearm creates texture zigzags and bulges",
+    "depth-based breastplate layer removal did not improve the opening",
+    "sparse pauldron anchor reassignment fragmented intact panels",
+    "expanded arm domain stretched shoulder surfaces",
+    "original GLB normal restoration: no clear visual improvement",
+    "original high-detail chest patch: improved surface but unaccepted patch boundary mismatch up to 0.04022m"
+  ],
+  "experimental_remodel_run": "run-940d3e059e904843ba0d040b32fa2034",
+  "retained_this_round": [
+    "fixed torso rim at small hatch recessed 6mm in source depth",
+    "fixed rim shares source edge texture with moving panels; no outward averaged-normal spike"
+  ],
+  "total_native_images": 250,
+  "small_hatch": {
+    "central_breastplate_fixed": true,
+    "open_degrees": 12,
+    "local_slide_m": [
+      0.012,
+      0,
+      0.012
+    ],
+    "restored_native_pose_check": "PASS",
+    "live_installed": true
+  },
+  "normal_probe_run": "run-8403cdd90a5e413fadbcd141d3fe57cd",
+  "detail_probe_run": "run-f0fc5d807a2b4769be7272da5ced964c",
+  "fixed_rim_ray_regression": "passes final candidate; reproduces failure on previous candidate",
+  "chest_detail_diagnosis": {
+    "direct_source_patch_triangles": 17070,
+    "trial_total_triangles": 258315,
+    "accepted": false,
+    "limited_patch_max_boundary_mismatch_m": 0.04021851679174071
+  },
+  "pre_install_live_files_verified_unchanged": 139,
+  "installation": {
+    "version": "0.16.0",
+    "installed_at": "2026-10-06T22:40:39.552637+08:00",
+    "backup": ".local-tests/Mecha-before-install-0.16.0-20261006-224037",
+    "changed_files": [
+      "ModInfo.xml",
+      "PZAEC.Mecha.dll",
+      "README.md",
+      "Resources/samurai_style_gundam_mecha_rig.bin",
+      "Resources/samurai_style_gundam_mecha_rig.json",
+      "Source/MechaAudio.cs",
+      "Source/MechaGroundNet.cs",
+      "Source/MechaNet.cs",
+      "Source/MechaRig.cs",
+      "Source/MechaTraversalNet.cs"
+    ],
+    "all_139_files_match_candidate": true,
+    "offline_checks": "63 main checks and Complete asset/profile checks passed"
+  }
+}

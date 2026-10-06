@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -142,13 +142,13 @@ namespace PZAEC.Mecha
                 if(!Rules.Complete(v)){p.Left=Cube(p.Root,"HatchL",new Vector3(-.16f,0,0),new Vector3(.31f,.48f,.07f),plate);
                 p.Right=Cube(p.Root,"HatchR",new Vector3(.16f,0,0),new Vector3(.31f,.48f,.07f),plate);
                 }else{
-                    p.Root.localPosition=new Vector3(0,2.17f,.43f)-rig.TorsoBasePosition;
-                    Cube(p.Root,"CockpitBack",new Vector3(0,0,-.08f),new Vector3(.38f,.40f,.035f),plate);
-                    Cube(p.Root,"Seat",new Vector3(0,-.13f,-.025f),new Vector3(.20f,.10f,.12f),plate);
-                    Cube(p.Root,"CockpitLightL",new Vector3(-.19f,0,0),new Vector3(.018f,.35f,.018f),glow);
-                    Cube(p.Root,"CockpitLightR",new Vector3(.19f,0,0),new Vector3(.018f,.35f,.018f),glow);
+                    p.Root.localPosition=new Vector3(0,2.27f,.70f)-rig.TorsoBasePosition;
+                    // The source chest stays intact. Only two original small
+                    // armour panels open over recessed conforming backing.
+                    Cube(p.Root,"CockpitLightL",new Vector3(-.045f,-.01f,.025f),new Vector3(.004f,.05f,.004f),glow);
+                    Cube(p.Root,"CockpitLightR",new Vector3(.132f,-.01f,.05f),new Vector3(.004f,.05f,.004f),glow);
                 }
-                p.Lamp=p.Root.gameObject.AddComponent<Light>();p.Lamp.color=new Color(.2f,.8f,1);p.Lamp.range=2;p.Lamp.intensity=0;p.Lamp.shadows=LightShadows.None;
+                p.Lamp=p.Root.gameObject.AddComponent<Light>();p.Lamp.color=new Color(.2f,.8f,1);p.Lamp.range=Rules.Complete(v)?.35f:2;p.Lamp.intensity=0;p.Lamp.shadows=LightShadows.None;
                 for(int i=0;i<2;i++)p.Jets[i]=Cube(rig.Backpack,"MechaThruster",new Vector3(i==0?-.35f:.35f,-.15f,-.12f),new Vector3(.12f,.02f,.12f),glow);
                 if(Rules.Complete(v)){
                     p.Emitter=Cube(rig.Head,"MechaForeheadEmitter",new Vector3(0,.10f,.20f),new Vector3(.045f,.04f,.018f),glow);
@@ -160,18 +160,19 @@ namespace PZAEC.Mecha
             if(Rules.Complete(v)){
                 p.Root.gameObject.SetActive(hatch>.001f);
                 if(rig.ChestL!=null&&rig.ChestR!=null&&rig.ChestDoor!=null){
-                    float side=Mathf.Clamp01(hatch*1.5f),door=Mathf.Clamp01((hatch-.25f)/.75f);
-                    rig.ChestL.localPosition=rig.RestPos[rig.ChestL]+new Vector3(-.16f,0,.04f)*side;
-                    rig.ChestR.localPosition=rig.RestPos[rig.ChestR]+new Vector3(.16f,0,.04f)*side;
-                    rig.ChestL.localRotation=rig.RestRot[rig.ChestL]*Quaternion.Euler(0,-45*side,0);
-                    rig.ChestR.localRotation=rig.RestRot[rig.ChestR]*Quaternion.Euler(0,45*side,0);
-                    rig.ChestDoor.localRotation=rig.RestRot[rig.ChestDoor]*Quaternion.Euler(80*door,0,0);
+                    float door=Mathf.SmoothStep(0,1,Mathf.Clamp01((hatch-.15f)/.85f));
+                    rig.ChestL.localPosition=rig.RestPos[rig.ChestL]+new Vector3(-.012f,0,.012f)*door;
+                    rig.ChestR.localPosition=rig.RestPos[rig.ChestR]+new Vector3(.012f,0,.012f)*door;
+                    rig.ChestL.localRotation=rig.RestRot[rig.ChestL]*Quaternion.Euler(0,-12*door,0);
+                    rig.ChestR.localRotation=rig.RestRot[rig.ChestR]*Quaternion.Euler(0,12*door,0);
+                    rig.ChestDoor.localPosition=rig.RestPos[rig.ChestDoor];
+                    rig.ChestDoor.localRotation=rig.RestRot[rig.ChestDoor];
                 }
             }else{
                 p.Left.localPosition=new Vector3(-.16f-hatch*.32f,0,0);p.Right.localPosition=new Vector3(.16f+hatch*.32f,0,0);
                 p.Left.localRotation=Quaternion.Euler(0,-hatch*55,0);p.Right.localRotation=Quaternion.Euler(0,hatch*55,0);
             }
-            p.Lamp.intensity=hatch*1.4f;
+            p.Lamp.intensity=hatch*(Rules.Complete(v)?.25f:1.4f);
             if(p.Emitter!=null){var s=Samurai.Get(v);var block=new MaterialPropertyBlock();block.SetColor("_Color",new Color(.2f,.85f,1f,.2f+.8f*s.LaserCharge));p.Emitter.GetComponent<Renderer>().SetPropertyBlock(block);block.SetColor("_Color",new Color(.2f,.85f,1f,.2f+.5f*s.Alert+.3f*s.LaserCharge));p.Eye.GetComponent<Renderer>().SetPropertyBlock(block);}
             var move=Locomotion.Get(v);
             float thrust=Rules.Complete(v)?(Flight.Active(move)?(move.Boost?1:move.VerticalInput>0?.85f:.55f):move.FlightMode==Flight.Phase.PowerLost?0:boost):boost;

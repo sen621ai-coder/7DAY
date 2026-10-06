@@ -9,6 +9,10 @@ p=argparse.ArgumentParser();p.add_argument('--resources',type=Path,required=True
 d=json.loads((a.resources/'samurai_style_gundam_mecha_rig.json').read_text());raw=(a.resources/'samurai_style_gundam_mecha_rig.bin').read_bytes();dt=np.dtype([('v','<f4',8),('b','<i4',2),('w','<f4',2)])
 def read(part):
  v=np.frombuffer(raw,dt,part['vertices'],part['offset']);ix=np.frombuffer(raw,'<u4',part['indices'],part['offset']+48*part['vertices']).reshape(-1,3);return v,ix
+if 'panelRepair' in d:
+ import runpy
+ runpy.run_path(str(Path(__file__).with_name('Test-PanelIntegrity.py')),run_name='__main__')
+ raise SystemExit(0)
 source=d['articulationSourceParts'];outer=[p for p in d['parts'] if p.get('generatedRepair')!='recessed-joint-interior-v1'];liners=[p for p in d['parts'] if p.get('generatedRepair')=='recessed-joint-interior-v1']
 sf=np.concatenate([read(p)[0][read(p)[1]]['v'] for p in source]);of=np.concatenate([read(p)[0][read(p)[1]]['v'] for p in outer])
 def area(f):return np.linalg.norm(np.cross(f[:,1,:3]-f[:,0,:3],f[:,2,:3]-f[:,0,:3]),axis=1).sum(dtype=np.float64)*.5

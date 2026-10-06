@@ -4,7 +4,7 @@ namespace PZAEC.M1
     public static class SecondaryRules
     {
         public const string Belt="pzM1MGBelt",Missile="pzM1AAMissile";
-        public const byte Protocol=1,Main=0,MG=1,AA=2;
+        public const byte Protocol=2,Main=0,MG=1,AA=2,MissileHit=5,MissileExpired=6;
         public const float AAMinPitch=-10,AAMaxPitch=75;
         public static bool AASearchPitch(float pitch)=>!float.IsNaN(pitch)&&!float.IsInfinity(pitch)&&pitch>=AAMinPitch&&pitch<=85;
         public static readonly int[] MGDamage={20000,35000,60000,100000},AADamage={5000000,10000000,20000000,35000000};

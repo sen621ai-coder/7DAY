@@ -42,6 +42,7 @@ public static class SakuraDialogTierRegression
             player.QuestJournal.quests.Add(quest);
             var gate=new DialogRequirementSakuraTier{ID=tier.ToString()};
             var locked=new DialogRequirementSakuraTier{ID="0"};
+            var claim=new DialogRequirementSakuraClaim();
             string id=(guard?"mintGuardT":"sakuraEscortT")+tier;
             foreach(string variant in new[]{id.ToLowerInvariant(),id,id.ToUpperInvariant()})
             {
@@ -56,13 +57,21 @@ public static class SakuraDialogTierRegression
             quest.QuestClass.ID=null;
             Check(!gate.CheckRequirement(player,npc),"Missing quest ID rejected");
             quest.QuestClass.ID=id.ToLowerInvariant();
+            Check(!claim.CheckRequirement(player,npc),"Unsynchronized claim remains hidden");
+            quest.DataVariables["sakuraClaimable"]="1";
+            Check(claim.CheckRequirement(player,npc)&&claim.Clone().CheckRequirement(player,npc),"Server-authorized claim and clone are visible");
+            quest.DataVariables["sakuraClaimable"]="0";
+            Check(!claim.CheckRequirement(player,npc),"Issued or retired claim is hidden");
+            quest.DataVariables["sakuraClaimable"]="1";
             quest.QuestGiverID++;
             Check(!gate.CheckRequirement(player,npc),"Other NPC cannot start this mission");
+            Check(!claim.CheckRequirement(player,npc),"Other NPC cannot expose claim");
             quest.QuestGiverID=npc.entityId;
             foreach(var state in new[]{Quest.QuestState.Completed,Quest.QuestState.Failed})
             {
                 quest.CurrentState=state;
                 Check(!gate.CheckRequirement(player,npc),"Terminal mission cannot restart");
+                Check(!claim.CheckRequirement(player,npc),"Terminal local quest cannot expose stale claim");
             }
             quest.CurrentState=Quest.QuestState.InProgress;
             quest.DataVariables["sakuraSearching"]="0";
@@ -79,6 +88,7 @@ public static class SakuraDialogTierRegression
             Check(!gate.CheckRequirement(player,npc)&&locked.CheckRequirement(player,npc),"Missing mission shows only locked entry");
             player.QuestJournal=null;
             Check(!gate.CheckRequirement(player,npc),"Missing journal cannot start mission");
+            Check(!claim.CheckRequirement(player,npc),"Missing journal cannot expose claim");
         }
         return "PASS: "+checks+" dialogue requirement checks (Mint/Sakura T16-T19, normalized/mixed-case IDs, NPC binding and lifecycle guards).";
     }
@@ -86,3 +96,8 @@ public static class SakuraDialogTierRegression
 '@
 Add-Type -TypeDefinition ($source+[Environment]::NewLine+$fixtures)
 [SakuraDialogTierRegression]::Run()
+[xml]$dialogs=Get-Content (Join-Path $root '96-SakuraPreview/Config/dialogs.xml') -Raw
+foreach($id in @('sakuraNative','mintNative')){
+    if($dialogs.SelectNodes("//dialog[@id='$id']/response[@id='claim']/requirement[@type='SakuraClaim, Sakura.Preview']").Count -ne 1){throw "$id claim requirement missing"}
+}
+'PASS: both native claim responses require server-synchronized eligibility.'

@@ -44,7 +44,13 @@ namespace PZAEC.Mecha
         public TraverseWire Data=new TraverseWire();
         public override NetPackageDirection PackageDirection {get{return NetPackageDirection.ToServer;}}
         public NetPackagePZAECMechaTraverseIntent Setup(TraverseWire data){Data=data;return this;}
-        public override int GetLength(){return TraverseWire.Bytes;}
+        
+#if MECHA_LEGACY_PACKAGE_LENGTH
+        public override int
+#else
+        public int
+#endif
+        GetLength(){return TraverseWire.Bytes;}
         public override void read(PooledBinaryReader r){Data=new TraverseWire();Data.Read(r);}
         public override void write(PooledBinaryWriter w){base.write(w);Data.Write(w);}
         public override void ProcessPackage(World world,GameManager callbacks){if(Weapons.Server&&world!=null&&Sender!=null&&Sender.entityId==Data.Actor)TraversalNet.ServerReceive(world,Sender.entityId,Data);}
@@ -54,7 +60,13 @@ namespace PZAEC.Mecha
         public TraverseWire Data=new TraverseWire();
         public override NetPackageDirection PackageDirection {get{return NetPackageDirection.ToClient;}}
         public NetPackagePZAECMechaTraverseEvent Setup(TraverseWire data){Data=data;return this;}
-        public override int GetLength(){return TraverseWire.Bytes;}
+        
+#if MECHA_LEGACY_PACKAGE_LENGTH
+        public override int
+#else
+        public int
+#endif
+        GetLength(){return TraverseWire.Bytes;}
         public override void read(PooledBinaryReader r){Data=new TraverseWire();Data.Read(r);}
         public override void write(PooledBinaryWriter w){base.write(w);Data.Write(w);}
         public override void ProcessPackage(World world,GameManager callbacks){if(!Weapons.Server&&world!=null)TraversalNet.ClientReceive(world,Data);}

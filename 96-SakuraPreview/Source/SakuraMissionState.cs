@@ -23,6 +23,8 @@ namespace SakuraPreview
         public int Waves;
         public double Elapsed,MissingSeconds,WaveDelay;
         public double TerminalUtc;
+        // Persist before removing the entity: an older entity save must not reopen claims.
+        public bool NpcRetired;
         public List<int> Enemies=new List<int>();
         public List<EscortMember> Members=new List<EscortMember>();
         public int WaveCount => Tier-14;
@@ -44,11 +46,16 @@ namespace SakuraPreview
             if(Waves==WaveCount-1)roster[roster.Count-1]="sakuraAmbushT"+Tier+"Boss";
             return roster;
         }
-        public bool ShouldDespawnNpc(bool randomEncounter,double now)
+        public bool ShouldDespawnNpc(double now)
         {
-            return Phase==EscortPhase.Failed || Phase==EscortPhase.Completed && randomEncounter && TerminalUtc>0 && now-TerminalUtc>1800;
+            if(NpcRetired || Phase==EscortPhase.Failed)return true;
+            if(Phase!=EscortPhase.Completed)return false;
+            // Keep the NPC only for eligible teammates who have not yet claimed.
+            return !Members.Exists(m=>CanClaim(m.Key)) || TerminalUtc>0 && now-TerminalUtc>=1800;
         }
-        public bool Active => Phase==EscortPhase.Following || Phase==EscortPhase.Ambush || Phase==EscortPhase.Searching;
+        public bool Active => !NpcRetired && (Phase==EscortPhase.Following || Phase==EscortPhase.Ambush || Phase==EscortPhase.Searching);
+        public bool CanStart(int tier,string key)=>!NpcRetired && Phase==EscortPhase.Searching &&
+            tier>=16 && tier<=19 && Tier==tier && !string.IsNullOrEmpty(key) && Members.Exists(m=>m.Key==key);
         public bool TryJoin(string key,bool sameParty,bool busy)
         {
             if(!Active || string.IsNullOrEmpty(key) || !sameParty || busy || Members.Exists(m=>m.Key==key))return false;
@@ -98,7 +105,7 @@ namespace SakuraPreview
         public bool CanClaim(string key)
         {
             var member=Members.Find(m=>m.Key==key);
-            return Phase==EscortPhase.Completed && member!=null && member.Receipt==0 && member.NearSeconds>=Math.Max(10,Elapsed*.5);
+            return !NpcRetired && Phase==EscortPhase.Completed && member!=null && member.Receipt==0 && member.NearSeconds>=Math.Max(10,Elapsed*.5);
         }
         public bool BeginClaim(string key)
         {if(!CanClaim(key))return false;Members.Find(m=>m.Key==key).Receipt=1;return true;}

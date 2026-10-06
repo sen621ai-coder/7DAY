@@ -66,7 +66,7 @@ public static class SakuraMissionRegression
         for(int i=0;i<400;i++)search.Tick(5,false,false,9999,null);
         Check(search.Active&&search.Elapsed==0&&search.MissingSeconds==0,"search does not run escort timeout, unload failure or distance grace");
         search.WaveDelay=999;Check(!search.WantWave(0,true)&&!search.CanClaim("A"),"search cannot start waves or rewards");
-        search.Fail("abandoned");Check(search.ShouldDespawnNpc(true,0),"search abandonment retires target");
+        search.Fail("abandoned");Check(search.ShouldDespawnNpc(0),"search abandonment retires target");
         Check((int)SakuraPreview.EscortPhase.Failed==3&&(int)SakuraPreview.EscortPhase.Searching==4,"existing serialized phase numbers preserved");
         var saved=new SakuraPreview.SakuraMissionJournal();saved.RescueGrants.Add(new SakuraPreview.SakuraRescueGrant{Key="A",QuestId="aec_quest_T16_A1_clear",Code=42,TraderId=7,Tier=16,Spawned=true});
         var rescueSerializer=new System.Xml.Serialization.XmlSerializer(typeof(SakuraPreview.SakuraMissionJournal));
@@ -79,13 +79,50 @@ public static class SakuraMissionRegression
         Check(shared.Members.Find(m=>m.Key=="D").NearSeconds==0,"late members do not inherit participation credit");
         shared.Phase=SakuraPreview.EscortPhase.Completed;Check(!shared.TryJoin("E",true,false),"completed mission cannot admit reward farmers");
         shared.Phase=SakuraPreview.EscortPhase.Failed;Check(!shared.TryJoin("E",true,false),"failed mission cannot be shared");
-        var retirement=New(16);Check(!retirement.ShouldDespawnNpc(true,9999),"active NPC remains");
-        retirement.Fail("failed");Check(retirement.ShouldDespawnNpc(false,0),"failed fixed NPC disappears immediately");Check(retirement.ShouldDespawnNpc(true,0),"failed random NPC disappears immediately");
-        retirement.Guard=true;Check(retirement.ShouldDespawnNpc(false,0),"failed Mint also disappears");
-        retirement.Phase=SakuraPreview.EscortPhase.Completed;retirement.TerminalUtc=100;
-        Check(!retirement.ShouldDespawnNpc(true,1900),"success retains full reward claim window");
-        Check(retirement.ShouldDespawnNpc(true,1901),"successful random NPC retires after claim window");
-        Check(!retirement.ShouldDespawnNpc(false,1901),"successful fixed NPC retained");
+        foreach(bool guard in new[]{false,true})
+        foreach(int tier in new[]{16,17,18,19})
+        {
+            var retirement=New(tier);retirement.Guard=guard;
+            Check(!retirement.ShouldDespawnNpc(9999),"active NPC remains");
+            retirement.Fail("failed");Check(retirement.ShouldDespawnNpc(0),"failed NPC disappears immediately");
+            retirement.Phase=SakuraPreview.EscortPhase.Completed;retirement.TerminalUtc=100;retirement.Elapsed=100;
+            retirement.Members[0].NearSeconds=50;
+            Check(!retirement.ShouldDespawnNpc(1899),"eligible teammate retains remaining claim window");
+            Check(retirement.ShouldDespawnNpc(1900),"every mission NPC retires at deadline, including fixed NPCs");
+            retirement.Members[0].Receipt=2;
+            Check(retirement.ShouldDespawnNpc(101),"claimed reward retires NPC without waiting on ineligible teammate");
+            retirement.Members[1].NearSeconds=50;
+            Check(!retirement.ShouldDespawnNpc(101),"eligible unclaimed teammate still has own reward");
+            retirement.Members[1].Receipt=1;
+            Check(retirement.ShouldDespawnNpc(101),"durable pending claim cannot be replayed through NPC");
+            retirement.NpcRetired=true;retirement.Members[1].Receipt=0;
+            Check(!retirement.BeginClaim("B")&&retirement.ShouldDespawnNpc(101),"retirement fence prevents reopened claim and repeats removal");
+            retirement.Phase=SakuraPreview.EscortPhase.Searching;
+            Check(!retirement.Active&&!retirement.CanStart(tier,"A"),"retired NPC cannot restart even with stale searching phase");
+            var start=New(tier);start.Phase=SakuraPreview.EscortPhase.Searching;
+            Check(start.CanStart(tier,"A")&&!start.CanStart(tier,"stranger")&&!start.CanStart(tier==19?16:tier+1,"A"),"start requires matching tier and member");
+            start.Phase=SakuraPreview.EscortPhase.Completed;
+            Check(!start.CanStart(tier,"A")&&!start.WantWave(0,true),"completed mission cannot restart waves");
+            var legacy=new SakuraPreview.SakuraMissionState{Tier=tier,Guard=guard,Phase=SakuraPreview.EscortPhase.Completed,Elapsed=100,TerminalUtc=100};
+            legacy.Members.Add(new SakuraPreview.EscortMember{Key="A",NearSeconds=100,Receipt=2});
+            Check(legacy.ShouldDespawnNpc(101),"already-claimed legacy mission retires without new flags");
+            var serializer=new System.Xml.Serialization.XmlSerializer(typeof(SakuraPreview.SakuraMissionState));
+            using(var writer=new System.IO.StringWriter())
+            {
+                serializer.Serialize(writer,legacy);
+                using(var reader=new System.IO.StringReader(writer.ToString().Replace("<NpcRetired>false</NpcRetired>","")))
+                {
+                    var old=(SakuraPreview.SakuraMissionState)serializer.Deserialize(reader);
+                    Check(!old.NpcRetired&&old.ShouldDespawnNpc(101)&&!old.BeginClaim("A"),"old XML without retirement field preserves receipts and retires");
+                }
+            }
+            using(var stream=new System.IO.MemoryStream())
+            {
+                serializer.Serialize(stream,retirement);stream.Position=0;
+                var loaded=(SakuraPreview.SakuraMissionState)serializer.Deserialize(stream);
+                Check(loaded.NpcRetired&&!loaded.BeginClaim("B")&&!loaded.CanStart(tier,"A"),"retirement survives save and reload");
+            }
+        }
         var lost=New(16);for(int i=0;i<59;i++)lost.Tick(1,true,false,600,Near);Check(lost.Active,"59 seconds grace");
         lost.Tick(1,true,false,600,Near);Check(lost.Phase==SakuraPreview.EscortPhase.Failed,"60 seconds abandonment");
         var dead=New(16);dead.Tick(1,false,true,0,Near);Check(dead.Phase==SakuraPreview.EscortPhase.Failed,"NPC death fails");

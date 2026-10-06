@@ -6,7 +6,7 @@ namespace PZAEC.M1
 {
     public static class SecondaryPresentation
     {
-        sealed class View{public EntityVehicle Vehicle;public int Epoch,Serial,MotionSerial;public readonly EffectRules.Events Events=new EffectRules.Events();public float At,Clock=float.PositiveInfinity;public readonly float[] F=new float[16];public readonly int[] I=new int[8];public Transform Yaw,Pitch,AA,Muzzle;public AudioSource MGSound,AASound;public Transform Flash;public float ShotAt=-100,FlashLife=.055f,AAAt=-100;public Transform LeftFlash,RightFlash,ActiveAA;public readonly MaterialPropertyBlock FlashProperties=new MaterialPropertyBlock();}
+        sealed class View{public EntityVehicle Vehicle;public int Epoch,Serial,MotionSerial;public readonly EffectRules.Events Events=new EffectRules.Events();public float At,Clock=float.PositiveInfinity;public readonly float[] F=new float[16];public readonly int[] I=new int[8];public Transform Yaw,Pitch,AA,Muzzle;public AudioSource MGSound,AASound,ImpactSound;public Transform Flash;public float ShotAt=-100,FlashLife=.055f,AAAt=-100;public Transform LeftFlash,RightFlash,ActiveAA;public readonly MaterialPropertyBlock FlashProperties=new MaterialPropertyBlock();}
         sealed class Trail{public int Vehicle,Id;public LineRenderer Line;public Vector3 A,B;public float Until,Start;public bool Missile;}
         static readonly Dictionary<int,View> views=new Dictionary<int,View>();static readonly List<Trail> trails=new List<Trail>();static Material material;static AudioClip mgClip,aaClip;
         static AudioClip Clip(string name,bool missile)
@@ -17,7 +17,7 @@ namespace PZAEC.M1
             if(views.TryGetValue(v.entityId,out var existing)&&existing.Vehicle==v)return existing;
             var root=SecondaryModel.Find(v.PhysicsTransform!=null?v.PhysicsTransform:v.transform,"M1Visual");var yaw=SecondaryModel.Find(root,"RoofMGYaw");if(yaw==null)return null;
             if(material==null){material=new Material(Shader.Find("Sprites/Default"));mgClip=Clip("M1 MG",false);aaClip=Clip("M1 AA",true);}
-            var x=new View{Vehicle=v,Yaw=yaw,Pitch=SecondaryModel.Find(root,"RoofMGPitch"),AA=SecondaryModel.Find(root,"AAPitch"),Muzzle=SecondaryModel.Find(root,"RoofMGMuzzle")};x.Flash=Presentation.CreateMGFlash(x.Muzzle);x.LeftFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleL"));x.RightFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleR"));x.MGSound=Sound(x.Muzzle,mgClip);x.AASound=Sound(x.AA,aaClip);x.I[0]=v.GetAttached(1)!=null?1:0;views[v.entityId]=x;return x;
+            var x=new View{Vehicle=v,Yaw=yaw,Pitch=SecondaryModel.Find(root,"RoofMGPitch"),AA=SecondaryModel.Find(root,"AAPitch"),Muzzle=SecondaryModel.Find(root,"RoofMGMuzzle")};x.Flash=Presentation.CreateMGFlash(x.Muzzle);x.LeftFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleL"));x.RightFlash=LaunchFlash(SecondaryModel.Find(root,"AAMuzzleR"));x.MGSound=Sound(x.Muzzle,mgClip);x.AASound=Sound(x.AA,aaClip);x.ImpactSound=Presentation.CreateMissileImpactSound();x.I[0]=v.GetAttached(1)!=null?1:0;views[v.entityId]=x;return x;
         }
         static Transform LaunchFlash(Transform muzzle){var flash=Presentation.CreateMGFlash(muzzle);flash.name="M1AAMuzzleFX";flash.localScale=new Vector3(.35f,.35f,.75f);return flash;}
         static bool NativeFlash(Transform muzzle)
@@ -30,7 +30,7 @@ namespace PZAEC.M1
                 spawned.localScale*=2f;return true;
             }catch{return false;}
         }
-        static void DestroyFlashes(View v){foreach(var f in new[]{v.Flash,v.LeftFlash,v.RightFlash})if(f!=null)UnityEngine.Object.Destroy(f.gameObject);}
+        static void DestroyFlashes(View v){if(v.ImpactSound!=null)UnityEngine.Object.Destroy(v.ImpactSound.gameObject);foreach(var f in new[]{v.Flash,v.LeftFlash,v.RightFlash})if(f!=null)UnityEngine.Object.Destroy(f.gameObject);}
         public static byte Mode(EntityVehicle v,int seat)=>seat<0?(byte)0:views.TryGetValue(v.entityId,out var s)?(byte)s.I[seat]:(seat==0&&v.GetAttached(1)!=null?(byte)1:(byte)0);
         public static void SaveItem(EntityVehicle vehicle)
         {
@@ -47,10 +47,10 @@ namespace PZAEC.M1
             if(p.Kind==1){if(unchecked(p.Serial-v.Serial)<=0)return;v.Serial=p.Serial;Array.Copy(p.F,v.F,16);Array.Copy(p.I,v.I,8);v.At=Time.time;return;}
             if(!EffectRules.Fresh(age)||!v.Events.Accept(p.Serial))return;
             if(p.Kind>=4){if(unchecked(p.Serial-v.MotionSerial)<=0)return;v.MotionSerial=p.Serial;}
-            if(p.Kind==2){if(!NativeFlash(v.Muzzle))v.ShotAt=Time.time;v.FlashLife=EffectRules.FlashLife(Time.unscaledDeltaTime,true);if(p.I[0]%3==0)Add(p.Vehicle,p.I[0],p.A,p.B,false,age);v.MGSound.PlayOneShot(mgClip);}
+            if(p.Kind==2){NativeFlash(v.Muzzle);v.ShotAt=Time.time;v.FlashLife=EffectRules.FlashLife(Time.unscaledDeltaTime,true);if(p.I[0]%3==0)Add(p.Vehicle,p.I[0],p.A,p.B,false,age);v.MGSound.PlayOneShot(mgClip);}
             else if(p.Kind==3){if(p.Serial>v.MotionSerial)Add(p.Vehicle,p.I[0],p.A,p.A+p.B*2,true);v.AAAt=Time.time;v.ActiveAA=Vector3.Distance(v.LeftFlash.position+Origin.position,p.A)<Vector3.Distance(v.RightFlash.position+Origin.position,p.A)?v.LeftFlash:v.RightFlash;v.AASound.PlayOneShot(aaClip);}
             else if(p.Kind==4){var t=trails.Find(x=>x.Missile&&x.Vehicle==p.Vehicle&&x.Id==p.I[0]);if(t==null)Add(p.Vehicle,p.I[0],p.A-p.B*2,p.A,true);else{t.A=p.A-p.B*2;t.B=p.A;t.Until=Time.time+.25f;}}
-            else if(p.Kind==5){for(int i=trails.Count-1;i>=0;i--)if(trails[i].Missile&&trails[i].Vehicle==p.Vehicle&&trails[i].Id==p.I[0]){UnityEngine.Object.Destroy(trails[i].Line.gameObject);trails.RemoveAt(i);}Add(p.Vehicle,p.I[0],p.A-Vector3.up*.2f,p.A+Vector3.up*.2f,false);}
+            else if(p.Kind==SecondaryRules.MissileHit||p.Kind==SecondaryRules.MissileExpired){for(int i=trails.Count-1;i>=0;i--)if(trails[i].Missile&&trails[i].Vehicle==p.Vehicle&&trails[i].Id==p.I[0]){UnityEngine.Object.Destroy(trails[i].Line.gameObject);trails.RemoveAt(i);}if(p.Kind==SecondaryRules.MissileHit)Presentation.MissileImpact(p.A,p.B,p.I[0],v.ImpactSound);}
         }
         static void Add(int vehicle,int id,Vector3 a,Vector3 b,bool missile,float age=0)
         {

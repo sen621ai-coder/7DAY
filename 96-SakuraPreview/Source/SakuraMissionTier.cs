@@ -29,3 +29,21 @@ public sealed class DialogRequirementSakuraTier : BaseDialogRequirement
     }
     public override BaseDialogRequirement Clone()=>new DialogRequirementSakuraTier{ID=ID,Value=Value,Tag=Tag,Owner=Owner,RequirementVisibilityType=RequirementVisibilityType};
 }
+public sealed class DialogRequirementSakuraClaim : BaseDialogRequirement
+{
+    public DialogRequirementSakuraClaim(){RequirementVisibilityType=RequirementVisibilityTypes.Hide;}
+    public override bool CheckRequirement(EntityPlayer player,EntityNPC respondent)
+    {
+        var npc=respondent as SakuraPreview.EntitySakura;
+        if(player?.QuestJournal==null || npc==null)return false;
+        string prefix=npc.IsGuardian?"mintGuardT":"sakuraEscortT";
+        return player.QuestJournal.quests.Exists(q=>q.QuestGiverID==npc.entityId &&
+            q.CurrentState!=Quest.QuestState.Completed && q.CurrentState!=Quest.QuestState.Failed &&
+            q.DataVariables.TryGetValue("sakuraClaimable",out var value) && value=="1" &&
+            (string.Equals(q.QuestClass.ID,prefix+16,System.StringComparison.OrdinalIgnoreCase) ||
+             string.Equals(q.QuestClass.ID,prefix+17,System.StringComparison.OrdinalIgnoreCase) ||
+             string.Equals(q.QuestClass.ID,prefix+18,System.StringComparison.OrdinalIgnoreCase) ||
+             string.Equals(q.QuestClass.ID,prefix+19,System.StringComparison.OrdinalIgnoreCase)));
+    }
+    public override BaseDialogRequirement Clone()=>new DialogRequirementSakuraClaim{ID=ID,Value=Value,Tag=Tag,Owner=Owner,RequirementVisibilityType=RequirementVisibilityType};
+}

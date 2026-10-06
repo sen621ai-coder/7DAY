@@ -174,16 +174,16 @@ namespace PZAEC.M1
         public static void Advance(float delta)
         {
             var w=GameManager.Instance.World;
-            for(int i=missiles.Count-1;i>=0;i--){var m=missiles[i];float left=Mathf.Max(0,delta);bool done=false;
+            for(int i=missiles.Count-1;i>=0;i--){var m=missiles[i];float left=Mathf.Max(0,delta);bool done=false,impacted=false;
                 while(left>0&&!done){float dt=Mathf.Min(.01f,Mathf.Min(left,5-m.Age));if(dt<=0){done=true;break;}left-=dt;var target=w.GetEntity(m.Target) as EntityAlive;bool armed=m.Distance>=3;
                     if(m.Guided&&armed){if(!Target(target))m.Guided=false;else{var to=Center(target)-m.Position;if(!Weapons.Trace(m.Vehicle,m.Position,to.normalized,to.magnitude,out var sight)||ItemActionAttack.FindHitEntity(sight)==target)m.Lost=0;else m.Lost+=dt;if(m.Lost>=.5f)m.Guided=false;if(m.Guided)m.Direction=Vector3.RotateTowards(m.Direction,to.normalized,90*Mathf.Deg2Rad*dt,0).normalized;}}
                     float length=Mathf.Min(180*dt,700-m.Distance);var next=m.Position+m.Direction*length;
-                    if(Weapons.Trace(m.Vehicle,m.Position,m.Direction,length,out var hit)){if(armed&&ItemActionAttack.FindHitEntity(hit)==target&&Target(target))Combat.SecondaryHit(target,m.Actor,SecondaryRules.AADamage[m.Tier],true,m.Direction,hit.hit.pos);m.Position=hit.hit.pos;done=true;}
+                    if(Weapons.Trace(m.Vehicle,m.Position,m.Direction,length,out var hit)){if(armed&&ItemActionAttack.FindHitEntity(hit)==target&&Target(target))Combat.SecondaryHit(target,m.Actor,SecondaryRules.AADamage[m.Tier],true,m.Direction,hit.hit.pos);m.Position=hit.hit.pos;done=true;impacted=armed;}
                     else if(armed&&Target(target)){var center=Center(target);float along=Mathf.Clamp(Vector3.Dot(center-m.Position,m.Direction),0,length);var closest=m.Position+m.Direction*along;var to=center-closest;
-                        if(to.sqrMagnitude<=4&&(!Weapons.Trace(m.Vehicle,closest,to.normalized,to.magnitude,out var obstruction)||ItemActionAttack.FindHitEntity(obstruction)==target)){Combat.SecondaryHit(target,m.Actor,SecondaryRules.AADamage[m.Tier],true,m.Direction,center);m.Position=closest;done=true;}}
+                        if(to.sqrMagnitude<=4&&(!Weapons.Trace(m.Vehicle,closest,to.normalized,to.magnitude,out var obstruction)||ItemActionAttack.FindHitEntity(obstruction)==target)){Combat.SecondaryHit(target,m.Actor,SecondaryRules.AADamage[m.Tier],true,m.Direction,center);m.Position=closest;done=true;impacted=true;}}
                     if(!done)m.Position=next;m.Distance+=length;m.Age+=dt;if(m.Distance>=700||m.Age>=5)done=true;
                 }
-                if(States.TryGetValue(m.Vehicle.entityId,out var state)&&state.Main.Epoch==m.Epoch&&(done||Time.time>=m.NextEvent)){Send(state,done?(byte)5:(byte)4,m.Position,m.Direction,m.Id);m.NextEvent=Time.time+.05f;}
+                if(States.TryGetValue(m.Vehicle.entityId,out var state)&&state.Main.Epoch==m.Epoch&&(done||Time.time>=m.NextEvent)){Send(state,done?(impacted?SecondaryRules.MissileHit:SecondaryRules.MissileExpired):(byte)4,m.Position,m.Direction,m.Id);m.NextEvent=Time.time+.05f;}
                 if(done)missiles.RemoveAt(i);
             }
             foreach(var id in States.Keys.Where(id=>!Weapons.States.ContainsKey(id)).ToArray())States.Remove(id);
