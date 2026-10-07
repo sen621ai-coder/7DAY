@@ -47,14 +47,17 @@ namespace PZAEC.PortableShower
         }
         public static bool Equipped(EntityPlayerLocal player)
         {
-            var armor = player.equipment == null ? null : player.equipment.GetItems();
-            if (armor == null) return false;
-            foreach (var item in armor)
+            if (player.equipment == null) return false;
+            for (int slot = 0; slot < player.equipment.GetSlotCount(); slot++)
             {
+                var item = player.equipment.GetSlotItem(slot);
                 if (item == null || item.IsEmpty() || item.ItemClass == null ||
-                    !item.ItemClass.ItemTags.Test_AnySet(FastTags<TagGroup.Global>.Parse("armorHands")) || item.Modifications == null) continue;
-                foreach (var mod in item.Modifications)
+                    !item.ItemClass.ItemTags.Test_AnySet(FastTags<TagGroup.Global>.Parse("armorHands")) || item.ModificationCount == 0) continue;
+                for (int modIndex = 0; modIndex < item.ModificationCount; modIndex++)
+                {
+                    var mod = item.GetModification(modIndex);
                     if (mod != null && mod.ItemClass != null && mod.ItemClass.GetItemName() == Rules.Module) return true;
+                }
             }
             return false;
         }

@@ -1,5 +1,10 @@
 # 腕式便携清洁模块 1.0.1
 
+
+
+## 1.0.3 游戏V3.3.0移植
+
+装备检测改用 Equipment.GetSlotItem/GetSlotCount 与 ModificationCount/GetModification 访问器，修复 buff 每跳 MissingFieldException 刷屏（ItemValue.type 与 Modifications 数组在 3.3.0 均已移除）。
 为当前 Project Z + AEC / 7 Days to Die V3.2 整合环境制作，依赖 Project Z 的卫生系统。
 
 ## 制作和使用
