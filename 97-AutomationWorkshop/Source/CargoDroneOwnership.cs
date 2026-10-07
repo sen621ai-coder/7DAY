@@ -24,7 +24,7 @@ namespace YFAutomation.CargoDrones
         }
         public static string StorageOwner(TileEntityComposite tile)
         {
-            if(tile==null||tile.IsRemoving||!(tile.GetFeature<TEFeatureStorage>()?.bPlayerStorage??false))return null;
+            if(tile==null||tile.IsRemoving||!(tile.GetFeature<TEFeatureStorage>()?.ItemGrid?.PlayerOwned??false))return null;
             return (tile.GetFeature<TEFeatureLockable>()?.GetOwner()??tile.Owner)?.CombinedString;
         }
         public static void StoragePlaced(WorldBase __0,Chunk __1,Vector3i __2,BlockValue __3,PlatformUserIdentifierAbs __4)
@@ -38,7 +38,7 @@ namespace YFAutomation.CargoDrones
                 {
                     // Clear positional metadata even when the replacement is not a player container.
                     CargoNativeMarkers.Remove(tile);
-                    if(!(tile.GetFeature<TEFeatureStorage>()?.bPlayerStorage??false))return;
+                    if(!(tile.GetFeature<TEFeatureStorage>()?.ItemGrid?.PlayerOwned??false))return;
                     var owner=StorageOwner(tile)??"shared";
                     CargoNativeMarkers.Write(tile,new CargoEndpointMarker(WorldIdentity(world),Guid.NewGuid(),Guid.NewGuid(),
                         owner,__3.Block.GetBlockName(),0,Guid.Empty));

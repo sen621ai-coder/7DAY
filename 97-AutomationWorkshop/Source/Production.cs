@@ -9,14 +9,14 @@ namespace YFAutomation
     {
         public string Job="";
         public float Seconds;
-        public override void Read(PooledBinaryReader reader,TileEntity.StreamModeRead mode)
+        public override void Read(PooledBinaryReader reader,StreamModeRead mode)
         {
             base.Read(reader,mode);string job=reader.ReadString();float seconds=reader.ReadSingle();
             // Client container/sign updates cannot grant machine progress.
-            if(mode==TileEntity.StreamModeRead.FromClient)return;
+            if(mode==StreamModeRead.FromClient)return;
             Job=job;Seconds=seconds;if(float.IsNaN(Seconds)||float.IsInfinity(Seconds)||Seconds<0)Seconds=0;
         }
-        public override void Write(PooledBinaryWriter writer,TileEntity.StreamModeWrite mode)
+        public override void Write(PooledBinaryWriter writer,StreamModeWrite mode)
         {base.Write(writer,mode);writer.Write(Job??"");writer.Write(Seconds);}
         public override void CopyFromInternal(TileEntityComposite source)
         {var other=source.GetFeature<TEFeatureAutomationState>();if(other!=null){Job=other.Job;Seconds=other.Seconds;}}
@@ -57,7 +57,7 @@ namespace YFAutomation
     public static class Production
     {
         public static bool IsMachine(string name)=>RecipeMachines.IsMachine(name)||name=="yfAutoRecycler"||name=="yfAutoSmelter"||name=="yfAutoFarm"||name=="yfAutoMiner";
-        static bool Locked(TEFeatureStorage s,int i)=>s.HasSlotLocksSupport&&s.SlotLocks!=null&&s.SlotLocks[i];
+        static bool Locked(TEFeatureStorage s,int i)=>s.ItemGrid.SlotLocks!=null&&s.ItemGrid.SlotLocks[i];
         public static string Step(TileEntityComposite machine,TileEntityComposite source,TileEntityComposite target,EntityPlayer player)
         {
             if(Logistics.Busy(machine)||Logistics.Busy(source)||Logistics.Busy(target))return "库存正在使用，生产暂停";
@@ -66,10 +66,10 @@ namespace YFAutomation
             if(state==null||input==null||output==null)return "机器组件不完整";
             var config=MachineConfiguration.Get(machine);
             if(config.Paused)return "已暂停（机器配置）";
-            if(output.items.Length<2)return "输出箱容量不足";
+            if(output.ItemGrid.items.Length<2)return "输出箱容量不足";
             bool internalStorage=ReferenceEquals(source,machine)&&ReferenceEquals(target,machine)&&MachineInventory.Has(machine);
             string kind=machine.block.GetBlockName();
-            int type=config.Product==""&&internalStorage?0:config.Product==""?(output.items[0].IsEmpty()?0:output.items[0].itemValue.type):ItemClass.GetItem(config.Product).type;
+            int type=config.Product==""&&internalStorage?0:config.Product==""?(output.ItemGrid.items[0].IsEmpty()?0:output.ItemGrid.items[0].itemValue.type):ItemClass.GetItem(config.Product).type;
             if(type==0&&kind!="yfAutoRecycler")return internalStorage?"在面板选择目标产品并保存":"配置目标产品或输出箱首格放样品";
             Func<int,bool> inputLocked=i=>Locked(input,i)||internalStorage&&!MachineInventory.IsInput(i)||i==0&&source.block.GetBlockName()=="yfAutoOutput";
             Recipe recipe=null;ItemStack product=null;ItemStack[] nextInput=null;
@@ -78,7 +78,7 @@ namespace YFAutomation
             Func<bool> ready=null;
             if(kind=="yfAutoFarm"||kind=="yfAutoMiner")
             {
-                var work=FieldMachines.Find(GameManager.Instance.World,machine,input.items,inputLocked,type,player);
+                var work=FieldMachines.Find(GameManager.Instance.World,machine,input.ItemGrid.items,inputLocked,type,player);
                 if(work==null)return kind=="yfAutoFarm"?"等待自有领地成熟作物/种子":"等待自有领地矿点/钻头耗材";
                 nextInput=work.Input;product=work.Product;duration=work.Duration;key=work.Key;complete=work.Complete;ready=work.Ready;
             }
@@ -87,11 +87,11 @@ namespace YFAutomation
                 string sample=ItemClass.GetForId(type).GetItemName();
                 if(!sample.StartsWith("yfAutoIngot_"))return "首格放自动化冶炼料样品";
                 string category=sample.Substring("yfAutoIngot_".Length);
-                for(int i=0;i<input.items.Length;i++)
+                for(int i=0;i<input.ItemGrid.items.Length;i++)
                 {
-                    var s=input.items[i];var item=s.itemValue.ItemClass;
+                    var s=input.ItemGrid.items[i];var item=s.itemValue.ItemClass;
                     if(inputLocked(i)||s.IsEmpty()||item==null||item.HasQuality||s.itemValue.HasMods()||item.GetItemName().StartsWith("yfAutoIngot_")||item.GetItemName().StartsWith("unit_")||item.MadeOfMaterial?.ForgeCategory!=category||item.GetWeight()<=0)continue;
-                    nextInput=ProductionInventory.Clone(input.items);nextInput[i].count--;if(nextInput[i].count==0)nextInput[i]=ItemStack.Empty;
+                    nextInput=ProductionInventory.Clone(input.ItemGrid.items);nextInput[i].count--;if(nextInput[i].count==0)nextInput[i]=ItemStack.Empty;
                     product=new ItemStack(new ItemValue(type),item.GetWeight());
                     duration=Math.Max(1,item.GetWeight()*(item.MeltTimePerUnit>0?item.MeltTimePerUnit:1));
                     key="melt:"+s.itemValue.type+":"+type+":"+product.count;break;
@@ -101,9 +101,9 @@ namespace YFAutomation
             else if(kind=="yfAutoRecycler")
             {
                 if(player==null)return "等待机器所有者上线";
-                for(int i=0;i<input.items.Length;i++)
+                for(int i=0;i<input.ItemGrid.items.Length;i++)
                 {
-                    var s=input.items[i];
+                    var s=input.ItemGrid.items[i];
                     // Equipment only; keep top quality, modifications and locked slots safe.
                     if(inputLocked(i)||s.IsEmpty()||!s.itemValue.ItemClass.HasQuality||s.itemValue.Quality>=6||s.itemValue.HasMods()||s.itemValue.Meta>0)continue;
                     var scrap=CraftingManager.GetScrapableRecipe(s.itemValue,1);
@@ -114,7 +114,7 @@ namespace YFAutomation
                     int yield=ProductionInventory.ScrapYield(raw.GetWeight(),material.GetWeight(),XUiM_Recipes.ScrappingOutputModifier,
                         XUiM_Recipes.DisableSmelter&&raw.HasAnyTags(FastTags<TagGroup.Global>.Parse("scrap100")));
                     if(yield<=0)continue;
-                    recipe=scrap;nextInput=ProductionInventory.Clone(input.items);
+                    recipe=scrap;nextInput=ProductionInventory.Clone(input.ItemGrid.items);
                     nextInput[i].count--;if(nextInput[i].count==0)nextInput[i]=ItemStack.Empty;
                     product=new ItemStack(new ItemValue(type),yield);
                     duration=Math.Max(1,raw.ScrapTimeOverride>0?raw.ScrapTimeOverride:
@@ -127,7 +127,7 @@ namespace YFAutomation
             {
                 if(player==null)return "等待机器所有者上线";
                 string area=RecipeMachines.Area(kind);
-                var plan=RecipePlan.Select(ItemClass.GetForId(type).GetItemName(),kind,input.items,inputLocked,player);
+                var plan=RecipePlan.Select(ItemClass.GetForId(type).GetItemName(),kind,input.ItemGrid.items,inputLocked,player);
                 if(plan!=null&&plan.Ready)
                 {
                     var candidate=plan.Recipe;recipe=candidate;nextInput=plan.Input;
@@ -140,7 +140,7 @@ namespace YFAutomation
                 if(recipe==null)return "缺材料/工具或配方未解锁";
             }
             if(float.IsNaN(duration)||float.IsInfinity(duration)||duration<=0||product.count<=0)return "配方数据异常";
-            var nextOutput=ProductionInventory.Clone(internalStorage?nextInput:output.items);
+            var nextOutput=ProductionInventory.Clone(internalStorage?nextInput:output.ItemGrid.items);
             if(!ProductionInventory.Produce(nextOutput,product,i=>Locked(output,i)||internalStorage&&!MachineInventory.IsOutput(i),v=>v.ItemClass.Stacknumber.Value))return "输出箱满，生产暂停";
             if(state.Job!=key){state.Job=key;state.Seconds=0;}
             state.Seconds=Math.Min(duration,state.Seconds+1);machine.SetChunkModified();
@@ -149,8 +149,8 @@ namespace YFAutomation
             // Check every participant before any world-side completion callback or debit.
             if(Logistics.Busy(machine)||Logistics.Busy(source)||Logistics.Busy(target)||ready!=null&&!ready())return "库存正在使用，生产暂停";
             complete?.Invoke();
-            if(!internalStorage)Array.Copy(nextInput,input.items,nextInput.Length);
-            Array.Copy(nextOutput,output.items,nextOutput.Length);
+            if(!internalStorage)Array.Copy(nextInput,input.ItemGrid.items,nextInput.Length);
+            Array.Copy(nextOutput,output.ItemGrid.items,nextOutput.Length);
             state.Seconds=0;source.SetChunkModified();target.SetChunkModified();
             source.SetModified();target.SetModified();return "完成：产出 "+product.count;
         }

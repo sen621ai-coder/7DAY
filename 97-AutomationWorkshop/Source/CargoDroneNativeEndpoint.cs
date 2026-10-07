@@ -52,12 +52,12 @@ namespace YFAutomation.CargoDrones
         public static void Install(Harmony harmony)
         {
             if(installed)return;
-            if(typeof(Chunk).Module.ModuleVersionId!=new Guid("229796d0-95ca-4662-b426-1a6f1f1596ed"))throw new NotSupportedException("Unverified native inventory build");
+            if(typeof(Chunk).Module.ModuleVersionId!=new Guid("1a9a4203-3d95-4c90-b094-8926dec1ee9c"))throw new NotSupportedException("Unverified native inventory build");
             CargoNativeQueuedSaves.InstallForValidation(harmony);
             foreach(string name in new[]{"UpdateTick","HandleUpdate","handleUpdateForOutputType"})
             foreach(var method in typeof(TileEntityCollector).GetMethods(System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.NonPublic).Where(m=>m.Name==name))
                 harmony.Patch(method,prefix:new HarmonyMethod(typeof(CargoNativeValidationEndpoint),nameof(BeforeProduction)));
-            harmony.Patch(AccessTools.Method(typeof(TileEntity),"CanLockOnServer"),prefix:new HarmonyMethod(typeof(CargoNativeValidationEndpoint),nameof(BeforeLock)));
+            harmony.Patch(AccessTools.Method(typeof(TileEntity),"OnLockRequestServer"),prefix:new HarmonyMethod(typeof(CargoNativeValidationEndpoint),nameof(BeforeLock)));
             CargoNativeWriteGuards.Install(harmony);
             installed=true;
         }
@@ -97,8 +97,8 @@ namespace YFAutomation.CargoDrones
                 // Normalize that metadata before fencing, so serialization need
                 // not perform a guarded setter while saving the transaction.
                 var storage=(tile as TileEntityComposite)?.GetFeature<TEFeatureStorage>();
-                if(storage!=null&&storage.HasSlotLocksSupport&&storage.SlotLocks==null)
-                {if(startupRecovery)CargoNativeWriteGuards.NormalizeRecoveryLocks(storage);else storage.SlotLocks=new PackedBoolArray(storage.items.Length);}
+                if(storage!=null&&storage.ItemGrid!=null&&storage.ItemGrid.PlayerOwned&&storage.ItemGrid.SlotLocks==null)
+                {if(startupRecovery)CargoNativeWriteGuards.NormalizeRecoveryLocks(storage);else storage.ItemGrid.SetSlotLocks(new PackedBoolArray(storage.ItemGrid.items.Length));}
                 var snapshot=Snapshot();if(snapshot.Busy||snapshot.Revision!=expectedRevision)return false;
                 fences.Add(tile,transaction);held=transaction;save=null;saveRequested=false;return true;
             }

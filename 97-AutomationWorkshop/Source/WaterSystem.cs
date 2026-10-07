@@ -32,9 +32,9 @@ namespace YFAutomation
                 {
                     if(Logistics.Busy(tank))continue;
                     var storage=tank.GetFeature<TEFeatureStorage>();
-                    int stored=storage.items.Where(s=>s!=null&&!s.IsEmpty()&&s.itemValue.type==type).Sum(s=>s.count);
+                    int stored=storage.ItemGrid.items.Where(s=>s!=null&&!s.IsEmpty()&&s.itemValue.type==type).Sum(s=>s.count);
                     if(Free(stored)==0)continue;
-                    var copy=ProductionInventory.Clone(storage.items);
+                    var copy=ProductionInventory.Clone(storage.ItemGrid.items);
                     // Transport helper handles slot zero normally; no filter sample in a tank.
                     var unit=new[]{new ItemStack(new ItemValue(type),1)};
                     if(InventoryTransfer.MoveUnfiltered(unit,copy,i=>false,i=>Logistics.Locked(storage,i)||tank==machine&&!MachineInventory.IsOutput(i),v=>v.ItemClass.Stacknumber.Value)==0)continue;
@@ -43,7 +43,7 @@ namespace YFAutomation
                     state.Seconds++;machine.SetChunkModified();
                     if(state.Seconds<5)return "抽水中 "+(int)(state.Seconds*20)+"%";
                     if(Logistics.Busy(machine)||Logistics.Busy(tank))return "库存正在使用，抽水暂停";
-                    Array.Copy(copy,storage.items,copy.Length);state.Seconds=0;
+                    Array.Copy(copy,storage.ItemGrid.items,copy.Length);state.Seconds=0;
                     tank.SetChunkModified();tank.SetModified();return "储水："+(stored+1)+"/"+Capacity;
                 }
             }
@@ -62,13 +62,13 @@ namespace YFAutomation
             }
             foreach(var tank in Tanks(world,machine))
             {
-                var storage=tank.GetFeature<TEFeatureStorage>();var copy=ProductionInventory.Clone(storage.items);
+                var storage=tank.GetFeature<TEFeatureStorage>();var copy=ProductionInventory.Clone(storage.ItemGrid.items);
                 if(!ProductionInventory.Consume(copy,type,1,i=>Logistics.Locked(storage,i)))continue;
                 var original=work.Complete;
                 var originalReady=work.Ready;
                 work.Duration=5;work.Key+=":irrigated";
                 work.Ready=()=>world.GetTileEntity(tank.ToWorldPos())==tank&&!Logistics.Busy(tank)&&(originalReady==null||originalReady());
-                work.Complete=()=>{original?.Invoke();Array.Copy(copy,storage.items,copy.Length);tank.SetChunkModified();tank.SetModified();};
+                work.Complete=()=>{original?.Invoke();Array.Copy(copy,storage.ItemGrid.items,copy.Length);tank.SetChunkModified();tank.SetModified();};
                 return;
             }
         }

@@ -114,7 +114,6 @@ namespace YFAutomation.CargoDrones
         public long Revision;
         public CargoHubAction Action;
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>56;
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write((byte)Action);w.Write(Hub.ToByteArray());w.Write(Revision);w.Write(Endpoint.x);w.Write(Endpoint.y);w.Write(Endpoint.z);w.Write(FromDrone);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Action=(CargoHubAction)r.ReadByte();Hub=new Guid(r.ReadBytes(16));Revision=r.ReadInt64();Endpoint=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());FromDrone=r.ReadBoolean();}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -200,7 +199,6 @@ namespace YFAutomation.CargoDrones
             var s=state.ShipmentTarget?.Position??new CargoPosition(0,0,0);Shipment=new Vector3i(s.X,s.Y,s.Z);
         }
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>76+Encoding.UTF8.GetByteCount(Message+Details+Destinations);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write(Allowed);w.Write(Hub.ToByteArray());w.Write(Revision);w.Write(Paused);ConfigurationWire.Text(w,Message,512);ConfigurationWire.Text(w,Details,4096);ConfigurationWire.Text(w,Destinations,2048);w.Write(HasTarget);w.Write(Target.x);w.Write(Target.y);w.Write(Target.z);w.Write(HasShipment);w.Write(Shipment.x);w.Write(Shipment.y);w.Write(Shipment.z);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Allowed=r.ReadBoolean();Hub=new Guid(r.ReadBytes(16));Revision=r.ReadInt64();Paused=r.ReadBoolean();Message=ConfigurationWire.Text(r,512);Details=ConfigurationWire.Text(r,4096);Destinations=ConfigurationWire.Text(r,2048);HasTarget=r.ReadBoolean();Target=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());HasShipment=r.ReadBoolean();Shipment=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());}
         public override void ProcessPackage(World world,GameManager callbacks){if(world!=null&&!(ConnectionManager.Instance?.IsServer??true))Deliver();}

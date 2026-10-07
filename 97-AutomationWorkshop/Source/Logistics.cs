@@ -181,7 +181,7 @@ namespace YFAutomation
             select new Vector3i(x,y,z)).ToArray();
         internal static bool Powered(World w,Vector3i at)=>w!=null&&powerOffsets.Any(offset=>
             w.GetTileEntity(Add(at,offset)) is TileEntityPowered p&&p.block.GetBlockName()=="yfAutoPowerPort"&&p.IsPowered);
-        internal static bool Locked(TEFeatureStorage storage,int slot)=>storage.HasSlotLocksSupport&&storage.SlotLocks!=null&&storage.SlotLocks[slot];
+        internal static bool Locked(TEFeatureStorage storage,int slot)=>storage.ItemGrid.SlotLocks!=null&&storage.ItemGrid.SlotLocks[slot];
         static void RunTransfer(TileEntityComposite machine,string owner)
         {
             var at=machine.ToWorldPos();var chunk=world.GetChunkFromWorldPos(at.x,at.z) as Chunk;
@@ -197,7 +197,7 @@ namespace YFAutomation
                     var a=source.ToWorldPos();var b=target.ToWorldPos();
                     if(!TransferRules.SameChunk(at.x,at.z,a.x,a.z)||!TransferRules.SameChunk(at.x,at.z,b.x,b.z))continue;
                     var input=source.GetFeature<TEFeatureStorage>();var output=target.GetFeature<TEFeatureStorage>();
-                    moved=InventoryTransfer.MoveUnfiltered(input.items,output.items,i=>i==0||Locked(input,i),i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value);
+                    moved=InventoryTransfer.MoveUnfiltered(input.ItemGrid.items,output.ItemGrid.items,i=>i==0||Locked(input,i),i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value);
                     if(moved>0){source.SetChunkModified();target.SetChunkModified();source.SetModified();target.SetModified();Status(machine,"输送："+moved);return;}
                 }
             }
@@ -217,7 +217,7 @@ namespace YFAutomation
                 if(world.GetTileEntity(a)!=source||world.GetTileEntity(b)!=target||!Available(source,"yfAutoInput",owner)||!Available(target,"yfAutoOutput",owner))return 0;
                 var input=source.GetFeature<TEFeatureStorage>();var output=target.GetFeature<TEFeatureStorage>();
                 if(input==null||output==null||filter!=""&&ItemClass.GetItem(filter).type==0)return 0;
-                moved=InventoryTransfer.Move(input.items,output.items,i=>Locked(input,i),i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value,filter==""?0:ItemClass.GetItem(filter).type);
+                moved=InventoryTransfer.Move(input.ItemGrid.items,output.ItemGrid.items,i=>Locked(input,i),i=>Locked(output,i),v=>v.ItemClass.Stacknumber.Value,filter==""?0:ItemClass.GetItem(filter).type);
                 if(moved>0){source.SetChunkModified();target.SetChunkModified();}
                 return moved;
             }

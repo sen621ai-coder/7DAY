@@ -55,7 +55,6 @@ namespace YFAutomation
         static readonly Dictionary<int,float> nextRequest=new Dictionary<int,float>();
         public Vector3i At;public int Request;public bool Save;public string Token="";public MachineSettings Value=new MachineSettings();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>36+Encoding.UTF8.GetByteCount(Token+Value.Source+Value.Target+Value.Product+Value.StorageMode+Value.Product2);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write(Save);ConfigurationWire.Text(w,Token,64);ConfigurationWire.Settings(w,Value);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Save=r.ReadBoolean();Token=ConfigurationWire.Text(r,64);Value=ConfigurationWire.Settings(r);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -85,7 +84,6 @@ namespace YFAutomation
     {
         public Vector3i At;public int Request;public bool Allowed;public string Message="",Kind="",Token="";public MachineSettings Value=new MachineSettings();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>40+Encoding.UTF8.GetByteCount(Message+Kind+Token+Value.Source+Value.Target+Value.Product+Value.StorageMode+Value.Product2);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);w.Write(Allowed);ConfigurationWire.Text(w,Message,512);ConfigurationWire.Text(w,Kind);ConfigurationWire.Text(w,Token,64);ConfigurationWire.Settings(w,Value);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Allowed=r.ReadBoolean();Message=ConfigurationWire.Text(r,512);Kind=ConfigurationWire.Text(r);Token=ConfigurationWire.Text(r,64);Value=ConfigurationWire.Settings(r);}
         public override void ProcessPackage(World world,GameManager callbacks)

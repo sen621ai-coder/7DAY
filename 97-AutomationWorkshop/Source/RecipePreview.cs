@@ -21,7 +21,7 @@ namespace YFAutomation
             foreach(var source in sources)
             {
                 var storage=source.GetFeature<TEFeatureStorage>();if(storage==null)continue;
-                var plan=RecipePlan.Select(draft.Product,kind,storage.items,i=>Logistics.Locked(storage,i)||internalMode&&!MachineInventory.IsInput(i)||!internalMode&&i==0&&source.block.GetBlockName()=="yfAutoOutput",owner);
+                var plan=RecipePlan.Select(draft.Product,kind,storage.ItemGrid.items,i=>Logistics.Locked(storage,i)||internalMode&&!MachineInventory.IsInput(i)||!internalMode&&i==0&&source.block.GetBlockName()=="yfAutoOutput",owner);
                 if(plan==null)continue;
                 if(best==null||plan.Ready)best=plan;if(plan.Ready)break;
             }
@@ -39,7 +39,6 @@ namespace YFAutomation
         static World current;static readonly Dictionary<int,float> next=new Dictionary<int,float>();
         public Vector3i At;public int Request;public MachineSettings Draft=new MachineSettings();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>33+Encoding.UTF8.GetByteCount(Draft.Source+Draft.Target+Draft.Product+Draft.StorageMode+Draft.Product2);
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);ConfigurationWire.Settings(w,Draft);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Draft=ConfigurationWire.Settings(r);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -64,7 +63,6 @@ namespace YFAutomation
         public Vector3i At;public int Request;public string Text="";
         public List<RecipeMaterial> Materials=new List<RecipeMaterial>();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>22+Encoding.UTF8.GetByteCount(Text)+Materials.Sum(m=>11+Encoding.UTF8.GetByteCount(m.Name));
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Request);ConfigurationWire.Text(w,Text,8192);if(Materials.Count>128)throw new System.IO.InvalidDataException();w.Write((ushort)Materials.Count);foreach(var m in Materials){ConfigurationWire.Text(w,m.Name);w.Write(m.Need);w.Write(m.Have);w.Write(m.Tool);}}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Request=r.ReadInt32();Text=ConfigurationWire.Text(r,8192);int count=r.ReadUInt16();if(count>128)throw new System.IO.InvalidDataException();Materials=new List<RecipeMaterial>();for(int i=0;i<count;i++)Materials.Add(new RecipeMaterial{Name=ConfigurationWire.Text(r),Need=r.ReadInt32(),Have=r.ReadInt32(),Tool=r.ReadBoolean()});}
         public override void ProcessPackage(World world,GameManager callbacks){if(world!=null&&ConnectionManager.Instance!=null&&!ConnectionManager.Instance.IsServer)Deliver();}

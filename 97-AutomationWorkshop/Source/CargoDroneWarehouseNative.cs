@@ -46,7 +46,7 @@ namespace YFAutomation.CargoDrones
                 if(chunk==null||chunk.IsLocked||chunk.NeedsDecoration)continue;
                 foreach(var tile in chunk.GetTileEntities().dict.Values.OfType<TileEntityComposite>())
                 {
-                    if(tile.IsRemoving||tile.block.GetBlockName()==CargoRuntime.HubBlock||!(tile.GetFeature<TEFeatureStorage>()?.bPlayerStorage??false))continue;
+                    if(tile.IsRemoving||tile.block.GetBlockName()==CargoRuntime.HubBlock||!(tile.GetFeature<TEFeatureStorage>()?.ItemGrid?.PlayerOwned??false))continue;
                     var at=tile.ToWorldPos();var position=new CargoPosition(at.x,at.y,at.z);
                     if(position.Equals(hub)||!rules.CanDeliver(hub,position))continue;
                     string block=tile.block.GetBlockName(),name=tile.block.GetLocalizedBlockName();
@@ -147,7 +147,6 @@ namespace YFAutomation.CargoDrones
         public CargoSourceKind SourceKind;
         public string Query="";
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>45+Encoding.UTF8.GetByteCount(Query??"");
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Hub.ToByteArray());w.Write(Request);w.Write(Page);w.Write((byte)Kind);w.Write(Sources);w.Write(Entrances);w.Write(BoundOnly);w.Write((byte)SourceKind);ConfigurationWire.Text(w,Query,256);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Hub=new Guid(r.ReadBytes(16));Request=r.ReadInt32();Page=r.ReadInt32();Kind=(CargoWarehouseKind)r.ReadByte();Sources=r.ReadBoolean();Entrances=r.ReadBoolean();BoundOnly=r.ReadBoolean();SourceKind=(CargoSourceKind)r.ReadByte();Query=ConfigurationWire.Text(r,256);}
         public override void ProcessPackage(World world,GameManager callbacks){if(Sender!=null&&Sender.loginDone&&Sender.bAttachedToEntity)Handle(world,Sender.entityId);}
@@ -177,7 +176,6 @@ namespace YFAutomation.CargoDrones
         public Vector3i At;public Guid Hub;public int Request;public bool Success,Sources,Entrances;
         public string Message="";public CargoWarehousePage Result=new CargoWarehousePage();
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>49+Encoding.UTF8.GetByteCount(Message??"")+Result.Rows.Sum(r=>28+Encoding.UTF8.GetByteCount(r.Name+r.Sign+r.Block));
         public override void write(PooledBinaryWriter w)
         {
             base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Hub.ToByteArray());w.Write(Request);w.Write(Success);w.Write(Sources);w.Write(Entrances);ConfigurationWire.Text(w,Message,512);

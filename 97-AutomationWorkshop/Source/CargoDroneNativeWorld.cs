@@ -90,7 +90,7 @@ namespace YFAutomation.CargoDrones
         {
             Context();var tile=world.GetTileEntity(new Vector3i(at.X,at.Y,at.Z));if(tile==null||tile.IsRemoving)return null;
             if(tile.block.GetBlockName()==CargoRuntime.HubBlock)return null;
-            if(source?!(tile is TileEntityCollector)||!CargoRules.IsSource(tile.block.GetBlockName()):!((tile as TileEntityComposite)?.GetFeature<TEFeatureStorage>()?.bPlayerStorage??false))return null;
+            if(source?!(tile is TileEntityCollector)||!CargoRules.IsSource(tile.block.GetBlockName()):!((tile as TileEntityComposite)?.GetFeature<TEFeatureStorage>()?.ItemGrid?.PlayerOwned??false))return null;
             CargoEndpointMarker marker;
             lock(ChunkTransferLock.For(tile.GetChunk()))
             {
@@ -197,7 +197,7 @@ namespace YFAutomation.CargoDrones
                 // This non-craftable recovery block is adopted only while empty
                 // and unowned. Its durable intent is the removed hub checkpoint;
                 // both IDs and the reserved position are derived from that intent.
-                if(tile.Owner!=null||storage.items.Any(s=>s!=null&&!s.IsEmpty()))return false;
+                if(tile.Owner!=null||storage.ItemGrid.items.Any(s=>s!=null&&!s.IsEmpty()))return false;
                 tile.SetOwner(PlatformUserIdentifierAbs.FromCombinedString(hub.Owner,false));
                 marker=new CargoEndpointMarker(worldId,flight,hub.HubId,hub.Owner,CargoRuntime.RecoveryBlock,0,Guid.Empty);
                 CargoNativeMarkers.Write(tile,marker);

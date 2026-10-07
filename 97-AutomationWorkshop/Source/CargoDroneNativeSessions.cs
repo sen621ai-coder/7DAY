@@ -30,15 +30,15 @@ namespace YFAutomation.CargoDrones
         {
             if(installed)return;
             if(GameManager.Instance?.World!=null&&GameManager.Instance.World.Players.Count!=0)throw new InvalidOperationException("Install session tracking before any client accesses native inventories");
-            if(typeof(TileEntity).Module.ModuleVersionId!=new Guid("229796d0-95ca-4662-b426-1a6f1f1596ed"))throw new NotSupportedException("Unverified native access protocol build");
+            if(typeof(TileEntity).Module.ModuleVersionId!=new Guid("1a9a4203-3d95-4c90-b094-8926dec1ee9c"))throw new NotSupportedException("Unverified native access protocol build");
             harmony.Patch(AccessTools.Method(typeof(ConnectionManager),"SendToServer"),prefix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(BeforeSend)));
             harmony.Patch(AccessTools.Method(typeof(NetPackageTileEntity),"ProcessPackage"),prefix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(BeforeRead)));
             harmony.Patch(AccessTools.Method(typeof(LockManager),"UnlockRequestLocal"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(AfterLocalClose)));
-            harmony.Patch(AccessTools.Method(typeof(TileEntity),"CanLockOnServer"),prefix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(CanOpenTile)));
-            harmony.Patch(AccessTools.Method(typeof(TEFeatureAbs),"CanLockOnServer"),prefix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(CanOpenFeature)));
-            harmony.Patch(AccessTools.Method(typeof(TileEntity),"OnLockedServer"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(OpenedTile)));
-            harmony.Patch(AccessTools.Method(typeof(TEFeatureStorage),"OnLockedServer"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(OpenedStorage)));
-            harmony.Patch(AccessTools.Method(typeof(TEFeatureAbs),"OnLockedServer"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(OpenedFeature)));
+            harmony.Patch(AccessTools.Method(typeof(TileEntity),"OnLockRequestServer"),prefix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(CanOpenTile)));
+            harmony.Patch(AccessTools.Method(typeof(TEFeatureAbs),"OnLockRequestServer"),prefix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(CanOpenFeature)));
+            harmony.Patch(AccessTools.Method(typeof(TileEntity),"OnLockRequestServer"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(OpenedTile)));
+            harmony.Patch(AccessTools.Method(typeof(TEFeatureStorage),"OnLockRequestServer"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(OpenedStorage)));
+            harmony.Patch(AccessTools.Method(typeof(TEFeatureAbs),"OnLockRequestServer"),postfix:new HarmonyMethod(typeof(CargoNativeAccessSessions),nameof(OpenedFeature)));
             ModEvents.GameUpdate.RegisterHandler(UpdateClient);
             installed=true;
         }
@@ -86,7 +86,7 @@ namespace YFAutomation.CargoDrones
         static Registration TrackNativeAccess(TileEntity tile)
         {
             var storage=(tile as TileEntityComposite)?.GetFeature<TEFeatureStorage>();
-            if(tile==null||!(tile is TileEntityCollector)&&!(storage?.bPlayerStorage??false))return null;
+            if(tile==null||!(tile is TileEntityCollector)&&!(storage?.ItemGrid?.PlayerOwned??false))return null;
             WorldContext(GameManager.Instance.World);Registration r;
             if(registered.TryGetValue(tile.ToWorldPos(),out r)&&r.Tile==tile)return r;
             if(r!=null)r.Session?.Disconnect();
@@ -111,9 +111,9 @@ namespace YFAutomation.CargoDrones
         }
         public static bool CanOpenTile(TileEntity __instance,int __0,ref bool __result){if(CanOpen(__instance,__0))return true;__result=false;return false;}
         public static bool CanOpenFeature(TEFeatureAbs __instance,int __0,ref bool __result){if(CanOpen(__instance.Parent,__0))return true;__result=false;return false;}
-        public static void OpenedTile(TileEntity __instance,bool __0,int __1){if(__0)Opened(__instance,__1);}
-        public static void OpenedStorage(TEFeatureStorage __instance,bool __0,int __1){if(__0)Opened(__instance.Parent,__1);}
-        public static void OpenedFeature(TEFeatureAbs __instance,bool __0,int __1){if(__0)Opened(__instance.Parent,__1);}
+        public static void OpenedTile(TileEntity __instance,int __0,bool __result){if(__result)Opened(__instance,__0);}
+        public static void OpenedStorage(TEFeatureStorage __instance,int __0,bool __result){if(__result)Opened(__instance.Parent,__0);}
+        public static void OpenedFeature(TEFeatureAbs __instance,int __0,bool __result){if(__result)Opened(__instance.Parent,__0);}
         static void Opened(TileEntity tile,int actor)
         {
             Registration r;if(tile==null||!registered.TryGetValue(tile.ToWorldPos(),out r)||GameManager.Instance.World.GetEntity(actor) is EntityPlayerLocal)return;
@@ -178,7 +178,6 @@ namespace YFAutomation.CargoDrones
     {
         bool valid;
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>6;
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(1);}
         public override void read(PooledBinaryReader r){valid=r.ReadInt32()==1;}
         public override void ProcessPackage(World world,GameManager callbacks){if(valid)CargoNativeAccessSessions.Hello(Sender);}
@@ -187,7 +186,6 @@ namespace YFAutomation.CargoDrones
     {
         public Vector3i At;public Guid Token;
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>30;
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Token.ToByteArray());}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Token=new Guid(r.ReadBytes(16));}
         public override void ProcessPackage(World world,GameManager callbacks){CargoNativeAccessSessions.Start(At,Token);}
@@ -196,7 +194,6 @@ namespace YFAutomation.CargoDrones
     {
         public Vector3i At;public Guid Token;public long Sequence;public byte[] Payload=new byte[0];
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>42+Payload.Length;
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Token.ToByteArray());w.Write(Sequence);w.Write(Payload.Length);w.Write(Payload);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Token=new Guid(r.ReadBytes(16));Sequence=r.ReadInt64();int n=r.ReadInt32();if(n<1||n>CargoRules.MaxRecordBytes)throw new InvalidDataException("Invalid access envelope length");Payload=r.ReadBytes(n);if(Payload.Length!=n)throw new EndOfStreamException();}
         public override void ProcessPackage(World world,GameManager callbacks){CargoNativeAccessSessions.Receive(Sender,At,Token,Sequence,Payload,false);}
@@ -205,7 +202,6 @@ namespace YFAutomation.CargoDrones
     {
         public Vector3i At;public Guid Token;public long Sequence;
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
-        public override int GetLength()=>38;
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(At.x);w.Write(At.y);w.Write(At.z);w.Write(Token.ToByteArray());w.Write(Sequence);}
         public override void read(PooledBinaryReader r){At=new Vector3i(r.ReadInt32(),r.ReadInt32(),r.ReadInt32());Token=new Guid(r.ReadBytes(16));Sequence=r.ReadInt64();}
         public override void ProcessPackage(World world,GameManager callbacks){CargoNativeAccessSessions.Receive(Sender,At,Token,Sequence,null,true);}

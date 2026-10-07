@@ -23,8 +23,9 @@ namespace YFAutomation.CargoDrones
         public static CargoItem Encode(ItemStack stack)
         {
             if(stack==null||stack.IsEmpty())return null;
-            using(var memory=new MemoryStream())using(var writer=new BinaryWriter(memory))
+            using(var memory=new MemoryStream())
             {
+                var writer=new PooledBinaryWriter();writer.SetBaseStream(memory);
                 stack.itemValue.Write(writer);writer.Flush();
                 if(memory.Length>CargoRules.MaxItemBytes)throw new InvalidDataException("Complete ItemValue exceeds logistics limit");
                 return new CargoItem(memory.ToArray(),stack.count,stack.itemValue.ItemClass.Stacknumber.Value);
@@ -33,8 +34,9 @@ namespace YFAutomation.CargoDrones
         public static ItemStack Decode(CargoItem item)
         {
             if(item==null)return ItemStack.Empty;
-            using(var memory=new MemoryStream(item.Value,false))using(var reader=new BinaryReader(memory))
+            using(var memory=new MemoryStream(item.Value,false))
             {
+                var reader=new PooledBinaryReader();reader.SetBaseStream(memory);
                 var value=new ItemValue();value.Read(reader);
                 if(memory.Position!=memory.Length||value.IsEmpty()||value.ItemClass==null)throw new InvalidDataException("Unknown/incomplete native ItemValue");
                 return new ItemStack(value,item.Count);
@@ -110,9 +112,9 @@ namespace YFAutomation.CargoDrones
                 return new CargoInventory(marker.EndpointId,marker.Incarnation,marker.Revision,marker.Owner,items,locks,allowed,busy);
             }
             var composite=tile as TileEntityComposite;var storage=composite==null?null:composite.GetFeature<TEFeatureStorage>();
-            if(storage==null||!storage.bPlayerStorage)throw new InvalidOperationException("Unsupported target");
-            var values=new CargoItem[storage.items.Length];var slotLocks=new bool[values.Length];var writable=new bool[values.Length];
-            for(int i=0;i<values.Length;i++){values[i]=CargoNativeItems.Encode(storage.items[i]);slotLocks[i]=Logistics.Locked(storage,i);writable[i]=!ThreeWaySorter.Is(composite)||MachineInventory.IsInput(i);}
+            if(storage==null||storage.ItemGrid==null||!storage.ItemGrid.PlayerOwned)throw new InvalidOperationException("Unsupported target");
+            var values=new CargoItem[storage.ItemGrid.items.Length];var slotLocks=new bool[values.Length];var writable=new bool[values.Length];
+            for(int i=0;i<values.Length;i++){values[i]=CargoNativeItems.Encode(storage.ItemGrid.items[i]);slotLocks[i]=Logistics.Locked(storage,i);writable[i]=!ThreeWaySorter.Is(composite)||MachineInventory.IsInput(i);}
             return new CargoInventory(marker.EndpointId,marker.Incarnation,marker.Revision,marker.Owner,values,slotLocks,writable,Logistics.Busy(composite,includeCargoFence));
         }
     }

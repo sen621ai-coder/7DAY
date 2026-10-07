@@ -75,9 +75,9 @@ namespace YFAutomation
     if(power&&members.Count<=32)foreach(var b in members)powered.Add(b);
    }
    var working=new Dictionary<TileEntityComposite,ItemStack[]>();var changed=new HashSet<TileEntityComposite>();var moved=new HashSet<TileEntityComposite>();
-   Func<TileEntityComposite,ItemStack[]> inventory=t=>{ItemStack[] a;if(!working.TryGetValue(t,out a)){a=ProductionInventory.Clone(t.GetFeature<TEFeatureStorage>().items);working[t]=a;}return a;};
+    Func<TileEntityComposite,ItemStack[]> inventory=t=>{ItemStack[] a;if(!working.TryGetValue(t,out a)){a=ProductionInventory.Clone(t.GetFeature<TEFeatureStorage>().ItemGrid.items);working[t]=a;}return a;};
    Func<TileEntityComposite,TileEntityComposite,bool> allowed=(a,b)=>b!=null&&!b.IsRemoving&&TransferRules.SameOwner(Owner(a),Owner(b))&&chunks.Contains(world.GetChunkFromWorldPos(b.ToWorldPos()) as Chunk)&&!Logistics.Busy(b)&&b.GetFeature<TEFeatureStorage>()!=null;
-   var budget=nodes.ToDictionary(t=>t,t=>t.GetFeature<TEFeatureStorage>().items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count));
+    var budget=nodes.ToDictionary(t=>t,t=>t.GetFeature<TEFeatureStorage>().ItemGrid.items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count));
    foreach(var b in nodes){if(!powered.Contains(b)||Logistics.Busy(b)||budget[b]==0)continue;var target=world.GetTileEntity(Exit(b)) as TileEntityComposite;if(!allowed(b,target))continue;
     bool belt=ConveyorPath.IsBelt(target.block.GetBlockName());string kind=target.block.GetBlockName();if(belt&&(!map.ContainsKey(target.ToWorldPos())||!Matches(b,target)||!powered.Contains(target)))continue;bool machine=MachineInventory.UsesInternal(target);if(!belt&&!machine&&kind!="yfAutoInput"&&kind!="yfAutoOutput")continue;
     if(!ThreeWaySorter.CanInput(target,b.ToWorldPos()))continue;
@@ -107,7 +107,7 @@ namespace YFAutomation
    }
    // Abort the entire detached batch before publishing either side of any transfer.
    if(changed.Any(t=>world.GetTileEntity(t.ToWorldPos())!=t||Logistics.Busy(t)||!(world.GetChunkFromWorldPos(t.ToWorldPos()) is Chunk c)||c.IsLocked||!chunks.Contains(c)))return;
-   foreach(var t in changed){var s=t.GetFeature<TEFeatureStorage>();Array.Copy(working[t],s.items,s.items.Length);t.SetChunkModified();}
+    foreach(var t in changed){var s=t.GetFeature<TEFeatureStorage>();Array.Copy(working[t],s.ItemGrid.items,s.ItemGrid.items.Length);t.SetChunkModified();}
    foreach(var t in changed)t.SetModified();
    foreach(var b in nodes){if(Logistics.Busy(b))continue;var state=b.GetFeature<TEFeatureAutomationState>();if(state==null)continue;string status=!powered.Contains(b)?"缺电/线路超过32段":moved.Contains(b)?"运输中":"等待物品/出口堵塞";if(state.Job!=status||moved.Contains(b)){state.Job=status;state.Seconds+=1;b.SetChunkModified();b.SetModified();}}
   }
@@ -120,7 +120,7 @@ namespace YFAutomation
    var v=__0.transform.GetComponent<ConveyorVisual>()??__0.transform.gameObject.AddComponent<ConveyorVisual>();v.Bind(__instance,__0.transform);
   }
   public void Bind(TileEntityComposite t,Transform root){tile=t;kind=t.block.GetBlockName();packet=root.GetComponentsInChildren<Transform>(true).FirstOrDefault(v=>v.name=="Cargo");}
-  public static void ActivationText(Vector3i __1,BlockValue __2,ref string __result){if(!ConveyorPath.IsBelt(__2.Block.GetBlockName()))return;var t=GameManager.Instance?.World?.GetTileEntity(__1) as TileEntityComposite;var state=t?.GetFeature<TEFeatureAutomationState>();if(state!=null)__result+="\n"+state.Job+" · "+(t.GetFeature<TEFeatureStorage>()?.items.Sum(s=>s.count)??0)+" 件";}
-  void Update(){if(tile==null||tile.IsRemoving||packet==null)return;var store=tile.GetFeature<TEFeatureStorage>();bool full=store!=null&&store.items.Any(s=>s!=null&&!s.IsEmpty());packet.gameObject.SetActive(full);if(!full)return;var state=tile.GetFeature<TEFeatureAutomationState>();if(state!=null&&revision!=state.Seconds){revision=state.Seconds;received=Time.time;}float t=state!=null&&state.Job=="运输中"?Mathf.Clamp01((Time.time-received)/1f):.85f;packet.localPosition=ConveyorPath.Point(kind,Mathf.Lerp(.12f,.88f,t))+Vector3.up*(kind.EndsWith("Up")||kind.EndsWith("Down")?.55f:.43f);}
+  public static void ActivationText(Vector3i __1,BlockValue __2,ref string __result){if(!ConveyorPath.IsBelt(__2.Block.GetBlockName()))return;var t=GameManager.Instance?.World?.GetTileEntity(__1) as TileEntityComposite;var state=t?.GetFeature<TEFeatureAutomationState>();if(state!=null)__result+="\n"+state.Job+" · "+(t.GetFeature<TEFeatureStorage>()?.ItemGrid.items.Sum(s=>s.count)??0)+" 件";}
+  void Update(){if(tile==null||tile.IsRemoving||packet==null)return;var store=tile.GetFeature<TEFeatureStorage>();bool full=store!=null&&store.ItemGrid.items.Any(s=>s!=null&&!s.IsEmpty());packet.gameObject.SetActive(full);if(!full)return;var state=tile.GetFeature<TEFeatureAutomationState>();if(state!=null&&revision!=state.Seconds){revision=state.Seconds;received=Time.time;}float t=state!=null&&state.Job=="运输中"?Mathf.Clamp01((Time.time-received)/1f):.85f;packet.localPosition=ConveyorPath.Point(kind,Mathf.Lerp(.12f,.88f,t))+Vector3.up*(kind.EndsWith("Up")||kind.EndsWith("Down")?.55f:.43f);}
  }
 }

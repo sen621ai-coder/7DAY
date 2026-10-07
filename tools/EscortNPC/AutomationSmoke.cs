@@ -27,7 +27,7 @@ public static class AutomationSmoke
   distinct=second.Clone();distinct.itemValue.Quality=1;Check(!StackCompatibility.Matches(first.itemValue,distinct.itemValue),"different quality remains separate");
   var equipmentA=first.Clone();var equipmentB=second.Clone();equipmentA.itemValue.Quality=equipmentB.itemValue.Quality=3;
   Check(!StackCompatibility.Matches(equipmentA.itemValue,equipmentB.itemValue),"equipment random-stat seeds are not discarded");
-  equipmentA=first.Clone();equipmentB=second.Clone();equipmentA.itemValue.Modifications=equipmentB.itemValue.Modifications=new[]{new ItemValue{type=2}};
+   equipmentA=first.Clone();equipmentB=second.Clone();equipmentA.itemValue.modifications=equipmentB.itemValue.modifications=new[]{new ItemValue{type=2}};
   Check(!StackCompatibility.Matches(equipmentA.itemValue,equipmentB.itemValue),"modified items keep strict seed identity");
   Check(!StackCompatibility.Matches(first.itemValue,Stack(2,1).itemValue),"different resource types never merge");
  }
@@ -88,10 +88,10 @@ public static class AutomationSmoke
    Check(Move(src,new[]{ItemStack.Empty,ItemStack.Empty})==0,"no sample no movement");
    src=new[]{Stack(1,1,42,5)};dst=new[]{Stack(1,1),Stack(1,1,7,5),ItemStack.Empty};
    Check(Move(src,dst,1)==1&&dst[1].itemValue.UseTimes==7&&dst[2].itemValue.UseTimes==42&&dst[2].itemValue.Quality==5,"wear and quality survive without incompatible merge");
-   var value=new ItemValue{type=1,Quality=5,UseTimes=13,Modifications=new[]{new ItemValue{type=2,Quality=3}}};
-   src=new[]{new ItemStack(value,1)};dst=new[]{Stack(1,1),ItemStack.Empty};Move(src,dst,1);
-   Check(dst[1].itemValue.Modifications[0].type==2&&dst[1].itemValue.Modifications[0].Quality==3,"installed mod preserved");
-   Check(!ReferenceEquals(value,dst[1].itemValue)&&!ReferenceEquals(value.Modifications,dst[1].itemValue.Modifications),"deep copied values");
+    var value=new ItemValue{type=1,Quality=5,UseTimes=13,modifications=new[]{new ItemValue{type=2,Quality=3}}};
+    src=new[]{new ItemStack(value,1)};dst=new[]{Stack(1,1),ItemStack.Empty};Move(src,dst,1);
+    Check(dst[1].itemValue.modifications[0].type==2&&dst[1].itemValue.modifications[0].Quality==3,"installed mod preserved");
+    Check(!ReferenceEquals(value,dst[1].itemValue)&&!ReferenceEquals(value.modifications,dst[1].itemValue.modifications),"deep copied values");
    Check(typeof(TileEntityComposite).GetMethod("UpdateTick",new[]{typeof(World)})!=null,"native tick hook exists");
    Check(typeof(Chunk).GetMethod("write",new[]{typeof(PooledBinaryWriter),typeof(bool)})!=null,"native chunk serialization hook exists");
    var chunk=(Chunk)FormatterServices.GetUninitializedObject(typeof(Chunk));
@@ -131,10 +131,10 @@ public static class AutomationSmoke
    Check(decrement!=null&&decrement.ReturnType==typeof(bool),"native per-shot ammo hook signature");
    var state=new TEFeatureAutomationState{Job="forge:iron",Seconds=25.5f};
    using(var stream=new System.IO.MemoryStream()){
-    var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);state.Write(writer,TileEntity.StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
-    var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TEFeatureAutomationState();restored.Read(reader,TileEntity.StreamModeRead.Persistency);
-    Check(restored.Job==state.Job&&restored.Seconds==25.5f,"native feature progress serialization round trip");
-    stream.Position=0;restored.Job="trusted";restored.Seconds=3;restored.Read(reader,TileEntity.StreamModeRead.FromClient);
+     var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);state.Write(writer,StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
+     var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TEFeatureAutomationState();restored.Read(reader,StreamModeRead.Persistency);
+     Check(restored.Job==state.Job&&restored.Seconds==25.5f,"native feature progress serialization round trip");
+     stream.Position=0;restored.Job="trusted";restored.Seconds=3;restored.Read(reader,StreamModeRead.FromClient);
     Check(restored.Job=="trusted"&&restored.Seconds==3,"client cannot forge production progress");
    }
    RawForgeChecks();
@@ -183,9 +183,9 @@ public static class AutomationSmoke
   var feature=new TEFeatureMachineInventory();Check(feature.Legacy,"missing new feature preserves legacy mode");
   feature.Legacy=false;
   using(var stream=new System.IO.MemoryStream()){
-   var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);feature.Write(writer,TileEntity.StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
-   var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var copy=new TEFeatureMachineInventory();copy.Read(reader,TileEntity.StreamModeRead.Persistency);
-   Check(!copy.Legacy,"new machine mode round trips in native feature");stream.Position=0;copy.Legacy=true;copy.Read(reader,TileEntity.StreamModeRead.FromClient);Check(copy.Legacy,"client cannot change migration marker");
+    var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);feature.Write(writer,StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
+    var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var copy=new TEFeatureMachineInventory();copy.Read(reader,StreamModeRead.Persistency);
+    Check(!copy.Legacy,"new machine mode round trips in native feature");stream.Position=0;copy.Legacy=true;copy.Read(reader,StreamModeRead.FromClient);Check(copy.Legacy,"client cannot change migration marker");
   }
   Check(ReflectionHelpers.GetTypeWithPrefix("XUiC_","YFAutomation.YFAutomationInventoryControls, YF.Automation")==typeof(XUiC_YFAutomationInventoryControls),"native XML resolves integrated inventory controls");
  }

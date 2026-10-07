@@ -33,15 +33,15 @@ namespace YFAutomation
             if(!Logistics.Powered(GameManager.Instance.World,machine.ToWorldPos()))return "缺电：4格内需通电供电口";
             var store=machine.GetFeature<TEFeatureStorage>();bool blocked=false,unsupported=false;
             for(int i=0;i<MachineInventory.InputSlots;i++){
-                var input=store.items[i];if(input==null||input.IsEmpty()||Logistics.Locked(store,i))continue;
+                var input=store.ItemGrid.items[i];if(input==null||input.IsEmpty()||Logistics.Locked(store,i))continue;
                 var products=Products(input.itemValue);if(products==null){unsupported=true;continue;}
-                var next=ProductionInventory.Clone(store.items);
+                var next=ProductionInventory.Clone(store.ItemGrid.items);
                 if(products.Any(p=>!ProductionInventory.Produce(next,p,j=>!MachineInventory.IsOutput(j)||Logistics.Locked(store,j),v=>v.ItemClass.Stacknumber.Value,MachineInventory.InputSlots))){blocked=true;continue;}
                 next[i].count--;if(next[i].count==0)next[i]=ItemStack.Empty;
                 // The caller holds the native chunk transaction lock. Publish all outputs and
                 // the consumed package together, never drop overflow into the world.
                 if(Logistics.Busy(machine)||GameManager.Instance.World.GetTileEntity(machine.ToWorldPos())!=machine)return "库存正在使用，拆包暂停";
-                Array.Copy(next,store.items,next.Length);machine.SetChunkModified();machine.SetModified();
+                Array.Copy(next,store.ItemGrid.items,next.Length);machine.SetChunkModified();machine.SetModified();
                 return "已拆包："+Localization.Get(input.itemValue.ItemClass.GetItemName());
             }
             return blocked?"成品区放不下整包，保留原包等待":unsupported?"等待可拆包物品；不支持的物品保持原样":"等待打包物品";

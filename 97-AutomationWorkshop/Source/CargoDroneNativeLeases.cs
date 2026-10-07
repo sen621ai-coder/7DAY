@@ -38,7 +38,7 @@ namespace YFAutomation.CargoDrones
         public CargoNativeLeaseService(World world,int perFlight=49,int total=128)
         {
             if(world==null||world.IsRemote()||world.m_ChunkManager==null)throw new ArgumentException("Live server world required");
-            if(typeof(Chunk).Module.ModuleVersionId!=new Guid("229796d0-95ca-4662-b426-1a6f1f1596ed"))throw new NotSupportedException("Observer footprint unverified on this game build");
+            if(typeof(Chunk).Module.ModuleVersionId!=new Guid("1a9a4203-3d95-4c90-b094-8926dec1ee9c"))throw new NotSupportedException("Observer footprint unverified on this game build");
             this.world=world;manager=world.m_ChunkManager;thread=Thread.CurrentThread.ManagedThreadId;budget=new CargoChunkBudget(perFlight,total);
         }
         void MainThread(){if(Thread.CurrentThread.ManagedThreadId!=thread)throw new InvalidOperationException("Native leases require their world thread");}

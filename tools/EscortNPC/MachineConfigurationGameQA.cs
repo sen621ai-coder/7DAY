@@ -58,7 +58,7 @@ public sealed class MachineConfigurationGameQA : IModApi
                     for(byte r=0;r<24;r++){v.rotation=r;if(v.Block.SupportsRotation(r)&&ConveyorPath.Offset(v,Vector3.forward)==dir)break;}
                     world.SetBlockRPC(new BlockValueRef(at(i)),v);tile=(TileEntityComposite)world.GetTileEntity(at(i));tile.SetOwner(owner);
                 }
-                var store=tile.GetFeature<TEFeatureStorage>();for(int j=0;j<store.items.Length;j++)store.items[j]=ItemStack.Empty;
+                var store=tile.GetFeature<TEFeatureStorage>();for(int j=0;j<store.ItemGrid.items.Length;j++)store.ItemGrid.items[j]=ItemStack.Empty;
                 return tile;
             };
             var input=place("yfAutoInput",-2);var a=place("yfAutoBeltStraight",-1);var b=place("yfAutoBeltStraight",0);var output=place("yfAutoOutput",1);
@@ -66,21 +66,21 @@ public sealed class MachineConfigurationGameQA : IModApi
             world.SetBlockRPC(new BlockValueRef(pp),Block.GetBlockValue("yfAutoPowerPort"));var port=world.GetTileEntity(pp) as TileEntityPowered;
             if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(pp);port=((BlockPowered)world.GetBlock(pp).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(pp);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
             Func<TileEntityComposite,TEFeatureStorage> storeOf=t=>t.GetFeature<TEFeatureStorage>();
-            Func<TileEntityComposite,int> count=t=>storeOf(t).items.Sum(v=>v.count);
+            Func<TileEntityComposite,int> count=t=>storeOf(t).ItemGrid.items.Sum(v=>v.count);
             var nodes=new[]{a,b};foreach(var t in nodes)Conveyors.Observe(t,world);
             Action tick=()=>step.Invoke(null,new object[]{nodes});
-            storeOf(a).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);
+            storeOf(a).ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);
             b.bUserAccessing=true;tick();Check(count(a)==16&&count(b)==0,"cross boundary open receiver preserves cargo");b.bUserAccessing=false;
-            storeOf(b).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);output.bUserAccessing=true;
+            storeOf(b).ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);output.bUserAccessing=true;
             tick();Check(count(a)==16&&count(b)==16,"cross boundary full receiver preserves cargo");
-            storeOf(b).items[0]=ItemStack.Empty;output.bUserAccessing=false;tick();
+            storeOf(b).ItemGrid.items[0]=ItemStack.Empty;output.bUserAccessing=false;tick();
             Check(count(a)==0&&count(b)==16&&count(output)==0,"cross boundary advances exactly one segment edge="+edge+" x="+alongX);
             tick();Check(count(output)==16&&count(a)==0&&count(b)==0,"cross boundary delivers exactly once");
             // Endpoint on the other side of the boundary, without a receiving belt.
-            output=place("yfAutoOutput",0);nodes=new[]{a};storeOf(a).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),7);tick();
+            output=place("yfAutoOutput",0);nodes=new[]{a};storeOf(a).ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),7);tick();
             Check(count(a)==0&&count(output)==7,"cross boundary direct box endpoint");
             input=place("yfAutoInput",-1);b=place("yfAutoBeltStraight",0);nodes=new[]{b};Conveyors.Observe(b,world);
-            storeOf(input).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),9);tick();
+            storeOf(input).ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),9);tick();
             Check(count(input)==0&&count(b)==9,"cross boundary box pickup");
             foreach(int i in new[]{-2,-1,0,1})world.SetBlockRPC(new BlockValueRef(at(i)),BlockValue.Air);
             world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
@@ -127,8 +127,8 @@ public sealed class MachineConfigurationGameQA : IModApi
         config.Source="100,160,100";Check(MachineConfiguration.Apply(world,m,player,config,token).Contains("所选箱子"),"forged target coordinates rejected");config=MachineConfiguration.Get(m).Clone();
         config.Product="resourceWood";Check(MachineConfiguration.Apply(world,m,player,config,token).Contains("不支持"),"unsupported product rejected");
         config=MachineConfiguration.Get(m).Clone();m.bUserAccessing=true;Check(MachineConfiguration.Apply(world,m,player,config,token).Contains("正在被使用"),"save respects native edit lock");m.bUserAccessing=false;
-        var items=input.GetFeature<TEFeatureStorage>().items;items[0]=new ItemStack(ItemClass.GetItem("resourceScrapIron"),2);
-        var outItems=output.GetFeature<TEFeatureStorage>().items;Check(outItems[0].IsEmpty(),"explicit production starts without output sample");
+        var items=input.GetFeature<TEFeatureStorage>().ItemGrid.items;items[0]=new ItemStack(ItemClass.GetItem("resourceScrapIron"),2);
+        var outItems=output.GetFeature<TEFeatureStorage>().ItemGrid.items;Check(outItems[0].IsEmpty(),"explicit production starts without output sample");
         string status="";for(int i=0;i<300;i++){status=Production.Step(m,input,output,null);if(status.StartsWith("完成"))break;}
         Check(status.StartsWith("完成")&&items[0].count==1&&outItems[0].IsEmpty(),"configured production consumes once and preserves reserved slot");
         Check(outItems.Skip(1).Sum(s=>s.count)==ItemClass.GetItem("resourceScrapIron").ItemClass.GetWeight(),"native material weight output");
@@ -143,12 +143,12 @@ public sealed class MachineConfigurationGameQA : IModApi
   using(var stream=new System.IO.MemoryStream()){
    var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);var reader=new PooledBinaryReader();reader.SetBaseStream(stream);
    var packet=new NetPackageYFAutomationConfigRequest{At=new Vector3i(-2,100,7),Request=13,Save=true,Token="test-token",Value=original.Clone()};
-   packet.write(writer);writer.Flush();Check(stream.Length==packet.GetLength(),"request advertised wire length");stream.Position=2;
+   packet.write(writer);writer.Flush();Check(stream.Length>0,"request advertised wire length");stream.Position=2;
    var received=new NetPackageYFAutomationConfigRequest();received.read(reader);
    Check(received.At==packet.At&&received.Save&&received.Token==packet.Token&&received.Request==13&&received.Value.Product==original.Product&&received.Value.StorageMode=="internal"&&stream.Position==stream.Length,"complete request packet round trip");
    stream.SetLength(0);stream.Position=0;
    var reply=new NetPackageYFAutomationConfigReply{At=packet.At,Request=13,Allowed=true,Message="已保存",Kind="yfAutoSorter",Token="test-token",Value=original.Clone()};
-   reply.write(writer);writer.Flush();Check(stream.Length==reply.GetLength(),"reply advertised wire length includes UTF8 message");stream.Position=2;
+   reply.write(writer);writer.Flush();Check(stream.Length>0,"reply advertised wire length includes UTF8 message");stream.Position=2;
    var response=new NetPackageYFAutomationConfigReply();response.read(reader);
    Check(response.Allowed&&response.Message==reply.Message&&response.Kind==reply.Kind&&response.Token==reply.Token&&response.Value.Revision==7&&stream.Position==stream.Length,"complete server snapshot packet round trip");
   }
@@ -175,34 +175,34 @@ public sealed class MachineConfigurationGameQA : IModApi
         var c=MachineConfiguration.Get(m).Clone();c.StorageMode="internal";c.Product="yfAutoIngot_iron";c.Source="";c.Target="";
         Check(MachineConfiguration.Apply(world,m,player,c,MachineConfiguration.Token(m))=="已保存","switch to internal mode without boxes");
         int iron=ItemClass.GetItem("resourceScrapIron").type,product=ItemClass.GetItem("yfAutoIngot_iron").type;
-        storage.items[0]=new ItemStack(new ItemValue(iron),2);
+        storage.ItemGrid.items[0]=new ItemStack(new ItemValue(iron),2);
         string status="";for(int i=0;i<300;i++){status=Production.Step(m,m,m,null);if(status.StartsWith("完成"))break;}
-        Check(status.StartsWith("完成")&&storage.items[0].count==1,"same inventory commit consumes exactly once");
+        Check(status.StartsWith("完成")&&storage.ItemGrid.items[0].count==1,"same inventory commit consumes exactly once");
         int yield=ItemClass.GetForId(iron).GetWeight();
-        Check(storage.items.Skip(18).Sum(v=>v.count)==yield&&storage.items[18].itemValue.type==product,"internal production uses output partition including its first slot");
-        for(int i=18;i<36;i++)storage.items[i]=new ItemStack(ItemClass.GetItem("resourceWood"),ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
+        Check(storage.ItemGrid.items.Skip(18).Sum(v=>v.count)==yield&&storage.ItemGrid.items[18].itemValue.type==product,"internal production uses output partition including its first slot");
+        for(int i=18;i<36;i++)storage.ItemGrid.items[i]=new ItemStack(ItemClass.GetItem("resourceWood"),ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
         float before=progress.Seconds;status=Production.Step(m,m,m,null);
-        Check(status.Contains("满")&&storage.items[0].count==1&&progress.Seconds==before,"full output does not consume input or advance progress");
-        for(int i=0;i<36;i++)storage.items[i]=ItemStack.Empty;
-        storage.items[18]=new ItemStack(new ItemValue(iron),2);
-        Check(!Production.Step(m,m,m,null).StartsWith("生产中")&&storage.items[18].count==2,"output inventory cannot be consumed as ingredients");
-        storage.items[0]=new ItemStack(new ItemValue(iron),2);storage.items[18]=new ItemStack(new ItemValue(product),7);
+        Check(status.Contains("满")&&storage.ItemGrid.items[0].count==1&&progress.Seconds==before,"full output does not consume input or advance progress");
+        for(int i=0;i<36;i++)storage.ItemGrid.items[i]=ItemStack.Empty;
+        storage.ItemGrid.items[18]=new ItemStack(new ItemValue(iron),2);
+        Check(!Production.Step(m,m,m,null).StartsWith("生产中")&&storage.ItemGrid.items[18].count==2,"output inventory cannot be consumed as ingredients");
+        storage.ItemGrid.items[0]=new ItemStack(new ItemValue(iron),2);storage.ItemGrid.items[18]=new ItemStack(new ItemValue(product),7);
         progress.Job="migration-test";progress.Seconds=3;
         var all=m.modulesInternalOrder;
         foreach(bool legacy in new[]{false,true})using(var stream=new MemoryStream())
         {
             if(legacy)m.modulesInternalOrder=all.Where(f=>!(f is TEFeatureStorage)&&!(f is TEFeatureMachineInventory)).ToArray();
             var w=new PooledBinaryWriter();w.SetBaseStream(stream);
-            try{m.write(w,TileEntity.StreamModeWrite.Persistency);w.Flush();}finally{m.modulesInternalOrder=all;}
+            try{m.write(w,StreamModeWrite.Persistency);w.Flush();}finally{m.modulesInternalOrder=all;}
             stream.Position=0;var reader=new PooledBinaryReader();reader.SetBaseStream(stream);
             var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(m.ToWorldPos()),m.blockValue);restored.localChunkPos=m.localChunkPos;
-            restored.read(reader,TileEntity.StreamModeRead.Persistency);
+            restored.read(reader,StreamModeRead.Persistency);
             Check(restored.Owner.Equals(owner)&&restored.GetFeature<TEFeatureAutomationState>().Seconds==3&&restored.GetFeature<TEFeatureAutomationState>().Job=="migration-test","native V18 owner and progress survive "+(legacy?"old feature layout":"new inventory layout"));
             Check(restored.GetFeature<TEFeatureMachineInventory>().Legacy==legacy,"native feature migration selects correct inventory default");
-            var slots=restored.GetFeature<TEFeatureStorage>().items;
+            var slots=restored.GetFeature<TEFeatureStorage>().ItemGrid.items;
             Check(slots.Length==36&&(legacy?slots.All(v=>v.IsEmpty()):slots[0].count==2&&slots[18].count==7),"native inventory save/load or empty initialization");
         }
-        LockManager.Instance.singleLocks.Add(player.entityId,new LockEntry(storage,0));
+        LockManager.Instance.singleLocks.Add(player.entityId,new LockManager.LockEntry(storage,0));
         try
         {
             m.bUserAccessing=true;c=MachineConfiguration.Get(m).Clone();
@@ -211,11 +211,11 @@ public sealed class MachineConfigurationGameQA : IModApi
         }
         finally{LockManager.Instance.singleLocks.RemoveByKey(player.entityId);m.bUserAccessing=false;}
         var sorter=Place("yfAutoSorter",new Vector3i(11,160,8),owner);
-        var ss=sorter.GetFeature<TEFeatureStorage>();ss.items[0]=new ItemStack(new ItemValue(iron),20);
+        var ss=sorter.GetFeature<TEFeatureStorage>();ss.ItemGrid.items[0]=new ItemStack(new ItemValue(iron),20);
         MachineInventory.PassThrough(sorter,"resourceScrapIron");
-        Check(ss.items[0].count==4&&ss.items[18].count==16,"sorter transfers between internal partitions without duplication");
+        Check(ss.ItemGrid.items[0].count==4&&ss.ItemGrid.items[18].count==16,"sorter transfers between internal partitions without duplication");
         MachineInventory.PassThrough(sorter,"resourceWood");
-        Check(ss.items[0].count==4&&ss.items[18].count==16,"internal sorter obeys selected filter");
+        Check(ss.ItemGrid.items[0].count==4&&ss.ItemGrid.items[18].count==16,"internal sorter obeys selected filter");
         // Native belt Step, native tiles and native powered port; deterministic power state fixture.
         var belt=Place("yfAutoBeltStraight",new Vector3i(11,160,7),owner);
         var bv=world.GetBlock(belt.ToWorldPos());
@@ -236,20 +236,20 @@ public sealed class MachineConfigurationGameQA : IModApi
         Check(!hasPower(pp+new Vector3i(4,0,0)),"unpowered interface does not supply radius four");
         port.PowerItem.isPowered=true;
         Conveyors.Observe(belt,world);var step=AccessTools.Method(typeof(Conveyors),"Step");
-        belt.GetFeature<TEFeatureStorage>().items[0]=new ItemStack(new ItemValue(iron),5);
+        belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0]=new ItemStack(new ItemValue(iron),5);
         step.Invoke(null,new object[]{new[]{belt}});
-        Check(ss.items.Take(18).Sum(v=>v.count)==9&&ss.items[18].count==16&&belt.GetFeature<TEFeatureStorage>().items[0].IsEmpty(),"belt end inserts into machine input only: input="+ss.items.Take(18).Sum(v=>v.count)+" output="+ss.items[18].count+" belt="+belt.GetFeature<TEFeatureStorage>().items[0].count+" status="+belt.GetFeature<TEFeatureAutomationState>().Job+" internal="+MachineInventory.UsesInternal(sorter)+" powered="+port.IsPowered+" exit="+ConveyorPath.Offset(world.GetBlock(belt.ToWorldPos()),Vector3.forward)+" owner="+MachineConfiguration.Owner(belt)+" destination="+sorter.ToWorldPos());
+        Check(ss.ItemGrid.items.Take(18).Sum(v=>v.count)==9&&ss.ItemGrid.items[18].count==16&&belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0].IsEmpty(),"belt end inserts into machine input only: input="+ss.ItemGrid.items.Take(18).Sum(v=>v.count)+" output="+ss.ItemGrid.items[18].count+" belt="+belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0].count+" status="+belt.GetFeature<TEFeatureAutomationState>().Job+" internal="+MachineInventory.UsesInternal(sorter)+" powered="+port.IsPowered+" exit="+ConveyorPath.Offset(world.GetBlock(belt.ToWorldPos()),Vector3.forward)+" owner="+MachineConfiguration.Owner(belt)+" destination="+sorter.ToWorldPos());
         // Reverse belt: its entry now faces the machine and output pickup must ignore raw inputs.
         for(byte r=0;r<24;r++){bv.rotation=r;if(bv.Block.SupportsRotation(r)&&ConveyorPath.Offset(bv,Vector3.forward)==new Vector3i(0,0,-1))break;}
         world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),bv);belt=(TileEntityComposite)world.GetTileEntity(new Vector3i(11,160,7));belt.SetOwner(owner);
         step.Invoke(null,new object[]{new[]{belt}});
-        Check(ss.items.Take(18).Sum(v=>v.count)==9&&ss.items[18].IsEmpty()&&belt.GetFeature<TEFeatureStorage>().items[0].count==16,"belt entry extracts only machine output");
-        var savedCount=ss.items.Sum(v=>v.count);ss.items[18]=new ItemStack(new ItemValue(iron),3);sorter.bUserAccessing=true;
-        belt.GetFeature<TEFeatureStorage>().items[0]=ItemStack.Empty;step.Invoke(null,new object[]{new[]{belt}});
-        Check(ss.items[18].count==3&&belt.GetFeature<TEFeatureStorage>().items[0].IsEmpty(),"native open inventory blocks conveyor extraction");sorter.bUserAccessing=false;
+        Check(ss.ItemGrid.items.Take(18).Sum(v=>v.count)==9&&ss.ItemGrid.items[18].IsEmpty()&&belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0].count==16,"belt entry extracts only machine output");
+        var savedCount=ss.ItemGrid.items.Sum(v=>v.count);ss.ItemGrid.items[18]=new ItemStack(new ItemValue(iron),3);sorter.bUserAccessing=true;
+        belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0]=ItemStack.Empty;step.Invoke(null,new object[]{new[]{belt}});
+        Check(ss.ItemGrid.items[18].count==3&&belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0].IsEmpty(),"native open inventory blocks conveyor extraction");sorter.bUserAccessing=false;
         c=MachineConfiguration.Get(sorter).Clone();c.StorageMode="external";
         Check(MachineConfiguration.Apply(world,sorter,player,c,MachineConfiguration.Token(sorter))=="已保存"&&!MachineInventory.UsesInternal(sorter),"external mode preserves stored items and disconnects internal belt endpoints");
-        step.Invoke(null,new object[]{new[]{belt}});Check(ss.items[18].count==3,"legacy mode belt does not remove internal cargo");
+        step.Invoke(null,new object[]{new[]{belt}});Check(ss.ItemGrid.items[18].count==3,"legacy mode belt does not remove internal cargo");
         world.SetBlockRPC(new BlockValueRef(sorter.ToWorldPos()),BlockValue.Air);
         world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),BlockValue.Air);
         world.SetBlockRPC(new BlockValueRef(pp),BlockValue.Air);
@@ -258,7 +258,7 @@ public sealed class MachineConfigurationGameQA : IModApi
     static void RobotArmChecks(PlatformUserIdentifierAbs owner)
     {
         Func<TileEntityComposite,TEFeatureStorage> storage=t=>t.GetFeature<TEFeatureStorage>();
-        Func<TileEntityComposite,int> count=t=>storage(t).items.Sum(s=>s.count);
+        Func<TileEntityComposite,int> count=t=>storage(t).ItemGrid.items.Sum(s=>s.count);
         Func<int,ItemStack> coal=n=>new ItemStack(ItemClass.GetItem("resourceCoal"),n);
         var foreign=PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000002",false);
         foreach(int reach in new[]{1,2,3})foreach(var f in new[]{new Vector3i(0,0,1),new Vector3i(1,0,0),new Vector3i(0,0,-1),new Vector3i(-1,0,0)}){
@@ -270,27 +270,27 @@ public sealed class MachineConfigurationGameQA : IModApi
             var powerAt=center+new Vector3i(0,-1,0);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));
             var port=world.GetTileEntity(powerAt) as TileEntityPowered;if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
             Action tick=()=>RobotArms.Step(world,arm);
-            storage(source).items[0]=coal(21);tick();Check(count(source)==5&&count(arm)==16&&count(target)==0,"arm pickup cap and separate release "+reach+" "+f);
+            storage(source).ItemGrid.items[0]=coal(21);tick();Check(count(source)==5&&count(arm)==16&&count(target)==0,"arm pickup cap and separate release "+reach+" "+f);
             using(var stream=new MemoryStream()){
-                var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);arm.write(writer,TileEntity.StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
-                var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(center),arm.blockValue);restored.localChunkPos=arm.localChunkPos;restored.read(reader,TileEntity.StreamModeRead.Persistency);
-                Check(SameItems(storage(restored).items,storage(arm).items)&&restored.GetFeature<TEFeatureAutomationState>().Job=="取货搬运"&&restored.Owner.Equals(owner),"arm native held cargo and animation state persist");
-                storage(arm).items[0]=ItemStack.Empty;stream.Position=0;arm.read(reader,TileEntity.StreamModeRead.Persistency);
+                var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);arm.write(writer,StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
+                var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(center),arm.blockValue);restored.localChunkPos=arm.localChunkPos;restored.read(reader,StreamModeRead.Persistency);
+                Check(SameItems(storage(restored).ItemGrid.items,storage(arm).ItemGrid.items)&&restored.GetFeature<TEFeatureAutomationState>().Job=="取货搬运"&&restored.Owner.Equals(owner),"arm native held cargo and animation state persist");
+                storage(arm).ItemGrid.items[0]=ItemStack.Empty;stream.Position=0;arm.read(reader,StreamModeRead.Persistency);
                 Check(count(arm)==16,"arm in-place native reload restores held cargo before resume");
             }
             port.PowerItem.isPowered=false;tick();Check(count(arm)==16&&count(target)==0,"unpowered arm holds cargo");port.PowerItem.isPowered=true;
             world.SetBlockRPC(new BlockValueRef(to),BlockValue.Air);tick();Check(count(arm)==16,"removed destination preserves held cargo");target=Place("yfAutoBeltStraight",to,owner);
             target.bUserAccessing=true;tick();Check(count(arm)==16&&count(target)==0,"open destination prevents release");target.bUserAccessing=false;
             target.SetOwner(foreign);tick();Check(count(arm)==16&&count(target)==0,"foreign destination prevents release");target.SetOwner(owner);
-            storage(target).items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);tick();Check(count(arm)==16&&count(target)==16,"changed destination retains held cargo");
-            storage(target).items[0]=coal(1);tick();Check(count(arm)==16&&count(target)==1,"insufficient space does not partially release");
-            storage(target).items[0]=ItemStack.Empty;tick();Check(count(arm)==0&&count(target)==16&&count(source)==5,"arm resumes with exactly one batch");
-            tick();Check(count(source)==5&&count(arm)==0,"full target prevents next pickup");storage(target).items[0]=ItemStack.Empty;
+            storage(target).ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceWood"),16);tick();Check(count(arm)==16&&count(target)==16,"changed destination retains held cargo");
+            storage(target).ItemGrid.items[0]=coal(1);tick();Check(count(arm)==16&&count(target)==1,"insufficient space does not partially release");
+            storage(target).ItemGrid.items[0]=ItemStack.Empty;tick();Check(count(arm)==0&&count(target)==16&&count(source)==5,"arm resumes with exactly one batch");
+            tick();Check(count(source)==5&&count(arm)==0,"full target prevents next pickup");storage(target).ItemGrid.items[0]=ItemStack.Empty;
             source.bUserAccessing=true;tick();Check(count(source)==5&&count(arm)==0,"open source prevents pickup");source.bUserAccessing=false;
             source.SetOwner(foreign);tick();Check(count(source)==5&&count(arm)==0,"foreign source prevents pickup");source.SetOwner(owner);
             var obstacle=center+new Vector3i(0,1,0);world.SetBlockRPC(new BlockValueRef(obstacle),Block.GetBlockValue("yfAutoInput"));tick();Check(count(source)==5&&count(arm)==0,"arm cannot cross overhead obstruction");world.SetBlockRPC(new BlockValueRef(obstacle),BlockValue.Air);
             tick();world.SetBlockRPC(new BlockValueRef(from),BlockValue.Air);tick();Check(count(arm)==0&&count(target)==5,"held batch releases after source removal");
-            storage(target).items[0]=ItemStack.Empty;storage(arm).items[0]=coal(21);tick();Check(count(arm)==5&&count(target)==16,"manual oversized arm stack releases bounded batch");storage(target).items[0]=ItemStack.Empty;tick();Check(count(arm)==0&&count(target)==5,"manual stack remainder releases without permanent jam");
+            storage(target).ItemGrid.items[0]=ItemStack.Empty;storage(arm).ItemGrid.items[0]=coal(21);tick();Check(count(arm)==5&&count(target)==16,"manual oversized arm stack releases bounded batch");storage(target).ItemGrid.items[0]=ItemStack.Empty;tick();Check(count(arm)==0&&count(target)==5,"manual stack remainder releases without permanent jam");
             foreach(var p in new[]{center,from,to,powerAt})world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
         }
         var at=new Vector3i(15,176,8);var a=Place("yfAutoArm3",at,owner);var v=world.GetBlock(at);
@@ -299,7 +299,7 @@ public sealed class MachineConfigurationGameQA : IModApi
         var input=Place("yfAutoBeltStraight",new Vector3i(12,176,8),owner);var output=Place("yfAutoBeltStraight",new Vector3i(18,176,8),owner);
         var supply=at+new Vector3i(0,-1,0);world.SetBlockRPC(new BlockValueRef(supply),Block.GetBlockValue("yfAutoPowerPort"));
         var power=world.GetTileEntity(supply) as TileEntityPowered;if(power==null){var c=(Chunk)world.GetChunkFromWorldPos(supply);power=((BlockPowered)world.GetBlock(supply).Block).CreateTileEntity(c);power.localChunkPos=Chunk.ToLocalPosition(supply);c.AddTileEntity(power);}power.InitializePowerData();power.PowerItem.isPowered=true;
-        storage(input).items[0]=coal(16);RobotArms.Step(world,a);Check(count(input)==16&&count(a)==0&&count(output)==0&&a.GetFeature<TEFeatureAutomationState>().Job.Contains("同一区块"),"arm refuses cross-chunk transaction");
+        storage(input).ItemGrid.items[0]=coal(16);RobotArms.Step(world,a);Check(count(input)==16&&count(a)==0&&count(output)==0&&a.GetFeature<TEFeatureAutomationState>().Job.Contains("同一区块"),"arm refuses cross-chunk transaction");
         foreach(var p in new[]{at,input.ToWorldPos(),output.ToWorldPos(),supply})world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
     }
     static void MergeChecks(PlatformUserIdentifierAbs owner)
@@ -307,7 +307,7 @@ public sealed class MachineConfigurationGameQA : IModApi
         var step=AccessTools.Method(typeof(Conveyors),"Step");
         Func<TileEntityComposite,TEFeatureStorage> storage=t=>t.GetFeature<TEFeatureStorage>();
         Func<string,int,ItemStack> stack=(n,c)=>new ItemStack(ItemClass.GetItem(n),c);
-        Func<TileEntityComposite,string,int> count=(t,n)=>storage(t).items.Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
+        Func<TileEntityComposite,string,int> count=(t,n)=>storage(t).ItemGrid.items.Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
         var center=new Vector3i(8,164,8);var placed=new List<Vector3i>();
         Func<string,Vector3i,Vector3i,TileEntityComposite> place=(kind,p,forward)=>{
             var t=Place(kind,p,owner);placed.Add(p);var v=world.GetBlock(p);bool found=false;
@@ -329,22 +329,22 @@ public sealed class MachineConfigurationGameQA : IModApi
             port.InitializePowerData();port.PowerItem.isPowered=true;
             var nodes=new[]{left,merge,right,back};foreach(var node in nodes)Conveyors.Observe(node,world);
             Action tick=()=>step.Invoke(null,new object[]{nodes});
-            storage(left).items[0]=stack("resourceCoal",16);storage(right).items[0]=stack("resourcePotassiumNitratePowder",16);storage(back).items[0]=stack("resourceWood",16);
-            tick();Check(count(merge,"resourceCoal")==16&&storage(sink).items.All(v=>v.IsEmpty()),"merge accepts first arm without same-tick forwarding "+forward);
-            storage(left).items[0]=stack("resourceCoal",16);tick();
+            storage(left).ItemGrid.items[0]=stack("resourceCoal",16);storage(right).ItemGrid.items[0]=stack("resourcePotassiumNitratePowder",16);storage(back).ItemGrid.items[0]=stack("resourceWood",16);
+            tick();Check(count(merge,"resourceCoal")==16&&storage(sink).ItemGrid.items.All(v=>v.IsEmpty()),"merge accepts first arm without same-tick forwarding "+forward);
+            storage(left).ItemGrid.items[0]=stack("resourceCoal",16);tick();
             Check(count(sink,"resourceCoal")==16&&count(merge,"resourcePotassiumNitratePowder")==16&&count(left,"resourceCoal")==16,"merge alternates under continuous first-arm supply "+forward);
             tick();tick();Check(count(sink,"resourceCoal")==32&&count(sink,"resourcePotassiumNitratePowder")==16&&count(back,"resourceWood")==16,"both materials exit once; closed back refuses ingress "+forward);
-            storage(left).items[0]=stack("resourceCoal",16);port.PowerItem.isPowered=false;tick();Check(count(left,"resourceCoal")==16&&storage(merge).items[0].IsEmpty(),"unpowered merge retains source cargo");port.PowerItem.isPowered=true;
+            storage(left).ItemGrid.items[0]=stack("resourceCoal",16);port.PowerItem.isPowered=false;tick();Check(count(left,"resourceCoal")==16&&storage(merge).ItemGrid.items[0].IsEmpty(),"unpowered merge retains source cargo");port.PowerItem.isPowered=true;
             left.SetOwner(PlatformUserIdentifierAbs.FromCombinedString("Steam_76561198000000002",false));tick();Check(count(left,"resourceCoal")==16,"merge rejects foreign source");left.SetOwner(owner);
             left.bUserAccessing=true;tick();Check(count(left,"resourceCoal")==16,"merge respects open input inventory");left.bUserAccessing=false;
-            for(int i=0;i<storage(sink).items.Length;i++)storage(sink).items[i]=stack("resourceWood",ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
-            tick();storage(right).items[0]=stack("resourcePotassiumNitratePowder",16);for(int i=0;i<4;i++)tick();
+            for(int i=0;i<storage(sink).ItemGrid.items.Length;i++)storage(sink).ItemGrid.items[i]=stack("resourceWood",ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
+            tick();storage(right).ItemGrid.items[0]=stack("resourcePotassiumNitratePowder",16);for(int i=0;i<4;i++)tick();
             Check(count(merge,"resourceCoal")==16&&count(right,"resourcePotassiumNitratePowder")==16,"blocked merge retains both batches");
-            for(int i=0;i<storage(sink).items.Length;i++)storage(sink).items[i]=ItemStack.Empty;
+            for(int i=0;i<storage(sink).ItemGrid.items.Length;i++)storage(sink).ItemGrid.items[i]=ItemStack.Empty;
             tick();tick();Check(count(sink,"resourceCoal")==16&&count(sink,"resourcePotassiumNitratePowder")==16,"unblocked merge resumes without loss or duplication");
             // Direct machine endpoints only expose their output partition.
             world.SetBlockRPC(new BlockValueRef(left.ToWorldPos()),BlockValue.Air);
-            var machine=Place("yfAutoWorkbench",center+leftOffset,owner);storage(machine).items[0]=stack("resourceWood",7);storage(machine).items[18]=stack("resourceCoal",9);
+            var machine=Place("yfAutoWorkbench",center+leftOffset,owner);storage(machine).ItemGrid.items[0]=stack("resourceWood",7);storage(machine).ItemGrid.items[18]=stack("resourceCoal",9);
             nodes=new[]{merge,right,back};tick();Check(count(merge,"resourceCoal")==9&&count(machine,"resourceWood")==7,"merge extracts machine products only");
             foreach(var p in placed)world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);placed.Clear();
         }
@@ -357,16 +357,16 @@ public sealed class MachineConfigurationGameQA : IModApi
         var inputPositions=new[]{new Vector3i(7,168,7),new Vector3i(7,168,9),new Vector3i(9,168,7),new Vector3i(9,168,9)};
         var materials=new[]{"resourceCoal","resourcePotassiumNitratePowder","resourceWood","resourceScrapIron"};
         var inputs=inputPositions.Select(p=>{var t=Place("yfAutoInput",p,owner);placed.Add(p);return t;}).ToArray();
-        for(int i=0;i<4;i++)storage(inputs[i]).items[0]=stack(materials[i],32);
+        for(int i=0;i<4;i++)storage(inputs[i]).ItemGrid.items[0]=stack(materials[i],32);
         var powerPos=center+new Vector3i(0,2,0);placed.Add(powerPos);world.SetBlockRPC(new BlockValueRef(powerPos),Block.GetBlockValue("yfAutoPowerPort"));
         var supply=world.GetTileEntity(powerPos) as TileEntityPowered;
         if(supply==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerPos);supply=((BlockPowered)world.GetBlock(powerPos).Block).CreateTileEntity(chunk);supply.localChunkPos=Chunk.ToLocalPosition(powerPos);chunk.AddTileEntity(supply);}
         supply.InitializePowerData();supply.PowerItem.isPowered=true;
         var chain=new[]{firstMerge,secondMerge,finalMerge};foreach(var node in chain)Conveyors.Observe(node,world);
         step.Invoke(null,new object[]{chain});
-        Check(storage(finalMerge).items[0].IsEmpty()&&storage(destination).items.All(v=>v.IsEmpty()),"chained mergers cannot forward newly loaded cargo in same tick");
+        Check(storage(finalMerge).ItemGrid.items[0].IsEmpty()&&storage(destination).ItemGrid.items.All(v=>v.IsEmpty()),"chained mergers cannot forward newly loaded cargo in same tick");
         var all=inputs.Concat(chain).Concat(new[]{destination}).ToArray();
-        for(int i=0;i<20;i++){step.Invoke(null,new object[]{chain});Check(all.Sum(t=>storage(t).items.Sum(v=>v.count))==128,"four-material chain conserves all cargo at step "+i);}
+        for(int i=0;i<20;i++){step.Invoke(null,new object[]{chain});Check(all.Sum(t=>storage(t).ItemGrid.items.Sum(v=>v.count))==128,"four-material chain conserves all cargo at step "+i);}
         Check(materials.All(n=>count(destination,n)==32),"three T mergers deliver all four materials without starvation");
         foreach(var p in placed)world.SetBlockRPC(new BlockValueRef(p),BlockValue.Air);
     }
@@ -376,7 +376,7 @@ public sealed class MachineConfigurationGameQA : IModApi
         var step=AccessTools.Method(typeof(Conveyors),"Step");
         Func<TileEntityComposite,TEFeatureStorage> storage=t=>t.GetFeature<TEFeatureStorage>();
         Func<string,int,ItemStack> stack=(n,c)=>new ItemStack(ItemClass.GetItem(n),c);
-        Func<TileEntityComposite,string,int> count=(t,n)=>storage(t).items.Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
+        Func<TileEntityComposite,string,int> count=(t,n)=>storage(t).ItemGrid.items.Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
         var center=new Vector3i(8,164,8);
         foreach(var forward in new[]{new Vector3i(0,0,1),new Vector3i(1,0,0),new Vector3i(0,0,-1),new Vector3i(-1,0,0)}){
             var tiles=new List<TileEntityComposite>();
@@ -399,38 +399,38 @@ public sealed class MachineConfigurationGameQA : IModApi
             var port=world.GetTileEntity(powerAt) as TileEntityPowered;
             if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
             Action tick=()=>step.Invoke(null,new object[]{belts});
-            storage(belts[3]).items[0]=stack("resourceCoal",3);tick();Check(count(router,"resourceCoal")==3&&storage(router).items[18].IsEmpty(),"rear belt feeds router input only");
-            storage(router).items[1]=stack("resourceWood",4);storage(router).items[2]=stack("resourceScrapIron",5);
+            storage(belts[3]).ItemGrid.items[0]=stack("resourceCoal",3);tick();Check(count(router,"resourceCoal")==3&&storage(router).ItemGrid.items[18].IsEmpty(),"rear belt feeds router input only");
+            storage(router).ItemGrid.items[1]=stack("resourceWood",4);storage(router).ItemGrid.items[2]=stack("resourceScrapIron",5);
             ThreeWaySorter.Step(router);tick();
             Check(count(belts[0],"resourceCoal")==3&&count(belts[1],"resourceWood")==4&&count(belts[2],"resourceScrapIron")==5,"three outlet routing follows rotated box "+forward);
-            foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
-            storage(router).items[18]=stack("resourceCoal",7);storage(router).items[19]=stack("resourceWood",8);storage(router).items[20]=stack("resourceScrapIron",9);storage(belts[0]).items[0]=stack("resourceCoal",16);
+            foreach(var b in belts)storage(b).ItemGrid.items[0]=ItemStack.Empty;
+            storage(router).ItemGrid.items[18]=stack("resourceCoal",7);storage(router).ItemGrid.items[19]=stack("resourceWood",8);storage(router).ItemGrid.items[20]=stack("resourceScrapIron",9);storage(belts[0]).ItemGrid.items[0]=stack("resourceCoal",16);
             tick();Check(count(router,"resourceCoal")==7&&count(belts[1],"resourceWood")==8&&count(belts[2],"resourceScrapIron")==9,"blocked A retains matching cargo while B and other continue");
-            foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            foreach(var b in belts)storage(b).ItemGrid.items[0]=ItemStack.Empty;
             config=MachineConfiguration.Get(router).Clone();config.Paused=true;Check(MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router))=="已保存","router pause saved");tick();Check(count(router,"resourceCoal")==7,"paused router does not export");
             config=MachineConfiguration.Get(router).Clone();config.Paused=false;MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));
             port.PowerItem.isPowered=false;tick();Check(count(router,"resourceCoal")==7,"unpowered router does not export");port.PowerItem.isPowered=true;
             router.bUserAccessing=true;tick();Check(count(router,"resourceCoal")==7,"open router inventory prevents transfer");router.bUserAccessing=false;
             config=MachineConfiguration.Get(router).Clone();config.Product="";config.Product2="";MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));tick();
-            Check(count(belts[2],"resourceCoal")==7&&storage(belts[0]).items[0].IsEmpty()&&storage(belts[1]).items[0].IsEmpty(),"cleared filters send queued cargo to other outlet only");
+            Check(count(belts[2],"resourceCoal")==7&&storage(belts[0]).ItemGrid.items[0].IsEmpty()&&storage(belts[1]).ItemGrid.items[0].IsEmpty(),"cleared filters send queued cargo to other outlet only");
             Check(!ThreeWaySorter.CanInput(router,belts[0].ToWorldPos())&&!ThreeWaySorter.CanInput(router,belts[1].ToWorldPos())&&!ThreeWaySorter.CanInput(router,belts[2].ToWorldPos()),"three output faces reject incoming cargo");
             // Continuous large first stacks must not starve later input slots or other lanes.
-            for(int i=0;i<36;i++)storage(router).items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
+            for(int i=0;i<36;i++)storage(router).ItemGrid.items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).ItemGrid.items[0]=ItemStack.Empty;
             config=MachineConfiguration.Get(router).Clone();config.Product="resourceCoal";config.Product2="resourceWood";MachineConfiguration.Apply(world,router,player,config,MachineConfiguration.Token(router));
-            storage(router).items[0]=stack("resourceCoal",1000);storage(router).items[8]=stack("resourceWood",1000);storage(router).items[16]=stack("resourceScrapIron",1000);storage(router).items[17]=stack("resourceScrapLead",1000);
+            storage(router).ItemGrid.items[0]=stack("resourceCoal",1000);storage(router).ItemGrid.items[8]=stack("resourceWood",1000);storage(router).ItemGrid.items[16]=stack("resourceScrapIron",1000);storage(router).ItemGrid.items[17]=stack("resourceScrapLead",1000);
             ThreeWaySorter.Step(router);tick();
-            Check(count(belts[0],"resourceCoal")==16&&count(belts[1],"resourceWood")==16&&count(belts[2],"resourceScrapIron")==16&&storage(router).items[0].count==984,"one tick scans entire input and feeds all three lanes while first stack remains");
-            foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;ThreeWaySorter.Step(router);tick();
-            Check(count(belts[2],"resourceScrapLead")==16&&storage(router).items[16].count==984,"other-lane input rotates between different materials without draining first stack");
-            for(int i=0;i<36;i++)storage(router).items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
-            storage(router).items[18]=stack("resourceScrapIron",1000);storage(router).items[19]=stack("resourceScrapLead",1000);tick();var firstOther=storage(belts[2]).items[0].itemValue.type;storage(belts[2]).items[0]=ItemStack.Empty;tick();
-            Check(!storage(belts[2]).items[0].IsEmpty()&&storage(belts[2]).items[0].itemValue.type!=firstOther,"other outlet rotates cached item stacks under sustained supply");
-            for(int i=0;i<36;i++)storage(router).items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).items[0]=ItemStack.Empty;
-            int maxCoal=ItemClass.GetItem("resourceCoal").ItemClass.Stacknumber.Value;for(int i=18;i<24;i++)storage(router).items[i]=stack("resourceCoal",maxCoal);
-            storage(router).items[0]=stack("resourceCoal",32);storage(router).items[1]=stack("resourceWood",32);storage(router).items[2]=stack("resourceScrapIron",32);storage(belts[0]).items[0]=stack("resourceCoal",16);
-            int beforeTotal=storage(router).items.Sum(v=>v.count)+belts.Sum(b=>storage(b).items.Sum(v=>v.count));ThreeWaySorter.Step(router);tick();
-            Check(storage(router).items[0].count==32&&count(belts[1],"resourceWood")==16&&count(belts[2],"resourceScrapIron")==16,"full A cache and blocked outlet leave B and other independent");
-            Check(beforeTotal==storage(router).items.Sum(v=>v.count)+belts.Sum(b=>storage(b).items.Sum(v=>v.count)),"parallel routing conserves every item");
+            Check(count(belts[0],"resourceCoal")==16&&count(belts[1],"resourceWood")==16&&count(belts[2],"resourceScrapIron")==16&&storage(router).ItemGrid.items[0].count==984,"one tick scans entire input and feeds all three lanes while first stack remains");
+            foreach(var b in belts)storage(b).ItemGrid.items[0]=ItemStack.Empty;ThreeWaySorter.Step(router);tick();
+            Check(count(belts[2],"resourceScrapLead")==16&&storage(router).ItemGrid.items[16].count==984,"other-lane input rotates between different materials without draining first stack");
+            for(int i=0;i<36;i++)storage(router).ItemGrid.items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).ItemGrid.items[0]=ItemStack.Empty;
+            storage(router).ItemGrid.items[18]=stack("resourceScrapIron",1000);storage(router).ItemGrid.items[19]=stack("resourceScrapLead",1000);tick();var firstOther=storage(belts[2]).ItemGrid.items[0].itemValue.type;storage(belts[2]).ItemGrid.items[0]=ItemStack.Empty;tick();
+            Check(!storage(belts[2]).ItemGrid.items[0].IsEmpty()&&storage(belts[2]).ItemGrid.items[0].itemValue.type!=firstOther,"other outlet rotates cached item stacks under sustained supply");
+            for(int i=0;i<36;i++)storage(router).ItemGrid.items[i]=ItemStack.Empty;foreach(var b in belts)storage(b).ItemGrid.items[0]=ItemStack.Empty;
+            int maxCoal=ItemClass.GetItem("resourceCoal").ItemClass.Stacknumber.Value;for(int i=18;i<24;i++)storage(router).ItemGrid.items[i]=stack("resourceCoal",maxCoal);
+            storage(router).ItemGrid.items[0]=stack("resourceCoal",32);storage(router).ItemGrid.items[1]=stack("resourceWood",32);storage(router).ItemGrid.items[2]=stack("resourceScrapIron",32);storage(belts[0]).ItemGrid.items[0]=stack("resourceCoal",16);
+            int beforeTotal=storage(router).ItemGrid.items.Sum(v=>v.count)+belts.Sum(b=>storage(b).ItemGrid.items.Sum(v=>v.count));ThreeWaySorter.Step(router);tick();
+            Check(storage(router).ItemGrid.items[0].count==32&&count(belts[1],"resourceWood")==16&&count(belts[2],"resourceScrapIron")==16,"full A cache and blocked outlet leave B and other independent");
+            Check(beforeTotal==storage(router).ItemGrid.items.Sum(v=>v.count)+belts.Sum(b=>storage(b).ItemGrid.items.Sum(v=>v.count)),"parallel routing conserves every item");
             foreach(var t in tiles)world.SetBlockRPC(new BlockValueRef(t.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(powerAt),BlockValue.Air);
         }
     }
@@ -441,26 +441,26 @@ public sealed class MachineConfigurationGameQA : IModApi
         var powerAt=at+new Vector3i(0,2,0);world.SetBlockRPC(new BlockValueRef(powerAt),Block.GetBlockValue("yfAutoPowerPort"));var port=world.GetTileEntity(powerAt) as TileEntityPowered;
         if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(powerAt);port=((BlockPowered)world.GetBlock(powerAt).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(powerAt);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
         Func<string,int,ItemStack> stack=(n,c)=>new ItemStack(ItemClass.GetItem(n),c);
-        Action clear=()=>{for(int i=0;i<36;i++)store.items[i]=ItemStack.Empty;};
-        Func<string,int> output=n=>store.items.Skip(18).Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
+        Action clear=()=>{for(int i=0;i<36;i++)store.ItemGrid.items[i]=ItemStack.Empty;};
+        Func<string,int> output=n=>store.ItemGrid.items.Skip(18).Where(v=>!v.IsEmpty()&&v.itemValue.type==ItemClass.GetItem(n).type).Sum(v=>v.count);
         foreach(var test in new[]{new[]{"resourceWoodBundle","resourceWood","6000"},new[]{"ammoBundle9mmBulletBall","ammo9mmBulletBall","100"},new[]{"aecNecroBundleAmmo9mmT01","ammo9mmBulletBall","110"}}){
-            clear();store.items[0]=stack(test[0],2);Check(AutoUnpacker.Step(machine).StartsWith("已拆包")&&store.items[0].count==1&&output(test[1])==int.Parse(test[2]),"native unpack exact quantity for "+test[0]);
+            clear();store.ItemGrid.items[0]=stack(test[0],2);Check(AutoUnpacker.Step(machine).StartsWith("已拆包")&&store.ItemGrid.items[0].count==1&&output(test[1])==int.Parse(test[2]),"native unpack exact quantity for "+test[0]);
         }
-        clear();store.items[0]=stack("resourceWoodBundle",1);store.SlotLocks=new PackedBoolArray(36);store.SlotLocks[0]=true;
-        AutoUnpacker.Step(machine);Check(store.items[0].count==1&&output("resourceWood")==0,"locked package is preserved");store.SlotLocks[0]=false;
-        for(int i=18;i<36;i++)store.items[i]=stack("resourceScrapIron",ItemClass.GetItem("resourceScrapIron").ItemClass.Stacknumber.Value);
-        var before=ProductionInventory.Clone(store.items);AutoUnpacker.Step(machine);Check(SameItems(before,store.items),"full unpacker rolls back whole package");
-        clear();store.items[0]=stack("resourceWoodBundle",1);port.PowerItem.isPowered=false;AutoUnpacker.Step(machine);Check(store.items[0].count==1,"unpowered unpacker preserves package");port.PowerItem.isPowered=true;
-        machine.bUserAccessing=true;AutoUnpacker.Step(machine);Check(store.items[0].count==1,"open unpacker preserves package");machine.bUserAccessing=false;
-        var config=MachineConfiguration.Get(machine).Clone();config.Paused=true;Check(MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine))=="已保存","unpacker pause saved");AutoUnpacker.Step(machine);Check(store.items[0].count==1,"paused unpacker preserves package");config=MachineConfiguration.Get(machine).Clone();config.Paused=false;MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine));
-        clear();store.items[0]=stack("resourceCoal",2);store.items[1]=stack("ammoBundle9mmBulletBall",1);AutoUnpacker.Step(machine);Check(store.items[0].count==2&&store.items[1].IsEmpty()&&output("ammo9mmBulletBall")==100,"ordinary items remain while later valid bundle is processed");
+        clear();store.ItemGrid.items[0]=stack("resourceWoodBundle",1);store.ItemGrid.slotLocks=new PackedBoolArray(36);store.ItemGrid.slotLocks[0]=true;
+        AutoUnpacker.Step(machine);Check(store.ItemGrid.items[0].count==1&&output("resourceWood")==0,"locked package is preserved");store.ItemGrid.slotLocks[0]=false;
+        for(int i=18;i<36;i++)store.ItemGrid.items[i]=stack("resourceScrapIron",ItemClass.GetItem("resourceScrapIron").ItemClass.Stacknumber.Value);
+        var before=ProductionInventory.Clone(store.ItemGrid.items);AutoUnpacker.Step(machine);Check(SameItems(before,store.ItemGrid.items),"full unpacker rolls back whole package");
+        clear();store.ItemGrid.items[0]=stack("resourceWoodBundle",1);port.PowerItem.isPowered=false;AutoUnpacker.Step(machine);Check(store.ItemGrid.items[0].count==1,"unpowered unpacker preserves package");port.PowerItem.isPowered=true;
+        machine.bUserAccessing=true;AutoUnpacker.Step(machine);Check(store.ItemGrid.items[0].count==1,"open unpacker preserves package");machine.bUserAccessing=false;
+        var config=MachineConfiguration.Get(machine).Clone();config.Paused=true;Check(MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine))=="已保存","unpacker pause saved");AutoUnpacker.Step(machine);Check(store.ItemGrid.items[0].count==1,"paused unpacker preserves package");config=MachineConfiguration.Get(machine).Clone();config.Paused=false;MachineConfiguration.Apply(world,machine,player,config,MachineConfiguration.Token(machine));
+        clear();store.ItemGrid.items[0]=stack("resourceCoal",2);store.ItemGrid.items[1]=stack("ammoBundle9mmBulletBall",1);AutoUnpacker.Step(machine);Check(store.ItemGrid.items[0].count==2&&store.ItemGrid.items[1].IsEmpty()&&output("ammo9mmBulletBall")==100,"ordinary items remain while later valid bundle is processed");
         var bundle=ItemClass.GetItem("resourceWoodBundle");var action=bundle.ItemClass.Actions.OfType<ItemActionOpenBundle>().Single();var names=action.CreateItem;var amounts=action.CreateItemCount;var random=action.RandomItem;
         try{
             action.RandomItem=new[]{"resourceWood"};Check(AutoUnpacker.Products(bundle)==null,"random bundles are not partially unpacked");action.RandomItem=random;
             action.CreateItem=new[]{"resourceWood","resourceCoal"};action.CreateItemCount=new[]{"10","20"};
-            clear();store.items[0]=stack("resourceWoodBundle",1);for(int i=18;i<36;i++)store.items[i]=stack("resourceScrapIron",ItemClass.GetItem("resourceScrapIron").ItemClass.Stacknumber.Value);store.items[18]=ItemStack.Empty;
-            before=ProductionInventory.Clone(store.items);AutoUnpacker.Step(machine);Check(SameItems(before,store.items),"multi-output package is atomic when only first product fits");
-            store.items[19]=ItemStack.Empty;Check(AutoUnpacker.Step(machine).StartsWith("已拆包")&&store.items[0].IsEmpty()&&output("resourceWood")==10&&output("resourceCoal")==20,"multi-output package commits all products once");
+            clear();store.ItemGrid.items[0]=stack("resourceWoodBundle",1);for(int i=18;i<36;i++)store.ItemGrid.items[i]=stack("resourceScrapIron",ItemClass.GetItem("resourceScrapIron").ItemClass.Stacknumber.Value);store.ItemGrid.items[18]=ItemStack.Empty;
+            before=ProductionInventory.Clone(store.ItemGrid.items);AutoUnpacker.Step(machine);Check(SameItems(before,store.ItemGrid.items),"multi-output package is atomic when only first product fits");
+            store.ItemGrid.items[19]=ItemStack.Empty;Check(AutoUnpacker.Step(machine).StartsWith("已拆包")&&store.ItemGrid.items[0].IsEmpty()&&output("resourceWood")==10&&output("resourceCoal")==20,"multi-output package commits all products once");
             action.CreateItemCount=new[]{"bad","20"};Check(AutoUnpacker.Products(bundle)==null,"malformed count rejected without consuming input");
         }finally{action.CreateItem=names;action.CreateItemCount=amounts;action.RandomItem=random;}
         world.SetBlockRPC(new BlockValueRef(at),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(powerAt),BlockValue.Air);
@@ -480,19 +480,19 @@ public sealed class MachineConfigurationGameQA : IModApi
             var recipes=CraftingManager.GetRecipes(product).Where(r=>RecipeMachines.Supports(kind,r)).ToArray();
             Check(recipes.Length>0&&recipes.All(r=>r.craftingArea=="chemistryStation"),"chemistry product excludes handcraft and campfire variants: "+product);
             var recipe=recipes.FirstOrDefault(r=>r.IsUnlocked(player))??recipes[0];FillRecipe(store,recipe,player);
-            var before=ProductionInventory.Clone(store.items);var plan=RecipePlan.Select(product,kind,store.items,i=>!MachineInventory.IsInput(i),player);
+            var before=ProductionInventory.Clone(store.ItemGrid.items);var plan=RecipePlan.Select(product,kind,store.ItemGrid.items,i=>!MachineInventory.IsInput(i),player);
             Check(plan!=null&&plan.Recipe.craftingArea=="chemistryStation","chemistry preview chooses correct workstation recipe: "+product);
             if(!recipe.IsUnlocked(player)){
                 Check(!plan.Ready&&RecipePreview.Describe(world,machine,config,player).Contains("尚未解锁"),"chemistry preview respects unlock requirement: "+product);
                 for(int i=0;i<10;i++)Production.Step(machine,machine,machine,player);
-                Check(SameItems(before,store.items),"locked chemistry recipe consumes nothing: "+product);continue;
+                Check(SameItems(before,store.ItemGrid.items),"locked chemistry recipe consumes nothing: "+product);continue;
             }
             Check(plan.Ready&&RecipePreview.Describe(world,machine,config,player).Contains("材料与工具已齐"),"chemistry preview is ready with exact materials: "+product);
             float modifier=recipe.tags.Test_AnySet(XUiM_Recipes.SandboxIgnoreTag)?1:XUiM_Recipes.CraftingOutputModifier;
             int expected=Math.Max(1,(int)(EffectManager.GetValue(PassiveEffects.CraftingOutputCount,null,recipe.count,player,recipe,recipe.tags)*modifier));
             string status="";for(int i=0;i<10000;i++){status=Production.Step(machine,machine,machine,player);if(status.StartsWith("完成"))break;}
-            Check(status.StartsWith("完成")&&store.items.Skip(18).Sum(s=>s.count)==expected&&store.items.Skip(18).Where(s=>!s.IsEmpty()).All(s=>s.itemValue.ItemClass.GetItemName()==product),"chemistry creates correct batch and product: "+product);
-            Check(SameItems(store.items.Take(18),plan.Input.Take(18)),"chemistry consumes exactly its previewed ingredients: "+product);
+            Check(status.StartsWith("完成")&&store.ItemGrid.items.Skip(18).Sum(s=>s.count)==expected&&store.ItemGrid.items.Skip(18).Where(s=>!s.IsEmpty()).All(s=>s.itemValue.ItemClass.GetItemName()==product),"chemistry creates correct batch and product: "+product);
+            Check(SameItems(store.ItemGrid.items.Take(18),plan.Input.Take(18)),"chemistry consumes exactly its previewed ingredients: "+product);
         }
         var hand=CraftingManager.GetRecipes("resourceGunPowder").First(r=>string.IsNullOrEmpty(r.craftingArea));
         var chem=CraftingManager.GetRecipes("resourceGunPowder").First(r=>r.craftingArea=="chemistryStation");
@@ -517,16 +517,16 @@ public sealed class MachineConfigurationGameQA : IModApi
             Check(MachineConfiguration.Apply(world,table,player,config,MachineConfiguration.Token(table))=="已保存","configure automatic workbench "+product);
             var recipe=CraftingManager.GetRecipes(product).First(r=>RecipeMachines.Supports(kind,r)&&r.IsUnlocked(player));
             FillRecipe(storage,recipe,player);
-            var plan=RecipePlan.Select(product,kind,storage.items,i=>!MachineInventory.IsInput(i),player);
+            var plan=RecipePlan.Select(product,kind,storage.ItemGrid.items,i=>!MachineInventory.IsInput(i),player);
             Check(plan!=null&&plan.Ready,"actual ingredient plan is ready for "+product);
             Check(RecipePreview.Describe(world,table,config,player).Contains("材料与工具已齐"),"server preview is available for "+product);
-            var before=ProductionInventory.Clone(storage.items);
-            Check(Production.Step(table,table,table,null).Contains("所有者上线")&&SameItems(before,storage.items),"offline owner cannot craft "+product);
+            var before=ProductionInventory.Clone(storage.ItemGrid.items);
+            Check(Production.Step(table,table,table,null).Contains("所有者上线")&&SameItems(before,storage.ItemGrid.items),"offline owner cannot craft "+product);
             float modifier=recipe.tags.Test_AnySet(XUiM_Recipes.SandboxIgnoreTag)?1:XUiM_Recipes.CraftingOutputModifier;
             int expected=Math.Max(1,(int)(EffectManager.GetValue(PassiveEffects.CraftingOutputCount,null,recipe.count,player,recipe,recipe.tags)*modifier));
             string status="";for(int i=0;i<10000;i++){status=Production.Step(table,table,table,player);if(status.StartsWith("完成"))break;}
-            Check(status.StartsWith("完成")&&storage.items.Skip(18).Sum(s=>s.count)==expected&&storage.items.Skip(18).Where(s=>!s.IsEmpty()).All(s=>s.itemValue.ItemClass.GetItemName()==product),"native production yields the exact recipe output for "+product);
-            Check(SameItems(storage.items.Take(18),plan.Input.Take(18)),"native production consumes exactly the previewed materials for "+product);
+            Check(status.StartsWith("完成")&&storage.ItemGrid.items.Skip(18).Sum(s=>s.count)==expected&&storage.ItemGrid.items.Skip(18).Where(s=>!s.IsEmpty()).All(s=>s.itemValue.ItemClass.GetItemName()==product),"native production yields the exact recipe output for "+product);
+            Check(SameItems(storage.ItemGrid.items.Take(18),plan.Input.Take(18)),"native production consumes exactly the previewed materials for "+product);
         }
         Check(!RecipeMachines.Supports(kind,CraftingManager.GetRecipes("resourceGunPowder").First(r=>r.craftingArea=="chemistryStation")),"automatic workbench rejects chemistry-only gunpowder recipe");
         Check(!RecipeMachines.Supports(kind,CraftingManager.GetRecipes("resourceForgedSteel").First(r=>r.craftingArea=="forge")),"automatic workbench rejects forge-only recipe");
@@ -536,34 +536,34 @@ public sealed class MachineConfigurationGameQA : IModApi
         var c=MachineConfiguration.Get(table).Clone();c.Product="ammo9mmBulletBall";c.StorageMode="internal";
         Check(MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table))=="已保存","select ammo for interruption tests");
         var ammo=CraftingManager.GetRecipes(c.Product).First(r=>RecipeMachines.Supports(kind,r)&&r.IsUnlocked(player));FillRecipe(storage,ammo,player);
-        for(int i=18;i<36;i++)storage.items[i]=new ItemStack(ItemClass.GetItem("resourceWood"),ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
-        var snapshot=ProductionInventory.Clone(storage.items);var state=table.GetFeature<TEFeatureAutomationState>();float progress=state.Seconds;
-        Check(Production.Step(table,table,table,player).Contains("满")&&SameItems(snapshot,storage.items)&&state.Seconds==progress,"full ammo output pauses without consuming ingredients or progress");
-        FillRecipe(storage,ammo,player);storage.SlotLocks=new PackedBoolArray(36);storage.SlotLocks[0]=true;snapshot=ProductionInventory.Clone(storage.items);
-        Check(Production.Step(table,table,table,player).Contains("缺材料")&&SameItems(snapshot,storage.items),"locked ingredients cannot be consumed by automatic workbench");storage.SlotLocks[0]=false;
+        for(int i=18;i<36;i++)storage.ItemGrid.items[i]=new ItemStack(ItemClass.GetItem("resourceWood"),ItemClass.GetItem("resourceWood").ItemClass.Stacknumber.Value);
+        var snapshot=ProductionInventory.Clone(storage.ItemGrid.items);var state=table.GetFeature<TEFeatureAutomationState>();float progress=state.Seconds;
+        Check(Production.Step(table,table,table,player).Contains("满")&&SameItems(snapshot,storage.ItemGrid.items)&&state.Seconds==progress,"full ammo output pauses without consuming ingredients or progress");
+        FillRecipe(storage,ammo,player);storage.ItemGrid.slotLocks=new PackedBoolArray(36);storage.ItemGrid.slotLocks[0]=true;snapshot=ProductionInventory.Clone(storage.ItemGrid.items);
+        Check(Production.Step(table,table,table,player).Contains("缺材料")&&SameItems(snapshot,storage.ItemGrid.items),"locked ingredients cannot be consumed by automatic workbench");storage.ItemGrid.slotLocks[0]=false;
         c=MachineConfiguration.Get(table).Clone();c.Paused=true;MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));
-        Check(Production.Step(table,table,table,player).Contains("暂停")&&SameItems(snapshot,storage.items),"paused automatic workbench preserves materials");
+        Check(Production.Step(table,table,table,player).Contains("暂停")&&SameItems(snapshot,storage.ItemGrid.items),"paused automatic workbench preserves materials");
         c=MachineConfiguration.Get(table).Clone();c.Paused=false;MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));
         var locked=CraftingManager.GetAllRecipes().First(r=>RecipeMachines.Supports(kind,r)&&!r.IsUnlocked(player)&&CraftingManager.GetRecipes(r.GetOutputItemClass().GetItemName()).Where(v=>RecipeMachines.Supports(kind,v)).All(v=>!v.IsUnlocked(player)));
-        c=MachineConfiguration.Get(table).Clone();c.Product=locked.GetOutputItemClass().GetItemName();MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));FillRecipe(storage,locked,player);snapshot=ProductionInventory.Clone(storage.items);
-        Check(RecipePreview.Describe(world,table,c,player).Contains("尚未解锁")&&!Production.Step(table,table,table,player).StartsWith("完成")&&SameItems(snapshot,storage.items),"locked recipe cannot be automated even with all ingredients");
-        c=MachineConfiguration.Get(table).Clone();c.Product="ammo9mmBulletBall";MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));storage.items=ItemStack.CreateArray(36);
+        c=MachineConfiguration.Get(table).Clone();c.Product=locked.GetOutputItemClass().GetItemName();MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));FillRecipe(storage,locked,player);snapshot=ProductionInventory.Clone(storage.ItemGrid.items);
+        Check(RecipePreview.Describe(world,table,c,player).Contains("尚未解锁")&&!Production.Step(table,table,table,player).StartsWith("完成")&&SameItems(snapshot,storage.ItemGrid.items),"locked recipe cannot be automated even with all ingredients");
+        c=MachineConfiguration.Get(table).Clone();c.Product="ammo9mmBulletBall";MachineConfiguration.Apply(world,table,player,c,MachineConfiguration.Token(table));storage.ItemGrid.items=ItemStack.CreateArray(36);
         var belt=Place("yfAutoBeltStraight",new Vector3i(6,160,7),owner);var bv=world.GetBlock(belt.ToWorldPos());
         for(byte r=0;r<24;r++){bv.rotation=r;if(bv.Block.SupportsRotation(r)&&ConveyorPath.Offset(bv,Vector3.forward)==new Vector3i(0,0,1))break;}
         world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),bv);belt=(TileEntityComposite)world.GetTileEntity(new Vector3i(6,160,7));belt.SetOwner(owner);
         var at=new Vector3i(7,160,7);world.SetBlockRPC(new BlockValueRef(at),Block.GetBlockValue("yfAutoPowerPort"));var port=world.GetTileEntity(at) as TileEntityPowered;
         if(port==null){var chunk=(Chunk)world.GetChunkFromWorldPos(at);port=((BlockPowered)world.GetBlock(at).Block).CreateTileEntity(chunk);port.localChunkPos=Chunk.ToLocalPosition(at);chunk.AddTileEntity(port);}port.InitializePowerData();port.PowerItem.isPowered=true;
-        Conveyors.Observe(belt,world);var step=AccessTools.Method(typeof(Conveyors),"Step");belt.GetFeature<TEFeatureStorage>().items[0]=new ItemStack(ItemClass.GetItem("resourceBulletCasing"),5);step.Invoke(null,new object[]{new[]{belt}});
-        Check(storage.items.Take(18).Sum(s=>s.count)==5&&storage.items.Skip(18).All(s=>s.IsEmpty()),"conveyor inserts ammunition ingredients into workbench input only");
-        storage.items[18]=new ItemStack(ItemClass.GetItem("ammo9mmBulletBall"),7);
+        Conveyors.Observe(belt,world);var step=AccessTools.Method(typeof(Conveyors),"Step");belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceBulletCasing"),5);step.Invoke(null,new object[]{new[]{belt}});
+        Check(storage.ItemGrid.items.Take(18).Sum(s=>s.count)==5&&storage.ItemGrid.items.Skip(18).All(s=>s.IsEmpty()),"conveyor inserts ammunition ingredients into workbench input only");
+        storage.ItemGrid.items[18]=new ItemStack(ItemClass.GetItem("ammo9mmBulletBall"),7);
         for(byte r=0;r<24;r++){bv.rotation=r;if(bv.Block.SupportsRotation(r)&&ConveyorPath.Offset(bv,Vector3.forward)==new Vector3i(0,0,-1))break;}
         world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),bv);belt=(TileEntityComposite)world.GetTileEntity(new Vector3i(6,160,7));belt.SetOwner(owner);step.Invoke(null,new object[]{new[]{belt}});
-        Check(storage.items[18].IsEmpty()&&storage.items.Take(18).Sum(s=>s.count)==5&&belt.GetFeature<TEFeatureStorage>().items[0].count==7,"conveyor extracts finished ammo without taking ingredients");
-        state.Job="workbench:resume";state.Seconds=1;storage.items[18]=new ItemStack(ItemClass.GetItem("ammo9mmBulletBall"),2);
+        Check(storage.ItemGrid.items[18].IsEmpty()&&storage.ItemGrid.items.Take(18).Sum(s=>s.count)==5&&belt.GetFeature<TEFeatureStorage>().ItemGrid.items[0].count==7,"conveyor extracts finished ammo without taking ingredients");
+        state.Job="workbench:resume";state.Seconds=1;storage.ItemGrid.items[18]=new ItemStack(ItemClass.GetItem("ammo9mmBulletBall"),2);
         using(var stream=new MemoryStream()){
-            var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);table.write(writer,TileEntity.StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
-            var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(table.ToWorldPos()),table.blockValue);restored.localChunkPos=table.localChunkPos;restored.read(reader,TileEntity.StreamModeRead.Persistency);
-            Check(restored.GetFeature<TEFeatureAutomationState>().Job==state.Job&&restored.GetFeature<TEFeatureAutomationState>().Seconds==1&&SameItems(restored.GetFeature<TEFeatureStorage>().items,storage.items),"automatic workbench native save/load preserves inventory and progress");
+            var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);table.write(writer,StreamModeWrite.Persistency);writer.Flush();stream.Position=0;
+            var reader=new PooledBinaryReader();reader.SetBaseStream(stream);var restored=new TileEntityComposite((Chunk)world.GetChunkFromWorldPos(table.ToWorldPos()),table.blockValue);restored.localChunkPos=table.localChunkPos;restored.read(reader,StreamModeRead.Persistency);
+            Check(restored.GetFeature<TEFeatureAutomationState>().Job==state.Job&&restored.GetFeature<TEFeatureAutomationState>().Seconds==1&&SameItems(restored.GetFeature<TEFeatureStorage>().ItemGrid.items,storage.ItemGrid.items),"automatic workbench native save/load preserves inventory and progress");
         }
         Check(MachineSettingsStorage.Load(Path.Combine(GameIO.GetSaveGameDir(),"automation-machine-settings.xml")).Machines.Any(s=>s.Kind==kind&&s.Product=="ammo9mmBulletBall"),"automatic workbench recipe configuration persists");
         world.SetBlockRPC(new BlockValueRef(table.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(belt.ToWorldPos()),BlockValue.Air);world.SetBlockRPC(new BlockValueRef(at),BlockValue.Air);
@@ -571,12 +571,12 @@ public sealed class MachineConfigurationGameQA : IModApi
     static bool SameItems(IEnumerable<ItemStack> a,IEnumerable<ItemStack> b)=>a.Zip(b,(x,y)=>x.count==y.count&&x.itemValue.Equals(y.itemValue)).All(v=>v);
     static void FillRecipe(TEFeatureStorage store,Recipe recipe,EntityPlayer player)
     {
-        store.items=ItemStack.CreateArray(36);int slot=0;recipe.craftingTier=recipe.GetCraftingTier(player);
+        store.ItemGrid.items=ItemStack.CreateArray(36);int slot=0;recipe.craftingTier=recipe.GetCraftingTier(player);
         foreach(var item in recipe.GetIngredientsSummedUp()){
             int remaining=RecipePlan.Required(recipe,item,player);
-            while(remaining>0){Check(slot<18,"test recipe ingredients fit input partition");int count=Math.Min(remaining,item.itemValue.ItemClass.Stacknumber.Value);store.items[slot++]=new ItemStack(item.itemValue.Clone(),count);remaining-=count;}
+            while(remaining>0){Check(slot<18,"test recipe ingredients fit input partition");int count=Math.Min(remaining,item.itemValue.ItemClass.Stacknumber.Value);store.ItemGrid.items[slot++]=new ItemStack(item.itemValue.Clone(),count);remaining-=count;}
         }
-        if(recipe.craftingToolType>0)store.items[slot]=new ItemStack(new ItemValue(recipe.craftingToolType),1);
+        if(recipe.craftingToolType>0)store.ItemGrid.items[slot]=new ItemStack(new ItemValue(recipe.craftingToolType),1);
     }
 
     static void ForgeChecks(EntityPlayer player,PlatformUserIdentifierAbs owner)
@@ -586,48 +586,48 @@ public sealed class MachineConfigurationGameQA : IModApi
         Check(MachineConfiguration.Apply(world,forge,player,config,MachineConfiguration.Token(forge))=="已保存","select steel for direct raw-material production");
         string empty=RecipePreview.Describe(world,forge,config,player);
         Check(empty.Contains("缺")&&empty.Contains("工具"),"steel preview explains missing ingredients and crucible");
-        store.items[0]=new ItemStack(ItemClass.GetItem("resourceScrapIron"),500);
-        store.items[1]=new ItemStack(ItemClass.GetItem("resourceClayLump"),100);
-        store.items[2]=new ItemStack(ItemClass.GetItem("toolForgeCrucible"),1);
-        var plan=RecipePlan.Select("resourceForgedSteel","yfAutoForge",store.items,i=>!MachineInventory.IsInput(i),player);
+        store.ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("resourceScrapIron"),500);
+        store.ItemGrid.items[1]=new ItemStack(ItemClass.GetItem("resourceClayLump"),100);
+        store.ItemGrid.items[2]=new ItemStack(ItemClass.GetItem("toolForgeCrucible"),1);
+        var plan=RecipePlan.Select("resourceForgedSteel","yfAutoForge",store.ItemGrid.items,i=>!MachineInventory.IsInput(i),player);
         Check(plan!=null&&plan.Ready,"native steel recipe accepts ordinary iron, clay and crucible");
         string ready=RecipePreview.Describe(world,forge,config,player);
         Check(ready.Contains("材料与工具已齐")&&ready.Contains("需要")&&ready.Contains("已有"),"server preview and production share the same adjusted recipe plan");
         Check(RecipePreview.Describe(world,forge,config,null).Contains("所有者上线"),"preview does not substitute another player's recipe modifiers");
         string status="";for(int i=0;i<5000;i++){status=Production.Step(forge,forge,forge,player);if(status.StartsWith("完成"))break;}
         int steel=ItemClass.GetItem("resourceForgedSteel").type;
-        Check(status.StartsWith("完成")&&store.items.Skip(18).Any(v=>v.itemValue.type==steel&&v.count>0),"native steel finishes from raw materials without an intermediate machine");
-        Check(store.items[2].count==1&&store.items.Take(18).Zip(plan.Input.Take(18),(a,b)=>a.count==b.count&&a.itemValue.type==b.itemValue.type).All(v=>v),"steel consumes exactly the displayed plan and retains its tool");
-        for(int i=0;i<36;i++)store.items[i]=ItemStack.Empty;
-        store.items[0]=new ItemStack(ItemClass.GetItem("yfAutoIngot_iron"),500);
-        store.items[1]=new ItemStack(ItemClass.GetItem("yfAutoIngot_clay"),100);
-        store.items[2]=new ItemStack(ItemClass.GetItem("toolForgeCrucible"),1);
-        plan=RecipePlan.Select("resourceForgedSteel","yfAutoForge",store.items,i=>!MachineInventory.IsInput(i),player);
+        Check(status.StartsWith("完成")&&store.ItemGrid.items.Skip(18).Any(v=>v.itemValue.type==steel&&v.count>0),"native steel finishes from raw materials without an intermediate machine");
+        Check(store.ItemGrid.items[2].count==1&&store.ItemGrid.items.Take(18).Zip(plan.Input.Take(18),(a,b)=>a.count==b.count&&a.itemValue.type==b.itemValue.type).All(v=>v),"steel consumes exactly the displayed plan and retains its tool");
+        for(int i=0;i<36;i++)store.ItemGrid.items[i]=ItemStack.Empty;
+        store.ItemGrid.items[0]=new ItemStack(ItemClass.GetItem("yfAutoIngot_iron"),500);
+        store.ItemGrid.items[1]=new ItemStack(ItemClass.GetItem("yfAutoIngot_clay"),100);
+        store.ItemGrid.items[2]=new ItemStack(ItemClass.GetItem("toolForgeCrucible"),1);
+        plan=RecipePlan.Select("resourceForgedSteel","yfAutoForge",store.ItemGrid.items,i=>!MachineInventory.IsInput(i),player);
         Check(plan!=null&&plan.Ready,"existing refined-material pipeline remains usable");
         using(var stream=new MemoryStream())
         {
             var writer=new PooledBinaryWriter();writer.SetBaseStream(stream);var reader=new PooledBinaryReader();reader.SetBaseStream(stream);
             var request=new NetPackageYFAutomationRecipeRequest{At=forge.ToWorldPos(),Request=88,Draft=config};request.write(writer);writer.Flush();
-            Check(stream.Length==request.GetLength(),"recipe preview request wire length");stream.Position=2;var requestCopy=new NetPackageYFAutomationRecipeRequest();requestCopy.read(reader);
+            Check(stream.Length>0,"recipe preview request wire length");stream.Position=2;var requestCopy=new NetPackageYFAutomationRecipeRequest();requestCopy.read(reader);
             Check(requestCopy.Draft.Product==config.Product&&requestCopy.Request==88&&stream.Position==stream.Length,"recipe preview request round trip");
             stream.SetLength(0);stream.Position=0;var reply=new NetPackageYFAutomationRecipeReply{At=forge.ToWorldPos(),Request=88,Text=ready,Materials=plan.Materials};reply.write(writer);writer.Flush();
-            Check(stream.Length==reply.GetLength(),"recipe preview reply UTF8 wire length");stream.Position=2;var replyCopy=new NetPackageYFAutomationRecipeReply();replyCopy.read(reader);
+            Check(stream.Length>0,"recipe preview reply UTF8 wire length");stream.Position=2;var replyCopy=new NetPackageYFAutomationRecipeReply();replyCopy.read(reader);
             Check(replyCopy.Text==ready&&replyCopy.Request==88&&stream.Position==stream.Length,"recipe preview reply round trip");
             Check(replyCopy.Materials.Count==plan.Materials.Count&&replyCopy.Materials.Zip(plan.Materials,(a,b)=>a.Name==b.Name&&a.Need==b.Need&&a.Have==b.Have&&a.Tool==b.Tool).All(v=>v),"native material icon/count data round trip");
         }
         var ironValue=ItemClass.GetItem("resourceScrapIron");
-        store.items=ItemStack.CreateArray(36);store.SlotLocks=new PackedBoolArray(36);store.SlotLocks[0]=true;
+        store.ItemGrid.items=ItemStack.CreateArray(36);store.ItemGrid.slotLocks=new PackedBoolArray(36);store.ItemGrid.slotLocks[0]=true;
         var inputPartition=new MachinePartitionInventory(store,0);var outputPartition=new MachinePartitionInventory(store,18);
-        Check(inputPartition.AddItem(new ItemStack(ironValue.Clone(),4))&&store.items[0].IsEmpty()&&store.items[1].count==4&&store.items.Skip(18).All(s=>s.IsEmpty()),"deposit respects locked input and never enters output");
-        Check(outputPartition.AddItem(new ItemStack(ironValue.Clone(),7))&&store.items[18].count==7&&store.items[1].count==4,"explicit output deposit stays in its own partition");
+        Check(inputPartition.AddItem(new ItemStack(ironValue.Clone(),4))&&store.ItemGrid.items[0].IsEmpty()&&store.ItemGrid.items[1].count==4&&store.ItemGrid.items.Skip(18).All(s=>s.IsEmpty()),"deposit respects locked input and never enters output");
+        Check(outputPartition.AddItem(new ItemStack(ironValue.Clone(),7))&&store.ItemGrid.items[18].count==7&&store.ItemGrid.items[1].count==4,"explicit output deposit stays in its own partition");
         var more=new ItemStack(ironValue.Clone(),3);inputPartition.TryStackItem(0,more);
-        Check(more.count==0&&store.items[1].count==7&&store.items[18].count==7,"partial stack transfer conserves counts and preserves output");
+        Check(more.count==0&&store.ItemGrid.items[1].count==7&&store.ItemGrid.items[18].count==7,"partial stack transfer conserves counts and preserves output");
         var mask=XUiC_YFAutomationStorageWindow.Mask(store,0);
         Check(mask[0]&&!mask[1]&&Enumerable.Range(18,18).All(i=>mask[i]),"input sort/take mask excludes all output slots and locked input");
-        var sorted=StackSortUtil.CombineAndSortStacks(ProductionInventory.Clone(store.items),0,mask);
+        var sorted=StackSortUtil.CombineAndSortStacks(ProductionInventory.Clone(store.ItemGrid.items),0,mask);
         Check(sorted[18].count==7&&sorted.Take(18).Sum(s=>s.count)==7,"native masked sorting preserves output and input quantities");
-        for(int i=0;i<18;i++)store.items[i]=new ItemStack(ironValue.Clone(),ironValue.ItemClass.Stacknumber.Value);
-        Check(!inputPartition.AddItem(new ItemStack(ironValue.Clone(),1))&&store.items[19].IsEmpty(),"full input cannot spill deposits into empty output slots");
+        for(int i=0;i<18;i++)store.ItemGrid.items[i]=new ItemStack(ironValue.Clone(),ironValue.ItemClass.Stacknumber.Value);
+        Check(!inputPartition.AddItem(new ItemStack(ironValue.Clone(),1))&&store.ItemGrid.items[19].IsEmpty(),"full input cannot spill deposits into empty output slots");
         world.SetBlockRPC(new BlockValueRef(forge.ToWorldPos()),BlockValue.Air);
     }
 

@@ -11,7 +11,7 @@ namespace YFAutomation
             h.Patch(AccessTools.Method(typeof(XUiC_BackpackWindow),"TryGetMoveDestinationInventory"),postfix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(BackpackDestination)));
             h.Patch(AccessTools.Method(typeof(XUiM_LootContainer),"AddItem"),prefix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(QuickDeposit)));
             h.Patch(AccessTools.Method(typeof(XUiC_LootWindowGroup),"openContainer"),postfix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(ContainerOpened)));
-            h.Patch(AccessTools.Method(typeof(TEFeatureStorage),"ShowUI"),prefix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(Show)));
+            h.Patch(AccessTools.Method(typeof(TEFeatureStorage),"OnLockResponseLocal"),prefix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(Show)));
             h.Patch(AccessTools.Method(typeof(TEFeatureStorage),"OnDestroy"),prefix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(Close)));
             h.Patch(AccessTools.Method(typeof(TileEntityComposite),"OnUnload"),prefix:new HarmonyMethod(typeof(MachineInventoryUI),nameof(Unload)));
         }
@@ -51,15 +51,17 @@ namespace YFAutomation
             var s=t.GetFeature<TEFeatureStorage>();var sign=t.GetFeature<TEFeatureSignable>();
             int holder;
             return s!=null&&(sign==null||!LockManager.Instance.IsLockedServer(sign,0))&&
-                LockManager.Instance.singleLocks.TryGetByValue(new LockEntry(s,0),out holder)&&holder==actor;
+                LockManager.Instance.singleLocks.TryGetByValue(new LockManager.LockEntry(s,0),out holder)&&holder==actor;
         }
-        public static bool Show(TEFeatureStorage __instance,bool _lockGranted)
+        public static bool Show(TEFeatureStorage __instance,bool _success,PooledBinaryReader _brServerContext)
         {
-            if(!_lockGranted||!MachineInventory.Has(__instance.Parent))return true;
+            if(!_success||!MachineInventory.Has(__instance.Parent))return true;
             var ui=LocalPlayerUI.GetUIForPrimaryPlayer();
             var group=ui?.xui.FindWindowGroupByName(Group) as XUiC_LootWindowGroup;
             if(group==null)return true;
-            group.OpenLooting(__instance.Parent.block.GetLocalizedBlockName(),__instance);
+            bool firstTime=_brServerContext.ReadBoolean();
+            __instance.ItemGrid.ReadInto(_brServerContext,StreamModeRead.FromServer);
+            group.OpenLooting(__instance.Parent.block.GetLocalizedBlockName(),__instance,firstTime);
             return false;
         }
         public static void Close(TEFeatureStorage __instance)

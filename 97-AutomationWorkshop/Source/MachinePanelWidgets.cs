@@ -51,13 +51,13 @@ namespace YFAutomation
                 int start=part*MachineInventory.InputSlots;
                 var bar=(XUiC_ContainerStandardControls)GetChildById("toolbar"+part);
                 bar.GetLockedSlotsFromStorage=()=>Mask(te,start);
-                bar.SetLockedSlotsToStorage=slots=>{if(te!=null){te.SlotLocks=slots;te.SetModified();}};
-                bar.ApplyLockedSlotStates=slots=>ApplyLockedSlotStates(te?.SlotLocks);
+                bar.SetLockedSlotsToStorage=slots=>{if(te!=null){te.ItemGrid.SetSlotLocks(slots);te.SetModified();}};
+                bar.ApplyLockedSlotStates=slots=>ApplyLockedSlotStates(te?.ItemGrid.SlotLocks);
                 bar.UpdateLockedSlotStates=c=>UpdateLockedSlots(standardControls);
                 bar.LockModeToggled=()=>UserLockMode=!UserLockMode;
                 bar.SortPressed=mask=>{
                     if(te==null)return;
-                    var sorted=StackSortUtil.CombineAndSortStacks(ProductionInventory.Clone(te.items),0,Mask(te,start));
+                    var sorted=StackSortUtil.CombineAndSortStacks(ProductionInventory.Clone(te.ItemGrid.items),0,Mask(te,start));
                     for(int i=start;i<start+18;i++)te.UpdateSlot(i,sorted[i]);te.SetModified();
                 };
                 bar.MoveAllowed=(out XUiController parent,out XUiC_ItemStackGrid grid,out IInventory inventory)=>{
@@ -75,32 +75,32 @@ namespace YFAutomation
                 };
             }
         }
-        public static PackedBoolArray Mask(ITileEntityLootable tile,int start)
+        public static PackedBoolArray Mask(TEFeatureStorage tile,int start)
         {
             var mask=new PackedBoolArray(MachineInventory.TotalSlots);
-            for(int i=0;i<MachineInventory.TotalSlots;i++)mask[i]=i<start||i>=start+18||(tile?.SlotLocks!=null&&tile.SlotLocks[i]);
+            for(int i=0;i<MachineInventory.TotalSlots;i++)mask[i]=i<start||i>=start+18||(tile?.ItemGrid.SlotLocks!=null&&tile.ItemGrid.SlotLocks[i]);
             return mask;
         }
     }
     public sealed class MachinePartitionInventory : IInventory
     {
-        readonly ITileEntityLootable tile;readonly int start;
-        public MachinePartitionInventory(ITileEntityLootable tile,int start){this.tile=tile;this.start=start;}
-        bool Available(int i)=>tile.SlotLocks==null||!tile.SlotLocks[i];
-        public bool HasItem(ItemValue value)=>tile.items.Skip(start).Take(18).Any(s=>!s.IsEmpty()&&s.itemValue.type==value.type);
+        readonly TEFeatureStorage tile;readonly int start;
+        public MachinePartitionInventory(TEFeatureStorage tile,int start){this.tile=tile;this.start=start;}
+        bool Available(int i)=>tile.ItemGrid.SlotLocks==null||!tile.ItemGrid.SlotLocks[i];
+        public bool HasItem(ItemValue value)=>tile.ItemGrid.items.Skip(start).Take(18).Any(s=>!s.IsEmpty()&&s.itemValue.type==value.type);
         public bool AddItem(ItemStack stack)
         {
             if(!stack.CanMoveTo(XUiC_ItemStack.StackLocationTypes.LootContainer))return false;
-            for(int i=start;i<start+18;i++)if(Available(i)&&tile.items[i].IsEmpty()){tile.UpdateSlot(i,stack.Clone());tile.SetModified();return true;}
+            for(int i=start;i<start+18;i++)if(Available(i)&&tile.ItemGrid.items[i].IsEmpty()){tile.UpdateSlot(i,stack.Clone());tile.SetModified();return true;}
             return false;
         }
         public (bool anyMoved,bool allMoved) TryStackItem(int index,ItemStack stack)
         {
             if(!stack.CanMoveTo(XUiC_ItemStack.StackLocationTypes.LootContainer))return(false,false);
             int before=stack.count;
-            for(int i=start;i<start+18&&stack.count>0;i++)if(Available(i)&&tile.items[i].CanStackWith(stack,true))
+            for(int i=start;i<start+18&&stack.count>0;i++)if(Available(i)&&tile.ItemGrid.items[i].CanStackWith(stack,true))
             {
-                var next=tile.items[i].Clone();int count=Math.Min(stack.count,next.itemValue.ItemClass.Stacknumber.Value-next.count);
+                var next=tile.ItemGrid.items[i].Clone();int count=Math.Min(stack.count,next.itemValue.ItemClass.Stacknumber.Value-next.count);
                 if(count<=0)continue;next.count+=count;stack.count-=count;tile.UpdateSlot(i,next);
             }
             if(before!=stack.count)tile.SetModified();return(before!=stack.count,stack.count==0);

@@ -36,7 +36,7 @@ namespace YFAutomation.CargoDrones
         public static void InstallForValidation(Harmony harmony)
         {
             if(installed)return;
-            if(typeof(Chunk).Module.ModuleVersionId!=new Guid("229796d0-95ca-4662-b426-1a6f1f1596ed"))throw new NotSupportedException("Native save receipt API has not been validated on this assembly");
+            if(typeof(Chunk).Module.ModuleVersionId!=new Guid("1a9a4203-3d95-4c90-b094-8926dec1ee9c"))throw new NotSupportedException("Native save receipt API has not been validated on this assembly");
             harmony.Patch(AccessTools.Method(typeof(RegionFileChunkSnapshot),"Write"),prefix:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(BeforeSnapshot)),finalizer:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(AfterSnapshot)));
             harmony.Patch(AccessTools.Method(typeof(RegionFileRaw),"WriteData"),prefix:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(BeforeRegion)),postfix:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(AfterRegion)),finalizer:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(ReleaseRegion)));
             harmony.Patch(AccessTools.Method(typeof(RegionFileV2),"WriteData"),prefix:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(BeforeRegion)),postfix:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(AfterRegion)),finalizer:new HarmonyMethod(typeof(CargoNativeSaveReceipts),nameof(ReleaseRegion)));

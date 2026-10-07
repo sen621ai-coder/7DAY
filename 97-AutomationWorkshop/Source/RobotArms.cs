@@ -51,7 +51,7 @@ namespace YFAutomation
                     if(d!=0&&!block.isair&&!ConveyorPath.IsBelt(block.Block.GetBlockName())){Status(arm,"取放路径只允许空气或传送带");return;}
                 }
                 var store=arm.GetFeature<TEFeatureStorage>();if(store==null)return;
-                bool carrying=store.items.Any(s=>s!=null&&!s.IsEmpty());
+                bool carrying=store.ItemGrid.items.Any(s=>s!=null&&!s.IsEmpty());
                 var target=w.GetTileEntity(to) as TileEntityComposite;
                 if(target==null||!ConveyorPath.IsBelt(target.block.GetBlockName())){Status(arm,"前方缺少目标传送带");return;}
                 var source=carrying?arm:w.GetTileEntity(from) as TileEntityComposite;
@@ -59,17 +59,17 @@ namespace YFAutomation
                 if(!TransferRules.SameOwner(Owner(arm),Owner(source))||!TransferRules.SameOwner(Owner(arm),Owner(target))){Status(arm,"传送带所有者不匹配");return;}
                 if(!Current(w,source)||!Current(w,target)){Status(arm,"等待传送带库存关闭");return;}
                 var src=source.GetFeature<TEFeatureStorage>();var dst=target.GetFeature<TEFeatureStorage>();if(src==null||dst==null)return;
-                var a=ProductionInventory.Clone(src.items);var b=ProductionInventory.Clone((carrying?dst:store).items);
+                var a=ProductionInventory.Clone(src.ItemGrid.items);var b=ProductionInventory.Clone((carrying?dst:store).ItemGrid.items);
                 int moved=ConveyorTransfer.Move(a,b,i=>Logistics.Locked(src,i),i=>Logistics.Locked(carrying?dst:store,i),16,16,v=>v.ItemClass.Stacknumber.Value);
                 if(moved==0){Status(arm,carrying?"出口堵塞，持货等待":"等待来源物品");return;}
-                if(carrying&&moved!=Math.Min(16,src.items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count))){Status(arm,"出口空间不足，持货等待");return;}
+                if(carrying&&moved!=Math.Min(16,src.ItemGrid.items.Where(s=>s!=null&&!s.IsEmpty()).Sum(s=>s.count))){Status(arm,"出口空间不足，持货等待");return;}
                 if(!carrying){
-                    var probe=ProductionInventory.Clone(b);var output=ProductionInventory.Clone(dst.items);
+                    var probe=ProductionInventory.Clone(b);var output=ProductionInventory.Clone(dst.ItemGrid.items);
                     if(ConveyorTransfer.Move(probe,output,i=>false,i=>Logistics.Locked(dst,i),16,16,v=>v.ItemClass.Stacknumber.Value)!=moved){Status(arm,"出口空间不足，等待取货");return;}
                 }
                 if(!Current(w,arm)||!Current(w,source)||!Current(w,target))return;
                 // Detached two-sided transaction under the native chunk serialization gate.
-                Array.Copy(a,src.items,a.Length);var receiver=carrying?target:arm;var destination=carrying?dst:store;Array.Copy(b,destination.items,b.Length);
+                Array.Copy(a,src.ItemGrid.items,a.Length);var receiver=carrying?target:arm;var destination=carrying?dst:store;Array.Copy(b,destination.ItemGrid.items,b.Length);
                 source.SetChunkModified();receiver.SetChunkModified();source.SetModified();receiver.SetModified();
                 Status(arm,carrying?(a.Any(s=>s!=null&&!s.IsEmpty())?"继续放货":"放货返回"):"取货搬运");
             }
@@ -99,7 +99,7 @@ namespace YFAutomation
         void Update()
         {
             if(tile==null||tile.IsRemoving||claw==null||parcel==null)return;
-            var state=tile.GetFeature<TEFeatureAutomationState>();bool holding=tile.GetFeature<TEFeatureStorage>()?.items.Any(s=>s!=null&&!s.IsEmpty())==true;
+            var state=tile.GetFeature<TEFeatureAutomationState>();bool holding=tile.GetFeature<TEFeatureStorage>()?.ItemGrid.items.Any(s=>s!=null&&!s.IsEmpty())==true;
             if(state!=null&&state.Seconds!=revision){bool first=revision<0;revision=state.Seconds;started=Time.time-(first?1:0);action=state.Job;}
             float progress=Mathf.SmoothStep(0,1,Mathf.Clamp01((Time.time-started)/.9f));
             float t=action=="取货搬运"?progress:action=="放货返回"?1-progress:holding?1:0;

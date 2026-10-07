@@ -93,7 +93,6 @@ namespace YFAutomation.CargoDrones
         public long Sequence;
         public CargoVisualState[] States=new CargoVisualState[0];
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
-        public override int GetLength()=>27+44*States.Length;
         public override void write(PooledBinaryWriter w)
         {
             base.write(w);w.Write(Epoch.ToByteArray());w.Write(Sequence);w.Write((byte)States.Length);

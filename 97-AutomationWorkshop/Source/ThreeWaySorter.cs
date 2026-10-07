@@ -29,7 +29,7 @@ namespace YFAutomation
             var config=MachineConfiguration.Get(t);
             if(config.Paused)return "已暂停";
             if(!Logistics.Powered(GameManager.Instance.World,t.ToWorldPos()))return "缺电";
-            var store=t.GetFeature<TEFeatureStorage>();var input=ProductionInventory.Clone(store.items);var output=ProductionInventory.Clone(store.items);
+            var store=t.GetFeature<TEFeatureStorage>();var input=ProductionInventory.Clone(store.ItemGrid.items);var output=ProductionInventory.Clone(store.ItemGrid.items);
             var cursor=Cursor(t);int total=0,active=1+(config.Product!=""?1:0)+(config.Product2!=""?1:0);
             int limit=MachineInventory.InputSlots/active;
             for(int route=0;route<3;route++){
@@ -43,7 +43,7 @@ namespace YFAutomation
             }
             if(total==0)return "等待物料／对应通道空位";
             if(Logistics.Busy(t)||GameManager.Instance.World.GetTileEntity(t.ToWorldPos())!=t)return "库存正在使用";
-            for(int i=0;i<store.items.Length;i++)store.items[i]=MachineInventory.IsInput(i)?input[i]:output[i];
+            for(int i=0;i<store.ItemGrid.items.Length;i++)store.ItemGrid.items[i]=MachineInventory.IsInput(i)?input[i]:output[i];
             t.SetChunkModified();t.SetModified();return "三路并行输送："+total;
         }
         public static bool CanInput(TileEntityComposite t,Vector3i from)=>!Is(t)||from==At(t,Vector3.back);

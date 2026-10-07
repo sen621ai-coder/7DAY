@@ -58,13 +58,13 @@ namespace YFAutomation
                         if(!TransferRules.SameChunk(pos.x,pos.z,inputPos.x,inputPos.z)||
                             !(internalStorage&&box==feeder||Logistics.Available(box,"yfAutoInput",owner)||Logistics.Available(box,"yfAutoOutput",owner)))continue;
                         var storage=box.GetFeature<TEFeatureStorage>();if(storage==null)continue;
-                        int slot=FindRound(storage.items,i=>Logistics.Locked(storage,i)||internalStorage&&!MachineInventory.IsInput(i)||i==0&&box.block.GetBlockName()=="yfAutoOutput",
+                        int slot=FindRound(storage.ItemGrid.items,i=>Logistics.Locked(storage,i)||internalStorage&&!MachineInventory.IsInput(i)||i==0&&box.block.GetBlockName()=="yfAutoOutput",
                             type=>turret.AmmoItems.Any(v=>v!=null&&v.Id==type));
                         if(slot<0)continue;
-                        ammo=storage.items[slot].itemValue.ItemClass;
+                        ammo=storage.ItemGrid.items[slot].itemValue.ItemClass;
                         if(consume)
                         {
-                            if(!ConsumeRound(storage.items,slot)){ammo=null;return false;}
+                            if(!ConsumeRound(storage.ItemGrid.items,slot)){ammo=null;return false;}
                             box.SetChunkModified();box.SetModified();
                         }
                         return true;

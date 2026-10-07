@@ -83,7 +83,7 @@ namespace YFAutomation.CargoDrones
                 if(marker==null||marker.EndpointId!=expected.EndpointId||marker.Incarnation!=expected.Incarnation||marker.Owner!=expected.Owner||marker.BlockName!=expected.BlockName||marker.Revision!=expected.Revision||marker.LastTransaction!=expected.LastTransaction)
                     throw new InvalidDataException("Captured endpoint marker does not match requested commit");
                 var collector=tile as TileEntityCollector;var composite=tile as TileEntityComposite;
-                var values=collector!=null?collector.Items:composite?.GetFeature<TEFeatureStorage>()?.items;
+                var values=collector!=null?collector.Items:composite?.GetFeature<TEFeatureStorage>()?.ItemGrid.items;
                 if(values==null||!CargoPlanner.Equal(values.Select(CargoNativeItems.Encode).ToArray(),request.Expected))throw new InvalidDataException("Captured endpoint inventory does not match requested commit");
                 Volatile.Write(ref request.Receipt,CargoNativeSaveReceipts.Watch(__instance,request.Directory,clone.X,clone.Z));
             }
