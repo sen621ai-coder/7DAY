@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace PZAEC.Fishing.Runtime
 {
@@ -14,7 +14,7 @@ namespace PZAEC.Fishing.Runtime
             ModEvents.GameUpdate.RegisterHandler(Update);
             ModEvents.WorldShuttingDown.RegisterHandler(Stopping);
             ModEvents.GameShutdown.RegisterHandler(Stopped);
-            Log.Out("[PZAEC.Fishing] v0.2.7 natural-float hand-pole single-player runtime registered; remote clients and dedicated servers disabled.");
+            Log.Out("[PZAEC.Fishing] v0.2.8 natural-float hand-pole single-player runtime registered; remote clients and dedicated servers disabled.");
         }
         static void Update(ref ModEvents.SGameUpdateData data)
         {

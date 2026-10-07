@@ -76,7 +76,6 @@ namespace PZAEC.Fishing.Networking
         public override NetPackageDirection PackageDirection {get {return NetPackageDirection.ToServer;}}
         public static NetPackagePzaecFishingRequest Create(byte[] value)
         {var p=NetPackageManager.GetPackage<NetPackagePzaecFishingRequest>();p.bytes=NativeFishingPacket.Copy(value);return p;}
-        public override int GetLength(){return bytes.Length+4;}
         public override void write(PooledBinaryWriter writer){base.write(writer);NativeFishingPacket.Write(writer,bytes);}
         public override void read(PooledBinaryReader reader){bytes=NativeFishingPacket.Read(reader);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -90,7 +89,6 @@ namespace PZAEC.Fishing.Networking
         public override NetPackageDirection PackageDirection {get {return NetPackageDirection.ToClient;}}
         public static NetPackagePzaecFishingResponse Create(byte[] value)
         {var p=NetPackageManager.GetPackage<NetPackagePzaecFishingResponse>();p.bytes=NativeFishingPacket.Copy(value);return p;}
-        public override int GetLength(){return bytes.Length+4;}
         public override void write(PooledBinaryWriter writer){base.write(writer);NativeFishingPacket.Write(writer,bytes);}
         public override void read(PooledBinaryReader reader){bytes=NativeFishingPacket.Read(reader);}
         public override void ProcessPackage(World world,GameManager callbacks)

@@ -4,5 +4,5 @@
   <DisplayName value="PZAEC Fishing (single-player test)" />
   <Description value="Single-player fishing integration test: mouse rod control, float bites, fish fighting and inventory rewards. Multiplayer is not enabled." />
   <Author value="PZAEC" />
-  <Version value="0.2.7" />
+  <Version value="0.2.8" />
 </xml>

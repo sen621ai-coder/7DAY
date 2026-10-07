@@ -41,12 +41,12 @@ namespace PZAEC.Fishing.Runtime
                     if(float.IsNaN(stored)||float.IsInfinity(stored)||stored<0||stored>count||stored!=(int)stored)throw new InvalidDataException("Invalid saved kit progress");
                     int delivered=(int)stored;
                     while(delivered<count) {
-                        var slots=player.bag.GetSlots();int empty=-1;
+                        var slots=player.bag.ItemGrid.items;int empty=-1;
                         for(int i=0;i<slots.Length;i++)if(slots[i]==null||slots[i].count<=0){empty=i;break;}
                         if(empty<0){complete=false;break;}
                         int amount=Math.Min(count-delivered,Math.Max(1,item.ItemClass.Stacknumber.Value));
                         var updated=(ItemStack[])slots.Clone();updated[empty]=new ItemStack(item.Clone(),amount);
-                        player.bag.SetSlots(updated);delivered+=amount;player.Buffs.SetCustomVar(key,delivered);
+                        player.bag.SetSlots(updated,false);delivered+=amount;player.Buffs.SetCustomVar(key,delivered);
                         Log.Out("[PZAEC.Fishing] Test kit delivered "+amount+" x "+gift.GetAttribute("name"));
                     }
                     if(!complete)break;

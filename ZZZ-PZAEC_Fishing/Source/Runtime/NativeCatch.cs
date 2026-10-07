@@ -53,11 +53,11 @@ namespace PZAEC.Fishing.Runtime
             value.SetMetadata("pzaecFishingSettlement",settlementId.ToString("N"));
             // Native AddItem merges catches despite different metadata. Place one fish in an
             // empty slot through SetSlots so its identity/mass cannot be overwritten by stacking.
-            var slots=player.bag.GetSlots();
+            var slots=player.bag.ItemGrid.items;
             for(int i=0;i<slots.Length;i++) {
                 if(slots[i]!=null&&slots[i].count>0)continue;
                 var updated=(ItemStack[])slots.Clone();updated[i]=new ItemStack(value,reward.Count);
-                player.bag.SetSlots(updated);return true;
+                player.bag.SetSlots(updated,false);return true;
             }
             return false;
         }
