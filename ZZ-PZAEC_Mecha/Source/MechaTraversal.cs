@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace PZAEC.Mecha
             public void Frame(float age,out Vector3 root,out Vector3 left,out Vector3 right)
             {
                 float t=Mathf.Clamp01(age/Duration),front=Ease((t-.12f)/.25f),follow=Ease((t-.37f)/.48f);
-                float pre=Type==Kind.Down?.95f:Type==Kind.Gap?.65f:Shape!=null&&Shape.Justice?.45f:.20f;
+                float pre=Shape!=null&&Shape.SideUpper!=null?(Type==Kind.Down?.80f:Type==Kind.Gap?.45f:.25f):Type==Kind.Down?.95f:Type==Kind.Gap?(Shape!=null&&Shape.Justice?.55f:.65f):Shape!=null&&Shape.Justice?.45f:.20f;
                 root=Vector3.Lerp(Root,End,pre*front+(1-pre)*follow);
                 root.y=Type==Kind.Down?Mathf.Lerp(Root.y,End.y,front):Mathf.Lerp(Root.y,End.y,follow);
                 if(Type==Kind.Gap)root.y-=Mathf.Lerp(.22f,.55f,Mathf.Clamp01((Width-.40f)/.35f))*front*(1-follow);
@@ -45,7 +45,7 @@ namespace PZAEC.Mecha
             }
             public void FrameInto(float age,Vector3[] feet,out Vector3 root)
             {
-                float t=Mathf.Clamp01(age/Duration),front=Ease((t-.12f)/.25f),follow=Ease((t-.37f)/.48f),pre=Type==Kind.Down?.95f:Type==Kind.Gap?.65f:Shape!=null&&Shape.Justice?.45f:.20f;
+                float t=Mathf.Clamp01(age/Duration),front=Ease((t-.12f)/.25f),follow=Ease((t-.37f)/.48f),pre=Shape!=null&&Shape.SideUpper!=null?(Type==Kind.Down?.80f:Type==Kind.Gap?.45f:.25f):Type==Kind.Down?.95f:Type==Kind.Gap?(Shape!=null&&Shape.Justice?.55f:.65f):Shape!=null&&Shape.Justice?.45f:.20f;
                 root=Vector3.Lerp(Root,End,pre*front+(1-pre)*follow);
                 root.y=Type==Kind.Down?Mathf.Lerp(Root.y,End.y,front):Mathf.Lerp(Root.y,End.y,follow);
                 if(Type==Kind.Gap)root.y-=Mathf.Lerp(.22f,.55f,Mathf.Clamp01((Width-.40f)/.35f))*front*(1-follow);
@@ -101,8 +101,8 @@ namespace PZAEC.Mecha
             if(length<.001f)return false;var axis=d/length;var pole=Vector3.ProjectOnPlane(yaw*Vector3.forward,axis).normalized;
             if(pole.sqrMagnitude<.01f)pole=yaw*Vector3.up;
             pole=Quaternion.AngleAxis(poleAngle,axis)*pole;
-            float along=(shape.Upper*shape.Upper-shape.Lower*shape.Lower+length*length)/(2*length);
-            var knee=hip+axis*along+pole*Mathf.Sqrt(Mathf.Max(0,shape.Upper*shape.Upper-along*along));
+            float upper=shape.UpperAt(side),lower=shape.LowerAt(side);float along=(upper*upper-lower*lower+length*length)/(2*length);
+            var knee=hip+axis*along+pole*Mathf.Sqrt(Mathf.Max(0,upper*upper-along*along));
             if(!LimbClear(v,hip,knee)||!LimbClear(v,knee,ankle)){pathFailure="leg volume hip="+hip+" knee="+knee+" ankle="+ankle+" hit="+GroundSupport.Blocked;return false;}return true;
         }
         static bool LimbClear(EntityVehicle v,Vector3 a,Vector3 b)
@@ -200,11 +200,11 @@ namespace PZAEC.Mecha
             }
             width=Mathf.Min(width,Rules.ActiveGapWidth);
             if(landing<0){if(gapStart>=0)reason="缺少可靠落脚点";return SearchContour(v,support,front,ref reason);}
-            var p=new Plan{Front=front,Type=kind,Root=root,Rotation=yaw,Height=height,Width=width,Duration=Rules.Complete(v)?Rules.CompleteTraverseSeconds:Rules.PrototypeTraverseSeconds};
+            var p=new Plan{Front=front,Type=kind,Root=root,Rotation=yaw,Height=height,Width=width,Duration=Rules.Ultimate(v)?Rules.UltimateTraverseSeconds:Rules.Complete(v)?Rules.CompleteTraverseSeconds:Rules.PrototypeTraverseSeconds};
             p.Start[0]=support.Feet[0].Position;p.Start[1]=support.Feet[1].Position;p.StartNormal[0]=support.Feet[0].Normal;p.StartNormal[1]=support.Feet[1].Normal;
             // Finish with the original stance spread, on pads wholly inside the top/opposite bank.
             float distanceRoot=landing-homeZ;
-            for(float extension=0;extension<=.70f;extension+=.05f){
+            for(float extension=0;extension<=.70f;extension+=support.Shape.Justice&&!Rules.Ultimate(v)&&kind==Kind.Gap?.01f:.05f){
                 p.Adaptive=support.Shape.Justice||extension>.35f;
                 p.End=root+forward*(distanceRoot+extension);p.End.y=floor+height+support.Shape.NeutralY;
                 bool pads=true;
@@ -228,7 +228,7 @@ namespace PZAEC.Mecha
             var rb=v.vehicleRB;var yaw=Quaternion.Euler(0,rb.rotation.eulerAngles.y,0);var root=rb.position+Origin.position;var forward=yaw*Vector3.forward;
             float floor=(support.Feet[0].Position.y+support.Feet[1].Position.y)*.5f;
             for(float distance=.20f;distance<=1.05f;distance+=.05f){
-                var p=new Plan{Front=front,Root=root,Rotation=yaw,Adaptive=true,Duration=Rules.Complete(v)?Rules.CompleteTraverseSeconds:Rules.PrototypeTraverseSeconds};
+                var p=new Plan{Front=front,Root=root,Rotation=yaw,Adaptive=true,Duration=Rules.Ultimate(v)?Rules.UltimateTraverseSeconds:Rules.Complete(v)?Rules.CompleteTraverseSeconds:Rules.PrototypeTraverseSeconds};
                 p.End=root+forward*distance;bool found=true;
                 for(int i=0;i<2;i++){
                     p.Start[i]=support.Feet[i].Position;p.StartNormal[i]=support.Feet[i].Normal;

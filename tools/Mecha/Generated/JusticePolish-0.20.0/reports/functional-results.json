@@ -1,0 +1,26 @@
+[
+  {
+    "Probe": "SkimNativeQA",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-32405f8307e04a89a4e727850d5502e7",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\SkimNativeQA.log"
+  },
+  {
+    "Probe": "GravityOwnershipNativeQA",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-aedf241a7402447aa51c95aec74cfd1b",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\GravityOwnershipNativeQA.log"
+  },
+  {
+    "Probe": "TraversalNativeQA",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-0c13b10d05b443b081ff8703b360e8e3",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\TraversalNativeQA.log"
+  },
+  {
+    "Probe": "MotionNativeQA",
+    "ExitCode": 1,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-0c13b10d05b443b081ff8703b360e8e3",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\MotionNativeQA.log"
+  }
+]

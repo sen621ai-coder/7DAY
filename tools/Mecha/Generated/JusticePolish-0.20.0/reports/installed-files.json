@@ -1,0 +1,16 @@
+[
+  "ATTRIBUTION.md",
+  "ModInfo.xml",
+  "PZAEC.Mecha.dll",
+  "README.md",
+  "Source\\MechaGait.cs",
+  "Source\\MechaJustice.cs",
+  "Source\\MechaJusticeFinish.cs",
+  "Resources\\Justice\\justice.json",
+  "Resources\\Justice\\polish.bin",
+  "Resources\\Justice\\polish.json",
+  "Resources\\Justice\\polish_albedo.png",
+  "Resources\\Justice\\polish_emission.png",
+  "Resources\\Justice\\polish_material.png",
+  "Resources\\Justice\\polish_normal.png"
+]

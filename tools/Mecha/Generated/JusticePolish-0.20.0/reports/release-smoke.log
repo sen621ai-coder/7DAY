@@ -1,0 +1,35 @@
+loaded=True installed=True exited=False
+--- Mecha/Buster/Exception lines ---
+2026-10-07T19:09:17 0.102 INF Command line arguments: "F:\SteamLibrary\steamapps\common\7 Days To Die\7DaysToDie.exe" -batchmode -dedicated -crossplatform=None -serverplatforms=Ste
+2026-10-07T19:09:17 0.105 INF Parsing server configfile: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a1306e88\serverc
+2026-10-07T19:09:17 0.149 INF Overriding default user data path to F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a1306e
+2026-10-07T19:09:17 0.377 INF [SaveDataUtils] UserGameDataDir: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a1306e88\U
+2026-10-07T19:09:17 0.452 INF Starting dedicated server level=Navezgane game name=MechaQA_Isolated
+2026-10-07T19:09:19 1.788 INF [MODS] Start loading from: 'F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a1306e88\UserDa
+2026-10-07T19:09:19 1.801 INF [MODS]     Loaded assembly 0Harmony (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a13
+2026-10-07T19:09:19 1.805 INF [MODS]     Loaded assembly Mono.Cecil (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a
+2026-10-07T19:09:19 1.808 INF [MODS]     Loaded assembly Mono.Cecil.Mdb (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96d
+2026-10-07T19:09:19 1.812 INF [MODS]     Loaded assembly Mono.Cecil.Pdb (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96d
+2026-10-07T19:09:19 1.815 INF [MODS]     Loaded assembly Mono.Cecil.Rocks (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab9
+2026-10-07T19:09:19 1.818 INF [MODS]     Loaded assembly MonoMod.Backports (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab
+2026-10-07T19:09:19 1.822 INF [MODS]     Loaded assembly MonoMod.Core (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea
+2026-10-07T19:09:19 1.825 INF [MODS]     Loaded assembly MonoMod.Iced (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea
+2026-10-07T19:09:19 1.830 INF [MODS]     Loaded assembly MonoMod.ILHelpers (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab
+2026-10-07T19:09:19 1.833 INF [MODS]     Loaded assembly MonoMod.RuntimeDetour (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a
+2026-10-07T19:09:19 1.837 INF [MODS]     Loaded assembly MonoMod.Utils (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96de
+2026-10-07T19:09:19 1.840 INF [MODS]     Loaded assembly System.ValueTuple (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab
+2026-10-07T19:09:19 1.844 INF [MODS]     Loaded assembly TfpHarmony (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8a
+2026-10-07T19:09:19 1.882 INF [MODS]   Trying to load from folder: 'ZZ-PZAEC_Mecha'
+2026-10-07T19:09:19 1.886 INF [MODS]     Loaded assembly PZAEC.Mecha (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-fa9fb251df4a4a29ab96dea8
+2026-10-07T19:09:19 1.887 INF [MODS]     Loaded Mod: PZAEC_Mecha (0.20.0)
+2026-10-07T19:09:19 1.940 INF [MODS]   Trying to load from folder: 'ZZ-PZAEC_Mecha'
+2026-10-07T19:09:19 1.941 WRN [MODS]     Mod with same name (PZAEC_Mecha) already loaded, ignoring
+2026-10-07T19:09:19 2.189 INF [MODS]   Initializing mod PZAEC_Mecha
+2026-10-07T19:09:19 2.190 INF [MODS]     Found ModAPI in assembly PZAEC.Mecha, creating instance
+2026-10-07T19:09:19 2.397 INF [Mecha] Combat Robot beam / blades / guided missiles enabled; server-authoritative cargo ammunition.
+2026-10-07T19:09:19 2.578 INF [Mecha] Hull 15/30/50% damage channels (10% per-hit cap), sealed cabin (crew transfer zeroed, direct hits 10/20% capped at 20% HP), field + battle rep
+2026-10-07T19:09:19 2.588 INF [Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).
+2026-10-07T19:09:19 2.589 INF [MODS]     Initialized code in mod 'PZAEC_Mecha' in assembly PZAEC.Mecha
+2026-10-07T19:09:19 2.591 INF [MODS] Loading localization from mod: PZAEC_Mecha
+QA server stopped.
+MECHA NATIVE SMOKE PASSED

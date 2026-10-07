@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -18,9 +18,10 @@ namespace PZAEC.Mecha
         {
             var ankle=foot-Quaternion.FromToRotation(Vector3.up,normal)*yaw*p.AnkleOffset[side];var hip=yaw*p.Hip[side];
             float dx=root.x+hip.x-ankle.x,dz=root.z+hip.z-ankle.z;
-            float radius=(p.Upper+p.Lower)*.95f-Rules.SupportHeightMargin;
+            float radius=(p.UpperAt(side)+p.LowerAt(side))*.95f-Rules.SupportHeightMargin;
             float vertical=radius*radius-dx*dx-dz*dz;
-            low=ankle.y-hip.y+.20f;high=vertical>0?ankle.y-hip.y+Mathf.Sqrt(vertical):low-.01f;
+            float minimum=p.SideUpper==null?.20f:Mathf.Sqrt(Mathf.Max(.04f,Mathf.Pow(Mathf.Abs(p.UpperAt(side)-p.LowerAt(side))+.035f,2)-dx*dx-dz*dz));
+            low=ankle.y-hip.y+minimum;high=vertical>0?ankle.y-hip.y+Mathf.Sqrt(vertical):low-.01f;
             return high>=low;
         }
         public static bool Pelvis(GroundSupport.State s,Vector3 root,Vector3 left,Vector3 right,Vector3 normalL,Vector3 normalR,float preferred,out float height)
@@ -51,7 +52,7 @@ namespace PZAEC.Mecha
         {
             var rb=s.Vehicle.vehicleRB;var rotation=Quaternion.FromToRotation(Vector3.up,normal)*rb.rotation;
             var hip=rb.position+Origin.position+rb.rotation*s.Shape.Hip[side];var offset=rotation*s.Shape.AnkleOffset[side];
-            var ankle=sole-offset;float radius=(s.Shape.Upper+s.Shape.Lower)*.93f;
+            var ankle=sole-offset;float radius=(s.Shape.UpperAt(side)+s.Shape.LowerAt(side))*.93f;
             return hip+Vector3.ClampMagnitude(ankle-hip,radius)+offset;
         }
         public static bool Validate(GroundSupport.State s,int side,GroundSupport.Pad target,float duration,Vector3 velocity,bool recovering)

@@ -1,0 +1,58 @@
+QA_ROOT=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-04691d26020848639dba536f2de4c1eb
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(471,24): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(471,47): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(486,75): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(373,38): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(375,13): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(401,229): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(429,38): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(432,13): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(452,173): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(208,25): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(208,48): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuSafetyNativeQA.cs(293,13): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+Mecha compiled against installed V3.2 Mono/Unity references.
+loaded=True installed=True exited=False
+--- Mecha/Buster/Exception lines ---
+2026-10-07T21:18:47 115.169 INF [MechaTraversalQA] PASS invalid support normal rejected
+2026-10-07T21:18:47 115.169 INF [MechaTraversalQA] PASS dedicated traversal payload length
+2026-10-07T21:18:47 115.170 INF [MechaTraversalQA] PASS progress cannot replace accepted path
+2026-10-07T21:18:47 115.170 INF [MechaTraversalQA] PASS dedicated traversal payload length
+2026-10-07T21:18:47 115.171 INF [MechaTraversalQA] PASS server accepts monotonic progress
+2026-10-07T21:18:47 115.172 INF [MechaTraversalQA] PASS server drops old/duplicate progress
+2026-10-07T21:18:47 115.172 INF [MechaTraversalQA] PASS dedicated traversal payload length
+2026-10-07T21:18:47 115.173 INF [MechaTraversalQA] PASS server rejects changed path during execution
+2026-10-07T21:18:47 115.175 INF [MechaTraversalQA] PASS dedicated traversal payload length
+2026-10-07T21:18:47 115.176 INF [MechaTraversalQA] PASS remote mid-action join replays accepted feet
+2026-10-07T21:18:47 115.177 INF [MechaTraversalQA] PASS remote replay never applies physics force
+2026-10-07T21:18:47 115.177 INF [MechaTraversalQA] PASS remote drops out-of-order event
+2026-10-07T21:18:47 115.179 INF [MechaTraversalQA] PASS dedicated traversal payload length
+2026-10-07T21:18:47 115.180 INF [MechaTraversalQA] PASS remote stop clears unfinished plan
+2026-10-07T21:18:47 115.180 INF [MechaTraversalQA] PASS stop event cannot replay twice
+2026-10-07T21:18:47 115.181 INF [MechaTraversalQA] PASS dedicated traversal payload length
+2026-10-07T21:18:47 115.181 INF [MechaTraversalQA] PASS next action accepted
+2026-10-07T21:18:47 115.182 INF [MechaTraversalQA] PASS driver departure cancels replay
+2026-10-07T21:18:47 115.183 INF [MechaTraversalQA] NETWORK LIMIT: same-process native protocol test; not a real two-client session.
+2026-10-07T21:18:47 115.183 INF [MechaTraversalQA] PASS vehiclePZAECMechaUltimate removed floor falls without support
+2026-10-07T21:19:05 132.620 INF [NuSubQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-04691d26020848639dba536f2de4
+2026-10-07T21:19:05 133.326 INF 23732 Vehicle PostInit [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=177], (8.00, 320.00, 0.00) (chunk 0, 0), rbPos (0.00, 0.00, 0.00)
+2026-10-07T21:19:08 136.245 INF 23732 VehicleManager RemoveTrackedVehicle [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=177], Despawned
+2026-10-07T21:19:08 136.262 INF [SharedFlightQA] FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 321.97, 0.00), Extents: (0.75, 0.95, 0.50)
+2026-10-07T21:19:08 136.267 INF [SharedFlightQA] FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 322.10, 0.00), Extents: (0.75, 0.95, 0.50)
+2026-10-07T21:19:08 136.301 INF [SharedFlightQA] VISUAL: production Gait/Flight poses, scripted state and trajectory; not human driving or two-client networking. Images: F:\SteamLi
+2026-10-07T21:19:08 136.324 INF [SharedFlightQA] FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 321.97, 0.00), Extents: (0.75, 0.82, 0.50)
+2026-10-07T21:19:08 136.329 INF [SharedFlightQA] FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 322.08, 0.00), Extents: (0.75, 0.82, 0.50)
+2026-10-07T21:19:08 136.357 INF [SharedFlightQA] VISUAL: production Gait/Flight poses, scripted state and trajectory; not human driving or two-client networking. Images: F:\SteamLi
+2026-10-07T21:19:08 136.381 INF 23732 Vehicle PostInit [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=180], (30.00, 410.00, 0.00) (chunk 1, 0), rbPos (0.00, 0.00, 0.00)
+2026-10-07T21:19:10 138.440 INF 23732 VehicleManager RemoveTrackedVehicle [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=180], Despawned
+2026-10-07T21:19:10 138.442 INF [MechaGravityQA] PASS 初号机（试验体） parked has one gravity vy=-0.1962
+2026-10-07T21:19:10 138.443 INF [MechaGravityQA] PASS 初号机（试验体） boarding native gravity handoff vy=-0.1962
+2026-10-07T21:19:10 138.443 INF [MechaGravityQA] PASS 初号机（试验体） native thrust net acceleration is +6 vy=0.12
+2026-10-07T21:19:10 138.444 INF [MechaGravityQA] PASS 初号机（试验体） unboarding restores one gravity vy=-0.1962
+2026-10-07T21:19:10 138.445 INF [MechaGravityQA] PASS 初号机（究极体） parked has one gravity vy=-0.1962
+2026-10-07T21:19:10 138.445 INF [MechaGravityQA] PASS 初号机（究极体） boarding native gravity handoff vy=-0.1962
+2026-10-07T21:19:10 138.446 INF [MechaGravityQA] PASS 初号机（究极体） native thrust net acceleration is +6 vy=0.12
+2026-10-07T21:19:10 138.447 INF [MechaGravityQA] PASS 初号机（究极体） unboarding restores one gravity vy=-0.1962
+2026-10-07T21:19:10 138.447 INF [MechaMotionQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-04691d26020848639dba53
+QA server stopped.
+MECHA NATIVE SMOKE PASSED

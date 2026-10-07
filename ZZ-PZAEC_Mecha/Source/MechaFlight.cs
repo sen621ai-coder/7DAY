@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PZAEC.Mecha
 {
-    // Complete Form flight. Hull physics stays upright; banking is visual only.
+    // Shared Unit-01 flight. Hull physics stays upright; banking is visual only.
     public static class Flight
     {
         public enum Phase { Ground, Takeoff, Cruise, Landing, PowerLost }
@@ -10,8 +10,8 @@ namespace PZAEC.Mecha
         { return s.FlightMode==Phase.Takeoff||s.FlightMode==Phase.Cruise||s.FlightMode==Phase.Landing; }
         public static bool AirPose(Locomotion.MoveState s)
         { return Active(s)||(s.FlightMode==Phase.PowerLost&&!s.Grounded); }
-        public static string Status(Locomotion.MoveState s)
-        { return s.FlightMode==Phase.Takeoff?"起飞展翼":s.FlightMode==Phase.Landing?"降落":s.FlightMode==Phase.PowerLost?"动力中断":s.FlightMode==Phase.Cruise?(Mathf.Abs(s.VerticalInput)<.01f?"飞行 / 定高":"飞行 / 升降"):"地面 / 推进"; }
+        public static string Status(Locomotion.MoveState s,bool complete=true)
+        { return s.FlightMode==Phase.Takeoff?(complete?"起飞展翼":"起飞"):s.FlightMode==Phase.Landing?"降落":s.FlightMode==Phase.PowerLost?"动力中断":s.FlightMode==Phase.Cruise?(Mathf.Abs(s.VerticalInput)<.01f?"飞行 / 定高":"飞行 / 升降"):"地面 / 推进"; }
         // Absolute world Y is deliberately used: floating-origin shifts cannot alter the held altitude.
         public static void Advance(Locomotion.MoveState s,bool powered,bool toggle,bool grounded,float vertical,float worldY,float dt)
         {
@@ -41,7 +41,7 @@ namespace PZAEC.Mecha
             var rb=v.vehicleRB;var driver=v.GetAttached(0);
             int actor=driver!=null?driver.entityId:-1;
             bool changed=(s.FlightActor>=0&&s.FlightActor!=actor)||(s.FlightActor<0&&s.Actor>=0&&s.Actor!=actor&&Active(s));
-            if(changed){s.FlightMode=grounded?Phase.Ground:Phase.PowerLost;s.Toggle=s.Jump=s.Descend=s.JumpWasHeld=s.InputReady=false;s.ChargeStart=-1;s.Charge=0;s.ControlledLanding=false;input=false;}
+            if(changed){if(s.SkimPhase!=Skim.Phase.Off)Skim.Cancel(s);s.FlightMode=grounded?Phase.Ground:Phase.PowerLost;s.Toggle=s.Jump=s.Descend=s.JumpWasHeld=s.InputReady=false;s.ChargeStart=-1;s.Charge=0;s.ControlledLanding=false;input=false;}
             s.FlightActor=actor;
             bool powered=Locomotion.Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0&&!Boarding.Active(v);
             float vertical=input?((s.Jump?1:0)-(s.Descend?1:0)):0;
@@ -108,7 +108,7 @@ namespace PZAEC.Mecha
         }
         public static void Pose(EntityVehicle v,Model.Rig r,float dt)
         {
-            if(!Rules.Complete(v)||r.WingL==null||r.WingR==null)return;
+            if(r==null||r.Torso==null)return;
             var s=Locomotion.Get(v);float deployed=s.WingBlend;
             // Remote bodies can be kinematic; Gait supplies their interpolated speed and turn.
             float along=s.VisualForward,turn=s.VisualTurn;
@@ -120,6 +120,7 @@ namespace PZAEC.Mecha
             s.FlightLean=Mathf.MoveTowards(s.FlightLean,lean,dt*35);
             s.FlightSweep=Mathf.MoveTowards(s.FlightSweep,Mathf.Lerp(0,24,cruise)+(s.Boost?12:0),dt*60);
             if(deployed>.001f)r.Torso.localRotation=r.RestRot[r.Torso]*Quaternion.Euler(s.FlightLean*deployed,0,-s.FlightBank*deployed);
+            if(!Rules.Complete(v)||r.WingL==null||r.WingR==null)return;
             float sweep=s.FlightSweep;
             // Folded long fins point back/down; unfolding rolls them outward about their real roots.
             r.WingL.localRotation=r.RestRot[r.WingL]*Quaternion.Euler(-8*deployed,(35-sweep)*deployed,(-58+s.FlightBank*.6f)*deployed);

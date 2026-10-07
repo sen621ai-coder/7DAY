@@ -1,0 +1,1 @@
+Scripted isolated native Unity/PhysX review. Walk and skim use production ground/skim controllers; Q sequence injects flight commands; combat injects authoritative pose states, without live target hits. Boarding is a crouch/stand pose review, not the seat-interaction sequence. Not human driving, not two-client networking, not save reload acceptance.

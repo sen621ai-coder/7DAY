@@ -2,14 +2,14 @@ using UnityEngine;
 namespace PZAEC.Mecha {
  public static class Skim {
   public enum Phase{Off,Lifting,Cruise,Settling}
-  public const float Height=.30f,MaxRelief=1f,Speed=13.5f,Braking=10f;
-  public static bool Active(EntityVehicle v){return v!=null&&Rules.Complete(v)&&Locomotion.Get(v).SkimPhase!=Phase.Off;}
+  public const float Height=.30f,MaxRelief=1f,Speed=13.5f,Braking=10f,Acceleration=16f;
+  public static bool Active(EntityVehicle v){return Weapons.IsMecha(v)&&Locomotion.Get(v).SkimPhase!=Phase.Off;}
   public static float Lookahead(float speed){return speed*speed/(2*Braking)+2.2f;}
   public static bool ReliefAllowed(float from,float to){return Mathf.Abs(to-from)<=MaxRelief+.001f;}
   public static string Label(EntityVehicle v){var s=Locomotion.Get(v);return !string.IsNullOrEmpty(s.SkimReason)?s.SkimReason:s.SkimPhase==Phase.Lifting?"抬升滑行":s.SkimPhase==Phase.Cruise?"低空滑行":s.SkimPhase==Phase.Settling?"制动落地":"[Shift]低空滑行";}
   public static bool Ground(EntityVehicle v,Vector3 position,float reference,out float y){y=reference;Vector3 point;if(!GroundSupport.PointAt(v,new Vector3(position.x,reference,position.z),1.2f,1.3f,out point))return false;y=point.y;return true;}
   public static void Cancel(Locomotion.MoveState s){s.SkimPhase=Phase.Off;s.SkimLatch=true;s.SkimAge=0;s.Boost=false;s.LastSync=-100;s.AirSince=-1;s.LandingEventExpected=false;}
-  public static bool Step(EntityVehicle v,Locomotion.MoveState s,bool grounded,bool input,float dt){if(!Rules.Complete(v))return false;var rb=v.vehicleRB;bool shift=input&&v.vehicle.IsTurbo;var m=v.movementInput;float throttle=input&&m!=null?m.moveForward:0,steer=input&&m!=null?m.moveStrafe:0;bool powered=Locomotion.Powered(v)&&v.timeInWater<=0;return Drive(v,s,grounded,shift,throttle,steer,powered,dt);}
+  public static bool Step(EntityVehicle v,Locomotion.MoveState s,bool grounded,bool input,float dt){var driver=v.GetAttached(0);bool shift=input&&v.vehicle.IsTurbo;var m=v.movementInput;float throttle=input&&m!=null?m.moveForward:0,steer=input&&m!=null?m.moveStrafe:0;bool powered=Locomotion.Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0;return Drive(v,s,grounded,shift,throttle,steer,powered,dt);}
   public static bool Drive(EntityVehicle v,Locomotion.MoveState s,bool grounded,bool shift,float throttle,float steer,bool powered,float dt){var rb=v.vehicleRB;
    if(!shift){s.SkimLatch=false;if(s.SkimPhase==Phase.Off)s.SkimReason=null;}
    if(Flight.AirPose(s)){if(s.SkimPhase!=Phase.Off)Cancel(s);s.SkimLatch=true;return false;}
@@ -30,11 +30,13 @@ namespace PZAEC.Mecha {
    }
    if(braking)s.SkimPhase=Phase.Settling;
    if(s.SkimPhase==Phase.Lifting&&s.SkimAge>.35f&&rb.position.y+Origin.position.y>=s.SkimGround+.20f)s.SkimPhase=Phase.Cruise;
-   float target=s.SkimPhase==Phase.Cruise?Mathf.Min(allowed,Speed*Mathf.Clamp01(throttle))*Mathf.Lerp(1,.35f,Mathf.Abs(steer)):0;
+   // Lift and accelerate together on clear terrain; the sweep above still stops
+   // horizontal drive when a step must be cleared vertically first.
+   float target=s.SkimPhase!=Phase.Settling?Mathf.Min(allowed,Speed*Mathf.Clamp01(throttle))*Mathf.Lerp(1,.35f,Mathf.Abs(steer)):0;
    float wantY=highest+Height;if(highest>s.SkimGround+.05f){s.SkimRaisedHeight=Mathf.Max(s.SkimRaisedHeight,wantY);s.SkimRaisedAt=v.position;}if(Vector3.ProjectOnPlane(v.position-s.SkimRaisedAt,Vector3.up).sqrMagnitude<16)wantY=Mathf.Max(wantY,s.SkimRaisedHeight);if(s.SkimPhase==Phase.Settling)wantY=s.SkimGround;
    s.SkimTarget=Mathf.MoveTowards(s.SkimTarget,wantY,dt*(wantY>s.SkimTarget?2f:.8f));
    GroundSupport.Suspend(v);s.Grounded=false;s.Charge=0;s.ChargeStart=-1;s.AirSince=-1;s.LandingEventExpected=false;s.LandingPendingUntil=-100;s.Boost=s.SkimPhase==Phase.Cruise;
-   var planar=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);var desired=forward*target;var delta=Vector3.ClampMagnitude((desired-planar)/Mathf.Max(dt,.001f),target<speed?Braking:4f);float lift=-Physics.gravity.y+Mathf.Clamp((s.SkimTarget-Origin.position.y-rb.position.y)*12-rb.velocity.y*6,-6,6);rb.AddForce((delta+Vector3.up*lift)*rb.mass,ForceMode.Force);rb.MoveRotation(Quaternion.RotateTowards(rb.rotation,rb.rotation*Quaternion.Euler(0,steer*45*dt,0),45*dt));var tilt=Vector3.Cross(rb.rotation*Vector3.up,Vector3.up);var rock=rb.angularVelocity-Vector3.up*rb.angularVelocity.y;Locomotion.AngularAcceleration(rb,Vector3.ClampMagnitude(tilt*10-rock*3,5));
+   var planar=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);var desired=forward*target;var delta=Vector3.ClampMagnitude((desired-planar)/Mathf.Max(dt,.001f),target<speed?Braking:Acceleration);float lift=-Physics.gravity.y+Mathf.Clamp((s.SkimTarget-Origin.position.y-rb.position.y)*12-rb.velocity.y*6,-6,6);rb.AddForce((delta+Vector3.up*lift)*rb.mass,ForceMode.Force);rb.MoveRotation(Quaternion.RotateTowards(rb.rotation,rb.rotation*Quaternion.Euler(0,steer*45*dt,0),45*dt));var tilt=Vector3.Cross(rb.rotation*Vector3.up,Vector3.up);var rock=rb.angularVelocity-Vector3.up*rb.angularVelocity.y;Locomotion.AngularAcceleration(rb,Vector3.ClampMagnitude(tilt*10-rock*3,5));
    if(EntityVehicle.VehicleFuelUsageModifier!=0)v.vehicle.SetFuelLevel(Mathf.Max(0,v.vehicle.GetFuelLevel()-Rules.HoverFuelPerSecond*dt));
    if(s.SkimPhase==Phase.Settling&&speed<.2f&&Mathf.Abs(rb.position.y+Origin.position.y-s.SkimGround)<.05f&&Mathf.Abs(rb.velocity.y)<.25f){Cancel(s);s.Grounded=true;GroundSupport.Forget(v);}
    if(old!=s.SkimPhase){s.SkimStart=v.position;s.SkimAge=0;s.LastSync=-100;}Locomotion.Sync(v,s);return true;

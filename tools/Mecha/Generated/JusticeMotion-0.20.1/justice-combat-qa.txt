@@ -1,0 +1,22 @@
+PASS 65 bones and four influences
+PASS sword heavy=False combo=0 deterministic drift=1.192093E-06
+PASS sword mounted grip distance=0.1128216
+PASS sword body clearance blocked frames=0
+PASS sword heavy=False combo=1 deterministic drift=1.192093E-06
+PASS sword mounted grip distance=0.1128216
+PASS sword body clearance blocked frames=0
+PASS sword heavy=True combo=0 deterministic drift=9.310543E-07
+PASS sword mounted grip distance=0.1128212
+PASS sword body clearance blocked frames=0
+PASS sword heavy=True combo=1 deterministic drift=9.61096E-07
+PASS sword mounted grip distance=0.1128213
+PASS sword body clearance blocked frames=0
+PASS rifle replaces sword
+PASS rifle muzzle finite
+PASS guard raises progressively
+PASS guard returns progressively
+PASS shield remains visible
+PASS scale restored after combat
+PASS boarding clears rifle and beam visibility
+PASS boarding kneels without moving physical root
+PASS boarding stop clears presentation blends

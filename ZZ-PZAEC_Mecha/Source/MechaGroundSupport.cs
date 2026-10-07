@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace PZAEC.Mecha
         public sealed class Profile
         {
             public Vector3[] Hip=new Vector3[2], Home=new Vector3[2], AnkleOffset=new Vector3[2];
-            public float Upper,Lower,NeutralY;
+            public float Upper,Lower,NeutralY;public float[] SideUpper,SideLower;public float UpperAt(int side){return SideUpper==null?Upper:SideUpper[side];}public float LowerAt(int side){return SideLower==null?Lower:SideLower[side];}
             public Vector3[] WingRoot=new Vector3[2];public Bounds[] WingBounds=new Bounds[2];public bool Equipment;
             public Vector3 HullCenter=new Vector3(0,2.18f,0),HullHalf=new Vector3(.75f,.95f,.50f);
             public bool Justice;public Bounds Backpack,BackpackAir;public Bounds[] BackpackPoses;public Bounds[][] BackpackParts;
@@ -20,7 +20,7 @@ namespace PZAEC.Mecha
             {
                 var ankle=sole-Quaternion.FromToRotation(Vector3.up,normal)*rotation*AnkleOffset[side];
                 float d=Vector3.Distance(root+rotation*Hip[side],ankle);
-                return d<=(Upper+Lower)*.95f+.001f&&d>=Mathf.Abs(Upper-Lower)+.01f;
+                return d<=(UpperAt(side)+LowerAt(side))*.95f+.001f&&d>=Mathf.Abs(UpperAt(side)-LowerAt(side))+.01f;
             }
         }
         public struct Pad
@@ -97,18 +97,18 @@ namespace PZAEC.Mecha
         {
             var s=Find(v);if(s!=null)return s;
             var r=Model.GetRig(v);if(r==null||r.HipL==null)return null;
-            var rb=v.vehicleRB;var p=new Profile{Upper=r.LegUpper,Lower=r.LegLower};
+            var rb=v.vehicleRB;var p=new Profile{Upper=r.LegUpper,Lower=r.LegLower};if(Rules.Ultimate(v)){p.HullCenter=new Vector3(0,2.32f,0);p.HullHalf=new Vector3(.75f,.82f,.50f);p.SideUpper=new[]{r.LegUpper,Vector3.Distance(r.HipR.position,r.KneeR.position)};p.SideLower=new[]{r.LegLower,Vector3.Distance(r.KneeR.position,r.AnkleR.position)};}
             if(r.Justice!=null){p.Justice=true;p.Backpack=Justice.BackpackEnvelope(r);p.BackpackAir=Justice.BackpackEnvelope(r,true);p.BackpackPoses=new Bounds[11];p.BackpackParts=new Bounds[11][];for(int pose=0;pose<=10;pose++){p.BackpackPoses[pose]=Justice.BackpackEnvelope(r,false,pose/10f);p.BackpackParts[pose]=Justice.BackpackBoxes(r,pose/10f);}}
             for(int i=0;i<2;i++){
                 var hip=i==0?r.HipL:r.HipR;var ankle=i==0?r.AnkleL:r.AnkleR;var foot=i==0?r.FootL:r.FootR;
                 p.Hip[i]=rb.transform.InverseTransformPoint(hip.position);
-                p.Home[i]=rb.transform.InverseTransformPoint(foot.position);p.Home[i].y=0;
+                p.Home[i]=rb.transform.InverseTransformPoint(foot.position);p.Home[i].y=0;if(p.Justice&&!Rules.Ultimate(v))p.Home[i]=JusticeLegs.Home(p.Home[i],i);
                 p.AnkleOffset[i]=Quaternion.Inverse(rb.rotation)*(foot.position-ankle.position);
             }
             // Five percent extension reserve, plus enough crouch for continuous planted gait.
             float lateral=Mathf.Abs(p.Home[0].x-p.Hip[0].x);
             float vertical=Mathf.Sqrt(Mathf.Max(.1f,Mathf.Pow((p.Upper+p.Lower)*.95f,2)-lateral*lateral-.40f*.40f));
-            p.NeutralY=Mathf.Min(-.06f,vertical-p.Hip[0].y-p.AnkleOffset[0].y);
+            p.NeutralY=Mathf.Min(-.06f,vertical-p.Hip[0].y-p.AnkleOffset[0].y);if(Rules.Ultimate(v))p.NeutralY-=.12f;
             if(Rules.Complete(v)){
                 var skins=r.Mount.GetComponentsInChildren<SkinnedMeshRenderer>();
                 for(int i=0;i<2;i++){
@@ -242,6 +242,7 @@ namespace PZAEC.Mecha
                 for(int i=0;i<2;i++){
                     var f=s.Feet[i];var home=root+rb.rotation*s.Shape.Home[i];Pad p;
                     if(!f.Planted&&!f.Swing){f.Position=FootPlanner.ReachableSole(s,i,home,Vector3.up);f.Normal=Vector3.up;}
+                    if(Rules.Ultimate(v)&&PadAt(v,home,rb.rotation,.80f,.40f,out p)){f.Position=FootPlanner.ReachableSole(s,i,p.Point,p.Normal);f.Normal=p.Normal;}
                     if(PadAt(v,home,rb.rotation,.80f,.40f,out p)&&Mathf.Abs(root.y-(p.Point.y+s.Shape.NeutralY))<.40f&&s.Shape.Reach(root,rb.rotation,i,p.Point,p.Normal)){
                         f.Position=p.Point;f.Normal=p.Normal;f.Contact=p;f.Planted=true;f.Swing=f.Recovery=false;
                     }
@@ -325,7 +326,7 @@ namespace PZAEC.Mecha
                 for(int side=0;side<2;side++)if(s.Feet[side].Planted&&!s.Shape.Reach(b,rb.rotation,side,s.Feet[side].Position,s.Feet[side].Normal)){s.WalkReason="bearing leg reach boundary";return false;}
                 if(!FootPlanner.TargetHeight(s,b,out height)){s.WalkReason="no shared pelvis interval";return false;}b.y=height;
                 if(!HullClear(v,s.Shape,previous,b,rb.rotation)){s.WalkReason="body path blocked "+Blocked;return false;}
-                for(int side=0;side<2;side++)if(!Traversal.FootPath(v,s.Shape,b,rb.rotation,side,s.Feet[side].Position,s.Feet[side].Position,0,s.Feet[side].Normal)){s.WalkReason="leg motion blocked "+Blocked;return false;}
+                for(int side=0;side<2;side++)if(!Traversal.FootPath(v,s.Shape,b,rb.rotation,side,s.Feet[side].Position,s.Feet[side].Position,0,s.Feet[side].Normal)){s.WalkReason="leg motion blocked "+Traversal.PathFailure;return false;}
                 previous=b;
             }return true;
         }

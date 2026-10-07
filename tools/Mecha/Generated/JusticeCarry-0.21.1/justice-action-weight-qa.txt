@@ -1,0 +1,49 @@
+PASS dt=0.03333334 heavy=False combo=0 damage path drift=0 samples=11
+PASS dt=0.03333334 heavy=False combo=0 anticipatory compression=0.0649755
+PASS dt=0.03333334 heavy=False combo=0 planted foot error=0.005615239
+PASS dt=0.03333334 heavy=False combo=0 whole-action blade blocked=0
+PASS dt=0.03333334 heavy=False combo=1 damage path drift=0 samples=11
+PASS dt=0.03333334 heavy=False combo=1 anticipatory compression=0.0649755
+PASS dt=0.03333334 heavy=False combo=1 planted foot error=0.005615239
+PASS dt=0.03333334 heavy=False combo=1 whole-action blade blocked=0
+PASS dt=0.03333334 heavy=True combo=0 damage path drift=0 samples=12
+PASS dt=0.03333334 heavy=True combo=0 anticipatory compression=0.06500006
+PASS dt=0.03333334 heavy=True combo=0 planted foot error=0.005676272
+PASS dt=0.03333334 heavy=True combo=0 whole-action blade blocked=0
+PASS dt=0.03333334 heavy=True combo=1 damage path drift=0 samples=12
+PASS dt=0.03333334 heavy=True combo=1 anticipatory compression=0.06500006
+PASS dt=0.03333334 heavy=True combo=1 planted foot error=0.005676272
+PASS dt=0.03333334 heavy=True combo=1 whole-action blade blocked=0
+PASS dt=0.01666667 heavy=False combo=0 damage path drift=0 samples=21
+PASS dt=0.01666667 heavy=False combo=0 anticipatory compression=0.06498361
+PASS dt=0.01666667 heavy=False combo=0 planted foot error=0.005798345
+PASS dt=0.01666667 heavy=False combo=0 whole-action blade blocked=0
+PASS dt=0.01666667 heavy=False combo=1 damage path drift=0 samples=21
+PASS dt=0.01666667 heavy=False combo=1 anticipatory compression=0.06498361
+PASS dt=0.01666667 heavy=False combo=1 planted foot error=0.005798345
+PASS dt=0.01666667 heavy=False combo=1 whole-action blade blocked=0
+PASS dt=0.01666667 heavy=True combo=0 damage path drift=0 samples=24
+PASS dt=0.01666667 heavy=True combo=0 anticipatory compression=0.06500006
+PASS dt=0.01666667 heavy=True combo=0 planted foot error=0.005798343
+PASS dt=0.01666667 heavy=True combo=0 whole-action blade blocked=0
+PASS dt=0.01666667 heavy=True combo=1 damage path drift=0 samples=24
+PASS dt=0.01666667 heavy=True combo=1 anticipatory compression=0.06500006
+PASS dt=0.01666667 heavy=True combo=1 planted foot error=0.005798343
+PASS dt=0.01666667 heavy=True combo=1 whole-action blade blocked=0
+PASS dt=0.008333334 heavy=False combo=0 damage path drift=0 samples=41
+PASS dt=0.008333334 heavy=False combo=0 anticipatory compression=0.06498361
+PASS dt=0.008333334 heavy=False combo=0 planted foot error=0.005798345
+PASS dt=0.008333334 heavy=False combo=0 whole-action blade blocked=0
+PASS dt=0.008333334 heavy=False combo=1 damage path drift=0 samples=41
+PASS dt=0.008333334 heavy=False combo=1 anticipatory compression=0.06498361
+PASS dt=0.008333334 heavy=False combo=1 planted foot error=0.005798345
+PASS dt=0.008333334 heavy=False combo=1 whole-action blade blocked=0
+PASS dt=0.008333334 heavy=True combo=0 damage path drift=0 samples=49
+PASS dt=0.008333334 heavy=True combo=0 anticipatory compression=0.06500006
+PASS dt=0.008333334 heavy=True combo=0 planted foot error=0.005798343
+PASS dt=0.008333334 heavy=True combo=0 whole-action blade blocked=0
+PASS dt=0.008333334 heavy=True combo=1 damage path drift=0 samples=49
+PASS dt=0.008333334 heavy=True combo=1 anticipatory compression=0.06500006
+PASS dt=0.008333334 heavy=True combo=1 planted foot error=0.005798343
+PASS dt=0.008333334 heavy=True combo=1 whole-action blade blocked=0
+PASS charged stance compresses before release

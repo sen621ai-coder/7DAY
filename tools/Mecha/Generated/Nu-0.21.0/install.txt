@@ -1,0 +1,5 @@
+Installed 0.21.0: 75 files. Backup: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-Nu-20261007-195614\pre-install-20261007-212101
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          583C47E6AEB22425ED29630686AF0E2F82179DD0AD1197C29BC035DFD52E1B3D       F:\SteamLibrary\steamapps\commo…

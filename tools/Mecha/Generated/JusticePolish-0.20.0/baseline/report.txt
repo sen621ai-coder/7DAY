@@ -1,0 +1,14 @@
+PASS finite pose ground
+PASS finite pose walk
+PASS finite pose skim
+PASS finite pose brake
+PASS finite pose flight
+PASS finite pose boost
+PASS finite pose turn
+PASS finite pose landing
+PASS finite pose fault
+PASS finite pose combat
+PASS finite pose guard
+PASS finite pose rifle
+PASS finite pose board
+ALLOCATION COUNTER CALIBRATION=0

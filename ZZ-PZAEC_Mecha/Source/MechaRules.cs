@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -7,12 +7,14 @@ namespace PZAEC.Mecha
         public const string VehicleName = "vehicleCombatRobot";
         public const string PlaceableItem = "vehicleCombatRobotPlaceable";
         public const string CompleteVehicle = "vehicleCombatRobotComplete", CompleteItem = "vehicleCombatRobotCompletePlaceable";
+        public const string UltimateVehicle="vehiclePZAECMechaUltimate",UltimateItem="vehiclePZAECMechaUltimatePlaceable";
+        public static bool Ultimate(EntityVehicle v){return v!=null&&v.vehicle!=null&&Same(v.vehicle.GetName(),UltimateVehicle);}
         static bool Same(string a,string b){return string.Equals(a,b,System.StringComparison.OrdinalIgnoreCase);}
-        public static bool VehicleNameMatches(string name){return Same(name,VehicleName)||Same(name,CompleteVehicle);}
-        public static bool ItemNameMatches(string name){return Same(name,PlaceableItem)||Same(name,CompleteItem);}
-        public static bool Complete(EntityVehicle v){return v!=null&&v.vehicle!=null&&Same(v.vehicle.GetName(),CompleteVehicle);}
+        public static bool VehicleNameMatches(string name){return Same(name,VehicleName)||Same(name,CompleteVehicle)||Same(name,UltimateVehicle);}
+        public static bool ItemNameMatches(string name){return Same(name,PlaceableItem)||Same(name,CompleteItem)||Same(name,UltimateItem);}
+        public static bool Complete(EntityVehicle v){return v!=null&&v.vehicle!=null&&(Same(v.vehicle.GetName(),CompleteVehicle)||Ultimate(v));}
         public static float AttributeScale(EntityVehicle v){return Complete(v)?1.5f:1f;}
-        public static string DisplayName(EntityVehicle v){return Complete(v)?"初号机（完全体）":"初号机（试验体）";}
+        public static string DisplayName(EntityVehicle v){return Ultimate(v)?"初号机（究极体）":Complete(v)?"初号机（完全体）":"初号机（试验体）";}
         public const string BeamAmmo = "ammoPZAECMechaCell";
         public const string MissileAmmo = "ammoPZAECMechaMissile";
 
@@ -66,11 +68,11 @@ namespace PZAEC.Mecha
         // Ground support / traversal rules, shared by both chassis and native QA.
         public const float AutoStepHeight=.30f,ActiveStepHeight=1.00f,ActiveGapWidth=.75f;
         public const float NormalWalkSlope=35f,MaxWalkSlope=45f;
-        public static float SoleWidth(EntityVehicle v){return Complete(v)?Justice.SoleWidth:FootWidth;}
-        public static float SoleDepth(EntityVehicle v){return Complete(v)?Justice.SoleDepth:FootDepth;}
+        public static float SoleWidth(EntityVehicle v){return Ultimate(v)?Nu.Document.soleWidth:Complete(v)?Justice.SoleWidth:FootWidth;}
+        public static float SoleDepth(EntityVehicle v){return Ultimate(v)?Nu.Document.soleDepth:Complete(v)?Justice.SoleDepth:FootDepth;}
         public const float FootWidth=.45f,FootDepth=.65f,FootResidual=.08f,SoleClearance=.015f;
         public const float TraverseToeClearance=.12f,TraverseSafeSpeed=.45f;
-        public const float PrototypeTraverseSeconds=1f,CompleteTraverseSeconds=1f;
+        public const float PrototypeTraverseSeconds=1f,CompleteTraverseSeconds=1f,UltimateTraverseSeconds=1.5f;
         public const float SupportHeightMargin=.03f,RoughWalkSpeed=1.2f,RoughStepSeconds=.18f,RecoveryStepSeconds=.24f;
         public const float TorsoLeanDegrees = 8f, HipSwayMeters = .08f, ArmSwingDegrees = 15f;
         public const float DeployRiseSeconds = 2.5f;

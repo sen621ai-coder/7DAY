@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "BaselineLegacy",
+    "ExitCode": 1,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-d04f9e085970498bb098b9a86351d3af",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\BaselineLegacy.log"
+  },
+  {
+    "Name": "PolishBaselineBaked",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-5c78a58ff2804c00a37150d0237c0ce3",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\PolishBaselineBaked.log"
+  },
+  {
+    "Name": "PolishCandidateBaked",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-a4ecddbbd45241778233841c66c570c8",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\PolishCandidateBaked.log"
+  },
+  {
+    "Name": "FlightFinal",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-37a5cc9dcd9544b0a31429d66afb070e",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\FlightFinal.log"
+  },
+  {
+    "Name": "VideoBaseline",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-8b44eda3e08a48d39252cc363491982f",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\VideoBaseline.log"
+  },
+  {
+    "Name": "VideoFinal",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-44dfbaade0e34d1a8c461533635f630a",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046/VideoFinalCorrected.log"
+  }
+]

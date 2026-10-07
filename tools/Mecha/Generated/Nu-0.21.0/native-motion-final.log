@@ -1,0 +1,52 @@
+QA_ROOT=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-78019ba3bfb44ccfae4752c5d1393618
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuMotionNativeQA.cs(34,100): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuMotionNativeQA.cs(34,123): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuMotionNativeQA.cs(39,67): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuMotionNativeQA.cs(63,72): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuMotionNativeQA.cs(63,95): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuMotionNativeQA.cs(109,59): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+Mecha compiled against installed V3.2 Mono/Unity references.
+loaded=True installed=True exited=False
+--- Mecha/Buster/Exception lines ---
+2026-10-07T21:15:48 81.777 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.476099E-05
+2026-10-07T21:15:48 81.778 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.476099E-05
+2026-10-07T21:15:48 81.779 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.476099E-05
+2026-10-07T21:15:48 81.780 INF [MechaStrideQA] DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 37.82) planted=True right=(0.52, 400.02, 37.97) pl
+2026-10-07T21:15:48 81.781 INF [MechaStrideQA] PASS 初号机（究极体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990014 steps=32 stops=0 footError=7.076209E
+2026-10-07T21:15:48 81.781 INF [MechaStrideQA] PASS 初号机（究极体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990014 steps=32 stops=0 footError=7.076209E
+2026-10-07T21:15:48 81.782 INF [MechaStrideQA] PASS 初号机（究极体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990014 steps=32 stops=0 footError=7.076209E
+2026-10-07T21:15:48 81.783 INF [MechaStrideQA] PASS 初号机（究极体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990014 steps=32 stops=0 footError=7.076209E
+2026-10-07T21:15:48 81.783 INF [MechaStrideQA] DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, -19.59) planted=True right=(0.52, 400.02, -19.53)
+2026-10-07T21:15:48 81.784 INF [MechaStrideQA] PASS 初号机（究极体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=6.476
+2026-10-07T21:15:48 81.785 INF [MechaStrideQA] PASS 初号机（究极体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=6.476
+2026-10-07T21:15:48 81.785 INF [MechaStrideQA] PASS 初号机（究极体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=6.476
+2026-10-07T21:15:48 81.786 INF [MechaStrideQA] DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 103.84) planted=True right=(0.52, 400.02, 103.65)
+2026-10-07T21:15:48 81.787 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.1
+2026-10-07T21:15:48 81.787 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.1
+2026-10-07T21:15:48 81.788 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.1
+2026-10-07T21:15:48 81.789 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.1
+2026-10-07T21:15:48 81.789 INF [MechaStrideQA] DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 37.85) planted=True right=(0.52, 400.02, 37.95) pl
+2026-10-07T21:15:48 81.790 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=6.4
+2026-10-07T21:15:48 81.792 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=6.4
+2026-10-07T21:15:48 81.793 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=6.4
+2026-10-07T21:15:48 81.793 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=6.4
+2026-10-07T21:15:48 81.794 INF [MechaStrideQA] DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 37.88) planted=True right=(0.52, 400.02, 37.97) pl
+2026-10-07T21:15:48 81.794 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.
+2026-10-07T21:15:48 81.795 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.
+2026-10-07T21:15:48 81.796 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.
+2026-10-07T21:15:48 81.796 INF [MechaStrideQA] PASS 初号机（究极体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.
+2026-10-07T21:15:48 81.797 INF [MechaStrideQA] DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 37.97) planted=True right=(0.52, 400.02, 37.92) pl
+2026-10-07T21:15:48 81.798 INF [MechaStrideQA] PASS 初号机（究极体） standing turn yaw=168.6011 error=6.387102E-05
+2026-10-07T21:15:48 81.798 INF [MechaStrideQA] PASS 初号机（究极体） wall stops safely z=1.990041
+2026-10-07T21:15:48 81.799 INF [MechaStrideQA] PASS 初号机（究极体） cliff stops safely z=2.615584
+2026-10-07T21:15:48 81.799 INF [NuSubQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-78019ba3bfb44ccfae4752c5d1393
+2026-10-07T21:15:48 81.804 INF 23393 Vehicle PostInit [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=174], (0.00, 400.00, 0.00) (chunk 0, 0), rbPos (0.00, 0.00, 0.00)
+2026-10-07T21:15:50 83.960 INF 23393 VehicleManager RemoveTrackedVehicle [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=174], Despawned
+2026-10-07T21:15:50 83.977 INF [NuSubQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-78019ba3bfb44ccfae4752c5d1393
+2026-10-07T21:15:52 86.271 INF 23393 Vehicle PostInit [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=176], (0.00, 400.00, 0.00) (chunk 0, 0), rbPos (0.00, 0.00, 0.00)
+2026-10-07T21:16:38 132.066 INF 23393 VehicleManager RemoveTrackedVehicle [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=176], Despawned
+2026-10-07T21:16:38 132.131 INF [MechaMotionQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-78019ba3bfb44ccfae4752
+2026-10-07T21:16:39 133.064 INF Dymesh: Mesh location: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-78019ba3bfb44ccfae4752c5d1393618\UserData\
+2026-10-07T21:16:39 133.066 INF Dymesh: Loading Items: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-78019ba3bfb44ccfae4752c5d1393618\UserData\
+QA server stopped.
+MECHA NATIVE SMOKE PASSED

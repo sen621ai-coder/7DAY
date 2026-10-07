@@ -1,0 +1,47 @@
+QA_ROOT=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/NuNativeQA.cs(17,862): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Mecha compiled against installed V3.2 Mono/Unity references.
+loaded=True installed=True exited=False
+--- Mecha/Buster/Exception lines ---
+2026-10-07T21:06:23 2.024 INF [MODS]     Loaded assembly MonoMod.Iced (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd
+2026-10-07T21:06:23 2.028 INF [MODS]     Loaded assembly MonoMod.ILHelpers (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2
+2026-10-07T21:06:23 2.036 INF [MODS]     Loaded assembly MonoMod.RuntimeDetour (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948
+2026-10-07T21:06:23 2.039 INF [MODS]     Loaded assembly MonoMod.Utils (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342c
+2026-10-07T21:06:23 2.042 INF [MODS]     Loaded assembly System.ValueTuple (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2
+2026-10-07T21:06:23 2.046 INF [MODS]     Loaded assembly TfpHarmony (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd43
+2026-10-07T21:06:23 2.080 INF [MODS]   Trying to load from folder: 'ZZ-PZAEC_Mecha'
+2026-10-07T21:06:23 2.083 INF [MODS]     Loaded assembly PZAEC.Mecha (in F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd4
+2026-10-07T21:06:23 2.085 INF [MODS]     Loaded Mod: PZAEC_Mecha (0.21.0)
+2026-10-07T21:06:23 2.144 INF [MODS]   Trying to load from folder: 'ZZ-PZAEC_Mecha'
+2026-10-07T21:06:23 2.145 WRN [MODS]     Mod with same name (PZAEC_Mecha) already loaded, ignoring
+2026-10-07T21:06:24 2.400 INF [MODS]   Initializing mod PZAEC_Mecha
+2026-10-07T21:06:24 2.400 INF [MODS]     Found ModAPI in assembly PZAEC.Mecha, creating instance
+2026-10-07T21:06:24 2.402 INF [MODS]     Initialized code in mod 'PZAEC_Mecha' in assembly PZAEC.Mecha
+2026-10-07T21:06:24 2.403 INF [MODS]     Found ModAPI in assembly PZAEC.Mecha, creating instance
+2026-10-07T21:06:24 2.602 INF [Mecha] Combat Robot beam / blades / guided missiles enabled; server-authoritative cargo ammunition.
+2026-10-07T21:06:24 2.791 INF [Mecha] Hull 15/30/50% damage channels (10% per-hit cap), sealed cabin (crew transfer zeroed, direct hits 10/20% capped at 20% HP), field + battle rep
+2026-10-07T21:06:24 2.802 INF [Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).
+2026-10-07T21:06:24 2.803 INF [MODS]     Initialized code in mod 'PZAEC_Mecha' in assembly PZAEC.Mecha
+2026-10-07T21:06:24 2.805 INF [MODS] Loading localization from mod: PZAEC_Mecha
+2026-10-07T21:06:25 3.568 INF Loading permissions file at 'F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1\UserD
+2026-10-07T21:06:26 4.333 INF Loaded (local): sandbox_overrides in 0.00
+2026-10-07T21:06:28 6.923 INF [PermissionsManager] ResolvePermissions(_perms: [All], _canPrompt: False) Fetching Title Storage Overrides...
+2026-10-07T21:06:28 6.924 INF [PermissionsManager] ResolvePermissions(_perms: [All], _canPrompt: False) Fetched Title Storage Overrides!
+GamePref.GameName = MechaQA_Isolated
+GamePref.OptionsGfxTerrainQuality = 2
+GamePref.ServerName = Mecha Isolated QA
+GamePref.ServerReservedSlots = 0
+GamePref.ServerReservedSlotsPermission = 100
+Option TerrainDamage: 9/150% (default: 7/100%)
+2026-10-07T21:06:50 28.976 INF Block IDs total 24810, terr 30, last 25031
+2026-10-07T21:06:52 31.181 INF Loaded (local): sandbox_overrides in 0.00
+2026-10-07T21:06:52 31.195 INF createWorld: Navezgane, Navezgane (src: GameData, DeviceLocal), MechaQA_Isolated, GameModeSurvival
+2026-10-07T21:07:00 38.422 INF Started thread SaveChunks F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1\UserDat
+2026-10-07T21:07:03 42.049 INF Dymesh: Mesh location: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1\UserData\S
+2026-10-07T21:07:08 46.560 INF 20984 Vehicle PostInit [type=EntityVJeep, name=vehiclePZAECMechaUltimate, id=171], (0.00, 400.00, 0.00) (chunk 0, 0), rbPos (0.00, 0.00, 0.00)
+2026-10-07T21:07:11 49.994 INF [JusticeQA] renders=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1\UserData\Save
+2026-10-07T21:07:11 49.996 INF [MechaMotionQA] COMPLETE failures=0
+2026-10-07T21:07:12 50.960 INF Dymesh: Mesh location: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1\UserData\S
+2026-10-07T21:07:12 50.962 INF Dymesh: Loading Items: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-24dfdf04467948adb2342cd435957cf1\UserData\S
+QA server stopped.
+MECHA NATIVE SMOKE PASSED

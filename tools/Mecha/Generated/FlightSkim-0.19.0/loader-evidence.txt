@@ -1,0 +1,15 @@
+skim run-8920e547d35342ff90b4de015b523913
+2026-10-07T16:59:45 1.129 INF [MODS]     Loaded Mod: PZAEC_Mecha (0.19.0)
+2026-10-07T16:59:45 1.860 INF [Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).
+2026-10-07T17:00:24 40.295 INF [MechaMotionQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8920e547d35342ff90b4de015b523913\UserData\Saves/Navezgane/MechaQA_Isolated\mecha-skim-qa.txt
+flight run-2a3eaa2387ff4bfc945b3e32b45ade27
+2026-10-07T17:03:28 1.097 INF [MODS]     Loaded Mod: PZAEC_Mecha (0.19.0)
+2026-10-07T17:03:29 1.816 INF [Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).
+2026-10-07T17:03:58 31.692 INF [MechaMotionQA] COMPLETE failures=0
+gravity run-94f80828ec194382b1fde7909fee7112
+2026-10-07T17:02:17 1.116 INF [MODS]     Loaded Mod: PZAEC_Mecha (0.19.0)
+2026-10-07T17:02:18 1.841 INF [Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).
+2026-10-07T17:02:46 30.545 INF [MechaMotionQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-94f80828ec194382b1fde7909fee7112\UserData\Saves/Navezgane/MechaQA_Isolated\mecha-gravity-qa.txt
+production_smoke run-eeb5ccee492849a0b72a9a2617beadd8
+2026-10-07T17:04:47 1.108 INF [MODS]     Loaded Mod: PZAEC_Mecha (0.19.0)
+2026-10-07T17:04:47 1.829 INF [Mecha] Combat Robot biped installed (runtime rig + IK gait, FPV optics, beam + blades + missiles).

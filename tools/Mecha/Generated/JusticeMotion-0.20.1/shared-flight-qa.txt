@@ -1,0 +1,170 @@
+CHASSIS 初号机（试验体）
+PASS Q takeoff resets jump and sets height
+PASS takeoff reaches cruise
+PASS takeoff status matches chassis
+PASS flight production Step starts airborne hold
+PASS flight production Step consumes selected cruise fuel
+PASS flight production Step reads Space as ascent
+PASS flight production Step expired input brakes and keeps power
+PASS flight production Step Q enters descent
+PASS flight production Step Q cancels descent
+PASS flight production Step engine off removes lift
+PASS flight production ownership handoff cannot reuse remote altitude/input
+PASS flight production Step leaving seat clears flight and input
+PASS flight native ten second hold drift <= .2m, measured=0
+PASS flight native held absolute altitude survives 64m origin relocation
+PASS flight native low roof prevents accumulated climb
+PASS flight native horizontal speed 12, measured=11.99999
+PASS flight native horizontal speed 20, measured=19.99998
+PASS flight native horizontal speed -6, measured=-5.999994
+PASS flight native release brakes to hold
+PASS flight native vertical speed 5, measured=4.999958
+PASS flight native vertical speed -4, measured=-3.999943
+PASS flight native yaw turns with upright hull
+PASS flight native no lift falls under gravity
+PASS flight support does not classify three metre air gap as landed on 0 degree slope
+FLIGHT LAND slope=0 body=(8.00, 319.79, 0.00) velocity=(0.00, -0.08, 0.00) support=True
+FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 321.97, 0.00), Extents: (0.75, 0.95, 0.50)
+FLIGHT LAND ray=GameObject point=(8.00, 321.65, 0.00) normal=(0.00, 1.00, 0.00) own=False
+FLIGHT LAND ray=Flight QA landing slope point=(8.00, 319.85, 0.00) normal=(0.00, 1.00, 0.00) own=False
+PASS flight native controlled landing on 0 degree support, contacts=16
+PASS flight support does not classify three metre air gap as landed on 12 degree slope
+FLIGHT LAND slope=12 body=(8.00, 319.92, 0.00) velocity=(0.00, -0.11, 0.00) support=True
+FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 322.10, 0.00), Extents: (0.75, 0.95, 0.50)
+FLIGHT LAND ray=GameObject point=(8.00, 321.78, 0.00) normal=(0.00, 1.00, 0.00) own=False
+FLIGHT LAND ray=Flight QA landing slope point=(8.00, 319.85, 0.00) normal=(-0.21, 0.98, 0.00) own=False
+PASS flight native controlled landing on 12 degree support, contacts=16
+PASS network roundtrip (40.00, 0.00, 0.00)
+PASS network roundtrip (8.00, 0.00, 1.00)
+PASS network roundtrip (10.00, 0.00, 0.00)
+PASS network roundtrip (24.00, 0.00, -1.00)
+PASS network roundtrip (64.00, 0.00, 0.00)
+PASS network roundtrip (128.00, 0.00, 0.00)
+PASS network roundtrip (258.00, 0.00, 0.00)
+PASS network roundtrip (384.00, 0.00, 0.00)
+PASS network roundtrip (4.00, 0.00, 0.00)
+PASS duplicate rejected
+PASS stale rejected
+PASS illegal state rejected (136.00, 0.00, 0.00)
+PASS illegal state rejected (132.00, 0.00, 0.00)
+PASS illegal state rejected (130.00, 0.00, 0.00)
+PASS illegal state rejected (8.50, 0.00, 0.00)
+PASS illegal state rejected (16.00, 0.00, 0.00)
+PASS illegal state rejected (56.00, 0.00, 0.00)
+PASS illegal state rejected (72.00, 0.00, 0.00)
+PASS illegal state rejected (9.00, 0.00, 0.00)
+PASS illegal state rejected (8.00, 0.00, 2.00)
+PASS illegal state rejected (8.00, 0.00, NaN)
+PASS illegal state rejected (8.00, 1.00, 0.00)
+PASS illegal state rejected (26.00, 0.00, -1.00)
+PASS remote timeout loses power
+PASS remote skim timeout clears drive
+PASS finite feet/torso ground
+PASS prototype thruster ground
+PASS finite feet/torso skim-lift
+PASS prototype thruster skim-lift
+PASS finite feet/torso skim-cruise
+PASS prototype thruster skim-cruise
+PASS finite feet/torso takeoff
+PASS prototype thruster takeoff
+PASS finite feet/torso cruise
+PASS prototype thruster cruise
+PASS wingless torso leans in flight
+PASS finite feet/torso boost
+PASS prototype thruster boost
+PASS finite feet/torso landing-high
+PASS prototype thruster landing-high
+PASS finite feet/torso landing-low
+PASS prototype thruster landing-low
+PASS near-ground legs extend
+PASS finite feet/torso power-loss
+PASS prototype thruster power-loss
+PASS finite feet/torso returned
+PASS prototype thruster returned
+VISUAL: production Gait/Flight poses, scripted state and trajectory; not human driving or two-client networking. Images: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8683b5e238ce424fa71a71bd23cc54b8\UserData\Saves/Navezgane/MechaQA_Isolated\shared-flight-review
+PASS air/skim footstep suppressed False
+PASS air/skim laser impact remains audible False
+PASS powered flight/lifting thrust audio False
+PASS air/skim footstep suppressed True
+PASS air/skim laser impact remains audible True
+PASS powered flight/lifting thrust audio True
+PASS controlled touchdown retains landing cue
+CHASSIS 初号机（完全体）
+PASS Q takeoff resets jump and sets height
+PASS takeoff reaches cruise
+PASS takeoff status matches chassis
+PASS flight production Step starts airborne hold
+PASS flight production Step consumes selected cruise fuel
+PASS flight production Step reads Space as ascent
+PASS flight production Step expired input brakes and keeps power
+PASS flight production Step Q enters descent
+PASS flight production Step Q cancels descent
+PASS flight production Step engine off removes lift
+PASS flight production ownership handoff cannot reuse remote altitude/input
+PASS flight production Step leaving seat clears flight and input
+PASS flight native ten second hold drift <= .2m, measured=0
+PASS flight native held absolute altitude survives 64m origin relocation
+PASS flight native low roof prevents accumulated climb
+PASS flight native horizontal speed 12, measured=11.99999
+PASS flight native horizontal speed 20, measured=19.99998
+PASS flight native horizontal speed -6, measured=-5.999994
+PASS flight native release brakes to hold
+PASS flight native vertical speed 5, measured=4.999958
+PASS flight native vertical speed -4, measured=-3.999943
+PASS flight native yaw turns with upright hull
+PASS flight native no lift falls under gravity
+PASS flight support does not classify three metre air gap as landed on 0 degree slope
+FLIGHT LAND slope=0 body=(8.00, 319.74, 0.00) velocity=(0.00, -0.09, 0.00) support=True
+FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 321.92, 0.00), Extents: (0.75, 0.95, 0.50)
+FLIGHT LAND ray=GameObject point=(8.00, 321.59, 0.00) normal=(0.00, 1.00, 0.00) own=False
+FLIGHT LAND ray=Flight QA landing slope point=(8.00, 319.85, 0.00) normal=(0.00, 1.00, 0.00) own=False
+PASS flight native controlled landing on 0 degree support, contacts=16
+PASS flight support does not classify three metre air gap as landed on 12 degree slope
+FLIGHT LAND slope=12 body=(8.00, 319.78, 0.00) velocity=(0.00, -0.08, 0.00) support=True
+FLIGHT LAND collider=MechaBodyHit bounds=Center: (8.00, 321.96, 0.00), Extents: (0.75, 0.95, 0.50)
+FLIGHT LAND ray=GameObject point=(8.00, 321.63, 0.00) normal=(0.00, 1.00, 0.00) own=False
+FLIGHT LAND ray=Flight QA landing slope point=(8.00, 319.85, 0.00) normal=(-0.21, 0.98, 0.00) own=False
+PASS flight native controlled landing on 12 degree support, contacts=16
+PASS network roundtrip (40.00, 0.00, 0.00)
+PASS network roundtrip (8.00, 0.00, 1.00)
+PASS network roundtrip (10.00, 0.00, 0.00)
+PASS network roundtrip (24.00, 0.00, -1.00)
+PASS network roundtrip (64.00, 0.00, 0.00)
+PASS network roundtrip (128.00, 0.00, 0.00)
+PASS network roundtrip (258.00, 0.00, 0.00)
+PASS network roundtrip (384.00, 0.00, 0.00)
+PASS network roundtrip (4.00, 0.00, 0.00)
+PASS duplicate rejected
+PASS stale rejected
+PASS illegal state rejected (136.00, 0.00, 0.00)
+PASS illegal state rejected (132.00, 0.00, 0.00)
+PASS illegal state rejected (130.00, 0.00, 0.00)
+PASS illegal state rejected (8.50, 0.00, 0.00)
+PASS illegal state rejected (16.00, 0.00, 0.00)
+PASS illegal state rejected (56.00, 0.00, 0.00)
+PASS illegal state rejected (72.00, 0.00, 0.00)
+PASS illegal state rejected (9.00, 0.00, 0.00)
+PASS illegal state rejected (8.00, 0.00, 2.00)
+PASS illegal state rejected (8.00, 0.00, NaN)
+PASS illegal state rejected (8.00, 1.00, 0.00)
+PASS illegal state rejected (26.00, 0.00, -1.00)
+PASS remote timeout loses power
+PASS remote skim timeout clears drive
+PASS finite feet/torso ground
+PASS finite feet/torso skim-lift
+PASS finite feet/torso skim-cruise
+PASS finite feet/torso takeoff
+PASS finite feet/torso cruise
+PASS finite feet/torso boost
+PASS finite feet/torso landing-high
+PASS finite feet/torso landing-low
+PASS finite feet/torso power-loss
+PASS finite feet/torso returned
+VISUAL: production Gait/Flight poses, scripted state and trajectory; not human driving or two-client networking. Images: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8683b5e238ce424fa71a71bd23cc54b8\UserData\Saves/Navezgane/MechaQA_Isolated\shared-flight-review
+PASS air/skim footstep suppressed False
+PASS air/skim laser impact remains audible False
+PASS powered flight/lifting thrust audio False
+PASS air/skim footstep suppressed True
+PASS air/skim laser impact remains audible True
+PASS powered flight/lifting thrust audio True
+PASS controlled touchdown retains landing cue

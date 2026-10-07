@@ -1,0 +1,51 @@
+﻿正义完全体精修 0.20.0 验收记录
+日期：2026-10-07（Asia/Shanghai）
+状态：已同步正式源码、资源、ModInfo、说明及纯正式 DLL，并通过安装后的离线检查和原生加载冒烟。
+
+实现内容
+- 2K 派生底色、金属度/遮蔽/光滑度遮罩、AG 法线与发光。涂装、金属、关节分区响应；降低装甲与光剑的过强发光。
+- 源 GLB、justice.bin 和三张源贴图字节不变。7003 个源顶点切线匹配；X 反射和 V 翻转共同转换切线手性，法线绿色反向；源切线先正交化。
+- 1086 组凸面选择记录保存在 polish.json 的 patchAudit 中。仅处理选中刚性平面、局部紧固件、轴套及源喷口边缘；65 骨、19 个原角色部件与挂点保持兼容。
+- 蒙皮近/中/远景：44,596 / 11,246 / 9,134 三角面。四个推进光效最多增加 192 面，总预算上界为 44,788 / 11,438 / 9,326。按屏幕高度切换；驾驶第一人称优先近景。
+- 每台一个 LOD 渲染回调；共享 LOD 网格与材质。四个固定复用推进对象，无动态灯；滑行、定高、加速强度分别可辨，断电当帧关闭。
+- 步行平衡、背包展开、滑行轻微前倾/刹停、飞行转弯/收腿与武器切换过渡；最终足底 IK 保留。额外挥剑承重只在有效切击窗口以外叠加，切击窗口内的剑端轨迹变动检查阈值 0.1 mm。
+- 保留 0.19.0 的输入、燃料、战斗数值、存档和网络布局；试验体资源没有变化。
+
+自动检查
+- 63 项基础离线检查通过；新增派生资源完整性测试通过，包括原件哈希、65 骨、所有 LOD 角色、权重/切线、索引边界、无孤立顶点、2K 地图和选择范围。
+- 598 项有效原生检查通过：滑行 71、重力 8、地形/越障 208、步态 60、正义战斗 21、共享飞行/网络 150、精修/LOD/姿态连续性 80。最后的正式 DLL 原生加载冒烟通过。
+- 两机型静止冲刺九成速度约 0.775–0.800 秒；步行转冲刺约 0.525–0.540 秒；滑行速度未超 13.5 m/s。
+- 30/60/120 Hz 步态脚底最大误差约 0.0007644 m（0.76 mm），低于 2 cm。精修姿态在上述频率下做有限值及躯干连续性检查。
+- 两版各 5 段 30 fps 原生脚本录像：步行、滑行、飞行、战斗和上下机姿态；另有固定光照近景、四面、日/夜、法线开关、白模、驾驶视角和 LOD 对照。
+
+性能
+  1 台：8.4991 → 8.5209 ms；增量 0.0218 ms；上限 1.2749 ms；通过。
+  4 台：8.8466 → 8.9462 ms；增量 0.0996 ms；上限 1.3270 ms；通过。
+采用同一 960×960 原生渲染夹具；单台近景和四台完整同屏中景。每场景三轮，各 60 个真实引擎帧预热、120 帧采样，比较三轮 P95 的中位数。
+计时范围是 Gait.Update 加同步 Camera.Render/ReadPixels。为隔离模型成本，机体在固定位置，物理暂停；这不是完整游戏帧耗时或 FPS 承诺。
+早期单引擎帧内循环的草稿测量存在蒙皮缓存问题，已排除，不用于门槛判定。最终原始 CSV、场景截图和 summary.json 保存在 baseline/、candidate/ 及 performance-summary.json。
+
+明确未完成/限制
+- 人工实景驾驶、真实双客户端、真实地图日夜及极端战斗混战仍需单独验证。隔离脚本录像和状态包单进程测试没有替代这些项目。
+- Mono 的 GetAllocatedBytesForCurrentThread 对显式分配的 4096 字节校准返回 0。最终 CSV 用 -1 表示不可用；不能宣称已测得零分配。新增持续运行路径经代码审查未创建逐帧托管对象，仍待有效 Profiler 实测。
+- 旧 MotionNativeQA 通用夹具在原始 0.19.0 与候选上均出现同样 33 项失败，包括旧胸部关节/舱门结构假设及后续空引用。这组失败没有计入通过项，记录见会话目录的 BaselineLegacy.log 和 MotionFull.log。
+- 本轮保留原始外形、骨架和配色，采用有明确选择记录的局部派生精修；不是整机重做资源。
+
+复现
+  pwsh -File tools/Mecha/Build.ps1
+  python tools/Mecha/Prepare-JusticePolish.py --mod-root ZZ-PZAEC_Mecha
+  python tools/Mecha/Test-JusticePolish.py --mod-root ZZ-PZAEC_Mecha --baseline "F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-polish-20261007-180046\baseline"
+  pwsh -File tools/Mecha/Start-NativeQA.ps1 -MotionProbe -ProbeSource tools/Mecha/PolishNativeQA.cs
+派生脚本需要 NumPy、SciPy、Pillow。原生 QA 必须串行，先检查游戏进程，使用隔离存档，未使用 -nographics。
+
+回滚
+完整 0.19.0 备份（含实施前未提交源码、DLL、配置与资源）：
+  F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-polish-20261007-180046\baseline
+哈希校验清单：F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-polish-20261007-180046\baseline-sha256.json
+关游戏后运行：pwsh -File "F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-polish-20261007-180046\Restore-0.19.0.ps1"
+脚本先校验备份并保存当前安装，再恢复旧文件并移除本次新增的派生文件。没有改动用户实际存档。
+
+证据索引
+index.html：图片及录像对照页面。
+reports/：检查报告、QA 会话位置、安装文件列表与加载冒烟。
+candidate-sha256.json：最终候选逐文件哈希；源 GLB 哈希为 57f3007588abdbf1953c6d431a9fa7cb127554fd3f68952035fe23762309d724。

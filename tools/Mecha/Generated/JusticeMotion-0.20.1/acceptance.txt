@@ -1,0 +1,22 @@
+0.20.1 完全体动作协调验收
+
+问题：旧步行层右臂/头部被 Combat 与 SafePose 覆盖，脚底按真实支撑脚运行，形成上下身节奏分离；骨盆动作过弱。
+修改：支撑脚/前后脚距驱动骨盆与胸肩反向平衡；持械与末次 SafePose 完成后统一叠加双臂和头部动作；加减速响应与屈肘；蓄力、起手与收招增加重心转移。
+保留：试验体实现、0.19.0 快速滑行、飞行控制、模型与材质、存档/网络格式、伤害时序。保留原攻击段，包括 0.035 相位伤害尾段；用 0.20.0 的原体态公式逐样本对照剑根与剑尖。
+
+离线：63 PASS。
+最终原生专项：377 PASS；全部在独立存档串行运行，无 -nographics。
+coordination-final: PASS 85, FAIL 0; source=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-55614fc4af264b1c8d50745364038d92\UserData\Saves\Navezgane\MechaQA_Isolated\justice-coordination-qa.txt
+action: PASS 49, FAIL 0; source=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8f1aa25923704d6c852e6d44a91dbb62\UserData\Saves\Navezgane\MechaQA_Isolated\justice-action-weight-qa.txt
+skim: PASS 71, FAIL 0; source=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-de738c86743841f0b70a8e0901ded35c\UserData\Saves\Navezgane\MechaQA_Isolated\mecha-skim-qa.txt
+flight: PASS 150, FAIL 0; source=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8683b5e238ce424fa71a71bd23cc54b8\UserData\Saves\Navezgane\MechaQA_Isolated\shared-flight-qa.txt
+combat: PASS 22, FAIL 0; source=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-a20cde1bd5a44e3b9ec9adf7eb52d835\UserData\Saves\Navezgane\MechaQA_Isolated\justice-combat-qa.txt
+步态（含试验体回归）最大足底误差：0.000840428 m。
+战斗最大足底误差：0.005798345 m；伤害区间剑根/剑尖最大差：0.000000000 m。
+步态覆盖：静止、1.2/4/-2/13.5 m/s、30/50/60/120 Hz、停止、原地转向、墙体、悬崖。新增检查持械双臂运动、骨盆起伏、净空、停步恢复；首轮检查发现幅度不足，调节后复测通过。
+战斗覆盖：30/60/120 Hz，轻/重攻击、两种连击方向、蓄力、剑盾枪、上下机姿态。滑行/飞行专项保留地形、速度、动力丢失、状态衔接、驾驶员及非法包检查。
+
+录像：index.html 左侧 0.20.0，右侧 0.20.1；均为同机位同脚本原生 Unity/PhysX 录制，五段各自时长一致。旧录像保留在 JusticePolish-0.20.0/candidate/。本轮新录像没有发生异常；上下机视频独立检查脚底接触。
+限制：不是人工实景驾驶，也不是真实双客户端测试；本轮不重新宣称多机 P95 或托管分配的实测结果。动作力量感不能仅靠数值断言，提供录像供实际观看。
+完整 0.20.0 备份：F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-motion-20261007-194216\baseline
+回滚：F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-motion-20261007-194216\Restore-0.20.0.ps1

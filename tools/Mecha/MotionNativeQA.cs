@@ -207,7 +207,7 @@ public sealed class MechaMotionQA : IModApi
         foreach(var bad in new[]{new Vector3(8.5f,0,0),new Vector3(16,0,0),new Vector3(56,0,0),new Vector3(72,0,0),new Vector3(9,0,0),new Vector3(8,0,2),new Vector3(8,0,float.NaN),new Vector3(8,1,0),new Vector3(26,0,-1)})
             Check("flight network rejects illegal flags/scalars "+bad,!Locomotion.Receive(v,actor,++serial,bad));
         var prototype=EntityFactory.CreateEntity(EntityClass.FromString(Rules.VehicleName),v.position+Vector3.right*20) as EntityVehicle;world.SpawnEntityInWorld(prototype);
-        Check("flight prototype rejects Complete flight snapshot",!Locomotion.Receive(prototype,actor,1,new Vector3(8,0,0)));prototype.vehicleRB.gameObject.SetActive(false);
+        Check("flight prototype accepts shared flight snapshot",Locomotion.Receive(prototype,actor,1,new Vector3(8,0,0)));prototype.vehicleRB.gameObject.SetActive(false);
         m.FlightMode=Flight.Phase.Cruise;m.WingBlend=1;m.Blend=1;m.Grounded=false;
         Check("flight ground sword/shield unavailable",!Samurai.GroundReady(v));
         var combat=Samurai.Get(v);combat.GuardHeld=combat.SwordHeld=true;Check("flight held sword/shield does not brace cruise",!Samurai.Braced(v));Samurai.Stop(v);

@@ -1,28 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <configs>
   <append xpath="/recipes">
     <recipe name="ammoPZAECMechaCell" count="20" craft_time="60" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
-      <ingredient name="resourceElectricParts" count="4"/>
-      <ingredient name="resourceScrapPolymers" count="4"/>
-      <ingredient name="resourceForgedSteel" count="2"/>
+      <ingredient name="resourceElectricParts" count="4" />
+      <ingredient name="resourceScrapPolymers" count="4" />
+      <ingredient name="resourceForgedSteel" count="2" />
     </recipe>
     <recipe name="ammoPZAECMechaMissile" count="1" craft_time="120" craft_area="workbench" tags="learnable,workbenchCrafting" always_unlocked="false">
-      <ingredient name="ammoRocketHE" count="1"/>
-      <ingredient name="resourceElectricParts" count="8"/>
-      <ingredient name="resourceMechanicalParts" count="4"/>
-      <ingredient name="resourceForgedSteel" count="4"/>
+      <ingredient name="ammoRocketHE" count="1" />
+      <ingredient name="resourceElectricParts" count="8" />
+      <ingredient name="resourceMechanicalParts" count="4" />
+      <ingredient name="resourceForgedSteel" count="4" />
     </recipe>
     <recipe name="vehicleCombatRobotChassis" count="1" craft_time="900" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
-      <ingredient name="resourceForgedSteel" count="26"/>
-      <ingredient name="resourceMechanicalParts" count="35"/>
-      <ingredient name="resourceElectricParts" count="29"/>
+      <ingredient name="resourceForgedSteel" count="26" />
+      <ingredient name="resourceMechanicalParts" count="35" />
+      <ingredient name="resourceElectricParts" count="29" />
     </recipe>
     <recipe name="vehicleCombatRobotPlaceable" count="1" craft_time="1200" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
-      <ingredient name="vehicleCombatRobotChassis" count="1"/>
-      <ingredient name="smallEngine" count="1"/>
-      <ingredient name="carBattery" count="1"/>
-      <ingredient name="resourceLegendaryParts" count="1"/>
-      <ingredient name="resourceMechanicalParts" count="20"/>
+      <ingredient name="vehicleCombatRobotChassis" count="1" />
+      <ingredient name="smallEngine" count="1" />
+      <ingredient name="carBattery" count="1" />
+      <ingredient name="resourceLegendaryParts" count="1" />
+      <ingredient name="resourceMechanicalParts" count="20" />
     </recipe>
     <recipe name="vehicleCombatRobotCompleteChassis" count="1" craft_time="1350" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
       <ingredient name="resourceForgedSteel" count="39" />
@@ -31,6 +31,18 @@
     </recipe>
     <recipe name="vehicleCombatRobotCompletePlaceable" count="1" craft_time="1800" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
       <ingredient name="vehicleCombatRobotCompleteChassis" count="1" />
+      <ingredient name="smallEngine" count="1" />
+      <ingredient name="carBattery" count="1" />
+      <ingredient name="resourceLegendaryParts" count="2" />
+      <ingredient name="resourceMechanicalParts" count="30" />
+    </recipe>
+    <recipe name="vehiclePZAECMechaUltimateChassis" count="1" craft_time="1350" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
+      <ingredient name="resourceForgedSteel" count="39" />
+      <ingredient name="resourceMechanicalParts" count="53" />
+      <ingredient name="resourceElectricParts" count="44" />
+    </recipe>
+    <recipe name="vehiclePZAECMechaUltimatePlaceable" count="1" craft_time="1800" craft_area="aecVehicleFinalAssemblyBench" crafting_category="AECvehicleFinalAssembly" tags="learnable" always_unlocked="false">
+      <ingredient name="vehiclePZAECMechaUltimateChassis" count="1" />
       <ingredient name="smallEngine" count="1" />
       <ingredient name="carBattery" count="1" />
       <ingredient name="resourceLegendaryParts" count="2" />

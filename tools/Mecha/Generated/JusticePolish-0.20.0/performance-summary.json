@@ -1,0 +1,22 @@
+{
+  "metric": "Gait.Update + synchronous Camera.Render/ReadPixels P95; 960x960; three runs of 120 distinct engine frames after 60 warmups; one near or four medium LOD units",
+  "allocation_counter_valid": false,
+  "results": [
+    {
+      "count": 1,
+      "baseline_ms": 8.4991,
+      "candidate_ms": 8.5209,
+      "delta_ms": 0.02179999999999893,
+      "limit_ms": 1.274865,
+      "passed": true
+    },
+    {
+      "count": 4,
+      "baseline_ms": 8.8466,
+      "candidate_ms": 8.9462,
+      "delta_ms": 0.0995999999999988,
+      "limit_ms": 1.3269900000000001,
+      "passed": true
+    }
+  ]
+}

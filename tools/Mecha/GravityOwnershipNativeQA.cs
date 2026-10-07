@@ -19,7 +19,7 @@ public sealed class MechaGravityQA : IModApi
     }
     static void Step(EntityVehicle v,bool lift){
         AccessTools.Method(typeof(EntityVehicle),"PhysicsFixedUpdate").Invoke(v,null);
-        if(lift){if(Rules.Complete(v))Flight.ApplyControl(v.vehicleRB,0,0,false,2,.02f);else v.vehicleRB.AddForce(Vector3.up*(9.81f+6f)*v.vehicleRB.mass,ForceMode.Force);}
+        if(lift)Flight.ApplyControl(v.vehicleRB,0,0,false,2,.02f);
         Physics.Simulate(.02f);
     }
     static void Run(ref ModEvents.SGameStartDoneData data){

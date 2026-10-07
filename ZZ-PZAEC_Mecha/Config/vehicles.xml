@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <configs>
   <append xpath="/vehicles">
     <vehicle name="vehicleCombatRobot">
@@ -121,6 +121,105 @@
       <property name="wheelPtlScale" value="0" />
       <property name="hornSound" value="electric_fence_on" />
       <property name="recipeName" value="vehicleCombatRobotCompletePlaceable" />
+      <property name="pzMechaBeamKey" value="F" />
+      <property name="pzMechaMissileKey" value="G" />
+      <property name="pzMechaRepairKey" value="F" />
+      <property name="pzMechaBattleRepairKey" value="R" />
+      <property name="pzMechaHoverKey" value="Q" />
+      <property name="pzMechaTraverseKey" value="LeftAlt" />
+      <property name="pzMechaJumpKey" value="Space" />
+      <property name="pzMechaDescendKey" value="C" />
+      <property class="storage">
+        <property name="class" value="Storage" />
+      </property>
+      <property class="chassis">
+        <property name="class" value="Chassis" />
+        <property name="paint" value="M" />
+      </property>
+      <property class="engine">
+        <property name="class" value="Engine" />
+        <property name="particleOn" value="Particles/p_on" />
+        <property name="particleDamaged" value="Particles/p_damaged" />
+        <property name="particleBroken" value="Particles/p_broken" />
+        <property name="fuelKmPerL" value="0.04" />
+        <property name="foodDrain" value=".002,.00811" />
+        <property name="gear1" value="         500,2500, -1400,800,0, 700,2200,900,         ,         ,         0, .7, 1, .1, -9, .12, .1, ,         -.4, -.02, .7, .7, -.2, 9, .2,          " />
+        <property name="gear2" value="         500,2500, -2000,1000,2000, 600,2200,800,         ,         ,         -.25, -.05, .2, .4, -1, 1, .1,          " />
+        <property name="gear3" value="         500,2500, -2000,1000,2000, 500,2200,1000,         ,         ,         -.28, -.07, .3, .6, -1, 1, .1,          " />
+        <property name="gear4" value="         500,2500, -2000,1000,2000, 500,9999,9999,         ,         ,         -.31, -.08, .6, .9, -1, 1, .1,          " />
+        <property name="sound_start" value="" />
+        <property name="sound_shut_off" value="" />
+        <property name="sound_no_fuel_shut_off" value="" />
+      </property>
+      <property class="fuelTank">
+        <property name="class" value="FuelTank" />
+        <property name="capacity" value="450" />
+      </property>
+      <property class="handlebars">
+        <property name="class" value="Steering" />
+        <property name="steerMaxAngle" value="0" />
+        <property name="IKHandLPosition" value="-.2596, -.03777, -.266483" />
+        <property name="IKHandLRotation" value="-65.88229, 166.2278, -67.5802" />
+        <property name="IKHandRPosition" value=".24465, -.0909, -.25648" />
+        <property name="IKHandRRotation" value="54.6357, 14.0615, 102.1651" />
+      </property>
+      <property class="seat0">
+        <property name="class" value="Seat" />
+        <property name="pose" value="40" />
+        <property name="position" value="0, 2.1, -.1" />
+        <property name="rotation" value="0, 0, 0" />
+        <property name="exit" value="-2.2,0,0 ~ 2.2,0,0 ~ 0,0,-3.2 ~ 0,0,3.2 ~ 0,3,0" />
+        <property name="IKFootLPosition" value="-.2, -.6, .5" />
+        <property name="IKFootLRotation" value="-15, 0, 0" />
+        <property name="IKFootRPosition" value=".2, -.6, .5" />
+        <property name="IKFootRRotation" value="-15, 0, 0" />
+        <property name="IKHandLPosition" value="-.3, .55, .35" />
+        <property name="IKHandLRotation" value="-40, 20, -60" />
+        <property name="IKHandRPosition" value=".3, .55, .35" />
+        <property name="IKHandRRotation" value="40, -20, -60" />
+      </property>
+      <property class="wheel0">
+        <property name="tireTransform" value="Wheel0" />
+        <property name="tireSuspensionPercent" value="1" />
+        <property name="torqueScale_motor_brake" value="1, .8" />
+      </property>
+      <property class="wheel1">
+        <property name="tireTransform" value="Wheel1" />
+        <property name="tireSuspensionPercent" value="1" />
+        <property name="torqueScale_motor_brake" value="1, .8" />
+      </property>
+      <property class="wheel2">
+        <property name="tireTransform" value="Wheel2" />
+        <property name="tireSuspensionPercent" value="1" />
+        <property name="torqueScale_motor_brake" value="1, 1" />
+      </property>
+      <property class="wheel3">
+        <property name="tireTransform" value="Wheel3" />
+        <property name="tireSuspensionPercent" value="1" />
+        <property name="torqueScale_motor_brake" value="1, 1" />
+      </property>
+    </vehicle>
+    <vehicle name="vehiclePZAECMechaUltimate">
+      <property name="cameraDistance" value="9, 12" />
+      <property name="cameraTurnRate" value=".2, .35" />
+      <property name="upAngleMax" value="45" />
+      <property name="upForce" value="1.5" />
+      <property name="steerAngleMax" value="0" />
+      <property name="steerRate" value="120" />
+      <property name="steerCenteringRate" value="85" />
+      <property name="tiltAngleMax" value="24" />
+      <property name="tiltThreshold" value="3" />
+      <property name="tiltDampening" value=".25" />
+      <property name="tiltDampenThreshold" value="8" />
+      <property name="tiltUpForce" value="0" />
+      <property name="motorTorque_turbo" value="0, 0, 0, 0" />
+      <property name="velocityMax_turbo" value="7.5, 3.6, 13.5, 3.6" />
+      <property name="brakeTorque" value="45000" />
+      <property name="unstickForce" value="2" />
+      <property name="waterDrag_y_velScale_velMaxScale" value="1.8, .9, .1" />
+      <property name="wheelPtlScale" value="0" />
+      <property name="hornSound" value="electric_fence_on" />
+      <property name="recipeName" value="vehiclePZAECMechaUltimatePlaceable" />
       <property name="pzMechaBeamKey" value="F" />
       <property name="pzMechaMissileKey" value="G" />
       <property name="pzMechaRepairKey" value="F" />

@@ -1,0 +1,5 @@
+RX-93 Nu Gundam by Ryanwill679 (https://sketchfab.com/Ryanwill679)
+https://sketchfab.com/3d-models/rx-93-nu-gundam-85c329a2565043c58999afd43506c9a9
+CC BY 4.0 https://creativecommons.org/licenses/by/4.0/
+Modified: canonical gameplay rig, animation retarget, fitted malformed wing panels, generated beam saber. Original source and hash retained.
+Motion basis: Justice Gundam by nama_140, CC BY 4.0; adapted gameplay motion by PZAEC.

@@ -15,13 +15,13 @@ namespace PZAEC.Mecha
         { Vector3 a,b;if(!Ground(v,p+Vector3.right*.12f,out a)||!Ground(v,p+Vector3.forward*.12f,out b))return Vector3.up;
           var n=Vector3.Cross(b-p,a-p).normalized;return n.y>.6f?n:Vector3.up; }
         // All lengths measured in world metres; never mix pre-fit GLB units and rig units.
-        public static void Solve(Model.Rig rig,int side,Vector3 sole,Vector3 normal,float poleAngle=0)
+        public static void Solve(Model.Rig rig,int side,Vector3 sole,Vector3 normal,float poleAngle=0,float soleYaw=0,float solePitch=0)
         {
             var hip=side==0?rig.HipL:rig.HipR;var knee=side==0?rig.KneeL:rig.KneeR;var ankle=side==0?rig.AnkleL:rig.AnkleR;var foot=side==0?rig.FootL:rig.FootR;
-            var soleRotation=Quaternion.FromToRotation(rig.Mount.up,normal)*rig.Mount.rotation;
+            var soleRotation=Quaternion.FromToRotation(rig.Mount.up,normal)*rig.Mount.rotation*Quaternion.Euler(solePitch,soleYaw,0);
             var offset=Quaternion.Inverse(ankle.rotation)*(foot.position-ankle.position);
             var target=sole-soleRotation*offset;var delta=target-hip.position;
-            float a=rig.LegUpper,b=rig.LegLower,dist=Mathf.Clamp(delta.magnitude,Mathf.Abs(a-b)+.01f,a+b-.005f);
+            float a=rig.Justice!=null&&rig.Justice.Ultimate?Vector3.Distance(hip.position,knee.position):rig.LegUpper,b=rig.Justice!=null&&rig.Justice.Ultimate?Vector3.Distance(knee.position,ankle.position):rig.LegLower,dist=Mathf.Clamp(delta.magnitude,Mathf.Abs(a-b)+.01f,a+b-.005f);
             var axis=delta.sqrMagnitude>.00001f?delta.normalized:Vector3.down;
             var pole=Vector3.ProjectOnPlane(rig.Mount.forward,axis).normalized;
             if(pole.sqrMagnitude<.01f)pole=rig.Mount.up;
@@ -52,7 +52,7 @@ namespace PZAEC.Mecha
             w.Velocity=Vector3.Lerp(w.Velocity,velocity,Mathf.Min(1,dt*12));float speed=w.Velocity.magnitude;
             var state=Locomotion.Get(v);bool airborne=!state.Grounded&&!state.HoverOn;
             state.VisualForward=Vector3.Dot(w.Velocity,rig.Mount.forward);state.VisualTurn=turn;
-            if(Rules.Complete(v)&&v.isEntityRemote&&Flight.AirPose(state)&&Time.time-state.LastHeightAt>=.2f){state.LastHeightAt=Time.time;float clearance;state.FlightHeight=Flight.Clearance(v,out clearance)?clearance:-1;}
+            if(v.isEntityRemote&&Flight.AirPose(state)&&Time.time-state.LastHeightAt>=.2f){state.LastHeightAt=Time.time;float clearance;state.FlightHeight=Flight.Clearance(v,out clearance)?clearance:-1;}
             float mountY=0;
             if(GroundSupport.Find(v)==null&&state.Grounded&&!state.HoverOn&&Ground(v,v.position,out var support))mountY=Mathf.Clamp(support.y-v.position.y-.05f,-.4f,.25f);
             rig.Mount.localPosition=new Vector3(0,Mathf.MoveTowards(rig.Mount.localPosition.y,mountY,dt*2),0);
@@ -70,21 +70,24 @@ namespace PZAEC.Mecha
                 float recoil=Mathf.Clamp01(1-(Time.time-w.RecoilAt)/.22f);
                 rig.ElbowR.localRotation=rig.RestRot[rig.ElbowR]*Quaternion.Euler(-recoil*8,0,0);
             }
-            if(rig.Justice!=null&&!show){Justice.Walk(v,rig,speed,turn,dt);Justice.FlightPose(v,rig);}
+            if(rig.Justice!=null&&!show){Justice.Walk(v,rig,speed,turn,dt);JusticeFinish.Weight(v,rig,dt);Justice.FlightPose(v,rig,dt);if(!rig.Justice.Ultimate&&Traversal.Active(v)){rig.Torso.localPosition=rig.TorsoBasePosition;rig.Torso.localRotation=rig.RestRot[rig.Torso];}}
             if(Rules.Complete(v))SwordMotion.CaptureBase(rig);
             if(!show){Samurai.Pose(v,rig,dt,Time.time,false);if(rig.Justice==null)Flight.Pose(v,rig,dt);}
 
+            if(rig.Justice!=null&&!show)JusticeFinish.Blend(v,rig,dt);
+            if(rig.Justice!=null&&rig.Justice.Ultimate&&Traversal.Active(v)){rig.Torso.localPosition=rig.TorsoBasePosition;rig.Torso.localRotation=rig.RestRot[rig.Torso];}
             bool supportPose=!show&&!Skim.Active(v)&&!state.HoverOn&&(!airborne||Traversal.Active(v))&&(!Flight.AirPose(state)||state.Grounded&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0))&&Traversal.Pose(v,rig);
             if(supportPose){var ground=GroundSupport.Find(v);var traversal=Traversal.Get(v);
                 if(v.isEntityRemote&&traversal.Current!=null){for(int i=0;i<2;i++){w.Legs[i].Foot=traversal.FrameFeet[i];w.Legs[i].Normal=Vector3.up;}activity=1;}
                 else if(ground!=null){for(int i=0;i<2;i++){w.Legs[i].Foot=ground.Feet[i].Position;w.Legs[i].Normal=ground.Feet[i].Normal;w.Legs[i].Swing=ground.Feet[i].Swing;}activity=(ground.Feet[0].Swing||ground.Feet[1].Swing)?1:0;}}
             for(int i=0;!supportPose&&i<2;i++)
             {
-                var leg=w.Legs[i];var home=rig.Mount.TransformPoint(leg.Home)+Origin.position;
+                var leg=w.Legs[i];var home=rig.Mount.TransformPoint(rig.Justice!=null&&!rig.Justice.Ultimate&&!airborne&&!Flight.AirPose(state)&&!Skim.Active(v)?JusticeLegs.Home(leg.Home,i):leg.Home)+Origin.position;
                 if(state.Blend>.05f||airborne||state.WingBlend>.05f||Skim.Active(v))
                 {
-                    leg.Swing=false;float tuck=Rules.Complete(v)&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0)&&state.FlightHeight>=0?Mathf.Clamp01((state.FlightHeight-.5f)/3):1;
-                    if(Rules.Complete(v)&&!Flight.AirPose(state)&&state.Grounded)tuck=0;
+                    leg.Swing=false;float tuck=(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0)&&state.FlightHeight>=0?Mathf.Clamp01((state.FlightHeight-.5f)/3):1;
+                    if(!Flight.AirPose(state)&&state.Grounded)tuck=0;
+                    if(rig.Justice!=null){if(i==0)rig.Justice.LegTuck=Mathf.MoveTowards(rig.Justice.LegTuck,tuck,dt*4);tuck=rig.Justice.LegTuck;}
                     leg.Foot=home+(rig.Mount.up*(Skim.Active(v)?0:.32f)-rig.Mount.forward*.22f)*tuck;
                     Solve(rig,i,leg.Foot-Origin.position,rig.Mount.up);continue;
                 }
@@ -117,6 +120,7 @@ namespace PZAEC.Mecha
                 }
                 Solve(rig,i,leg.Foot-Origin.position,leg.Normal);
             }
+            if(rig.Justice!=null&&!rig.Justice.Ultimate&&!show)JusticeLegs.Pose(v,rig);
             w.WasAir=airborne||state.Blend>.05f;
             if(state.LandingAt>w.LastLanding){w.LastLanding=state.LandingAt;w.PendingLanding=Time.time+(state.LandingEventExpected?.8f:.25f);}
             // Wait longer for an authoritative heavy event, but never leave a
@@ -124,8 +128,9 @@ namespace PZAEC.Mecha
             // only: it cannot apply damage or create an explosion.
             if(w.PendingLanding>=0&&Time.time>=w.PendingLanding)
             {if(!MechaFX.LandingRecently(v.entityId,.8f))RobotAudio.LandCue(v,v.position,.25f);w.PendingLanding=-100;}
-            if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn)RobotAudio.Event(v,"jump",RobotAudio.NextPresentationSerial(),.6f);}
+            if(state.JumpAt>w.LastJump){w.LastJump=state.JumpAt;if(!state.HoverOn&&!Flight.AirPose(state)&&!Skim.Active(v))RobotAudio.Event(v,"jump",RobotAudio.NextPresentationSerial(),.6f);}
             if(Rules.Complete(v)){SwordMotion.CacheFeet(rig,w.Legs[0].Foot-Origin.position,w.Legs[1].Foot-Origin.position,w.Legs[0].Normal,w.Legs[1].Normal);SwordMotion.SafePose(v,rig);}
+            if(rig.Justice!=null&&!show)JusticeMotion.Finish(v,rig,dt);
             Traversal.EquipmentPose(v,rig);
             CombatFeedback.Blade(v,rig);RobotAudio.Update(v,activity,show);
             RobotPresentation.Update(v,rig,state.Blend,Boarding.Hatch(v));

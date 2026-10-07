@@ -55,7 +55,13 @@ namespace PZAEC.Mecha
         public static void Event(EntityVehicle v,string cue,int serial=-1,float volume=1f)
         {Emit(v,cue,serial,Vector3.zero,false,volume);}
         public static void ContactEvent(EntityVehicle v,string cue,int serial,Vector3 point,float volume=1f)
-        {if(!Skim.Active(v))Emit(v,cue,serial,point,true,volume);}
+        {
+            if(v==null)return;
+            bool foot=cue=="step-left"||cue=="step-right";
+            if((foot||cue=="land")&&Skim.Active(v))return;
+            if(foot&&Flight.AirPose(Locomotion.Get(v)))return;
+            Emit(v,cue,serial,point,true,volume);
+        }
         public static void LandCue(EntityVehicle v,Vector3 point,float strength,int serial=-1)
         {
             if(v==null||!Audible)return;var voice=Get(v);
@@ -111,7 +117,7 @@ namespace PZAEC.Mecha
             if(a.PowerKnown&&a.WasPowered!=powered)Event(v,powered?"power-on":"power-off",-1,powered?.55f:.40f);a.PowerKnown=true;a.WasPowered=powered;
             a.JointActivity=JointMotion(v,a);a.ServoTarget=(powered||ceremony)?Mathf.Max(Mathf.Clamp01(moving),a.JointActivity)*.35f:0;
             float speed=Mathf.Abs(s.VisualForward);if(v.vehicleRB!=null)speed=Mathf.Max(speed,Vector3.ProjectOnPlane(v.vehicleRB.velocity,Vector3.up).magnitude);
-            a.BoostTarget=powered?(Flight.Active(s)?(s.Boost?.85f:.45f):s.HoverOn?.35f:s.Boost&&speed>.25f?.55f:0):0;
+            a.BoostTarget=powered?(Flight.Active(s)?(s.Boost?.85f:.45f):s.HoverOn?.35f:Skim.Active(v)?.55f:s.Boost&&speed>.25f?.55f:0):0;
             var combat=Rules.Complete(v)?Samurai.Get(v):null;
             a.ChargeTarget=powered&&!ceremony&&combat!=null&&!combat.BeamSpent?Mathf.Clamp01(combat.LaserCharge)*.40f:0;
             a.Charge.pitch=.9f+(combat!=null?Mathf.Clamp01(combat.LaserCharge)*.35f:0);
@@ -176,7 +182,7 @@ namespace PZAEC.Mecha
             p.Lamp.intensity=hatch*(Rules.Complete(v)?.25f:1.4f);
             if(p.Emitter!=null){var s=Samurai.Get(v);var block=new MaterialPropertyBlock();block.SetColor("_Color",new Color(.2f,.85f,1f,.2f+.8f*s.LaserCharge));p.Emitter.GetComponent<Renderer>().SetPropertyBlock(block);block.SetColor("_Color",new Color(.2f,.85f,1f,.2f+.5f*s.Alert+.3f*s.LaserCharge));p.Eye.GetComponent<Renderer>().SetPropertyBlock(block);}
             var move=Locomotion.Get(v);
-            float thrust=Rules.Complete(v)?(Flight.Active(move)?(move.Boost?1:move.VerticalInput>0?.85f:.55f):move.FlightMode==Flight.Phase.PowerLost?0:boost):boost;
+            float thrust=Locomotion.Powered(v)?(Flight.Active(move)?(move.Boost?1:move.VerticalInput>0?.85f:.55f):move.FlightMode==Flight.Phase.PowerLost?0:Skim.Active(v)?Mathf.Max(.55f,boost):boost):0;
             foreach(var jet in p.Jets){jet.gameObject.SetActive(thrust>.01f);jet.localScale=new Vector3(.12f,.15f+thrust*.5f,.12f);}
         }
         public static void Cleanup(World world){var remove=new List<int>();foreach(var p in parts)if(p.Value.Vehicle==null||world.GetEntity(p.Key)!=p.Value.Vehicle){Destroy(p.Value);remove.Add(p.Key);}foreach(int id in remove)parts.Remove(id);}

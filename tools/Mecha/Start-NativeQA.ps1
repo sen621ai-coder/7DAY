@@ -10,9 +10,18 @@ param(
     [string]$ProbeSource
 )
 $ErrorActionPreference = 'Stop'
+# Serialize callers across chats/processes; the process check below also protects
+# a manually launched game and older QA runners that do not hold this mutex.
+$qaMutex = [Threading.Mutex]::new($false, 'Local\PZAEC.Mecha.NativeQA')
+$ownsQaMutex = $false
+try {
+    try { $ownsQaMutex = $qaMutex.WaitOne([TimeSpan]::FromMinutes(20)) }
+    catch [Threading.AbandonedMutexException] { $ownsQaMutex = $true }
+    if (!$ownsQaMutex) { throw 'Timed out waiting for the other native QA runner.' }
 $root = Split-Path (Split-Path $PSScriptRoot); $game = Split-Path $root
 if (Get-Process 7DaysToDie, 7DaysToDieServer -ErrorAction SilentlyContinue) { throw 'A game/QA process is already running; leave it untouched.' }
 $qa = Join-Path $root ('.local-tests/MechaNativeQA/run-' + [guid]::NewGuid().ToString('N'))
+Write-Output ('QA_ROOT=' + $qa)
 $data = Join-Path $qa 'UserData'; $mods = Join-Path $data 'Mods'
 New-Item -ItemType Directory -Force $mods | Out-Null
 Copy-Item -LiteralPath (Join-Path $root '0_TFP_Harmony') -Destination $mods -Recurse
@@ -82,8 +91,13 @@ if (Test-Path $log) {
     Select-String -Path $log -Pattern 'Mecha|Buster|ERR|Exception' | Select-Object -Last 40 | ForEach-Object { $_.Line.Substring(0, [Math]::Min(180, $_.Line.Length)) }
 }
 if (-not $KeepRunning) {
-    if (-not $process.HasExited) { Stop-Process -Id $process.Id -Force }
+    if (-not $process.HasExited) { Stop-Process -Id $process.Id -Force; if (!$process.WaitForExit(10000)) { throw 'QA process did not exit; keep the next run stopped.' } }
     Write-Output 'QA server stopped.'
     if ($loaded -and $installed -and (!$MotionProbe -or (Get-Content $log -Raw) -match '\[MechaMotionQA\] COMPLETE failures=0')) { Write-Output 'MECHA NATIVE SMOKE PASSED'; exit 0 }
     Write-Output 'MECHA NATIVE SMOKE FAILED'; exit 1
+}
+
+} finally {
+    if ($ownsQaMutex) { $qaMutex.ReleaseMutex() }
+    $qaMutex.Dispose()
 }

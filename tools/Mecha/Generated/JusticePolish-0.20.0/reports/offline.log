@@ -1,0 +1,65 @@
+PASS  GLB magic/version
+PASS  GLB flat sculpture 154 meshes / 311 nodes / 4 materials / 15 images
+PASS  GLB has zero animations (procedural gait required)
+PASS  GLB display floor node exists (must be skipped)
+PASS  GLB materials Hands/Torse/Legs/Floor
+PASS  GLB Hands material maps baseColor tex_0
+PASS  texture tex_0 exists <=1024
+PASS  texture tex_4 exists <=1024
+PASS  texture tex_8 exists <=1024
+PASS  vehicles.xml defines vehicleCombatRobot
+PASS  vehicles.xml seat0 + storage + fuelTank
+PASS  vehicles.xml fire key overrides
+PASS  items.xml placeable Action1 vehicle
+PASS  items.xml chassis + both ammo items
+PASS  entityclasses.xml vehicle entity
+PASS  recipes.xml uses AEC final assembly bench
+PASS  AEC final assembly bench exists in 07 mod
+PASS  progression.xml unlocks at craftingVehicles 100
+PASS  all damage constants <= 65535
+PASS  items.xml placeable exposes vehicle mod tags
+PASS  vehicles.xml repair keys retained and melee key removed
+PASS  rules define vanilla repair kit + 8s channel + blade constants
+PASS  weapons define repair ops 5/6/7 and melee ops 8/9/10
+PASS  armor composes after ApacheArmor and M1
+PASS  armor damage channels 15/30/50 hull, 10% cap (main battle)
+PASS  crew direct-hit channels 10/20, 20% HP cap
+PASS  crew hull transfer zeroed (closed cabin)
+PASS  main-battle hull 2,000,000 and cell stack 200
+PASS  retired melee commands rejected server-side
+PASS  vehicles.xml hover/jump/descend keys + turbo 13.5 + unstick 2
+PASS  rules define hover/charge-jump/trample constants
+PASS  foot support replaces hidden wheels and low belly hull
+PASS  weapons define trample ops 11/12 with server rate limits
+PASS  old trike GLB removed
+PASS  rig manifest covers source nodes and articulated joints
+PASS  rig manifest excludes display floor
+PASS  native gait source and QA harness present
+PASS  deploy rise is procedural (no GLB animation dependency)
+PASS  boarding gates native entry and detach request
+PASS  boarding four-phase timing constants
+PASS  0.7.0 articulated presentation enabled
+PASS  vehicles.xml carries full seat/handle IK anchors
+PASS  baked geometry is shipped
+PASS  weapons locked during ceremony
+PASS  boarding event routes through FX to remote spectators
+PASS  four second boarding and per-vehicle pose API present
+PASS  HUD ceremony overlay (letterbox + typewriter)
+PASS  pose stores and restores bind transforms
+PASS  boarding transfers after kneeling with recursion guard
+PASS  intent op guard includes motion and boarding skip
+PASS  dedicated silhouette icon generated and referenced
+PASS  chinese naming: Prototype with shared ammunition
+PASS  rig importer wired and fuel HUD retained
+PASS  ground support has torso hull, current COM, F9 diagnostics and sound gate
+PASS  aim messages cannot fire: trigger state is separate
+PASS  stale sequences drop without extending the session
+PASS  stop clears trigger + aim + lock together
+PASS  beam events dedup by vehicle+serial; melee has its own sound
+PASS  robot has no automotive engine audio
+PASS  native wheel drive disabled
+PASS  PZAEC.Mecha.dll exists
+PASS  DLL newer than all sources
+PASS  ModInfo version matches README headline
+
+ALL MECHA TESTS PASSED

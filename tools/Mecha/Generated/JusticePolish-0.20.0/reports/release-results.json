@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "SkimFinal",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-48491058eb374b07beb16915a05f276f",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\SkimFinal.log"
+  },
+  {
+    "Name": "PerformanceBaseline",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-bed5c43f4d804368ba4ab87a7fc34671",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\StableFramesBaseline.log"
+  },
+  {
+    "Name": "PerformanceCandidate",
+    "ExitCode": 0,
+    "QaRoot": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\MechaNativeQA\\run-14a27b9f1c814a54b4c79312d0e695fa",
+    "Output": "F:\\SteamLibrary\\steamapps\\common\\7 Days To Die\\Mods\\.local-tests\\Mecha-polish-20261007-180046\\StableFramesCandidate.log"
+  }
+]

@@ -33,7 +33,7 @@ namespace PZAEC.Mecha
         {
             var p=Plan;if(Mode>3||Phase>Traversal.Stage.Exit||Action<=0||Tick<=0||!Weapons.Finite(Age)||Age<0)return false;
             if(Mode>=2)return true;
-            if(p==null||p.Front>1||p.Type>Traversal.Kind.Gap||!Finite(p.Root)||!Finite(p.End)||!Weapons.Finite(p.Rotation.eulerAngles.y)||!Weapons.Finite(p.Duration)||p.Duration<.75f||p.Duration>1.1f||Age>p.Duration+.02f||!Weapons.Finite(p.Height)||Mathf.Abs(p.Height)>Rules.ActiveStepHeight+.02f||!Weapons.Finite(p.Width)||p.Width<0||p.Width>Rules.ActiveGapWidth+.02f)return false;
+            if(p==null||p.Front>1||p.Type>Traversal.Kind.Gap||!Finite(p.Root)||!Finite(p.End)||!Weapons.Finite(p.Rotation.eulerAngles.y)||!Weapons.Finite(p.Duration)||p.Duration<.75f||p.Duration>Rules.UltimateTraverseSeconds+.1f||Age>p.Duration+.02f||!Weapons.Finite(p.Height)||Mathf.Abs(p.Height)>Rules.ActiveStepHeight+.02f||!Weapons.Finite(p.Width)||p.Width<0||p.Width>Rules.ActiveGapWidth+.02f)return false;
             if(!Weapons.Finite(p.Rotation.x)||!Weapons.Finite(p.Rotation.y)||!Weapons.Finite(p.Rotation.z)||!Weapons.Finite(p.Rotation.w)||Vector3.Distance(p.Root,p.End)>2.5f)return false;
             for(int i=0;i<2;i++)if(!Weapons.Finite(p.Lift[i])||p.Lift[i]<Rules.TraverseToeClearance||p.Lift[i]>1.25f||!Finite(p.StartNormal[i])||Mathf.Abs(p.StartNormal[i].magnitude-1)>.02f||p.StartNormal[i].y<.707f||p.Land[i].Normal.y<.707f||!Finite(p.Start[i])||!Finite(p.Land[i].Point)||!Finite(p.Land[i].Normal)||(p.Start[i]-p.Root).sqrMagnitude>6||(p.Land[i].Point-p.End).sqrMagnitude>6||Mathf.Abs(p.Land[i].Normal.magnitude-1)>.02f)return false;
             return Phase==p.Phase(Age)||(Phase==Traversal.Stage.Settle&&Age>=p.Duration);

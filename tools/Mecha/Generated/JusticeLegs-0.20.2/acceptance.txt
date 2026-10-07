@@ -1,0 +1,26 @@
+0.20.2 完全体下肢动作验收
+
+改动：默认站距约 0.36→0.60 m；膝盖外展，脚尖外展 6°，摆脚约 ±12°；支撑末段绕脚尖抬跟并回平。真实支撑面和实际骨骼净空不足时回退原 IK，保留试验体路径、移动速度、加速度、伤害参数和网络/存档布局。
+修复：0.20.1 原生基线重测发现越障时额外行走姿态会让骨盆与物理计划不一致；本次统一到计划参考姿态。放宽站距后跨沟落点采用 1 cm 搜索，重心推进调整为先接重后前移，保持跨越时长。
+
+离线：63 PASS。
+有效原生专项合计：626 PASS。
+legs-release: 131 PASS / 0 FAIL; F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-128f9b34029e467091bd9e12ec9e9b04\UserData\Saves\Navezgane\MechaQA_Isolated\justice-legs-qa.txt
+traversal-final: 208 PASS / 0 FAIL; F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-d3fa6b32ac76478094c8c0521ed4c4a7\UserData\Saves\Navezgane\MechaQA_Isolated\mecha-traversal-qa.txt
+rough: 66 PASS / 0 FAIL; F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-7a4b2cdb74254547b5765636282cc0aa\UserData\Saves\Navezgane\MechaQA_Isolated\mecha-rough-support-qa.txt
+skim: 71 PASS / 0 FAIL; F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-e73f4a3359e74b4ca7e01a43eda846e3\UserData\Saves\Navezgane\MechaQA_Isolated\mecha-skim-qa.txt
+flight: 150 PASS / 0 FAIL; F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-781eda885d3a42779fdc19748de1c1cc\UserData\Saves\Navezgane\MechaQA_Isolated\shared-flight-qa.txt
+
+脚掌中心相对权威目标最大偏移：0.015627570 m（包括绕脚尖抬跟产生的有意抬升；小于 2 cm）。
+支撑脚尖接触点最大偏移：0.000096661 m。
+最小足底角点相对真实平地高度：-0.000640869 m；测试容差 2 mm。地面参考使用真实地面，扣除了规则中的 1.5 cm 足底净空，避免把净空平面误当成实体地面。
+PASS 初号机（试验体） 20 repetitions both feet / 3 angles / 30,60,120 fixed samples, success=360/360 end=0.01119996 foot=6.486223E-05 penetration=3.051758E-05 seconds=10.9195416
+PASS 初号机（完全体） 20 repetitions both feet / 3 angles / 30,60,120 fixed samples, success=360/360 end=9.17433E-05 foot=9.156181E-05 penetration=3.051758E-05 seconds=26.0074325
+新增障碍测试：只阻挡外展脚尖时退回平脚，移除障碍后恢复外展，两项均通过。
+覆盖静止/行走/倒退/急停/原地转向，30/50/60/120 Hz；台阶、坡面、窄处、墙体、悬崖、跨沟、支撑销毁与恢复、近战接地、地面包校验、滑行、飞行及驾驶员/非法包回归。原生 QA 串行、独立存档，不使用 -nographics。
+
+验证过程：首轮保守扩大足底范围导致部分跨沟拒绝，已改为逐脚实际方向复查；宽站距的斜向跨沟重心转移经修正后，完整重复矩阵通过。初版新增角点检查把净空平面当成地面，校正真实地面参考后通过。旧版 0.20.1 越障基线的 8 项失败保留在会话 traversal-baseline.log 和原始报告中，没有计为通过。
+
+录像：index.html 左侧 0.20.1，右侧 0.20.2；同脚本、机位、光照，含全身动作和腿脚正面/侧面近景。仅为隔离原生 Unity/PhysX 脚本录像，不代替人工驾驶、双客户端或真实存档加载体验。此次未重做多机 P95/GC 分配基准，不引用旧性能结果充当新测量。
+备份：F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-legs-20261007-201428\baseline
+回滚脚本：F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\Mecha-legs-20261007-201428\Restore-0.20.1.ps1

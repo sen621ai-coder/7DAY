@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <configs>
   <append xpath="/items">
     <item name="vehicleCombatRobotPlaceable">
@@ -67,6 +67,33 @@
       <property name="Extends" value="vehicleWheels" />
       <property name="CustomIcon" value="vehicleGyroCopterChassis" />
       <property name="DescriptionKey" value="vehicleCombatRobotCompleteChassisDesc" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property name="Group" value="AECvehicleFinalAssembly" />
+      <property name="EconomicValue" value="37500" />
+    </item>
+    <item name="vehiclePZAECMechaUltimatePlaceable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="Tags" value="vehicle,varmor,vengine,vfuel,vlight,vstorage,canHaveCosmetic,PZAECMecha" />
+      <property name="CustomIcon" value="vehiclePZAECMechaUltimatePlaceable" />
+      <property name="DescriptionKey" value="vehiclePZAECMechaUltimatePlaceableDesc" />
+      <property name="Meshfile" value="@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab" />
+      <property name="EconomicValue" value="225000" />
+      <property name="UnlockedBy" value="craftingVehicles" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehiclePZAECMechaUltimate" />
+        <property name="VehicleSize" value="3.0, 3.2, 3.4" />
+      </property>
+      <effect_group name="Buster Base" tiered="false">
+        <passive_effect name="DegradationMax" operation="base_set" value="3000000" />
+        <passive_effect name="ModSlots" operation="base_set" value="4" />
+      </effect_group>
+      <property name="Stacknumber" value="1" />
+      <property name="RepairTools" value="resourceRepairKit" />
+    </item>
+    <item name="vehiclePZAECMechaUltimateChassis">
+      <property name="Extends" value="vehicleWheels" />
+      <property name="CustomIcon" value="vehicleGyroCopterChassis" />
+      <property name="DescriptionKey" value="vehiclePZAECMechaUltimateChassisDesc" />
       <property name="UnlockedBy" value="craftingVehicles" />
       <property name="Group" value="AECvehicleFinalAssembly" />
       <property name="EconomicValue" value="37500" />

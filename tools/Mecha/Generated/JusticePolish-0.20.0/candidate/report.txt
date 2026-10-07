@@ -1,0 +1,115 @@
+PASS finite pose ground
+PASS finite pose walk
+PASS finite pose skim
+PASS finite pose brake
+PASS finite pose flight
+PASS finite pose boost
+PASS finite pose turn
+PASS finite pose landing
+PASS finite pose fault
+PASS finite pose combat
+PASS finite pose guard
+PASS finite pose rifle
+PASS finite pose board
+PASS LOD budget 0
+PASS LOD budget 1
+PASS LOD budget 2
+PASS torso continuity 30 walk deg/s=33.88515
+THRUST 30 walk 0 powered=True health=3000000
+PASS finite 30 walk
+PASS torso continuity 30 skim deg/s=69.05826
+THRUST 30 skim 0.7 powered=True health=3000000
+PASS finite 30 skim
+PASS torso continuity 30 brake deg/s=23.10731
+THRUST 30 brake 0.25 powered=True health=3000000
+PASS finite 30 brake
+PASS torso continuity 30 flight deg/s=61.56174
+THRUST 30 flight 0.5 powered=True health=3000000
+PASS finite 30 flight
+PASS torso continuity 30 boost deg/s=39.98797
+THRUST 30 boost 1 powered=True health=3000000
+PASS finite 30 boost
+PASS torso continuity 30 turn deg/s=53.80706
+THRUST 30 turn 0.5 powered=True health=3000000
+PASS finite 30 turn
+PASS torso continuity 30 landing deg/s=53.80706
+THRUST 30 landing 0.5 powered=True health=3000000
+PASS finite 30 landing
+PASS torso continuity 30 fault deg/s=39.98797
+THRUST 30 fault 0 powered=True health=3000000
+PASS finite 30 fault
+PASS power loss jets off 30
+PASS torso continuity 30 rifle deg/s=68.19599
+THRUST 30 rifle 0 powered=True health=3000000
+PASS finite 30 rifle
+PASS torso continuity 30 ground deg/s=0
+THRUST 30 ground 0 powered=True health=3000000
+PASS finite 30 ground
+PASS torso continuity 60 walk deg/s=32.89349
+THRUST 60 walk 0 powered=True health=3000000
+PASS finite 60 walk
+PASS torso continuity 60 skim deg/s=73.62894
+THRUST 60 skim 0.7 powered=True health=3000000
+PASS finite 60 skim
+PASS torso continuity 60 brake deg/s=22.52062
+THRUST 60 brake 0.25 powered=True health=3000000
+PASS finite 60 brake
+PASS torso continuity 60 flight deg/s=66.5113
+THRUST 60 flight 0.5 powered=True health=3000000
+PASS finite 60 flight
+PASS torso continuity 60 boost deg/s=40.00541
+THRUST 60 boost 1 powered=True health=3000000
+PASS finite 60 boost
+PASS torso continuity 60 turn deg/s=53.81974
+THRUST 60 turn 0.5 powered=True health=3000000
+PASS finite 60 turn
+PASS torso continuity 60 landing deg/s=53.81974
+THRUST 60 landing 0.5 powered=True health=3000000
+PASS finite 60 landing
+PASS torso continuity 60 fault deg/s=40.00541
+THRUST 60 fault 0 powered=True health=3000000
+PASS finite 60 fault
+PASS power loss jets off 60
+PASS torso continuity 60 rifle deg/s=75.21907
+THRUST 60 rifle 0 powered=True health=3000000
+PASS finite 60 rifle
+PASS torso continuity 60 ground deg/s=0
+THRUST 60 ground 0 powered=True health=3000000
+PASS finite 60 ground
+PASS torso continuity 120 walk deg/s=35.21035
+THRUST 120 walk 0 powered=True health=3000000
+PASS finite 120 walk
+PASS torso continuity 120 skim deg/s=75.21879
+THRUST 120 skim 0.7 powered=True health=3000000
+PASS finite 120 skim
+PASS torso continuity 120 brake deg/s=20.69502
+THRUST 120 brake 0.25 powered=True health=3000000
+PASS finite 120 brake
+PASS torso continuity 120 flight deg/s=61.72095
+THRUST 120 flight 0.5 powered=True health=3000000
+PASS finite 120 flight
+PASS torso continuity 120 boost deg/s=40.00537
+THRUST 120 boost 1 powered=True health=3000000
+PASS finite 120 boost
+PASS torso continuity 120 turn deg/s=53.92425
+THRUST 120 turn 0.5 powered=True health=3000000
+PASS finite 120 turn
+PASS torso continuity 120 landing deg/s=53.92425
+THRUST 120 landing 0.5 powered=True health=3000000
+PASS finite 120 landing
+PASS torso continuity 120 fault deg/s=40.00537
+THRUST 120 fault 0 powered=True health=3000000
+PASS finite 120 fault
+PASS power loss jets off 120
+PASS torso continuity 120 rifle deg/s=79.86983
+THRUST 120 rifle 0 powered=True health=3000000
+PASS finite 120 rifle
+PASS torso continuity 120 ground deg/s=0
+THRUST 120 ground 0 powered=True health=3000000
+PASS finite 120 ground
+JET local=(-0.49, -0.59, 0.46) world-relative=(-0.75, 2.72, -1.38) enabled=True
+JET local=(-0.38, -0.49, 0.63) world-relative=(-0.78, 2.51, -1.29) enabled=True
+JET local=(0.54, -0.70, -0.15) world-relative=(0.70, 2.49, -1.47) enabled=True
+JET local=(0.65, -0.60, 0.03) world-relative=(0.67, 2.28, -1.37) enabled=True
+PASS engine loss immediately disables jets
+ALLOCATION COUNTER CALIBRATION=0

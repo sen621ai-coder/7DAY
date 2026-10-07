@@ -1,0 +1,25 @@
+PASS immutable GLB hash
+PASS 123 original joints plus gameplay beam
+PASS parent precedes child
+PASS unique canonical joint names
+PASS source triangle count
+PASS all source triangles plus saber, explicit double sided
+PASS measured foot dimensions
+PASS both sole anchors
+PASS finite bind matrices
+PASS all vertex weights, indices and geometry bounds
+PASS animation quaternion normalization and track bounds
+PASS complete gameplay motion track set
+PASS all referenced textures exist
+PASS entityclasses ultimate registration
+PASS entityclasses complete preserved
+PASS vehicles ultimate registration
+PASS vehicles complete preserved
+PASS items ultimate registration
+PASS items complete preserved
+PASS recipes ultimate registration
+PASS recipes complete preserved
+PASS display name
+PASS recipe unlock
+PASS native rendered transparent inventory icon
+Nu checks passed: 24

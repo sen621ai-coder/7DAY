@@ -12,8 +12,8 @@ namespace PZAEC.Mecha
     {
         public static string Path;
         static GlbFile glb;
-        static Transform prefab,completePrefab; static GameObject cache;
-        static Transform Prefab(bool full){if(full){if(completePrefab==null)completePrefab=Build(true);return completePrefab;}if(prefab==null)prefab=Build();return prefab;}
+        static Transform prefab,completePrefab,ultimatePrefab; static GameObject cache;
+        static Transform Prefab(bool full,bool ultimate=false){if(ultimate){if(ultimatePrefab==null)ultimatePrefab=Build(true,true);return ultimatePrefab;}if(full){if(completePrefab==null)completePrefab=Build(true);return completePrefab;}if(prefab==null)prefab=Build();return prefab;}
 
         public sealed class Rig
         {
@@ -60,7 +60,7 @@ namespace PZAEC.Mecha
         static bool LoadEntity(EntityInstanceAssets __instance, EntityClass __1)
         {
             if (__1 == null || !Rules.VehicleNameMatches(__1.entityClassName)) return true;
-            var selected=Prefab(string.Equals(__1.entityClassName,Rules.CompleteVehicle,StringComparison.OrdinalIgnoreCase));
+            var selected=Prefab(string.Equals(__1.entityClassName,Rules.CompleteVehicle,StringComparison.OrdinalIgnoreCase),string.Equals(__1.entityClassName,Rules.UltimateVehicle,StringComparison.OrdinalIgnoreCase));
             __instance.PrefabT = selected;
             __instance.prefabHandle = new ReadyAsset(selected.gameObject);
             return false;
@@ -72,7 +72,7 @@ namespace PZAEC.Mecha
             if (player == null || !Rules.ItemNameMatches(player.inventory.holdingItem.GetItemName())) return true;
             var data = (ItemActionSpawnVehicle.ItemActionDataSpawnVehicle)__0;
             if (data.VehiclePreviewT != null) UnityEngine.Object.DestroyImmediate(data.VehiclePreviewT.gameObject);
-            var selected=Prefab(string.Equals(player.inventory.holdingItem.GetItemName(),Rules.CompleteItem,StringComparison.OrdinalIgnoreCase));
+            var selected=Prefab(string.Equals(player.inventory.holdingItem.GetItemName(),Rules.CompleteItem,StringComparison.OrdinalIgnoreCase),string.Equals(player.inventory.holdingItem.GetItemName(),Rules.UltimateItem,StringComparison.OrdinalIgnoreCase));
             var root = new GameObject("MechaPlacementPreview").transform;
             var visual = UnityEngine.Object.Instantiate(Find(selected.transform, "MechaVisual").gameObject, root, false);
             visual.SetActive(true);
@@ -199,7 +199,7 @@ namespace PZAEC.Mecha
             m.SetTexture("_MetallicGlossMap",Tex("../CompleteTextures/metallic.png",true));m.EnableKeyword("_METALLICGLOSSMAP");m.SetFloat("_GlossMapScale",1f);
             return m;
         }
-        static Transform Build(bool full=false)
+        static Transform Build(bool full=false,bool ultimate=false)
         {
             var native = DataLoader.LoadAsset<Transform>("@:Entities/Vehicles/VTruck4x4/VTruck4x4P.prefab", false);
             if (native == null) throw new InvalidOperationException("Native jeep prefab missing");
@@ -223,11 +223,11 @@ namespace PZAEC.Mecha
             if(!full)for (int i = 0; i < glb.materials.Length; i++) materials[i] = BuildMaterial(glb.materials[i]);
 
             var mount = Add(visual, "MechaMount");
-            if(full)Justice.Build(mount,layer);else RobotRig.Build(mount, materials, layer,"combat_robot");
+            if(ultimate)Nu.Build(mount,layer);else if(full)Justice.Build(mount,layer);else RobotRig.Build(mount, materials, layer,"combat_robot");
             mount.localRotation = Rules.MountRotation;
 
             // Torso, pelvis and head only. Feet/legs have swept support volumes.
-            Box(physics, "MechaBodyHit", new Vector3(0, 2.18f, 0), new Vector3(1.50f, 1.90f, 1.00f), layer);
+            Box(physics, "MechaBodyHit", ultimate?new Vector3(0,2.32f,0):new Vector3(0, 2.18f, 0), ultimate?new Vector3(1.50f,1.64f,1.00f):new Vector3(1.50f, 1.90f, 1.00f), layer);
             rb.mass = 8000; rb.centerOfMass = new Vector3(0, 1.3f, 0);
             foreach (var wheel in root.GetComponentsInChildren<WheelCollider>(true))
             {

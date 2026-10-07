@@ -1,0 +1,49 @@
+QA_ROOT=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8ab1692cfe0344658b9b38caa534e415
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/JusticeLegsNativeQA.cs(56,100): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/JusticeLegsNativeQA.cs(56,123): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+F:\SteamLibrary\steamapps\common\7 Days To Die\Mods/tools/Mecha/JusticeLegsNativeQA.cs(61,67): warning CS0618: 'Physics.autoSimulation' is obsolete: 'Physics.autoSimulation has been replaced by Physics.simulationMode'
+Mecha compiled against installed V3.2 Mono/Unity references.
+loaded=True installed=True exited=False
+--- Mecha/Buster/Exception lines ---
+2026-10-07T21:20:20 64.009 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=0.0
+2026-10-07T21:20:20 64.010 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=0.0
+2026-10-07T21:20:20 64.010 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=0.0
+2026-10-07T21:20:20 64.011 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=0.0
+2026-10-07T21:20:20 64.012 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=0.0
+2026-10-07T21:20:20 64.012 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=0.0
+2026-10-07T21:20:20 64.014 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.015 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.015 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.016 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.017 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.017 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.018 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.019 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.019 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.020 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.020 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.021 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.022 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.022 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.023 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0
+2026-10-07T21:20:20 64.024 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.025 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.026 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.026 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.027 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.028 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.029 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.030 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.030 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.031 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.031 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.032 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.033 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.033 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.034 INF [JusticeLegsQA] PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=0.
+2026-10-07T21:20:20 64.036 INF [JusticeLegsQA] PASS 初号机（完全体） standing turn yaw=168.6011 error=0.01523081
+2026-10-07T21:20:20 64.038 INF [MechaMotionQA] COMPLETE failures=0 report=F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8ab1692cfe0344658b9b38c
+2026-10-07T21:20:21 65.043 INF Dymesh: Mesh location: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8ab1692cfe0344658b9b38caa534e415\UserData\S
+2026-10-07T21:20:21 65.045 INF Dymesh: Loading Items: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\MechaNativeQA\run-8ab1692cfe0344658b9b38caa534e415\UserData\S
+QA server stopped.
+MECHA NATIVE SMOKE PASSED

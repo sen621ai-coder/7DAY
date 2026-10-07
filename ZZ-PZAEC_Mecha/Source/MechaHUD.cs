@@ -42,7 +42,7 @@ namespace PZAEC.Mecha
                     GUI.color=new Color(.5f,1f,.9f,.95f);
                     GUI.Label(new Rect(cx-188,72,380,22),Rules.DisplayName(vehicle)+(Optics.ThirdPerson?" / 第三人称":" / 第一视角")+"  [·]切换",bold);
                     float speed=vehicle.vehicleRB!=null?Vector3.ProjectOnPlane(vehicle.vehicleRB.velocity,Vector3.up).magnitude:0;
-                    GUI.Label(new Rect(cx-188,96,380,20),string.Format("速度 {0:0.0} m/s    {1}    舱内冲击防护在线",speed,complete?Flight.Status(motion):Locomotion.HoverOn?"悬浮":"地面 / 推进"),label);
+                    GUI.Label(new Rect(cx-188,96,380,20),string.Format("速度 {0:0.0} m/s    {1}    舱内冲击防护在线",speed,Skim.Active(vehicle)?Skim.Label(vehicle):Flight.Status(motion,complete)),label);
                     GUI.color=new Color(.35f,.9f,.85f,.6f);
                     Rect(32,130,45,2);Rect(32,130,2,45);Rect(Screen.width-77,130,45,2);Rect(Screen.width-34,130,2,45);
                 }
@@ -101,13 +101,13 @@ namespace PZAEC.Mecha
                 bool fueled = fuel > 0 || EntityVehicle.VehicleFuelUsageModifier == 0f;
                 GUI.color = fueled ? new Color(.5f, 1f, .6f) : new Color(1f, .35f, .3f);
                 GUI.Label(new Rect(left, top + 210, 210, 20),
-                    fueled ? "燃料 " + Mathf.RoundToInt(fuel) + "L" : complete?"燃油耗尽 · 飞行升力关闭":"⚠ 燃料耗尽——加油后才能驱动/悬浮/跳跃");
+                    fueled ? "燃料 " + Mathf.RoundToInt(fuel) + "L" : "燃料耗尽 · 飞行升力关闭");
                 GUI.color = new Color(.75f, .9f, .95f);
-                string hoverText = complete?(Flight.Active(motion)?"飞行推进 "+(EntityVehicle.VehicleFuelUsageModifier==0?"0":(motion.Boost?Rules.FlightBoostFuel:Rules.FlightFuel).ToString("0.##"))+"L/s":"[Q]飞行 关") : Locomotion.HoverOn ? "悬浮巡航中 · 耗油 0.5L/s" : "[Q]悬浮 关";
+                string hoverText = Flight.Active(motion)?"飞行推进 "+(EntityVehicle.VehicleFuelUsageModifier==0?"0":(motion.Boost?Rules.FlightBoostFuel:Rules.FlightFuel).ToString("0.##"))+"L/s":Skim.Active(vehicle)?"滑行推进 "+(EntityVehicle.VehicleFuelUsageModifier==0?"0":Rules.HoverFuelPerSecond.ToString("0.##"))+"L/s":"[Q]飞行 关";
                 GUI.Label(new Rect(left, top + 232, 210, 20), hoverText);
                 bool jumpReady = Locomotion.JumpCooldownRemaining <= 0;
                 GUI.color = jumpReady ? new Color(.5f, 1f, .6f) : new Color(.85f, .7f, .55f);
-                GUI.Label(new Rect(left, top + 188, 210, 20), complete&&Flight.AirPose(motion)?"离地 "+(motion.FlightHeight<0?"—":motion.FlightHeight.ToString("0.0")+"m")+"  升降 "+(vehicle.vehicleRB!=null?vehicle.vehicleRB.velocity.y:0).ToString("+0.0;-0.0;0.0")+"m/s":jumpReady ? "[空格]蓄力跳 就绪（按住蓄力）" : "跳跃 充能 " + Mathf.CeilToInt(Locomotion.JumpCooldownRemaining) + "s");
+                GUI.Label(new Rect(left, top + 188, 210, 20), Flight.AirPose(motion)?"离地 "+(motion.FlightHeight<0?"—":motion.FlightHeight.ToString("0.0")+"m")+"  升降 "+(vehicle.vehicleRB!=null?vehicle.vehicleRB.velocity.y:0).ToString("+0.0;-0.0;0.0")+"m/s":jumpReady ? "[空格]蓄力跳 就绪（按住蓄力）" : "跳跃 充能 " + Mathf.CeilToInt(Locomotion.JumpCooldownRemaining) + "s");
                 bool repairReady = status.BattleRepairWait <= 0;
                 GUI.color = repairReady ? new Color(.5f, 1f, .6f) : new Color(.85f, .7f, .55f);
                 GUI.Label(new Rect(left, top + 254, 210, 20), repairReady ? "紧急维修 就绪（货箱维修包）" : "紧急维修 充能 " + Mathf.CeilToInt(status.BattleRepairWait) + "s");
@@ -123,7 +123,7 @@ namespace PZAEC.Mecha
                 GUI.color = new Color(.75f, .9f, .95f);
                 string traverse=Skim.Active(vehicle)||!string.IsNullOrEmpty(motion.SkimReason)?Skim.Label(vehicle):Traversal.Prompt(vehicle);
                 if(!string.IsNullOrEmpty(traverse))GUI.Label(new Rect(Screen.width*.5f-130,Screen.height*.5f+125,340,28),traverse,bold);
-                GUI.Label(new Rect(left, top + 278, 250, 75), Rules.Complete(vehicle)?"[左键]剑击/按住蓄力  [右键]举盾\n[F]步枪光束  [G]导弹  [V]瞄准 [Z]倍率\n[Q]飞行/降落  [空格]上升 [C]下降\n[Shift]滑行/飞行加速 [R]维修 / 车外[F]维修":"[左键]光束  [G按住]锁定并发射\n[右键]瞄准镜  [Z]切换倍率\n[Q]悬浮  [空格]蓄力跳  [C]下降\n[R]紧急维修  车外按住[F]维修");
+                GUI.Label(new Rect(left, top + 278, 250, 75), Rules.Complete(vehicle)?"[左键]剑击/按住蓄力  [右键]举盾\n[F]步枪光束  [G]导弹  [V]瞄准 [Z]倍率\n[Q]飞行/降落  [空格]上升 [C]下降\n[Shift]滑行/飞行加速 [R]维修 / 车外[F]维修":"[左键]光束  [G按住]锁定并发射\n[右键]瞄准镜  [Z]切换倍率\n[Q]飞行/降落  [空格]上升 [C]下降\n[Shift]滑行/飞行加速 [R]维修 / 车外[F]维修");
             }
             finally { GUI.color = old; }
         }
