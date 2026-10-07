@@ -40,7 +40,7 @@ namespace LogicCircuitGates
                     nameof(CheckForNewWiresPrefix), nameof(CheckForNewWiresPostfix));
                 Patch(harmony, typeof(TileEntityPowered), nameof(TileEntityPowered.DrawWires),
                     null, nameof(DrawWiresPostfix));
-                Debug.Log("[LogicGates] 1.3.0: AND/OR/NOT/XOR gates and four automatic base alarm sensors loaded.");
+                Debug.Log("[LogicGates] 1.3.1: AND/OR/NOT/XOR gates and four automatic base alarm sensors loaded.");
             }
             catch (Exception ex)
             {

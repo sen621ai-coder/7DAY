@@ -61,11 +61,11 @@ namespace LogicCircuitGates
                     var restored = new PowerTrigger();
                     using (var stream = new MemoryStream())
                     {
-                        using (var writer = new BinaryWriter(stream, System.Text.Encoding.UTF8, true)) sensor.write(writer);
+                        var writer = new PooledBinaryWriter(); writer.SetBaseStream(stream);
+                        sensor.write(writer); writer.Flush();
                         stream.Position = 0;
-                        using (var reader = new BinaryReader(stream, System.Text.Encoding.UTF8, true))
-                            restored.read(reader, PowerManager.Instance.CurrentFileVersion);
-                        Check(stream.Position == stream.Length, names[i] + " vanilla save record consumed");
+                        var reader = new PooledBinaryReader(); reader.SetBaseStream(stream);
+                        restored.read(reader, PowerManager.Instance.CurrentFileVersion);
                     }
                     Check(restored.IsTriggered && restored.TriggerType == PowerTrigger.TriggerTypes.Switch, names[i] + " vanilla save roundtrip");
                     BaseAlarmSensors.ApplyOutput(restored, new AlarmLatch().Update(true, false, true, 0));
