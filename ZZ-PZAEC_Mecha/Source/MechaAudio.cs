@@ -55,7 +55,7 @@ namespace PZAEC.Mecha
         public static void Event(EntityVehicle v,string cue,int serial=-1,float volume=1f)
         {Emit(v,cue,serial,Vector3.zero,false,volume);}
         public static void ContactEvent(EntityVehicle v,string cue,int serial,Vector3 point,float volume=1f)
-        {Emit(v,cue,serial,point,true,volume);}
+        {if(!Skim.Active(v))Emit(v,cue,serial,point,true,volume);}
         public static void LandCue(EntityVehicle v,Vector3 point,float strength,int serial=-1)
         {
             if(v==null||!Audible)return;var voice=Get(v);
@@ -135,6 +135,7 @@ namespace PZAEC.Mecha
         {var o=GameObject.CreatePrimitive(PrimitiveType.Cube);o.name=name;var c=o.GetComponent<Collider>();c.enabled=false;UnityEngine.Object.Destroy(c);o.transform.SetParent(parent,false);o.transform.localPosition=position;o.transform.localScale=scale;o.GetComponent<Renderer>().sharedMaterial=material;return o.transform;}
         public static void Update(EntityVehicle v,Model.Rig rig,float boost,float hatch)
         {
+            if(rig.Justice!=null)return;
             Parts p;if(!parts.TryGetValue(v.entityId,out p)||p.Root==null||p.Vehicle!=v)
             {
                 if(plate==null){plate=new Material(Shader.Find("Standard")){color=new Color(.08f,.1f,.11f)};plate.SetFloat("_Metallic",.8f);glow=new Material(Shader.Find("Sprites/Default")){color=new Color(.15f,.7f,1f,.65f)};}

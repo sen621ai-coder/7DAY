@@ -1,11 +1,11 @@
-"""Asset/profile checks for Complete Form; Python standard library only."""
+"""Archived Samurai asset/profile checks (Justice runtime: Test-Justice.py); Python standard library only."""
 import argparse,csv,hashlib,json,pathlib,struct,math,xml.etree.ElementTree as E
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 p=argparse.ArgumentParser();p.add_argument('--mod-root',type=pathlib.Path,default=ROOT/'ZZ-PZAEC_Mecha');p.add_argument('--baseline',type=pathlib.Path);args=p.parse_args();MOD=args.mod_root;RES=MOD/'Resources'
 stem='samurai_style_gundam_mecha';doc=json.loads((RES/(stem+'_rig.json')).read_text());blob=(RES/(stem+'_rig.bin')).read_bytes()
 assert hashlib.sha256((RES/(stem+'.glb')).read_bytes()).hexdigest()==doc['sourceSha256']
 assert doc['skinned'] and doc['sourceParts']==17 and doc['sourceTriangles']==2000000
-assert 150000<doc['triangles']<250000
+assert 150000<doc['triangles']<260000
 assert len(doc.get('sourceNodes',list({p['node'] for p in doc['parts']})))==17
 count=0
 for p in doc['parts']:

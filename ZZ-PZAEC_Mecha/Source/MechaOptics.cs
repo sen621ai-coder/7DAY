@@ -45,7 +45,7 @@ namespace PZAEC.Mecha
         {
             // A recessed cockpit lens leaves the real forearms in the lower view.
             // The firing origin remains the physical head / palm, not this lens.
-            if(!external)return r.Head.position-Vector3.up*.15f-look*Vector3.forward*.70f;
+            if(!external)return r.Justice!=null?r.Head.position+r.Head.forward*.10f:r.Head.position-Vector3.up*.15f-look*Vector3.forward*.70f;
             var pivot=r.Torso.position+Vector3.up*.25f;return CollideCamera(v,pivot,pivot+look*new Vector3(.6f,.85f,-4.8f));
         }
         static Vector3 Position(Model.Rig r){var end=CameraPosition(vehicle,r,StoredLook,third);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +17,7 @@ namespace PZAEC.Mecha
 
         public sealed class Rig
         {
+            public JusticeRig Justice;
             public Transform Root, Visual, Mount, Torso, Head, HandL, HandR, ShoulderL, ShoulderR, Backpack;
             public Transform ChestL, ChestR, ChestDoor, WingL, WingR, Sword;
             public Renderer[] FirstPersonHidden; public float ArmUpper,ArmLower;
@@ -31,8 +32,8 @@ namespace PZAEC.Mecha
             public Quaternion ActionBaseTorsoRotation=Quaternion.identity;
             public Transform[] ContactJoints;
             public Quaternion[] ContactRotations;
-            public Vector3[] ContactPositions;
-            public void ResetPose() { ActionBaseReady=false;foreach(var p in RestRot) if(p.Key!=null) p.Key.localRotation=p.Value; foreach(var p in RestPos) if(p.Key!=null) p.Key.localPosition=p.Value; }
+            public Vector3[] ContactPositions,ContactScales;
+            public void ResetPose() { ActionBaseReady=false;if(Justice!=null)Justice.Reset();foreach(var p in RestRot) if(p.Key!=null) p.Key.localRotation=p.Value; foreach(var p in RestPos) if(p.Key!=null) p.Key.localPosition=p.Value; }
             public float LegUpper, LegLower, GroundY;
             public Vector3 TorsoBasePosition;
         }
@@ -119,7 +120,7 @@ namespace PZAEC.Mecha
             foreach(var t in new[]{rig.Torso,rig.Head,rig.HipL,rig.HipR,rig.KneeL,rig.KneeR,rig.AnkleL,rig.AnkleR,rig.ShoulderL,rig.ShoulderR,rig.ElbowL,rig.ElbowR,rig.HandL,rig.HandR,rig.ChestL,rig.ChestR,rig.ChestDoor,rig.WingL,rig.WingR,rig.Sword})
                 if(t!=null) { rig.RestRot[t]=t.localRotation; rig.RestPos[t]=t.localPosition; }
             rig.ArmUpper=Vector3.Distance(rig.ShoulderR.position,rig.ElbowR.position);rig.ArmLower=Vector3.Distance(rig.ElbowR.position,rig.HandR.position);
-            CacheFirstPersonDisplay(rig);rigs[v] = rig;
+            Justice.Attach(rig);CacheFirstPersonDisplay(rig);rigs[v] = rig;
             return rig;
         }
 
@@ -218,11 +219,11 @@ namespace PZAEC.Mecha
             var physics = rb.transform;
             var visual = Add(physics, "MechaVisual");
 
-            var materials = full?new[]{CompleteMaterial()}:new Material[glb.materials.Length];
+            var materials = new Material[glb.materials.Length];
             if(!full)for (int i = 0; i < glb.materials.Length; i++) materials[i] = BuildMaterial(glb.materials[i]);
 
             var mount = Add(visual, "MechaMount");
-            RobotRig.Build(mount, materials, layer,full?"samurai_style_gundam_mecha":"combat_robot");
+            if(full)Justice.Build(mount,layer);else RobotRig.Build(mount, materials, layer,"combat_robot");
             mount.localRotation = Rules.MountRotation;
 
             // Torso, pelvis and head only. Feet/legs have swept support volumes.

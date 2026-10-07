@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 namespace PZAEC.Mecha
 {
     public static class SwordMotion
@@ -135,6 +135,7 @@ namespace PZAEC.Mecha
         }
         public static void Pose(EntityVehicle v,Model.Rig r,Samurai.State s,float now)
         {
+            if(r.Justice!=null){Justice.Combat(v,r,s,now);return;}
             if(!r.ActionBaseReady)CaptureBase(r);var motion=Locomotion.Get(v);var frame=FrameAt(s,motion,now);Vector3 grip,direction,normal;
             bool ceremony=Boarding.SwordTarget(v,out grip,out direction,out normal);
             if(!ceremony){grip=frame.Grip;direction=frame.Direction;normal=frame.Normal;if(!Flight.AirPose(motion)&&motion.WingBlend<.01f&&motion.Blend<.01f)Body(r,frame);else {r.ActionBaseTorsoPosition=r.Torso.localPosition;r.ActionBaseTorsoRotation=r.Torso.localRotation;}}

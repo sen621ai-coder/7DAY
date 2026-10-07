@@ -1,0 +1,37 @@
+{
+  "status": "installed_partial_visual_repair",
+  "version": "0.17.0",
+  "changes": {
+    "spikes_removed": 706,
+    "spike_rule": "exterior face centroid >12mm off original-GLB vertex planes, defect regions only",
+    "exterior_clusters_restored": 3,
+    "cavity_clusters_filled": 354,
+    "cavity_clusters_budget_dropped": 204,
+    "patch_faces_total": 5682,
+    "patch_parts_by_role": {"ArmR": 3656, "Torso": 1195, "Backpack": 446, "LegR": 114, "ArmL": 94},
+    "triangles": "244176 -> 248975 (native budget 250000)"
+  },
+  "pipeline": [
+    "tools/Mecha/Detect-LostSurface.py <candidate Resources> <out prefix>: 24-camera original-vs-candidate coverage diff, exact ray-triangle association",
+    "tools/Mecha/Repair-CompleteDefects.py --resources <candidate Resources> --lost <lost-faces.json>"
+  ],
+  "verification": {
+    "lost_pixels": "9473 -> 4809; remaining are intentional original gaps and 1px outline artefacts (2 ray-hittable faces left)",
+    "main_offline_checks": "63 passed",
+    "panel_integrity": "passed, including patch-to-original-GLB provenance assertions",
+    "knee_wing_sword_blade_swordclearance": "passed (2514 poses, min distance 0.076584349 m)",
+    "native_functional": "passed (one prototype frame-timing flake passed on rerun)",
+    "equipment_isolation": "passed (no Sword/WingR/HipR drag)",
+    "native_replay": "23 poses x 5 views textured, max sampled vertex error 3.1e-05 m",
+    "replay_run": "run-6e2b603f00ad476cbeff86be33a9f451",
+    "motion_run": "run-a8817bc6d819410e8ed7bce72a6e9482",
+    "baseline_replay_run_0.16.0": "run-31716bbcb486426c9f1049eca773242b"
+  },
+  "remaining_visual_failures": [
+    "shoulder/arm junction and hidden-cavity sculpt slivers remain visually rough (original interior geometry is messy; now dark recessed filler instead of see-through voids)",
+    "204 low-visibility small holes skipped for the triangle budget",
+    "upper-chest LOD sliver original-detail patch still blocked by 0.04022 m boundary mismatch",
+    "no human-driven or two-machine visual acceptance"
+  ],
+  "source_glb_sha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b"
+}

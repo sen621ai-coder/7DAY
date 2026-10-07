@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace PZAEC.Mecha
@@ -70,21 +70,22 @@ namespace PZAEC.Mecha
                 float recoil=Mathf.Clamp01(1-(Time.time-w.RecoilAt)/.22f);
                 rig.ElbowR.localRotation=rig.RestRot[rig.ElbowR]*Quaternion.Euler(-recoil*8,0,0);
             }
+            if(rig.Justice!=null&&!show){Justice.Walk(v,rig,speed,turn,dt);Justice.FlightPose(v,rig);}
             if(Rules.Complete(v))SwordMotion.CaptureBase(rig);
-            if(!show){Samurai.Pose(v,rig,dt,Time.time,false);Flight.Pose(v,rig,dt);}
+            if(!show){Samurai.Pose(v,rig,dt,Time.time,false);if(rig.Justice==null)Flight.Pose(v,rig,dt);}
 
-            bool supportPose=!show&&!state.HoverOn&&(!airborne||Traversal.Active(v))&&(!Flight.AirPose(state)||state.Grounded&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0))&&Traversal.Pose(v,rig);
+            bool supportPose=!show&&!Skim.Active(v)&&!state.HoverOn&&(!airborne||Traversal.Active(v))&&(!Flight.AirPose(state)||state.Grounded&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0))&&Traversal.Pose(v,rig);
             if(supportPose){var ground=GroundSupport.Find(v);var traversal=Traversal.Get(v);
                 if(v.isEntityRemote&&traversal.Current!=null){for(int i=0;i<2;i++){w.Legs[i].Foot=traversal.FrameFeet[i];w.Legs[i].Normal=Vector3.up;}activity=1;}
                 else if(ground!=null){for(int i=0;i<2;i++){w.Legs[i].Foot=ground.Feet[i].Position;w.Legs[i].Normal=ground.Feet[i].Normal;w.Legs[i].Swing=ground.Feet[i].Swing;}activity=(ground.Feet[0].Swing||ground.Feet[1].Swing)?1:0;}}
             for(int i=0;!supportPose&&i<2;i++)
             {
                 var leg=w.Legs[i];var home=rig.Mount.TransformPoint(leg.Home)+Origin.position;
-                if(state.Blend>.05f||airborne||state.WingBlend>.05f)
+                if(state.Blend>.05f||airborne||state.WingBlend>.05f||Skim.Active(v))
                 {
                     leg.Swing=false;float tuck=Rules.Complete(v)&&(state.FlightMode==Flight.Phase.Landing||state.VerticalInput<0)&&state.FlightHeight>=0?Mathf.Clamp01((state.FlightHeight-.5f)/3):1;
                     if(Rules.Complete(v)&&!Flight.AirPose(state)&&state.Grounded)tuck=0;
-                    leg.Foot=home+(rig.Mount.up*.32f-rig.Mount.forward*.22f)*tuck;
+                    leg.Foot=home+(rig.Mount.up*(Skim.Active(v)?0:.32f)-rig.Mount.forward*.22f)*tuck;
                     Solve(rig,i,leg.Foot-Origin.position,rig.Mount.up);continue;
                 }
                 if(w.WasAir){leg.Foot=home;Ground(v,home,out leg.Foot);leg.Swing=false;}

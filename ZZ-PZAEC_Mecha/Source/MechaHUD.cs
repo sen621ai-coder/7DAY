@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -121,9 +121,9 @@ namespace PZAEC.Mecha
                     { GUI.color = new Color(.6f, 1f, .7f); GUI.Label(new Rect(Screen.width * .5f - 90, cy1 + 10, 180, 20), "满蓄力 · 松开跳跃", label); }
                 }
                 GUI.color = new Color(.75f, .9f, .95f);
-                string traverse=Traversal.Prompt(vehicle);
+                string traverse=Skim.Active(vehicle)||!string.IsNullOrEmpty(motion.SkimReason)?Skim.Label(vehicle):Traversal.Prompt(vehicle);
                 if(!string.IsNullOrEmpty(traverse))GUI.Label(new Rect(Screen.width*.5f-130,Screen.height*.5f+125,340,28),traverse,bold);
-                GUI.Label(new Rect(left, top + 278, 250, 75), Rules.Complete(vehicle)?"[左键]剑击/按住蓄力  [右键]举盾\n[F]头炮  [G]导弹  [V]瞄准 [Z]倍率\n[Q]飞行/降落  [空格]上升 [C]下降\n[Shift]加速 [R]维修 / 车外[F]维修":"[左键]光束  [G按住]锁定并发射\n[右键]瞄准镜  [Z]切换倍率\n[Q]悬浮  [空格]蓄力跳  [C]下降\n[R]紧急维修  车外按住[F]维修");
+                GUI.Label(new Rect(left, top + 278, 250, 75), Rules.Complete(vehicle)?"[左键]剑击/按住蓄力  [右键]举盾\n[F]步枪光束  [G]导弹  [V]瞄准 [Z]倍率\n[Q]飞行/降落  [空格]上升 [C]下降\n[Shift]滑行/飞行加速 [R]维修 / 车外[F]维修":"[左键]光束  [G按住]锁定并发射\n[右键]瞄准镜  [Z]切换倍率\n[Q]悬浮  [空格]蓄力跳  [C]下降\n[R]紧急维修  车外按住[F]维修");
             }
             finally { GUI.color = old; }
         }

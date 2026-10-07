@@ -1,0 +1,74 @@
+PASS 初号机（试验体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=3.9321E-05 support
+PASS 初号机（试验体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=3.9321E-05 progress
+PASS 初号机（试验体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=3.9321E-05 visible stride
+PASS 初号机（试验体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=3.9321E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8788 left=(-0.61, 400.02, 11.87) planted=True right=(0.61, 400.02, 12.11) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=57325 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2542761/0.2623862
+PASS 初号机（试验体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.237825E-05 support
+PASS 初号机（试验体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.237825E-05 progress
+PASS 初号机（试验体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.237825E-05 visible stride
+PASS 初号机（试验体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=6.237825E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8779 left=(-0.61, 400.02, 37.92) planted=True right=(0.61, 400.02, 38.07) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=178985 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2284752/0.2572349
+PASS 初号机（试验体） speed=-2 dt=0.02 peak=1.998 distance=-9.864906 duration=0.2685374 stride=0.5764192 steps=29 stops=0 footError=6.518557E-05 support
+PASS 初号机（试验体） speed=-2 dt=0.02 peak=1.998 distance=-9.864906 duration=0.2685374 stride=0.5764192 steps=29 stops=0 footError=6.518557E-05 progress
+PASS 初号机（试验体） speed=-2 dt=0.02 peak=1.998 distance=-9.864906 duration=0.2685374 stride=0.5764192 steps=29 stops=0 footError=6.518557E-05 visible stride
+PASS 初号机（试验体） speed=-2 dt=0.02 peak=1.998 distance=-9.864906 duration=0.2685374 stride=0.5764192 steps=29 stops=0 footError=6.518557E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.9456 left=(-0.61, 400.02, -9.78) planted=True right=(0.61, 400.02, -9.97) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=235545 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2395363/0.2964462
+PASS 初号机（试验体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=0.0002331963 support
+PASS 初号机（试验体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=0.0002331963 progress
+PASS 初号机（试验体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=0.0002331963 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8786 left=(-0.61, 400.02, 103.95) planted=True right=(0.61, 400.02, 103.75) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=780475 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2543393/0.2240783
+PASS 初号机（试验体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.416295E-05 support
+PASS 初号机（试验体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.416295E-05 progress
+PASS 初号机（试验体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.416295E-05 visible stride
+PASS 初号机（试验体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=6.416295E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8761 left=(-0.61, 400.02, 37.96) planted=True right=(0.61, 400.02, 38.05) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=857140 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.232889/0.2618367
+PASS 初号机（试验体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0006547685 support
+PASS 初号机（试验体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0006547685 progress
+PASS 初号机（试验体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0006547685 visible stride
+PASS 初号机（试验体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=0.0006547685 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8818 left=(-0.61, 400.02, 37.99) planted=True right=(0.61, 400.02, 38.07) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=1002010 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2346859/0.2664673
+PASS 初号机（试验体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.516467E-05 support
+PASS 初号机（试验体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.516467E-05 progress
+PASS 初号机（试验体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.516467E-05 visible stride
+PASS 初号机（试验体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.516467E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8872 left=(-0.61, 400.02, 38.07) planted=True right=(0.61, 400.02, 38.02) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=1282590 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.24749/0.2828857
+PASS 初号机（试验体） standing turn yaw=168.6011 error=6.203457E-05
+PASS 初号机（试验体） wall stops safely z=1.98752
+PASS 初号机（试验体） cliff stops safely z=2.635627
+PASS 初号机（完全体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=4.446319E-05 support
+PASS 初号机（完全体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=4.446319E-05 progress
+PASS 初号机（完全体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=4.446319E-05 visible stride
+PASS 初号机（完全体） speed=1.2 dt=0.02 peak=1.1988 distance=11.63681 duration=0.2542761 stride=0.6473538 steps=29 stops=0 footError=4.446319E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8273 left=(-0.69, 400.02, 12.26) planted=True right=(0.69, 400.02, 12.50) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=57325 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2542761/0.2623862
+PASS 初号机（完全体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=4.744365E-05 support
+PASS 初号机（完全体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=4.744365E-05 progress
+PASS 初号机（完全体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=4.744365E-05 visible stride
+PASS 初号机（完全体） speed=4 dt=0.02 peak=3.996 distance=35.86568 duration=0.1627449 stride=1.521252 steps=42 stops=0 footError=4.744365E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8266 left=(-0.69, 400.02, 38.31) planted=True right=(0.69, 400.02, 38.45) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=178985 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2284752/0.2572349
+PASS 初号机（完全体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990013 steps=32 stops=0 footError=4.635008E-05 support
+PASS 初号机（完全体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990013 steps=32 stops=0 footError=4.635008E-05 progress
+PASS 初号机（完全体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990013 steps=32 stops=0 footError=4.635008E-05 visible stride
+PASS 初号机（完全体） speed=-2 dt=0.02 peak=1.998 distance=-18.98436 duration=0.2308225 stride=0.9990013 steps=32 stops=0 footError=4.635008E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8406 left=(-0.69, 400.02, -19.11) planted=True right=(0.69, 400.02, -19.05) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=246230 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2471284/0.2840192
+PASS 初号机（完全体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=6.249762E-05 support
+PASS 初号机（完全体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=6.249762E-05 progress
+PASS 初号机（完全体） speed=13.5 dt=0.02 peak=13.4865 distance=83.29687 duration=0.04401575 stride=1.263928 steps=126 stops=0 footError=6.249762E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8271 left=(-0.69, 400.02, 104.33) planted=True right=(0.69, 400.02, 104.13) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=791160 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2543393/0.2240783
+PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=4.643489E-05 support
+PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=4.643489E-05 progress
+PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=4.643489E-05 visible stride
+PASS 初号机（完全体） speed=4 dt=0.03333334 peak=3.993333 distance=35.86971 duration=0.1627713 stride=1.470682 steps=43 stops=0 footError=4.643489E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8252 left=(-0.69, 400.02, 38.34) planted=True right=(0.69, 400.02, 38.43) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=867825 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.232889/0.2618367
+PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=4.803709E-05 support
+PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=4.803709E-05 progress
+PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=4.803709E-05 visible stride
+PASS 初号机（完全体） speed=4 dt=0.01666667 peak=3.996667 distance=35.86457 duration=0.1627559 stride=1.406927 steps=46 stops=0 footError=4.803709E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8297 left=(-0.69, 400.02, 38.37) planted=True right=(0.69, 400.02, 38.45) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=1012695 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2346859/0.2664673
+PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.622505E-05 support
+PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.622505E-05 progress
+PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.622505E-05 visible stride
+PASS 初号机（完全体） speed=4 dt=0.008333334 peak=3.998333 distance=35.86193 duration=0.1625677 stride=1.368549 steps=46 stops=0 footError=6.622505E-05 stop
+DETAIL ground=True normal=(0.00, 1.00, 0.00) targetY=399.8338 left=(-0.69, 400.02, 38.45) planted=True right=(0.69, 400.02, 38.40) planted=True lengths=0.6953788/0.6184469 reserve=5% queries=1293275 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.24749/0.2828857
+PASS 初号机（完全体） standing turn yaw=168.6011 error=6.550398E-05
+PASS 初号机（完全体） wall stops safely z=1.621755
+PASS 初号机（完全体） cliff stops safely z=2.246988

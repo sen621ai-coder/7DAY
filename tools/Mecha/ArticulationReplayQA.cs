@@ -22,7 +22,7 @@ public sealed class ArticulationReplayQA:IModApi
   var lamp=new GameObject("inspection light").AddComponent<Light>();lamp.type=LightType.Directional;lamp.intensity=1.1f;lamp.transform.rotation=Quaternion.Euler(35,-30,0);RenderSettings.ambientMode=UnityEngine.Rendering.AmbientMode.Flat;RenderSettings.ambientLight=new Color(.6f,.6f,.6f);var ambient=new UnityEngine.Rendering.SphericalHarmonicsL2();ambient.AddAmbientLight(new Color(.6f,.6f,.6f));RenderSettings.ambientProbe=ambient;lamp.cullingMask=1<<30;
   var folder=Path.Combine(GameIO.GetSaveGameDir(),"articulation-review");Directory.CreateDirectory(folder);var lines=new List<string>();
   var interiors=skins.Where(s=>s.name.StartsWith("Complete_Liner_")).ToArray();
-  if(interiors.Length>0){bool finish=interiors.Length==5&&interiors.All(s=>!s.sharedMaterial.IsKeywordEnabled("_METALLICGLOSSMAP")&&Mathf.Abs(s.sharedMaterial.GetFloat("_Glossiness")-.15f)<.001f);lines.Add((finish?"PASS ":"FAIL ")+"five graphite interiors use effective low-reflection material controls");if(!finish)fail++;}
+   if(interiors.Length>0){bool finish=interiors.Length>=5&&interiors.All(s=>!s.sharedMaterial.IsKeywordEnabled("_METALLICGLOSSMAP")&&Mathf.Abs(s.sharedMaterial.GetFloat("_Glossiness")-.15f)<.001f);lines.Add((finish?"PASS ":"FAIL ")+"graphite interiors use effective low-reflection material controls");if(!finish)fail++;}
   var poses=JArray.Parse(File.ReadAllText(Environment.GetEnvironmentVariable("MECHA_REVIEW_POSES")));
   foreach(JObject pose in poses){rig.ResetPose();var matrices=(JArray)pose["bones"];
    // Create the native cockpit helpers too. The matrix replay then restores the

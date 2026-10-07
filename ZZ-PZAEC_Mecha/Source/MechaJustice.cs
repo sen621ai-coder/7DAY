@@ -1,0 +1,81 @@
+﻿using System;using System.IO;using System.Collections.Generic;using Newtonsoft.Json;using UnityEngine;using UnityEngine.Rendering;
+namespace PZAEC.Mecha {
+#pragma warning disable 0649
+ public sealed class JusticeRig:MonoBehaviour {
+  public Transform[] Bones;public Transform GunMuzzle,MissileMuzzle;public Renderer[] Parts;public string[] Roles;
+  public float WalkPhase,WalkBlend;public Quaternion[] BaseRot;public Vector3[] BasePos,BaseScale;public Transform Shield;public Bounds ShieldBounds;
+  public void Reset(){if(Bones==null)return;for(int i=0;i<Bones.Length;i++){Bones[i].localPosition=BasePos[i];Bones[i].localRotation=BaseRot[i];Bones[i].localScale=BaseScale[i];}}
+ }
+ public static class Justice {
+  // Lift the original long wing tips clear of the crouched walking stance.
+  // Skim/flight and traversal then finish opening the mounted backpack.
+  const float GroundPackBlend=.5f;
+  public sealed class Bone {public string name;public int sourceNode,parent;public float[] trs;}
+  public sealed class Part {public string role;public int material,offset,vertices,indices;}
+  public sealed class Socket {public int bone;public float[] position;}
+  public sealed class Clip {public string name,mask;public bool loop;public int offset,frames;public float fps,duration;}
+  public sealed class Document {public int version;public float soleWidth,soleDepth;public string sourceSha256;public float[] bladeRoot,bladeTip,gunMuzzle,gunGrip;public Dictionary<string,int[]> weaponVisibility;public Bone[] bones;public Part[] parts;public float[][] bindposes;public Dictionary<string,Socket> sockets;public Clip[] clips;}
+  static Document doc;static byte[] bytes;static Material[] mats;
+  static Vector3 V(float[] v,int o=0){return new Vector3(v[o],v[o+1],v[o+2]);}
+  static Quaternion Q(float[] v,int o=3){return new Quaternion(v[o],v[o+1],v[o+2],v[o+3]);}
+  public static void Load(){if(doc!=null)return;string dir=Path.Combine(Model.Path,"Justice");var d=JsonConvert.DeserializeObject<Document>(File.ReadAllText(Path.Combine(dir,"justice.json")));using(var sha=System.Security.Cryptography.SHA256.Create())if(BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(Path.Combine(dir,"justice.glb")))).Replace("-","").ToLowerInvariant()!=d.sourceSha256)throw new InvalidDataException("Justice source hash mismatch");bytes=File.ReadAllBytes(Path.Combine(dir,"justice.bin"));doc=d;}
+  static Texture2D Texture(int i,bool linear){var t=new Texture2D(2,2,TextureFormat.RGBA32,true,linear);ImageConversion.LoadImage(t,File.ReadAllBytes(Path.Combine(Model.Path,"Justice/tex_"+i+".png")));t.anisoLevel=4;return t;}
+  public static void Build(Transform mount,int layer){Load();if(mats==null){var body=new Material(Shader.Find("Standard")){name="Justice original",color=Color.white};body.mainTexture=Texture(0,false);body.SetFloat("_Metallic",0);body.SetFloat("_Glossiness",.8f);body.SetTexture("_BumpMap",Texture(2,true));body.EnableKeyword("_NORMALMAP");body.SetTexture("_EmissionMap",Texture(1,false));body.SetColor("_EmissionColor",Color.white*3);body.EnableKeyword("_EMISSION");var beam=new Material(Shader.Find("Standard")){name="Justice beam",color=Color.black};beam.SetColor("_EmissionColor",new Color(3,.59677f,2.3425f));beam.EnableKeyword("_EMISSION");mats=new[]{body,beam};}
+   var j=mount.gameObject.AddComponent<JusticeRig>();j.Bones=new Transform[doc.bones.Length];j.BaseRot=new Quaternion[j.Bones.Length];j.BasePos=new Vector3[j.Bones.Length];j.BaseScale=new Vector3[j.Bones.Length];
+   for(int i=0;i<j.Bones.Length;i++){var b=doc.bones[i];var t=new GameObject("Mecha"+b.name).transform;t.SetParent(b.parent<0?mount:j.Bones[b.parent],false);t.localPosition=V(b.trs);t.localRotation=Q(b.trs);t.localScale=V(b.trs,7);j.Bones[i]=t;j.BasePos[i]=t.localPosition;j.BaseRot[i]=t.localRotation;j.BaseScale[i]=t.localScale;}
+   foreach(var pair in doc.sockets){var t=new GameObject("Mecha"+pair.Key).transform;t.SetParent(j.Bones[pair.Value.bone],false);t.localPosition=V(pair.Value.position);}
+   var bind=new Matrix4x4[j.Bones.Length];for(int i=0;i<bind.Length;i++)for(int k=0;k<16;k++)bind[i][k]=doc.bindposes[i][k];var parts=new List<Renderer>();var roles=new List<string>();
+   using(var r=new BinaryReader(new MemoryStream(bytes)))foreach(var p in doc.parts){r.BaseStream.Position=p.offset;var vs=new Vector3[p.vertices];var ns=new Vector3[p.vertices];var uv=new Vector2[p.vertices];var weights=new BoneWeight[p.vertices];for(int i=0;i<vs.Length;i++){vs[i]=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());ns[i]=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());uv[i]=new Vector2(r.ReadSingle(),1-r.ReadSingle());weights[i]=new BoneWeight{boneIndex0=r.ReadInt32(),boneIndex1=r.ReadInt32(),boneIndex2=r.ReadInt32(),boneIndex3=r.ReadInt32(),weight0=r.ReadSingle(),weight1=r.ReadSingle(),weight2=r.ReadSingle(),weight3=r.ReadSingle()};}var ix=new int[p.indices];for(int i=0;i<ix.Length;i++)ix[i]=r.ReadInt32();var mesh=new Mesh{name="Justice "+p.role,indexFormat=IndexFormat.UInt32};mesh.vertices=vs;mesh.normals=ns;mesh.uv=uv;mesh.triangles=ix;mesh.boneWeights=weights;mesh.bindposes=bind;mesh.RecalculateBounds();mesh.RecalculateTangents();var go=new GameObject(mesh.name);go.layer=layer;go.transform.SetParent(mount,false);var skin=go.AddComponent<SkinnedMeshRenderer>();skin.sharedMesh=mesh;skin.bones=j.Bones;skin.rootBone=j.Bones[0];skin.sharedMaterial=mats[p.material];skin.quality=SkinQuality.Bone4;skin.localBounds=new Bounds(new Vector3(0,1.6f,0),new Vector3(8,8,8));go.AddComponent<MechaRenderPart>().Role=p.role;parts.Add(skin);roles.Add(p.role);if(p.role.StartsWith("Weapon"))go.SetActive(p.role=="Weapon63"||p.role=="Weapon53"||p.role=="Weapon54");}
+   j.Parts=parts.ToArray();j.Roles=roles.ToArray();j.GunMuzzle=SocketAt(j,64,"JusticeGunMuzzle",V(doc.gunMuzzle));j.MissileMuzzle=SocketAt(j,65,"JusticeMissileMuzzle",new Vector3(0,.15f,.4f));
+  }
+  static Transform Node(JusticeRig j,int n){for(int i=0;i<doc.bones.Length;i++)if(doc.bones[i].sourceNode==n)return j.Bones[i];return null;}
+  static Transform SocketAt(JusticeRig j,int n,string name,Vector3 offset){var t=new GameObject(name).transform;t.SetParent(Node(j,n),false);t.localPosition=offset;return t;}
+  public static void Attach(Model.Rig r){r.Justice=r.Mount.GetComponent<JusticeRig>();if(r.Justice==null)return;Load();for(int i=0;i<r.Justice.Bones.Length;i++){var t=r.Justice.Bones[i];r.RestRot[t]=r.Justice.BaseRot[i];r.RestPos[t]=r.Justice.BasePos[i];}r.SwordRootAnchor=V(doc.bladeRoot);r.SwordTipAnchor=V(doc.bladeTip);r.HiltAnchor=Vector3.zero;r.SwordRestNormal=Vector3.right;}
+  static float F(int at){return BitConverter.ToSingle(bytes,at);}
+  static void Sample(Model.Rig r,string name,float time,float blend,Predicate<int> mask){var j=r.Justice;if(j==null)return;Clip c=Array.Find(doc.clips,x=>x.name==name);if(c==null)return;if(c.loop&&c.duration>0)time=Mathf.Repeat(time,c.duration);float frame=Mathf.Clamp(time*c.fps,0,c.frames-1);int a=(int)frame,b=Mathf.Min(a+1,c.frames-1);float t=frame-a;for(int i=0;i<j.Bones.Length;i++){if(!mask(doc.bones[i].sourceNode))continue;int x=c.offset+(a*j.Bones.Length+i)*40,y=c.offset+(b*j.Bones.Length+i)*40;var pos=Vector3.Lerp(new Vector3(F(x),F(x+4),F(x+8)),new Vector3(F(y),F(y+4),F(y+8)),t);var rot=Quaternion.Slerp(new Quaternion(F(x+12),F(x+16),F(x+20),F(x+24)),new Quaternion(F(y+12),F(y+16),F(y+20),F(y+24)),t);var scale=Vector3.Lerp(new Vector3(F(x+28),F(x+32),F(x+36)),new Vector3(F(y+28),F(y+32),F(y+36)),t);var bone=j.Bones[i];bone.localPosition=Vector3.Lerp(bone.localPosition,pos,blend);bone.localRotation=Quaternion.Slerp(bone.localRotation,rot,blend);bone.localScale=Vector3.Lerp(bone.localScale,scale,blend);}}
+  public static float SoleWidth{get{Load();return doc.soleWidth;}}public static float SoleDepth{get{Load();return doc.soleDepth;}}
+  static bool Upper(int n){return n>=11&&n<=34;}
+  static float PointSegment(Vector3 p,Vector3 a,Vector3 b){var d=b-a;return Vector3.Distance(p,a+d*Mathf.Clamp01(Vector3.Dot(p-a,d)/Mathf.Max(.000001f,d.sqrMagnitude)));}
+  public static bool BladeClear(Model.Rig r){var a=SwordMotion.Root(r);var b=SwordMotion.Tip(r);for(int i=0;i<=24;i++){var p=Vector3.Lerp(a,b,i/24f);if(PointSegment(p,r.Torso.position+Vector3.up*.1f,r.Torso.position+Vector3.up*.6f)<.34f||Vector3.Distance(p,r.Head.position)<.25f||PointSegment(p,r.ShoulderL.position,r.ElbowL.position)<.16f||PointSegment(p,r.HipL.position,r.KneeL.position)<.17f||PointSegment(p,r.HipR.position,r.KneeR.position)<.17f)return false;}return !ShieldObstructs(r,a+Origin.position,(b-a).normalized);}
+  static void ClearBlade(Model.Rig r){if(BladeClear(r))return;var original=r.ShoulderR.rotation;for(int i=1;i<=12;i++){r.ShoulderR.rotation=Quaternion.AngleAxis(((i+1)/2)*5*(i%2==0?-1:1),r.Mount.up)*original;if(BladeClear(r))return;}r.ShoulderR.rotation=original;}
+  public static bool ShieldObstructs(Model.Rig r,Vector3 origin,Vector3 direction){var j=r.Justice;if(j.Shield==null){j.Shield=Node(j,63);for(int i=0;i<j.Parts.Length;i++)if(j.Roles[i]=="Weapon63"){var mesh=new Mesh();((SkinnedMeshRenderer)j.Parts[i]).BakeMesh(mesh);bool first=true;foreach(var p in mesh.vertices){var q=j.Shield.InverseTransformPoint(j.Parts[i].transform.TransformPoint(p));if(first){j.ShieldBounds=new Bounds(q,Vector3.zero);first=false;}else j.ShieldBounds.Encapsulate(q);}UnityEngine.Object.Destroy(mesh);}}float distance;return j.ShieldBounds.IntersectRay(new Ray(j.Shield.InverseTransformPoint(origin-Origin.position),j.Shield.InverseTransformDirection(direction)),out distance)&&distance>=0&&distance<=2;}
+  public static Bounds[] BackpackBoxes(Model.Rig r,float blend){
+   var j=r.Justice;var ps=new Vector3[j.Bones.Length];var qs=new Quaternion[ps.Length];var ss=new Vector3[ps.Length];
+   for(int i=0;i<ps.Length;i++){ps[i]=j.Bones[i].localPosition;qs[i]=j.Bones[i].localRotation;ss[i]=j.Bones[i].localScale;}
+   var boxes=new Bounds[8];var used=new bool[8];
+   try{j.Reset();Sample(r,"02-RIFLE",2,GroundPackBlend+(1-GroundPackBlend)*blend,n=>n>=65);
+    for(int part=0;part<j.Parts.Length;part++)if(j.Roles[part]=="Backpack"){
+     var skin=(SkinnedMeshRenderer)j.Parts[part];var mesh=new Mesh();skin.BakeMesh(mesh);var vertices=mesh.vertices;var triangles=skin.sharedMesh.triangles;var weights=skin.sharedMesh.boneWeights;
+     for(int t=0;t<triangles.Length;t+=3){var scores=new float[8];
+      for(int k=0;k<3;k++){var w=weights[triangles[t+k]];int[] bi={w.boneIndex0,w.boneIndex1,w.boneIndex2,w.boneIndex3};float[] bw={w.weight0,w.weight1,w.weight2,w.weight3};for(int n=0;n<4;n++){int node=doc.bones[bi[n]].sourceNode-65;if(node>=0&&node<8)scores[node]+=bw[n];}}
+      int group=0;for(int k=1;k<8;k++)if(scores[k]>scores[group])group=k;
+      for(int k=0;k<3;k++){var point=r.Root.InverseTransformPoint(skin.transform.TransformPoint(vertices[triangles[t+k]]));if(!used[group]){boxes[group]=new Bounds(point,Vector3.zero);used[group]=true;}else boxes[group].Encapsulate(point);}
+     }UnityEngine.Object.Destroy(mesh);
+    }for(int i=0;i<8;i++)if(used[i])boxes[i].Expand(.02f);
+   }finally{for(int i=0;i<ps.Length;i++){j.Bones[i].localPosition=ps[i];j.Bones[i].localRotation=qs[i];j.Bones[i].localScale=ss[i];}}
+   return boxes;
+  }
+  public static Bounds BackpackEnvelope(Model.Rig r,bool deployed=false,float poseBlend=-1){var bounds=new Bounds();bool first=true;for(int i=0;i<(deployed?2:1);i++)foreach(var box in BackpackBoxes(r,poseBlend>=0?poseBlend:i)){if(box.size==Vector3.zero)continue;if(first){bounds=box;first=false;}else bounds.Encapsulate(box);}return bounds;}
+  public static void TraversePack(Model.Rig r,float blend){var j=r.Justice;for(int i=0;i<j.Bones.Length;i++)if(doc.bones[i].sourceNode>=65){j.Bones[i].localPosition=j.BasePos[i];j.Bones[i].localRotation=j.BaseRot[i];j.Bones[i].localScale=j.BaseScale[i];}Sample(r,"02-RIFLE",2,GroundPackBlend+(1-GroundPackBlend)*Mathf.Clamp01(blend),n=>n>=65);}
+  public static void Walk(EntityVehicle v,Model.Rig r,float speed,float turn,float dt){var j=r.Justice;TraversePack(r,0);var ground=GroundSupport.Find(v);float phase=v.isEntityRemote?GroundNet.WalkPhase(v,j.WalkPhase):j.WalkPhase;if(ground!=null&&!v.isEntityRemote){for(int side=0;side<2;side++)if(ground.Feet[side].Swing)phase=(side*.5f+Mathf.Clamp01(ground.Feet[side].Age/Mathf.Max(.01f,ground.Feet[side].Duration))*.5f)%1;}j.WalkPhase=phase;Sample(r,"00-IDLE",Time.time%10,1,Upper);j.WalkBlend=Mathf.MoveTowards(j.WalkBlend,!Skim.Active(v)&&!Flight.AirPose(Locomotion.Get(v))&&(speed>.08f||Mathf.Abs(turn)>3)?1:0,dt*5);if(j.WalkBlend>0)Sample(r,speed<.15f?(turn<0?"TurnLeft":"TurnRight"):Locomotion.Get(v).VisualForward<0?"Reverse":"Walk",phase,j.WalkBlend,n=>n==10||n==16||n==25||n==35||n==40);}
+  public static void FlightPose(EntityVehicle v,Model.Rig r){var motion=Locomotion.Get(v);float skim=motion.SkimPhase==Skim.Phase.Lifting?Mathf.Clamp01(motion.SkimAge/.35f):motion.SkimPhase==Skim.Phase.Cruise?1:motion.SkimPhase==Skim.Phase.Settling?1-Mathf.Clamp01(motion.SkimAge/.7f):0;float b=Mathf.Max(motion.WingBlend,skim);if(b>0){TraversePack(r,b);r.Torso.localRotation*=Quaternion.Euler(10*b,0,-Mathf.Clamp(Locomotion.Get(v).VisualTurn*.035f,-10,10)*b);}}
+  public static void Combat(EntityVehicle v,Model.Rig r,Samurai.State s,float now){if(Boarding.Active(v))return;r.Head.localRotation=r.RestRot[r.Head]*Quaternion.Euler(-s.AimPitch,s.AimYaw,0);float guard=s.GuardBlend;if(guard>0)Sample(r,"03-SHILD",2,guard,n=>(n>=15&&n<=23)||n==63);float rifle=Mathf.Max(s.RifleBlend,Mathf.Clamp01(s.LaserCharge*3));bool gun=!s.Swing&&!s.Charging&&(rifle>0||s.BeamSpent);
+   if(gun)Sample(r,"02-RIFLE",Mathf.Lerp(0,.8f,rifle),1,n=>(n>=24&&n<=34)||n==53||n==54||n==64);
+   else {Sample(r,"01-SABER",SaberTime(s,now),1,n=>(n>=24&&n<=34)||n==53||n==54||n==64);if(s.Swing){float phase=SwordMotion.Phase(s,now);float amount=Mathf.Sin(Mathf.Clamp01((phase-SwordMotion.WindEnd)/(SwordMotion.CutEnd-SwordMotion.WindEnd))*Mathf.PI);r.ShoulderR.localRotation*=Quaternion.Euler(s.Heavy?-40*amount:0,(s.Combo==1?1:-1)*35*amount,0);}}
+   if(gun&&doc.gunGrip!=null){var aim=r.Mount.rotation*Quaternion.Euler(-s.AimPitch,s.AimYaw,0)*Vector3.forward;var shoulder=r.ShoulderR.localRotation;var elbow=r.ElbowR.localRotation;SwordMotion.Arm(r,r.ShoulderR.position+r.Mount.right*.12f+aim*(r.ArmUpper+r.ArmLower)*.85f,-r.Mount.up);r.ShoulderR.localRotation=Quaternion.Slerp(shoulder,r.ShoulderR.localRotation,rifle);r.ElbowR.localRotation=Quaternion.Slerp(elbow,r.ElbowR.localRotation,rifle);var weapon=Node(r.Justice,64);weapon.rotation=Quaternion.FromToRotation(V(doc.gunMuzzle)-V(doc.gunGrip),aim);weapon.position=r.HandR.position-weapon.rotation*V(doc.gunGrip);}
+   if(!gun){Sample(r,"01-SABER",1.3f,1,n=>n==53||n==54);Node(r.Justice,54).localScale=Vector3.one*100;ClearBlade(r);}
+   for(int i=0;i<r.Justice.Parts.Length;i++){string role=r.Justice.Roles[i];if(role.StartsWith("Weapon"))r.Justice.Parts[i].gameObject.SetActive(Array.IndexOf(doc.weaponVisibility[gun?"rifle":"saber"],int.Parse(role.Substring(6)))>=0);}
+  }
+  static float SaberTime(Samurai.State s,float now){
+   float phase=s.Swing?Mathf.Clamp01(SwordMotion.Phase(s,now)):0;
+   if(s.Blocked)return Mathf.Lerp(2.3f,1.3f,Mathf.SmoothStep(0,1,(now-s.BlockedAt)/.38f));
+   if(s.Charging)return Mathf.Lerp(1.3f,1.55f,Mathf.Clamp01((now-s.PressedAt)/Samurai.HeavyCharge));
+   if(!s.Swing)return 1.3f;
+   if(phase<SwordMotion.WindEnd)return Mathf.Lerp(1.3f,1.55f,phase/SwordMotion.WindEnd);
+   if(phase<SwordMotion.CutEnd)return Mathf.Lerp(1.55f,2.3f,(phase-SwordMotion.WindEnd)/(SwordMotion.CutEnd-SwordMotion.WindEnd));
+   if(phase<SwordMotion.BrakeEnd)return 2.3f;
+   return Mathf.Lerp(2.3f,1.3f,Mathf.SmoothStep(0,1,(phase-SwordMotion.BrakeEnd)/(1-SwordMotion.BrakeEnd)));
+  }
+  public static void Board(Model.Rig r,float k){TraversePack(r,k);Sample(r,"01-SABER",1.3f,1,n=>n==53||n==54);for(int i=0;i<r.Justice.Parts.Length;i++){var role=r.Justice.Roles[i];if(role.StartsWith("Weapon"))r.Justice.Parts[i].gameObject.SetActive(role=="Weapon53"||role=="Weapon63");}r.Torso.localPosition=r.TorsoBasePosition+Vector3.down*.45f*k;r.Torso.localRotation=Quaternion.Euler(10*k,0,0);r.Head.localRotation=Quaternion.Euler(-10*k,0,0);r.ShoulderL.localRotation=Quaternion.Euler(-10*k,0,-12*k);r.ShoulderR.localRotation=Quaternion.Euler(-10*k,0,12*k);}
+ }
+}

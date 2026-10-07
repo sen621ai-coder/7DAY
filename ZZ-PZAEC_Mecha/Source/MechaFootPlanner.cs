@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PZAEC.Mecha
 {
@@ -7,7 +7,9 @@ namespace PZAEC.Mecha
     public static class FootPlanner
     {
         static readonly float[] forwardOffsets={0,-.12f,-.24f,.12f,.24f,.36f};
+        static readonly float[] justiceForwardOffsets={0,-.12f,-.24f,.12f,.24f,.36f,.48f,.60f,.72f};
         static readonly float[] sideOffsets={0,-.10f,.10f,-.20f,.20f};
+        static readonly float[] justicePreviewForward={.12f,-.12f,.24f,.36f,.48f,.60f,.72f,.84f,.96f};
         static readonly float[] previewForward={.12f,-.12f,.24f,.36f,.48f,.60f};
         public static string Failure="";
         public static float SelectedLift=Rules.TraverseToeClearance;
@@ -71,13 +73,13 @@ namespace PZAEC.Mecha
             if(!recovering){
                 var end=start+velocity*duration;var home=end+rb.rotation*s.Shape.Home[1-side]+velocity*(duration+.035f);home.y=target.Point.y;GroundSupport.Pad follow;
                 bool reachable=false;
-                foreach(float dz in forwardOffsets)foreach(float dx in sideOffsets){
+                foreach(float dz in (s.Shape.Justice?justiceForwardOffsets:forwardOffsets))foreach(float dx in sideOffsets){
                     if(reachable)continue;
                     var at=home+rb.rotation*new Vector3(dx,0,dz);
-                    if(!GroundSupport.PadAt(v,at,rb.rotation,.7f,.7f,out follow)||Mathf.Abs(follow.Point.y-other.Position.y)>Rules.AutoStepHeight+.02f)continue;
+                    if(!GroundSupport.PadAt(v,at,rb.rotation,.7f,.7f,out follow)||Mathf.Abs(Vector3.Dot(follow.Point-other.Position,other.Normal))/Mathf.Max(.01f,other.Normal.y)>Rules.AutoStepHeight+.02f)continue;
                     if(Following(s,side,target,follow,end,other,duration,velocity,count)){reachable=true;break;}
                 }
-                if(!reachable)return Fail("following complete path "+Failure);
+                if(!reachable)return Fail("following complete path");
             }
             SelectedLift=lift;return true;
         }
@@ -102,7 +104,7 @@ namespace PZAEC.Mecha
             for(int k=0;k<=count;k++){
                 var at=Vector3.Lerp(from,to,k/(float)count);at.y=peak;
                 for(int corner=0;corner<5;corner++){
-                    var sample=at;if(corner>0)sample+=yaw*new Vector3((corner<=2?-1:1)*Rules.FootWidth*.5f,0,(corner%2==0?-1:1)*Rules.FootDepth*.5f);
+                    var sample=at;if(corner>0)sample+=yaw*new Vector3((corner<=2?-1:1)*Rules.SoleWidth(s.Vehicle)*.5f,0,(corner%2==0?-1:1)*Rules.SoleDepth(s.Vehicle)*.5f);
                     Vector3 point;if(GroundSupport.PointAt(s.Vehicle,sample,.8f,.8f,out point))peak=Mathf.Max(peak,point.y+Rules.SoleClearance);
                 }
             }
@@ -111,9 +113,9 @@ namespace PZAEC.Mecha
         public static bool Select(GroundSupport.State s,int side,Vector3 desired,float duration,Vector3 velocity,bool recovering,out GroundSupport.Pad best)
         {
             best=new GroundSupport.Pad();var rb=s.Vehicle.vehicleRB;var f=s.Feet[side];float score=float.PositiveInfinity,bestLift=Rules.TraverseToeClearance;
-            foreach(float dz in forwardOffsets)foreach(float dx in sideOffsets){
+            foreach(float dz in (s.Shape.Justice?justiceForwardOffsets:forwardOffsets))foreach(float dx in sideOffsets){
                 var at=desired+rb.rotation*new Vector3(dx,0,dz);at.y=f.Position.y;GroundSupport.Pad pad;
-                if(!GroundSupport.PadAt(s.Vehicle,at,rb.rotation,.8f,.8f,out pad)||Mathf.Abs(pad.Point.y-f.Position.y)>Rules.AutoStepHeight+.02f)continue;
+                if(!GroundSupport.PadAt(s.Vehicle,at,rb.rotation,.8f,.8f,out pad)||Mathf.Abs(Vector3.Dot(pad.Point-f.Position,f.Normal))/Mathf.Max(.01f,f.Normal.y)>Rules.AutoStepHeight+.02f)continue;
                 float value=Vector3.ProjectOnPlane(pad.Point-desired,Vector3.up).sqrMagnitude+pad.Residual*.5f;
                 if(value>=score||!Validate(s,side,pad,duration,velocity,recovering))continue;
                 score=value;best=pad;bestLift=SelectedLift;
@@ -155,7 +157,7 @@ namespace PZAEC.Mecha
                     if(!found){
                         // A single unusable sole center is not a wall. Check nearby
                         // full soles; execution still validates both complete leg paths.
-                        foreach(float dz in previewForward)foreach(float dx in sideOffsets){
+                        foreach(float dz in (s.Shape.Justice?justicePreviewForward:previewForward))foreach(float dx in sideOffsets){
                             var candidate=at+yaw*new Vector3(dx,0,dz);GroundSupport.Pad alternate;
                             if(!found&&GroundSupport.PadAt(s.Vehicle,candidate,yaw,.65f,.65f,out alternate)){pad=alternate;found=true;rough=true;}
                         }

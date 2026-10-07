@@ -2,7 +2,7 @@
   "equipmentBinding": "rigid complete faces: shield Shield, sword Sword, rear fins WingL/WingR, back Backpack, mechanical limbs and chest leaves",
   "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b",
   "sourceParts": 17,
-  "triangles": 244176,
+  "triangles": 248975,
   "sourceTriangles": 2000000,
   "height": 3.2,
   "skinned": true,
@@ -232,7 +232,7 @@
       "joint": "Torso",
       "role": "SwordBlade",
       "material": 0,
-      "offset": 11505888,
+      "offset": 24817392,
       "vertices": 84,
       "indices": 132,
       "generatedRepair": "closed-blade-overlap-surface-v1"
@@ -244,7 +244,7 @@
       "joint": "Torso",
       "role": "LegL",
       "material": 0,
-      "offset": 11510448,
+      "offset": 24821952,
       "vertices": 345,
       "indices": 1248,
       "generatedRepair": "armoured-knee-joint-v2"
@@ -256,7 +256,7 @@
       "joint": "Torso",
       "role": "LegR",
       "material": 0,
-      "offset": 11532000,
+      "offset": 24843504,
       "vertices": 345,
       "indices": 1248,
       "generatedRepair": "armoured-knee-joint-v2"
@@ -352,7 +352,7 @@
       "joint": "Torso",
       "role": "ArmL",
       "material": 0,
-      "offset": 12518964,
+      "offset": 24865056,
       "vertices": 9276,
       "indices": 34407,
       "generatedRepair": null
@@ -376,9 +376,9 @@
       "joint": "Torso",
       "role": "ArmR",
       "material": 0,
-      "offset": 13173696,
-      "vertices": 20705,
-      "indices": 62856,
+      "offset": 25447932,
+      "vertices": 20423,
+      "indices": 60828,
       "generatedRepair": null
     },
     {
@@ -400,7 +400,7 @@
       "joint": "Torso",
       "role": "Backpack",
       "material": 0,
-      "offset": 14595792,
+      "offset": 26671548,
       "vertices": 7786,
       "indices": 26049,
       "generatedRepair": null
@@ -412,7 +412,7 @@
       "joint": "Torso",
       "role": "ChestL",
       "material": 0,
-      "offset": 15073716,
+      "offset": 27149472,
       "vertices": 335,
       "indices": 1089,
       "generatedRepair": null
@@ -424,7 +424,7 @@
       "joint": "Torso",
       "role": "ChestR",
       "material": 0,
-      "offset": 15094152,
+      "offset": 27169908,
       "vertices": 349,
       "indices": 954,
       "generatedRepair": null
@@ -436,7 +436,7 @@
       "joint": "Torso",
       "role": "Head",
       "material": 0,
-      "offset": 15114720,
+      "offset": 27190476,
       "vertices": 14928,
       "indices": 48243,
       "generatedRepair": null
@@ -448,7 +448,7 @@
       "joint": "Torso",
       "role": "LegL",
       "material": 0,
-      "offset": 16024236,
+      "offset": 28099992,
       "vertices": 31226,
       "indices": 108486,
       "generatedRepair": null
@@ -472,7 +472,7 @@
       "joint": "Torso",
       "role": "LegR",
       "material": 0,
-      "offset": 18134004,
+      "offset": 30032784,
       "vertices": 26774,
       "indices": 84945,
       "generatedRepair": null
@@ -496,7 +496,7 @@
       "joint": "Torso",
       "role": "Shield",
       "material": 0,
-      "offset": 19899612,
+      "offset": 31657716,
       "vertices": 10926,
       "indices": 43827,
       "generatedRepair": null
@@ -520,7 +520,7 @@
       "joint": "Torso",
       "role": "SwordBlade",
       "material": 0,
-      "offset": 20665128,
+      "offset": 32357472,
       "vertices": 10609,
       "indices": 33489,
       "generatedRepair": null
@@ -532,7 +532,7 @@
       "joint": "Torso",
       "role": "SwordHilt",
       "material": 0,
-      "offset": 21308316,
+      "offset": 33000660,
       "vertices": 3829,
       "indices": 11556,
       "generatedRepair": null
@@ -544,9 +544,9 @@
       "joint": "Torso",
       "role": "Torso",
       "material": 0,
-      "offset": 21538332,
-      "vertices": 40235,
-      "indices": 140373,
+      "offset": 33230676,
+      "vertices": 40232,
+      "indices": 140283,
       "generatedRepair": null
     },
     {
@@ -568,7 +568,7 @@
       "joint": "Torso",
       "role": "WingL",
       "material": 0,
-      "offset": 24191784,
+      "offset": 35722944,
       "vertices": 4571,
       "indices": 18123,
       "generatedRepair": null
@@ -592,7 +592,7 @@
       "joint": "Torso",
       "role": "WingR",
       "material": 0,
-      "offset": 24504588,
+      "offset": 36014844,
       "vertices": 4571,
       "indices": 18123,
       "generatedRepair": null
@@ -608,6 +608,66 @@
       "vertices": 402,
       "indices": 402,
       "generatedRepair": "recessed-joint-interior-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_DefectPatch_ArmL",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ArmL",
+      "material": 0,
+      "offset": 36306744,
+      "vertices": 282,
+      "indices": 282,
+      "generatedRepair": "original-surface-reinsert-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_DefectPatch_ArmR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "ArmR",
+      "material": 0,
+      "offset": 36321408,
+      "vertices": 10966,
+      "indices": 10968,
+      "generatedRepair": "original-surface-reinsert-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_DefectPatch_Backpack",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Backpack",
+      "material": 0,
+      "offset": 36891648,
+      "vertices": 1338,
+      "indices": 1338,
+      "generatedRepair": "original-surface-reinsert-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_DefectPatch_LegR",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "LegR",
+      "material": 0,
+      "offset": 36961224,
+      "vertices": 342,
+      "indices": 342,
+      "generatedRepair": "original-surface-reinsert-v1"
+    },
+    {
+      "node": 6,
+      "nodeName": "Complete_DefectPatch_Torso",
+      "primitive": 0,
+      "joint": "Torso",
+      "role": "Torso",
+      "material": 0,
+      "offset": 36979008,
+      "vertices": 3585,
+      "indices": 3585,
+      "generatedRepair": "original-surface-reinsert-v1"
     }
   ],
   "wingBinding": "complete rigid rear fins and tapered necks; WingL/WingR under Backpack",
@@ -1005,5 +1065,18 @@
     "seamRefinementFaces": 2276,
     "shieldPartition": "surface graph with archived ornament anchors",
     "gripContactLockWidth": 0.045
+  },
+  "defectPatch": {
+    "version": 1,
+    "spikesRemoved": 706,
+    "spikeThresholdMm": 12.0,
+    "coverThresholdMm": 4.0,
+    "reinsertedFaces": 5505,
+    "clustersAccepted": 316,
+    "clustersRejected": 0,
+    "exteriorClusters": 3,
+    "cavityClusters": 313,
+    "rejectReasons": {},
+    "sourceSha256": "71e8ce79bb611bd40e41ac4d9a404fdab0244e10726c1470440ffebbf098001b"
   }
 }

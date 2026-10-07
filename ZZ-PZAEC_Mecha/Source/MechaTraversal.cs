@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace PZAEC.Mecha
             {
                 float side=Front==0?1:-1;
                 float lateral=t<.37f?side*.16f*Ease(t/.12f):t<.60f?Mathf.Lerp(side*.16f,-side*.16f,Ease((t-.37f)/.23f)):-side*.16f*(1-Ease((t-.60f)/.25f));
-                return Rotation*Vector3.right*lateral-Vector3.up*(.02f*Mathf.Min(Ease(t/.12f),1-Ease((t-.85f)/.15f)));
+                if(Shape!=null&&Shape.Justice)lateral*=.5f;return Rotation*Vector3.right*lateral-Vector3.up*(.02f*Mathf.Min(Ease(t/.12f),1-Ease((t-.85f)/.15f)));
             }
             public float PoleAngle(float age,int side)
             {
@@ -35,7 +35,7 @@ namespace PZAEC.Mecha
             public void Frame(float age,out Vector3 root,out Vector3 left,out Vector3 right)
             {
                 float t=Mathf.Clamp01(age/Duration),front=Ease((t-.12f)/.25f),follow=Ease((t-.37f)/.48f);
-                float pre=Type==Kind.Down?.95f:Type==Kind.Gap?.65f:.20f;
+                float pre=Type==Kind.Down?.95f:Type==Kind.Gap?.65f:Shape!=null&&Shape.Justice?.45f:.20f;
                 root=Vector3.Lerp(Root,End,pre*front+(1-pre)*follow);
                 root.y=Type==Kind.Down?Mathf.Lerp(Root.y,End.y,front):Mathf.Lerp(Root.y,End.y,follow);
                 if(Type==Kind.Gap)root.y-=Mathf.Lerp(.22f,.55f,Mathf.Clamp01((Width-.40f)/.35f))*front*(1-follow);
@@ -45,7 +45,7 @@ namespace PZAEC.Mecha
             }
             public void FrameInto(float age,Vector3[] feet,out Vector3 root)
             {
-                float t=Mathf.Clamp01(age/Duration),front=Ease((t-.12f)/.25f),follow=Ease((t-.37f)/.48f),pre=Type==Kind.Down?.95f:Type==Kind.Gap?.65f:.20f;
+                float t=Mathf.Clamp01(age/Duration),front=Ease((t-.12f)/.25f),follow=Ease((t-.37f)/.48f),pre=Type==Kind.Down?.95f:Type==Kind.Gap?.65f:Shape!=null&&Shape.Justice?.45f:.20f;
                 root=Vector3.Lerp(Root,End,pre*front+(1-pre)*follow);
                 root.y=Type==Kind.Down?Mathf.Lerp(Root.y,End.y,front):Mathf.Lerp(Root.y,End.y,follow);
                 if(Type==Kind.Gap)root.y-=Mathf.Lerp(.22f,.55f,Mathf.Clamp01((Width-.40f)/.35f))*front*(1-follow);
@@ -95,7 +95,7 @@ namespace PZAEC.Mecha
         {
             var normal=surfaceNormal??Vector3.up;var soleRotation=Quaternion.FromToRotation(Vector3.up,normal)*yaw;
             if(!shape.Reach(root,yaw,side,foot,normal)){pathFailure="reach root="+root+" foot="+foot;return false;}
-            if(!GroundSupport.BoxClear(v,previous+normal*.15f,foot+normal*.15f,new Vector3(.20f,.125f,.29f),soleRotation)){pathFailure="foot volume root="+root+" foot="+foot+" hit="+GroundSupport.Blocked;return false;}
+            if(!GroundSupport.BoxClear(v,previous+normal*.15f,foot+normal*.15f,shape.Justice?new Vector3(Rules.SoleWidth(v)*.5f,.125f,Rules.SoleDepth(v)*.5f):new Vector3(.20f,.125f,.29f),soleRotation)){pathFailure="foot volume root="+root+" foot="+foot+" hit="+GroundSupport.Blocked;return false;}
             // Reconstruct the same two-bone pole as render IK, then sweep both leg volumes.
             var hip=root+yaw*shape.Hip[side];var ankle=foot-soleRotation*shape.AnkleOffset[side];var d=ankle-hip;float length=d.magnitude;
             if(length<.001f)return false;var axis=d/length;var pole=Vector3.ProjectOnPlane(yaw*Vector3.forward,axis).normalized;
@@ -140,7 +140,7 @@ namespace PZAEC.Mecha
             int count=Mathf.Max(100,Mathf.CeilToInt((Vector3.Distance(p.Root,p.End)+Mathf.Abs(p.Height)+2)/.05f));
             for(int i=0;i<=count;i++){
                 Vector3 root;p.FrameInto(p.Duration*i/count,feet,out root);
-                if(!GroundSupport.HullClear(v,support.Shape,last,root,p.Rotation)){reason="上方或机体路径受阻";return false;}
+                if(!GroundSupport.HullClear(v,support.Shape,last,root,p.Rotation,Mathf.Clamp01(i/(float)count/.12f))){reason="上方或机体路径受阻 t="+(i/(float)count)+" "+GroundSupport.Blocked;return false;}
                 if(!EquipmentClear(v,support.Shape,p,p.Duration*i/count,last,root)){reason="翼组或长剑路径受阻";return false;}
                 for(int side=0;side<2;side++)if(!FootPath(v,support.Shape,root,p.Rotation,side,feet[side],previous[side],p.PoleAngle(p.Duration*i/count,side),p.FootNormal(p.Duration*i/count,side))){reason="腿部路径受阻或落点超出腿长 t="+(i/(float)count)+" side="+side+" "+pathFailure;return false;}
                 last=root;previous[0]=feet[0];previous[1]=feet[1];
@@ -153,7 +153,7 @@ namespace PZAEC.Mecha
             int count=Mathf.Max(1,Mathf.CeilToInt((to-from)/.01f));
             for(int i=1;i<=count;i++){
                 float age=Mathf.Lerp(from,to,i/(float)count);Vector3 root;p.FrameInto(age,s.FrameFeet,out root);
-                if(!GroundSupport.HullClear(v,support.Shape,previous,root,p.Rotation)){reason="路径出现新障碍";return false;}
+                if(!GroundSupport.HullClear(v,support.Shape,previous,root,p.Rotation,Mathf.Clamp01(age/p.Duration/.12f))){reason="路径出现新障碍";return false;}
                 if(!EquipmentClear(v,support.Shape,p,age,previous,root)){reason="装备路径出现新障碍";return false;}
                 for(int side=0;side<2;side++)if(!FootPath(v,support.Shape,root,p.Rotation,side,s.FrameFeet[side],old[side],p.PoleAngle(age,side),p.FootNormal(age,side))){reason="腿部路径变化";return false;}
                 previous=root;old[0]=s.FrameFeet[0];old[1]=s.FrameFeet[1];
@@ -205,7 +205,7 @@ namespace PZAEC.Mecha
             // Finish with the original stance spread, on pads wholly inside the top/opposite bank.
             float distanceRoot=landing-homeZ;
             for(float extension=0;extension<=.70f;extension+=.05f){
-                p.Adaptive=extension>.35f;
+                p.Adaptive=support.Shape.Justice||extension>.35f;
                 p.End=root+forward*(distanceRoot+extension);p.End.y=floor+height+support.Shape.NeutralY;
                 bool pads=true;
                 for(int side=0;side<2;side++){
@@ -323,12 +323,13 @@ namespace PZAEC.Mecha
             var p=s.Current;float next=Mathf.Min(p.Duration,s.Age+dt);var phase=p.Phase(next);
             Vector3 desired;p.FrameInto(next,s.FrameFeet,out desired);
             var rb=v.vehicleRB;var actual=rb.position+Origin.position;
-            if(Vector3.Distance(actual,s.TargetRoot)>.35f){Cancel(v,"机体偏离安全路径");return false;}
-            if(!GroundSupport.HullClear(v,support.Shape,actual,desired,p.Rotation)){Cancel(v,"路径出现新障碍");return false;}
+            if(Vector3.Distance(actual,s.TargetRoot)>.35f){Cancel(v,"机体偏离安全路径 age="+s.Age+" actual="+actual+" target="+s.TargetRoot+" velocity="+rb.velocity);return false;}
+            if(!GroundSupport.HullClear(v,support.Shape,actual,desired,p.Rotation,Mathf.Clamp01(next/p.Duration/.12f))){Cancel(v,"路径出现新障碍");return false;}
             if(!EquipmentClear(v,support.Shape,p,next,actual,desired)){Cancel(v,"装备路径出现新障碍");return false;}
+            string segmentFailure;if(!ValidateSegment(v,support,p,s.Age,next,out segmentFailure)){Cancel(v,segmentFailure);return false;}
             for(int side=0;side<2;side++){
                 var f=support.Feet[side];bool swing=side==p.Front?phase==Stage.FrontStep:phase==Stage.Transfer||phase==Stage.RearStep;
-                if(!FootPath(v,support.Shape,desired,p.Rotation,side,s.FrameFeet[side],f.Position,p.PoleAngle(next,side),p.FootNormal(next,side))){Cancel(v,"腿部路径变化");return false;}
+                // ValidateSegment sweeps the curved foot route in substeps; a single diagonal chord can cut a stair corner.
                 if(f.Planted&&!GroundSupport.Recheck(v,f)){Cancel(v,"支撑地面已改变");return false;}
                 if(swing){f.Planted=false;f.Swing=true;f.Position=s.FrameFeet[side];f.Normal=p.FootNormal(next,side);}
                 bool land=side==p.Front?s.Phase==Stage.FrontStep&&phase>=Stage.Transfer:s.Phase==Stage.RearStep&&phase>=Stage.Settle;
@@ -395,7 +396,7 @@ namespace PZAEC.Mecha
         {
             // Boarding owns the full pose, including while ground recovery is still settling.
             if(Boarding.Active(v)){if(Rules.Complete(v))Get(v).EquipmentBlend=0;return;}
-            if(!Rules.Complete(v))return;var s=Get(v);var ground=GroundSupport.Find(v);bool recovery=ground!=null&&ground.Recovering;bool active=Major(v)||recovery;float swordBlend=0;
+            if(!Rules.Complete(v))return;if(r.Justice!=null){var justiceState=Get(v);if(justiceState.Current!=null)Justice.TraversePack(r,Mathf.Clamp01(justiceState.Age/justiceState.Current.Duration/.12f));return;}var s=Get(v);var ground=GroundSupport.Find(v);bool recovery=ground!=null&&ground.Recovering;bool active=Major(v)||recovery;float swordBlend=0;
             if(!active&&(Flight.AirPose(Locomotion.Get(v))||Boarding.Active(v))){s.EquipmentBlend=0;return;}
             if(recovery){s.EquipmentBlend=Mathf.MoveTowards(s.EquipmentBlend,1,Time.deltaTime/.12f);swordBlend=s.EquipmentBlend;}
             else if(active){float t=s.Age/s.Current.Duration;s.EquipmentBlend=Mathf.Clamp01(t/.12f);swordBlend=Mathf.Min(s.EquipmentBlend,Mathf.Clamp01((1-t)/.15f));}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -15,6 +15,7 @@ namespace PZAEC.Mecha
             public float Upper,Lower,NeutralY;
             public Vector3[] WingRoot=new Vector3[2];public Bounds[] WingBounds=new Bounds[2];public bool Equipment;
             public Vector3 HullCenter=new Vector3(0,2.18f,0),HullHalf=new Vector3(.75f,.95f,.50f);
+            public bool Justice;public Bounds Backpack,BackpackAir;public Bounds[] BackpackPoses;public Bounds[][] BackpackParts;
             public bool Reach(Vector3 root,Quaternion rotation,int side,Vector3 sole,Vector3 normal)
             {
                 var ankle=sole-Quaternion.FromToRotation(Vector3.up,normal)*rotation*AnkleOffset[side];
@@ -61,7 +62,11 @@ namespace PZAEC.Mecha
         }
         static bool PassivePhysics(EntityVehicle __instance)
         {
-            var v=__instance;if(!Weapons.IsMecha(v)||v.isEntityRemote||v.hasDriver||v.vehicleRB==null||v.IsDead())return true;
+            var v=__instance;if(!Weapons.IsMecha(v)||v.isEntityRemote||v.vehicleRB==null||v.IsDead())return true;
+            // Native PhysicsFixedUpdate adds -9.81 * mass itself. Parked mecha
+            // bypass it and use Unity gravity instead; hand ownership back on boarding.
+            // Otherwise both gravity sources survive and overpower hover/flight thrust.
+            if(v.hasDriver){v.vehicleRB.useGravity=false;return true;}
             // Skip the parked-car branch that resets velocity/position every frame.
             v.RBActive=true;v.vehicleRB.isKinematic=false;v.vehicleRB.useGravity=true;
             v.SetPosition(v.vehicleRB.position+Origin.position);return false;
@@ -72,7 +77,7 @@ namespace PZAEC.Mecha
             // Native parked vehicles are kinematic. Feet must remain live even without a pilot.
             var rb=v.vehicleRB;v.RBActive=true;rb.isKinematic=false;rb.useGravity=true;
             var support=Observe(v);if(support==null)return;
-            var motion=Locomotion.Get(v);bool air=Flight.AirPose(motion);
+            var motion=Locomotion.Get(v);bool air=Flight.AirPose(motion);if(motion.SkimPhase!=Skim.Phase.Off)Skim.Cancel(motion);
             motion.Grounded=support.Grounded;motion.HoverOn=motion.Boost=motion.InputReady=motion.Toggle=motion.Jump=motion.Descend=false;motion.Charge=0;motion.ChargeStart=-1;
             motion.FlightMode=support.Grounded?Flight.Phase.Ground:air?Flight.Phase.PowerLost:Flight.Phase.Ground;motion.VerticalInput=0;
             if(Traversal.Active(v))Traversal.Cancel(v,"驾驶已中断");
@@ -93,6 +98,7 @@ namespace PZAEC.Mecha
             var s=Find(v);if(s!=null)return s;
             var r=Model.GetRig(v);if(r==null||r.HipL==null)return null;
             var rb=v.vehicleRB;var p=new Profile{Upper=r.LegUpper,Lower=r.LegLower};
+            if(r.Justice!=null){p.Justice=true;p.Backpack=Justice.BackpackEnvelope(r);p.BackpackAir=Justice.BackpackEnvelope(r,true);p.BackpackPoses=new Bounds[11];p.BackpackParts=new Bounds[11][];for(int pose=0;pose<=10;pose++){p.BackpackPoses[pose]=Justice.BackpackEnvelope(r,false,pose/10f);p.BackpackParts[pose]=Justice.BackpackBoxes(r,pose/10f);}}
             for(int i=0;i<2;i++){
                 var hip=i==0?r.HipL:r.HipR;var ankle=i==0?r.AnkleL:r.AnkleR;var foot=i==0?r.FootL:r.FootR;
                 p.Hip[i]=rb.transform.InverseTransformPoint(hip.position);
@@ -134,10 +140,10 @@ namespace PZAEC.Mecha
             pad=new Pad();int count=0;Vector3 center=Vector3.zero,normal=Vector3.zero;Collider surface=null;
             // up/down bound the sole CENTER. Sloping corners can be higher/lower
             // by half a foot diagonal, including during the final 8 cm recheck.
-            float cornerHeight=Mathf.Sqrt(Rules.FootWidth*Rules.FootWidth+Rules.FootDepth*Rules.FootDepth)*.5f*Mathf.Tan(Rules.MaxWalkSlope*Mathf.Deg2Rad)+Rules.FootResidual;
+            float cornerHeight=Mathf.Sqrt(Rules.SoleWidth(v)*Rules.SoleWidth(v)+Rules.SoleDepth(v)*Rules.SoleDepth(v))*.5f*Mathf.Tan(Rules.MaxWalkSlope*Mathf.Deg2Rad)+Rules.FootResidual;
             float rayUp=up+cornerHeight,rayDown=down+cornerHeight;
             for(int i=0;i<5;i++){
-                var q=at+yaw*new Vector3(corners[i].x*Rules.FootWidth*.5f,0,corners[i].y*Rules.FootDepth*.5f);
+                var q=at+yaw*new Vector3(corners[i].x*Rules.SoleWidth(v)*.5f,0,corners[i].y*Rules.SoleDepth(v)*.5f);
                 int n=Physics.RaycastNonAlloc(q-Origin.position+Vector3.up*rayUp,Vector3.down,hits,rayUp+rayDown,~0,QueryTriggerInteraction.Ignore);
                 if(n==hits.Length)return false;
                 float nearest=float.PositiveInfinity;RaycastHit best=new RaycastHit();
@@ -166,7 +172,7 @@ namespace PZAEC.Mecha
             // The five support samples can miss a narrow ridge between corners.
             // Sweep the entire thin sole onto the fitted plane before accepting it.
             var sole=new Vector3(at.x,y+Rules.SoleClearance,at.z);var soleRotation=Quaternion.FromToRotation(Vector3.up,normal)*yaw;
-            int swept=Physics.BoxCastNonAlloc(sole-Origin.position+normal*.5f,new Vector3(Rules.FootWidth*.5f,.002f,Rules.FootDepth*.5f),-normal,hits,soleRotation,1f,~0,QueryTriggerInteraction.Ignore);
+            int swept=Physics.BoxCastNonAlloc(sole-Origin.position+normal*.5f,new Vector3(Rules.SoleWidth(v)*.5f,.002f,Rules.SoleDepth(v)*.5f),-normal,hits,soleRotation,1f,~0,QueryTriggerInteraction.Ignore);
             if(swept==hits.Length)return false;float nearestSole=float.PositiveInfinity;Collider touch=null;
             for(int i=0;i<swept;i++)if(!Own(v,hits[i].collider)&&hits[i].distance<nearestSole){nearestSole=hits[i].distance;touch=hits[i].collider;}
             if(touch==null||!StaticSurface(v,touch))return false;
@@ -195,15 +201,22 @@ namespace PZAEC.Mecha
         {
             if(!foot.Planted)return false;
             var rotation=Quaternion.FromToRotation(Vector3.up,foot.Normal)*v.vehicleRB.rotation;
-            if(!BoxClear(v,foot.Position+foot.Normal*.15f,foot.Position+foot.Normal*.15f,new Vector3(.20f,.125f,.29f),rotation))return false;
+            if(!BoxClear(v,foot.Position+foot.Normal*.15f,foot.Position+foot.Normal*.15f,Rules.Complete(v)?new Vector3(Rules.SoleWidth(v)*.5f,.125f,Rules.SoleDepth(v)*.5f):new Vector3(.20f,.125f,.29f),rotation))return false;
             var c=foot.Contact;
             if(c.Surface!=null&&(Vector3.Distance(c.Surface.transform.position+Origin.position,c.SurfacePosition)>.002f||Quaternion.Angle(c.Surface.transform.rotation,c.SurfaceRotation)>.1f))return false;
             Pad next;
             if(!PadAt(v,foot.Position,v.vehicleRB.rotation,.45f,.45f,out next)||Vector3.Distance(next.Point,foot.Position)>.05f)return false;
             foot.Contact=next;foot.Normal=next.Normal;return true;
         }
-        public static bool HullClear(EntityVehicle v,Profile shape,Vector3 a,Vector3 b,Quaternion yaw)
-        {return BoxClear(v,a+yaw*shape.HullCenter,b+yaw*shape.HullCenter,shape.HullHalf,yaw);}
+        public static bool HullClear(EntityVehicle v,Profile shape,Vector3 a,Vector3 b,Quaternion yaw,float packBlend=-1)
+        {
+            if(!BoxClear(v,a+yaw*shape.HullCenter,b+yaw*shape.HullCenter,shape.HullHalf,yaw))return false;
+            if(!shape.Justice)return true;
+            if(packBlend<0&&Traversal.Active(v)){var traversal=Traversal.Get(v);packBlend=Mathf.Clamp01(traversal.Age/traversal.Current.Duration/.12f);}
+            bool air=Skim.Active(v)||Flight.AirPose(Locomotion.Get(v));float sample=Mathf.Clamp01(packBlend)*10;int lo=air?0:Mathf.FloorToInt(sample),hi=air?10:Mathf.Min(10,Mathf.CeilToInt(sample));
+            for(int part=0;part<8;part++){var box=shape.BackpackParts[lo][part];if(box.size==Vector3.zero)continue;for(int pose=lo+1;pose<=hi;pose++)box.Encapsulate(shape.BackpackParts[pose][part]);if(!BoxClear(v,a+yaw*box.center,b+yaw*box.center,box.extents,yaw))return false;}
+            return true;
+        }
         public static bool BoxClear(EntityVehicle v,Vector3 a,Vector3 b,Vector3 half,Quaternion yaw)
         {
             int count=Physics.OverlapBoxNonAlloc(b-Origin.position,half,overlaps,yaw,~0,QueryTriggerInteraction.Ignore);
@@ -278,10 +291,10 @@ namespace PZAEC.Mecha
                     continue;
                 }
                 if(!enabled||s.Recovering||s.Feet[1-i].Swing||!s.Feet[1-i].Planted||i!=s.Next)continue;
-                var home=root+rb.rotation*s.Shape.Home[i];float duration=s.Cautious?Rules.RoughStepSeconds:Mathf.Clamp(.16f/(1+speed*1.1f),.008f,.20f);
+                var home=root+rb.rotation*s.Shape.Home[i];float duration=s.Cautious?Rules.RoughStepSeconds:WalkDuration(speed);
                 bool attack=Rules.Complete(v)&&Samurai.Get(v).Swing&&!Samurai.Get(v).Blocked&&SwordMotion.Phase(Samurai.Get(v),Time.time)<SwordMotion.WindEnd;
                 if(attack)duration=Mathf.Max(duration,.20f);
-                var ahead=home+Vector3.ClampMagnitude(planar*(duration+.035f),s.Cautious?.28f:.45f);
+                var ahead=home+Vector3.ClampMagnitude(planar*(duration+.035f),s.Cautious?.28f:.85f);
                 if(speed<.30f&&s.DesiredVelocity.sqrMagnitude>.01f)ahead+=Vector3.ClampMagnitude(s.DesiredVelocity,.8f)*(duration+.035f);
                 if(attack&&Vector3.Dot(s.DesiredVelocity,rb.rotation*Vector3.forward)>0)ahead+=rb.rotation*Vector3.forward*.15f;
                 float error=Vector3.ProjectOnPlane(ahead-f.Position,Vector3.up).magnitude;
@@ -295,6 +308,13 @@ namespace PZAEC.Mecha
                 f.From=f.Position;f.To=target.Point;f.FromNormal=f.Normal;f.ToNormal=target.Normal;f.Age=0;f.Duration=duration;f.Lift=FootPlanner.SelectedLift;f.Swing=true;f.Planted=false;
             }
             if(s.Recovering)s.DriveCap=0;
+        }
+        // Normal walking needs a visible swing, not a one-frame foot shuffle.
+        // At boosted speeds bound body travel while the opposite foot bears load.
+        public static float WalkDuration(float speed)
+        {
+            float travel=Mathf.Lerp(.65f,.40f,Mathf.InverseLerp(4,8,speed));
+            return Mathf.Min(.30f/(1+speed*.15f),travel/Mathf.Max(speed,.1f));
         }
         public static bool MotionClear(State s,float dt)
         {

@@ -11,7 +11,8 @@ from scipy.spatial import cKDTree
 p=argparse.ArgumentParser();p.add_argument('--resources',required=True,type=Path);a=p.parse_args();stem='samurai_style_gundam_mecha';d=json.loads((a.resources/(stem+'_rig.json')).read_text());raw=(a.resources/(stem+'_rig.bin')).read_bytes();dt=np.dtype([('v','<f4',8),('b','<i4',2),('w','<f4',2)]);names=[j['name'] for j in d['joints']];ids={n:i for i,n in enumerate(names)};positions=np.array([j['position'] for j in d['joints']])
 def read(part):
  v=np.frombuffer(raw,dt,part['vertices'],part['offset']);ix=np.frombuffer(raw,'<u4',part['indices'],part['offset']+48*part['vertices']).reshape(-1,3);assert ix.max()<len(v);return v[ix]
-outer=[p for p in d['parts'] if p.get('generatedRepair') not in ['recessed-joint-interior-v1','source-textured-panel-back-v1']];inside=[p for p in d['parts'] if p.get('generatedRepair') in ['recessed-joint-interior-v1','source-textured-panel-back-v1']];f=np.concatenate([read(p) for p in outer]);q=f['v'][:,:,:3];bones=f['b'][:,0,0];allf=np.concatenate([read(p) for p in d['parts']]);assert len(allf)==d['triangles']<250000;assert len(d['parts'])<=38
+patch_tag='original-surface-reinsert-v1'
+outer=[p for p in d['parts'] if p.get('generatedRepair') not in ['recessed-joint-interior-v1','source-textured-panel-back-v1',patch_tag]];inside=[p for p in d['parts'] if p.get('generatedRepair') in ['recessed-joint-interior-v1','source-textured-panel-back-v1']];patch=[p for p in d['parts'] if p.get('generatedRepair')==patch_tag];f=np.concatenate([read(p) for p in outer]);q=f['v'][:,:,:3];bones=f['b'][:,0,0];allf=np.concatenate([read(p) for p in d['parts']]);assert len(allf)==d['triangles']<260000;assert len(d['parts'])<=38
 assert np.isfinite(allf['v']).all() and np.isfinite(allf['w']).all()
 assert np.all(allf['w']>=0) and np.allclose(allf['w'].sum(-1),1,atol=1e-6)
 assert np.all(allf['b'][:,0:1,0]==allf['b'][:,:,0]);assert np.allclose(np.linalg.norm(allf['v'][:,:,3:6],axis=-1),1,atol=.001)
@@ -80,6 +81,32 @@ print('PASS all exterior seam points lie on archived source surfaces with matchi
 # All generated surfaces are explicitly marked as interiors, so exterior
 # preservation tests cannot accidentally count hidden backing as original skin.
 assert inside and all(p['generatedRepair'] in ['recessed-joint-interior-v1','source-textured-panel-back-v1'] for p in inside)
+# Defect-patch batches: exterior rows are verbatim original-GLB surface
+# (position+UV exact), cavity rows are recessed graphite backing near it.
+if patch:
+ import struct as _struct
+ _raw=(a.resources/(stem+'.glb')).read_bytes();_ln=_struct.unpack_from('<I',_raw,12)[0];_g=json.loads(_raw[20:20+_ln]);_base=_ln+28
+ _w={}
+ def _walk(i,parent):
+  node=_g['nodes'][i];_w[i]=parent@np.array(node.get('matrix',np.eye(4).flatten(order='F'))).reshape(4,4,order='F')
+  for ch in node.get('children',[]):_walk(ch,_w[i])
+ for i in _g['scenes'][_g.get('scene',0)]['nodes']:_walk(i,np.eye(4))
+ def _acc(i):
+  x=_g['accessors'][i];v=_g['bufferViews'][x['bufferView']];n={'SCALAR':1,'VEC2':2,'VEC3':3}[x['type']];dtp=np.dtype({5126:'<f4',5123:'<u2',5125:'<u4'}[x['componentType']])
+  return np.ndarray((x['count'],n),dtp,_raw,_base+v.get('byteOffset',0)+x.get('byteOffset',0),strides=(v.get('byteStride',n*dtp.itemsize),dtp.itemsize)).copy()
+ _verts=[]
+ for i,node in enumerate(_g['nodes']):
+  if 'mesh' not in node:continue
+  for prim in _g['meshes'][node['mesh']]['primitives']:
+   v=_acc(prim['attributes']['POSITION']).astype(float)@_w[i][:3,:3].T+_w[i][:3,3];v[:,0]*=-1;_verts.append(v)
+ _verts=np.concatenate(_verts);_floor=_verts[:,1].min();_sc=3.2/(_verts[:,1].max()-_floor);_verts[:,1]=(_verts[:,1]-_floor)*_sc+.05;_verts[:,[0,2]]*=_sc
+ _tree=cKDTree(_verts);graphite=np.array([.8672464,.88142943])
+ for p in patch:
+  pv=read(p)['v'].reshape(-1,8);dist,_=_tree.query(pv[:,:3])
+  ext=np.linalg.norm(pv[:,6:8]-graphite,axis=1)>.01
+  if ext.any():assert dist[ext].max()<1e-5,('patch exterior vertex not on original surface',dist[ext].max())
+  if (~ext).any():assert dist[~ext].max()<.02,('cavity backing drifted from original surface',dist[~ext].max())
+ print('PASS defect-patch exterior vertices match original GLB exactly; cavity backing within 2 cm of it')
 for role in ['ChestL','ChestR','WingL','WingR','ArmL','ArmR','Shield']:
  assert any(p['role']==role for p in inside),('missing interior',role)
 print('PASS chest, wings and arms have separate recessed backing batches; no generic sphere batch')

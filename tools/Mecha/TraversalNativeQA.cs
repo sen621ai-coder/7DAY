@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -11,15 +11,17 @@ using PZAEC.Mecha;
 public sealed class MechaTraversalQA : IModApi
 {
     static List<string> report=new List<string>();static int failures;
-    static int Repetitions=Environment.GetEnvironmentVariable("MECHA_QA_FAST")=="1"?1:20;
+    static int Repetitions=Environment.GetEnvironmentVariable("MECHA_QA_FAST")=="1"?3:20;
     public void InitMod(Mod mod){if(Environment.GetCommandLineArgs().Contains("-mechaMotionQA"))ModEvents.GameStartDone.RegisterHandler(Run);}
     static bool Pause(){return false;}
+    // Place the rim beyond the whole sole at all tested approach angles.
+    static float Rim(EntityVehicle v,float legacy){return Rules.Complete(v)?Mathf.Max(legacy,Rules.SoleDepth(v)*.5f+Rules.SoleWidth(v)*.5f+.05f):legacy;}
     static void Check(string name,bool ok){report.Add((ok?"PASS ":"FAIL ")+name);if(!ok)failures++;}
     static GameObject Box(string name,Vector3 center,Vector3 size)
     {var go=new GameObject(name);go.layer=16;go.transform.position=center;go.AddComponent<BoxCollider>().size=size;return go;}
     static void Reset(EntityVehicle v,float floor=400,float yaw=0)
     {
-        Traversal.Forget(v);GroundSupport.Suspend(v);var s=GroundSupport.Get(v);var rb=v.vehicleRB;
+        Model.GetRig(v).ResetPose();Traversal.Forget(v);GroundSupport.Suspend(v);var s=GroundSupport.Get(v);var rb=v.vehicleRB;
         rb.isKinematic=false;rb.useGravity=true;rb.constraints=RigidbodyConstraints.None;rb.drag=.05f;
         rb.position=new Vector3(0,floor+s.Shape.NeutralY+Rules.SoleClearance,0);rb.rotation=Quaternion.Euler(0,yaw,0);rb.velocity=rb.angularVelocity=Vector3.zero;
         v.SetPosition(rb.position+Origin.position);Physics.SyncTransforms();GroundSupport.Observe(v);
@@ -55,7 +57,7 @@ public sealed class MechaTraversalQA : IModApi
     {
         int attempts=0,success=0;float worst=0,slip=0,penetration=0;var stopwatch=System.Diagnostics.Stopwatch.StartNew();
         foreach(string mode in new[]{"up","down","gap"})foreach(float yaw in new[]{-15f,0f,15f})foreach(int side in new[]{0,1}) {
-            float edge=homeZ+(mode=="up"?.55f:.425f);
+            float edge=homeZ+Rim(v,mode=="up"?.55f:.425f);
             var a=Box("Matrix near bank",new Vector3(0,399.5f,edge-15),new Vector3(30,1,30));
             var b=Box("Matrix far bank",new Vector3(0,399.5f+(mode=="up"?1:0),edge+(mode=="gap"?.75f:0)+15),new Vector3(30,1,30));
             if(mode=="down")a.transform.position+=Vector3.up;
@@ -86,7 +88,7 @@ public sealed class MechaTraversalQA : IModApi
     }
     static void Safety(EntityVehicle v,float homeZ)
     {
-        float edge=homeZ+.425f;var floor=Box("Safety floor",new Vector3(0,399.5f,0),new Vector3(30,1,120));
+        float edge=homeZ+Rim(v,.425f);var floor=Box("Safety floor",new Vector3(0,399.5f,0),new Vector3(30,1,120));
         var step=Box("Safety step",new Vector3(0,400.5f,edge+15),new Vector3(30,1,30));Reset(v);
         var roof=Box("Safety roof",new Vector3(0,402.75f,edge+2),new Vector3(30,.4f,4));Physics.SyncTransforms();
         string reason;Check(Rules.DisplayName(v)+" low roof rejected",Traversal.Search(v,GroundSupport.Get(v),0,out reason)==null);
@@ -101,12 +103,12 @@ public sealed class MechaTraversalQA : IModApi
         } else Check("dynamic fixture precondition",false);
         Reset(v);p=Traversal.Search(v,GroundSupport.Get(v),0,out reason);
         if(p!=null){Traversal.Begin(v,GroundSupport.Get(v),p,false);for(int i=0;i<25;i++)Tick(v,.02f);UnityEngine.Object.DestroyImmediate(step);for(int i=0;i<100;i++)Tick(v,.02f);Check(Rules.DisplayName(v)+" landing destroyed cancels instead of hovering",!Traversal.Active(v)&&v.vehicleRB.position.y<400.1f);}
-        UnityEngine.Object.DestroyImmediate(floor);
+        if(step!=null)UnityEngine.Object.DestroyImmediate(step);UnityEngine.Object.DestroyImmediate(floor);
     }
     static void RenderRates(World world,EntityVehicle v,Model.Rig rig,float homeZ)
     {
-        var floor=Box("Frame near bank",new Vector3(0,399.5f,homeZ+.55f-15),new Vector3(30,1,30));
-        var step=Box("Frame far bank",new Vector3(0,400.5f,homeZ+.55f+15),new Vector3(30,1,30));
+        var floor=Box("Frame near bank",new Vector3(0,399.5f,homeZ+Rim(v,.55f)-15),new Vector3(30,1,30));
+        var step=Box("Frame far bank",new Vector3(0,400.5f,homeZ+Rim(v,.55f)+15),new Vector3(30,1,30));
         foreach(float fps in new[]{30f,60f,120f}){
             float error=0;int ok=0;
             for(int side=0;side<2;side++)for(int repeat=0;repeat<Repetitions;repeat++){
@@ -137,7 +139,8 @@ public sealed class MechaTraversalQA : IModApi
     static void StairsAndEdges(World world,EntityVehicle v,Model.Rig rig)
     {
         var objects=new List<GameObject>();objects.Add(Box("Stairs floor",new Vector3(0,399.5f,0),new Vector3(30,1,120)));
-        for(int i=0;i<8;i++){float height=.15f*(i+1);objects.Add(Box("Stair "+i,new Vector3(0,400+height*.5f,3+i*.85f+15),new Vector3(30,height,30)));}
+        float tread=Mathf.Max(.85f,Rules.SoleDepth(v)+.15f);
+        for(int i=0;i<8;i++){float height=.15f*(i+1);objects.Add(Box("Stair "+i,new Vector3(0,400+height*.5f,3+i*tread+15),new Vector3(30,height,30)));}
         Reset(v);for(int i=0;i<550;i++)Tick(v,.02f,2);
         Check(Rules.DisplayName(v)+" continuous static stairs pos="+v.vehicleRB.position+" "+GroundSupport.Diagnostics(v)+" "+Traversal.Diagnostics(v),GroundSupport.IsGrounded(v)&&v.vehicleRB.position.z>10&&v.vehicleRB.position.y>400.8f);
         foreach(var go in objects)UnityEngine.Object.DestroyImmediate(go);objects.Clear();
@@ -163,8 +166,8 @@ public sealed class MechaTraversalQA : IModApi
     }
     static void Network(World world,EntityVehicle v,float homeZ)
     {
-        var floor=Box("Net near bank",new Vector3(0,399.5f,homeZ+.55f-15),new Vector3(30,1,30));
-        var step=Box("Net far bank",new Vector3(0,400.5f,homeZ+.55f+15),new Vector3(30,1,30));
+        var floor=Box("Net near bank",new Vector3(0,399.5f,homeZ+Rim(v,.55f)-15),new Vector3(30,1,30));
+        var step=Box("Net far bank",new Vector3(0,400.5f,homeZ+Rim(v,.55f)+15),new Vector3(30,1,30));
         var pilot=EntityFactory.CreateEntity(EntityClass.FromString("playerMale"),new Vector3(10,400,0)) as EntityPlayer;world.SpawnEntityInWorld(pilot);
         var seats=AccessTools.Field(typeof(Entity),"attachedEntities");var old=seats.GetValue(v);bool driver=v.hasDriver,engine=v.IsEngineRunning;
         try{
@@ -219,7 +222,7 @@ public sealed class MechaTraversalQA : IModApi
                 var v=EntityFactory.CreateEntity(EntityClass.FromString(name),new Vector3(0,400,0)+Origin.position) as EntityVehicle;
                 world.SpawnEntityInWorld(v);var rb=v.vehicleRB;for(var t=rb.transform;t!=null;t=t.parent)t.gameObject.SetActive(true);
                 var rig=Model.GetRig(v);rig.ResetPose();var support=GroundSupport.Get(v);float homeZ=support.Shape.Home[0].z;
-                report.Add("PROFILE "+name+" neutral="+support.Shape.NeutralY+" hips="+support.Shape.Hip[0]+" home="+support.Shape.Home[0]+" ankle="+support.Shape.AnkleOffset[0]);
+                report.Add("PROFILE "+name+" neutral="+support.Shape.NeutralY+" hips="+support.Shape.Hip[0]+" home="+support.Shape.Home[0]+" ankle="+support.Shape.AnkleOffset[0]+" backpack="+support.Shape.Backpack);
                 foreach(var c in UnityEngine.Object.FindObjectsOfType<Collider>())if(c.enabled&&!c.isTrigger&&Mathf.Abs(c.transform.position.y-400)<3){var path=c.name;for(var t=c.transform.parent;t!=null;t=t.parent)path=t.name+"/"+path;report.Add("COLLIDER "+path+" rb="+(c.attachedRigidbody!=null?c.attachedRigidbody.name:"none")+" entity="+GameUtils.GetHitRootEntity(c.tag,c.transform)+" type="+c.GetType()+" pos="+c.transform.position+" tag="+c.tag);}
                 Check(name+" all wheel load disabled",rb.GetComponentsInChildren<WheelCollider>(true).All(w=>!w.enabled));
                 var floor=Box("Traversal floor",new Vector3(0,399.5f,0),new Vector3(30,1,300));
@@ -235,11 +238,11 @@ public sealed class MechaTraversalQA : IModApi
                 foreach(float small in new[]{.15f,.30f}){
                     var obstacle=Box("Small step",new Vector3(0,400+small*.5f,18),new Vector3(30,small,30));Reset(v);
                     for(int tick=0;tick<400;tick++)Tick(v,.02f,4);
-                    Check(name+" automatic small step "+small+" pos="+rb.position+" vel="+rb.velocity,GroundSupport.IsGrounded(v)&&rb.position.z>6&&rb.position.y>400+small+support.Shape.NeutralY-.20f);
+                    Check(name+" automatic small step "+small+" pos="+rb.position+" vel="+rb.velocity+" "+GroundSupport.Diagnostics(v),GroundSupport.IsGrounded(v)&&rb.position.z>6&&rb.position.y>400+small+support.Shape.NeutralY-.20f);
                     UnityEngine.Object.DestroyImmediate(obstacle);
                 }
                 foreach(float height in new[]{.50f,.75f,1f,1.2f,-.50f,-1f}){
-                    bool down=height<0;float edge=homeZ+.425f;
+                    bool down=height<0;float edge=homeZ+Rim(v,.425f);
                     GameObject step;
                     if(down){UnityEngine.Object.DestroyImmediate(floor);floor=Box("Traversal lower floor",new Vector3(0,399.5f,0),new Vector3(30,1,120));step=Box("Traversal upper bank",new Vector3(0,400-height/2,edge-15),new Vector3(30,-height,30));Reset(v,400-height);}
                     else{step=Box("Traversal step",new Vector3(0,400+height/2,edge+15),new Vector3(30,height,30));Reset(v);}
@@ -274,7 +277,7 @@ public sealed class MechaTraversalQA : IModApi
                     rig.ResetPose();
                 }
                 foreach(float width in new[]{.40f,.75f,1f}){
-                    UnityEngine.Object.DestroyImmediate(floor);float edge=homeZ+.425f;
+                    UnityEngine.Object.DestroyImmediate(floor);float edge=homeZ+Rim(v,.425f);
                     var left=Box("Traversal near bank",new Vector3(0,399.5f,edge-15),new Vector3(30,1,30));
                     var right=Box("Traversal far bank",new Vector3(0,399.5f,edge+width+15),new Vector3(30,1,30));
                     Reset(v);string reason;var p=Traversal.Search(v,support,0,out reason);

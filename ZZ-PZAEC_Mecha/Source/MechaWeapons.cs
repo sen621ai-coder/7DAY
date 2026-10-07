@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -241,8 +241,8 @@ namespace PZAEC.Mecha
                 var driver=vehicle.GetAttached(0);
                 if(driver==null || driver.entityId!=actor) return;
                 if(op==SkipBoard) { Boarding.Skip(vehicle); return; }
-                if(!Locomotion.Receive(vehicle,actor,sequence,direction)) return;
-                Broadcast(vehicleId,sequence,9,direction,Vector3.zero,actor,0);
+                if(!Finite(origin.x)||!Finite(origin.y)||!Finite(origin.z)||!Locomotion.Receive(vehicle,actor,sequence,direction,origin)) return;
+                Broadcast(vehicleId,sequence,9,direction,origin,actor,0);
                 return;
             }
             // Weapons, repairs and mode flips stay locked during the ceremony.
@@ -595,7 +595,7 @@ namespace PZAEC.Mecha
             var reason=ResolveMissile(state,out var target);
             if(reason!=0||target!=state.LockTarget){state.AimReason=reason;return;}
             var rig = Model.GetRig(state.Vehicle);
-            var mount = rig != null && rig.Backpack != null ? rig.Backpack : null;
+            var mount = rig!=null&&rig.Justice!=null?rig.Justice.MissileMuzzle:rig != null && rig.Backpack != null ? rig.Backpack : null;
             var start = mount != null ? mount.position + Origin.position : state.Vehicle.position + BodyRotation(state.Vehicle) * new Vector3(0, 2.6f, 0);
             var direction=AimFromMuzzle(start,MissileAimPoint(target),state.AimDirection);
             if(Trace(state.Vehicle,start,direction,1f,out var blocked)){state.AimReason=2;return;}

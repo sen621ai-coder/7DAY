@@ -1,0 +1,7 @@
+ZGMF-X09A Justice Gundam
+Author: みそ太郎 / nama_140
+https://sketchfab.com/nama_140
+Source: https://sketchfab.com/3d-models/zgmf-x09a-justice-gundam-764f572a4f3b48e6ac7a0d49a6d9b4e8
+License: CC-BY-4.0 https://creativecommons.org/licenses/by/4.0/
+Attribution verified from original GLB asset.extras.
+Adaptation by PZAEC: coordinate/scale conversion, grounded base pose, render grouping, preserved 65-joint skin, sampled clips, authored walking overlays, game equipment attachments. Original GLB is preserved as justice.glb; source SHA256 in justice.json.

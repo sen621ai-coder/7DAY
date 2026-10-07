@@ -66,9 +66,11 @@ namespace PZAEC.Mecha
         // Ground support / traversal rules, shared by both chassis and native QA.
         public const float AutoStepHeight=.30f,ActiveStepHeight=1.00f,ActiveGapWidth=.75f;
         public const float NormalWalkSlope=35f,MaxWalkSlope=45f;
+        public static float SoleWidth(EntityVehicle v){return Complete(v)?Justice.SoleWidth:FootWidth;}
+        public static float SoleDepth(EntityVehicle v){return Complete(v)?Justice.SoleDepth:FootDepth;}
         public const float FootWidth=.45f,FootDepth=.65f,FootResidual=.08f,SoleClearance=.015f;
         public const float TraverseToeClearance=.12f,TraverseSafeSpeed=.45f;
-        public const float PrototypeTraverseSeconds=1f,CompleteTraverseSeconds=.8f;
+        public const float PrototypeTraverseSeconds=1f,CompleteTraverseSeconds=1f;
         public const float SupportHeightMargin=.03f,RoughWalkSpeed=1.2f,RoughStepSeconds=.18f,RecoveryStepSeconds=.24f;
         public const float TorsoLeanDegrees = 8f, HipSwayMeters = .08f, ArmSwingDegrees = 15f;
         public const float DeployRiseSeconds = 2.5f;

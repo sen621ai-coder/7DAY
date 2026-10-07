@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +8,15 @@ namespace PZAEC.Mecha
     // flags/charge/vertical input; remote peers never apply bearing forces.
     public sealed class GroundWire
     {
-        public int Vehicle,Actor,Sequence;public byte Flags;public float Yaw;
+        public int Vehicle,Actor,Sequence;public byte Flags;public float Yaw,WalkPhase;
         public Vector3 Root;public Vector3[] Feet=new Vector3[2],Normals={Vector3.up,Vector3.up};
-        public const int Bytes=77;
+        public const int Bytes=81;
         static void Vector(PooledBinaryWriter w,Vector3 v){w.Write(v.x);w.Write(v.y);w.Write(v.z);}
         static Vector3 Vector(PooledBinaryReader r){return new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());}
-        public void Write(PooledBinaryWriter w){w.Write(Vehicle);w.Write(Actor);w.Write(Sequence);w.Write(Flags);w.Write(Yaw);Vector(w,Root);for(int i=0;i<2;i++){Vector(w,Feet[i]);Vector(w,Normals[i]);}}
-        public void Read(PooledBinaryReader r){Vehicle=r.ReadInt32();Actor=r.ReadInt32();Sequence=r.ReadInt32();Flags=r.ReadByte();Yaw=r.ReadSingle();Root=Vector(r);for(int i=0;i<2;i++){Feet[i]=Vector(r);Normals[i]=Vector(r);}}
+        public void Write(PooledBinaryWriter w){w.Write(Vehicle);w.Write(Actor);w.Write(Sequence);w.Write(Flags);w.Write(Yaw);w.Write(WalkPhase);Vector(w,Root);for(int i=0;i<2;i++){Vector(w,Feet[i]);Vector(w,Normals[i]);}}
+        public void Read(PooledBinaryReader r){Vehicle=r.ReadInt32();Actor=r.ReadInt32();Sequence=r.ReadInt32();Flags=r.ReadByte();Yaw=r.ReadSingle();WalkPhase=r.ReadSingle();Root=Vector(r);for(int i=0;i<2;i++){Feet[i]=Vector(r);Normals[i]=Vector(r);}}
         static bool Finite(Vector3 v){return Weapons.Finite(v.x)&&Weapons.Finite(v.y)&&Weapons.Finite(v.z);}
-        public bool Valid(){if(Sequence<=0||Flags>31||!Weapons.Finite(Yaw)||!Finite(Root)||((Flags&1)!=0)!=((Flags&6)!=0)||((Flags&8)!=0&&(Flags&1)==0))return false;
+        public bool Valid(){if(!Weapons.Finite(WalkPhase)||WalkPhase<0||WalkPhase>1||Sequence<=0||Flags>31||!Weapons.Finite(Yaw)||!Finite(Root)||((Flags&1)!=0)!=((Flags&6)!=0)||((Flags&8)!=0&&(Flags&1)==0))return false;
             for(int i=0;i<2;i++)if(!Finite(Feet[i])||!Finite(Normals[i])||Mathf.Abs(Normals[i].magnitude-1)>.02f||Normals[i].y<.707f||(Feet[i]-Root).sqrMagnitude>6)return false;return true;}
     }
     public sealed class NetPackagePZAECMechaGroundIntent:NetPackage
@@ -47,7 +47,7 @@ namespace PZAEC.Mecha
     }
     public static class GroundNet
     {
-        sealed class Peer{public int Sent,Actor=-1,Received;public byte SentFlags=255;public float SendAt=-100,Seen=-100;public GroundWire Last;public Vector3[] From=new Vector3[2];}
+        sealed class Peer{public int Sent,Actor=-1,Received;public byte SentFlags=255;public float SendAt=-100,Seen=-100,PhaseFrom;public GroundWire Last;public Vector3[] From=new Vector3[2];}
         static readonly Dictionary<int,Peer> peers=new Dictionary<int,Peer>();
         static Peer Get(EntityVehicle v){Peer p;if(!peers.TryGetValue(v.entityId,out p)){p=new Peer();peers[v.entityId]=p;}return p;}
         static int Actor(EntityVehicle v){var driver=v.GetAttached(0);return driver!=null?driver.entityId:-1;}
@@ -59,14 +59,14 @@ namespace PZAEC.Mecha
             int actor=Actor(v);if(actor!=p.Actor){p.Actor=actor;p.SentFlags=255;}
             if(flags==p.SentFlags&&Time.time-p.SendAt<.1f)return;p.SentFlags=flags;p.SendAt=Time.time;
             var d=new GroundWire{Vehicle=v.entityId,Actor=actor,Sequence=++p.Sent,Flags=flags,Yaw=v.vehicleRB.rotation.eulerAngles.y,Root=v.vehicleRB.position+Origin.position};
-            for(int i=0;i<2;i++){d.Feet[i]=s.Feet[i].Position;d.Normals[i]=s.Feet[i].Normal;}
+            for(int i=0;i<2;i++){d.Feet[i]=s.Feet[i].Position;d.Normals[i]=s.Feet[i].Normal;if(s.Feet[i].Swing)d.WalkPhase=(i*.5f+Mathf.Clamp01(s.Feet[i].Age/Mathf.Max(.01f,s.Feet[i].Duration))*.5f)%1;}
             if(Weapons.Server){Broadcast(d);return;}if(actor>=0&&ConnectionManager.Instance!=null)ConnectionManager.Instance.SendToServer(NetPackageManager.GetPackage<NetPackagePZAECMechaGroundIntent>().Setup(d));
         }
         static void Broadcast(GroundWire d){if(ConnectionManager.Instance!=null)ConnectionManager.Instance.SendPackage(NetPackageManager.GetPackage<NetPackagePZAECMechaGroundEvent>().Setup(d),false,-1,-1,d.Vehicle,null,512);}
         public static bool ServerReceive(World world,int actor,GroundWire d)
         {
             if(!d.Valid()||d.Actor!=actor||actor<0)return false;var v=world.GetEntity(d.Vehicle) as EntityVehicle;
-            if(!Weapons.IsMecha(v)||Actor(v)!=actor||v.IsDead()||Traversal.Active(v)||Flight.AirPose(Locomotion.Get(v))||Locomotion.Get(v).HoverOn||Vector3.Distance(v.vehicleRB.position+Origin.position,d.Root)>1.5f)return false;
+            if(!Weapons.IsMecha(v)||Actor(v)!=actor||v.IsDead()||Traversal.Active(v)||Flight.AirPose(Locomotion.Get(v))||(Locomotion.Get(v).HoverOn||Skim.Active(v))||Vector3.Distance(v.vehicleRB.position+Origin.position,d.Root)>1.5f)return false;
             var peer=Get(v);if(peer.Actor==actor&&d.Sequence<=peer.Received)return false;var support=GroundSupport.Get(v);if(support==null)return false;var yaw=Quaternion.Euler(0,d.Yaw,0);
             if(!GroundSupport.HullClear(v,support.Shape,d.Root,d.Root,yaw))return false;
             for(int i=0;i<2;i++){
@@ -78,7 +78,7 @@ namespace PZAEC.Mecha
         }
         public static bool ClientReceive(World world,GroundWire d)
         {
-            if(!d.Valid())return false;var v=world.GetEntity(d.Vehicle) as EntityVehicle;if(!Weapons.IsMecha(v)||Actor(v)!=d.Actor||v.IsDead()||Flight.AirPose(Locomotion.Get(v))||Locomotion.Get(v).HoverOn)return false;
+            if(!d.Valid())return false;var v=world.GetEntity(d.Vehicle) as EntityVehicle;if(!Weapons.IsMecha(v)||Actor(v)!=d.Actor||v.IsDead()||Flight.AirPose(Locomotion.Get(v))||(Locomotion.Get(v).HoverOn||Skim.Active(v)))return false;
             var p=Get(v);if(p.Actor==d.Actor&&d.Sequence<=p.Received)return false;
             if(!v.isEntityRemote)return true;Accept(v,p,d);return true;
         }
@@ -89,12 +89,14 @@ namespace PZAEC.Mecha
             if(same){if((d.Flags&8)!=0&&(p.Last.Flags&8)==0)RobotAudio.Event(v,"entry-brace",d.Sequence,.28f);
                 if((d.Flags&8)==0&&(p.Last.Flags&8)!=0)RobotAudio.Event(v,"stand-lock",d.Sequence,.32f);
                 for(int i=0;i<2;i++)if((d.Flags&(2<<i))!=0&&(p.Last.Flags&(2<<i))==0)RobotAudio.ContactEvent(v,i==0?"step-left":"step-right",d.Sequence,d.Feet[i],.85f);}
-            p.Actor=d.Actor;p.Received=d.Sequence;p.Last=d;p.Seen=Time.time;support.Actor=d.Actor;support.Initialized=true;support.Grounded=(d.Flags&1)!=0;support.Recovering=(d.Flags&8)!=0;support.Cautious=(d.Flags&16)!=0;
+            p.PhaseFrom=same?WalkPhase(v,d.WalkPhase):d.WalkPhase;p.Actor=d.Actor;p.Received=d.Sequence;p.Last=d;p.Seen=Time.time;support.Actor=d.Actor;support.Initialized=true;support.Grounded=(d.Flags&1)!=0;support.Recovering=(d.Flags&8)!=0;support.Cautious=(d.Flags&16)!=0;
             for(int i=0;i<2;i++){support.Feet[i].Position=d.Feet[i];support.Feet[i].Normal=d.Normals[i];support.Feet[i].Planted=(d.Flags&(2<<i))!=0;support.Feet[i].Swing=!support.Feet[i].Planted;}
             if(support.Recovering){var m=Locomotion.Get(v);m.AirSince=-1;m.LandingEventExpected=false;m.LandingPendingUntil=-100;}
         }
+        public static float BlendPhase(float from,float to,float t){return Mathf.Repeat(from+Mathf.Repeat(to-from,1)*Mathf.Clamp01(t),1);}
+        public static float WalkPhase(EntityVehicle v,float fallback){if(!Fresh(v))return fallback;var p=Get(v);return BlendPhase(p.PhaseFrom,p.Last.WalkPhase,(Time.time-p.Seen)/.1f);}
         public static bool Pose(EntityVehicle v,Model.Rig rig){if(!v.isEntityRemote||!Fresh(v))return false;var p=Get(v);float t=Mathf.Clamp01((Time.time-p.Seen)/.1f);for(int i=0;i<2;i++)Gait.Solve(rig,i,((p.Last.Flags&(2<<i))!=0?p.Last.Feet[i]:Vector3.Lerp(p.From[i],p.Last.Feet[i],t))-Origin.position,p.Last.Normals[i],0);return true;}
-        public static void Tick(World world){foreach(var pair in peers){var p=pair.Value;if(p.Last==null)continue;var v=world.GetEntity(pair.Key) as EntityVehicle;if(v==null||Actor(v)!=p.Actor||v.IsDead()||Flight.AirPose(Locomotion.Get(v))||Locomotion.Get(v).HoverOn||Time.time-p.Seen>=.75f){p.Last=null;if(v!=null&&v.isEntityRemote){var s=GroundSupport.Find(v);if(s!=null){s.Recovering=s.Cautious=s.QueuedToggle=false;s.Initialized=false;}}}}}
+        public static void Tick(World world){foreach(var pair in peers){var p=pair.Value;if(p.Last==null)continue;var v=world.GetEntity(pair.Key) as EntityVehicle;if(v==null||Actor(v)!=p.Actor||v.IsDead()||Flight.AirPose(Locomotion.Get(v))||(Locomotion.Get(v).HoverOn||Skim.Active(v))||Time.time-p.Seen>=.75f){p.Last=null;if(v!=null&&v.isEntityRemote){var s=GroundSupport.Find(v);if(s!=null){s.Recovering=s.Cautious=s.QueuedToggle=false;s.Initialized=false;}}}}}
         public static void Forget(EntityVehicle v){peers.Remove(v.entityId);}public static void Clear(){peers.Clear();}
     }
 }

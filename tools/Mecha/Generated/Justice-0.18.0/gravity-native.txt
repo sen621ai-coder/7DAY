@@ -1,0 +1,8 @@
+PASS 初号机（试验体） parked has one gravity vy=-0.1962
+PASS 初号机（试验体） boarding native gravity handoff vy=-0.1962
+PASS 初号机（试验体） native thrust net acceleration is +6 vy=0.12
+PASS 初号机（试验体） unboarding restores one gravity vy=-0.1962
+PASS 初号机（完全体） parked has one gravity vy=-0.1962
+PASS 初号机（完全体） boarding native gravity handoff vy=-0.1962
+PASS 初号机（完全体） native thrust net acceleration is +6 vy=0.12
+PASS 初号机（完全体） unboarding restores one gravity vy=-0.1962

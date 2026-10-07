@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -116,10 +116,10 @@ namespace PZAEC.Mecha
             {
                 if(complete){Cue(s,age,s.Exit?.75f:1.05f,1,"step-left",.72f,silent,0);Cue(s,age,s.Exit?1.05f:1.5f,2,"step-right",.78f,silent,1);}
                 Cue(s,age,complete?Ceremony.KneelEnd(s.Exit):.9f,3,"kneel-lock",.62f,silent);
-                Cue(s,age,complete?Ceremony.OpenAt(s.Exit):s.Exit?.6f:.9f,4,"hatch-open",.52f,silent);
+                if(!complete){Cue(s,age,complete?Ceremony.OpenAt(s.Exit):s.Exit?.6f:.9f,4,"hatch-open",.52f,silent);
                 Cue(s,age,complete?Ceremony.CloseAt(s.Exit):s.Exit?1.4f:2.1f,5,"hatch-close",.48f,silent);
                 Cue(s,age,complete?Ceremony.OpenAt(s.Exit)+(s.Exit?.7f:.75f):s.Exit?1.2f:1.6f,8,"hatch-open-stop",.52f,silent);
-                Cue(s,age,complete?Ceremony.CloseAt(s.Exit)+.65f:s.Exit?2:2.5f,9,"hatch-close-lock",.68f,silent);
+                Cue(s,age,complete?Ceremony.CloseAt(s.Exit)+.65f:s.Exit?2:2.5f,9,"hatch-close-lock",.68f,silent); }
                 Cue(s,age,complete?(s.Exit?5.75f:6.6f):s.Duration-.1f,6,"stand-lock",.7f,silent);
             }
             if(!s.Exit)Cue(s,age,s.Duration-.08f,7,"ready",.46f,silent);
@@ -128,7 +128,7 @@ namespace PZAEC.Mecha
         public static bool SwordTarget(EntityVehicle v,out Vector3 grip,out Vector3 direction,out Vector3 normal)
         {grip=direction=normal=Vector3.zero;Show s;if(v==null||!Rules.Complete(v)||!shows.TryGetValue(v.entityId,out s))return false;Ceremony.SwordTarget(s.Exit,s.Full?Time.time-s.Started:0,out grip,out direction,out normal);return true;}
         public static Vector3 FootTarget(EntityVehicle v,Model.Rig rig,int side,Vector3 home)
-        {Show s;return v!=null&&Rules.Complete(v)&&shows.TryGetValue(v.entityId,out s)&&s.Full?Ceremony.FootTarget(rig,s.Exit,Time.time-s.Started,side,home):home+(side==0?-rig.Mount.forward*.85f:rig.Mount.forward*.3f)*Kneel(v);}
+        {Show s;if(rig.Justice!=null)return home;return v!=null&&Rules.Complete(v)&&shows.TryGetValue(v.entityId,out s)&&s.Full?Ceremony.FootTarget(rig,s.Exit,Time.time-s.Started,side,home):home+(side==0?-rig.Mount.forward*.85f:rig.Mount.forward*.3f)*Kneel(v);}
         public static float Total(bool exit){return exit?2:4;}
         static float Ease(float t){t=Mathf.Clamp01(t);return t*t*(3-2*t);}
         public static float Kneel(EntityVehicle v)
@@ -141,6 +141,7 @@ namespace PZAEC.Mecha
             return s.Exit?(t<.6f?0:t<1.2f?Ease((t-.6f)/.6f):t<1.4f?1:1-Ease((t-1.4f)/.6f)):t<.9f?0:t<1.6f?Ease((t-.9f)/.7f):t<2.1f?1:1-Ease((t-2.1f)/.4f);}
         public static bool ApplyPose(Model.Rig rig,EntityVehicle v)
         {Show s;if(!shows.TryGetValue(v.entityId,out s))return false;
+            if(rig.Justice!=null){Justice.Board(rig,Kneel(v));return true;}
             if(Rules.Complete(v)){var actor=GameManager.Instance.World.GetEntity(s.Actor);Ceremony.Pose(v,rig,s.Exit,s.Full,Time.time-s.Started,actor!=null?actor.position:v.position+Weapons.BodyRotation(v)*Vector3.forward);return true;}
             float k=Kneel(v),t=Time.time-s.Started;
             float brace=s.Full?Ease(t/.35f)*(1-Ease((t-(s.Exit?1.65f:3.4f))/(s.Exit?.35f:.6f))):0;

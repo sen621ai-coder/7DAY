@@ -106,7 +106,7 @@ namespace PZAEC.Mecha
             if(kind==CombatFeedback.BeamImpact||kind==CombatFeedback.SwordContact){CombatFeedback.Receive(world,vehicleId,id,kind,a,b,value,c);return;}
             if(kind==Samurai.CancelAck){var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)Samurai.ReceiveCancelAck(v,id,a);return;}
             if(kind==Samurai.Snapshot){var v=world.GetEntity(vehicleId) as EntityVehicle;if(v!=null)Samurai.Receive(v,id,a,b,value,c);return;}
-            if(kind==9) { var v=world.GetEntity(vehicleId) as EntityVehicle; if(v!=null && v.isEntityRemote) Locomotion.Receive(v,(int)value,id,a); return; }
+            if(kind==9) { var v=world.GetEntity(vehicleId) as EntityVehicle; if(v!=null && v.isEntityRemote) Locomotion.Receive(v,(int)value,id,a,b); return; }
             if(kind==Boarding.BoardEvent) { Boarding.ReceiveSnapshot(world,vehicleId,id,a,b,value,c); return; }
             if(kind==Weapons.LandingEvent){LandingContact(world,vehicleId,id,a,b,value,c);return;}
             if (kind == Weapons.StatusEvent)

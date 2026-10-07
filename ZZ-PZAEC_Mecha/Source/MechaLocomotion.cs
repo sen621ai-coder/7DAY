@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -14,6 +14,7 @@ namespace PZAEC.Mecha
             public float ChargeStart=-1, Charge, NextJump, AirSince=-1, LastInput=-100, LastSync=-100, LastPacket=-100, LandingAt=-100, JumpAt=-100, LastTime, Blend;
             public float AirPeakDownSpeed,LandingStrength=.7f,LandingPendingUntil=-100;public bool LandingEventExpected;
             public Flight.Phase FlightMode;
+            public Vector3 SkimStart,SkimRaisedAt;public float SkimRaisedHeight;public Skim.Phase SkimPhase;public bool SkimLatch;public float SkimGround,SkimTarget,SkimAge;public string SkimReason;
             public float HoldY, FlightAge, ContactTime, VerticalInput, WingBlend, FlightHeight=-1, VisualForward, VisualTurn, FlightLean, FlightBank, FlightSweep, LastHeightAt=-100;
             public bool ControlledLanding;
             public int FlightActor=-1;
@@ -34,10 +35,11 @@ namespace PZAEC.Mecha
         public static void ReleaseInput() {var s=Local;if(s==null)return;s.Toggle=s.Descend=s.Jump=s.JumpWasHeld=s.InputReady=false;s.ChargeStart=-1;s.Charge=0;}
         public static bool Powered(EntityVehicle v)
         {return v!=null&&v.hasDriver&&!v.IsDead()&&v.IsEngineRunning&&v.vehicle.GetHealth()>0&&(v.vehicle.GetFuelLevel()>0||EntityVehicle.VehicleFuelUsageModifier==0);}
-        public static bool Receive(EntityVehicle v,int actor,int sequence,Vector3 state)
+        public static bool Receive(EntityVehicle v,int actor,int sequence,Vector3 state,Vector3? transition=null)
         {
-            if(!Weapons.IsMecha(v)||!Weapons.Finite(state.x)||!Weapons.Finite(state.y)||!Weapons.Finite(state.z)||state.x<0||state.x>127||state.x!=(int)state.x||state.y<0||state.y>1||Mathf.Abs(state.z)>1)return false;
+            if(!Weapons.IsMecha(v)||!Weapons.Finite(state.x)||!Weapons.Finite(state.y)||!Weapons.Finite(state.z)||state.x<0||state.x>511||state.x!=(int)state.x||state.y<0||state.y>1||Mathf.Abs(state.z)>1)return false;
             int bits=(int)state.x;
+            int skim=(bits>>7)&3;if(skim!=0&&skim!=2&&(bits&2)!=0)return false;if(skim!=0&&((bits&125)!=0||state.y!=0||state.z!=0))return false;
             bool flight=(bits&8)!=0,landing=(bits&16)!=0,takeoff=(bits&32)!=0,fault=(bits&64)!=0;
             if((!Rules.Complete(v)&&bits>7)||(landing&&!flight)||(takeoff&&!flight)||(landing&&takeoff)||(flight&&fault)||((flight||fault)&&(bits&1)!=0)||(!flight&&state.z!=0)||((flight||fault)&&state.y!=0)||((landing||takeoff||fault)&&(bits&2)!=0))return false;
             var s=Get(v); if(s.Actor==actor&&sequence<=s.Sequence)return false;
@@ -45,17 +47,18 @@ namespace PZAEC.Mecha
             // A local physics owner already has more recent input than its echo.
             if(!v.isEntityRemote&&!Weapons.Server)return true;
             int flags=(int)state.x;bool ground=(flags&4)!=0;
-            if(!s.Grounded&&ground)MarkLanding(s,Time.time,!Traversal.Active(v)&&!Traversal.Major(v)&&!landing&&!takeoff&&!flight&&!Flight.Active(s));
-            if(s.Grounded&&!ground){s.JumpAt=Time.time;s.AirSince=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
+            if(s.SkimPhase==Skim.Phase.Off&&skim==0&&!s.Grounded&&ground)MarkLanding(s,Time.time,!Traversal.Active(v)&&!Traversal.Major(v)&&!landing&&!takeoff&&!flight&&!Flight.Active(s));
+            if(skim==0&&s.Grounded&&!ground){s.JumpAt=Time.time;s.AirSince=Time.time;s.AirPeakDownSpeed=0;s.LandingPendingUntil=-100;s.LandingEventExpected=false;}
             s.Grounded=ground;s.HoverOn=(flags&1)!=0;s.Boost=(flags&2)!=0;s.Charge=state.y;
             s.FlightMode=fault?Flight.Phase.PowerLost:landing?Flight.Phase.Landing:takeoff?Flight.Phase.Takeoff:flight?Flight.Phase.Cruise:Flight.Phase.Ground;
-            s.VerticalInput=state.z;return true;
+            if(s.SkimPhase!=(Skim.Phase)skim){s.SkimAge=0;s.SkimStart=transition??v.position;}s.SkimPhase=(Skim.Phase)skim;s.VerticalInput=state.z;return true;
         }
         public static void Tick(World world)
         {
             GroundSupport.Cleanup(world);var remove=new List<int>();
             foreach(var pair in moves){var s=pair.Value;if(s.Vehicle==null||world.GetEntity(pair.Key)!=s.Vehicle){remove.Add(pair.Key);continue;}
-                if(s.Vehicle.isEntityRemote&&Time.time-s.LastPacket>1f){bool flying=Flight.AirPose(s);s.HoverOn=s.Boost=false;s.Charge=0;s.FlightMode=!s.Grounded&&flying?Flight.Phase.PowerLost:Flight.Phase.Ground;s.VerticalInput=0;}
+                if(s.Vehicle.isEntityRemote&&Time.time-s.LastPacket>1f){bool flying=Flight.AirPose(s);s.SkimPhase=Skim.Phase.Off;s.HoverOn=s.Boost=false;s.Charge=0;s.FlightMode=!s.Grounded&&flying?Flight.Phase.PowerLost:Flight.Phase.Ground;s.VerticalInput=0;}
+                if(s.Vehicle.isEntityRemote&&s.SkimPhase!=Skim.Phase.Off)s.SkimAge+=Time.deltaTime;
                 s.WingBlend=Mathf.MoveTowards(s.WingBlend,Flight.AirPose(s)?1:0,Time.deltaTime/(Flight.AirPose(s)?Rules.FlightDeploySeconds:1f));
                 s.Blend=Mathf.MoveTowards(s.Blend,(s.HoverOn||s.Boost||Flight.Active(s))?1:0,Time.deltaTime/.35f);
             }
@@ -72,10 +75,10 @@ namespace PZAEC.Mecha
             bool input=s.InputReady&&Time.time-s.LastInput<.5f&&driver!=null&&Weapons.UIReady(driver)&&!Boarding.Active(v);
             var movement=v.movementInput;
             float rawThrottle=input&&movement!=null?movement.moveForward:0;
-            bool traversal=Traversal.Step(v,support,s,rawThrottle,Powered(v)&&input,dt);
+            bool traversal=!Skim.Active(v)&&Traversal.Step(v,support,s,rawThrottle,Powered(v)&&input,dt);
             if(traversal){s.Grounded=support!=null&&support.Grounded;s.Boost=false;s.AirSince=-1;s.LandingEventExpected=false;Sync(v,s);return;}
-            RecoveryInputs(v,support,s);
-            if(Rules.Complete(v)){if(Flight.Step(v,s,grounded,input,dt)){GroundSupport.Suspend(v);return;}input&=s.InputReady;}
+            if(!Skim.Active(v))RecoveryInputs(v,support,s);
+            if(Rules.Complete(v)){if(s.Toggle&&Skim.Active(v)){Skim.Cancel(s);grounded=false;}if(Flight.Step(v,s,grounded,input,dt)){if(Skim.Active(v))Skim.Cancel(s);s.SkimLatch=true;GroundSupport.Suspend(v);return;}input&=s.InputReady;if(Skim.Step(v,s,grounded,input,dt))return;}
             bool sustain=Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0;
             bool powered=sustain&&input;
             if(!input){s.Toggle=s.Descend=s.Jump=s.JumpWasHeld=false;s.Charge=0;s.ChargeStart=-1;}
@@ -90,7 +93,7 @@ namespace PZAEC.Mecha
             if(stomp){s.LastSync=-100;Sync(v,s);Weapons.SendLocalIntent(v,Weapons.Stomp,Vector3.down*s.LandingStrength,v.position);}
             var forward=Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized;
             var planar=Vector3.ProjectOnPlane(rb.velocity,Vector3.up);float speed=planar.magnitude;
-            bool boost=!Samurai.Braced(v)&&powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
+            bool boost=!Rules.Complete(v)&&!Samurai.Braced(v)&&powered&&grounded&&!s.HoverOn&&throttle>.1f&&v.vehicle.IsTurbo;
             s.Boost=boost||(s.Boost&&powered&&grounded&&speed>4.2f&&!s.HoverOn);
             float target=throttle>=0?throttle*(boost?13.5f:4f):throttle*2f;
             if(s.HoverOn)target=throttle*Rules.HoverSpeed;
@@ -128,7 +131,7 @@ namespace PZAEC.Mecha
         }
         public static Vector3 Snapshot(MoveState s)
         {
-            int flags=(s.HoverOn?1:0)|(s.Boost?2:0)|(s.Grounded?4:0)|(Flight.Active(s)?8:0)|(s.FlightMode==Flight.Phase.Landing?16:0)|(s.FlightMode==Flight.Phase.Takeoff?32:0)|(s.FlightMode==Flight.Phase.PowerLost?64:0);
+            int flags=(s.HoverOn?1:0)|(s.Boost?2:0)|(s.Grounded?4:0)|(Flight.Active(s)?8:0)|(s.FlightMode==Flight.Phase.Landing?16:0)|(s.FlightMode==Flight.Phase.Takeoff?32:0)|(s.FlightMode==Flight.Phase.PowerLost?64:0)|((int)s.SkimPhase<<7);
             return new Vector3(flags,s.Charge,Flight.Active(s)?s.VerticalInput:0);
         }
         public static void RecoveryInputs(EntityVehicle v,GroundSupport.State support,MoveState s)
@@ -145,7 +148,7 @@ namespace PZAEC.Mecha
         public static void Sync(EntityVehicle v,MoveState s)
         // Airborne duration starts at the contact edge on both peers, not at
         // the next throttled heartbeat (which can erase 0.2s from a short jump).
-        {if(s.Grounded!=s.LastSentGrounded||Time.time-s.LastSync>=.2f){s.LastSync=Time.time;s.LastSentGrounded=s.Grounded;Weapons.SendLocalIntent(v,Weapons.Motion,Snapshot(s),Vector3.zero);}}
+        {if(s.Grounded!=s.LastSentGrounded||Time.time-s.LastSync>=.2f){s.LastSync=Time.time;s.LastSentGrounded=s.Grounded;Weapons.SendLocalIntent(v,Weapons.Motion,Snapshot(s),s.SkimStart);}}
         // One airborne interval grants at most one damaging landing. The
         // owner sends the grounded snapshot before its stomp intent so the
         // server can consume the same contact without creating an explosion.

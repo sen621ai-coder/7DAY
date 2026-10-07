@@ -1,0 +1,28 @@
+PASS remote gait phase wraps forward without a jump
+PASS physical hover height=0.3002319
+PASS cruise speed=13.5
+PASS release settles phase=Off height=0.01132202
+PASS relief 0.25
+PASS relief 0.5
+PASS relief 1
+PASS relief 1.1
+PASS relief -1
+PASS relief -1.1
+PASS braking horizon 13.5
+PASS cliff brakes before rim z=117.9126
+PASS cancel clears drive
+PASS motion rejects skim plus flight
+PASS motion rejects skim on ground
+PASS physical relief=0.25 z=94.49972 y=400.5503
+PASS physical relief=0.5 z=94.49972 y=400.8002
+PASS physical relief=1 z=93.51971 y=401.3001
+PASS physical relief=1.1 z=9.92138 y=400.0426
+PASS physical relief=-0.25 z=94.49972 y=400.0498
+PASS physical relief=-0.5 z=94.49972 y=399.7998
+PASS physical relief=-1 z=94.49972 y=399.2998
+PASS physical relief=-1.1 z=9.92138 y=400.0426
+PASS low roof brakes before ascent phase=Settling
+PASS power loss cancels drive
+PASS skim to Q cruise preserves release latch
+PASS ground message length
+PASS ground gait round trip
