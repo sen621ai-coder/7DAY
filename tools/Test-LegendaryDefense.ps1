@@ -92,9 +92,9 @@ public static class DefenseRegression
             var original=new EntityCreationData {entityClass=123456789,id=51,spawnById=-1,spawnByName=tag};
             using(var stream=new MemoryStream()) {
                 var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream);
-                original.write(writer,true); writer.Flush(); stream.Position=0;
+                original.write(writer,StreamModeWrite.ToClient); writer.Flush(); stream.Position=0;
                 var reader=new PooledBinaryReader(); reader.SetBaseStream(stream);
-                var received=new EntityCreationData(); received.read(reader,true);
+                var received=new EntityCreationData(); received.read(reader,StreamModeRead.FromServer);
                 Check(received.spawnByName==tag && received.spawnById==-1 && received.id==51,"Spawn ownership lost in INITIAL packet");
                 Check(stream.Position==stream.Length,"Entity packet size mismatch");
             }

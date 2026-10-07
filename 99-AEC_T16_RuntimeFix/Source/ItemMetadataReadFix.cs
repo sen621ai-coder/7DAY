@@ -13,7 +13,7 @@ namespace AECT16RuntimeFix
     {
         public static void Install(Harmony harmony)
         {
-            harmony.Patch(AccessTools.Method(typeof(ItemValue), "Read", new[] { typeof(BinaryReader) }),
+            harmony.Patch(AccessTools.Method(typeof(ItemValue), "Read", new[] { typeof(PooledBinaryReader) }),
                 prefix: new HarmonyMethod(typeof(ItemMetadataReadFix), nameof(BeforeRead)));
             harmony.Patch(AccessTools.Method(typeof(ItemValue), "ReadData"),
                 transpiler: new HarmonyMethod(typeof(ItemMetadataReadFix), nameof(ReadMetadataTranspiler)));

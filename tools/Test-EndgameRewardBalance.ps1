@@ -3,8 +3,23 @@ $ErrorActionPreference = 'Stop'
 $modRoot = Split-Path -Parent $PSScriptRoot
 function Assert-Balance([bool]$ok,[string]$message) { if (-not $ok) { throw $message } }
 function Apply-Config([xml]$target,[xml]$patch,[switch]$Strict) {
+    $ops=@()
     foreach ($op in $patch.DocumentElement.ChildNodes) {
         if ($op.NodeType -ne 'Element') { continue }
+        if ($op.LocalName -eq 'conditional') {
+            foreach ($branch in $op.ChildNodes) {
+                if ($branch.NodeType -ne 'Element' -or $branch.LocalName -ne 'if') { continue }
+                if ($branch.GetAttribute('cond') -match "mod_loaded\('([^']+)'\)") {
+                    $base = @($modRoot, $root) | Where-Object { $_ } | Select-Object -First 1
+                    if (-not (Test-Path -LiteralPath (Join-Path $base $Matches[1]))) { continue }
+                }
+                foreach ($inner in $branch.ChildNodes) { if ($inner.NodeType -eq 'Element') { $ops+=$inner } }
+            }
+            continue
+        }
+        $ops+=$op
+    }
+    foreach ($op in $ops) {
         $targets = @($target.SelectNodes($op.xpath))
         if ($Strict -and $op.LocalName -ne 'append' -and $targets.Count -ne 1) { throw "Balance selector matched $($targets.Count): $($op.xpath)" }
         foreach ($node in $targets) {
@@ -160,8 +175,8 @@ while($pendingBookGroups.Count) {
         elseif($entry.name){[void]$magazineNames.Add([string]$entry.name)}
     }
 }
-Assert-Balance ($magazineNames.Count -eq 23 -and @($magazineNames | Where-Object {$_ -notlike '*SkillMagazine'}).Count -eq 0) 'Boss magazine pool contains unexpected leaf items'
-'PASS: four boss boxes trigger crafting magazines at 100%; all 23 magazines reachable; ordinary books/schematics and skill-point book excluded; global book pools unchanged; new weapons use 2/4/6/8%.'
+Assert-Balance ($magazineNames.Count -eq 24 -and @($magazineNames | Where-Object {$_ -notlike '*SkillMagazine'}).Count -eq 0) 'Boss magazine pool contains unexpected leaf items'
+'PASS: four boss boxes trigger crafting magazines at 100%; all 24 magazines reachable; ordinary books/schematics and skill-point book excluded; global book pools unchanged; new weapons use 2/4/6/8%.'
 
 # Walk the final supply tree: all leaves must be parts/materials, coins or medical
 # supplies. Fixed weights bypass loot-stage gates and must select just one branch.

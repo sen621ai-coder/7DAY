@@ -30,18 +30,21 @@ namespace AECT16RuntimeFix
         }
         private static void CheckSavedSlots(ItemValue value, int oldSlots)
         {
-            value.Modifications = Enumerable.Range(0, oldSlots).Select(_ => new ItemValue()).ToArray();
-            value.Modifications[0] = Item("modPZAECPrecisionR2", 1);
+            value.modifications = Enumerable.Range(0, oldSlots).Select(_ => new ItemValue()).ToArray();
+            value.SetModification(0, Item("modPZAECPrecisionR2", 1));
             value.UseTimes = 123;
             using (var stream = new MemoryStream())
             {
-                var writer = new BinaryWriter(stream);
+                var writer = new PooledBinaryWriter();
+                writer.SetBaseStream(stream);
                 value.Write(writer); writer.Flush(); stream.Position = 0;
                 var restored = new ItemValue();
-                restored.Read(new BinaryReader(stream));
+                var reader = new PooledBinaryReader();
+                reader.SetBaseStream(stream);
+                restored.Read(reader);
                 Check(stream.Position == stream.Length, "Save payload misaligned");
                 Check(restored.type == value.type && restored.Quality == value.Quality && restored.UseTimes == value.UseTimes, "Save identity/quality/wear changed");
-                Check(restored.Modifications.Length == 6 && restored.Modifications[0].type == value.Modifications[0].type, "Saved equipment did not preserve mods and expand sockets");
+                Check(restored.ModificationCount == 6 && restored.GetModification(0).type == value.GetModification(0).type, "Saved equipment did not preserve mods and expand sockets");
             }
         }
         public override void Execute(List<string> parameters, CommandSenderInfo senderInfo)

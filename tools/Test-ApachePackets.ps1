@@ -12,10 +12,10 @@ public class GameManager{}
 public class PacketSender {public bool loginDone,bAttachedToEntity;public int entityId;}
 public class PooledBinaryReader:System.IO.BinaryReader {public PooledBinaryReader(System.IO.Stream s):base(s){} }
 public class PooledBinaryWriter:System.IO.BinaryWriter {public PooledBinaryWriter(System.IO.Stream s):base(s){} }
-public abstract class NetPackage {
+ public abstract class NetPackage {
  public PacketSender Sender;
  public virtual NetPackageDirection PackageDirection {get{return NetPackageDirection.ToServer;}}
- public abstract int GetLength();public abstract void read(PooledBinaryReader r);
+ public abstract void read(PooledBinaryReader r);
  public virtual void write(PooledBinaryWriter w){}public abstract void ProcessPackage(World w,GameManager g);
 }
 namespace AECT16RuntimeFix {
@@ -27,7 +27,7 @@ public static class ApachePacketTests {
  public static void Run(){
   var packet=new AECT16RuntimeFix.NetPackagePZApacheIntent().Setup(123,1,new UnityEngine.Vector3(.1f,-.2f,.9f),new UnityEngine.Vector3(10,20,30),42);
   var stream=new System.IO.MemoryStream();var writer=new PooledBinaryWriter(stream);packet.write(writer);writer.Flush();
-  Check(stream.Length==packet.GetLength(),"intent payload size");stream.Position=0;
+  Check(stream.Length==33,"intent payload size");stream.Position=0;
   var copy=new AECT16RuntimeFix.NetPackagePZApacheIntent();copy.read(new PooledBinaryReader(stream));
   Check(copy.Vehicle==123&&copy.Op==1&&copy.Direction.y==-.2f&&copy.Origin.y==20&&copy.Sequence==42,"intent roundtrip");
   Check(copy.PackageDirection==NetPackageDirection.ToServer,"intent server only");
@@ -43,7 +43,7 @@ public static class ApachePacketTests {
   Check(AECT16RuntimeFix.ApacheWeapons.Calls==1&&AECT16RuntimeFix.ApacheWeapons.Actor==77&&AECT16RuntimeFix.ApacheWeapons.Vehicle==123,"actor comes from connection identity");
   var effect=new AECT16RuntimeFix.NetPackagePZApacheEvent().Setup(123,456,2,new UnityEngine.Vector3(1,2,3),new UnityEngine.Vector3(4,5,6),78);
   stream=new System.IO.MemoryStream();writer=new PooledBinaryWriter(stream);effect.write(writer);writer.Flush();
-  Check(stream.Length==effect.GetLength(),"visual packet payload size");stream.Position=0;
+  Check(stream.Length==37,"visual packet payload size");stream.Position=0;
   var effectCopy=new AECT16RuntimeFix.NetPackagePZApacheEvent();effectCopy.read(new PooledBinaryReader(stream));
   Check(effectCopy.Vehicle==123&&effectCopy.Id==456&&effectCopy.Kind==2&&effectCopy.A.z==3&&effectCopy.B.x==4&&effectCopy.Heat==78,"visual packet roundtrip");
   Check(effectCopy.PackageDirection==NetPackageDirection.ToClient,"effects client only");

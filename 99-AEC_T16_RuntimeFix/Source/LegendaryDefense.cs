@@ -87,7 +87,7 @@ namespace AECT16RuntimeFix
         {
             try
             {
-                harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.StartQuest), new[] { typeof(bool), typeof(bool) }),
+                harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.StartQuest), new[] { typeof(Quest.QuestSource), typeof(bool), typeof(bool) }),
                     postfix: new HarmonyMethod(typeof(LegendaryDefense), nameof(AfterStart)));
                 harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.CloseQuest)),
                     prefix: new HarmonyMethod(typeof(LegendaryDefense), nameof(BeforeClose)));

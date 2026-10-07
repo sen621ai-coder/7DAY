@@ -131,8 +131,8 @@ public static class AdventureRegression
             string id="PZAECChallengeT"+tier, tag=LegendaryAdventure.Request(code,LegendaryAdventure.SpawnMarker);
             var original=new EntityCreationData {id=51,entityClass=123456789,spawnById=-1,spawnByName=tag};
             using(var stream=new System.IO.MemoryStream()) {
-                var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream); original.write(writer,true); writer.Flush(); stream.Position=0;
-                var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); var received=new EntityCreationData(); received.read(reader,true);
+                var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream); original.write(writer,StreamModeWrite.ToClient); writer.Flush(); stream.Position=0;
+                var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); var received=new EntityCreationData(); received.read(reader,StreamModeRead.FromServer);
                 Check(LegendaryAdventure.MatchesTrialKill(id,code,received.spawnByName),"Own trial kill lost in initial packet");
                 Check(!LegendaryAdventure.MatchesTrialKill(id,unchecked(code+1),received.spawnByName),"Nearby/old trial borrowed kill");
                 Check(!LegendaryAdventure.MatchesTrialKill(id,code,null) && !LegendaryAdventure.MatchesTrialKill(id,code,""),"Unattributed old enemy counted");

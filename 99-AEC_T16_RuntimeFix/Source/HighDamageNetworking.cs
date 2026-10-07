@@ -144,8 +144,6 @@ namespace AECT16RuntimeFix
             FullStrength = value;
         }
 
-        public override int GetLength() { return base.GetLength() + sizeof(int); }
-
         private static void Validate(int value)
         {
             if (value <= ushort.MaxValue) throw new InvalidDataException("Invalid Damage32 V1 strength: " + value);

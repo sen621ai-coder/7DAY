@@ -23,8 +23,9 @@ namespace AECT16RuntimeFix
         {
             using (var stream = new MemoryStream())
             {
-                var writer = new BinaryWriter(stream); item.Write(writer); writer.Flush(); stream.Position = 0;
-                var restored = new ItemValue(); restored.Read(new BinaryReader(stream));
+                var writer = new PooledBinaryWriter(); writer.SetBaseStream(stream); item.Write(writer); writer.Flush(); stream.Position = 0;
+                var restored = new ItemValue();
+                var reader = new PooledBinaryReader(); reader.SetBaseStream(stream); restored.Read(reader);
                 if (stream.Position != stream.Length) throw new Exception("Save payload alignment");
                 return restored;
             }
@@ -46,7 +47,7 @@ namespace AECT16RuntimeFix
                     var first = Item(name); var second = Item(name, 6); ItemStack fused;
                     Check(EquipmentFusion.IsFusionItem(first.itemValue), name + " allowlist");
                     Check(first.itemValue.HasQuality && first.itemValue.ItemClass.HasQuality && !first.itemValue.ItemClass.HasSubItems, name + " native station acceptance");
-                    Check(first.itemValue.Modifications.Length == 6, name + " fresh actual six sockets");
+                    Check(first.itemValue.ModificationCount == 6, name + " fresh actual six sockets");
                     Check(EquipmentFusion.TryCreate(first, second, out fused), name + " first fusion: " + EquipmentFusion.Validate(first, second));
                     if (fused.IsEmpty()) continue;
                     Check(EquipmentFusion.Rank(fused.itemValue) == 1 && first.itemValue.Quality == fused.itemValue.Quality, name + " output rank/quality");
@@ -91,21 +92,21 @@ namespace AECT16RuntimeFix
                 b.count = 2; Check(!EquipmentFusion.TryCreate(a, b, out output), "stack of two rejected"); b.count = 1;
                 b.itemValue.Meta = 10; Check(!EquipmentFusion.TryCreate(a, b, out output), "loaded donor rejected"); b.itemValue.Meta = 0;
                 a.itemValue.Meta = 10; Check(!EquipmentFusion.TryCreate(a, b, out output), "loaded primary rejected"); a.itemValue.Meta = 0;
-                b.itemValue.Modifications[0] = Item("modPZAECPrecisionR2").itemValue;
+                b.itemValue.SetModification(0, Item("modPZAECPrecisionR2").itemValue);
                 Check(!EquipmentFusion.TryCreate(a, b, out output), "donor mods rejected"); b = Item(gun);
-                a.itemValue.Modifications[0] = Item("modPZAECPrecisionR2").itemValue;
+                a.itemValue.SetModification(0, Item("modPZAECPrecisionR2").itemValue);
                 float primaryModdedDamage = Value(a.itemValue, PassiveEffects.EntityDamage, "perkDeadEye");
                 float primaryModdedRate = Value(a.itemValue, PassiveEffects.RoundsPerMinute, "perkDeadEye");
                 a.itemValue.SetMetadata("audit", "keep"); a.itemValue.UseTimes = 100;
                 Check(EquipmentFusion.TryCreate(a, b, out output), "primary mods accepted");
-                Check(output.itemValue.Modifications[0].type == a.itemValue.Modifications[0].type && !ReferenceEquals(output.itemValue.Modifications, a.itemValue.Modifications), "primary mods cloned");
+                Check(output.itemValue.GetModification(0).type == a.itemValue.GetModification(0).type && !ReferenceEquals(output.itemValue.modifications, a.itemValue.modifications), "primary mods cloned");
                 Check(output.itemValue.Seed == a.itemValue.Seed, "primary seed retained");
                 Near(Value(output.itemValue, PassiveEffects.EntityDamage, "perkDeadEye"), primaryModdedDamage * 1.05f, "attached mod bonus not independently scaled");
                 Near(Value(output.itemValue, PassiveEffects.RoundsPerMinute, "perkDeadEye"), primaryModdedRate * 1.05f, "active attached mod penalty retains own scope");
                 Near(output.itemValue.UseTimes, 105, "wear proportion");
                 string metadata; Check(output.itemValue.TryGetMetadata("audit", out metadata) && metadata == "keep", "primary metadata retained");
                 var saved = Saved(output.itemValue);
-                Check(saved.Modifications[0].type == a.itemValue.Modifications[0].type && EquipmentFusion.Rank(saved) == 1, "saved attachments and fusion");
+                Check(saved.GetModification(0).type == a.itemValue.GetModification(0).type && EquipmentFusion.Rank(saved) == 1, "saved attachments and fusion");
                 // Signed bonuses, costs and structural values exercise distinct rules.
                 Near(FusionStatScaling.Scale(PassiveEffects.StaminaLoss, PassiveEffect.ValueModifierTypes.base_set, 20, 1), 19, "positive cost reduced");
                 Near(FusionStatScaling.Scale(PassiveEffects.StaminaLoss, PassiveEffect.ValueModifierTypes.perc_add, -.2f, 1), -.21f, "cost reduction enhanced");

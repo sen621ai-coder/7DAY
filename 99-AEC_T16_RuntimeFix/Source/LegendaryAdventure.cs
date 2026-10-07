@@ -34,7 +34,7 @@ namespace AECT16RuntimeFix
                 harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.AdvancePhase), Type.EmptyTypes),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeAdvance)),
                     postfix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(AfterAdvance)));
-                harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.StartQuest), new[] { typeof(bool), typeof(bool) }),
+                harmony.Patch(AccessTools.Method(typeof(Quest), nameof(Quest.StartQuest), new[] { typeof(Quest.QuestSource), typeof(bool), typeof(bool) }),
                     postfix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(AfterStart)));
                 harmony.Patch(AccessTools.Method(typeof(ItemActionQuest), nameof(ItemActionQuest.ExecuteInstantAction)),
                     prefix: new HarmonyMethod(typeof(LegendaryAdventure), nameof(BeforeUseVoucher)));

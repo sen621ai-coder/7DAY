@@ -28,7 +28,7 @@ namespace AECT16RuntimeFix
 
         public static void Install(Harmony harmony)
         {
-            harmony.Patch(AccessTools.Constructor(typeof(EntityCreationData), new[] { typeof(Entity), typeof(bool) }),
+            harmony.Patch(AccessTools.Constructor(typeof(EntityCreationData), new[] { typeof(Entity), typeof(StreamModeWrite) }),
                 postfix: new HarmonyMethod(typeof(LegendaryTrialSharing), nameof(AfterSnapshot)));
             harmony.Patch(AccessTools.Method(typeof(EntityCreationData), nameof(EntityCreationData.read)),
                 postfix: new HarmonyMethod(typeof(LegendaryTrialSharing), nameof(AfterRead)));
@@ -250,7 +250,6 @@ namespace AECT16RuntimeFix
         { Recipient = reader.ReadInt32(); Code = reader.ReadInt32(); Tier = reader.ReadByte(); Kind = reader.ReadByte(); Victim = reader.ReadInt32(); }
         public override void write(PooledBinaryWriter writer)
         { base.write(writer); writer.Write(Recipient); writer.Write(Code); writer.Write(Tier); writer.Write(Kind); writer.Write(Victim); }
-        public override int GetLength() { return 14; }
         public override void ProcessPackage(World world, GameManager callbacks)
         {
             if (world == null || ConnectionManager.Instance == null || ConnectionManager.Instance.IsServer) return;

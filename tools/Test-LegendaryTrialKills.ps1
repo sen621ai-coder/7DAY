@@ -7,7 +7,7 @@ if (!$RuntimeDll) { $RuntimeDll = Join-Path $modRoot '99-AEC_T16_RuntimeFix/AEC.
 Get-ChildItem -LiteralPath $managed -Filter '*.dll' | ForEach-Object {
     try { [void][Reflection.Assembly]::LoadFrom($_.FullName) } catch { }
 }
-$references = @($RuntimeDll, (Join-Path $modRoot '00-TFP_Harmony/0Harmony.dll'),
+$references = @($RuntimeDll, (Join-Path $modRoot '0_TFP_Harmony/0Harmony.dll'),
     (Join-Path $managed 'Assembly-CSharp.dll'), (Join-Path $managed 'UnityEngine.CoreModule.dll'))
 foreach ($path in $references) { [void][Reflection.Assembly]::LoadFrom($path) }
 $framework = @(Get-ChildItem (Join-Path $PSHOME 'ref') -Filter '*.dll' | ForEach-Object FullName)

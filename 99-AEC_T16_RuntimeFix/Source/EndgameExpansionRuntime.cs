@@ -79,8 +79,11 @@ namespace AECT16RuntimeFix
             {
                 reason = "没有需要维修的已穿护甲；维修包未消耗。";
                 if (player.equipment == null) return false;
-                foreach (var armor in player.equipment.GetItems())
+                for (int i = 0; i < player.equipment.GetSlotCount(); i++)
+                {
+                    var armor = player.equipment.GetSlotItem(i);
                     if (armor != null && !armor.IsEmpty() && armor.MaxUseTimes > 0 && armor.UseTimes > 0) return true;
+                }
                 return false;
             }
             if (name == "itemPZAECResonanceInjector")
@@ -266,16 +269,16 @@ namespace AECT16RuntimeFix
         private static void ApplyFieldRepair(EntityPlayer player, int tier)
         {
             float fraction = tier == 19 ? .65f : tier == 18 ? .55f : tier == 17 ? .45f : .35f;
-            ItemValue[] equipped = player.equipment == null ? null : player.equipment.GetItems();
-            if (equipped == null)
+            if (player.equipment == null)
             {
                 return;
             }
+            int slots = player.equipment.GetSlotCount();
             int bestSlot = -1;
             float bestDamage = 0f;
-            for (int i = 0; i < equipped.Length; i++)
+            for (int i = 0; i < slots; i++)
             {
-                ItemValue value = equipped[i];
+                ItemValue value = player.equipment.GetSlotItem(i);
                 if (value == null || value.IsEmpty() || value.MaxUseTimes <= 0 || value.UseTimes <= bestDamage)
                 {
                     continue;
@@ -287,19 +290,20 @@ namespace AECT16RuntimeFix
             {
                 return;
             }
-            ItemValue repaired = equipped[bestSlot];
+            ItemValue repaired = player.equipment.GetSlotItem(bestSlot);
             repaired.UseTimes = Math.Max(0f, repaired.UseTimes - repaired.MaxUseTimes * fraction);
-            player.equipment.SetSlotItem(bestSlot, repaired, true);
+            player.equipment.SetSlotItem(bestSlot, repaired);
         }
 
         private static void ApplyCalibration(EntityPlayer player, ItemValue helmet, string family)
         {
-            if (helmet == null || helmet.Modifications == null)
+            if (helmet == null)
             {
                 return;
             }
-            foreach (ItemValue modification in helmet.Modifications)
+            for (int i = 0; i < helmet.ModificationCount; i++)
             {
+                ItemValue modification = helmet.GetModification(i);
                 if (modification == null || modification.IsEmpty() || modification.ItemClass == null)
                 {
                     continue;
@@ -349,7 +353,12 @@ namespace AECT16RuntimeFix
                 player.Buffs.AddBuff(prefix + "Active", player.entityId, true);
                 if (tier == 19)
                 {
-                    var helmet = player.equipment.GetItems().FirstOrDefault(v => v != null && v.ItemClass != null && v.ItemClass.GetItemName() == "armorPZAEC" + family + "HelmetT19");
+                    ItemValue helmet = null;
+                    for (int slot = 0; slot < player.equipment.GetSlotCount(); slot++)
+                    {
+                        var worn = player.equipment.GetSlotItem(slot);
+                        if (worn != null && worn.ItemClass != null && worn.ItemClass.GetItemName() == "armorPZAEC" + family + "HelmetT19") { helmet = worn; break; }
+                    }
                     ApplyCalibration(player, helmet, family);
                 }
             }

@@ -1,6 +1,30 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.24 game V3.3.0 API port
+- Ported to game V3.3.0 assemblies; no feature or balance changes.
+- AutoMiner audit now patches the Block-declared methods and additionally any
+  surviving BlockCollector overrides (several overrides were removed in V3.3.0,
+  which previously disabled the audit with a patch-target exception).
+- NetPackage subclasses drop the removed GetLength overrides; wire payloads
+  are unchanged (Apache intent/event, defense request/state, trial kill,
+  full-damage V1).
+- ItemValue mod arrays now use ModificationCount/GetModification/
+  SetModification and CosmeticModCount/GetCosmeticMod; socket migration and
+  metadata fixes patch ItemValue.Read(PooledBinaryReader).
+- Equipment slot access uses GetSlotCount/GetSlotItem/SetSlotItem(2-arg) and
+  Inventory.SetItem(3-arg); item save/network copies use PooledBinaryWriter/
+  PooledBinaryReader with SetBaseStream.
+- Loot bags construct via Bag(Vector2i, StackLocationTypes.LootContainer,
+  holder) and compact steel storage migrates through TEFeatureStorage.ItemGrid
+  (Resize/SetSlotLocks), preserving stack references and locks.
+- PlayerDataFile.Read gains StreamModeRead.Persistency for local .ttp audits.
+- Loot lifetime and fallen-loot recovery now patch the declaring base
+  EntityContainerAbs.OnUpdateEntity and filter to loot containers.
+- Validation: offline Roslyn build against the installed V3.3.0 Managed
+  assemblies; Apache, fusion, storage, networking and legendary offline test
+  harnesses pass. In-game smoke (native QA server) still recommended.
+
 Runtime 1.27.23 vehicle dismount collision safety
 - MD-500, Apache and M1 T16-T19 now use eight lateral exit candidates;
   remove the overhead/roof candidate and keep native obstacle checks.

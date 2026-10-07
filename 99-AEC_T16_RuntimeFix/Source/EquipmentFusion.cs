@@ -50,13 +50,16 @@ namespace AECT16RuntimeFix
 
         public static bool HasAttachments(ItemValue item)
         {
-            return HasItems(item.Modifications) || HasItems(item.CosmeticMods);
-        }
-
-        private static bool HasItems(ItemValue[] items)
-        {
-            if (items == null) return false;
-            foreach (var item in items) if (item != null && !item.IsEmpty()) return true;
+            for (int i = 0; i < item.ModificationCount; i++)
+            {
+                var mod = item.GetModification(i);
+                if (mod != null && !mod.IsEmpty()) return true;
+            }
+            for (int i = 0; i < item.CosmeticModCount; i++)
+            {
+                var mod = item.GetCosmeticMod(i);
+                if (mod != null && !mod.IsEmpty()) return true;
+            }
             return false;
         }
 

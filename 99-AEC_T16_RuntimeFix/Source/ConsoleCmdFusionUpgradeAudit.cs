@@ -17,12 +17,12 @@ namespace AECT16RuntimeFix
         private static Recipe Copy(Recipe recipe)
         {
             using (var stream = new MemoryStream())
-            { var writer = new BinaryWriter(stream); recipe.Write(writer); writer.Flush(); stream.Position = 0; return Recipe.Read(new BinaryReader(stream)); }
+            { var writer = new PooledBinaryWriter(); writer.SetBaseStream(stream); recipe.Write(writer); writer.Flush(); stream.Position = 0; var reader = new PooledBinaryReader(); reader.SetBaseStream(stream); return Recipe.Read(reader); }
         }
         private static RecipeQueueItem Saved(RecipeQueueItem queue)
         {
             using (var stream = new MemoryStream())
-            { var writer = new BinaryWriter(stream); queue.Write(writer); writer.Flush(); stream.Position = 0; var result = new RecipeQueueItem(); result.Read(new BinaryReader(stream)); if (stream.Position != stream.Length) throw new Exception("Queue save alignment"); return result; }
+            { var writer = new PooledBinaryWriter(); writer.SetBaseStream(stream); queue.Write(writer); writer.Flush(); stream.Position = 0; var reader = new PooledBinaryReader(); reader.SetBaseStream(stream); var result = new RecipeQueueItem(); result.Read(reader); if (stream.Position != stream.Length) throw new Exception("Queue save alignment"); return result; }
         }
         public override void Execute(List<string> parameters, CommandSenderInfo senderInfo)
         {

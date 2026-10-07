@@ -68,7 +68,8 @@ namespace AECT16RuntimeFix
                     }
                 }
 
-                lootEntity.bag = new Bag(slotCount);
+                lootEntity.bag = new Bag(new Vector2i(slotCount, 1),
+                    XUiC_ItemStack.StackLocationTypes.LootContainer, lootEntity);
 
                 string signature = (entityClassName ?? "<unknown>") + "|" + (lootList ?? "<empty>");
                 lock (ReportedBags)
@@ -89,7 +90,8 @@ namespace AECT16RuntimeFix
                 // Never let diagnostics recreate the original spawn failure.
                 if (lootEntity.bag == null)
                 {
-                    lootEntity.bag = new Bag(FallbackSlotCount);
+                    lootEntity.bag = new Bag(new Vector2i(FallbackSlotCount, 1),
+                        XUiC_ItemStack.StackLocationTypes.LootContainer, lootEntity);
                 }
 
                 T16RuntimeFixMod.SafeLog(

@@ -84,8 +84,8 @@ public static class TrialSharingRegression
             LegendaryTrialSharing.AfterSnapshot(original);
             Check(original.entityData.Length==20 && original.entityData.Position==position,"Trailer corrupted native payload/position");
             using(var stream=new MemoryStream()) {
-                var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream); original.write(writer,network); writer.Flush(); stream.Position=0;
-                var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); var restored=new EntityCreationData(); restored.read(reader,network);
+                var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream); original.write(writer,network?StreamModeWrite.ToClient:StreamModeWrite.Persistency); writer.Flush(); stream.Position=0;
+                var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); var restored=new EntityCreationData(); restored.read(reader,network?StreamModeRead.FromServer:StreamModeRead.Persistency);
                 if(!network) Check(string.IsNullOrEmpty(restored.spawnByName),"Native disk format now saves tag; re-evaluate extension");
                 LegendaryTrialSharing.AfterRead(restored);
                 Check(restored.spawnByName==original.spawnByName,"Disk/network identity lost");
@@ -133,7 +133,7 @@ public static class TrialSharingRegression
                 var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); Check(reader.ReadUInt16()==321,"Packet header");
                 var received=new NetPackagePZAECTrialKill(); received.read(reader);
                 Check(received.Recipient==43 && received.Code==code && received.Tier==tier && received.Kind==kind && received.Victim==900,"Receipt payload changed");
-                Check(stream.Position==stream.Length && stream.Length==sent.GetLength()+2,"Receipt length mismatch");
+                Check(stream.Position==stream.Length && stream.Length==16,"Receipt length mismatch");
                 Check(received.PackageDirection==NetPackageDirection.ToClient && received.ReliableDelivery,"Receipt security/delivery direction changed");
                 Check(LegendaryTrialSharing.ParseClass(LegendaryTrialSharing.TrialClass(tier,kind),out int t,out int k) && t==tier && k==kind,"Class mapping");
             }

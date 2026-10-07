@@ -391,7 +391,6 @@ namespace AECT16RuntimeFix
         public int Vehicle,Sequence; public byte Op; public Vector3 Direction,Origin;
         public override NetPackageDirection PackageDirection {get{return NetPackageDirection.ToServer;}}
         public NetPackagePZApacheIntent Setup(int vehicle,byte op,Vector3 direction,Vector3 origin,int sequence){Vehicle=vehicle;Op=op;Direction=direction;Origin=origin;Sequence=sequence;return this;}
-        public override int GetLength(){return 33;}
         public override void read(PooledBinaryReader r){Vehicle=r.ReadInt32();Op=r.ReadByte();Direction=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());Origin=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());Sequence=r.ReadInt32();}
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(Vehicle);w.Write(Op);w.Write(Direction.x);w.Write(Direction.y);w.Write(Direction.z);w.Write(Origin.x);w.Write(Origin.y);w.Write(Origin.z);w.Write(Sequence);}
         public override void ProcessPackage(World world,GameManager callbacks)
@@ -402,7 +401,6 @@ namespace AECT16RuntimeFix
         public int Vehicle,Id;public byte Kind;public Vector3 A,B;public float Heat;
         public override NetPackageDirection PackageDirection {get{return NetPackageDirection.ToClient;}}
         public NetPackagePZApacheEvent Setup(int v,int id,byte kind,Vector3 a,Vector3 b,float heat){Vehicle=v;Id=id;Kind=kind;A=a;B=b;Heat=heat;return this;}
-        public override int GetLength(){return 37;}
         public override void read(PooledBinaryReader r){Vehicle=r.ReadInt32();Id=r.ReadInt32();Kind=r.ReadByte();A=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());B=new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());Heat=r.ReadSingle();}
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(Vehicle);w.Write(Id);w.Write(Kind);w.Write(A.x);w.Write(A.y);w.Write(A.z);w.Write(B.x);w.Write(B.y);w.Write(B.z);w.Write(Heat);}
         public override void ProcessPackage(World world,GameManager callbacks)

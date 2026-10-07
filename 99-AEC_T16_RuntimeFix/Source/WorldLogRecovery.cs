@@ -9,7 +9,7 @@ namespace AECT16RuntimeFix
     {
         public static void Install(Harmony harmony)
         {
-            harmony.Patch(AccessTools.Method(typeof(EntityLootContainer), "OnUpdateEntity"),
+            harmony.Patch(AccessTools.Method(typeof(EntityContainerAbs), "OnUpdateEntity"),
                 prefix: new HarmonyMethod(typeof(WorldLogRecovery), nameof(BeforeLootUpdate)));
             foreach (var method in typeof(SignDataManager).GetMethods())
             {
@@ -29,18 +29,19 @@ namespace AECT16RuntimeFix
             __2 = __2.FindAll(r => r != null && r.Renderer != null);
         }
 
-        public static bool BeforeLootUpdate(EntityLootContainer __instance)
+        public static bool BeforeLootUpdate(EntityContainerAbs __instance)
         {
-            if (__instance == null || __instance.world == null || __instance.isEntityRemote ||
-                !SingletonMonoBehaviour<ConnectionManager>.Instance.IsServer || __instance.position.y >= -32f)
+            var loot = __instance as EntityLootContainer;
+            if (loot == null || loot.world == null || loot.isEntityRemote ||
+                !SingletonMonoBehaviour<ConnectionManager>.Instance.IsServer || loot.position.y >= -32f)
                 return true;
-            var old = __instance.position;
+            var old = loot.position;
             if (float.IsNaN(old.x) || float.IsNaN(old.y) || float.IsNaN(old.z) ||
                 float.IsInfinity(old.x) || float.IsInfinity(old.y) || float.IsInfinity(old.z)) return false;
-            var world = __instance.world;
+            var world = loot.world;
             if (world.GetChunkFromWorldPos(Mathf.FloorToInt(old.x), Mathf.FloorToInt(old.z)) == null)
                 return false; // Wait for real terrain; do not teleport to an unloaded column.
-            return RecoverAtHeight(__instance, world.GetHeightAt(old.x, old.z));
+            return RecoverAtHeight(loot, world.GetHeightAt(old.x, old.z));
         }
 
         internal static bool RecoverAtHeight(EntityLootContainer entity, float height)

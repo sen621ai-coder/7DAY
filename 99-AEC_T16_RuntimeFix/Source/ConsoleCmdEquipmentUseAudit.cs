@@ -111,13 +111,13 @@ namespace AECT16RuntimeFix
                     EndgameExpansionRuntime.BlockRemovedPostfix(pos);
                     var armor = Item("armorPZAECWardenOutfitT" + tier);
                     armor.UseTimes = armor.MaxUseTimes * .9f;
-                    player.equipment.SetSlotItem(1, armor, false);
+                    player.equipment.SetSlotItem(1, armor);
                     float before = armor.UseTimes;
                     Check(Use(player, Item("itemPZAECFieldRepairKitT" + tier)), "repair kit use T" + tier);
-                    var repaired = player.equipment.GetItems()[1];
+                    var repaired = player.equipment.GetSlotItem(1);
                     float expected = Math.Max(0, before - armor.MaxUseTimes * new[] { .35f,.45f,.55f,.65f }[tier-16]);
                     Check(Math.Abs(repaired.UseTimes - expected) < .01f, "repair actual wear T" + tier + " actual=" + repaired.UseTimes + " expected=" + expected);
-                    player.equipment.SetSlotItem(1, ItemValue.None, false);
+                    player.equipment.SetSlotItem(1, ItemValue.None);
                 }
                 foreach (string family in new[] { "Harrier", "Storm", "Tremor", "Warden" })
                 foreach (int tier in Enumerable.Range(16, 4))
@@ -127,13 +127,13 @@ namespace AECT16RuntimeFix
                     var retired = ItemClass.GetItemClass("itemPZAEC" + family + "DeviceT" + tier, false);
                     Check(retired != null && retired.Actions[0] == null && retired.Properties.GetString("CreativeMode") == "None", "manual device hidden and disabled " + family + tier);
                     string[] slots = { "Helmet", "Outfit", "Gloves", "Boots" };
-                    for (int slot = 0; slot < 3; slot++) player.equipment.SetSlotItem(slot, Item("armorPZAEC" + family + slots[slot] + "T" + tier), false);
+                    for (int slot = 0; slot < 3; slot++) player.equipment.SetSlotItem(slot, Item("armorPZAEC" + family + slots[slot] + "T" + tier));
                     if (tier == 19)
                     {
-                        var helmet = player.equipment.GetItems()[0];
-                        Check(helmet.Modifications.Length == 6, family + " helmet retains six sockets");
-                        helmet.Modifications[0] = Item("modPZAEC" + family + "StableT19");
-                        player.equipment.SetSlotItem(0, helmet, false);
+                        var helmet = player.equipment.GetSlotItem(0);
+                        Check(helmet.ModificationCount == 6, family + " helmet retains six sockets");
+                        helmet.SetModification(0, Item("modPZAEC" + family + "StableT19"));
+                        player.equipment.SetSlotItem(0, helmet);
                     }
                     player.FireEvent(MinEventTypes.onSelfBuffUpdate, true);
                     FlushRemoved(player);
@@ -143,7 +143,7 @@ namespace AECT16RuntimeFix
                     Check(player.Buffs.GetCustomVar(charge) == 100, family+tier+" injector charges once");
                     AutoUpdate(player);
                     Check(!player.Buffs.HasBuff(prefix+"Active") && player.Buffs.GetCustomVar(charge)==100, family+tier+" three pieces cannot activate");
-                    player.equipment.SetSlotItem(3, Item("armorPZAEC"+family+"BootsT"+(tier==19?18:tier+1)), false);
+                    player.equipment.SetSlotItem(3, Item("armorPZAEC"+family+"BootsT"+(tier==19?18:tier+1)));
                     AutoUpdate(player);
                     int mixedTier=tier==19?18:tier;
                     string mixedPrefix="buffPZAEC"+family+"T"+mixedTier;
@@ -151,7 +151,7 @@ namespace AECT16RuntimeFix
                     player.Buffs.RemoveBuff(mixedPrefix+"Active",-1,false);
                     player.Buffs.RemoveBuff(mixedPrefix+"Cooldown",-1,false);FlushRemoved(player);
                     player.Buffs.SetCustomVar(charge,100);
-                    player.equipment.SetSlotItem(3, Item("armorPZAEC"+family+"BootsT"+tier), false);
+                    player.equipment.SetSlotItem(3, Item("armorPZAEC"+family+"BootsT"+tier));
                     player.FireEvent(MinEventTypes.onSelfBuffUpdate, true);
                     AutoUpdate(player);
                     Check(player.Buffs.HasBuff(prefix+"Active") && player.Buffs.HasBuff(prefix+"Cooldown"), family+tier+" fourth piece auto activates");
@@ -165,24 +165,24 @@ namespace AECT16RuntimeFix
                     Check(!player.Buffs.HasBuff(prefix+"Active") && player.Buffs.GetCustomVar(charge)==100, family+tier+" full charge waits for cooldown");
                     if (tier == 19)
                     {
-                        var helmet = player.equipment.GetItems()[0];
-                        helmet.Modifications[0] = Item("modPZAEC"+family+"OverloadT19");
-                        player.equipment.SetSlotItem(0, helmet, false);
+                        var helmet = player.equipment.GetSlotItem(0);
+                        helmet.SetModification(0, Item("modPZAEC"+family+"OverloadT19"));
+                        player.equipment.SetSlotItem(0, helmet);
                     }
                     player.Buffs.RemoveBuff(prefix+"Cooldown", -1, false); FlushRemoved(player);
                     AutoUpdate(player);
                     Check(player.Buffs.HasBuff(prefix+"Active") && player.Buffs.GetCustomVar(charge)==0, family+tier+" cooldown ending activates queued charge");
                     if (tier == 19) Check(player.Buffs.HasBuff("buffPZAEC"+family+"OverloadCalibrationT19"), family+" helmet overload calibration activates");
                     player.Buffs.SetCustomVar(charge, 100);
-                    player.equipment.SetSlotItem(3, ItemValue.None, false);
+                    player.equipment.SetSlotItem(3, ItemValue.None);
                     AutoUpdate(player);
                     Check(!player.Buffs.HasBuff(prefix+"Active") && player.Buffs.GetCustomVar(charge)==100, family+tier+" remove fourth piece cancels active, retains charge");
                     Check(player.Buffs.HasBuff(prefix+"Cooldown"), family+tier+" unequip does not bypass cooldown");
                     if (tier==19) Check(!player.Buffs.HasBuff("buffPZAEC"+family+"StableCalibrationT19") && !player.Buffs.HasBuff("buffPZAEC"+family+"OverloadCalibrationT19"), family+" incomplete set removes calibration");
-                    player.equipment.SetSlotItem(2, ItemValue.None, false); AutoUpdate(player);
+                    player.equipment.SetSlotItem(2, ItemValue.None); AutoUpdate(player);
                     Check(player.Buffs.GetCustomVar(charge)==0, family+tier+" below three pieces clears charge");
                     foreach (string suffix in new[] { "Set3", "Set4", "Active", "Cooldown", "Ready" }) player.Buffs.RemoveBuff(prefix+suffix, -1, false);
-                    for (int slot=0; slot<4; slot++) player.equipment.SetSlotItem(slot, ItemValue.None, false);
+                    for (int slot=0; slot<4; slot++) player.equipment.SetSlotItem(slot, ItemValue.None);
                     player.FireEvent(MinEventTypes.onSelfBuffUpdate, true); FlushRemoved(player);
                     Check(!player.Buffs.HasBuff(prefix+"Set2"), family+tier+" set removed after unequip");
                 }
@@ -203,7 +203,7 @@ namespace AECT16RuntimeFix
                     Check(!temporaryEnemies[1].Buffs.HasBuff("buffPZAECCounterJammerT" + tier), "jammer T" + tier + " excludes enemy beyond 8m");
                     Check(!player.Buffs.HasBuff("buffPZAECCounterJammerT" + tier), "jammer T" + tier + " does not debuff player");
                     string heat = "$PZAECStormHeatT" + tier;
-                    player.inventory.SetItem(0, Item("gunPZAECStormReservoirT" + tier), 1, false);
+                    player.inventory.SetItem(0, Item("gunPZAECStormReservoirT" + tier), 1);
                     player.inventory.SetHoldingItemIdxNoHolsterTime(0);
                     player.Buffs.SetCustomVar(heat, 100, false);
                     var throttle = (System.Collections.IDictionary)AccessTools.Field(typeof(EndgameExpansionRuntime), "NextPlayerHeatUpdate").GetValue(null);

@@ -128,7 +128,7 @@ public static class DefenseSharingRegression
                 var r=new PooledBinaryReader(); r.SetBaseStream(stream); Check(r.ReadUInt16()==321,"Request header");
                 var got=new NetPackagePZAECDefenseRequest(); got.read(r);
                 Check(got.Owner==42 && got.Code==code && got.Op==S.Pulse && got.Tier==tier,"Request payload");
-                Check(stream.Length==sent.GetLength()+2 && stream.Position==stream.Length && got.ReliableDelivery && got.PackageDirection==NetPackageDirection.ToServer,"Request wire contract");
+                Check(stream.Length==12 && stream.Position==stream.Length && got.ReliableDelivery && got.PackageDirection==NetPackageDirection.ToServer,"Request wire contract");
             }
             using(var stream=new MemoryStream()) {
                 var counts=(byte[])S.Required.Clone();
@@ -138,7 +138,7 @@ public static class DefenseSharingRegression
                 var r=new PooledBinaryReader(); r.SetBaseStream(stream); Check(r.ReadUInt16()==321,"State header");
                 var got=new NetPackagePZAECDefenseState(); got.read(r);
                 Check(got.Recipient==43 && got.Owner==42 && got.Code==code && got.Tier==tier && got.Wave==3 && got.Status==S.Won && got.Rank==2 && got.Revision==9 && got.Range==500 && got.Anchor.y==2 && got.Counts.SequenceEqual(S.Required),"State payload");
-                Check(stream.Length==sent.GetLength()+2 && stream.Position==stream.Length && got.ReliableDelivery && got.PackageDirection==NetPackageDirection.ToClient,"State wire contract");
+                Check(stream.Length==49 && stream.Position==stream.Length && got.ReliableDelivery && got.PackageDirection==NetPackageDirection.ToClient,"State wire contract");
             }
             n++;
         }

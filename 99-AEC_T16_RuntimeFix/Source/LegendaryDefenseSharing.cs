@@ -415,7 +415,6 @@ namespace AECT16RuntimeFix
         public override NetPackageDirection PackageDirection { get { return NetPackageDirection.ToServer; } }
         public NetPackagePZAECDefenseRequest Setup(byte op, int owner, int code, int tier)
         { Op = op; Owner = owner; Code = code; Tier = (byte)tier; return this; }
-        public override int GetLength() { return 10; }
         public override void read(PooledBinaryReader r) { Op = r.ReadByte(); Owner = r.ReadInt32(); Code = r.ReadInt32(); Tier = r.ReadByte(); }
         public override void write(PooledBinaryWriter w) { base.write(w); w.Write(Op); w.Write(Owner); w.Write(Code); w.Write(Tier); }
         public override void ProcessPackage(World world, GameManager callbacks)
@@ -435,7 +434,6 @@ namespace AECT16RuntimeFix
             int revision, Vector3 anchor, int range, byte[] counts)
         { Recipient = recipient; Owner = owner; Code = code; Tier = (byte)tier; Wave = (byte)wave; Status = status; Rank = rank;
             Revision = revision; Anchor = anchor; Range = range; Counts = (byte[])counts.Clone(); return this; }
-        public override int GetLength() { return 47; }
         public override void read(PooledBinaryReader r)
         {
             Recipient = r.ReadInt32(); Owner = r.ReadInt32(); Code = r.ReadInt32(); Tier = r.ReadByte(); Wave = r.ReadByte(); Status = r.ReadByte(); Rank = r.ReadByte();

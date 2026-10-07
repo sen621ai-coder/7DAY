@@ -90,12 +90,12 @@ public static class BuildRegression
                 int modId=Block.ItemsStartHere+2+i;
                 ItemClass.list[modId]=(ItemClassModifier)RuntimeHelpers.GetUninitializedObject(typeof(ItemClassModifier));
                 foreach(ushort quality in new ushort[]{1,5,6}) {
-                    var value=new ItemValue {type=hostId,Quality=quality,Modifications=new[]{new ItemValue{type=modId}},CosmeticMods=Array.Empty<ItemValue>()};
+                    var value=new ItemValue {type=hostId,Quality=quality,modifications=new[]{new ItemValue{type=modId}},cosmeticMods=Array.Empty<ItemValue>()};
                     using(var stream=new MemoryStream()) {
-                        var writer=new BinaryWriter(stream); value.Write(writer); writer.Flush(); stream.Position=0;
-                        var read=new ItemValue(); read.Read(new BinaryReader(stream));
-                        Check(read.type==hostId && read.Quality==quality && read.Modifications.Length==1 && read.Modifications[0].type==modId,"Core identity/rank lost in native serialization");
-                        Check(read.Modifications[0].ItemClass is ItemClassModifier && stream.Position==stream.Length,"Modifier payload misaligned");
+                        var writer=new PooledBinaryWriter(); writer.SetBaseStream(stream); value.Write(writer); writer.Flush(); stream.Position=0;
+                        var read=new ItemValue(); var reader=new PooledBinaryReader(); reader.SetBaseStream(stream); read.Read(reader);
+                        Check(read.type==hostId && read.Quality==quality && read.ModificationCount==1 && read.GetModification(0).type==modId,"Core identity/rank lost in native serialization");
+                        Check(read.GetModification(0).ItemClass is ItemClassModifier && stream.Position==stream.Length,"Modifier payload misaligned");
                     }
                     count++;
                 }
@@ -112,8 +112,20 @@ public static class BuildRegression
 
 function Assert-Build([bool]$condition,[string]$message) { if(-not $condition){throw $message} }
 function Apply-BuildPatch([xml]$document,[xml]$patch) {
+    $ops=@()
     foreach($op in $patch.DocumentElement.ChildNodes) {
         if($op.NodeType -ne 'Element'){continue}
+        if($op.LocalName -eq 'conditional') {
+            foreach($branch in $op.ChildNodes) {
+                if($branch.NodeType -ne 'Element' -or $branch.LocalName -ne 'if'){continue}
+                if($branch.GetAttribute('cond') -match "mod_loaded\('([^']+)'\)" -and -not (Test-Path -LiteralPath (Join-Path $modRoot $Matches[1]))){continue}
+                foreach($inner in $branch.ChildNodes){if($inner.NodeType -eq 'Element'){$ops+=$inner}}
+            }
+            continue
+        }
+        $ops+=$op
+    }
+    foreach($op in $ops) {
         foreach($target in @($document.SelectNodes($op.GetAttribute('xpath')))) {
             switch($op.LocalName) {
                 'set' {$target.InnerText=$op.InnerText}

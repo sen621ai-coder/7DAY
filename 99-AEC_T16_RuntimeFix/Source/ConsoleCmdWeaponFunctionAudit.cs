@@ -49,7 +49,13 @@ namespace AECT16RuntimeFix
                         Check(weapon.Actions[0].Properties.Values.TryGetValue("Magazine_items", out ammo) && !string.IsNullOrEmpty(ammo), name + " missing ammunition list");
                         foreach (string entry in ammo.Split(',')) Check(!ItemClass.GetItem(entry, false).IsEmpty(), name + " missing ammunition: " + entry);
                         Check(Value(item, PassiveEffects.ReloadSpeedMultiplier, tags) > 0, name + " invalid reload speed");
-                        Check(item.Modifications != null && item.Modifications.All(m => m == null || m.IsEmpty()), name + " giveself false unexpectedly installed mods");
+                        bool modsEmpty = true;
+                        for (int m = 0; m < item.ModificationCount; m++)
+                        {
+                            var mod = item.GetModification(m);
+                            if (mod != null && !mod.IsEmpty()) { modsEmpty = false; break; }
+                        }
+                        Check(modsEmpty, name + " giveself false unexpectedly installed mods");
                         item.SetMetadata(EquipmentFusion.RankKey, 25);
                         Check(Value(item, PassiveEffects.BurstRoundCount, tags) == Value(original, PassiveEffects.BurstRoundCount, tags), name + " fusion changed fire mode");
                     }

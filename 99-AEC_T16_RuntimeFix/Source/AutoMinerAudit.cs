@@ -25,9 +25,14 @@ namespace AECT16RuntimeFix
                 var seen=new HashSet<MethodBase>();
                 foreach(string name in new[]{"DamageBlock","OnBlockLoaded","OnBlockUnloaded","OnBlockAdded","OnBlockRemoved","OnBlockDestroyedBy","OnBlockDestroyedByExplosion"})
                 {
-                    var method=AccessTools.Method(typeof(BlockCollector),name);
-                    if(method==null)throw new MissingMethodException("Collector audit: "+name);
-                    if(seen.Add(method))h.Patch(method,prefix:new HarmonyMethod(typeof(AutoMinerAudit),nameof(Before)));
+                    // 3.3.0 dropped several BlockCollector overrides; patch the
+                    // declared Block method plus any surviving collector override.
+                    var declared=AccessTools.Method(typeof(Block),name);
+                    if(declared==null)throw new MissingMethodException("Collector audit: "+name);
+                    if(seen.Add(declared))h.Patch(declared,prefix:new HarmonyMethod(typeof(AutoMinerAudit),nameof(Before)));
+                    var overrideMethod=AccessTools.Method(typeof(BlockCollector),name);
+                    if(overrideMethod!=null&&overrideMethod.DeclaringType==typeof(BlockCollector)&&seen.Add(overrideMethod))
+                        h.Patch(overrideMethod,prefix:new HarmonyMethod(typeof(AutoMinerAudit),nameof(Before)));
                 }
                 h.Patch(AccessTools.Method(typeof(GameManager),"SaveAndCleanupWorld"),postfix:new HarmonyMethod(typeof(AutoMinerAudit),nameof(Clear)));
                 Log.Out("[AutoMiner-Audit] Enabled: seven resource miners; damage aggregation 5s; lifecycle traces. Events describe callbacks, not a proven cause.");

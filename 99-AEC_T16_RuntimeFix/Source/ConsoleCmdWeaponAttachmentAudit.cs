@@ -23,7 +23,7 @@ namespace AECT16RuntimeFix
                     {
                         DynamicProperties original;
                         if (!modifier.PropertyOverrides.TryGetValue(model, out original)) continue;
-                        value.Modifications[0] = ItemClass.GetItem(modifier.GetItemName(), false);
+                        value.SetModification(0, ItemClass.GetItem(modifier.GetItemName(), false));
                         foreach (var property in original.Values)
                         {
                             string expected = property.Value;

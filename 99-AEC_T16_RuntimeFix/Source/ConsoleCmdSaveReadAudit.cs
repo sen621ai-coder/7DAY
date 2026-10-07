@@ -18,12 +18,12 @@ namespace AECT16RuntimeFix
         static byte[] Bytes(ItemValue value)
         {
             using (var stream = new MemoryStream())
-            { var writer = new BinaryWriter(stream); value.Write(writer); writer.Flush(); return stream.ToArray(); }
+            { var writer = new PooledBinaryWriter(); writer.SetBaseStream(stream); value.Write(writer); writer.Flush(); return stream.ToArray(); }
         }
         void Read(ItemValue into, byte[] bytes)
         {
             using (var stream = new MemoryStream(bytes))
-            { into.Read(new BinaryReader(stream)); Check(stream.Position == stream.Length, "item payload fully consumed"); }
+            { var reader = new PooledBinaryReader(); reader.SetBaseStream(stream); into.Read(reader); Check(stream.Position == stream.Length, "item payload fully consumed"); }
         }
         public override void Execute(List<string> args, CommandSenderInfo sender)
         {
@@ -43,7 +43,7 @@ namespace AECT16RuntimeFix
                 original.SetMetadata("AECFusionRank", 10);
                 original.SetMetadata("audit", "keep");
                 original.UseTimes = 71;
-                original.Modifications[0] = ItemClass.GetItem("modGunScopeSmall", false);
+                original.SetModification(0, ItemClass.GetItem("modGunScopeSmall", false));
                 byte[] saved = Bytes(original);
                 var restored = new ItemValue();
                 restored.SetMetadata("AECFusionRank", "wrong previous type");
@@ -53,7 +53,7 @@ namespace AECT16RuntimeFix
                 Check(!restored.Metadata.ContainsKey("stale"), "previous item metadata removed");
                 Check(restored.Metadata["audit"].GetValue().Equals("keep"), "custom metadata retained");
                 Check(restored.Quality == 6 && restored.UseTimes == 71, "quality and wear retained");
-                Check(restored.Modifications[0].type == original.Modifications[0].type, "attachment retained");
+                Check(restored.GetModification(0).type == original.GetModification(0).type, "attachment retained");
                 Read(restored, Bytes(new ItemValue()));
                 Check(restored.Metadata == null && restored.IsEmpty(), "empty slot clears old fusion metadata");
 
@@ -86,11 +86,11 @@ namespace AECT16RuntimeFix
                 {
                     var old = Item("itemPZAEC" + family + "DeviceT" + tier);
                     Check(!old.IsEmpty() && old.ItemClass != null, "retired definition present");
-                    old.Modifications = new ItemValue[6];
-                    for (int i = 0; i < 6; i++) old.Modifications[i] = new ItemValue();
-                    old.Modifications[0] = original.Modifications[0].Clone();
+                    old.modifications = new ItemValue[6];
+                    for (int i = 0; i < 6; i++) old.modifications[i] = new ItemValue();
+                    old.modifications[0] = original.GetModification(0).Clone();
                     var result = new ItemValue(); Read(result, Bytes(old));
-                    Check(result.type == old.type && result.Modifications[0].type == old.Modifications[0].type, "retired item and nested attachment retained");
+                    Check(result.type == old.type && result.GetModification(0).type == old.GetModification(0).type, "retired item and nested attachment retained");
                     Check(old.ItemClass.Actions[0] == null, "retired item cannot cast ability");
                 }
                 List<SignRenderer> signs = new List<SignRenderer> { null };
@@ -115,8 +115,8 @@ namespace AECT16RuntimeFix
                 Check(loot != null, "native loot entity construction");
                 if (loot == null) return;
                 loot.world = GameManager.Instance.World;
-                loot.bag = new Bag(18);
-                loot.bag.items[0] = new ItemStack(item.Clone(), 1);
+                loot.bag = new Bag(new Vector2i(18, 1), XUiC_ItemStack.StackLocationTypes.LootContainer, loot);
+                loot.bag.SetSlot(0, new ItemStack(item.Clone(), 1));
                 var bag = loot.bag;
                 loot.belongsPlayerId = 123;
                 var normal = loot.position;
@@ -130,7 +130,7 @@ namespace AECT16RuntimeFix
                 Check(loot.position == new Vector3(12.5f, 62, 15.5f), "recovery preserves horizontal position above terrain");
                 Check(loot.motion == Vector3.zero && loot.physicsVel == Vector3.zero, "fall velocity reset");
                 Check(loot.itemRB == null || loot.itemRB.isKinematic || loot.itemRB.velocity == Vector3.zero, "native rigidbody velocity reset");
-                Check(ReferenceEquals(bag, loot.bag) && loot.belongsPlayerId == 123 && loot.bag.items[0].itemValue.type == item.type, "bag contents and ownership preserved");
+                Check(ReferenceEquals(bag, loot.bag) && loot.belongsPlayerId == 123 && loot.bag.ItemGrid[0].itemValue.type == item.type, "bag contents and ownership preserved");
                 var recovered = loot.position;
                 Check(WorldLogRecovery.RecoverAtHeight(loot, 80) && loot.position == recovered, "recovery not repeated for healthy loot");
                 var updateTransform = AccessTools.Method(typeof(EntityItem), "updateTransform");
@@ -204,7 +204,7 @@ namespace AECT16RuntimeFix
                         var data = new PlayerDataFile();
                         try
                         {
-                            data.Read(reader, version);
+                            data.Read(reader, version, StreamModeRead.Persistency);
                             Check(stream.Position == stream.Length, "copied player payload fully consumed " + index);
                             SdtdConsole.Instance.Output("[AEC-Save-Audit] Copied player " + index + " read " + stream.Position + "/" + stream.Length + " bytes; entity=" + data.ecd.id);
                         }

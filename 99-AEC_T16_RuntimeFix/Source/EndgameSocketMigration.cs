@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 
@@ -13,8 +12,8 @@ namespace AECT16RuntimeFix
 
         public static void Install(Harmony harmony)
         {
-            var method = AccessTools.Method(typeof(ItemValue), "Read", new[] { typeof(BinaryReader) });
-            if (method == null) throw new MissingMethodException("ItemValue.Read(BinaryReader)");
+            var method = AccessTools.Method(typeof(ItemValue), "Read", new[] { typeof(PooledBinaryReader) });
+            if (method == null) throw new MissingMethodException("ItemValue.Read(PooledBinaryReader)");
             harmony.Patch(method, postfix: new HarmonyMethod(typeof(EndgameSocketMigration), nameof(AfterRead)));
         }
 
@@ -24,13 +23,13 @@ namespace AECT16RuntimeFix
         {
             var item = __instance.ItemClass;
             if (item == null || !Supported.IsMatch(item.GetItemName())) return;
-            var old = __instance.Modifications;
+            var old = __instance.modifications;
             if (old != null && old.Length >= 6) return;
             var expanded = new ItemValue[6];
             int count = old == null ? 0 : old.Length;
             if (count > 0) Array.Copy(old, expanded, count);
             for (int i = count; i < expanded.Length; i++) expanded[i] = new ItemValue();
-            __instance.Modifications = expanded;
+            __instance.modifications = expanded;
         }
     }
 }

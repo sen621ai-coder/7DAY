@@ -49,7 +49,7 @@ namespace AECT16RuntimeFix
                 if (!text.Contains("350")) throw new Exception("Formatted health text: " + text);
                 SdtdConsole.Instance.Output("[AEC-Display-Audit] T19 Harrier outfit formatted health=" + text);
                 var gun = new ItemValue(ItemClass.GetItem("gunPZAECEmberPistolT19", false).type, 6,6,false,null,1f);
-                gun.Modifications[0] = ItemClass.GetItem("modPZAECClosedLoopFeedT19", false);
+                gun.SetModification(0, ItemClass.GetItem("modPZAECClosedLoopFeedT19", false));
                 gun.SetMetadata(EquipmentFusion.RankKey, 1);
                 var magazine = UIDisplayInfoManager.instance.GetDisplayStatsForTag(gun.ItemClass.DisplayType).DisplayStats.Single(e => e.CustomName=="aecBase_MagazineSize");
                 foreach (bool mods in new[] { false,true })
