@@ -9,7 +9,7 @@ $update=$src.Substring($src.IndexOf('        public static void Update'))
 $stub=@'
 namespace PZAEC.M1 {
  public static class Secondary{public static bool Empty(ItemValue item)=>!item.HasBelt;}
- public class ItemValue{public bool HasBelt;public float UseTimes;public int Meta,type=1;public ItemValue[] Modifications,CosmeticMods;public ItemClass ItemClass=new ItemClass();public int Version;public bool TryGetMetadata(string k,out int v){v=Version;return v>0;}public void SetMetadata(string k,int v){Version=v;}}
+ public class ItemValue{public bool HasBelt;public float UseTimes;public int Meta,type=1;public ItemValue[] modifications,cosmeticMods;public ItemValue[] Modifications{get=>modifications;set=>modifications=value;}public ItemValue[] CosmeticMods{get=>cosmeticMods;set=>cosmeticMods=value;}public int ModificationCount=>modifications==null?0:modifications.Length;public ItemValue GetModification(int i)=>modifications[i];public int CosmeticModCount=>cosmeticMods==null?0:cosmeticMods.Length;public ItemValue GetCosmeticMod(int i)=>cosmeticMods[i];public ItemClass ItemClass=new ItemClass();public int Version;public bool TryGetMetadata(string k,out int v){v=Version;return v>0;}public void SetMetadata(string k,int v){Version=v;}}
  public class ItemClass{public string Name="vehicleM1AbramsPlaceable";public string GetItemName()=>Name;public static ItemValue GetItem(string n,bool b)=>new ItemValue();}
  public static class Mathf{public static float Clamp(float v,float min,float max)=>System.Math.Max(min,System.Math.Min(max,v));}
  public class EntityPlayer{}

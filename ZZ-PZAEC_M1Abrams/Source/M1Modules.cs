@@ -17,7 +17,7 @@ namespace PZAEC.M1
             h.Patch(AccessTools.Method(typeof(Vehicle),"CalcEffects"),prefix:new HarmonyMethod(typeof(Modules),nameof(BeforeEffects)),postfix:new HarmonyMethod(typeof(Modules),nameof(AfterEffects)),finalizer:new HarmonyMethod(typeof(Modules),nameof(RestoreEffects)));
             h.Patch(AccessTools.Method(typeof(Vehicle),"CalcMods"),prefix:new HarmonyMethod(typeof(Modules),nameof(BareMods)),finalizer:new HarmonyMethod(typeof(Modules),nameof(RestoreEffects)));
             h.Patch(AccessTools.Method(typeof(Vehicle),"SetItemValue"),prefix:new HarmonyMethod(typeof(Modules),nameof(ExpandVehicle)));
-            h.Patch(AccessTools.Method(typeof(Vehicle),"SetItemValueMods"),prefix:new HarmonyMethod(typeof(Modules),nameof(LocalMods)));
+            h.Patch(AccessTools.Method(typeof(Vehicle),"OnModsChanged"),postfix:new HarmonyMethod(typeof(Modules),nameof(LocalMods)));
             h.Patch(AccessTools.Method(typeof(ItemValue),"Read"),postfix:new HarmonyMethod(typeof(Modules),nameof(ReadItem)));
             h.Patch(AccessTools.Method(typeof(ItemValue),"CalcModSlotCount"),postfix:new HarmonyMethod(typeof(Modules),nameof(SlotCount)));
             h.Patch(AccessTools.Method(typeof(Vehicle),"LoadItems"),prefix:new HarmonyMethod(typeof(Modules),nameof(LoadItems)));
@@ -28,8 +28,8 @@ namespace PZAEC.M1
             h.Patch(AccessTools.Method(typeof(XUiC_ItemPartStack),"CanSwap"),prefix:new HarmonyMethod(typeof(Modules),nameof(CanSwap)));
             h.Patch(AccessTools.Method(typeof(XUiC_ItemPartStack),"CanRemove"),postfix:new HarmonyMethod(typeof(Modules),nameof(CanRemove)));
         }
-        static string[] Names(ItemValue item)=>item?.Modifications==null?new string[0]:item.Modifications.Select(x=>x==null||x.type==0?null:x.ItemClass?.GetItemName()??"unknown").ToArray();
-        static bool Cosmetic(ItemValue item)=>item?.CosmeticMods!=null&&item.CosmeticMods.Any(x=>x!=null&&x.type!=0);
+        static string[] Names(ItemValue item)=>item==null||item.ModificationCount==0?new string[0]:Enumerable.Range(0,item.ModificationCount).Select(i=>{var x=item.GetModification(i);return x==null||x.type==0?null:x.ItemClass?.GetItemName()??"unknown";}).ToArray();
+        static bool Cosmetic(ItemValue item)=>item!=null&&item.CosmeticModCount>0&&Enumerable.Range(0,item.CosmeticModCount).Select(item.GetCosmeticMod).Any(x=>x!=null&&x.type!=0);
         static string Signature(ItemValue item)=>string.Join("|",Names(item))+"/"+(Cosmetic(item)?"cosmetic":"")+"/"+(item!=null&&item.TryGetMetadata(Quarantine,out int q)?q:0);
         static int Mask(ItemValue item)
         {return item!=null&&!Cosmetic(item)&&(!item.TryGetMetadata(Quarantine,out int q)||q==0)&&ModuleRules.Validate(Rules.Index(item.ItemClass?.GetItemName()),Names(item),out int mask)?mask:0;}
@@ -42,13 +42,13 @@ namespace PZAEC.M1
         static void Expand(ItemValue item)
         {
             int tier=Rules.Index(item?.ItemClass?.GetItemName());if(tier<0)return;
-            int count=ModuleRules.Slots(tier);if(item.Modifications==null||item.Modifications.Length<count){var array=item.Modifications??new ItemValue[0];Array.Resize(ref array,count);for(int i=0;i<array.Length;i++)if(array[i]==null)array[i]=ItemValue.None;item.Modifications=array;}
+            int count=ModuleRules.Slots(tier);if(item.ModificationCount<count){var array=item.modifications??new ItemValue[0];Array.Resize(ref array,count);for(int i=0;i<array.Length;i++)if(array[i]==null)array[i]=ItemValue.None;item.modifications=array;}
         }
-        static void LocalMods(Vehicle __instance,ItemValue __0)
+        static void LocalMods(Vehicle __instance)
         {
-            if(Rules.Index(__instance.GetName())<0||__0==null)return;
+            if(Rules.Index(__instance.GetName())<0||__instance.itemValue==null)return;
             var p=GameManager.Instance?.World?.GetPrimaryPlayer();
-            if(cache.TryGetValue(__instance,out var previous)&&previous.Signature!=Signature(__0)&&Parked(__instance.entity)&&Authorized(__instance.entity,p)&&!Cosmetic(__0)&&ModuleRules.Validate(Rules.Index(__0.ItemClass?.GetItemName()),Names(__0),out int mask))
+            if(cache.TryGetValue(__instance,out var previous)&&previous.Signature!=Signature(__instance.itemValue)&&Parked(__instance.entity)&&Authorized(__instance.entity,p)&&!Cosmetic(__instance.itemValue)&&ModuleRules.Validate(Rules.Index(__instance.itemValue.ItemClass?.GetItemName()),Names(__instance.itemValue),out int mask))
                 __instance.itemValue.SetMetadata(Quarantine,0);
         }
         static void ExpandVehicle(ItemValue __0)=>Expand(__0);
@@ -56,13 +56,13 @@ namespace PZAEC.M1
         static void SlotCount(ItemValue __instance,ref int __result){int tier=Rules.Index(__instance.ItemClass?.GetItemName());if(tier>=0)__result=ModuleRules.Slots(tier);}
         // Native effect calculation still handles global settings and driver effects. Invalid legacy mods are retained but cannot supply effects.
         static void BareMods(Vehicle __instance,out ItemValue __state)
-        {__state=null;if(Rules.Index(__instance.GetName())<0)return;__state=__instance.itemValue;var bare=__state.Clone();bare.Modifications=new ItemValue[0];bare.CosmeticMods=new ItemValue[0];__instance.itemValue=bare;}
+        {__state=null;if(Rules.Index(__instance.GetName())<0)return;__state=__instance.itemValue;var bare=__state.Clone();bare.modifications=new ItemValue[0];bare.cosmeticMods=new ItemValue[0];__instance.itemValue=bare;}
         static void BeforeEffects(Vehicle __instance,out ItemValue __state)
         {
             __state=null;if(Rules.Index(__instance.GetName())<0)return;
             var item=__instance.itemValue;var signature=Signature(item);var c=cache.GetValue(__instance,_=>new Cache());
             if(c.Signature!=signature){c.Signature=signature;c.Mask=Mask(item);if(Weapons.IsTank(__instance.entity)){var s=Weapons.Register(__instance.entity);s.Trigger.Stop();s.NextFire=Mathf.Max(s.NextFire,Time.time+Reload(__instance.entity));}}
-            __state=item;var bare=item.Clone();bare.Modifications=new ItemValue[0];bare.CosmeticMods=new ItemValue[0];__instance.itemValue=bare;
+            __state=item;var bare=item.Clone();bare.modifications=new ItemValue[0];bare.cosmeticMods=new ItemValue[0];__instance.itemValue=bare;
         }
         static void AfterEffects(Vehicle __instance,ItemValue __state)
         {

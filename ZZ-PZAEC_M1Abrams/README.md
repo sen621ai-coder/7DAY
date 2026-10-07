@@ -1,4 +1,8 @@
-# M1 Abrams · 0.4.17 副武器命中与机枪可见性修复
+# M1 Abrams · 0.4.18 游戏V3.3.0移植
+
+## 0.4.18 游戏V3.3.0移植
+
+游戏更新 V3.2.0 → V3.3.0 后的原生适配：`Vehicle.SetItemValueMods` 补丁目标改为 `Vehicle.OnModsChanged`（后缀，隔离解除判定改读实例 itemValue）；`ItemValue.Modifications/CosmeticMods` 改用 `ModificationCount/GetModification` 与 public `modifications/cosmeticMods` 字段；删除各 NetPackage 的 `GetLength()` override（3.3.0 基类已移除）。武器线格式与行为不变。12 项离线 fixture（含 mock 更新到新 API 形状）与安装程序集补丁目标扫描通过。
 
 ## 0.4.17 副武器命中与机枪可见性修复
 

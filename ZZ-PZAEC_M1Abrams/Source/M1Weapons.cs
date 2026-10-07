@@ -200,7 +200,6 @@ namespace PZAEC.M1
         public int Vehicle,Sequence;public byte Op;public Vector3 Origin,Direction;
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToServer;
         public NetPackageM1Intent Setup(int v,byte op,int seq,Vector3 o,Vector3 d){Vehicle=v;Op=op;Sequence=seq;Origin=o;Direction=d;return this;}
-        public override int GetLength()=>33;
         public override void read(PooledBinaryReader r){Vehicle=r.ReadInt32();Op=r.ReadByte();Sequence=r.ReadInt32();Origin=Read(r);Direction=Read(r);}
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(Vehicle);w.Write(Op);w.Write(Sequence);Write(w,Origin);Write(w,Direction);}
         public static Vector3 Read(PooledBinaryReader r)=>new Vector3(r.ReadSingle(),r.ReadSingle(),r.ReadSingle());
@@ -214,7 +213,6 @@ namespace PZAEC.M1
         public override NetPackageDirection PackageDirection=>NetPackageDirection.ToClient;
         public static NetPackageM1Event Make(int v,int epoch,int seq,int shot,byte kind,float time,Vector3 a,Vector3 b,float x,float y)
         {var p=NetPackageManager.GetPackage<NetPackageM1Event>();p.Vehicle=v;p.Epoch=epoch;p.Sequence=seq;p.Shot=shot;p.Kind=kind;p.Time=time;p.A=a;p.B=b;p.X=x;p.Y=y;return p;}
-        public override int GetLength()=>53;
         public override void read(PooledBinaryReader r){Vehicle=r.ReadInt32();Epoch=r.ReadInt32();Sequence=r.ReadInt32();Shot=r.ReadInt32();Kind=r.ReadByte();Time=r.ReadSingle();A=NetPackageM1Intent.Read(r);B=NetPackageM1Intent.Read(r);X=r.ReadSingle();Y=r.ReadSingle();}
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(Vehicle);w.Write(Epoch);w.Write(Sequence);w.Write(Shot);w.Write(Kind);w.Write(Time);NetPackageM1Intent.Write(w,A);NetPackageM1Intent.Write(w,B);w.Write(X);w.Write(Y);}
         public override void ProcessPackage(World world,GameManager callbacks){if(world!=null&&!Weapons.Server)Presentation.Receive(world,this);}

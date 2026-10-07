@@ -36,8 +36,8 @@ namespace PZAEC.M1
             GameManager.ShowTooltip(slot.xui.playerUI.entityPlayer,"请先放置M1，将装甲维修包放入货仓，在车外对准坦克按住G维修。");return false;
         }
         static bool Clean(ItemValue item)=>Secondary.Empty(item)&&item.UseTimes<=.5f&&item.Meta==0&&
-            (item.Modifications==null||item.Modifications.All(m=>m==null||m.type==0))&&
-            (item.CosmeticMods==null||item.CosmeticMods.All(m=>m==null||m.type==0));
+            (item.ModificationCount==0||Enumerable.Range(0,item.ModificationCount).Select(item.GetModification).All(m=>m==null||m.type==0))&&
+            (item.CosmeticModCount==0||Enumerable.Range(0,item.CosmeticModCount).Select(item.GetCosmeticMod).All(m=>m==null||m.type==0));
         static bool CraftGuard(ItemActionEntryCraft __instance)
         {
             var entry=__instance.ItemController as XUiC_RecipeEntry;var recipe=entry?.Recipe;if(recipe==null)return true;

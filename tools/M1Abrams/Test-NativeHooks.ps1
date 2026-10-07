@@ -10,7 +10,7 @@ Check ($damage.Count -eq 1) 'ApplyDamage hook unambiguous'
 Check (@($damage[0].Body.Instructions|Where-Object {$_.OpCode.Code -eq 'Ldc_I4' -and $_.Operand -eq 99999}).Count -eq 1) 'Exactly one vanilla destruction sentinel'
 foreach($pair in @(@('EntityVehicle','ProcessDamageResponseLocal'),@('Equipment','GetTotalPhysicalArmorRating'),@('Vehicle','GetPlayerDamagePercent'),@('Vehicle','SetItemValue'),@('Vehicle','RepairParts'),@('XUiM_Vehicle','RepairVehicle'),@('ItemActionEntryCraft','OnActivated'))){Check ((Method $pair[0] $pair[1]).Count -eq 1) ($pair -join '.')}
 $m=Method Vehicle SetItemValue
-Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'ItemValue::UseTimes'}).Count -eq 1) 'Health reads item float degradation'
+Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'ItemValue::get_UseTimes'}).Count -eq 1) 'Health reads item float degradation'
 Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'Stat::set_BaseMax'}).Count -eq 1) 'Vehicle initializes max health from item'
 $m=Method EntityVehicle ReadSyncData
 Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'Vehicle::LoadItems'}).Count -eq 1) 'Network loads native item state'
@@ -27,7 +27,7 @@ $steering=@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -mat
 $forces=@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'EntityVehicle::FixedUpdateForces'})
 Check ($steering.Count -eq 1 -and $forces.Count -eq 1 -and $steering[0].Offset -lt $forces[0].Offset) 'Chassis postfix follows native wheel steering in physics step'
 Check ((Method EntityVehicle FixedUpdateForces).Count -eq 1) 'Chassis physics hook unambiguous'
-foreach($pair in @(@('Vehicle','CalcEffects'),@('Vehicle','CalcMods'),@('Vehicle','SetItemValueMods'),@('Vehicle','LoadItems'),@('ItemValue','CalcModSlotCount'),@('ItemValue','Read'),@('XUiC_ItemPartStack','CanSwap'),@('XUiC_ItemPartStack','CanRemove'),@('XUiC_ItemCosmeticStack','CanSwap'))){Check ((Method $pair[0] $pair[1]).Count -eq 1) ('Module hook unambiguous: '+($pair -join '.'))}
+foreach($pair in @(@('Vehicle','CalcEffects'),@('Vehicle','CalcMods'),@('Vehicle','OnModsChanged'),@('Vehicle','LoadItems'),@('ItemValue','CalcModSlotCount'),@('ItemValue','Read'),@('XUiC_ItemPartStack','CanSwap'),@('XUiC_ItemPartStack','CanRemove'),@('XUiC_ItemCosmeticStack','CanSwap'))){Check ((Method $pair[0] $pair[1]).Count -eq 1) ('Module hook unambiguous: '+($pair -join '.'))}
 $m=Method VPEngine Update
 Check (@($m[0].Body.Instructions|Where-Object {($_.Operand -as [string]) -match 'Vehicle::EffectFuelUsePer'}).Count -eq 1) 'Native engine applies fuel multiplier exactly once'
 $m=Method EntityVehicle PhysicsFixedUpdate

@@ -6,10 +6,12 @@ namespace HarmonyLib {public class Harmony{public void Patch(object a,HarmonyMet
 namespace UnityEngine {public struct Vector3{public float sqrMagnitude;public static Vector3 operator-(Vector3 a,Vector3 b)=>new Vector3{ sqrMagnitude=a.sqrMagnitude+b.sqrMagnitude};}public static class Time{public static float time=100;}public static class Mathf{public static float Max(float a,float b)=>Math.Max(a,b);}}
 public class ItemClass{public string Name;public string GetItemName()=>Name;}
 public class ItemValue{
- public int type=1;public ItemClass ItemClass;public ItemValue[] Modifications=new ItemValue[0],CosmeticMods=new ItemValue[0];public int Q;public float UseTimes;public int Meta;
+ public int type=1;public ItemClass ItemClass; public ItemValue[] modifications=new ItemValue[0],cosmeticMods=new ItemValue[0];public int Q;public float UseTimes;public int Meta;
+ public int ModificationCount=>modifications.Length;public ItemValue GetModification(int i)=>modifications[i];public void SetModification(int i,ItemValue v)=>modifications[i]=v;
+ public int CosmeticModCount=>cosmeticMods.Length;public ItemValue GetCosmeticMod(int i)=>cosmeticMods[i];public void SetCosmeticMod(int i,ItemValue v)=>cosmeticMods[i]=v;
  public ItemValue(string n="empty"){ItemClass=new ItemClass{Name=n};if(n=="empty")type=0;}
  public static ItemValue None=>new ItemValue();public bool TryGetMetadata(string k,out int q){q=Q;return Q!=0;}public void SetMetadata(string k,int q){Q=q;}
- public ItemValue Clone()=>new ItemValue(ItemClass.Name){Modifications=(ItemValue[])Modifications.Clone(),CosmeticMods=(ItemValue[])CosmeticMods.Clone(),Q=Q,UseTimes=UseTimes,Meta=Meta};
+ public ItemValue Clone()=>new ItemValue(ItemClass.Name){modifications=(ItemValue[])modifications.Clone(),cosmeticMods=(ItemValue[])cosmeticMods.Clone(),Q=Q,UseTimes=UseTimes,Meta=Meta};
 }
 public class ItemStack{public ItemValue itemValue;public ItemStack(ItemValue i){itemValue=i;}}
 public class Body{public UnityEngine.Vector3 velocity;}
@@ -20,7 +22,7 @@ public class EntityVehicle{
  public EntityVehicle(string name="vehicleM1Abrams"){vehicle=new Vehicle(this,name);}
  public bool IsDead()=>Dead;public object GetAttached(int i)=>Gunner?new object():null;public object GetOwner()=>Owner;public bool IsUserAllowed(string id)=>id==Owner;public void SendSyncData(ushort flags){Syncs++;}
 }
-public class Vehicle{public EntityVehicle entity;public ItemValue itemValue;public string Name;public float EffectMotorTorquePer,EffectVelocityMaxPer,EffectFuelUsePer;public int Health=1000000;public Vehicle(EntityVehicle e,string name){entity=e;Name=name;itemValue=new ItemValue(name+"Placeable");}public string GetName()=>Name;public int GetHealth()=>Health;}
+public class Vehicle{public EntityVehicle entity;public ItemValue itemValue;public string Name;public float EffectMotorTorquePer,EffectVelocityMaxPer,EffectFuelUsePer;public int Health=1000000;public Vehicle(EntityVehicle e,string name){entity=e;Name=name;itemValue=new ItemValue(name+"Placeable");}public string GetName()=>Name;public int GetHealth()=>Health;public void OnModsChanged(){}}
 public class World{public EntityPlayer Player=new EntityPlayer();public EntityPlayer GetPrimaryPlayer()=>Player;public object GetEntity(int n)=>Player;}
 public class GameManager{public static GameManager Instance=new GameManager();public World World=new World();public static void ShowTooltip(EntityPlayer p,string s){}}
 public static class Log{public static void Warning(string s){}}
@@ -55,24 +57,24 @@ namespace PZAEC.M1 {
    Check(ModuleRules.Validate(0,ModuleRules.Names,out int all)&&all==63,"all six dedicated modules fit together");
    Near(ModuleRules.Reload(32),.75f,"reload");Near(ModuleRules.Tracking(16),1.5f,"tracking");Near(ModuleRules.Recoil(16),.4f,"recoil");Near(ModuleRules.Fuel(2),.6f,"economy");
    Check(ModuleRules.Damage(100000,3,4,true,12)==20000,"T19 combined roof acid");Near(Rules.Specs[0].Reload*ModuleRules.Reload(32),3.6f,"T16 reload");
-   var e=new EntityVehicle();e.vehicle.itemValue.Modifications=Items(0);e.vehicle.itemValue.UseTimes=123;e.vehicle.itemValue.Meta=42;var original=e.vehicle.itemValue;
+   var e=new EntityVehicle();e.vehicle.itemValue.modifications=Items(0);e.vehicle.itemValue.UseTimes=123;e.vehicle.itemValue.Meta=42;var original=e.vehicle.itemValue;
    Effects(e.vehicle);Check(ReferenceEquals(e.vehicle.itemValue,original),"native item restored");Near(e.vehicle.EffectMotorTorquePer,2.6f,"actual torque hook");Near(e.vehicle.EffectVelocityMaxPer,1.25f,"actual speed hook");Near(e.vehicle.EffectFuelUsePer,2,"power no fuel penalty");
    Effects(e.vehicle);Near(e.vehicle.EffectMotorTorquePer,2.6f,"repeated calc no accumulation");Check(original.UseTimes==123&&original.Meta==42,"health fuel untouched");
-   e.vehicle.itemValue.Modifications=Items(1);Effects(e.vehicle);Near(e.vehicle.EffectFuelUsePer,1.2f,"actual fuel multiplier");Near(e.vehicle.EffectMotorTorquePer,2,"economy no torque penalty");
-   e.vehicle.itemValue.Modifications=Items(0,1);Effects(e.vehicle);Check(Modules.Get(e)==3&&!Modules.Invalid(e),"power and economy combine");Near(e.vehicle.EffectMotorTorquePer,2.6f,"combined torque");Near(e.vehicle.EffectFuelUsePer,1.2f,"combined fuel saving");
-   e.vehicle.itemValue.Modifications=Items(0,0);Effects(e.vehicle);Check(Modules.Get(e)==0&&Modules.Invalid(e),"duplicate modules disabled retained");Check(e.vehicle.itemValue.Modifications.Length==2,"invalid modules not deleted");
-   object[] bare={e.vehicle,null};Call("BeforeEffects",bare);Check(e.vehicle.itemValue.Modifications.Length==0,"native effects cannot import invalid mods");Call("RestoreEffects",e.vehicle,bare[1],new Exception());Check(ReferenceEquals(e.vehicle.itemValue,original),"exception restores item");
-   for(int tier=0;tier<4;tier++){var item=new ItemValue("vehicleM1Abrams"+(tier==0?"":"T"+(16+tier))+"Placeable"){UseTimes=222,Meta=333};Call("ReadItem",item);Check(item.Modifications.Length==6,"old item slot expansion");Check(item.UseTimes==222&&item.Meta==333,"migration preserves health/fuel");Call("ReadItem",item);Check(item.Modifications.All(x=>x!=null),"empty slots usable");}
-   e.vehicle.itemValue.Modifications=Items(0,1,2,3);Call("ReadItem",e.vehicle.itemValue);Check(e.vehicle.itemValue.Modifications.Length==6&&e.vehicle.itemValue.Modifications[0].ItemClass.Name==ModuleRules.Names[0]&&e.vehicle.itemValue.Modifications[3].ItemClass.Name==ModuleRules.Names[3],"legacy modules preserved while adding slots");
+   e.vehicle.itemValue.modifications=Items(1);Effects(e.vehicle);Near(e.vehicle.EffectFuelUsePer,1.2f,"actual fuel multiplier");Near(e.vehicle.EffectMotorTorquePer,2,"economy no torque penalty");
+   e.vehicle.itemValue.modifications=Items(0,1);Effects(e.vehicle);Check(Modules.Get(e)==3&&!Modules.Invalid(e),"power and economy combine");Near(e.vehicle.EffectMotorTorquePer,2.6f,"combined torque");Near(e.vehicle.EffectFuelUsePer,1.2f,"combined fuel saving");
+   e.vehicle.itemValue.modifications=Items(0,0);Effects(e.vehicle);Check(Modules.Get(e)==0&&Modules.Invalid(e),"duplicate modules disabled retained");Check(e.vehicle.itemValue.modifications.Length==2,"invalid modules not deleted");
+   object[] bare={e.vehicle,null};Call("BeforeEffects",bare);Check(e.vehicle.itemValue.modifications.Length==0,"native effects cannot import invalid mods");Call("RestoreEffects",e.vehicle,bare[1],new Exception());Check(ReferenceEquals(e.vehicle.itemValue,original),"exception restores item");
+   for(int tier=0;tier<4;tier++){var item=new ItemValue("vehicleM1Abrams"+(tier==0?"":"T"+(16+tier))+"Placeable"){UseTimes=222,Meta=333};Call("ReadItem",item);Check(item.modifications.Length==6,"old item slot expansion");Check(item.UseTimes==222&&item.Meta==333,"migration preserves health/fuel");Call("ReadItem",item);Check(item.modifications.All(x=>x!=null),"empty slots usable");}
+   e.vehicle.itemValue.modifications=Items(0,1,2,3);Call("ReadItem",e.vehicle.itemValue);Check(e.vehicle.itemValue.modifications.Length==6&&e.vehicle.itemValue.modifications[0].ItemClass.Name==ModuleRules.Names[0]&&e.vehicle.itemValue.modifications[3].ItemClass.Name==ModuleRules.Names[3],"legacy modules preserved while adding slots");
    var other=new EntityVehicle("vehicleTruck4x4");Effects(other.vehicle);Near(other.vehicle.EffectMotorTorquePer,2,"non M1 untouched");
-   var v=new EntityVehicle();Effects(v.vehicle);var incoming=new ItemValue("vehicleM1AbramsPlaceable"){Modifications=Items(5)};
+   var v=new EntityVehicle();Effects(v.vehicle);var incoming=new ItemValue("vehicleM1AbramsPlaceable"){modifications=Items(5)};
    object[] begin={7,null};Call("BeginSync",begin);Call("LoadItems",v.vehicle,new[]{new ItemStack(incoming)});Check(incoming.Q==0,"authorized parked server update");
-   v.hasDriver=true;Call("LoadItems",v.vehicle,new[]{new ItemStack(incoming)});Check(incoming.Q==1,"occupied remote update quarantined");Check(incoming.Modifications.Length==1,"quarantine preserves items");v.hasDriver=false;
+   v.hasDriver=true;Call("LoadItems",v.vehicle,new[]{new ItemStack(incoming)});Check(incoming.Q==1,"occupied remote update quarantined");Check(incoming.modifications.Length==1,"quarantine preserves items");v.hasDriver=false;
    incoming.Q=0;GameManager.Instance.World.Player.PersistentPlayerData.PrimaryId="stranger";Call("LoadItems",v.vehicle,new[]{new ItemStack(incoming)});Check(incoming.Q==1,"unauthorized remote update quarantined");GameManager.Instance.World.Player.PersistentPlayerData.PrimaryId="owner";
    Call("EndSync",v,(ushort)4,begin[1],null);Check(v.Syncs==1,"server correction includes original sender");
-   v.vehicle.itemValue.Modifications=Items(5);Effects(v.vehicle);Near(Modules.Reload(v),3.6f,"actual reload adapter");Check(Weapons.Register(v).NextFire>=103.6f,"module change resets reload");
+   v.vehicle.itemValue.modifications=Items(5);Effects(v.vehicle);Near(Modules.Reload(v),3.6f,"actual reload adapter");Check(Weapons.Register(v).NextFire>=103.6f,"module change resets reload");
    var slot=new XUiC_ItemPartStack{SlotNumber=0,WindowGroup=new Window{Controller=new XUiC_VehicleWindowGroup{CurrentVehicleEntity=v}}};slot.xui.AssembleItem.CurrentItem=new ItemStack(v.vehicle.itemValue);v.hasDriver=true;object[] swap={slot,new ItemStack(new ItemValue(ModuleRules.Names[0])),true};Check(!(bool)Call("CanSwap",swap)&&!(bool)swap[2],"occupied UI blocked before transfer");v.hasDriver=false;
-   var six=Items(0,1,2,3,4);Array.Resize(ref six,6);six[5]=ItemValue.None;v.vehicle.itemValue.Modifications=six;slot.SlotNumber=5;object[] finalSlot={slot,new ItemStack(new ItemValue(ModuleRules.Names[5])),true};Check((bool)Call("CanSwap",finalSlot),"sixth dedicated module accepted in sixth UI slot");
+   var six=Items(0,1,2,3,4);Array.Resize(ref six,6);six[5]=ItemValue.None;v.vehicle.itemValue.modifications=six;slot.SlotNumber=5;object[] finalSlot={slot,new ItemStack(new ItemValue(ModuleRules.Names[5])),true};Check((bool)Call("CanSwap",finalSlot),"sixth dedicated module accepted in sixth UI slot");
    var cosmetic=new XUiC_ItemCosmeticStack();cosmetic.xui.AssembleItem.CurrentItem=new ItemStack(v.vehicle.itemValue);object[] cosmeticArgs={cosmetic,new ItemStack(new ItemValue(ModuleRules.Names[0])),true};Check(!(bool)Call("CosmeticSwap",cosmeticArgs)&&!(bool)cosmeticArgs[2],"cosmetic slot cannot bypass limits");
    Console.WriteLine("PASS "+n+" actual module rules, hooks, migration and server/UI validation checks");
   }
