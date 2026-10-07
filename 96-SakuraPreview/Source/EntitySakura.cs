@@ -126,7 +126,6 @@ namespace SakuraPreview
         public NetPackageSakuraRequest Setup(int id, byte choice) {entity=id;action=choice;return this;}
         public override void read(PooledBinaryReader r) {entity=r.ReadInt32();action=r.ReadByte();}
         public override void write(PooledBinaryWriter w) {base.write(w);w.Write(entity);w.Write(action);}
-        public override int GetLength() => 7;
         public override void ProcessPackage(World world, GameManager manager)
         {
             if (world==null || world.IsRemote() || Sender==null || !Sender.bAttachedToEntity) return;
@@ -144,7 +143,6 @@ namespace SakuraPreview
         public NetPackageSakuraReply Setup(int id,byte response,bool wave){entity=id;reply=response;gesture=wave;return this;}
         public override void read(PooledBinaryReader r){entity=r.ReadInt32();reply=r.ReadByte();gesture=r.ReadBoolean();}
         public override void write(PooledBinaryWriter w){base.write(w);w.Write(entity);w.Write(reply);w.Write(gesture);}
-        public override int GetLength()=>8;
         public override void ProcessPackage(World world,GameManager manager)
         {
             if(world==null || !world.IsRemote())return;

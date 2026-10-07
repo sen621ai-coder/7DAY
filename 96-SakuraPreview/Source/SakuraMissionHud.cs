@@ -25,7 +25,6 @@ namespace SakuraPreview
         {npc=r.ReadInt32();tier=r.ReadInt32();waves=r.ReadInt32();enemies=r.ReadInt32();health=r.ReadInt32();coins=r.ReadInt32();xp=r.ReadInt32();phase=r.ReadByte();x=r.ReadSingle();z=r.ReadSingle();missing=r.ReadSingle();paused=r.ReadBoolean();claim=r.ReadBoolean();failure=r.ReadString();guard=r.ReadBoolean();missionId=r.ReadString();receipt=r.ReadInt32();}
         public override void write(PooledBinaryWriter w)
         {base.write(w);w.Write(npc);w.Write(tier);w.Write(waves);w.Write(enemies);w.Write(health);w.Write(coins);w.Write(xp);w.Write(phase);w.Write(x);w.Write(z);w.Write(missing);w.Write(paused);w.Write(claim);w.Write(failure??"");w.Write(guard);w.Write(missionId??"");w.Write(receipt);}
-        public override int GetLength()=>64+System.Text.Encoding.UTF8.GetByteCount(failure??"")+System.Text.Encoding.UTF8.GetByteCount(missionId??"");
         public override void ProcessPackage(World world,GameManager manager){if(world!=null&&world.IsRemote())DeliverLocal();}
         public void DeliverLocal()
         {
@@ -52,7 +51,7 @@ namespace SakuraPreview
                 quest.DataVariables["sakuraDetails"]="生命 "+health+" · 波次 "+waves+"/"+(tier-14)+" · 敌人 "+enemies+(phase!=(byte)EscortPhase.Failed && missing>0?" · 返回倒计时 "+Mathf.Max(0,Mathf.CeilToInt(60-missing))+" 秒":"");
                 quest.DataVariables["sakuraX"]=x.ToString(CultureInfo.InvariantCulture);
                 quest.DataVariables["sakuraZ"]=z.ToString(CultureInfo.InvariantCulture);
-                if(created){journal.AddQuest(quest,true);journal.TrackedQuest=quest;Log.Out("[Sakura] Native quest added: "+missionId);}
+                if(created){journal.AddQuest(quest,Quest.QuestSource.QuestSystem,true);journal.TrackedQuest=quest;Log.Out("[Sakura] Native quest added: "+missionId);}
                 foreach(var objective in quest.Objectives)if(objective is ObjectiveSakuraMission native)native.Refresh();
                 SakuraDialog.SetMissionFailure(npc,phase==(byte)EscortPhase.Failed?failure:null);
                 bool terminal=quest.CurrentState==Quest.QuestState.Completed||quest.CurrentState==Quest.QuestState.Failed;
@@ -92,6 +91,7 @@ public sealed class ObjectiveSakuraMission : BaseObjective
     public override void SetupObjective(){SetupDisplay();}
     public override void SetupDisplay(){Description=ID=="health"?"保护目标生命":ID=="waves"?"抵御伏击波次":ID=="enemies"?"本波剩余敌人":Data("sakuraStatus","等待服务器进度");}
     public override void AddHooks(){Refresh();}
+    public override void InternalToParametersDictionary(ref System.Collections.Generic.Dictionary<string,object> parameters){}
     public override void RemoveHooks(){RemoveNavObject();}
     public override void Update(float dt){Refresh();}
     public override void Refresh()

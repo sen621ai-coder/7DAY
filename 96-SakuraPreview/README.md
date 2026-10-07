@@ -1,4 +1,6 @@
-﻿# 0.8.6 完成后退场与领奖收尾
+# 小樱护航预览 0.8.7
+
+2026-10-07 / 0.8.7：游戏 V3.2.0 → V3.3.0 移植。NetPackage 删除 GetLength override；QuestJournal.AddQuest 改为 (Quest, QuestSource, notify) 三参（动态任务按 QuestSystem 来源登记）；ObjectiveSakuraMission 实现 3.3.0 新增的 InternalToParametersDictionary 虚方法（本目标全部状态存于任务 DataVariables，参数字典无需附加项）。
 
 Mint 守护和小樱护送完成后，所有有资格的成员领奖完毕即移除 NPC，不再无条件停留 30 分钟或永久保留固定 NPC。有合格队员尚未领奖时保留 NPC，完成起满 30 分钟统一退场；参与不足的成员不会拖延退场。失败仍立即退场。
 

@@ -25,7 +25,7 @@ namespace SakuraPreview
         }
         public static void Install(Harmony harmony)
         {
-            harmony.Patch(AccessTools.Method(typeof(Quest),nameof(Quest.StartQuest),new[]{typeof(bool),typeof(bool)}),
+            harmony.Patch(AccessTools.Method(typeof(Quest),nameof(Quest.StartQuest),new[]{typeof(Quest.QuestSource),typeof(bool),typeof(bool)}),
                 postfix:new HarmonyMethod(typeof(SakuraTraderRescue),nameof(AfterStart)));
             harmony.Patch(AccessTools.Method(typeof(GameManager),"Update"),
                 postfix:new HarmonyMethod(typeof(SakuraTraderRescue),nameof(Tick)));
@@ -135,7 +135,6 @@ namespace SakuraPreview
         {quest=r.ReadString();code=r.ReadInt32();trader=r.ReadInt32();ack=r.ReadBoolean();status=r.ReadByte();}
         public override void write(PooledBinaryWriter w)
         {base.write(w);w.Write(quest??"");w.Write(code);w.Write(trader);w.Write(ack);w.Write(status);}
-        public override int GetLength()=>17+System.Text.Encoding.UTF8.GetByteCount(quest??"");
         public override void ProcessPackage(World world,GameManager manager)
         {
             if(world==null)return;
