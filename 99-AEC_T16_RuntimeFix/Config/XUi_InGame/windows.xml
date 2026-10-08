@@ -1,4 +1,24 @@
 <configs>
+  <!-- V3.3 uses paged bars, beltCount/beltslots and zero-based inventory names.
+       Replace only ProjectZ's legacy Toolbelt controller, retaining its HUD. -->
+  <remove xpath="/windows/window[@name='windowToolbelt']/rect/rect[@controller='Toolbelt']" />
+  <append xpath="/windows/window[@name='windowToolbelt']/rect">
+    <rect pos="3,-3" controller="Toolbelt">
+      <rect name="toolbeltPager" pos="{%'375, ' + (beltCount * 82 - 60)}" width="160" height="36" pivot="center" visible="{showpager}">
+        <button depth="3" name="btnToolbeltPrev" pos="-60, 0" pivot="center" sprite="ui_game_symbol_arrow_left" style="icon32px, press, hover" sound="[paging_click]" tooltip_key="lblToolbeltPrev" />
+        <label depth="3" name="toolbeltPageLabel" pos="0, 0" width="40" height="30" pivot="center" justify="center" text="{toolbeltpage}" font_size="22" />
+        <button depth="3" name="btnToolbeltNext" pos="60, 0" pivot="center" sprite="ui_game_symbol_arrow_right" style="icon32px, press, hover" sound="[paging_click]" tooltip_key="lblToolbeltNext" />
+      </rect>
+      <rect name="bars" repeat_content="true" repeat_count="{%beltCount}">
+        <rect name="bar${repeat_i}" pos="0, ${repeat_i * 82}">
+          <button depth="3" name="btnClearInventory${repeat_i}" sprite="ui_game_symbol_trash" tooltip_key="lblClearInventory" pos="800,-32" style="icon32px, press, hover" pivot="center" sound="[paging_click]" visible="{creativewindowopen}" />
+          <grid depth="10" name="inventory${repeat_i}" rows="1" cols="{%beltslots}" pos="0,0" cell_width="75" cell_height="75" repeat_content="true">
+            <item_stack name="0" />
+          </grid>
+        </rect>
+      </rect>
+    </rect>
+  </append>
   <append xpath="/windows/window[@name='windowCombine']/rect[@controller='CombineGrid']">
     <label name="aecFusionHint" pos="4,-495" width="602" height="64" depth="4"
            font_size="21" color="255,220,130" justify="left" text="{aecfusionhint}" />

@@ -1,6 +1,14 @@
 AEC T16-T19 Runtime Fix
 =======================
 
+Runtime 1.27.25 creative toolbelt compatibility
+- Replace ProjectZ's obsolete two-row Toolbelt controller with the installed
+  V3.3 paged-bar structure, keeping ProjectZ's surrounding HUD unchanged.
+- Removes the undefined secondrow expression that spammed errors on U/opening
+  creative inventory, and restores native inventory/clear-button naming.
+- Verified patch application and structural equality with the installed game
+  using tools/Test-ToolbeltV33.ps1. Client menu interaction still needs play QA.
+
 Runtime 1.27.24 game V3.3.0 API port
 - Ported to game V3.3.0 assemblies; no feature or balance changes.
 - AutoMiner audit now patches the Block-declared methods and additionally any
