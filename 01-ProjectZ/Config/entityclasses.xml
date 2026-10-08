@@ -31,6 +31,8 @@
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='CarryCapacity']/@value">@.carryCapacityBase</set>
 
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='BagSize']/@value">176</set>
+	<!-- V3.3 clamps BagSize to MaxBagSize (vanilla 96); keep all 176 slots. -->
+	<set xpath="/entity_classes/entity_class[@name='playerMale']/property[@name='MaxBagSize']/@value">176</set>
 
 
 	<!-- Z_Bosses | entityclasses.xml -->

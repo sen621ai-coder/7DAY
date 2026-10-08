@@ -3,6 +3,8 @@
   <!-- 176-slot player backpack: 11 rows x 16 columns, fully unencumbered. -->
   <set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/triggered_effect[@trigger='onSelfEnteredGame' and @action='ModifyCVar' and @cvar='.carryCapacityBase' and @operation='set']/@value">200</set>
   <set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='BagSize']/@value">176</set>
+  <!-- V3.3 clamps actual capacity to MaxBagSize; playerFemale inherits this. -->
+  <set xpath="/entity_classes/entity_class[@name='playerMale']/property[@name='MaxBagSize']/@value">176</set>
   <!-- Complete T16 layer for the 21 AEC boss families. Each class inherits its finalized T15 behavior and Project Z integration, then overrides late-game stats and its loot bag. -->
   <insertBefore xpath="/entity_classes/color[@name='radiated']">
     <color name="AECTier16BossColor" value="3.6,1.2,3.8,.92" />
