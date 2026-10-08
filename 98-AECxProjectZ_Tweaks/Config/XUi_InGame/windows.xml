@@ -73,12 +73,19 @@ RU: Операции применяются по порядку файла; со
     </window>
   </append>
   <!-- Match the 176-slot backpack and retain room for the ten-slot toolbelt on death. -->
-  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/@rows">13</set>
-  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/@cols">15</set>
-  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/@cell_width">54</set>
-  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/@cell_height">36</set>
-  <remove xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']/*[self::item_stack or self::backpack_item_stack]"/>
-  <append xpath="/windows/window[@name='windowLooting']/rect[@name='content']/grid[@name='queue']">
+  <!-- V3.3 nests the loot grid in a scrollview. Keep its bounds and scrollbar
+       consistent with the compact 54x36 slot template. -->
+  <set xpath="/windows/window[@name='windowLooting']/@width">{% v2i_x(gridDimensions) * 54 + 16 }</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/scrollview/@width">{% v2i_x(gridDimensions) * 54 + 3 }</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/defaultscrollbar/@pos">{% v2i(v2i_x(gridDimensions) * 54 + 3, 0)}</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/defaultscrollbar/@barheight">{% Min( v2i_y(gridDimensions) * 36 + 3, ${parentinnerheight} ) }</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']/defaultscrollbar/@thumbheight">{% Min( v2i_y(gridDimensions) * 36 + 3 - 8, ${parentinnerheight-8} ) }</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']//grid[@name='queue']/@rows">13</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']//grid[@name='queue']/@cols">15</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']//grid[@name='queue']/@cell_width">54</set>
+  <set xpath="/windows/window[@name='windowLooting']/rect[@name='content']//grid[@name='queue']/@cell_height">36</set>
+  <remove xpath="/windows/window[@name='windowLooting']/rect[@name='content']//grid[@name='queue']/*[self::item_stack or self::backpack_item_stack]"/>
+  <append xpath="/windows/window[@name='windowLooting']/rect[@name='content']//grid[@name='queue']">
     <backpack_item_stack name="0"/>
   </append>
   <remove xpath="/windows/window[@name='windowLooting']/rect[@name='header']/rect[@controller='ContainerStandardControls' or @name='storageControls']"/>

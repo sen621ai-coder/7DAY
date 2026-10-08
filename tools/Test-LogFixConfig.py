@@ -25,7 +25,7 @@ negotiator = progression.find(".//perk[@name='perkAecMasterNegotiator']")
 assert negotiator is None or negotiator.find(".//passive_effect[@name='QuestRewardChoiceCount']") is None
 windows = E.parse(dump/'XUi_InGame/windows.xml')
 window = windows.find(".//window[@name='windowLooting']")
-grid = window.find("rect[@name='content']/grid[@name='queue']")
+grid = window.find("rect[@name='content']//grid[@name='queue']")
 assert (grid.get('rows'), grid.get('cols')) == ('13','15')
 assert len(grid.findall('backpack_item_stack')) == 1 and not grid.findall('item_stack')
 assert len(window.findall("rect[@name='header']/rect[@controller='ContainerStandardControls']")) == 1
