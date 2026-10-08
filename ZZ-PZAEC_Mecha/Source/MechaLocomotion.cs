@@ -79,7 +79,7 @@ namespace PZAEC.Mecha
             if(traversal){s.Grounded=support!=null&&support.Grounded;s.Boost=false;s.AirSince=-1;s.LandingEventExpected=false;Sync(v,s);return;}
             if(!Skim.Active(v))RecoveryInputs(v,support,s);
             if(input&&s.Toggle&&Skim.Active(v)){Skim.Cancel(s);grounded=false;}
-            if(Flight.Step(v,s,grounded,input,dt)){if(Skim.Active(v))Skim.Cancel(s);s.SkimLatch=true;GroundSupport.Suspend(v);return;}
+            if(Flight.Step(v,s,grounded,input,dt)){if(Skim.Active(v))Skim.Cancel(s);s.SkimLatch=true;return;}
             input&=s.InputReady;
             if(Skim.Step(v,s,grounded,input,dt))return;
             bool sustain=Powered(v)&&driver!=null&&!driver.IsDead()&&v.timeInWater<=0;

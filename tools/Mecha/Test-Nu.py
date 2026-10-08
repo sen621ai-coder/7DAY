@@ -37,4 +37,5 @@ check('vehiclePZAECMechaUltimatePlaceable' in (root/'Config/progression.xml').re
 from PIL import Image
 icon=Image.open(root/'ItemIcons/vehiclePZAECMechaUltimatePlaceable.png')
 check(icon.size==(256,256) and icon.mode=='RGBA' and icon.getchannel('A').getextrema()==(0,255),'native rendered transparent inventory icon')
+check((root/'UIAtlases/ItemIconAtlas/vehiclePZAECMechaUltimatePlaceable.png').read_bytes()==(root/'ItemIcons/vehiclePZAECMechaUltimatePlaceable.png').read_bytes(),'ultimate icon deployed to game item atlas')
 print('Nu checks passed:',checks)

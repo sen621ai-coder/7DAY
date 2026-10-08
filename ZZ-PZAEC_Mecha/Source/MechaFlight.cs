@@ -10,6 +10,8 @@ namespace PZAEC.Mecha
         { return s.FlightMode==Phase.Takeoff||s.FlightMode==Phase.Cruise||s.FlightMode==Phase.Landing; }
         public static bool AirPose(Locomotion.MoveState s)
         { return Active(s)||(s.FlightMode==Phase.PowerLost&&!s.Grounded); }
+        public static bool Touching(Locomotion.MoveState s,bool grounded)
+        { return grounded&&(s.FlightMode==Phase.Landing||(s.FlightMode==Phase.Cruise&&s.VerticalInput<0)); }
         public static string Status(Locomotion.MoveState s,bool complete=true)
         { return s.FlightMode==Phase.Takeoff?(complete?"起飞展翼":"起飞"):s.FlightMode==Phase.Landing?"降落":s.FlightMode==Phase.PowerLost?"动力中断":s.FlightMode==Phase.Cruise?(Mathf.Abs(s.VerticalInput)<.01f?"飞行 / 定高":"飞行 / 升降"):"地面 / 推进"; }
         // Absolute world Y is deliberately used: floating-origin shifts cannot alter the held altitude.
@@ -32,7 +34,7 @@ namespace PZAEC.Mecha
             if(s.FlightMode==Phase.Takeoff&&s.FlightAge>=Rules.FlightDeploySeconds)s.FlightMode=Phase.Cruise;
             if(s.FlightMode==Phase.Takeoff)s.VerticalInput=0;
             else s.VerticalInput=s.FlightMode==Phase.Landing?-1:Mathf.Clamp(vertical,-1,1);
-            bool touching=grounded&&(s.FlightMode==Phase.Landing||(s.FlightMode==Phase.Cruise&&s.VerticalInput<0));
+            bool touching=Touching(s,grounded);
             s.ContactTime=touching?s.ContactTime+dt:0;
             if(s.ContactTime>=Rules.FlightContactSeconds){s.FlightMode=Phase.Ground;s.Boost=false;s.VerticalInput=0;s.Jump=false;s.JumpWasHeld=false;}
         }
@@ -55,6 +57,20 @@ namespace PZAEC.Mecha
             var movement=v.movementInput;
             float throttle=input&&movement!=null?movement.moveForward:0,steer=input&&movement!=null?movement.moveStrafe:0;
             s.Boost=s.FlightMode==Phase.Cruise&&input&&throttle>.1f&&v.vehicle.IsTurbo;
+            if(Touching(s,grounded)){
+                // Contact confirmation must retain the soles and stop the descent.
+                // Continuing C's -4 m/s for another .3s sinks the pelvis below the
+                // acquisition/leg-path range, leaving a flat floor unwalkable.
+                // Feet own vertical support here; never add flight lift as well.
+                var support=GroundSupport.Find(v);
+                if(support!=null){
+                    s.Boost=false;support.DesiredVelocity=Vector3.zero;
+                    GroundSupport.StopHorizontal(support);GroundSupport.Apply(support,dt);
+                    Locomotion.ApplyDrive(rb,Vector3.ProjectOnPlane(rb.rotation*Vector3.forward,Vector3.up).normalized,0,0,false,support.Normal,dt);
+                    Locomotion.Sync(v,s);return true;
+                }
+            }
+            GroundSupport.Suspend(v);
             float target=throttle>=0?throttle*(s.Boost?Rules.FlightBoostSpeed:Rules.FlightSpeed):throttle*Rules.FlightReverseSpeed;
             if(s.FlightMode==Phase.Takeoff){target=0;steer=0;}
             if(s.FlightMode==Phase.Landing)target=Mathf.Clamp(target,-2,2);

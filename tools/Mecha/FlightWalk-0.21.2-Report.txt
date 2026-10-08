@@ -1,0 +1,107 @@
+Mecha 0.21.2 flight-to-walking regression (2026-10-08)
+Fixture: tools/Mecha/FlightWalkNativeQA.cs; isolated game PhysX, production Flight.Step, GroundSupport, FootPlanner, Gait.
+Three chassis; flat/12-degree floor; Q landing/C descent; forward/reverse. No jump input during recovery.
+Before: .local-tests/MechaNativeQA/run-5e1c776149554d928b21aec120cb56ba/UserData/Saves/Navezgane/MechaQA_Isolated/flight-walk-qa.txt
+Before failures: 24
+After: .local-tests/MechaNativeQA/run-e7c9f316b4ac4a5fb2df5defd1fc93de/UserData/Saves/Navezgane/MechaQA_Isolated/flight-walk-qa.txt
+After checks: 48; failures: 0
+SharedFlightNativeQA: 150 passes, 0 failures, 0 logged exceptions/errors. Run: .local-tests/MechaNativeQA/run-c20851f76a104aa59caf1f61b2eb7360/
+Offline: Test-All.ps1 63 passes; Test-Nu.py 25 passes; Test-ToolbeltV33.ps1 passed.
+Not tested here: human client input, multiplayer, client UI rendering.
+
+PASS vehicleCombatRobot slope=0 drive=4 manual=False lands ticks=229
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.9355 left=(-0.61, 400.02, 0.13) planted=True right=(0.61, 400.02, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=450 walking= recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0/0
+PASS vehicleCombatRobot slope=0 drive=4 manual=False walks without jump distance=15.88563 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7967 left=(-0.61, 400.02, 15.69) planted=True right=(0.61, 400.14, 15.61) planted=False lengths=0.7738884/0.7213104 reserve=5% queries=47365 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.08
+PASS vehicleCombatRobot slope=0 drive=4 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.9355 left=(-0.61, 400.02, 0.13) planted=True right=(0.61, 400.02, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=47595 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.08
+PASS vehicleCombatRobot slope=0 drive=4 manual=True walks without jump distance=15.88563 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7967 left=(-0.61, 400.14, 15.20) planted=False right=(0.61, 400.02, 15.69) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=94515 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.1626627
+PASS vehicleCombatRobot slope=0 drive=-2 manual=False lands ticks=229
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.9355 left=(-0.61, 400.02, 0.13) planted=True right=(0.61, 400.02, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=94965 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.1626627
+PASS vehicleCombatRobot slope=0 drive=-2 manual=False walks without jump distance=4.640861 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7967 left=(-0.61, 400.02, -4.29) planted=True right=(0.61, 400.14, -4.35) planted=False lengths=0.7738884/0.7213104 reserve=5% queries=115905 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.275406/0.09999999
+PASS vehicleCombatRobot slope=0 drive=-2 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.9355 left=(-0.61, 400.02, 0.13) planted=True right=(0.61, 400.02, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=116135 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.275406/0.09999999
+PASS vehicleCombatRobot slope=0 drive=-2 manual=True walks without jump distance=4.661005 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7967 left=(-0.61, 400.13, -4.34) planted=False right=(0.61, 400.02, -4.35) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=137110 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.2769085
+PASS vehicleCombatRobot slope=12 drive=4 manual=False lands ticks=221
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=400.0685 left=(-0.61, 400.16, 0.11) planted=False right=(0.61, 400.16, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=137410 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.2769085
+PASS vehicleCombatRobot slope=12 drive=4 manual=False walks without jump distance=13.7278 blocked=26
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.6702 left=(-0.61, 399.90, 13.45) planted=True right=(0.61, 400.32, 13.88) planted=False lengths=0.7738884/0.7213104 reserve=5% queries=180115 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.09999999
+PASS vehicleCombatRobot slope=12 drive=4 manual=True lands ticks=82
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=400.0685 left=(-0.61, 400.16, 0.11) planted=False right=(0.61, 400.16, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=180240 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.09999999
+PASS vehicleCombatRobot slope=12 drive=4 manual=True walks without jump distance=13.40812 blocked=30
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.6702 left=(-0.61, 399.90, 13.37) planted=True right=(0.61, 400.32, 12.57) planted=False lengths=0.7738884/0.7213104 reserve=5% queries=222170 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.04
+PASS vehicleCombatRobot slope=12 drive=-2 manual=False lands ticks=221
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=400.0685 left=(-0.61, 400.16, 0.11) planted=False right=(0.61, 400.16, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=222470 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.04
+PASS vehicleCombatRobot slope=12 drive=-2 manual=False walks without jump distance=4.079792 blocked=30
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.826 left=(-0.61, 400.06, -3.58) planted=False right=(0.61, 400.16, -4.02) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=243120 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.09999999/0.2395363
+PASS vehicleCombatRobot slope=12 drive=-2 manual=True lands ticks=82
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=400.0685 left=(-0.61, 400.16, 0.11) planted=False right=(0.61, 400.16, 0.13) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=243245 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.09999999/0.2395363
+PASS vehicleCombatRobot slope=12 drive=-2 manual=True walks without jump distance=4.079792 blocked=30
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.826 left=(-0.61, 400.06, -3.58) planted=False right=(0.61, 400.16, -4.02) planted=True lengths=0.7738884/0.7213104 reserve=5% queries=263895 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.09999999/0.2395363
+PASS vehicleCombatRobotComplete slope=0 drive=4 manual=False lands ticks=231
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.8809 left=(-0.25, 400.02, 0.27) planted=True right=(0.25, 400.02, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=480 walking= recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0/0
+PASS vehicleCombatRobotComplete slope=0 drive=4 manual=False walks without jump distance=15.88563 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7309 left=(-0.25, 400.02, 15.82) planted=True right=(0.25, 400.14, 15.75) planted=False lengths=0.6522522/0.8629761 reserve=5% queries=50500 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.08
+PASS vehicleCombatRobotComplete slope=0 drive=4 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.8809 left=(-0.25, 400.02, 0.27) planted=True right=(0.25, 400.02, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=50740 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.08
+PASS vehicleCombatRobotComplete slope=0 drive=4 manual=True walks without jump distance=15.88563 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7068 left=(-0.25, 400.14, 15.34) planted=False right=(0.25, 400.02, 15.82) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=100770 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.1626627
+PASS vehicleCombatRobotComplete slope=0 drive=-2 manual=False lands ticks=231
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.8809 left=(-0.25, 400.02, 0.27) planted=True right=(0.25, 400.02, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=101250 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.1626627
+PASS vehicleCombatRobotComplete slope=0 drive=-2 manual=False walks without jump distance=8.994316 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7309 left=(-0.25, 400.02, -8.54) planted=True right=(0.25, 400.14, -8.33) planted=False lengths=0.6522522/0.8629761 reserve=5% queries=129910 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2308225/0.09999999
+PASS vehicleCombatRobotComplete slope=0 drive=-2 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.8809 left=(-0.25, 400.02, 0.27) planted=True right=(0.25, 400.02, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=130150 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2308225/0.09999999
+PASS vehicleCombatRobotComplete slope=0 drive=-2 manual=True walks without jump distance=8.994316 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.7309 left=(-0.25, 400.14, -8.17) planted=False right=(0.25, 400.02, -8.54) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=158820 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.2308225
+PASS vehicleCombatRobotComplete slope=12 drive=4 manual=False lands ticks=227
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.9378 left=(-0.25, 400.10, 0.27) planted=False right=(0.25, 400.08, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=159180 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.2308225
+PASS vehicleCombatRobotComplete slope=12 drive=4 manual=False walks without jump distance=7.745169 blocked=15
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.7878 left=(-0.25, 400.13, 7.98) planted=False right=(0.25, 400.08, 7.72) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=189280 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.14/0.278429
+PASS vehicleCombatRobotComplete slope=12 drive=4 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.9009 left=(-0.25, 400.04, 0.27) planted=False right=(0.25, 400.08, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=189430 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.14/0.278429
+PASS vehicleCombatRobotComplete slope=12 drive=4 manual=True walks without jump distance=7.592379 blocked=19
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.7878 left=(-0.25, 400.13, 7.68) planted=False right=(0.25, 400.08, 7.65) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=219180 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.278429
+PASS vehicleCombatRobotComplete slope=12 drive=-2 manual=False lands ticks=227
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.9378 left=(-0.25, 400.10, 0.27) planted=False right=(0.25, 400.08, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=219540 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.278429
+PASS vehicleCombatRobotComplete slope=12 drive=-2 manual=False walks without jump distance=8.195118 blocked=19
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.7716 left=(-0.25, 400.06, -8.02) planted=False right=(0.25, 400.08, -7.50) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=247260 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2/0.2308225
+PASS vehicleCombatRobotComplete slope=12 drive=-2 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.9009 left=(-0.25, 400.04, 0.27) planted=False right=(0.25, 400.08, 0.27) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=247410 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2/0.2308225
+PASS vehicleCombatRobotComplete slope=12 drive=-2 manual=True walks without jump distance=8.195118 blocked=19
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.7716 left=(-0.25, 400.06, -8.02) planted=False right=(0.25, 400.08, -7.50) planted=True lengths=0.6522522/0.8629761 reserve=5% queries=275130 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2/0.2308225
+PASS vehiclePZAECMechaUltimate slope=0 drive=4 manual=False lands ticks=230
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.47, 400.06, 0.03) planted=False right=(0.52, 400.02, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=680 walking= recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0/0
+PASS vehiclePZAECMechaUltimate slope=0 drive=4 manual=False walks without jump distance=14.84667 blocked=12
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.4379 left=(-0.48, 400.02, 14.79) planted=True right=(0.52, 400.08, 13.99) planted=False lengths=0.6108386/1.217349 reserve=5% queries=47435 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.02
+PASS vehiclePZAECMechaUltimate slope=0 drive=4 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 0.03) planted=True right=(0.52, 400.02, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=47735 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.1626627/0.02
+PASS vehiclePZAECMechaUltimate slope=0 drive=4 manual=True walks without jump distance=15.88563 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.5944 left=(-0.48, 400.14, 15.10) planted=False right=(0.52, 400.02, 15.59) planted=True lengths=0.6108386/1.217349 reserve=5% queries=96455 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.1626627
+PASS vehiclePZAECMechaUltimate slope=0 drive=-2 manual=False lands ticks=230
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.47, 400.06, 0.03) planted=False right=(0.52, 400.02, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=97135 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.06/0.1626627
+PASS vehiclePZAECMechaUltimate slope=0 drive=-2 manual=False walks without jump distance=8.314998 blocked=16
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.6342 left=(-0.48, 400.02, -8.26) planted=True right=(0.52, 400.05, -7.74) planted=False lengths=0.6108386/1.217349 reserve=5% queries=123980 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2308225/0.02
+PASS vehiclePZAECMechaUltimate slope=0 drive=-2 manual=True lands ticks=84
+TOUCHDOWN ground=True normal=(0.00, 1.00, 0.00) targetY=399.7841 left=(-0.48, 400.02, 0.03) planted=True right=(0.52, 400.02, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=124280 walking=swing side=1 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.2308225/0.02
+PASS vehiclePZAECMechaUltimate slope=0 drive=-2 manual=True walks without jump distance=8.994316 blocked=0
+WALK ground=True normal=(0.00, 1.00, 0.00) targetY=399.6342 left=(-0.48, 400.14, -8.41) planted=False right=(0.52, 400.02, -8.78) planted=True lengths=0.6108386/1.217349 reserve=5% queries=151650 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.2308225
+PASS vehiclePZAECMechaUltimate slope=12 drive=4 manual=False lands ticks=223
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.9038 left=(-0.44, 400.17, 0.06) planted=False right=(0.52, 400.14, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=152210 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.2308225
+PASS vehiclePZAECMechaUltimate slope=12 drive=4 manual=False walks without jump distance=7.662658 blocked=18
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.7035 left=(-0.48, 400.09, 7.51) planted=False right=(0.52, 400.14, 7.48) planted=True lengths=0.6108386/1.217349 reserve=5% queries=181055 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.278429
+PASS vehiclePZAECMechaUltimate slope=12 drive=4 manual=True lands ticks=83
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.8931 left=(-0.45, 400.13, 0.06) planted=False right=(0.52, 400.14, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=181245 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.08/0.278429
+PASS vehiclePZAECMechaUltimate slope=12 drive=4 manual=True walks without jump distance=7.61911 blocked=18
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.7035 left=(-0.48, 400.09, 7.50) planted=False right=(0.52, 400.14, 7.41) planted=True lengths=0.6108386/1.217349 reserve=5% queries=209805 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.09999999/0.278429
+PASS vehiclePZAECMechaUltimate slope=12 drive=-2 manual=False lands ticks=223
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.9038 left=(-0.44, 400.17, 0.06) planted=False right=(0.52, 400.14, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=210365 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.09999999/0.278429
+PASS vehiclePZAECMechaUltimate slope=12 drive=-2 manual=False walks without jump distance=8.235078 blocked=18
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.5574 left=(-0.48, 399.94, -8.26) planted=False right=(0.52, 400.14, -7.74) planted=True lengths=0.6108386/1.217349 reserve=5% queries=236915 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.22/0.2308225
+PASS vehiclePZAECMechaUltimate slope=12 drive=-2 manual=True lands ticks=83
+TOUCHDOWN ground=True normal=(-0.21, 0.98, 0.00) targetY=399.8931 left=(-0.45, 400.13, 0.06) planted=False right=(0.52, 400.14, 0.03) planted=True lengths=0.6108386/1.217349 reserve=5% queries=237105 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.22/0.2308225
+PASS vehiclePZAECMechaUltimate slope=12 drive=-2 manual=True walks without jump distance=8.235078 blocked=18
+WALK ground=True normal=(-0.21, 0.98, 0.00) targetY=399.5574 left=(-0.48, 399.94, -8.26) planted=False right=(0.52, 400.14, -7.74) planted=True lengths=0.6108386/1.217349 reserve=5% queries=263655 walking=swing side=0 recovery=False cautious=False speedCap=13.5 stop= lastFailure= swingAge=0.22/0.2308225
