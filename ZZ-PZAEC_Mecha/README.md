@@ -1,4 +1,12 @@
-# PZAEC 初号机系列：试验体 / 完全体 / 究极体 0.21.2
+# PZAEC 初号机系列：试验体 / 完全体 / 究极体 0.21.3
+
+## 0.21.3 正义蒙皮网格切换时机修复
+
+将正义完全体的 LOD 选择从躯干的 `OnWillRenderObject` 移到机体根节点的 `LateUpdate`，按本地玩家摄像机选择细节等级（无玩家时回退到主摄像机）。渲染回调不再更换整台机体的 `SkinnedMeshRenderer.sharedMesh`，避免已准备好的蒙皮缓冲与新网格顶点数量不一致；辅助摄像机不再在同一帧内来回切换全机网格。原日志中 Backpack、Head、Torso、四肢及武器均出现过相同的 data size / vertex stride 错误。
+
+保留三档网格、骨骼、动画、材质及存档数据。更新后需退出并重新启动游戏加载 DLL。旧 DLL、版本清单和源码备份：`.local-tests/Mecha-render-0.21.2-backup/`。
+
+已按已安装 V3.3 游戏程序集编译，并检查产物中已移除渲染回调、改用 LateUpdate。新增 `tools/Mecha/JusticeRenderNativeQA.cs`，直接使用真实蒙皮渲染器与双摄像机检查三个 LOD 和渲染期间网格稳定性；不使用静态烘焙替身。因用户游戏仍在运行，本次未执行原生渲染验证，仍需退出游戏后运行 `pwsh -File tools/Mecha/Start-NativeQA.ps1 -MotionProbe -ProbeSource tools/Mecha/JusticeRenderNativeQA.cs`，再进行客户端验证。
 
 ## 0.21.2 降落后恢复步行与究极体图标
 
