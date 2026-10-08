@@ -2,7 +2,16 @@ using System;using System.IO;using Newtonsoft.Json;using UnityEngine;using Unity
 namespace PZAEC.Mecha {
  public sealed class JusticeDetailView:MonoBehaviour {
   public JusticeRig Owner;
-  void OnWillRenderObject(){if(Owner!=null)JusticeFinish.SelectDetail(Owner,Camera.current);}
+  // Never replace a skinned mesh from OnWillRenderObject: Unity may already
+  // have prepared its skinning buffers for the previous vertex count/layout.
+  // Use the player's camera once before rendering, so auxiliary cameras cannot
+  // swap the whole rig back and forth while the render pipeline is using it.
+  void LateUpdate(){
+   if(Owner==null)return;
+   var world=GameManager.Instance!=null?GameManager.Instance.World:null;
+   var player=world!=null?world.GetPrimaryPlayer():null;
+   JusticeFinish.SelectDetail(Owner,player!=null?player.playerCamera:Camera.main);
+  }
  }
  public static class JusticeFinish {
   public sealed class Part{public int sourcePart,lod,offset,vertices,indices;}
@@ -21,7 +30,8 @@ namespace PZAEC.Mecha {
      var mesh=new Mesh{name="Justice polished LOD"+p.lod+" "+rig.Roles[p.sourcePart],indexFormat=IndexFormat.UInt32};mesh.vertices=v;mesh.normals=n;mesh.uv=uv;mesh.boneWeights=w;mesh.bindposes=meshes[2][p.sourcePart].bindposes;mesh.triangles=ix;mesh.tangents=t;mesh.RecalculateBounds();meshes[p.lod][p.sourcePart]=mesh;
     }
    }
-   for(int i=0;i<rig.Parts.Length;i++){if(meshes[0][i]==null||meshes[1][i]==null)throw new InvalidDataException("Incomplete Justice LOD");if(rig.Roles[i]=="Torso"){var callback=rig.Parts[i].gameObject.AddComponent<JusticeDetailView>();callback.Owner=rig;}rig.Parts[i].shadowCastingMode=ShadowCastingMode.On;rig.Parts[i].receiveShadows=true;}
+   for(int i=0;i<rig.Parts.Length;i++){if(meshes[0][i]==null||meshes[1][i]==null)throw new InvalidDataException("Incomplete Justice LOD");rig.Parts[i].shadowCastingMode=ShadowCastingMode.On;rig.Parts[i].receiveShadows=true;}
+   var detailView=rig.gameObject.AddComponent<JusticeDetailView>();detailView.Owner=rig;
    rig.BlendRot=new Quaternion[rig.Bones.Length];rig.BlendPos=new Vector3[rig.Bones.Length];for(int i=0;i<rig.Bones.Length;i++){rig.BlendRot[i]=rig.Bones[i].localRotation;rig.BlendPos[i]=rig.Bones[i].localPosition;}SetDetail(rig,0);
    if(cone==null){cone=new Mesh{name="Justice pooled thruster"};var v=new Vector3[24];var ix=new int[144];for(int i=0;i<12;i++){float a=i*Mathf.PI/6;v[i]=new Vector3(Mathf.Cos(a),Mathf.Sin(a),0);v[12+i]=new Vector3(Mathf.Cos(a)*.10f,Mathf.Sin(a)*.10f,1);}int at=0;for(int i=0;i<12;i++){int k=(i+1)%12;foreach(int j in new[]{i,k,12+k,i,12+k,12+i,k,i,12+k,12+k,i,12+i})ix[at++]=j;}var colors=new Color[24];for(int i=0;i<12;i++){colors[i]=new Color(1,1,1,.7f);colors[12+i]=new Color(1,1,1,0);}cone.vertices=v;cone.colors=colors;cone.triangles=ix;cone.RecalculateNormals();cone.RecalculateBounds();var shader=Shader.Find("Sprites/Default")??Shader.Find("Unlit/Color");thrustMaterial=new Material(shader){name="Justice thrust",color=new Color(.22f,.65f,1,.8f)};}
    rig.Jets=new Transform[doc.jets.Length];for(int i=0;i<rig.Jets.Length;i++){var jet=doc.jets[i];var go=new GameObject("JusticeThruster"+i);go.layer=layer;go.transform.SetParent(rig.Bones[jet.bone],false);go.transform.localPosition=new Vector3(jet.position[0],jet.position[1],jet.position[2]);go.transform.localRotation=Quaternion.LookRotation(new Vector3(jet.direction[0],jet.direction[1],jet.direction[2]));go.AddComponent<MeshFilter>().sharedMesh=cone;var renderer=go.AddComponent<MeshRenderer>();renderer.sharedMaterial=thrustMaterial;renderer.shadowCastingMode=ShadowCastingMode.Off;renderer.receiveShadows=false;go.AddComponent<MechaRenderPart>().Role="Backpack";rig.Jets[i]=go.transform;go.SetActive(false);}
