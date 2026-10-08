@@ -49,10 +49,12 @@ public sealed class JusticeRenderProbe : MonoBehaviour {
    Camera.onPreCull+=Before;Camera.onPostRender+=After;
   } catch(Exception e){Error(e.ToString());Finish();yield break;}
   for(int frame=0;frame<180;frame++) {
-   // Automatic camera rendering drives Unity's real skinning lifecycle.
+   // Dedicated mode does not render cameras automatically. Advance the Unity
+   // frame, then explicitly render both cameras without baking static copies.
    Place(near,frame<60?6:frame<120?30:100);
    yield return null;
    levels.Add(rig.DetailLevel);
+   near.Render();far.Render();
   }
   if(renders<180)Error("insufficient camera renders: "+renders);
   if(levels.Count!=3)Error("not all LODs exercised: "+string.Join(",",levels));

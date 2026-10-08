@@ -6,7 +6,7 @@
 
 保留三档网格、骨骼、动画、材质及存档数据。更新后需退出并重新启动游戏加载 DLL。旧 DLL、版本清单和源码备份：`.local-tests/Mecha-render-0.21.2-backup/`。
 
-已按已安装 V3.3 游戏程序集编译，并检查产物中已移除渲染回调、改用 LateUpdate。新增 `tools/Mecha/JusticeRenderNativeQA.cs`，直接使用真实蒙皮渲染器与双摄像机检查三个 LOD 和渲染期间网格稳定性；不使用静态烘焙替身。因用户游戏仍在运行，本次未执行原生渲染验证，仍需退出游戏后运行 `pwsh -File tools/Mecha/Start-NativeQA.ps1 -MotionProbe -ProbeSource tools/Mecha/JusticeRenderNativeQA.cs`，再进行客户端验证。
+已按已安装 V3.3 游戏程序集编译，并检查产物中已移除渲染回调、改用 LateUpdate。`tools/Mecha/JusticeRenderNativeQA.cs` 直接使用真实蒙皮渲染器与双摄像机检查三个 LOD 和渲染期间网格稳定性，不使用静态烘焙替身。2026-10-08 原生对照测试：两版均执行 360 次摄像机渲染并覆盖 LOD 0/1/2；旧版产生 828 条 data size / vertex stride 错误及 100 次渲染期间换网格，0.21.3 两项均为 0。专用服务器不自动绘制摄像机，测试显式调用 Camera.Render，并在每轮之间推进真实游戏帧。验证仅覆盖隔离渲染场景，尚未替代真人联机驾驶。
 
 ## 0.21.2 降落后恢复步行与究极体图标
 
