@@ -1,0 +1,16 @@
+{
+  "source_sha256": "3f58d1db3a462d6b1cace538c80ef0511b5039dd4bc62f78c9d6a0102cf07f80",
+  "vertices": 9750,
+  "triangles": 9689,
+  "normalization": "source (z,y,-x), centered, length 1 metre",
+  "source": {
+    "extras": {
+      "author": "Rew (https://sketchfab.com/RewriteYourReality)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/legend-sword-50a40db9b8b64fa293b1a8ec3716aea0",
+      "title": "Legend Sword"
+    },
+    "generator": "Sketchfab-16.21.0",
+    "version": "2.0"
+  }
+}

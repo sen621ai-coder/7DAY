@@ -1,0 +1,12 @@
+﻿Key,File,Type,UsedInMainMenu,NoTranslate,english,schinese
+meleePZAECJuqueT16,items,Item,,,Juque Sword T16,巨阙剑·T16
+meleePZAECJuqueT16Desc,items,Item,,,"LMB melee; hold/release RMB for spirit wave. G deploy, E ride/return. One landing fall protection on return.",左键近战；右键短按剑气、长按蓄力后松开发出月牙剑气。G御出，E上剑／任意高度下剑回栏。本次落地免摔伤。御剑时WASD驾驶，空格/C升降，Shift加速，可切换枪械。
+meleePZAECJuqueT17,items,Item,,,Juque Sword T17,巨阙剑·T17
+meleePZAECJuqueT17Desc,items,Item,,,"LMB melee; hold/release RMB for spirit wave. G deploy, E ride/return. One landing fall protection on return.",左键近战；右键短按剑气、长按蓄力后松开发出月牙剑气。G御出，E上剑／任意高度下剑回栏。本次落地免摔伤。御剑时WASD驾驶，空格/C升降，Shift加速，可切换枪械。
+meleePZAECJuqueT18,items,Item,,,Juque Sword T18,巨阙剑·T18
+meleePZAECJuqueT18Desc,items,Item,,,"LMB melee; hold/release RMB for spirit wave. G deploy, E ride/return. One landing fall protection on return.",左键近战；右键短按剑气、长按蓄力后松开发出月牙剑气。G御出，E上剑／任意高度下剑回栏。本次落地免摔伤。御剑时WASD驾驶，空格/C升降，Shift加速，可切换枪械。
+meleePZAECJuqueT19,items,Item,,,Juque Sword T19,巨阙剑·T19
+meleePZAECJuqueT19Desc,items,Item,,,"LMB melee; hold/release RMB for spirit wave. G deploy, E ride/return. One landing fall protection on return.",左键近战；右键短按剑气、长按蓄力后松开发出月牙剑气。G御出，E上剑／任意高度下剑回栏。本次落地免摔伤。御剑时WASD驾驶，空格/C升降，Shift加速，可切换枪械。
+vehiclePZAECJuque,items,Item,,,Juque Flying Sword,巨阙剑
+resourcePZAECSpiritStone,items,Item,,,Spirit Stone,灵石
+resourcePZAECSpiritStoneDesc,items,Item,,,Use to restore 250 spirit to a sword in your toolbelt.,使用后为快捷栏中的巨阙剑恢复250灵力，优先补充手持或已御出的剑。

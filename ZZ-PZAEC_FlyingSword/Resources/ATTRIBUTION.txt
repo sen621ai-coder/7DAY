@@ -1,0 +1,10 @@
+Legend Sword — Rew (RewriteYourReality)
+Source: https://sketchfab.com/3d-models/legend-sword-50a40db9b8b64fa293b1a8ec3716aea0
+Author: https://sketchfab.com/RewriteYourReality
+License recorded in the supplied GLB: CC BY 4.0
+https://creativecommons.org/licenses/by/4.0/
+
+The original legend_sword.glb is preserved. Derived juque.mesh is centered,
+rotated and normalized to unit length for runtime use. Source textures are
+extracted unchanged. The mod adds animation, gameplay and cyan/gold effects.
+The icon is rendered from the source mesh and color texture.

@@ -1,0 +1,78 @@
+巨阙剑 0.1.0 · 原生自动验证报告
+验证日期：2026-10-09
+环境：隔离专服、当前完整模组包、难度 2；未使用 nographics。
+交付源码与此次隔离编译使用的源码逐文件 SHA256 一致。
+交付 DLL SHA256：8164CCDCD6B977C1E19C2758DD1EC68F78D00BB2A77B21235B2A1CBCB63F2226
+注意：本报告不代表双客户端人工操作、完整 Boss 战斗及演示录像已验收。
+
+2026-10-09T10:13:07 90.658 INF [JuqueQA] PASS four sword classes and custom action
+2026-10-09T10:13:07 90.659 INF [JuqueQA] PASS spirit stone action
+2026-10-09T10:13:07 90.689 INF [JuqueQA] PASS source mesh present
+2026-10-09T10:13:07 90.691 INF [JuqueQA] PASS input IL patched
+2026-10-09T10:13:07 90.730 INF [JuqueQA] PASS custom entity factory
+2026-10-09T10:13:07 90.736 INF [JuqueQA] PASS native physics
+2026-10-09T10:13:07 90.738 INF [JuqueQA] PASS one seat
+2026-10-09T10:13:07 90.766 INF [JuqueQA] material color=RGBA(0.731, 0.731, 0.731, 1.000) triangles=9689
+2026-10-09T10:13:07 90.901 INF [JuqueQA] PASS player inventory
+2026-10-09T10:13:07 90.909 INF [JuqueQA] PASS reserved sort slot
+2026-10-09T10:13:07 90.910 INF [JuqueQA] PASS reserved recipe exclusion
+2026-10-09T10:13:07 90.911 INF [JuqueQA] PASS canonical ownership
+2026-10-09T10:13:07 90.912 INF [JuqueQA] owner= player= id=64054966ff6a450ebb411c69c6abf9ae entity=171
+2026-10-09T10:13:07 90.913 INF [JuqueQA] PASS metadata clone
+2026-10-09T10:13:07 90.917 INF [JuqueQA] PASS native attachment at 350 metres
+2026-10-09T10:13:07 90.918 INF [JuqueQA] PASS native firearm seat flags
+2026-10-09T10:13:07 90.943 INF [JuqueQA] PASS cruise speed 26 m/s (native physics)
+2026-10-09T10:13:07 90.949 INF [JuqueQA] PASS 80 percent inertia dissipates within 0.8 s
+2026-10-09T10:13:07 90.950 INF [JuqueQA] PASS hover retains altitude
+2026-10-09T10:13:07 90.971 INF [JuqueQA] PASS boost speed 40 m/s
+2026-10-09T10:13:07 90.992 INF [JuqueQA] PASS reverse speed 8 m/s
+2026-10-09T10:13:07 91.005 INF [JuqueQA] PASS ascent speed 8 m/s
+2026-10-09T10:13:07 91.017 INF [JuqueQA] PASS descent speed 6 m/s
+2026-10-09T10:13:07 91.028 INF [JuqueQA] PASS empty spirit disables acceleration and descends
+2026-10-09T10:13:07 91.043 INF [JuqueQA] PASS boost collision cannot cross solid wall
+2026-10-09T10:13:07 91.045 INF [JuqueQA] PASS rider and sword colliders active
+2026-10-09T10:13:07 91.070 INF [JuqueQA] PASS immediate high altitude detachment
+2026-10-09T10:13:07 91.071 INF [JuqueQA] PASS selection retained on recall
+2026-10-09T10:13:07 91.072 INF [JuqueQA] PASS return restores original slot with full toolbar
+2026-10-09T10:13:07 91.072 INF [JuqueQA] PASS world representation removed
+2026-10-09T10:13:07 91.073 INF [JuqueQA] PASS original sort lock restored
+2026-10-09T10:13:07 91.074 INF [JuqueQA] PASS repeated return creates no extra sword
+2026-10-09T10:13:07 91.075 INF [JuqueQA] PASS fall only protection active
+2026-10-09T10:13:07 91.076 INF [JuqueQA] PASS fall damage suppressed
+2026-10-09T10:13:07 91.077 INF [JuqueQA] PASS fall protection consumed by first impact
+2026-10-09T10:13:07 91.078 INF [JuqueQA] PASS physical damage remains enabled
+2026-10-09T10:13:07 91.079 INF [JuqueQA] PASS first valid landing clears fall protection
+2026-10-09T10:13:07 91.080 INF [JuqueQA] PASS later fall damage enabled
+2026-10-09T10:13:07 91.081 INF [JuqueQA] PASS fusion supported
+2026-10-09T10:13:07 91.084 INF [JuqueQA] PASS upgrade retains full fusion rank
+2026-10-09T10:13:07 91.084 INF [JuqueQA] PASS upgrade retains identity and energy proportion
+2026-10-09T10:13:07 91.085 INF [JuqueQA] PASS upgrade retains wear proportion
+2026-10-09T10:13:07 91.086 INF [JuqueQA] PASS native item persistence preserves identity energy and wear
+2026-10-09T10:13:07 91.091 INF [JuqueQA] PASS server full charge spends exactly 60
+2026-10-09T10:13:07 91.092 INF [JuqueQA] PASS replayed request cannot spend again
+2026-10-09T10:13:07 91.094 INF [JuqueQA] PASS one crystal restores 250 and consumes one
+2026-10-09T10:13:07 91.094 INF [JuqueQA] PASS crystal replay rejected
+2026-10-09T10:13:07 91.095 INF [JuqueQA] PASS Damage32 integration active
+2026-10-09T10:13:07 91.096 INF [JuqueQA] PASS damage saturation cannot wrap negative
+2026-10-09T10:13:07 91.096 INF [JuqueQA] PASS 270 degree aim bounds
+2026-10-09T10:13:07 91.097 INF [JuqueQA] DAMAGE tier=16 effective=1000000 configured=1000000
+2026-10-09T10:13:07 91.098 INF [JuqueQA] PASS native melee damage tier 0
+2026-10-09T10:13:08 91.248 INF [JuqueQA] BOSS tier=16 health=40000000 chargedLoss=2925000 idealChargedSeconds=41.03
+2026-10-09T10:13:08 91.249 INF [JuqueQA] PASS boss actual damage 0
+2026-10-09T10:13:08 91.253 INF [JuqueQA] PASS server wave hits once at body damage 0
+2026-10-09T10:13:08 91.254 INF [JuqueQA] DAMAGE tier=17 effective=2500000 configured=2500000
+2026-10-09T10:13:08 91.255 INF [JuqueQA] PASS native melee damage tier 1
+2026-10-09T10:13:08 91.259 INF [JuqueQA] BOSS tier=17 health=80000000 chargedLoss=6050000 idealChargedSeconds=39.67
+2026-10-09T10:13:08 91.260 INF [JuqueQA] PASS boss actual damage 1
+2026-10-09T10:13:08 91.261 INF [JuqueQA] PASS server wave hits once at body damage 1
+2026-10-09T10:13:08 91.262 INF [JuqueQA] DAMAGE tier=18 effective=5500000 configured=5500000
+2026-10-09T10:13:08 91.263 INF [JuqueQA] PASS native melee damage tier 2
+2026-10-09T10:13:08 91.266 INF [JuqueQA] BOSS tier=18 health=150000000 chargedLoss=10800000 idealChargedSeconds=41.67
+2026-10-09T10:13:08 91.267 INF [JuqueQA] PASS boss actual damage 2
+2026-10-09T10:13:08 91.268 INF [JuqueQA] PASS server wave hits once at body damage 2
+2026-10-09T10:13:08 91.269 INF [JuqueQA] DAMAGE tier=19 effective=1.2E+07 configured=12000000
+2026-10-09T10:13:08 91.270 INF [JuqueQA] PASS native melee damage tier 3
+2026-10-09T10:13:08 91.273 INF [JuqueQA] BOSS tier=19 health=260000000 chargedLoss=19250000 idealChargedSeconds=40.52
+2026-10-09T10:13:08 91.274 INF [JuqueQA] PASS boss actual damage 3
+2026-10-09T10:13:08 91.275 INF [JuqueQA] PASS server wave hits once at body damage 3
+2026-10-09T10:13:08 91.278 INF [JuqueQA] COMPLETE failures=0 checks=60

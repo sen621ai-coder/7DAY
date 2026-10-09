@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net48</TargetFramework><LangVersion>latest</LangVersion><AssemblyName>PZAEC.FlyingSword</AssemblyName><AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath><OutputPath>..\</OutputPath><GenerateAssemblyInfo>false</GenerateAssemblyInfo></PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp"><HintPath>..\..\..\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="..\..\..\7DaysToDie_Data\Managed\*.dll"><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>..\..\0_TFP_Harmony\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="AEC.T16.RuntimeFix"><HintPath>..\..\99-AEC_T16_RuntimeFix\AEC.T16.RuntimeFix.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

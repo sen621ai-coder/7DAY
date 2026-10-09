@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/entity_classes">
+    <entity_class name="vehiclePZAECJuque" extends="vehicleTruck4x4">
+      <property name="Class" value="PZAEC.FlyingSword.EntityJuque, PZAEC.FlyingSword" />
+      <property name="Prefab" value="JuqueRuntime.prefab" />
+      <property name="Tags" value="vehicle,PZAECJuque" />
+      <property name="LootList" value="vehicle4x4Truck" />
+      <property name="MapIcon" value="ui_game_symbol_gyrocopter" />
+      <property name="NavObject" value="gyrocopter" />
+    </entity_class>
+  </append>
+</configs>

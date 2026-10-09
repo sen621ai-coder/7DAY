@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/recipes">
+    <recipe name="meleePZAECJuqueT16" count="1" craft_area="workbench" craft_time="360" always_unlocked="true" use_ingredient_modifier="false">
+      <ingredient name="meleeWpnBladeT3Machete" count="1" />
+      <ingredient name="resourcePZAECWeaponChassis" count="1" />
+      <ingredient name="PZAECBuildPartsR2" count="8" />
+      <ingredient name="resourceLegendaryParts" count="15" />
+      <ingredient name="resourcePZAECSiegeCapacitorT16" count="2" />
+      <ingredient name="resourcePZAECMutantHeartT16" count="1" />
+      <ingredient name="itemPZAECArmoryBlueprintCrateT16" count="1" />
+    </recipe>
+    <recipe name="meleePZAECJuqueT17" count="1" craft_area="workbench" craft_time="300" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade">
+      <ingredient name="meleePZAECJuqueT16" count="1" />
+      <ingredient name="PZAECBuildPartsR3" count="6" />
+      <ingredient name="resourceLegendaryParts" count="16" />
+      <ingredient name="resourcePZAECSiegeCapacitorT17" count="2" />
+      <ingredient name="resourcePZAECMutantHeartT17" count="1" />
+    </recipe>
+    <recipe name="meleePZAECJuqueT18" count="1" craft_area="workbench" craft_time="420" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade">
+      <ingredient name="meleePZAECJuqueT17" count="1" />
+      <ingredient name="PZAECBuildPartsR4" count="8" />
+      <ingredient name="resourceLegendaryParts" count="24" />
+      <ingredient name="resourcePZAECSiegeCapacitorT18" count="3" />
+      <ingredient name="resourcePZAECMutantHeartT18" count="1" />
+    </recipe>
+    <recipe name="meleePZAECJuqueT19" count="1" craft_area="workbench" craft_time="540" always_unlocked="true" use_ingredient_modifier="false" tags="upgrade">
+      <ingredient name="meleePZAECJuqueT18" count="1" />
+      <ingredient name="PZAECBuildPartsR5" count="10" />
+      <ingredient name="resourceLegendaryParts" count="36" />
+      <ingredient name="resourcePZAECSiegeCapacitorT19" count="4" />
+      <ingredient name="resourcePZAECMutantHeartT19" count="2" />
+    </recipe>
+    <recipe name="resourcePZAECSpiritStone" count="5" craft_area="workbench" craft_time="30" always_unlocked="true">
+      <ingredient name="resourceLegendaryParts" count="1" />
+      <ingredient name="resourceElectricParts" count="10" />
+    </recipe>
+  </append>
+</configs>

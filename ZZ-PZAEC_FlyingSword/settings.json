@@ -1,0 +1,12 @@
+{
+  "DeployKey": "G",
+  "ViewKey": "BackQuote",
+  "RiseKey": "Space",
+  "DescendKey": "C",
+  "Effects": 1,
+  "Cruise": 26,
+  "Boost": 40,
+  "Reverse": 8,
+  "Rise": 8,
+  "Descend": 6
+}

@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configs>
+  <append xpath="/items">
+    <item name="vehiclePZAECJuquePlaceable">
+      <property name="Extends" value="vehicleTruck4x4Placeable" />
+      <property name="CreativeMode" value="None" />
+      <property name="DescriptionKey" value="vehiclePZAECJuque" />
+      <property name="CustomIcon" value="meleeWpnBladeT3Machete" />
+      <property name="Stacknumber" value="1" />
+      <property class="Action1">
+        <property name="Vehicle" value="vehiclePZAECJuque" />
+      </property>
+    </item>
+    <item name="meleePZAECJuqueT16">
+      <property name="Extends" value="meleeWpnBladeT3Machete" />
+      <property name="CustomIcon" value="meleePZAECJuque" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="DescriptionKey" value="meleePZAECJuqueT16Desc" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="Tags" value="T3,machete,melee,weapon,meleeWeapon,blade,light,longShaft,bladeSkill,canHaveCosmetic,attAgility,perkDeepCuts,perkFlurryOfAgility,PZAECAdvancedWeapon,PZAECJuque,PZAECTier16" />
+      <property name="RepairTools" value="resourceRepairKit" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action1">
+        <property name="Class" value="PZAECJuqueWave, PZAEC.FlyingSword" />
+      </property>
+      <effect_group name="meleePZAECJuqueT16" tiered="false">
+        <passive_effect name="EntityDamage" operation="base_set" value="1000000" tags="perkDeepCuts" />
+        <passive_effect name="AttacksPerMinute" operation="base_set" value="120" />
+        <passive_effect name="StaminaLoss" operation="base_set" value="12" tags="primary" />
+        <passive_effect name="MaxRange" operation="base_set" value="3" tags="perkDeepCuts" />
+        <passive_effect name="BlockDamage" operation="base_set" value="1" tags="perkDeepCuts" />
+        <passive_effect name="DegradationMax" operation="base_set" value="5000" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
+      </effect_group>
+    </item>
+    <item name="meleePZAECJuqueT17">
+      <property name="Extends" value="meleeWpnBladeT3Machete" />
+      <property name="CustomIcon" value="meleePZAECJuque" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="DescriptionKey" value="meleePZAECJuqueT17Desc" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="Tags" value="T3,machete,melee,weapon,meleeWeapon,blade,light,longShaft,bladeSkill,canHaveCosmetic,attAgility,perkDeepCuts,perkFlurryOfAgility,PZAECAdvancedWeapon,PZAECJuque,PZAECTier17" />
+      <property name="RepairTools" value="resourceRepairKit" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action1">
+        <property name="Class" value="PZAECJuqueWave, PZAEC.FlyingSword" />
+      </property>
+      <effect_group name="meleePZAECJuqueT17" tiered="false">
+        <passive_effect name="EntityDamage" operation="base_set" value="2500000" tags="perkDeepCuts" />
+        <passive_effect name="AttacksPerMinute" operation="base_set" value="120" />
+        <passive_effect name="StaminaLoss" operation="base_set" value="12" tags="primary" />
+        <passive_effect name="MaxRange" operation="base_set" value="3" tags="perkDeepCuts" />
+        <passive_effect name="BlockDamage" operation="base_set" value="1" tags="perkDeepCuts" />
+        <passive_effect name="DegradationMax" operation="base_set" value="6500" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
+      </effect_group>
+    </item>
+    <item name="meleePZAECJuqueT18">
+      <property name="Extends" value="meleeWpnBladeT3Machete" />
+      <property name="CustomIcon" value="meleePZAECJuque" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="DescriptionKey" value="meleePZAECJuqueT18Desc" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="Tags" value="T3,machete,melee,weapon,meleeWeapon,blade,light,longShaft,bladeSkill,canHaveCosmetic,attAgility,perkDeepCuts,perkFlurryOfAgility,PZAECAdvancedWeapon,PZAECJuque,PZAECTier18" />
+      <property name="RepairTools" value="resourceRepairKit" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action1">
+        <property name="Class" value="PZAECJuqueWave, PZAEC.FlyingSword" />
+      </property>
+      <effect_group name="meleePZAECJuqueT18" tiered="false">
+        <passive_effect name="EntityDamage" operation="base_set" value="5500000" tags="perkDeepCuts" />
+        <passive_effect name="AttacksPerMinute" operation="base_set" value="120" />
+        <passive_effect name="StaminaLoss" operation="base_set" value="12" tags="primary" />
+        <passive_effect name="MaxRange" operation="base_set" value="3" tags="perkDeepCuts" />
+        <passive_effect name="BlockDamage" operation="base_set" value="1" tags="perkDeepCuts" />
+        <passive_effect name="DegradationMax" operation="base_set" value="8500" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
+      </effect_group>
+    </item>
+    <item name="meleePZAECJuqueT19">
+      <property name="Extends" value="meleeWpnBladeT3Machete" />
+      <property name="CustomIcon" value="meleePZAECJuque" />
+      <property name="CustomIconTint" value="FFFFFF" />
+      <property name="DescriptionKey" value="meleePZAECJuqueT19Desc" />
+      <property name="ShowQuality" value="false" />
+      <property name="Stacknumber" value="1" />
+      <property name="Tags" value="T3,machete,melee,weapon,meleeWeapon,blade,light,longShaft,bladeSkill,canHaveCosmetic,attAgility,perkDeepCuts,perkFlurryOfAgility,PZAECAdvancedWeapon,PZAECJuque,PZAECTier19" />
+      <property name="RepairTools" value="resourceRepairKit" />
+      <property name="SellableToTrader" value="false" />
+      <property class="Action1">
+        <property name="Class" value="PZAECJuqueWave, PZAEC.FlyingSword" />
+      </property>
+      <effect_group name="meleePZAECJuqueT19" tiered="false">
+        <passive_effect name="EntityDamage" operation="base_set" value="12000000" tags="perkDeepCuts" />
+        <passive_effect name="AttacksPerMinute" operation="base_set" value="120" />
+        <passive_effect name="StaminaLoss" operation="base_set" value="12" tags="primary" />
+        <passive_effect name="MaxRange" operation="base_set" value="3" tags="perkDeepCuts" />
+        <passive_effect name="BlockDamage" operation="base_set" value="1" tags="perkDeepCuts" />
+        <passive_effect name="DegradationMax" operation="base_set" value="11000" />
+        <passive_effect name="ModSlots" operation="base_set" value="6" />
+      </effect_group>
+    </item>
+    <item name="resourcePZAECSpiritStone">
+      <property name="Extends" value="resourceForgedSteel" />
+      <property name="CustomIcon" value="resourceDiamond" />
+      <property name="CustomIconTint" value="70EDDD" />
+      <property name="Stacknumber" value="100" />
+      <property name="DescriptionKey" value="resourcePZAECSpiritStoneDesc" />
+      <property class="Action0">
+        <property name="Class" value="PZAECSpiritStone, PZAEC.FlyingSword" />
+      </property>
+    </item>
+  </append>
+</configs>

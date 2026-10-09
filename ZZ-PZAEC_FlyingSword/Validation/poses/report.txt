@@ -1,0 +1,310 @@
+巨阙剑 0.1.9 原生姿态检查
+QA: F:\SteamLibrary\steamapps\common\7 Days To Die\Mods\.local-tests\FlyingSword\run-9b4dc471d7fb4164af1899a3cf289000
+Production DLL SHA256: 0B44F7CEB0EFE544DC70240586ECE4757FC498C32001B71A7F5DF9CC75B19CF2
+QA copy contains extra test probes; all production .cs source hashes match.
+Native SDCS armored BaseFemale model; native sword and M60 animations; fixed-frame bone skinning bake for dedicated rendering.
+Not a live input test, continuous motion review, multiplayer test, or proof for every body/armor/weapon.
+2026-10-09T14:01:04 104.271 INF [JuqueQA] COMPLETE failures=0 checks=187
+
+2026-10-09T14:00:59 99.125 INF [JuqueQA] PASS four sword classes and custom action
+2026-10-09T14:00:59 99.127 INF [JuqueQA] PASS native Chinese sword names loaded
+2026-10-09T14:00:59 99.129 INF [JuqueQA] PASS spirit stone action
+2026-10-09T14:00:59 99.188 INF [JuqueQA] PASS source mesh present
+2026-10-09T14:00:59 99.193 INF [JuqueQA] PASS input IL patched
+2026-10-09T14:00:59 99.282 INF [JuqueQA] PASS custom entity factory
+2026-10-09T14:01:00 99.296 INF [JuqueQA] PASS native physics
+2026-10-09T14:01:00 99.301 INF [JuqueQA] PASS one seat
+2026-10-09T14:01:00 99.362 INF [JuqueQA] material color=RGBA(0.731, 0.731, 0.731, 1.000) triangles=9689
+2026-10-09T14:01:00 99.666 INF [JuqueQA] PASS player inventory
+2026-10-09T14:01:00 99.686 INF [JuqueQA] PASS reserved sort slot
+2026-10-09T14:01:00 99.688 INF [JuqueQA] PASS reserved recipe exclusion
+2026-10-09T14:01:00 99.691 INF [JuqueQA] PASS canonical ownership
+2026-10-09T14:01:00 99.693 INF [JuqueQA] owner= player= id=dc8235d31129412eb0b238279e1d6aea entity=171
+2026-10-09T14:01:00 99.696 INF [JuqueQA] PASS metadata clone
+2026-10-09T14:01:00 99.705 INF [JuqueQA] PASS native attachment at 350 metres
+2026-10-09T14:01:00 99.707 INF [JuqueQA] PASS native firearm seat flags
+2026-10-09T14:01:00 99.819 INF [JuquePose] template avatar=baseRigAvatar (UnityEngine.Avatar) human=False liveAvatar=baseRigAvatar (UnityEngine.Avatar) humanClip=False
+2026-10-09T14:01:00 99.821 INF [JuquePose] model=player_FemaleRagdoll (UnityEngine.Transform) animator=player_FemaleRagdoll (UnityEngine.Animator) human=False
+2026-10-09T14:01:00 99.838 INF [JuquePose] pose-initial hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=False
+2026-10-09T14:01:00 99.843 INF [JuquePose] pose-initial Left sole=(-0.1401, 0.0778, 0.0090)
+2026-10-09T14:01:00 99.846 INF [JuquePose] pose-initial Right sole=(0.1401, 0.0778, 0.0090)
+2026-10-09T14:01:00 99.959 INF [JuquePose] animation speed=1 initialized=False clips=1
+2026-10-09T14:01:00 99.983 INF [JuquePose] LAYER 0 StandingIdleTurn weight=1 clips=3P_Female_Unarmed_idle
+2026-10-09T14:01:00 99.986 INF [JuquePose] LAYER 1 PH1 weight=0 clips=
+2026-10-09T14:01:00 99.989 INF [JuquePose] LAYER 2 PH2 weight=0 clips=
+2026-10-09T14:01:00 99.991 INF [JuquePose] LAYER 3 PH3 weight=0 clips=
+2026-10-09T14:01:00 99.993 INF [JuquePose] LAYER 4 CrouchingIdleTurn weight=1 clips=
+2026-10-09T14:01:00 99.995 INF [JuquePose] LAYER 5 Locomotion weight=1 clips=
+2026-10-09T14:01:00 99.997 INF [JuquePose] LAYER 6 InAir weight=1 clips=
+2026-10-09T14:01:00 99.999 INF [JuquePose] LAYER 7 Jump weight=1 clips=
+2026-10-09T14:01:00 100.000 INF [JuquePose] LAYER 8 AdditiveJumpLand weight=1 clips=
+2026-10-09T14:01:00 100.002 INF [JuquePose] LAYER 9 Swimming Fullbody weight=1 clips=
+2026-10-09T14:01:00 100.004 INF [JuquePose] LAYER 10 RangedRightHandHoldPoses weight=1 clips=
+2026-10-09T14:01:00 100.005 INF [JuquePose] LAYER 11 RightArmHoldPoses weight=1 clips=
+2026-10-09T14:01:00 100.007 INF [JuquePose] LAYER 12 BothArmsHoldPoses weight=1 clips=
+2026-10-09T14:01:00 100.008 INF [JuquePose] LAYER 13 RightHandHoldPoses weight=1 clips=
+2026-10-09T14:01:00 100.010 INF [JuquePose] LAYER 14 AdditiveOffsetHoldPoses weight=1 clips=
+2026-10-09T14:01:00 100.012 INF [JuquePose] LAYER 15 UpperBodyUnholster weight=0 clips=
+2026-10-09T14:01:00 100.014 INF [JuquePose] LAYER 16 AdditiveAimPoses weight=1 clips=
+2026-10-09T14:01:00 100.015 INF [JuquePose] LAYER 17 UpperBodyAttack weight=1 clips=
+2026-10-09T14:01:00 100.017 INF [JuquePose] LAYER 18 BowDrawAndFire weight=1 clips=
+2026-10-09T14:01:00 100.019 INF [JuquePose] LAYER 19 UpperBodyUseAndReload weight=1 clips=
+2026-10-09T14:01:00 100.021 INF [JuquePose] LAYER 20 WeaponJointOverrides weight=1 clips=
+2026-10-09T14:01:00 100.022 INF [JuquePose] LAYER 21 AdditiveTorsoLook weight=1 clips=3P_Female_Unarmed_Additive_TorsoLook_Neutral
+2026-10-09T14:01:00 100.024 INF [JuquePose] LAYER 22 AdditiveRangedAttack weight=1 clips=
+2026-10-09T14:01:00 100.026 INF [JuquePose] LAYER 23 FullbodyVehicle weight=1 clips=
+2026-10-09T14:01:00 100.069 INF [JuquePose] pose-empty-hover hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:00 100.072 INF [JuqueQA] PASS pose-empty-hover body meshes
+2026-10-09T14:01:00 100.074 INF [JuqueQA] PASS pose-empty-hover empty hands
+2026-10-09T14:01:00 100.076 INF [JuquePose] pose-empty-hover Left sole=(-0.0500, 0.0250, 0.0700)
+2026-10-09T14:01:00 100.078 INF [JuquePose] pose-empty-hover Right sole=(0.0500, 0.0250, -0.3100)
+2026-10-09T14:01:00 100.081 INF [JuqueQA] PASS pose-empty-hover Left support
+2026-10-09T14:01:00 100.082 INF [JuqueQA] PASS pose-empty-hover Right support
+2026-10-09T14:01:00 100.160 INF [JuquePose] pose-empty-boost-turn hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:00 100.163 INF [JuqueQA] PASS pose-empty-boost-turn body meshes
+2026-10-09T14:01:00 100.165 INF [JuqueQA] PASS pose-empty-boost-turn empty hands
+2026-10-09T14:01:00 100.167 INF [JuquePose] pose-empty-boost-turn Left sole=(-0.0500, 0.0250, 0.0700)
+2026-10-09T14:01:00 100.169 INF [JuquePose] pose-empty-boost-turn Right sole=(0.0500, 0.0250, -0.3100)
+2026-10-09T14:01:00 100.171 INF [JuqueQA] PASS pose-empty-boost-turn Left support
+2026-10-09T14:01:00 100.173 INF [JuqueQA] PASS pose-empty-boost-turn Right support
+2026-10-09T14:01:00 100.250 INF [JuqueQA] PASS unarmed rider follows sword instead of mouse
+2026-10-09T14:01:00 100.252 INF [JuqueQA] PASS unarmed Left hand outside torso
+2026-10-09T14:01:00 100.254 INF [JuqueQA] PASS unarmed Right hand outside torso
+2026-10-09T14:01:00 100.256 INF [JuquePose] pose-empty-look-away hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:00 100.257 INF [JuqueQA] PASS pose-empty-look-away body meshes
+2026-10-09T14:01:00 100.259 INF [JuqueQA] PASS pose-empty-look-away empty hands
+2026-10-09T14:01:00 100.261 INF [JuquePose] pose-empty-look-away Left sole=(-0.0500, 0.0250, 0.0700)
+2026-10-09T14:01:00 100.263 INF [JuquePose] pose-empty-look-away Right sole=(0.0500, 0.0250, -0.3100)
+2026-10-09T14:01:00 100.265 INF [JuqueQA] PASS pose-empty-look-away Left support
+2026-10-09T14:01:00 100.266 INF [JuqueQA] PASS pose-empty-look-away Right support
+2026-10-09T14:01:01 100.390 INF [JuquePose] pose-M60-yaw0 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 100.392 INF [JuqueQA] PASS pose-M60-yaw0 body meshes
+2026-10-09T14:01:01 100.394 INF [JuquePose] pose-M60-yaw0 Left sole=(-0.0500, 0.0250, 0.0700)
+2026-10-09T14:01:01 100.395 INF [JuquePose] pose-M60-yaw0 Right sole=(0.0500, 0.0250, -0.3100)
+2026-10-09T14:01:01 100.397 INF [JuqueQA] PASS pose-M60-yaw0 Left support
+2026-10-09T14:01:01 100.399 INF [JuqueQA] PASS pose-M60-yaw0 Right support
+2026-10-09T14:01:01 100.401 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.05, -0.50, 0.87) look=(0.00, -0.57, 0.82) errorDegrees=6.172538
+2026-10-09T14:01:01 100.403 INF [JuqueQA] PASS pose-M60-yaw0 native gun carry
+2026-10-09T14:01:01 100.404 INF [JuqueQA] PASS pose-M60-yaw0 muzzle aim within 15 degrees
+2026-10-09T14:01:01 100.512 INF [JuquePose] pose-M60-yaw90 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 100.514 INF [JuqueQA] PASS pose-M60-yaw90 body meshes
+2026-10-09T14:01:01 100.516 INF [JuquePose] pose-M60-yaw90 Left sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:01 100.518 INF [JuquePose] pose-M60-yaw90 Right sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:01 100.519 INF [JuqueQA] PASS pose-M60-yaw90 Left support
+2026-10-09T14:01:01 100.521 INF [JuqueQA] PASS pose-M60-yaw90 Right support
+2026-10-09T14:01:01 100.522 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(0.87, -0.49, 0.05) look=(0.82, -0.57, 0.00) errorDegrees=6.572323
+2026-10-09T14:01:01 100.524 INF [JuqueQA] PASS pose-M60-yaw90 native gun carry
+2026-10-09T14:01:01 100.525 INF [JuqueQA] PASS pose-M60-yaw90 muzzle aim within 15 degrees
+2026-10-09T14:01:01 100.625 INF [JuquePose] pose-M60-yaw135 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 100.627 INF [JuqueQA] PASS pose-M60-yaw135 body meshes
+2026-10-09T14:01:01 100.629 INF [JuquePose] pose-M60-yaw135 Left sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:01 100.630 INF [JuquePose] pose-M60-yaw135 Right sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:01 100.632 INF [JuqueQA] PASS pose-M60-yaw135 Left support
+2026-10-09T14:01:01 100.634 INF [JuqueQA] PASS pose-M60-yaw135 Right support
+2026-10-09T14:01:01 100.635 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(0.64, -0.50, -0.58) look=(0.57, -0.57, -0.58) errorDegrees=6.049576
+2026-10-09T14:01:01 100.637 INF [JuqueQA] PASS pose-M60-yaw135 native gun carry
+2026-10-09T14:01:01 100.638 INF [JuqueQA] PASS pose-M60-yaw135 muzzle aim within 15 degrees
+2026-10-09T14:01:01 100.734 INF [JuquePose] pose-M60-yaw-135 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 100.735 INF [JuqueQA] PASS pose-M60-yaw-135 body meshes
+2026-10-09T14:01:01 100.737 INF [JuquePose] pose-M60-yaw-135 Left sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:01 100.739 INF [JuquePose] pose-M60-yaw-135 Right sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:01 100.740 INF [JuqueQA] PASS pose-M60-yaw-135 Left support
+2026-10-09T14:01:01 100.742 INF [JuqueQA] PASS pose-M60-yaw-135 Right support
+2026-10-09T14:01:01 100.743 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.57, -0.45, -0.69) look=(-0.57, -0.57, -0.58) errorDegrees=9.077185
+2026-10-09T14:01:01 100.745 INF [JuqueQA] PASS pose-M60-yaw-135 native gun carry
+2026-10-09T14:01:01 100.746 INF [JuqueQA] PASS pose-M60-yaw-135 muzzle aim within 15 degrees
+2026-10-09T14:01:01 100.874 INF [JuquePose] pose-M60-pitch-80 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 100.876 INF [JuqueQA] PASS pose-M60-pitch-80 body meshes
+2026-10-09T14:01:01 100.878 INF [JuquePose] pose-M60-pitch-80 Left sole=(-0.0500, 0.0250, 0.0700)
+2026-10-09T14:01:01 100.880 INF [JuquePose] pose-M60-pitch-80 Right sole=(0.0500, 0.0250, -0.3100)
+2026-10-09T14:01:01 100.881 INF [JuqueQA] PASS pose-M60-pitch-80 Left support
+2026-10-09T14:01:01 100.883 INF [JuqueQA] PASS pose-M60-pitch-80 Right support
+2026-10-09T14:01:01 100.885 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.05, -0.98, 0.20) look=(0.00, -0.99, 0.17) errorDegrees=3.630708
+2026-10-09T14:01:01 100.887 INF [JuqueQA] PASS pose-M60-pitch-80 native gun carry
+2026-10-09T14:01:01 100.889 INF [JuqueQA] PASS pose-M60-pitch-80 muzzle aim within 15 degrees
+2026-10-09T14:01:01 101.007 INF [JuquePose] pose-M60-pitch45 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 101.010 INF [JuqueQA] PASS pose-M60-pitch45 body meshes
+2026-10-09T14:01:01 101.013 INF [JuquePose] pose-M60-pitch45 Left sole=(-0.0500, 0.0250, 0.0700)
+2026-10-09T14:01:01 101.015 INF [JuquePose] pose-M60-pitch45 Right sole=(0.0500, 0.0250, -0.3100)
+2026-10-09T14:01:01 101.017 INF [JuqueQA] PASS pose-M60-pitch45 Left support
+2026-10-09T14:01:01 101.018 INF [JuqueQA] PASS pose-M60-pitch45 Right support
+2026-10-09T14:01:01 101.020 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.04, 0.62, 0.79) look=(0.00, 0.71, 0.71) errorDegrees=7.423702
+2026-10-09T14:01:01 101.022 INF [JuqueQA] PASS pose-M60-pitch45 native gun carry
+2026-10-09T14:01:01 101.023 INF [JuqueQA] PASS pose-M60-pitch45 muzzle aim within 15 degrees
+2026-10-09T14:01:01 101.121 INF [JuquePose] pose-M60-down80-yaw135 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 101.123 INF [JuqueQA] PASS pose-M60-down80-yaw135 body meshes
+2026-10-09T14:01:01 101.124 INF [JuquePose] pose-M60-down80-yaw135 Left sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:01 101.126 INF [JuquePose] pose-M60-down80-yaw135 Right sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:01 101.128 INF [JuqueQA] PASS pose-M60-down80-yaw135 Left support
+2026-10-09T14:01:01 101.130 INF [JuqueQA] PASS pose-M60-down80-yaw135 Right support
+2026-10-09T14:01:01 101.131 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(0.16, -0.96, -0.21) look=(0.12, -0.99, -0.12) errorDegrees=5.90976
+2026-10-09T14:01:01 101.133 INF [JuqueQA] PASS pose-M60-down80-yaw135 native gun carry
+2026-10-09T14:01:01 101.134 INF [JuqueQA] PASS pose-M60-down80-yaw135 muzzle aim within 15 degrees
+2026-10-09T14:01:01 101.237 INF [JuquePose] pose-M60-down80-yaw-135 hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:01 101.239 INF [JuqueQA] PASS pose-M60-down80-yaw-135 body meshes
+2026-10-09T14:01:01 101.241 INF [JuquePose] pose-M60-down80-yaw-135 Left sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:01 101.243 INF [JuquePose] pose-M60-down80-yaw-135 Right sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:01 101.245 INF [JuqueQA] PASS pose-M60-down80-yaw-135 Left support
+2026-10-09T14:01:01 101.247 INF [JuqueQA] PASS pose-M60-down80-yaw-135 Right support
+2026-10-09T14:01:01 101.249 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.06, -0.97, -0.24) look=(-0.12, -0.99, -0.12) errorDegrees=7.635789
+2026-10-09T14:01:01 101.251 INF [JuqueQA] PASS pose-M60-down80-yaw-135 native gun carry
+2026-10-09T14:01:01 101.254 INF [JuqueQA] PASS pose-M60-down80-yaw-135 muzzle aim within 15 degrees
+2026-10-09T14:01:02 101.371 INF [JuquePose] pose-M60-firing hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:02 101.374 INF [JuqueQA] PASS pose-M60-firing body meshes
+2026-10-09T14:01:02 101.376 INF [JuquePose] pose-M60-firing Left sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:02 101.378 INF [JuquePose] pose-M60-firing Right sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:02 101.380 INF [JuqueQA] PASS pose-M60-firing Left support
+2026-10-09T14:01:02 101.382 INF [JuqueQA] PASS pose-M60-firing Right support
+2026-10-09T14:01:02 101.384 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.60, -0.46, -0.66) look=(-0.57, -0.57, -0.58) errorDegrees=7.841348
+2026-10-09T14:01:02 101.386 INF [JuqueQA] PASS pose-M60-firing native gun carry
+2026-10-09T14:01:02 101.387 INF [JuqueQA] PASS pose-M60-firing muzzle aim within 15 degrees
+2026-10-09T14:01:02 101.486 INF [JuquePose] pose-M60-reload hold=gunMGT3M60 param=60 state=2049016938 initialized=True
+2026-10-09T14:01:02 101.488 INF [JuqueQA] PASS pose-M60-reload body meshes
+2026-10-09T14:01:02 101.490 INF [JuquePose] pose-M60-reload Left sole=(-0.0500, 0.0250, -0.1750)
+2026-10-09T14:01:02 101.492 INF [JuquePose] pose-M60-reload Right sole=(0.0500, 0.0250, -0.0650)
+2026-10-09T14:01:02 101.493 INF [JuqueQA] PASS pose-M60-reload Left support
+2026-10-09T14:01:02 101.495 INF [JuqueQA] PASS pose-M60-reload Right support
+2026-10-09T14:01:02 101.496 INF [JuquePose] muzzle=Muzzle (UnityEngine.Transform) forward=(-0.47, -0.32, -0.82) look=(-0.57, -0.57, -0.58) errorDegrees=21.06132
+2026-10-09T14:01:02 101.567 INF [JuquePose] active clips=3P_2HRifle_Idle
+2026-10-09T14:01:02 101.574 INF [JuqueQA] PASS first person eye camera without shoulder offset
+2026-10-09T14:01:02 101.576 INF [JuqueQA] PASS third person shoulder and chase cameras
+2026-10-09T14:01:02 101.579 INF [JuqueQA] PASS view key defaults to physical backquote
+2026-10-09T14:01:02 101.581 INF [JuqueQA] PASS first person does not force full body visible
+2026-10-09T14:01:02 101.612 INF [JuqueQA] PASS hover emits no tail but retains sword coat
+2026-10-09T14:01:02 101.617 INF [JuquePose] flight-tail-hover hold=meleePZAECJuqueT16 param=0 state=2049016938 initialized=True
+2026-10-09T14:01:02 101.619 INF [JuqueQA] PASS flight-tail-hover body meshes
+2026-10-09T14:01:02 101.621 INF [JuquePose] flight-tail-hover Left sole=(-0.0500, 0.0250, -0.1548)
+2026-10-09T14:01:02 101.623 INF [JuquePose] flight-tail-hover Right sole=(0.0500, 0.0250, -0.0852)
+2026-10-09T14:01:02 101.624 INF [JuqueQA] PASS flight-tail-hover Left support
+2026-10-09T14:01:02 101.625 INF [JuqueQA] PASS flight-tail-hover Right support
+2026-10-09T14:01:02 101.707 INF [JuqueQA] PASS launch fades in below cruise speed
+2026-10-09T14:01:02 101.713 INF [JuquePose] flight-tail-launch hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:02 101.714 INF [JuqueQA] PASS flight-tail-launch body meshes
+2026-10-09T14:01:02 101.716 INF [JuquePose] flight-tail-launch Left sole=(-0.0500, 0.0250, -0.1343)
+2026-10-09T14:01:02 101.718 INF [JuquePose] flight-tail-launch Right sole=(0.0500, 0.0250, -0.1057)
+2026-10-09T14:01:02 101.720 INF [JuqueQA] PASS flight-tail-launch Left support
+2026-10-09T14:01:02 101.722 INF [JuqueQA] PASS flight-tail-launch Right support
+2026-10-09T14:01:02 101.802 INF [JuqueQA] PASS flame has three soft particle layers and no lines
+2026-10-09T14:01:02 101.808 INF [JuqueQA] PASS boost extends and widens flame
+2026-10-09T14:01:02 101.811 INF [JuqueQA] PASS native flame simulation emits particles
+2026-10-09T14:01:02 101.813 INF [JuqueQA] PASS fitted sword glow shells
+2026-10-09T14:01:02 101.828 INF [JuqueQA] PASS glow shell world position within soft 3.5 centimetre envelope
+2026-10-09T14:01:02 101.842 INF [JuqueQA] PASS banked glow shell follows sword offset and rotation
+2026-10-09T14:01:02 101.845 INF [JuquePose] flight-aura-boost hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:02 101.847 INF [JuqueQA] PASS flight-aura-boost body meshes
+2026-10-09T14:01:02 101.849 INF [JuquePose] flight-aura-boost Left sole=(-0.0500, 0.0250, -0.1136)
+2026-10-09T14:01:02 101.852 INF [JuquePose] flight-aura-boost Right sole=(0.0500, 0.0250, -0.1264)
+2026-10-09T14:01:02 101.854 INF [JuqueQA] PASS flight-aura-boost Left support
+2026-10-09T14:01:02 101.856 INF [JuqueQA] PASS flight-aura-boost Right support
+2026-10-09T14:01:02 101.944 INF [JuqueQA] PASS turn increases plume spread with actual trajectory
+2026-10-09T14:01:02 101.948 INF [JuqueQA] PASS turn keeps particles behind in world space
+2026-10-09T14:01:02 101.951 INF [JuquePose] flight-tail-turn hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:02 101.952 INF [JuqueQA] PASS flight-tail-turn body meshes
+2026-10-09T14:01:02 101.954 INF [JuquePose] flight-tail-turn Left sole=(-0.0500, 0.0250, -0.0930)
+2026-10-09T14:01:02 101.956 INF [JuquePose] flight-tail-turn Right sole=(0.0500, 0.0250, -0.1470)
+2026-10-09T14:01:02 101.957 INF [JuqueQA] PASS flight-tail-turn Left support
+2026-10-09T14:01:02 101.959 INF [JuqueQA] PASS flight-tail-turn Right support
+2026-10-09T14:01:02 102.060 INF [JuqueQA] PASS braking preserves fading wake
+2026-10-09T14:01:02 102.063 INF [JuqueQA] PASS stopped wake expires without lingering plume
+2026-10-09T14:01:02 102.066 INF [JuquePose] flight-tail-stopped hold=meleePZAECJuqueT16 param=0 state=970075688 initialized=True
+2026-10-09T14:01:02 102.068 INF [JuqueQA] PASS flight-tail-stopped body meshes
+2026-10-09T14:01:02 102.070 INF [JuquePose] flight-tail-stopped Left sole=(-0.0500, 0.0250, -0.0726)
+2026-10-09T14:01:02 102.071 INF [JuquePose] flight-tail-stopped Right sole=(0.0500, 0.0250, -0.1674)
+2026-10-09T14:01:02 102.073 INF [JuqueQA] PASS flight-tail-stopped Left support
+2026-10-09T14:01:02 102.074 INF [JuqueQA] PASS flight-tail-stopped Right support
+2026-10-09T14:01:02 102.147 INF [JuqueQA] PASS boost key at rest cannot create a tail
+2026-10-09T14:01:02 102.149 INF [JuqueQA] PASS remote position samples drive wake without rigidbody velocity
+2026-10-09T14:01:02 102.151 INF [JuqueQA] PASS teleport clears remote wake
+2026-10-09T14:01:02 102.152 INF [JuqueQA] PASS first person aura subdued
+2026-10-09T14:01:02 102.155 INF [JuqueQA] PASS effects zero disables all aura renderers
+2026-10-09T14:01:02 102.157 INF [JuqueQA] PASS effects zero clears existing flame
+2026-10-09T14:01:02 102.159 INF [JuqueQA] PASS unoccupied sword aura off
+2026-10-09T14:01:02 102.211 INF [JuqueQA] PASS cruise speed 26 m/s (native physics)
+2026-10-09T14:01:02 102.221 INF [JuqueQA] PASS 80 percent inertia dissipates within 0.8 s
+2026-10-09T14:01:02 102.223 INF [JuqueQA] PASS hover retains altitude
+2026-10-09T14:01:02 102.264 INF [JuqueQA] PASS boost speed 40 m/s
+2026-10-09T14:01:03 102.312 INF [JuqueQA] PASS reverse speed 8 m/s
+2026-10-09T14:01:03 102.338 INF [JuqueQA] PASS ascent speed 8 m/s
+2026-10-09T14:01:03 102.367 INF [JuqueQA] PASS descent speed 6 m/s
+2026-10-09T14:01:03 102.390 INF [JuqueQA] PASS empty spirit disables acceleration and descends
+2026-10-09T14:01:03 102.419 INF [JuqueQA] PASS boost collision cannot cross solid wall
+2026-10-09T14:01:03 102.422 INF [JuqueQA] PASS rider and sword colliders active
+2026-10-09T14:01:03 102.469 INF [JuqueQA] PASS immediate high altitude detachment
+2026-10-09T14:01:03 102.472 INF [JuqueQA] PASS selection retained on recall
+2026-10-09T14:01:03 102.473 INF [JuqueQA] PASS return restores original slot with full toolbar
+2026-10-09T14:01:03 102.475 INF [JuqueQA] PASS world representation removed
+2026-10-09T14:01:03 102.476 INF [JuqueQA] PASS original sort lock restored
+2026-10-09T14:01:03 102.478 INF [JuqueQA] PASS repeated return creates no extra sword
+2026-10-09T14:01:03 102.480 INF [JuqueQA] PASS fall only protection active
+2026-10-09T14:01:03 102.484 INF [JuqueQA] PASS fall damage suppressed
+2026-10-09T14:01:03 102.485 INF [JuqueQA] PASS fall protection consumed by first impact
+2026-10-09T14:01:03 102.487 INF [JuqueQA] PASS physical damage remains enabled
+2026-10-09T14:01:03 102.491 INF [JuqueQA] PASS first valid landing clears fall protection
+2026-10-09T14:01:03 102.492 INF [JuqueQA] PASS later fall damage enabled
+2026-10-09T14:01:03 102.494 INF [JuqueQA] PASS fusion supported
+2026-10-09T14:01:03 102.501 INF [JuqueQA] PASS upgrade retains full fusion rank
+2026-10-09T14:01:03 102.503 INF [JuqueQA] PASS upgrade retains identity and energy proportion
+2026-10-09T14:01:03 102.504 INF [JuqueQA] PASS upgrade retains wear proportion
+2026-10-09T14:01:03 102.507 INF [JuqueQA] PASS native item persistence preserves identity energy and wear
+2026-10-09T14:01:03 102.513 INF [JuqueQA] PASS zero duration tap spends only normal wave cost
+2026-10-09T14:01:03 102.515 INF [JuqueQA] PASS server full charge spends exactly 60
+2026-10-09T14:01:03 102.517 INF [JuqueQA] PASS replayed request cannot spend again
+2026-10-09T14:01:03 102.520 INF [JuqueQA] PASS one crystal restores 250 and consumes one
+2026-10-09T14:01:03 102.522 INF [JuqueQA] PASS crystal replay rejected
+2026-10-09T14:01:03 102.524 INF [JuqueQA] PASS Damage32 integration active
+2026-10-09T14:01:03 102.526 INF [JuqueQA] PASS damage saturation cannot wrap negative
+2026-10-09T14:01:03 102.528 INF [JuqueQA] PASS 270 degree aim bounds
+2026-10-09T14:01:03 102.533 INF [JuqueQA] DAMAGE tier=16 effective=1000000 configured=1000000
+2026-10-09T14:01:03 102.535 INF [JuqueQA] PASS native melee damage tier 0
+2026-10-09T14:01:03 102.874 INF [JuqueQA] BOSS tier=16 health=40000000 chargedLoss=2925000 idealChargedSeconds=41.03
+2026-10-09T14:01:03 102.876 INF [JuqueQA] PASS boss actual damage 0
+2026-10-09T14:01:03 102.887 INF [JuqueQA] PASS server wave hits once at body damage 0
+2026-10-09T14:01:03 102.890 INF [JuqueQA] DAMAGE tier=17 effective=2500000 configured=2500000
+2026-10-09T14:01:03 102.892 INF [JuqueQA] PASS native melee damage tier 1
+2026-10-09T14:01:03 102.901 INF [JuqueQA] BOSS tier=17 health=80000000 chargedLoss=6050000 idealChargedSeconds=39.67
+2026-10-09T14:01:03 102.902 INF [JuqueQA] PASS boss actual damage 1
+2026-10-09T14:01:03 102.905 INF [JuqueQA] PASS server wave hits once at body damage 1
+2026-10-09T14:01:03 102.908 INF [JuqueQA] DAMAGE tier=18 effective=5500000 configured=5500000
+2026-10-09T14:01:03 102.909 INF [JuqueQA] PASS native melee damage tier 2
+2026-10-09T14:01:03 102.918 INF [JuqueQA] BOSS tier=18 health=150000000 chargedLoss=10800000 idealChargedSeconds=41.67
+2026-10-09T14:01:03 102.921 INF [JuqueQA] PASS boss actual damage 2
+2026-10-09T14:01:03 102.924 INF [JuqueQA] PASS server wave hits once at body damage 2
+2026-10-09T14:01:03 102.927 INF [JuqueQA] DAMAGE tier=19 effective=1.2E+07 configured=12000000
+2026-10-09T14:01:03 102.929 INF [JuqueQA] PASS native melee damage tier 3
+2026-10-09T14:01:03 102.936 INF [JuqueQA] BOSS tier=19 health=260000000 chargedLoss=19250000 idealChargedSeconds=40.52
+2026-10-09T14:01:03 102.939 INF [JuqueQA] PASS boss actual damage 3
+2026-10-09T14:01:03 102.942 INF [JuqueQA] PASS server wave hits once at body damage 3
+2026-10-09T14:01:03 102.999 INF [JuqueQA] PASS ground sword original renderer visible
+2026-10-09T14:01:03 103.002 INF [JuqueQA] PASS sword handle center meets actual palm
+2026-10-09T14:01:03 103.026 INF [JuqueGround] ground-idle p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.02, 351.62, 0.08) camera=(3.00, 352.30, 4.00) focus=(0.00, 350.90, 0.00) skins=10 active=True
+2026-10-09T14:01:03 103.128 INF [JuqueQA] PASS ground-idle rendered nonempty frame
+2026-10-09T14:01:03 103.197 INF [JuqueGround] ground-grip-close p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.02, 351.62, 0.08) camera=(0.88, 351.52, 0.69) focus=(0.43, 351.32, 0.14) skins=10 active=True
+2026-10-09T14:01:03 103.262 INF [JuqueQA] PASS ground-grip-close rendered nonempty frame
+2026-10-09T14:01:04 103.367 INF [JuqueGround] ground-grip-back p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.02, 351.62, 0.08) camera=(3.00, 352.30, -4.00) focus=(0.00, 350.90, 0.00) skins=10 active=True
+2026-10-09T14:01:04 103.424 INF [JuqueQA] PASS ground-grip-back rendered nonempty frame
+2026-10-09T14:01:04 103.522 INF [JuqueQA] PASS charge gathering emits real particles
+2026-10-09T14:01:04 103.539 INF [JuqueGround] ground-full-charge p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.02, 351.62, 0.07) camera=(3.00, 352.30, 4.00) focus=(0.00, 350.90, 0.00) skins=10 active=True
+2026-10-09T14:01:04 103.595 INF [JuqueQA] PASS ground-full-charge rendered nonempty frame
+2026-10-09T14:01:04 103.668 INF [JuqueGround] release clips=3P_1HMelee_Idle,3P_Machete_Hold,3P_1HMelee_Fire,3P_1HMelee_Additive_TorsoLook_Neutral
+2026-10-09T14:01:04 103.670 INF [JuqueQA] PASS wave swing suppresses native melee damage callback
+2026-10-09T14:01:04 103.672 INF [JuqueQA] PASS wave release plays actual native attack clip
+2026-10-09T14:01:04 103.684 INF [JuqueQA] PASS native swing produces blade path mesh
+2026-10-09T14:01:04 103.703 INF [JuqueGround] ground-release-swing p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.04, 351.61, 0.15) camera=(3.00, 352.30, 4.00) focus=(0.00, 350.90, 0.00) skins=10 active=True
+2026-10-09T14:01:04 103.763 INF [JuqueQA] PASS ground-release-swing rendered nonempty frame
+2026-10-09T14:01:04 103.839 INF [JuqueQA] PASS wave origin is below head and on sword side
+2026-10-09T14:01:04 103.848 INF [JuqueQA] PASS charged crescent is a filled mesh eight metres wide
+2026-10-09T14:01:04 103.871 INF [JuqueGround] ground-charged-wave p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.04, 351.61, 0.15) camera=(6.00, 353.90, 9.00) focus=(0.00, 350.90, 1.00) skins=10 active=True
+2026-10-09T14:01:04 103.933 INF [JuqueQA] PASS ground-charged-wave rendered nonempty frame
+2026-10-09T14:01:04 103.988 INF [JuqueQA] PASS blocked crescent lanes become transparent
+2026-10-09T14:01:04 103.990 INF [JuqueQA] PASS normal crescent remains one metre wide
+2026-10-09T14:01:04 104.009 INF [JuqueGround] ground-normal-wave p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.04, 351.61, 0.15) camera=(3.00, 352.30, 4.00) focus=(0.00, 350.90, 0.00) skins=10 active=True
+2026-10-09T14:01:04 104.067 INF [JuqueQA] PASS ground-normal-wave rendered nonempty frame
+2026-10-09T14:01:04 104.118 INF [JuqueQA] PASS impact dispersal emits real particles
+2026-10-09T14:01:04 104.137 INF [JuqueGround] ground-impact p=(0.00, 350.00, 0.00) origin=(0.00, 0.00, 0.00) root=(0.00, 350.00, 0.00) head=(0.04, 351.61, 0.15) camera=(3.00, 352.30, 4.00) focus=(0.00, 350.90, 0.00) skins=10 active=True
+2026-10-09T14:01:04 104.199 INF [JuqueQA] PASS ground-impact rendered nonempty frame
+2026-10-09T14:01:04 104.253 INF [JuqueQA] PASS effects disabled cancels charge particles
+2026-10-09T14:01:04 104.255 INF [JuqueQA] PASS release has real swing anticipation
+2026-10-09T14:01:04 104.258 INF [JuqueQA] PASS wave spawns after anticipation
+2026-10-09T14:01:04 104.260 INF [JuqueQA] PASS uncharged wave launches immediately without anticipation
+2026-10-09T14:01:04 104.263 INF [JuqueQA] PASS switching weapon before launch cancels pending wave
+2026-10-09T14:01:04 104.271 INF [JuqueQA] COMPLETE failures=0 checks=187
